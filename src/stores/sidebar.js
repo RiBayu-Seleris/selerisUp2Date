@@ -1,20 +1,26 @@
+// src/stores/sidebar.js
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 export const useSidebarStore = defineStore("sidebar", () => {
   const isOpen = ref(false);
 
-  const toggle = () => {
+  function toggle() {
     isOpen.value = !isOpen.value;
-  };
+  }
 
-  const open = () => {
+  function open() {
     isOpen.value = true;
-  };
+  }
 
-  const close = () => {
+  function close() {
     isOpen.value = false;
-  };
+  }
+
+  // Optional: disable scroll saat terbuka
+  watch(isOpen, (val) => {
+    document.body.style.overflow = val ? "hidden" : "";
+  });
 
   return { isOpen, toggle, open, close };
 });

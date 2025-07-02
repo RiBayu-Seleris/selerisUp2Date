@@ -1,75 +1,85 @@
 <script setup>
-import CloseIcon from "@/components/icons/CloseIcon.vue";
 import { useSidebarStore } from "@/stores/sidebar";
-import { ref, onMounted, onBeforeUnmount, watch } from "vue";
+import { useRoute } from "vue-router";
+import { watch } from "vue";
 
-const isSidebarOpen = ref(null);
 const sidebar = useSidebarStore();
+const route = useRoute();
 
-const toggleCloseSidebar = () => {
-  sidebar.close();
-};
-
-const handleClickOutsides = (event) => {
-  const sidebarContainer = document.getElementById("sidebar-container");
-
-  if (
-    sidebar.isOpen &&
-    sidebarContainer &&
-    !sidebarContainer.contains(event.target)
-  ) {
-    toggleCloseSidebar();
+// Tutup saat ganti route
+watch(
+  () => route.fullPath,
+  () => {
+    sidebar.close();
   }
-};
-
-onMounted(() => {
-  // Add event listener with a small delay to prevent conflicts
-  setTimeout(() => {
-    document.addEventListener("click", handleClickOutsides);
-  }, 100);
-});
-
-onBeforeUnmount(() => {
-  document.removeEventListener("click", handleClickOutsides);
-});
+);
 </script>
 
 <template>
-  <div
-    class="fixed top-0 right-0 h-full w-full flex z-[999] bg-white/10 backdrop-blur-[2px] shadow-lg"
-  >
+  <transition name="fade">
     <div
-      id="sidebar-container"
-      class="fixed top-0 right-0 h-full w-1/2 flex bg-emerald-200/50 backdrop-blur-lg shadow-lg z-[999]"
+      v-if="sidebar.isOpen"
+      class="fixed inset-0 z-50 flex flex-col transition-all duration-300"
     >
-      <div class="flex flex-col pt-10 px-10 w-full h-full">
-        <div class="flex flex-row justify-center items-center">
-          <div class="flex w-full h-full justify-start items-center">
-            <p class="text-black text-2xl font-semibold">Menu</p>
-          </div>
-          <div class="flex w-full h-full justify-end items-center">
-            <button
-              type="button"
-              id="close-sidebar-button"
-              class="bg-white p-2 rounded-lg shadow-md text-[#1AB24F]"
-              @click="toggleCloseSidebar"
+      <!-- Overlay -->
+      <div class="absolute inset-0 bg-black/50" @click="sidebar.close"></div>
+
+      <!-- Sidebar -->
+      <transition name="slide">
+        <div
+          class="ml-auto w-full max-w-[100%] bg-white h-full p-6 relative z-50 flex flex-col"
+        >
+          <button
+            @click="sidebar.close"
+            class="ml-auto text-2xl font-bold text-gray-700 hover:text-black"
+          >
+            ✕
+          </button>
+
+          <nav class="mt-8 space-y-6 text-lg font-semibold text-gray-800">
+            <router-link to="/" class="hover:text-green-500"
+              >Beranda</router-link
             >
-              <CloseIcon />
-            </button>
-          </div>
+            <router-link to="/about" class="hover:text-green-500"
+              >Tentang</router-link
+            >
+            <router-link to="/layanan" class="hover:text-green-500"
+              >Layanan</router-link
+            >
+            <router-link to="/kontak" class="hover:text-green-500"
+              >Kontak</router-link
+            >
+          </nav>
         </div>
-      </div>
+      </transition>
     </div>
-  </div>
+  </transition>
 </template>
 
 <style scoped>
-/* Optional: Custom scrollbar for the sidebar */
-::-webkit-scrollbar {
-  width: 6px;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
 }
-::-webkit-scrollbar-thumb {
-  background: rgba(255, 255, 255, 0.2);
-  border-radius: 3px;
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.3s ease-in-out;
+}
+.slide-enter-from {
+  transform: translateX(100%);
+}
+.slide-enter-to {
+  transform: translateX(0%);
+}
+.slide-leave-from {
+  transform: translateX(0%);
+}
+.slide-leave-to {
+  transform: translateX(100%);
 }
 </style>

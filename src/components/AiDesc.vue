@@ -1,5 +1,5 @@
 <template>
-  <div class="mx-10 mt-10">
+  <div class="mt-10">
     <div class="hidden lg:flex relative w-full h-full">
       <!-- Background image -->
       <div class="w-full h-auto mt-5">
@@ -14,7 +14,7 @@
           <div class="w-full pl-8 pt-0">
             <div class="w-full h-auto">
               <p
-                class="text-[43pt] bg-gradient-to-b from-[#FF09C2] to-[#2B3CFC] bg-clip-text text-transparent leading-[71px] font-semibold"
+                class="text-[43pt] bg-gradient-to-b from-[#FF09C2] to-[#2B3CFC] bg-clip-text text-transparent leading-[80px] font-semibold"
               >
                 AI and Machine Learning Algorithms
               </p>
@@ -40,12 +40,12 @@
                 />
               </div>
               <div
-                class="flex w-full h-full bottom-0 z-0 pt-[100px] md:pt-[100px] lg:pt-[100px] pl-5"
+                class="flex w-full h-full bottom-0 z-0 pt-[100px] md:pt-[100px] pl-5"
               >
                 <img
                   src="@/assets/images/robot-ai.svg"
                   alt="Robot"
-                  class="w-[400px] h-[400px] object-contain object-bottom robot-wiggle"
+                  class="w-[400px] h-[400px] object-contain object-bottom animate-bounce"
                 />
               </div>
             </div>
@@ -62,7 +62,7 @@
           <img
             src="@/assets/images/robot-ai.svg"
             alt="Robot"
-            class="w-full h-full object-contain object-center robot-wiggle"
+            class="w-full h-full object-contain object-center animate-wiggle origin-bottom"
           />
         </div>
       </div>
@@ -88,32 +88,3 @@
     </div>
   </div>
 </template>
-
-<style scoped>
-@keyframes robotWiggle {
-  0% {
-    transform: rotate(7deg);
-  }
-  25% {
-    transform: rotate(-7deg);
-  }
-  50% {
-    transform: rotate(4deg);
-  }
-  75% {
-    transform: rotate(-4deg);
-  }
-  100% {
-    transform: rotate(7deg);
-  }
-}
-
-.robot-wiggle-hover:hover {
-  animation: robotWiggle 5s linear infinite;
-  transform-origin: bottom center;
-}
-.robot-wiggle {
-  animation: robotWiggle 5s linear infinite;
-  transform-origin: bottom center;
-}
-</style>

@@ -48,7 +48,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="flex flex-row sml:flex-col md:flex-col lg:flex-row mx-9 lg:justify-between mt-10"
+    class="flex flex-row sml:flex-col md:flex-col lg:flex-row mx-6 lg:justify-between mt-10"
   >
     <div class="flex flex-col w-full h-full justify-center">
       <div class="w-full pb-2 sml:pb-4">
@@ -66,7 +66,7 @@ onMounted(() => {
         <div class="h-full relative overflow-hidden">
           <!-- Scroll Indicator -->
           <div
-            class="absolute left-3 sml:left-0 top-1/2 -translate-y-1/2 flex flex-col gap-12 sml:gap-6 z-10"
+            class="absolute left-3 sml:left-0 top-1/2 -translate-y-1/2 flex flex-col gap-12 sml:gap-6 z-0"
           >
             <div
               v-for="(step, index) in steps.length"

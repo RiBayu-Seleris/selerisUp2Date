@@ -1,29 +1,22 @@
 <script setup>
 import Logo from "@/assets/images/logo.png";
 import MenuNav from "@/components/MenuNav.vue";
-import Blur from "@/assets/images/green-blur.svg";
 import MenuIcon from "@/components/icons/MenuIcon.vue";
 
 import { ref, onMounted, onUnmounted } from "vue";
-
-const isScrolled = ref(false);
-
+import { useScrollStore } from "@/stores/scroll";
 import { useSidebarStore } from "@/stores/sidebar";
 
+const scrollStore = useScrollStore();
 const sidebarStore = useSidebarStore();
 
-function toggleSidebar() {
-  sidebarStore.toggle();
-}
-
 const handleScroll = () => {
-  isScrolled.value = window.scrollY > 10;
+  scrollStore.updateScroll();
 };
 
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
 });
-
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
 });
@@ -32,16 +25,19 @@ onUnmounted(() => {
 <template>
   <div class="flex flex-col relative w-full h-[100px] items-center z-40">
     <nav
-      class="flex flex-row px-12 md:px-12 fixed w-full items-center z-40 bg-white py-2 shadow-lg"
+      :class="[
+        'flex flex-row px-7 md:px-7 lg:px-14 fixed w-full items-center z-40 transition-all duration-300',
+        scrollStore.isScrolled ? 'bg-white shadow-lg py-1' : 'bg-transparent',
+      ]"
     >
       <!-- Div Navbar Kiri (Logo) -->
       <div
-        class="flex h-[75px] sml:w-[60%] md:w-[25%] lg:w-[15%] items-center lg:pl-10 rounded-t-3xl z-50 md:bg-transparent"
+        class="flex h-[75px] sml:w-[60%] md:w-[50%] lg:w-[15%] items-center rounded-t-3xl z-50 md:bg-transparent"
       >
         <img
           :src="Logo"
           alt="Logo"
-          class="sml:w-[100px] h-[70px] sml:h-[70px] object-contain"
+          class="h-[70px] sml:w-[100px] sml:h-[70px] object-contain"
         />
       </div>
       <!-- Div Navbar -->
@@ -50,14 +46,15 @@ onUnmounted(() => {
       >
         <MenuNav />
       </div>
-      <!-- Mobile Nav Menu -->
+      <!-- Mobile -->
       <div
-        class="flex lg:hidden h-[75px] sml:w-[55%] md:w-[75%] items-center justify-end"
+        class="flex lg:hidden h-[75px] sml:w-[50%] md:w-[50%] items-center justify-end"
       >
         <button
           type="button"
+          id="sidebar-button"
           class="bg-white p-2 rounded-lg shadow-md text-[#1AB24F]"
-          @click="toggleSidebar"
+          @click="sidebarStore.open"
         >
           <MenuIcon />
         </button>

@@ -20,7 +20,10 @@
                   <p>Full Name:</p>
                 </div>
                 <div class="w-full">
-                  <input type="text" class="w-full h-10 border rounded-md" />
+                  <input
+                    type="text"
+                    class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#2AB857]"
+                  />
                 </div>
               </div>
               <div class="flex flex-col w-full mb-4">
@@ -28,7 +31,10 @@
                   <p>Email:</p>
                 </div>
                 <div class="w-full">
-                  <input type="text" class="w-full h-10 border rounded-md" />
+                  <input
+                    type="email"
+                    class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#2AB857]"
+                  />
                 </div>
               </div>
               <div class="flex flex-col w-full mb-4">
@@ -36,7 +42,10 @@
                   <p>Message:</p>
                 </div>
                 <div class="w-full">
-                  <input type="text" class="w-full h-32 border rounded-md" />
+                  <textarea
+                    rows="5"
+                    class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#2AB857] resize-none align-top"
+                  />
                 </div>
               </div>
               <div class="flex w-full h-auto rounded-lg mt-2">

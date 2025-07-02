@@ -50,9 +50,9 @@ import performanceIcon from "@/assets/icons/performance.svg";
           <div class="flex w-4/12 h-auto">
             <div class="flex w-full h-full z-0">
               <img
-                src="@/assets/images/robot-ai2.svg"
+                src="@/assets/images/robot-ai3.svg"
                 alt="Robot"
-                class="w-full h-full object-cover object-bottom bottom-0"
+                class="w-full h-full object-cover object-bottom bottom-0 robot-wiggle"
               />
             </div>
           </div>
@@ -69,7 +69,7 @@ import performanceIcon from "@/assets/icons/performance.svg";
           <img
             src="@/assets/images/robot-ai3.svg"
             alt="Robot"
-            class="w-full h-full object-contain object-center robot-wiggle"
+            class="w-full h-full object-contain object-center animate-bounce"
           />
         </div>
       </div>
@@ -83,42 +83,42 @@ import performanceIcon from "@/assets/icons/performance.svg";
         </div>
         <div class="w-full h-auto">
           <p
-            class="sml:text-[14pt] md:text-[24pt] sml:leading-relaxed md:leading-[32pt] font-semibold text-center text-[#195279]"
+            class="sml:text-[14pt] md:text-[17pt] sml:leading-relaxed md:leading-[32pt] font-normal text-center text-[#195279]"
           >
             We bring solutions to make life insurance for our customers.
           </p>
         </div>
-        <div
-          class="flex flex-col md:grid md:grid-cols-2 md:gap-x-10 w-full md:mt-8 sml:mt-5"
-        >
-          <div class="w-full mb-5">
-            <DifferentCard
-              :image="teamIcon"
-              title="Our Team"
-              subtitle="Collaboration and Teamwork."
-            />
-          </div>
-          <div class="w-full mb-5">
-            <DifferentCard
-              :image="innovationIcon"
-              title="Innovation"
-              subtitle="Developing innovative and effective solutions."
-            />
-          </div>
-          <div class="w-full mb-5">
-            <DifferentCard
-              :image="missionIcon"
-              title="Missions"
-              subtitle="Efficient, accurate, and accessible."
-            />
-          </div>
-          <div class="w-full mb-5">
-            <DifferentCard
-              :image="performanceIcon"
-              title="Optimal Perfomance"
-              subtitle="Equipped with advanced technology to ensure smoothness and speed."
-            />
-          </div>
+      </div>
+      <div
+        class="flex flex-col md:grid md:grid-cols-2 md:gap-x-10 w-full md:mt-3 sml:mt-5 px-5"
+      >
+        <div class="w-full mb-5">
+          <DifferentCard
+            :image="teamIcon"
+            title="Our Team"
+            subtitle="Collaboration and Teamwork."
+          />
+        </div>
+        <div class="w-full mb-5">
+          <DifferentCard
+            :image="innovationIcon"
+            title="Innovation"
+            subtitle="Developing innovative and effective solutions."
+          />
+        </div>
+        <div class="w-full mb-5">
+          <DifferentCard
+            :image="missionIcon"
+            title="Missions"
+            subtitle="Efficient, accurate, and accessible."
+          />
+        </div>
+        <div class="w-full mb-5">
+          <DifferentCard
+            :image="performanceIcon"
+            title="Optimal Perfomance"
+            subtitle="Equipped with advanced technology to ensure smoothness and speed."
+          />
         </div>
       </div>
     </div>

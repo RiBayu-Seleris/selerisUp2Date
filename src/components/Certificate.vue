@@ -1,272 +1,101 @@
 <script setup>
-import { ref } from "vue";
-import MobileCert from "@/components/CertMobile.vue";
-
-const cardOne = ref(false);
-const cardTwo = ref(false);
-const cardThree = ref(false);
-
-const toggleClickOne = () => {
-  cardOne.value = !cardOne.value;
-  cardTwo.value = false;
-  cardThree.value = false;
-};
-const toggleClickTwo = () => {
-  cardTwo.value = !cardTwo.value;
-  cardOne.value = false;
-  cardThree.value = false;
-};
-const toggleClickThree = () => {
-  cardThree.value = !cardThree.value;
-  cardOne.value = false;
-  cardTwo.value = false;
-};
-
-// Mobile Version Script
-// Kartu dengan info deskripsi
-
-const scrollContainerRef = ref(null);
-const selectedScrollIndex = ref(null);
-
-const selectScrollCard = (index) => {
-  selectedScrollIndex.value =
-    selectedScrollIndex.value === index ? null : index;
-};
+import CertCard from "@/components/reusable/CertCard.vue";
+import Cert1 from "@/assets/images/certification/logo/Cert1.png";
+import Cert2 from "@/assets/images/certification/logo/dscui.svg";
+import Cert3 from "@/assets/images/certification/logo/Cert1.png";
 </script>
 
 <template>
-  <div class="lg:mt-24">
-    <!-- Desktop Version -->
-    <div
-      class="hidden lg:flex flex-row w-full h-[100vh] relative items-center justify-center self-center"
-    >
-      <div class="flex flex-row w-full h-full justify-between relative">
-        <div
-          class="flex w-full h-full justify-start self-start content-start items-start"
-        >
-          <img
-            src="@/assets/images/left-cert.svg"
-            alt="Background"
-            class="w-[600px] h-[600px] object-contain"
-          />
+  <div class="w-full h-full lg:px-16">
+    <div class="flex flex-col w-full h-auto">
+      <div class="flex flex-col w-full h-auto">
+        <div class="flex w-full justify-center items-center text-[#195279]">
+          <p class="text-4xl lg:text-5xl font-semibold">
+            Seleris Certification
+          </p>
         </div>
         <div
-          class="flex w-full h-full justify-end self-end content-end items-end"
+          class="flex w-full justify-center items-center text-[#1DC457] mt-2 lg:mt-4"
         >
-          <img
-            src="@/assets/images/right-cert.svg"
-            alt="Background"
-            class="w-[600px] h-[600px] object-contain"
-          />
+          <p class="text-lg lg:text-2xl font-semibold">
+            Seleris Meditekno Internasional
+          </p>
         </div>
       </div>
 
-      <!-- ISI CARD -->
-      <div class="absolute w-full h-full flex flex-col">
-        <div class="flex flex-col text-center justify-center mb-5">
-          <div class="w-full h-auto py-2">
-            <p class="text-5xl">Seleris Certification</p>
-          </div>
-          <div class="w-full h-auto py-2">
-            <p class="text-2xl text-[#1DC457]">
-              Seleris Meditekno Internasional
-            </p>
-          </div>
+      <!-- Desktop -->
+      <div class="hidden lg:flex flex-row w-full h-auto gap-x-10 mt-5 relative">
+        <!-- :divImageAfter="bgLeftAfter" -->
+        <CertCard
+          :divImageBefore="'bg-leftCertBefore'"
+          :divImageAfter="'bg-leftCertAfter'"
+          :imageCertLogo="Cert1"
+          :TitleBefore="'ISO Certification Award'"
+          :textPosition="'text-start'"
+          :TitleAfter="'ISO Certification'"
+          :CertNumber="'2403150020501 '"
+          :BodyText="`PT. Seleris Meditekno Internasional has been awarded ISO/IEC 27001:2022 
+          certification with the number 2403150020501, which demonstrates our commitment to healthcare 
+          quality and service excellence. This certification signifies that we meet international standards in quality management, 
+          and we continuously strive to improve our service quality.`"
+        />
+        <CertCard
+          :divImageBefore="'bg-centerCertBefore'"
+          :divImageAfter="'bg-centerCertAfter'"
+          :imageCertLogo="Cert2"
+          :TitleBefore="'Best Innovation AI Solution for Insurance'"
+          :textPosition="'text-center'"
+          :TitleAfter="'ISO Certification'"
+          :CertNumber="'2403150020501 '"
+          :BodyText="`PT. Seleris Meditekno Internasional has been awarded ISO/IEC 27001:2022 
+          certification with the number 2403150020501, which demonstrates our commitment to healthcare 
+          quality and service excellence. This certification signifies that we meet international standards in quality management, 
+          and we continuously strive to improve our service quality.`"
+        />
+        <CertCard
+          :divImageBefore="'bg-rightCertBefore'"
+          :divImageAfter="'bg-rightCertAfter'"
+          :imageCertLogo="Cert3"
+          :TitleBefore="'ISO Certification Award'"
+          :textPosition="'text-end'"
+          :TitleAfter="'ISO Certification'"
+          :CertNumber="'2403150020501 '"
+          :BodyText="`PT. Seleris Meditekno Internasional has been awarded ISO/IEC 27001:2022 
+          certification with the number 2403150020501, which demonstrates our commitment to healthcare 
+          quality and service excellence. This certification signifies that we meet international standards in quality management, 
+          and we continuously strive to improve our service quality.`"
+        />
+      </div>
+
+      <!-- Mobile Cert -->
+      <div
+        class="lg:hidden flex flex-row w-full max-h-screen gap-x-6 mt-5 lg:overscroll-none lg:overflow-x-hidden lg:snap-none lg:pr-0 lg:pl-0 lg:scroll-pl-0 overflow-x-auto snap-x snap-mandatory scroll-pl-6 pl-10 pr-10 hide-scrollbar"
+      >
+        <div
+          class="snap-start shrink-0 w-[85%] h-[150px] bg-blue-500 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30 border border-gray-100"
+        >
+          Item 1
         </div>
-        <div class="flex flex-row mx-10">
-          <!-- Card Left -->
-          <div class="w-full h-auto">
-            <div
-              class="w-[420px] h-[500px] bg-custom-cert-center"
-              v-if="!cardOne"
-              @click="toggleClickOne"
-            >
-              <div class="w-full h-full">
-                <div class="px-16 py-20 flex flex-col">
-                  <div
-                    class="flex w-full h-full items-center justify-center mb-5"
-                  >
-                    <img
-                      src="@/assets/images/ISO-Cert.svg"
-                      alt="Background"
-                      class="w-[200px] h-[200px] object-contain"
-                    />
-                  </div>
-                  <div class="pt-6 text-center text-[#195279] font-semibold">
-                    <p class="text-[21pt]">ISO Certification Award</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="w-[420px] h-[500px] bg-custom-cert-hover"
-              v-if="cardOne"
-              @click="toggleClickOne"
-            >
-              <div class="w-full">
-                <div class="px-14 py-14 flex flex-col text-white">
-                  <div>
-                    <p class="text-[21pt] pb-3">ISO Certification Award</p>
-                  </div>
-                  <div>
-                    <p class="text-[12pt] pb-3">
-                      Certificate Number: 2403150020501
-                    </p>
-                  </div>
-                  <div>
-                    <p class="text-[12pt]">
-                      PT. Seleris Meditekno Internasional has been awarded
-                      ISO/IEC 27001:2022 certification with the number
-                      2403150020501, which demonstrates our commitment to
-                      healthcare quality and service excellence. This
-                      certification signifies that we meet international
-                      standards in quality management, and we continuously
-                      strive to improve our service quality.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Card Center -->
-          <div class="w-full h-auto">
-            <div
-              class="w-[420px] h-[500px] bg-custom-cert-center"
-              v-if="!cardTwo"
-              @click="toggleClickTwo"
-            >
-              <div class="w-full h-full">
-                <div class="px-16 py-20 flex flex-col">
-                  <div
-                    class="flex w-full h-full items-center justify-center mb-5"
-                  >
-                    <img
-                      src="@/assets/images/DSCUI.svg"
-                      alt="Background"
-                      class="w-[200px] h-[200px] object-contain"
-                    />
-                  </div>
-                  <div class="pt-6 text-center text-[#195279] font-semibold">
-                    <p class="text-[19pt]">Best Innovation AI</p>
-                    <p class="text-[19pt]">Solution for Insurance</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="w-[420px] h-[500px] bg-custom-cert-hover"
-              v-if="cardTwo"
-              @click="toggleClickTwo"
-            >
-              <div class="w-full">
-                <div class="px-14 py-14 flex flex-col text-white">
-                  <div>
-                    <p class="text-[21pt] pb-3">ISO Certification Award</p>
-                  </div>
-                  <div>
-                    <p class="text-[12pt] pb-3">
-                      Certificate Number: 2403150020501
-                    </p>
-                  </div>
-                  <div>
-                    <p class="text-[12pt]">
-                      PT. Seleris Meditekno Internasional has been awarded
-                      ISO/IEC 27001:2022 certification with the number
-                      2403150020501, which demonstrates our commitment to
-                      healthcare quality and service excellence. This
-                      certification signifies that we meet international
-                      standards in quality management, and we continuously
-                      strive to improve our service quality.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- Card Right -->
-          <div class="w-full h-auto">
-            <div
-              class="w-[420px] h-[500px] bg-custom-cert-right"
-              v-if="!cardThree"
-              @click="toggleClickThree"
-            >
-              <div class="w-full h-full">
-                <div class="px-16 py-20 flex flex-col">
-                  <div
-                    class="flex w-full h-full items-center justify-center mb-5"
-                  >
-                    <img
-                      src="@/assets/images/ISO-Cert.svg"
-                      alt="Background"
-                      class="w-[200px] h-[200px] object-contain"
-                    />
-                  </div>
-                  <div class="pt-6 text-center text-[#195279] font-semibold">
-                    <p class="text-[21pt]">ISO Certification Award</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-            <div
-              class="w-[420px] h-[500px] bg-custom-cert-hover"
-              v-if="cardThree"
-              @click="toggleClickThree"
-            >
-              <div class="w-full">
-                <div class="px-14 py-14 flex flex-col text-white">
-                  <div>
-                    <p class="text-[21pt] pb-3">ISO Certification Award</p>
-                  </div>
-                  <div>
-                    <p class="text-[12pt] pb-3">
-                      Certificate Number: 2403150020501
-                    </p>
-                  </div>
-                  <div>
-                    <p class="text-[12pt]">
-                      PT. Seleris Meditekno Internasional has been awarded
-                      ISO/IEC 27001:2022 certification with the number
-                      2403150020501, which demonstrates our commitment to
-                      healthcare quality and service excellence. This
-                      certification signifies that we meet international
-                      standards in quality management, and we continuously
-                      strive to improve our service quality.
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+        <div
+          class="snap-start shrink-0 w-[85%] h-[150px] bg-green-300 rounded-lg"
+        >
+          Item 2
+        </div>
+        <div
+          class="snap-start shrink-0 w-[85%] h-[150px] bg-blue-300 rounded-lg"
+        >
+          Item 3
         </div>
       </div>
-    </div>
-
-    <!-- Mobile Version -->
-    <div class="flex lg:hidden w-full mt-10 overflow-hidden">
-      <MobileCert />
     </div>
   </div>
 </template>
-
 <style scoped>
-.bg-custom-cert-hover {
-  background-image: url("@/assets/images/cert-side2.png");
-  background-size: cover;
-  background-repeat: no-repeat;
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
 }
-.bg-custom-cert-center {
-  background-image: url("@/assets/images/cert-center.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-.bg-custom-cert-right {
-  background-image: url("@/assets/images/cert-right.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-
-.custom-shape {
-  border-radius: 30px;
-  clip-path: polygon(0% 0%, 85% 0%, 100% 15%, 100% 100%, 0% 100%);
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 </style>
