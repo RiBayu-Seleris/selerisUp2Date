@@ -52,7 +52,7 @@ onUnmounted(() => {
         <router-view />
       </div>
     </main>
-    <!-- bg-white rounded-t-[2rem] pt-5 shadow-[0px_-4px_20px_rgba(0,0,0,0.1)] -->
+
     <footer class="w-full h-auto px-8 mt-20">
       <Footer />
     </footer>

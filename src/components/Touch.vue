@@ -1,7 +1,11 @@
+<script setup>
+import TouchMobile from "@/components/TouchMobile.vue";
+</script>
+
 <template>
-  <div class="px-10 mt-10">
+  <div class="px-10 lg:mt-0">
     <div
-      class="w-full h-[110vh] bg-touch px-8 pt-24 rounded-b-3xl rounded-tr-[3rem]"
+      class="hidden lg:block w-full h-auto bg-touch px-8 pt-24 pb-10 rounded-b-3xl rounded-tr-[3rem]"
     >
       <div class="flex flex-row w-full h-auto gap-5">
         <div class="w-[45%] h-[580px]">
@@ -59,16 +63,18 @@
         <div
           class="flex flex-col w-[55%] h-auto justify-between gap-5 rounded-3xl"
         >
-          <div class="flex w-full h-[70%] bg-[#FAFAFA] rounded-3xl p-4">
+          <div class="flex w-full h-[65%] bg-[#FAFAFA] rounded-3xl p-4">
             <div class="flex w-full h-full rounded-xl">
-              <img
-                src="@/assets/images/maps.png"
-                alt="Maps"
-                class="w-full h-full object-cover object-center rounded-2xl"
+              <iframe
+                class="w-full h-full rounded-2xl"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.8339793616797!2d106.83314007441082!3d-6.285542461522718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3001660852f%3A0x1ac61febb98f4350!2sSeleris%20Development%20Office!5e0!3m2!1sid!2sid!4v1751444288952!5m2!1sid!2sid"
+                allowfullscreen=""
+                loading="lazy"
+                referrerpolicy="no-referrer-when-downgrade"
               />
             </div>
           </div>
-          <div class="flex flex-row w-full h-full gap-5">
+          <div class="flex flex-row w-full h-[35%] gap-5">
             <div class="flex w-full h-full bg-[#FAFAFA] rounded-xl">
               <div class="flex flex-col w-full py-3 gap-1">
                 <div class="flex w-full justify-center items-center mb-2">
@@ -112,6 +118,7 @@
         </div>
       </div>
     </div>
+    <TouchMobile />
   </div>
 </template>
 <style scoped>

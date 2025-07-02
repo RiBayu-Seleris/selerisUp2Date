@@ -17,8 +17,8 @@ const route = useRoute();
       <router-link
         to="/"
         :class="[
-          'relative inline-block after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-[#18AB53] after:transition-all after:duration-300 hover:after:w-full',
-          route.path === '/' ? 'text-[#18AB53] after:w-full' : 'after:w-0',
+          'relative inline-block text-animate-hover hover:font-bold',
+          route.path === '/' ? 'text-[#18AB53] font-bold' : '',
         ]"
       >
         Home
@@ -28,30 +28,47 @@ const route = useRoute();
       <router-link
         to="/about"
         :class="[
-          'relative inline-block after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-[#18AB53] after:transition-all after:duration-300 hover:after:w-full',
-          route.path === '/about' ? 'text-[#18AB53] after:w-full' : 'after:w-0',
+          'relative inline-block text-animate-hover hover:font-bold ',
+          route.path === '/about' ? 'text-[#18AB53] font-bold' : '',
         ]"
       >
         About
       </router-link>
     </li>
 
-    <!-- Dropdown (tanpa active path karena tidak ada to= link) -->
-    <li class="relative group">
-      <span
-        class="relative inline-block cursor-pointer after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-[#18AB53] after:w-0 after:transition-all after:duration-300 group-hover:after:w-full"
-      >
+    <!-- Dropdown wrapper -->
+    <li class="relative group list-none">
+      <!-- Trigger -->
+      <span class="relative inline-block text-animate-hover hover:font-bold">
         Product ▾
       </span>
-      <ul
-        class="absolute left-0 mt-2 hidden group-hover:block bg-white border rounded shadow"
+
+      <!-- Dropdown content as a div -->
+      <div
+        :class="[
+          `absolute left-0 hidden group-hover:block bg-white border rounded shadow z-50 w-64 p-4`,
+          isScrolled ? 'mt-3' : 'mt-4',
+        ]"
       >
-        <li>
-          <router-link to="/product" class="block px-4 py-2 hover:bg-gray-100"
-            >Sub Item</router-link
-          >
-        </li>
-      </ul>
+        <router-link
+          to="/product"
+          class="block px-2 py-2 text-sm rounded hover:bg-gray-100"
+        >
+          Seleris Lifins
+        </router-link>
+        <router-link
+          to="/product/medins"
+          class="block px-2 py-2 text-sm rounded hover:bg-gray-100"
+        >
+          Seleris Medins
+        </router-link>
+        <router-link
+          to="/product/credit"
+          class="block px-2 py-2 text-sm rounded hover:bg-gray-100"
+        >
+          Credit Cover
+        </router-link>
+      </div>
     </li>
 
     <!-- Tambahan menu lainnya -->
@@ -59,8 +76,8 @@ const route = useRoute();
       <router-link
         to="/team"
         :class="[
-          'relative inline-block after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-[#18AB53] after:transition-all after:duration-300 hover:after:w-full',
-          route.path === '/team' ? 'text-[#18AB53] after:w-full' : 'after:w-0',
+          'relative inline-block text-animate-hover hover:font-bold ',
+          route.path === '/team' ? 'text-[#18AB53] font-bold' : '',
         ]"
       >
         Our Team
@@ -70,8 +87,8 @@ const route = useRoute();
       <router-link
         to="/blog"
         :class="[
-          'relative inline-block after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-[#18AB53] after:transition-all after:duration-300 hover:after:w-full',
-          route.path === '/blog' ? 'text-[#18AB53] after:w-full' : 'after:w-0',
+          'relative inline-block text-animate-hover hover:font-bold ',
+          route.path === '/blog' ? 'text-[#18AB53] font-bold' : '',
         ]"
       >
         Blog
@@ -81,10 +98,8 @@ const route = useRoute();
       <router-link
         to="/services"
         :class="[
-          'relative inline-block after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-[#18AB53] after:transition-all after:duration-300 hover:after:w-full',
-          route.path === '/services'
-            ? 'text-[#18AB53] after:w-full'
-            : 'after:w-0',
+          'relative inline-block text-animate-hover hover:font-bold ',
+          route.path === '/services' ? 'text-[#18AB53] font-bold' : '',
         ]"
       >
         Services
@@ -94,10 +109,8 @@ const route = useRoute();
       <router-link
         to="/contact"
         :class="[
-          'relative inline-block after:absolute after:left-0 after:bottom-0 after:h-[2px] after:bg-[#18AB53] after:transition-all after:duration-300 hover:after:w-full',
-          route.path === '/contact'
-            ? 'text-[#18AB53] after:w-full'
-            : 'after:w-0',
+          'relative inline-block text-animate-hover hover:font-bold ',
+          route.path === '/contact' ? 'text-[#18AB53] font-bold' : '',
         ]"
       >
         Contact
@@ -105,3 +118,21 @@ const route = useRoute();
     </li>
   </ul>
 </template>
+<style scoped>
+.text-animate-hover {
+  position: relative;
+  display: inline-block;
+  background-image: linear-gradient(to right, #18ab53 0%, #18ab53 100%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  background-position: left;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition: background-size 0.5s ease, -webkit-text-fill-color 0.5s ease;
+}
+
+.text-animate-hover:hover {
+  background-size: 100% 100%;
+  -webkit-text-fill-color: transparent;
+}
+</style>
