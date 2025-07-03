@@ -44,12 +44,12 @@ const PartnersRow2 = Partners.slice(Math.ceil(Partners.length / 2));
       <div class="flex flex-col w-full h-full pb-10">
         <div class="flex flex-col w-full px-14 lg:px-0 h-auto">
           <div class="flex w-full justify-center items-center">
-            <p class="text-4xl lg:text-4xl font-semibold text-[#195279]">
+            <p class="text-3xl lg:text-4xl font-semibold text-[#195279]">
               OUR PARTNERS
             </p>
           </div>
           <div class="flex w-full justify-center items-center my-4">
-            <p class="text-2xl lg:text-2xl text-[#1DC457] text-center">
+            <p class="text-xl lg:text-2xl text-[#1DC457] text-center">
               Seleris collaborates with partners to make a positive impact in
               health and insurance.
             </p>

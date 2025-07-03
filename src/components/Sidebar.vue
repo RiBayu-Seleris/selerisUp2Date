@@ -1,19 +1,23 @@
 <script setup>
+import { ref, watch } from "vue";
 import { useSidebarStore } from "@/stores/sidebar";
 import { useRoute } from "vue-router";
-import { watch } from "vue";
 import MenuIconClose from "@/components/icons/CloseIcon.vue";
+import Navlink from "@/components/Navlink.vue";
 
 const sidebar = useSidebarStore();
 const route = useRoute();
 
-// Tutup saat ganti route
+// Tutup saat pindah halaman
 watch(
   () => route.fullPath,
   () => {
     sidebar.close();
   }
 );
+
+// Dropdown toggle
+const isDropdownOpen = ref(false);
 </script>
 
 <template>
@@ -53,18 +57,58 @@ watch(
           <nav
             class="w-full flex flex-col mt-8 space-y-6 text-lg font-semibold text-gray-800"
           >
-            <router-link to="/" class="hover:text-green-500"
-              >Beranda</router-link
-            >
-            <router-link to="/about" class="hover:text-green-500"
-              >Tentang</router-link
-            >
-            <router-link to="/layanan" class="hover:text-green-500"
-              >Layanan</router-link
-            >
-            <router-link to="/kontak" class="hover:text-green-500"
-              >Kontak</router-link
-            >
+            <Navlink href="/">Home</Navlink>
+            <Navlink href="/about">About</Navlink>
+
+            <!-- DROPDOWN MENU -->
+            <div>
+              <button
+                @click="isDropdownOpen = !isDropdownOpen"
+                class="w-full text-left focus:outline-none"
+              >
+                <div class="flex justify-between items-center">
+                  <span class="text-lg font-semibold">Products</span>
+                  <span>
+                    <svg
+                      :class="[
+                        'w-5 h-5 transition-transform duration-300',
+                        isDropdownOpen ? 'rotate-180' : '',
+                      ]"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </span>
+                </div>
+              </button>
+
+              <transition name="fade">
+                <div
+                  v-if="isDropdownOpen"
+                  class="mt-3 ml-4 flex flex-col space-y-3 text-base"
+                >
+                  <Navlink href="#"><span> Seleris Lifins</span></Navlink>
+                  <Navlink href="#"><span> Seleris Medins</span></Navlink>
+                  <Navlink href="#"><span> Seleris Credit Cover</span></Navlink>
+                  <Navlink href="#"><span> Seleris Care</span></Navlink>
+                  <Navlink href="#"><span> Flexa Asia</span></Navlink>
+                  <Navlink href="#"><span> Auto Claim</span></Navlink>
+                </div>
+              </transition>
+            </div>
+
+            <!-- Menu lainnya -->
+            <Navlink href="/team">Teams</Navlink>
+            <Navlink href="/blogs">Blogs</Navlink>
+            <Navlink href="/services">Services</Navlink>
           </nav>
         </div>
       </transition>

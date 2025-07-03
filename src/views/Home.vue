@@ -7,10 +7,9 @@ import AiDesc from "@/components/AiDesc.vue";
 import Certificate from "@/components/Certificate.vue";
 import Benefits from "@/components/Benefits.vue";
 import Products from "@/components/Products.vue";
-import Different from "@/components/Different.vue";
+import Different from "@/components/Home/Different.vue";
 import Partners from "@/components/Partners.vue";
 import Clients from "@/components/Clients.vue";
-import Touch from "@/components/Touch.vue";
 </script>
 
 <template>
@@ -35,12 +34,12 @@ import Touch from "@/components/Touch.vue";
   >
     <Certificate />
   </section>
-  <section class="flex flex-col relative w-full h-auto px-6 lg:px-16">
+  <section class="flex flex-col relative w-full h-auto px-6 lg:px-16 lg:mt-16">
     <Benefits />
   </section>
-  <section class="flex relative w-full h-auto px-8 mt-10">
+  <!-- <section class="flex relative w-full h-auto px-8 mt-10">
     <Products />
-  </section>
+  </section> -->
   <section class="flex flex-col relative w-full h-auto">
     <Different />
   </section>
@@ -49,8 +48,5 @@ import Touch from "@/components/Touch.vue";
   </section>
   <section class="flex flex-col relative w-full h-auto">
     <Clients />
-  </section>
-  <section class="flex flex-col relative w-full h-auto">
-    <Touch />
   </section>
 </template>

@@ -1,9 +1,12 @@
 <script setup>
+import { ref } from "vue";
 import { useScrollStore } from "@/stores/scroll";
 import { useRoute } from "vue-router";
+import Navlink from "@/components/Navlink.vue";
 
 const { isScrolled } = useScrollStore();
 const route = useRoute();
+const isHoveringProduct = ref(false);
 </script>
 
 <template>
@@ -14,107 +17,68 @@ const route = useRoute();
     ]"
   >
     <li>
-      <router-link
-        to="/"
-        :class="[
-          'relative inline-block text-animate-hover hover:font-bold',
-          route.path === '/' ? 'text-[#18AB53] font-bold' : '',
-        ]"
-      >
-        Home
-      </router-link>
+      <Navlink href="/"> Home </Navlink>
     </li>
     <li>
-      <router-link
-        to="/about"
-        :class="[
-          'relative inline-block text-animate-hover hover:font-bold ',
-          route.path === '/about' ? 'text-[#18AB53] font-bold' : '',
-        ]"
-      >
-        About
-      </router-link>
+      <Navlink href="/about"> About </Navlink>
     </li>
 
-    <!-- Dropdown wrapper -->
-    <li class="relative group list-none">
-      <!-- Trigger -->
+    <li
+      class="relative list-none"
+      @mouseenter="isHoveringProduct = true"
+      @mouseleave="isHoveringProduct = false"
+    >
       <span class="relative inline-block text-animate-hover hover:font-bold">
-        Product ▾
+        Products ▾
       </span>
-
-      <!-- Dropdown content as a div -->
-      <div
-        :class="[
-          `absolute left-0 hidden group-hover:block bg-white border rounded shadow z-50 w-64 p-4`,
-          isScrolled ? 'mt-3' : 'mt-4',
-        ]"
-      >
-        <router-link
-          to="/product"
-          class="block px-2 py-2 text-sm rounded hover:bg-gray-100"
-        >
-          Seleris Lifins
-        </router-link>
-        <router-link
-          to="/product/medins"
-          class="block px-2 py-2 text-sm rounded hover:bg-gray-100"
-        >
-          Seleris Medins
-        </router-link>
-        <router-link
-          to="/product/credit"
-          class="block px-2 py-2 text-sm rounded hover:bg-gray-100"
-        >
-          Credit Cover
-        </router-link>
-      </div>
     </li>
+
+    <!-- Dropdown bebas posisi -->
+    <div
+      v-if="isHoveringProduct"
+      @mouseenter="isHoveringProduct = true"
+      @mouseleave="isHoveringProduct = false"
+      :class="[
+        'absolute z-50 w-auto h-auto left-[350px] top-[70px]',
+        isScrolled ? '-mt-4 pt-8 ' : 'mt-0 pt-5 ',
+      ]"
+    >
+      <div
+        class="grid grid-cols-3 w-auto bg-white p-4 rounded-2xl shadow-lg gap-5"
+      >
+        <Navlink href="#" class="flex justify-center items-center w-[170px]">
+          <span> Seleris Lifins</span>
+        </Navlink>
+        <Navlink href="#" class="flex justify-center items-center w-[170px]">
+          <span> Seleris Medins</span>
+        </Navlink>
+        <Navlink href="#" class="flex justify-center items-center w-[170px]">
+          <span> Seleris Credit Cover</span>
+        </Navlink>
+        <Navlink href="#" class="flex justify-center items-center w-[170px]">
+          <span> Seleris Care</span>
+        </Navlink>
+        <Navlink href="#" class="flex justify-center items-center w-[170px]">
+          <span> Flexa Asia</span>
+        </Navlink>
+        <Navlink href="#" class="flex justify-center items-center w-[170px]">
+          <span> Auto Claim</span>
+        </Navlink>
+      </div>
+    </div>
 
     <!-- Tambahan menu lainnya -->
     <li>
-      <router-link
-        to="/team"
-        :class="[
-          'relative inline-block text-animate-hover hover:font-bold ',
-          route.path === '/team' ? 'text-[#18AB53] font-bold' : '',
-        ]"
-      >
-        Our Team
-      </router-link>
+      <Navlink href="#"> Teams </Navlink>
     </li>
     <li>
-      <router-link
-        to="/blog"
-        :class="[
-          'relative inline-block text-animate-hover hover:font-bold ',
-          route.path === '/blog' ? 'text-[#18AB53] font-bold' : '',
-        ]"
-      >
-        Blog
-      </router-link>
+      <Navlink href="#"> Blogs </Navlink>
     </li>
     <li>
-      <router-link
-        to="/services"
-        :class="[
-          'relative inline-block text-animate-hover hover:font-bold ',
-          route.path === '/services' ? 'text-[#18AB53] font-bold' : '',
-        ]"
-      >
-        Services
-      </router-link>
+      <Navlink href="#"> Services </Navlink>
     </li>
     <li>
-      <router-link
-        to="/contact"
-        :class="[
-          'relative inline-block text-animate-hover hover:font-bold ',
-          route.path === '/contact' ? 'text-[#18AB53] font-bold' : '',
-        ]"
-      >
-        Contact
-      </router-link>
+      <Navlink href="#"> Contact </Navlink>
     </li>
   </ul>
 </template>

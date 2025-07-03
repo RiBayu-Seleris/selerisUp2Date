@@ -3,7 +3,7 @@ import TouchMobile from "@/components/TouchMobile.vue";
 </script>
 
 <template>
-  <div class="px-10 lg:mt-0">
+  <div class="px-5 lg:px-10 lg:mt-0">
     <div
       class="hidden lg:block w-full h-auto bg-touch px-8 pt-24 pb-10 rounded-b-3xl rounded-tr-[3rem]"
     >

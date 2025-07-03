@@ -31,7 +31,7 @@ import appstore from "@/assets/images/appstore.png";
                 class="flex w-full h-auto lg:mt-4 justify-center items-center"
               >
                 <p
-                  class="text-[#195279] font-semibold sml:text-md md:text-[1.7rem]"
+                  class="text-[#195279] font-semibold lg:text-xl sml:text-md md:text-[1.7rem]"
                 >
                   PT Seleris Meditekno Internasional
                 </p>

@@ -26,7 +26,7 @@ onUnmounted(() => {
   <div class="flex flex-col relative w-full h-[100px] items-center z-40">
     <nav
       :class="[
-        'flex flex-row px-7 md:px-7 lg:px-14 fixed w-full items-center z-40 transition-all duration-300',
+        'flex flex-row px-10 md:px-10 lg:px-14 fixed w-full items-center z-40 transition-all duration-300',
         scrollStore.isScrolled ? 'bg-white shadow-lg py-1' : 'bg-transparent',
       ]"
     >

@@ -1,10 +1,10 @@
 <template>
   <div
-    class="lg:hidden flex flex-col w-full h-auto bg-[#F3F4F6] py-5 px-5 rounded-3xl gap-y-8"
+    class="lg:hidden flex flex-col w-full h-auto bg-[#F3F4F6] py-5 px-3 rounded-3xl gap-y-8"
   >
     <div class="flex w-full h-auto rounded-3xl">
       <iframe
-        class="w-full h-[300px] rounded-3xl"
+        class="w-full h-[300px] rounded-3xl border-2"
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.8339793616797!2d106.83314007441082!3d-6.285542461522718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3001660852f%3A0x1ac61febb98f4350!2sSeleris%20Development%20Office!5e0!3m2!1sid!2sid!4v1751444288952!5m2!1sid!2sid"
         allowfullscreen=""
         loading="lazy"
@@ -57,13 +57,13 @@
     </div>
     <div class="flex w-full h-auto">
       <div
-        class="flex flex-col w-full h-auto bg-[#FAFAFA] rounded-2xl px-8 py-4"
+        class="flex flex-col w-full h-auto bg-[#FAFAFA] rounded-2xl px-5 py-6"
       >
         <div class="flex flex-col w-full">
-          <p class="text-4xl font-semibold text-[#195279]">
+          <p class="text-3xl lg:text-4xl font-semibold text-[#195279]">
             GET <span class="text-[#2AB857]">In Touch</span>
           </p>
-          <p class="text-[#195279] text-xl">
+          <p class="text-[#195279] text-base lg:text-xl">
             Be among the first to discover what it's all about
           </p>
         </div>

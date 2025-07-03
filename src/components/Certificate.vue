@@ -1,5 +1,6 @@
 <script setup>
 import CertCard from "@/components/reusable/CertCard.vue";
+import MobileCert from "@/components/CertificateMobile.vue";
 import Cert1 from "@/assets/images/certification/logo/Cert1.png";
 import Cert2 from "@/assets/images/certification/logo/dscui.svg";
 import Cert3 from "@/assets/images/certification/logo/Cert1.png";
@@ -10,14 +11,14 @@ import Cert3 from "@/assets/images/certification/logo/Cert1.png";
     <div class="flex flex-col w-full h-auto">
       <div class="flex flex-col w-full h-auto">
         <div class="flex w-full justify-center items-center text-[#195279]">
-          <p class="text-4xl lg:text-5xl font-semibold">
+          <p class="text-3xl md:text-4xl lg:text-5xl font-semibold">
             Seleris Certification
           </p>
         </div>
         <div
           class="flex w-full justify-center items-center text-[#1DC457] mt-2 lg:mt-4"
         >
-          <p class="text-lg lg:text-2xl font-semibold">
+          <p class="text-lg md:text-xl lg:text-2xl font-semibold">
             Seleris Meditekno Internasional
           </p>
         </div>
@@ -68,25 +69,7 @@ import Cert3 from "@/assets/images/certification/logo/Cert1.png";
       </div>
 
       <!-- Mobile Cert -->
-      <div
-        class="lg:hidden flex flex-row w-full max-h-screen gap-x-6 mt-5 lg:overscroll-none lg:overflow-x-hidden lg:snap-none lg:pr-0 lg:pl-0 lg:scroll-pl-0 overflow-x-auto snap-x snap-mandatory scroll-pl-6 pl-10 pr-10 hide-scrollbar"
-      >
-        <div
-          class="snap-start shrink-0 w-[85%] h-[150px] bg-blue-500 rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30 border border-gray-100"
-        >
-          Item 1
-        </div>
-        <div
-          class="snap-start shrink-0 w-[85%] h-[150px] bg-green-300 rounded-lg"
-        >
-          Item 2
-        </div>
-        <div
-          class="snap-start shrink-0 w-[85%] h-[150px] bg-blue-300 rounded-lg"
-        >
-          Item 3
-        </div>
-      </div>
+      <MobileCert />
     </div>
   </div>
 </template>

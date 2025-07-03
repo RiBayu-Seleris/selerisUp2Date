@@ -3,8 +3,9 @@ import { useRoute } from "vue-router";
 
 import Navbar from "@/components/Navbar.vue";
 import NavbarScroll from "@/components/NavbarScroll.vue";
-import Footer from "@/components/Footer.vue";
 import Sidebar from "@/components/Sidebar.vue";
+import Touch from "@/components/Touch.vue";
+import Footer from "@/components/Footer.vue";
 
 import { useScrollStore } from "@/stores/scroll";
 import { onMounted, onUnmounted } from "vue";
@@ -40,7 +41,7 @@ onUnmounted(() => {
 <template>
   <div class="relative w-full h-auto font-poppins overflow-x-hidden">
     <!-- Navbar -->
-    <div class="flex fixed w-full h-auto px-7 pb-5 z-10">
+    <div class="flex fixed w-full h-auto px-10 lg:px-10 pb-5 z-10">
       <component :is="scrollStore.isScrolled ? NavbarScroll : Navbar" />
     </div>
 
@@ -50,6 +51,10 @@ onUnmounted(() => {
     <main class="relative lg:pt-5 sml:pt-0 md:pt-0">
       <div class="relative">
         <router-view />
+
+        <section class="flex flex-col relative w-full h-auto">
+          <Touch />
+        </section>
       </div>
     </main>
 
