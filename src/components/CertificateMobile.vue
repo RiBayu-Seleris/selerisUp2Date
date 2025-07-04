@@ -16,6 +16,22 @@ const updateWidth = () => {
   windowWidth.value = window.innerWidth;
 };
 
+const handleLeft = () => {
+  isFlippedLeft.value = !isFlippedLeft.value;
+  isFlippedCenter.value = false;
+  isFlippedRight.value = false;
+};
+const handleCenter = () => {
+  isFlippedCenter.value = !isFlippedCenter.value;
+  isFlippedLeft.value = false;
+  isFlippedRight.value = false;
+};
+const handleRight = () => {
+  isFlippedRight.value = !isFlippedRight.value;
+  isFlippedCenter.value = false;
+  isFlippedLeft.value = false;
+};
+
 onMounted(() => {
   window.addEventListener("resize", updateWidth);
 });
@@ -48,11 +64,11 @@ const shortText = computed(() => {
 
 <template>
   <div
-    class="lg:hidden flex flex-row py-2 w-full max-h-screen gap-x-6 mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-6 pl-10 pr-10 hide-scrollbar"
+    class="lg:hidden flex flex-row py-2 w-full h-auto gap-x-6 mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-6 pl-10 pr-10 hide-scrollbar"
   >
     <div
       class="snap-start shrink-0 w-[85%] sml:h-[270px] md:h-[200px] lg:h-[230px] perspective"
-      @click="isFlippedLeft = !isFlippedLeft"
+      @click="handleLeft"
     >
       <div
         :class="[
@@ -62,7 +78,7 @@ const shortText = computed(() => {
       >
         <!-- FRONT -->
         <div
-          class="flex flex-col gap-5 absolute w-full h-full backface-hidden bg-[#F9FAFB] rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30 border border-gray-100 shadow-md p-5"
+          class="flex flex-col gap-5 absolute w-full h-full backface-hidden bg-[#F9FAFB] rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md p-5"
         >
           <div class="sml:hidden flex flex-row w-full h-auto gap-5">
             <div class="w-[15%] h-auto">
@@ -111,15 +127,18 @@ const shortText = computed(() => {
 
         <!-- BACK -->
         <div
-          class="absolute w-full h-full backface-hidden rotate-y-180 bg-[#F9FAFB] rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30 border border-gray-100 shadow-md p-5"
+          class="absolute w-full h-full backface-hidden rotate-y-180 bg-[#F9FAFB] rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center px-5"
         >
-          <p class="text-base overflow-hidden" v-html="fullText"></p>
+          <p
+            class="flex text-base sml:text-sm overflow-hidden justify-center"
+            v-html="fullText"
+          ></p>
         </div>
       </div>
     </div>
     <div
       class="snap-start shrink-0 w-[85%] sml:h-[270px] md:h-[200px] lg:h-[230px] perspective"
-      @click="isFlippedCenter = !isFlippedCenter"
+      @click="handleCenter"
     >
       <div
         :class="[
@@ -129,7 +148,7 @@ const shortText = computed(() => {
       >
         <!-- FRONT -->
         <div
-          class="flex flex-col gap-5 absolute w-full h-full backface-hidden bg-[#F9FAFB] rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30 border border-gray-100 shadow-md p-5"
+          class="flex flex-col gap-5 absolute w-full h-full backface-hidden bg-[#F9FAFB] rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md p-5"
         >
           <div class="sml:hidden flex flex-row w-full h-auto gap-5">
             <div class="w-[15%] h-auto">
@@ -178,15 +197,18 @@ const shortText = computed(() => {
 
         <!-- BACK -->
         <div
-          class="absolute w-full h-full backface-hidden rotate-y-180 bg-[#F9FAFB] rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30 border border-gray-100 shadow-md p-5"
+          class="absolute w-full h-full backface-hidden rotate-y-180 bg-[#F9FAFB] rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center px-5"
         >
-          <p class="text-base overflow-hidden" v-html="fullText"></p>
+          <p
+            class="flex text-base sml:text-sm overflow-hidden justify-center"
+            v-html="fullText"
+          ></p>
         </div>
       </div>
     </div>
     <div
       class="snap-start shrink-0 w-[85%] sml:h-[270px] md:h-[200px] lg:h-[230px] perspective"
-      @click="isFlippedRight = !isFlippedRight"
+      @click="handleRight"
     >
       <div
         :class="[
@@ -196,7 +218,7 @@ const shortText = computed(() => {
       >
         <!-- FRONT -->
         <div
-          class="flex flex-col gap-5 absolute w-full h-full backface-hidden bg-[#F9FAFB] rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30 border border-gray-100 shadow-md p-5"
+          class="flex flex-col gap-5 absolute w-full h-full backface-hidden bg-[#F9FAFB] rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md p-5"
         >
           <div class="sml:hidden flex flex-row w-full h-auto gap-5">
             <div class="w-[15%] h-auto">
@@ -245,9 +267,12 @@ const shortText = computed(() => {
 
         <!-- BACK -->
         <div
-          class="absolute w-full h-full backface-hidden rotate-y-180 bg-[#F9FAFB] rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-30 border border-gray-100 shadow-md p-5"
+          class="absolute w-full h-full backface-hidden rotate-y-180 bg-[#F9FAFB] rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center px-5"
         >
-          <p class="text-base overflow-hidden" v-html="fullText"></p>
+          <p
+            class="flex text-base sml:text-sm overflow-hidden justify-center"
+            v-html="fullText"
+          ></p>
         </div>
       </div>
     </div>
@@ -266,5 +291,12 @@ const shortText = computed(() => {
 }
 .rotate-y-180 {
   transform: rotateY(180deg);
+}
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.hide-scrollbar {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 </style>

@@ -28,12 +28,12 @@ import { useSidebarStore } from "@/stores/sidebar";
           class="w-full pb-2 sml:pb-4 text-[#195279] animate__animated animate__fadeIn animate__delay-2s"
         >
           <p
-            class="sml:text-3xl text-5xl font-semibold sml:leading-[40px] leading-[70px]"
+            class="sml:text-2xl text-5xl font-semibold sml:leading-[35px] leading-[70px]"
           >
             The Future of Life
           </p>
           <p
-            class="sml:text-3xl text-5xl font-semibold sml:leading-[40px] leading-[70px]"
+            class="sml:text-2xl text-5xl font-semibold sml:leading-[35px] leading-[70px]"
           >
             Insurance Underwriting
           </p>

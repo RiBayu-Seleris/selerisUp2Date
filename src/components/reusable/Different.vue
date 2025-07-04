@@ -23,10 +23,8 @@ defineProps({
 </script>
 
 <template>
-  <div class="px-10 mt-16">
-    <div
-      :class="`hidden lg:block w-full h-[100vh] ${bgImage} rounded-b-[3rem]`"
-    >
+  <div class="px-10 my-16">
+    <div :class="`hidden lg:block w-full h-auto ${bgImage} rounded-b-[3rem]`">
       <div class="flex flex-col w-full h-auto px-10">
         <div class="flex flex-col w-full h-auto mt-20">
           <div class="flex w-full h-auto">
@@ -54,7 +52,7 @@ defineProps({
               <img
                 :src="robotImage"
                 alt="Robot"
-                class="w-full h-full object-cover object-bottom bottom-0 robot-wiggle"
+                class="w-full h-[350px] object-contain object-top top-0 animate-bounce"
               />
             </div>
           </div>
@@ -66,32 +64,3 @@ defineProps({
     <slot name="mobile" />
   </div>
 </template>
-
-<style scoped>
-@keyframes robotWiggle {
-  0% {
-    transform: rotate(7deg);
-  }
-  25% {
-    transform: rotate(-7deg);
-  }
-  50% {
-    transform: rotate(4deg);
-  }
-  75% {
-    transform: rotate(-4deg);
-  }
-  100% {
-    transform: rotate(7deg);
-  }
-}
-
-.robot-wiggle-hover:hover {
-  animation: robotWiggle 5s linear infinite;
-  transform-origin: bottom center;
-}
-.robot-wiggle {
-  animation: robotWiggle 5s linear infinite;
-  transform-origin: bottom center;
-}
-</style>

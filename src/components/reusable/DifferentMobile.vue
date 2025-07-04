@@ -26,7 +26,7 @@ defineProps({
         <img
           :src="robotImage"
           alt="Robot"
-          class="w-full h-full object-contain object-center animate-bounce"
+          class="w-full h-full object-contain object-center robot-wiggle"
         />
       </div>
     </div>
@@ -55,3 +55,31 @@ defineProps({
     </div>
   </div>
 </template>
+<style scoped>
+@keyframes robotWiggle {
+  0% {
+    transform: rotate(7deg);
+  }
+  25% {
+    transform: rotate(-7deg);
+  }
+  50% {
+    transform: rotate(4deg);
+  }
+  75% {
+    transform: rotate(-4deg);
+  }
+  100% {
+    transform: rotate(7deg);
+  }
+}
+
+.robot-wiggle-hover:hover {
+  animation: robotWiggle 5s linear infinite;
+  transform-origin: bottom center;
+}
+.robot-wiggle {
+  animation: robotWiggle 5s linear infinite;
+  transform-origin: bottom center;
+}
+</style>

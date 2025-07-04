@@ -69,7 +69,7 @@ const cekCertIcon = computed(() => {
       :class="`w-full h-[500px] absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out ${divImageAfter} `"
     >
       <div
-        :class="`flex flex-col w-full h-full text-white px-10 pt-12 gap-y-4 ${textPosition}`"
+        :class="`flex flex-col w-full h-full text-white px-16 pt-12 gap-y-4 ${textPosition}`"
       >
         <p class="text-2xl font-semibold">{{ TitleAfter }}</p>
         <p class="text-xl font-normal">Certificate Number: {{ CertNumber }}</p>

@@ -1,6 +1,6 @@
 <script setup>
 import SliderDescription from "@/components/SliderDescription.vue";
-import StepDescription from "@/components/StepDescription.vue";
+import StepDescription from "@/components/About/StepDescription.vue";
 
 import Hero from "@/components/About/Hero.vue";
 

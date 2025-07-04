@@ -18,7 +18,7 @@ const sidebarStore = useSidebarStore();
       />
     </div>
     <div class="sml:hidden md:hidden lg:flex w-[87%] h-full items-center">
-      <div class="flex w-[80%] h-auto ml-[5%]">
+      <div class="flex w-[86%] h-auto ml-[3.5%]">
         <nav
           class="hidden lg:flex w-full rounded-full border py-3 justify-center content-center shadow-md bg-white z-[999]"
         >
