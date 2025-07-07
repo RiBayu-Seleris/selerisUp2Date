@@ -7,28 +7,33 @@ import Navlink from "@/components/Navlink.vue";
 const { isScrolled } = useScrollStore();
 const route = useRoute();
 const isHoveringProduct = ref(false);
+const isHoveringTechnology = ref(false);
 </script>
 
 <template>
   <ul
     :class="[
       'flex items-center text-md font-medium text-[#374151]',
-      isScrolled ? 'lg:gap-[60px]' : 'lg:gap-[45px] justify-center',
+      isScrolled
+        ? 'xl:gap-[50px] lg:gap-[20px]'
+        : 'xl:gap-[50px] lg:gap-[20px] justify-center',
     ]"
   >
-    <li>
-      <Navlink href="/"> Home </Navlink>
+    <li class="">
+      <Navlink class="text-[11pt]" href="/"> Home </Navlink>
     </li>
-    <li>
-      <Navlink href="/about"> About </Navlink>
+    <li class="">
+      <Navlink class="text-[11pt]" href="/about"> About </Navlink>
     </li>
 
     <li
-      class="relative list-none"
+      class="relative list-none cursor-pointer"
       @mouseenter="isHoveringProduct = true"
       @mouseleave="isHoveringProduct = false"
     >
-      <span class="relative inline-block text-animate-hover hover:font-bold">
+      <span
+        class="relative inline-block text-animate-hover hover:font-bold text-[11pt]"
+      >
         Products ▾
       </span>
     </li>
@@ -39,8 +44,8 @@ const isHoveringProduct = ref(false);
       @mouseenter="isHoveringProduct = true"
       @mouseleave="isHoveringProduct = false"
       :class="[
-        'absolute z-50 w-auto h-auto left-[350px] top-[70px]',
-        isScrolled ? '-mt-4 pt-8 ' : 'mt-0 pt-5 ',
+        'absolute z-50 w-auto h-auto xl:left-[350px] lg:left-[200px] top-[70px]',
+        isScrolled ? '-mt-4 pt-8 ' : 'mt-0 lg:-mt-1 pt-5  ',
       ]"
     >
       <div
@@ -68,23 +73,25 @@ const isHoveringProduct = ref(false);
     </div>
 
     <li
-      class="relative list-none"
-      @mouseenter="isHoveringProduct = true"
-      @mouseleave="isHoveringProduct = false"
+      class="relative list-none cursor-pointer"
+      @mouseenter="isHoveringTechnology = true"
+      @mouseleave="isHoveringTechnology = false"
     >
-      <span class="relative inline-block text-animate-hover hover:font-bold">
+      <span
+        class="relative inline-block text-animate-hover hover:font-bold text-[11pt]"
+      >
         Technology ▾
       </span>
     </li>
 
     <!-- Dropdown bebas posisi -->
     <div
-      v-if="isHoveringProduct"
-      @mouseenter="isHoveringProduct = true"
-      @mouseleave="isHoveringProduct = false"
+      v-if="isHoveringTechnology"
+      @mouseenter="isHoveringTechnology = true"
+      @mouseleave="isHoveringTechnology = false"
       :class="[
-        'absolute z-50 w-auto h-auto left-[350px] top-[70px]',
-        isScrolled ? '-mt-4 pt-8 ' : 'mt-0 pt-5 ',
+        'absolute z-50 w-auto h-auto left-[350px] top-[70px] ',
+        isScrolled ? '-mt-4 pt-8 ' : 'mt-0 lg:-mt-1 pt-5 ',
       ]"
     >
       <div
@@ -112,17 +119,17 @@ const isHoveringProduct = ref(false);
     </div>
 
     <!-- Tambahan menu lainnya -->
-    <li>
-      <Navlink href="#"> Teams </Navlink>
+    <li class="">
+      <Navlink class="text-[11pt]" href="#"> Teams </Navlink>
     </li>
-    <li>
-      <Navlink href="#"> Blogs </Navlink>
+    <li class="">
+      <Navlink class="text-[11pt]" href="#"> Blogs </Navlink>
     </li>
-    <li>
-      <Navlink href="#"> Services </Navlink>
+    <li class="">
+      <Navlink class="text-[11pt]" href="#"> Services </Navlink>
     </li>
-    <li>
-      <Navlink href="#"> Contact </Navlink>
+    <li class="">
+      <Navlink class="text-[11pt]" href="/contact"> Contact </Navlink>
     </li>
   </ul>
 </template>

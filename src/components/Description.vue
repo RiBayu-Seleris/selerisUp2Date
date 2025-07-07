@@ -51,22 +51,33 @@ onMounted(() => {
     class="flex flex-row sml:flex-col md:flex-col lg:flex-row mx-6 lg:justify-between mt-10"
   >
     <div class="flex flex-col w-full h-full justify-center">
-      <div class="w-full pb-2 sml:pb-4">
-        <p class="text-4xl sml:text-2xl text-[#1AB24F] font-medium">
+      <div class="w-full pb-2 sml:pb-4 md:pb-5 xl:pb-5">
+        <p
+          class="sml:text-2xl md:text-3xl lg:text-3xl xl:text-4xl text-[#1AB24F] font-medium"
+        >
           AI Technology
         </p>
       </div>
-      <div class="w-full sml:pb-4 text-[#195279]">
-        <p class="text-5xl sml:text-3xl font-semibold leading-[55px]">
+      <div class="w-full sml:pb-4 md:pb-10 lg:pb-0 xl:pb-0 text-[#195279]">
+        <p
+          class="sml:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-semibold leading-[55px]"
+        >
           How Seleris
+          <span class="sml:inline-flex md:inline-flex lg:hidden"> Works?</span>
         </p>
-        <p class="text-5xl sml:text-3xl font-semibold leading-[55px]">Works?</p>
+        <p
+          class="sml:hidden md:hidden lg:block sml:text-3xl lg:text-4xl xl:text-5xl font-semibold leading-[55px]"
+        >
+          Works?
+        </p>
       </div>
-      <div class="w-full h-[354px] sml:h-[200px]">
+      <div
+        class="w-full sml:h-[200px] md:h-[200px] lg:h-[320px] xl:h-[354px] lg:mt-5"
+      >
         <div class="h-full relative overflow-hidden">
           <!-- Scroll Indicator -->
           <div
-            class="absolute left-3 sml:left-0 top-1/2 -translate-y-1/2 flex flex-col gap-12 sml:gap-6 z-0"
+            class="absolute xl:left-3 sml:left-0 top-1/2 -translate-y-1/2 flex flex-col gap-12 sml:gap-6 z-0"
           >
             <div
               v-for="(step, index) in steps.length"
@@ -88,10 +99,12 @@ onMounted(() => {
             <section
               v-for="(step, index) in steps"
               :key="index"
-              class="step h-full snap-start flex items-center justify-start pl-14 pr-8 sml:pl-8 sml:pr-0 text-start"
+              class="step h-full snap-start flex items-center justify-start sml:pl-8 sml:pr-0 md:pl-10 lg:w-full xl:w-full lg:pl-10 xl:pl-14 xl:pr-5 text-start"
             >
               <div>
-                <h3 class="text-4xl sml:text-xl text-green-600 font-semibold">
+                <h3
+                  class="sml:text-xl md:text-2xl lg:text-2xl xl:text-4xl text-green-600 font-semibold"
+                >
                   {{ step.title }}
                 </h3>
                 <p
@@ -105,7 +118,9 @@ onMounted(() => {
         </div>
       </div>
     </div>
-    <div class="flex w-full h-full justify-center items-center">
+    <div
+      class="flex w-full sml:h-full md:h-[300px] lg:h-full xl:h-full justify-center items-center"
+    >
       <video
         autoplay
         loop

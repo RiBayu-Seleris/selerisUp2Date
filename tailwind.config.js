@@ -30,6 +30,9 @@ module.exports = {
         md: "768px", // Pastikan ini ada
         mds: "853px",
         lg: "1024px",
+        xl: {
+          raw: "(min-width: 1025px)",
+        },
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],

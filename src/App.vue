@@ -39,7 +39,9 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="relative w-full h-auto font-poppins overflow-x-hidden">
+  <div
+    class="relative w-full h-auto font-poppins overflow-x-hidden animate__animated animate__fadeIn animate__slow"
+  >
     <!-- Navbar -->
     <div class="flex fixed w-full h-auto px-10 lg:px-10 pb-5 z-10">
       <component :is="scrollStore.isScrolled ? NavbarScroll : Navbar" />

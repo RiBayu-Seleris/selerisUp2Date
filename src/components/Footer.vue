@@ -31,7 +31,7 @@ import appstore from "@/assets/images/appstore.png";
                 class="flex w-full h-auto lg:mt-4 justify-center items-center"
               >
                 <p
-                  class="text-[#195279] font-semibold lg:text-xl sml:text-md md:text-[1.7rem]"
+                  class="text-[#195279] font-semibold lg:text-lg xl:text-2xl sml:text-md md:text-[1.7rem]"
                 >
                   PT Seleris Meditekno Internasional
                 </p>
@@ -61,63 +61,63 @@ import appstore from "@/assets/images/appstore.png";
         </div>
         <div class="flex lg:hidden w-full h-1 bg-[#F3F4F6] rounded-full my-3" />
         <div class="w-full h-auto">
-          <div class="flex flex-col lg:px-10">
-            <p class="text-[#195279] text-2xl lg:text-3xl font-medium pb-2">
+          <div class="flex flex-col lg:pl-6 xl:pl-12">
+            <p class="text-[#195279] text-2xl xl:text-3xl font-medium pb-2">
               Products
             </p>
             <div>
-              <p class="text-[#B8B8B8] text-lg lg:text-xl py-1.5">
+              <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">
                 Seleris Lifins
               </p>
-              <p class="text-[#B8B8B8] text-lg lg:text-xl py-1.5">
+              <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">
                 Seleris Medins
               </p>
-              <p class="text-[#B8B8B8] text-lg lg:text-xl py-1.5">
+              <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">
                 Seleris Credit Cover
               </p>
-              <p class="text-[#B8B8B8] text-lg lg:text-xl py-1.5">
+              <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">
                 Seleris Care
               </p>
-              <p class="text-[#B8B8B8] text-lg lg:text-xl py-1.5">Flexa Asia</p>
-              <p class="text-[#B8B8B8] text-lg lg:text-xl py-1.5">Auto Claim</p>
+              <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">Flexa Asia</p>
+              <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">Auto Claim</p>
             </div>
           </div>
         </div>
         <div class="flex lg:hidden w-full h-1 bg-[#F3F4F6] rounded-full my-3" />
         <div class="w-full h-auto">
-          <div class="flex flex-col lg:px-10">
-            <p class="text-[#195279] text-2xl lg:text-3xl font-medium pb-2">
+          <div class="flex flex-col lg:pl-6 xl:pl-8">
+            <p class="text-[#195279] text-2xl xl:text-3xl font-medium pb-2">
               Company
             </p>
-            <p class="text-[#B8B8B8] text-lg lg:text-xl py-1.5">Home</p>
-            <p class="text-[#B8B8B8] text-lg lg:text-xl py-1.5">About</p>
-            <p class="text-[#B8B8B8] text-lg lg:text-xl py-1.5">Our Team</p>
-            <p class="text-[#B8B8B8] text-lg lg:text-xl py-1.5">Blog</p>
-            <p class="text-[#B8B8B8] text-lg lg:text-xl py-1.5">Services</p>
-            <p class="text-[#B8B8B8] text-lg lg:text-xl py-1.5">Contact</p>
+            <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">Home</p>
+            <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">About</p>
+            <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">Our Team</p>
+            <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">Blog</p>
+            <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">Services</p>
+            <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">Contact</p>
           </div>
         </div>
         <div class="flex lg:hidden w-full h-1 bg-[#F3F4F6] rounded-full my-3" />
         <div class="w-full h-auto">
           <div class="flex flex-col">
-            <p class="text-[#195279] text-2xl lg:text-3xl font-medium pb-2">
+            <p class="text-[#195279] text-2xl xl:text-3xl font-medium pb-2">
               Stay Connects
             </p>
             <div class="mb-3 mt-2 lg:mt-2">
               <p class="text-[#195279] text-xl">Address</p>
-              <p class="text-[#2AB857] text-lg lg:text-xl lg:py-1.5">
+              <p class="text-[#2AB857] text-lg xl:text-xl lg:py-1.5">
                 16 Raffles Quay #35 - 01B Hong Leong Building SINGAPORE (048581)
               </p>
             </div>
             <div class="mb-3 lg:mt-2">
               <p class="text-[#195279] text-xl">Phone</p>
-              <p class="text-[#2AB857] text-lg lg:text-xl lg:py-1.5">
+              <p class="text-[#2AB857] text-lg xl:text-xl lg:py-1.5">
                 +62 (21) 526 52 35
               </p>
             </div>
             <div class="mb-3 lg:mt-2">
               <p class="text-[#195279] text-xl">E-Mail</p>
-              <p class="text-[#2AB857] text-lg lg:text-xl lg:py-1.5">
+              <p class="text-[#2AB857] text-lg xl:text-xl lg:py-1.5">
                 support@seleris.ai
               </p>
             </div>
@@ -126,7 +126,9 @@ import appstore from "@/assets/images/appstore.png";
         <div class="flex lg:hidden w-full h-1 bg-[#F3F4F6] rounded-full my-3" />
         <div class="w-full h-auto">
           <div class="flex flex-col lg:pl-10">
-            <p class="text-[#195279] text-3xl font-medium pb-2 sml:pb-0">
+            <p
+              class="text-[#195279] text-2xl lg:text-2xl xl:text-3xl font-medium pb-2 sml:pb-0"
+            >
               Get The App
             </p>
             <div class="flex flex-row lg:flex-col gap-10 lg:gap-0">

@@ -7,7 +7,7 @@ import Cert3 from "@/assets/images/certification/logo/Cert1.png";
 </script>
 
 <template>
-  <div class="w-full h-full lg:px-16">
+  <div class="w-full h-full xl:px-16 lg:px-5">
     <div class="flex flex-col w-full h-auto">
       <div class="flex flex-col w-full h-auto">
         <div class="flex w-full justify-center items-center text-[#195279]">
@@ -25,7 +25,9 @@ import Cert3 from "@/assets/images/certification/logo/Cert1.png";
       </div>
 
       <!-- Desktop -->
-      <div class="hidden lg:flex flex-row w-full h-auto gap-x-10 mt-5 relative">
+      <div
+        class="hidden lg:flex flex-row w-full h-auto gap-x-10 lg:gap-x-6 mt-5 relative"
+      >
         <!-- :divImageAfter="bgLeftAfter" -->
         <CertCard
           :divImageBefore="'bg-leftCertBefore'"

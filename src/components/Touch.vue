@@ -5,21 +5,25 @@ import TouchMobile from "@/components/TouchMobile.vue";
 <template>
   <div class="px-5 lg:px-10 lg:mt-0">
     <div
-      class="hidden lg:block w-full h-auto bg-touch px-8 pt-24 pb-10 rounded-b-3xl rounded-tr-[3rem]"
+      class="hidden lg:block w-full lg:h-[630px] xl:h-auto bg-touch lg:px-6 xl:px-8 xl:pt-24 lg:pt-20 pb-10 rounded-b-3xl rounded-tr-[3rem]"
     >
       <div class="flex flex-row w-full h-auto gap-5">
-        <div class="w-[45%] h-[580px]">
-          <div class="w-full h-full bg-[#FAFAFA] rounded-xl py-4 px-8">
+        <div class="w-[45%] lg:h-[530px] xl:h-[580px]">
+          <div
+            class="w-full h-full bg-[#FAFAFA] rounded-3xl py-4 lg:px-6 xl:px-8"
+          >
             <div class="flex flex-col w-full h-full">
               <div class="w-full h-auto py-5">
                 <p class="text-4xl pb-3 font-semibold text-[#195279]">
                   Get <span class="text-[#2AB857]">in Touch</span>
                 </p>
-                <p class="text-lg text-[#195279] font-semibold">
+                <p
+                  class="base:text-base xl:text-lg text-[#195279] font-semibold"
+                >
                   Be among the first to discover what it's all about
                 </p>
               </div>
-              <div class="flex flex-col w-full mb-4">
+              <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
                 <div class="w-full mb-2">
                   <p>Full Name:</p>
                 </div>
@@ -30,7 +34,7 @@ import TouchMobile from "@/components/TouchMobile.vue";
                   />
                 </div>
               </div>
-              <div class="flex flex-col w-full mb-4">
+              <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
                 <div class="w-full mb-2">
                   <p>Email:</p>
                 </div>
@@ -41,14 +45,13 @@ import TouchMobile from "@/components/TouchMobile.vue";
                   />
                 </div>
               </div>
-              <div class="flex flex-col w-full mb-4">
+              <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
                 <div class="w-full mb-2">
                   <p>Message:</p>
                 </div>
                 <div class="w-full">
                   <textarea
-                    rows="5"
-                    class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#2AB857] resize-none align-top"
+                    class="w-full lg:h-[70px] xl:h-[130px] p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#2AB857] resize-none align-top"
                   />
                 </div>
               </div>
@@ -63,7 +66,9 @@ import TouchMobile from "@/components/TouchMobile.vue";
         <div
           class="flex flex-col w-[55%] h-auto justify-between gap-5 rounded-3xl"
         >
-          <div class="flex w-full h-[65%] bg-[#FAFAFA] rounded-3xl p-4">
+          <div
+            class="flex w-full lg:h-[60%] xl:h-[65%] bg-[#FAFAFA] rounded-3xl p-4"
+          >
             <div class="flex w-full h-full rounded-xl">
               <iframe
                 class="w-full h-full rounded-2xl"
@@ -74,19 +79,21 @@ import TouchMobile from "@/components/TouchMobile.vue";
               />
             </div>
           </div>
-          <div class="flex flex-row w-full h-[35%] gap-5">
+          <div class="flex flex-row w-full lg:h-[40%] xl:h-[35%] gap-5">
             <div class="flex w-full h-full bg-[#FAFAFA] rounded-xl">
               <div class="flex flex-col w-full py-3 gap-1">
                 <div class="flex w-full justify-center items-center mb-2">
                   <div class="w-12 h-12 rounded-full bg-[#D9D9D9]" />
                 </div>
                 <div class="flex w-full justify-center items-center">
-                  <p class="text-2xl text-[#195279] font-bold">
+                  <p
+                    class="lg:text-xl xl:text-2xl text-[#195279] font-semibold"
+                  >
                     Chat to Support
                   </p>
                 </div>
-                <div class="flex w-full justify-center items-center">
-                  <p class="text-md text-[#ACACAC]">
+                <div class="flex w-full justify-center items-center lg:px-5">
+                  <p class="lg:text-sm xl:text-base text-[#ACACAC] text-center">
                     Our team here ready to help you
                   </p>
                 </div>
@@ -123,7 +130,7 @@ import TouchMobile from "@/components/TouchMobile.vue";
 </template>
 <style scoped>
 .bg-touch {
-  background-image: url("@/assets/images/touch-bg.png");
+  background-image: url("@/assets/images/touch-bg2.png");
   background-size: cover;
   background-repeat: no-repeat;
 }

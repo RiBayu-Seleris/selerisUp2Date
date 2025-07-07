@@ -11,37 +11,33 @@ import { useSidebarStore } from "@/stores/sidebar";
 
 <template>
   <div
-    class="relative w-full h-auto bg-cover bg-no-repeat lg:bg-hero bg-top rounded-b-3xl"
+    class="relative w-full h-auto xl:bg-cover lg:bg-hero bg-no-repeat lg:bg-cover rounded-b-3xl"
   >
-    <div class="w-full h-auto lg:pt-[100px] md:pt-[100px] sml:pt-[90px]">
+    <div
+      class="w-full h-auto sml:pt-[90px] md:pt-[100px] lg:pt-[60px] xl:pt-[100px]"
+    >
       <div
         class="flex flex-col w-full h-auto mt-5 sml:mt-4 md:mt-0 text-center sml:pt-5 md:pt-8 justify-center items-center z-30 bg-[#F3F4F6] lg:bg-transparent rounded-3xl"
       >
-        <div
-          class="w-full pb-2 sml:pb-4 animate__animated animate__fadeIn animate__delay-1s"
-        >
+        <div class="w-full pb-2 sml:pb-4">
           <p class="text-3xl sml:text-2xl text-[#1AB24F] font-medium">
             AI Inovation
           </p>
         </div>
-        <div
-          class="w-full pb-2 sml:pb-4 text-[#195279] animate__animated animate__fadeIn animate__delay-2s"
-        >
+        <div class="w-full pb-2 sml:pb-4 text-[#195279]">
           <p
-            class="sml:text-2xl text-5xl font-semibold sml:leading-[35px] leading-[70px]"
+            class="sml:text-2xl md:text-4xl lg:text-4xl xl:text-5xl font-semibold sml:leading-[35px] xl:leading-[70px]"
           >
             The Future of Life
           </p>
           <p
-            class="sml:text-2xl text-5xl font-semibold sml:leading-[35px] leading-[70px]"
+            class="sml:text-2xl md:text-4xl lg:text-4xl xl:text-5xl font-semibold sml:leading-[35px] xl:leading-[70px]"
           >
             Insurance Underwriting
           </p>
         </div>
         <!-- Swipe caption -->
-        <div
-          class="flex flex-row items-center mb-4 lg:mb-5 animate__animated animate__fadeIn animate__delay-3s"
-        >
+        <div class="flex flex-row items-center mb-4 lg:mb-5">
           <p
             class="text-lg sml:text-md font-medium bg-gradient-to-r from-[#B9CAD5] to-[#195279] bg-clip-text text-transparent cursor-pointer"
           >
@@ -73,14 +69,14 @@ import { useSidebarStore } from "@/stores/sidebar";
             </svg>
           </div>
         </div>
-        <div class="w-full sml:h-auto sml:mt-5 lg:h-[330px] lg:px-0">
+        <div class="w-full sml:h-auto sml:mt-5 lg:h-auto lg:px-0">
           <Swiper
             :modules="[Navigation, Autoplay]"
             :navigation="false"
             :pagination="false"
-            :autoplay="{ delay: 5000, disableOnInteraction: false }"
+            :autoplay="{ delay: 3000, disableOnInteraction: false }"
             loop
-            class="w-full h-full group animate__animated animate__fadeIn animate__delay-4s"
+            class="w-full h-full lg:h-[310px] group"
           >
             <SwiperSlide>
               <img

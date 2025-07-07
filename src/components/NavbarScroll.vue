@@ -37,7 +37,7 @@ onUnmounted(() => {
         <img
           :src="Logo"
           alt="Logo"
-          class="h-[70px] sml:w-[100px] sml:h-[70px] object-contain"
+          class="h-[70px] sml:w-[100px] sml:h-[70px] lg:h-[60px] object-contain"
         />
       </div>
       <!-- Div Navbar -->

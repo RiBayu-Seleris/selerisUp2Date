@@ -23,15 +23,18 @@ import Different from "@/components/Home/Different.vue";
     <PartnersClientsMobile />
   </section>
 
+  <!-- data-aos="fade-left"
+    data-aos-delay="100" -->
   <section
-    class="flex flex-col relative w-full lg:h-[100vh] md:mt-10 lg:mt-10 pt-4 pb-8 lg:pt-0 lg:pb-0 bg-cert bg-no-repeat bg-cover bg-center"
-    data-aos="fade-left"
-    data-aos-delay="100"
+    class="flex flex-col relative w-full xl:h-[100vh] lg:h-[80vh] md:mt-10 lg:mt-10 pt-4 pb-8 lg:pt-0 lg:pb-0"
   >
+    <!-- bg-cert bg-no-repeat bg-cover bg-center -->
     <Certificate />
   </section>
 
-  <section class="flex flex-col relative w-full h-auto px-8">
+  <section
+    class="flex flex-col relative w-full h-auto xl:px-8 lg:mt-10 xl:mt-0"
+  >
     <Description />
   </section>
 

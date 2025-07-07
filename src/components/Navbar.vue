@@ -9,12 +9,12 @@ const sidebarStore = useSidebarStore();
 </script>
 
 <template>
-  <div class="flex flex-row w-full h-auto items-center pt-5 lg:pt-5">
+  <div class="flex flex-row w-full h-auto items-center pt-5 lg:pt-6 xl:pt-5">
     <div class="sml:w-[50%] md:w-[50%] lg:w-[13%] h-auto">
       <img
         :src="Logo"
         alt="Logo"
-        class="h-[86px] sml:w-[100px] sml:h-[70px] md:h-[70px] lg:h-[80px] object-contain"
+        class="lg:h-[60px] sml:w-[100px] sml:h-[70px] md:h-[70px] xl:h-[80px] object-contain"
       />
     </div>
     <div class="sml:hidden md:hidden lg:flex w-[87%] h-full items-center">

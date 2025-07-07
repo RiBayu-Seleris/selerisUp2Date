@@ -110,10 +110,3 @@
     </div>
   </div>
 </template>
-<style scoped>
-.bg-touch {
-  background-image: url("@/assets/images/touch-bg.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-</style>

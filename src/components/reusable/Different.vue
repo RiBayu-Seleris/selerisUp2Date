@@ -24,9 +24,11 @@ defineProps({
 
 <template>
   <div class="px-10 my-16">
-    <div :class="`hidden lg:block w-full h-auto ${bgImage} rounded-b-[3rem]`">
-      <div class="flex flex-col w-full h-auto px-10">
-        <div class="flex flex-col w-full h-auto mt-20">
+    <div
+      :class="`hidden lg:block w-full h-auto lg:h-[480px] xl:h-auto ${bgImage} rounded-b-[3rem]`"
+    >
+      <div class="flex flex-col w-full h-auto xl:px-10 lg:px-5">
+        <div class="flex flex-col w-full h-auto lg:mt-16 xl:mt-20">
           <div class="flex w-full h-auto">
             <!-- Title -->
             <p class="text-3xl text-[#1DC457]">
@@ -36,13 +38,15 @@ defineProps({
           </div>
           <div class="flex w-[70%] h-auto mt-5">
             <!-- Title Body -->
-            <p class="text-4xl text-[#195279] leading-[40px] font-semibold">
+            <p
+              class="lg:text-2xl xl:text-4xl text-[#195279] leading-[40px] font-semibold"
+            >
               <!-- We bring solutions to make life insurance for our customers. -->
               {{ subtitle }}
             </p>
           </div>
         </div>
-        <div class="flex flex-row w-full h-auto mt-10">
+        <div class="flex flex-row w-full h-auto lg:mt-5 xl:mt-10">
           <div class="flex flex-col w-8/12 h-auto">
             <slot />
           </div>
@@ -52,7 +56,7 @@ defineProps({
               <img
                 :src="robotImage"
                 alt="Robot"
-                class="w-full h-[350px] object-contain object-top top-0 animate-bounce"
+                class="w-full lg:h-[250px] xl:h-[350px] object-contain object-top top-0 animate-bounce"
               />
             </div>
           </div>

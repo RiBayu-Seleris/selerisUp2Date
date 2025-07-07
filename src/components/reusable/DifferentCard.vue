@@ -31,15 +31,15 @@ defineProps({
         <img
           :src="image"
           alt="Icon"
-          class="w-[70px] h-[70px] object-contain bg-white rounded-full shadow-lg p-2"
+          class="w-[70px] xl:h-[70px] lg:h-[57px] object-contain bg-white rounded-full shadow-lg p-2"
         />
       </div>
-      <div class="flex flex-col w-full h-auto pl-2">
+      <div class="flex flex-col w-full h-auto lg:pl-4 xl:pl-4">
         <div class="flex w-full h-auto text-[#195279]">
-          <p class="text-2xl pt-3 pb-2">{{ title }}</p>
+          <p class="lg:text-xl xl:text-2xl pt-3 pb-2">{{ title }}</p>
         </div>
         <div :class="`flex w-full h-auto text-[#4F90BC] {${subtitleClass}}`">
-          <p class="text-xl pr-3">{{ subtitle }}</p>
+          <p class="lg:text-base xl:text-xl pr-3">{{ subtitle }}</p>
         </div>
       </div>
     </div>

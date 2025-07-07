@@ -46,10 +46,10 @@ const cekCertIcon = computed(() => {
   <div class="flex relative w-full h-auto group">
     <!-- Card A (default) -->
     <div
-      :class="`w-full h-[500px] group-hover:opacity-0 bg-cover bg-center ${divImageBefore} `"
+      :class="`relative w-full xl:h-[500px] lg:h-[410px]  group-hover:opacity-0 bg-cover bg-center ${divImageBefore} `"
     >
-      <div class="flex flex-col w-full h-auto mt-20">
-        <div class="flex w-full h-[180px]">
+      <div class="flex flex-col w-full h-auto xl:mt-20 lg:mt-14">
+        <div class="flex w-full h-[180px] lg:h-[140px] xl:h-[180px]">
           <img
             :src="imageCertLogo"
             alt="Cert Logo"
@@ -57,23 +57,27 @@ const cekCertIcon = computed(() => {
           />
         </div>
         <div
-          class="flex w-full h-auto justify-center mt-10 px-16 items-center text-center"
+          class="flex w-full h-auto justify-center mt-10 px-16 lg:px-10 items-center text-center"
         >
-          <p class="text-3xl font-normal text-[#195279]">{{ TitleBefore }}</p>
+          <p class="flex xl:text-3xl lg:text-2xl font-normal text-[#195279]">
+            {{ TitleBefore }}
+          </p>
         </div>
       </div>
     </div>
 
     <!-- Card B (on hover) -->
     <div
-      :class="`w-full h-[500px] absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out ${divImageAfter} `"
+      :class="`w-full xl:h-[500px] lg:h-[410px]  absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out ${divImageAfter} `"
     >
       <div
-        :class="`flex flex-col w-full h-full text-white px-16 pt-12 gap-y-4 ${textPosition}`"
+        :class="`flex flex-col w-full h-full text-white xl:px-10 lg:px-6 xl:pt-12 lg:pt-10 lg:gap-y-1 xl:gap-y-4 ${textPosition}`"
       >
-        <p class="text-2xl font-semibold">{{ TitleAfter }}</p>
-        <p class="text-xl font-normal">Certificate Number: {{ CertNumber }}</p>
-        <p class="text-base">
+        <p class="xl:text-2xl lg:text-lg font-semibold">{{ TitleAfter }}</p>
+        <p class="xl:text-xl lg:text-base font-normal">
+          Certificate Number: {{ CertNumber }}
+        </p>
+        <p class="xl:text-base lg:text-sm">
           {{ BodyText }}
         </p>
       </div>
