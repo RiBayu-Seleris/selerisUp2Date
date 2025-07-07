@@ -48,7 +48,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="flex flex-row sml:flex-col md:flex-col lg:flex-row mx-6 lg:justify-between mt-10"
+    class="flex flex-row sml:flex-col md:flex-col lg:flex-row mx-6 lg:justify-between mt-10 md:px-10"
   >
     <div class="flex flex-col w-full h-full justify-center">
       <div class="w-full pb-2 sml:pb-4 md:pb-5 xl:pb-5">
@@ -119,7 +119,7 @@ onMounted(() => {
       </div>
     </div>
     <div
-      class="flex w-full sml:h-full md:h-[300px] lg:h-full xl:h-full justify-center items-center"
+      class="flex w-full sml:h-full md:h-full lg:h-full xl:h-full justify-center items-center"
     >
       <video
         autoplay

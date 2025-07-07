@@ -17,7 +17,7 @@ import { useSidebarStore } from "@/stores/sidebar";
       class="w-full h-auto sml:pt-[90px] md:pt-[100px] lg:pt-[60px] xl:pt-[100px]"
     >
       <div
-        class="flex flex-col w-full h-auto mt-5 sml:mt-4 md:mt-0 text-center sml:pt-5 md:pt-8 justify-center items-center z-30 bg-[#F3F4F6] lg:bg-transparent rounded-3xl"
+        class="flex flex-col w-full h-auto mt-5 sml:mt-4 md:mt-0 text-center sml:pt-5 md:pt-8 justify-center items-center z-30 bg-[#F3F4F6] lg:bg-transparent rounded-3xl animate__animated animate__fadeIn animate__slower"
       >
         <div class="w-full pb-2 sml:pb-4">
           <p class="text-3xl sml:text-2xl text-[#1AB24F] font-medium">

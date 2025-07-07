@@ -10,23 +10,15 @@ import VideoAi from "@/assets/images/video-ai-desc.png";
       <div
         class="flex sml:w-full sml:h-[300px] md:w-full md:h-[300px] lg:w-[50%] lg:h-[370px] xl:w-[50%] xl:h-[500px] sml:mb-5 md:mb-5"
       >
-        <img
-          :src="VideoAi"
-          alt="VideoAI"
-          class="w-full h-full object-cover rounded-[2.5rem]"
-        />
-        <!-- <video
+        <video
           autoplay
           loop
           muted
           playsinline
-          class="w-full h-full object-cover object-center"
+          class="w-full h-full object-cover object-center rounded-3xl"
         >
-          <source
-            src="@/assets/videos/Design-Vector-Web2.mp4"
-            type="video/mp4"
-          />
-        </video> -->
+          <source src="@/assets/videos/Ai-Video.mp4" type="video/mp4" />
+        </video>
       </div>
       <div
         class="flex flex-col w-full lg:w-[50%] lg:h-[370px] xl:w-[50%] xl:h-[500px] rounded-3xl py-5 gap-y-5 md:py-8 lg:gap-y-5 xl:gap-y-10 lg:justify-center xl:justify-between xl:py-16 bg-white px-10 sml:px-8 shadow-lg"

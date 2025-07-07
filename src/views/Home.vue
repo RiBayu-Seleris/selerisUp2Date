@@ -16,17 +16,26 @@ import Different from "@/components/Home/Different.vue";
     <Herosection />
   </section>
 
-  <section class="hidden lg:flex w-full h-auto">
+  <section
+    class="hidden lg:flex w-full h-auto"
+    data-aos="fade-down"
+    data-aos-duration="2000"
+  >
     <PartnersClients />
   </section>
-  <section class="lg:hidden flex w-full h-auto">
+  <section
+    class="lg:hidden flex w-full h-auto"
+    data-aos="fade-down"
+    data-aos-duration="2000"
+  >
     <PartnersClientsMobile />
   </section>
 
-  <!-- data-aos="fade-left"
-    data-aos-delay="100" -->
   <section
     class="flex flex-col relative w-full xl:h-[100vh] lg:h-[80vh] md:mt-10 lg:mt-10 pt-4 pb-8 lg:pt-0 lg:pb-0"
+    data-aos="flip-left"
+    data-aos-easing="ease-out-cubic"
+    data-aos-duration="2000"
   >
     <!-- bg-cert bg-no-repeat bg-cover bg-center -->
     <Certificate />
@@ -34,18 +43,25 @@ import Different from "@/components/Home/Different.vue";
 
   <section
     class="flex flex-col relative w-full h-auto xl:px-8 lg:mt-10 xl:mt-0"
+    data-aos="fade-left"
+    data-aos-duration="3000"
   >
     <Description />
   </section>
 
-  <section class="flex flex-col relative w-full h-auto lg:mt-16">
+  <section
+    class="flex flex-col relative w-full h-auto mt-16"
+    data-aos="fade-right"
+    data-aos-duration="3000"
+  >
     <Benefits />
   </section>
 
   <section
     class="flex flex-col relative w-full h-auto px-12"
-    data-aos="fade-right"
-    data-aos-delay="300"
+    data-aos="fade-down"
+    data-aos-easing="linear"
+    data-aos-duration="2000"
   >
     <AiDesc />
   </section>

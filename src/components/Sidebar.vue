@@ -17,7 +17,17 @@ watch(
 );
 
 // Dropdown toggle
-const isDropdownOpen = ref(false);
+const isProductOpen = ref(false);
+const isTechnologyOpen = ref(false);
+
+const handleProduct = () => {
+  isProductOpen.value = !isProductOpen.value;
+  isTechnologyOpen.value = false;
+};
+const handleTechnology = () => {
+  isTechnologyOpen.value = !isTechnologyOpen.value;
+  isProductOpen.value = false;
+};
 </script>
 
 <template>
@@ -63,7 +73,7 @@ const isDropdownOpen = ref(false);
             <!-- DROPDOWN MENU -->
             <div>
               <button
-                @click="isDropdownOpen = !isDropdownOpen"
+                @click="handleProduct"
                 class="w-full text-left focus:outline-none"
               >
                 <div class="flex justify-between items-center">
@@ -72,7 +82,7 @@ const isDropdownOpen = ref(false);
                     <svg
                       :class="[
                         'w-5 h-5 transition-transform duration-300',
-                        isDropdownOpen ? 'rotate-180' : '',
+                        isProductOpen ? 'rotate-180' : '',
                       ]"
                       fill="none"
                       stroke="currentColor"
@@ -92,7 +102,52 @@ const isDropdownOpen = ref(false);
 
               <transition name="fade">
                 <div
-                  v-if="isDropdownOpen"
+                  v-if="isProductOpen"
+                  class="mt-3 ml-4 flex flex-col space-y-3 text-base"
+                >
+                  <Navlink href="#"><span> Seleris Lifins</span></Navlink>
+                  <Navlink href="#"><span> Seleris Medins</span></Navlink>
+                  <Navlink href="#"><span> Seleris Credit Cover</span></Navlink>
+                  <Navlink href="#"><span> Seleris Care</span></Navlink>
+                  <Navlink href="#"><span> Flexa Asia</span></Navlink>
+                  <Navlink href="#"><span> Auto Claim</span></Navlink>
+                </div>
+              </transition>
+            </div>
+
+            <!-- DROPDOWN MENU -->
+            <div>
+              <button
+                @click="handleTechnology"
+                class="w-full text-left focus:outline-none"
+              >
+                <div class="flex justify-between items-center">
+                  <span class="text-lg font-semibold">Technology</span>
+                  <span>
+                    <svg
+                      :class="[
+                        'w-5 h-5 transition-transform duration-300',
+                        isTechnologyOpen ? 'rotate-180' : '',
+                      ]"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        stroke-width="2"
+                        d="M19 9l-7 7-7-7"
+                      />
+                    </svg>
+                  </span>
+                </div>
+              </button>
+
+              <transition name="fade">
+                <div
+                  v-if="isTechnologyOpen"
                   class="mt-3 ml-4 flex flex-col space-y-3 text-base"
                 >
                   <Navlink href="#"><span> Seleris Lifins</span></Navlink>
