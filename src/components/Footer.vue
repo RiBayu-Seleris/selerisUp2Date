@@ -31,7 +31,7 @@ import appstore from "@/assets/images/appstore.png";
                 class="flex w-full h-auto lg:mt-4 justify-center items-center"
               >
                 <p
-                  class="text-[#195279] font-semibold lg:text-lg xl:text-2xl sml:text-md md:text-[1.7rem]"
+                  class="text-[#195279] font-normal lg:text-lg xl:text-[20px] sml:text-base md:text-[1.7rem]"
                 >
                   PT Seleris Meditekno Internasional
                 </p>
@@ -105,19 +105,25 @@ import appstore from "@/assets/images/appstore.png";
             </p>
             <div class="mb-3 mt-2 lg:mt-2">
               <p class="text-[#195279] text-xl">Address</p>
-              <p class="text-[#2AB857] text-lg xl:text-xl lg:py-1.5">
+              <p
+                class="text-[#2AB857] text-sm lg:text-base xl:text-lg lg:py-1.5"
+              >
                 16 Raffles Quay #35 - 01B Hong Leong Building SINGAPORE (048581)
               </p>
             </div>
             <div class="mb-3 lg:mt-2">
               <p class="text-[#195279] text-xl">Phone</p>
-              <p class="text-[#2AB857] text-lg xl:text-xl lg:py-1.5">
+              <p
+                class="text-[#2AB857] text-sm lg:text-base xl:text-lg lg:py-1.5"
+              >
                 +62 (21) 526 52 35
               </p>
             </div>
             <div class="mb-3 lg:mt-2">
               <p class="text-[#195279] text-xl">E-Mail</p>
-              <p class="text-[#2AB857] text-lg xl:text-xl lg:py-1.5">
+              <p
+                class="text-[#2AB857] text-sm lg:text-base xl:text-lg lg:py-1.5"
+              >
                 support@seleris.ai
               </p>
             </div>

@@ -3,18 +3,20 @@ import ImgLinear from "@/assets/images/about-linear.png";
 </script>
 
 <template>
-  <div class="w-full h-full lg:px-16 xl:px-20">
-    <div class="flex flex-row w-full h-auto gap-x-10">
+  <div class="w-full h-full sml:px-0 md:px-6 lg:px-16 xl:px-20">
+    <div class="flex flex-row sml:flex-col-reverse w-full h-auto gap-x-10">
       <div class="flex w-full h-auto">
         <div
-          class="flex flex-col w-full h-full pl-10 rounded-lg justify-center lg:gap-y-4 xl:gap-y-8"
+          class="flex flex-col w-full h-full pl-10 rounded-lg justify-center sml:gap-y-4 md:gap-y-4 lg:gap-y-4 xl:gap-y-8"
         >
           <div class="flex w-full h-auto">
-            <p class="lg:text-3xl xl:text-4xl text-[#1AB24F]">App Features</p>
+            <p class="text-2xl lg:text-3xl xl:text-4xl text-[#1AB24F]">
+              App Features
+            </p>
           </div>
-          <div class="flex w-full h-auto lg:pr-16 xl:pr-20">
+          <div class="flex w-full h-auto md:pr-16 lg:pr-16 xl:pr-20">
             <p
-              class="lg:text-4xl xl:text-5xl text-[#195279] lg:leading-[50px] xl:leading-[60px]"
+              class="text-3xl lg:text-4xl xl:text-5xl text-[#195279] lg:leading-[50px] xl:leading-[60px]"
             >
               We're company with a vision.
             </p>
@@ -26,11 +28,11 @@ import ImgLinear from "@/assets/images/about-linear.png";
           </div>
         </div>
       </div>
-      <div class="w-full h-auto flex">
+      <div class="w-full h-auto sml:h-[350px] flex">
         <img
           :src="ImgLinear"
           alt="About Banner"
-          class="w-full h-full object-cover"
+          class="w-full h-full object-cover sml:object-contain"
         />
         <!-- <NetworkDiagram /> -->
       </div>

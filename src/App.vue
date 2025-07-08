@@ -52,7 +52,7 @@ onUnmounted(() => {
       <div class="relative">
         <router-view />
 
-        <section class="flex flex-col relative w-full h-auto">
+        <section class="flex flex-col relative w-full h-auto mt-16">
           <Touch />
         </section>
       </div>

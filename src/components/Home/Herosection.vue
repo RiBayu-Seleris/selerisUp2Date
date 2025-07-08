@@ -39,7 +39,7 @@ import { useSidebarStore } from "@/stores/sidebar";
         <!-- Swipe caption -->
         <div class="flex flex-row items-center mb-4 lg:mb-5">
           <p
-            class="text-lg sml:text-md font-medium bg-gradient-to-r from-[#B9CAD5] to-[#195279] bg-clip-text text-transparent cursor-pointer"
+            class="text-lg sml:text-sm font-medium bg-gradient-to-r from-[#B9CAD5] to-[#195279] bg-clip-text text-transparent cursor-pointer"
           >
             Swipe to view product
           </p>

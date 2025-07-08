@@ -3,12 +3,13 @@ import { ref, onMounted, onUnmounted } from "vue";
 
 const scrollContainer = ref(null);
 const currentStep = ref(0);
+const scrollProgress = ref(0);
 
 const steps = [
   {
     title: "Remote Photoplethysmography Technology",
     description:
-      "Seleris harnesses Remote Photoplethysmography (rPPG) technology to evaluate various vital signs that represent a customer’s health condition.",
+      "Seleris harnesses Remote Photoplethysmography (rPPG) technology to evaluate various vital signs that represent a customer's health condition.",
   },
   {
     title: "Artificial Intelligence and Machine Learning",
@@ -35,6 +36,11 @@ onMounted(() => {
       }
     });
     currentStep.value = current;
+
+    // Hitung progress scroll untuk garis
+    const maxScroll = el.scrollHeight - el.clientHeight;
+    const currentScroll = el.scrollTop;
+    scrollProgress.value = Math.min((currentScroll / maxScroll) * 100, 100);
   };
 
   el.addEventListener("scroll", onScroll);
@@ -75,20 +81,37 @@ onMounted(() => {
         class="w-full sml:h-[200px] md:h-[200px] lg:h-[320px] xl:h-[354px] lg:mt-5"
       >
         <div class="h-full relative overflow-hidden">
-          <!-- Scroll Indicator -->
+          <!-- Scroll Indicator dengan Garis -->
           <div
-            class="absolute xl:left-3 sml:left-0 top-1/2 -translate-y-1/2 flex flex-col gap-12 sml:gap-6 z-0"
+            class="absolute xl:left-3 sml:left-0 top-1/2 -translate-y-1/2 flex flex-col gap-12 sml:gap-6 z-10"
           >
+            <!-- Garis Progress -->
+            <div
+              class="absolute left-1/2 -translate-x-1/2 top-0 w-0.5 h-full bg-gray-200"
+            >
+              <div
+                class="w-full bg-green-500 transition-all duration-300 ease-out"
+                :style="{ height: `${scrollProgress}%` }"
+              ></div>
+            </div>
+
+            <!-- Titik-titik -->
             <div
               v-for="(step, index) in steps.length"
               :key="index"
               :class="[
-                'w-3 h-3 rounded-full border-2 transition-all duration-300',
-                currentStep === index
-                  ? 'bg-green-500 border-green-500 scale-110'
-                  : 'bg-transparent border-gray-300',
+                'w-3 h-3 rounded-full border-2 transition-all duration-300 relative z-20 bg-white',
+                currentStep >= index
+                  ? 'border-green-500 scale-110'
+                  : 'border-gray-300',
               ]"
-            ></div>
+            >
+              <!-- Isi titik yang aktif -->
+              <div
+                v-if="currentStep >= index"
+                class="absolute inset-0.5 bg-green-500 rounded-full transition-all duration-300"
+              ></div>
+            </div>
           </div>
 
           <!-- Scrollable Sections -->
@@ -130,10 +153,6 @@ onMounted(() => {
       >
         <source src="@/assets/videos/Design-Vector-Web2.mp4" type="video/mp4" />
       </video>
-      <!-- bg-[#F9FAFB] -->
-      <!-- <div
-        class="absolute w-[590px] sml:w-[300px] h-[30px] bg-red-800 mt-[500px] sml:mt-[310px]"
-      ></div> -->
     </div>
   </div>
 </template>

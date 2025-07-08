@@ -7,6 +7,7 @@ module.exports = {
       backgroundImage: {
         hero: "url('@/assets/images/hero-banner.png')",
         different: "url('@/assets/images/different-background.png')",
+        api: "url('@/assets/images/api-background.png')",
         cert: "url('@/assets/images/bg-cert.png')",
         benefits: "url('@/assets/images/bg-benefits.png')",
         leftCertBefore:

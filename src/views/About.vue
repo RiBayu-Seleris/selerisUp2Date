@@ -4,6 +4,7 @@ import DescAbout from "@/components/About/DescAbout.vue";
 import Description from "@/components/Description.vue";
 import StepDescription from "@/components/About/StepDescription.vue";
 import Certificate from "@/components/Certificate.vue";
+import Deliver from "@/components/About/Deliver.vue";
 
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
@@ -18,9 +19,9 @@ import { useSidebarStore } from "@/stores/sidebar";
   </section>
 
   <section
-    class="flex flex-col relative w-full h-auto xl:px-14 md:px-10 lg:px-20"
+    class="flex flex-col relative w-full h-auto xl:px-14 md:px-10 lg:px-10 mt-16"
     data-aos="fade-in"
-    data-aos-duration="3000"
+    data-aos-duration="2000"
   >
     <DescAbout />
   </section>
@@ -50,5 +51,9 @@ import { useSidebarStore } from "@/stores/sidebar";
     data-aos-duration="3000"
   >
     <StepDescription />
+  </section>
+
+  <section class="flex flex-col relative w-full h-auto ">
+    <Deliver />
   </section>
 </template>

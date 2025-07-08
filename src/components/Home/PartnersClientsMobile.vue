@@ -40,7 +40,7 @@ const combinedLogos = Array.from(new Set([...partnerLogos, ...clientLogos]));
 </script>
 
 <template>
-  <div class="w-full h-auto flex flex-col pt-10 pb-5">
+  <div class="w-full h-auto flex flex-col py-16">
     <div
       class="flex w-full h-auto justify-center items-center text-center pb-5"
     >

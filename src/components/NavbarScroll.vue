@@ -42,7 +42,7 @@ onUnmounted(() => {
       </div>
       <!-- Div Navbar -->
       <div
-        class="hidden lg:flex h-[75px] md:w-[75%] lg:w-[75%] items-center justify-center px-5"
+        class="hidden lg:flex h-[75px] md:w-[75%] lg:w-[80%] xl:w-[75%] items-center justify-center px-5"
       >
         <MenuNav />
       </div>

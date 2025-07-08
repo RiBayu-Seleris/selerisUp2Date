@@ -3,13 +3,15 @@ import AboutHero from "@/assets/images/About-hero-image.png";
 </script>
 
 <template>
-  <div class="flex w-full h-auto xl:pt-[100px] md:pt-[100px] sml:pt-[90px]">
+  <div
+    class="flex w-full h-auto xl:pt-[80px] md:pt-[100px] sml:pt-[90px] animate__animated animate__fadeIn animate__slower"
+  >
     <div
-      class="flex flex-row sml:flex-col w-full h-auto justify-between sml:bg-[#F3F4F6] sml:mt-3 sml:pt-4 sml:rounded-xl sml:shadow-md"
+      class="flex lg:flex-row sml:flex-col md:flex-col w-full h-auto justify-between lg:gap-x-10 sml:mt-3 sml:pt-4"
     >
-      <div class="flex w-full md:w-[40%] xl:w-[45%] h-auto">
+      <div class="flex w-full md:w-full lg:w-[40%] xl:w-[45%] h-auto">
         <div
-          class="flex flex-col w-full h-auto md:pt-[60px] lg:pt-[100px] xl:pt-[100px] gap-3 xl:gap-7 sml:text-center"
+          class="flex flex-col w-full h-auto md:pt-[30px] lg:pt-[100px] xl:pt-[140px] sml:px-4 gap-3 xl:gap-7 sml:text-center md:text-center lg:text-left"
         >
           <div class="w-full h-auto">
             <p
@@ -20,7 +22,7 @@ import AboutHero from "@/assets/images/About-hero-image.png";
           </div>
           <div class="w-full h-auto">
             <p
-              class="text-4xl lg:text-[40px] xl:text-[60px] text-[#195279] lg:leading-[54px] xl:leading-[74px]"
+              class="sml:text-2xl md:text-3xl lg:text-[40px] xl:text-[60px] text-[#195279] lg:leading-[54px] xl:leading-[74px]"
             >
               Seleris Meditekno Internasional
             </p>
@@ -33,12 +35,12 @@ import AboutHero from "@/assets/images/About-hero-image.png";
         </div>
       </div>
       <div
-        class="flex w-full h-full md:w-[60%] xl:w-[55%] justify-center items-center sml:pt-10"
+        class="flex w-full h-full md:w-full lg:w-[60%] xl:w-[55%] justify-center items-center sml:pt-10 md:pt-10"
       >
         <img
           :src="AboutHero"
           alt="About Banner"
-          class="w-full h-full object-cover"
+          class="w-full h-full md:h-[500px] lg:h-[400px] xl:h-[500px] object-cover md:object-contain"
         />
       </div>
     </div>

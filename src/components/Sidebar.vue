@@ -161,7 +161,7 @@ const handleTechnology = () => {
             </div>
 
             <!-- Menu lainnya -->
-            <Navlink href="/team">Teams</Navlink>
+            <Navlink href="/team">Our Team</Navlink>
             <Navlink href="/blogs">Blogs</Navlink>
             <Navlink href="/services">Services</Navlink>
           </nav>

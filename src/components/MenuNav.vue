@@ -120,13 +120,13 @@ const isHoveringTechnology = ref(false);
 
     <!-- Tambahan menu lainnya -->
     <li class="">
-      <Navlink class="text-[11pt]" href="#"> Teams </Navlink>
+      <Navlink class="text-[11pt]" href="/teams"> Our Team </Navlink>
     </li>
     <li class="">
-      <Navlink class="text-[11pt]" href="#"> Blogs </Navlink>
+      <Navlink class="text-[11pt]" href="/blogs"> Blogs </Navlink>
     </li>
     <li class="">
-      <Navlink class="text-[11pt]" href="#"> Services </Navlink>
+      <Navlink class="text-[11pt]" href="/services"> Services </Navlink>
     </li>
     <li class="">
       <Navlink class="text-[11pt]" href="/contact"> Contact </Navlink>
