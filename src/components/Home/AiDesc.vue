@@ -31,7 +31,7 @@ import VideoAi from "@/assets/images/video-ai-desc.png";
           </p>
         </div>
         <div class="w-full h-auto text-[#195279] pr-0">
-          <p class="md:text-xl lg:text-xl xl:text-2xl">
+          <p class="md:text-xl lg:text-xl xl:text-[20px]">
             <span class="font-semibold">Our AI and ML</span> algorithms conduct
             in-depth risk assessments, considering various factors and
             subtleties that impact insurance outcomes. This sophisticated

@@ -66,20 +66,24 @@ import appstore from "@/assets/images/appstore.png";
               Products
             </p>
             <div>
-              <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">
+              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">
                 Seleris Lifins
               </p>
-              <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">
+              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">
                 Seleris Medins
               </p>
-              <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">
+              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">
                 Seleris Credit Cover
               </p>
-              <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">
+              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">
                 Seleris Care
               </p>
-              <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">Flexa Asia</p>
-              <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">Auto Claim</p>
+              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">
+                Flexa Asia
+              </p>
+              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">
+                Auto Claim
+              </p>
             </div>
           </div>
         </div>
@@ -89,12 +93,18 @@ import appstore from "@/assets/images/appstore.png";
             <p class="text-[#195279] text-2xl xl:text-3xl font-medium pb-2">
               Company
             </p>
-            <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">Home</p>
-            <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">About</p>
-            <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">Our Team</p>
-            <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">Blog</p>
-            <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">Services</p>
-            <p class="text-[#B8B8B8] text-lg xl:text-xl py-1.5">Contact</p>
+            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">Home</p>
+            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">About</p>
+            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">
+              Our Team
+            </p>
+            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">Blog</p>
+            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">
+              Services
+            </p>
+            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">
+              Contact
+            </p>
           </div>
         </div>
         <div class="flex lg:hidden w-full h-1 bg-[#F3F4F6] rounded-full my-3" />
@@ -144,7 +154,7 @@ import appstore from "@/assets/images/appstore.png";
                 <img
                   :src="playstore"
                   alt="Playstore"
-                  class="w-full md:w-[300px] h-[100px] object-contain object-center"
+                  class="w-full md:w-[300px] xl:w-[300px] h-[100px] object-contain object-center"
                 />
               </div>
               <div
@@ -153,7 +163,7 @@ import appstore from "@/assets/images/appstore.png";
                 <img
                   :src="appstore"
                   alt="Appstore"
-                  class="w-full md:w-[300px] h-[100px] object-contain object-center"
+                  class="w-full md:w-[300px] xl:w-[300px] h-[100px] object-contain object-center"
                 />
               </div>
             </div>

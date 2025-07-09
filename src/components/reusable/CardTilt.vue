@@ -31,15 +31,20 @@ function resetTransform() {
 </script>
 
 <template>
+  <!-- shadow-md -->
   <div
     ref="card"
-    class="flex w-full h-[120px] rounded-2xl shadow-md border-[0.1px] border-[#e0e4eb] transition-transform duration-300 ease-out hover:bg-white"
+    class="flex w-[222px] h-[80px] rounded-2xl border-[0.1px] border-[#e0e4eb] transition-transform duration-300 ease-out hover:bg-white justify-center items-center"
     @mousemove="handleMouseMove"
     @mouseleave="resetTransform"
     :style="{ transform: transformStyle }"
   >
-    <div class="w-full h-full">
-      <img :src="image" alt="partners" class="w-full h-full object-contain" />
+    <div class="flex w-full h-full justify-center items-center">
+      <img
+        :src="image"
+        alt="partners"
+        class="w-[184px] h-full object-contain"
+      />
     </div>
   </div>
 </template>
