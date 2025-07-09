@@ -19,26 +19,28 @@ import appstore from "@/assets/images/appstore.png";
           <div class="flex flex-col">
             <div class="flex flex-row lg:flex-col w-full h-auto">
               <div
-                class="flex w-full h-full md:w-[60%] lg:justify-start lg:items-start lg:content-start justify-center items-center content-center"
+                class="flex w-full h-full md:w-[60%] lg:w-full lg:justify-start lg:items-start lg:content-start justify-center items-center content-center"
               >
                 <img
                   :src="Logo"
                   alt="Logo"
-                  class="w-full sml:h-[60px] md:h-[80px] lg:h-[100px] object-contain object-left"
+                  class="w-full sml:h-[60px] md:h-[80px] xl:h-[100px] object-contain object-left"
                 />
               </div>
               <div
                 class="flex w-full h-auto lg:mt-4 justify-center items-center"
               >
                 <p
-                  class="text-[#195279] font-normal lg:text-lg xl:text-[20px] sml:text-base md:text-[1.7rem]"
+                  class="text-[#195279] font-normal sml:text-base md:text-[1.7rem] lg:text-lg xl:text-[18px]"
                 >
                   PT Seleris Meditekno Internasional
                 </p>
               </div>
             </div>
             <div class="w-full h-auto mt-4">
-              <p class="text-[#B8B8B8] text-base text-justify">
+              <p
+                class="text-[#B8B8B8] text-base xl:text-[18px] text-justify lg:text-left xl:text-left"
+              >
                 Transform the Life and Medical Insurance Underwriting industry
                 by making it more efficient, accurate, and accessible for
                 everyone
@@ -46,13 +48,13 @@ import appstore from "@/assets/images/appstore.png";
             </div>
             <div class="w-full h-auto mt-4">
               <div class="w-full h-auto flex flex-row justify-start gap-x-3">
-                <div class="w-auto h-[30px] lg:h-[40px]">
+                <div class="w-auto h-[30px] lg:h-[30px]">
                   <Instagram />
                 </div>
-                <div class="w-auto h-[30px] lg:h-[40px]">
+                <div class="w-auto h-[30px] lg:h-[30px]">
                   <Linkedin />
                 </div>
-                <div class="w-auto h-[30px] lg:h-[40px]">
+                <div class="w-auto h-[30px] lg:h-[30px]">
                   <Twitter />
                 </div>
               </div>
@@ -62,26 +64,26 @@ import appstore from "@/assets/images/appstore.png";
         <div class="flex lg:hidden w-full h-1 bg-[#F3F4F6] rounded-full my-3" />
         <div class="w-full h-auto">
           <div class="flex flex-col lg:pl-6 xl:pl-12">
-            <p class="text-[#195279] text-2xl xl:text-3xl font-medium pb-2">
+            <p class="text-[#195279] text-2xl xl:text-[22px] font-medium pb-2">
               Products
             </p>
             <div>
-              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">
+              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
                 Seleris Lifins
               </p>
-              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">
+              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
                 Seleris Medins
               </p>
-              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">
+              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
                 Seleris Credit Cover
               </p>
-              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">
+              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
                 Seleris Care
               </p>
-              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">
+              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
                 Flexa Asia
               </p>
-              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">
+              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
                 Auto Claim
               </p>
             </div>
@@ -90,19 +92,25 @@ import appstore from "@/assets/images/appstore.png";
         <div class="flex lg:hidden w-full h-1 bg-[#F3F4F6] rounded-full my-3" />
         <div class="w-full h-auto">
           <div class="flex flex-col lg:pl-6 xl:pl-8">
-            <p class="text-[#195279] text-2xl xl:text-3xl font-medium pb-2">
+            <p class="text-[#195279] text-2xl xl:text-[22px] font-medium pb-2">
               Company
             </p>
-            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">Home</p>
-            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">About</p>
-            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">
+            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
+              Home
+            </p>
+            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
+              About
+            </p>
+            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
               Our Team
             </p>
-            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">Blog</p>
-            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">
+            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
+              Blog
+            </p>
+            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
               Services
             </p>
-            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-xl py-1.5">
+            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
               Contact
             </p>
           </div>
@@ -110,13 +118,13 @@ import appstore from "@/assets/images/appstore.png";
         <div class="flex lg:hidden w-full h-1 bg-[#F3F4F6] rounded-full my-3" />
         <div class="w-full h-auto">
           <div class="flex flex-col">
-            <p class="text-[#195279] text-2xl xl:text-3xl font-medium pb-2">
+            <p class="text-[#195279] text-2xl xl:text-[22px] font-medium pb-2">
               Stay Connects
             </p>
             <div class="mb-3 mt-2 lg:mt-2">
               <p class="text-[#195279] text-xl">Address</p>
               <p
-                class="text-[#2AB857] text-sm lg:text-base xl:text-lg lg:py-1.5"
+                class="text-[#2AB857] text-sm lg:text-base xl:text-[18px] lg:pt-1.5"
               >
                 16 Raffles Quay #35 - 01B Hong Leong Building SINGAPORE (048581)
               </p>
@@ -124,7 +132,7 @@ import appstore from "@/assets/images/appstore.png";
             <div class="mb-3 lg:mt-2">
               <p class="text-[#195279] text-xl">Phone</p>
               <p
-                class="text-[#2AB857] text-sm lg:text-base xl:text-lg lg:py-1.5"
+                class="text-[#2AB857] text-sm lg:text-base xl:text-[18px] lg:pt-1.5"
               >
                 +62 (21) 526 52 35
               </p>
@@ -132,7 +140,7 @@ import appstore from "@/assets/images/appstore.png";
             <div class="mb-3 lg:mt-2">
               <p class="text-[#195279] text-xl">E-Mail</p>
               <p
-                class="text-[#2AB857] text-sm lg:text-base xl:text-lg lg:py-1.5"
+                class="text-[#2AB857] text-sm lg:text-base xl:text-[18px] lg:pt-1.5"
               >
                 support@seleris.ai
               </p>
@@ -149,21 +157,21 @@ import appstore from "@/assets/images/appstore.png";
             </p>
             <div class="flex flex-row lg:flex-col gap-10 lg:gap-0">
               <div
-                class="flex w-full h-full md:justify-start justify-center items-center content-center"
+                class="flex w-full h-full md:justify-start justify-center items-center content-center xl:justify-start xl:content-start"
               >
                 <img
                   :src="playstore"
                   alt="Playstore"
-                  class="w-full md:w-[300px] xl:w-[300px] h-[100px] object-contain object-center"
+                  class="w-full md:w-[300px] xl:w-[200px] h-[100px] object-contain object-center"
                 />
               </div>
               <div
-                class="flex w-full h-full justify-center items-center content-center"
+                class="flex w-full h-full justify-center items-center content-center xl:justify-start xl:content-start xl:-mt-5"
               >
                 <img
                   :src="appstore"
                   alt="Appstore"
-                  class="w-full md:w-[300px] xl:w-[300px] h-[100px] object-contain object-center"
+                  class="w-full md:w-[300px] xl:w-[200px] h-[100px] object-contain object-center"
                 />
               </div>
             </div>

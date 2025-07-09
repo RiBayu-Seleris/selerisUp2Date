@@ -66,7 +66,7 @@ const teams = [
     </div>
     <div class="w-full h-auto flex flex-row lg:mt-3 xl:mt-8">
       <div
-        class="flex flex-row py-2 w-full h-auto gap-x-10 mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-14 pl-14 pr-14 hide-scrollbar"
+        class="flex flex-row py-2 w-full h-auto gap-x-10 mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-44 pl-44 pr-44 hide-scrollbar"
       >
         <div
           v-for="(team, index) in teams"

@@ -1,5 +1,6 @@
 <script setup>
 import TouchMobile from "@/components/TouchMobile.vue";
+import ChatIcon from "@/components/icons/ChatIcon.vue";
 </script>
 
 <template>
@@ -83,7 +84,7 @@ import TouchMobile from "@/components/TouchMobile.vue";
             <div class="flex w-full h-full bg-[#FAFAFA] rounded-xl">
               <div class="flex flex-col w-full py-3 gap-1">
                 <div class="flex w-full justify-center items-center mb-2">
-                  <div class="w-12 h-12 rounded-full bg-[#D9D9D9]" />
+                  <div class="w-12 h-12 rounded-full bg-[#D9D9D9]"></div>
                 </div>
                 <div class="flex w-full justify-center items-center">
                   <p

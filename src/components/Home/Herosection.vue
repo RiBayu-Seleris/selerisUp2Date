@@ -20,18 +20,18 @@ import { useSidebarStore } from "@/stores/sidebar";
         class="flex flex-col w-full h-auto mt-5 sml:mt-4 md:mt-0 text-center sml:pt-5 md:pt-8 justify-center items-center z-30 bg-[#F3F4F6] lg:bg-transparent rounded-3xl animate__animated animate__fadeIn animate__slower"
       >
         <div class="w-full pb-2 sml:pb-4">
-          <p class="text-3xl sml:text-2xl text-[#1AB24F] font-medium">
+          <p class="sml:text-2xl xl:text-[26px] text-[#1AB24F] font-[500]">
             AI Inovation
           </p>
         </div>
         <div class="w-full pb-2 sml:pb-4 text-[#195279]">
           <p
-            class="sml:text-2xl md:text-4xl lg:text-4xl xl:text-5xl font-semibold sml:leading-[35px] xl:leading-[70px]"
+            class="sml:text-2xl md:text-4xl lg:text-4xl xl:text-[48px] font-[500] sml:leading-[35px] xl:leading-[70px]"
           >
             The Future of Life
           </p>
           <p
-            class="sml:text-2xl md:text-4xl lg:text-4xl xl:text-5xl font-semibold sml:leading-[35px] xl:leading-[70px]"
+            class="sml:text-2xl md:text-4xl lg:text-4xl xl:text-[48px] font-[500] sml:leading-[35px] xl:leading-[70px]"
           >
             Insurance Underwriting
           </p>

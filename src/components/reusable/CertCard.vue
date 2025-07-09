@@ -43,14 +43,14 @@ const cekCertIcon = computed(() => {
 </script>
 
 <template>
-  <div class="flex relative w-full h-auto group">
+  <div class="flex relative w-full h-auto group justify-center">
     <!-- Card A (default) -->
     <div
       :class="`relative xl:w-[335px] xl:h-[419px] lg:h-[419px]  group-hover:opacity-0 bg-cover bg-center ${divImageBefore} `"
     >
       <div class="flex flex-col w-full h-auto xl:mt-14 lg:mt-14">
         <div
-          class="flex w-full h-[180px] lg:h-[140px] xl:w-[149px] xl:h-[204px] justify-center mx-auto"
+          class="flex w-full h-[180px] lg:h-[140px] xl:w-[149px] xl:h-[194px] justify-center mx-auto"
         >
           <img
             :src="imageCertLogo"
@@ -61,7 +61,7 @@ const cekCertIcon = computed(() => {
         <div
           class="flex w-full h-auto justify-center mt-6 px-10 lg:px-10 items-center text-center"
         >
-          <p class="flex xl:text-[24px] lg:text-2xl font-normal text-[#195279]">
+          <p class="flex xl:text-[20px] lg:text-2xl font-normal text-[#195279]">
             {{ TitleBefore }}
           </p>
         </div>
@@ -70,7 +70,7 @@ const cekCertIcon = computed(() => {
 
     <!-- Card B (on hover) -->
     <div
-      :class="`w-full xl:w-[335px] xl:h-[419px] lg:h-[410px]  absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-in-out ${divImageAfter} `"
+      :class="`flex w-full xl:w-[335px] xl:h-[419px] lg:h-[419px] absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-in-out ${divImageAfter} xl:ml-7`"
     >
       <div
         :class="`flex flex-col w-full h-full text-white xl:px-10 lg:px-6 xl:pt-12 lg:pt-10 lg:gap-y-1 xl:gap-y-4 ${textPosition}`"

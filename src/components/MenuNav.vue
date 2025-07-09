@@ -13,10 +13,10 @@ const isHoveringTechnology = ref(false);
 <template>
   <ul
     :class="[
-      'flex items-center text-md font-medium text-[#374151]',
+      'flex items-center text-md font-[400] text-[#374151]',
       isScrolled
         ? 'xl:gap-[50px] lg:gap-[20px]'
-        : 'xl:gap-[50px] lg:gap-[20px] justify-center',
+        : 'xl:gap-[40px] lg:gap-[20px] justify-center',
     ]"
   >
     <li class="">
@@ -90,30 +90,21 @@ const isHoveringTechnology = ref(false);
       @mouseenter="isHoveringTechnology = true"
       @mouseleave="isHoveringTechnology = false"
       :class="[
-        'absolute z-50 w-auto h-auto left-[350px] top-[70px] ',
+        'absolute z-50 w-auto h-auto left-[580px] top-[70px] ',
         isScrolled ? '-mt-4 pt-8 ' : 'mt-0 lg:-mt-1 pt-5 ',
       ]"
     >
       <div
-        class="grid grid-cols-3 w-auto bg-white p-4 rounded-2xl shadow-lg gap-5"
+        class="flex flex-col w-auto bg-white p-4 rounded-2xl shadow-lg gap-5"
       >
-        <Navlink href="#" class="flex justify-center items-center w-[170px]">
-          <span> Seleris Lifins</span>
+        <Navlink href="#" class="flex justify-center items-center w-[300px]">
+          <span>Seleris Chromatic Imaging</span>
         </Navlink>
-        <Navlink href="#" class="flex justify-center items-center w-[170px]">
-          <span> Seleris Medins</span>
+        <Navlink href="#" class="flex justify-center items-center w-[300px]">
+          <span>Seleris DeepVitals</span>
         </Navlink>
-        <Navlink href="#" class="flex justify-center items-center w-[170px]">
-          <span> Seleris Credit Cover</span>
-        </Navlink>
-        <Navlink href="#" class="flex justify-center items-center w-[170px]">
-          <span> Seleris Care</span>
-        </Navlink>
-        <Navlink href="#" class="flex justify-center items-center w-[170px]">
-          <span> Flexa Asia</span>
-        </Navlink>
-        <Navlink href="#" class="flex justify-center items-center w-[170px]">
-          <span> Auto Claim</span>
+        <Navlink href="#" class="flex justify-center items-center w-[300px]">
+          <span>Seleris DeepRisk</span>
         </Navlink>
       </div>
     </div>

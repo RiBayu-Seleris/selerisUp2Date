@@ -16,9 +16,9 @@ import HeroText from "@/components/reusable/HeroText.vue";
         autoplay
         muted
         playsinline
-        class="w-full h-full object-cover object-center rounded-3xl"
+        class="w-full h-full object-contain object-center rounded-3xl"
       >
-        <source src="@/assets/videos/Ai-Video.mp4" type="video/mp4" />
+        <source src="@/assets/videos/DesignAPI.mp4" type="video/mp4" />
       </video>
     </div>
   </div>

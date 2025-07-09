@@ -31,7 +31,7 @@ defineProps({
         <div class="flex flex-col w-full h-auto lg:mt-16 xl:mt-20">
           <div class="flex w-full h-auto">
             <!-- Title -->
-            <p class="text-3xl text-[#1DC457]">
+            <p class="text-3xl xl:text-[24px] text-[#1DC457]">
               <!-- What Makes Us Different? -->
               {{ title }}
             </p>
@@ -39,7 +39,7 @@ defineProps({
           <div class="flex w-[70%] h-auto mt-5">
             <!-- Title Body -->
             <p
-              class="lg:text-2xl xl:text-4xl text-[#195279] leading-[40px] font-semibold"
+              class="lg:text-2xl xl:text-[48px] text-[#195279] leading-[40px] xl:leading-[65px] font-[500]"
             >
               <!-- We bring solutions to make life insurance for our customers. -->
               {{ subtitle }}
@@ -56,7 +56,7 @@ defineProps({
               <img
                 :src="robotImage"
                 alt="Robot"
-                class="w-full lg:h-[250px] xl:h-[350px] object-contain object-top top-0 animate-bounce"
+                class="w-full lg:h-[250px] xl:h-[300px] object-contain object-top top-0 animate-bounce"
               />
             </div>
           </div>

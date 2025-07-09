@@ -3,7 +3,7 @@ import { ref, onMounted, onBeforeUnmount, computed } from "vue";
 import CardTilt from "@/components/reusable/CardTilt.vue";
 
 const showPartners = ref(true);
-const intervalTime = 5000;
+const intervalTime = 3000;
 const progress = ref(0);
 const isHovered = ref(false);
 let progressInterval = null;
@@ -85,9 +85,9 @@ onBeforeUnmount(() => {
     <!-- Title -->
     <div class="text-center mb-4">
       <div
-        class="inline-flex gap-2 items-end relative text-2xl font-semibold text-[#89A6BA]"
+        class="inline-flex gap-2 items-end relative text-[20px] font-[400] text-[#89A6BA]"
       >
-        <span>SELERIS</span>
+        <span>Seleris</span>
         <div class="relative">
           <span
             class="cursor-pointer transition-colors"
@@ -95,7 +95,7 @@ onBeforeUnmount(() => {
           >
             Partners
           </span>
-          <!-- Progress bar under Partners -->
+          <!-- Progress bar under Partners
           <div
             v-if="showPartners"
             class="absolute left-0 -bottom-1 w-full h-1 bg-gray-300 rounded overflow-hidden"
@@ -104,7 +104,7 @@ onBeforeUnmount(() => {
               class="h-full bg-[#2AB857] transition-all duration-100"
               :style="{ width: progress + '%' }"
             ></div>
-          </div>
+          </div> -->
         </div>
         <span>&</span>
         <div class="relative">
@@ -114,7 +114,7 @@ onBeforeUnmount(() => {
           >
             Clients
           </span>
-          <!-- Progress bar under Clients -->
+          <!-- Progress bar under Clients
           <div
             v-if="!showPartners"
             class="absolute left-0 -bottom-1 w-full h-1 bg-gray-300 rounded overflow-hidden"
@@ -123,14 +123,14 @@ onBeforeUnmount(() => {
               class="h-full bg-[#2AB857] transition-all duration-100"
               :style="{ width: progress + '%' }"
             ></div>
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
 
     <!-- Content Grid -->
     <transition name="fade" mode="out-in">
-      <div :key="showPartners" class="flex flex-col items-center gap-6">
+      <div :key="showPartners" class="flex flex-col items-center gap-6 mt-5">
         <template v-if="showPartners">
           <div
             v-for="(row, rowIndex) in partnerChunks"

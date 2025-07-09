@@ -21,11 +21,11 @@ import VideoAi from "@/assets/images/video-ai-desc.png";
         </video>
       </div>
       <div
-        class="flex flex-col w-full lg:w-[50%] lg:h-[370px] xl:w-[50%] xl:h-[500px] rounded-3xl py-5 gap-y-5 md:py-8 lg:gap-y-5 xl:gap-y-10 lg:justify-center xl:justify-between xl:py-16 bg-white px-10 sml:px-8 shadow-lg"
+        class="flex flex-col w-full lg:w-[50%] lg:h-[370px] xl:w-[50%] xl:h-[500px] rounded-3xl py-5 gap-y-5 md:py-8 lg:gap-y-5 xl:gap-y-10 lg:justify-center xl:py-16 bg-white px-10 sml:px-8 shadow-lg"
       >
         <div class="w-full lg:w-full xl:w-[80%] xl:h-auto">
           <p
-            class="sml:text-xl md:text-2xl lg:text-3xl xl:text-4xl bg-gradient-to-b from-[#FF09C2] to-[#2B3CFC] bg-clip-text text-transparent leading-[60px] lg:leading-[45px] font-semibold"
+            class="sml:text-xl md:text-2xl lg:text-3xl xl:text-4xl bg-gradient-to-b from-[#FF09C2] to-[#2B3CFC] bg-clip-text text-transparent leading-[60px] lg:leading-[45px] xl:leading-[50px] font-semibold"
           >
             AI and Machine Learning Algorithms
           </p>

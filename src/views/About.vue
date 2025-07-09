@@ -36,7 +36,7 @@ import { useSidebarStore } from "@/stores/sidebar";
 
   <section
     class="flex flex-col relative w-full xl:h-[100vh] lg:h-[80vh] md:mt-10 lg:mt-10 xl:mt-20 pt-4 pb-8 lg:pt-0 lg:pb-0"
-    data-aos="flip-left"
+    data-aos="fade-up"
     data-aos-easing="ease-out-cubic"
     data-aos-duration="2000"
   >
@@ -53,7 +53,7 @@ import { useSidebarStore } from "@/stores/sidebar";
     <StepDescription />
   </section>
 
-  <section class="flex flex-col relative w-full h-auto ">
+  <section class="flex flex-col relative w-full h-auto">
     <Deliver />
   </section>
 </template>

@@ -11,14 +11,16 @@ import Cert3 from "@/assets/images/certification/logo/Cert1.png";
     <div class="flex flex-col w-full h-auto">
       <div class="flex flex-col w-full h-auto">
         <div class="flex w-full justify-center items-center text-[#195279]">
-          <p class="text-3xl md:text-4xl lg:text-5xl font-semibold">
+          <p class="text-3xl md:text-4xl lg:text-5xl xl:text-[48px] font-[500]">
             Seleris Certification
           </p>
         </div>
         <div
           class="flex w-full justify-center items-center text-[#1DC457] mt-2 lg:mt-4"
         >
-          <p class="text-lg md:text-xl lg:text-2xl font-semibold">
+          <p
+            class="text-lg md:text-xl lg:text-2xl xl:text-[22px] font-[400] tracking-[1px]"
+          >
             Seleris Meditekno Internasional
           </p>
         </div>
@@ -26,7 +28,7 @@ import Cert3 from "@/assets/images/certification/logo/Cert1.png";
 
       <!-- Desktop -->
       <div
-        class="hidden lg:flex flex-row w-full h-auto gap-x-10 lg:gap-x-6 mt-5 relative"
+        class="hidden lg:flex xl:flex flex-row w-full h-auto gap-x-5 lg:gap-x-6 mt-5 relative"
       >
         <!-- :divImageAfter="bgLeftAfter" -->
         <CertCard

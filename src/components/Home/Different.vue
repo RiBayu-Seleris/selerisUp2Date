@@ -24,11 +24,13 @@ import performanceIcon from "@/assets/icons/performance.svg";
           :image="teamIcon"
           title="Our Team"
           subtitle="Collaboration and Teamwork."
+          subtitleClass="xl:pr-32"
         />
         <DifferentCard
           :image="innovationIcon"
           title="Innovation"
           subtitle="Developing innovative and effective solutions."
+          subtitleClass="xl:pr-20"
         />
       </div>
       <div class="flex flex-row">
@@ -36,6 +38,7 @@ import performanceIcon from "@/assets/icons/performance.svg";
           :image="missionIcon"
           title="Missions"
           subtitle="Efficient, accurate, and accessible."
+          subtitleClass="xl:pr-24"
         />
         <DifferentCard
           :image="performanceIcon"

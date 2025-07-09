@@ -59,26 +59,24 @@ onMounted(() => {
     <div class="flex flex-col w-full h-full justify-center">
       <div class="w-full pb-2 sml:pb-4 md:pb-5 xl:pb-5">
         <p
-          class="sml:text-2xl md:text-3xl lg:text-3xl xl:text-4xl text-[#1AB24F] font-medium"
+          class="sml:text-2xl md:text-3xl lg:text-3xl xl:text-[24px] text-[#1AB24F] font-[500]"
         >
           AI Technology
         </p>
       </div>
       <div class="w-full sml:pb-4 md:pb-10 lg:pb-0 xl:pb-0 text-[#195279]">
-        <p
-          class="sml:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-semibold leading-[55px]"
-        >
+        <p class="sml:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-[500]">
           How Seleris
           <span class="sml:inline-flex md:inline-flex lg:hidden"> Works?</span>
         </p>
         <p
-          class="sml:hidden md:hidden lg:block sml:text-3xl lg:text-4xl xl:text-5xl font-semibold leading-[55px]"
+          class="sml:hidden md:hidden lg:block sml:text-3xl lg:text-4xl xl:text-5xl font-[500] xl:mt-5"
         >
           Works?
         </p>
       </div>
       <div
-        class="w-full sml:h-[200px] md:h-[200px] lg:h-[320px] xl:h-[354px] lg:mt-5"
+        class="w-full sml:h-[200px] md:h-[200px] lg:h-[320px] xl:h-[200px] lg:mt-5"
       >
         <div class="h-full relative overflow-hidden">
           <!-- Scroll Indicator dengan Garis -->
@@ -117,21 +115,21 @@ onMounted(() => {
           <!-- Scrollable Sections -->
           <div
             ref="scrollContainer"
-            class="h-full overflow-y-scroll snap-y snap-mandatory scroll-smooth scroll-hide"
+            class="h-full overflow-y-scroll snap-y snap-mandatory scroll-smooth scroll-hide pr-10"
           >
             <section
               v-for="(step, index) in steps"
               :key="index"
-              class="step h-full snap-start flex items-center justify-start sml:pl-8 sml:pr-0 md:pl-10 lg:w-full xl:w-full lg:pl-10 xl:pl-14 xl:pr-5 text-start"
+              class="step h-full snap-start flex items-center justify-start sml:pl-8 sml:pr-0 md:pl-10 lg:w-full xl:w-full lg:pl-10 xl:pl-14 xl:pr-20 text-start"
             >
               <div>
                 <h3
-                  class="sml:text-xl md:text-2xl lg:text-2xl xl:text-4xl text-green-600 font-semibold"
+                  class="sml:text-xl md:text-2xl lg:text-2xl xl:text-[20px] text-green-600 font-semibold"
                 >
                   {{ step.title }}
                 </h3>
                 <p
-                  class="mt-5 sml:mt-3 text-xl sml:text-sm text-gray-600 max-w-xl mx-auto"
+                  class="mt-5 sml:mt-3 text-xl xl:text-[16px] sml:text-sm text-gray-600 max-w-xl mx-auto"
                 >
                   {{ step.description }}
                 </p>
@@ -142,7 +140,7 @@ onMounted(() => {
       </div>
     </div>
     <div
-      class="flex w-full sml:h-full md:h-full lg:h-full xl:h-full justify-center items-center"
+      class="flex w-full sml:h-full md:h-full lg:h-full xl:h-[425px] justify-center items-center"
     >
       <video
         autoplay

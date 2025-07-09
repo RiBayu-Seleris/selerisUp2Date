@@ -14,13 +14,15 @@ const sidebarStore = useSidebarStore();
       <img
         :src="Logo"
         alt="Logo"
-        class="lg:h-[60px] sml:w-[100px] sml:h-[70px] md:h-[70px] xl:h-[80px] object-contain"
+        class="lg:h-[60px] sml:w-[100px] sml:h-[70px] md:h-[70px] xl:h-[70px] xl:pl-5 object-contain"
       />
     </div>
     <div class="sml:hidden md:hidden lg:flex w-[87%] h-full items-center">
-      <div class="flex lg:w-[90%] xl:w-[86%] h-auto lg:ml-[3.5%] xl:ml-[4%]">
+      <div
+        class="flex lg:w-[90%] xl:w-[85%] h-auto lg:ml-[3.5%] xl:ml-[4%] xl:mt-3"
+      >
         <nav
-          class="hidden lg:flex w-full rounded-full border py-3 justify-center content-center shadow-md bg-white z-[999]"
+          class="hidden lg:flex w-full rounded-full border py-3 justify-center content-center shadow-[1px_19px_33px_-14px_rgba(0,_0,_0,_0.08)] bg-white z-[999]"
         >
           <MenuNav />
         </nav>

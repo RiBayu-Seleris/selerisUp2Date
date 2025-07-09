@@ -48,7 +48,7 @@ onUnmounted(() => {
     <!-- Sidebar (hanya 1 instance) -->
     <Sidebar />
 
-    <main class="relative lg:pt-5 sml:pt-0 md:pt-0">
+    <main class="relative">
       <div class="relative">
         <router-view />
 
