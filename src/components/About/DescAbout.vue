@@ -4,7 +4,7 @@ import DescRobot from "@/assets/images/about-images.png";
 
 <template>
   <!-- Section Description 1 -->
-  <div class="flex w-full h-auto sml:mt-5 sml:px-10">
+  <div class="flex w-full h-auto sml:px-10 bg-green-500">
     <p
       class="text-[18px] lg:text-[24px] xl:text-[24px] text-center text-[#195279]"
     >

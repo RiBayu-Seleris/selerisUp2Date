@@ -14,14 +14,14 @@ import { useSidebarStore } from "@/stores/sidebar";
 </script>
 
 <template>
-  <section class="md:px-12 xl:px-14">
+  <section class="flex flex-col relative w-full h-auto md:px-12 xl:px-14">
     <Hero />
   </section>
 
+  <!-- data-aos="fade-in"
+    data-aos-duration="2000" -->
   <section
-    class="flex flex-col relative w-full h-auto xl:px-14 md:px-10 lg:px-10 mt-16"
-    data-aos="fade-in"
-    data-aos-duration="2000"
+    class="flex flex-col relative w-full h-auto md:px-10 lg:px-10 xl:px-14 mt-16"
   >
     <DescAbout />
   </section>

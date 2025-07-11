@@ -70,12 +70,14 @@ const cekCertIcon = computed(() => {
 
     <!-- Card B (on hover) -->
     <div
-      :class="`flex w-full xl:w-[335px] xl:h-[419px] lg:h-[419px] absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-in-out ${divImageAfter} xl:ml-7`"
+      :class="`flex w-full xl:w-[335px] xl:h-[419px] lg:h-[419px] absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-in-out ${divImageAfter} xl:ml-7 2xl:ml-10`"
     >
       <div
-        :class="`flex flex-col w-full h-full text-white xl:px-10 lg:px-6 xl:pt-12 lg:pt-10 lg:gap-y-1 xl:gap-y-4 ${textPosition}`"
+        :class="`flex flex-col w-full h-full text-white xl:px-10 lg:px-6 2lg:px-10 xl:pt-12 lg:pt-10 lg:gap-y-1 2xl:gap-y-6 xl:gap-y-4 ${textPosition}`"
       >
-        <p class="xl:text-[24px] lg:text-lg font-semibold">{{ TitleAfter }}</p>
+        <p class="xl:text-[24px] lg:text-lg 2lg:text-[22px] font-semibold">
+          {{ TitleAfter }}
+        </p>
         <p class="xl:text-[14px] lg:text-base font-normal">
           Certificate Number: {{ CertNumber }}
         </p>

@@ -40,11 +40,11 @@ const combinedLogos = Array.from(new Set([...partnerLogos, ...clientLogos]));
 </script>
 
 <template>
-  <div class="w-full h-auto flex flex-col py-16">
+  <div class="w-full h-auto flex flex-col py-16 sml:py-10">
     <div
       class="flex w-full h-auto justify-center items-center text-center pb-5"
     >
-      <p class="text-2xl text-[#89A6BA] font-[400]">
+      <p class="sml:text-[17px] text-2xl text-[#89A6BA] font-[400]">
         Seleris Partners & Clients
       </p>
     </div>

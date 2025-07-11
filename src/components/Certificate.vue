@@ -4,79 +4,82 @@ import MobileCert from "@/components/CertificateMobile.vue";
 import Cert1 from "@/assets/images/certification/logo/Cert1.png";
 import Cert2 from "@/assets/images/certification/logo/dscui.svg";
 import Cert3 from "@/assets/images/certification/logo/Cert1.png";
+
+const certificateData = [
+  {
+    logo: Cert1,
+    titleBefore: "ISO Certification Award",
+    titleAfter: "ISO Certification",
+    certNumber: "2403150020501",
+    description: `PT. Seleris Meditekno Internasional has been awarded ISO/IEC 27001:2022 certification with the number 2403150020501, which demonstrates our commitment to healthcare quality and service excellence. This certification signifies that we meet international standards in quality management, and we continuously strive to improve our service quality.`,
+    divImageBefore: "bg-leftCertBefore",
+    divImageAfter: "bg-leftCertAfter",
+    textPosition: "text-start",
+  },
+  {
+    logo: Cert2,
+    titleBefore: "Best Innovation AI Solution for Insurance",
+    titleAfter: "ISO Certification",
+    certNumber: "2204210020100",
+    description: `We received the Best Innovation AI Solution for Insurance, proving our dedication to cutting-edge AI implementation in health & insurance. This accolade reflects our drive to revolutionize healthcare access through smart technology.`,
+    divImageBefore: "bg-centerCertBefore",
+    divImageAfter: "bg-centerCertAfter",
+    textPosition: "text-center",
+  },
+  {
+    logo: Cert3,
+    titleBefore: "ISO Certification Award",
+    titleAfter: "ISO Certification",
+    certNumber: "2403150020501",
+    description: `PT. Seleris Meditekno Internasional has been awarded ISO/IEC 27001:2022 certification with the number 2403150020501, which demonstrates our commitment to healthcare quality and service excellence. This certification signifies that we meet international standards in quality management, and we continuously strive to improve our service quality.`,
+    divImageBefore: "bg-rightCertBefore",
+    divImageAfter: "bg-rightCertAfter",
+    textPosition: "text-end",
+  },
+];
 </script>
 
 <template>
-  <div class="w-full h-full xl:px-16 lg:px-5">
-    <div class="flex flex-col w-full h-auto">
-      <div class="flex flex-col w-full h-auto">
-        <div class="flex w-full justify-center items-center text-[#195279]">
-          <p class="text-3xl md:text-4xl lg:text-5xl xl:text-[48px] font-[500]">
-            Seleris Certification
-          </p>
-        </div>
-        <div
-          class="flex w-full justify-center items-center text-[#1DC457] mt-2 lg:mt-4"
+  <div class="w-full h-auto py-10 xl:px-16 lg:px-8 px-4 sml:px-0">
+    <div class="flex flex-col w-full h-auto max-w-[1440px] mx-auto">
+      <!-- Heading -->
+      <div class="flex flex-col w-full items-center text-center">
+        <p
+          class="text-3xl md:text-4xl lg:text-5xl xl:text-[48px] font-medium text-[#195279]"
         >
-          <p
-            class="text-lg md:text-xl lg:text-2xl xl:text-[22px] font-[400] tracking-[1px]"
-          >
-            Seleris Meditekno Internasional
-          </p>
-        </div>
+          Seleris Certification
+        </p>
+        <p
+          class="text-lg md:text-xl lg:text-2xl xl:text-[22px] font-normal tracking-wide text-[#1DC457] mt-2 lg:mt-4"
+        >
+          Seleris Meditekno Internasional
+        </p>
       </div>
 
-      <!-- Desktop -->
+      <!-- Desktop Certificate Cards -->
       <div
-        class="hidden lg:flex xl:flex flex-row w-full h-auto gap-x-5 lg:gap-x-6 mt-5 relative"
+        class="hidden lg:flex flex-row w-full max-w-[1440px] mx-auto gap-x-6 mt-8 mb-12 justify-center"
       >
-        <!-- :divImageAfter="bgLeftAfter" -->
         <CertCard
-          :divImageBefore="'bg-leftCertBefore'"
-          :divImageAfter="'bg-leftCertAfter'"
-          :imageCertLogo="Cert1"
-          :TitleBefore="'ISO Certification Award'"
-          :textPosition="'text-start'"
-          :TitleAfter="'ISO Certification'"
-          :CertNumber="'2403150020501 '"
-          :BodyText="`PT. Seleris Meditekno Internasional has been awarded ISO/IEC 27001:2022 
-          certification with the number 2403150020501, which demonstrates our commitment to healthcare 
-          quality and service excellence. This certification signifies that we meet international standards in quality management, 
-          and we continuously strive to improve our service quality.`"
-        />
-        <CertCard
-          :divImageBefore="'bg-centerCertBefore'"
-          :divImageAfter="'bg-centerCertAfter'"
-          :imageCertLogo="Cert2"
-          :TitleBefore="'Best Innovation AI Solution for Insurance'"
-          :textPosition="'text-center'"
-          :TitleAfter="'ISO Certification'"
-          :CertNumber="'2403150020501 '"
-          :BodyText="`PT. Seleris Meditekno Internasional has been awarded ISO/IEC 27001:2022 
-          certification with the number 2403150020501, which demonstrates our commitment to healthcare 
-          quality and service excellence. This certification signifies that we meet international standards in quality management, 
-          and we continuously strive to improve our service quality.`"
-        />
-        <CertCard
-          :divImageBefore="'bg-rightCertBefore'"
-          :divImageAfter="'bg-rightCertAfter'"
-          :imageCertLogo="Cert3"
-          :TitleBefore="'ISO Certification Award'"
-          :textPosition="'text-end'"
-          :TitleAfter="'ISO Certification'"
-          :CertNumber="'2403150020501 '"
-          :BodyText="`PT. Seleris Meditekno Internasional has been awarded ISO/IEC 27001:2022 
-          certification with the number 2403150020501, which demonstrates our commitment to healthcare 
-          quality and service excellence. This certification signifies that we meet international standards in quality management, 
-          and we continuously strive to improve our service quality.`"
+          v-for="(cert, index) in certificateData"
+          :key="index"
+          :divImageBefore="cert.divImageBefore"
+          :divImageAfter="cert.divImageAfter"
+          :imageCertLogo="cert.logo"
+          :TitleBefore="cert.titleBefore"
+          :textPosition="cert.textPosition"
+          :TitleAfter="cert.titleAfter"
+          :CertNumber="cert.certNumber"
+          :BodyText="cert.description"
         />
       </div>
 
-      <!-- Mobile Cert -->
-      <MobileCert />
+      <!-- Mobile Certificate -->
+      <MobileCert :certificates="certificateData" />
     </div>
   </div>
 </template>
+
 <style scoped>
 .hide-scrollbar::-webkit-scrollbar {
   display: none;

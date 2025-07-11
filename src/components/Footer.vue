@@ -64,7 +64,9 @@ import appstore from "@/assets/images/appstore.png";
         <div class="flex lg:hidden w-full h-1 bg-[#F3F4F6] rounded-full my-3" />
         <div class="w-full h-auto">
           <div class="flex flex-col lg:pl-6 xl:pl-12">
-            <p class="text-[#195279] text-2xl xl:text-[22px] font-medium pb-2">
+            <p
+              class="text-[#195279] text-[24px] sml:text-[24px] xl:text-[22px] font-medium pb-2"
+            >
               Products
             </p>
             <div>
@@ -92,7 +94,9 @@ import appstore from "@/assets/images/appstore.png";
         <div class="flex lg:hidden w-full h-1 bg-[#F3F4F6] rounded-full my-3" />
         <div class="w-full h-auto">
           <div class="flex flex-col lg:pl-6 xl:pl-8">
-            <p class="text-[#195279] text-2xl xl:text-[22px] font-medium pb-2">
+            <p
+              class="text-[#195279] text-[24px] sml:text-[24px] xl:text-[22px] font-medium pb-2"
+            >
               Company
             </p>
             <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
@@ -118,7 +122,9 @@ import appstore from "@/assets/images/appstore.png";
         <div class="flex lg:hidden w-full h-1 bg-[#F3F4F6] rounded-full my-3" />
         <div class="w-full h-auto">
           <div class="flex flex-col">
-            <p class="text-[#195279] text-2xl xl:text-[22px] font-medium pb-2">
+            <p
+              class="text-[#195279] text-[24px] sml:text-[24px] xl:text-[22px] font-medium pb-2"
+            >
               Stay Connects
             </p>
             <div class="mb-3 mt-2 lg:mt-2">
@@ -142,7 +148,7 @@ import appstore from "@/assets/images/appstore.png";
               <p
                 class="text-[#2AB857] text-sm lg:text-base xl:text-[18px] lg:pt-1.5"
               >
-                support@seleris.ai
+                info@seleris.id
               </p>
             </div>
           </div>
@@ -151,7 +157,7 @@ import appstore from "@/assets/images/appstore.png";
         <div class="w-full h-auto">
           <div class="flex flex-col lg:pl-10">
             <p
-              class="text-[#195279] text-2xl lg:text-2xl xl:text-3xl font-medium pb-2 sml:pb-0"
+              class="text-[#195279] text-[24px] lg:text-2xl xl:text-3xl font-medium pb-2 sml:pb-0"
             >
               Get The App
             </p>

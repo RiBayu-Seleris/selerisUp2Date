@@ -16,7 +16,7 @@ const isHoveringTechnology = ref(false);
       'flex items-center text-md font-[400] text-[#374151]',
       isScrolled
         ? 'lg:gap-[20px] xl:gap-[50px] '
-        : 'lg:gap-[50px] 2lg:gap-[100px] xl:gap-[63px] 2xl:gap-[90px] justify-center',
+        : 'lg:gap-[20px] 2lg:gap-[30px] xl:gap-[40px] 2xl:gap-[60px] justify-center',
     ]"
   >
     <li class="">

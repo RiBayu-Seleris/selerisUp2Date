@@ -1,57 +1,32 @@
 <script setup>
 import { ref, computed, onMounted, onUnmounted } from "vue";
+defineProps({
+  certificates: {
+    type: Array,
+    required: true,
+  },
+});
 
-const isFlippedLeft = ref(false);
-const isFlippedCenter = ref(false);
-const isFlippedRight = ref(false);
+// Track flipped card index
+const flippedIndex = ref(null);
 
-// Deskripsi asli
-const fullText = `
-PT. Seleris Meditekno Internasional has been awarded ISO/IEC 27001:2022 certification with the number 2403150020501, which demonstrates our commitment to healthcare quality and service excellence. This certification signifies that we meet international standards in quality management, and we continuously strive to improve our service quality.`;
+const handleFlip = (index) => {
+  flippedIndex.value = flippedIndex.value === index ? null : index;
+};
 
-// Window width untuk kontrol responsif
+// Window width
 const windowWidth = ref(window.innerWidth);
+const updateWidth = () => (windowWidth.value = window.innerWidth);
 
-const updateWidth = () => {
-  windowWidth.value = window.innerWidth;
-};
+onMounted(() => window.addEventListener("resize", updateWidth));
+onUnmounted(() => window.removeEventListener("resize", updateWidth));
 
-const handleLeft = () => {
-  isFlippedLeft.value = !isFlippedLeft.value;
-  isFlippedCenter.value = false;
-  isFlippedRight.value = false;
-};
-const handleCenter = () => {
-  isFlippedCenter.value = !isFlippedCenter.value;
-  isFlippedLeft.value = false;
-  isFlippedRight.value = false;
-};
-const handleRight = () => {
-  isFlippedRight.value = !isFlippedRight.value;
-  isFlippedCenter.value = false;
-  isFlippedLeft.value = false;
-};
-
-onMounted(() => {
-  window.addEventListener("resize", updateWidth);
-});
-
-onUnmounted(() => {
-  window.removeEventListener("resize", updateWidth);
-});
-
-// Deskripsi pendek tergantung ukuran layar
-const shortText = computed(() => {
+const getShortText = (fullText) => {
   const length = fullText.length;
   let max = 130;
-
-  if (windowWidth.value >= 1024) {
-    max = 140;
-  } else if (windowWidth.value > 425 && windowWidth.value < 1024) {
-    max = 120;
-  } else {
-    max = 70;
-  }
+  if (windowWidth.value >= 1024) max = 140;
+  else if (windowWidth.value > 425) max = 120;
+  else max = 70;
 
   if (length > max) {
     const cut = fullText.slice(0, max).trim();
@@ -59,219 +34,71 @@ const shortText = computed(() => {
   } else {
     return fullText;
   }
-});
+};
 </script>
 
 <template>
   <div
-    class="lg:hidden flex flex-row py-2 w-full h-auto gap-x-6 mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-6 pl-10 pr-10 hide-scrollbar"
+    class="lg:hidden flex flex-row pt-2 w-full h-auto gap-x-6 mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-10 pl-10 pr-10 hide-scrollbar"
   >
     <div
-      class="snap-start shrink-0 w-[85%] sml:h-[270px] md:h-[200px] lg:h-[230px] perspective"
-      @click="handleLeft"
+      v-for="(cert, index) in certificates"
+      :key="index"
+      class="snap-start shrink-0 w-[85%] sml:w-[250px] sml:h-[240px] md:h-[200px] lg:h-[230px] perspective mb-2"
+      @click="handleFlip(index)"
     >
       <div
         :class="[
           'relative w-full h-full duration-700 transform-style preserve-3d',
-          isFlippedLeft ? 'rotate-y-180' : '',
+          flippedIndex === index ? 'rotate-y-180' : '',
         ]"
       >
         <!-- FRONT -->
         <div
-          class="flex flex-col gap-5 absolute w-full h-full backface-hidden bg-[#F9FAFB] rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md p-5"
+          class="flex flex-col sml:gap-y-3 md:gap-y-3 absolute w-full h-full backface-hidden bg-[#F9FAFB] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md px-5 pt-6"
         >
-          <div class="sml:hidden flex flex-row w-full h-auto gap-5">
-            <div class="w-[15%] h-auto">
-              <img
-                src="@/assets/images/certification/logo/Cert1.png"
-                alt="CertLogo"
-                class="w-full h-full object-center object-contain"
-              />
-            </div>
-            <div class="w-[85%] h-auto flex flex-col gap-2 text-[#195279]">
-              <div class="w-full h-auto">
-                <p class="text-2xl">ISO CERTIFICATION</p>
-              </div>
-              <div class="w-full h-auto">
-                <p class="text-xl">Certificate Number: 2403150020501</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- sml Screen -->
-          <div class="md:hidden flex flex-col w-full h-auto text-[#195279]">
+          <div class="flex flex-col w-full h-auto text-[#195279]">
             <div class="flex flex-col w-full h-auto">
               <div class="flex flex-row w-full h-auto gap-x-4 mb-3">
-                <div class="flex w-[20%] h-auto">
+                <div
+                  class="flex sml:w-[50px] sml:h-[50px] md:w-[60px] md:h-[60px]"
+                >
                   <img
-                    src="@/assets/images/certification/logo/Cert1.png"
+                    :src="cert.logo"
                     alt="CertLogo"
                     class="w-full h-full object-center object-contain"
                   />
                 </div>
-                <div class="flex w-[80%] h-auto items-center">
-                  <p class="text-xl font-semibold">ISO CERTIFICATION</p>
+                <div class="flex md:w-full h-auto items-center">
+                  <p class="sml:text-[14px] md:text-[20px] font-normal">
+                    {{ cert.titleBefore }}
+                  </p>
                 </div>
               </div>
               <div class="flex w-full h-auto">
-                <p class="text-base">Certificate Number: 2403150020501</p>
+                <p class="sml:text-[14px]">
+                  Certificate Number: {{ cert.certNumber }}
+                </p>
               </div>
             </div>
           </div>
 
-          <!-- Descriptions -->
+          <!-- Description -->
           <div class="flex w-full h-auto">
-            <p class="text-base overflow-hidden" v-html="shortText"></p>
+            <p
+              class="text-[14px] sml:text-[12px] overflow-hidden"
+              v-html="getShortText(cert.description)"
+            ></p>
           </div>
         </div>
 
         <!-- BACK -->
         <div
-          class="absolute w-full h-full backface-hidden rotate-y-180 bg-[#F9FAFB] rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center px-5"
+          class="absolute w-full sml:w-[250px] sml:h-[240px] py-5 backface-hidden rotate-y-180 bg-[#F9FAFB] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center px-5 sml:px-4"
         >
           <p
-            class="flex text-base sml:text-sm overflow-hidden justify-center"
-            v-html="fullText"
-          ></p>
-        </div>
-      </div>
-    </div>
-    <div
-      class="snap-start shrink-0 w-[85%] sml:h-[270px] md:h-[200px] lg:h-[230px] perspective"
-      @click="handleCenter"
-    >
-      <div
-        :class="[
-          'relative w-full h-full duration-700 transform-style preserve-3d',
-          isFlippedCenter ? 'rotate-y-180' : '',
-        ]"
-      >
-        <!-- FRONT -->
-        <div
-          class="flex flex-col gap-5 absolute w-full h-full backface-hidden bg-[#F9FAFB] rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md p-5"
-        >
-          <div class="sml:hidden flex flex-row w-full h-auto gap-5">
-            <div class="w-[15%] h-auto">
-              <img
-                src="@/assets/images/certification/logo/Cert1.png"
-                alt="CertLogo"
-                class="w-full h-full object-center object-contain"
-              />
-            </div>
-            <div class="w-[85%] h-auto flex flex-col gap-2 text-[#195279]">
-              <div class="w-full h-auto">
-                <p class="text-2xl">ISO CERTIFICATION</p>
-              </div>
-              <div class="w-full h-auto">
-                <p class="text-xl">Certificate Number: 2403150020501</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- sml Screen -->
-          <div class="md:hidden flex flex-col w-full h-auto text-[#195279]">
-            <div class="flex flex-col w-full h-auto">
-              <div class="flex flex-row w-full h-auto gap-x-4 mb-3">
-                <div class="flex w-[20%] h-auto">
-                  <img
-                    src="@/assets/images/certification/logo/Cert1.png"
-                    alt="CertLogo"
-                    class="w-full h-full object-center object-contain"
-                  />
-                </div>
-                <div class="flex w-[80%] h-auto items-center">
-                  <p class="text-xl font-semibold">ISO CERTIFICATION</p>
-                </div>
-              </div>
-              <div class="flex w-full h-auto">
-                <p class="text-base">Certificate Number: 2403150020501</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Descriptions -->
-          <div class="flex w-full h-auto">
-            <p class="text-base overflow-hidden" v-html="shortText"></p>
-          </div>
-        </div>
-
-        <!-- BACK -->
-        <div
-          class="absolute w-full h-full backface-hidden rotate-y-180 bg-[#F9FAFB] rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center px-5"
-        >
-          <p
-            class="flex text-base sml:text-sm overflow-hidden justify-center"
-            v-html="fullText"
-          ></p>
-        </div>
-      </div>
-    </div>
-    <div
-      class="snap-start shrink-0 w-[85%] sml:h-[270px] md:h-[200px] lg:h-[230px] perspective"
-      @click="handleRight"
-    >
-      <div
-        :class="[
-          'relative w-full h-full duration-700 transform-style preserve-3d',
-          isFlippedRight ? 'rotate-y-180' : '',
-        ]"
-      >
-        <!-- FRONT -->
-        <div
-          class="flex flex-col gap-5 absolute w-full h-full backface-hidden bg-[#F9FAFB] rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md p-5"
-        >
-          <div class="sml:hidden flex flex-row w-full h-auto gap-5">
-            <div class="w-[15%] h-auto">
-              <img
-                src="@/assets/images/certification/logo/Cert1.png"
-                alt="CertLogo"
-                class="w-full h-full object-center object-contain"
-              />
-            </div>
-            <div class="w-[85%] h-auto flex flex-col gap-2 text-[#195279]">
-              <div class="w-full h-auto">
-                <p class="text-2xl">ISO CERTIFICATION</p>
-              </div>
-              <div class="w-full h-auto">
-                <p class="text-xl">Certificate Number: 2403150020501</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- sml Screen -->
-          <div class="md:hidden flex flex-col w-full h-auto text-[#195279]">
-            <div class="flex flex-col w-full h-auto">
-              <div class="flex flex-row w-full h-auto gap-x-4 mb-3">
-                <div class="flex w-[20%] h-auto">
-                  <img
-                    src="@/assets/images/certification/logo/Cert1.png"
-                    alt="CertLogo"
-                    class="w-full h-full object-center object-contain"
-                  />
-                </div>
-                <div class="flex w-[80%] h-auto items-center">
-                  <p class="text-xl font-semibold">ISO CERTIFICATION</p>
-                </div>
-              </div>
-              <div class="flex w-full h-auto">
-                <p class="text-base">Certificate Number: 2403150020501</p>
-              </div>
-            </div>
-          </div>
-
-          <!-- Descriptions -->
-          <div class="flex w-full h-auto">
-            <p class="text-base overflow-hidden" v-html="shortText"></p>
-          </div>
-        </div>
-
-        <!-- BACK -->
-        <div
-          class="absolute w-full h-full backface-hidden rotate-y-180 bg-[#F9FAFB] rounded-md bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center px-5"
-        >
-          <p
-            class="flex text-base sml:text-sm overflow-hidden justify-center"
-            v-html="fullText"
+            class="flex text-base sml:text-[12px] leading-relaxed overflow-hidden justify-center"
+            v-html="cert.description"
           ></p>
         </div>
       </div>
@@ -296,7 +123,7 @@ const shortText = computed(() => {
   display: none;
 }
 .hide-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 </style>

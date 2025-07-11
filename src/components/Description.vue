@@ -54,7 +54,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="flex flex-row sml:flex-col md:flex-col lg:flex-row mx-6 lg:justify-between mt-10 md:px-10"
+    class="flex flex-row sml:flex-col-reverse md:flex-col lg:flex-row mx-6 lg:justify-between"
   >
     <div class="flex flex-col w-full h-full justify-center">
       <div class="w-full pb-2 sml:pb-4 md:pb-5 xl:pb-5">
@@ -81,7 +81,7 @@ onMounted(() => {
         <div class="h-full relative overflow-hidden">
           <!-- Scroll Indicator dengan Garis -->
           <div
-            class="absolute xl:left-3 sml:left-0 top-1/2 -translate-y-1/2 flex flex-col gap-12 sml:gap-6 z-10"
+            class="absolute xl:left-3 sml:left-0 top-1/2 -translate-y-1/2 flex flex-col gap-12 sml:gap-6 z-0"
           >
             <!-- Garis Progress -->
             <div
@@ -140,7 +140,7 @@ onMounted(() => {
       </div>
     </div>
     <div
-      class="flex w-full sml:h-full md:h-full lg:h-full xl:h-[425px] justify-center items-center"
+      class="flex w-full sml:h-full md:h-[300px] lg:h-full xl:h-[425px] sml:mb-5 justify-center items-center"
     >
       <video
         autoplay

@@ -1,6 +1,7 @@
 <script setup>
 import TouchMobile from "@/components/TouchMobile.vue";
 import ChatIcon from "@/components/icons/ChatIcon.vue";
+import CallIcon from "@/components/icons/CallIcon.vue";
 </script>
 
 <template>
@@ -15,44 +16,49 @@ import ChatIcon from "@/components/icons/ChatIcon.vue";
           >
             <div class="flex flex-col w-full h-full">
               <div class="w-full h-auto py-5">
-                <p class="text-4xl pb-3 font-semibold text-[#195279]">
+                <p
+                  class="text-4xl xl:text-[38px] pb-3 font-[500] text-[#195279]"
+                >
                   Get <span class="text-[#2AB857]">in Touch</span>
                 </p>
                 <p
-                  class="base:text-base xl:text-lg text-[#195279] font-semibold"
+                  class="base:text-base xl:text-[16px] text-[#195279] font-[500]"
                 >
                   Be among the first to discover what it's all about
                 </p>
               </div>
               <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
                 <div class="w-full mb-2">
-                  <p>Full Name:</p>
+                  <p class="text-[14px] font-[500]">Full Name:</p>
                 </div>
                 <div class="w-full">
                   <input
                     type="text"
-                    class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#2AB857]"
+                    class="w-full p-2 rounded-[8px] border border-gray-300 focus:outline-none focus:ring-1 focus:ring-[#2AB857]"
+                    placeholder="Full Name"
                   />
                 </div>
               </div>
               <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
                 <div class="w-full mb-2">
-                  <p>Email:</p>
+                  <p class="text-[14px] font-[500]">Email:</p>
                 </div>
                 <div class="w-full">
                   <input
                     type="email"
-                    class="w-full p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#2AB857]"
+                    class="w-full p-2 rounded-[8px] border border-gray-300 focus:outline-none focus:ring-1 focus:ring-[#2AB857]"
+                    placeholder="Email"
                   />
                 </div>
               </div>
               <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
                 <div class="w-full mb-2">
-                  <p>Message:</p>
+                  <p class="text-[14px] font-[500]">Message:</p>
                 </div>
                 <div class="w-full">
                   <textarea
-                    class="w-full lg:h-[70px] xl:h-[130px] p-2 rounded border border-gray-300 focus:outline-none focus:ring-2 focus:ring-[#2AB857] resize-none align-top"
+                    class="w-full lg:h-[70px] xl:h-[130px] p-2 rounded-[8px] border border-gray-300 focus:outline-none focus:ring-1 focus:ring-[#2AB857] resize-none align-top"
+                    placeholder="Message"
                   />
                 </div>
               </div>
@@ -84,41 +90,59 @@ import ChatIcon from "@/components/icons/ChatIcon.vue";
             <div class="flex w-full h-full bg-[#FAFAFA] rounded-xl">
               <div class="flex flex-col w-full py-3 gap-1">
                 <div class="flex w-full justify-center items-center mb-2">
-                  <div class="w-12 h-12 rounded-full bg-[#D9D9D9]"></div>
+                  <div
+                    class="flex w-12 h-12 rounded-full bg-[#FFFFFF] justify-center items-center shadow-lg"
+                  >
+                    <ChatIcon />
+                  </div>
                 </div>
                 <div class="flex w-full justify-center items-center">
                   <p
-                    class="lg:text-xl xl:text-2xl text-[#195279] font-semibold"
+                    class="lg:text-xl xl:text-[24px] text-[#195279] font-[600]"
                   >
                     Chat to Support
                   </p>
                 </div>
                 <div class="flex w-full justify-center items-center lg:px-5">
-                  <p class="lg:text-sm xl:text-base text-[#ACACAC] text-center">
+                  <p
+                    class="lg:text-sm xl:text-[14px] font-[400] text-[#ACACAC] text-center"
+                  >
                     Our team here ready to help you
                   </p>
                 </div>
                 <div class="flex w-full justify-center items-center">
-                  <p class="text-[#2AB857]">support@seleris.ai</p>
+                  <p class="text-[#2AB857] xl:text-[14px]">
+                    support@seleris.ai
+                  </p>
                 </div>
                 <div class="flex w-full justify-center items-center">
-                  <p class="text-[#2AB857]">help@seleris.ai</p>
+                  <p class="text-[#2AB857] xl:text-[14px]">help@seleris.ai</p>
                 </div>
               </div>
             </div>
             <div class="flex w-full h-full bg-[#FAFAFA] rounded-xl">
               <div class="flex flex-col w-full py-3 gap-1">
                 <div class="flex w-full justify-center items-center mb-2">
-                  <div class="w-12 h-12 rounded-full bg-[#D9D9D9]" />
+                  <div
+                    class="flex w-12 h-12 rounded-full bg-[#FFFFFF] justify-center items-center shadow-lg"
+                  >
+                    <CallIcon />
+                  </div>
                 </div>
                 <div class="flex w-full justify-center items-center">
-                  <p class="text-2xl text-[#195279] font-bold">Call Us</p>
+                  <p class="text-2xl xl:text-[24px] text-[#195279] font-[600]">
+                    Call Us
+                  </p>
                 </div>
                 <div class="flex w-full justify-center items-center">
-                  <p class="text-md text-[#ACACAC]">Mon-Sat 9am to 5pm</p>
+                  <p class="text-md xl:text-[14px] font-[400] text-[#ACACAC]">
+                    Mon-Sat 9am to 5pm
+                  </p>
                 </div>
                 <div class="flex w-full justify-center items-center">
-                  <p class="text-[#2AB857]">+62 (21) 526 52 35</p>
+                  <p class="text-[#2AB857] xl:text-[14px] font-[400]">
+                    +62 (21) 526 52 35
+                  </p>
                 </div>
               </div>
             </div>

@@ -4,14 +4,14 @@ import AboutHero from "@/assets/images/About-hero-image.png";
 
 <template>
   <div
-    class="flex w-full h-auto xl:pt-[80px] md:pt-[100px] sml:pt-[90px] animate__animated animate__fadeIn animate__slower"
+    class="flex relative w-full h-auto animate__animated animate__fadeIn animate__slower"
   >
     <div
-      class="flex lg:flex-row sml:flex-col md:flex-col w-full h-auto justify-between lg:gap-x-10 sml:mt-3 sml:pt-4"
+      class="flex relative lg:flex-row sml:flex-col md:flex-col w-full h-auto justify-between lg:gap-x-10 mt-[130px] sml:mt-[100px]"
     >
       <div class="flex w-full md:w-full lg:w-[40%] xl:w-[45%] h-auto">
         <div
-          class="flex flex-col w-full h-auto md:pt-[30px] lg:pt-[100px] xl:pt-[140px] sml:px-4 gap-3 xl:gap-7 sml:text-center md:text-center lg:text-left"
+          class="flex flex-col w-full h-auto justify-center sml:px-4 gap-3 xl:gap-7 sml:text-center md:text-center lg:text-left"
         >
           <div class="w-full h-auto">
             <p
@@ -35,12 +35,12 @@ import AboutHero from "@/assets/images/About-hero-image.png";
         </div>
       </div>
       <div
-        class="flex w-full h-full md:w-full lg:w-[60%] xl:w-[55%] justify-center items-center sml:pt-10 md:pt-10"
+        class="flex w-full h-full md:w-full lg:w-[60%] xl:w-[55%] justify-end items-end"
       >
         <img
           :src="AboutHero"
           alt="About Banner"
-          class="w-full h-full md:h-[500px] lg:h-[400px] xl:h-[500px] object-cover md:object-contain"
+          class="h-full sml:h-[300px] md:h-[500px] lg:h-[400px] xl:h-[500px] object-contain"
         />
       </div>
     </div>

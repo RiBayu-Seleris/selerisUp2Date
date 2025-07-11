@@ -1,3 +1,8 @@
+<script setup>
+import ChatIcon from "@/components/icons/ChatIcon.vue";
+import CallIcon from "@/components/icons/CallIcon.vue";
+</script>
+
 <template>
   <div
     class="lg:hidden flex flex-col w-full h-auto bg-[#F3F4F6] py-5 px-3 rounded-3xl gap-y-8"
@@ -17,7 +22,11 @@
       >
         <div class="flex flex-col w-full h-auto py-5 bg-[#FAFAFA] rounded-2xl">
           <div class="flex w-full justify-center items-center mb-2">
-            <div class="w-12 h-12 rounded-full bg-[#D9D9D9]" />
+            <div
+              class="flex w-12 h-12 rounded-full bg-[#FFFFFF] justify-center items-center shadow-lg"
+            >
+              <ChatIcon />
+            </div>
           </div>
           <div class="flex w-full justify-center items-center">
             <p class="text-2xl text-[#195279] font-bold">Chat to Support</p>
@@ -36,7 +45,11 @@
         </div>
         <div class="flex flex-col w-full h-auto py-5 bg-[#FAFAFA] rounded-2xl">
           <div class="flex w-full justify-center items-center mb-2">
-            <div class="w-12 h-12 rounded-full bg-[#D9D9D9]" />
+            <div
+              class="flex w-12 h-12 rounded-full bg-[#FFFFFF] justify-center items-center shadow-lg"
+            >
+              <CallIcon />
+            </div>
           </div>
           <div class="flex w-full justify-center items-center">
             <p class="text-2xl text-[#195279] font-bold">Chat to Support</p>

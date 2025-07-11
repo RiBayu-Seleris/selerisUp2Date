@@ -9,38 +9,32 @@ const sidebarStore = useSidebarStore();
 </script>
 
 <template>
-  <div class="flex flex-row w-full h-auto items-center pt-5 lg:pt-6 xl:pt-5">
-    <div class="sml:w-[50%] md:w-[50%] lg:w-[13%] h-auto">
-      <img
-        :src="Logo"
-        alt="Logo"
-        class="lg:h-[60px] sml:w-[100px] sml:h-[70px] md:h-[70px] xl:h-[70px] xl:pl-5 object-contain"
-      />
-    </div>
-    <div class="sml:hidden md:hidden lg:flex w-[87%] h-full items-center">
-      <div
-        class="flex lg:w-[90%] xl:w-[85%] h-auto lg:ml-[3.5%] xl:ml-[4%] xl:mt-3"
-      >
-        <nav
-          class="hidden lg:flex w-full rounded-full border py-3 justify-center content-center shadow-[1px_19px_33px_-14px_rgba(0,_0,_0,_0.08)] bg-white z-[999]"
-        >
-          <MenuNav />
-        </nav>
+  <div
+    class="relative flex justify-center w-full h-auto items-center sml:pt-3 md:pt-5 lg:pt-5 xl:pt-5"
+  >
+    <div class="grid grid-cols-12 w-full h-auto">
+      <div class="col-span-1 h-auto">
+        <div class="flex w-full items-center">
+          <img
+            :src="Logo"
+            alt="Logo"
+            class="w-[117px] h-[56px] object-contain"
+          />
+        </div>
       </div>
-    </div>
-
-    <!-- Mobile -->
-    <div
-      class="flex lg:hidden h-[75px] sml:w-[50%] md:w-[50%] items-center justify-end"
-    >
-      <button
-        type="button"
-        id="sidebar-button"
-        class="bg-white p-2 rounded-lg shadow-md text-[#1AB24F]"
-        @click="sidebarStore.open"
-      >
-        <MenuIcon />
-      </button>
+      <div class="flex items-center col-span-10 h-auto">
+        <div class="flex w-full">
+          <!-- rounded-full border shadow-[1px_19px_33px_-14px_rgba(0,_0,_0,_0.08)] bg-white z-[999] -->
+          <nav
+            class="hidden lg:flex items-center w-full justify-center content-center"
+          >
+            <MenuNav />
+          </nav>
+        </div>
+      </div>
+      <div class="col-span-1 h-auto">
+        <div class="flex w-full items-center">c</div>
+      </div>
     </div>
   </div>
 </template>

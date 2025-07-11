@@ -36,15 +36,15 @@ const description = computed(() => {
 
 <template>
   <div
-    class="absolute inset-0 flex items-center justify-end opacity-100 lg:opacity-0 lg:group-hover:opacity-100 -mt-2 lg:mt-0 transition-opacity duration-300 z-[999]"
+    class="absolute inset-0 flex items-center justify-end opacity-100 lg:opacity-0 lg:group-hover:opacity-100 sml:mt-0 -mt-2 lg:mt-0 transition-opacity duration-300 z-[999]"
   >
     <!-- Bubble wrapper -->
     <div
-      class="relative w-[240px] h-[150px] md:w-[340px] md:h-[200px] lg:w-[440px] lg:h-[270px] md:mr-5 lg:mr-44"
+      class="relative w-[240px] h-[150px] sml:w-[200px] sml:h-[130px] md:w-[340px] md:h-[200px] lg:w-[440px] lg:h-[270px] sml:mr-10 md:mr-5 lg:mr-44"
     >
       <!-- SVG as background -->
       <svg
-        class="absolute inset-0 w-full h-full drop-shadow-md z-0"
+        class="absolute inset-0 w-full h-full drop-shadow-md z-0 text-white"
         viewBox="0 0 409 228"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -52,7 +52,7 @@ const description = computed(() => {
       >
         <path
           d="M1 30.5731V197.292C1 213.624 14.2403 226.865 30.5731 226.865H378.427C394.76 226.865 408 213.624 408 197.292V79.3688C408 63.036 394.76 49.7956 378.427 49.7956H227.234C213.76 49.7956 202.837 38.8724 202.837 25.3978C202.837 11.9233 191.913 1 178.439 1H30.5731C14.2403 1 1 14.2403 1 30.5731Z"
-          fill="#F9FAFB"
+          fill="currentColor"
           stroke="#48C97C"
           stroke-width="0.739328"
         />
@@ -65,17 +65,19 @@ const description = computed(() => {
         <img
           :src="Logo"
           alt="Logo"
-          class="w-[70px] md:w-[90px] lg:w-[128px] h-auto object-contain mb-4"
+          class="w-[70px] sml:w-[50px] md:w-[90px] lg:w-[128px] h-auto object-contain sml:mb-3 mb-4"
         />
         <div
-          class="text-start text-sm md:text-[1rem] lg:text-lg leading-snug text-black"
+          class="text-start sml:text-[12px] md:text-[1rem] lg:text-lg leading-snug text-black"
         >
           {{ description }}
         </div>
         <div
           class="flex flex-row text-[#2AB857] mt-2 lg:mt-4 font-medium items-center"
         >
-          <span class="text-sm md:text-base lg:text-lg">View product</span>
+          <span class="sml:text-[11px] md:text-base lg:text-lg"
+            >View product</span
+          >
           <svg
             class="w-[1.1rem] h-[1.1rem] md:w-[1.4rem] md:h-[1.7rem] lg:w-[1.7rem] lg:h-[1.7rem] ml-1 self-center"
             viewBox="0 0 24 24"

@@ -25,7 +25,7 @@ const blogPosts = ref([
   },
   {
     id: 2,
-    title: "Design 2024: Clean Minimal UI",
+    title: "Introducing CodeWizard, streamline with AI assistance",
     category: "Design",
     date: "Jan 3, 2024",
     description: "New trends in visual and UX design for modern apps.",
@@ -33,10 +33,18 @@ const blogPosts = ref([
   },
   {
     id: 3,
-    title: "Insurance Tech Boom",
+    title: "Discover HelpBot, the AI assistant for customer service",
     category: "Insurance",
     date: "Feb 10, 2024",
-    description: "How AI is transforming the insurance industry.",
+    description: "Tailor your approach with AI-enhanced customer analytics.",
+    image: new URL("@/assets/images/blog/example.png", import.meta.url).href,
+  },
+  {
+    id: 4,
+    title: "Discover HelpBot, the AI assistant for customer service",
+    category: "Technology",
+    date: "Feb 10, 2024",
+    description: "AI-driven marketing insights platform",
     image: new URL("@/assets/images/blog/example.png", import.meta.url).href,
   },
   // Tambah lebih banyak sesuai kebutuhan
@@ -52,9 +60,9 @@ const filteredPosts = computed(() => {
 </script>
 
 <template>
-  <div class="flex flex-col w-full h-auto px-0">
+  <div class="flex flex-col w-full h-auto px-0 xl:px-20">
     <!-- Tabs -->
-    <div class="flex flex-row w-full h-auto gap-x-[65px] mb-8">
+    <div class="flex flex-row w-full h-auto gap-x-[65px] mb-5">
       <div
         v-for="category in categories"
         :key="category"
@@ -71,7 +79,7 @@ const filteredPosts = computed(() => {
     </div>
 
     <!-- Blog Cards -->
-    <div class="relative flex flex-wrap w-full h-auto mt-4 gap-[32px]">
+    <div class="relative flex flex-wrap w-full h-auto mt-4 justify-between">
       <div v-for="post in filteredPosts" :key="post.id" class="w-auto h-auto">
         <BlogCard
           :title="post.title"

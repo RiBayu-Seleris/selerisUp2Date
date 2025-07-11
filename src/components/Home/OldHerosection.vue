@@ -10,10 +10,14 @@ import { useSidebarStore } from "@/stores/sidebar";
 </script>
 
 <template>
-  <div class="relative w-full h-auto rounded-b-3xl mt-28 px-10">
-    <div class="w-full h-auto bg-hero2 bg-no-repeat bg-cover pt-16 rounded-3xl">
+  <div
+    class="relative w-full h-auto xl:bg-cover lg:bg-hero bg-no-repeat lg:bg-cover rounded-b-3xl"
+  >
+    <div
+      class="w-full h-auto sml:pt-[90px] md:pt-[100px] lg:pt-[60px] xl:pt-[100px]"
+    >
       <div
-        class="flex flex-col w-full h-auto text-center justify-center items-center z-30 bg-[#F3F4F6] lg:bg-transparent rounded-3xl animate__animated animate__fadeIn animate__slower"
+        class="flex flex-col w-full h-auto mt-5 sml:mt-4 md:mt-0 text-center sml:pt-5 md:pt-8 justify-center items-center z-30 bg-[#F3F4F6] lg:bg-transparent rounded-3xl animate__animated animate__fadeIn animate__slower"
       >
         <div class="w-full pb-2 sml:pb-2 sml:pt-4">
           <p class="sml:text-[21px] xl:text-[26px] text-[#1AB24F] font-[500]">

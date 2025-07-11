@@ -41,18 +41,21 @@ onUnmounted(() => {
 <template>
   <div class="relative w-full h-auto font-poppins overflow-x-hidden">
     <!-- Navbar -->
-    <div class="flex fixed w-full h-auto px-10 lg:px-10 pb-5 z-10">
+    <!-- pt-5 lg:pt-6 xl:pt-5 -->
+    <div class="flex fixed w-full h-auto sml:px-8 md:px-10 lg:px-10 z-10">
       <component :is="scrollStore.isScrolled ? NavbarScroll : Navbar" />
     </div>
 
     <!-- Sidebar (hanya 1 instance) -->
     <Sidebar />
 
-    <main class="relative">
+    <main class="relative w-full max-w-[1440px] 2xl:max-w-[2560px] mx-auto">
       <div class="relative">
         <router-view />
 
-        <section class="flex flex-col relative w-full h-auto mt-16">
+        <section
+          class="flex flex-col relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto mt-16"
+        >
           <Touch />
         </section>
       </div>

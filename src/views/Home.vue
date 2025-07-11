@@ -12,61 +12,63 @@ import Different from "@/components/Home/Different.vue";
 </script>
 
 <template>
-  <section class="px-8 pt-5">
+  <section class="relative flex w-full h-auto">
     <Herosection />
   </section>
 
+  <!-- data-aos="fade-down"
+    data-aos-duration="2000" -->
   <section
-    class="hidden lg:flex w-full h-auto"
-    data-aos="fade-down"
-    data-aos-duration="2000"
+    class="hidden lg:flex w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto"
   >
     <PartnersClients />
   </section>
+  <!-- data-aos="fade-down"
+    data-aos-duration="2000" -->
   <section
-    class="lg:hidden flex w-full h-auto"
-    data-aos="fade-down"
-    data-aos-duration="2000"
+    class="lg:hidden flex w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto"
   >
     <PartnersClientsMobile />
   </section>
 
-  <section
-    class="flex flex-col relative w-full xl:h-[100vh] lg:h-[80vh] md:mt-10 lg:mt-10 pt-4 pb-8 lg:pt-0 lg:pb-0"
-    data-aos="fade-up"
+  <!-- data-aos="fade-up"
     data-aos-easing="ease-out-cubic"
-    data-aos-duration="2000"
+    data-aos-duration="2000" -->
+  <section
+    class="flex flex-col relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto xl:h-auto lg:h-[80vh] md:mt-10 lg:mt-10 pt-4 pb-8 lg:pt-0 lg:pb-0"
   >
     <!-- bg-cert bg-no-repeat bg-cover bg-center -->
     <Certificate />
   </section>
 
+  <!-- data-aos="fade-left"
+    data-aos-duration="3000" -->
   <section
-    class="flex flex-col relative w-full h-auto xl:px-8 lg:mt-10 xl:mt-0"
-    data-aos="fade-left"
-    data-aos-duration="3000"
+    class="flex flex-col relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto xl:px-8 md:px-12 lg:px-12 lg:mt-20 2lg:mt-40 xl:mt-0"
   >
     <Description />
   </section>
 
+  <!-- data-aos="fade-right"
+    data-aos-duration="3000" -->
   <section
-    class="flex flex-col relative w-full h-auto mt-16"
-    data-aos="fade-right"
-    data-aos-duration="3000"
+    class="flex flex-col relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto mt-16"
   >
     <Benefits />
   </section>
 
-  <section
-    class="flex flex-col relative w-full h-auto px-12 mt-10"
-    data-aos="fade-down"
+  <!-- data-aos="fade-down"
     data-aos-easing="linear"
-    data-aos-duration="1000"
+    data-aos-duration="1000" -->
+  <section
+    class="flex flex-col relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 mt-10 lg:mt-10 2lg:px-28 xl:mt-10 xl:px-28"
   >
     <AiDesc />
   </section>
 
-  <section class="flex flex-col relative w-full h-auto">
+  <section
+    class="flex flex-col relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto"
+  >
     <Different />
   </section>
 </template>

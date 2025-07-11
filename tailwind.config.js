@@ -1,15 +1,33 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
-  safelist: ["bg-benefits"], // ⬅ tambahkan ini
   theme: {
+    screens: {
+      // Mobile breakpoints
+      sml: { raw: "(min-width: 320px) and (max-width: 767px)" },
+      sm: "640px",
+
+      // Tablet / Medium
+      md: "768px",
+      mds: "853px",
+
+      // Desktop
+      lg: "1024px",
+      "2lg": { raw: "(min-width: 1025px) and (max-width: 1279px)" },
+      xl: "1280px",
+
+      // Extra Large
+      xls: { raw: "(min-width: 1440px) and (max-width: 1535px)" },
+      "2xl": { raw: "(min-width: 1536px) and (max-width: 2559px)" },
+      "3xl": { raw: "(min-width: 2560px)" },
+    },
     extend: {
       backgroundImage: {
         hero: "url('@/assets/images/hero-banner.png')",
+        hero2: "url('@/assets/images/hero-banner2.png')",
         different: "url('@/assets/images/different-background.png')",
         api: "url('@/assets/images/api-background.png')",
         cert: "url('@/assets/images/bg-cert.png')",
-        benefits: "url('@/assets/images/bg-benefits.png')",
         leftCertBefore:
           "url('@/assets/images/certification/left-frame-before.png')",
         centerCertBefore:
@@ -22,18 +40,6 @@ module.exports = {
           "url('@/assets/images/certification/center-frame-after.png')",
         rightCertAfter:
           "url('@/assets/images/certification/right-frame-after.png')",
-      },
-      screens: {
-        // sml430: "430px",
-        sml: {
-          raw: "(min-width: 320px) and (max-width: 767px)",
-        }, // Pastikan ini ada
-        md: "768px", // Pastikan ini ada
-        mds: "853px",
-        lg: "1024px",
-        xl: {
-          raw: "(min-width: 1025px)",
-        },
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],
