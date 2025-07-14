@@ -137,7 +137,10 @@ const isHoveringTechnology = ref(false);
       <div
         class="flex flex-col w-auto bg-white p-4 rounded-2xl shadow-lg gap-5"
       >
-        <Navlink href="#" class="flex justify-center items-center w-[300px]">
+        <Navlink
+          href="/seleris-chromatic-imaging"
+          class="flex justify-center items-center w-[300px]"
+        >
           <span>Seleris Chromatic Imaging</span>
         </Navlink>
         <Navlink href="#" class="flex justify-center items-center w-[300px]">

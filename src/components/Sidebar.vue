@@ -57,15 +57,15 @@ const menuPages = [
 
 const techPages = [
   {
-    title: "Seleris Care",
+    title: "Seleris Chromatic Imaging",
+    url: "/seleris-chromatic-imaging",
+  },
+  {
+    title: "Seleris Deep Vitals",
     url: "#",
   },
   {
-    title: "Seleris Medins",
-    url: "#",
-  },
-  {
-    title: "Seleris Credit Cover",
+    title: "Seleris Deep Risk",
     url: "#",
   },
 ];
