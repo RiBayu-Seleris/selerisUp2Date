@@ -5,11 +5,11 @@ module.exports = {
   theme: {
     screens: {
       // Mobile breakpoints
-      sml: { raw: "(min-width: 320px) and (max-width: 767px)" },
+      sml: { raw: "(min-width: 320px) and (max-width: 425px)" },
       sm: "640px",
 
       // Tablet / Medium
-      md: "768px",
+      md: { raw: "(min-width: 641px) and (max-width: 768px)" },
       mds: "853px",
 
       // Desktop
@@ -26,9 +26,9 @@ module.exports = {
       backgroundImage: {
         hero: "url('@/assets/images/hero-banner.png')",
         hero2: "url('@/assets/images/hero-banner2.png')",
+        herodark: "url('@/assets/images/herodark.svg')",
         different: "url('@/assets/images/different-background.png')",
         api: "url('@/assets/images/api-background.png')",
-        cert: "url('@/assets/images/bg-cert.png')",
         leftCertBefore:
           "url('@/assets/images/certification/left-frame-before.png')",
         centerCertBefore:

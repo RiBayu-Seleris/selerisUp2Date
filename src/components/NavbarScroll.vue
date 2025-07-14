@@ -1,5 +1,6 @@
 <script setup>
 import Logo from "@/assets/images/logo.png";
+import DarkLogo from "@/assets/images/darklogo.png";
 import MenuNav from "@/components/MenuNav.vue";
 import MenuIcon from "@/components/icons/MenuIcon.vue";
 import ThemeToggle from "@/components/reusable/ThemeToggle.vue";
@@ -34,9 +35,9 @@ onUnmounted(() => {
       <div class="w-full h-auto mt-8">
         <div class="max-w-[1440px] mx-auto px-8">
           <div
-            class="w-full flex items-center justify-between bg-white rounded-[18px] px-8 py-2 border-[0.5px] border-[#DEDEDE]"
+            class="w-full flex items-center justify-between bg-white dark:bg-black dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-xl dark:bg-opacity-10 rounded-[18px] lg:px-8 py-2 border-[0.5px] border-[#DEDEDE] dark:border-slate-300"
           >
-            <div class="grid grid-cols-12 w-full h-auto">
+            <div class="hidden lg:grid grid-cols-12 w-full h-auto">
               <div class="col-span-1 h-auto">
                 <div class="flex w-full items-center">
                   <img
@@ -62,18 +63,45 @@ onUnmounted(() => {
                 </div>
               </div>
             </div>
+
             <!-- Mobile Sidebar Button -->
             <div
-              class="flex flex-row lg:hidden items-center justify-end h-[60px]"
+              class="flex lg:hidden flex-row w-full h-auto justify-between md:px-8 sml:px-4"
             >
-              <button
-                type="button"
-                id="sidebar-button"
-                class="bg-white p-2 rounded-lg shadow-md text-[#1AB24F]"
-                @click="sidebarStore.open"
+              <div class="w-[40%] h-auto flex">
+                <!-- Logo terang (light mode) -->
+                <img
+                  :src="Logo"
+                  alt="Logo"
+                  class="w-[117px] h-[56px] sml:w-[80px] sml:h-[56px] object-contain dark:hidden"
+                />
+
+                <!-- Logo gelap (dark mode) -->
+                <img
+                  :src="DarkLogo"
+                  alt="Dark Logo"
+                  class="w-[117px] h-[56px] sml:w-[80px] sml:h-[56px] object-contain hidden dark:block"
+                />
+              </div>
+              <div
+                class="w-[60%] h-auto flex items-center flex-row justify-end"
               >
-                <MenuIcon />
-              </button>
+                <div class="w-[70%] h-10 flex items-center justify-end">
+                  <ThemeToggle />
+                </div>
+                <div
+                  class="w-[30%] sml:w-[35%] md:w-[15%] h-auto flex items-center justify-end"
+                >
+                  <button
+                    type="button"
+                    id="sidebar-button"
+                    class="bg-white p-2 rounded-lg shadow-md text-[#1AB24F]"
+                    @click="sidebarStore.open"
+                  >
+                    <MenuIcon />
+                  </button>
+                </div>
+              </div>
             </div>
           </div>
         </div>

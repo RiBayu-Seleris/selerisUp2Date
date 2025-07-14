@@ -13,10 +13,10 @@ const isHoveringTechnology = ref(false);
 <template>
   <ul
     :class="[
-      'flex items-center text-md font-[400] text-[#374151]',
+      'flex items-center text-md font-[400] text-[#374151] ',
       isScrolled
-        ? 'lg:gap-[20px] xl:gap-[50px] '
-        : 'lg:gap-[25px] 2lg:gap-[100px] xl:gap-[63px] 2xl:gap-[70px] justify-center',
+        ? 'lg:gap-[20px] xl:gap-[50px] dark:text-white '
+        : 'lg:gap-[25px] 2lg:gap-[100px] xl:gap-[63px] 2xl:gap-[70px] justify-center dark:text-white',
     ]"
   >
     <li class="">
@@ -45,30 +45,70 @@ const isHoveringTechnology = ref(false);
       @mouseleave="isHoveringProduct = false"
       :class="[
         'absolute z-50 w-auto h-auto xl:left-[350px] lg:left-[200px] top-[70px]',
-        isScrolled ? '-mt-4 pt-8 ' : 'mt-0 lg:-mt-1 pt-5  ',
+        isScrolled ? 'mt-2 pt-5' : 'mt-0 lg:-mt-2 pt-5 ',
       ]"
     >
       <div
-        class="grid grid-cols-3 w-auto bg-white p-4 rounded-2xl shadow-lg gap-5"
+        class="w-full h-auto flex flex-col bg-white p-8 rounded-2xl shadow-lg"
       >
-        <Navlink href="#" class="flex justify-center items-center w-[170px]">
-          <span> Seleris Lifins</span>
-        </Navlink>
-        <Navlink href="#" class="flex justify-center items-center w-[170px]">
-          <span> Seleris Medins</span>
-        </Navlink>
-        <Navlink href="#" class="flex justify-center items-center w-[170px]">
-          <span> Seleris Credit Cover</span>
-        </Navlink>
-        <Navlink href="#" class="flex justify-center items-center w-[170px]">
-          <span> Seleris Care</span>
-        </Navlink>
-        <Navlink href="#" class="flex justify-center items-center w-[170px]">
-          <span> Flexa Asia</span>
-        </Navlink>
-        <Navlink href="#" class="flex justify-center items-center w-[170px]">
-          <span> Auto Claim</span>
-        </Navlink>
+        <div class="w-full h-auto flex mb-6">
+          <p class="text-[#4B5563] font-[500] lg:text-[18px]">
+            Seleris Products
+          </p>
+        </div>
+        <div class="grid grid-cols-3 w-auto gap-5">
+          <Navlink href="#" class="flex justify-center items-center w-[170px]">
+            <span class="text-[#9CA3AF]"> Seleris Lifins</span>
+          </Navlink>
+          <Navlink href="#" class="flex justify-center items-center w-[170px]">
+            <span class="text-[#9CA3AF]"> Seleris Medins</span>
+          </Navlink>
+          <Navlink href="#" class="flex justify-center items-center w-[170px]">
+            <span class="text-[#9CA3AF]"> Seleris Credit Cover</span>
+          </Navlink>
+          <Navlink href="#" class="flex justify-center items-center w-[170px]">
+            <span class="text-[#9CA3AF]"> Seleris Care</span>
+          </Navlink>
+          <Navlink href="#" class="flex justify-center items-center w-[170px]">
+            <span class="text-[#9CA3AF]"> Flexa Asia</span>
+          </Navlink>
+          <Navlink href="#" class="flex justify-center items-center w-[170px]">
+            <span class="text-[#9CA3AF]"> Auto Claim</span>
+          </Navlink>
+          <Navlink href="#" class="flex justify-center items-center w-[170px]">
+            <span class="text-[#9CA3AF]"> Seleris Lifins</span>
+          </Navlink>
+          <Navlink href="#" class="flex justify-center items-center w-[170px]">
+            <span class="text-[#9CA3AF]"> Seleris Medins</span>
+          </Navlink>
+          <Navlink href="#" class="flex justify-center items-center w-[170px]">
+            <span class="text-[#9CA3AF]"> Seleris Credit Cover</span>
+          </Navlink>
+          <Navlink href="#" class="flex justify-center items-center w-[170px]">
+            <span class="text-[#9CA3AF]"> Seleris Care</span>
+          </Navlink>
+          <Navlink href="#" class="flex justify-center items-center w-[170px]">
+            <span class="text-[#9CA3AF]"> Flexa Asia</span>
+          </Navlink>
+          <Navlink href="#" class="flex justify-center items-center w-[170px]">
+            <span class="text-[#9CA3AF]"> Auto Claim</span>
+          </Navlink>
+          <Navlink href="#" class="flex justify-center items-center w-[170px]">
+            <span class="text-[#9CA3AF]"> Seleris Lifins</span>
+          </Navlink>
+          <Navlink href="#" class="flex justify-center items-center w-[170px]">
+            <span class="text-[#9CA3AF]"> Seleris Medins</span>
+          </Navlink>
+          <Navlink href="#" class="flex justify-center items-center w-[170px]">
+            <span class="text-[#9CA3AF]"> Seleris Credit Cover</span>
+          </Navlink>
+          <Navlink href="#" class="flex justify-center items-center w-[170px]">
+            <span class="text-[#9CA3AF]"> Seleris Care</span>
+          </Navlink>
+          <Navlink href="#" class="flex justify-center items-center w-[170px]">
+            <span class="text-[#9CA3AF]"> Flexa Asia</span>
+          </Navlink>
+        </div>
       </div>
     </div>
 
@@ -90,8 +130,8 @@ const isHoveringTechnology = ref(false);
       @mouseenter="isHoveringTechnology = true"
       @mouseleave="isHoveringTechnology = false"
       :class="[
-        'absolute z-50 w-auto h-auto left-[580px] top-[70px] ',
-        isScrolled ? '-mt-4 pt-8 ' : 'mt-0 lg:-mt-1 pt-5 ',
+        'absolute z-50 w-auto h-auto left-[560px] top-[70px] ',
+        isScrolled ? 'mt-2 pt-5' : 'mt-0 lg:-mt-2 pt-5 ',
       ]"
     >
       <div

@@ -28,10 +28,12 @@ const testimonials = [
   <div class="flex flex-col">
     <div class="relative flex flex-col w-full h-auto px-8 gap-y-3">
       <div class="flex w-full h-auto">
-        <p class="text-[#2AB857] font-[500] text-[21px]">Client Feedback</p>
+        <p class="text-[#2AB857] font-[500] text-[21px] lg:text-[21px]">
+          Client Feedback
+        </p>
       </div>
       <div class="flex w-full h-auto">
-        <p class="text-[#195279] font-[500] text-[34px]">
+        <p class="text-[#195279] font-[500] text-[24px] lg:text-[34px]">
           What they say after using our product
         </p>
       </div>
@@ -43,7 +45,7 @@ const testimonials = [
         :pagination="{ el: '.custom-pagination', clickable: true }"
         :autoplay="{ delay: 3000, disableOnInteraction: false }"
         loop
-        class="w-full max-w-[1440px] cursor-grab active:cursor-grabbing"
+        class="w-full cursor-grab active:cursor-grabbing"
       >
         <SwiperSlide
           v-for="(item, index) in testimonials"

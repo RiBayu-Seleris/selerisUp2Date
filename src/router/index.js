@@ -31,6 +31,13 @@ const routes = [
     name: "Contact",
     component: () => import("@/views/Contact.vue"),
   },
+
+  // Technology
+  {
+    path: "/seleris-chromatic-imaging",
+    name: "Seleris-Chromatic-Imaging",
+    component: () => import("@/views/ChromaticImaging.vue"),
+  },
 ];
 
 const router = createRouter({

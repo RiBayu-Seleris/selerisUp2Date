@@ -4,9 +4,9 @@ import DescRobot from "@/assets/images/about-images.png";
 
 <template>
   <!-- Section Description 1 -->
-  <div class="flex w-full h-auto">
+  <div class="flex w-full h-auto lg:px-20">
     <p
-      class="text-[18px] lg:text-[24px] xl:text-[24px] text-center text-[#195279]"
+      class="text-[14px] lg:text-[17px] xl:text-[21px] text-center text-[#195279]"
     >
       Seleris is a technology company that develops a facial video-based life
       insurance underwriting application. The application allows insurance
@@ -15,20 +15,20 @@ import DescRobot from "@/assets/images/about-images.png";
     </p>
   </div>
   <!-- div Description 2 -->
-  <div class="flex w-full h-auto my-5 lg:my-5 xl:my-10">
+  <div class="flex w-full h-auto my-5 lg:my-5 xl:my-10 lg:px-20">
     <div class="flex flex-row sml:flex-col w-full h-auto justify-between gap-8">
       <div
-        class="flex w-full h-full md:w-[70%] xl:w-[55%] justify-center items-center sml:pt-10"
+        class="flex w-full h-full md:w-[70%] lg:w-[50%] xl:w-[40%] justify-center items-center"
       >
         <img
           :src="DescRobot"
           alt="About Banner"
-          class="w-full h-full object-cover"
+          class="w-full h-full sml:w-[200px] object-cover"
         />
       </div>
       <div class="flex w-full items-center pr-2 lg:pr-8 xl:pr-14">
         <p
-          class="text-[18px] lg:text-[24px] xl:text-[24px] text-[#195279] sml:text-center md:text-justify lg:text-justify xl:text-justify"
+          class="text-[14px] lg:text-[17px] xl:text-[21px] text-[#195279] sml:text-center md:text-justify lg:text-justify xl:text-justify"
         >
           Seleris was founded in 2019 by a team of experienced entrepreneurs and
           technologists with a passion for transforming the insurance industry.
@@ -40,9 +40,9 @@ import DescRobot from "@/assets/images/about-images.png";
     </div>
   </div>
   <!-- div Description 1 -->
-  <div class="flex w-full h-auto xl:mt-5 sml:mt-5">
+  <div class="flex w-full h-auto xl:mt-5 sml:mt-5 lg:px-20">
     <p
-      class="text-[18px] lg:text-[24px] xl:text-[24px] text-center text-[#195279]"
+      class="text-[14px] lg:text-[17px] xl:text-[21px] text-center text-[#195279]"
     >
       Seleris's underwriting platform is powered by artificial intelligence (AI)
       and machine learning (ML) algorithms that have been trained on a massive

@@ -20,6 +20,56 @@ watch(
 const isProductOpen = ref(false);
 const isTechnologyOpen = ref(false);
 
+const menuPages = [
+  {
+    title: "Seleris Care",
+    url: "#",
+  },
+  {
+    title: "Seleris Medins",
+    url: "#",
+  },
+  {
+    title: "Seleris Credit Cover",
+    url: "#",
+  },
+  {
+    title: "EHD",
+    url: "#",
+  },
+  {
+    title: "Sentris",
+    url: "#",
+  },
+  {
+    title: "Flexa Asia",
+    url: "#",
+  },
+  {
+    title: "Auto Claim",
+    url: "#",
+  },
+  {
+    title: "Seleris Doctor",
+    url: "#",
+  },
+];
+
+const techPages = [
+  {
+    title: "Seleris Care",
+    url: "#",
+  },
+  {
+    title: "Seleris Medins",
+    url: "#",
+  },
+  {
+    title: "Seleris Credit Cover",
+    url: "#",
+  },
+];
+
 const handleProduct = () => {
   isProductOpen.value = !isProductOpen.value;
   isTechnologyOpen.value = false;
@@ -103,14 +153,17 @@ const handleTechnology = () => {
               <transition name="fade">
                 <div
                   v-if="isProductOpen"
-                  class="mt-3 ml-4 flex flex-col space-y-3 text-base"
+                  class="mt-4 flex flex-wrap items-center gap-y-2 bg-[#F3F4F6] p-4 rounded-2xl"
                 >
-                  <Navlink href="#"><span> Seleris Lifins</span></Navlink>
-                  <Navlink href="#"><span> Seleris Medins</span></Navlink>
-                  <Navlink href="#"><span> Seleris Credit Cover</span></Navlink>
-                  <Navlink href="#"><span> Seleris Care</span></Navlink>
-                  <Navlink href="#"><span> Flexa Asia</span></Navlink>
-                  <Navlink href="#"><span> Auto Claim</span></Navlink>
+                  <div
+                    v-for="(menuPage, index) in menuPages"
+                    :key="index"
+                    class="w-[50%] h-auto flex"
+                  >
+                    <Navlink :href="menuPage.url">
+                      <span class="text-[14px]"> {{ menuPage.title }}</span>
+                    </Navlink>
+                  </div>
                 </div>
               </transition>
             </div>
@@ -148,14 +201,17 @@ const handleTechnology = () => {
               <transition name="fade">
                 <div
                   v-if="isTechnologyOpen"
-                  class="mt-3 ml-4 flex flex-col space-y-3 text-base"
+                  class="mt-3 flex flex-col space-y-3 text-base bg-[#F3F4F6] p-4 rounded-2xl"
                 >
-                  <Navlink href="#"><span> Seleris Lifins</span></Navlink>
-                  <Navlink href="#"><span> Seleris Medins</span></Navlink>
-                  <Navlink href="#"><span> Seleris Credit Cover</span></Navlink>
-                  <Navlink href="#"><span> Seleris Care</span></Navlink>
-                  <Navlink href="#"><span> Flexa Asia</span></Navlink>
-                  <Navlink href="#"><span> Auto Claim</span></Navlink>
+                  <div
+                    v-for="(techPage, index) in techPages"
+                    :key="index"
+                    class="w-[50%] h-auto flex"
+                  >
+                    <Navlink :href="techPage.url">
+                      <span class="text-[14px]"> {{ techPage.title }}</span>
+                    </Navlink>
+                  </div>
                 </div>
               </transition>
             </div>

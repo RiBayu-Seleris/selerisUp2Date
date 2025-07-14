@@ -33,7 +33,7 @@ defineProps({
         </p>
       </div>
     </div>
-    <div class="flex w-full h-[80px] text-justify">
+    <div class="flex w-full h-[80px] text-left">
       <p class="text-[19px] font-[600] text-[#111928]">
         {{ title }}
       </p>

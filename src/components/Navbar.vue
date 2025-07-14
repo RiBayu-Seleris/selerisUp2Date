@@ -1,5 +1,6 @@
 <script setup>
 import Logo from "@/assets/images/logo.png";
+import DarkLogo from "@/assets/images/darklogo.png";
 import MenuNav from "@/components/MenuNav.vue";
 import MenuIcon from "@/components/icons/MenuIcon.vue";
 import ThemeToggle from "@/components/reusable/ThemeToggle.vue";
@@ -17,10 +18,18 @@ const sidebarStore = useSidebarStore();
     <div class="hidden lg:grid grid-cols-12 w-full h-auto">
       <div class="col-span-1 h-auto">
         <div class="flex w-full items-center">
+          <!-- Logo terang (light mode) -->
           <img
             :src="Logo"
             alt="Logo"
-            class="w-[117px] h-[56px] object-contain"
+            class="w-[117px] h-[56px] object-contain dark:hidden"
+          />
+
+          <!-- Logo gelap (dark mode) -->
+          <img
+            :src="DarkLogo"
+            alt="Dark Logo"
+            class="w-[117px] h-[56px] object-contain hidden dark:block"
           />
         </div>
       </div>
@@ -37,6 +46,40 @@ const sidebarStore = useSidebarStore();
       <div class="col-span-1 h-auto">
         <div class="flex w-full h-full items-center justify-center">
           <ThemeToggle />
+        </div>
+      </div>
+    </div>
+
+    <!-- Mobile Navbar -->
+    <div class="w-full h-auto flex lg:hidden flex-row justify-between">
+      <div class="w-[40%] h-auto flex">
+        <!-- Logo terang (light mode) -->
+        <img
+          :src="Logo"
+          alt="Logo"
+          class="w-[117px] h-[56px] sml:w-[80px] sml:h-[56px] object-contain dark:hidden"
+        />
+
+        <!-- Logo gelap (dark mode) -->
+        <img
+          :src="DarkLogo"
+          alt="Dark Logo"
+          class="w-[117px] h-[56px] sml:w-[80px] sml:h-[56px] object-contain hidden dark:block"
+        />
+      </div>
+      <div class="w-[60%] h-auto flex items-center flex-row justify-end">
+        <div class="w-[70%] h-10 flex items-center justify-end">
+          <ThemeToggle />
+        </div>
+        <div class="w-[30%] md:w-[15%] h-auto flex items-center justify-end">
+          <button
+            type="button"
+            id="sidebar-button"
+            class="bg-white p-2 rounded-lg shadow-md text-[#1AB24F]"
+            @click="sidebarStore.open"
+          >
+            <MenuIcon />
+          </button>
         </div>
       </div>
     </div>

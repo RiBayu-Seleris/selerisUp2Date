@@ -14,45 +14,43 @@ import { useSidebarStore } from "@/stores/sidebar";
   <!-- xl:bg-cover lg:bg-hero bg-no-repeat lg:bg-cover -->
   <div class="relative w-full h-auto rounded-b-3xl mt-28">
     <div
-      class="w-full h-auto xl:bg-cover lg:bg-hero2 bg-no-repeat lg:bg-cover lg:pt-16 rounded-3xl"
+      class="w-full h-auto xl:bg-cover lg:bg-hero2 dark:lg:bg-herodark bg-no-repeat lg:bg-cover lg:pt-16 rounded-3xl"
     >
       <div
-        class="flex flex-col w-full h-auto text-center justify-center items-center z-30 bg-[#F3F4F6] lg:bg-transparent rounded-3xl animate__animated animate__fadeIn animate__slower"
+        class="flex flex-col w-full h-auto text-center justify-center items-center z-30 bg-[#F3F4F6] dark:bg-black dark:lg:bg-transparent lg:bg-transparent rounded-3xl animate__animated animate__fadeIn animate__slower"
       >
-        <div class="w-full pb-2 sml:pb-2 sml:pt-4">
-          <p class="sml:text-[21px] xl:text-[26px] text-[#1AB24F] font-[500]">
+        <div class="w-full pb-2 sml:pb-2 sml:pt-4 md:pt-5">
+          <p
+            class="text-[24px] sml:text-[21px] lg:text-[26px] xl:text-[32px] text-[#1AB24F] font-[500]"
+          >
             AI Inovation
           </p>
         </div>
-        <div class="w-full pb-2 sml:pb-2 text-[#195279]">
+        <div class="w-full pb-2 sml:pb-2">
           <p
-            class="sml:text-[21px] sml:tracking-[0.5px] md:text-4xl lg:text-4xl xl:text-[48px] font-[500] sml:leading-[27px] xl:leading-[70px]"
+            class="text-[#195279] sml:text-[21px] sml:tracking-[0.5px] md:text-[32px] lg:text-[36px] xl:text-[48px] font-[500] sml:leading-[27px] xl:leading-[70px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
-            The Future of Life
-          </p>
-          <p
-            class="sml:text-[21px] sml:tracking-[0.5px] md:text-4xl lg:text-4xl xl:text-[48px] font-[500] sml:leading-[27px] xl:leading-[70px]"
-          >
+            The Future of Life <br />
             Insurance Underwriting
           </p>
         </div>
         <!-- Swipe caption -->
         <div class="flex flex-row items-center mb-4 sml:mb-0 lg:mb-5">
           <p
-            class="text-lg sml:text-[12px] font-medium bg-gradient-to-r from-[#B9CAD5] to-[#195279] bg-clip-text text-transparent cursor-pointer"
+            class="text-lg sml:text-[10px] font-medium dark:text-[#686868] bg-gradient-to-r from-[#B9CAD5] to-[#195279] bg-clip-text text-transparent cursor-pointer"
           >
             Swipe to view product
           </p>
-          <div class="ml-1">
+          <div class="ml-1 text-[#13405E] dark:text-[#696969]">
             <svg
-              class="w-5 h-5"
+              class="w-5 h-5 sml:w-3 sml:h-3"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
                 d="M14.43 18.07L20.5 12L14.43 5.92999"
-                stroke="#13405E"
+                stroke="currentColor"
                 stroke-width="1.5"
                 stroke-miterlimit="10"
                 stroke-linecap="round"
@@ -60,7 +58,7 @@ import { useSidebarStore } from "@/stores/sidebar";
               />
               <path
                 d="M3.50002 12L20.33 12"
-                stroke="#13405E"
+                stroke="currentColor"
                 stroke-width="1.5"
                 stroke-miterlimit="10"
                 stroke-linecap="round"
@@ -82,7 +80,7 @@ import { useSidebarStore } from "@/stores/sidebar";
               <img
                 :src="Banner"
                 alt="Logo Besar"
-                class="w-full sml:h-full h-[170px] md:h-full lg:h-full lg:object-contain object-bottom lg:px-10"
+                class="w-full h-[170px] sml:h-[120px] md:h-full lg:h-full lg:object-contain object-bottom sml:mt-10 lg:px-10"
               />
               <SliderDescription />
             </SwiperSlide>
@@ -90,7 +88,7 @@ import { useSidebarStore } from "@/stores/sidebar";
               <img
                 :src="Banner"
                 alt="Logo Besar"
-                class="w-full sml:h-full h-[170px] md:h-full lg:h-full lg:object-contain object-bottom lg:px-10"
+                class="w-full h-[170px] sml:h-[120px] md:h-full lg:h-full lg:object-contain object-bottom sml:mt-10 lg:px-10"
               />
               <SliderDescription />
             </SwiperSlide>
@@ -98,7 +96,7 @@ import { useSidebarStore } from "@/stores/sidebar";
               <img
                 :src="Banner"
                 alt="Logo Besar"
-                class="w-full sml:h-full h-[170px] md:h-full lg:h-full lg:object-contain object-bottom lg:px-10"
+                class="w-full h-[170px] sml:h-[120px] md:h-full lg:h-full lg:object-contain object-bottom sml:mt-10 lg:px-10"
               />
               <SliderDescription />
             </SwiperSlide>

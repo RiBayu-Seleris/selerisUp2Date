@@ -157,7 +157,7 @@ import appstore from "@/assets/images/appstore.png";
         <div class="w-full h-auto">
           <div class="flex flex-col lg:pl-10">
             <p
-              class="text-[#195279] text-[24px] lg:text-2xl xl:text-3xl font-medium pb-2 sml:pb-0"
+              class="text-[#195279] text-[24px] sml:text-[24px] xl:text-[22px] font-medium pb-2 sml:pb-0"
             >
               Get The App
             </p>

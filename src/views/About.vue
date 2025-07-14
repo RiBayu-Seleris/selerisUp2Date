@@ -14,13 +14,13 @@ import { useSidebarStore } from "@/stores/sidebar";
 </script>
 
 <template>
-  <section class="flex flex-col relative w-full h-auto px-8">
+  <section class="flex flex-col relative w-full h-auto lg:px-20">
     <Hero />
   </section>
 
   <!-- data-aos="fade-in"
     data-aos-duration="2000" -->
-  <section class="flex flex-col relative w-full h-auto px-8 mt-16">
+  <section class="flex flex-col relative w-full h-auto px-8 mt-28">
     <DescAbout />
   </section>
 
@@ -43,7 +43,9 @@ import { useSidebarStore } from "@/stores/sidebar";
   <!-- <section class="flex w-full h-auto mt-10 relative justify-center"> -->
   <!-- data-aos="fade-left"
     data-aos-duration="3000" -->
-  <section class="flex relative w-full xl:h-[100vh] lg:h-[80vh] pb-8 lg:pb-0">
+  <section
+    class="flex relative w-full xl:h-[100vh] lg:h-[80vh] pb-8 lg:pb-0 px-8 lg:px-20"
+  >
     <StepDescription />
   </section>
 

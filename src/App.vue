@@ -42,7 +42,7 @@ onUnmounted(() => {
 
 <template>
   <div
-    class="relative w-full h-auto font-poppins overflow-x-hidden mx-auto bg-[#f9fafb] dark:bg-[#17181A] dark:text-[#989898]"
+    class="relative w-full h-auto font-poppins overflow-x-hidden mx-auto bg-[#f9fafb] dark:bg-[#17181A] dark:text-white"
   >
     <!-- Navbar -->
     <!-- pt-5 lg:pt-6 xl:pt-5 -->

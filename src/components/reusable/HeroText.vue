@@ -10,7 +10,6 @@ defineProps({
   },
   description: {
     type: String,
-    required: true,
   },
 });
 </script>
