@@ -3,7 +3,7 @@ import ImgLinear from "@/assets/images/about-linear.png";
 </script>
 
 <template>
-  <div class="w-full h-full sml:px-0 md:px-6 lg:px-16 xl:px-20">
+  <div class="w-full h-full">
     <div class="flex flex-row sml:flex-col-reverse w-full h-auto gap-x-10">
       <div class="flex w-full h-auto">
         <div

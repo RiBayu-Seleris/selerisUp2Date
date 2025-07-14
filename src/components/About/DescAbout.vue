@@ -4,7 +4,7 @@ import DescRobot from "@/assets/images/about-images.png";
 
 <template>
   <!-- Section Description 1 -->
-  <div class="flex w-full h-auto sml:px-10 bg-green-500">
+  <div class="flex w-full h-auto">
     <p
       class="text-[18px] lg:text-[24px] xl:text-[24px] text-center text-[#195279]"
     >
@@ -15,7 +15,7 @@ import DescRobot from "@/assets/images/about-images.png";
     </p>
   </div>
   <!-- div Description 2 -->
-  <div class="flex w-full h-auto my-5 sml:px-10 lg:my-5 xl:my-10">
+  <div class="flex w-full h-auto my-5 lg:my-5 xl:my-10">
     <div class="flex flex-row sml:flex-col w-full h-auto justify-between gap-8">
       <div
         class="flex w-full h-full md:w-[70%] xl:w-[55%] justify-center items-center sml:pt-10"
@@ -40,7 +40,7 @@ import DescRobot from "@/assets/images/about-images.png";
     </div>
   </div>
   <!-- div Description 1 -->
-  <div class="flex w-full h-auto xl:mt-5 sml:mt-5 sml:px-10">
+  <div class="flex w-full h-auto xl:mt-5 sml:mt-5">
     <p
       class="text-[18px] lg:text-[24px] xl:text-[24px] text-center text-[#195279]"
     >

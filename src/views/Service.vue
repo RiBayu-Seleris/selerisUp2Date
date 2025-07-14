@@ -6,19 +6,19 @@ import GetStarted from "@/components/Service/GetStarted.vue";
 </script>
 
 <template>
-  <section class="flex relative w-full h-auto md:px-12 xl:px-14">
+  <section class="flex relative w-full h-auto px-8">
     <HeroSection />
   </section>
 
-  <section class="flex relative w-full h-auto md:px-12 xl:px-14 mt-16">
+  <section class="flex relative w-full h-auto px-8 mt-16">
     <ApiService />
   </section>
 
-  <section class="flex relative w-full h-auto md:px-12 xl:px-14">
+  <section class="flex relative w-full h-auto px-8">
     <Benefit />
   </section>
 
-  <section class="flex relative w-full h-auto md:px-12 xl:px-14">
+  <section class="flex relative w-full h-auto px-8">
     <GetStarted />
   </section>
 </template>

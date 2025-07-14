@@ -2,6 +2,7 @@
 import Logo from "@/assets/images/logo.png";
 import MenuNav from "@/components/MenuNav.vue";
 import MenuIcon from "@/components/icons/MenuIcon.vue";
+import ThemeToggle from "@/components/reusable/ThemeToggle.vue";
 
 import { useSidebarStore } from "@/stores/sidebar";
 
@@ -10,9 +11,10 @@ const sidebarStore = useSidebarStore();
 
 <template>
   <div
-    class="relative flex justify-center w-full h-auto items-center sml:pt-3 md:pt-5 lg:pt-5 xl:pt-5"
+    class="relative flex justify-center w-full h-auto items-center max-w-[1440px] px-8 pt-6"
   >
-    <div class="grid grid-cols-12 w-full h-auto">
+    <!-- Desktop Navbar -->
+    <div class="hidden lg:grid grid-cols-12 w-full h-auto">
       <div class="col-span-1 h-auto">
         <div class="flex w-full items-center">
           <img
@@ -33,7 +35,9 @@ const sidebarStore = useSidebarStore();
         </div>
       </div>
       <div class="col-span-1 h-auto">
-        <div class="flex w-full items-center">c</div>
+        <div class="flex w-full h-full items-center justify-center">
+          <ThemeToggle />
+        </div>
       </div>
     </div>
   </div>

@@ -23,7 +23,7 @@ defineProps({
 </script>
 
 <template>
-  <div class="px-10 my-16">
+  <div class="my-16">
     <div
       :class="`hidden lg:block w-full h-auto lg:h-[480px] xl:h-auto ${bgImage} rounded-b-[3rem]`"
     >

@@ -5,7 +5,7 @@ import CallIcon from "@/components/icons/CallIcon.vue";
 </script>
 
 <template>
-  <div class="px-5 lg:px-10 lg:mt-0">
+  <div class="lg:mt-0">
     <div
       class="hidden lg:block w-full lg:h-[630px] xl:h-auto bg-touch lg:px-6 xl:px-8 xl:pt-24 lg:pt-20 pb-10 rounded-b-3xl rounded-tr-[3rem]"
     >

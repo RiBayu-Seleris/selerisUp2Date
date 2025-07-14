@@ -1,5 +1,20 @@
 <script setup>
 import CardDefault from "@/components/reusable/CardDefault.vue";
+
+const benefitList = [
+  {
+    title: "Speed",
+    body: "Seleris processes images in real-time, with an average recognition time of under 100 milliseconds.",
+  },
+  {
+    title: "Accuracy",
+    body: "Advanced AI ensures over 99% accuracy in detecting and evaluating insurance claims.",
+  },
+  {
+    title: "Cost Efficiency",
+    body: "Automated processing reduces operational costs and improves ROI significantly.",
+  },
+];
 </script>
 
 <template>
@@ -23,11 +38,12 @@ import CardDefault from "@/components/reusable/CardDefault.vue";
     <div
       class="flex flex-row w-full max-h-screen gap-x-10 sml:gap-x-5 md:gap-x-5 mt-16 sml:mt-4 md:mt-10 py-5 overflow-x-auto snap-x snap-mandatory scroll-pl-24 pl-24 pr-24 sml:scroll-pl-10 sml:pl-10 sml:pr-10 hide-scrollbar"
     >
-      <CardDefault />
-      <CardDefault />
-      <CardDefault />
-      <CardDefault />
-      <CardDefault />
+      <CardDefault
+        v-for="(benefit, index) in benefitList"
+        :key="index"
+        :title="benefit.title"
+        :body="benefit.body"
+      />
     </div>
   </div>
 </template>

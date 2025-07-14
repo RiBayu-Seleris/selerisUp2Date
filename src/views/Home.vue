@@ -8,11 +8,12 @@ import Description from "@/components/Description.vue";
 import AiDesc from "@/components/Home/AiDesc.vue";
 import Certificate from "@/components/Certificate.vue";
 import Benefits from "@/components/Home/Benefits.vue";
+import Testimonial from "@/components/Home/Testimonial.vue";
 import Different from "@/components/Home/Different.vue";
 </script>
 
 <template>
-  <section class="relative flex w-full h-auto">
+  <section class="relative flex w-full h-auto px-8">
     <Herosection />
   </section>
 
@@ -43,8 +44,9 @@ import Different from "@/components/Home/Different.vue";
 
   <!-- data-aos="fade-left"
     data-aos-duration="3000" -->
+  <!-- xl:px-8 md:px-12 lg:px-12 -->
   <section
-    class="flex flex-col relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto xl:px-8 md:px-12 lg:px-12 lg:mt-20 2lg:mt-40 xl:mt-0"
+    class="flex flex-col relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto lg:mt-20 2lg:mt-40 xl:mt-0 px-8"
   >
     <Description />
   </section>
@@ -60,14 +62,21 @@ import Different from "@/components/Home/Different.vue";
   <!-- data-aos="fade-down"
     data-aos-easing="linear"
     data-aos-duration="1000" -->
+  <!-- px-8 2lg:px-28 xl:px-28 -->
   <section
-    class="flex flex-col relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 mt-10 lg:mt-10 2lg:px-28 xl:mt-10 xl:px-28"
+    class="flex flex-col relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto mt-10 lg:mt-10 xl:mt-10 px-8"
   >
     <AiDesc />
   </section>
 
   <section
-    class="flex flex-col relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto"
+    class="flex flex-col relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto mt-10"
+  >
+    <Testimonial />
+  </section>
+
+  <section
+    class="flex flex-col relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8"
   >
     <Different />
   </section>

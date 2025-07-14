@@ -26,9 +26,7 @@ const ApiCards = [
 </script>
 
 <template>
-  <div
-    class="flex w-full h-auto lg:h-[520px] xl:h-[100vh] bg-api rounded-b-[3rem] bg-cover"
-  >
+  <div class="flex w-full h-auto pb-20 bg-api rounded-b-[3rem] bg-cover">
     <div class="flex flex-col w-full h-auto">
       <div
         class="flex flex-col w-full h-auto lg:mt-10 xl:mt-14 xl:pl-16 lg:pl-10"
