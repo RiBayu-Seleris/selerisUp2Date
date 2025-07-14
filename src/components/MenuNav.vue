@@ -143,26 +143,32 @@ const isHoveringTechnology = ref(false);
         >
           <span>Seleris Chromatic Imaging</span>
         </Navlink>
-        <Navlink href="#" class="flex justify-center items-center w-[300px]">
+        <Navlink
+          href="/seleris-deep-vitals"
+          class="flex justify-center items-center w-[300px]"
+        >
           <span>Seleris DeepVitals</span>
         </Navlink>
-        <Navlink href="#" class="flex justify-center items-center w-[300px]">
+        <Navlink
+          href="/seleris-deep-risk"
+          class="flex justify-center items-center w-[300px]"
+        >
           <span>Seleris DeepRisk</span>
         </Navlink>
       </div>
     </div>
 
     <!-- Tambahan menu lainnya -->
-    <li class="">
+    <li>
       <Navlink class="text-[11pt]" href="/teams"> Our Team </Navlink>
     </li>
-    <li class="">
+    <li>
       <Navlink class="text-[11pt]" href="/blogs"> Blogs </Navlink>
     </li>
-    <li class="">
+    <li>
       <Navlink class="text-[11pt]" href="/services"> Services </Navlink>
     </li>
-    <li class="">
+    <li>
       <Navlink class="text-[11pt]" href="/contact"> Contact </Navlink>
     </li>
   </ul>

@@ -44,7 +44,7 @@ const cardContents = [
 
 <template>
   <section
-    class="flex relative w-full h-auto px-8 bg-[radial-gradient(ellipse_at_top,_#3CFF7A_-70%,_#FAFAFA_60%)] lg:pt-28 xl:pt-0"
+    class="flex relative w-full h-auto px-8 bg-[radial-gradient(ellipse_at_top,_#F01149_-70%,_#FAFAFA_60%)] lg:pt-28 xl:pt-0"
   >
     <div class="flex w-full h-auto xl:pt-[160px] md:pt-[100px] sml:pt-[90px]">
       <HeroText title="Technology" subtitle="Seleris Deep Risk" />
