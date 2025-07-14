@@ -4,36 +4,36 @@ import TechCard from "@/components/reusable/TechCard.vue";
 
 const cardContents = [
   {
-    bgCard: "bg-[#2B7C3F]",
+    bgCard: "bg-[#1738B8]",
     title: "Health Risk",
-    titleColor: "text-[#2B7C3F]",
+    titleColor: "text-[#1738B8]",
     body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
     Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
     Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
     Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.`,
   },
   {
-    bgCard: "bg-[#2B7C3F]",
+    bgCard: "bg-[#1738B8]",
     title: "Health Risk",
-    titleColor: "text-[#2B7C3F]",
+    titleColor: "text-[#1738B8]",
     body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
     Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
     Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
     Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.`,
   },
   {
-    bgCard: "bg-[#2B7C3F]",
+    bgCard: "bg-[#1738B8]",
     title: "Health Risk",
-    titleColor: "text-[#2B7C3F]",
+    titleColor: "text-[#1738B8]",
     body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
     Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
     Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
     Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.`,
   },
   {
-    bgCard: "bg-[#2B7C3F]",
+    bgCard: "bg-[#1738B8]",
     title: "Health Risk",
-    titleColor: "text-[#2B7C3F]",
+    titleColor: "text-[#1738B8]",
     body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
     Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
     Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
@@ -44,10 +44,10 @@ const cardContents = [
 
 <template>
   <section
-    class="flex relative w-full h-auto px-8 bg-[radial-gradient(ellipse_at_top,_#3CFF7A_-70%,_#FAFAFA_60%)] lg:pt-28 xl:pt-0"
+    class="flex relative w-full h-auto px-8 bg-[radial-gradient(ellipse_at_top,_#466CFF_-70%,_#FAFAFA_60%)] lg:pt-28 xl:pt-0"
   >
     <div class="flex w-full h-auto xl:pt-[160px] md:pt-[100px] sml:pt-[90px]">
-      <HeroText title="Technology" subtitle="Seleris Chromatic Imaging" />
+      <HeroText title="Technology" subtitle="Seleris Deep Vitals" />
     </div>
   </section>
 
@@ -56,7 +56,7 @@ const cardContents = [
   >
     <div class="w-full h-auto flex justify-center mt-10 lg:mt-20">
       <img
-        src="@/assets/images/technology/SCI-Logo.svg"
+        src="@/assets/images/technology/SDV-Logo.svg"
         alt="Logo"
         class="w-[600px] sml:w-[150px] h-full object-contain"
       />
@@ -70,7 +70,7 @@ const cardContents = [
       class="w-full h-auto flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] rounded-3xl"
     >
       <img
-        src="@/assets/images/technology/SCI-Images.png"
+        src="@/assets/images/technology/SDV-Images.png"
         alt="Logo"
         class="w-full h-full object-contain"
       />

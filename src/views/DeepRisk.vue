@@ -47,7 +47,7 @@ const cardContents = [
     class="flex relative w-full h-auto px-8 bg-[radial-gradient(ellipse_at_top,_#3CFF7A_-70%,_#FAFAFA_60%)] lg:pt-28 xl:pt-0"
   >
     <div class="flex w-full h-auto xl:pt-[160px] md:pt-[100px] sml:pt-[90px]">
-      <HeroText title="Technology" subtitle="Seleris Chromatic Imaging" />
+      <HeroText title="Technology" subtitle="Seleris Deep Risk" />
     </div>
   </section>
 
@@ -56,7 +56,7 @@ const cardContents = [
   >
     <div class="w-full h-auto flex justify-center mt-10 lg:mt-20">
       <img
-        src="@/assets/images/technology/SCI-Logo.svg"
+        src="@/assets/images/technology/SDR-Logo.svg"
         alt="Logo"
         class="w-[600px] sml:w-[150px] h-full object-contain"
       />
@@ -70,7 +70,7 @@ const cardContents = [
       class="w-full h-auto flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] rounded-3xl"
     >
       <img
-        src="@/assets/images/technology/SCI-Images.png"
+        src="@/assets/images/technology/SDR-Images.png"
         alt="Logo"
         class="w-full h-full object-contain"
       />

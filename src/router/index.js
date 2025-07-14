@@ -38,6 +38,16 @@ const routes = [
     name: "Seleris-Chromatic-Imaging",
     component: () => import("@/views/ChromaticImaging.vue"),
   },
+  {
+    path: "/seleris-deep-vitals",
+    name: "Seleris-Deep-Vitals",
+    component: () => import("@/views/DeepVitals.vue"),
+  },
+  {
+    path: "/seleris-deep-risk",
+    name: "Seleris-Deep-Risk",
+    component: () => import("@/views/DeepRisk.vue"),
+  },
 ];
 
 const router = createRouter({
