@@ -4,7 +4,7 @@ import TechCard from "@/components/reusable/TechCard.vue";
 
 const cardContents = [
   {
-    bgCard: "bg-[#2B7C3F]",
+    bgCard: "bg-[#81021E]",
     title: "Health Risk",
     titleColor: "text-[#2B7C3F]",
     body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
@@ -13,7 +13,7 @@ const cardContents = [
     Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.`,
   },
   {
-    bgCard: "bg-[#2B7C3F]",
+    bgCard: "bg-[#81021E]",
     title: "Health Risk",
     titleColor: "text-[#2B7C3F]",
     body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
@@ -22,7 +22,7 @@ const cardContents = [
     Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.`,
   },
   {
-    bgCard: "bg-[#2B7C3F]",
+    bgCard: "bg-[#81021E]",
     title: "Health Risk",
     titleColor: "text-[#2B7C3F]",
     body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
@@ -31,7 +31,7 @@ const cardContents = [
     Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.`,
   },
   {
-    bgCard: "bg-[#2B7C3F]",
+    bgCard: "bg-[#81021E]",
     title: "Health Risk",
     titleColor: "text-[#2B7C3F]",
     body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 

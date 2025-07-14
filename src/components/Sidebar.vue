@@ -62,11 +62,11 @@ const techPages = [
   },
   {
     title: "Seleris Deep Vitals",
-    url: "#",
+    url: "/seleris-deep-vitals",
   },
   {
     title: "Seleris Deep Risk",
-    url: "#",
+    url: "/seleris-deep-risk",
   },
 ];
 
