@@ -1,5 +1,6 @@
 <script setup>
 import Logo from "@/assets/images/logo.png";
+import DarkLogo from "@/assets/images/darklogo.png";
 
 // Sosmed Icon
 import Instagram from "@/components/icons/Instagram.vue";
@@ -14,7 +15,7 @@ import appstore from "@/assets/images/appstore.png";
 <template>
   <div class="relative w-full h-auto">
     <div class="flex flex-col lg:flex-rows w-full h-auto">
-      <div class="lg:grid lg:grid-cols-5 w-full h-auto lg:mb-14 mb-0">
+      <div class="lg:flex lg:flex-row w-full h-auto lg:mb-14 mb-0">
         <div class="flex w-full h-auto">
           <div class="flex flex-col">
             <div class="flex flex-row lg:flex-col w-full h-auto">
@@ -24,14 +25,19 @@ import appstore from "@/assets/images/appstore.png";
                 <img
                   :src="Logo"
                   alt="Logo"
-                  class="w-full sml:h-[60px] md:h-[80px] xl:h-[100px] object-contain object-left"
+                  class="w-full sml:h-[60px] md:h-[80px] xl:h-[100px] object-contain object-left dark:hidden"
+                />
+                <img
+                  :src="DarkLogo"
+                  alt="Logo"
+                  class="w-full sml:h-[60px] md:h-[80px] xl:h-[100px] object-contain object-left hidden dark:block"
                 />
               </div>
               <div
                 class="flex w-full h-auto lg:mt-4 justify-center items-center"
               >
                 <p
-                  class="text-[#195279] font-normal sml:text-base md:text-[1.7rem] lg:text-lg xl:text-[18px]"
+                  class="text-[#195279] dark:text-[#FAFAFA] font-normal sml:text-base md:text-[1.7rem] lg:text-lg xl:text-[18px]"
                 >
                   PT Seleris Meditekno Internasional
                 </p>
@@ -41,31 +47,39 @@ import appstore from "@/assets/images/appstore.png";
               <p
                 class="text-[#B8B8B8] text-base xl:text-[18px] text-justify lg:text-left xl:text-left"
               >
-                Transform the Life and Medical Insurance Underwriting industry
-                by making it more efficient, accurate, and accessible for
-                everyone
+                Transform the Life and Medical industry by making it more
+                efficient, accurate, and accessible for everyone
               </p>
             </div>
             <div class="w-full h-auto mt-4">
               <div class="w-full h-auto flex flex-row justify-start gap-x-3">
-                <div class="w-auto h-[30px] lg:h-[30px]">
+                <div
+                  class="w-auto h-[30px] lg:h-[30px] text-[#195279] dark:text-[#FAFAFA]"
+                >
                   <Instagram />
                 </div>
-                <div class="w-auto h-[30px] lg:h-[30px]">
+                <div
+                  class="w-auto h-[30px] lg:h-[30px] text-[#195279] dark:text-[#FAFAFA]"
+                >
                   <Linkedin />
                 </div>
-                <div class="w-auto h-[30px] lg:h-[30px]">
+                <div
+                  class="w-auto h-[30px] lg:h-[30px] text-[#195279] dark:text-[#FAFAFA]"
+                >
                   <Twitter />
                 </div>
               </div>
             </div>
           </div>
         </div>
-        <div class="flex lg:hidden w-full h-1 bg-[#F3F4F6] rounded-full my-3" />
+        <div
+          class="flex lg:hidden w-full h-[1px] bg-[#F3F4F6] rounded-full my-3"
+        />
         <div class="w-full h-auto">
-          <div class="flex flex-col lg:pl-6 xl:pl-12">
+          <!-- lg:pl-6 xl:pl-12 -->
+          <div class="flex flex-col w-full h-auto lg:pl-8 xl:px-8">
             <p
-              class="text-[#195279] text-[24px] sml:text-[24px] xl:text-[22px] font-medium pb-2"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] xl:text-[22px] font-medium pb-2"
             >
               Products
             </p>
@@ -91,11 +105,13 @@ import appstore from "@/assets/images/appstore.png";
             </div>
           </div>
         </div>
-        <div class="flex lg:hidden w-full h-1 bg-[#F3F4F6] rounded-full my-3" />
-        <div class="w-full h-auto">
-          <div class="flex flex-col lg:pl-6 xl:pl-8">
+        <div
+          class="flex lg:hidden w-full h-[1px] bg-[#F3F4F6] rounded-full my-3"
+        />
+        <div class="flex relative w-full h-auto">
+          <div class="flex flex-col w-full h-auto lg:pl-8 xl:pl-5">
             <p
-              class="text-[#195279] text-[24px] sml:text-[24px] xl:text-[22px] font-medium pb-2"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] xl:text-[22px] font-medium pb-2"
             >
               Company
             </p>
@@ -119,45 +135,83 @@ import appstore from "@/assets/images/appstore.png";
             </p>
           </div>
         </div>
-        <div class="flex lg:hidden w-full h-1 bg-[#F3F4F6] rounded-full my-3" />
-        <div class="w-full h-auto">
+        <div
+          class="flex lg:hidden w-full h-[1px] bg-[#F3F4F6] rounded-full my-3"
+        />
+        <div class="w-full h-auto xl:w-[170%]">
           <div class="flex flex-col">
             <p
-              class="text-[#195279] text-[24px] sml:text-[24px] xl:text-[22px] font-medium pb-2"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] xl:text-[22px] font-medium pb-2"
             >
               Stay Connects
             </p>
-            <div class="mb-3 mt-2 lg:mt-2">
-              <p class="text-[#195279] text-xl">Address</p>
+
+            <div class="mb-3">
               <p
-                class="text-[#2AB857] text-sm lg:text-base xl:text-[18px] lg:pt-1.5"
+                class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[18px] xl:text-[22px] sml:pb-2"
               >
-                16 Raffles Quay #35 - 01B Hong Leong Building SINGAPORE (048581)
+                Address
               </p>
+              <div class="w-full h-auto flex flex-col xl:flex-row">
+                <div class="w-full h-auto sml:pb-2">
+                  <p
+                    class="text-[#343F52] dark:text-[#FAFAFA] font-[500] sml:text-[14px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 sml:pb-1"
+                  >
+                    Seleris Asia Pacific Technology Pte.Ltd
+                  </p>
+                  <p
+                    class="text-[#2AB857] sml:text-[12px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 xl:pr-14"
+                  >
+                    16 Raffles Quay #35 - 01B Hong Leong Building SINGAPORE
+                    (048581)
+                  </p>
+                </div>
+                <div class="w-full h-auto">
+                  <p
+                    class="text-[#343F52] dark:text-[#FAFAFA] font-[500] sml:text-[14px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 sml:pb-1"
+                  >
+                    PT Seleris Meditekno Internasional
+                  </p>
+                  <p
+                    class="text-[#2AB857] sml:text-[12px] lg:text-[14px] xl:text-[16px] lg:pt-1.5"
+                  >
+                    Graha SMI, Jl. Raya Ragunan No. 29 A, Jakarta Selatan,
+                    Indonesia 12540
+                  </p>
+                </div>
+              </div>
             </div>
-            <div class="mb-3 lg:mt-2">
-              <p class="text-[#195279] text-xl">Phone</p>
-              <p
-                class="text-[#2AB857] text-sm lg:text-base xl:text-[18px] lg:pt-1.5"
-              >
-                +62 (21) 526 52 35
-              </p>
-            </div>
-            <div class="mb-3 lg:mt-2">
-              <p class="text-[#195279] text-xl">E-Mail</p>
-              <p
-                class="text-[#2AB857] text-sm lg:text-base xl:text-[18px] lg:pt-1.5"
-              >
-                info@seleris.id
-              </p>
+            <div class="flex flex-col xl:flex-row w-full h-auto">
+              <div class="flex flex-col w-full h-auto mb-3 lg:mt-2">
+                <p class="text-[#195279] dark:text-[#FAFAFA] text-[20px]">
+                  Phone
+                </p>
+                <p
+                  class="text-[#2AB857] text-sm lg:text-base xl:text-[18px] lg:pt-1.5"
+                >
+                  +62 (21) 526 52 35
+                </p>
+              </div>
+              <div class="flex flex-col w-full h-auto mb-3 lg:mt-2">
+                <p class="text-[#195279] dark:text-[#FAFAFA] text-[20px]">
+                  E-Mail
+                </p>
+                <p
+                  class="text-[#2AB857] text-sm lg:text-base xl:text-[18px] lg:pt-1.5"
+                >
+                  info@seleris.id
+                </p>
+              </div>
             </div>
           </div>
         </div>
-        <div class="flex lg:hidden w-full h-1 bg-[#F3F4F6] rounded-full my-3" />
+        <div
+          class="flex lg:hidden w-full h-[1px] bg-[#F3F4F6] rounded-full my-3"
+        />
         <div class="w-full h-auto">
           <div class="flex flex-col lg:pl-10">
             <p
-              class="text-[#195279] text-[24px] sml:text-[24px] xl:text-[22px] font-medium pb-2 sml:pb-0"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] xl:text-[22px] font-medium pb-2 sml:pb-0"
             >
               Get The App
             </p>
@@ -185,7 +239,11 @@ import appstore from "@/assets/images/appstore.png";
         </div>
       </div>
       <div class="flex w-full justify-center text-center items-center pb-8">
-        <p>© 2023 Seleris Asia Pacific Technology. All rights reserved</p>
+        <p
+          class="text-[14px] lg:text-[16px] xl:text-[17px] dark:text-[#FAFAFA]/40 font-[400]"
+        >
+          © 2023 Seleris Asia Pacific Technology. All rights reserved
+        </p>
       </div>
     </div>
   </div>

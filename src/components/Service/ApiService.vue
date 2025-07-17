@@ -4,23 +4,23 @@ const ApiCards = [
   {
     icon: Icon,
     title: "Risk Assessment",
-    description: `The API service allows 
-	insurance companies to assess the risk of potential customers 
-	based on a short facial video recording.`,
+    description: `The API service allows companies to assess the risk 
+    of potential customers 
+    based on a short facial video recording.`,
   },
   {
     icon: Icon,
     title: "Risk Assessment",
-    description: `The API service allows 
-	insurance companies to assess the risk of potential customers 
-	based on a short facial video recording.`,
+    description: `The API service allows companies to assess the risk 
+    of potential customers 
+    based on a short facial video recording.`,
   },
   {
     icon: Icon,
     title: "Risk Assessment",
-    description: `The API service allows 
-	insurance companies to assess the risk of potential customers 
-	based on a short facial video recording.`,
+    description: `The API service allows companies to assess the risk 
+    of potential customers 
+    based on a short facial video recording.`,
   },
 ];
 </script>

@@ -12,8 +12,8 @@ const certificateData = [
     titleAfter: "ISO Certification",
     certNumber: "2403150020501",
     description: `PT. Seleris Meditekno Internasional has been awarded ISO/IEC 27001:2022 certification with the number 2403150020501, which demonstrates our commitment to healthcare quality and service excellence. This certification signifies that we meet international standards in quality management, and we continuously strive to improve our service quality.`,
-    divImageBefore: "bg-leftCertBefore",
-    divImageAfter: "bg-leftCertAfter",
+    divImageBefore: "bg-leftCertBefore dark:bg-leftCertDarkBefore",
+    divImageAfter: "bg-leftCertAfter dark:bg-leftCertDarkAfter",
     textPosition: "text-start",
   },
   {
@@ -22,8 +22,8 @@ const certificateData = [
     titleAfter: "ISO Certification",
     certNumber: "2204210020100",
     description: `We received the Best Innovation AI Solution for Insurance, proving our dedication to cutting-edge AI implementation in health & insurance. This accolade reflects our drive to revolutionize healthcare access through smart technology.`,
-    divImageBefore: "bg-centerCertBefore",
-    divImageAfter: "bg-centerCertAfter",
+    divImageBefore: "bg-centerCertBefore dark:bg-centerCertDarkBefore",
+    divImageAfter: "bg-centerCertAfter dark:bg-centerCertDarkAfter",
     textPosition: "text-center",
   },
   {
@@ -32,8 +32,8 @@ const certificateData = [
     titleAfter: "ISO Certification",
     certNumber: "2403150020501",
     description: `PT. Seleris Meditekno Internasional has been awarded ISO/IEC 27001:2022 certification with the number 2403150020501, which demonstrates our commitment to healthcare quality and service excellence. This certification signifies that we meet international standards in quality management, and we continuously strive to improve our service quality.`,
-    divImageBefore: "bg-rightCertBefore",
-    divImageAfter: "bg-rightCertAfter",
+    divImageBefore: "bg-rightCertBefore dark:bg-rightCertDarkBefore",
+    divImageAfter: "bg-rightCertAfter dark:bg-rightCertDarkAfter",
     textPosition: "text-end",
   },
 ];
@@ -45,12 +45,12 @@ const certificateData = [
       <!-- Heading -->
       <div class="flex flex-col w-full items-center text-center">
         <p
-          class="text-3xl md:text-4xl lg:text-5xl xl:text-[48px] font-medium text-[#195279]"
+          class="text-3xl md:text-4xl lg:text-5xl xl:text-[48px] font-medium text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
         >
           Seleris Certification
         </p>
         <p
-          class="text-lg md:text-xl lg:text-2xl xl:text-[22px] font-normal tracking-wide text-[#1DC457] mt-2 lg:mt-4"
+          class="text-lg md:text-xl lg:text-2xl xl:text-[22px] font-normal tracking-wide text-[#1DC457] dark:text-[#6A6A6A] mt-2 lg:mt-4"
         >
           Seleris Meditekno Internasional
         </p>
@@ -58,7 +58,7 @@ const certificateData = [
 
       <!-- Desktop Certificate Cards -->
       <div
-        class="hidden lg:flex flex-row w-full max-w-[1440px] mx-auto gap-x-6 mt-8 mb-12 justify-center"
+        class="hidden lg:flex flex-row w-full max-w-[1440px] mx-auto gap-x-16 mt-8 mb-12 justify-center"
       >
         <CertCard
           v-for="(cert, index) in certificateData"

@@ -9,12 +9,12 @@ const testimonials = [
   {
     name: "Dazzle Healer",
     position: "Head of Technology at CHUUB",
-    text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. Eu dolor aliquet risus gravida nunc at feugiat consequat purus. Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.`,
+    text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ullamcorper mattis lorem non.`,
   },
   {
     name: "Jane Smith",
     position: "Design Lead at KREATIF",
-    text: `Aliquam erat volutpat. Suspendisse potenti. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae.`,
+    text: `Aliquam erat volutpat. Suspendisse potenti. Vestibulum ante ipsum primis in faucibus orci.`,
   },
   {
     name: "John Doe",
@@ -26,19 +26,23 @@ const testimonials = [
 
 <template>
   <div class="flex flex-col">
-    <div class="relative flex flex-col w-full h-auto px-8 gap-y-3">
+    <div class="relative flex flex-col w-full h-auto px-8 lg:px-16 gap-y-3">
       <div class="flex w-full h-auto">
-        <p class="text-[#2AB857] font-[500] text-[21px] lg:text-[21px]">
+        <p
+          class="text-[#2AB857] font-[500] text-[21px] sml:text-[19px] lg:text-[21px]"
+        >
           Client Feedback
         </p>
       </div>
       <div class="flex w-full h-auto">
-        <p class="text-[#195279] font-[500] text-[24px] lg:text-[34px]">
+        <p
+          class="text-[#195279] font-[500] text-[24px] sml:text-[20px] lg:text-[34px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+        >
           What they say after using our product
         </p>
       </div>
     </div>
-    <div class="relative w-full h-auto group mt-4">
+    <div class="relative w-full h-auto group mt-6">
       <Swiper
         :modules="modules"
         :navigation="false"
@@ -50,7 +54,7 @@ const testimonials = [
         <SwiperSlide
           v-for="(item, index) in testimonials"
           :key="index"
-          class="px-8"
+          class="px-8 lg:px-16"
         >
           <TestimonialCard
             :name="item.name"
@@ -61,7 +65,7 @@ const testimonials = [
       </Swiper>
 
       <!-- Custom pagination -->
-      <div class="custom-pagination mt-8 flex justify-center gap-2"></div>
+      <div class="custom-pagination mt-4 flex justify-center gap-2"></div>
     </div>
   </div>
 </template>

@@ -2,6 +2,7 @@
 import { ref, onMounted, onUnmounted, computed } from "vue";
 
 import Logo from "@/assets/images/seleris-logo.svg";
+import DarkLogo from "@/assets/images/seleris-logo-dark.svg";
 
 const descriptions = `Seleris is a technology company that develops a facial video-based life insurance underwriting application. The application allows insurance companies to assess the risk...`;
 const windowWidth = ref(window.innerWidth);
@@ -40,11 +41,11 @@ const description = computed(() => {
   >
     <!-- Bubble wrapper -->
     <div
-      class="relative w-[240px] h-[150px] sml:w-[200px] sml:h-[130px] md:w-[340px] md:h-[200px] lg:w-[440px] lg:h-[270px] sml:mr-10 md:mr-5 lg:mr-44"
+      class="relative w-[240px] h-[150px] sml:w-[200px] sml:h-[110px] md:w-[340px] md:h-[200px] lg:w-[440px] lg:h-[270px] sml:mr-10 md:mr-5 lg:mr-44"
     >
       <!-- SVG as background -->
       <svg
-        class="absolute inset-0 w-full h-full drop-shadow-md z-0 text-white"
+        class="absolute inset-0 w-full h-full drop-shadow-md z-0 text-white dark:text-[#34343466]"
         viewBox="0 0 409 228"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -60,20 +61,25 @@ const description = computed(() => {
 
       <!-- Konten di dalam bubble -->
       <div
-        class="relative z-10 flex flex-col px-5 lg:px-8 pt-5 lg:py-6 w-full h-full"
+        class="relative z-10 flex flex-col px-5 lg:px-8 pt-5 sml:pt-3 md:pt-5 lg:py-6 w-full h-full"
       >
         <img
           :src="Logo"
           alt="Logo"
-          class="w-[70px] sml:w-[50px] md:w-[90px] lg:w-[128px] h-auto object-contain sml:mb-3 mb-4"
+          class="w-[70px] sml:w-[50px] md:w-[90px] lg:w-[100px] h-auto object-contain mb-3 dark:hidden"
+        />
+        <img
+          :src="DarkLogo"
+          alt="Logo"
+          class="w-[70px] sml:w-[50px] md:w-[90px] lg:w-[100px] h-auto object-contain mb-3 hidden dark:block"
         />
         <div
-          class="text-start sml:text-[12px] md:text-[1rem] lg:text-lg leading-snug text-black"
+          class="text-start sml:text-[12px] md:text-[16px] lg:text-[19px] leading-snug text-black dark:text-[#FAFAFA]"
         >
           {{ description }}
         </div>
         <div
-          class="flex flex-row text-[#2AB857] mt-2 lg:mt-4 font-medium items-center"
+          class="flex flex-row text-[#2AB857] dark:text-[#FAFAFA] mt-2 lg:mt-4 font-medium items-center"
         >
           <span class="sml:text-[11px] md:text-base lg:text-lg"
             >View product</span
@@ -86,7 +92,7 @@ const description = computed(() => {
           >
             <path
               d="M14.43 18.07L20.5 12L14.43 5.92999"
-              stroke="#2AB857"
+              stroke="currentColor"
               stroke-width="1.5"
               stroke-miterlimit="10"
               stroke-linecap="round"
@@ -94,7 +100,7 @@ const description = computed(() => {
             />
             <path
               d="M3.50002 12L20.33 12"
-              stroke="#2AB857"
+              stroke="currentColor"
               stroke-width="1.5"
               stroke-miterlimit="10"
               stroke-linecap="round"

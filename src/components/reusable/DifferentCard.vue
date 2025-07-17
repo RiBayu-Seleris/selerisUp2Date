@@ -36,45 +36,37 @@ defineProps({
       </div>
       <div class="flex flex-col w-full h-auto lg:pl-4 xl:pl-4">
         <div class="flex w-full h-auto text-[#195279]">
-          <p class="lg:text-xl xl:text-[20px] pt-3 pb-2">{{ title }}</p>
+          <p class="lg:text-[16px] xl:text-[20px] pt-3 pb-2">{{ title }}</p>
         </div>
         <div :class="`flex w-full h-auto text-[#4F90BC] ${subtitleClass}`">
-          <p class="lg:text-base xl:text-[18px] pr-3">{{ subtitle }}</p>
+          <p class="text-[18px] lg:text-[16px]">{{ subtitle }}</p>
         </div>
       </div>
     </div>
   </div>
 
   <!-- Mobile & Tabs -->
-  <div class="flex lg:hidden w-full h-auto md:justify-center md:items-center">
-    <div
-      class="flex flex-col sml:flex-row w-full h-full md:justify-center md:items-center"
-    >
-      <div
-        class="flex w-full sml:w-[25%] h-full md:justify-center md:items-center md:pt-4"
-      >
+  <div class="flex lg:hidden w-full h-auto md:justify-center">
+    <div class="flex flex-col sml:flex-row w-full h-full md:justify-center">
+      <div class="flex w-full sml:w-[20%] h-full md:justify-center">
         <img
           :src="image"
           alt="Icon"
           class="w-[20%] sml:w-[50px] h-full object-contain bg-white rounded-full shadow-lg p-2"
         />
       </div>
-      <div
-        class="flex flex-col w-full h-auto md:justify-center md:items-center sml:pl-4"
-      >
-        <div
-          class="flex w-full h-auto text-[#195279] md:justify-center md:items-center md:content-center"
-        >
-          <p class="sml:text-xl md:text-2xl pb-1 md:pt-2 md:text-center">
+      <div class="flex flex-col w-full h-auto md:justify-center sml:pl-4">
+        <div class="flex w-full h-auto text-[#195279]">
+          <p
+            class="sml:text-[17px] md:text-[20px] pb-1 md:text-center text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+          >
             {{ title }}
           </p>
         </div>
         <div
-          class="flex w-full h-auto md:h-[75px] text-[#4F90BC] md:justify-center md:items-start"
+          :class="`flex w-full h-auto md:h-[75px] text-[#4F90BC] md:items-start ${subtitleClass}`"
         >
-          <p
-            class="sml:text-base md:text-xl md:text-center md:px-2 lg:text-base"
-          >
+          <p class="sml:text-[14px] md:text-[16px] dark:text-[#6F6F6F]">
             {{ subtitle }}
           </p>
         </div>

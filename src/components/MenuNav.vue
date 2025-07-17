@@ -8,6 +8,33 @@ const { isScrolled } = useScrollStore();
 const route = useRoute();
 const isHoveringProduct = ref(false);
 const isHoveringTechnology = ref(false);
+
+const products = [
+  {
+    url: "/",
+    name: "Seleris Lifins",
+  },
+  {
+    url: "/",
+    name: "Seleris Medins",
+  },
+  {
+    url: "/",
+    name: "Seleris Credit Cover",
+  },
+  {
+    url: "/",
+    name: "Seleris Care",
+  },
+  {
+    url: "/",
+    name: "Flexa Asia",
+  },
+  {
+    url: "/",
+    name: "Auto Claim",
+  },
+];
 </script>
 
 <template>
@@ -16,13 +43,13 @@ const isHoveringTechnology = ref(false);
       'flex items-center text-md font-[400] text-[#374151] ',
       isScrolled
         ? 'lg:gap-[20px] xl:gap-[50px] dark:text-white '
-        : 'lg:gap-[25px] 2lg:gap-[100px] xl:gap-[63px] 2xl:gap-[70px] justify-center dark:text-white',
+        : 'lg:gap-[25px] 2lg:gap-[45px] xl:gap-[63px] 2xl:gap-[70px] justify-center dark:text-white',
     ]"
   >
-    <li class="">
+    <li>
       <Navlink class="text-[11pt]" href="/"> Home </Navlink>
     </li>
-    <li class="">
+    <li>
       <Navlink class="text-[11pt]" href="/about"> About </Navlink>
     </li>
 
@@ -45,68 +72,25 @@ const isHoveringTechnology = ref(false);
       @mouseleave="isHoveringProduct = false"
       :class="[
         'absolute z-50 w-auto h-auto xl:left-[350px] lg:left-[200px] top-[70px]',
-        isScrolled ? 'mt-2 pt-5' : 'mt-0 lg:-mt-2 pt-5 ',
+        isScrolled ? 'mt-2 lg:-mt-6 xl:-mt-5 pt-10' : 'mt-0 lg:-mt-2 pt-5 ',
       ]"
     >
       <div
-        class="w-full h-auto flex flex-col bg-white p-8 rounded-2xl shadow-lg"
+        class="w-full h-auto flex flex-col bg-white p-8 rounded-2xl shadow-lg dark:bg-green-300 dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-sm dark:bg-opacity-10 dark:border-[0.2px] dark:shadow-none"
       >
         <div class="w-full h-auto flex mb-6">
-          <p class="text-[#4B5563] font-[500] lg:text-[18px]">
+          <p class="text-[#4B5563] dark:text-white font-[500] lg:text-[18px]">
             Seleris Products
           </p>
         </div>
         <div class="grid grid-cols-3 w-auto gap-5">
-          <Navlink href="#" class="flex justify-center items-center w-[170px]">
-            <span class="text-[#9CA3AF]"> Seleris Lifins</span>
-          </Navlink>
-          <Navlink href="#" class="flex justify-center items-center w-[170px]">
-            <span class="text-[#9CA3AF]"> Seleris Medins</span>
-          </Navlink>
-          <Navlink href="#" class="flex justify-center items-center w-[170px]">
-            <span class="text-[#9CA3AF]"> Seleris Credit Cover</span>
-          </Navlink>
-          <Navlink href="#" class="flex justify-center items-center w-[170px]">
-            <span class="text-[#9CA3AF]"> Seleris Care</span>
-          </Navlink>
-          <Navlink href="#" class="flex justify-center items-center w-[170px]">
-            <span class="text-[#9CA3AF]"> Flexa Asia</span>
-          </Navlink>
-          <Navlink href="#" class="flex justify-center items-center w-[170px]">
-            <span class="text-[#9CA3AF]"> Auto Claim</span>
-          </Navlink>
-          <Navlink href="#" class="flex justify-center items-center w-[170px]">
-            <span class="text-[#9CA3AF]"> Seleris Lifins</span>
-          </Navlink>
-          <Navlink href="#" class="flex justify-center items-center w-[170px]">
-            <span class="text-[#9CA3AF]"> Seleris Medins</span>
-          </Navlink>
-          <Navlink href="#" class="flex justify-center items-center w-[170px]">
-            <span class="text-[#9CA3AF]"> Seleris Credit Cover</span>
-          </Navlink>
-          <Navlink href="#" class="flex justify-center items-center w-[170px]">
-            <span class="text-[#9CA3AF]"> Seleris Care</span>
-          </Navlink>
-          <Navlink href="#" class="flex justify-center items-center w-[170px]">
-            <span class="text-[#9CA3AF]"> Flexa Asia</span>
-          </Navlink>
-          <Navlink href="#" class="flex justify-center items-center w-[170px]">
-            <span class="text-[#9CA3AF]"> Auto Claim</span>
-          </Navlink>
-          <Navlink href="#" class="flex justify-center items-center w-[170px]">
-            <span class="text-[#9CA3AF]"> Seleris Lifins</span>
-          </Navlink>
-          <Navlink href="#" class="flex justify-center items-center w-[170px]">
-            <span class="text-[#9CA3AF]"> Seleris Medins</span>
-          </Navlink>
-          <Navlink href="#" class="flex justify-center items-center w-[170px]">
-            <span class="text-[#9CA3AF]"> Seleris Credit Cover</span>
-          </Navlink>
-          <Navlink href="#" class="flex justify-center items-center w-[170px]">
-            <span class="text-[#9CA3AF]"> Seleris Care</span>
-          </Navlink>
-          <Navlink href="#" class="flex justify-center items-center w-[170px]">
-            <span class="text-[#9CA3AF]"> Flexa Asia</span>
+          <Navlink
+            v-for="(product, index) in products"
+            :key="index"
+            :href="product.url"
+            class="flex justify-center items-center w-[170px]"
+          >
+            <span class="text-[#9CA3AF]">{{ product.name }}</span>
           </Navlink>
         </div>
       </div>
@@ -130,12 +114,12 @@ const isHoveringTechnology = ref(false);
       @mouseenter="isHoveringTechnology = true"
       @mouseleave="isHoveringTechnology = false"
       :class="[
-        'absolute z-50 w-auto h-auto left-[560px] top-[70px] ',
-        isScrolled ? 'mt-2 pt-5' : 'mt-0 lg:-mt-2 pt-5 ',
+        'absolute z-50 w-auto h-auto left-[560px] lg:left-[360px] xl:left-[500px] top-[70px] ',
+        isScrolled ? 'mt-2 lg:-mt-6 xl:-mt-5 pt-10' : 'mt-0 lg:-mt-2 pt-5 ',
       ]"
     >
       <div
-        class="flex flex-col w-auto bg-white p-4 rounded-2xl shadow-lg gap-5"
+        class="flex flex-col w-auto bg-white p-4 rounded-2xl shadow-lg gap-5 dark:bg-green-300 dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-sm dark:bg-opacity-10 dark:border-[0.2px] dark:shadow-none"
       >
         <Navlink
           href="/seleris-chromatic-imaging"

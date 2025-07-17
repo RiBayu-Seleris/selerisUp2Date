@@ -43,45 +43,43 @@ const cekCertIcon = computed(() => {
 </script>
 
 <template>
-  <div class="flex relative w-full h-auto group justify-center">
-    <!-- Card A (default) -->
+  <div class="relative w-[335px] h-[419px] group">
+    <!-- Card A -->
     <div
-      :class="`relative xl:w-[335px] xl:h-[419px] lg:h-[419px]  group-hover:opacity-0 bg-cover bg-center ${divImageBefore} `"
+      :class="`absolute top-0 left-0 z-0 flex flex-col w-full h-full bg-cover bg-center ${divImageBefore}`"
     >
-      <div class="flex flex-col w-full h-auto xl:mt-14 lg:mt-14">
-        <div
-          class="flex w-full h-[180px] lg:h-[140px] xl:w-[149px] xl:h-[194px] justify-center mx-auto"
-        >
+      <div class="flex flex-col w-full h-auto mt-14">
+        <div class="flex w-full h-[194px] justify-center mx-auto">
           <img
             :src="imageCertLogo"
             alt="Cert Logo"
             class="w-full h-full object-contain object-center"
           />
         </div>
-        <div
-          class="flex w-full h-auto justify-center mt-6 px-10 lg:px-10 items-center text-center"
-        >
-          <p class="flex xl:text-[20px] lg:text-2xl font-normal text-[#195279]">
+        <div class="flex w-full justify-center mt-6 px-10 text-center">
+          <p
+            class="text-[20px] font-normal text-[#195279] dark:text-[#FAFAFAFA]"
+          >
             {{ TitleBefore }}
           </p>
         </div>
       </div>
     </div>
 
-    <!-- Card B (on hover) -->
+    <!-- Card B -->
     <div
-      :class="`flex w-full xl:w-[335px] xl:h-[419px] lg:h-[419px] absolute inset-0 bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-1000 ease-in-out ${divImageAfter} xl:ml-7 2xl:ml-10`"
+      :class="`absolute top-0 left-0 z-0 flex flex-col w-full h-full bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out ${divImageAfter}`"
     >
       <div
-        :class="`flex flex-col w-full h-full text-white xl:px-10 lg:px-6 2lg:px-10 xl:pt-12 lg:pt-10 lg:gap-y-1 2xl:gap-y-6 xl:gap-y-4 ${textPosition}`"
+        :class="`flex flex-col w-full h-full text-white dark:text-[#3D3434] px-10 pt-12 gap-y-4 ${textPosition}`"
       >
-        <p class="xl:text-[24px] lg:text-lg 2lg:text-[22px] font-semibold">
+        <p class="text-[24px] font-semibold">
           {{ TitleAfter }}
         </p>
-        <p class="xl:text-[14px] lg:text-base font-normal">
+        <p class="text-[14px] font-normal">
           Certificate Number: {{ CertNumber }}
         </p>
-        <p class="xl:text-[12px] lg:text-sm">
+        <p class="text-[12px]">
           {{ BodyText }}
         </p>
       </div>

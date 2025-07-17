@@ -19,16 +19,12 @@ import Different from "@/components/Home/Different.vue";
 
   <!-- data-aos="fade-down"
     data-aos-duration="2000" -->
-  <section
-    class="hidden lg:flex w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto"
-  >
+  <section class="hidden lg:flex w-full max-w-[1440px] mx-auto h-auto">
     <PartnersClients />
   </section>
   <!-- data-aos="fade-down"
     data-aos-duration="2000" -->
-  <section
-    class="lg:hidden flex w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto"
-  >
+  <section class="lg:hidden flex w-full max-w-[1440px] mx-auto h-auto">
     <PartnersClientsMobile />
   </section>
 
@@ -36,7 +32,7 @@ import Different from "@/components/Home/Different.vue";
     data-aos-easing="ease-out-cubic"
     data-aos-duration="2000" -->
   <section
-    class="flex flex-col relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto xl:h-auto lg:h-[80vh] md:mt-10 lg:mt-10 pt-4 pb-8 lg:pt-0 lg:pb-0"
+    class="flex flex-col relative w-full h-auto max-w-[1440px] mx-auto md:mt-10 lg:mt-10 pt-4 pb-8 lg:pt-0 lg:pb-0"
   >
     <!-- bg-cert bg-no-repeat bg-cover bg-center -->
     <Certificate />
@@ -46,7 +42,7 @@ import Different from "@/components/Home/Different.vue";
     data-aos-duration="3000" -->
   <!-- xl:px-8 md:px-12 lg:px-12 -->
   <section
-    class="flex flex-col relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto lg:mt-20 2lg:mt-40 xl:mt-0 px-8"
+    class="flex flex-col relative w-full max-w-[1440px] mx-auto h-auto lg:mt-20 2lg:mt-40 xl:mt-0 px-8"
   >
     <Description />
   </section>
@@ -54,7 +50,7 @@ import Different from "@/components/Home/Different.vue";
   <!-- data-aos="fade-right"
     data-aos-duration="3000" -->
   <section
-    class="flex flex-col relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto mt-16"
+    class="flex flex-col relative w-full max-w-[1440px] mx-auto h-auto mt-16"
   >
     <Benefits />
   </section>
@@ -64,19 +60,19 @@ import Different from "@/components/Home/Different.vue";
     data-aos-duration="1000" -->
   <!-- px-8 2lg:px-28 xl:px-28 -->
   <section
-    class="flex flex-col relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto mt-10 lg:mt-10 xl:mt-10 px-8"
+    class="flex flex-col relative w-full max-w-[1440px] mx-auto h-auto mt-10 lg:mt-10 xl:mt-10 px-8 lg:px-24"
   >
     <AiDesc />
   </section>
 
   <section
-    class="flex flex-col relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto mt-10"
+    class="flex flex-col relative w-full max-w-[1440px] mx-auto h-auto mt-40 sml:mt-24 mb-10"
   >
     <Testimonial />
   </section>
 
   <section
-    class="flex flex-col relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8"
+    class="flex flex-col relative w-full max-w-[1440px] mx-auto h-auto px-8 my-20"
   >
     <Different />
   </section>

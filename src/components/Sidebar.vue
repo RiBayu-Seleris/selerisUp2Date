@@ -20,52 +20,52 @@ watch(
 const isProductOpen = ref(false);
 const isTechnologyOpen = ref(false);
 
-const menuPages = [
+const ProductList = [
   {
-    title: "Seleris Care",
+    name: "Seleris Care",
     url: "#",
   },
   {
-    title: "Seleris Medins",
+    name: "Seleris Medins",
     url: "#",
   },
   {
-    title: "Seleris Credit Cover",
+    name: "Seleris Credit Cover",
     url: "#",
   },
   {
-    title: "EHD",
+    name: "EHD",
     url: "#",
   },
   {
-    title: "Sentris",
+    name: "Sentris",
     url: "#",
   },
   {
-    title: "Flexa Asia",
+    name: "Flexa Asia",
     url: "#",
   },
   {
-    title: "Auto Claim",
+    name: "Auto Claim",
     url: "#",
   },
   {
-    title: "Seleris Doctor",
+    name: "Seleris Doctor",
     url: "#",
   },
 ];
 
-const techPages = [
+const TechnologyList = [
   {
-    title: "Seleris Chromatic Imaging",
+    name: "Seleris Chromatic Imaging",
     url: "/seleris-chromatic-imaging",
   },
   {
-    title: "Seleris Deep Vitals",
+    name: "Seleris Deep Vitals",
     url: "/seleris-deep-vitals",
   },
   {
-    title: "Seleris Deep Risk",
+    name: "Seleris Deep Risk",
     url: "/seleris-deep-risk",
   },
 ];
@@ -84,143 +84,101 @@ const handleTechnology = () => {
   <transition name="fade">
     <div
       v-if="sidebar.isOpen"
-      class="fixed inset-0 z-50 flex flex-col transition-all duration-300"
+      class="fixed inset-0 z-50 flex flex-col transition-all duration-300 overflow-y-auto"
     >
       <!-- Overlay -->
       <div class="absolute inset-0 bg-black/50" @click="sidebar.close"></div>
 
       <!-- Sidebar -->
       <transition name="slide">
-        <div
-          class="ml-auto w-full max-w-[100%] bg-white h-full px-8 pt-6 relative z-50 flex flex-col items-center"
-        >
-          <div class="flex flex-row w-full h-auto justify-between items-center">
-            <div class="w-[80%] h-auto">
-              <p
-                class="text-[#195279] font-semibold sml:text-md md:text-[1.7rem]"
-              >
-                PT Seleris Meditekno Internasional
-              </p>
-            </div>
-            <div class="w-[20%] h-auto flex justify-end">
-              <button
-                type="button"
-                id="sidebar-button"
-                @click="sidebar.close"
-                class="ml-auto text-2xl font-bold text-gray-700 hover:text-black"
-              >
-                <MenuIconClose />
-              </button>
-            </div>
-          </div>
-
-          <nav
-            class="w-full flex flex-col mt-8 space-y-6 text-lg font-semibold text-gray-800"
+        <div class="ml-auto w-full h-auto px-4 pt-6">
+          <div
+            class="w-full h-full bg-white relative z-50 flex flex-col items-center py-6 px-5 rounded-xl"
           >
-            <Navlink href="/">Home</Navlink>
-            <Navlink href="/about">About</Navlink>
-
-            <!-- DROPDOWN MENU -->
-            <div>
-              <button
-                @click="handleProduct"
-                class="w-full text-left focus:outline-none"
-              >
-                <div class="flex justify-between items-center">
-                  <span class="text-lg font-semibold">Products</span>
-                  <span>
-                    <svg
-                      :class="[
-                        'w-5 h-5 transition-transform duration-300',
-                        isProductOpen ? 'rotate-180' : '',
-                      ]"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </span>
-                </div>
-              </button>
-
-              <transition name="fade">
-                <div
-                  v-if="isProductOpen"
-                  class="mt-4 flex flex-wrap items-center gap-y-2 bg-[#F3F4F6] p-4 rounded-2xl"
+            <div
+              class="flex flex-row w-full h-auto justify-between items-center"
+            >
+              <div class="w-[80%] h-auto">
+                <p
+                  class="text-[#195279] font-semibold sml:text-md md:text-[1.7rem]"
                 >
+                  PT Seleris Meditekno Internasional
+                </p>
+              </div>
+              <div class="w-[20%] h-auto flex justify-end">
+                <button
+                  type="button"
+                  id="sidebar-button"
+                  @click="sidebar.close"
+                  class="ml-auto text-2xl font-bold text-gray-700 hover:text-black"
+                >
+                  <MenuIconClose />
+                </button>
+              </div>
+            </div>
+            <nav
+              class="w-full flex flex-wrap mt-8 text-lg font-semibold text-gray-800 gap-y-2"
+            >
+              <div class="w-full h-auto">
+                <Navlink href="/">
+                  <p class="text-[12px]">Home</p>
+                </Navlink>
+              </div>
+              <div class="w-full h-auto">
+                <Navlink href="/about">
+                  <p class="text-[12px]">About</p>
+                </Navlink>
+              </div>
+              <div class="w-full h-[2px] bg-[#1AB24F]/40" />
+              <div class="w-full h-auto flex flex-col">
+                <p class="text-slate-400 text-[16px]">Products</p>
+                <div class="w-full h-auto flex flex-wrap">
                   <div
-                    v-for="(menuPage, index) in menuPages"
+                    v-for="(product, index) in ProductList"
                     :key="index"
-                    class="w-[50%] h-auto flex"
+                    class="w-[50%] h-auto"
                   >
-                    <Navlink :href="menuPage.url">
-                      <span class="text-[14px]"> {{ menuPage.title }}</span>
+                    <Navlink :href="product.url">
+                      <p class="text-[12px] font-[500]">{{ product.name }}</p>
                     </Navlink>
                   </div>
                 </div>
-              </transition>
-            </div>
-
-            <!-- DROPDOWN MENU -->
-            <div>
-              <button
-                @click="handleTechnology"
-                class="w-full text-left focus:outline-none"
-              >
-                <div class="flex justify-between items-center">
-                  <span class="text-lg font-semibold">Technology</span>
-                  <span>
-                    <svg
-                      :class="[
-                        'w-5 h-5 transition-transform duration-300',
-                        isTechnologyOpen ? 'rotate-180' : '',
-                      ]"
-                      fill="none"
-                      stroke="currentColor"
-                      viewBox="0 0 24 24"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        stroke-linecap="round"
-                        stroke-linejoin="round"
-                        stroke-width="2"
-                        d="M19 9l-7 7-7-7"
-                      />
-                    </svg>
-                  </span>
-                </div>
-              </button>
-
-              <transition name="fade">
-                <div
-                  v-if="isTechnologyOpen"
-                  class="mt-3 flex flex-col space-y-3 text-base bg-[#F3F4F6] p-4 rounded-2xl"
-                >
+              </div>
+              <div class="w-full h-[2px] bg-[#1AB24F]/40" />
+              <div class="w-full h-auto flex flex-col">
+                <p class="text-slate-400 text-[16px]">Technology</p>
+                <div class="w-full h-auto flex flex-wrap">
                   <div
-                    v-for="(techPage, index) in techPages"
+                    v-for="(technology, index) in TechnologyList"
                     :key="index"
-                    class="w-[50%] h-auto flex"
+                    class="w-[50%] h-auto"
                   >
-                    <Navlink :href="techPage.url">
-                      <span class="text-[14px]"> {{ techPage.title }}</span>
+                    <Navlink :href="technology.url">
+                      <p class="text-[12px] font-[500]">
+                        {{ technology.name }}
+                      </p>
                     </Navlink>
                   </div>
                 </div>
-              </transition>
-            </div>
-
-            <!-- Menu lainnya -->
-            <Navlink href="/team">Our Team</Navlink>
-            <Navlink href="/blogs">Blogs</Navlink>
-            <Navlink href="/services">Services</Navlink>
-          </nav>
+              </div>
+              <div class="w-full h-[2px] bg-[#1AB24F]/40" />
+              <div class="w-full h-auto">
+                <Navlink href="/team">
+                  <p class="text-[12px]">Our Team</p>
+                </Navlink>
+              </div>
+              <div class="w-full h-auto">
+                <Navlink href="/blogs">
+                  <p class="text-[12px]">Blogs</p>
+                </Navlink>
+              </div>
+              <div class="w-full h-auto">
+                <Navlink href="/services">
+                  <p class="text-[12px]">Services</p>
+                </Navlink>
+              </div>
+            </nav>
+          </div>
         </div>
       </transition>
     </div>

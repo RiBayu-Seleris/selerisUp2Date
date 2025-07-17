@@ -25,12 +25,13 @@ const getShortText = (fullText) => {
   const length = fullText.length;
   let max = 130;
   if (windowWidth.value >= 1024) max = 140;
+  else if (windowWidth.value >= 768) max = 140;
   else if (windowWidth.value > 425) max = 120;
   else max = 70;
 
   if (length > max) {
     const cut = fullText.slice(0, max).trim();
-    return `${cut}<span class='text-blue-500 font-semibold'>...read more</span>`;
+    return `${cut}<span class='text-[#1AB24F] font-semibold '>...read more</span>`;
   } else {
     return fullText;
   }
@@ -44,7 +45,7 @@ const getShortText = (fullText) => {
     <div
       v-for="(cert, index) in certificates"
       :key="index"
-      class="snap-start shrink-0 w-[85%] sml:w-[250px] sml:h-[240px] md:h-[200px] lg:h-[230px] perspective mb-2"
+      class="snap-start shrink-0 w-[85%] sml:w-[250px] sml:h-[240px] md:w-[85%] md:h-[240px] lg:h-[230px] perspective mb-2"
       @click="handleFlip(index)"
     >
       <div
@@ -55,9 +56,11 @@ const getShortText = (fullText) => {
       >
         <!-- FRONT -->
         <div
-          class="flex flex-col sml:gap-y-3 md:gap-y-3 absolute w-full h-full backface-hidden bg-[#F9FAFB] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md px-5 pt-6"
+          class="flex flex-col sml:gap-y-3 md:gap-y-3 absolute w-full h-full backface-hidden bg-[#F9FAFB] dark:bg-[#1D1F23] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md px-5 pt-6"
         >
-          <div class="flex flex-col w-full h-auto text-[#195279]">
+          <div
+            class="flex flex-col w-full h-auto text-[#195279] dark:text-[#FAFAFA]"
+          >
             <div class="flex flex-col w-full h-auto">
               <div class="flex flex-row w-full h-auto gap-x-4 mb-3">
                 <div
@@ -76,7 +79,7 @@ const getShortText = (fullText) => {
                 </div>
               </div>
               <div class="flex w-full h-auto">
-                <p class="sml:text-[14px]">
+                <p class="sml:text-[14px] md:text-[18px]">
                   Certificate Number: {{ cert.certNumber }}
                 </p>
               </div>
@@ -86,7 +89,7 @@ const getShortText = (fullText) => {
           <!-- Description -->
           <div class="flex w-full h-auto">
             <p
-              class="text-[14px] sml:text-[12px] overflow-hidden"
+              class="text-[14px] sml:text-[12px] md:text-[16px] overflow-hidden"
               v-html="getShortText(cert.description)"
             ></p>
           </div>
@@ -94,10 +97,10 @@ const getShortText = (fullText) => {
 
         <!-- BACK -->
         <div
-          class="absolute w-full sml:w-[250px] sml:h-[240px] py-5 backface-hidden rotate-y-180 bg-[#F9FAFB] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center px-5 sml:px-4"
+          class="absolute w-full sml:w-[250px] sml:h-[240px] md:w-full py-5 backface-hidden rotate-y-180 bg-[#F9FAFB] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center px-5 sml:px-4"
         >
           <p
-            class="flex text-base sml:text-[12px] leading-relaxed overflow-hidden justify-center"
+            class="flex text-[16px] sml:text-[12px] md:text-[18px] leading-relaxed overflow-hidden justify-center"
             v-html="cert.description"
           ></p>
         </div>

@@ -7,64 +7,73 @@ import CallIcon from "@/components/icons/CallIcon.vue";
 <template>
   <div class="lg:mt-0">
     <div
-      class="hidden lg:block w-full lg:h-[630px] xl:h-auto bg-touch lg:px-6 xl:px-8 xl:pt-24 lg:pt-20 pb-10 rounded-b-3xl rounded-tr-[3rem]"
+      class="hidden lg:block w-full lg:h-[630px] xl:h-auto bg-touch dark:bg-touchDark bg-cover bg-no-repeat lg:px-6 xl:px-8 xl:pt-24 lg:pt-20 pb-10 rounded-b-3xl rounded-tr-[3rem]"
     >
       <div class="flex flex-row w-full h-auto gap-5">
         <div class="w-[45%] lg:h-[530px] xl:h-[580px]">
           <div
-            class="w-full h-full bg-[#FAFAFA] rounded-3xl py-4 lg:px-6 xl:px-8"
+            class="w-full h-full bg-[#FAFAFA] dark:bg-[#323232] rounded-3xl py-4 lg:px-6 xl:px-8"
           >
             <div class="flex flex-col w-full h-full">
               <div class="w-full h-auto py-5">
                 <p
-                  class="text-4xl xl:text-[38px] pb-3 font-[500] text-[#195279]"
+                  class="text-4xl xl:text-[38px] pb-3 font-[500] text-[#195279] dark:text-[#FAFAFA]"
                 >
-                  Get <span class="text-[#2AB857]">in Touch</span>
+                  Get
+                  <span class="text-[#2AB857] dark:text-[#FAFAFA]"
+                    >in Touch</span
+                  >
                 </p>
                 <p
-                  class="base:text-base xl:text-[16px] text-[#195279] font-[500]"
+                  class="base:text-base xl:text-[16px] text-[#195279] font-[500] dark:text-[#FAFAFA]"
                 >
                   Be among the first to discover what it's all about
                 </p>
               </div>
               <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
                 <div class="w-full mb-2">
-                  <p class="text-[14px] font-[500]">Full Name:</p>
+                  <p class="text-[14px] font-[500] dark:text-[#6F6F6F]">
+                    Full Name:
+                  </p>
                 </div>
                 <div class="w-full">
                   <input
                     type="text"
-                    class="w-full p-2 rounded-[8px] border border-gray-300 focus:outline-none focus:ring-1 focus:ring-[#2AB857]"
+                    class="w-full p-2 rounded-[8px] border-[0.3px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] focus:outline-none focus:ring-1 focus:ring-[#2AB857]"
                     placeholder="Full Name"
                   />
                 </div>
               </div>
               <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
                 <div class="w-full mb-2">
-                  <p class="text-[14px] font-[500]">Email:</p>
+                  <p class="text-[14px] font-[500] dark:text-[#6F6F6F]">
+                    Email:
+                  </p>
                 </div>
                 <div class="w-full">
                   <input
                     type="email"
-                    class="w-full p-2 rounded-[8px] border border-gray-300 focus:outline-none focus:ring-1 focus:ring-[#2AB857]"
+                    class="w-full p-2 rounded-[8px] border-[0.3px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] focus:outline-none focus:ring-1 focus:ring-[#2AB857] dark:focus:border-none"
                     placeholder="Email"
                   />
                 </div>
               </div>
               <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
                 <div class="w-full mb-2">
-                  <p class="text-[14px] font-[500]">Message:</p>
+                  <p class="text-[14px] font-[500] dark:text-[#6F6F6F]">
+                    Message:
+                  </p>
                 </div>
                 <div class="w-full">
                   <textarea
-                    class="w-full lg:h-[70px] xl:h-[130px] p-2 rounded-[8px] border border-gray-300 focus:outline-none focus:ring-1 focus:ring-[#2AB857] resize-none align-top"
+                    class="w-full lg:h-[70px] xl:h-[130px] p-2 rounded-[8px] border-[0.3px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] focus:outline-none focus:ring-1 focus:ring-[#2AB857] resize-none align-top"
                     placeholder="Message"
                   />
                 </div>
               </div>
               <div class="flex w-full h-auto rounded-lg mt-2">
                 <button class="w-full h-12 bg-[#2AB857] text-white rounded-lg">
-                  Masuk
+                  Submit
                 </button>
               </div>
             </div>
@@ -74,7 +83,7 @@ import CallIcon from "@/components/icons/CallIcon.vue";
           class="flex flex-col w-[55%] h-auto justify-between gap-5 rounded-3xl"
         >
           <div
-            class="flex w-full lg:h-[60%] xl:h-[65%] bg-[#FAFAFA] rounded-3xl p-4"
+            class="flex w-full lg:h-[60%] xl:h-[65%] bg-[#FAFAFA] dark:bg-[#323232] rounded-3xl p-4"
           >
             <div class="flex w-full h-full rounded-xl">
               <iframe
@@ -87,18 +96,20 @@ import CallIcon from "@/components/icons/CallIcon.vue";
             </div>
           </div>
           <div class="flex flex-row w-full lg:h-[40%] xl:h-[35%] gap-5">
-            <div class="flex w-full h-full bg-[#FAFAFA] rounded-xl">
+            <div
+              class="flex w-full h-full bg-[#FAFAFA] dark:bg-[#323232] rounded-xl"
+            >
               <div class="flex flex-col w-full py-3 gap-1">
                 <div class="flex w-full justify-center items-center mb-2">
                   <div
-                    class="flex w-12 h-12 rounded-full bg-[#FFFFFF] justify-center items-center shadow-lg"
+                    class="flex w-12 h-12 rounded-full bg-[#FFFFFF] dark:bg-[#6F6F6F] text-[#2AB857] dark:text-[#FAFAFA] justify-center items-center shadow-lg"
                   >
                     <ChatIcon />
                   </div>
                 </div>
                 <div class="flex w-full justify-center items-center">
                   <p
-                    class="lg:text-xl xl:text-[24px] text-[#195279] font-[600]"
+                    class="lg:text-xl xl:text-[24px] text-[#195279] font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                   >
                     Chat to Support
                   </p>
@@ -120,17 +131,21 @@ import CallIcon from "@/components/icons/CallIcon.vue";
                 </div>
               </div>
             </div>
-            <div class="flex w-full h-full bg-[#FAFAFA] rounded-xl">
+            <div
+              class="flex w-full h-full bg-[#FAFAFA] dark:bg-[#323232] rounded-xl"
+            >
               <div class="flex flex-col w-full py-3 gap-1">
                 <div class="flex w-full justify-center items-center mb-2">
                   <div
-                    class="flex w-12 h-12 rounded-full bg-[#FFFFFF] justify-center items-center shadow-lg"
+                    class="flex w-12 h-12 rounded-full bg-[#FFFFFF] dark:bg-[#6F6F6F] text-[#2AB857] dark:text-[#FAFAFA] justify-center items-center shadow-lg"
                   >
                     <CallIcon />
                   </div>
                 </div>
                 <div class="flex w-full justify-center items-center">
-                  <p class="text-2xl xl:text-[24px] text-[#195279] font-[600]">
+                  <p
+                    class="text-2xl xl:text-[24px] text-[#195279] font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                  >
                     Call Us
                   </p>
                 </div>
@@ -153,10 +168,3 @@ import CallIcon from "@/components/icons/CallIcon.vue";
     <TouchMobile />
   </div>
 </template>
-<style scoped>
-.bg-touch {
-  background-image: url("@/assets/images/touch-bg2.png");
-  background-size: cover;
-  background-repeat: no-repeat;
-}
-</style>

@@ -8,15 +8,17 @@ import DescRobot from "@/assets/images/about-images.png";
     <p
       class="text-[14px] lg:text-[17px] xl:text-[21px] text-center text-[#195279]"
     >
-      Seleris is a technology company that develops a facial video-based life
-      insurance underwriting application. The application allows insurance
-      companies to assess the risk of potential customers more quickly and
-      accurately, without the need for face-to-face interviews.
+      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat, quas.
+      Qui veritatis molestiae nemo numquam quidem commodi eum eaque vero
+      exercitationem, repellendus illum vel, voluptatibus distinctio aliquid
+      voluptates, delectus cupiditate excepturi cum odit recusandae itaque?
     </p>
   </div>
   <!-- div Description 2 -->
   <div class="flex w-full h-auto my-5 lg:my-5 xl:my-10 lg:px-20">
-    <div class="flex flex-row sml:flex-col w-full h-auto justify-between gap-8">
+    <div
+      class="flex md:flex-row sml:flex-col w-full h-auto justify-between gap-8"
+    >
       <div
         class="flex w-full h-full md:w-[70%] lg:w-[50%] xl:w-[40%] justify-center items-center"
       >

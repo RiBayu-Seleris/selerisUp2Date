@@ -6,7 +6,7 @@ const cardContents = [
   {
     bgCard: "bg-[#81021E]",
     title: "Health Risk",
-    titleColor: "text-[#2B7C3F]",
+    titleColor: "text-[#81021E]",
     body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
     Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
     Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
@@ -15,7 +15,7 @@ const cardContents = [
   {
     bgCard: "bg-[#81021E]",
     title: "Health Risk",
-    titleColor: "text-[#2B7C3F]",
+    titleColor: "text-[#81021E]",
     body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
     Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
     Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
@@ -24,7 +24,7 @@ const cardContents = [
   {
     bgCard: "bg-[#81021E]",
     title: "Health Risk",
-    titleColor: "text-[#2B7C3F]",
+    titleColor: "text-[#81021E]",
     body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
     Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
     Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
@@ -33,7 +33,7 @@ const cardContents = [
   {
     bgCard: "bg-[#81021E]",
     title: "Health Risk",
-    titleColor: "text-[#2B7C3F]",
+    titleColor: "text-[#81021E]",
     body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
     Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
     Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
@@ -85,6 +85,7 @@ const cardContents = [
       :key="index"
       :bgCard="cardContent.bgCard"
       :title="cardContent.title"
+      :titleColor="cardContent.titleColor"
       :body="cardContent.body"
     />
   </section>

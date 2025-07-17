@@ -43,7 +43,14 @@ onUnmounted(() => {
                   <img
                     :src="Logo"
                     alt="Logo"
-                    class="w-[117px] h-[56px] object-contain"
+                    class="w-[117px] h-[56px] object-contain dark:hidden"
+                  />
+                </div>
+                <div class="flex w-full items-center">
+                  <img
+                    :src="DarkLogo"
+                    alt="Logo"
+                    class="w-[117px] h-[56px] object-contain hidden dark:block"
                   />
                 </div>
               </div>

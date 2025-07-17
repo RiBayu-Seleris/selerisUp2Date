@@ -31,8 +31,8 @@ const ApiServices = [
         </div>
         <div class="flex w-[541px] h-auto">
           <p class="text-[#195279] font-[400] text-[24px]">
-            The Seleris API service offers a number of benefits for insurance
-            companies, including
+            The Seleris API service offers a number of benefits for companies,
+            including
           </p>
         </div>
       </div>

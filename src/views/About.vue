@@ -14,19 +14,21 @@ import { useSidebarStore } from "@/stores/sidebar";
 </script>
 
 <template>
-  <section class="flex flex-col relative w-full h-auto lg:px-20">
+  <section class="flex flex-col relative w-full h-auto md:px-20">
     <Hero />
   </section>
 
   <!-- data-aos="fade-in"
     data-aos-duration="2000" -->
-  <section class="flex flex-col relative w-full h-auto px-8 mt-28">
+  <section class="flex flex-col relative w-full h-auto px-8 sml:mt-20 lg:mt-28">
     <DescAbout />
   </section>
 
   <!-- data-aos="fade-left"
     data-aos-duration="3000" -->
-  <section class="flex flex-col relative w-full h-auto px-8 lg:mt-10 xl:mt-10">
+  <section
+    class="flex flex-col relative w-full h-auto px-8 mt-20 lg:mt-10 xl:mt-10"
+  >
     <Description />
   </section>
 
@@ -44,7 +46,7 @@ import { useSidebarStore } from "@/stores/sidebar";
   <!-- data-aos="fade-left"
     data-aos-duration="3000" -->
   <section
-    class="flex relative w-full xl:h-[100vh] lg:h-[80vh] pb-8 lg:pb-0 px-8 lg:px-20"
+    class="flex relative w-full h-auto pb-8 lg:pb-0 px-8 lg:px-20 sml:mb-20 md:mb-4 mb-10 xl:mb-20"
   >
     <StepDescription />
   </section>

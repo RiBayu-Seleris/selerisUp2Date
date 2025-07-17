@@ -1,5 +1,4 @@
 <script setup>
-// import DifferentCard from "@/components/reusable/DifferentCard.vue";
 import DifferentMobile from "@/components/reusable/DifferentMobile.vue";
 
 defineProps({
@@ -23,48 +22,44 @@ defineProps({
 </script>
 
 <template>
-  <div class="my-16">
-    <div
-      :class="`hidden lg:block w-full h-auto lg:h-[480px] xl:h-auto ${bgImage} rounded-b-[3rem]`"
-    >
-      <div class="flex flex-col w-full h-auto xl:px-10 lg:px-5">
-        <div class="flex flex-col w-full h-auto lg:mt-16 xl:mt-20">
-          <div class="flex w-full h-auto">
-            <!-- Title -->
-            <p class="text-3xl xl:text-[24px] text-[#1DC457]">
-              <!-- What Makes Us Different? -->
-              {{ title }}
-            </p>
-          </div>
-          <div class="flex w-[70%] h-auto mt-5">
-            <!-- Title Body -->
-            <p
-              class="lg:text-2xl xl:text-[48px] text-[#195279] leading-[40px] xl:leading-[65px] font-[500]"
-            >
-              <!-- We bring solutions to make life insurance for our customers. -->
-              {{ subtitle }}
-            </p>
-          </div>
+  <div :class="`hidden lg:block w-full h-auto ${bgImage} rounded-b-[3rem]`">
+    <div class="flex flex-col w-full h-auto xl:px-10 lg:px-5">
+      <div class="flex flex-col w-full h-auto lg:mt-16 xl:mt-20">
+        <div class="flex w-full h-auto">
+          <!-- Title -->
+          <p class="text-3xl xl:text-[24px] text-[#1DC457]">
+            <!-- What Makes Us Different? -->
+            {{ title }}
+          </p>
         </div>
-        <div class="flex flex-row w-full h-auto lg:mt-5 xl:mt-10">
-          <div class="flex flex-col w-8/12 h-auto">
-            <slot />
-          </div>
-          <div class="flex w-4/12 h-auto">
-            <div class="flex w-full h-full z-0">
-              <!-- src="@/assets/images/robot-ai3.svg" -->
-              <img
-                :src="robotImage"
-                alt="Robot"
-                class="w-full lg:h-[250px] xl:h-[300px] object-contain object-top top-0 animate-bounce"
-              />
-            </div>
+        <div class="flex w-[70%] h-auto mt-5">
+          <!-- Title Body -->
+          <p
+            class="lg:text-2xl xl:text-[48px] text-[#195279] leading-[40px] xl:leading-[65px] font-[500]"
+          >
+            <!-- We bring solutions to make life insurance for our customers. -->
+            {{ subtitle }}
+          </p>
+        </div>
+      </div>
+      <div class="flex flex-row w-full h-auto lg:mt-5 xl:mt-10">
+        <div class="flex flex-col w-8/12 h-auto">
+          <slot />
+        </div>
+        <div class="flex w-4/12 h-auto">
+          <div class="flex w-full h-full z-0">
+            <!-- src="@/assets/images/robot-ai3.svg" -->
+            <img
+              :src="robotImage"
+              alt="Robot"
+              class="w-full lg:h-[250px] xl:h-[300px] object-contain object-top top-0 animate-bounce"
+            />
           </div>
         </div>
       </div>
     </div>
-
-    <!-- Mobile -->
-    <slot name="mobile" />
   </div>
+
+  <!-- Mobile -->
+  <slot name="mobile" />
 </template>

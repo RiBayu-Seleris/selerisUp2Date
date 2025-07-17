@@ -13,9 +13,9 @@ import performanceIcon from "@/assets/icons/performance.svg";
 
 <template>
   <DifferentSection
-    bgImage="bg-different bg-cover bg-no-repeat"
+    bgImage="bg-different dark:bg-differentDark bg-cover bg-no-repeat"
     title="What Makes Us Different?"
-    subtitle="We bring solutions to make life insurance for our customers."
+    subtitle="We bring solutions to make life for our customers."
     :robotImage="RobotAI"
   >
     <template #default>
@@ -30,7 +30,7 @@ import performanceIcon from "@/assets/icons/performance.svg";
           :image="innovationIcon"
           title="Innovation"
           subtitle="Developing innovative and effective solutions."
-          subtitleClass="xl:pr-20"
+          subtitleClass="lg:pr-10 xl:pr-20"
         />
       </div>
       <div class="flex flex-row">
@@ -38,7 +38,7 @@ import performanceIcon from "@/assets/icons/performance.svg";
           :image="missionIcon"
           title="Missions"
           subtitle="Efficient, accurate, and accessible."
-          subtitleClass="xl:pr-24"
+          subtitleClass="lg:pr-14 xl:pr-24"
         />
         <DifferentCard
           :image="performanceIcon"
@@ -50,7 +50,7 @@ import performanceIcon from "@/assets/icons/performance.svg";
     <template #mobile>
       <DifferentMobileSection
         title="What Makes Us Different?"
-        subtitle="We bring solutions to make life insurance for our customers."
+        subtitle="We bring solutions to make life for our customers."
         :robotImage="RobotAI2"
       >
         <template #mobileContentDifferent>
@@ -59,6 +59,7 @@ import performanceIcon from "@/assets/icons/performance.svg";
               :image="teamIcon"
               title="Our Team"
               subtitle="Collaboration and Teamwork."
+              subtitleClass="pr-10"
             />
           </div>
           <div class="w-full mb-5">
@@ -66,6 +67,7 @@ import performanceIcon from "@/assets/icons/performance.svg";
               :image="innovationIcon"
               title="Innovation"
               subtitle="Developing innovative and effective solutions."
+              subtitleClass="pr-10"
             />
           </div>
           <div class="w-full mb-5">

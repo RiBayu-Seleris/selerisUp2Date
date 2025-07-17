@@ -12,14 +12,14 @@ const steps = [
       "Seleris harnesses Remote Photoplethysmography (rPPG) technology to evaluate various vital signs that represent a customer's health condition.",
   },
   {
-    title: "Artificial Intelligence and Machine Learning",
+    title: "Artificial Intelligence and Machine Learning Adoption",
     description:
       "Leveraging predictive models to enhance underwriting accuracy and speed.",
   },
   {
-    title: "Insurance Company",
+    title: "The Company",
     description:
-      "Integration with the insurance platform to streamline customer experience.",
+      "Integration with the platform to streamline customer experience.",
   },
 ];
 
@@ -54,23 +54,29 @@ onMounted(() => {
 
 <template>
   <div
-    class="flex flex-row sml:flex-col-reverse md:flex-col lg:flex-row mx-6 lg:justify-between"
+    class="flex flex-row sml:flex-col-reverse lg:flex-row mx-6 lg:justify-between"
   >
     <div class="flex flex-col w-full h-full justify-center">
       <div class="w-full pb-2 sml:pb-4 md:pb-5 xl:pb-5">
         <p
-          class="sml:text-2xl md:text-3xl lg:text-3xl xl:text-[24px] text-[#1AB24F] font-[500]"
+          class="sml:text-2xl md:text-3xl lg:text-3xl xl:text-[24px] text-[#1AB24F] font-[500] dark:text-[#FAFAFA]"
         >
           AI Technology
         </p>
       </div>
       <div class="w-full sml:pb-4 md:pb-10 lg:pb-0 xl:pb-0 text-[#195279]">
-        <p class="sml:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-[500]">
+        <p
+          class="sml:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-[500] dark:text-[#FAFAFA]"
+        >
           How Seleris
-          <span class="sml:inline-flex md:inline-flex lg:hidden"> Works?</span>
+          <span
+            class="sml:inline-flex md:inline-flex lg:hidden dark:text-[#FAFAFA]"
+          >
+            Works?</span
+          >
         </p>
         <p
-          class="sml:hidden md:hidden lg:block sml:text-3xl lg:text-4xl xl:text-5xl font-[500] xl:mt-5"
+          class="sml:hidden md:hidden lg:block sml:text-3xl lg:text-4xl xl:text-5xl font-[500] xl:mt-5 dark:text-[#FAFAFA]"
         >
           Works?
         </p>
@@ -115,12 +121,12 @@ onMounted(() => {
           <!-- Scrollable Sections -->
           <div
             ref="scrollContainer"
-            class="h-full overflow-y-scroll snap-y snap-mandatory scroll-smooth scroll-hide pr-10"
+            class="h-full overflow-y-scroll snap-y snap-mandatory scroll-smooth scroll-hide pr-10 sml:pl-8 sml:pr-0 md:pl-10 lg:pl-10 xl:pl-14 xl:pr-20"
           >
             <section
               v-for="(step, index) in steps"
               :key="index"
-              class="step h-full snap-start flex items-center justify-start sml:pl-8 sml:pr-0 md:pl-10 lg:w-full xl:w-full lg:pl-10 xl:pl-14 xl:pr-20 text-start"
+              class="step h-full snap-start flex items-center justify-start lg:w-full xl:w-full text-start"
             >
               <div>
                 <h3
@@ -129,7 +135,7 @@ onMounted(() => {
                   {{ step.title }}
                 </h3>
                 <p
-                  class="mt-5 sml:mt-3 text-xl xl:text-[16px] sml:text-sm text-gray-600 max-w-xl mx-auto"
+                  class="mt-5 sml:mt-3 text-xl xl:text-[16px] sml:text-sm text-gray-600 dark:text-[#FAFAFA] max-w-xl mx-auto"
                 >
                   {{ step.description }}
                 </p>
@@ -147,9 +153,21 @@ onMounted(() => {
         loop
         muted
         playsinline
-        class="w-full h-full object-contain"
+        class="w-full h-full object-contain dark:hidden"
       >
         <source src="@/assets/videos/Design-Vector-Web2.mp4" type="video/mp4" />
+      </video>
+      <video
+        autoplay
+        loop
+        muted
+        playsinline
+        class="w-full h-full object-contain hidden dark:block"
+      >
+        <source
+          src="@/assets/videos/Design-Dark-Vector-Web2.mp4"
+          type="video/mp4"
+        />
       </video>
     </div>
   </div>

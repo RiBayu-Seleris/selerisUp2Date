@@ -7,11 +7,11 @@ import AboutHero from "@/assets/images/About-hero-image.png";
     class="flex relative w-full h-auto animate__animated animate__fadeIn animate__slower"
   >
     <div
-      class="flex relative lg:flex-row sml:flex-col md:flex-col w-full h-auto justify-between lg:gap-x-10 mt-[130px] sml:mt-[100px]"
+      class="flex relative md:flex-row sml:flex-col w-full h-auto justify-between lg:gap-x-10 sml:mt-[100px] md:mt-[50px] lg:mt-[130px]"
     >
       <div class="flex w-full md:w-full lg:w-[40%] xl:w-[45%] h-auto">
         <div
-          class="flex flex-col w-full h-auto justify-center gap-3 xl:gap-4 sml:text-center md:text-center lg:text-left"
+          class="flex flex-col w-full h-auto justify-center gap-3 xl:gap-4 sml:text-center md:text-left"
         >
           <div class="w-full h-auto">
             <p
@@ -31,7 +31,7 @@ import AboutHero from "@/assets/images/About-hero-image.png";
             <p
               class="text-base xl:text-[27px] text-[#89A6BA] lg:leading-[54px] xl:leading-[45px]"
             >
-              Seleris Is The Best Life Insurance Underwriting.
+              Seleris Is The Best Life Technology.
             </p>
           </div>
         </div>

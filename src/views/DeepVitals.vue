@@ -85,6 +85,7 @@ const cardContents = [
       :key="index"
       :bgCard="cardContent.bgCard"
       :title="cardContent.title"
+      :titleColor="cardContent.titleColor"
       :body="cardContent.body"
     />
   </section>

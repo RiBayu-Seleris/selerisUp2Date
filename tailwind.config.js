@@ -5,12 +5,14 @@ module.exports = {
   theme: {
     screens: {
       // Mobile breakpoints
-      sml: { raw: "(min-width: 320px) and (max-width: 425px)" },
+      sml: "320px",
+      // sml: { raw: "(min-width: 320px) and (max-width: 425px)" },
       sm: "640px",
 
       // Tablet / Medium
-      md: { raw: "(min-width: 641px) and (max-width: 768px)" },
-      mds: "853px",
+      md: "768px",
+      // md: { raw: "(min-width: 641px) and (max-width: 768px)" },
+      // mds: "853px",
 
       // Desktop
       lg: "1024px",
@@ -26,8 +28,11 @@ module.exports = {
       backgroundImage: {
         hero: "url('@/assets/images/hero-banner.png')",
         hero2: "url('@/assets/images/hero-banner2.png')",
+        touch: "url('@/assets/images/touch-bg.png')",
+        touchDark: "url('@/assets/images/touch-bg-dark.png')",
         herodark: "url('@/assets/images/herodark.svg')",
         different: "url('@/assets/images/different-background.png')",
+        differentDark: "url('@/assets/images/different-dark-background.png')",
         api: "url('@/assets/images/api-background.png')",
         leftCertBefore:
           "url('@/assets/images/certification/left-frame-before.png')",
@@ -41,6 +46,19 @@ module.exports = {
           "url('@/assets/images/certification/center-frame-after.png')",
         rightCertAfter:
           "url('@/assets/images/certification/right-frame-after.png')",
+        // DARK BACKGROUND
+        leftCertDarkBefore:
+          "url('@/assets/images/certification/dark-left-frame-before.png')",
+        leftCertDarkAfter:
+          "url('@/assets/images/certification/dark-left-frame-after.png')",
+        centerCertDarkBefore:
+          "url('@/assets/images/certification/dark-center-frame-before.png')",
+        centerCertDarkAfter:
+          "url('@/assets/images/certification/dark-center-frame-after.png')",
+        rightCertDarkBefore:
+          "url('@/assets/images/certification/dark-right-frame-before.png')",
+        rightCertDarkAfter:
+          "url('@/assets/images/certification/dark-right-frame-after.png')",
       },
       fontFamily: {
         poppins: ["Poppins", "sans-serif"],

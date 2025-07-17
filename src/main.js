@@ -7,5 +7,10 @@ import "aos/dist/aos.css";
 
 import App from "./App.vue";
 
+router.beforeEach((to, from, next) => {
+  document.title = "Seleris |" + to.meta.title || "Seleris";
+  next();
+});
+
 createApp(App).use(createPinia()).use(router).mount("#app");
 AOS.init();

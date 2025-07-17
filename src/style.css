@@ -6,10 +6,41 @@ html {
   scrollbar-gutter: stable;
 }
 
+/* style.css */
+@layer utilities {
+  .border-gradient {
+    background: linear-gradient(to right, blue, red);
+    padding: 1px; /* untuk membuat efek border tipis */
+    border-radius: 1rem;
+  }
+  .border-gradient-inner {
+    border-radius: 0.95rem; /* sedikit lebih kecil dari luar */
+    background-color: #1d1f23; /* atau bg-white, atau dark:bg */
+  }
+}
+
 .hide-scrollbar::-webkit-scrollbar {
   display: none;
 }
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+.custom-pagination .swiper-pagination-bullet {
+  @apply bg-gray-800 rounded-full transition-all;
+}
+
+/* Aktif */
+.custom-pagination .swiper-pagination-bullet-active {
+  @apply bg-[#1DC457];
+}
+
+/* Dark mode */
+.dark .custom-pagination .swiper-pagination-bullet {
+  @apply bg-white;
+}
+
+.dark .custom-pagination .swiper-pagination-bullet-active {
+  @apply bg-[#1DC457];
 }

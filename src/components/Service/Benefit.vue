@@ -8,7 +8,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       <HeroText
         title="Benefits"
         subtitle="Benefits of Using the Seleris API"
-        description="The Seleris API service offers a number of benefits for insurance companies, including"
+        description="The Seleris API service offers a number of benefits for companies, including"
       />
     </div>
     <div class="flex w-full h-[700px] mt-5">
