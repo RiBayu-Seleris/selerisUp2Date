@@ -45,7 +45,7 @@ const description = computed(() => {
     >
       <!-- SVG as background -->
       <svg
-        class="absolute inset-0 w-full h-full drop-shadow-md z-0 text-white dark:text-[#34343466]"
+        class="absolute inset-0 w-full h-full drop-shadow-md z-0 text-white dark:text-[#363636]"
         viewBox="0 0 409 228"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -74,7 +74,7 @@ const description = computed(() => {
           class="w-[70px] sml:w-[50px] md:w-[90px] lg:w-[100px] h-auto object-contain mb-3 hidden dark:block"
         />
         <div
-          class="text-start sml:text-[12px] md:text-[16px] lg:text-[19px] leading-snug text-black dark:text-[#FAFAFA]"
+          class="text-start sml:text-[12px] md:text-[16px] lg:text-[19px] xl:pt-3 leading-snug text-black dark:text-[#FAFAFA]"
         >
           {{ description }}
         </div>

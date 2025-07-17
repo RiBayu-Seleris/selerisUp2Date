@@ -85,13 +85,17 @@ onBeforeUnmount(() => {
     <!-- Title -->
     <div class="text-center mb-4">
       <div
-        class="inline-flex gap-2 items-end relative text-[20px] font-[400] text-[#89A6BA]"
+        class="inline-flex gap-2 items-end relative text-[20px] font-[400] text-[#89A6BA] dark:text-[#6A6A6A]"
       >
         <span>Seleris</span>
         <div class="relative">
           <span
             class="cursor-pointer transition-colors"
-            :class="showPartners ? 'text-[#2AB857]' : 'text-[#89A6BA]'"
+            :class="
+              showPartners
+                ? 'text-[#2AB857] dark:text-[#FAFAFA]'
+                : 'text-[#89A6BA] dark:text-[#6A6A6A]'
+            "
           >
             Partners
           </span>
@@ -110,7 +114,11 @@ onBeforeUnmount(() => {
         <div class="relative">
           <span
             class="cursor-pointer transition-colors"
-            :class="!showPartners ? 'text-[#2AB857]' : 'text-[#89A6BA]'"
+            :class="
+              !showPartners
+                ? 'text-[#2AB857] dark:text-[#FAFAFA]'
+                : 'text-[#89A6BA] dark:text-[#6A6A6A]'
+            "
           >
             Clients
           </span>

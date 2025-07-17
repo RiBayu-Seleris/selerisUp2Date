@@ -7,14 +7,14 @@ const themeStore = useThemeStore();
 <template>
   <div
     @click="themeStore.toggleTheme"
-    class="w-24 h-12 bg-white dark:bg-gray-800 rounded-full border-[1px] shadow-[inset_0px_0px_17px_-3px_rgba(0,_0,_0,_0.1)] relative cursor-pointer flex items-center px-3 transition-all duration-300"
+    class="w-24 h-12 bg-white dark:bg-gray-800 rounded-full border-[0.5px] dark:border-[#FAFAFA]/30 shadow-[inset_0px_0px_17px_-3px_rgba(0,_0,_0,_0.1)] relative cursor-pointer flex items-center px-3 transition-all duration-300"
   >
     <!-- Circle -->
     <div
-      class="absolute w-8 h-8 rounded-full bg-white shadow-lg transition-all duration-300"
+      class="absolute w-8 h-8 rounded-full bg-white dark:bg-[#878787] shadow-lg transition-all duration-300"
       :class="
         themeStore.isDark
-          ? 'translate-x-[41px] lg:translate-x-[25px] xl:translate-x-[41px]'
+          ? 'translate-x-[41px] lg:translate-x-[25px] xl:translate-x-[43px]'
           : 'translate-x-[-6px]'
       "
     ></div>
@@ -22,7 +22,11 @@ const themeStore = useThemeStore();
     <!-- Sun Icon -->
     <svg
       class="flex w-5 h-5 z-10 ml-0 transition-colors duration-300"
-      :class="themeStore.isDark ? 'text-gray-400' : 'text-green-500'"
+      :class="
+        themeStore.isDark
+          ? 'text-gray-400 dark:text-[#FAFAFA]/50'
+          : 'text-green-500 '
+      "
       fill="none"
       stroke="currentColor"
       stroke-width="2"
@@ -37,7 +41,11 @@ const themeStore = useThemeStore();
     <!-- Moon Icon -->
     <svg
       class="w-5 h-5 z-10 ml-auto mr-0 transition-colors duration-300"
-      :class="themeStore.isDark ? 'text-green-500' : 'text-gray-400'"
+      :class="
+        themeStore.isDark
+          ? 'text-green-500 dark:text-[#434343]'
+          : 'text-gray-400'
+      "
       fill="none"
       stroke="currentColor"
       stroke-width="2"

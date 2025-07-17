@@ -44,7 +44,7 @@ const combinedLogos = Array.from(new Set([...partnerLogos, ...clientLogos]));
     <div
       class="flex w-full h-auto justify-center items-center text-center pb-5"
     >
-      <p class="sml:text-[17px] text-2xl text-[#89A6BA] font-[400]">
+      <p class="sml:text-[17px] text-2xl text-[#89A6BA] dark:text-[#6A6A6A] font-[400]">
         Seleris Partners & Clients
       </p>
     </div>

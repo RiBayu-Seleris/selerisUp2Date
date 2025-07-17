@@ -31,7 +31,7 @@ defineProps({
         <img
           :src="image"
           alt="Icon"
-          class="w-[70px] xl:h-[70px] lg:h-[57px] object-contain bg-white rounded-full shadow-lg p-2"
+          class="w-[70px] xl:h-[70px] lg:h-[57px] object-contain bg-white dark:bg-[#323232] rounded-full shadow-lg p-2"
         />
       </div>
       <div class="flex flex-col w-full h-auto lg:pl-4 xl:pl-4">
@@ -39,7 +39,7 @@ defineProps({
           <p class="lg:text-[16px] xl:text-[20px] pt-3 pb-2">{{ title }}</p>
         </div>
         <div
-          :class="`flex w-full h-auto text-[#4F90BC] dark:text-[#FAFAFA] ${subtitleClass}`"
+          :class="`flex w-full h-auto text-[#4F90BC] dark:text-[#6F6F6F] ${subtitleClass}`"
         >
           <p class="text-[18px] lg:text-[16px]">{{ subtitle }}</p>
         </div>

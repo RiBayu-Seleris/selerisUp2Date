@@ -35,7 +35,7 @@ onUnmounted(() => {
       <div class="w-full h-auto mt-8">
         <div class="max-w-[1440px] mx-auto px-8">
           <div
-            class="w-full flex items-center justify-between bg-white dark:bg-black dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-xl dark:bg-opacity-10 rounded-[18px] lg:px-8 py-2 border-[0.5px] border-[#DEDEDE] dark:border-slate-300"
+            class="w-full flex items-center justify-between bg-white dark:bg-black dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-xl dark:bg-opacity-10 rounded-[18px] lg:px-8 py-2 border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30"
           >
             <div class="hidden lg:grid grid-cols-12 w-full h-auto">
               <div class="col-span-1 h-auto">
