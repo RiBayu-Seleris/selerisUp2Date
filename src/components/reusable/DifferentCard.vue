@@ -35,10 +35,12 @@ defineProps({
         />
       </div>
       <div class="flex flex-col w-full h-auto lg:pl-4 xl:pl-4">
-        <div class="flex w-full h-auto text-[#195279]">
+        <div class="flex w-full h-auto text-[#195279] dark:text-[#FAFAFA]">
           <p class="lg:text-[16px] xl:text-[20px] pt-3 pb-2">{{ title }}</p>
         </div>
-        <div :class="`flex w-full h-auto text-[#4F90BC] ${subtitleClass}`">
+        <div
+          :class="`flex w-full h-auto text-[#4F90BC] dark:text-[#FAFAFA] ${subtitleClass}`"
+        >
           <p class="text-[18px] lg:text-[16px]">{{ subtitle }}</p>
         </div>
       </div>
@@ -64,7 +66,7 @@ defineProps({
           </p>
         </div>
         <div
-          :class="`flex w-full h-auto md:h-[75px] text-[#4F90BC] md:items-start ${subtitleClass}`"
+          :class="`flex w-full h-auto md:h-[75px] text-[#4F90BC] dark:text-[#FAFAFA] md:items-start ${subtitleClass}`"
         >
           <p class="sml:text-[14px] md:text-[16px] dark:text-[#6F6F6F]">
             {{ subtitle }}

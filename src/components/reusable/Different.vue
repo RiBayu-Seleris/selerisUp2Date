@@ -35,7 +35,7 @@ defineProps({
         <div class="flex w-[70%] h-auto mt-5">
           <!-- Title Body -->
           <p
-            class="lg:text-2xl xl:text-[48px] text-[#195279] leading-[40px] xl:leading-[65px] font-[500]"
+            class="lg:text-2xl xl:text-[48px] text-[#195279] dark:text-[#FAFAFA] leading-[40px] xl:leading-[65px] font-[500]"
           >
             <!-- We bring solutions to make life insurance for our customers. -->
             {{ subtitle }}

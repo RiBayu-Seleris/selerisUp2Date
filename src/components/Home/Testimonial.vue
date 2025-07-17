@@ -9,17 +9,20 @@ const testimonials = [
   {
     name: "Dazzle Healer",
     position: "Head of Technology at CHUUB",
-    text: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ullamcorper mattis lorem non.`,
+    text: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fuga vero minus iste
+  saepe ipsam ipsa provident veritatis aspernatur quisquam pariatur!`,
   },
   {
     name: "Jane Smith",
     position: "Design Lead at KREATIF",
-    text: `Aliquam erat volutpat. Suspendisse potenti. Vestibulum ante ipsum primis in faucibus orci.`,
+    text: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fuga vero minus iste
+  saepe ipsam ipsa provident veritatis aspernatur quisquam pariatur!`,
   },
   {
     name: "John Doe",
     position: "Product Manager at HALO",
-    text: `Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.`,
+    text: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Fuga vero minus iste
+  saepe ipsam ipsa provident veritatis aspernatur quisquam pariatur!`,
   },
 ];
 </script>
