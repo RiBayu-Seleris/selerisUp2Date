@@ -1,5 +1,13 @@
 <script setup>
 import VideoAi from "@/assets/images/video-ai-desc.png";
+import { onMounted } from "vue";
+
+onMounted(() => {
+  const video = document.querySelector("video");
+  if (video) {
+    video.addEventListener("contextmenu", (e) => e.preventDefault());
+  }
+});
 </script>
 
 <template>
@@ -14,6 +22,7 @@ import VideoAi from "@/assets/images/video-ai-desc.png";
         loop
         muted
         playsinline
+        @contextmenu.prevent
         class="w-full h-full object-cover object-center rounded-3xl"
       >
         <source src="@/assets/videos/Ai-Video.mp4" type="video/mp4" />

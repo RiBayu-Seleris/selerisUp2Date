@@ -1,6 +1,10 @@
 <script setup>
-import HeroText from "@/components/reusable/HeroText.vue";
+import HeroText from "@/components/reusable/TechHero.vue";
+import TechLogo from "@/components/reusable/TechLogo.vue";
 import TechCard from "@/components/reusable/TechCard.vue";
+
+import SCI_Logo from "@/assets/images/technology/SCI-Logo.svg";
+import Dark_SCI_Logo from "@/assets/images/technology/Dark-SCI-Logo.svg";
 
 const cardContents = [
   {
@@ -44,43 +48,35 @@ const cardContents = [
 
 <template>
   <section
-    class="flex relative w-full h-auto px-8 bg-[radial-gradient(ellipse_at_top,_#3CFF7A_-70%,_#FAFAFA_60%)] sml:pt-12 lg:pt-28 xl:pt-0"
+    class="flex relative w-full h-auto px-8 bg-[radial-gradient(ellipse_at_top,_#3CFF7A_-70%,_#FAFAFA_60%)] dark:bg-[radial-gradient(ellipse_at_top,_#3CFF7A_-70%,_#17181A_60%)]"
   >
-    <div
-      class="flex w-full h-auto sml:pt-[90px] md:pt-[100px] lg:pt-[50px] xl:pt-[160px]"
-    >
-      <HeroText title="Technology" subtitle="Seleris Chromatic Imaging" />
-    </div>
+    <HeroText subtitle="Seleris Chromatic Imaging" />
   </section>
 
+  <!-- SCI LOGO -->
   <section
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-center"
   >
-    <div class="w-full h-auto flex justify-center mt-10 lg:mt-20 xl:mt-16">
-      <img
-        src="@/assets/images/technology/SCI-Logo.svg"
-        alt="Logo"
-        class="w-full h-full sml:w-[150px] lg:w-[300px] xl:w-[300px] object-contain lg:object-cover"
-      />
-    </div>
+    <TechLogo :imgUrl="SCI_Logo" :darkImgUrl="Dark_SCI_Logo" />
   </section>
 
+  <!-- IMAGES -->
   <section
-    class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-center"
+    class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-center mt-10 md:mt-20"
   >
     <div
-      class="w-full h-auto lg:w-[800px] lg:h-[370px] xl:w-[900px] xl:h-[400px] flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] rounded-3xl"
+      class="w-full h-auto sml:h-[170px] md:h-[350px] lg:h-[400px] xl:h-[500px] flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
     >
       <img
         src="@/assets/images/technology/SCI-Images.png"
         alt="Logo"
-        class="w-full h-full object-contain"
+        class="w-full h-full object-fit bg-no-repeat object-center"
       />
     </div>
   </section>
 
   <section
-    class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-start mt-20 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar gap-x-10 scroll-pl-20 pl-20 pr-20"
+    class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-start mt-14 md:mt-20 mb-32 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar gap-x-10 scroll-pl-8 pl-8 pr-8"
   >
     <TechCard
       v-for="(cardContent, index) in cardContents"

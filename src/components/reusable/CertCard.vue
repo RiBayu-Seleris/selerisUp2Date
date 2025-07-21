@@ -71,7 +71,7 @@ const cekCertIcon = computed(() => {
       :class="`absolute top-0 left-0 z-0 flex flex-col w-full h-full bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out ${divImageAfter}`"
     >
       <div
-        :class="`flex flex-col w-full h-full text-white dark:text-[#3D3434] px-10 pt-12 gap-y-4 ${textPosition}`"
+        :class="`flex flex-col w-full h-full text-white dark:text-[#3D3434] px-6 xl:px-10 pt-12 gap-y-4 ${textPosition}`"
       >
         <p class="text-[24px] font-semibold">
           {{ TitleAfter }}

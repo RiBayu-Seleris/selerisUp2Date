@@ -13,7 +13,7 @@ import performanceIcon from "@/assets/icons/performance.svg";
 
 <template>
   <DifferentSection
-    bgImage="bg-different bg-cover bg-no-repeat"
+    bgImage="bg-different dark:bg-differentDark bg-cover bg-no-repeat"
     title="About Us"
     subtitle="We are committed to deliver efficient and effective products and services."
     :robotImage="RobotAI"

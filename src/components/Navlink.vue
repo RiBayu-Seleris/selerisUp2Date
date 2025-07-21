@@ -14,8 +14,10 @@ defineProps({
   <router-link
     :to="href"
     :class="[
-      'relative inline-block text-animate-hover hover:font-bold',
-      route.path === href ? 'text-[#18AB53] font-bold' : '',
+      'relative inline-block text-animate-hover dark:dark-text-animate-hover hover:font-semibold',
+      route.path === href
+        ? 'text-[#18AB53] dark:text-[#EEEEEE] font-semibold'
+        : '',
     ]"
   >
     <slot />

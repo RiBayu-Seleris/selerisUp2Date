@@ -6,6 +6,7 @@ import Navlink from "@/components/Navlink.vue";
 
 const { isScrolled } = useScrollStore();
 const route = useRoute();
+const isHoveringAbout = ref(false);
 const isHoveringProduct = ref(false);
 const isHoveringTechnology = ref(false);
 
@@ -42,16 +43,49 @@ const products = [
     :class="[
       'flex items-center text-md font-[400] text-[#374151] ',
       isScrolled
-        ? 'lg:gap-[20px] xl:gap-[50px] dark:text-white '
-        : 'lg:gap-[25px] 2lg:gap-[45px] xl:gap-[63px] 2xl:gap-[70px] justify-center dark:text-white',
+        ? 'lg:gap-[20px] xl:gap-[50px] dark:text-[#989898] '
+        : 'lg:gap-[25px] 2lg:gap-[45px] xl:gap-[63px] 2xl:gap-[70px] justify-center dark:text-[#989898]',
     ]"
   >
     <li>
       <Navlink class="text-[11pt]" href="/"> Home </Navlink>
     </li>
-    <li>
-      <Navlink class="text-[11pt]" href="/about"> About </Navlink>
+    <li
+      class="relative list-none cursor-pointer"
+      @mouseenter="isHoveringAbout = true"
+      @mouseleave="isHoveringAbout = false"
+    >
+      <span
+        class="relative inline-block text-animate-hover dark:dark-text-animate-hover hover:font-bold text-[11pt]"
+      >
+        About ▾
+      </span>
     </li>
+
+    <!-- Dropdown bebas posisi -->
+    <div
+      v-if="isHoveringAbout"
+      @mouseenter="isHoveringAbout = true"
+      @mouseleave="isHoveringAbout = false"
+      :class="[
+        'absolute z-50 w-auto h-auto lg:left-[200px] xl:left-[300px] top-[70px] ',
+        isScrolled ? 'mt-2 lg:-mt-6 xl:-mt-5 pt-10' : 'mt-0 lg:-mt-2 pt-5 ',
+      ]"
+    >
+      <div
+        class="flex flex-col w-auto bg-white p-4 rounded-2xl shadow-lg gap-5 dark:bg-[#2C2C2C80] dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-sm dark:bg-opacity-10 dark:border-[0.2px] dark:shadow-none"
+      >
+        <Navlink
+          href="/about"
+          class="flex justify-center items-center w-[300px]"
+        >
+          <span>Company</span>
+        </Navlink>
+        <Navlink href="#" class="flex justify-center items-center w-[300px]">
+          <span>Innovations</span>
+        </Navlink>
+      </div>
+    </div>
 
     <li
       class="relative list-none cursor-pointer"
@@ -59,7 +93,7 @@ const products = [
       @mouseleave="isHoveringProduct = false"
     >
       <span
-        class="relative inline-block text-animate-hover hover:font-bold text-[11pt]"
+        class="relative inline-block text-animate-hover dark:dark-text-animate-hover hover:font-bold text-[11pt]"
       >
         Products ▾
       </span>
@@ -71,12 +105,12 @@ const products = [
       @mouseenter="isHoveringProduct = true"
       @mouseleave="isHoveringProduct = false"
       :class="[
-        'absolute z-50 w-auto h-auto xl:left-[350px] lg:left-[200px] top-[70px]',
+        'absolute z-50 w-auto h-auto lg:left-[300px] xl:left-[400px] top-[70px]',
         isScrolled ? 'mt-2 lg:-mt-6 xl:-mt-5 pt-10' : 'mt-0 lg:-mt-2 pt-5 ',
       ]"
     >
       <div
-        class="w-full h-auto flex flex-col bg-white p-8 rounded-2xl shadow-lg dark:bg-green-300 dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-sm dark:bg-opacity-10 dark:border-[0.2px] dark:shadow-none"
+        class="w-full h-auto flex flex-col bg-white p-8 rounded-2xl shadow-lg dark:bg-[#2C2C2C80] dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-sm dark:bg-opacity-10 dark:border-[0.2px] dark:shadow-none"
       >
         <div class="w-full h-auto flex mb-6">
           <p class="text-[#4B5563] dark:text-white font-[500] lg:text-[18px]">
@@ -90,7 +124,9 @@ const products = [
             :href="product.url"
             class="flex justify-center items-center w-[170px]"
           >
-            <span class="text-[#9CA3AF]">{{ product.name }}</span>
+            <span class="text-[#9CA3AF] dark:text-[#FAFAFA] font-[400]">{{
+              product.name
+            }}</span>
           </Navlink>
         </div>
       </div>
@@ -102,7 +138,7 @@ const products = [
       @mouseleave="isHoveringTechnology = false"
     >
       <span
-        class="relative inline-block text-animate-hover hover:font-bold text-[11pt]"
+        class="relative inline-block text-animate-hover dark:dark-text-animate-hover hover:font-bold text-[11pt]"
       >
         Technology ▾
       </span>
@@ -114,12 +150,12 @@ const products = [
       @mouseenter="isHoveringTechnology = true"
       @mouseleave="isHoveringTechnology = false"
       :class="[
-        'absolute z-50 w-auto h-auto left-[560px] lg:left-[360px] xl:left-[500px] top-[70px] ',
+        'absolute z-50 w-auto h-auto left-[560px] lg:left-[380px] xl:left-[500px] top-[70px] ',
         isScrolled ? 'mt-2 lg:-mt-6 xl:-mt-5 pt-10' : 'mt-0 lg:-mt-2 pt-5 ',
       ]"
     >
       <div
-        class="flex flex-col w-auto bg-white p-4 rounded-2xl shadow-lg gap-5 dark:bg-green-300 dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-sm dark:bg-opacity-10 dark:border-[0.2px] dark:shadow-none"
+        class="flex flex-col w-auto bg-white p-4 rounded-2xl shadow-lg gap-5 dark:bg-[#2C2C2C80] dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-sm dark:bg-opacity-10 dark:border-[0.2px] dark:shadow-none"
       >
         <Navlink
           href="/seleris-chromatic-imaging"
@@ -157,21 +193,3 @@ const products = [
     </li>
   </ul>
 </template>
-<style scoped>
-.text-animate-hover {
-  position: relative;
-  display: inline-block;
-  background-image: linear-gradient(to right, #18ab53 0%, #18ab53 100%);
-  background-size: 0% 100%;
-  background-repeat: no-repeat;
-  background-position: left;
-  -webkit-background-clip: text;
-  background-clip: text;
-  transition: background-size 0.5s ease, -webkit-text-fill-color 0.5s ease;
-}
-
-.text-animate-hover:hover {
-  background-size: 100% 100%;
-  -webkit-text-fill-color: transparent;
-}
-</style>

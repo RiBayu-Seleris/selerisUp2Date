@@ -18,21 +18,21 @@ import ImgLinear from "@/assets/images/about-linear.png";
           </div>
           <div class="flex w-full h-auto md:pr-16 lg:pr-16 xl:pr-20">
             <p
-              class="sml:text-[24px] md:text-[32px] lg:text-[40px] xl:text-[48px] text-[#195279] md:leading-[45px] lg:leading-[50px] xl:leading-[60px]"
+              class="sml:text-[24px] md:text-[32px] lg:text-[40px] xl:text-[48px] text-[#195279] md:leading-[45px] lg:leading-[50px] xl:leading-[60px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
             >
               We're company with a vision.
             </p>
           </div>
           <div class="flex w-full h-auto">
             <p
-              class="sml:text-[14px] md:text-[19px] lg:text-[24px] xl:text-[27px] text-[#89A6BA] xl:leading-[35px] pr-20"
+              class="sml:text-[14px] md:text-[19px] lg:text-[21px] xl:text-[24px] text-[#89A6BA] dark:text-[#6F6F6F] xl:leading-[35px] pr-20"
             >
               Seleris Is The Best Life Technology
             </p>
           </div>
         </div>
       </div>
-      <div class="w-full h-auto sml:h-[350px] flex">
+      <div class="w-full h-auto sml:h-[350px] lg:w-full lg:h-auto flex">
         <img
           :src="ImgLinear"
           alt="About Banner"

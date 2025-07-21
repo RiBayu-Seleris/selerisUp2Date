@@ -66,26 +66,26 @@ const description = computed(() => {
         <img
           :src="Logo"
           alt="Logo"
-          class="w-[70px] sml:w-[50px] md:w-[90px] lg:w-[100px] h-auto object-contain mb-3 dark:hidden"
+          class="w-[70px] sml:w-[50px] md:w-[90px] lg:w-[130px] h-auto object-contain mb-3 dark:hidden"
         />
         <img
           :src="DarkLogo"
           alt="Logo"
-          class="w-[70px] sml:w-[50px] md:w-[90px] lg:w-[100px] h-auto object-contain mb-3 hidden dark:block"
+          class="w-[70px] sml:w-[50px] md:w-[90px] lg:w-[130px] h-auto object-contain mb-3 hidden dark:block"
         />
         <div
-          class="text-start sml:text-[12px] md:text-[16px] lg:text-[19px] xl:pt-3 leading-snug text-black dark:text-[#FAFAFA]"
+          class="text-start sml:text-[12px] md:text-[16px] lg:text-[17px] xl:pt-3 leading-snug text-black dark:text-[#FAFAFA]"
         >
           {{ description }}
         </div>
         <div
           class="flex flex-row text-[#2AB857] dark:text-[#FAFAFA] mt-2 lg:mt-4 font-medium items-center"
         >
-          <span class="sml:text-[11px] md:text-base lg:text-lg"
+          <span class="sml:text-[12px] md:text-[16px] lg:text-[17px]"
             >View product</span
           >
           <svg
-            class="w-[1.1rem] h-[1.1rem] md:w-[1.4rem] md:h-[1.7rem] lg:w-[1.7rem] lg:h-[1.7rem] ml-1 self-center"
+            class="w-[1.1rem] h-[1.1rem] md:w-[1.4rem] md:h-[1.4rem] lg:w-[1.4rem] lg:h-[1.4rem] ml-1 self-center"
             viewBox="0 0 24 24"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"

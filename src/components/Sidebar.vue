@@ -177,6 +177,11 @@ const handleTechnology = () => {
                   <p class="text-[12px]">Services</p>
                 </Navlink>
               </div>
+              <div class="w-full h-auto">
+                <Navlink href="/contact">
+                  <p class="text-[12px]">Contact</p>
+                </Navlink>
+              </div>
             </nav>
           </div>
         </div>

@@ -48,7 +48,7 @@ onUnmounted(() => {
     <!-- pt-5 lg:pt-6 xl:pt-5 -->
 
     <main class="relative w-full max-w-[1440px] mx-auto">
-      <div class="flex fixed w-full h-auto z-10">
+      <div class="flex fixed w-full h-auto z-50">
         <component :is="scrollStore.isScrolled ? NavbarScroll : Navbar" />
       </div>
 
@@ -56,7 +56,10 @@ onUnmounted(() => {
       <Sidebar />
       <router-view />
 
-      <section class="flex flex-col relative w-full mx-auto h-auto mt-16 px-8">
+      <section
+        class="flex flex-col relative w-full mx-auto h-auto mt-16 px-8"
+        v-if="!['/blog'].includes(route.path)"
+      >
         <Touch />
       </section>
     </main>

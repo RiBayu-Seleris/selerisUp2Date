@@ -34,6 +34,7 @@ module.exports = {
         different: "url('@/assets/images/different-background.png')",
         differentDark: "url('@/assets/images/different-dark-background.png')",
         api: "url('@/assets/images/api-background.png')",
+        darkapi: "url('@/assets/images/dark-api-background.png')",
         leftCertBefore:
           "url('@/assets/images/certification/left-frame-before.png')",
         centerCertBefore:

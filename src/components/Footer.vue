@@ -79,27 +79,27 @@ import appstore from "@/assets/images/appstore.png";
           <!-- lg:pl-6 xl:pl-12 -->
           <div class="flex flex-col w-full h-auto lg:pl-8 xl:px-8">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] xl:text-[22px] font-medium pb-2"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[19px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2"
             >
               Products
             </p>
             <div>
-              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
+              <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
                 Seleris Lifins
               </p>
-              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
+              <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
                 Seleris Medins
               </p>
-              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
+              <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
                 Seleris Credit Cover
               </p>
-              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
+              <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
                 Seleris Care
               </p>
-              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
+              <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
                 Flexa Asia
               </p>
-              <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
+              <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
                 Auto Claim
               </p>
             </div>
@@ -111,26 +111,26 @@ import appstore from "@/assets/images/appstore.png";
         <div class="flex relative w-full h-auto">
           <div class="flex flex-col w-full h-auto lg:pl-8 xl:pl-5">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] xl:text-[22px] font-medium pb-2"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2"
             >
               Company
             </p>
-            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
+            <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
               Home
             </p>
-            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
+            <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
               About
             </p>
-            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
+            <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
               Our Team
             </p>
-            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
+            <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
               Blog
             </p>
-            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
+            <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
               Services
             </p>
-            <p class="text-[#B8B8B8] lg:text-[20px] xl:text-[18px] py-1.5">
+            <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
               Contact
             </p>
           </div>
@@ -141,14 +141,14 @@ import appstore from "@/assets/images/appstore.png";
         <div class="w-full h-auto xl:w-[170%]">
           <div class="flex flex-col">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] xl:text-[22px] font-medium pb-2"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2"
             >
               Stay Connects
             </p>
 
             <div class="mb-3">
               <p
-                class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[18px] xl:text-[22px] sml:pb-2"
+                class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[18px] lg:text-[18px] xl:text-[22px] sml:pb-2"
               >
                 Address
               </p>
@@ -183,7 +183,9 @@ import appstore from "@/assets/images/appstore.png";
             </div>
             <div class="flex flex-col xl:flex-row w-full h-auto">
               <div class="flex flex-col w-full h-auto mb-3 lg:mt-2">
-                <p class="text-[#195279] dark:text-[#FAFAFA] text-[20px]">
+                <p
+                  class="text-[#195279] dark:text-[#FAFAFA] text-[20px] lg:text-[18px]"
+                >
                   Phone
                 </p>
                 <p
@@ -193,7 +195,9 @@ import appstore from "@/assets/images/appstore.png";
                 </p>
               </div>
               <div class="flex flex-col w-full h-auto mb-3 lg:mt-2">
-                <p class="text-[#195279] dark:text-[#FAFAFA] text-[20px]">
+                <p
+                  class="text-[#195279] dark:text-[#FAFAFA] text-[20px] lg:text-[18px]"
+                >
                   E-Mail
                 </p>
                 <p
@@ -211,7 +215,7 @@ import appstore from "@/assets/images/appstore.png";
         <div class="w-full h-auto">
           <div class="flex flex-col lg:pl-10">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] xl:text-[22px] font-medium pb-2 sml:pb-0"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2 sml:pb-0"
             >
               Get The App
             </p>

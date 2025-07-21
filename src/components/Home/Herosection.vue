@@ -23,7 +23,7 @@ import { useSidebarStore } from "@/stores/sidebar";
           <p
             class="text-[24px] sml:text-[21px] lg:text-[26px] xl:text-[32px] text-[#1AB24F] font-[500]"
           >
-            AI Inovation
+            AI Innovation
           </p>
         </div>
         <div class="w-full pb-2 sml:pb-2">

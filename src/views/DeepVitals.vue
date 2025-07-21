@@ -1,6 +1,10 @@
 <script setup>
-import HeroText from "@/components/reusable/HeroText.vue";
+import HeroText from "@/components/reusable/TechHero.vue";
+import TechLogo from "@/components/reusable/TechLogo.vue";
 import TechCard from "@/components/reusable/TechCard.vue";
+
+import SDV_Logo from "@/assets/images/technology/SDV-Logo.svg";
+import Dark_SDV_Logo from "@/assets/images/technology/Dark-SDV-Logo.svg";
 
 const cardContents = [
   {
@@ -44,30 +48,22 @@ const cardContents = [
 
 <template>
   <section
-    class="flex relative w-full h-auto px-8 bg-[radial-gradient(ellipse_at_top,_#466CFF_-70%,_#FAFAFA_60%)] lg:pt-28 xl:pt-0"
+    class="flex relative w-full h-auto px-8 bg-[radial-gradient(ellipse_at_top,_#466CFF_-70%,_#FAFAFA_60%)] dark:bg-[radial-gradient(ellipse_at_top,_#466CFF_-70%,_#17181A_60%)]"
   >
-    <div class="flex w-full h-auto xl:pt-[160px] md:pt-[100px] sml:pt-[90px]">
-      <HeroText title="Technology" subtitle="Seleris Deep Vitals" />
-    </div>
+    <HeroText subtitle="Seleris Deep Vitals" />
   </section>
 
   <section
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-center"
   >
-    <div class="w-full h-auto flex justify-center mt-10 lg:mt-20">
-      <img
-        src="@/assets/images/technology/SDV-Logo.svg"
-        alt="Logo"
-        class="w-[600px] sml:w-[150px] h-full object-contain"
-      />
-    </div>
+    <TechLogo :imgUrl="SDV_Logo" :darkImgUrl="Dark_SDV_Logo" />
   </section>
 
   <section
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-center"
   >
     <div
-      class="w-full h-auto flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] rounded-3xl"
+      class="w-full h-auto sml:h-[200px] md:h-[250px] lg:h-[350px] xl:h-[500px] flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
     >
       <img
         src="@/assets/images/technology/SDV-Images.png"
@@ -78,7 +74,7 @@ const cardContents = [
   </section>
 
   <section
-    class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-start mt-20 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar gap-x-10 scroll-pl-20 pl-20 pr-20"
+    class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-start mt-14 md:mt-20 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar gap-x-10 scroll-pl-8 pl-8 pr-8"
   >
     <TechCard
       v-for="(cardContent, index) in cardContents"

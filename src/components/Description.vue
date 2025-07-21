@@ -27,6 +27,11 @@ onMounted(() => {
   const el = scrollContainer.value;
   const stepElements = el.querySelectorAll(".step");
 
+  const video = document.querySelector("video");
+  if (video) {
+    video.addEventListener("contextmenu", (e) => e.preventDefault());
+  }
+
   const onScroll = () => {
     let current = 0;
     stepElements.forEach((step, index) => {
@@ -153,6 +158,7 @@ onMounted(() => {
         loop
         muted
         playsinline
+        @contextmenu.prevent
         class="w-full h-full object-contain dark:hidden"
       >
         <source src="@/assets/videos/Design-Vector-Web2.mp4" type="video/mp4" />
@@ -162,7 +168,8 @@ onMounted(() => {
         loop
         muted
         playsinline
-        class="w-full h-full object-contain hidden dark:block"
+        @contextmenu.prevent
+        class="w-full h-full lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] object-contain hidden dark:block rounded-[20px] border-[0.1px] bg-[#FFFFFF] dark:bg-[#141618] dark:border-[#FAFAFA]/25 lg:ml-10 xl:pl-0"
       >
         <source
           src="@/assets/videos/Design-Dark-Vector-Web2.mp4"

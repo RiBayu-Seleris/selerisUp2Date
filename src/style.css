@@ -44,3 +44,36 @@ html {
 .dark .custom-pagination .swiper-pagination-bullet-active {
   @apply bg-[#1DC457];
 }
+
+.text-animate-hover {
+  position: relative;
+  display: inline-block;
+  background-image: linear-gradient(to right, #18ab53 0%, #18ab53 100%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  background-position: left;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition: background-size 0.5s ease, -webkit-text-fill-color 0.5s ease;
+}
+
+.text-animate-hover:hover {
+  background-size: 100% 100%;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark .dark-text-animate-hover {
+  position: relative;
+  display: inline-block;
+  background-image: linear-gradient(to right, #eeeeee 0%, #eeeeee 100%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  background-position: left;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition: background-size 0.5s ease, -webkit-text-fill-color 0.5s ease;
+}
+.dark .dark-text-animate-hover:hover {
+  background-size: 100% 100%;
+  -webkit-text-fill-color: transparent;
+}
