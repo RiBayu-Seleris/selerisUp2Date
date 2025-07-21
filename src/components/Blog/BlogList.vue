@@ -60,14 +60,16 @@ const filteredPosts = computed(() => {
 </script>
 
 <template>
-  <div class="flex flex-col w-full h-auto px-0 xl:px-20">
+  <div class="flex flex-col w-full h-auto px-0 xl:px-10">
     <!-- Tabs -->
-    <div class="flex flex-row w-full h-auto gap-x-[65px] mb-5">
+    <div
+      class="flex flex-row w-full h-auto gap-x-[20px] md:gap-x-[45px] lg:gap-x-[65px] mb-5 sml:overflow-x-auto md:overflow-x-hidden sml:snap-x sml:snap-mandatory sml:scroll-pl-10 sml:pl-10 sml:pr-10 hide-scrollbar md:pl-0"
+    >
       <div
         v-for="category in categories"
         :key="category"
         @click="activeCategory = category"
-        class="cursor-pointer text-[16px] font-medium pb-1 border-b-2 transition-all duration-200"
+        class="flex-shrink-0 w-auto cursor-pointer md:text-[16px] font-medium pb-1 border-b-2 transition-all duration-200"
         :class="
           activeCategory === category
             ? 'text-green-600 border-green-600'
