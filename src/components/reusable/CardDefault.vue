@@ -14,7 +14,7 @@ defineProps({
 
 <template>
   <div
-    class="sml:hidden lg:flex flex-row snap-start shrink-0 md:gap-x-5 w-[80%] md:w-[450px] md:h-[180px] lg:w-[50%] sml:h-[270px] lg:h-[200px] rounded-xl p-5 border-[0.1px] bg-[#FFFFFF] dark:bg-[#1D1F23] dark:border-[#FAFAFA]/25"
+    class="sml:hidden lg:flex flex-row snap-start shrink-0 md:gap-x-5 w-[80%] md:w-[450px] md:h-[180px] lg:w-[50%] sml:h-[270px] lg:h-[200px] rounded-xl p-5 bg-[#FFFFFF] dark:bg-[#1D1F23] border-[0.1px] dark:border-[#FAFAFA]/25"
   >
     <div class="flex w-[30%] lg:w-[30%] h-auto">
       <img
@@ -37,7 +37,7 @@ defineProps({
 
   <!-- Mobile Smalls -->
   <div
-    class="lg:hidden sml:flex flex-col snap-start shrink-0 sml:w-full md:w-[60%] h-[200px] rounded-xl p-5 border shadow-lg"
+    class="lg:hidden sml:flex flex-col snap-start shrink-0 sml:w-full md:w-[60%] h-[200px] rounded-xl p-5 shadow-lg dark:bg-[#1D1F23] border-[0.1px] dark:border-[#FAFAFA]/25"
   >
     <div class="flex flex-row">
       <div class="flex w-[70px] h-[70px]">

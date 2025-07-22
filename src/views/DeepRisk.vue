@@ -63,13 +63,18 @@ const cardContents = [
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-center"
   >
     <div
-      class="w-full h-auto sml:h-[150px] md:h-[250px] lg:h-[350px] xl:h-[400px] flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
+      class="w-full h-auto sml:h-[140px] md:h-[250px] lg:h-[350px] xl:h-[480px] flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
     >
-      <img
-        src="@/assets/images/technology/SDR-Images.png"
-        alt="Logo"
-        class="w-full h-full object-contain"
-      />
+      <video
+        autoplay
+        loop
+        muted
+        playsinline
+        @contextmenu.prevent
+        class="w-full h-full object-cover object-bottom rounded-[20px] bg-[#F3F4F6] dark:bg-[#323232] border-[0.1px] border-[#FAFAFA] dark:border-[#FAFAFA]/25"
+      >
+        <source src="@/assets/videos/SDR_Video.mp4" type="video/mp4" />
+      </video>
     </div>
   </section>
 

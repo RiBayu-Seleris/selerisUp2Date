@@ -7,17 +7,28 @@ const routes = [
     component: () => import("@/views/Home.vue"),
     meta: { title: "Home" },
   },
+  // Redirect jika akses langsung ke /about
   {
     path: "/about",
-    name: "About",
-    component: () => import("@/views/About.vue"),
-    meta: { title: "About" },
+    redirect: "/", // bisa juga ke "/about/company" atau "/not-found"
   },
+  // Routes Grouping
   {
-    path: "/teams",
-    name: "Team",
-    component: () => import("@/views/Team.vue"),
-    meta: { title: "Team" },
+    path: "/about", // Parent path for admin
+    children: [
+      {
+        path: "company",
+        name: "Company",
+        component: () => import("@/views/Company.vue"),
+        meta: { title: "Company" },
+      },
+      {
+        path: "teams",
+        name: "Team",
+        component: () => import("@/views/Team.vue"),
+        meta: { title: "Team" },
+      },
+    ],
   },
   {
     path: "/blogs",

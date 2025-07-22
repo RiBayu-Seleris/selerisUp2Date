@@ -65,11 +65,16 @@ const cardContents = [
     <div
       class="w-full h-auto sml:h-[200px] md:h-[250px] lg:h-[350px] xl:h-[500px] flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
     >
-      <img
-        src="@/assets/images/technology/SDV-Images.png"
-        alt="Logo"
-        class="w-full h-full object-contain"
-      />
+      <video
+        autoplay
+        loop
+        muted
+        playsinline
+        @contextmenu.prevent
+        class="w-full h-full object-cover rounded-[20px] bg-[#F3F4F6] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25"
+      >
+        <source src="@/assets/videos/SDV_Video.mp4" type="video/mp4" />
+      </video>
     </div>
   </section>
 

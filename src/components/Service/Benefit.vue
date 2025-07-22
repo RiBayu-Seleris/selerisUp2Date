@@ -11,14 +11,22 @@ import HeroText from "@/components/reusable/HeroText.vue";
         description="The Seleris API service offers a number of benefits for companies, including"
       />
     </div>
-    <div class="flex w-full h-[700px] mt-5">
+    <div class="flex w-full h-full mt-5">
       <video
         autoplay
         muted
         playsinline
-        class="w-full h-full object-contain object-center rounded-3xl"
+        class="w-full h-full object-cover object-center rounded-3xl dark:hidden border-[0.1px] dark:border-[#FAFAFA]/25"
       >
         <source src="@/assets/videos/DesignAPI.mp4" type="video/mp4" />
+      </video>
+      <video
+        autoplay
+        muted
+        playsinline
+        class="w-full h-full object-cover object-center rounded-3xl hidden dark:block border-[0.1px] dark:border-[#FAFAFA]/25"
+      >
+        <source src="@/assets/videos/DarkDesignAPI.mp4" type="video/mp4" />
       </video>
     </div>
   </div>

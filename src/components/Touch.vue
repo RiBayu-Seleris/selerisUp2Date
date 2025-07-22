@@ -39,7 +39,7 @@ import CallIcon from "@/components/icons/CallIcon.vue";
                 <div class="w-full">
                   <input
                     type="text"
-                    class="w-full p-2 rounded-[8px] border-[1px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] focus:outline-none focus:ring-1 focus:ring-[#2AB857]"
+                    class="w-full p-2 rounded-[8px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:outline-none focus:ring-1 focus:ring-[#2AB857]"
                     placeholder="Full Name"
                   />
                 </div>
@@ -53,7 +53,7 @@ import CallIcon from "@/components/icons/CallIcon.vue";
                 <div class="w-full">
                   <input
                     type="email"
-                    class="w-full p-2 rounded-[8px] border-[1px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] focus:outline-none focus:ring-1 focus:ring-[#2AB857] dark:focus:border-none"
+                    class="w-full p-2 rounded-[8px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:outline-none focus:ring-1 focus:ring-[#2AB857] dark:focus:border-none"
                     placeholder="Email"
                   />
                 </div>
@@ -66,7 +66,7 @@ import CallIcon from "@/components/icons/CallIcon.vue";
                 </div>
                 <div class="w-full">
                   <textarea
-                    class="w-full lg:h-[70px] xl:h-[130px] p-2 rounded-[8px] border-[1px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] focus:outline-none focus:ring-1 focus:ring-[#2AB857] resize-none align-top"
+                    class="w-full lg:h-[70px] xl:h-[130px] p-2 rounded-[8px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:outline-none focus:ring-1 focus:ring-[#2AB857] resize-none align-top"
                     placeholder="Message"
                   />
                 </div>

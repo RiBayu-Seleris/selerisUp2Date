@@ -4,7 +4,7 @@ import { ref, onMounted, onUnmounted, computed } from "vue";
 import Logo from "@/assets/images/seleris-logo.svg";
 import DarkLogo from "@/assets/images/seleris-logo-dark.svg";
 
-const descriptions = `Seleris is a technology company that develops a facial video-based life insurance underwriting application. The application allows insurance companies to assess the risk...`;
+const descriptions = `Seleris is a technology company that develops a facial video-based life underwriting application. The application allows companies to assess the`;
 const windowWidth = ref(window.innerWidth);
 
 const updateWidth = () => {
@@ -24,7 +24,7 @@ const description = computed(() => {
 
   if (windowWidth.value >= 1024) {
     // ukuran lg ke atas → tampilkan 170 karakter
-    return length > 140 ? descriptions.substring(0, 140) + "..." : descriptions;
+    return length > 120 ? descriptions.substring(0, 120) + "..." : descriptions;
   } else if (windowWidth.value > 425 && windowWidth.value < 1024) {
     // ukuran md → tampilkan 100 karakter
     return length > 90 ? descriptions.substring(0, 90) + "..." : descriptions;

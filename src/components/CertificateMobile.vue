@@ -56,7 +56,7 @@ const getShortText = (fullText) => {
       >
         <!-- FRONT -->
         <div
-          class="flex flex-col sml:gap-y-3 md:gap-y-3 absolute w-full h-full backface-hidden bg-[#F9FAFB] dark:bg-[#1D1F23] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md px-5 pt-6"
+          class="flex flex-col sml:gap-y-3 md:gap-y-3 absolute w-full h-full backface-hidden bg-[#F9FAFB] dark:bg-[#1D1F23] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 shadow-md px-5 pt-6 border-[0.1px] dark:border-[#FAFAFA]/25"
         >
           <div
             class="flex flex-col w-full h-auto text-[#195279] dark:text-[#FAFAFA]"
@@ -97,10 +97,10 @@ const getShortText = (fullText) => {
 
         <!-- BACK -->
         <div
-          class="absolute w-full sml:w-[250px] sml:h-[240px] md:w-full py-5 backface-hidden rotate-y-180 bg-[#F9FAFB] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center px-5 sml:px-4"
+          class="absolute w-full sml:w-[250px] sml:h-[240px] md:w-full py-5 backface-hidden rotate-y-180 bg-[#F9FAFB] dark:bg-[#FAFAFA] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center px-5 sml:px-4"
         >
           <p
-            class="flex text-[16px] sml:text-[12px] md:text-[18px] leading-relaxed overflow-hidden justify-center"
+            class="flex text-[16px] sml:text-[12px] md:text-[18px] leading-relaxed overflow-hidden justify-center dark:text-[#3D3434]"
             v-html="cert.description"
           ></p>
         </div>

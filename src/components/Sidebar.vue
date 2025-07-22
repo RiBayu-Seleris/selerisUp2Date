@@ -20,53 +20,68 @@ watch(
 const isProductOpen = ref(false);
 const isTechnologyOpen = ref(false);
 
+const AboutList = [
+  {
+    url: "/about/company",
+    name: "Company",
+  },
+  {
+    url: "/teams",
+    name: "Our Team",
+  },
+  {
+    url: "/innovation",
+    name: "Innovation",
+  },
+];
+
 const ProductList = [
   {
+    url: "#",
     name: "Seleris Care",
-    url: "#",
   },
   {
+    url: "#",
     name: "Seleris Medins",
-    url: "#",
   },
   {
+    url: "#",
     name: "Seleris Credit Cover",
-    url: "#",
   },
   {
+    url: "#",
     name: "EHD",
-    url: "#",
   },
   {
+    url: "#",
     name: "Sentris",
-    url: "#",
   },
   {
+    url: "#",
     name: "Flexa Asia",
-    url: "#",
   },
   {
+    url: "#",
     name: "Auto Claim",
-    url: "#",
   },
   {
-    name: "Seleris Doctor",
     url: "#",
+    name: "Seleris Doctor",
   },
 ];
 
 const TechnologyList = [
   {
-    name: "Seleris Chromatic Imaging",
     url: "/seleris-chromatic-imaging",
+    name: "Seleris Chromatic Imaging",
   },
   {
-    name: "Seleris Deep Vitals",
     url: "/seleris-deep-vitals",
+    name: "Seleris Deep Vitals",
   },
   {
-    name: "Seleris Deep Risk",
     url: "/seleris-deep-risk",
+    name: "Seleris Deep Risk",
   },
 ];
 
@@ -124,10 +139,22 @@ const handleTechnology = () => {
                   <p class="text-[12px]">Home</p>
                 </Navlink>
               </div>
-              <div class="w-full h-auto">
-                <Navlink href="/about">
-                  <p class="text-[12px]">About</p>
-                </Navlink>
+              <div class="w-full h-[2px] bg-[#1AB24F]/40" />
+              <div class="w-full h-auto flex flex-col">
+                <p class="text-slate-400 text-[16px]">About</p>
+                <div class="w-full h-auto flex flex-wrap">
+                  <div
+                    v-for="(about, index) in AboutList"
+                    :key="index"
+                    class="w-[50%] h-auto"
+                  >
+                    <Navlink :href="about.url">
+                      <p class="text-[12px] font-[500]">
+                        {{ about.name }}
+                      </p>
+                    </Navlink>
+                  </div>
+                </div>
               </div>
               <div class="w-full h-[2px] bg-[#1AB24F]/40" />
               <div class="w-full h-auto flex flex-col">

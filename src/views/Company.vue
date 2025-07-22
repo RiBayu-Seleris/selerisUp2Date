@@ -14,17 +14,19 @@ import { useSidebarStore } from "@/stores/sidebar";
 </script>
 
 <template>
-  <section class="flex flex-col relative w-full h-auto md:px-20">
+  <section class="dark:hidden flex flex-col relative w-full h-auto md:px-20">
     <Hero />
   </section>
 
   <!-- data-aos="fade-in"
     data-aos-duration="2000" -->
-  <section class="flex flex-col relative w-full h-auto px-8 sml:mt-20 lg:mt-28">
+  <section
+    class="dark:hidden flex flex-col relative w-full h-auto px-8 sml:mt-20 lg:mt-28"
+  >
     <DescAbout />
   </section>
 
-  <!-- DARK MODE
+  <!-- DARK MODE -->
   <div
     class="hidden dark:flex dark:flex-col dark:w-full dark:h-auto dark:bg-[radial-gradient(ellipse_at_right,_#3CFF7A_-70%,_#17181A_60%)]"
   >
@@ -37,7 +39,7 @@ import { useSidebarStore } from "@/stores/sidebar";
     >
       <DescAbout />
     </section>
-  </div> -->
+  </div>
 
   <!-- data-aos="fade-left"
     data-aos-duration="3000" -->

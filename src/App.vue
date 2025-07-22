@@ -58,7 +58,7 @@ onUnmounted(() => {
 
       <section
         class="flex flex-col relative w-full mx-auto h-auto mt-16 px-8"
-        v-if="!['/blog'].includes(route.path)"
+        v-if="!['/blogs'].includes(route.path)"
       >
         <Touch />
       </section>

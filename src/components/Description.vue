@@ -14,12 +14,12 @@ const steps = [
   {
     title: "Artificial Intelligence and Machine Learning Adoption",
     description:
-      "Leveraging predictive models to enhance underwriting accuracy and speed.",
+      "Seleris harnesses Remote Photoplethysmography (rPPG) technology to evaluate various vital signs that represent a customer's health condition.",
   },
   {
     title: "The Company",
     description:
-      "Integration with the platform to streamline customer experience.",
+      "Seleris harnesses Remote Photoplethysmography (rPPG) technology to evaluate various vital signs that represent a customer's health condition.",
   },
 ];
 
@@ -135,12 +135,12 @@ onMounted(() => {
             >
               <div>
                 <h3
-                  class="sml:text-xl md:text-2xl lg:text-2xl xl:text-[20px] text-green-600 font-semibold"
+                  class="sml:text-[14px] md:text-2xl lg:text-2xl xl:text-[20px] sml:leading-[20px] md:leading-normal text-green-600 font-[500]"
                 >
                   {{ step.title }}
                 </h3>
                 <p
-                  class="mt-5 sml:mt-3 text-xl xl:text-[16px] sml:text-sm text-gray-600 dark:text-[#FAFAFA] max-w-xl mx-auto"
+                  class="mt-5 sml:mt-3 text-xl sml:text-[12px] xl:text-[16px] sml:leading-relaxed text-gray-600 dark:text-[#FAFAFA] max-w-xl"
                 >
                   {{ step.description }}
                 </p>
@@ -151,7 +151,7 @@ onMounted(() => {
       </div>
     </div>
     <div
-      class="flex w-full sml:h-full md:h-[300px] lg:h-full xl:h-[425px] sml:mb-5 justify-center items-center"
+      class="flex w-full sml:h-full md:h-[600px] lg:h-full xl:h-[425px] justify-center items-center sml:mb-12 md:mb-20 lg:mb-0"
     >
       <video
         autoplay
@@ -169,7 +169,7 @@ onMounted(() => {
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] object-contain hidden dark:block rounded-[20px] border-[0.1px] bg-[#FFFFFF] dark:bg-[#141618] dark:border-[#FAFAFA]/25 lg:ml-10 xl:pl-0"
+        class="w-full h-full lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] object-contain hidden dark:block rounded-[20px] bg-[#FFFFFF] dark:bg-[#151819] border-[0.1px] dark:border-[#FAFAFA]/25 lg:ml-10 xl:pl-0"
       >
         <source
           src="@/assets/videos/Design-Dark-Vector-Web2.mp4"
