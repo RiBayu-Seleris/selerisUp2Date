@@ -28,7 +28,7 @@ const ApiCards = [
     class="flex w-full h-auto lg:h-[588px] xl:h-auto pb-5 lg:pb-10 dark:bg-transparent lg:bg-api dark:lg:bg-darkapi bg-no-repeat bg-cover bg-top xl:rounded-b-[3rem]"
   >
     <div
-      class="flex flex-col w-full h-auto bg-transparent sml:pb-10 lg:pb-0 bg-[#1E1F1C] lg:bg-transparent dark:bg-[#1E1F1C] dark:lg:bg-transparent rounded-[1.5rem]"
+      class="flex flex-col w-full h-auto bg-[#F3F4F6] sml:pb-10 lg:pb-0 lg:bg-transparent dark:bg-[#1E1F1C] dark:lg:bg-transparent rounded-[1.5rem]"
     >
       <div
         class="flex flex-col w-full h-auto mt-8 lg:mt-10 xl:mt-14 px-8 lg:px-14 gap-y-4 xl:gap-y-6"
