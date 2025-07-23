@@ -2,51 +2,85 @@
 const teams = [
   {
     image: new URL(
-      "@/assets/images/leadership-teams/example.png",
+      "@/assets/images/leadership-teams/rinaldi.png",
       import.meta.url
     ).href,
-    name: "Vania Denia",
+    name: "Rinaldi Anwar",
+    position: "Founder",
+  },
+  {
+    image: new URL("@/assets/images/leadership-teams/nana.png", import.meta.url)
+      .href,
+    name: "Nana Rangga Permana",
+    position: "Director",
+  },
+  {
+    image: new URL("@/assets/images/leadership-teams/prof.png", import.meta.url)
+      .href,
+    name: "Prof. Alhadi Bustamam",
+    position: "Senior Advisor",
+  },
+  {
+    image: new URL(
+      "@/assets/images/leadership-teams/shandy.png",
+      import.meta.url
+    ).href,
+    name: "Shandy Rahussholihin",
+    position: "Chief Operation Officer",
+  },
+  {
+    image: new URL(
+      "@/assets/images/leadership-teams/fendy.png",
+      import.meta.url
+    ).href,
+    name: "Fendy Setiawan",
     position: "Chief Technology Officer",
   },
   {
     image: new URL(
-      "@/assets/images/leadership-teams/example.png",
+      "@/assets/images/leadership-teams/rizal.png",
       import.meta.url
     ).href,
-    name: "Vania Denia",
-    position: "Chief Technology Officer",
+    name: "Rizal Alfaridzi",
+    position: "Chief Product Officer",
   },
   {
     image: new URL(
-      "@/assets/images/leadership-teams/example.png",
+      "@/assets/images/leadership-teams/remzy.png",
       import.meta.url
     ).href,
-    name: "Vania Denia",
-    position: "Chief Technology Officer",
+    name: "Remzy Ramazan",
+    position: "Chief Analytics Officer",
   },
   {
     image: new URL(
-      "@/assets/images/leadership-teams/example.png",
+      "@/assets/images/leadership-teams/harum.png",
       import.meta.url
     ).href,
-    name: "Vania Denia",
-    position: "Chief Technology Officer",
+    name: "Harum Ananda",
+    position: "Chief Research Officer",
   },
   {
     image: new URL(
-      "@/assets/images/leadership-teams/example.png",
+      "@/assets/images/leadership-teams/dhita.png",
       import.meta.url
     ).href,
-    name: "Vania Denia",
-    position: "Chief Technology Officer",
+    name: "Dhita Septiani",
+    position: "Product Manager",
+  },
+  {
+    image: new URL("@/assets/images/leadership-teams/riza.png", import.meta.url)
+      .href,
+    name: "Riza Afriani",
+    position: "Marketing Manager",
   },
   {
     image: new URL(
-      "@/assets/images/leadership-teams/example.png",
+      "@/assets/images/leadership-teams/davva.png",
       import.meta.url
     ).href,
-    name: "Vania Denia",
-    position: "Chief Technology Officer",
+    name: "M. Davva Alfaiz",
+    position: "VP Finance & Investment",
   },
 ];
 </script>

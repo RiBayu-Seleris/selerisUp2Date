@@ -26,7 +26,7 @@ const AboutList = [
     name: "Company",
   },
   {
-    url: "/teams",
+    url: "/about/teams",
     name: "Our Team",
   },
   {

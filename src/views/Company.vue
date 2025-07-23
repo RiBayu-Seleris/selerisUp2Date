@@ -27,9 +27,7 @@ import { useSidebarStore } from "@/stores/sidebar";
   </section>
 
   <!-- DARK MODE -->
-  <div
-    class="hidden dark:flex dark:flex-col dark:w-full dark:h-auto dark:bg-[radial-gradient(ellipse_at_right,_#3CFF7A_-70%,_#17181A_60%)]"
-  >
+  <div class="hidden dark:flex dark:flex-col dark:w-full dark:h-auto">
     <section class="flex flex-col relative w-full h-auto md:px-20">
       <Hero />
     </section>

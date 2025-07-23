@@ -37,7 +37,7 @@ import AboutHero from "@/assets/images/About-hero-image.png";
         </div>
       </div>
       <div
-        class="flex w-full h-full sml:w-full md:w-full lg:w-[60%] xl:w-[55%] justify-center lg:justify-end items-end mt-0 sml:mt-5 md:mt-5"
+        class="flex w-full h-full sml:w-full md:w-full lg:w-[60%] xl:w-auto justify-end lg:justify-end items-end mt-0 sml:mt-5 md:mt-5"
       >
         <img
           :src="AboutHero"
