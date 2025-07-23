@@ -28,7 +28,7 @@ import { useSidebarStore } from "@/stores/sidebar";
         </div>
         <div class="w-full pb-2 sml:pb-2">
           <p
-            class="text-[#195279] sml:text-[21px] sml:tracking-[0.5px] md:text-[32px] lg:text-[36px] xl:text-[48px] font-[500] sml:leading-[27px] md:leading-[37px] lg:leading-[45px] xl:leading-[60px] xl:tracking-[5px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+            class="text-[#195279] sml:text-[21px] sml:tracking-[0.5px] md:text-[32px] lg:text-[36px] xl:text-[48px] font-[500] sml:leading-[27px] md:leading-[37px] lg:leading-[45px] xl:leading-[60px] xl:tracking-[0px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
             The Future of Life <br />
             Technology
