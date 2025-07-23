@@ -28,16 +28,16 @@ import { useSidebarStore } from "@/stores/sidebar";
         </div>
         <div class="w-full pb-2 sml:pb-2">
           <p
-            class="text-[#195279] sml:text-[21px] sml:tracking-[0.5px] md:text-[32px] lg:text-[36px] xl:text-[48px] font-[500] sml:leading-[27px] md:leading-[37px] lg:leading-[45px] xl:leading-[70px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+            class="text-[#195279] sml:text-[21px] sml:tracking-[0.5px] md:text-[32px] lg:text-[36px] xl:text-[48px] font-[500] sml:leading-[27px] md:leading-[37px] lg:leading-[45px] xl:leading-[60px] xl:tracking-[5px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
             The Future of Life <br />
             Technology
           </p>
         </div>
         <!-- Swipe caption -->
-        <div class="flex flex-row items-center mb-4 sml:mb-0 lg:mb-5">
+        <div class="flex flex-row items-center mb-4 sml:mb-0 lg:mb-5 mt-6">
           <p
-            class="text-lg sml:text-[10px] xl:text-[20px] font-medium dark:text-[#686868] bg-gradient-to-r from-[#B9CAD5] to-[#195279] bg-clip-text text-transparent cursor-pointer"
+            class="text-[20px] sml:text-[10px] xl:text-[20px] font-[400] dark:text-[#686868] bg-gradient-to-r from-[#B9CAD5] to-[#195279] bg-clip-text text-transparent cursor-pointer"
           >
             Swipe to view product
           </p>

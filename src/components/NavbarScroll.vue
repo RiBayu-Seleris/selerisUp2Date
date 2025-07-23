@@ -56,7 +56,6 @@ onUnmounted(() => {
               </div>
               <div class="hidden lg:flex items-center col-span-10 h-auto">
                 <div class="flex w-full">
-                  <!-- rounded-full border shadow-[1px_19px_33px_-14px_rgba(0,_0,_0,_0.08)] bg-white z-[999] -->
                   <nav
                     class="flex items-center w-full justify-center content-center"
                   >
@@ -71,7 +70,7 @@ onUnmounted(() => {
               </div>
             </div>
 
-            <!-- Mobile Sidebar Button -->
+            <!-- Mobile Navbar with Sidebar Button -->
             <div
               class="flex lg:hidden flex-row w-full h-auto justify-between md:px-8 sml:px-4"
             >

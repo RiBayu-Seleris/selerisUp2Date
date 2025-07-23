@@ -71,9 +71,19 @@ const cardContents = [
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full object-cover object-bottom rounded-[20px] bg-[#F3F4F6] dark:bg-[#323232] border-[0.1px] border-[#FAFAFA] dark:border-[#FAFAFA]/25"
+        class="w-full h-full object-cover object-bottom rounded-[20px] bg-[#F3F4F6] dark:bg-[#323232] border-[0.1px] border-[#FAFAFA] dark:border-[#FAFAFA]/25 dark:hidden"
       >
         <source src="@/assets/videos/SDR_Video.mp4" type="video/mp4" />
+      </video>
+      <video
+        autoplay
+        loop
+        muted
+        playsinline
+        @contextmenu.prevent
+        class="w-full h-full object-cover object-bottom rounded-[20px] bg-[#F3F4F6] dark:bg-[#323232] border-[0.1px] border-[#FAFAFA] dark:border-[#FAFAFA]/25 hidden dark:block"
+      >
+        <source src="@/assets/videos/Dark_SDR_Video.mp4" type="video/mp4" />
       </video>
     </div>
   </section>

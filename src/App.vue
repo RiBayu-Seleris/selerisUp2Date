@@ -57,7 +57,7 @@ onUnmounted(() => {
       <router-view />
 
       <section
-        class="flex flex-col relative w-full mx-auto h-auto mt-16 px-8"
+        class="flex flex-col relative w-full mx-auto h-auto mt-40 px-8"
         v-if="!['/blogs'].includes(route.path)"
       >
         <Touch />

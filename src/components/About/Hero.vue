@@ -22,7 +22,7 @@ import AboutHero from "@/assets/images/About-hero-image.png";
           </div>
           <div class="w-full h-auto">
             <p
-              class="sml:text-2xl md:text-3xl lg:text-[32px] xl:text-[48px] text-[#195279] lg:leading-[54px] xl:leading-[65px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+              class="sml:text-[24px] md:text-[30px] lg:text-[32px] xl:text-[48px] font-[500] text-[#195279] lg:leading-[54px] xl:leading-[65px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
             >
               Seleris Meditekno Internasional
             </p>

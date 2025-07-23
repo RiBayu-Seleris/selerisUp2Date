@@ -1,5 +1,6 @@
 <script setup>
 import ImgLinear from "@/assets/images/about-linear.png";
+import DarkImgLinear from "@/assets/images/dark-about-linear.png";
 </script>
 
 <template>
@@ -36,7 +37,12 @@ import ImgLinear from "@/assets/images/about-linear.png";
         <img
           :src="ImgLinear"
           alt="About Banner"
-          class="w-full h-full object-cover sml:object-contain"
+          class="w-full h-full object-cover sml:object-contain dark:hidden"
+        />
+        <img
+          :src="DarkImgLinear"
+          alt="About Banner"
+          class="w-full h-full object-cover sml:object-contain hidden dark:block"
         />
         <!-- <NetworkDiagram /> -->
       </div>

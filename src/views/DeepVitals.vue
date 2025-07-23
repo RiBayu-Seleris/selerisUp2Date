@@ -63,7 +63,7 @@ const cardContents = [
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-center"
   >
     <div
-      class="w-full h-auto sml:h-[200px] md:h-[250px] lg:h-[350px] xl:h-[500px] flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
+      class="w-full h-auto sml:h-[200px] md:h-[250px] lg:h-[350px] xl:h-[650px] flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
     >
       <video
         autoplay
@@ -71,9 +71,19 @@ const cardContents = [
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full object-cover rounded-[20px] bg-[#F3F4F6] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25"
+        class="w-full h-full object-cover rounded-[20px] bg-[#F3F4F6] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 dark:hidden"
       >
         <source src="@/assets/videos/SDV_Video.mp4" type="video/mp4" />
+      </video>
+      <video
+        autoplay
+        loop
+        muted
+        playsinline
+        @contextmenu.prevent
+        class="w-full h-full object-cover rounded-[20px] bg-[#F3F4F6] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 hidden dark:block"
+      >
+        <source src="@/assets/videos/Dark_SDV_Video.mp4" type="video/mp4" />
       </video>
     </div>
   </section>

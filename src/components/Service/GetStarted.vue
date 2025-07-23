@@ -18,17 +18,19 @@ const ApiServices = [
 <template>
   <div class="flex w-full h-auto mt-20">
     <div
-      class="relative flex flex-col w-full h-auto bg-[#F3F4F6] dark:bg-[#1E1F1C] lg:px-10 xl:px-20 pt-16 pb-16 xl:pb-6 rounded-[60px]"
+      class="relative flex flex-col w-full h-auto bg-[#F3F4F6] dark:bg-[#1E1F1C] px-10 lg:px-14 xl:px-20 pt-16 pb-16 xl:pb-16 rounded-[60px]"
     >
       <div class="flex flex-col w-full h-auto gap-y-3 xl:gap-y-5">
         <div class="flex w-full h-auto">
-          <p class="text-[#1AB24F] font-[500] lg:text-[27px] xl:text-[30px]">
+          <p
+            class="text-[#1AB24F] font-[500] text-[27px] lg:text-[27px] xl:text-[30px]"
+          >
             Services
           </p>
         </div>
         <div class="flex w-full h-auto">
           <p
-            class="text-[#195279] font-[500] lg:text-[41px] xl:text-[47px] lg:leading-[50px] xl:leading-[60px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+            class="text-[#195279] font-[600] text-[41px] lg:text-[41px] xl:text-[53px] lg:leading-[50px] xl:leading-[70px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
             How to Get Started with the <br />
             Seleris API Service
@@ -43,32 +45,34 @@ const ApiServices = [
           </p>
         </div>
       </div>
-      <div class="flex flex-col lg:flex-row w-full h-auto lg:mt-10 xl:mt-5">
+      <div
+        class="flex flex-col-reverse md:flex-row w-full h-auto mt-10 lg:mt-10"
+      >
         <div class="flex w-full lg:w-[60%] h-auto">
           <div
-            class="flex flex-col w-full h-auto gap-x-10 justify-center lg:gap-y-8 xl:gap-y-10"
+            class="flex flex-col w-full h-auto gap-x-10 justify-center gap-y-8 lg:gap-y-8 xl:gap-y-10 mt-10 md:mt-0"
           >
             <div
               v-for="(ApiService, index) in ApiServices"
               :key="index"
-              class="flex flex-row w-full h-auto"
+              class="flex flex-row w-full h-auto gap-x-7 lg:gap-x-4"
             >
-              <div class="w-[10%] h-auto">
+              <div class="w-[5%] h-auto">
                 <div
-                  class="w-7 h-7 xl:w-10 xl:h-10 object-contain bg-[#1AB24F] rounded-full"
+                  class="w-7 h-7 xl:w-8 xl:h-8 object-contain bg-[#1AB24F] rounded-full"
                 />
               </div>
               <div class="flex flex-col w-[90%] h-auto lg:gap-y-1 xl:gap-y-2">
                 <div class="flex w-full h-auto">
                   <p
-                    class="text-[#1AB24F] lg:text-[20px] xl:text-[23px] font-[500]"
+                    class="text-[#1AB24F] lg:text-[20px] xl:text-[21px] font-[500]"
                   >
                     {{ ApiService.title }}
                   </p>
                 </div>
                 <div class="flex w-[90%] xl:w-[80%] h-auto">
                   <p
-                    class="text-[#195279] dark:text-[#FAFAFA] font-[400] dark:font-thin lg:text-[17px] xl:text-[23px]"
+                    class="text-[#195279] dark:text-[#FAFAFA] font-[400] lg:text-[17px] xl:text-[21px]"
                   >
                     {{ ApiService.body }}
                   </p>
@@ -78,15 +82,13 @@ const ApiServices = [
           </div>
         </div>
         <div
-          class="flex w-full lg:w-[40%] h-auto justify-center lg:justify-end"
+          class="flex w-full lg:w-[40%] h-auto justify-center md:justify-end"
         >
-          <div
-            class="flex w-full h-auto justify-center lg:justify-end items-center"
-          >
+          <div class="flex w-full h-auto md:justify-end items-center">
             <img
-              src="@/assets/images/robot-getstarted2.png"
+              src="@/assets/images/robot-getstarted.png"
               alt="Icon"
-              class="flex justify-center items-center lg:w-[300px] lg:h-[300px] xl:w-[500px] xl:h-[500px] object-contain lg:animate__animated lg:animate-bounce"
+              class="flex lg:justify-center items-center w-[300px] h-[300px] md:w-[300px] md:h-full lg:w-[350px] lg:h-[350px] xl:w-[400px] xl:h-[400px] object-contain animate__animated animate-bounce"
             />
           </div>
         </div>
