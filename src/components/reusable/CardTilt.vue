@@ -43,7 +43,7 @@ function resetTransform() {
       <img
         :src="image"
         alt="partners"
-        class="w-[184px] h-full object-contain dark:filter dark:grayscale dark:brightness-100 dark:invert dark:opacity-100"
+        class="w-[184px] h-full object-contain"
       />
     </div>
   </div>

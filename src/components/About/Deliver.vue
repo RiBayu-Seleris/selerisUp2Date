@@ -22,25 +22,26 @@ import performanceIcon from "@/assets/icons/performance.svg";
       <div class="flex flex-row mb-10">
         <DifferentCard
           :image="innovationIcon"
-          title="Innovation"
-          subtitle="Developing innovative and effective solutions."
+          title="Why Seleris"
+          subtitle="Seleris helps businesses assess people faster, smarter, and easier. Efficiency"
         />
         <DifferentCard
           :image="innovationIcon"
-          title="Innovation"
-          subtitle="Developing innovative and effective solutions."
+          title="Efficiency"
+          subtitle="Cut costs and processing time by up to 50 percent. Accuracy"
         />
       </div>
       <div class="flex flex-row">
         <DifferentCard
           :image="innovationIcon"
-          title="Innovation"
-          subtitle="Developing innovative and effective solutions."
+          title="Accuracy"
+          subtitleClass="pr-5"
+          subtitle="AI delivers accurate results, even with limited user data. Accessibility"
         />
         <DifferentCard
           :image="innovationIcon"
           title="Innovation"
-          subtitle="Developing innovative and effective solutions."
+          subtitle="Online process is quick, easy, and accessible for everyone."
         />
       </div>
     </template>
@@ -54,29 +55,29 @@ import performanceIcon from "@/assets/icons/performance.svg";
           <div class="w-full mb-5">
             <DifferentCard
               :image="innovationIcon"
-              title="Innovation"
-              subtitle="Developing innovative and effective solutions."
+              title="Why Seleris"
+              subtitle="Seleris helps businesses assess people faster, smarter, and easier. Efficiency"
+            />
+          </div>
+          <div class="w-full mb-5">
+            <DifferentCard
+              :image="innovationIcon"
+              title="Efficiency"
+              subtitle="Cut costs and processing time by up to 50 percent. Accuracy"
+            />
+          </div>
+          <div class="w-full mb-5">
+            <DifferentCard
+              :image="innovationIcon"
+              title="Accuracy"
+              subtitle="AI delivers accurate results, even with limited user data. Accessibility"
             />
           </div>
           <div class="w-full mb-5">
             <DifferentCard
               :image="innovationIcon"
               title="Innovation"
-              subtitle="Developing innovative and effective solutions."
-            />
-          </div>
-          <div class="w-full mb-5">
-            <DifferentCard
-              :image="innovationIcon"
-              title="Innovation"
-              subtitle="Developing innovative and effective solutions."
-            />
-          </div>
-          <div class="w-full mb-5">
-            <DifferentCard
-              :image="innovationIcon"
-              title="Innovation"
-              subtitle="Developing innovative and effective solutions."
+              subtitle="Online process is quick, easy, and accessible for everyone."
             />
           </div>
         </template>

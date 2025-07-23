@@ -3,24 +3,21 @@ import Icon from "@/assets/icons/innovation.svg";
 const ApiCards = [
   {
     icon: Icon,
-    title: "Risk Assessment",
-    description: `The API service allows companies to assess the risk 
-    of potential customers 
-    based on a short facial video recording.`,
+    title: "Smart Video Analysis",
+    description: `Assess individuals through short facial video recordings.
+    Our AI detects key risk indicators quickly and accurately.`,
   },
   {
     icon: Icon,
-    title: "Risk Assessment",
-    description: `The API service allows companies to assess the risk 
-    of potential customers 
-    based on a short facial video recording.`,
+    title: "Instant Risk Scoring",
+    description: `Get real-time risk scores with just a few seconds of video.
+    No manual forms or interviews required.`,
   },
   {
     icon: Icon,
-    title: "Risk Assessment",
-    description: `The API service allows companies to assess the risk 
-    of potential customers 
-    based on a short facial video recording.`,
+    title: "Frictionless Evaluation",
+    description: `Simplify customer assessments with a fully digital process.
+    Fast, seamless, and ideal for remote or low-data cases.`,
   },
 ];
 </script>

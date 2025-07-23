@@ -9,39 +9,21 @@ import Dark_SCI_Logo from "@/assets/images/technology/Dark-SCI-Logo.svg";
 const cardContents = [
   {
     bgCard: "bg-[#2B7C3F]",
-    title: "Health Risk",
+    title: "Vital Sign Monitoring",
     titleColor: "text-[#2B7C3F]",
-    body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-    Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
-    Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
-    Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.`,
+    body: `By analyzing facial blood flow patterns, our system provides accurate, contactless monitoring of key vital signs such as heart rate, respiratory rate, and stress indicators—anytime, anywhere.`,
   },
   {
     bgCard: "bg-[#2B7C3F]",
-    title: "Health Risk",
+    title: "Early Health Insights",
     titleColor: "text-[#2B7C3F]",
-    body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-    Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
-    Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
-    Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.`,
+    body: `Our platform detects subtle physiological changes, allowing early identification of potential health issues such as fatigue, cardiovascular irregularities, or stress—enabling smarter lifestyle choices.`,
   },
   {
     bgCard: "bg-[#2B7C3F]",
-    title: "Health Risk",
+    title: "Contactless Screening",
     titleColor: "text-[#2B7C3F]",
-    body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-    Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
-    Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
-    Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.`,
-  },
-  {
-    bgCard: "bg-[#2B7C3F]",
-    title: "Health Risk",
-    titleColor: "text-[#2B7C3F]",
-    body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-    Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
-    Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
-    Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.`,
+    body: `Utilizing advanced facial video analysis, we offer a hygienic and convenient way to assess health status without physical contact—ideal for public settings, clinics, or daily self-monitoring.`,
   },
 ];
 </script>
@@ -64,8 +46,9 @@ const cardContents = [
   <section
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-center mt-10 md:mt-20"
   >
+    <!-- sml:h-[190px] md:h-[400px] lg:h-[470px] xl:h-[640px] -->
     <div
-      class="w-full h-auto sml:h-[190px] md:h-[400px] lg:h-[470px] xl:h-[640px] flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
+      class="w-full h-auto aspect-[16/8] flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
     >
       <video
         autoplay
@@ -73,7 +56,7 @@ const cardContents = [
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full object-cover rounded-[20px] bg-[#F3F4F6] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 dark:hidden"
+        class="w-full h-full object-cover rounded-[20px] dark:border-[0.1px] dark:border-[#FAFAFA]/25 dark:hidden"
       >
         <source src="@/assets/videos/SCI_Video.mp4" type="video/mp4" />
       </video>
@@ -83,7 +66,7 @@ const cardContents = [
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full object-cover rounded-[20px] bg-[#F3F4F6] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 hidden dark:block"
+        class="w-full h-full object-cover rounded-[20px] dark:border-[0.1px] dark:border-[#FAFAFA]/25 hidden dark:block"
       >
         <source src="@/assets/videos/Dark_SCI_Video.mp4" type="video/mp4" />
       </video>

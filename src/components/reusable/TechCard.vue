@@ -36,7 +36,7 @@ defineProps({
       </div>
       <div class="flex w-full ml-5 h-auto items-center">
         <p
-          :class="`md:text-[22px] xl:text-[32px] font-[500] ${titleColor} dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]`"
+          :class="`md:text-[22px] xl:text-[27px] font-[500] ${titleColor} dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]`"
         >
           {{ title }}
         </p>

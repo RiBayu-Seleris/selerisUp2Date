@@ -9,39 +9,33 @@ import Dark_SDR_Logo from "@/assets/images/technology/Dark-SDR-Logo.svg";
 const cardContents = [
   {
     bgCard: "bg-[#81021E]",
-    title: "Health Risk",
+    title: "Advanced Risk Profiling",
     titleColor: "text-[#81021E]",
-    body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-    Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
-    Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
-    Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.`,
+    body: `Our system translates biometric data into advanced health risk scores, enabling precise prediction of insurance underwriting risks, potential disease development, and overall life expectancy trends.`,
   },
   {
     bgCard: "bg-[#81021E]",
-    title: "Health Risk",
+    title: "Comprehensive Health Risk Insights",
     titleColor: "text-[#81021E]",
-    body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-    Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
-    Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
-    Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.`,
+    body: `Beyond basic vitals, we provide predictive insights into chronic disease risks, mortality likelihood, and other key factors that support medical decision-making and insurance evaluations.`,
   },
   {
     bgCard: "bg-[#81021E]",
-    title: "Health Risk",
+    title: "Underwriting & Disease Prediction",
     titleColor: "text-[#81021E]",
-    body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-    Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
-    Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
-    Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.`,
+    body: `With AI-powered analytics, we offer deep risk assessment across multiple health domains—supporting accurate underwriting decisions, early disease identification, and morbidity predictions.`,
   },
   {
     bgCard: "bg-[#81021E]",
-    title: "Health Risk",
+    title: "AI-Based Risk Modeling",
     titleColor: "text-[#81021E]",
-    body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-    Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
-    Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
-    Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.`,
+    body: `Seleris Deep Risk™ combines real-time biometric sensing with advanced risk prediction models to deliver actionable insights for life insurance, preventive healthcare, and chronic disease management.`,
+  },
+  {
+    bgCard: "bg-[#81021E]",
+    title: "From Data to Decision",
+    titleColor: "text-[#81021E]",
+    body: `Using physiological signals and behavioral indicators, we help insurers and healthcare providers predict disease onset, assess mortality risk, and make smarter, faster decisions.`,
   },
 ];
 </script>
@@ -62,8 +56,9 @@ const cardContents = [
   <section
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-center"
   >
+    <!-- sml:h-[140px] md:h-[250px] lg:h-[350px] xl:h-[470px] xls:h-[490px] -->
     <div
-      class="w-full h-auto sml:h-[140px] md:h-[250px] lg:h-[350px] xl:h-[480px] flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
+      class="relative w-full h-auto aspect-[16/6] flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
     >
       <video
         autoplay
@@ -71,7 +66,7 @@ const cardContents = [
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full object-cover object-bottom rounded-[20px] bg-[#F3F4F6] dark:bg-[#323232] border-[0.1px] border-[#FAFAFA] dark:border-[#FAFAFA]/25 dark:hidden"
+        class="w-full h-full object-cover object-bottom rounded-[20px] dark:bg-[#323232] dark:hidden"
       >
         <source src="@/assets/videos/SDR_Video.mp4" type="video/mp4" />
       </video>
@@ -81,7 +76,7 @@ const cardContents = [
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full object-cover object-bottom rounded-[20px] bg-[#F3F4F6] dark:bg-[#323232] border-[0.1px] border-[#FAFAFA] dark:border-[#FAFAFA]/25 hidden dark:block"
+        class="w-full h-full object-cover object-bottom rounded-[20px] dark:bg-[#323232] hidden dark:block"
       >
         <source src="@/assets/videos/Dark_SDR_Video.mp4" type="video/mp4" />
       </video>

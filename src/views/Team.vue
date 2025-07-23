@@ -23,7 +23,7 @@ import Description from "@/components/Team/Description.vue";
     <PositionDescription />
   </section>
 
-  <section class="flex relative w-full h-auto mt-10 px-16">
+  <section class="flex relative w-full h-auto mt-20 lg:mt-28 px-8 md:px-16">
     <Description />
   </section>
 </template>

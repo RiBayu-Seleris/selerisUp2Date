@@ -30,7 +30,7 @@ const AboutList = [
     name: "Our Team",
   },
   {
-    url: "/innovation",
+    url: "#",
     name: "Innovation",
   },
 ];
@@ -108,14 +108,14 @@ const handleTechnology = () => {
       <transition name="slide">
         <div class="ml-auto w-full h-auto px-4 pt-6">
           <div
-            class="w-full h-full bg-white relative z-50 flex flex-col items-center py-6 px-5 rounded-xl"
+            class="w-full h-full bg-white dark:bg-[#17181A] relative z-50 flex flex-col items-center py-6 px-5 rounded-xl"
           >
             <div
               class="flex flex-row w-full h-auto justify-between items-center"
             >
               <div class="w-[80%] h-auto">
                 <p
-                  class="text-[#195279] font-semibold sml:text-md md:text-[1.7rem]"
+                  class="text-[#195279] dark:text-[#FAFAFA] font-semibold sml:text-md md:text-[1.7rem]"
                 >
                   PT Seleris Meditekno Internasional
                 </p>
@@ -125,7 +125,7 @@ const handleTechnology = () => {
                   type="button"
                   id="sidebar-button"
                   @click="sidebar.close"
-                  class="ml-auto text-2xl font-bold text-gray-700 hover:text-black"
+                  class="ml-auto text-2xl font-bold text-gray-700 hover:text-black dark:text-[#FAFAFA]"
                 >
                   <MenuIconClose />
                 </button>
@@ -136,12 +136,12 @@ const handleTechnology = () => {
             >
               <div class="w-full h-auto">
                 <Navlink href="/">
-                  <p class="text-[12px]">Home</p>
+                  <p class="dark:text-[#FAFAFA] text-[12px]">Home</p>
                 </Navlink>
               </div>
               <div class="w-full h-[2px] bg-[#1AB24F]/40" />
               <div class="w-full h-auto flex flex-col">
-                <p class="text-slate-400 text-[16px]">About</p>
+                <p class="text-slate-400 text-[16px] font-[600]">About</p>
                 <div class="w-full h-auto flex flex-wrap">
                   <div
                     v-for="(about, index) in AboutList"
@@ -149,7 +149,7 @@ const handleTechnology = () => {
                     class="w-[50%] h-auto"
                   >
                     <Navlink :href="about.url">
-                      <p class="text-[12px] font-[500]">
+                      <p class="text-[12px] font-[500] dark:text-[#FAFAFA]">
                         {{ about.name }}
                       </p>
                     </Navlink>
@@ -166,7 +166,9 @@ const handleTechnology = () => {
                     class="w-[50%] h-auto"
                   >
                     <Navlink :href="product.url">
-                      <p class="text-[12px] font-[500]">{{ product.name }}</p>
+                      <p class="dark:text-[#FAFAFA] text-[12px] font-[500]">
+                        {{ product.name }}
+                      </p>
                     </Navlink>
                   </div>
                 </div>
@@ -181,7 +183,7 @@ const handleTechnology = () => {
                     class="w-[50%] h-auto"
                   >
                     <Navlink :href="technology.url">
-                      <p class="text-[12px] font-[500]">
+                      <p class="dark:text-[#FAFAFA] text-[12px] font-[500]">
                         {{ technology.name }}
                       </p>
                     </Navlink>
@@ -190,23 +192,18 @@ const handleTechnology = () => {
               </div>
               <div class="w-full h-[2px] bg-[#1AB24F]/40" />
               <div class="w-full h-auto">
-                <Navlink href="/team">
-                  <p class="text-[12px]">Our Team</p>
-                </Navlink>
-              </div>
-              <div class="w-full h-auto">
                 <Navlink href="/blogs">
-                  <p class="text-[12px]">Blogs</p>
+                  <p class="text-[12px] dark:text-[#FAFAFA]">Blogs</p>
                 </Navlink>
               </div>
               <div class="w-full h-auto">
                 <Navlink href="/services">
-                  <p class="text-[12px]">Services</p>
+                  <p class="text-[12px] dark:text-[#FAFAFA]">Services</p>
                 </Navlink>
               </div>
               <div class="w-full h-auto">
                 <Navlink href="/contact">
-                  <p class="text-[12px]">Contact</p>
+                  <p class="text-[12px] dark:text-[#FAFAFA]">Contact</p>
                 </Navlink>
               </div>
             </nav>

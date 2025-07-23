@@ -20,9 +20,10 @@ module.exports = {
       xl: "1280px",
 
       // Extra Large
-      xls: { raw: "(min-width: 1440px) and (max-width: 1535px)" },
-      "2xl": { raw: "(min-width: 1536px) and (max-width: 2559px)" },
-      "3xl": { raw: "(min-width: 2560px)" },
+      // xls: "1440px",
+      // xls: { raw: "(min-width: 1440px) and (max-width: 1535px)" },
+      // "2xl": { raw: "(min-width: 1536px) and (max-width: 2559px)" },
+      // "3xl": { raw: "(min-width: 2560px)" },
     },
     extend: {
       backgroundImage: {

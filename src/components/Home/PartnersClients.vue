@@ -25,6 +25,34 @@ const partnerLogos = [
   new URL("@/assets/images/clients-and-partners/data-ai.png", import.meta.url)
     .href,
 ];
+const partnerLogosDark = [
+  new URL(
+    "@/assets/images/clients-and-partners/rynest-dark.png",
+    import.meta.url
+  ).href,
+  new URL("@/assets/images/clients-and-partners/boa-dark.png", import.meta.url)
+    .href,
+  new URL("@/assets/images/clients-and-partners/grm-dark.png", import.meta.url)
+    .href,
+  new URL("@/assets/images/clients-and-partners/cc-dark.png", import.meta.url)
+    .href,
+  new URL("@/assets/images/clients-and-partners/bc-dark.png", import.meta.url)
+    .href,
+  new URL("@/assets/images/clients-and-partners/dsc-dark.png", import.meta.url)
+    .href,
+  new URL(
+    "@/assets/images/clients-and-partners/hunting-dark.png",
+    import.meta.url
+  ).href,
+  new URL(
+    "@/assets/images/clients-and-partners/math-faculty-dark.png",
+    import.meta.url
+  ).href,
+  new URL(
+    "@/assets/images/clients-and-partners/data-ai-dark.png",
+    import.meta.url
+  ).href,
+];
 
 const clientLogos = [
   new URL("@/assets/images/clients-and-partners/boa.png", import.meta.url).href,
@@ -42,6 +70,31 @@ const clientLogos = [
     .href,
 ];
 
+const clientLogosDark = [
+  new URL("@/assets/images/clients-and-partners/boa-dark.png", import.meta.url)
+    .href,
+  new URL("@/assets/images/clients-and-partners/grm-dark.png", import.meta.url)
+    .href,
+  new URL(
+    "@/assets/images/clients-and-partners/chubb-dark.png",
+    import.meta.url
+  ).href,
+  new URL("@/assets/images/clients-and-partners/fpg-dark.png", import.meta.url)
+    .href,
+  new URL(
+    "@/assets/images/clients-and-partners/heksa-dark.png",
+    import.meta.url
+  ).href,
+  new URL(
+    "@/assets/images/clients-and-partners/jamkrida-banten-dark.png",
+    import.meta.url
+  ).href,
+  new URL(
+    "@/assets/images/clients-and-partners/nexus-dark.png",
+    import.meta.url
+  ).href,
+];
+
 function chunkArray(array, size) {
   const result = [];
   for (let i = 0; i < array.length; i += size) {
@@ -53,6 +106,13 @@ function chunkArray(array, size) {
 const columnsPerRow = 5;
 const partnerChunks = computed(() => chunkArray(partnerLogos, columnsPerRow));
 const clientChunks = computed(() => chunkArray(clientLogos, columnsPerRow));
+
+const partnerChunksDark = computed(() =>
+  chunkArray(partnerLogosDark, columnsPerRow)
+);
+const clientChunksDark = computed(() =>
+  chunkArray(clientLogosDark, columnsPerRow)
+);
 
 const startProgress = () => {
   const step = 100 / (intervalTime / 100); // 100ms update

@@ -8,35 +8,40 @@ import DescRobot from "@/assets/images/about-images.png";
     <p
       class="text-[14px] lg:text-[17px] xl:text-[21px] text-center text-[#195279] dark:text-[#FAFAFA] font-light"
     >
-      Lorem, ipsum dolor sit amet consectetur adipisicing elit. Fugiat, quas.
-      Qui veritatis molestiae nemo numquam quidem commodi eum eaque vero
-      exercitationem, repellendus illum vel, voluptatibus distinctio aliquid
-      voluptates, delectus cupiditate excepturi cum odit recusandae itaque?
+      Seleris is a technology company that develops facial video-based
+      applications to help businesses assess individuals more quickly and
+      accurately without the need for face-to-face interviews. The AI-powered
+      solution delivers smarter, faster, and scalable evaluations, making it
+      easier to analyze various aspects such as health, financial condition, and
+      behavioral traits.
     </p>
   </div>
   <!-- div Description 2 -->
-  <div class="flex w-full h-auto my-5 lg:my-5 xl:my-20 lg:px-20">
+  <div class="flex w-full h-auto my-5 lg:my-14 xl:my-16 lg:px-20">
     <div
       class="flex md:flex-row sml:flex-col w-full h-auto justify-between gap-16"
     >
       <div
-        class="flex w-full h-full md:w-[70%] lg:w-[50%] xl:w-[40%] justify-center items-center"
+        class="flex w-full h-full md:w-[70%] lg:w-[50%] xl:w-[50%] justify-center items-center"
       >
         <img
           :src="DescRobot"
           alt="About Banner"
-          class="w-full h-full sml:w-[200px] xl:w-[400px] object-cover"
+          class="w-full h-full sml:w-[200px] lg:w-[400px] object-cover"
         />
       </div>
       <div class="flex w-full items-center pr-2 lg:pr-8 xl:pr-14">
         <p
           class="text-[14px] lg:text-[17px] xl:text-[21px] text-[#195279] dark:text-[#FAFAFA] font-light sml:text-center md:text-justify lg:text-justify xl:text-justify"
         >
-          Seleris was founded in 2019 by a team of experienced entrepreneurs and
-          technologists with a passion for transforming the insurance industry.
-          The company believes that everyone deserves access to affordable and
-          accessible life insurance, and that technology can play a vital role
-          in making this a reality
+          Founded in 2019 by experienced entrepreneurs and technologists,
+          Seleris is built on the belief that everyone deserves access to
+          affordable and inclusive protection. Its
+          <span class="font-[600]"> AI and machine learning </span>
+          models are trained on large datasets of facial video and behavioral
+          data, enabling high-accuracy risk assessments—even for individuals
+          with limited medical or historical records. dikasih bold di AI and
+          Machine Learning
         </p>
       </div>
     </div>
@@ -46,11 +51,12 @@ import DescRobot from "@/assets/images/about-images.png";
     <p
       class="text-[14px] lg:text-[17px] xl:text-[21px] text-center text-[#195279] dark:text-[#FAFAFA] font-light"
     >
-      Seleris's underwriting platform is powered by artificial intelligence (AI)
-      and machine learning (ML) algorithms that have been trained on a massive
-      dataset of facial video data and underwriting data. This allows the
-      platform to assess the risk of potential customers with a high degree of
-      accuracy, even if they have limited or no medical history
+      Seleris's platform is designed to be simple and efficient for both
+      companies and customers. Businesses can integrate Seleris through a
+      flexible API, while users can complete the assessment process entirely
+      online within minutes. Seleris helps partners enhance speed, precision,
+      and accessibility across a variety of digital screening and
+      evaluation use cases.
     </p>
   </div>
 </template>

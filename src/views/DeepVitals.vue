@@ -9,39 +9,27 @@ import Dark_SDV_Logo from "@/assets/images/technology/Dark-SDV-Logo.svg";
 const cardContents = [
   {
     bgCard: "bg-[#1738B8]",
-    title: "Health Risk",
+    title: "Health Risk Assessment",
     titleColor: "text-[#1738B8]",
-    body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-    Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
-    Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
-    Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.`,
+    body: `We analyze filtered rPPG signals to predict potential health risks, including abnormal heart rate patterns, stress indicators, and fatigue levels—enabling proactive health management.`,
   },
   {
     bgCard: "bg-[#1738B8]",
-    title: "Health Risk",
+    title: "AI-Powered Health Insights",
     titleColor: "text-[#1738B8]",
-    body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-    Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
-    Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
-    Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.`,
+    body: `Using deep learning on facial signal data, our system identifies early warning signs of physiological stress, cardiovascular irregularities, or lifestyle-related risk factors—all in real time.`,
   },
   {
     bgCard: "bg-[#1738B8]",
-    title: "Health Risk",
+    title: "Remote Wellness Monitoring",
     titleColor: "text-[#1738B8]",
-    body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-    Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
-    Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
-    Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.`,
+    body: `Our platform translates facial signal data into actionable wellness metrics, providing continuous health tracking for individuals, organizations, or clinical applications.`,
   },
   {
     bgCard: "bg-[#1738B8]",
-    title: "Health Risk",
+    title: "Predictive Vital Analytics",
     titleColor: "text-[#1738B8]",
-    body: `Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
-    Donec ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo massa. 
-    Eu dolor aliquet risus gravida nunc at feugiat consequat purus. 
-    Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.`,
+    body: `By extracting and processing key biometric features, we deliver predictive analytics on your health condition—helping anticipate risks before symptoms arise.`,
   },
 ];
 </script>
@@ -62,8 +50,9 @@ const cardContents = [
   <section
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-center"
   >
+    <!-- sml:h-[200px] md:h-[250px] lg:h-[350px] xl:h-[650px] -->
     <div
-      class="w-full h-auto sml:h-[200px] md:h-[250px] lg:h-[350px] xl:h-[650px] flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
+      class="w-full h-auto aspect-[16/8] flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
     >
       <video
         autoplay
@@ -71,7 +60,7 @@ const cardContents = [
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full object-cover rounded-[20px] bg-[#F3F4F6] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 dark:hidden"
+        class="w-full h-full object-cover rounded-[20px] dark:bg-[#323232] dark:hidden"
       >
         <source src="@/assets/videos/SDV_Video.mp4" type="video/mp4" />
       </video>
@@ -81,7 +70,7 @@ const cardContents = [
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full object-cover rounded-[20px] bg-[#F3F4F6] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 hidden dark:block"
+        class="w-full h-full object-cover rounded-[20px] dark:bg-[#323232] hidden dark:block"
       >
         <source src="@/assets/videos/Dark_SDV_Video.mp4" type="video/mp4" />
       </video>

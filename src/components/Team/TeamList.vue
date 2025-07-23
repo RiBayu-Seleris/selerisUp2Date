@@ -1,4 +1,7 @@
 <script setup>
+import DescTeamFrame from "@/components/icons/DescCardTeam.vue";
+import DarkDescTeamFrame from "@/components/icons/DarkDescCardTeam.vue";
+
 const teams = [
   {
     image: new URL(
@@ -90,45 +93,54 @@ const teams = [
     <div
       class="flex flex-col w-full h-auto justify-center items-center xl:px-14 md:px-10 lg:px-10"
     >
-      <p class="lg:text-[48px] xl:text-[48px] font-[500] text-[#1AB24F]">
+      <p
+        class="text-[27px] md:text-[37px] lg:text-[48px] xl:text-[48px] font-[500] text-[#1AB24F] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+      >
         Leadership Team
       </p>
-      <p class="lg:text-[20px] xl:text-[20px] font-[400] text-[#89A6BA]">
+      <p
+        class="text-[15px] md:text-[21px] lg:text-[20px] xl:text-[20px] font-[400] px-8 md:px-0 text-[#89A6BA] dark:text-[#6F6F6F] text-center"
+      >
         Our leadership team brings decades of experiences, a proven track record
         of success.
       </p>
     </div>
     <div class="w-full h-auto flex flex-row lg:mt-3 xl:mt-8">
       <div
-        class="flex flex-row py-2 w-full h-auto gap-x-10 mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-44 pl-44 pr-44 hide-scrollbar"
+        class="flex flex-row py-2 w-full h-auto gap-x-5 md:gap-x-10 mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-16 pl-16 pr-16 lg:scroll-pl-16 lg:pl-16 lg:pr-16 hide-scrollbar"
       >
         <div
           v-for="(team, index) in teams"
           :key="index"
-          class="snap-start shrink-0 xl:w-[350px] sml:h-[270px] md:h-[200px] lg:h-[440px] xl:h-[440px] rounded-[22px]"
+          class="snap-start shrink-0 h-auto rounded-[22px]"
         >
           <div
-            class="relative flex w-full h-full bg-blue-300 rounded-[22px] justify-center items-end"
+            class="relative flex w-full h-auto bg-blue-300 rounded-[22px] justify-center items-end"
           >
             <img
               :src="team.image"
-              alt="Robot"
-              class="w-full h-full object-cover rounded-[22px]"
+              alt="Photo"
+              class="w-full h-[270px] md:h-[320px] lg:h-[370px] object-cover bg-no-repeat rounded-[22px]"
             />
             <div
-              class="absolute flex w-full h-auto justify-center items-center py-5"
+              class="absolute flex w-full h-auto justify-center items-center pb-3"
             >
               <div class="relative flex justify-center items-center">
-                <img
-                  src="@/assets/images/desc-card-team.png"
-                  alt="Robot"
-                  class="w-[330px] h-[111.93px] object-cover rounded-[22px] shadow-xl"
+                <DescTeamFrame
+                  svgClass="h-auto w-[250px] md:w-[280px] lg:w-[310px] xl:w-[310px] dark:hidden"
+                />
+                <DarkDescTeamFrame
+                  svgClass="h-auto w-[250px] md:w-[280px] lg:w-[310px] xl:w-[310px] hidden dark:block"
                 />
                 <div class="absolute flex w-full h-auto pl-5 flex-col pt-2">
-                  <p class="font-[600] text-[#195279] text-[24px]">
+                  <p
+                    class="font-[600] text-[#195279] dark:text-[#FFFFFF] text-[17px] md:text-[19px] lg:text-[21px]"
+                  >
                     {{ team.name }}
                   </p>
-                  <p class="font-[400] text-[#195279] text-[16px]">
+                  <p
+                    class="font-[400] text-[#195279] dark:text-[#FAFAFA] text-[13px] md:text-[14px] lg:text-[16px]"
+                  >
                     {{ team.position }}
                   </p>
                 </div>
