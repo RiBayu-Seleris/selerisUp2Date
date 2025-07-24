@@ -1,6 +1,15 @@
 <script setup>
 import ImgLinear from "@/assets/images/about-linear.png";
 import DarkImgLinear from "@/assets/images/dark-about-linear.png";
+
+import { onMounted } from "vue";
+
+onMounted(() => {
+  const video = document.querySelector("video");
+  if (video) {
+    video.addEventListener("contextmenu", (e) => e.preventDefault());
+  }
+});
 </script>
 
 <template>
@@ -34,16 +43,26 @@ import DarkImgLinear from "@/assets/images/dark-about-linear.png";
         </div>
       </div>
       <div class="w-full h-auto sml:h-[350px] lg:w-full lg:h-auto flex">
-        <img
-          :src="ImgLinear"
-          alt="About Banner"
-          class="w-full h-full object-cover sml:object-contain dark:hidden"
-        />
-        <img
-          :src="DarkImgLinear"
-          alt="About Banner"
-          class="w-full h-full object-cover sml:object-contain hidden dark:block"
-        />
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          @contextmenu.prevent
+          class="w-full h-full object-cover object-center rounded-3xl dark:hidden"
+        >
+          <source src="@/assets/videos/Step.mp4" type="video/mp4" />
+        </video>
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          @contextmenu.prevent
+          class="w-full h-full object-cover object-center rounded-3xl hidden dark:block"
+        >
+          <source src="@/assets/videos/Dark_Step.mp4" type="video/mp4" />
+        </video>
         <!-- <NetworkDiagram /> -->
       </div>
     </div>

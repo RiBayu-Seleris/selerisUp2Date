@@ -1,6 +1,6 @@
 <script setup>
 import RobotEngineering from "@/assets/images/robot-engineering.svg";
-import RobotProduct from "@/assets/images/robot-product.svg";
+import RobotProduct from "@/assets/images/robot-product.png";
 const positions = [
   {
     robot: RobotEngineering,

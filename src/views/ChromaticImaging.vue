@@ -48,7 +48,7 @@ const cardContents = [
   >
     <!-- sml:h-[190px] md:h-[400px] lg:h-[470px] xl:h-[640px] -->
     <div
-      class="w-full h-auto aspect-[16/8] flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
+      class="w-full h-auto aspect-[16/8] flex justify-center mt-10 lg:mt-20 dark:bg-[#323232] rounded-3xl"
     >
       <video
         autoplay
@@ -56,7 +56,7 @@ const cardContents = [
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full object-cover rounded-[20px] dark:border-[0.1px] dark:border-[#FAFAFA]/25 dark:hidden"
+        class="w-full h-full object-cover rounded-[20px] dark:hidden"
       >
         <source src="@/assets/videos/SCI_Video.mp4" type="video/mp4" />
       </video>
@@ -66,7 +66,7 @@ const cardContents = [
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full object-cover rounded-[20px] dark:border-[0.1px] dark:border-[#FAFAFA]/25 hidden dark:block"
+        class="w-full h-full object-cover rounded-[20px] hidden dark:block"
       >
         <source src="@/assets/videos/Dark_SCI_Video.mp4" type="video/mp4" />
       </video>

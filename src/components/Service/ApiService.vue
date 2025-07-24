@@ -104,7 +104,7 @@ const ApiCards = [
       <div
         class="flex lg:w-[65%] xl:w-[60%] h-auto px-8 lg:px-16 mt-10 lg:mt-10"
       >
-        <p class="dark:text-[#6F6F6F] xl:text-[20px]">
+        <p class="text-[#195279] dark:text-[#6F6F6F] xl:text-[20px]">
           Seleris provides comprehensive documentation and support to help
           companies get started with the API service.
         </p>
