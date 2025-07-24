@@ -11,8 +11,7 @@
       <p
         class="text-[15px] md:text-[20px] font-[400] text-[#89A6BA] dark:text-[#6F6F6F] text-center"
       >
-        Our leadership team brings decades of experiences, a proven track record
-        of success.
+        Our dev team turns ideas into working code fast, clean, and reliable.
       </p>
     </div>
     <div class="flex w-full h-auto mt-5 px-8 md:px-14">

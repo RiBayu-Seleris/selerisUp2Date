@@ -19,7 +19,7 @@ const steps = [
   {
     title: "The Company",
     description:
-      "Seleris harnesses Remote Photoplethysmography (rPPG) technology to evaluate various vital signs that represent a customer's health condition.",
+      "The company can then use the risk score to make a decision about whether or not to proceed with the individual's application.",
   },
 ];
 

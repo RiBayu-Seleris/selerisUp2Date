@@ -4,20 +4,19 @@ const ApiCards = [
   {
     icon: Icon,
     title: "Smart Video Analysis",
-    description: `Assess individuals through short facial video recordings.
-    Our AI detects key risk indicators quickly and accurately.`,
+    description: `Seleris analyzes short facial videos to identify key risk factors quickly and accurately, 
+    enabling smarter, faster evaluations.`,
   },
   {
     icon: Icon,
     title: "Instant Risk Scoring",
-    description: `Get real-time risk scores with just a few seconds of video.
-    No manual forms or interviews required.`,
+    description: `Get instant risk scores in seconds to streamline decisions and improve your digital evaluation process.`,
   },
   {
     icon: Icon,
     title: "Frictionless Evaluation",
-    description: `Simplify customer assessments with a fully digital process.
-    Fast, seamless, and ideal for remote or low-data cases.`,
+    description: `Seleris provides a fully digital, seamless evaluation experience, 
+    perfect for remote users or those with limited data history.`,
   },
 ];
 </script>
@@ -49,10 +48,10 @@ const ApiCards = [
           <p
             class="text-[15px] lg:text-[19px] xl:text-[21px] text-[#195279] dark:text-[#6F6F6F]"
           >
-            Seleris offers a powerful API service that allows insurance
-            companies to integrate Seleris's underwriting capabilities into
-            their existing systems. The API service is easy to use and provides
-            a wide range of features, including.
+            Seleris offers a powerful API service that allows companies to
+            integrate Seleris's capabilities into their existing systems. The
+            API service is easy to use and provides a wide range of features,
+            including.
           </p>
         </div>
       </div>
@@ -64,10 +63,10 @@ const ApiCards = [
           <div
             v-for="(ApiCard, index) in ApiCards"
             :key="index"
-            class="flex snap-start shrink-0 w-[100%] md:w-[60%] lg:w-[55%] xl:w-[60%] sml:h-[150px] md:h-[120px] lg:h-[150px] xl:h-[200px] rounded-[22px] items-center bg-[#FAFAFA] dark:bg-[#323232]"
+            class="flex snap-start shrink-0 w-[100%] md:w-[60%] lg:w-[55%] xl:w-[60%] sml:h-[150px] md:h-auto lg:h-auto xl:h-[200px] rounded-[22px] items-center bg-[#FAFAFA] dark:bg-[#323232]"
           >
             <div
-              class="flex flex-row w-full h-auto gap-x-5 md:gap-x-5 xl:gap-x-8 justify-center"
+              class="flex flex-row w-full h-full py-4 xl:py-7 gap-x-5 md:gap-x-5 xl:gap-x-8 justify-center"
             >
               <div
                 class="flex sml:w-[50px] sml:h-[50px] md:w-[50px] md:h-[50px] lg:w-[55px] lg:h-[55px] xl:w-[70px] xl:h-[70px] justify-center md:mt-2 lg:mt-0"
@@ -75,7 +74,7 @@ const ApiCards = [
                 <img
                   :src="ApiCard.icon"
                   alt="Icon"
-                  class="w-full lg:h-full xl:h-full object-contain bg-white rounded-full shadow-lg p-2"
+                  class="w-full lg:h-full xl:h-full object-contain object-top bg-white rounded-full shadow-lg p-2"
                 />
               </div>
               <div
@@ -83,7 +82,7 @@ const ApiCards = [
               >
                 <div class="flex w-full h-auto">
                   <p
-                    class="text-[#1AB24F] text-[17px] lg:text-[17px] xl:text-[21px] font-[500]"
+                    class="text-[#1AB24F] text-[17px] md:text-[14px] lg:text-[17px] xl:text-[21px] font-[500]"
                   >
                     {{ ApiCard.title }}
                   </p>

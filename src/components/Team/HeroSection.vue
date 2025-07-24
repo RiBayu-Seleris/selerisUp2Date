@@ -7,7 +7,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
     <HeroText
       title="Our Team"
       subtitle="Meet the team behind Seleris"
-      description="Driven by innovation, we design unforgettable experiences that connect builders and customers"
+      description="Behind every breakthrough is a team of passionate experts turning bold ideas into real-world impact."
     />
   </div>
 </template>

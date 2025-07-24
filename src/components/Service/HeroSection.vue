@@ -21,7 +21,7 @@
       </div>
       <div class="w-full h-auto">
         <p
-          class="text-[14px] md:text-[23px] lg:text-[24px] xl:text-[24px] font-[400] text-[#195279] sml:px-8 md:px-0 xl:px-48 text-center leading-[25px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+          class="text-[14px] md:text-[23px] lg:text-[24px] xl:text-[24px] font-[400] text-[#195279] sml:px-8 md:px-0 xl:px-48 text-center leading-[37px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
         >
           Our intuitive API documentation guides you step-by-step
         </p>

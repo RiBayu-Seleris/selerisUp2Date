@@ -1,4 +1,5 @@
 <script setup>
+import ChecklistIcon from "@/components/icons/Checklist.vue";
 const ApiServices = [
   {
     title: "API Documentation",
@@ -10,7 +11,7 @@ const ApiServices = [
   },
   {
     title: "Claims Processing",
-    body: "Easily manage and automate insurance claims workflows.",
+    body: "Easily manage and automate claims workflows with speed, accuracy, and minimal manual effort.",
   },
 ];
 </script>
@@ -30,9 +31,9 @@ const ApiServices = [
         </div>
         <div class="flex w-full h-auto">
           <p
-            class="text-[#195279] font-[600] text-[27px] md:text-[41px] lg:text-[41px] xl:text-[53px] lg:leading-[50px] xl:leading-[70px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+            class="text-[#195279] font-[500] text-[27px] md:text-[41px] lg:text-[41px] xl:text-[53px] lg:leading-[50px] xl:leading-[70px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] from-[15%] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
-            How to Get Started with the <br class="md:hidden" />
+            How to Get Started with the <br class="md:hidden lg:block" />
             Seleris API Service
           </p>
         </div>
@@ -60,7 +61,9 @@ const ApiServices = [
               <div class="w-[5%] h-auto">
                 <div
                   class="w-7 h-7 lg:w-7 lg:h-7 xl:w-8 xl:h-8 mt-2 bg-[#1AB24F] rounded-full"
-                />
+                >
+                  <ChecklistIcon />
+                </div>
               </div>
               <div
                 class="flex flex-col w-[90%] h-auto gap-y-2 lg:gap-y-1 xl:gap-y-2"
@@ -90,7 +93,7 @@ const ApiServices = [
             <img
               src="@/assets/images/robot-getstarted.png"
               alt="Icon"
-              class="flex lg:justify-center items-center w-[300px] h-[300px] md:w-[300px] md:h-full lg:w-[350px] lg:h-[350px] xl:w-[400px] xl:h-[400px] object-contain md:animate__animated md:animate-bounce"
+              class="flex lg:justify-center items-center w-[300px] h-[300px] md:w-[300px] md:h-full lg:w-[350px] lg:h-[350px] xl:w-[400px] xl:h-[400px] object-contain md:animate__animated md:animate-bounce2"
             />
           </div>
         </div>

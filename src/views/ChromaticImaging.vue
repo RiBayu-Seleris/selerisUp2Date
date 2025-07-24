@@ -11,19 +11,19 @@ const cardContents = [
     bgCard: "bg-[#2B7C3F]",
     title: "Vital Sign Monitoring",
     titleColor: "text-[#2B7C3F]",
-    body: `By analyzing facial blood flow patterns, our system provides accurate, contactless monitoring of key vital signs such as heart rate, respiratory rate, and stress indicators—anytime, anywhere.`,
+    body: `By analyzing facial blood flow patterns, our system provides accurate, contactless monitoring of key vital signs such as heart rate, respiratory rate, and stress indicators anytime, anywhere.`,
   },
   {
     bgCard: "bg-[#2B7C3F]",
     title: "Early Health Insights",
     titleColor: "text-[#2B7C3F]",
-    body: `Our platform detects subtle physiological changes, allowing early identification of potential health issues such as fatigue, cardiovascular irregularities, or stress—enabling smarter lifestyle choices.`,
+    body: `Our platform detects subtle physiological changes, allowing early identification of potential health issues such as fatigue, cardiovascular irregularities, or stress enabling smarter lifestyle choices.`,
   },
   {
     bgCard: "bg-[#2B7C3F]",
     title: "Contactless Screening",
     titleColor: "text-[#2B7C3F]",
-    body: `Utilizing advanced facial video analysis, we offer a hygienic and convenient way to assess health status without physical contact—ideal for public settings, clinics, or daily self-monitoring.`,
+    body: `Utilizing advanced facial video analysis, we offer a hygienic and convenient way to assess health status without physical contact ideal for public settings, clinics, or daily self-monitoring.`,
   },
 ];
 </script>

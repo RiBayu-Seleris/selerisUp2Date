@@ -17,13 +17,13 @@ const cardContents = [
     bgCard: "bg-[#81021E]",
     title: "Comprehensive Health Risk Insights",
     titleColor: "text-[#81021E]",
-    body: `Beyond basic vitals, we provide predictive insights into chronic disease risks, mortality likelihood, and other key factors that support medical decision-making and insurance evaluations.`,
+    body: `Beyond basic vitals, we provide predictive insights into chronic disease risks, mortality likelihood, and other key factors that support medical decision making and insurance evaluations.`,
   },
   {
     bgCard: "bg-[#81021E]",
     title: "Underwriting & Disease Prediction",
     titleColor: "text-[#81021E]",
-    body: `With AI-powered analytics, we offer deep risk assessment across multiple health domains—supporting accurate underwriting decisions, early disease identification, and morbidity predictions.`,
+    body: `With AI-powered analytics, we offer deep risk assessment across multiple health domains supporting accurate underwriting decisions, early disease identification, and morbidity predictions.`,
   },
   {
     bgCard: "bg-[#81021E]",

@@ -38,7 +38,7 @@ onUnmounted(() => {
             class="w-full flex items-center justify-between bg-white dark:bg-black dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-xl dark:bg-opacity-10 rounded-[18px] lg:px-8 py-2 border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30"
           >
             <div class="hidden lg:grid grid-cols-12 w-full h-auto">
-              <div class="col-span-1 h-auto">
+              <router-link to="/" class="col-span-1 h-auto">
                 <div class="flex w-full items-center">
                   <img
                     :src="Logo"
@@ -53,7 +53,7 @@ onUnmounted(() => {
                     class="w-[117px] h-[56px] object-contain hidden dark:block"
                   />
                 </div>
-              </div>
+              </router-link>
               <div class="hidden lg:flex items-center col-span-10 h-auto">
                 <div class="flex w-full">
                   <nav
@@ -74,7 +74,7 @@ onUnmounted(() => {
             <div
               class="flex lg:hidden flex-row w-full h-auto justify-between md:px-8 sml:px-4"
             >
-              <div class="w-[40%] h-auto flex">
+              <router-link to="/" class="w-[40%] h-auto flex">
                 <!-- Logo terang (light mode) -->
                 <img
                   :src="Logo"
@@ -88,7 +88,7 @@ onUnmounted(() => {
                   alt="Dark Logo"
                   class="w-[117px] h-[56px] sml:w-[80px] sml:h-[56px] object-contain hidden dark:block"
                 />
-              </div>
+              </router-link>
               <div
                 class="w-[60%] h-auto flex items-center flex-row justify-end"
               >

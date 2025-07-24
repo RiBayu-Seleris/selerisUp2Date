@@ -7,7 +7,7 @@
         <img
           src="@/assets/images/robot-team.svg"
           alt="Robot"
-          class="w-[170px] h-[170px] md:w-[200px] md:h-[200px] lg:w-[230px] lg:h-[230px] xl:w-[250px] xl:h-[250px] object-contain rounded-[22px] md:animate__animated md:animate-miniBounce"
+          class="w-[170px] h-[170px] md:w-[200px] md:h-[200px] lg:w-[230px] lg:h-[230px] xl:w-[250px] xl:h-[250px] object-contain rounded-[22px]"
         />
       </div>
       <div class="flex w-full justify-center items-center md:w-[70%]">
@@ -17,8 +17,8 @@
           The Seleris engineering team is responsible for building and
           maintaining our AI-powered platform. Led by Rinaldi Anwar, who brings
           over 10 years of experience in AI development and deployment, the team
-          focuses on delivering reliable, scalable, and innovative
-          technology solutions.
+          focuses on delivering reliable, scalable, and innovative technology
+          solutions.
         </p>
       </div>
     </div>

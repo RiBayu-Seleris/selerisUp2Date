@@ -15,7 +15,7 @@ import Description from "@/components/Team/Description.vue";
     <TeamList />
   </section>
 
-  <section class="flex relative w-full h-auto mt-20">
+  <section class="flex relative w-full h-auto mt-28">
     <DevelopmentTeam />
   </section>
 

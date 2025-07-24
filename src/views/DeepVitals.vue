@@ -11,13 +11,13 @@ const cardContents = [
     bgCard: "bg-[#1738B8]",
     title: "Health Risk Assessment",
     titleColor: "text-[#1738B8]",
-    body: `We analyze filtered rPPG signals to predict potential health risks, including abnormal heart rate patterns, stress indicators, and fatigue levels—enabling proactive health management.`,
+    body: `We analyze filtered rPPG signals to predict potential health risks, including abnormal heart rate patterns, stress indicators, and fatigue levels enabling proactive health management.`,
   },
   {
     bgCard: "bg-[#1738B8]",
     title: "AI-Powered Health Insights",
     titleColor: "text-[#1738B8]",
-    body: `Using deep learning on facial signal data, our system identifies early warning signs of physiological stress, cardiovascular irregularities, or lifestyle-related risk factors—all in real time.`,
+    body: `Using deep learning on facial signal data, our system identifies early warning signs of physiological stress, cardiovascular irregularities, or lifestyle-related risk factors all in real time.`,
   },
   {
     bgCard: "bg-[#1738B8]",
@@ -29,7 +29,7 @@ const cardContents = [
     bgCard: "bg-[#1738B8]",
     title: "Predictive Vital Analytics",
     titleColor: "text-[#1738B8]",
-    body: `By extracting and processing key biometric features, we deliver predictive analytics on your health condition—helping anticipate risks before symptoms arise.`,
+    body: `By extracting and processing key biometric features, we deliver predictive analytics on your health condition helping anticipate risks before symptoms arise.`,
   },
 ];
 </script>

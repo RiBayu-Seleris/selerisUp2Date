@@ -37,11 +37,10 @@ import DescRobot from "@/assets/images/about-images.png";
           Founded in 2019 by experienced entrepreneurs and technologists,
           Seleris is built on the belief that everyone deserves access to
           affordable and inclusive protection. Its
-          <span class="font-[600]"> AI and machine learning </span>
+          <span class="font-bold"> AI and machine learning </span>
           models are trained on large datasets of facial video and behavioral
-          data, enabling high-accuracy risk assessments—even for individuals
-          with limited medical or historical records. dikasih bold di AI and
-          Machine Learning
+          data, enabling high-accuracy risk assessments even for individuals
+          with limited medical or historical records.
         </p>
       </div>
     </div>

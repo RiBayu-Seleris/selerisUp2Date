@@ -17,21 +17,23 @@ const sidebarStore = useSidebarStore();
     <!-- Desktop Navbar -->
     <div class="hidden lg:grid grid-cols-12 w-full h-auto">
       <div class="col-span-1 h-auto">
-        <div class="flex w-full items-center">
-          <!-- Logo terang (light mode) -->
-          <img
-            :src="Logo"
-            alt="Logo"
-            class="w-[117px] h-[56px] object-contain dark:hidden"
-          />
+        <router-link to="/">
+          <div class="flex w-full items-center">
+            <!-- Logo terang (light mode) -->
+            <img
+              :src="Logo"
+              alt="Logo"
+              class="w-[117px] h-[56px] object-contain dark:hidden"
+            />
 
-          <!-- Logo gelap (dark mode) -->
-          <img
-            :src="DarkLogo"
-            alt="Dark Logo"
-            class="w-[117px] h-[56px] object-contain hidden dark:block"
-          />
-        </div>
+            <!-- Logo gelap (dark mode) -->
+            <img
+              :src="DarkLogo"
+              alt="Dark Logo"
+              class="w-[117px] h-[56px] object-contain hidden dark:block"
+            />
+          </div>
+        </router-link>
       </div>
       <div class="flex items-center col-span-10 h-auto">
         <div class="flex w-full">
@@ -52,7 +54,7 @@ const sidebarStore = useSidebarStore();
 
     <!-- Mobile Navbar -->
     <div class="w-full h-auto flex lg:hidden flex-row justify-between">
-      <div class="w-[40%] h-auto flex">
+      <router-link to="/" class="w-[40%] h-auto flex">
         <!-- Logo terang (light mode) -->
         <img
           :src="Logo"
@@ -66,7 +68,7 @@ const sidebarStore = useSidebarStore();
           alt="Dark Logo"
           class="w-[117px] h-[56px] sml:w-[80px] sml:h-[56px] object-contain hidden dark:block"
         />
-      </div>
+      </router-link>
       <div class="w-[60%] h-auto flex items-center flex-row justify-end">
         <div class="w-[70%] h-10 flex items-center justify-end">
           <ThemeToggle />

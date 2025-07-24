@@ -29,7 +29,13 @@ const positions = [
 </script>
 
 <template>
-  <div class="w-full h-auto flex flex-row">
+  <div class="w-full h-auto flex flex-row relative">
+    <div
+      class="hidden xl:flex absolute w-32 h-full bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-r dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% left-0 z-20 rounded-r-2xl"
+    />
+    <div
+      class="hidden xl:flex absolute w-32 h-full bg-gradient-to-l from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-l dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% right-0 z-20 rounded-l-2xl"
+    />
     <div
       class="relative flex flex-row py-2 w-full h-auto gap-x-8 md:gap-x-10 mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-10 pl-10 pr-10 md:scroll-pl-14 md:pl-14 md:pr-14 hide-scrollbar"
     >

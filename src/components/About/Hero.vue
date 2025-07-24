@@ -31,7 +31,7 @@ import AboutHero from "@/assets/images/About-hero-image.png";
             <p
               class="md:text-[14px] lg:text-[17px] xl:text-[23px] text-[#89A6BA] dark:text-[#6F6F6F] lg:leading-[54px] xl:leading-[45px]"
             >
-              Seleris Is The Best Life Technology.
+              The Future of Life Technology
             </p>
           </div>
         </div>

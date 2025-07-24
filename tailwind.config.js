@@ -20,7 +20,7 @@ module.exports = {
       xl: "1280px",
 
       // Extra Large
-      // xls: "1440px",
+      xls: "1440px",
       // xls: { raw: "(min-width: 1440px) and (max-width: 1535px)" },
       // "2xl": { raw: "(min-width: 1536px) and (max-width: 2559px)" },
       // "3xl": { raw: "(min-width: 2560px)" },
@@ -71,6 +71,10 @@ module.exports = {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-15%)" },
         },
+        bounce2: {
+          "0%, 100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-15%)" },
+        },
         wiggle: {
           "0%, 100%": { transform: "rotate(7deg)" },
           "25%": { transform: "rotate(-7deg)" },
@@ -94,6 +98,7 @@ module.exports = {
       },
       animation: {
         bounce: "bounce 3s infinite",
+        bounce2: "bounce2 3s infinite",
         miniBounce: "miniBounce 1s ease-in-out infinite",
         wiggle: "wiggle 5s linear infinite",
         marquee: "marquee 25s linear infinite",

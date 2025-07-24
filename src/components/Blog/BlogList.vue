@@ -16,36 +16,39 @@ const activeCategory = ref("View All");
 const blogPosts = ref([
   {
     id: 1,
+    image: new URL("@/assets/images/blog/example.png", import.meta.url).href,
     title: "Meet AutoManage, the best AI management tools",
     category: "Artificial Intelligent",
     date: "Dec 22, 2023",
     description:
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
-    image: new URL("@/assets/images/blog/example.png", import.meta.url).href,
+      "Meet AutoManage, the best AI management tools Boost productivity with smart tools that automate everyday operational tasks.",
   },
   {
     id: 2,
+    image: new URL("@/assets/images/blog/example.png", import.meta.url).href,
     title: "Introducing CodeWizard, streamline with AI assistance",
     category: "Design",
     date: "Jan 3, 2024",
-    description: "New trends in visual and UX design for modern apps.",
-    image: new URL("@/assets/images/blog/example.png", import.meta.url).href,
+    description:
+      "Introducing CodeWizard, streamline with AI assistance Explore AI-powered design tools that simplify modern app development.",
   },
   {
     id: 3,
+    image: new URL("@/assets/images/blog/example.png", import.meta.url).href,
     title: "Discover HelpBot, the AI assistant for customer service",
     category: "Insurance",
     date: "Feb 10, 2024",
-    description: "Tailor your approach with AI-enhanced customer analytics.",
-    image: new URL("@/assets/images/blog/example.png", import.meta.url).href,
+    description:
+      "Discover HelpBot, the AI assistant for customer service Transform service experience using intelligent, real-time customer insights.",
   },
   {
     id: 4,
+    image: new URL("@/assets/images/blog/example.png", import.meta.url).href,
     title: "Discover HelpBot, the AI assistant for customer service",
     category: "Technology",
     date: "Feb 10, 2024",
-    description: "AI-driven marketing insights platform",
-    image: new URL("@/assets/images/blog/example.png", import.meta.url).href,
+    description:
+      "Discover HelpBot, the AI assistant for customer service AI-driven platform to uncover deep marketing and customer behavior patterns.",
   },
   // Tambah lebih banyak sesuai kebutuhan
 ]);

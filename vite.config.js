@@ -6,7 +6,7 @@ import path from "path"; // <-- tambahkan ini
 
 export default defineConfig({
   server: {
-    allowedHosts: ["617c5b311f3a.ngrok-free.app"],
+    allowedHosts: ["b464629c9aa9.ngrok-free.app"],
   },
   plugins: [vue()],
   resolve: {

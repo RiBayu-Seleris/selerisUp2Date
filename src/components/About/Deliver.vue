@@ -23,12 +23,12 @@ import performanceIcon from "@/assets/icons/performance.svg";
         <DifferentCard
           :image="innovationIcon"
           title="Why Seleris"
-          subtitle="Seleris helps businesses assess people faster, smarter, and easier. Efficiency"
+          subtitle="Seleris helps businesses assess people faster, smarter, and easier."
         />
         <DifferentCard
           :image="innovationIcon"
           title="Efficiency"
-          subtitle="Cut costs and processing time by up to 50 percent. Accuracy"
+          subtitle="Cut costs and processing time by up to 50 percent."
         />
       </div>
       <div class="flex flex-row">
@@ -36,7 +36,7 @@ import performanceIcon from "@/assets/icons/performance.svg";
           :image="innovationIcon"
           title="Accuracy"
           subtitleClass="pr-5"
-          subtitle="AI delivers accurate results, even with limited user data. Accessibility"
+          subtitle="AI delivers accurate results, even with limited user data."
         />
         <DifferentCard
           :image="innovationIcon"
@@ -56,21 +56,21 @@ import performanceIcon from "@/assets/icons/performance.svg";
             <DifferentCard
               :image="innovationIcon"
               title="Why Seleris"
-              subtitle="Seleris helps businesses assess people faster, smarter, and easier. Efficiency"
+              subtitle="Seleris helps businesses assess people faster, smarter, and easier."
             />
           </div>
           <div class="w-full mb-5">
             <DifferentCard
               :image="innovationIcon"
               title="Efficiency"
-              subtitle="Cut costs and processing time by up to 50 percent. Accuracy"
+              subtitle="Cut costs and processing time by up to 50 percent."
             />
           </div>
           <div class="w-full mb-5">
             <DifferentCard
               :image="innovationIcon"
               title="Accuracy"
-              subtitle="AI delivers accurate results, even with limited user data. Accessibility"
+              subtitle="AI delivers accurate results, even with limited user data."
             />
           </div>
           <div class="w-full mb-5">

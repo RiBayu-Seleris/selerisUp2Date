@@ -21,7 +21,7 @@ const aboutList = [
     name: "Our Team",
   },
   {
-    url: "/",
+    url: "#",
     name: "Innovations",
   },
 ];
@@ -118,8 +118,8 @@ const industryList = [
     :class="[
       'flex items-center text-md font-[400] text-[#374151] ',
       isScrolled
-        ? 'lg:gap-[20px] xl:gap-[50px] dark:text-[#989898] '
-        : 'lg:gap-[25px] 2lg:gap-[45px] xl:gap-[63px] 2xl:gap-[70px] justify-center dark:text-[#989898]',
+        ? 'lg:gap-[20px] xl:gap-[50px] dark:text-[#DEDEDE] '
+        : 'lg:gap-[25px] 2lg:gap-[45px] xl:gap-[63px] 2xl:gap-[70px] justify-center dark:text-[#DEDEDE]',
     ]"
   >
     <li>
