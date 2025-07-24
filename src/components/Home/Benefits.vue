@@ -3,16 +3,28 @@ import CardDefault from "@/components/reusable/CardDefault.vue";
 
 const benefitList = [
   {
-    title: "Speed",
-    body: "Seleris processes images in real-time, with an average recognition time of under 100 milliseconds.",
-  },
-  {
     title: "Accuracy",
-    body: "Advanced AI ensures over 99% accuracy in detecting.",
+    body: "The results show that Seleris can recognize faces with up to 94% accuracy.",
   },
   {
-    title: "Cost Efficiency",
-    body: "Automated processing reduces operational costs and improves ROI significantly.",
+    title: "Speed",
+    body: "The Seleris app has a lightning-fast speed. it can open and run features quickly.",
+  },
+  {
+    title: "Efficiency",
+    body: "The app uses a simple and intuitive interface, so users can quickly find the features they are looking for.",
+  },
+  {
+    title: "Testimonial",
+    body: "Embrace the power of collaboration with a multitude of partners.",
+  },
+  {
+    title: "Customer Experience",
+    body: "The best possible Experience that is easy, comfortable, and Safe for Seleris users is our commitment.",
+  },
+  {
+    title: "Guarantee",
+    body: "The security of your data is our priority. Our apps use cutting-edge security technology",
   },
 ];
 </script>

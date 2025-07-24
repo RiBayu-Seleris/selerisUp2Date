@@ -48,7 +48,7 @@ defineProps({
         />
       </div>
       <div class="flex w-full h-auto text-[#2AB857] pl-3 items-center">
-        <p class="text-[24px] sml:text-[20px]">Speed</p>
+        <p class="text-[24px] sml:text-[20px]">{{ title }}</p>
       </div>
     </div>
     <div class="flex flex-col w-full h-full">
@@ -56,8 +56,7 @@ defineProps({
         <p
           class="text-[1.1rem] sml:text-[14px] text-[#195279] dark:text-[#FAFAFA]"
         >
-          Seleris processes images in real-time, with an average recognition
-          time of under 100 milliseconds.
+          {{ body }}
         </p>
       </div>
     </div>
