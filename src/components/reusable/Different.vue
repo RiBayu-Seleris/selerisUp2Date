@@ -24,18 +24,18 @@ defineProps({
 <template>
   <div :class="`hidden lg:block w-full h-auto ${bgImage} rounded-b-[3rem]`">
     <div class="flex flex-col w-full h-auto xl:px-10 lg:px-5">
-      <div class="flex flex-col w-full h-auto lg:mt-16 xl:mt-20">
+      <div class="flex flex-col w-full h-auto lg:mt-8 xl:mt-20">
         <div class="flex w-full h-auto">
           <!-- Title -->
-          <p class="text-3xl xl:text-[24px] text-[#1DC457]">
+          <p class="text-[23px] xl:text-[24px] text-[#1DC457]">
             <!-- What Makes Us Different? -->
             {{ title }}
           </p>
         </div>
-        <div class="flex w-[70%] h-auto mt-5">
+        <div class="flex w-[70%] h-auto mt-2 xl:mt-5">
           <!-- Title Body -->
           <p
-            class="lg:text-2xl xl:text-[48px] text-[#195279] dark:text-[#FAFAFA] leading-[40px] xl:leading-[65px] font-[500]"
+            class="lg:text-2xl xl:text-[41px] text-[#195279] dark:text-[#FAFAFA] leading-[40px] xl:leading-[65px] font-[500]"
           >
             <!-- We bring solutions to make life insurance for our customers. -->
             {{ subtitle }}

@@ -27,14 +27,16 @@ defineProps({
   <!-- Desktop -->
   <div class="hidden lg:flex w-full h-auto">
     <div class="flex flex-row w-full h-full">
-      <div class="flex w-[25%] h-full">
+      <div class="flex w-[15%] xl:w-[25%] h-full">
         <img
           :src="image"
           alt="Icon"
-          class="w-[70px] xl:h-[70px] lg:h-[57px] object-contain bg-white dark:bg-[#323232] rounded-full shadow-lg p-2"
+          class="w-[70px] lg:w-[45px] lg:h-[45px] xl:w-[70px] xl:h-[70px] p-3 xl:p-3 object-contain bg-white dark:bg-[#323232] rounded-full shadow-lg"
         />
       </div>
-      <div class="flex flex-col w-full h-auto lg:pl-4 xl:pl-4">
+      <div
+        class="flex flex-col w-[85%] xl:w-full h-auto lg:pl-2 xl:pl-4 justify-start items-start"
+      >
         <div class="flex w-full h-auto text-[#195279] dark:text-[#FAFAFA]">
           <p class="lg:text-[16px] xl:text-[20px] pt-3 pb-2">{{ title }}</p>
         </div>

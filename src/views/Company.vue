@@ -61,7 +61,7 @@ import { useSidebarStore } from "@/stores/sidebar";
   <!-- data-aos="fade-left"
     data-aos-duration="3000" -->
   <section
-    class="flex relative w-full h-auto pb-8 lg:pb-0 px-8 lg:px-20 sml:mb-20 md:mb-4 mb-10 xl:mb-20"
+    class="flex relative w-full h-auto pb-8 lg:pb-0 px-8 md:px-16 lg:px-20 sml:mb-20 md:mb-4 lg:mb-20 xl:mb-20"
   >
     <StepDescription />
   </section>
