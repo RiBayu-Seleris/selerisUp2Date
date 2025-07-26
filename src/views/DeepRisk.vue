@@ -9,33 +9,27 @@ import Dark_SDR_Logo from "@/assets/images/technology/Dark-SDR-Logo.svg";
 const cardContents = [
   {
     bgCard: "bg-[#81021E]",
-    title: "Advanced Risk Profiling",
+    title: "Health Risk Scoring",
     titleColor: "text-[#81021E]",
-    body: `Our system translates biometric data into advanced health risk scores, enabling precise prediction of insurance underwriting risks, potential disease development, and overall life expectancy trends.`,
+    body: `Generates a quantifiable score based on physiological input to assess an individual's current health condition. This score helps users and providers make informed wellness or diagnostic decisions.`,
   },
   {
     bgCard: "bg-[#81021E]",
-    title: "Comprehensive Health Risk Insights",
+    title: "Underwriting Risk Prediction",
     titleColor: "text-[#81021E]",
-    body: `Beyond basic vitals, we provide predictive insights into chronic disease risks, mortality likelihood, and other key factors that support medical decision making and insurance evaluations.`,
+    body: `Predicts insurance underwriting risks by analyzing biometric data. It provides insurers with automated risk profiling to accelerate and improve decision-making accuracy.`,
   },
   {
     bgCard: "bg-[#81021E]",
-    title: "Underwriting & Disease Prediction",
+    title: "Risk Diseases Prediction",
     titleColor: "text-[#81021E]",
-    body: `With AI-powered analytics, we offer deep risk assessment across multiple health domains supporting accurate underwriting decisions, early disease identification, and morbidity predictions.`,
+    body: `Assesses the likelihood of chronic or critical diseases by combining physiological indicators with AI modeling. It aids early detection and targeted interventions.`,
   },
   {
     bgCard: "bg-[#81021E]",
-    title: "AI-Based Risk Modeling",
+    title: "Mortality/Morbidity Risk Prediction",
     titleColor: "text-[#81021E]",
-    body: `Seleris Deep Risk™ combines real-time biometric sensing with advanced risk prediction models to deliver actionable insights for life insurance, preventive healthcare, and chronic disease management.`,
-  },
-  {
-    bgCard: "bg-[#81021E]",
-    title: "From Data to Decision",
-    titleColor: "text-[#81021E]",
-    body: `Using physiological signals and behavioral indicators, we help insurers and healthcare providers predict disease onset, assess mortality risk, and make smarter, faster decisions.`,
+    body: `Estimates potential health deterioration or death risk using biometric and behavioral data. This insight supports healthcare, insurance, and wellness decision-making for long-term planning.`,
   },
 ];
 </script>

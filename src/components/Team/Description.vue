@@ -1,7 +1,7 @@
 <template>
   <div class="flex w-full h-auto">
     <div
-      class="flex flex-col md:flex-row w-full h-auto bg-[#195279] justify-center items-center px-8 md:px-8 lg:px-8 xl:px-16 py-5 lg:py-10 rounded-[30px] md:gap-x-10 xl:gap-x-0"
+      class="flex flex-col md:flex-row w-full h-auto bg-[#195279] dark:bg-gradient-to-br dark:from-[#195279] dark:to-[#2E97DF] justify-center items-center px-8 md:px-8 lg:px-8 xl:px-16 py-5 lg:py-10 rounded-[30px] md:gap-x-10 xl:gap-x-0"
     >
       <div class="flex w-full justify-center md:w-[30%]">
         <img

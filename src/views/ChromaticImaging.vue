@@ -9,21 +9,33 @@ import Dark_SCI_Logo from "@/assets/images/technology/Dark-SCI-Logo.svg";
 const cardContents = [
   {
     bgCard: "bg-[#2B7C3F]",
-    title: "Vital Sign Monitoring",
+    title: "Capturing Facial Blood Flow Video",
     titleColor: "text-[#2B7C3F]",
-    body: `By analyzing facial blood flow patterns, our system provides accurate, contactless monitoring of key vital signs such as heart rate, respiratory rate, and stress indicators anytime, anywhere.`,
+    body: `Captures real-time facial video to analyze micro blood flow changes using standard cameras. This process is non-contact and helps extract physiological signals from skin color fluctuations linked to blood circulation.`,
   },
   {
     bgCard: "bg-[#2B7C3F]",
-    title: "Early Health Insights",
+    title: "Object Detection",
     titleColor: "text-[#2B7C3F]",
-    body: `Our platform detects subtle physiological changes, allowing early identification of potential health issues such as fatigue, cardiovascular irregularities, or stress enabling smarter lifestyle choices.`,
+    body: `Detects and tracks facial areas and other relevant objects to ensure the correct region is monitored throughout the video. This improves accuracy by isolating key visual components.`,
   },
   {
     bgCard: "bg-[#2B7C3F]",
-    title: "Contactless Screening",
+    title: "Requirement Condition Detection",
     titleColor: "text-[#2B7C3F]",
-    body: `Utilizing advanced facial video analysis, we offer a hygienic and convenient way to assess health status without physical contact ideal for public settings, clinics, or daily self-monitoring.`,
+    body: `Automatically checks for environmental and positional requirements such as lighting quality, subject distance, and motion artifacts. This ensures the system only processes usable and reliable visual data.`,
+  },
+  {
+    bgCard: "bg-[#2B7C3F]",
+    title: "Region of Interest (ROI)",
+    titleColor: "text-[#2B7C3F]",
+    body: `Selects specific facial zones (like the forehead or cheeks) where blood flow signals are most visible. Focusing on ROI improves signal strength and reduces noise from unrelated areas.`,
+  },
+  {
+    bgCard: "bg-[#2B7C3F]",
+    title: "Raw (RGB) Signals Extraction",
+    titleColor: "text-[#2B7C3F]",
+    body: `Extracts color channel values (Red, Green, Blue) from the ROI. These raw signals form the basis for further physiological analysis, capturing subtle changes caused by blood flow variations.`,
   },
 ];
 </script>

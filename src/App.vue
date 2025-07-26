@@ -1,6 +1,6 @@
 <script setup>
 import { useRoute } from "vue-router";
-import { onMounted, onUnmounted } from "vue";
+import { onMounted, onUnmounted, ref, computed } from "vue";
 import { useScrollStore } from "@/stores/scroll";
 import { useThemeStore } from "@/stores/theme";
 
@@ -18,9 +18,15 @@ import "swiper/css/pagination";
 const themeStore = useThemeStore();
 const route = useRoute();
 const scrollStore = useScrollStore();
+const showTooltip = computed(() => scrollStore.isScrolled);
 
 const handleScroll = () => {
   scrollStore.updateScroll();
+};
+
+const scrollToTop = () => {
+  window.scrollTo({ top: 0, behavior: "smooth" });
+  // scrollStore.isScrolled = false; // Paksa hilangkan tooltip
 };
 
 onMounted(() => {
@@ -52,6 +58,16 @@ onUnmounted(() => {
         <component :is="scrollStore.isScrolled ? NavbarScroll : Navbar" />
       </div>
 
+      <transition name="fade-slide">
+        <div
+          v-if="showTooltip"
+          @click="scrollToTop"
+          class="flex fixed justify-center cursor-pointer items-center bottom-10 right-20 w-14 h-14 z-50 bg-green-400 border-1 border-black rounded-full shadow-sm"
+        >
+          Tooltip
+        </div>
+      </transition>
+
       <!-- Sidebar (hanya 1 instance) -->
       <Sidebar />
       <router-view />
@@ -69,3 +85,19 @@ onUnmounted(() => {
     </footer>
   </div>
 </template>
+<style scoped>
+.fade-slide-enter-active,
+.fade-slide-leave-active {
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+.fade-slide-enter-from,
+.fade-slide-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
+}
+.fade-slide-enter-to,
+.fade-slide-leave-from {
+  opacity: 1;
+  transform: translateY(0);
+}
+</style>

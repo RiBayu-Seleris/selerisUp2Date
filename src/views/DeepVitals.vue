@@ -9,27 +9,33 @@ import Dark_SDV_Logo from "@/assets/images/technology/Dark-SDV-Logo.svg";
 const cardContents = [
   {
     bgCard: "bg-[#1738B8]",
-    title: "Health Risk Assessment",
+    title: "rPPG Signals Extraction",
     titleColor: "text-[#1738B8]",
-    body: `We analyze filtered rPPG signals to predict potential health risks, including abnormal heart rate patterns, stress indicators, and fatigue levels enabling proactive health management.`,
+    body: `Derives remote photoplethysmographic (rPPG) signals from facial video data. These signals reflect vital signs such as heart rate and are extracted without physical sensors.`,
   },
   {
     bgCard: "bg-[#1738B8]",
-    title: "AI-Powered Health Insights",
+    title: "Signal Filtering",
     titleColor: "text-[#1738B8]",
-    body: `Using deep learning on facial signal data, our system identifies early warning signs of physiological stress, cardiovascular irregularities, or lifestyle-related risk factors all in real time.`,
+    body: `Applies advanced signal processing filters to enhance relevant health data while removing interference. This step ensures the extracted rPPG signals are clean and ready for analysis.`,
   },
   {
     bgCard: "bg-[#1738B8]",
-    title: "Remote Wellness Monitoring",
+    title: "Noise Reduction",
     titleColor: "text-[#1738B8]",
-    body: `Our platform translates facial signal data into actionable wellness metrics, providing continuous health tracking for individuals, organizations, or clinical applications.`,
+    body: `Removes unwanted disturbances like lighting changes or small head movements from the signal. This enhances the clarity of health indicators by eliminating signal artifacts.`,
   },
   {
     bgCard: "bg-[#1738B8]",
-    title: "Predictive Vital Analytics",
+    title: "AI Feature Extraction",
     titleColor: "text-[#1738B8]",
-    body: `By extracting and processing key biometric features, we deliver predictive analytics on your health condition helping anticipate risks before symptoms arise.`,
+    body: `Uses machine learning algorithms to identify critical patterns in the cleaned signals. The system recognizes features such as heart rate variability and other biometric indicators.`,
+  },
+  {
+    bgCard: "bg-[#1738B8]",
+    title: "Feature Prediction",
+    titleColor: "text-[#1738B8]",
+    body: `Predicts key physiological parameters based on the extracted features, such as estimated pulse, respiration rate, and stress indicators—enabling fast, contactless health insights.`,
   },
 ];
 </script>

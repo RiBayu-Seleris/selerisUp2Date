@@ -6,7 +6,7 @@
       <p
         class="text-[29px] md:text-[37px] lg:text-[48px] xl:text-[48px] font-[500] text-[#1AB24F] text-center dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
       >
-        Development Team
+        Office Team
       </p>
       <p
         class="text-[15px] md:text-[20px] font-[400] text-[#89A6BA] dark:text-[#6F6F6F] text-center"

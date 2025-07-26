@@ -45,7 +45,7 @@ onMounted(() => {
           <span class="font-semibold">Our AI and ML</span> algorithms conduct
           in-depth risk assessments, considering various factors and subtleties
           that impact outcomes. This sophisticated analysis enables us to
-          provide insurers with tailored guidance and recommendations
+          provide with tailored guidance and recommendations
         </p>
       </div>
     </div>

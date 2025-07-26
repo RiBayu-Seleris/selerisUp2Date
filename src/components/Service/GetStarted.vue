@@ -10,8 +10,8 @@ const ApiServices = [
     body: "Securely authenticate using API keys and tokens.",
   },
   {
-    title: "Claims Processing",
-    body: "Easily manage and automate claims workflows with speed, accuracy, and minimal manual effort.",
+    title: "Workflow Automation",
+    body: "Easily manage and automate workflows with speed, accuracy, and minimal manual effort.",
   },
 ];
 </script>

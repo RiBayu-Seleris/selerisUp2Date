@@ -39,7 +39,7 @@ import { useSidebarStore } from "@/stores/sidebar";
           <p
             class="text-[20px] sml:text-[10px] xl:text-[20px] font-[400] dark:text-[#686868] bg-gradient-to-r from-[#B9CAD5] to-[#195279] bg-clip-text text-transparent cursor-pointer"
           >
-            Swipe to view product
+            Book a Demo
           </p>
           <div class="ml-1 text-[#13405E] dark:text-[#696969]">
             <svg

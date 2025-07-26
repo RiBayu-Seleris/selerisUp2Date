@@ -23,14 +23,18 @@ defineProps({
         class="w-full h-full object-center object-contain"
       />
     </div>
-    <div class="flex flex-col w-[70%] lg:w-[70%] h-auto gap-y-3 justify-center">
-      <div class="w-full h-auto text-[#2AB857]">
-        <p class="text-[24px] md:text-[20px]">{{ title }}</p>
-      </div>
-      <div class="w-full h-auto text-[#195279]">
-        <p class="text-[18px] md:text-[16px] dark:text-[#FAFAFA]">
-          {{ body }}
-        </p>
+    <div class="w-[70%] lg:w-[70%] h-auto justify-center">
+      <div class="flex flex-col w-full h-full items-center justify-between">
+        <div class="w-full h-[100px] flex items-center">
+          <p class="text-[24px] text-[#2AB857] md:text-[20px]">{{ title }}</p>
+        </div>
+        <div class="w-full h-full">
+          <p
+            class="text-[18px] md:text-[16px] text-[#195279] dark:text-[#FAFAFA]"
+          >
+            {{ body }}
+          </p>
+        </div>
       </div>
     </div>
   </div>

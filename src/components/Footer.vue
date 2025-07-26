@@ -85,22 +85,19 @@ import appstore from "@/assets/images/appstore.png";
             </p>
             <div>
               <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
+                Seleris Credit Cover
+              </p>
+              <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
                 Seleris Lifins
               </p>
               <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
                 Seleris Medins
               </p>
               <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
-                Seleris Credit Cover
-              </p>
-              <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
                 Seleris Care
               </p>
               <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
-                Flexa Asia
-              </p>
-              <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
-                Auto Claim
+                Flexa Cough
               </p>
             </div>
           </div>
@@ -116,22 +113,16 @@ import appstore from "@/assets/images/appstore.png";
               Company
             </p>
             <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
-              Home
-            </p>
-            <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
               About
             </p>
             <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
-              Our Team
+              Security
             </p>
             <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
-              Blog
+              Terms
             </p>
             <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
-              Services
-            </p>
-            <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
-              Contact
+              Privacy
             </p>
           </div>
         </div>
@@ -220,7 +211,10 @@ import appstore from "@/assets/images/appstore.png";
               Get The App
             </p>
             <div class="flex flex-row lg:flex-col gap-10 lg:gap-0">
-              <div
+              <a
+                href="https://play.google.com/store/apps/developer?id=PT.+Seleris+Meditekno+Internasional"
+                target="_blank"
+                rel="noopener noreferrer"
                 class="flex w-full h-full md:justify-start justify-center items-center content-center xl:justify-start xl:content-start"
               >
                 <img
@@ -228,7 +222,7 @@ import appstore from "@/assets/images/appstore.png";
                   alt="Playstore"
                   class="w-full md:w-[300px] xl:w-[200px] h-[100px] object-contain object-center"
                 />
-              </div>
+              </a>
               <div
                 class="flex w-full h-full justify-center items-center content-center xl:justify-start xl:content-start xl:-mt-5"
               >
