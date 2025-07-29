@@ -10,6 +10,9 @@ import Twitter from "@/components/icons/Twitter.vue";
 // Images
 import playstore from "@/assets/images/playstore.png";
 import appstore from "@/assets/images/appstore.png";
+
+import { productList } from "@/Data/productList";
+import { companyList } from "@/Data/companyList";
 </script>
 
 <template>
@@ -56,12 +59,22 @@ import appstore from "@/assets/images/appstore.png";
                 <div
                   class="w-auto h-[30px] lg:h-[30px] text-[#195279] dark:text-[#FAFAFA]"
                 >
-                  <Instagram />
+                  <a
+                    href="https://www.instagram.com/selerisindonesia/?igsh=MXJ1Y3c1ZnFtZGdhNA%3D%3D#"
+                    target="_blank"
+                  >
+                    <Instagram />
+                  </a>
                 </div>
                 <div
                   class="w-auto h-[30px] lg:h-[30px] text-[#195279] dark:text-[#FAFAFA]"
                 >
-                  <Linkedin />
+                  <a
+                    href="https://www.linkedin.com/company/seleris-meditekno-internasional/"
+                    target="_blank"
+                  >
+                    <Linkedin />
+                  </a>
                 </div>
                 <div
                   class="w-auto h-[30px] lg:h-[30px] text-[#195279] dark:text-[#FAFAFA]"
@@ -84,21 +97,16 @@ import appstore from "@/assets/images/appstore.png";
               Products
             </p>
             <div>
-              <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
-                Seleris Credit Cover
-              </p>
-              <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
-                Seleris Lifins
-              </p>
-              <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
-                Seleris Medins
-              </p>
-              <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
-                Seleris Care
-              </p>
-              <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
-                Flexa Cough
-              </p>
+              <router-link
+                v-for="(product, index) in productList"
+                :key="index"
+                :to="product.url"
+                class=""
+              >
+                <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
+                  {{ product.name }}
+                </p>
+              </router-link>
             </div>
           </div>
         </div>
@@ -112,18 +120,16 @@ import appstore from "@/assets/images/appstore.png";
             >
               Company
             </p>
-            <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
-              About
-            </p>
-            <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
-              Security
-            </p>
-            <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
-              Terms
-            </p>
-            <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
-              Privacy
-            </p>
+            <router-link
+              v-for="(company, index) in companyList"
+              :key="index"
+              :to="company.url"
+              class=""
+            >
+              <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
+                {{ company.name }}
+              </p>
+            </router-link>
           </div>
         </div>
         <div
@@ -150,12 +156,15 @@ import appstore from "@/assets/images/appstore.png";
                   >
                     Seleris Asia Pacific Technology Pte.Ltd
                   </p>
-                  <p
+                  <a
+                    href="https://maps.app.goo.gl/8EZcoxw2NPYhc7ed8"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     class="text-[#2AB857] sml:text-[12px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 xl:pr-14"
                   >
                     16 Raffles Quay #35 - 01B Hong Leong Building SINGAPORE
                     (048581)
-                  </p>
+                  </a>
                 </div>
                 <div class="w-full h-auto">
                   <p
@@ -163,12 +172,15 @@ import appstore from "@/assets/images/appstore.png";
                   >
                     PT Seleris Meditekno Internasional
                   </p>
-                  <p
+                  <a
+                    href="https://maps.app.goo.gl/ywhqmCdfhGod9Mps6"
+                    target="_blank"
+                    rel="noopener noreferrer"
                     class="text-[#2AB857] sml:text-[12px] lg:text-[14px] xl:text-[16px] lg:pt-1.5"
                   >
                     Graha SMI, Jl. Raya Ragunan No. 29 A, Jakarta Selatan,
                     Indonesia 12540
-                  </p>
+                  </a>
                 </div>
               </div>
             </div>
@@ -179,11 +191,12 @@ import appstore from "@/assets/images/appstore.png";
                 >
                   Phone
                 </p>
-                <p
+                <a
+                  href="tel:+62215265235"
                   class="text-[#2AB857] text-sm lg:text-base xl:text-[18px] lg:pt-1.5"
                 >
                   +62 (21) 526 52 35
-                </p>
+                </a>
               </div>
               <div class="flex flex-col w-full h-auto mb-3 lg:mt-2">
                 <p
@@ -191,11 +204,12 @@ import appstore from "@/assets/images/appstore.png";
                 >
                   E-Mail
                 </p>
-                <p
+                <a
+                  href="mailto:info@seleris.id"
                   class="text-[#2AB857] text-sm lg:text-base xl:text-[18px] lg:pt-1.5"
                 >
                   info@seleris.id
-                </p>
+                </a>
               </div>
             </div>
           </div>

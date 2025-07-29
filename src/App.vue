@@ -9,6 +9,8 @@ import NavbarScroll from "@/components/NavbarScroll.vue";
 import Sidebar from "@/components/Sidebar.vue";
 import Touch from "@/components/Touch.vue";
 import Footer from "@/components/Footer.vue";
+// Icon
+import ArrowTop from "@/components/icons/ArrowTop.vue";
 
 // Import Swiper CSS
 import "swiper/css";
@@ -19,6 +21,7 @@ const themeStore = useThemeStore();
 const route = useRoute();
 const scrollStore = useScrollStore();
 const showTooltip = computed(() => scrollStore.isScrolled);
+const isLoad = ref(false);
 
 const handleScroll = () => {
   scrollStore.updateScroll();
@@ -34,6 +37,9 @@ onMounted(() => {
   window.addEventListener("scroll", handleScroll);
   document.body.style.overflow = ""; // pastikan tidak terkunci
 
+  setTimeout(() => {
+    isLoad.value = true;
+  }, 3000); // 3 detik loading palsu
   AOS.init({
     duration: 800,
     once: true,
@@ -44,6 +50,8 @@ onMounted(() => {
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
 });
+
+const isLoaded = ref(false);
 </script>
 
 <template>
@@ -58,18 +66,18 @@ onUnmounted(() => {
         <component :is="scrollStore.isScrolled ? NavbarScroll : Navbar" />
       </div>
 
+      <!-- Sidebar (hanya 1 instance) -->
+      <Sidebar />
+
       <transition name="fade-slide">
         <div
           v-if="showTooltip"
           @click="scrollToTop"
-          class="flex fixed justify-center cursor-pointer items-center bottom-10 right-20 w-14 h-14 z-50 bg-green-400 border-1 border-black rounded-full shadow-sm"
+          class="flex fixed justify-center cursor-pointer items-center bottom-10 right-20 w-14 h-14 z-30 bg-green-400 border-1 border-black text-white rounded-full shadow-sm p-2"
         >
-          Tooltip
+          <ArrowTop />
         </div>
       </transition>
-
-      <!-- Sidebar (hanya 1 instance) -->
-      <Sidebar />
       <router-view />
 
       <section
@@ -78,6 +86,19 @@ onUnmounted(() => {
       >
         <Touch />
       </section>
+
+      <!-- <Suspense>
+        <template #default>
+          <div v-if="isLoad"></div>
+        </template>
+        <template #fallback>
+          <div
+            class="flex items-center justify-center py-20 animate-pulse text-lg text-gray-500"
+          >
+            ⏳ Memuat halaman...
+          </div>
+        </template>
+      </Suspense> -->
     </main>
 
     <footer class="w-full max-w-[1440px] h-auto px-8 mt-20 mx-auto">
@@ -99,5 +120,12 @@ onUnmounted(() => {
 .fade-slide-leave-from {
   opacity: 1;
   transform: translateY(0);
+}
+.cls-1 {
+  fill: none;
+  stroke: currentColor;
+  stroke-linecap: round;
+  stroke-linejoin: bevel;
+  stroke-width: 1.5px;
 }
 </style>

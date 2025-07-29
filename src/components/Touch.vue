@@ -99,7 +99,9 @@ import CallIcon from "@/components/icons/CallIcon.vue";
             <div
               class="flex w-full h-full bg-[#FAFAFA] dark:bg-[#323232] rounded-xl"
             >
-              <div class="flex flex-col w-full py-3 gap-1">
+              <div
+                class="flex flex-col w-full py-3 gap-2 items-center justify-center"
+              >
                 <div class="flex w-full justify-center items-center mb-2">
                   <div
                     class="flex w-12 h-12 rounded-full bg-[#FFFFFF] dark:bg-[#6F6F6F] text-[#2AB857] dark:text-[#FAFAFA] justify-center items-center shadow-lg"
@@ -122,19 +124,20 @@ import CallIcon from "@/components/icons/CallIcon.vue";
                   </p>
                 </div>
                 <div class="flex w-full justify-center items-center">
-                  <p class="text-[#2AB857] xl:text-[14px]">
-                    support@seleris.ai
-                  </p>
-                </div>
-                <div class="flex w-full justify-center items-center">
-                  <p class="text-[#2AB857] xl:text-[14px]">info@seleris.id</p>
+                  <a
+                    href="mailto:info@seleris.id"
+                    class="text-[#2AB857] xl:text-[14px]"
+                    >info@seleris.id</a
+                  >
                 </div>
               </div>
             </div>
             <div
               class="flex w-full h-full bg-[#FAFAFA] dark:bg-[#323232] rounded-xl"
             >
-              <div class="flex flex-col w-full py-3 gap-1">
+              <div
+                class="flex flex-col w-full py-3 gap-2 items-center justify-center"
+              >
                 <div class="flex w-full justify-center items-center mb-2">
                   <div
                     class="flex w-12 h-12 rounded-full bg-[#FFFFFF] dark:bg-[#6F6F6F] text-[#2AB857] dark:text-[#FAFAFA] justify-center items-center shadow-lg"

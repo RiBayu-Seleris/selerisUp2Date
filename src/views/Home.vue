@@ -13,9 +13,9 @@ import Different from "@/components/Home/Different.vue";
 </script>
 
 <template>
-  <section class="relative flex w-full h-auto px-8">
-    <Herosection />
-  </section>
+    <section class="relative flex w-full h-auto px-8">
+      <Herosection />
+    </section>
 
   <!-- data-aos="fade-down"
     data-aos-duration="2000" -->

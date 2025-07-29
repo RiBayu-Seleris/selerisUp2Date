@@ -14,7 +14,7 @@ import { useSidebarStore } from "@/stores/sidebar";
   <!-- xl:bg-cover lg:bg-hero bg-no-repeat lg:bg-cover -->
   <div class="relative w-full h-auto rounded-b-3xl mt-28">
     <div
-      class="w-full h-auto lg:bg-hero2 dark:lg:bg-herodark bg-no-repeat bg-cover lg:bg-center xl:bg-top lg:pt-16 rounded-3xl"
+      class="w-full h-auto lg:bg-hero2 dark:lg:bg-herodark bg-no-repeat bg-cover lg:bg-center dark:lg:bg-center xl:bg-top dark:xl:bg-top lg:pt-16 rounded-3xl"
     >
       <div
         class="flex flex-col w-full h-auto text-center justify-center items-center z-30 bg-[#F3F4F6] dark:bg-black dark:lg:bg-transparent lg:bg-transparent rounded-3xl animate__animated animate__fadeIn animate__slower"
@@ -35,13 +35,17 @@ import { useSidebarStore } from "@/stores/sidebar";
           </p>
         </div>
         <!-- Swipe caption -->
-        <div class="flex flex-row items-center mb-4 sml:mb-0 lg:mb-5 mt-6">
-          <p
-            class="text-[20px] sml:text-[10px] xl:text-[20px] font-[400] dark:text-[#686868] bg-gradient-to-r from-[#B9CAD5] to-[#195279] bg-clip-text text-transparent cursor-pointer"
-          >
-            Book a Demo
-          </p>
-          <div class="ml-1 text-[#13405E] dark:text-[#696969]">
+        <div
+          class="cursor-pointer flex flex-row items-center mb-4 sml:mb-0 lg:mb-5 mt-6 bg-[#195279] dark:bg-[#2B2E32] dark:border-[1px] dark:border-[#2AB857] px-5 py-2 rounded-full dark:shadow-[0px_4px_18.8px_0px_rgba(0,255,59,0.25)]"
+        >
+          <router-link to="/book-a-demo">
+            <p
+              class="text-[20px] sml:text-[10px] xl:text-[14px] font-[400] text-[#FAFAFA]"
+            >
+              Book a Demo
+            </p>
+          </router-link>
+          <div class="ml-1 text-[#FAFAFA] dark:text-[#FAFAFA]">
             <svg
               class="w-5 h-5 sml:w-3 sml:h-3 xl:w-5 xl:h-5"
               viewBox="0 0 24 24"

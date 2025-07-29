@@ -3,6 +3,11 @@ import { ref } from "vue";
 import { useScrollStore } from "@/stores/scroll";
 import { useRoute } from "vue-router";
 import Navlink from "@/components/Navlink.vue";
+import { productList } from "@/Data/productList";
+import { aboutList } from "@/Data/aboutList";
+import { technologyList } from "@/Data/technologyList";
+import { usecaseList } from "@/Data/usecaseList";
+import { industryList } from "@/Data/industryList";
 
 const { isScrolled } = useScrollStore();
 const route = useRoute();
@@ -10,107 +15,6 @@ const isHoveringAbout = ref(false);
 const isHoveringProduct = ref(false);
 const isHoveringTechnology = ref(false);
 const isHoveringSolution = ref(false);
-
-const aboutList = [
-  {
-    url: "/about/company",
-    name: "Company",
-  },
-  {
-    url: "/about/teams",
-    name: "Our Team",
-  },
-  {
-    url: "#",
-    name: "Innovations",
-  },
-];
-
-const productList = [
-  {
-    url: "#",
-    name: "Seleris Lifins",
-  },
-  {
-    url: "#",
-    name: "Seleris Medins",
-  },
-  {
-    url: "#",
-    name: "Seleris Credit Cover",
-  },
-  {
-    url: "#",
-    name: "Seleris Care",
-  },
-  {
-    url: "#",
-    name: "Flexa Asia",
-  },
-  {
-    url: "#",
-    name: "Auto Claim",
-  },
-];
-
-const technologyList = [
-  {
-    url: "/seleris-chromatic-imaging",
-    name: "Seleris Chromatic Imaging",
-  },
-  {
-    url: "/seleris-deep-vitals",
-    name: "Seleris DeepVitals",
-  },
-  {
-    url: "/seleris-deep-risk",
-    name: "Seleris DeepRisk",
-  },
-];
-
-// Solutions
-const usecaseList = [
-  {
-    url: "#",
-    name: "AI Ops",
-  },
-  {
-    url: "#",
-    name: "Data Observability",
-  },
-  {
-    url: "#",
-    name: "ETL/ELT",
-  },
-  {
-    url: "#",
-    name: "MLOps",
-  },
-  {
-    url: "#",
-    name: "Analytics and Reporting",
-  },
-];
-
-// Industries
-const industryList = [
-  {
-    url: "#",
-    name: "Financial Services",
-  },
-  {
-    url: "#",
-    name: "Retail",
-  },
-  {
-    url: "#",
-    name: "Manufacturing",
-  },
-  {
-    url: "#",
-    name: "Healthcare",
-  },
-];
 </script>
 
 <template>
@@ -265,11 +169,14 @@ const industryList = [
         :class="[`absolute left-0 top-full z-50`, isScrolled ? 'pt-8' : 'pt-8']"
       >
         <div
-          class="flex flex-row w-full bg-white p-4 rounded-2xl shadow-lg dark:bg-[#2C2C2C80] dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-sm dark:bg-opacity-20 dark:border-[0.1px] dark:border-[#FAFAFA]/25"
+          class="flex flex-row w-full bg-white p-8 rounded-2xl shadow-lg dark:bg-[#2C2C2C80] dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-sm dark:bg-opacity-20 dark:border-[0.1px] dark:border-[#FAFAFA]/25"
         >
           <div class="w-[250px] flex flex-col h-auto">
             <div class="w-full h-auto mb-3">
-              <span class="dark:text-[#FAFAFA]">Use Case</span>
+              <span
+                class="lg:text-[18px] text-[#4B5563] dark:text-white font-[500]"
+                >Use Case</span
+              >
             </div>
             <div class="w-full h-auto flex flex-col gap-y-2">
               <Navlink
@@ -278,13 +185,19 @@ const industryList = [
                 :href="usecase.url"
                 class="flex justify-center items-center"
               >
-                <span class="text-[15px] font-[500]">{{ usecase.name }}</span>
+                <span
+                  class="text-[15px] text-[#9CA3AF] dark:text-[#FAFAFA] font-[400]"
+                  >{{ usecase.name }}</span
+                >
               </Navlink>
             </div>
           </div>
           <div class="w-[250px] flex flex-col h-auto">
             <div class="w-full h-auto mb-3">
-              <span class="dark:text-[#FAFAFA]">Industries</span>
+              <span
+                class="lg:text-[18px] text-[#4B5563] dark:text-white font-[500]"
+                >Industries</span
+              >
             </div>
             <div class="w-full h-auto flex flex-col gap-y-2">
               <Navlink
@@ -293,7 +206,10 @@ const industryList = [
                 :href="industry.url"
                 class="flex justify-center items-center"
               >
-                <span class="text-[15px] font-[500]">{{ industry.name }}</span>
+                <span
+                  class="text-[15px] text-[#9CA3AF] dark:text-[#FAFAFA] font-[400]"
+                  >{{ industry.name }}</span
+                >
               </Navlink>
             </div>
           </div>

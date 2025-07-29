@@ -9,7 +9,6 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@tailwindcss/line-clamp": "^0.4.4",
     "aos": "^2.3.4",
     "pinia": "^3.0.3",
     "swiper": "^11.2.8",
@@ -17,6 +16,8 @@
     "vue-router": "^4.5.1"
   },
   "devDependencies": {
+    "@tailwindcss/line-clamp": "^0.4.4",
+    "@tailwindcss/typography": "^0.5.16",
     "@vitejs/plugin-vue": "^5.2.3",
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.5",

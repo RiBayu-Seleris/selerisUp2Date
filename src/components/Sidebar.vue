@@ -5,6 +5,12 @@ import { useRoute } from "vue-router";
 import MenuIconClose from "@/components/icons/CloseIcon.vue";
 import Navlink from "@/components/Navlink.vue";
 
+import { aboutList } from "@/Data/aboutList";
+import { productList } from "@/Data/productList";
+import { technologyList } from "@/Data/technologyList";
+import { usecaseList } from "@/Data/usecaseList";
+import { industryList } from "@/Data/industryList";
+
 const sidebar = useSidebarStore();
 const route = useRoute();
 
@@ -19,71 +25,6 @@ watch(
 // Dropdown toggle
 const isProductOpen = ref(false);
 const isTechnologyOpen = ref(false);
-
-const AboutList = [
-  {
-    url: "/about/company",
-    name: "Company",
-  },
-  {
-    url: "/about/teams",
-    name: "Our Team",
-  },
-  {
-    url: "#",
-    name: "Innovation",
-  },
-];
-
-const ProductList = [
-  {
-    url: "#",
-    name: "Seleris Care",
-  },
-  {
-    url: "#",
-    name: "Seleris Medins",
-  },
-  {
-    url: "#",
-    name: "Seleris Credit Cover",
-  },
-  {
-    url: "#",
-    name: "EHD",
-  },
-  {
-    url: "#",
-    name: "Sentris",
-  },
-  {
-    url: "#",
-    name: "Flexa Asia",
-  },
-  {
-    url: "#",
-    name: "Auto Claim",
-  },
-  {
-    url: "#",
-    name: "Seleris Doctor",
-  },
-];
-
-const TechnologyList = [
-  {
-    url: "/seleris-chromatic-imaging",
-    name: "Seleris Chromatic Imaging",
-  },
-  {
-    url: "/seleris-deep-vitals",
-    name: "Seleris Deep Vitals",
-  },
-  {
-    url: "/seleris-deep-risk",
-    name: "Seleris Deep Risk",
-  },
-];
 
 const handleProduct = () => {
   isProductOpen.value = !isProductOpen.value;
@@ -144,7 +85,7 @@ const handleTechnology = () => {
                 <p class="text-slate-400 text-[16px] font-[600]">About</p>
                 <div class="w-full h-auto flex flex-wrap">
                   <div
-                    v-for="(about, index) in AboutList"
+                    v-for="(about, index) in aboutList"
                     :key="index"
                     class="w-[50%] h-auto"
                   >
@@ -161,7 +102,7 @@ const handleTechnology = () => {
                 <p class="text-slate-400 text-[16px]">Products</p>
                 <div class="w-full h-auto flex flex-wrap">
                   <div
-                    v-for="(product, index) in ProductList"
+                    v-for="(product, index) in productList"
                     :key="index"
                     class="w-[50%] h-auto"
                   >
@@ -178,7 +119,7 @@ const handleTechnology = () => {
                 <p class="text-slate-400 text-[16px]">Technology</p>
                 <div class="w-full h-auto flex flex-wrap">
                   <div
-                    v-for="(technology, index) in TechnologyList"
+                    v-for="(technology, index) in technologyList"
                     :key="index"
                     class="w-[50%] h-auto"
                   >
@@ -187,6 +128,40 @@ const handleTechnology = () => {
                         {{ technology.name }}
                       </p>
                     </Navlink>
+                  </div>
+                </div>
+              </div>
+              <div class="w-full h-[2px] bg-[#1AB24F]/40" />
+              <div class="w-full h-auto flex flex-col">
+                <p class="text-slate-400 text-[16px]">Solutions</p>
+                <div class="w-full h-auto grid grid-cols-2">
+                  <div>
+                    <p>Use Case</p>
+                    <div
+                      v-for="(usecase, index) in usecaseList"
+                      :key="index"
+                      class="w-[50%] h-auto"
+                    >
+                      <Navlink :href="usecase.url">
+                        <p class="dark:text-[#FAFAFA] text-[12px] font-[500]">
+                          {{ usecase.name }}
+                        </p>
+                      </Navlink>
+                    </div>
+                  </div>
+                  <div>
+                    <p>Industries</p>
+                    <div
+                      v-for="(industry, index) in industryList"
+                      :key="index"
+                      class="w-[50%] h-auto"
+                    >
+                      <Navlink :href="industry.url">
+                        <p class="dark:text-[#FAFAFA] text-[12px] font-[500]">
+                          {{ industry.name }}
+                        </p>
+                      </Navlink>
+                    </div>
                   </div>
                 </div>
               </div>

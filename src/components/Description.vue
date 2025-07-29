@@ -14,7 +14,7 @@ const steps = [
   {
     title: "Artificial Intelligence and Machine Learning Adoption",
     description:
-      "Seleris harnesses Remote Photoplethysmography (rPPG) technology to evaluate various vital signs that represent a customer's health condition.",
+      "Seleris capitalizes on the power of cutting-edge AI and ML algorithms to evaluate underwriting decisions and furnish comprehensive coverage advice.",
   },
   {
     title: "The Company",

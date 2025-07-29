@@ -52,7 +52,7 @@ const cardContents = [
   >
     <!-- sml:h-[140px] md:h-[250px] lg:h-[350px] xl:h-[470px] xls:h-[490px] -->
     <div
-      class="relative w-full h-auto aspect-[16/6] flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
+      class="relative w-full h-auto flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
     >
       <video
         autoplay
@@ -60,7 +60,7 @@ const cardContents = [
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full object-cover object-bottom rounded-[20px] dark:bg-[#323232] dark:hidden"
+        class="w-full h-full object-cover object-bottom rounded-[20px] aspect-[16/5] dark:bg-[#323232] dark:hidden"
       >
         <source src="@/assets/videos/SDR_Video.mp4" type="video/mp4" />
       </video>
@@ -70,7 +70,7 @@ const cardContents = [
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full object-cover object-bottom rounded-[20px] dark:bg-[#323232] hidden dark:block"
+        class="w-full h-full object-cover object-bottom rounded-[20px] aspect-[16/6] dark:bg-[#323232] hidden dark:block"
       >
         <source src="@/assets/videos/Dark_SDR_Video.mp4" type="video/mp4" />
       </video>

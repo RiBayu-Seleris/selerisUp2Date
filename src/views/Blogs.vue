@@ -10,7 +10,7 @@ import BlogList from "@/components/Blog/BlogList.vue";
     <HeroSection />
   </section>
 
-  <section class="flex relative w-full h-auto md:px-12 xl:px-16 mt-20">
+  <section class="flex relative w-full h-auto md:px-12 xl:px-16 mt-10 lg:mt-20">
     <BlogList />
   </section>
 </template>

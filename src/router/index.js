@@ -7,6 +7,12 @@ const routes = [
     component: () => import("@/views/Home.vue"),
     meta: { title: "Home" },
   },
+  {
+    path: "/book-a-demo",
+    name: "BookDemo",
+    component: () => import("@/views/BookDemo.vue"),
+    meta: { title: "Demo" },
+  },
   // Redirect jika akses langsung ke /about
   {
     path: "/about",
@@ -30,11 +36,18 @@ const routes = [
       },
     ],
   },
+  // Blogs
   {
     path: "/blogs",
     name: "Blog",
     component: () => import("@/views/Blogs.vue"),
-    meta: { title: "Blog" },
+    meta: { title: "Blogs" },
+  },
+  {
+    path: "/blog/:slug",
+    name: "BlogDetail",
+    component: () => import("@/views/BlogDetail.vue"),
+    meta: { title: "BlogDetail" },
   },
   {
     path: "/services",
@@ -67,6 +80,25 @@ const routes = [
     name: "Seleris-Deep-Risk",
     component: () => import("@/views/DeepRisk.vue"),
     meta: { title: "Home" },
+  },
+
+  {
+    path: "/security",
+    name: "Security",
+    component: () => import("@/views/Security.vue"),
+    meta: { title: "Security" },
+  },
+  {
+    path: "/term-and-condition",
+    name: "TermCondition",
+    component: () => import("@/views/Term.vue"),
+    meta: { title: "Terms & Conditions" },
+  },
+  {
+    path: "/frequently-ask-question",
+    name: "FAQ",
+    component: () => import("@/views/Faq.vue"),
+    meta: { title: "FAQ" },
   },
 ];
 
