@@ -10,7 +10,7 @@ import Sidebar from "@/components/Sidebar.vue";
 import Touch from "@/components/Touch.vue";
 import Footer from "@/components/Footer.vue";
 // Icon
-import ArrowTop from "@/components/icons/ArrowTop.vue";
+import Tooltip from "@/assets/images/tooltip.png";
 
 // Import Swiper CSS
 import "swiper/css";
@@ -22,6 +22,7 @@ const route = useRoute();
 const scrollStore = useScrollStore();
 const showTooltip = computed(() => scrollStore.isScrolled);
 const isLoad = ref(false);
+const isLoaded = ref(false);
 
 const handleScroll = () => {
   scrollStore.updateScroll();
@@ -51,7 +52,13 @@ onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
 });
 
-const isLoaded = ref(false);
+const scrollProgress = computed(() => {
+  const scrollTop = window.scrollY || document.documentElement.scrollTop;
+  const docHeight =
+    document.documentElement.scrollHeight -
+    document.documentElement.clientHeight;
+  return docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+});
 </script>
 
 <template>
@@ -65,19 +72,19 @@ const isLoaded = ref(false);
       <div class="flex fixed w-full h-auto z-50">
         <component :is="scrollStore.isScrolled ? NavbarScroll : Navbar" />
       </div>
-
-      <!-- Sidebar (hanya 1 instance) -->
-      <Sidebar />
-
       <transition name="fade-slide">
         <div
           v-if="showTooltip"
           @click="scrollToTop"
-          class="flex fixed justify-center cursor-pointer items-center bottom-10 right-20 w-14 h-14 z-30 bg-green-400 border-1 border-black text-white rounded-full shadow-sm p-2"
+          class="flex fixed justify-center cursor-pointer items-center bottom-5 right-5 lg:right-10 w-9 h-9 lg:w-16 lg:h-16 z-30 bg-white shadow-md border-[0.5px] text-white rounded-full p-1 md:p-2"
         >
-          <ArrowTop />
+          <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
         </div>
       </transition>
+
+      <!-- Sidebar (hanya 1 instance) -->
+      <Sidebar />
+
       <router-view />
 
       <section

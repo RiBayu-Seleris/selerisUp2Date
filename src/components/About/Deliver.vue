@@ -5,10 +5,10 @@ import RobotAI from "@/assets/images/robot-ai.svg";
 import RobotAI2 from "@/assets/images/robot-ai3.svg";
 import DifferentCard from "@/components/reusable/DifferentCard.vue";
 
-import teamIcon from "@/assets/icons/our-team.svg";
-import innovationIcon from "@/assets/icons/innovation.svg";
-import missionIcon from "@/assets/icons/mission.svg";
-import performanceIcon from "@/assets/icons/performance.svg";
+import AccuracyIcon from "@/assets/icons/About-Accuracy.png";
+import EfficiencyIcon from "@/assets/icons/About-Efficiency.png";
+import InnovationIcon from "@/assets/icons/About-Innovation.png";
+import WhySelerisIcon from "@/assets/icons/About-Why-Seleris.png";
 </script>
 
 <template>
@@ -21,25 +21,25 @@ import performanceIcon from "@/assets/icons/performance.svg";
     <template #default>
       <div class="flex flex-row mb-10">
         <DifferentCard
-          :image="innovationIcon"
+          :image="WhySelerisIcon"
           title="Why Seleris"
           subtitle="Seleris helps businesses assess people faster, smarter, and easier."
         />
         <DifferentCard
-          :image="innovationIcon"
+          :image="EfficiencyIcon"
           title="Efficiency"
           subtitle="Cut costs and processing time by up to 50 percent."
         />
       </div>
       <div class="flex flex-row">
         <DifferentCard
-          :image="innovationIcon"
+          :image="AccuracyIcon"
           title="Accuracy"
           subtitleClass="pr-5"
           subtitle="AI delivers accurate results, even with limited user data."
         />
         <DifferentCard
-          :image="innovationIcon"
+          :image="InnovationIcon"
           title="Innovation"
           subtitle="Online process is quick, easy, and accessible for everyone."
         />
@@ -54,28 +54,28 @@ import performanceIcon from "@/assets/icons/performance.svg";
         <template #mobileContentDifferent>
           <div class="w-full mb-5">
             <DifferentCard
-              :image="innovationIcon"
+              :image="WhySelerisIcon"
               title="Why Seleris"
               subtitle="Seleris helps businesses assess people faster, smarter, and easier."
             />
           </div>
           <div class="w-full mb-5">
             <DifferentCard
-              :image="innovationIcon"
+              :image="EfficiencyIcon"
               title="Efficiency"
               subtitle="Cut costs and processing time by up to 50 percent."
             />
           </div>
           <div class="w-full mb-5">
             <DifferentCard
-              :image="innovationIcon"
+              :image="AccuracyIcon"
               title="Accuracy"
               subtitle="AI delivers accurate results, even with limited user data."
             />
           </div>
           <div class="w-full mb-5">
             <DifferentCard
-              :image="innovationIcon"
+              :image="InnovationIcon"
               title="Innovation"
               subtitle="Online process is quick, easy, and accessible for everyone."
             />

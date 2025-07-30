@@ -150,7 +150,7 @@ import { companyList } from "@/Data/companyList";
                 Address
               </p>
               <div class="w-full h-auto flex flex-col xl:flex-row">
-                <div class="w-full h-auto sml:pb-2">
+                <div class="w-full h-auto sml:pb-2 lg:pr-5">
                   <p
                     class="text-[#343F52] dark:text-[#FAFAFA] font-[500] sml:text-[14px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 sml:pb-1"
                   >
@@ -160,13 +160,13 @@ import { companyList } from "@/Data/companyList";
                     href="https://maps.app.goo.gl/8EZcoxw2NPYhc7ed8"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-[#2AB857] sml:text-[12px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 xl:pr-14"
+                    class="text-[#2AB857] sml:text-[12px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 w-full"
                   >
                     16 Raffles Quay #35 - 01B Hong Leong Building SINGAPORE
                     (048581)
                   </a>
                 </div>
-                <div class="w-full h-auto">
+                <div class="w-full h-auto lg:pr-5">
                   <p
                     class="text-[#343F52] dark:text-[#FAFAFA] font-[500] sml:text-[14px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 sml:pb-1"
                   >

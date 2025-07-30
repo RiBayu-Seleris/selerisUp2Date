@@ -3,9 +3,7 @@ import AboutHero from "@/assets/images/About-hero-image.png";
 </script>
 
 <template>
-  <div
-    class="flex relative w-full h-auto animate__animated animate__fadeIn animate__slower"
-  >
+  <div class="flex relative w-full h-auto">
     <div
       class="flex relative md:flex-row sml:flex-col w-full h-auto justify-between lg:gap-x-10 sml:mt-[100px] md:mt-[50px] lg:mt-[130px]"
     >

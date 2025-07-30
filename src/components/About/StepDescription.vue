@@ -21,22 +21,16 @@ const StepsContent = [
       "Seleris develops smart, effective solutions for insurance and underwriting industry challenges.",
   },
   {
-    icon: Vision,
-    title: "Our Vision",
-    description:
-      "Seleris envisions accessible, affordable life and medical insurance for everyone.",
-  },
-  {
     icon: OptimalPerformance,
     title: "Optimal Performance",
     description:
       "We use advanced technology to ensure fast, smooth, reliable service delivery.",
   },
   {
-    icon: Focus,
-    title: "Customer Focus",
+    icon: TeamWork,
+    title: "Team Work",
     description:
-      "We prioritize delivering the best possible experience to every customer.",
+      "We believe great results come through strong teamwork and shared collaboration.",
   },
   {
     icon: Integrity,
@@ -45,10 +39,16 @@ const StepsContent = [
       "Seleris values honesty and full transparency in all business interactions.",
   },
   {
-    icon: TeamWork,
-    title: "Team Work",
+    icon: Focus,
+    title: "Customer Focus",
     description:
-      "We believe great results come through strong teamwork and shared collaboration.",
+      "We prioritize delivering the best possible experience to every customer.",
+  },
+  {
+    icon: Vision,
+    title: "Our Vision",
+    description:
+      "Seleris envisions accessible, affordable life and medical insurance for everyone.",
   },
 ];
 
@@ -100,7 +100,7 @@ onMounted(() => {
             :pagination="false"
             :autoplay="{ delay: 2000, disableOnInteraction: false }"
             loop
-            class="w-full h-full rounded-xl overflow-hidden custom-swiper"
+            class="w-full h-full rounded-xl overflow-hidden custom-swiper cursor-grab"
           >
             <SwiperSlide v-for="(step, index) in StepsContent" :key="index">
               <div
