@@ -1,32 +1,47 @@
 // src/data/faqList.js
 export const faqList = [
   {
-    question: "How long until we deliver your first blog post?",
+    question: "What is Seleris App?",
     answer:
-      "Really boy law county she unable her sister. Feet you off its like like six. Among sex are leave law built now. In built table in on rapid blush. Merits behind on afraid or warmly.",
+      "Seleris is a platform designed to make the risk assessment process more efficient, accurate, and accessible for everyone. We offer powerful features such as AI Detection, enabling users to instantly receive decision results",
   },
   {
-    question: "What is the process of content delivery?",
+    question: "Is the Seleris App available on other platforms?",
     answer:
-      "We start by understanding your needs, then proceed with drafts, revisions, and final delivery.",
+      "Yes, our app available on Google Play Store and soon on App Store.",
   },
   {
-    question: "Do you offer revisions?",
-    answer: "Yes, we offer up to 2 rounds of revisions depending on your plan.",
+    question: "How do I get started with this application?",
+    answer:
+      "To get started, you can download in Google Play Store and login using the account you have registered.",
   },
   {
-    question: "Can I request a specific writing style?",
+    question: "How can I delete my account?",
     answer:
-      "Absolutely! We tailor the content to match your brand voice and style preferences.",
+      "If you wish to delete your account, please contact our team at info@seleris.id",
   },
   {
-    question: "How do I get started?",
+    question: "Does this application offer customer support?",
     answer:
-      "Just sign up and fill out our onboarding form. We’ll guide you through the rest.",
+      "Yes, we have a customer support team ready to help. Please contact us via info@seleris.id for questions, feedback, or technical assistance.",
   },
   {
-    question: "What topics do you cover?",
+    question: "Does this application offer customer support?",
     answer:
-      "We cover a wide range of industries—from finance and health to tech and lifestyle.",
+      "Yes, we have a customer support team ready to help. Please contact us via info@seleris.id for questions, feedback, or technical assistance.",
+  },
+  {
+    question: "is this application Free?",
+    answer:
+      "Our app offers free for demo use. Certain features are available for free, while full access to premium features may require a subscription or in-app purchase.",
+  },
+  {
+    question: "is this application Secure?",
+    answer: `We prioritize user data security. Our application utilizes TLS/SSL encryption protocols and adheres to strict security standards to safeguard users' personal information. Seleris has successfully undergone <span class="font-[600]">ISO/IEC 27001:2022</span> compliance testing with certificate number <span class="font-[600]">2403150020501.</span>`,
+  },
+  {
+    question: "How can I provide feedback or suggestions?",
+    answer:
+      "We highly value your feedback. You can provide feedback by visiting the settings menu and clicking privacy policy or via info@seleris.id to provide your feedback to our team..",
   },
 ];

@@ -34,6 +34,18 @@ const routes = [
         component: () => import("@/views/Team.vue"),
         meta: { title: "Team" },
       },
+      {
+        path: "innovation",
+        name: "Roadmap",
+        component: () => import("@/views/Roadmap.vue"),
+        meta: { title: "Innovation" },
+      },
+      {
+        path: "frequently-ask-question",
+        name: "FAQ",
+        component: () => import("@/views/Faq.vue"),
+        meta: { title: "FAQ" },
+      },
     ],
   },
   // Blogs
@@ -81,7 +93,7 @@ const routes = [
     component: () => import("@/views/DeepRisk.vue"),
     meta: { title: "Home" },
   },
-
+  // Company
   {
     path: "/security",
     name: "Security",
@@ -95,10 +107,24 @@ const routes = [
     meta: { title: "Terms & Conditions" },
   },
   {
-    path: "/frequently-ask-question",
-    name: "FAQ",
-    component: () => import("@/views/Faq.vue"),
-    meta: { title: "FAQ" },
+    path: "/privacy",
+    name: "PrivacyPolicy",
+    component: () => import("@/views/Privacy.vue"),
+    meta: { title: "Privacy & Policy" },
+  },
+
+  // Products
+  {
+    path: "/product",
+    component: import("@/views/Products/ProductLayout.vue"),
+    children: [
+      {
+        path: "medins",
+        name: "Medins",
+        component: () => import("@/views/Products/Medins.vue"),
+        meta: { title: "Medins" },
+      },
+    ],
   },
 ];
 

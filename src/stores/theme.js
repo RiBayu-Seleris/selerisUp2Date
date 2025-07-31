@@ -7,7 +7,6 @@ export const useThemeStore = defineStore("theme", () => {
 
   const applyTheme = () => {
     const root = document.documentElement;
-    console.log("Applying theme, isDark =", isDark.value); // Debug
     if (isDark.value) {
       root.classList.add("dark");
     } else {

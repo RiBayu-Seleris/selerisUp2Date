@@ -89,7 +89,7 @@ const description = computed(() => {
         <div
           class="flex flex-row text-[#2AB857] dark:text-[#FAFAFA] mt-2 lg:mt-4 font-medium items-center"
         >
-          <span class="sml:text-[12px] md:text-[16px] lg:text-[17px]"
+          <span class="sml:text-[11px] md:text-[16px] lg:text-[17px]"
             >View product</span
           >
           <svg

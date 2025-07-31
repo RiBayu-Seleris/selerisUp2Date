@@ -9,7 +9,7 @@ export const companyList = [
     name: "Terms",
   },
   {
-    url: "#",
+    url: "/privacy",
     name: "Privacy",
   },
   {

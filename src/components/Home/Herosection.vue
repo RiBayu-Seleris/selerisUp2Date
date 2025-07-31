@@ -10,8 +10,6 @@ import { useSidebarStore } from "@/stores/sidebar";
 </script>
 
 <template>
-  <!-- px-10 -->
-  <!-- xl:bg-cover lg:bg-hero bg-no-repeat lg:bg-cover -->
   <div class="relative w-full h-auto rounded-b-3xl mt-28">
     <div
       class="w-full h-auto lg:bg-hero2 dark:lg:bg-herodark bg-no-repeat bg-cover lg:bg-center dark:lg:bg-center xl:bg-top dark:xl:bg-top lg:pt-16 rounded-3xl"

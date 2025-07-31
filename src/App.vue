@@ -59,59 +59,72 @@ const scrollProgress = computed(() => {
     document.documentElement.clientHeight;
   return docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
 });
+
+const isProductRoute = computed(() => route.path.startsWith("/product"));
+const isTermsRoute = computed(() => route.path === "/terms");
+const isSecurityRoute = computed(() => route.path === "/security");
+const isPrivacyRoute = computed(() => route.path === "/privacy");
 </script>
 
 <template>
-  <div
-    class="relative w-full h-auto font-poppins overflow-x-hidden mx-auto bg-[#f9fafb] dark:bg-[#17181A] dark:text-white"
-  >
-    <!-- Navbar -->
-    <!-- pt-5 lg:pt-6 xl:pt-5 -->
-
-    <main class="relative w-full max-w-[1440px] mx-auto">
-      <div class="flex fixed w-full h-auto z-50">
-        <component :is="scrollStore.isScrolled ? NavbarScroll : Navbar" />
-      </div>
-      <transition name="fade-slide">
-        <div
-          v-if="showTooltip"
-          @click="scrollToTop"
-          class="flex fixed justify-center cursor-pointer items-center bottom-5 right-5 lg:right-10 w-9 h-9 lg:w-16 lg:h-16 z-30 bg-white shadow-md border-[0.5px] text-white rounded-full p-1 md:p-2"
-        >
-          <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
+  <template v-if="!isProductRoute">
+    <div
+      :class="[
+        `relative w-full h-auto font-poppins overflow-x-hidden mx-auto  dark:bg-[#17181A] dark:text-white`,
+        isTermsRoute || isSecurityRoute || isPrivacyRoute
+          ? 'bg-[#FFFFFF]'
+          : 'bg-[#f9fafb]',
+      ]"
+    >
+      <main class="relative w-full max-w-[1440px] mx-auto">
+        <div class="flex fixed w-full h-auto z-50">
+          <component :is="scrollStore.isScrolled ? NavbarScroll : Navbar" />
         </div>
-      </transition>
-
-      <!-- Sidebar (hanya 1 instance) -->
-      <Sidebar />
-
-      <router-view />
-
-      <section
-        class="flex flex-col relative w-full mx-auto h-auto mt-32 px-8"
-        v-if="!['/blogs'].includes(route.path)"
-      >
-        <Touch />
-      </section>
-
-      <!-- <Suspense>
-        <template #default>
-          <div v-if="isLoad"></div>
-        </template>
-        <template #fallback>
+        <transition name="fade-slide">
           <div
-            class="flex items-center justify-center py-20 animate-pulse text-lg text-gray-500"
+            v-if="showTooltip"
+            @click="scrollToTop"
+            class="flex fixed justify-center cursor-pointer items-center bottom-5 right-5 lg:right-10 w-9 h-9 lg:w-16 lg:h-16 z-30 bg-white shadow-md border-[0.5px] text-white rounded-full p-1 md:p-2"
           >
-            ⏳ Memuat halaman...
+            <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
           </div>
-        </template>
-      </Suspense> -->
-    </main>
+        </transition>
 
-    <footer class="w-full max-w-[1440px] h-auto px-8 mt-20 mx-auto">
-      <Footer />
-    </footer>
-  </div>
+        <!-- Sidebar (hanya 1 instance) -->
+        <Sidebar />
+
+        <router-view />
+
+        <section
+          class="flex flex-col relative w-full mx-auto h-auto mt-32 px-8"
+          v-if="!['/blogs'].includes(route.path)"
+        >
+          <Touch />
+        </section>
+
+        <!-- <Suspense>
+          <template #default>
+            <div v-if="isLoad"></div>
+          </template>
+          <template #fallback>
+            <div
+              class="flex items-center justify-center py-20 animate-pulse text-lg text-gray-500"
+            >
+              ⏳ Memuat halaman...
+            </div>
+          </template>
+        </Suspense> -->
+      </main>
+
+      <footer class="w-full max-w-[1440px] h-auto px-8 mt-20 mx-auto">
+        <Footer />
+      </footer>
+    </div>
+  </template>
+  <template v-else>
+    <!-- Layout khusus product -->
+    <router-view />
+  </template>
 </template>
 <style scoped>
 .fade-slide-enter-active,

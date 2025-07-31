@@ -24,36 +24,45 @@ const toggle = (index) => {
     </div>
   </section>
   <section>
-    <div class="w-full max-w-[1024px] mx-auto mt-20">
-      <div class="grid md:grid-cols-2 gap-6 items-start">
+    <div class="w-full mx-auto mt-20">
+      <div
+        class="flex flex-col lg:grid lg:md:grid-cols-2 gap-6 items-start px-8 lg:px-8"
+      >
         <div
           v-for="(faq, index) in faqList"
           :key="index"
-          class="border rounded-lg shadow-sm transition-all"
+          class="w-full h-auto p-[0.7px] rounded-lg dark:bg-gradient-to-tr dark:from-[#565656] from-0% dark:to-[#BCBCBC]"
         >
-          <button
-            class="w-full flex flex-row gap-x-5 items-center px-6 py-4"
-            @click="toggle(index)"
-          >
-            <span class="text-xl">
-              <span v-if="openedIndex === index" class="text-green-600">−</span>
-              <span v-else class="text-blue-600">+</span>
-            </span>
-            <span
-              :class="
-                openedIndex === index
-                  ? 'text-green-600 font-medium'
-                  : 'text-gray-700 font-medium'
-              "
-            >
-              {{ faq.question }}
-            </span>
-          </button>
           <div
-            v-if="openedIndex === index"
-            class="px-6 pb-4 text-gray-500 text-sm"
+            class="w-full rounded-lg shadow-md transition-all bg-[#FFFFFF] dark:bg-[#323232]"
           >
-            {{ faq.answer }}
+            <button
+              class="w-full flex flex-row gap-x-5 items-center px-6 py-4"
+              @click="toggle(index)"
+            >
+              <span class="text-xl">
+                <span
+                  v-if="openedIndex === index"
+                  class="text-[#2AB857] dark:text-[#52BD95]"
+                  >−</span
+                >
+                <span v-else class="text-[#195279] dark:text-[#FAFAFA]">+</span>
+              </span>
+              <span
+                :class="
+                  openedIndex === index
+                    ? 'text-[#2AB857] font-medium'
+                    : 'text-[#195279] dark:text-[#FAFAFA] font-medium'
+                "
+              >
+                {{ faq.question }}
+              </span>
+            </button>
+            <div
+              v-if="openedIndex === index"
+              class="px-6 pb-4 text-[#363049] dark:text-[#FFFFFF] text-sm"
+              v-html="faq.answer"
+            ></div>
           </div>
         </div>
       </div>

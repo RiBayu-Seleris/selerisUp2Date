@@ -36,13 +36,13 @@ const filteredAndSearchedPosts = computed(() => {
   <div class="flex flex-col w-full h-auto px-0 xl:px-10">
     <!-- Search Mobile -->
     <div
-      class="relative flex lg:hidden flex-row w-full h-auto justify-end items-center gap-x-5 mb-10"
+      class="relative flex lg:hidden flex-row w-full h-auto justify-end items-center gap-x-5 mb-10 px-10 md:px-0"
     >
       <div
-        class="w-full h-10 flex flex-row items-center bg-[#EFEFEF] dark:bg-[#535353] md:px-2 rounded-[10px] md:gap-x-3 lg:gap-x-3 xl:gap-x-2.5"
+        class="w-full h-10 flex flex-row items-center bg-[#EFEFEF] dark:bg-[#535353] px-2 md:px-4 rounded-[10px] md:gap-x-3 lg:gap-x-3 xl:gap-x-2.5"
       >
         <div
-          class="w-[15%] h-full flex justify-center items-center text-[#6C6C6C] dark:text-[#ADADAD]"
+          class="w-[15%] md:w-[5%] h-full flex justify-center items-center text-[#6C6C6C] dark:text-[#ADADAD]"
         >
           <SearchIcon />
         </div>

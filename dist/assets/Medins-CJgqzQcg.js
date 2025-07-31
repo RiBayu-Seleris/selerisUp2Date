@@ -1,0 +1,1 @@
+import{_ as e,b as n,d as s}from"./index-DojyKKT7.js";const t={},c={class:"w-full h-[500px] bg-green-400"};function o(r,_){return s(),n("div",c,"Medins Content")}const d=e(t,[["render",o]]);export{d as default};

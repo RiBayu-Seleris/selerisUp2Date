@@ -9,11 +9,11 @@ export const aboutList = [
     name: "Our Team",
   },
   {
-    url: "#",
+    url: "/about/innovation",
     name: "Innovations",
   },
   {
-    url: "/frequently-ask-question",
+    url: "/about/frequently-ask-question",
     name: "FAQ",
   },
 ];

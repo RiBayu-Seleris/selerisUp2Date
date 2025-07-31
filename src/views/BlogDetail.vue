@@ -148,7 +148,7 @@ onBeforeUnmount(() => {
   >
     <!-- Blog Content -->
     <div
-      class="w-full h-auto bg-[#FFFFFF] dark:bg-[#17181A] px-8 md:px-14 lg:px-28 py-5"
+      class="w-full h-auto bg-[#FFFFFF] dark:bg-[#17181A] px-0 md:px-14 lg:px-28 py-5"
     >
       <!-- {{ post.description }} -->
       <div
@@ -203,33 +203,43 @@ onBeforeUnmount(() => {
   </div>
   <!-- Post At and Author -->
   <section
-    class="flex flex-row justify-between w-full max-w-none md:max-w-xl lg:max-w-4xl h-auto mx-auto mt-10"
+    class="flex flex-row justify-between w-full max-w-none md:max-w-xl lg:max-w-4xl h-auto py-2 mx-auto mt-6 px-8 md:px-0"
   >
-    <div class="flex flex-row w-full h-auto gap-x-5 items-center">
-      <div class="w-14 h-14 lg:w-20 lg:h-20">
-        <div class="w-full h-full bg-green-400 rounded-full" />
+    <div
+      class="flex flex-col md:flex-row w-full h-auto gap-x-2 md:gap-x-5 items-center"
+    >
+      <div
+        class="w-8 h-8 md:w-14 md:h-14 lg:w-14 lg:h-14 mb-2 flex items-center justify-center"
+      >
+        <div class="w-full h-full bg-[#D9D9D9] rounded-full" />
       </div>
-      <div class="w-[60%] h-auto flex items-center">
-        <p class="text-[14px] lg:text-[19px]">
+      <div
+        class="w-[80%] md:w-[60%] h-auto flex items-center text-center md:text-start"
+      >
+        <p class="text-[14px] md:text-[14px] lg:text-[17px]">
           <span class="font-[600]">Published in</span> Seleris Meditekno
           International
         </p>
       </div>
     </div>
-    <div class="flex flex-row w-full h-auto gap-x-5 justify-end items-center">
-      <div class="w-14 h-14 lg:w-20 lg:h-20">
-        <div class="w-full h-full bg-green-400 rounded-full" />
+    <div
+      class="flex flex-col md:flex-row w-full h-auto gap-x-2 md:gap-x-5 md:justify-end items-center"
+    >
+      <div class="w-8 h-8 md:w-14 md:h-14 lg:w-14 lg:h-14 mb-2">
+        <div class="w-full h-full bg-[#D9D9D9] rounded-full" />
       </div>
-      <div class="w-[60%] h-auto flex items-center">
-        <p class="text-[14px] lg:text-[19px]">
-          <span class="font-[600]">Written by</span> Anisa Maulida Rahma
+      <div
+        class="w-[80%] md:w-[60%] h-auto flex items-center text-center md:text-start"
+      >
+        <p class="text-[14px] md:text-[14px] lg:text-[17px]">
+          <span class="font-[600]">Written by</span> Annisa Maulida Rahma
         </p>
       </div>
     </div>
   </section>
   <!-- Comments -->
   <section
-    class="flex flex-col justify-between w-full max-w-none md:max-w-xl lg:max-w-4xl h-auto mx-auto mt-20"
+    class="flex flex-col w-full max-w-none md:max-w-xl lg:max-w-4xl h-auto py-2 mx-auto mt-6 px-14 md:px-0"
   >
     <div class="w-full h-auto">
       <p>Comments (10)</p>
@@ -239,8 +249,59 @@ onBeforeUnmount(() => {
         type="text"
         name=""
         id=""
-        class="w-full bg-[#EBEBEB] rounded-[10px]"
+        placeholder="Share your thoughts?"
+        class="w-full bg-[#EBEBEB] rounded-[10px] py-3 px-3"
       />
+    </div>
+  </section>
+  <section
+    class="flex flex-col w-full max-w-none md:max-w-xl lg:max-w-4xl h-auto py-2 mx-auto mt-6 px-14 md:px-0 gap-y-16"
+  >
+    <div class="w-full h-auto flex flex-col">
+      <div class="w-full h-auto">
+        <p
+          class="font-[500] text-[#000000] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+        >
+          Anisa Maulida Rahma
+        </p>
+      </div>
+      <div class="w-full h-auto">
+        <p class="font-[400] text-[#000000] dark:text-[#565656]">21 Jul 2020</p>
+      </div>
+      <div class="w-full h-auto mt-3">
+        <p class="text-[#535862] dark:text-[#DADADA]">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+          ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo
+          massa. Eu dolor aliquet risus gravida nunc at feugiat consequat purus.
+          Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.
+        </p>
+      </div>
+    </div>
+    <!-- Comment 2 -->
+    <div class="w-full h-auto flex flex-col">
+      <div class="w-full h-auto">
+        <p
+          class="font-[500] text-[#000000] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+        >
+          Jhon Doe
+        </p>
+      </div>
+      <div class="w-full h-auto">
+        <p class="font-[400] text-[#000000] dark:text-[#565656]">21 Jul 2020</p>
+      </div>
+      <div class="w-full h-auto mt-3">
+        <p class="text-[#535862] dark:text-[#DADADA]">
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
+          ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo
+          massa.
+        </p>
+      </div>
+    </div>
+    <!-- See More -->
+    <div class="w-full h-auto flex flex-col">
+      <div class="w-full h-auto">
+        <p class="font-[500] text-[#2AB857]">See More..</p>
+      </div>
     </div>
   </section>
 </template>

@@ -34,7 +34,6 @@ module.exports = {
         herodark: "url('@/assets/images/herodark.svg')",
         different: "url('@/assets/images/different-background.png')",
         differentDark: "url('@/assets/images/different-dark-background.png')",
-        // shareFrame: "url('@/assets/images/touch-bg.png')",
         api: "url('@/assets/images/api-background.png')",
         darkapi: "url('@/assets/images/dark-api-background.png')",
         leftCertBefore:

@@ -56,7 +56,10 @@ defineProps({
       </p>
     </div>
     <div class="flex w-full h-[100px] justify-start items-start">
-      <div v-html="description" class="prose max-w-none line-clamp-3" />
+      <div
+        v-html="description"
+        class="prose max-w-none line-clamp-3 text-[14px] font-[400] text-[#637381] dark:text-[#6F6F6F]"
+      />
       <!-- <p class="text-[14px] font-[400] text-[#637381] dark:text-[#6F6F6F]">
         {{ description }}
       </p> -->

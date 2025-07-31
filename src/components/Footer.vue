@@ -240,11 +240,22 @@ import { companyList } from "@/Data/companyList";
               <div
                 class="flex w-full h-full justify-center items-center content-center xl:justify-start xl:content-start xl:-mt-5"
               >
-                <img
-                  :src="appstore"
-                  alt="Appstore"
-                  class="w-full md:w-[300px] xl:w-[200px] h-[100px] object-contain object-center"
-                />
+                <div
+                  class="relative group w-full md:w-[300px] xl:w-[200px] h-[100px]"
+                >
+                  <img
+                    :src="appstore"
+                    alt="Appstore"
+                    class="w-full h-full object-contain object-center"
+                  />
+
+                  <!-- Hover Overlay -->
+                  <div
+                    class="absolute inset-0 bg-black bg-opacity-60 flex items-center justify-center text-white opacity-0 group-hover:opacity-100 transition duration-300"
+                  >
+                    <span>Detail Appstore</span>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
