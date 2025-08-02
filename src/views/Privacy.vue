@@ -953,7 +953,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
               <p>
                 Seleris's AI-powered platform can assess the risk of potential
                 customers with a high degree of accuracy, even if they have
-                limited or no medical history\
+                limited or no medical history
               </p>
             </li>
             <li>

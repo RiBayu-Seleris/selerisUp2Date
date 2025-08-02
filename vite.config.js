@@ -6,12 +6,16 @@ import path from "path"; // <-- tambahkan ini
 
 export default defineConfig({
   server: {
-    allowedHosts: ["715bd529a4e5.ngrok-free.app"],
+    allowedHosts: ["5850b2018114.ngrok-free.app"],
   },
   plugins: [vue()],
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"), // <-- alias '@' ke 'src'
+      "@productComponents": path.resolve(
+        __dirname,
+        "./src/components/Products/ReusableComponents"
+      ), // <-- alias '@' ke 'src'
     },
   },
 });

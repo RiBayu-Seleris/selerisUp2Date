@@ -1,6 +1,6 @@
 <script setup>
 import { useRoute } from "vue-router";
-import { onMounted, onUnmounted, ref, computed } from "vue";
+import { onMounted, onUnmounted, ref, computed, watch } from "vue";
 import { useScrollStore } from "@/stores/scroll";
 import { useThemeStore } from "@/stores/theme";
 
@@ -33,7 +33,16 @@ const scrollToTop = () => {
   // scrollStore.isScrolled = false; // Paksa hilangkan tooltip
 };
 
-onMounted(() => {
+function updateDarkMode() {
+  const html = document.documentElement;
+  const isLightOnlyPage = route.path.startsWith("/product");
+
+  if (isLightOnlyPage) {
+    html.classList.remove("dark");
+  }
+}
+
+onMounted((updateDarkMode) => {
   themeStore.loadTheme(); // <== Penting untuk dark mode
   window.addEventListener("scroll", handleScroll);
   document.body.style.overflow = ""; // pastikan tidak terkunci
@@ -52,6 +61,8 @@ onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
 });
 
+watch(() => route.path, updateDarkMode);
+
 const scrollProgress = computed(() => {
   const scrollTop = window.scrollY || document.documentElement.scrollTop;
   const docHeight =
@@ -64,6 +75,7 @@ const isProductRoute = computed(() => route.path.startsWith("/product"));
 const isTermsRoute = computed(() => route.path === "/terms");
 const isSecurityRoute = computed(() => route.path === "/security");
 const isPrivacyRoute = computed(() => route.path === "/privacy");
+const isBookDemoRoute = computed(() => route.path === "/book-a-demo");
 </script>
 
 <template>
@@ -74,10 +86,13 @@ const isPrivacyRoute = computed(() => route.path === "/privacy");
         isTermsRoute || isSecurityRoute || isPrivacyRoute
           ? 'bg-[#FFFFFF]'
           : 'bg-[#f9fafb]',
+        isBookDemoRoute
+          ? 'min-h-screen w-full dark:bg-[radial-gradient(circle_at_0%_30%,_#3CFF7A_-70%,_#17181A_30%)]'
+          : '',
       ]"
     >
       <main class="relative w-full max-w-[1440px] mx-auto">
-        <div class="flex fixed w-full h-auto z-50">
+        <div class="flex fixed w-full h-auto top-0 z-50">
           <component :is="scrollStore.isScrolled ? NavbarScroll : Navbar" />
         </div>
         <transition name="fade-slide">
@@ -93,6 +108,7 @@ const isPrivacyRoute = computed(() => route.path === "/privacy");
         <!-- Sidebar (hanya 1 instance) -->
         <Sidebar />
 
+        <!-- Tampilan berdasarkan route -->
         <router-view />
 
         <section
@@ -101,19 +117,6 @@ const isPrivacyRoute = computed(() => route.path === "/privacy");
         >
           <Touch />
         </section>
-
-        <!-- <Suspense>
-          <template #default>
-            <div v-if="isLoad"></div>
-          </template>
-          <template #fallback>
-            <div
-              class="flex items-center justify-center py-20 animate-pulse text-lg text-gray-500"
-            >
-              ⏳ Memuat halaman...
-            </div>
-          </template>
-        </Suspense> -->
       </main>
 
       <footer class="w-full max-w-[1440px] h-auto px-8 mt-20 mx-auto">

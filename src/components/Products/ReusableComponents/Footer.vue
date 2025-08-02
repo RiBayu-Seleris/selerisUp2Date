@@ -1,5 +1,4 @@
 <script setup>
-import Logo from "@/assets/images/logo.png";
 import DarkLogo from "@/assets/images/darklogo.png";
 
 // Sosmed Icon
@@ -13,6 +12,35 @@ import appstore from "@/assets/images/appstore.png";
 
 import { productList } from "@/Data/productList";
 import { companyList } from "@/Data/companyList";
+
+import { computed } from "vue";
+import { useRoute } from "vue-router"; // ✅ Tambahkan ini
+
+const route = useRoute(); // ✅ Ambil route saat ini
+
+const Logo = computed(() => {
+  if (route.path.startsWith("/product/credit-cover")) {
+    return new URL(
+      "@/assets/Products/images/Logo/CC-logo-color.png",
+      import.meta.url
+    ).href;
+  }
+  if (route.path.startsWith("/product/medins")) {
+    return new URL(
+      "@/assets/Products/images/Logo/medins-logo-color.png",
+      import.meta.url
+    ).href;
+  }
+});
+
+const footerTitle = computed(() => {
+  if (route.path.startsWith("/product/credit-cover")) {
+    return "Seleris Credit Cover";
+  }
+  if (route.path.startsWith("/product/medins")) {
+    return "Seleris Medins";
+  }
+});
 </script>
 
 <template>
@@ -28,22 +56,26 @@ import { companyList } from "@/Data/companyList";
                 <img
                   :src="Logo"
                   alt="Logo"
-                  class="w-full sml:h-[60px] md:h-[80px] xl:h-[100px] object-contain object-left dark:hidden"
-                />
-                <img
-                  :src="DarkLogo"
-                  alt="Logo"
-                  class="w-full sml:h-[60px] md:h-[80px] xl:h-[100px] object-contain object-left hidden dark:block"
+                  class="w-full sml:h-[60px] md:h-[80px] xl:h-[40px] object-contain object-left"
                 />
               </div>
               <div
-                class="flex w-full h-auto lg:mt-4 justify-center items-center"
+                class="flex flex-col w-full h-auto lg:mt-4 justify-center items-center space-y-2"
               >
-                <p
-                  class="text-[#195279] dark:text-[#FAFAFA] font-normal sml:text-base md:text-[1.7rem] lg:text-lg xl:text-[18px]"
-                >
-                  PT Seleris Meditekno Internasional
-                </p>
+                <div class="w-full h-auto">
+                  <p
+                    class="text-[#195279] dark:text-[#FAFAFA] font-[400] sml:text-base md:text-[1.7rem] lg:text-lg xl:text-[18px]"
+                  >
+                    {{ footerTitle }}
+                  </p>
+                </div>
+                <div class="w-full h-auto">
+                  <p
+                    class="text-[#195279] font-[400] dark:text-[#FAFAFA] xl:leading-relaxed sml:text-base md:text-[23px] lg:text-lg xl:text-[14px]"
+                  >
+                    Powered by Seleris Meditekno International
+                  </p>
+                </div>
               </div>
             </div>
             <div class="w-full h-auto mt-4">

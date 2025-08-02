@@ -1,0 +1,88 @@
+<script setup>
+import MenuNav from "@productComponents/MenuNav.vue";
+import MenuIcon from "@/components/icons/MenuIcon.vue";
+import ThemeToggle from "@/components/reusable/ThemeToggle.vue";
+
+import { useSidebarStore } from "@/stores/sidebar";
+import { computed } from "vue";
+import { useRoute } from "vue-router"; // ✅ Tambahkan ini
+
+const sidebarStore = useSidebarStore();
+const route = useRoute(); // ✅ Ambil route saat ini
+
+const Logo = computed(() => {
+  if (route.path.startsWith("/product/credit-cover")) {
+    return new URL("@/assets/Products/images/Logo/CC-logo.png", import.meta.url)
+      .href;
+  }
+  if (route.path.startsWith("/product/medins")) {
+    return new URL(
+      "@/assets/Products/images/Logo/medins-logo.png",
+      import.meta.url
+    ).href;
+  }
+});
+const LogoLink = computed(() => {
+  if (route.path.startsWith("/product/credit-cover")) {
+    return "/product/credit-cover";
+  }
+  if (route.path.startsWith("/product/medins")) {
+    return "/product/medins";
+  }
+});
+</script>
+
+<template>
+  <div
+    class="relative flex justify-center w-full h-auto items-center max-w-[1440px] mx-auto px-14 pt-6"
+  >
+    <!-- Desktop Navbar -->
+    <div class="hidden lg:grid grid-cols-12 w-full h-auto">
+      <div class="col-span-1 h-full">
+        <router-link :to="LogoLink" class="w-full h-full">
+          <div class="flex w-full h-full items-center">
+            <img :src="Logo" alt="Logo" class="w-full h-auto object-contain" />
+          </div>
+        </router-link>
+      </div>
+      <div class="flex items-center col-span-10 h-auto">
+        <div class="flex w-full h-auto">
+          <!-- rounded-full border shadow-[1px_19px_33px_-14px_rgba(0,_0,_0,_0.08)] bg-white z-[999] -->
+          <nav
+            class="hidden lg:flex items-center w-full justify-center content-center h-auto"
+          >
+            <div
+              class="w-auto h-full border-[0.5px] rounded-[40px] bg-[#FFFDFD]/30 backdrop-filter backdrop-blur-xl bg-opacity-10 py-3 px-10"
+            >
+              <MenuNav />
+            </div>
+          </nav>
+        </div>
+      </div>
+      <div class="flex items-center col-span-10 h-auto" />
+    </div>
+
+    <!-- Mobile Navbar -->
+    <div class="w-full h-auto flex lg:hidden flex-row justify-between">
+      <router-link to="/" class="w-[40%] h-auto flex">
+        <img
+          :src="Logo"
+          alt="Logo"
+          class="w-[117px] h-[56px] sml:w-[80px] sml:h-[56px] object-contain"
+        />
+      </router-link>
+      <div class="w-[60%] h-auto flex items-center flex-row justify-end">
+        <div class="w-[30%] md:w-[15%] h-auto flex items-center justify-end">
+          <button
+            type="button"
+            id="sidebar-button"
+            class="bg-white p-2 rounded-lg shadow-md text-[#1AB24F]"
+            @click="sidebarStore.open"
+          >
+            <MenuIcon />
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>

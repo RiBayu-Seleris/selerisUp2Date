@@ -31,6 +31,8 @@ module.exports = {
         hero2: "url('@/assets/images/hero-banner2.png')",
         touch: "url('@/assets/images/touch-bg.png')",
         touchDark: "url('@/assets/images/touch-bg-dark.png')",
+        medins: "url('@/assets/Products/images/bg-hero-medins.png')",
+        cc: "url('@/assets/Products/images/bg-hero-cc.png')",
         herodark: "url('@/assets/images/herodark.svg')",
         different: "url('@/assets/images/different-background.png')",
         differentDark: "url('@/assets/images/different-dark-background.png')",

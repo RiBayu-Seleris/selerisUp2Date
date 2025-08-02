@@ -114,9 +114,14 @@ const routes = [
   },
 
   // Products
+  // Redirect jika akses langsung ke /about
   {
     path: "/product",
-    component: import("@/views/Products/ProductLayout.vue"),
+    redirect: "/", // bisa juga ke "/about/company" atau "/not-found"
+  },
+  {
+    path: "/product",
+    component: () => import("@/views/Products/ProductLayout.vue"),
     children: [
       {
         path: "medins",
@@ -124,6 +129,18 @@ const routes = [
         component: () => import("@/views/Products/Medins.vue"),
         meta: { title: "Medins" },
       },
+      {
+        path: "credit-cover",
+        name: "CreditCover",
+        component: () => import("@/views/Products/CC.vue"),
+        meta: { title: "Credit Cover" },
+      },
+      // {
+      //   path: "medins",
+      //   name: "Medins",
+      //   component: () => import("@/views/Products/Medins.vue"),
+      //   meta: { title: "Medins" },
+      // },
     ],
   },
 ];

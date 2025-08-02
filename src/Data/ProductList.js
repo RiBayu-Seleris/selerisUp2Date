@@ -1,6 +1,6 @@
 // src/data/productList.js
 export const productList = [
-  { url: "#", name: "Seleris Credit Cover" },
+  { url: "/product/credit-cover", name: "Seleris Credit Cover" },
   { url: "#", name: "Seleris Lifins" },
   { url: "/product/medins", name: "Seleris Medins" },
   { url: "#", name: "Seleris Care" },

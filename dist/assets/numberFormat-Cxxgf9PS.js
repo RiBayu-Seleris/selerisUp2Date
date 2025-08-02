@@ -1,17 +1,4 @@
-// src/data/blogPosts.js
-import { generateSlug } from "@/components/Helper/slugUtil.js";
-
-export const blogPosts = [
-  {
-    id: 1,
-    image: new URL("@/assets/images/blog/example.png", import.meta.url).href,
-    title: "Your Financial Safety Net in an Unpredictable World",
-    category: "Insurance",
-    date: "Dec 22, 2023",
-    likes: 600,
-    views: 400,
-    comments: 300,
-    description: `
+import{_ as n,b as t,d as s,e as o}from"./index-qSzT5Wcd.js";function a(e){return e.toLowerCase().trim().replace(/[^a-z0-9\s-]/g,"").replace(/\s+/g,"-").replace(/-+/g,"-")}const w=[{id:1,image:new URL("/assets/example-JKryANqA.png",import.meta.url).href,title:"Your Financial Safety Net in an Unpredictable World",category:"Insurance",date:"Dec 22, 2023",likes:600,views:400,comments:300,description:`
     <p>Life is full of uncertainties. From unexpected illnesses and accidents to natural disasters and property damage, things can go wrong when you least expect them. That's where insurance steps in. More than just a piece of paper, insurance is a financial safety net designed to protect you and your loved ones from the potentially devastating costs of unforeseen events.</p>
     <p>While it might seem like an extra expense, thinking of insurance as an investment in your peace of mind and financial stability is far more accurate. It's about mitigating risk and ensuring that a single unfortunate event doesn't derail your entire financial future.</p>
     <p>Why Is Insurance So Important?</p>
@@ -67,19 +54,7 @@ export const blogPosts = [
   </ul>
   <p>Insurance isn't about hoping something bad happens; it's about being prepared if it does. It’s an essential tool for building financial resilience and protecting your future in an unpredictable world.</p>
   <p>Summary : insurance as a crucial financial safety net in an unpredictable world. It emphasizes how insurance provides financial protection, peace of mind, and asset security against unforeseen events like illness or accidents. Different types, from health to auto and life insurance, offer specific coverage. The blog advises assessing needs and comparing policies to choose the right protection.</p>
-    `,
-  },
-  {
-    id: 2,
-    image: new URL("@/assets/images/blog/example.png", import.meta.url).href,
-    title:
-      "The Relentless March of Tech: Shaping Our World, One Innovation at a Time",
-    category: "Technology",
-    date: "Dec 22, 2023",
-    likes: 1000,
-    views: 2500,
-    comments: 200,
-    description: `
+    `},{id:2,image:new URL("/assets/example-JKryANqA.png",import.meta.url).href,title:"The Relentless March of Tech: Shaping Our World, One Innovation at a Time",category:"Technology",date:"Dec 22, 2023",likes:1e3,views:2500,comments:200,description:`
     <p>Technology. It's the invisible hand guiding our modern lives, the constant hum in the background, and the driving force behind unprecedented change. From the smartphones in our pockets to the complex algorithms powering global networks, tech isn't just a sector; it's the very fabric of our contemporary existence.</p>
     <p>Every day, new advancements emerge, seemingly at lightning speed, promising to make our lives easier, smarter, and more connected. But beyond the hype, what truly defines the current landscape of technology, and how is it fundamentally reshaping our world?</p>
     <h3>Key Frontiers in Today's Tech Landscape</h3>
@@ -101,18 +76,7 @@ export const blogPosts = [
     <p>The future of tech isn't just about what new gadgets emerge; it's about how we thoughtfully integrate these advancements into society to create a more prosperous, equitable, and sustainable world. It's about empowering humanity through intelligent design and responsible deployment.</p>
     <p><em>What technological advancements are you most excited (or concerned) about? Share your thoughts below!</em></p>
     <p>Summary: how technology fundamentally reshapes our world, driven by advancements in AI/ML, 5G, cloud computing, and cybersecurity. Tech is transforming industries, workplaces, and daily life, driving rapid innovation. While beneficial, it necessitates navigating challenges like ethics and privacy, emphasizing responsible integration for a prosperous, equitable future</p>
-    `,
-  },
-  {
-    id: 3,
-    image: new URL("@/assets/images/blog/example.png", import.meta.url).href,
-    title: "Unveiling the World of AI: More Than Just Technology",
-    category: "Artificial Intelligent",
-    date: "Dec 22, 2023",
-    likes: 1000,
-    views: 2500,
-    comments: 200,
-    description: `
+    `},{id:3,image:new URL("/assets/example-JKryANqA.png",import.meta.url).href,title:"Unveiling the World of AI: More Than Just Technology",category:"Artificial Intelligent",date:"Dec 22, 2023",likes:1e3,views:2500,comments:200,description:`
     <p>Artificial Intelligence (AI)'s transformative role in boosting efficiency, innovation, personalized experiences, security, and healthcare. It acknowledges challenges like job impact and bias, emphasizing AI's future in creating smarter systems and solving global problems. Join the conversation on its development for a smarter, fairer future.</p>
     <h2>What is AI?</h2>
     <p>Artificial Intelligence (AI) has become a household name. From sci-fi movies to daily headlines, AI continues to capture our attention. But what exactly is AI, and why is it so important for our future? Let's dive deeper.</p>
@@ -151,18 +115,7 @@ export const blogPosts = [
     </ul>
     <p>AI isn't just about robots or complex algorithms; it's about empowering humans, enhancing our lives, and unlocking new possibilities never before imagined. By understanding AI and participating in discussions about its development, we can all contribute to a smarter and more equitable future.</p>
 
-    `,
-  },
-  {
-    id: 4,
-    image: new URL("@/assets/images/blog/example.png", import.meta.url).href,
-    title: "Beyond Aesthetics: The Power of Thoughtful Design",
-    category: "Design",
-    date: "Dec 22, 2023",
-    likes: 1000,
-    views: 2500,
-    comments: 200,
-    description: `
+    `},{id:4,image:new URL("/assets/example-JKryANqA.png",import.meta.url).href,title:"Beyond Aesthetics: The Power of Thoughtful Design",category:"Design",date:"Dec 22, 2023",likes:1e3,views:2500,comments:200,description:`
     <p>Design is more than just aesthetics; it's a powerful force shaping our world. Good design solves problems, enhances user experience, communicates value, evokes emotion, and drives innovation. It highlights key principles like functionality, usability, and clarity, stressing that designers meticulously craft our everyday reality to make lives easier, more beautiful, and meaningful.</p>
     <h2>What Is Design, Really?</h2>
     <p>Design. It's a word we hear constantly, but what does it truly mean? Is it just about making things look pretty, or is there something more profound at play? In reality, design is a powerful force that shapes our world, influences our emotions, and dictates how we interact with everything around us.</p>
@@ -189,11 +142,4 @@ export const blogPosts = [
     <h2>Design is Everywhere, and So Are Designers</h2>
     <p>From architects shaping cityscapes to UX designers crafting digital interfaces, and fashion designers creating wearable art, designers are the unsung heroes who meticulously craft our everyday reality. They observe, research, ideate, prototype, and refine, all to make our lives easier, more beautiful, and more meaningful.</p>
     <p>So, the next time you interact with an object or a digital interface, take a moment to appreciate the intentionality behind its creation. Good design isn't just about how something looks; it's about how it works, how it feels, and the problems it elegantly solves. It's about enhancing human experience, one thoughtfully crafted detail at a time.</p>
-    `,
-  },
-
-  // Tambah lainnya...
-].map((post) => ({
-  ...post,
-  slug: `${generateSlug(post.title)}`, // pastikan unik
-}));
+    `}].map(e=>({...e,slug:`${a(e.title)}`})),r={},l={width:"24",height:"24",viewBox:"0 0 24 24",fill:"none",xmlns:"http://www.w3.org/2000/svg"};function c(e,i){return s(),t("svg",l,i[0]||(i[0]=[o("path",{d:"M6.4 19H7.1V9.42105H6.4C6.0287 9.42105 5.6726 9.57632 5.41005 9.85268C5.1475 10.1291 5 10.5039 5 10.8947V17.5263C5 17.9172 5.1475 18.292 5.41005 18.5684C5.6726 18.8447 6.0287 19 6.4 19ZM17.6 9.42105H12.7L13.4854 6.93937C13.5555 6.71788 13.5746 6.48204 13.5411 6.25127C13.5076 6.0205 13.4226 5.8014 13.2929 5.61202C13.1632 5.42263 12.9927 5.26839 12.7953 5.16198C12.5979 5.05558 12.3793 5.00006 12.1575 5H12L8.5 9.00695V19H16.2L18.9384 12.6661L19 12.3684V10.8947C19 10.5039 18.8525 10.1291 18.5899 9.85268C18.3274 9.57632 17.9713 9.42105 17.6 9.42105Z",fill:"currentColor"},null,-1)]))}const I=n(r,[["render",c]]),u={},d={width:"24",height:"24",viewBox:"0 0 24 24",fill:"none",xmlns:"http://www.w3.org/2000/svg"};function g(e,i){return s(),t("svg",d,i[0]||(i[0]=[o("path",{d:"M12 9C11.2044 9 10.4413 9.31607 9.87868 9.87868C9.31607 10.4413 9 11.2044 9 12C9 12.7956 9.31607 13.5587 9.87868 14.1213C10.4413 14.6839 11.2044 15 12 15C12.7956 15 13.5587 14.6839 14.1213 14.1213C14.6839 13.5587 15 12.7956 15 12C15 11.2044 14.6839 10.4413 14.1213 9.87868C13.5587 9.31607 12.7956 9 12 9ZM12 17C10.6739 17 9.40215 16.4732 8.46447 15.5355C7.52678 14.5979 7 13.3261 7 12C7 10.6739 7.52678 9.40215 8.46447 8.46447C9.40215 7.52678 10.6739 7 12 7C13.3261 7 14.5979 7.52678 15.5355 8.46447C16.4732 9.40215 17 10.6739 17 12C17 13.3261 16.4732 14.5979 15.5355 15.5355C14.5979 16.4732 13.3261 17 12 17ZM12 4.5C7 4.5 2.73 7.61 1 12C2.73 16.39 7 19.5 12 19.5C17 19.5 21.27 16.39 23 12C21.27 7.61 17 4.5 12 4.5Z",fill:"currentColor"},null,-1)]))}const k=n(u,[["render",g]]),h={},p={width:"24",height:"24",viewBox:"0 0 24 24",fill:"none",xmlns:"http://www.w3.org/2000/svg"};function m(e,i){return s(),t("svg",p,i[0]||(i[0]=[o("path",{"fill-rule":"evenodd","clip-rule":"evenodd",d:"M5 6.98534C5 6.45879 5.20801 5.95381 5.57828 5.58149C5.94854 5.20917 6.45073 5 6.97436 5H17.0256C17.5493 5 18.0515 5.20917 18.4217 5.58149C18.792 5.95381 19 6.45879 19 6.98534V14.2047C19 14.7313 18.792 15.2363 18.4217 15.6086C18.0515 15.9809 17.5493 16.1901 17.0256 16.1901H9.10021C8.82738 16.1901 8.56964 16.315 8.39949 16.5294L6.72667 18.6324C6.15374 19.3515 5 18.945 5 18.0238V6.98534Z",fill:"currentColor"},null,-1)]))}const A=n(h,[["render",m]]),f={},y={width:"24",height:"24",viewBox:"0 0 24 24",fill:"none",xmlns:"http://www.w3.org/2000/svg"};function v(e,i){return s(),t("svg",y,i[0]||(i[0]=[o("path",{d:"M13 6.91394V2.58594L17.707 7.29294L21.481 11.0669L17.64 14.2679L13 18.1349V13.8999C4.85396 13.2859 1.99996 17.9999 1.99996 17.9999C1.99996 15.0629 2.24196 12.0149 4.55096 9.70694C7.23496 7.02194 11.122 6.83194 13 6.91394Z",fill:"currentColor"},null,-1)]))}const C=n(f,[["render",v]]);function x(e){return e>=1e6?(e/1e6).toFixed(1).replace(/\.0$/,"")+"M":e>=1e3?(e/1e3).toFixed(1).replace(/\.0$/,"")+"k":e.toString()}export{A as C,k as E,I as L,C as S,w as b,x as f};
