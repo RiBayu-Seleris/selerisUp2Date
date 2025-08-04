@@ -11,8 +11,8 @@ defineProps({
 </script>
 
 <template>
-  <router-link
-    :to="href"
+  <a
+    :href="href"
     :class="[
       'relative inline-block text-animate-hover dark:dark-text-animate-hover hover:font-semibold',
       route.path === href
@@ -21,5 +21,5 @@ defineProps({
     ]"
   >
     <slot />
-  </router-link>
+  </a>
 </template>

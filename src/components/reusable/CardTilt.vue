@@ -34,7 +34,7 @@ function resetTransform() {
   <!-- shadow-md -->
   <div
     ref="card"
-    class="flex w-[222px] h-[80px] rounded-2xl border-[0.1px] bg-[#FFFFFF] dark:bg-[#1D1F23] dark:border-[#FAFAFA]/25 transition-transform duration-300 ease-out hover:bg-white dark:hover:bg-transparent justify-center items-center grayscale hover:grayscale-0 dark:grayscale"
+    class="flex w-[222px] h-[80px] rounded-2xl border-[0.1px] bg-[#FFFFFF] dark:bg-[#1D1F23] dark:border-[#FAFAFA]/25 transition-transform duration-300 ease-out hover:bg-white dark:hover:bg-transparent justify-center items-center"
     @mousemove="handleMouseMove"
     @mouseleave="resetTransform"
     :style="{ transform: transformStyle }"
@@ -43,7 +43,7 @@ function resetTransform() {
       <img
         :src="image"
         alt="partners"
-        class="w-[184px] h-full object-contain dark:invert dark:brightness-110 dark:mix-blend-plus-lighter"
+        class="w-[184px] h-full object-contain"
       />
     </div>
   </div>

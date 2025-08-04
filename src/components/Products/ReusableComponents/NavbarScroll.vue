@@ -24,6 +24,12 @@ const Logo = computed(() => {
       import.meta.url
     ).href;
   }
+  if (route.path.startsWith("/product/lifins")) {
+    return new URL(
+      "@/assets/Products/images/Logo/Lifins-logo.png",
+      import.meta.url
+    ).href;
+  }
 });
 
 const LogoLink = computed(() => {

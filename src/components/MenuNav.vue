@@ -101,6 +101,7 @@ const isHoveringSolution = ref(false);
             <Navlink
               v-for="(product, index) in productList"
               :key="index"
+              target="_blank"
               :href="product.url"
               class="flex justify-center items-center w-[170px]"
             >

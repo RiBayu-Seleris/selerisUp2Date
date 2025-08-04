@@ -6,38 +6,7 @@ import TechCard from "@/components/reusable/TechCard.vue";
 import SDV_Logo from "@/assets/images/technology/SDV-Logo.svg";
 import Dark_SDV_Logo from "@/assets/images/technology/Dark-SDV-Logo.svg";
 
-const cardContents = [
-  {
-    bgCard: "bg-[#1738B8]",
-    title: "rPPG Signals Extraction",
-    titleColor: "text-[#1738B8]",
-    body: `Derives remote photoplethysmographic (rPPG) signals from facial video data. These signals reflect vital signs such as heart rate and are extracted without physical sensors.`,
-  },
-  {
-    bgCard: "bg-[#1738B8]",
-    title: "Signal Filtering",
-    titleColor: "text-[#1738B8]",
-    body: `Applies advanced signal processing filters to enhance relevant health data while removing interference. This step ensures the extracted rPPG signals are clean and ready for analysis.`,
-  },
-  {
-    bgCard: "bg-[#1738B8]",
-    title: "Noise Reduction",
-    titleColor: "text-[#1738B8]",
-    body: `Removes unwanted disturbances like lighting changes or small head movements from the signal. This enhances the clarity of health indicators by eliminating signal artifacts.`,
-  },
-  {
-    bgCard: "bg-[#1738B8]",
-    title: "AI Feature Extraction",
-    titleColor: "text-[#1738B8]",
-    body: `Uses machine learning algorithms to identify critical patterns in the cleaned signals. The system recognizes features such as heart rate variability and other biometric indicators.`,
-  },
-  {
-    bgCard: "bg-[#1738B8]",
-    title: "Feature Prediction",
-    titleColor: "text-[#1738B8]",
-    body: `Predicts key physiological parameters based on the extracted features, such as estimated pulse, respiration rate, and stress indicators—enabling fast, contactless health insights.`,
-  },
-];
+import { SDV_Content } from "@/Data/SDV_Content";
 </script>
 
 <template>
@@ -87,9 +56,10 @@ const cardContents = [
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-start mt-14 md:mt-20 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar gap-x-10 scroll-pl-8 pl-8 pr-8"
   >
     <TechCard
-      v-for="(cardContent, index) in cardContents"
+      v-for="(cardContent, index) in SDV_Content"
       :key="index"
       :bgCard="cardContent.bgCard"
+      :icon="cardContent.icon"
       :title="cardContent.title"
       :titleColor="cardContent.titleColor"
       :body="cardContent.body"

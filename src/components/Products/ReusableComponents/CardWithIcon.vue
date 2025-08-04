@@ -6,7 +6,7 @@ defineProps({
   title: {
     type: String,
   },
-  subtitle: {
+  description: {
     type: String,
   },
   imageClass: {
@@ -44,7 +44,7 @@ defineProps({
           :class="`flex w-full h-auto text-[#4F90BC] dark:text-[#6F6F6F] ${subtitleClass}`"
         >
           <p class="text-[12px] md:text-[14px] lg:text-[16px]">
-            {{ subtitle }}
+            {{ description }}
           </p>
         </div>
       </div>

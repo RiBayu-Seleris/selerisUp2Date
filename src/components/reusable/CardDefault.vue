@@ -1,6 +1,10 @@
 <!-- Ini adalah card yang memiliki logo di sebelah kiri dan konten di sebelah kanan degan 2 kolom konten -->
 <script setup>
 defineProps({
+  icon: {
+    type: String,
+    required: true,
+  },
   title: {
     type: String,
     required: true,
@@ -18,7 +22,7 @@ defineProps({
   >
     <div class="flex w-[30%] lg:w-[30%] h-auto">
       <img
-        src="@/assets/images/robot-ai.svg"
+        :src="icon"
         alt="BenefitRobot"
         class="w-full h-full object-center object-contain"
       />
@@ -46,7 +50,7 @@ defineProps({
     <div class="flex flex-row">
       <div class="flex w-[70px] h-[70px]">
         <img
-          src="@/assets/images/robot-ai.svg"
+          :src="icon"
           alt="BenefitRobot"
           class="w-full h-full object-center object-contain"
         />

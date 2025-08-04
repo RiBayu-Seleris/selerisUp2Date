@@ -8,7 +8,7 @@ import "swiper/css/pagination";
 const modules = [Navigation, Pagination, Autoplay];
 
 defineProps({
-  medinsTestimonials: {
+  Testimonials: {
     type: Array,
     required: true,
   },
@@ -28,15 +28,12 @@ defineProps({
     >
       <!-- Bagi data menjadi grup 4 per slide -->
       <SwiperSlide
-        v-for="(group, i) in Math.ceil(medinsTestimonials.length / 4)"
+        v-for="(group, i) in Math.ceil(Testimonials.length / 4)"
         :key="i"
       >
         <div class="grid grid-cols-2 gap-x-10 gap-y-8 px-8">
           <TestimonialCard
-            v-for="(testimonial, j) in medinsTestimonials.slice(
-              i * 4,
-              i * 4 + 4
-            )"
+            v-for="(testimonial, j) in Testimonials.slice(i * 4, i * 4 + 4)"
             :key="j"
             :comment="testimonial.comment"
             :authorName="testimonial.authorName"
@@ -61,7 +58,7 @@ defineProps({
       class="w-full h-auto cursor-grab active:cursor-grabbing mt-4 md:mt-8"
     >
       <SwiperSlide
-        v-for="(testimonial, index) in medinsTestimonials"
+        v-for="(testimonial, index) in Testimonials"
         :key="index"
         class="px-8 py-5"
       >

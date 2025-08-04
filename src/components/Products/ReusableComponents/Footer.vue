@@ -31,6 +31,12 @@ const Logo = computed(() => {
       import.meta.url
     ).href;
   }
+  if (route.path.startsWith("/product/lifins")) {
+    return new URL(
+      "@/assets/Products/images/Logo/Lifins-logo.png",
+      import.meta.url
+    ).href;
+  }
 });
 
 const footerTitle = computed(() => {
@@ -39,6 +45,18 @@ const footerTitle = computed(() => {
   }
   if (route.path.startsWith("/product/medins")) {
     return "Seleris Medins";
+  }
+  if (route.path.startsWith("/product/lifins")) {
+    return "Seleris Lifins";
+  }
+});
+
+const connectColor = computed(() => {
+  if (route.path.startsWith("/product/credit-cover")) {
+    return "Seleris Credit Cover";
+  }
+  if (route.path.startsWith("/product/medins")) {
+    return "text-[#42C5AF]";
   }
 });
 </script>
@@ -123,16 +141,16 @@ const footerTitle = computed(() => {
               Products
             </p>
             <div>
-              <router-link
+              <a
                 v-for="(product, index) in productList"
                 :key="index"
-                :to="product.url"
-                class=""
+                :href="product.url"
+                target="_blank"
               >
                 <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
                   {{ product.name }}
                 </p>
-              </router-link>
+              </a>
             </div>
           </div>
         </div>
@@ -150,7 +168,6 @@ const footerTitle = computed(() => {
               v-for="(company, index) in companyList"
               :key="index"
               :to="company.url"
-              class=""
             >
               <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
                 {{ company.name }}
@@ -186,7 +203,9 @@ const footerTitle = computed(() => {
                     href="https://maps.app.goo.gl/8EZcoxw2NPYhc7ed8"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-[#2AB857] sml:text-[12px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 w-full"
+                    :class="[
+                      `${connectColor} sml:text-[12px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 w-full`,
+                    ]"
                   >
                     16 Raffles Quay #35 - 01B Hong Leong Building SINGAPORE
                     (048581)
@@ -202,7 +221,9 @@ const footerTitle = computed(() => {
                     href="https://maps.app.goo.gl/ywhqmCdfhGod9Mps6"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-[#2AB857] sml:text-[12px] lg:text-[14px] xl:text-[16px] lg:pt-1.5"
+                    :class="[
+                      `${connectColor} sml:text-[12px] lg:text-[14px] xl:text-[16px] lg:pt-1.5`,
+                    ]"
                   >
                     Graha SMI, Jl. Raya Ragunan No. 29 A, Jakarta Selatan,
                     Indonesia 12540
@@ -215,7 +236,9 @@ const footerTitle = computed(() => {
                 <p class="text-[#195279] text-[20px] lg:text-[18px]">Phone</p>
                 <a
                   href="tel:+62215265235"
-                  class="text-[#2AB857] text-sm lg:text-base xl:text-[18px] lg:pt-1.5"
+                  :class="[
+                    `${connectColor} text-sm lg:text-base xl:text-[18px] lg:pt-1.5`,
+                  ]"
                 >
                   +62 (21) 526 52 35
                 </a>
@@ -224,7 +247,9 @@ const footerTitle = computed(() => {
                 <p class="text-[#195279] text-[20px] lg:text-[18px]">E-Mail</p>
                 <a
                   href="mailto:info@seleris.id"
-                  class="text-[#2AB857] text-sm lg:text-base xl:text-[18px] lg:pt-1.5"
+                  :class="[
+                    `${connectColor} text-sm lg:text-base xl:text-[18px] lg:pt-1.5`,
+                  ]"
                 >
                   info@seleris.id
                 </a>

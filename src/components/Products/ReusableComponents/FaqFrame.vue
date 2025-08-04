@@ -2,14 +2,17 @@
 import { computed, ref } from "vue";
 
 const props = defineProps({
-  medinsFaq: {
+  Faq: {
     type: Array,
     required: true,
   },
+  opencolortext: {
+    type: String,
+  },
 });
 
-const leftFaqs = computed(() => props.medinsFaq.filter((_, i) => i % 2 === 0));
-const rightFaqs = computed(() => props.medinsFaq.filter((_, i) => i % 2 !== 0));
+const leftFaqs = computed(() => props.Faq.filter((_, i) => i % 2 === 0));
+const rightFaqs = computed(() => props.Faq.filter((_, i) => i % 2 !== 0));
 
 const openedIndex = ref([]);
 const toggle = (key) => {
@@ -32,7 +35,7 @@ function enter(el) {
   el.style.height = el.scrollHeight + "px";
   el.style.opacity = "1";
   el.style.paddingTop = "0";
-  el.style.paddingBottom = "5rem";
+  el.style.paddingBottom = "0";
 }
 function leave(el) {
   el.style.transition = "all 0.4s ease";
@@ -49,7 +52,6 @@ function afterLeave(el) {
   el.style.height = "0";
 }
 </script>
-
 <template>
   <div
     class="w-full h-auto lg:max-w-6xl mx-auto grid md:grid-cols-2 gap-y-5 gap-x-10 px-8 lg:px-0 items-start"
@@ -59,10 +61,10 @@ function afterLeave(el) {
       <div
         v-for="(faq, index) in leftFaqs"
         :key="`left-${index}`"
-        class="w-full h-auto p-[0.7px] rounded-lg dark:bg-gradient-to-tr dark:from-[#565656] dark:to-[#BCBCBC]"
+        class="w-full h-auto p-[0.7px] rounded-lg"
       >
         <div
-          class="w-full rounded-lg shadow-md transition-all bg-[#FFFFFF] dark:bg-[#323232] overflow-visible"
+          class="w-full rounded-lg shadow-md transition-all bg-[#FFFFFF] overflow-visible"
         >
           <button
             class="w-full flex flex-row gap-x-5 items-center px-6 py-4"
@@ -71,17 +73,17 @@ function afterLeave(el) {
             <span class="text-xl">
               <span
                 v-if="openedIndex.includes(`left-${index}`)"
-                class="text-[#2AB857] dark:text-[#52BD95]"
-                >−</span
+                :class="[opencolortext]"
+                >-</span
               >
-              <span v-else class="text-[#195279] dark:text-[#FAFAFA]">+</span>
+              <span v-else class="text-[#195279]">+</span>
             </span>
             <span
               :class="[
-                'font-[500] text-start',
-                openedIndex === `left-${index}`
-                  ? 'text-[#2AB857]'
-                  : 'text-[#195279] dark:text-[#FAFAFA] text-[14px] md:text-[17px]',
+                'font-[500] text-start text-[14px] md:text-[17px]',
+                openedIndex.includes(`left-${index}`)
+                  ? opencolortext
+                  : 'text-[#195279]',
               ]"
             >
               {{ faq.question }}
@@ -122,17 +124,17 @@ function afterLeave(el) {
             <span class="text-xl">
               <span
                 v-if="openedIndex.includes(`right-${index}`)"
-                class="text-[#2AB857] dark:text-[#52BD95]"
-                >−</span
+                class="text-[#2AB857]"
+                >-</span
               >
-              <span v-else class="text-[#195279] dark:text-[#FAFAFA]">+</span>
+              <span v-else class="text-[#195279]">+</span>
             </span>
             <span
               :class="[
-                'font-[500] text-start',
-                openedIndex === `right-${index}`
-                  ? 'text-[#2AB857]'
-                  : 'text-[#195279] dark:text-[#FAFAFA] text-[14px] md:text-[17px]',
+                'font-[500] text-start text-[14px] md:text-[17px]',
+                openedIndex.includes(`right-${index}`)
+                  ? opencolortext
+                  : 'text-[#195279]',
               ]"
             >
               {{ faq.question }}

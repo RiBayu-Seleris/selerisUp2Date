@@ -3,10 +3,16 @@ import WorkPhone from "@productComponents/WorkPhone.vue";
 import WorkLine from "@productComponents/WorkLine.vue";
 
 defineProps({
+  circleColor: {
+    type: String,
+  },
+  textcolor: {
+    type: String,
+  },
   title: {
     type: String,
   },
-  subtitle: {
+  description: {
     type: String,
   },
   steps: {
@@ -25,10 +31,14 @@ defineProps({
       <WorkPhone />
       <!-- Line Frame -->
       <WorkLine
+        :circleColor="circleColor"
+        :textcolor="textcolor"
         :title="step.title"
-        :subtitle="step.subtitle"
+        :description="step.description"
         :isLast="index === steps.length - 1"
-      />
+      >
+        <slot />
+      </WorkLine>
     </template>
     <!-- Phone -->
     <!-- <WorkPhone /> -->

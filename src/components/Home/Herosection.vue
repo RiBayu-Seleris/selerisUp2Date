@@ -15,9 +15,9 @@ import { useSidebarStore } from "@/stores/sidebar";
       class="w-full h-auto lg:bg-hero2 dark:lg:bg-herodark bg-no-repeat bg-cover lg:bg-center dark:lg:bg-center xl:bg-top dark:xl:bg-top lg:pt-16 rounded-3xl"
     >
       <div
-        class="flex flex-col w-full h-auto text-center justify-center items-center z-30 bg-[#F3F4F6] dark:bg-black dark:lg:bg-transparent lg:bg-transparent rounded-3xl animate__animated animate__fadeIn animate__slower"
+        class="flex flex-col w-full h-auto text-center justify-center items-center pt-8 lg:pt-0 z-30 bg-[#F3F4F6] dark:bg-black dark:lg:bg-transparent lg:bg-transparent rounded-3xl animate__animated animate__fadeIn animate__slower"
       >
-        <div class="w-full pb-2 sml:pb-2 sml:pt-4 md:pt-5">
+        <div class="w-full pb-2 sml:pb-2 sml:pt-4 md:pt-0">
           <p
             class="text-[24px] sml:text-[21px] lg:text-[26px] xl:text-[32px] text-[#1AB24F] font-[500]"
           >
@@ -26,7 +26,7 @@ import { useSidebarStore } from "@/stores/sidebar";
         </div>
         <div class="w-full pb-2 sml:pb-2">
           <p
-            class="text-[#195279] sml:text-[21px] sml:tracking-[0.5px] md:text-[32px] lg:text-[36px] xl:text-[48px] font-[500] sml:leading-[27px] md:leading-[37px] lg:leading-[45px] xl:leading-[60px] xl:tracking-[0px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+            class="text-[#195279] sml:text-[21px] sml:tracking-[0.5px] md:text-[32px] lg:text-[36px] xl:text-[60px] font-[500] sml:leading-[27px] md:leading-[37px] lg:leading-[45px] xl:leading-tight xl:-tracking-[1px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
             The Future of Life <br />
             Technology
@@ -34,7 +34,7 @@ import { useSidebarStore } from "@/stores/sidebar";
         </div>
         <!-- Swipe caption -->
         <div
-          class="cursor-pointer flex flex-row items-center mb-4 sml:mb-0 lg:mb-5 mt-6 bg-[#195279] dark:bg-[#2B2E32] dark:border-[1px] dark:border-[#2AB857] px-5 py-2 rounded-full dark:shadow-[0px_4px_18.8px_0px_rgba(0,255,59,0.25)]"
+          class="cursor-pointer flex flex-row items-center mb-4 sml:mb-0 lg:mb-5 mt-6 bg-[#195279] dark:bg-[#2B2E32] border-[1px] dark:border-[1px] dark:border-[#2AB857] px-5 py-2 rounded-full dark:shadow-[0px_4px_18.8px_0px_rgba(0,255,59,0.25)]"
         >
           <router-link to="/book-a-demo">
             <p

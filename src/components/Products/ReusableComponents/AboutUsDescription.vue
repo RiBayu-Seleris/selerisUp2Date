@@ -1,5 +1,8 @@
 <script setup>
 defineProps({
+  image: {
+    type: String,
+  },
   title: {
     type: String,
   },
@@ -14,11 +17,7 @@ defineProps({
     class="w-full h-auto flex flex-col md:flex-row justify-between md:gap-x-10 xl:gap-x-16 md:px-10"
   >
     <figure class="w-full md:max-w-max justify-center h-auto flex">
-      <img
-        src="@/assets/products/images/medins-about.png"
-        alt=""
-        class="h-[270px] md:h-[350px] lg:h-[500px]"
-      />
+      <img :src="image" alt="" class="h-[270px] md:h-[350px] lg:h-[500px]" />
     </figure>
     <div
       class="w-full h-auto flex flex-col pt-8 md:pt-14 lg:pt-20 space-y-4 lg:space-y-8"

@@ -52,7 +52,7 @@ defineProps({
             <img
               :src="robotImage"
               alt="Robot"
-              class="w-full lg:h-[250px] xl:h-[300px] object-contain object-top top-0 animate-bounce"
+              class="w-full lg:h-[250px] xl:h-[300px] object-contain object-top top-0 md:animate__animated md:animate-bounce2"
             />
           </div>
         </div>

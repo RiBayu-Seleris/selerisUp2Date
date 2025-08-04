@@ -101,7 +101,6 @@ import { companyList } from "@/Data/companyList";
                 v-for="(product, index) in productList"
                 :key="index"
                 :to="product.url"
-                class=""
               >
                 <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
                   {{ product.name }}
@@ -124,7 +123,6 @@ import { companyList } from "@/Data/companyList";
               v-for="(company, index) in companyList"
               :key="index"
               :to="company.url"
-              class=""
             >
               <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
                 {{ company.name }}

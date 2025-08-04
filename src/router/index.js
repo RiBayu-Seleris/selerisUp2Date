@@ -135,12 +135,12 @@ const routes = [
         component: () => import("@/views/Products/CC.vue"),
         meta: { title: "Credit Cover" },
       },
-      // {
-      //   path: "medins",
-      //   name: "Medins",
-      //   component: () => import("@/views/Products/Medins.vue"),
-      //   meta: { title: "Medins" },
-      // },
+      {
+        path: "lifins",
+        name: "Lifins",
+        component: () => import("@/views/Products/Lifins.vue"),
+        meta: { title: "Lifins" },
+      },
     ],
   },
 ];

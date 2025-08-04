@@ -1,3 +1,14 @@
+<script setup>
+defineProps({
+  productname: {
+    type: String,
+  },
+  textcolor: {
+    type: String,
+  },
+});
+</script>
+
 <template>
   <div
     class="relative w-full flex flex-col justify-center items-center z-20 md:pl-10"
@@ -12,9 +23,11 @@
       </div>
       <div class="w-full h-auto flex pl-8">
         <p
-          class="text-[#42C5AF] text-[19px] md:text-[23px] lg:text-[27px] font-[500]"
+          :class="[
+            `${textcolor} text-[19px] md:text-[23px] lg:text-[27px] font-[500]`,
+          ]"
         >
-          Seleris Medins
+          {{ productname }}
         </p>
       </div>
     </div>

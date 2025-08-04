@@ -27,13 +27,12 @@ module.exports = {
     },
     extend: {
       backgroundImage: {
-        hero: "url('@/assets/images/hero-banner.png')",
         hero2: "url('@/assets/images/hero-banner2.png')",
         touch: "url('@/assets/images/touch-bg.png')",
         touchDark: "url('@/assets/images/touch-bg-dark.png')",
         medins: "url('@/assets/Products/images/bg-hero-medins.png')",
         cc: "url('@/assets/Products/images/bg-hero-cc.png')",
-        herodark: "url('@/assets/images/herodark.svg')",
+        herodark: "url('@/assets/images/herodark.png')",
         different: "url('@/assets/images/different-background.png')",
         differentDark: "url('@/assets/images/different-dark-background.png')",
         api: "url('@/assets/images/api-background.png')",

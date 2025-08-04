@@ -1,5 +1,5 @@
 <script setup>
-import { medinsHealthCheck } from "@/Data/Products/MedinsHealthCheck";
+import { medinsHealthCheck } from "@/Data/Products/Medins/medinsHealthCheck";
 import { ref } from "vue";
 
 import HeroText from "@productComponents/HeroText.vue";
@@ -23,24 +23,18 @@ import EasyQuickText from "@productComponents/EasyQuickText.vue";
 import InnovationIcon from "@/assets/icons/innovation.svg";
 import ArrowRight from "@/assets/Products/icons/arrow-right.svg";
 
+import imageAbout from "@/assets/products/images/medins-about.png";
+import FrameLineWorks from "@productComponents/Svg/MedinsDescriptionWork.vue";
+import medinsframebook from "@/assets/Products/images/bg-book-demo-medins.png";
+
 // FAQ
-import { medinsFaq } from "@/Data/Products/medinsFaq.js";
+import { medinsFaq } from "@/Data/Products/Medins/medinsFaq.js";
+import { medinsWorkSteps } from "@/Data/Products/Medins/medinsWorkSteps.js";
 
 const work1 = ref(false);
 
-const steps = [
-  {
-    title: "Face Screening",
-    subtitle: "Easy and Quick Health Check with Seleris Medins",
-  },
-  {
-    title: "Face Screening",
-    subtitle: "Easy and Quick Health Check with Seleris Medins",
-  },
-];
-
-import { clientLogos } from "@/data/Products/MedinsClients";
-import { medinsTestimonials } from "@/data/Products/medinsTestimonials";
+import { clientLogos } from "@/Data/Products/Medins/medinsClients";
+import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
 </script>
 
 <template>
@@ -51,8 +45,8 @@ import { medinsTestimonials } from "@/data/Products/medinsTestimonials";
         class="w-full h-[400px] md:h-[600px] lg:h-[650px] bg-medins bg-no-repeat bg-cover bg-center rounded-[20px] z-20"
       >
         <HeroText
-          title="Medical Claims"
-          subtitle="Automation"
+          title="Seleris Medins"
+          subtitle="Application"
           description="Enhance efficiency and accuracy in health insurance operations with AI-driven medical data automation."
         />
       </div>
@@ -89,7 +83,8 @@ import { medinsTestimonials } from "@/data/Products/medinsTestimonials";
         />
         <div class="w-full h-auto mt-10 md:mt-10 lg:mt-20">
           <AboutUsDescription
-            title="AI Health Care Application"
+            :image="imageAbout"
+            title="Smart Medical Platform"
             description="Seleris Medins uses AI to automate medical data processing and health claims. Our solution helps insurers and corporate healthcare providers reduce costs, detect fraud, predict claim values, and ensure regulatory compliance with ease and accuracy."
           />
         </div>
@@ -111,9 +106,18 @@ import { medinsTestimonials } from "@/data/Products/medinsTestimonials";
       <div
         class="relative w-full flex flex-col justify-center items-center z-20"
       >
-        <ApplicationWorkText />
+        <ApplicationWorkText
+          productname="Seleris Medins"
+          textcolor="text-[#42C5AF]"
+        />
         <div class="relative w-full h-auto mt-10 md:mt-12 lg:mt-14">
-          <ApplicationWorkSlider :steps="steps" />
+          <ApplicationWorkSlider
+            circleColor="bg-gradient-to-b from-[#23C4BA] to-[#4ADDD4]"
+            textcolor="text-[#38C1AA]"
+            :steps="medinsWorkSteps"
+          >
+            <FrameLineWorks />
+          </ApplicationWorkSlider>
         </div>
       </div>
     </section>
@@ -130,6 +134,7 @@ import { medinsTestimonials } from "@/data/Products/medinsTestimonials";
           <EasyQuickText
             title="Smarter Medical Claims with"
             subtitle="AI-Powered Automation"
+            subtitlecolor="text-[#42C5AF]"
             subsubtitle="Seleris Meditekno Internasional"
           />
         </div>
@@ -144,7 +149,7 @@ import { medinsTestimonials } from "@/data/Products/medinsTestimonials";
             <CardWithIcon
               :icon="data.icon"
               :title="data.title"
-              :subtitle="data.subtitle"
+              :description="data.description"
               :subtitleClass="data.subtitleClass"
             />
           </div>
@@ -160,7 +165,7 @@ import { medinsTestimonials } from "@/data/Products/medinsTestimonials";
       <div class="w-full h-auto flex flex-col">
         <TitleAndSubCard
           title="Our Client"
-          subtitle="Seleris Medins Meditekno Internasional"
+          subtitle="Seleris Meditekno Internasional"
           subtitleColor="text-[#42C5AF]"
         />
         <ClientCardFrame :client-logos="clientLogos" />
@@ -184,11 +189,11 @@ import { medinsTestimonials } from "@/data/Products/medinsTestimonials";
         <div class="w-full h-auto px-8">
           <TitleAndSubCard
             title="Testimonial"
-            subtitle="Seleris Medins Meditekno Internasional"
+            subtitle="Seleris Meditekno Internasional"
             subtitleColor="text-[#42C5AF]"
           />
         </div>
-        <TestimonialCommentFrame :medinsTestimonials="medinsTestimonials" />
+        <TestimonialCommentFrame :Testimonials="medinsTestimonials" />
       </div>
     </section>
 
@@ -216,13 +221,13 @@ import { medinsTestimonials } from "@/data/Products/medinsTestimonials";
           <div class="w-full h-auto px-8">
             <TitleAndSubCard
               title="FAQ's"
-              subtitle="Seleris Medins Meditekno Internasional"
+              subtitle="Seleris Meditekno Internasional"
               subtitleColor="text-[#42C5AF]"
             />
           </div>
         </div>
         <div class="w-full mx-auto mt-10 md:mt-20">
-          <FaqFrame :medinsFaq="medinsFaq" />
+          <FaqFrame :Faq="medinsFaq" opencolortext="text-[#2AB857]" />
         </div>
       </div>
     </section>
@@ -233,7 +238,12 @@ import { medinsTestimonials } from "@/data/Products/medinsTestimonials";
       id="download"
     >
       <div class="w-full h-auto md:max-w-6xl mx-auto">
-        <DownloadFrame appname="Seleris Medins" />
+        <DownloadFrame
+          appname="Seleris Medins"
+          description="Stay in control of your health data and claims anytime, anywhere. Our
+          AI-powered platform makes medical data processing, claims tracking,
+          and risk analysis easier and faster."
+        />
       </div>
     </section>
 
@@ -242,7 +252,10 @@ import { medinsTestimonials } from "@/data/Products/medinsTestimonials";
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-40 px-8"
       id="bookdemo"
     >
-      <BookDemoProduct />
+      <BookDemoProduct
+        :framebookdemo="medinsframebook"
+        colorarrow="text-[#42C5AF]"
+      />
     </section>
   </div>
 </template>

@@ -6,6 +6,9 @@ defineProps({
   subtitle: {
     type: String,
   },
+  subtitlecolor: {
+    type: String,
+  },
   subsubtitle: {
     type: String,
   },
@@ -23,7 +26,9 @@ defineProps({
   </div>
   <div class="w-full h-auto flex justify-center items-center">
     <p
-      class="text-[#42C5AF] md:text-[15px] lg:text-[21px] font-[400] text-center md:text-start"
+      :class="[
+        `${subtitlecolor} md:text-[15px] lg:text-[21px] font-[400] text-center md:text-start`,
+      ]"
     >
       {{ subsubtitle }}
     </p>

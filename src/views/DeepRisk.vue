@@ -6,32 +6,7 @@ import TechCard from "@/components/reusable/TechCard.vue";
 import SDR_Logo from "@/assets/images/technology/SDR-Logo.svg";
 import Dark_SDR_Logo from "@/assets/images/technology/Dark-SDR-Logo.svg";
 
-const cardContents = [
-  {
-    bgCard: "bg-[#81021E]",
-    title: "Health Risk Scoring",
-    titleColor: "text-[#81021E]",
-    body: `Generates a quantifiable score based on physiological input to assess an individual's current health condition. This score helps users and providers make informed wellness or diagnostic decisions.`,
-  },
-  {
-    bgCard: "bg-[#81021E]",
-    title: "Underwriting Risk Prediction",
-    titleColor: "text-[#81021E]",
-    body: `Predicts insurance underwriting risks by analyzing biometric data. It provides insurers with automated risk profiling to accelerate and improve decision-making accuracy.`,
-  },
-  {
-    bgCard: "bg-[#81021E]",
-    title: "Risk Diseases Prediction",
-    titleColor: "text-[#81021E]",
-    body: `Assesses the likelihood of chronic or critical diseases by combining physiological indicators with AI modeling. It aids early detection and targeted interventions.`,
-  },
-  {
-    bgCard: "bg-[#81021E]",
-    title: "Mortality/Morbidity Risk Prediction",
-    titleColor: "text-[#81021E]",
-    body: `Estimates potential health deterioration or death risk using biometric and behavioral data. This insight supports healthcare, insurance, and wellness decision-making for long-term planning.`,
-  },
-];
+import { SDR_Content } from "@/Data/SDR_Content";
 </script>
 
 <template>
@@ -81,9 +56,10 @@ const cardContents = [
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-start mt-14 md:mt-20 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar gap-x-10 scroll-pl-8 pl-8 pr-8"
   >
     <TechCard
-      v-for="(cardContent, index) in cardContents"
+      v-for="(cardContent, index) in SDR_Content"
       :key="index"
       :bgCard="cardContent.bgCard"
+      :icon="cardContent.icon"
       :title="cardContent.title"
       :titleColor="cardContent.titleColor"
       :body="cardContent.body"

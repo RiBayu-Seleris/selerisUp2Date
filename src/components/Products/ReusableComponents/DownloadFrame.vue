@@ -5,6 +5,9 @@ defineProps({
   appname: {
     type: String,
   },
+  description: {
+    type: String,
+  },
 });
 </script>
 
@@ -13,7 +16,7 @@ defineProps({
     class="w-full h-auto flex flex-col-reverse md:flex-row justify-between gap-x-10"
   >
     <div
-      class="w-full h-auto flex flex-col justify-center items-center px-8 md:pl-20 gap-y-4 md:gap-y-8"
+      class="w-full h-auto flex flex-col justify-center items-center px-8 md:pl-20 gap-y-6 md:gap-y-8 mt-10"
     >
       <div class="w-full h-auto">
         <p
@@ -28,8 +31,7 @@ defineProps({
         <p
           class="text-[#535862] text-[12px] md:text-[14px] lg:text-[19px] font-[400] text-center md:text-left"
         >
-          deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis
-          iste natus error sit voluptatem accusantium doloremque laudantium.
+          {{ description }}
         </p>
       </div>
       <!-- DownloadStore -->

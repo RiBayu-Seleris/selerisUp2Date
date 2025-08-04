@@ -3,26 +3,36 @@ import CardDefault from "@/components/reusable/CardDefault.vue";
 
 const benefitList = [
   {
+    icon: new URL("@/assets/icons/Benefits/accuracy.png", import.meta.url).href,
     title: "Accuracy",
     body: "The results show that Seleris can recognize faces with up to 94% accuracy.",
   },
   {
+    icon: new URL("@/assets/icons/Benefits/speed.png", import.meta.url).href,
     title: "Speed",
     body: "The Seleris app has a lightning-fast speed. it can open and run features quickly.",
   },
   {
+    icon: new URL("@/assets/icons/Benefits/efficiency.png", import.meta.url)
+      .href,
     title: "Efficiency",
     body: "The app uses a simple and intuitive interface, so users can quickly find the features they are looking for.",
   },
   {
+    icon: new URL("@/assets/icons/Benefits/testimonial.png", import.meta.url)
+      .href,
     title: "Testimonial",
     body: "Embrace the power of collaboration with a multitude of partners.",
   },
   {
+    icon: new URL("@/assets/icons/Benefits/experience.png", import.meta.url)
+      .href,
     title: "Customer Experience",
     body: "The best possible Experience that is easy, comfortable, and Safe for Seleris users is our commitment.",
   },
   {
+    icon: new URL("@/assets/icons/Benefits/guarantee.png", import.meta.url)
+      .href,
     title: "Guarantee",
     body: "The security of your data is our priority. Our apps use cutting-edge security technology",
   },
@@ -60,6 +70,7 @@ const benefitList = [
         <CardDefault
           v-for="(benefit, index) in benefitList"
           :key="index"
+          :icon="benefit.icon"
           :title="benefit.title"
           :body="benefit.body"
         />

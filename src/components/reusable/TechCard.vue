@@ -1,6 +1,10 @@
 <!-- Ini adalah card yang memiliki logo di sebelah kiri dan konten di sebelah kanan degan 2 kolom konten -->
 <script setup>
 defineProps({
+  icon: {
+    type: String,
+    required: true,
+  },
   title: {
     type: String,
     required: true,
@@ -29,8 +33,8 @@ defineProps({
         :class="`flex w-[20%] lg:w-[15%] xl:w-[20%] h-auto rounded-full p-2 md:p-3 xl:p-6 ${bgCard}`"
       >
         <img
-          src="@/assets/images/technology/CardIcon.svg"
-          alt="BenefitRobot"
+          :src="icon"
+          alt="Icon"
           class="w-full h-full object-center object-contain"
         />
       </div>
