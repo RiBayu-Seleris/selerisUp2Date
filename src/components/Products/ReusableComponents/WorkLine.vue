@@ -6,6 +6,10 @@ defineProps({
   subtitle: {
     type: String,
   },
+  isLast: {
+    type: Boolean,
+    default: false,
+  },
 });
 </script>
 
@@ -68,7 +72,7 @@ defineProps({
           </div>
         </div>
       </div>
-      <!-- Line -->
+      <!-- LineStart -->
       <div class="w-[90px] md:w-32 lg:w-44 h-auto flex items-center">
         <div class="w-full h-1 bg-black rounded-full" />
       </div>
@@ -76,9 +80,9 @@ defineProps({
       <div class="relative w-auto h-auto rounded-full flex items-center">
         <div class="w-10 h-10 bg-green-500 rounded-full shadow-xl" />
       </div>
-      <!-- Line -->
+      <!-- LineEnd -->
       <div class="w-[90px] md:w-32 lg:w-44 h-auto flex items-center">
-        <div class="w-full h-1 bg-black rounded-full" />
+        <div v-if="!isLast" class="w-full h-1 bg-black rounded-full" />
       </div>
     </div>
   </div>

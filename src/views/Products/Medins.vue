@@ -51,9 +51,9 @@ import { medinsTestimonials } from "@/data/Products/medinsTestimonials";
         class="w-full h-[400px] md:h-[600px] lg:h-[650px] bg-medins bg-no-repeat bg-cover bg-center rounded-[20px] z-20"
       >
         <HeroText
-          title="AI Health Care"
-          subtitle="Application"
-          description="Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ullamcorper mattis lorem non."
+          title="Medical Claims"
+          subtitle="Automation"
+          description="Enhance efficiency and accuracy in health insurance operations with AI-driven medical data automation."
         />
       </div>
       <!-- Image Phone -->
@@ -90,10 +90,7 @@ import { medinsTestimonials } from "@/data/Products/medinsTestimonials";
         <div class="w-full h-auto mt-10 md:mt-10 lg:mt-20">
           <AboutUsDescription
             title="AI Health Care Application"
-            description="deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste
-        natus error sit voluptatem accusantium doloremque laudantium, totam rem
-        aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
-        beatae vitae dicta sunt explicabo."
+            description="Seleris Medins uses AI to automate medical data processing and health claims. Our solution helps insurers and corporate healthcare providers reduce costs, detect fraud, predict claim values, and ensure regulatory compliance with ease and accuracy."
           />
         </div>
       </div>
@@ -127,17 +124,17 @@ import { medinsTestimonials } from "@/data/Products/medinsTestimonials";
       id="easyquick"
     >
       <div
-        class="w-full h-auto flex flex-col px-8 py-14 bg-[#F3F4F6] rounded-[20px]"
+        class="w-full h-auto flex flex-col px-8 pt-14 pb-20 bg-[#F3F4F6] rounded-[20px]"
       >
         <div class="w-full h-auto flex flex-col gap-y-2">
           <EasyQuickText
-            title="Easy and Quick Health Check"
-            subtitle="with Seleris Medins"
-            subsubtitle="Seleris Medins Meditekno Internasional"
+            title="Smarter Medical Claims with"
+            subtitle="AI-Powered Automation"
+            subsubtitle="Seleris Meditekno Internasional"
           />
         </div>
         <div
-          class="w-full h-auto flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-5 gap-y-4 md:gap-y-8 lg:gap-5 mt-10"
+          class="w-full h-auto flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-5 gap-y-4 md:gap-y-8 lg:gap-12 mt-10"
         >
           <div
             v-for="(data, index) in medinsHealthCheck"
@@ -236,7 +233,7 @@ import { medinsTestimonials } from "@/data/Products/medinsTestimonials";
       id="download"
     >
       <div class="w-full h-auto md:max-w-6xl mx-auto">
-        <DownloadFrame />
+        <DownloadFrame appname="Seleris Medins" />
       </div>
     </section>
 

@@ -24,9 +24,13 @@ defineProps({
       <!-- Phone -->
       <WorkPhone />
       <!-- Line Frame -->
-      <WorkLine :title="step.title" :subtitle="step.subtitle" />
+      <WorkLine
+        :title="step.title"
+        :subtitle="step.subtitle"
+        :isLast="index === steps.length - 1"
+      />
     </template>
     <!-- Phone -->
-    <WorkPhone />
+    <!-- <WorkPhone /> -->
   </div>
 </template>

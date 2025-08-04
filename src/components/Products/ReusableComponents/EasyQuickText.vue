@@ -15,7 +15,7 @@ defineProps({
 <template>
   <div class="w-full mx-auto h-auto flex justify-center items-center">
     <p
-      class="text-[#2E504E] font-[500] md:text-[27px] lg:text-[37px] text-center leading-normal lg:leading-snug tracking-wide"
+      class="text-[#2E504E] font-[500] md:text-[27px] lg:text-[37px] text-center leading-normal lg:leading-snug"
     >
       {{ title }}
       <span class="block">{{ subtitle }} </span>
@@ -23,7 +23,7 @@ defineProps({
   </div>
   <div class="w-full h-auto flex justify-center items-center">
     <p
-      class="text-[#42C5AF] md:text-[15px] lg:text-[21px] font-[500] text-center md:text-start"
+      class="text-[#42C5AF] md:text-[15px] lg:text-[21px] font-[400] text-center md:text-start"
     >
       {{ subsubtitle }}
     </p>

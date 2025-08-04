@@ -2,7 +2,7 @@
 import { ref } from "vue";
 import { useScrollStore } from "@/stores/scroll";
 import { useRoute } from "vue-router";
-import Navlink from "@/components/Navlink.vue";
+import Navlink from "@productComponents/Navlink.vue";
 
 const { isScrolled } = useScrollStore();
 const route = useRoute();
@@ -13,7 +13,7 @@ const route = useRoute();
     :class="[
       'flex items-center text-md font-[400]  ',
       isScrolled
-        ? 'lg:gap-[20px] xl:gap-[50px] text-[#374151] font-semibold '
+        ? 'lg:gap-[20px] xl:gap-[50px] text-[#717171] font-[500] '
         : 'lg:gap-[25px] 2lg:gap-[45px] xl:gap-[63px] 2xl:gap-[70px] justify-center text-[#FAFAFA]',
     ]"
   >

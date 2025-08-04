@@ -68,10 +68,7 @@ const steps = [
         <div class="w-full h-auto mt-10 md:mt-10 lg:mt-20">
           <AboutUsDescription
             title="AI Health Care Application"
-            description="deserunt mollit anim id est laborum. Sed ut perspiciatis unde omnis iste
-        natus error sit voluptatem accusantium doloremque laudantium, totam rem
-        aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto
-        beatae vitae dicta sunt explicabo."
+            description="Seleris Medins uses AI to automate medical data processing and health claims. Our solution helps insurers and corporate healthcare providers reduce costs, detect fraud, predict claim values, and ensure regulatory compliance with ease and accuracy."
           />
         </div>
       </div>

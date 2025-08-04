@@ -50,18 +50,20 @@ onUnmounted(() => {
 <template>
   <div class="relative w-full z-40">
     <nav class="fixed top-0 left-0 w-full transition-all duration-300 z-40">
-      <div class="w-full h-auto mt-8">
-        <div class="max-w-[1440px] mx-auto px-8">
+      <div class="w-full h-auto mt-0">
+        <div class="max-w-full mx-auto px-0">
           <div
-            class="w-full flex items-center justify-between bg-[#FDFDFD] dark:bg-black dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-xl dark:bg-opacity-10 rounded-[18px] lg:px-8 py-2 border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30"
+            class="w-full flex items-center justify-between bg-[#FDFDFD] shadow-md lg:px-8 py-2 border-[0.5px] border-[#DEDEDE]"
           >
-            <div class="hidden lg:grid grid-cols-12 w-full h-auto">
+            <div
+              class="hidden max-w-[1200px] mx-auto lg:grid grid-cols-12 w-full h-auto"
+            >
               <router-link :to="LogoLink" class="col-span-1 h-auto">
-                <div class="flex w-full items-center">
+                <div class="flex w-full h-auto items-center">
                   <img
                     :src="Logo"
                     alt="Logo"
-                    class="w-[117px] h-[56px] object-contain dark:hidden"
+                    class="w-full h-[56px] object-contain dark:hidden"
                   />
                 </div>
               </router-link>

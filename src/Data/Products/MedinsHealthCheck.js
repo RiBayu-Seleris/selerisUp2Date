@@ -2,33 +2,34 @@
 export const medinsHealthCheck = [
   {
     icon: new URL("@/assets/icons/innovation.svg", import.meta.url).href,
-    title: "Innovation",
-    subtitle: "Online process is quick, easy, and accessible for everyone.",
-    subtitleClass: "lg:pr-16",
+    title: "Medical Data Automation",
+    subtitle:
+      "Automatically process medical data to reduce manual work and errors.",
   },
   {
     icon: new URL("@/assets/icons/innovation.svg", import.meta.url).href,
-    title: "Innovation",
-    subtitle: "Online process is quick, easy, and accessible for everyone.",
+    title: "Claims Prediction",
+    subtitle: "Accurately estimate health claim costs before approval.",
   },
   {
     icon: new URL("@/assets/icons/innovation.svg", import.meta.url).href,
-    title: "Innovation",
-    subtitle: "Online process is quick, easy, and accessible for everyone.",
+    title: "Fraud Detection",
+    subtitle: "Identify suspicious claims with AI - powered fraud analytics.",
   },
   {
     icon: new URL("@/assets/icons/innovation.svg", import.meta.url).href,
-    title: "Innovation",
-    subtitle: "Online process is quick, easy, and accessible for everyone.",
+    title: "Regulatory Compliance ",
+    subtitle:
+      "Ensure alignment with local and international health regulations.",
   },
   {
     icon: new URL("@/assets/icons/innovation.svg", import.meta.url).href,
-    title: "Innovation",
-    subtitle: "Online process is quick, easy, and accessible for everyone.",
+    title: "Risk Stratification",
+    subtitle: "Classify patient data to predict high-risk cases.",
   },
   {
     icon: new URL("@/assets/icons/innovation.svg", import.meta.url).href,
-    title: "Innovation",
-    subtitle: "Online process is quick, easy, and accessible for everyone.",
+    title: "Scalable Integration",
+    subtitle: "Easily integrate with your existing systems via APIs.",
   },
 ];

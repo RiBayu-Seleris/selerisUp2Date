@@ -13,12 +13,10 @@ defineProps({
 </script>
 
 <template>
-  <div
-    class="w-full h-auto flex flex-col justify-center space-y-4 md:space-y-2"
-  >
+  <div class="w-full h-auto flex flex-col justify-center gap-y-2">
     <div class="w-full h-auto flex justify-center items-center">
       <p
-        class="text-[27px] md:text-[32px] lg:text-[40px] text-[#2E504E] font-[500]"
+        class="text-[#2E504E] font-[500] md:text-[27px] lg:text-[37px] text-center"
       >
         {{ title }}
       </p>
@@ -26,7 +24,7 @@ defineProps({
     <div class="w-full h-auto flex justify-center items-center">
       <p
         :class="[
-          `text-[17px] md:text-[19px] lg:text-[21px] ${subtitleColor} font-[500] text-center`,
+          ` md:text-[15px] lg:text-[21px] font-[400] text-center md:text-start ${subtitleColor}`,
         ]"
       >
         {{ subtitle }}

@@ -1,5 +1,11 @@
 <script setup>
 import DownloadStore from "@productComponents/DownloadStore.vue";
+
+defineProps({
+  appname: {
+    type: String,
+  },
+});
 </script>
 
 <template>
@@ -13,8 +19,9 @@ import DownloadStore from "@productComponents/DownloadStore.vue";
         <p
           class="text-[#2E504E] text-[23px] md:text-[37px] lg:text-[47px] font-[500] leading-tight text-center md:text-left"
         >
-          Download <br class="hidden md:block" />
-          App
+          Download
+          <br class="hidden md:block" />
+          {{ appname }}
         </p>
       </div>
       <div class="w-full h-auto">

@@ -33,7 +33,7 @@ import appstore from "@/assets/images/appstore.png";
         class="absolute flex w-full h-full items-center justify-center inset-0 group-hover:opacity-100 transition duration-300 bg-opacity-60 opacity-0"
       >
         <div
-          class="w-full h-full bg-[#FDFDFD] bg-opacity-60 flex items-center justify-center text-white cursor-pointer"
+          class="w-full h-full bg-[#FDFDFD] bg-opacity-50 flex items-center justify-center text-white cursor-pointer rounded-md"
         >
           <span class="text-[14px] md:text-[17px] lg:text-[20px]"
             >Coming Soon!</span
