@@ -49,7 +49,7 @@ const footerTitle = computed(() => {
       <div class="lg:flex lg:flex-row w-full h-auto lg:mb-14 mb-0">
         <div class="flex w-full h-auto">
           <div class="flex flex-col">
-            <div class="flex flex-row lg:flex-col w-full h-auto">
+            <div class="flex flex-col md:flex-row lg:flex-col w-full h-auto">
               <div
                 class="flex w-full h-full md:w-[60%] lg:w-full lg:justify-start lg:items-start lg:content-start justify-center items-center content-center"
               >
@@ -60,18 +60,18 @@ const footerTitle = computed(() => {
                 />
               </div>
               <div
-                class="flex flex-col w-full h-auto lg:mt-4 justify-center items-center space-y-2"
+                class="flex flex-col w-full h-auto mt-5 md:mt-0 lg:mt-4 justify-between lg:justify-center items-center space-y-2 lg:space-y-2"
               >
-                <div class="w-full h-auto">
+                <div class="w-full h-full flex items-end">
                   <p
-                    class="text-[#195279] dark:text-[#FAFAFA] font-[400] sml:text-base md:text-[1.7rem] lg:text-lg xl:text-[18px]"
+                    class="sml:text-base md:text-[27px] lg:text-[17px] text-[#195279] font-[400]"
                   >
                     {{ footerTitle }}
                   </p>
                 </div>
-                <div class="w-full h-auto">
+                <div class="w-full h-full">
                   <p
-                    class="text-[#195279] font-[400] dark:text-[#FAFAFA] xl:leading-relaxed sml:text-base md:text-[23px] lg:text-lg xl:text-[14px]"
+                    class="sml:text-base md:text-[21px] lg:text-[16px] text-[#195279] font-[400] lg:leading-snug"
                   >
                     Powered by Seleris Meditekno International
                   </p>
@@ -88,9 +88,7 @@ const footerTitle = computed(() => {
             </div>
             <div class="w-full h-auto mt-4">
               <div class="w-full h-auto flex flex-row justify-start gap-x-3">
-                <div
-                  class="w-auto h-[30px] lg:h-[30px] text-[#195279] dark:text-[#FAFAFA]"
-                >
+                <div class="w-auto h-[30px] lg:h-[30px] text-[#195279]">
                   <a
                     href="https://www.instagram.com/selerisindonesia/?igsh=MXJ1Y3c1ZnFtZGdhNA%3D%3D#"
                     target="_blank"
@@ -98,9 +96,7 @@ const footerTitle = computed(() => {
                     <Instagram />
                   </a>
                 </div>
-                <div
-                  class="w-auto h-[30px] lg:h-[30px] text-[#195279] dark:text-[#FAFAFA]"
-                >
+                <div class="w-auto h-[30px] lg:h-[30px] text-[#195279]">
                   <a
                     href="https://www.linkedin.com/company/seleris-meditekno-internasional/"
                     target="_blank"
@@ -108,9 +104,7 @@ const footerTitle = computed(() => {
                     <Linkedin />
                   </a>
                 </div>
-                <div
-                  class="w-auto h-[30px] lg:h-[30px] text-[#195279] dark:text-[#FAFAFA]"
-                >
+                <div class="w-auto h-[30px] lg:h-[30px] text-[#195279]">
                   <Twitter />
                 </div>
               </div>
@@ -124,7 +118,7 @@ const footerTitle = computed(() => {
           <!-- lg:pl-6 xl:pl-12 -->
           <div class="flex flex-col w-full h-auto lg:pl-8 xl:px-8">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[19px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2"
+              class="text-[#195279] text-[19px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2"
             >
               Products
             </p>
@@ -148,7 +142,7 @@ const footerTitle = computed(() => {
         <div class="flex relative w-full h-auto">
           <div class="flex flex-col w-full h-auto lg:pl-8 xl:pl-5">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2"
+              class="text-[#195279] text-[24px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2"
             >
               Company
             </p>
@@ -170,21 +164,21 @@ const footerTitle = computed(() => {
         <div class="w-full h-auto xl:w-[170%]">
           <div class="flex flex-col">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2"
+              class="text-[#195279] text-[24px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2"
             >
               Stay Connects
             </p>
 
             <div class="mb-3">
               <p
-                class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[18px] lg:text-[18px] xl:text-[22px] sml:pb-2"
+                class="text-[#195279] text-[24px] sml:text-[18px] lg:text-[18px] xl:text-[22px] sml:pb-2"
               >
                 Address
               </p>
               <div class="w-full h-auto flex flex-col xl:flex-row">
                 <div class="w-full h-auto sml:pb-2 lg:pr-5">
                   <p
-                    class="text-[#343F52] dark:text-[#FAFAFA] font-[500] sml:text-[14px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 sml:pb-1"
+                    class="text-[#343F52] font-[500] sml:text-[14px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 sml:pb-1"
                   >
                     Seleris Asia Pacific Technology Pte.Ltd
                   </p>
@@ -200,7 +194,7 @@ const footerTitle = computed(() => {
                 </div>
                 <div class="w-full h-auto lg:pr-5">
                   <p
-                    class="text-[#343F52] dark:text-[#FAFAFA] font-[500] sml:text-[14px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 sml:pb-1"
+                    class="text-[#343F52] font-[500] sml:text-[14px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 sml:pb-1"
                   >
                     PT Seleris Meditekno Internasional
                   </p>
@@ -218,11 +212,7 @@ const footerTitle = computed(() => {
             </div>
             <div class="flex flex-col xl:flex-row w-full h-auto">
               <div class="flex flex-col w-full h-auto mb-3 lg:mt-2">
-                <p
-                  class="text-[#195279] dark:text-[#FAFAFA] text-[20px] lg:text-[18px]"
-                >
-                  Phone
-                </p>
+                <p class="text-[#195279] text-[20px] lg:text-[18px]">Phone</p>
                 <a
                   href="tel:+62215265235"
                   class="text-[#2AB857] text-sm lg:text-base xl:text-[18px] lg:pt-1.5"
@@ -231,11 +221,7 @@ const footerTitle = computed(() => {
                 </a>
               </div>
               <div class="flex flex-col w-full h-auto mb-3 lg:mt-2">
-                <p
-                  class="text-[#195279] dark:text-[#FAFAFA] text-[20px] lg:text-[18px]"
-                >
-                  E-Mail
-                </p>
+                <p class="text-[#195279] text-[20px] lg:text-[18px]">E-Mail</p>
                 <a
                   href="mailto:info@seleris.id"
                   class="text-[#2AB857] text-sm lg:text-base xl:text-[18px] lg:pt-1.5"
@@ -252,7 +238,7 @@ const footerTitle = computed(() => {
         <div class="w-full h-auto">
           <div class="flex flex-col lg:pl-10">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2 sml:pb-0"
+              class="text-[#195279] text-[24px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2 sml:pb-0"
             >
               Get The App
             </p>
@@ -298,9 +284,7 @@ const footerTitle = computed(() => {
         </div>
       </div>
       <div class="flex w-full justify-center text-center items-center pb-8">
-        <p
-          class="text-[14px] lg:text-[16px] xl:text-[17px] dark:text-[#FAFAFA]/40 font-[400]"
-        >
+        <p class="text-[14px] lg:text-[16px] xl:text-[17px]/40 font-[400]">
           © 2023 Seleris Asia Pacific Technology. All rights reserved
         </p>
       </div>

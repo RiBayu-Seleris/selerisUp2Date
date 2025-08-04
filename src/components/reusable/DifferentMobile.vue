@@ -39,7 +39,7 @@ defineProps({
           {{ title }}
         </p>
       </div>
-      <div class="w-full h-auto">
+      <div class="w-full h-auto px-8">
         <p
           class="sml:text-[12pt] md:text-[17pt] sml:leading-relaxed md:leading-[32pt] font-normal text-center text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
         >

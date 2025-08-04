@@ -4,11 +4,19 @@ import MenuIcon from "@/components/icons/MenuIcon.vue";
 import ThemeToggle from "@/components/reusable/ThemeToggle.vue";
 
 import { useSidebarStore } from "@/stores/sidebar";
-import { computed } from "vue";
+import { computed, watch } from "vue";
 import { useRoute } from "vue-router"; // ✅ Tambahkan ini
 
 const sidebarStore = useSidebarStore();
 const route = useRoute(); // ✅ Ambil route saat ini
+
+// Tutup saat pindah halaman
+watch(
+  () => route.fullPath,
+  () => {
+    sidebarStore.close();
+  }
+);
 
 const Logo = computed(() => {
   if (route.path.startsWith("/product/credit-cover")) {
@@ -34,7 +42,7 @@ const LogoLink = computed(() => {
 
 <template>
   <div
-    class="relative flex justify-center w-full h-auto items-center max-w-[1440px] mx-auto px-14 pt-6"
+    class="relative flex justify-center w-full h-auto items-center max-w-[1440px] mx-auto px-10 md:px-14 pt-4 md:pt-6"
   >
     <!-- Desktop Navbar -->
     <div class="hidden lg:grid grid-cols-12 w-full h-auto">

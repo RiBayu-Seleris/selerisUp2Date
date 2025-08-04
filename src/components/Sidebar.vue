@@ -19,6 +19,7 @@ watch(
   () => route.fullPath,
   () => {
     sidebar.close();
+    console.log(sidebar.isOpen);
   }
 );
 

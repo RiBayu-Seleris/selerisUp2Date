@@ -70,6 +70,31 @@ const clientLogos = [
     .href,
 ];
 
+const clientLogosDark = [
+  new URL("@/assets/images/clients-and-partners/boa-dark.png", import.meta.url)
+    .href,
+  new URL("@/assets/images/clients-and-partners/grm-dark.png", import.meta.url)
+    .href,
+  new URL(
+    "@/assets/images/clients-and-partners/chubb-dark.png",
+    import.meta.url
+  ).href,
+  new URL("@/assets/images/clients-and-partners/fpg-dark.png", import.meta.url)
+    .href,
+  new URL(
+    "@/assets/images/clients-and-partners/heksa-dark.png",
+    import.meta.url
+  ).href,
+  new URL(
+    "@/assets/images/clients-and-partners/jamkrida-banten-dark.png",
+    import.meta.url
+  ).href,
+  new URL(
+    "@/assets/images/clients-and-partners/nexus-dark.png",
+    import.meta.url
+  ).href,
+];
+
 function chunkArray(array, size) {
   const result = [];
   for (let i = 0; i < array.length; i += size) {
@@ -84,6 +109,9 @@ const clientChunks = computed(() => chunkArray(clientLogos, columnsPerRow));
 
 const partnerChunksDark = computed(() =>
   chunkArray(partnerLogosDark, columnsPerRow)
+);
+const clientChunksDark = computed(() =>
+  chunkArray(clientLogosDark, columnsPerRow)
 );
 
 const startProgress = () => {
@@ -149,7 +177,7 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- Content Grid Light -->
-    <transition name="fade" mode="out-in">
+    <transition name="fade" mode="out-in" class="dark:hidden">
       <div :key="showPartners" class="flex flex-col items-center gap-6 mt-5">
         <template v-if="showPartners">
           <div
@@ -217,6 +245,76 @@ onBeforeUnmount(() => {
         </template>
       </div>
     </transition>
+
+    <!-- Content Grid Dark -->
+    <!-- <transition name="fade" mode="out-in" class="hidden dark:flex">
+      <div :key="showPartners" class="flex flex-col items-center gap-6 mt-5">
+        <template v-if="showPartners">
+          <div
+            v-for="(row, rowIndex) in partnerChunksDark"
+            :key="'row-' + rowIndex"
+            class="grid gap-6"
+            :class="[
+              row.length === 1
+                ? 'grid-cols-1'
+                : row.length === 2
+                ? 'grid-cols-2'
+                : row.length === 3
+                ? 'grid-cols-3'
+                : row.length === 4
+                ? 'grid-cols-4'
+                : 'grid-cols-5',
+              row.length < columnsPerRow ? 'justify-center' : '',
+              rowIndex === 1 ? 'px-24' : '',
+            ]"
+          >
+            <div
+              v-for="(logo, index) in row"
+              :key="`${rowIndex}-${index}`"
+              class="flex items-center justify-center"
+            >
+              <CardTilt
+                :image="logo"
+                @mouseenter="isHovered = true"
+                @mouseleave="isHovered = false"
+              />
+            </div>
+          </div>
+        </template>
+
+        <template v-else>
+          <div
+            v-for="(row, rowIndex) in clientChunksDark"
+            :key="'client-row-' + rowIndex"
+            class="grid gap-6"
+            :class="[
+              row.length === 1
+                ? 'grid-cols-1'
+                : row.length === 2
+                ? 'grid-cols-2'
+                : row.length === 3
+                ? 'grid-cols-3'
+                : row.length === 4
+                ? 'grid-cols-4'
+                : 'grid-cols-5',
+              row.length < columnsPerRow ? 'justify-center' : '',
+            ]"
+          >
+            <div
+              v-for="(logo, index) in row"
+              :key="`${rowIndex}-${index}`"
+              class="flex items-center justify-center"
+            >
+              <CardTilt
+                :image="logo"
+                @mouseenter="isHovered = true"
+                @mouseleave="isHovered = false"
+              />
+            </div>
+          </div>
+        </template>
+      </div>
+    </transition> -->
   </div>
 </template>
 

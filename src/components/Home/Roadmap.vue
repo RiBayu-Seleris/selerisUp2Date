@@ -129,15 +129,17 @@ const timelineData = [
       />
       <Swiper
         :modules="modules"
-        :navigation="true"
+        :navigation="false"
         :slidesPerView="3"
         :spaceBetween="150"
-        :centeredSlides="true"
+        :centeredSlides="false"
         :pagination="{ el: '.custom-pagination', clickable: true }"
-        class="w-full cursor-grab active:cursor-grabbing absolute mb-[100px] xl:mb-[200px]"
+        class="w-full absolute mb-[100px] xl:mb-[200px]"
       >
         <SwiperSlide v-for="(timeline, index) in timelineData" :key="index">
-          <div class="flex flex-col items-center">
+          <div
+            class="flex flex-col items-center cursor-grab active:cursor-grabbing"
+          >
             <!-- Logo -->
             <img
               :src="timeline.logo"
