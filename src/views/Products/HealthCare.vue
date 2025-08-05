@@ -77,7 +77,7 @@ import { clientLogos } from "@/Data/Products/Medins/medinsClients";
           <AboutUsDescription
             :image="imageAbout"
             title="Smart Medical Platform"
-            description=" Seleris Care is an AI-powered platform built for corporate health and wellness. It automates employee health monitoring, delivers real-time preventive care insights, and helps companies optimize wellness programs while reducing medical costs by up to 20%. With mobile-first deployment and population-level analytics, Seleris Care enables organizations to take proactive control over workforce health."
+            description=" Seleris Care is an AI-powered platform built for corporate health and wellness. It automates employee health monitoring, delivers real-time preventive care insights, and helps companies optimize wellness programs while reducing medical costs by up to 20%"
           />
         </div>
       </div>

@@ -26,7 +26,7 @@ export function useProductLogo() {
     }
     if (route.path === "/product/health-care") {
       return new URL(
-        "@/assets/Products/images/Logo/Lifins-logo.png",
+        "@/assets/Products/images/Logo/Care-logo.png",
         import.meta.url
       ).href;
     }

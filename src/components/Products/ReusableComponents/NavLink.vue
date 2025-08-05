@@ -14,9 +14,13 @@ defineProps({
   <a
     :href="href"
     :class="[
-      'relative inline-block text-animate-hover hover:font-semibold',
-      route.path === href
-        ? 'text-[#18AB53] dark:text-[#EEEEEE] font-semibold'
+      'relative inline-block font-medium',
+      route.path === '/product/lifins'
+        ? 'text-[#374151]'
+        : route.path === '/product/health-care'
+        ? 'text-[#374151]'
+        : route.path === href
+        ? 'text-[#374151]'
         : '',
     ]"
   >

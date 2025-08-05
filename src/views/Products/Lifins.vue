@@ -16,7 +16,9 @@ import DownloadFrame from "@productComponents/DownloadFrame.vue";
 import BookDemoProduct from "@productComponents/BookDemoProduct.vue";
 
 import TestimonialCommentFrame from "@productComponents/TestimonialCommentFrame.vue";
-import Circle from "@productComponents/Circle.vue";
+import CircleGradientLeft from "@productComponents/CircleGradientLeft.vue";
+import CircleGradient from "@productComponents/CircleGradient.vue";
+import CircleGradientRight from "@productComponents/CircleGradientRight.vue";
 
 import CardWithIcon from "@productComponents/CardWithIcon.vue";
 import EasyQuickText from "@productComponents/EasyQuickText.vue";
@@ -42,11 +44,12 @@ import { lifinsTestimonials } from "@/Data/Products/Lifins/lifinsTestimonials";
     <!-- Hero -->
     <section class="relative w-full h-full rounded-[20px] z-20 p-4" id="hero">
       <div
-        class="w-full h-[400px] md:h-[600px] lg:h-[650px] rounded-[20px] z-20"
+        class="relative w-full h-[400px] md:h-[600px] lg:h-[650px] rounded-[20px] z-20"
       >
         <HeroText
-          title="Automated Life Insurance Underwriting"
-          subtitle="Application"
+          class="relative"
+          title="Automated Life Insurance"
+          subtitle="Underwriting"
           titlecolor="text-[#195279]"
           subtitlecolor="text-[#2AB857]"
           description="Accelerate life policy approvals with intelligent, accurate, and customizable AI underwriting."
@@ -54,7 +57,24 @@ import { lifinsTestimonials } from "@/Data/Products/Lifins/lifinsTestimonials";
         />
       </div>
       <!-- Image Phone -->
-      <div class="w-full h-auto flex -mt-[120px] md:-mt-[250px]">
+      <div
+        class="relative w-full max-w-[1440px] mx-auto h-auto flex -mt-[120px] md:-mt-[250px]"
+      >
+        <!-- Left Circle -->
+        <CircleGradientLeft
+          heightClass="h-[280px] md:h-[500px] xl:h-[470px]"
+          positionClass="top-[10px] md:-top-[70px] xl:-top-[100px] -left-[90px]"
+        />
+        <!-- Center Circle -->
+        <CircleGradient
+          heightClass="h-[280px] md:h-[500px] xl:h-[700px]"
+          positionClass="top-[10px] md:-top-[70px] xl:-top-[50px] left-1/2 transform -translate-x-1/2"
+        />
+        <!-- Right Circle -->
+        <CircleGradientRight
+          heightClass="h-[280px] md:h-[500px] xl:h-[470px]"
+          positionClass="top-[10px] md:-top-[70px] xl:-top-[100px] -right-[90px]"
+        />
         <PhoneHero />
       </div>
       <!-- DownloadStore -->

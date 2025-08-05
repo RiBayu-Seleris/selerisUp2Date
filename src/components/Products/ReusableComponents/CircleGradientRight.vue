@@ -13,7 +13,7 @@ defineProps({
   <!-- w-auto -->
   <figure :class="[`absolute max-w-full  ${positionClass} ${heightClass} `]">
     <img
-      src="@/assets/Products/images/circle.png"
+      src="@/assets/Products/images/circlegradientright.png"
       alt="Circle"
       class="object-contain w-full h-full"
     />

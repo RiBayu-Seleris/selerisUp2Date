@@ -80,7 +80,7 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
           <AboutUsDescription
             :image="imageAbout"
             title="Smart Medical Platform"
-            description="Seleris Credit Cover is a cutting-edge AI solution designed to streamline credit life insurance and loan protection. Our platform automates credit risk assessments, improves accuracy by up to 25%, and reduces processing time by 80%. With real-time decision-making and automated compliance reporting, financial institutions can confidently scale their credit operations with maximum efficiency."
+            description="Seleris Credit Cover is a cutting-edge AI solution designed to streamline credit life insurance and loan protection. Our platform automates credit risk assessments, improves accuracy by up to 25%, and reduces processing time by 80%"
           />
         </div>
       </div>
