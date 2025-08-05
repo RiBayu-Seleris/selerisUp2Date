@@ -1,6 +1,7 @@
 import { defineConfig } from "vite";
 import vue from "@vitejs/plugin-vue";
 import path from "path"; // <-- tambahkan ini
+import vueDevTools from "vite-plugin-vue-devtools";
 
 // "tailwindcss": "^3.3.5",
 
@@ -8,7 +9,10 @@ export default defineConfig({
   server: {
     allowedHosts: ["b90d10c881bb.ngrok-free.app"],
   },
-  plugins: [vue()],
+  plugins: [
+    vue(),
+    process.env.NODE_ENV === "development" && vueDevTools(),
+  ].filter(Boolean),
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"), // <-- alias '@' ke 'src'

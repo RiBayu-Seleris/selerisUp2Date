@@ -19,6 +19,7 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 
 // Store & route
+const dotLazyLoading = 4;
 const themeStore = useThemeStore();
 const route = useRoute();
 const scrollStore = useScrollStore();
@@ -54,7 +55,7 @@ onMounted(() => {
     isLoad.value = false;
     setTimeout(() => {
       isLoad.value = true;
-    }, 1500);
+    }, 3500);
   }
 
   AOS.init({
@@ -78,7 +79,7 @@ watch(
       isLoad.value = false;
       setTimeout(() => {
         isLoad.value = true;
-      }, 2000);
+      }, 3500);
     }
   }
 );
@@ -104,12 +105,24 @@ const isBookDemoRoute = computed(() => route.path === "/book-a-demo");
   <!-- ⏳ Initial Loading Screen -->
   <div
     v-if="!isLoad"
-    class="fixed inset-0 flex items-center justify-center bg-white dark:bg-[#17181A] z-[9999]"
+    class="fixed inset-0 flex flex-col items-center justify-center bg-white dark:bg-[#17181A] z-[9999]"
   >
     <!-- Spinner -->
-    <div
-      class="animate-spin h-12 w-12 rounded-full border-t-2 border-b-2 border-gray-900 dark:border-white"
-    ></div>
+    <figure>
+      <img
+        src="@/assets/icons/Benefits/accuracy.png"
+        alt="BenefitRobot"
+        class="w-[200px] h-[200px] object-center object-contain animate__animated animate-bounce2 [animation-duration:1200ms]"
+      />
+    </figure>
+    <div class="bouncing-loader mt-6">
+      <div
+        v-for="i in dotLazyLoading"
+        :key="i"
+        class="w-5 h-5 bg-[#2AB857] rounded-full animate-bounce"
+        :style="{ animationDelay: `${(i - 1) * 0.2}s` }"
+      />
+    </div>
   </div>
 
   <!-- ✅ Main App Content -->
@@ -188,5 +201,21 @@ const isBookDemoRoute = computed(() => route.path === "/book-a-demo");
 .fade-slide-leave-from {
   opacity: 1;
   transform: translateY(0);
+}
+
+.bouncing-loader {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+}
+.bouncing-loader > div {
+  animation: bounce 0.6s infinite alternate;
+}
+@keyframes bounce {
+  to {
+    transform: translateY(-16px);
+    opacity: 0.5;
+  }
 }
 </style>
