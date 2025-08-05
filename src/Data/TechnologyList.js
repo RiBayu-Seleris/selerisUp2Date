@@ -6,10 +6,10 @@ export const technologyList = [
   },
   {
     url: "/seleris-deep-vitals",
-    name: "Seleris DeepVitals",
+    name: "Seleris Deep Vitals",
   },
   {
     url: "/seleris-deep-risk",
-    name: "Seleris DeepRisk",
+    name: "Seleris Deep Risk",
   },
 ];

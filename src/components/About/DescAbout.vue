@@ -39,7 +39,7 @@ import DescRobot from "@/assets/images/about-images.png";
           affordable and inclusive protection. Its
           <span class="font-bold"> AI and machine learning </span>
           models are trained on large datasets of facial video and behavioral
-          data, enabling high-accuracy risk assessments even for individuals
+          data, enabling high accuracy risk assessments even for individuals
           with limited medical or historical records.
         </p>
       </div>
@@ -55,7 +55,7 @@ import DescRobot from "@/assets/images/about-images.png";
       flexible API, while users can complete the assessment process entirely
       online within minutes. Seleris helps partners enhance speed, precision,
       and accessibility across a variety of digital screening and
-      evaluation use cases.
+      evaluation use cases.
     </p>
   </div>
 </template>

@@ -10,7 +10,7 @@ const benefitList = [
   {
     icon: new URL("@/assets/icons/Benefits/speed.png", import.meta.url).href,
     title: "Speed",
-    body: "The Seleris app has a lightning-fast speed. it can open and run features quickly.",
+    body: "The Seleris app has a lightning fast speed. it can open and run features quickly.",
   },
   {
     icon: new URL("@/assets/icons/Benefits/efficiency.png", import.meta.url)

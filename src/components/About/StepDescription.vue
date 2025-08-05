@@ -88,7 +88,7 @@ onMounted(() => {
               <br class="hidden md:block xl:hidden" />
               AI-driven,
               <br class="hidden xl:block" />
-              human-focused technology.
+              human focused technology.
             </p>
           </div>
         </div>

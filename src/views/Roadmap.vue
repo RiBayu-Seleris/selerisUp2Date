@@ -21,7 +21,7 @@ const cardDetail = [
 </script>
 <template>
   <section
-    class="flex w-full h-auto sml:pt-[120px] md:pt-[150px] lg:pt-[160px] xl:pt-[160px] sml:px-6 md:px-0"
+    class="flex w-full h-auto sml:pt-[120px] md:pt-[150px] lg:pt-[160px] xl:pt-[160px]"
   >
     <HeroText
       title="Innovation"
@@ -36,7 +36,7 @@ const cardDetail = [
       class="bottom-0 w-full h-full"
     />
   </div>
-  <section class="w-full h-[400px] bottom-0"></section>
+  <section class="w-full h-[400px] bottom-0 bg-red-600"></section>
   <!-- Card Description -->
   <section class="w-full h-auto mt-20">
     <div class="w-full h-auto flex flex-col">
@@ -48,12 +48,12 @@ const cardDetail = [
             class="w-full h-full flex flex-col bg-[#FFFFFF] dark:bg-[#323232] p-8 lg:p-14 rounded-[30px] gap-y-5"
           >
             <p
-              class="text-center text-[#195279] font-[500] text-[27px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+              class="md:text-[27px] text-center text-[#195279] font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
             >
               Seleris Credit Cover
             </p>
             <p
-              class="text-center text-[#195279] dark:text-[#6F6F6F] text-[19px] md:text-[17px] lg:text-[19px] lg:px-8"
+              class="text-center text-[#195279] dark:text-[#6F6F6F] text-[14px] md:text-[17px] lg:text-[19px] lg:px-8"
             >
               Seleris Credit Cover is an AI-powered platform designed to
               streamline your business operations by offering intelligent
@@ -77,15 +77,15 @@ const cardDetail = [
             class="w-full h-auto relative p-0.5 bg-gradient-to-r from-[#2C43B7] via-[#3ED2B2] to-[#50B6EE] rounded-[30px]"
           >
             <div
-              class="w-[500px] h-full flex flex-col bg-[#FFFFFF] dark:bg-[#323232] p-8 rounded-[30px] justify-between"
+              class="w-[300px] md:w-[500px] h-full flex flex-col bg-[#FFFFFF] dark:bg-[#323232] p-5 md:p-8 rounded-[30px] justify-between"
             >
               <p
-                class="text-center px-16 pb-4 text-[#195279] font-[500] text-[21px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                class="text-center md:px-16 pb-4 text-[#195279] font-[500] md:text-[21px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
               >
                 {{ detail.title }}
               </p>
               <p
-                class="text-center text-[#195279] text-[17px] dark:text-[#6F6F6F]"
+                class="text-center text-[#195279] md:text-[17px] dark:text-[#6F6F6F]"
               >
                 {{ detail.description }}
               </p>

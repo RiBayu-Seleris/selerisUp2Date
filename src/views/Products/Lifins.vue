@@ -97,7 +97,7 @@ import { lifinsTestimonials } from "@/Data/Products/Lifins/lifinsTestimonials";
           <AboutUsDescription
             :image="imageAbout"
             title="Smart Medical Platform"
-            description="Seleris Lifins is an intelligent AI platform designed to automate the underwriting process for individual and group life insurance policies. With a 90% faster decision-making engine and configurable business rules, Lifins empowers insurers to streamline risk assessment, minimize human errors, and deliver exceptional customer experience — all through a scalable, API-ready architecture."
+            description="Seleris Lifins is an intelligent AI platform designed to automate the underwriting process for individual and group life insurance policies. With a 90% faster decision-making engine and configurable business rules, Lifins empowers insurers to streamline risk assessment, minimize human errors, and deliver exceptional customer experience all through a scalable, API-ready architecture."
           />
         </div>
       </div>

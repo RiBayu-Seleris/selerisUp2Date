@@ -38,7 +38,7 @@ export const lifinsFaq = [
   {
     question: "Is Seleris Lifins free?",
     answer:
-      "Pricing depends on usage and deployment scale. We offer flexible subscription models—contact us for details.",
+      "Pricing depends on usage and deployment scale. We offer flexible subscription models. Contact us for details.",
   },
   {
     question: "Where can I find the terms and conditions?",

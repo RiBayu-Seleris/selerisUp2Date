@@ -32,6 +32,6 @@ export const SDV_Content = [
     icon: new URL("@/assets/icons/SDV/group-5.png", import.meta.url).href,
     title: "Feature Prediction",
     titleColor: "text-[#1738B8]",
-    body: `Predicts key physiological parameters based on the extracted features, such as estimated pulse, respiration rate, and stress indicators—enabling fast, contactless health insights.`,
+    body: `Predicts key physiological parameters based on the extracted features, such as estimated pulse, respiration rate, and stress indicators enabling fast, contactless health insights.`,
   },
 ];

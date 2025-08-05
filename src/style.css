@@ -45,6 +45,22 @@ html {
   @apply bg-[#1DC457];
 }
 
+.custom-pagination2 .custom-bullet {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  color: white;
+  border-radius: full;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.custom-pagination2 .swiper-pagination-bullet-active {
+  background-color: #1dc457;
+}
+
 .text-animate-hover {
   position: relative;
   display: inline-block;

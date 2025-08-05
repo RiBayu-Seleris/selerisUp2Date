@@ -13,7 +13,7 @@ export const faq = [
   {
     question: "How do I implement Seleris Care?",
     answer:
-      "Implementation is quick—our team supports integration and setup on-site or via mobile apps depending on your needs.",
+      "Implementation is quick, our team supports integration and setup on-site or via mobile apps depending on your needs.",
   },
   {
     question: "Is customer support available?",

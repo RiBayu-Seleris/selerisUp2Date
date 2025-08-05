@@ -14,7 +14,7 @@ export const ccHealthCheck = [
     icon: new URL("@/assets/icons/innovation.svg", import.meta.url).href,
     title: "Automated Compliance Reporting",
     description:
-      "Generate regulatory reports automatically—no manual work required.",
+      "Generate regulatory reports automatically. No manual work required.",
   },
   {
     icon: new URL("@/assets/icons/innovation.svg", import.meta.url).href,

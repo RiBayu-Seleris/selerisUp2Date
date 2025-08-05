@@ -3,7 +3,7 @@ import CertCard from "@/components/reusable/CertCard.vue";
 import MobileCert from "@/components/CertificateMobile.vue";
 import Cert1 from "@/assets/images/certification/logo/Cert1.png";
 import Cert2 from "@/assets/images/certification/logo/dscui.svg";
-import Cert3 from "@/assets/images/certification/logo/Cert1.png";
+import Cert3 from "@/assets/images/certification/logo/Cert2.png";
 
 const certificateData = [
   {
@@ -30,8 +30,8 @@ const certificateData = [
     logo: Cert3,
     titleBefore: "ISO Certification Award",
     titleAfter: "ISO Certification",
-    certNumber: 2403150020501,
-    description: `PT. Seleris Meditekno Internasional has been awarded ISO/IEC 27001:2022 certification with the number 2403150020501, which demonstrates our commitment to healthcare quality and service excellence. This certification signifies that we meet international standards in quality management, and we continuously strive to improve our service quality.`,
+    certNumber: 2403290020101,
+    description: `PT. Seleris Meditekno Internasional has been awarded ISO 9001:2015 certification with the number , this certificate signifies that our Quality Management System meets stringent international standards, ensuring our products and services are consistent and reliable.`,
     divImageBefore: "bg-rightCertBefore dark:bg-rightCertDarkBefore",
     divImageAfter: "bg-rightCertAfter dark:bg-rightCertDarkAfter",
     textPosition: "text-end",
