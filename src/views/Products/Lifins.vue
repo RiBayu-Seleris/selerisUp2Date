@@ -1,5 +1,5 @@
 <script setup>
-import { medinsHealthCheck } from "@/Data/Products/Medins/medinsHealthCheck";
+import { lifinsHealthCheck } from "@/Data/Products/Lifins/lifinsHealthCheck";
 import { ref } from "vue";
 
 import HeroText from "@productComponents/HeroText.vue";
@@ -23,18 +23,18 @@ import EasyQuickText from "@productComponents/EasyQuickText.vue";
 import InnovationIcon from "@/assets/icons/innovation.svg";
 import ArrowRight from "@/assets/Products/icons/arrow-right.svg";
 
-import imageAbout from "@/assets/products/images/medins-about.png";
-import FrameLineWorks from "@productComponents/Svg/MedinsDescriptionWork.vue";
-import medinsframebook from "@/assets/Products/images/bg-book-demo-medins.png";
+import imageAbout from "@/assets/products/images/lifins-about.png";
+import FrameLineWorks from "@productComponents/Svg/LifinsDescriptionWork.vue";
+import lifinsframebook from "@/assets/Products/images/bg-book-demo-lifins.png";
 
 // FAQ
-import { medinsFaq } from "@/Data/Products/Medins/medinsFaq.js";
-import { medinsWorkSteps } from "@/Data/Products/Medins/medinsWorkSteps.js";
+import { lifinsFaq } from "@/Data/Products/Lifins/lifinsFaq.js";
+import { lifinsWorkSteps } from "@/Data/Products/Lifins/lifinsWorkSteps.js";
 
 const work1 = ref(false);
 
 import { clientLogos } from "@/Data/Products/Medins/medinsClients";
-import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
+import { lifinsTestimonials } from "@/Data/Products/Lifins/lifinsTestimonials";
 </script>
 
 <template>
@@ -45,11 +45,12 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
         class="w-full h-[400px] md:h-[600px] lg:h-[650px] rounded-[20px] z-20"
       >
         <HeroText
-          title="Seleris Medins"
+          title="Automated Life Insurance Underwriting"
           subtitle="Application"
-          titlecolor="text-red-800"
-          subtitlecolor="text-red-800"
-          description="Enhance efficiency and accuracy in health insurance operations with AI-driven medical data automation."
+          titlecolor="text-[#195279]"
+          subtitlecolor="text-[#2AB857]"
+          description="Accelerate life policy approvals with intelligent, accurate, and customizable AI underwriting."
+          descriptioncolor="text-[#6F6F6F]"
         />
       </div>
       <!-- Image Phone -->
@@ -64,30 +65,19 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
 
     <!-- About Us -->
     <section class="relative w-full h-auto max-w-[1440px] mx-auto" id="about">
-      <!-- Circle First -->
-      <Circle
-        heightClass="h-[200px] md:h-[400px] xl:h-[600px]"
-        positionClass="-top-[200px] md:-top-[270px] lg:-top-[400px] -right-[60px] lg:right-[70px]"
-      />
-
-      <!-- Circle Second -->
-      <Circle
-        positionClass="top-[20px] md:top-[0px] lg:-top-[30px] -left-[150px] md:-left-[100px]"
-        heightClass="h-[300px] md:h-[400px] xl:h-[500px]"
-      />
       <div
         class="relative w-full flex flex-col justify-center items-center z-20 mt-16 md:mt-20 lg:mt-40 px-8"
       >
         <AboutUs
           title="About Us"
-          subtitle="Seleris Medins"
-          subtitleColor="text-[#42C5AF]"
+          subtitle="Seleris Lifins"
+          subtitleColor="text-[#2AB857]"
         />
         <div class="w-full h-auto mt-10 md:mt-10 lg:mt-20">
           <AboutUsDescription
             :image="imageAbout"
             title="Smart Medical Platform"
-            description="Seleris Medins uses AI to automate medical data processing and health claims. Our solution helps insurers and corporate healthcare providers reduce costs, detect fraud, predict claim values, and ensure regulatory compliance with ease and accuracy."
+            description="Seleris Lifins is an intelligent AI platform designed to automate the underwriting process for individual and group life insurance policies. With a 90% faster decision-making engine and configurable business rules, Lifins empowers insurers to streamline risk assessment, minimize human errors, and deliver exceptional customer experience — all through a scalable, API-ready architecture."
           />
         </div>
       </div>
@@ -98,25 +88,19 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-14 lg:mt-20"
       id="work"
     >
-      <!-- Circle Third -->
-      <Circle
-        positionClass="-top-[200px] lg:-top-[170px] -right-0 lg:-right-[70px]"
-        heightClass="md:h-[400px] xl:h-[550px]"
-        class="sml:hidden md:block"
-      />
       <!-- Application Work Slider -->
       <div
         class="relative w-full flex flex-col justify-center items-center z-20"
       >
         <ApplicationWorkText
-          productname="Seleris Medins"
-          textcolor="text-[#42C5AF]"
+          productname="Seleris Lifins"
+          textcolor="text-[#2AB857]"
         />
         <div class="relative w-full h-auto mt-10 md:mt-12 lg:mt-14">
           <ApplicationWorkSlider
-            circleColor="bg-gradient-to-b from-[#23C4BA] to-[#4ADDD4]"
-            textcolor="text-[#38C1AA]"
-            :steps="medinsWorkSteps"
+            circleColor="bg-gradient-to-b from-[#2B7C3F] to-[#30C254]"
+            textcolor="text-[#2AB857]"
+            :steps="lifinsWorkSteps"
           >
             <FrameLineWorks />
           </ApplicationWorkSlider>
@@ -136,15 +120,15 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
           <EasyQuickText
             title="Smarter Medical Claims with"
             subtitle="AI-Powered Automation"
-            subtitlecolor="text-[#42C5AF]"
+            subtitlecolor="text-[#2AB857]"
             subsubtitle="Seleris Meditekno Internasional"
           />
         </div>
         <div
-          class="w-full h-auto flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-5 gap-y-4 md:gap-y-8 lg:gap-12 mt-10"
+          class="w-full h-auto flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-5 gap-y-4 md:gap-y-8 lg:gap-12 mt-16"
         >
           <div
-            v-for="(data, index) in medinsHealthCheck"
+            v-for="(data, index) in lifinsHealthCheck"
             :key="index"
             class="w-full h-auto"
           >
@@ -168,7 +152,7 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
         <TitleAndSubCard
           title="Our Client"
           subtitle="Seleris Meditekno Internasional"
-          subtitleColor="text-[#42C5AF]"
+          subtitleColor="text-[#2AB857]"
         />
         <ClientCardFrame :client-logos="clientLogos" />
       </div>
@@ -179,12 +163,6 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 md:mt-28 lg:mt-40"
       id="Testimonial"
     >
-      <!-- Circle Fourth -->
-      <Circle
-        heightClass="h-[280px] md:h-[500px] xl:h-[500px]"
-        positionClass="top-[10px] md:-top-[70px] xl:-top-[60px] left-[45px] md:left-1/2 md:-translate-x-1/2"
-      />
-
       <div
         class="relative w-full flex flex-col justify-center items-center z-20 pt-20"
       >
@@ -192,10 +170,10 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
           <TitleAndSubCard
             title="Testimonial"
             subtitle="Seleris Meditekno Internasional"
-            subtitleColor="text-[#42C5AF]"
+            subtitleColor="text-[#2AB857]"
           />
         </div>
-        <TestimonialCommentFrame :Testimonials="medinsTestimonials" />
+        <TestimonialCommentFrame :Testimonials="lifinsTestimonials" />
       </div>
     </section>
 
@@ -204,18 +182,6 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-20"
       id="faq"
     >
-      <!-- Circle Fifth -->
-      <Circle
-        heightClass="h-[200px] md:h-[500px] xl:h-[550px]"
-        positionClass="-top-[20px] md:-top-[180px] xl:-top-[200px] md:-right-40 lg:right-10"
-      />
-
-      <!-- Circle Sixth -->
-      <Circle
-        heightClass="h-[200px] md:h-[500px] xl:h-[400px]"
-        positionClass="-top-[20px] md:top-[200px] xl:top-[200px] -left-[200px] lg:-left-[80px]"
-      />
-
       <div class="relative w-full z-30">
         <div
           class="relative w-full flex flex-col justify-center items-center z-20 pt-20"
@@ -224,12 +190,12 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
             <TitleAndSubCard
               title="FAQ's"
               subtitle="Seleris Meditekno Internasional"
-              subtitleColor="text-[#42C5AF]"
+              subtitleColor="text-[#2AB857]"
             />
           </div>
         </div>
         <div class="w-full mx-auto mt-10 md:mt-20">
-          <FaqFrame :Faq="medinsFaq" opencolortext="text-[#2AB857]" />
+          <FaqFrame :Faq="lifinsFaq" opencolortext="text-[#2AB857]" />
         </div>
       </div>
     </section>
@@ -241,7 +207,7 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
     >
       <div class="w-full h-auto md:max-w-6xl mx-auto">
         <DownloadFrame
-          appname="Seleris Medins"
+          appname="Seleris Lifins"
           description="Stay in control of your health data and claims anytime, anywhere. Our
           AI-powered platform makes medical data processing, claims tracking,
           and risk analysis easier and faster."
@@ -255,8 +221,9 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
       id="bookdemo"
     >
       <BookDemoProduct
-        :framebookdemo="medinsframebook"
-        colorarrow="text-[#42C5AF]"
+        title="Seleris Medins A Complete Solution for Your Health Needs"
+        :framebookdemo="lifinsframebook"
+        colorarrow="text-[#2AB857]"
       />
     </section>
   </div>

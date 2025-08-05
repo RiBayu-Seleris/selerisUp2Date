@@ -17,6 +17,10 @@ defineProps({
   description: {
     type: String,
   },
+  descriptioncolor: {
+    type: String,
+    default: "text-[#FAFAFA]",
+  },
 });
 </script>
 
@@ -25,7 +29,7 @@ defineProps({
     class="w-full h-auto pt-[90px] md:pt-[100px] lg:pt-[120px] space-y-5 md:space-y-6"
   >
     <div
-      class="md:w-[500px] h-auto flex flex-col mx-auto justify-center px-10 md:px-0"
+      class="w-full h-auto flex flex-col mx-auto justify-center px-10 md:px-0"
     >
       <p
         :class="[
@@ -33,12 +37,16 @@ defineProps({
         ]"
       >
         {{ title }}
-        <span :class="[`font-[600] ${subtitlecolor}`]">{{ subtitle }}</span>
+        <span :class="[`font-[600] block ${subtitlecolor}`]">{{
+          subtitle
+        }}</span>
       </p>
     </div>
     <div class="md:w-[700px] px-10 h-auto flex flex-col mx-auto justify-center">
       <p
-        class="text-[14px] md:text-[20px] lg:text-[20px] text-center text-[#FAFAFA] font-[400]"
+        :class="[
+          `${descriptioncolor} text-[14px] md:text-[20px] lg:text-[20px] text-center font-[400]`,
+        ]"
       >
         {{ description }}
       </p>

@@ -141,6 +141,12 @@ const routes = [
         component: () => import("@/views/Products/Lifins.vue"),
         meta: { title: "Lifins" },
       },
+      {
+        path: "health-care",
+        name: "HealthCare",
+        component: () => import("@/views/Products/HealthCare.vue"),
+        meta: { title: "Health Care" },
+      },
     ],
   },
 ];

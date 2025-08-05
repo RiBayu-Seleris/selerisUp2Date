@@ -1,6 +1,6 @@
 <template>
   <div
-    class="w-full h-auto flex flex-row gap-x-1 md:gap-x-4 justify-center items-center"
+    class="w-full h-auto flex flex-row gap-x-1 md:gap-x-4 lg:gap-x-10 justify-center items-center"
   >
     <figure class="w-auto max-w-max h-auto flex">
       <img

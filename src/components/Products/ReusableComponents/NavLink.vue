@@ -14,7 +14,7 @@ defineProps({
   <a
     :href="href"
     :class="[
-      'relative inline-block text-animate-hover dark:dark-text-animate-hover hover:font-semibold',
+      'relative inline-block text-animate-hover hover:font-semibold',
       route.path === href
         ? 'text-[#18AB53] dark:text-[#EEEEEE] font-semibold'
         : '',

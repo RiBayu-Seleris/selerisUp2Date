@@ -17,14 +17,14 @@ defineProps({
 
 <template>
   <div class="w-full h-auto hidden lg:flex lg:flex-col">
+    <!-- loop -->
     <Swiper
       :modules="modules"
       :navigation="false"
       :pagination="{ el: '.custom-pagination', clickable: true }"
       :autoplay="{ delay: 3000, disableOnInteraction: false }"
-      loop
       :slides-per-view="1"
-      class="w-full h-auto mt-8 cursor-grab active:cursor-grabbing"
+      class="w-full h-auto mt-8"
     >
       <!-- Bagi data menjadi grup 4 per slide -->
       <SwiperSlide
@@ -38,6 +38,7 @@ defineProps({
             :comment="testimonial.comment"
             :authorName="testimonial.authorName"
             :authorPosition="testimonial.authorPosition"
+            class="cursor-grab active:cursor-grabbing"
           />
         </div>
       </SwiperSlide>

@@ -12,51 +12,39 @@ import appstore from "@/assets/images/appstore.png";
 
 import { productList } from "@/Data/productList";
 import { companyList } from "@/Data/companyList";
+import { useProductLogoColor } from "@/Data/Products/useProductLogoColor.js";
 
 import { computed } from "vue";
 import { useRoute } from "vue-router"; // ✅ Tambahkan ini
 
 const route = useRoute(); // ✅ Ambil route saat ini
 
-const Logo = computed(() => {
-  if (route.path.startsWith("/product/credit-cover")) {
-    return new URL(
-      "@/assets/Products/images/Logo/CC-logo-color.png",
-      import.meta.url
-    ).href;
-  }
-  if (route.path.startsWith("/product/medins")) {
-    return new URL(
-      "@/assets/Products/images/Logo/medins-logo-color.png",
-      import.meta.url
-    ).href;
-  }
-  if (route.path.startsWith("/product/lifins")) {
-    return new URL(
-      "@/assets/Products/images/Logo/Lifins-logo.png",
-      import.meta.url
-    ).href;
-  }
-});
+const { logo } = useProductLogoColor();
 
 const footerTitle = computed(() => {
-  if (route.path.startsWith("/product/credit-cover")) {
+  if (route.path === "/product/credit-cover") {
     return "Seleris Credit Cover";
   }
-  if (route.path.startsWith("/product/medins")) {
+  if (route.path === "/product/medins") {
     return "Seleris Medins";
   }
-  if (route.path.startsWith("/product/lifins")) {
+  if (route.path === "/product/lifins") {
     return "Seleris Lifins";
   }
 });
 
 const connectColor = computed(() => {
-  if (route.path.startsWith("/product/credit-cover")) {
-    return "Seleris Credit Cover";
+  if (route.path === "/product/credit-cover") {
+    return "text-[#E84C7F]";
   }
-  if (route.path.startsWith("/product/medins")) {
+  if (route.path === "/product/medins") {
     return "text-[#42C5AF]";
+  }
+  if (route.path === "/product/lifins") {
+    return "text-[#2AB857]";
+  }
+  if (route.path === "/product/health-care") {
+    return "text-[#2AB857]";
   }
 });
 </script>
@@ -72,7 +60,8 @@ const connectColor = computed(() => {
                 class="flex w-full h-full md:w-[60%] lg:w-full lg:justify-start lg:items-start lg:content-start justify-center items-center content-center"
               >
                 <img
-                  :src="Logo"
+                  v-if="logo"
+                  :src="logo"
                   alt="Logo"
                   class="w-full sml:h-[60px] md:h-[80px] xl:h-[40px] object-contain object-left"
                 />

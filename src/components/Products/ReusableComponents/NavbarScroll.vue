@@ -5,40 +5,22 @@ import { ref, onMounted, onUnmounted, computed } from "vue";
 import { useScrollStore } from "@/stores/scroll";
 import { useSidebarStore } from "@/stores/sidebar";
 import { useRoute } from "vue-router"; // ✅ Tambahkan ini
+import { useProductLogoColor } from "@/Data/Products/useProductLogoColor.js";
 
 const scrollStore = useScrollStore();
 const sidebarStore = useSidebarStore();
-
 const route = useRoute(); // ✅ Ambil route saat ini
 
-const Logo = computed(() => {
-  if (route.path.startsWith("/product/credit-cover")) {
-    return new URL(
-      "@/assets/Products/images/Logo/CC-logo-color.png",
-      import.meta.url
-    ).href;
-  }
-  if (route.path.startsWith("/product/medins")) {
-    return new URL(
-      "@/assets/Products/images/Logo/medins-logo-color.png",
-      import.meta.url
-    ).href;
-  }
-  if (route.path.startsWith("/product/lifins")) {
-    return new URL(
-      "@/assets/Products/images/Logo/Lifins-logo.png",
-      import.meta.url
-    ).href;
-  }
-});
+const { logo } = useProductLogoColor();
 
 const LogoLink = computed(() => {
-  if (route.path.startsWith("/product/credit-cover")) {
+  if (route.path === "/product/credit-cover") {
     return "/product/credit-cover";
   }
-  if (route.path.startsWith("/product/medins")) {
+  if (route.path === "/product/medins") {
     return "/product/medins";
   }
+  return "";
 });
 
 const handleScroll = () => {
@@ -67,7 +49,8 @@ onUnmounted(() => {
               <router-link :to="LogoLink" class="col-span-1 h-auto">
                 <div class="flex w-full h-auto items-center">
                   <img
-                    :src="Logo"
+                    v-if="logo"
+                    :src="logo"
                     alt="Logo"
                     class="w-full h-[56px] object-contain dark:hidden"
                   />
@@ -91,7 +74,8 @@ onUnmounted(() => {
               <router-link to="/" class="w-[40%] h-auto flex">
                 <!-- Logo terang (light mode) -->
                 <img
-                  :src="Logo"
+                  v-if="logo"
+                  :src="logo"
                   alt="Logo"
                   class="w-[117px] h-[56px] sml:w-[80px] sml:h-[56px] object-contain dark:hidden"
                 />

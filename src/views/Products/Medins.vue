@@ -139,7 +139,7 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
           />
         </div>
         <div
-          class="w-full h-auto flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-5 gap-y-4 md:gap-y-8 lg:gap-12 mt-10"
+          class="w-full h-auto flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-5 gap-y-4 md:gap-y-8 lg:gap-12 mt-16"
         >
           <div
             v-for="(data, index) in medinsHealthCheck"
@@ -253,6 +253,7 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
       id="bookdemo"
     >
       <BookDemoProduct
+        title="Seleris Medins A Complete Solution for Your Health Needs"
         :framebookdemo="medinsframebook"
         colorarrow="text-[#42C5AF]"
       />

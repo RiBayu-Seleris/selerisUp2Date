@@ -1,5 +1,4 @@
 <script setup>
-import { ccHealthCheck } from "@/Data/Products/CreditCover/ccHealthCheck";
 import { ref } from "vue";
 
 import HeroText from "@productComponents/HeroText.vue";
@@ -23,18 +22,19 @@ import EasyQuickText from "@productComponents/EasyQuickText.vue";
 import InnovationIcon from "@/assets/icons/innovation.svg";
 import ArrowRight from "@/assets/Products/icons/arrow-right.svg";
 
-import imageAbout from "@/assets/products/images/cc-about.png";
-import FrameLineWorks from "@productComponents/Svg/CCDescriptionWork.vue";
-import ccframebook from "@/assets/Products/images/bg-book-demo-cc.png";
+import imageAbout from "@/assets/products/images/health-care-about.png";
+import FrameLineWorks from "@productComponents/Svg/HealthCareDescriptionWork.vue";
+import medinsframebook from "@/assets/Products/images/bg-book-demo-medins.png";
 
-// FAQ
-import { ccFaq } from "@/Data/Products/CreditCover/CCFaq.js";
-import { ccWorkSteps } from "@/Data/Products/CreditCover/CCWorkSteps.js";
+// HealthCare Data
+import { healthCheck } from "@/Data/Products/HealthCare/healthCheck";
+import { faq } from "@/Data/Products/HealthCare/faq.js";
+import { workSteps } from "@/Data/Products/HealthCare/workSteps.js";
+import { testimonials } from "@/Data/Products/HealthCare/testimonials";
 
 const work1 = ref(false);
 
 import { clientLogos } from "@/Data/Products/Medins/medinsClients";
-import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
 </script>
 
 <template>
@@ -42,13 +42,15 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
     <!-- Hero -->
     <section class="relative w-full h-full rounded-[20px] z-20 p-4" id="hero">
       <div
-        class="w-full h-[400px] md:h-[600px] lg:h-[650px] bg-cc bg-no-repeat bg-cover bg-bottom rounded-[20px] z-20"
+        class="w-full h-[400px] md:h-[600px] lg:h-[650px] rounded-[20px] z-20"
       >
-        <!-- subtitle="Application" -->
         <HeroText
-          title="AI-Powered Credit"
-          subtitle="Risk & Protection"
-          description="Simplify credit life insurance and loan protection processes with real-time risk analysis and compliance automation."
+          title="Smarter Corporate Health Monitoring"
+          subtitle="Application"
+          titlecolor="text-[#195279]"
+          subtitlecolor="text-[#13B89C]"
+          description=" Empower your organization with AI-driven employee wellness, preventive insights, and health cost control."
+          descriptioncolor="text-[#6F6F6F]"
         />
       </div>
       <!-- Image Phone -->
@@ -63,24 +65,19 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
 
     <!-- About Us -->
     <section class="relative w-full h-auto max-w-[1440px] mx-auto" id="about">
-      <!-- Circle First -->
-      <Circle
-        heightClass="h-[200px] md:h-[400px] xl:h-[600px]"
-        positionClass="-top-[200px] md:-top-[270px] lg:-top-[730px] left-1/2 -translate-x-1/2"
-      />
       <div
         class="relative w-full flex flex-col justify-center items-center z-20 mt-16 md:mt-20 lg:mt-40 px-8"
       >
         <AboutUs
           title="About Us"
-          subtitle="Seleris Credit Cover"
-          subtitleColor="text-[#E84C7F]"
+          subtitle="Seleris Care"
+          subtitleColor="text-[#42C5AF]"
         />
         <div class="w-full h-auto mt-10 md:mt-10 lg:mt-20">
           <AboutUsDescription
             :image="imageAbout"
             title="Smart Medical Platform"
-            description="Seleris Credit Cover is a cutting-edge AI solution designed to streamline credit life insurance and loan protection. Our platform automates credit risk assessments, improves accuracy by up to 25%, and reduces processing time by 80%. With real-time decision-making and automated compliance reporting, financial institutions can confidently scale their credit operations with maximum efficiency."
+            description=" Seleris Care is an AI-powered platform built for corporate health and wellness. It automates employee health monitoring, delivers real-time preventive care insights, and helps companies optimize wellness programs while reducing medical costs by up to 20%. With mobile-first deployment and population-level analytics, Seleris Care enables organizations to take proactive control over workforce health."
           />
         </div>
       </div>
@@ -96,14 +93,14 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
         class="relative w-full flex flex-col justify-center items-center z-20"
       >
         <ApplicationWorkText
-          productname="Seleris Credit Cover"
-          textcolor="text-[#E84C7F]"
+          productname="Seleris Care"
+          textcolor="text-[#42C5AF]"
         />
         <div class="relative w-full h-auto mt-10 md:mt-12 lg:mt-14">
           <ApplicationWorkSlider
-            circleColor="bg-gradient-to-b from-[#E84C7F] to-[#EF83A6]"
-            textcolor="text-[#E84C7F]"
-            :steps="ccWorkSteps"
+            circleColor="bg-gradient-to-b from-[#23C4BA] to-[#4ADDD4]"
+            textcolor="text-[#38C1AA]"
+            :steps="workSteps"
           >
             <FrameLineWorks />
           </ApplicationWorkSlider>
@@ -123,7 +120,7 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
           <EasyQuickText
             title="Smarter Medical Claims with"
             subtitle="AI-Powered Automation"
-            subtitlecolor="text-[#E84C7F]"
+            subtitlecolor="text-[#42C5AF]"
             subsubtitle="Seleris Meditekno Internasional"
           />
         </div>
@@ -131,7 +128,7 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
           class="w-full h-auto flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-5 gap-y-4 md:gap-y-8 lg:gap-12 mt-16"
         >
           <div
-            v-for="(data, index) in ccHealthCheck"
+            v-for="(data, index) in healthCheck"
             :key="index"
             class="w-full h-auto"
           >
@@ -155,7 +152,7 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
         <TitleAndSubCard
           title="Our Client"
           subtitle="Seleris Meditekno Internasional"
-          subtitleColor="text-[#E84C7F]"
+          subtitleColor="text-[#42C5AF]"
         />
         <ClientCardFrame :client-logos="clientLogos" />
       </div>
@@ -166,12 +163,6 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 md:mt-28 lg:mt-40"
       id="Testimonial"
     >
-      <!-- Circle Fourth -->
-      <Circle
-        heightClass="h-[280px] md:h-[500px] xl:h-[500px]"
-        positionClass="top-[10px] md:-top-[70px] xl:-top-[60px] left-[45px] md:left-1/2 md:-translate-x-1/2"
-      />
-
       <div
         class="relative w-full flex flex-col justify-center items-center z-20 pt-20"
       >
@@ -179,10 +170,10 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
           <TitleAndSubCard
             title="Testimonial"
             subtitle="Seleris Meditekno Internasional"
-            subtitleColor="text-[#E84C7F]"
+            subtitleColor="text-[#42C5AF]"
           />
         </div>
-        <TestimonialCommentFrame :Testimonials="ccTestimonials" />
+        <TestimonialCommentFrame :Testimonials="testimonials" />
       </div>
     </section>
 
@@ -191,18 +182,6 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-20"
       id="faq"
     >
-      <!-- Circle Fifth -->
-      <Circle
-        heightClass="h-[200px] md:h-[500px] xl:h-[550px]"
-        positionClass="-top-[20px] md:-top-[180px] xl:-top-[200px] md:-right-40 lg:right-10"
-      />
-
-      <!-- Circle Sixth -->
-      <Circle
-        heightClass="h-[200px] md:h-[500px] xl:h-[400px]"
-        positionClass="-top-[20px] md:top-[200px] xl:top-[200px] -left-[200px] lg:-left-[80px]"
-      />
-
       <div class="relative w-full z-30">
         <div
           class="relative w-full flex flex-col justify-center items-center z-20 pt-20"
@@ -211,12 +190,12 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
             <TitleAndSubCard
               title="FAQ's"
               subtitle="Seleris Meditekno Internasional"
-              subtitleColor="text-[#E84C7F]"
+              subtitleColor="text-[#42C5AF]"
             />
           </div>
         </div>
         <div class="w-full mx-auto mt-10 md:mt-20">
-          <FaqFrame :Faq="ccFaq" opencolortext="text-[#E84C7F]" />
+          <FaqFrame :Faq="faq" opencolortext="text-[#2AB857]" />
         </div>
       </div>
     </section>
@@ -228,7 +207,7 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
     >
       <div class="w-full h-auto md:max-w-6xl mx-auto">
         <DownloadFrame
-          appname="Seleris Credit Cover"
+          appname="Seleris Medins"
           description="Stay in control of your health data and claims anytime, anywhere. Our
           AI-powered platform makes medical data processing, claims tracking,
           and risk analysis easier and faster."
@@ -243,8 +222,8 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
     >
       <BookDemoProduct
         title="Seleris Medins A Complete Solution for Your Health Needs"
-        :framebookdemo="ccframebook"
-        colorarrow="text-[#E84C7F]"
+        :framebookdemo="medinsframebook"
+        colorarrow="text-[#42C5AF]"
       />
     </section>
   </div>

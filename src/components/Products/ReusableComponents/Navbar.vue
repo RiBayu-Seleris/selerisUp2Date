@@ -1,11 +1,13 @@
 <script setup>
+import { computed, watch } from "vue";
+import { useRoute } from "vue-router"; // ✅ Tambahkan ini
+
 import MenuNav from "@productComponents/MenuNav.vue";
 import MenuIcon from "@/components/icons/MenuIcon.vue";
 import ThemeToggle from "@/components/reusable/ThemeToggle.vue";
 
 import { useSidebarStore } from "@/stores/sidebar";
-import { computed, watch } from "vue";
-import { useRoute } from "vue-router"; // ✅ Tambahkan ini
+import { useProductLogo } from "@/Data/Products/useProductLogo.js";
 
 const sidebarStore = useSidebarStore();
 const route = useRoute(); // ✅ Ambil route saat ini
@@ -18,31 +20,18 @@ watch(
   }
 );
 
-const Logo = computed(() => {
-  if (route.path.startsWith("/product/credit-cover")) {
-    return new URL("@/assets/Products/images/Logo/CC-logo.png", import.meta.url)
-      .href;
-  }
-  if (route.path.startsWith("/product/medins")) {
-    return new URL(
-      "@/assets/Products/images/Logo/medins-logo.png",
-      import.meta.url
-    ).href;
-  }
-  if (route.path.startsWith("/product/lifins")) {
-    return new URL(
-      "@/assets/Products/images/Logo/Lifins-logo.png",
-      import.meta.url
-    ).href;
-  }
-});
+const { logo } = useProductLogo();
 const LogoLink = computed(() => {
-  if (route.path.startsWith("/product/credit-cover")) {
+  if (route.path === "/product/credit-cover") {
     return "/product/credit-cover";
   }
-  if (route.path.startsWith("/product/medins")) {
+  if (route.path === "/product/medins") {
     return "/product/medins";
   }
+  if (route.path === "/product/lifins") {
+    return "/product/lifins";
+  }
+  return "";
 });
 </script>
 
@@ -55,7 +44,12 @@ const LogoLink = computed(() => {
       <div class="col-span-1 h-full">
         <router-link :to="LogoLink" class="w-full h-full">
           <div class="flex w-full h-full items-center">
-            <img :src="Logo" alt="Logo" class="w-full h-auto object-contain" />
+            <img
+              v-if="logo"
+              :src="logo"
+              alt="Logo"
+              class="w-full h-auto object-contain"
+            />
           </div>
         </router-link>
       </div>
@@ -80,7 +74,8 @@ const LogoLink = computed(() => {
     <div class="w-full h-auto flex lg:hidden flex-row justify-between">
       <router-link to="/" class="w-[40%] h-auto flex">
         <img
-          :src="Logo"
+          v-if="logo"
+          :src="logo"
           alt="Logo"
           class="w-[117px] h-[56px] sml:w-[80px] sml:h-[56px] object-contain"
         />
