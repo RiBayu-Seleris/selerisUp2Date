@@ -8,94 +8,48 @@ const modules = [Navigation, Pagination];
 
 const timelineData = [
   {
-    year: 2019,
-    title: "Solaris Credit Cover",
-    subtitle: "Credit life insurance, loan protection",
-    logo: new URL(
-      "@/assets/images/clients-and-partners/cc.png",
-      import.meta.url
-    ).href,
-  },
-  {
     year: 2020,
-    title: "Solaris Credit Cover",
+    title: "Seleris Lifins",
     subtitle: "Credit life insurance, loan protection",
     logo: new URL(
-      "@/assets/images/clients-and-partners/cc.png",
+      "@/assets/images/RoadmapLogo/Lifins-Logo.png",
       import.meta.url
     ).href,
   },
   {
     year: 2021,
-    title: "Solaris Credit Cover",
+    title: "Seleris Medins",
     subtitle: "Credit life insurance, loan protection",
     logo: new URL(
-      "@/assets/images/clients-and-partners/cc.png",
+      "@/assets/images/RoadmapLogo/Medins-Logo.png",
       import.meta.url
     ).href,
   },
   {
     year: 2022,
-    title: "Solaris Credit Cover",
+    title: "Seleris Credit Cover",
     subtitle: "Credit life insurance, loan protection",
-    logo: new URL(
-      "@/assets/images/clients-and-partners/cc.png",
-      import.meta.url
-    ).href,
+    logo: new URL("@/assets/images/RoadmapLogo/cc-Logo.png", import.meta.url)
+      .href,
   },
   {
     year: 2023,
-    title: "Solaris Credit Cover",
+    title: "Seleris Care",
     subtitle: "Credit life insurance, loan protection",
-    logo: new URL(
-      "@/assets/images/clients-and-partners/cc.png",
-      import.meta.url
-    ).href,
+    logo: new URL("@/assets/images/RoadmapLogo/Care-Logo.png", import.meta.url)
+      .href,
   },
   {
     year: 2024,
-    title: "Solaris Credit Cover",
+    title: "Seleris Cough",
     subtitle: "Credit life insurance, loan protection",
-    logo: new URL(
-      "@/assets/images/clients-and-partners/cc.png",
-      import.meta.url
-    ).href,
+    logo: new URL("@/assets/images/RoadmapLogo/cc.png", import.meta.url).href,
   },
   {
     year: 2025,
-    title: "Solaris Credit Cover",
+    title: "Seleris Auto Claim",
     subtitle: "Credit life insurance, loan protection",
-    logo: new URL(
-      "@/assets/images/clients-and-partners/cc.png",
-      import.meta.url
-    ).href,
-  },
-  {
-    year: 2026,
-    title: "Solaris Credit Cover",
-    subtitle: "Credit life insurance, loan protection",
-    logo: new URL(
-      "@/assets/images/clients-and-partners/cc.png",
-      import.meta.url
-    ).href,
-  },
-  {
-    year: 2027,
-    title: "Solaris Credit Cover",
-    subtitle: "Credit life insurance, loan protection",
-    logo: new URL(
-      "@/assets/images/clients-and-partners/cc.png",
-      import.meta.url
-    ).href,
-  },
-  {
-    year: 2028,
-    title: "Solaris Credit Cover",
-    subtitle: "Credit life insurance, loan protection",
-    logo: new URL(
-      "@/assets/images/clients-and-partners/cc.png",
-      import.meta.url
-    ).href,
+    logo: new URL("@/assets/images/RoadmapLogo/cc.png", import.meta.url).href,
   },
 ];
 </script>
@@ -144,7 +98,7 @@ const timelineData = [
             <img
               :src="timeline.logo"
               alt="logo"
-              class="w-[250px] h-full object-contain mb-4"
+              class="w-[150px] h-full object-contain mb-4"
             />
 
             <!-- Title & Subtitle -->
