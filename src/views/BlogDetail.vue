@@ -246,9 +246,8 @@ onBeforeUnmount(() => {
     </div>
     <div class="w-full h-auto mt-5">
       <input
+        name="comment"
         type="text"
-        name=""
-        id=""
         placeholder="Share your thoughts?"
         class="w-full bg-[#EBEBEB] rounded-[10px] py-3 px-3"
       />

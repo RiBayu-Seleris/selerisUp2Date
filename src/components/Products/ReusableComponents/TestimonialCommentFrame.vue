@@ -49,13 +49,13 @@ defineProps({
   <!-- Mobile Testimonials -->
   <div class="w-full h-auto flex flex-col lg:hidden">
     <!-- :pagination="{ el: '.custom-pagination', clickable: true }" -->
+    <!-- loop -->
     <Swiper
       :modules="modules"
       :navigation="false"
       :slides-per-view="1"
       :pagination="{ el: '.custom-pagination', clickable: true }"
       :autoplay="{ delay: 3000, disableOnInteraction: false }"
-      loop
       class="w-full h-auto cursor-grab active:cursor-grabbing mt-4 md:mt-8"
     >
       <SwiperSlide

@@ -8,11 +8,29 @@ defineProps({
     required: true,
   },
 });
+
+// Fungsi scroll ke elemen dengan id tertentu
+function scrollToId(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+
+  if (id === "about") {
+    const yOffset = -100; // sesuaikan tinggi navbar
+    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
+  } else {
+    const yOffset = -20; // sesuaikan tinggi navbar
+    const y = el.getBoundingClientRect().top + window.pageYOffset + yOffset;
+
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }
+}
 </script>
 
 <template>
-  <a
-    :href="href"
+  <button
+    @click="scrollToId(href.replace('#', ''))"
     :class="[
       'relative inline-block font-medium',
       route.path === '/product/lifins'
@@ -25,5 +43,5 @@ defineProps({
     ]"
   >
     <slot />
-  </a>
+  </button>
 </template>

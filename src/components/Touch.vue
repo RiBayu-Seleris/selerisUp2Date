@@ -38,6 +38,7 @@ import CallIcon from "@/components/icons/CallIcon.vue";
                 </div>
                 <div class="w-full">
                   <input
+                    name="fullname"
                     type="text"
                     class="w-full p-2 rounded-[8px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:outline-none focus:ring-1 focus:ring-[#2AB857] dark:focus:border-none"
                     placeholder="Full Name"
@@ -52,6 +53,7 @@ import CallIcon from "@/components/icons/CallIcon.vue";
                 </div>
                 <div class="w-full">
                   <input
+                    name="email"
                     type="email"
                     class="w-full p-2 rounded-[8px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:outline-none focus:ring-1 focus:ring-[#2AB857] dark:focus:border-none"
                     placeholder="Email"

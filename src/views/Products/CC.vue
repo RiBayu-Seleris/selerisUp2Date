@@ -16,7 +16,7 @@ import DownloadFrame from "@productComponents/DownloadFrame.vue";
 import BookDemoProduct from "@productComponents/BookDemoProduct.vue";
 
 import TestimonialCommentFrame from "@productComponents/TestimonialCommentFrame.vue";
-import Circle from "@productComponents/Circle.vue";
+import Circle from "@productComponents/Svg/Circle.vue";
 
 import CardWithIcon from "@productComponents/CardWithIcon.vue";
 import EasyQuickText from "@productComponents/EasyQuickText.vue";
@@ -76,7 +76,7 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
           subtitle="Seleris Credit Cover"
           subtitleColor="text-[#E84C7F]"
         />
-        <div class="w-full h-auto mt-10 md:mt-10 lg:mt-20">
+        <div class="w-full h-auto mt-10 md:mt-10 lg:mt-10">
           <AboutUsDescription
             :image="imageAbout"
             title="Smart Medical Platform"
@@ -164,7 +164,7 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
     <!-- Testimonial -->
     <section
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 md:mt-28 lg:mt-40"
-      id="Testimonial"
+      id="testimonial"
     >
       <!-- Circle Fourth -->
       <Circle
@@ -215,7 +215,7 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
             />
           </div>
         </div>
-        <div class="w-full mx-auto mt-10 md:mt-20">
+        <div class="w-full mx-auto mt-10 md:mt-10">
           <FaqFrame :Faq="ccFaq" opencolortext="text-[#E84C7F]" />
         </div>
       </div>

@@ -55,7 +55,7 @@ onMounted(() => {
     isLoad.value = false;
     setTimeout(() => {
       isLoad.value = true;
-    }, 3500);
+    }, 2000);
   }
 
   AOS.init({
@@ -79,7 +79,7 @@ watch(
       isLoad.value = false;
       setTimeout(() => {
         isLoad.value = true;
-      }, 3500);
+      }, 2000);
     }
   }
 );

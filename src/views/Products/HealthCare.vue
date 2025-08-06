@@ -15,7 +15,7 @@ import DownloadFrame from "@productComponents/DownloadFrame.vue";
 import BookDemoProduct from "@productComponents/BookDemoProduct.vue";
 
 import TestimonialCommentFrame from "@productComponents/TestimonialCommentFrame.vue";
-import Circle from "@productComponents/Circle.vue";
+import Circle from "@productComponents/Svg/Circle.vue";
 
 import CardWithIcon from "@productComponents/CardWithIcon.vue";
 import EasyQuickText from "@productComponents/EasyQuickText.vue";
@@ -54,7 +54,9 @@ import { clientLogos } from "@/Data/Products/Medins/medinsClients";
         />
       </div>
       <!-- Image Phone -->
-      <div class="w-full h-auto flex -mt-[120px] md:-mt-[250px]">
+      <div
+        class="relative w-full max-w-[1440px] mx-auto h-auto flex -mt-[120px] md:-mt-[250px]"
+      >
         <PhoneHero />
       </div>
       <!-- DownloadStore -->
@@ -73,7 +75,7 @@ import { clientLogos } from "@/Data/Products/Medins/medinsClients";
           subtitle="Seleris Care"
           subtitleColor="text-[#42C5AF]"
         />
-        <div class="w-full h-auto mt-10 md:mt-10 lg:mt-20">
+        <div class="w-full h-auto mt-10 md:mt-10 lg:mt-10">
           <AboutUsDescription
             :image="imageAbout"
             title="Smart Medical Platform"
@@ -161,7 +163,7 @@ import { clientLogos } from "@/Data/Products/Medins/medinsClients";
     <!-- Testimonial -->
     <section
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 md:mt-28 lg:mt-40"
-      id="Testimonial"
+      id="testimonial"
     >
       <div
         class="relative w-full flex flex-col justify-center items-center z-20 pt-20"
@@ -194,7 +196,7 @@ import { clientLogos } from "@/Data/Products/Medins/medinsClients";
             />
           </div>
         </div>
-        <div class="w-full mx-auto mt-10 md:mt-20">
+        <div class="w-full mx-auto mt-10 md:mt-10">
           <FaqFrame :Faq="faq" opencolortext="text-[#2AB857]" />
         </div>
       </div>

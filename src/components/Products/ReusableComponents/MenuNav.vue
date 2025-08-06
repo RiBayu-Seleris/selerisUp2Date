@@ -22,16 +22,16 @@ const route = useRoute();
     </li>
     <!-- Tambahan menu lainnya -->
     <li>
-      <Navlink class="text-[11pt]" href="#"> About </Navlink>
+      <Navlink class="text-[11pt]" href="#about"> About </Navlink>
     </li>
     <li>
-      <Navlink class="text-[11pt]" href="#"> Testimonial </Navlink>
+      <Navlink class="text-[11pt]" href="#testimonial"> Testimonial </Navlink>
     </li>
     <li>
-      <Navlink class="text-[11pt]" href="#"> FAQ </Navlink>
+      <Navlink class="text-[11pt]" href="#faq"> FAQ </Navlink>
     </li>
     <li>
-      <Navlink class="text-[11pt]" href="#"> Contact </Navlink>
+      <Navlink class="text-[11pt]" href="#contact"> Contact </Navlink>
     </li>
   </ul>
 </template>

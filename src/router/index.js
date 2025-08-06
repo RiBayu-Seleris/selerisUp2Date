@@ -149,6 +149,12 @@ const routes = [
       },
     ],
   },
+  // catch-all route (harus di paling bawah)
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    redirect: "/",
+  },
 ];
 
 const router = createRouter({

@@ -95,6 +95,7 @@ import CallIcon from "@/components/icons/CallIcon.vue";
           </div>
           <div class="w-full">
             <input
+              name="fullname"
               type="text"
               class="w-full p-2 rounded-md border border-gray-300 dark:bg-[#565656] focus:outline-none focus:ring-2 focus:ring-[#2AB857] dark:focus:ring-white"
             />
@@ -106,6 +107,7 @@ import CallIcon from "@/components/icons/CallIcon.vue";
           </div>
           <div class="w-full">
             <input
+              name="email"
               type="email"
               class="w-full p-2 rounded-md border border-gray-300 dark:bg-[#565656] focus:outline-none focus:ring-2 focus:ring-[#2AB857] dark:focus:ring-white"
             />

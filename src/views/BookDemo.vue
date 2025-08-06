@@ -2,7 +2,7 @@
 import Input from "@/components/reusable/Input.vue";
 import CountrySelect from "@/components/reusable/CountrySelect.vue";
 
-import { ref, onMounted, watch, defineEmits, defineProps, computed } from "vue";
+import { ref, onMounted, watch, computed } from "vue";
 
 const FullName = ref("");
 const CompanyName = ref("");
@@ -77,13 +77,34 @@ watch(
             <div
               class="w-full h-auto flex flex-col md:grid md:grid-cols-2 gap-5"
             >
-              <Input label="First Name" type="text" placeholder="Jhon" />
-              <Input label="Last Name" type="text" placeholder="Doe" />
-              <Input label="Company" type="text" placeholder="Your Company" />
-              <Input label="Job Title" type="text" placeholder="Title" />
+              <Input
+                name="firstname"
+                label="First Name"
+                type="text"
+                placeholder="Jhon"
+              />
+              <Input
+                name="lastname"
+                label="Last Name"
+                type="text"
+                placeholder="Doe"
+              />
+              <Input
+                name="company"
+                label="Company"
+                type="text"
+                placeholder="Your Company"
+              />
+              <Input
+                name="jobtitle"
+                label="Job Title"
+                type="text"
+                placeholder="Title"
+              />
             </div>
             <div class="w-full h-auto">
               <Input
+                name="email"
                 label="Email"
                 type="email"
                 placeholder="example@gmail.com"

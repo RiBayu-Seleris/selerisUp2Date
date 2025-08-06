@@ -16,9 +16,9 @@ import DownloadFrame from "@productComponents/DownloadFrame.vue";
 import BookDemoProduct from "@productComponents/BookDemoProduct.vue";
 
 import TestimonialCommentFrame from "@productComponents/TestimonialCommentFrame.vue";
-import CircleGradientLeft from "@productComponents/CircleGradientLeft.vue";
-import CircleGradient from "@productComponents/CircleGradient.vue";
-import CircleGradientRight from "@productComponents/CircleGradientRight.vue";
+import CircleGradientLeft from "@productComponents/Svg/CircleGradientLeft.vue";
+import CircleGradient from "@productComponents/Svg/CircleGradient.vue";
+import CircleGradientRight from "@productComponents/Svg/CircleGradientRight.vue";
 
 import CardWithIcon from "@productComponents/CardWithIcon.vue";
 import EasyQuickText from "@productComponents/EasyQuickText.vue";
@@ -93,7 +93,7 @@ import { lifinsTestimonials } from "@/Data/Products/Lifins/lifinsTestimonials";
           subtitle="Seleris Lifins"
           subtitleColor="text-[#2AB857]"
         />
-        <div class="w-full h-auto mt-10 md:mt-10 lg:mt-20">
+        <div class="w-full h-auto mt-10 md:mt-10 lg:mt-10">
           <AboutUsDescription
             :image="imageAbout"
             title="Smart Medical Platform"
@@ -181,7 +181,7 @@ import { lifinsTestimonials } from "@/Data/Products/Lifins/lifinsTestimonials";
     <!-- Testimonial -->
     <section
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 md:mt-28 lg:mt-40"
-      id="Testimonial"
+      id="testimonial"
     >
       <div
         class="relative w-full flex flex-col justify-center items-center z-20 pt-20"
@@ -214,7 +214,7 @@ import { lifinsTestimonials } from "@/Data/Products/Lifins/lifinsTestimonials";
             />
           </div>
         </div>
-        <div class="w-full mx-auto mt-10 md:mt-20">
+        <div class="w-full mx-auto mt-10 md:mt-10">
           <FaqFrame :Faq="lifinsFaq" opencolortext="text-[#2AB857]" />
         </div>
       </div>

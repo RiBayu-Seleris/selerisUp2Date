@@ -48,6 +48,7 @@ const filteredAndSearchedPosts = computed(() => {
         </div>
         <div class="w-full h-auto">
           <input
+            name="search"
             v-model="searchQuery"
             type="text"
             class="bg-transparent border-none outline-none placeholder-gray-500 w-full text-[#6C6C6C] dark:text-[#ADADAD]"
@@ -96,6 +97,7 @@ const filteredAndSearchedPosts = computed(() => {
           </div>
           <div class="w-full h-auto">
             <input
+              name="search"
               v-model="searchQuery"
               type="text"
               class="bg-transparent border-none outline-none placeholder-gray-500 w-full text-[#6C6C6C] dark:text-[#ADADAD]"
