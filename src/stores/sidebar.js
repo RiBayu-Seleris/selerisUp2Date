@@ -22,5 +22,13 @@ export const useSidebarStore = defineStore("sidebar", () => {
     document.body.style.overflow = val ? "hidden" : "";
   });
 
-  return { isOpen, toggle, open, close };
+  // ✅ Fungsi ini akan dipanggil di main.js
+  function initRouterGuard(router) {
+    router.beforeEach(() => {
+      close(); // tutup sidebar sebelum navigasi halaman
+      return true;
+    });
+  }
+
+  return { isOpen, toggle, open, close, initRouterGuard };
 });

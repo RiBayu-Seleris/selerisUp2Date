@@ -211,7 +211,7 @@ onBeforeUnmount(() => {
       <div
         class="w-8 h-8 md:w-14 md:h-14 lg:w-14 lg:h-14 mb-2 flex items-center justify-center"
       >
-        <div class="w-full h-full bg-[#D9D9D9] rounded-full" />
+        <div class="w-full h-full bg-[#D9D9D9] rounded-full"></div>
       </div>
       <div
         class="w-[80%] md:w-[60%] h-auto flex items-center text-center md:text-start"
@@ -256,33 +256,13 @@ onBeforeUnmount(() => {
   <section
     class="flex flex-col w-full max-w-none md:max-w-xl lg:max-w-4xl h-auto py-2 mx-auto mt-6 px-14 md:px-0 gap-y-16"
   >
-    <div class="w-full h-auto flex flex-col">
-      <div class="w-full h-auto">
-        <p
-          class="font-[500] text-[#000000] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
-        >
-          Anisa Maulida Rahma
-        </p>
-      </div>
-      <div class="w-full h-auto">
-        <p class="font-[400] text-[#000000] dark:text-[#565656]">21 Jul 2020</p>
-      </div>
-      <div class="w-full h-auto mt-3">
-        <p class="text-[#535862] dark:text-[#DADADA]">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-          ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo
-          massa. Eu dolor aliquet risus gravida nunc at feugiat consequat purus.
-          Non massa enim vitae duis mattis. Vel in ultricies vel fringilla.
-        </p>
-      </div>
-    </div>
     <!-- Comment 2 -->
     <div class="w-full h-auto flex flex-col">
       <div class="w-full h-auto">
         <p
           class="font-[500] text-[#000000] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
         >
-          Jhon Doe
+          Maulana Riski
         </p>
       </div>
       <div class="w-full h-auto">
@@ -290,9 +270,9 @@ onBeforeUnmount(() => {
       </div>
       <div class="w-full h-auto mt-3">
         <p class="text-[#535862] dark:text-[#DADADA]">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec
-          ullamcorper mattis lorem non. Ultrices praesent amet ipsum justo
-          massa.
+          This is a really helpful reminder of how important it is to plan ahead
+          financially, especially with so much uncertainty these days. I
+          appreciate the practical tips!
         </p>
       </div>
     </div>

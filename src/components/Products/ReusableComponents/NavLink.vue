@@ -30,6 +30,7 @@ function scrollToId(id) {
 
 <template>
   <button
+    v-if="href.startsWith('#')"
     @click="scrollToId(href.replace('#', ''))"
     :class="[
       'relative inline-block font-medium',
@@ -44,4 +45,21 @@ function scrollToId(id) {
   >
     <slot />
   </button>
+  <!-- Router-link jika href adalah path -->
+  <router-link
+    v-else
+    :to="href"
+    :class="[
+      'relative inline-block font-medium',
+      route.path === '/product/lifins'
+        ? 'text-[#374151]'
+        : route.path === '/product/health-care'
+        ? 'text-[#374151]'
+        : route.path === href
+        ? 'text-[#374151]'
+        : '',
+    ]"
+  >
+    <slot />
+  </router-link>
 </template>

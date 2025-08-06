@@ -831,7 +831,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
               that is not set out in this Privacy Policy, please contact us at:
             </p>
             <ol class="list-decimal space-y-2 pl-7">
-              <li>Contact Number: +62 (21) 526 52n35</li>
+              <li>Contact Number: +62 (21) 526 5235</li>
               <li>Email : info@seleris.id</li>
               <li>
                 Address: Graha SMI, Jl. Raya Ragunan No. 29 A, Jakarta Selatan,
@@ -975,7 +975,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
             Graha SMI, Jl. Raya Ragunan No. 29 A, Jakarta Selatan, Indonesia
             12540
           </p>
-          <p>Contact Number: +62 (21) 526 52n35</p>
+          <p>Contact Number: +62 (21) 526 5235</p>
           <p>Email : info@seleris.id</p>
         </div>
       </div>

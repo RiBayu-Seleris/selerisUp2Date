@@ -19,7 +19,6 @@ watch(
   () => route.fullPath,
   () => {
     sidebar.close();
-    console.log(sidebar.isOpen);
   }
 );
 
@@ -48,7 +47,7 @@ const handleTechnology = () => {
 
       <!-- Sidebar -->
       <transition name="slide">
-        <div class="ml-auto w-full h-auto px-4 pt-6">
+        <div class="ml-auto w-full h-auto px-4 pt-6 z-50">
           <div
             class="w-full h-full bg-white dark:bg-[#17181A] relative z-50 flex flex-col items-center py-6 px-5 rounded-xl"
           >

@@ -1,6 +1,6 @@
 <!-- src/components/CountrySelector.vue -->
 <script setup>
-import { ref, onMounted, watch, defineEmits, defineProps } from "vue";
+import { ref, onMounted, watch } from "vue";
 
 const emit = defineEmits(["update:modelValue"]);
 const props = defineProps({

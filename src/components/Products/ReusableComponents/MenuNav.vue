@@ -18,7 +18,7 @@ const route = useRoute();
     ]"
   >
     <li>
-      <Navlink class="text-[11pt]" href="/"> Home </Navlink>
+      <Navlink class="text-[11pt]" href="#hero"> Home </Navlink>
     </li>
     <!-- Tambahan menu lainnya -->
     <li>
@@ -31,7 +31,7 @@ const route = useRoute();
       <Navlink class="text-[11pt]" href="#faq"> FAQ </Navlink>
     </li>
     <li>
-      <Navlink class="text-[11pt]" href="#contact"> Contact </Navlink>
+      <Navlink class="text-[11pt]" href="/contact"> Contact </Navlink>
     </li>
   </ul>
 </template>

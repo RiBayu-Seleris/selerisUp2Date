@@ -36,7 +36,13 @@ const cardDetail = [
       class="bottom-0 w-full h-full"
     />
   </div>
-  <!-- <section class="w-full h-[400px] bottom-0 bg-red-600"></section> -->
+  <!-- <section class="relative w-full h-auto top-0">
+    <div class="relative w-full h-[500px] bg-red-400">
+      <div
+        class="absolute bottom-40 w-full h-[6px] bg-gradient-to-r from-[#2C43B7] from-1% via-[#3ED2B2] via-40% to-[#50B6EE] to-100%"
+      ></div>
+    </div>
+  </section> -->
   <!-- Card Description -->
   <section class="w-full h-auto mt-20">
     <div class="w-full h-auto flex flex-col">

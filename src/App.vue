@@ -55,7 +55,7 @@ onMounted(() => {
     isLoad.value = false;
     setTimeout(() => {
       isLoad.value = true;
-    }, 2000);
+    }, 3500);
   }
 
   AOS.init({
@@ -79,7 +79,7 @@ watch(
       isLoad.value = false;
       setTimeout(() => {
         isLoad.value = true;
-      }, 2000);
+      }, 3500);
     }
   }
 );
@@ -105,24 +105,30 @@ const isBookDemoRoute = computed(() => route.path === "/book-a-demo");
   <!-- ⏳ Initial Loading Screen -->
   <div
     v-if="!isLoad"
-    class="fixed inset-0 flex flex-col items-center justify-center bg-white dark:bg-[#17181A] z-[9999]"
+    class="fixed inset-0 flex flex-col items-center justify-center bg-[#F9F9F9] dark:bg-[#17181A] z-[9999]"
   >
-    <!-- Spinner -->
-    <figure>
-      <img
-        src="@/assets/icons/Benefits/accuracy.png"
-        alt="BenefitRobot"
-        class="w-[200px] h-[200px] object-center object-contain animate__animated animate-bounce2 [animation-duration:1200ms]"
-      />
-    </figure>
-    <div class="bouncing-loader mt-6">
-      <div
-        v-for="i in dotLazyLoading"
-        :key="i"
-        class="w-5 h-5 bg-[#2AB857] rounded-full animate-bounce"
-        :style="{ animationDelay: `${(i - 1) * 0.2}s` }"
-      />
-    </div>
+    <!-- Loader Frame -->
+    <video
+      autoplay
+      loop
+      muted
+      playsinline
+      @contextmenu.prevent
+      class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[400px] lg:h-[400px] object-cover object-center dark:hidden"
+    >
+      <source src="@/assets/videos/loading.mp4" type="video/mp4" />
+    </video>
+    <!-- Loader Frame -->
+    <video
+      autoplay
+      loop
+      muted
+      playsinline
+      @contextmenu.prevent
+      class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[400px] lg:h-[400px] object-cover object-center hidden dark:flex"
+    >
+      <source src="@/assets/videos/dark-loading.mp4" type="video/mp4" />
+    </video>
   </div>
 
   <!-- ✅ Main App Content -->
@@ -140,10 +146,10 @@ const isBookDemoRoute = computed(() => route.path === "/book-a-demo");
         ]"
       >
         <main
-          class="relative w-full max-w-[1440px] mx-auto animate__animated animate__fadeIn animate__slower"
+          class="relative w-full max-w-[1440px] mx-auto animate__animated animate__fadeIn animate__slower z-10"
         >
           <!-- Navbar -->
-          <div class="flex fixed w-full h-auto top-0 z-50">
+          <div class="flex fixed top-0 w-full h-auto z-50">
             <component :is="scrollStore.isScrolled ? NavbarScroll : Navbar" />
           </div>
 
@@ -174,7 +180,9 @@ const isBookDemoRoute = computed(() => route.path === "/book-a-demo");
         </main>
 
         <!-- Footer -->
-        <footer class="w-full max-w-[1440px] h-auto px-8 mt-20 mx-auto">
+        <footer
+          class="w-full max-w-[1440px] h-auto px-8 mt-20 mx-auto z-10 dark:bg-[#17181A]/70"
+        >
           <Footer />
         </footer>
       </div>

@@ -17,9 +17,9 @@ const steps = [
       "Seleris capitalizes on the power of cutting-edge AI and ML algorithms to evaluate underwriting decisions and furnish comprehensive coverage advice.",
   },
   {
-    title: "The Company",
+    title: "Data Security and Privacy Compliance",
     description:
-      "The company can then use the risk score to make a decision about whether or not to proceed with the individual's application.",
+      "Seleris ensures that all customer data is securely stored and processed in accordance with global data protection regulations, safeguarding sensitive personal and financial information.",
   },
 ];
 

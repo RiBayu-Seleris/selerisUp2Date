@@ -73,7 +73,7 @@ watch(
           </p>
         </div>
         <div class="w-full h-auto mt-8">
-          <form action="" class="flex flex-col gap-5">
+          <form @submit.prevent action="#" class="flex flex-col gap-5">
             <div
               class="w-full h-auto flex flex-col md:grid md:grid-cols-2 gap-5"
             >
@@ -180,7 +180,7 @@ watch(
               <button
                 class="w-full h-auto py-2 flex justify-center items-center bg-[#2AB857] rounded-[20px]"
               >
-                Send
+                <p class="text-white">Send</p>
               </button>
             </div>
           </form>

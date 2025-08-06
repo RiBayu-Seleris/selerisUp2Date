@@ -75,7 +75,7 @@ const LogoLink = computed(() => {
 
     <!-- Mobile Navbar -->
     <div class="w-full h-auto flex lg:hidden flex-row justify-between">
-      <router-link to="/" class="w-[40%] h-auto flex">
+      <router-link :to="LogoLink" class="w-[40%] h-auto flex">
         <img
           v-if="logo"
           :src="logo"

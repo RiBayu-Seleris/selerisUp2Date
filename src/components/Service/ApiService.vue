@@ -1,19 +1,21 @@
 <script setup>
-import Icon from "@/assets/icons/innovation.svg";
+import Atom from "@/assets/icons/Services/circle-atom.svg";
+import Chip from "@/assets/icons/Services/chip-thunder.svg";
+import Bars from "@/assets/icons/Services/bars-up.svg";
 const ApiCards = [
   {
-    icon: Icon,
+    icon: Atom,
     title: "Smart Video Analysis",
     description: `Seleris analyzes short facial videos to identify key risk factors quickly and accurately, 
     enabling smarter, faster evaluations.`,
   },
   {
-    icon: Icon,
+    icon: Chip,
     title: "Instant Risk Scoring",
     description: `Get instant risk scores in seconds to streamline decisions and improve your digital evaluation process.`,
   },
   {
-    icon: Icon,
+    icon: Bars,
     title: "Frictionless Evaluation",
     description: `Seleris provides a fully digital, seamless evaluation experience, 
     perfect for remote users or those with limited data history.`,
@@ -74,7 +76,7 @@ const ApiCards = [
                 <img
                   :src="ApiCard.icon"
                   alt="Icon"
-                  class="w-full lg:h-full xl:h-full object-contain object-top bg-white rounded-full shadow-lg p-2"
+                  class="w-full lg:h-full xl:h-full object-contain object-top bg-white rounded-full shadow-lg p-3"
                 />
               </div>
               <div

@@ -3,7 +3,7 @@ import { ref, watch } from "vue";
 import { useSidebarStore } from "@/stores/sidebar";
 import { useRoute } from "vue-router";
 import MenuIconClose from "@/components/icons/CloseIcon.vue";
-import Navlink from "@/components/Navlink.vue";
+import Navlink from "@productComponents/Navlink.vue";
 
 import { aboutList } from "@/Data/aboutList";
 import { productList } from "@/Data/productList";
@@ -19,7 +19,6 @@ watch(
   () => route.fullPath,
   () => {
     sidebar.close();
-    console.log(sidebar.isOpen);
   }
 );
 
@@ -77,19 +76,21 @@ const handleTechnology = () => {
               class="w-full flex flex-wrap mt-8 text-lg font-semibold text-gray-800 gap-y-2"
             >
               <div class="w-full h-auto">
-                <Navlink class="text-[11pt]" href="/"> Home </Navlink>
+                <Navlink class="text-[11pt]" href="#hero"> Home </Navlink>
               </div>
               <div class="w-full h-auto">
-                <Navlink class="text-[11pt]" href="#"> About </Navlink>
+                <Navlink class="text-[11pt]" href="#about"> About </Navlink>
               </div>
               <div class="w-full h-auto">
-                <Navlink class="text-[11pt]" href="#"> Testimonial </Navlink>
+                <Navlink class="text-[11pt]" href="#testimonial">
+                  Testimonial
+                </Navlink>
               </div>
               <div class="w-full h-auto">
-                <Navlink class="text-[11pt]" href="#"> FAQ </Navlink>
+                <Navlink class="text-[11pt]" href="#faq"> FAQ </Navlink>
               </div>
               <div class="w-full h-auto">
-                <Navlink class="text-[11pt]" href="#"> Contact </Navlink>
+                <Navlink class="text-[11pt]" href="/contact"> Contact </Navlink>
               </div>
             </nav>
           </div>
