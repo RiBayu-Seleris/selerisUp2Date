@@ -36,7 +36,7 @@ const cardDetail = [
       class="bottom-0 w-full h-full"
     />
   </div>
-  <section class="w-full h-[400px] bottom-0 bg-red-600"></section>
+  <!-- <section class="w-full h-[400px] bottom-0 bg-red-600"></section> -->
   <!-- Card Description -->
   <section class="w-full h-auto mt-20">
     <div class="w-full h-auto flex flex-col">

@@ -16,18 +16,26 @@ const testimonials = [
   },
   {
     name: "Ari Wibowo",
-    position: "Head of Digital Services – Jamkrida Banten",
+    position: "Head of Digital Services - Jamkrida Banten",
     text: `Seleris has helped us modernize the way we evaluate individuals.
     The facial video-based system is fast, accurate, and easy to integrate with our existing workflows.
     What we value most is how seamless the process is no manual steps, no lengthy interviews.
-    It's a reliable solution that supports our digital transformation goals.`,
+    It's a reliable solution that supports our digital transformation goals.`,
   },
   {
     name: "Dewi Lestari",
-    position: "VP of Operations – FPG Insurance Indonesia",
+    position: "VP of Operations - FPG Insurance Indonesia",
     text: `Partnering with Seleris has significantly improved our customer evaluation process.
     The AI-driven facial video technology gives us a faster, smarter way to assess individuals with minimal friction.
     Integration was smooth, and the support team has been responsive and professional.`,
+  },
+  {
+    name: "Edhie Mulyono",
+    position: "Technical Director - PT Asuransi FPG Indonesia",
+    text: `Seleris empowers FPG's technical team with health data insights that were previously inaccessible. 
+    Its ability to process medical big data,  predict chronic claim patterns, 
+    and identify high-risk exposures has optimized our health insurance underwriting. 
+    This is the new foundation for sustainable growth in the industry's most dynamic segment`,
   },
 ];
 </script>
