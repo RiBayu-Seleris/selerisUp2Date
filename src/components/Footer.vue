@@ -227,19 +227,19 @@ import { companyList } from "@/Data/companyList";
                 href="https://play.google.com/store/apps/developer?id=PT.+Seleris+Meditekno+Internasional"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="flex w-full h-full md:justify-start justify-center items-center content-center xl:justify-start xl:content-start"
+                class="flex w-auto h-full md:justify-start justify-center items-center content-center xl:justify-start xl:content-start"
               >
                 <img
                   :src="playstore"
                   alt="Playstore"
-                  class="w-full md:w-[300px] xl:w-[200px] h-[100px] object-contain object-center"
+                  class="w-full sm:w-[200px] md:w-[200px] xl:w-[200px] h-[100px] object-contain object-center"
                 />
               </a>
               <div
-                class="flex w-full h-full justify-center items-center content-center xl:justify-start xl:content-start xl:-mt-5"
+                class="flex w-auto h-full justify-center items-center content-center xl:justify-start xl:content-start xl:-mt-5"
               >
                 <div
-                  class="relative group w-full md:w-[300px] xl:w-[200px] h-[100px]"
+                  class="relative group w-full sm:w-[200px] md:w-[200px] xl:w-[200px] h-[100px]"
                 >
                   <img
                     :src="appstore"

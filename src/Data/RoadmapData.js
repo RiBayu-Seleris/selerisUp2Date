@@ -1,10 +1,15 @@
+import ccLogo from "@/assets/Products/images/Logo/CC-Logo-Color.png";
+import MedinsLogo from "@/assets/Products/images/Logo/Medins-Logo-Color.png";
+import LifinsLogo from "@/assets/Products/images/Logo/Lifins-Logo.png";
+import CareLogo from "@/assets/Products/images/Logo/Care-Logo.png";
+
 export const roadmapData = [
   {
     year: 2023,
     data: [
       {
         quarters: null,
-        icon: "Lifins-Icons.png",
+        logo: LifinsLogo,
         title: "Seleris Lifins",
         subtitle: "Seleris Lifins Subtitle",
         description: `Seleris Lifins is an advanced AI-powered underwriting solution tailored for the life insurance industry, designed to streamline and automate the risk assessment and decision-making process, 
@@ -36,7 +41,7 @@ export const roadmapData = [
     data: [
       {
         quarters: 1,
-        icon: "Credit Cover Icons",
+        logo: ccLogo,
         title: "Credit Cover",
         subtitle: "Credit Life Insurance, Loan Protection",
         description: `Seleris Credit Cover is an AI-powered platform designed to streamline your business operations
@@ -64,7 +69,7 @@ export const roadmapData = [
       },
       {
         quarters: 2,
-        icon: "Medins.icon",
+        logo: MedinsLogo,
         title: "Seleris Medins",
         subtitle: "Seleris Medins Subtitle",
         description: `Seleris Medins is a health insurance intelligence platform powered by AI that automates the processing of medical data, enhances fraud detection, and improves cost and risk prediction while ensuring compliance with local health regulations. 
@@ -86,6 +91,65 @@ export const roadmapData = [
             title: "Regulatory Compliance & Risk Stratification",
             description: `Seleris medins supports local health regulation standards and lets insurers segment users based on medical risk levels. 
 			This enables more tailored product offerings and pricing, while remaining compliant with legal frameworks.`,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    year: 2025,
+    data: [
+      {
+        quarters: 1,
+        logo: CareLogo,
+        title: "Seleris Care",
+        subtitle: "Seleris Care Subtitle",
+        description: `Seleris Lifins is an advanced AI-powered underwriting solution tailored for the life insurance industry, designed to streamline and automate the risk assessment and decision-making process, 
+			enabling insurers to deliver faster, more accurate, and customer-friendly experiences. With its API-first architecture, 
+			Seleris Lifins seamlessly integrates with existing insurance systems and allows full customization of underwriting rules, 
+			making it ideal for both individual and group life insurance products while helping providers scale operations, reduce manual work, and improve overall efficiency.`,
+        content: [
+          {
+            title: "Make underwriting smarter and faster.",
+            description: `Lifins uses machine learning algorithms to perform comprehensive risk evaluations in real time. 
+			This ensures underwriting decisions are made with higher accuracy and fewer human errors enhancing reliability and consistency.`,
+          },
+          {
+            title: "90% Faster Decision-Making",
+            description: `By automating core processes, Lifins reduces decision times dramatically from days to minutes. 
+			This speed benefits both insurers and customers, ensuring a smoother application journey.`,
+          },
+          {
+            title: "Tailor rules to fit your exact underwriting needs.",
+            description: `The platform allows full customization of decision trees, thresholds, and scoring logic.
+			This makes it easy to adapt to regulatory changes, business strategies, or unique product offerings without rebuilding from scratch.`,
+          },
+        ],
+      },
+      {
+        quarters: 2,
+        logo: null,
+        title: "Seleris Cough",
+        subtitle: "Seleris Cough Subtitle",
+        description: `Seleris Lifins is an advanced AI-powered underwriting solution tailored for the life insurance industry, designed to streamline and automate the risk assessment and decision-making process, 
+			enabling insurers to deliver faster, more accurate, and customer-friendly experiences. With its API-first architecture, 
+			Seleris Lifins seamlessly integrates with existing insurance systems and allows full customization of underwriting rules, 
+			making it ideal for both individual and group life insurance products while helping providers scale operations, reduce manual work, and improve overall efficiency.`,
+        content: [
+          {
+            title: "Make underwriting smarter and faster.",
+            description: `Lifins uses machine learning algorithms to perform comprehensive risk evaluations in real time. 
+			This ensures underwriting decisions are made with higher accuracy and fewer human errors enhancing reliability and consistency.`,
+          },
+          {
+            title: "90% Faster Decision-Making",
+            description: `By automating core processes, Lifins reduces decision times dramatically from days to minutes. 
+			This speed benefits both insurers and customers, ensuring a smoother application journey.`,
+          },
+          {
+            title: "Tailor rules to fit your exact underwriting needs.",
+            description: `The platform allows full customization of decision trees, thresholds, and scoring logic.
+			This makes it easy to adapt to regulatory changes, business strategies, or unique product offerings without rebuilding from scratch.`,
           },
         ],
       },

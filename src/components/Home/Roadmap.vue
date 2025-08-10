@@ -100,7 +100,7 @@ const paginationOptions = {
         alt=""
         srcset=""
         class="absolute bottom-0"
-      /> 
+      />
       <Swiper
         :modules="modules"
         :navigation="false"

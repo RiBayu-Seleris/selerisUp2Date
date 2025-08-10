@@ -99,6 +99,7 @@ const isTermsRoute = computed(() => route.path === "/terms");
 const isSecurityRoute = computed(() => route.path === "/security");
 const isPrivacyRoute = computed(() => route.path === "/privacy");
 const isBookDemoRoute = computed(() => route.path === "/book-a-demo");
+const isCompanyRoute = computed(() => route.path === "/about/company");
 </script>
 
 <template>
@@ -143,13 +144,19 @@ const isBookDemoRoute = computed(() => route.path === "/book-a-demo");
           isBookDemoRoute
             ? 'min-h-screen w-full dark:bg-[radial-gradient(circle_at_0%_30%,_#3CFF7A_-70%,_#17181A_30%)]'
             : '',
+          isCompanyRoute
+            ? 'min-h-screen w-full dark:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-40%,_#17181A_30%)]'
+            : '',
         ]"
       >
         <main
           class="relative w-full max-w-[1440px] mx-auto animate__animated animate__fadeIn animate__slower z-10"
         >
           <!-- Navbar -->
-          <div class="flex fixed top-0 w-full h-auto z-50">
+          <div
+            class="flex fixed top-0 w-full h-auto z-50"
+            v-if="!['/test-embed'].includes(route.path)"
+          >
             <component :is="scrollStore.isScrolled ? NavbarScroll : Navbar" />
           </div>
 
@@ -173,7 +180,7 @@ const isBookDemoRoute = computed(() => route.path === "/book-a-demo");
           <!-- Touch Section (kecuali di /blogs) -->
           <section
             class="flex flex-col relative w-full mx-auto h-auto mt-32 px-8"
-            v-if="!['/blogs'].includes(route.path)"
+            v-if="!['/blogs', '/test-embed'].includes(route.path)"
           >
             <Touch />
           </section>
@@ -182,6 +189,7 @@ const isBookDemoRoute = computed(() => route.path === "/book-a-demo");
         <!-- Footer -->
         <footer
           class="w-full max-w-[1440px] h-auto px-8 mt-20 mx-auto z-10 dark:bg-[#17181A]/70"
+          v-if="!['/test-embed'].includes(route.path)"
         >
           <Footer />
         </footer>

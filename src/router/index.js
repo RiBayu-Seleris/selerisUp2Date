@@ -155,6 +155,12 @@ const routes = [
     name: "NotFound",
     redirect: "/",
   },
+  // Testing
+  {
+    path: "/test-embed",
+    name: "Lifins",
+    component: () => import("@/views/TestEmbed.vue"),
+  },
 ];
 
 const router = createRouter({

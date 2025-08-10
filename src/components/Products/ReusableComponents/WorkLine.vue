@@ -24,8 +24,8 @@ defineProps({
     <div class="relative flex flex-row w-auto h-full">
       <div class="absolute w-full h-1/2 bottom-[0px] justify-center flex pt-8">
         <div class="relative w-full h-full md:w-auto md:h-auto">
-          <!-- INI FRAME DIBAWAH LINGKARAN -->
           <slot />
+          <!-- INI FRAME DIBAWAH LINGKARAN -->
           <div
             class="absolute w-full h-full top-0 flex flex-col justify-center items-center px-8 gap-y-1 lg:gap-y-2 pt-4 md:pt-8"
           >
