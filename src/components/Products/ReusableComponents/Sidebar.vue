@@ -34,6 +34,21 @@ const handleTechnology = () => {
   isTechnologyOpen.value = !isTechnologyOpen.value;
   isProductOpen.value = false;
 };
+
+const titleSidebar = () => {
+  if (route.path === "/product/lifins") {
+    return "Lifins";
+  }
+  if (route.path === "/product/credit-cover") {
+    return "Credit Cover";
+  }
+  if (route.path === "/product/medins") {
+    return "Medins";
+  }
+  if (route.path === "/product/health-care") {
+    return "Care";
+  }
+};
 </script>
 
 <template>
@@ -58,7 +73,7 @@ const handleTechnology = () => {
                 <p
                   class="text-[#195279] dark:text-[#FAFAFA] font-semibold sml:text-md md:text-[1.7rem]"
                 >
-                  Seleris Medins
+                  Seleris {{ titleSidebar() }}
                 </p>
               </div>
               <div class="w-[20%] h-auto flex justify-end">

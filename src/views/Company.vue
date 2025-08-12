@@ -1,6 +1,7 @@
 <script setup>
 import Hero from "@/components/About/Hero.vue";
 import DescAbout from "@/components/About/DescAbout.vue";
+import VisiMisi from "@/components/About/VisiMisi.vue";
 import Description from "@/components/Description.vue";
 import StepDescription from "@/components/About/StepDescription.vue";
 import Certificate from "@/components/Certificate.vue";
@@ -18,8 +19,6 @@ import { useSidebarStore } from "@/stores/sidebar";
     <Hero />
   </section>
 
-  <!-- data-aos="fade-in"
-    data-aos-duration="2000" -->
   <section
     class="dark:hidden flex flex-col relative w-full h-auto px-8 sml:mt-20 lg:mt-28"
   >
@@ -39,27 +38,23 @@ import { useSidebarStore } from "@/stores/sidebar";
     </section>
   </div>
 
-  <!-- data-aos="fade-left"
-    data-aos-duration="3000" -->
+  <section class="relative w-full h-auto lg:px-8 mt-20 lg:mt-28 xl:mt-40">
+    <VisiMisi />
+  </section>
+
   <section
-    class="flex flex-col relative w-full h-auto px-8 mt-20 lg:mt-28 xl:mt-40"
+    class="flex flex-col relative w-full h-auto px-8 mt-10 lg:mt-28 xl:mt-40"
   >
     <Description />
   </section>
 
-  <!-- data-aos="fade-up"
-    data-aos-easing="ease-out-cubic"
-    data-aos-duration="2000" -->
   <section
     class="flex flex-col relative w-full md:mt-10 lg:mt-10 xl:mt-20 pt-4 pb-8 lg:pt-0 lg:pb-0"
   >
-    <!-- bg-cert bg-no-repeat bg-cover bg-center -->
     <Certificate />
   </section>
   <!-- Section Step -->
-  <!-- <section class="flex w-full h-auto mt-10 relative justify-center"> -->
-  <!-- data-aos="fade-left"
-    data-aos-duration="3000" -->
+
   <section
     class="flex relative w-full h-auto pb-8 lg:pb-0 px-8 md:px-16 lg:px-20 sml:mb-20 md:mb-4 lg:mb-20 xl:mb-20"
   >

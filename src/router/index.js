@@ -158,7 +158,7 @@ const routes = [
   // Testing
   {
     path: "/test-embed",
-    name: "Lifins",
+    name: "Testing",
     component: () => import("@/views/TestEmbed.vue"),
   },
 ];

@@ -61,78 +61,10 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <section
-    class="flex flex-col relative w-full h-auto md:px-12 xl:px-14 bg-[radial-gradient(ellipse_at_top,_#3CFF7A_-70%,_#FAFAFA_60%)] dark:bg-[radial-gradient(ellipse_at_top,_#3CFF7A_-70%,_#17181A_40%)]"
-  >
-    <div
-      class="flex flex-col w-full max-w-[1440px] mx-auto h-auto sml:pt-[130px] md:pt-[130px] lg:pt-[150px] xl:pt-[200px] justify-center"
-    >
-      <div
-        class="flex flex-col w-full h-auto justify-center items-center gap-y-1 px-16 md:px-28 lg:px-40"
-      >
-        <p
-          class="text-[19px] lg:text-[23px] text-[#18AB53] font-[500] text-center"
-        >
-          Published {{ post.date }}
-        </p>
-        <p
-          class="text-[21px] md:text-[27px] lg:text-[32px] xl:text-[47px] text-[#195279] font-[500] text-center leading-relaxed dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
-        >
-          {{ post.title }}
-        </p>
-        <div
-          class="w-auto h-auto px-8 py-1 md:px-10 md:py-2 bg-[#F9F5FF] mt-5 rounded-full"
-        >
-          <p class="text-[#6941C6] text-[14px] md:text-[17px]">
-            {{ post.category }}
-          </p>
-        </div>
-      </div>
-      <!-- Like, View, Comments, Share -->
-      <div
-        class="flex flex-row justify-between w-full max-w-none md:max-w-md h-auto py-2 mx-auto mt-6 px-20 md:px-0"
-      >
-        <div class="w-[90%] h-auto">
-          <div class="flex flex-row gap-x-5 md:gap-x-10">
-            <BlogPublic :count="countlikes">
-              <template #icon>
-                <LikeIcon />
-              </template>
-            </BlogPublic>
-            <BlogPublic :count="countviews">
-              <template #icon>
-                <EyeIcon />
-              </template>
-            </BlogPublic>
-            <BlogPublic :count="countcomments">
-              <template #icon>
-                <CommentIcon />
-              </template>
-            </BlogPublic>
-          </div>
-        </div>
-        <div
-          ref="shareTopRef"
-          class="relative w-[10%] h-auto text-[#6E6E6E] dark:text-[#B2AEAE]"
-        >
-          <!-- Tombol Share -->
-          <div @click.stop="handleTop" class="cursor-pointer">
-            <ShareIcon />
-          </div>
-
-          <!-- Dropdown -->
-          <div
-            v-if="shareOpenTop"
-            class="absolute mt-0 w-48 md:w-56 z-30 left-[30%] -translate-x-1/2"
-          >
-            <BlogShareMenu />
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
   <!-- Gambar Blog -->
-  <section class="flex relative w-full h-auto px-12 xl:px-28 mt-10 lg:mt-20">
+  <section
+    class="flex relative w-full h-auto px-12 xl:px-28 bg-green-400 pt-48 bg-[radial-gradient(ellipse_at_top,_#3CFF7A_-70%,_#FAFAFA_60%)] dark:bg-[radial-gradient(ellipse_at_top,_#3CFF7A_-70%,_#17181A_40%)]"
+  >
     <!-- Blog Content -->
     <div class="w-full h-auto">
       <img
@@ -142,18 +74,40 @@ onBeforeUnmount(() => {
       />
     </div>
   </section>
+  <section class="flex flex-col relative w-full h-auto px-12 xl:px-28">
+    <div
+      class="flex flex-col w-full h-auto sml:pt-[130px] md:pt-[130px] lg:pt-[150px] xl:pt-[150px]"
+    >
+      <div class="flex flex-col w-full h-auto gap-y-1">
+        <p class="text-[19px] lg:text-[23px] text-[#18AB53] font-[500]">
+          Published {{ post.date }}
+        </p>
+        <p
+          class="text-[21px] md:text-[27px] lg:text-[32px] xl:text-[47px] text-[#195279] font-[500] leading-relaxed dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+        >
+          {{ post.title }}
+        </p>
+        <div
+          class="relative w-40 h-auto py-1 flex justify-center md:py-2 bg-green-500 mt-5 rounded-full"
+        >
+          <p class="text-[#6941C6] text-[14px] md:text-[17px]">
+            {{ post.category }}
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- Content Blog -->
   <section
     class="flex flex-col relative w-full h-auto px-12 md:px-12 xl:px-28 mt-10"
   >
     <!-- Blog Content -->
-    <div
-      class="w-full h-auto bg-[#FFFFFF] dark:bg-[#17181A] px-0 md:px-14 lg:px-28 py-5"
-    >
+    <div class="w-full h-auto dark:bg-[#17181A] px-0 md:px-14 lg:px-28 py-5">
       <!-- {{ post.description }} -->
       <div
         v-html="post.description"
-        class="prose prose-base md:prose-lg lg:prose-xl max-w-none text-justify leading-relaxed dark:text-[#FAFAFA]"
+        class="prose prose-base md:prose-lg lg:prose-xl lg:text-[18px] max-w-none text-justify leading-relaxed dark:text-[#FAFAFA]"
       />
     </div>
   </section>

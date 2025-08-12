@@ -5,6 +5,7 @@ import DarkLogo from "@/assets/images/darklogo.png";
 // Sosmed Icon
 import Instagram from "@/components/icons/Instagram.vue";
 import Linkedin from "@/components/icons/Linkedin.vue";
+import Tiktok from "@/components/icons/Tiktok.vue";
 import Twitter from "@/components/icons/Twitter.vue";
 
 // Images
@@ -79,7 +80,9 @@ import { companyList } from "@/Data/companyList";
                 <div
                   class="w-auto h-[30px] lg:h-[30px] text-[#195279] dark:text-[#FAFAFA]"
                 >
-                  <Twitter />
+                  <a href="https://www.tiktok.com/@seleris.id" target="_blank">
+                    <Tiktok />
+                  </a>
                 </div>
               </div>
             </div>

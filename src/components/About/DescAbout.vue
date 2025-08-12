@@ -54,8 +54,8 @@ import DescRobot from "@/assets/images/about-images.png";
       companies and customers. Businesses can integrate Seleris through a
       flexible API, while users can complete the assessment process entirely
       online within minutes. Seleris helps partners enhance speed, precision,
-      and accessibility across a variety of digital screening and
-      evaluation use cases.
+      and accessibility across a variety of digital screening and evaluation use
+      cases.
     </p>
   </div>
 </template>

@@ -7,7 +7,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
     <HeroText
       title="Blog"
       subtitle="What's On Seleris"
-      description="Stories, updates, and ideas from the minds behind Seleris explore more here."
+      description="Our intuitive API documentation guides you step-by-step"
     />
   </div>
 </template>

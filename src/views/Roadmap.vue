@@ -6,7 +6,8 @@ import { ref } from "vue";
 
 // cari tahun 2023
 const initialYearIndex = roadmapData.findIndex((item) => item.year === 2023);
-const initialProduct = roadmapData[initialYearIndex].data[0]; // ambil produk pertama
+// ambil produk pertama
+const initialProduct = roadmapData[initialYearIndex].data[0];
 
 // set default
 const selectedProduct = ref(initialProduct);
@@ -53,7 +54,7 @@ function selectProduct(product) {
         <div
           v-for="(yearItem, yearIndex) in roadmapData"
           :key="yearIndex"
-          class="relative flex flex-row w-auto h-full snap-start shrink-0 z-10 space-x-6"
+          class="relative flex flex-row w-auto h-full snap-start flex-shrink-0 z-10 space-x-6"
         >
           <div class="relative w-[20%] h-auto">
             <div class="relative w-full h-full flex flex-col">

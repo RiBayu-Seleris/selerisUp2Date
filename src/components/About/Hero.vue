@@ -40,7 +40,7 @@ import AboutHero from "@/assets/images/About-hero-image.png";
         <img
           :src="AboutHero"
           alt="About Banner"
-          class="w-full h-full sml:h-[300px] md:h-[400px] lg:h-[400px] xl:h-[400px] object-contain object-right"
+          class="w-full h-full sml:h-[300px] md:h-[400px] lg:h-[400px] xl:h-[400px] object-contain md:object-right"
         />
       </div>
     </div>

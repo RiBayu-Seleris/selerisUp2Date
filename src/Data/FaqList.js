@@ -42,6 +42,6 @@ export const faqList = [
   {
     question: "How can I provide feedback or suggestions?",
     answer:
-      "We highly value your feedback. You can provide feedback by visiting the settings menu and clicking privacy policy or via info@seleris.id to provide your feedback to our team..",
+      "We highly value your feedback. You can provide feedback by visiting the settings menu and clicking privacy policy or via info@seleris.id to provide your feedback to our team.",
   },
 ];

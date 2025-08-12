@@ -55,7 +55,7 @@ onMounted(() => {
     isLoad.value = false;
     setTimeout(() => {
       isLoad.value = true;
-    }, 3500);
+    }, 2000);
   }
 
   AOS.init({
@@ -79,7 +79,7 @@ watch(
       isLoad.value = false;
       setTimeout(() => {
         isLoad.value = true;
-      }, 3500);
+      }, 2000);
     }
   }
 );
@@ -137,15 +137,15 @@ const isCompanyRoute = computed(() => route.path === "/about/company");
     <template v-if="!isProductRoute">
       <div
         :class="[
-          'relative w-full h-auto font-poppins overflow-x-hidden mx-auto dark:bg-[#17181A] dark:text-white',
+          'relative w-full h-auto font-poppins overflow-x-hidden dark:bg-[#17181A] dark:text-white',
           isTermsRoute || isSecurityRoute || isPrivacyRoute
             ? 'bg-[#FFFFFF]'
             : 'bg-[#f9fafb]',
           isBookDemoRoute
-            ? 'min-h-screen w-full dark:bg-[radial-gradient(circle_at_0%_30%,_#3CFF7A_-70%,_#17181A_30%)]'
+            ? 'min-h-screen w-full dark:lg:bg-[radial-gradient(circle_at_0%_30%,_#3CFF7A_-70%,_#17181A_30%)]'
             : '',
           isCompanyRoute
-            ? 'min-h-screen w-full dark:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-40%,_#17181A_30%)]'
+            ? 'min-h-screen w-full dark:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-50%,_#17181A_10%)] dark:md:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-50%,_#17181A_15%)] dark:lg:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-40%,_#17181A_30%)]'
             : '',
         ]"
       >
@@ -180,7 +180,9 @@ const isCompanyRoute = computed(() => route.path === "/about/company");
           <!-- Touch Section (kecuali di /blogs) -->
           <section
             class="flex flex-col relative w-full mx-auto h-auto mt-32 px-8"
-            v-if="!['/blogs', '/test-embed'].includes(route.path)"
+            v-if="
+              !['/blogs', '/blogs/:slug', '/test-embed'].includes(route.path)
+            "
           >
             <Touch />
           </section>

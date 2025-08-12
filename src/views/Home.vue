@@ -18,53 +18,46 @@ import Roadmap from "@/components/Home/Roadmap.vue";
     <Herosection />
   </section>
 
-  <section class="hidden lg:flex w-full max-w-[1440px] mx-auto h-auto">
+  <!-- max-w-[1440px] mx-auto -->
+  <section class="hidden lg:flex w-full h-auto">
     <PartnersClients />
   </section>
 
-  <section class="lg:hidden flex w-full max-w-[1440px] mx-auto h-auto">
+  <section class="lg:hidden flex w-full h-auto">
     <PartnersClientsMobile />
   </section>
 
   <section
-    class="flex flex-col relative w-full h-auto max-w-[1440px] mx-auto md:mt-10 lg:mt-10 pt-4 pb-8 lg:pt-0 lg:pb-0"
+    class="flex flex-col relative w-full h-auto md:mt-10 lg:mt-10 pt-4 pb-8 lg:pt-0 lg:pb-0"
   >
     <Certificate />
   </section>
 
   <section
-    class="flex flex-col relative w-full max-w-[1440px] mx-auto h-auto lg:mt-20 2lg:mt-40 xl:mt-0 px-8"
+    class="flex flex-col relative w-full h-auto lg:mt-20 2lg:mt-40 xl:mt-0 px-8"
   >
     <Description />
   </section>
 
-  <section
-    class="flex flex-col relative w-full max-w-[1440px] mx-auto h-auto mt-16"
-  >
+  <section class="flex flex-col relative w-full h-auto mt-16">
     <Benefits />
   </section>
 
   <section
-    class="flex flex-col relative w-full max-w-[1440px] mx-auto h-auto mt-10 lg:mt-10 xl:mt-10 px-8 lg:px-24"
+    class="flex flex-col relative w-full h-auto mt-10 lg:mt-10 xl:mt-10 px-8 lg:px-24"
   >
     <AiDesc />
   </section>
 
-  <section
-    class="flex flex-col relative w-full max-w-[1440px] mx-auto h-auto mt-40 sml:mt-24 mb-10"
-  >
+  <section class="flex flex-col relative w-full h-auto mt-40 sml:mt-24 mb-10">
     <Testimonial />
   </section>
 
-  <section
-    class="flex flex-col relative w-full max-w-[1440px] mx-auto h-auto px-8 my-20"
-  >
+  <section class="flex flex-col relative w-full h-auto px-8 my-20">
     <Different />
   </section>
 
-  <section
-    class="flex flex-col relative w-full max-w-[1440px] mx-auto h-auto my-20"
-  >
+  <!-- <section class="flex flex-col relative w-full h-auto my-20">
     <Roadmap />
-  </section>
+  </section> -->
 </template>
