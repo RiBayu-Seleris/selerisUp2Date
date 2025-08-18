@@ -115,8 +115,26 @@ const selectPostTime = (option) => {
       <div
         class="col-span-4 h-auto border-[2px] flex flex-row items-center px-5 rounded-[5px] justify-between"
       >
-        <div>Custom Date</div>
-        <div>aaa</div>
+        <div
+          class="flex items-center justify-between py-2 w-full cursor-pointer hover:border-gray-400"
+        >
+          <span class="text-gray-500">Custom Date</span>
+          <!-- Ikon kalender -->
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            class="w-5 h-5 text-gray-500"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="1.5"
+              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+            />
+          </svg>
+        </div>
       </div>
     </div>
   </section>
@@ -295,7 +313,7 @@ const selectPostTime = (option) => {
   </section>
 
   <!-- BlogList -->
-  <section class="w-full h-auto grid grid-cols-3 mt-10 gap-5">
+  <section class="w-full h-auto grid grid-cols-3 mt-10 gap-5 mb-20">
     <!-- <router-link
       :to="`/blog/${slug}`"
       class="flex flex-col w-full px-0 sml:px-8 md:px-0 h-auto"
