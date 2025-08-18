@@ -12,183 +12,66 @@ export const blogPosts = [
     views: 400,
     comments: 300,
     description: `
-    <p>Life is full of uncertainties. From unexpected illnesses and accidents to natural disasters and property damage, things can go wrong when you least expect them. That's where insurance steps in. More than just a piece of paper, insurance is a financial safety net designed to protect you and your loved ones from the potentially devastating costs of unforeseen events.</p>
-    <p>While it might seem like an extra expense, thinking of insurance as an investment in your peace of mind and financial stability is far more accurate. It's about mitigating risk and ensuring that a single unfortunate event doesn't derail your entire financial future.</p>
-    <p>Why Is Insurance So Important?</p>
-    <p>The value of insurance becomes clear when you consider its core benefits:</p>
-    <ul>
-      <li>
-        Financial Protection: This is the primary role of insurance. Whether it's covering medical bills, repairing your car, rebuilding your home, or replacing lost income, insurance shields you from significant out-of-pocket expenses that could otherwise lead to debt or bankruptcy.
-      </li>
-      <li>
-        Peace of Mind: Knowing you're protected provides immense relief. You can focus on recovering from an event rather than being consumed by financial worry. This peace of mind is invaluable, allowing you to live your life with greater confidence.
-      </li>
-      <li>
-        Asset Protection: For big investments like your home or car, insurance is crucial. It ensures that these valuable assets are protected against damage, theft, or loss, safeguarding your wealth.
-      </li>
-      <li>
-        Legal Compliance: In many cases, certain types of insurance (like auto insurance) are legally mandated. Having the correct coverage ensures you comply with the law and avoid penalties.
-      </li>
-      <li>
-        Support for Loved Ones: Life insurance, for example, provides financial security for your dependents should you pass away, helping them maintain their lifestyle and cover essential expenses like education or mortgage payments.
-      </li>
-    </ul>
-    <p>Common Types of Insurance You Should Consider</p>
-    <p>There are many different types of insurance, each designed to cover specific risks. Here are some of the most common ones:</p>
-    <ul>
-      <li>
-        Health Insurance: Covers medical expenses, including doctor visits, hospital stays, prescription drugs, and sometimes preventive care. This is essential for managing healthcare costs.
-      </li>
-      <li>
-        Auto Insurance: Mandatory in most places, it covers damages to your vehicle or other vehicles/property in an accident, as well as injuries to yourself or others.
-      </li>
-      <li>
-        Homeowner's/Renter's Insurance: Protects your dwelling and personal belongings against perils like fire, theft, and natural disasters. Renter's insurance covers your belongings even if you don't own the property.
-      </li>
-      <li>
-        Life Insurance: Provides a lump sum payment to your beneficiaries upon your death. This is vital for those with dependents who rely on their income.
-      </li>
-      <li>
-        Disability Insurance: Replaces a portion of your income if you become unable to work due to illness or injury.
-      </li>
-      <li>
-        Travel Insurance: Offers protection against unforeseen events during trips, such as trip cancellations, medical emergencies abroad, or lost luggage.
-      </li>
-    </ul>
-    <p>Choosing the Right Coverage</p>
-  <p>Navigating the world of insurance can seem complex, but here are some tips:</p>
-  <ul>
-    <li>
-      Assess Your Needs: What assets do you have to protect? Who depends on your income? What risks are you most exposed to?
-      Research and Compare: Don't just pick the first option. Get quotes from multiple providers and compare coverage details, deductibles, and premiums.
-      Understand the Fine Print: Read policies carefully to know exactly what is and isn't covered.
-      Consult an Expert: An insurance agent or financial advisor can help you understand your options and tailor a plan to your specific situation.
-    </li>
-  </ul>
-  <p>Insurance isn't about hoping something bad happens; it's about being prepared if it does. It’s an essential tool for building financial resilience and protecting your future in an unpredictable world.</p>
-  <p>Summary : insurance as a crucial financial safety net in an unpredictable world. It emphasizes how insurance provides financial protection, peace of mind, and asset security against unforeseen events like illness or accidents. Different types, from health to auto and life insurance, offer specific coverage. The blog advises assessing needs and comparing policies to choose the right protection.</p>
-    `,
-  },
-  {
-    id: 2,
-    image: new URL("@/assets/images/blog/example.png", import.meta.url).href,
-    title:
-      "The Relentless March of Tech: Shaping Our World, One Innovation at a Time",
-    category: "Technology",
-    date: "Dec 22, 2023",
-    likes: 1000,
-    views: 2500,
-    comments: 200,
-    description: `
-    <p>Technology. It's the invisible hand guiding our modern lives, the constant hum in the background, and the driving force behind unprecedented change. From the smartphones in our pockets to the complex algorithms powering global networks, tech isn't just a sector; it's the very fabric of our contemporary existence.</p>
-    <p>Every day, new advancements emerge, seemingly at lightning speed, promising to make our lives easier, smarter, and more connected. But beyond the hype, what truly defines the current landscape of technology, and how is it fundamentally reshaping our world?</p>
-    <h3>Key Frontiers in Today's Tech Landscape</h3>
-      <ul>
-        <li><strong>Artificial Intelligence (AI) & Machine Learning (ML):</strong> Far from just sci-fi concepts, AI and ML are now integral to everything from personalized recommendations on streaming services to advanced medical diagnostics and self-driving cars. These technologies are learning, adapting, and automating tasks at an incredible pace, redefining industries and human-computer interaction.</li>
-        <li><strong>5G and Beyond:</strong> Faster, more reliable connectivity isn't just about quicker downloads. 5G is the backbone for the next generation of interconnected devices, enabling everything from smart cities and remote surgery to immersive augmented reality experiences.</li>
-        <li><strong>Cloud Computing:</strong> The "cloud" is no longer just a buzzword; it's the infrastructure powering most of the digital services we use daily. It provides scalable, on-demand computing power, allowing businesses and individuals to store vast amounts of data and run complex applications without needing expensive on-premise hardware.</li>
-        <li><strong>Cybersecurity:</strong> As our world becomes more digitized, the importance of protecting our data and systems grows exponentially. Cybersecurity is a critical, ever-evolving field, constantly battling new threats and vulnerabilities to keep our digital lives safe.</li>
-        <li><strong>The Metaverse & Web3:</strong> While still in nascent stages, the concepts of the metaverse (immersive virtual worlds) and Web3 (decentralized internet powered by blockchain) hint at a future where our digital interactions are more immersive, ownership is redefined, and online experiences are fundamentally transformed.</li>
-      </ul>
-    <h3>How Tech is Reshaping Our World</h3>
-      <ul>
-        <li><strong>Transforming Industries:</strong> Tech is revolutionizing traditional sectors. Healthcare benefits from AI-driven diagnostics, agriculture uses IoT for precision farming, and finance is being disrupted by fintech innovations.</li>
-        <li><strong>Changing How We Work:</strong> Remote work, collaborative online tools, and automation are redefining the modern workplace. Tech enables greater flexibility, efficiency, and global collaboration.</li>
-        <li><strong>Enhancing Daily Life:</strong> From smart home devices that anticipate our needs to personalized education platforms and instant global communication, technology continues to make our daily lives more convenient and interconnected.</li>
-        <li><strong>Driving Innovation at Pace:</strong> The rapid evolution of one technology often fuels advancements in others, creating a virtuous cycle of innovation that pushes boundaries faster than ever before.</li>
-      </ul><h3>Navigating the Future of Tech</h3>
-    <p>While the benefits are clear, the rapid pace of technological change also brings challenges. Ethical considerations around AI, data privacy concerns, the digital divide, and the need for continuous upskilling are all critical discussions that must accompany innovation.</p>
-    <p>The future of tech isn't just about what new gadgets emerge; it's about how we thoughtfully integrate these advancements into society to create a more prosperous, equitable, and sustainable world. It's about empowering humanity through intelligent design and responsible deployment.</p>
-    <p><em>What technological advancements are you most excited (or concerned) about? Share your thoughts below!</em></p>
-    <p>Summary: how technology fundamentally reshapes our world, driven by advancements in AI/ML, 5G, cloud computing, and cybersecurity. Tech is transforming industries, workplaces, and daily life, driving rapid innovation. While beneficial, it necessitates navigating challenges like ethics and privacy, emphasizing responsible integration for a prosperous, equitable future</p>
-    `,
-  },
-  {
-    id: 3,
-    image: new URL("@/assets/images/blog/example.png", import.meta.url).href,
-    title: "Unveiling the World of AI: More Than Just Technology",
-    category: "Artificial Intelligent",
-    date: "Dec 22, 2023",
-    likes: 1000,
-    views: 2500,
-    comments: 200,
-    description: `
-    <p>Artificial Intelligence (AI)'s transformative role in boosting efficiency, innovation, personalized experiences, security, and healthcare. It acknowledges challenges like job impact and bias, emphasizing AI's future in creating smarter systems and solving global problems. Join the conversation on its development for a smarter, fairer future.</p>
-    <h2>What is AI?</h2>
-    <p>Artificial Intelligence (AI) has become a household name. From sci-fi movies to daily headlines, AI continues to capture our attention. But what exactly is AI, and why is it so important for our future? Let's dive deeper.</p>
-    <p>AI is a field of computer science focused on creating machines that can "think" and "learn" like humans. This is no longer just a futuristic dream; AI is already all around us, influencing nearly every aspect of modern life.</p>
-    <h2>Why Is AI Important?</h2>
-    <p>The potential of AI is vast and transformative. Here are some reasons why:</p>
-    <ul>
-      <li><strong>Efficiency and Productivity:</strong> AI can automate repetitive tasks, analyze large amounts of data quickly, and boost efficiency across various sectors, from manufacturing to customer service.</li>
-      <li><strong>Innovation and Discovery:</strong> AI accelerates scientific discovery, aiding in the development of new medicines, advanced materials, and innovative solutions for global problems like climate change.</li>
-      <li><strong>Personalized Experiences:</strong> From product recommendations on e-commerce sites to tailored music playlists, AI makes our digital experiences more relevant and enjoyable.</li>
-      <li><strong>Enhanced Security and Healthcare:</strong> AI plays a crucial role in cybersecurity systems, more accurate medical diagnoses, and the development of more effective healthcare treatments.</li>
-    </ul>
-    <h2>AI in Your Daily Life</h2>
-    <p>You might not even realize it, but AI is already an integral part of your daily routine:</p>
-    <ul>
-      <li><strong>Virtual Assistants:</strong> Siri, Google Assistant, and Alexa are real-world examples of AI that help us find information, manage schedules, and control smart devices.</li>
-      <li><strong>Content Recommendations:</strong> AI algorithms on Netflix, YouTube, and Spotify analyze your preferences to suggest movies, videos, and music you might like.</li>
-      <li><strong>Email Spam Filters:</strong> AI works behind the scenes to identify and block unwanted emails, keeping your inbox clean.</li>
-      <li><strong>Autonomous Vehicles:</strong> While still under development, self-driving cars heavily rely on AI to navigate, recognize objects, and make decisions on the road.</li>
-      <li><strong>Medical Diagnosis:</strong> AI helps doctors analyze medical images like X-rays and MRIs to detect diseases earlier and with higher accuracy.</li>
-    </ul>
-    <h2>Challenges and Ethics in AI Development</h2>
-    <p>Like any revolutionary technology, AI also brings challenges and ethical questions:</p>
-    <ul>
-      <li><strong>Job Displacement:</strong> Concerns about AI taking over human jobs are valid. It's important to focus on reskilling and adapting human capabilities.</li>
-      <li><strong>Data Privacy:</strong> AI needs data to learn, and this raises questions about how our personal data is collected, used, and protected.</li>
-      <li><strong>Algorithmic Bias:</strong> If the data used to train AI contains biases, then the decisions made by the AI can also be biased. It's crucial to ensure fairness and inclusivity in AI development.</li>
-      <li><strong>Security:</strong> The use of AI in critical systems requires special attention to cybersecurity to prevent misuse.</li>
-    </ul>
-    <h2>The Future of AI: What's Next?</h2>
-    <p>The future of AI holds immense promise. We can expect further advancements in:</p>
-    <ul>
-      <li><strong>Smarter and More Adaptive AI:</strong> AI systems will become even better at understanding context, learning from new experiences, and adapting to unforeseen situations.</li>
-      <li><strong>Deeper Integration:</strong> AI will be increasingly integrated into various devices and infrastructures, creating smarter and more responsive environments.</li>
-      <li><strong>Solutions for Complex Problems:</strong> AI will continue to be a vital tool in tackling global challenges like climate change, resource scarcity, and public health.</li>
-    </ul>
-    <p>AI isn't just about robots or complex algorithms; it's about empowering humans, enhancing our lives, and unlocking new possibilities never before imagined. By understanding AI and participating in discussions about its development, we can all contribute to a smarter and more equitable future.</p>
-
-    `,
-  },
-  {
-    id: 4,
-    image: new URL("@/assets/images/blog/example.png", import.meta.url).href,
-    title: "Beyond Aesthetics: The Power of Thoughtful Design",
-    category: "Design",
-    date: "Dec 22, 2023",
-    likes: 1000,
-    views: 2500,
-    comments: 200,
-    description: `
-    <p>Design is more than just aesthetics; it's a powerful force shaping our world. Good design solves problems, enhances user experience, communicates value, evokes emotion, and drives innovation. It highlights key principles like functionality, usability, and clarity, stressing that designers meticulously craft our everyday reality to make lives easier, more beautiful, and meaningful.</p>
-    <h2>What Is Design, Really?</h2>
-    <p>Design. It's a word we hear constantly, but what does it truly mean? Is it just about making things look pretty, or is there something more profound at play? In reality, design is a powerful force that shapes our world, influences our emotions, and dictates how we interact with everything around us.</p>
-    <p>Think about it: from the smartphone in your hand to the chair you're sitting on, and even the apps you use daily, every single object and experience has been designed. Good design often goes unnoticed because it just works. Bad design, however, sticks out like a sore thumb, causing frustration and inefficiency.</p>
-    <h2>Why Does Good Design Matter?</h2>
-    <p>The impact of thoughtful design extends far beyond mere visual appeal. Here's why it's crucial:</p>
-    <ul>
-      <li><strong>It Solves Problems:</strong> At its core, design is about problem-solving. A well-designed product or service addresses a user's need, simplifies a complex task, or improves an existing solution. Think of how a well-designed navigation system in a car reduces stress on long journeys, or how an intuitive app makes online banking less daunting.</li>
-      <li><strong>It Enhances User Experience (UX):</strong> Good design creates a seamless and enjoyable experience for the user. This isn't just about aesthetics; it encompasses usability, accessibility, and overall satisfaction.</li>
-      <li><strong>It Communicates Value:</strong> Design is a silent communicator. The way a brand's logo is crafted, the layout of a website, or the packaging of a product all send powerful messages about its quality, values, and target audience.</li>
-      <li><strong>It Evokes Emotion:</strong> Design has the power to make us feel. A beautifully designed space can evoke tranquility, a playful illustration can bring a smile, and a sleek product can inspire confidence.</li>
-      <li><strong>It Drives Innovation:</strong> Designers are often at the forefront of innovation, constantly seeking new ways to improve existing solutions or create entirely new ones.</li>
-    </ul>
-    <h2>The Elements of Great Design</h2>
-    <p>While the specifics vary across disciplines (graphic design, product design, web design, etc.), some universal principles underpin great design:</p>
-    <ul>
-      <li><strong>Functionality:</strong> Does it work as intended? Is it practical and efficient?</li>
-      <li><strong>Usability:</strong> Is it easy to learn and use? Can people intuitively understand how to interact with it?</li>
-      <li><strong>Aesthetics:</strong> Is it visually appealing? Does it create a positive first impression?</li>
-      <li><strong>Clarity:</strong> Is its purpose clear? Does it communicate effectively without confusion?</li>
-      <li><strong>Consistency:</strong> Are elements harmonious and predictable? This builds familiarity and reduces cognitive load.</li>
-      <li><strong>Accessibility:</strong> Can it be used by people with diverse abilities? Is it inclusive?</li>
-    </ul>
-    <h2>Design is Everywhere, and So Are Designers</h2>
-    <p>From architects shaping cityscapes to UX designers crafting digital interfaces, and fashion designers creating wearable art, designers are the unsung heroes who meticulously craft our everyday reality. They observe, research, ideate, prototype, and refine, all to make our lives easier, more beautiful, and more meaningful.</p>
-    <p>So, the next time you interact with an object or a digital interface, take a moment to appreciate the intentionality behind its creation. Good design isn't just about how something looks; it's about how it works, how it feels, and the problems it elegantly solves. It's about enhancing human experience, one thoughtfully crafted detail at a time.</p>
+    <p>
+              Technology. It's the invisible hand guiding our modern lives, the
+              constant hum in the background, and the driving force behind
+              unprecedented change. Every day, new advancements emerge,
+              seemingly at lightning speed, promising to make our lives easier,
+              smarter, and more connected. But beyond the hype, what truly
+              defines the current landscape of technology, and how is it
+              fundamentally reshaping our world?
+            </p>
+            <div class="flex flex-col space-y-4">
+              <h1 class="text-[28px] lg:text-[34px] text-[#195279] font-[500]">
+                Key Frontiers in Today's Tech Landscape
+              </h1>
+              <h2 class="text-[18px] lg:text-[20px] text-[#535862] font-[500]">
+                Artificial Intelligence (AI) & Machine Learning (ML)
+              </h2>
+              <p class="text-[14px] lg:text-[16px]">
+                Technology. It's the invisible hand guiding our modern lives,
+                the constant hum in the background, and the driving force behind
+                unprecedented change.
+              </p>
+              <h2 class="text-[18px] lg:text-[20px] text-[#535862] font-[500]">
+                Artificial Intelligence (AI) & Machine Learning (ML)
+              </h2>
+              <p class="text-[14px] lg:text-[16px]">
+                Technology. It's the invisible hand guiding our modern lives,
+                the constant hum in the background, and the driving force behind
+                unprecedented change.
+              </p>
+              <h2 class="text-[18px] lg:text-[20px] text-[#535862] font-[500]">
+                Artificial Intelligence (AI) & Machine Learning (ML)
+              </h2>
+              <p class="text-[14px] lg:text-[16px]">
+                Technology. It's the invisible hand guiding our modern lives,
+                the constant hum in the background, and the driving force behind
+                unprecedented change.
+              </p>
+            </div>
+            <div class="flex flex-col space-y-4">
+              <h1 class="text-[28px] lg:text-[34px] text-[#195279] font-[500]">
+                How Tech is Reshaping Our World
+              </h1>
+              <p class="italic text-[16px] lg:text-[20px] font-[500]">
+                “What technological advancements are you most excited (or
+                concerned) about? Share your thoughts below!”
+              </p>
+              <p class="text-[14px] lg:text-[16px]">
+                Technology. It's the invisible hand guiding our modern lives,
+                the constant hum in the background, and the driving force behind
+                unprecedented change.
+              </p>
+              <h2 class="text-[18px] lg:text-[20px] text-[#535862] font-[500]">
+                Artificial Intelligence (AI) & Machine Learning (ML)
+              </h2>
+              <p class="text-[14px] lg:text-[16px]">
+                Technology. It's the invisible hand guiding our modern lives,
+                the constant hum in the background, and the driving force behind
+                unprecedented change.
+              </p>
+            </div>
     `,
   },
 

@@ -57,6 +57,12 @@ const routes = [
   },
   {
     path: "/blog/:slug",
+    name: "BlogDetailOld",
+    component: () => import("@/views/BlogDetailOld.vue"),
+    meta: { title: "BlogDetailOld" },
+  },
+  {
+    path: "/blog/details",
     name: "BlogDetail",
     component: () => import("@/views/BlogDetail.vue"),
     meta: { title: "BlogDetail" },

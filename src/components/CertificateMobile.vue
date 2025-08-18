@@ -80,7 +80,7 @@ const getShortText = (fullText) => {
               </div>
               <div class="flex w-full h-auto">
                 <p class="sml:text-[14px] md:text-[18px]">
-                  Certificate Number: {{ cert.certNumber }}
+                  {{ cert.certNumber }}
                 </p>
               </div>
             </div>

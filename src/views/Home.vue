@@ -1,6 +1,4 @@
 <script setup>
-import Banner from "@/assets/images/Hero2.png";
-
 import Herosection from "@/components/Home/Herosection.vue";
 import PartnersClients from "@/components/Home/PartnersClients.vue";
 import PartnersClientsMobile from "@/components/Home/PartnersClientsMobile.vue";
@@ -57,7 +55,7 @@ import Roadmap from "@/components/Home/Roadmap.vue";
     <Different />
   </section>
 
-  <!-- <section class="flex flex-col relative w-full h-auto my-20">
+  <section class="flex flex-col relative w-full h-auto my-20">
     <Roadmap />
-  </section> -->
+  </section>
 </template>

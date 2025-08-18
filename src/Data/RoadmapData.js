@@ -5,155 +5,167 @@ import CareLogo from "@/assets/Products/images/Logo/Care-Logo.png";
 
 export const roadmapData = [
   {
-    year: 2023,
-    data: [
-      {
-        quarters: null,
-        logo: LifinsLogo,
-        title: "Seleris Lifins",
-        subtitle: "Individual life insurance, group policies",
-        description: `Seleris Lifins is an advanced AI-powered underwriting solution tailored for the life insurance industry, designed to streamline and automate the risk assessment and decision making process, 
-        enabling insurers to deliver faster, more accurate, and customer friendly experiences.
-        With its API-first architecture, Seleris Lifins seamlessly integrates with existing insurance systems and allows full customization of underwriting rules,
-        making it ideal for both individual and group life insurance products while helping providers scale operations, reduce manual work, and improve overall efficiency.`,
-        content: [
-          {
-            title: "Make underwriting smarter and faster.",
-            description: `Lifins uses machine learning algorithms to perform comprehensive risk 
-            evaluations in real time. This ensures underwriting decisions are made with higher accuracy and fewer human errors
-            enhancing reliability and consistency.`,
-          },
-          {
-            title: "90% Faster Decision-Making",
-            description: `By automating core processes, Lifins reduces decision times dramatically 
-            from days to minutes. This speed benefits both insurers and customers,
-            ensuring a smoother application journey.`,
-          },
-          {
-            title: "Tailor rules to fit your exact underwriting needs.",
-            description: `The platform allows full customization of decision trees, thresholds, and scoring logic. 
-            This makes it easy to adapt to regulatory changes, business strategies, or unique product offerings without rebuilding from scratch.`,
-          },
-        ],
-      },
-    ],
-  },
-  {
-    year: 2024,
-    data: [
-      {
-        quarters: 1,
-        logo: ccLogo,
-        title: "Credit Cover",
-        subtitle: "Credit life insurance, loan protection",
-        description: `Seleris Credit Cover is an AI-powered platform designed to streamline your business operations by offering intelligent automation and seamless data integration. 
-        With a user-friendly interface and smart, real-time analytics, Seleris Credit Cover empowers teams to make better decisions faster, scale effortlessly, and enhance operational efficiency.
-        Whether you're managing workflows, analyzing customer behavior, or integrating tools, Seleris gives you the power to turn insights into impact.`,
-        content: [
-          {
-            title: "Connect your favorite tools in minutes.",
-            description: `Seleris Credit Cover integrates with a wide range of third-party 
-            apps to help you unify all your business data in one place. 
-            No more switching tabs, everything works together smoothly.`,
-          },
-          {
-            title: "Automate repetitive tasks and save hours",
-            description: `Create smart workflows using drag-and-drop logic. 
-            Let Seleris handle the routine so your team can focus on what really matters innovation and growth.`,
-          },
-          {
-            title: "Make data-driven decisions with live analytics",
-            description: `Track performance metrics, customer behavior, and operational data as they happen. 
-            With visual dashboards and instant reports, your team stays informed and agile.`,
-          },
-        ],
-      },
-      {
-        quarters: 2,
-        logo: MedinsLogo,
-        title: "Seleris Medins",
-        subtitle: "Health insurance, corporate benefits",
-        description: `Seleris Medins is a health insurance intelligence platform powered by AI that automates the processing of medical data, 
-        enhances fraud detection, and improves cost and risk prediction while ensuring compliance with local health regulations. 
-        Designed for both individual and corporate health insurance use cases, 
-        the platform integrates predictive analytics and real-time automation to support faster claims management, better risk stratification, and more personalized underwriting. With its intuitive interface, users can complete their insurance evaluation in a single, efficient workflow.`,
-        content: [
-          {
-            title: "Streamline and accelerate insurance workflows.",
-            description: `Seleris medins automatically extracts, cleans, and analyzes medical data from various sources.
-            This reduces manual input, speeds up decision-making, and ensures higher data consistency across applications.`,
-          },
-          {
-            title: "Minimize risk, optimize budget planning.",
-            description: `The system uses machine learning to flag potentially fraudulent claims early and predicts cost trends based on medical history and usage patterns.
-            This helps insurers allocate resources more efficiently and reduce payout leakage.`,
-          },
-          {
-            title: "Regulatory Compliance & Risk Stratification",
-            description: `Seleris medins supports local health regulation standards and lets insurers segment users based on medical risk levels.
-            This enables more tailored product offerings and pricing, while remaining compliant with legal frameworks.`,
-          },
-        ],
-      },
-    ],
-  },
-  {
     year: 2025,
     data: [
       {
-        quarters: 1,
-        logo: CareLogo,
-        title: "Seleris Care",
-        subtitle: "Corporate health screening, wellness programs",
-        description: `Seleris Care is a corporate wellness and health screening platform designed to help organizations manage employee health more effectively through a mobile first interface and on-site integration capability that automates health monitoring, promotes preventive care, and provides actionable insights to optimize corporate wellness strategies. 
-        Leveraging real time data analytics and intuitive dashboards, the platform enables companies to reduce healthcare 
-        costs by up to 15-20% while improving employee engagement and overall well-being.
-        It also supports population health tracking and empowers better decision-making in occupational health management.`,
+        quarters: 3,
+        logo: null,
+        title: "Seleris Auto Claim",
+        subtitle: "Automated Claims Revolution",
+        description: `Seleris AutoClaim is a revolutionary AI-powered mobile platform designed to automate and streamline the auto insurance claims process, enabling users to assess vehicle damage directly from their smartphones, receive real-time repair cost estimates, and get claims approved faster than ever.`,
         content: [
           {
-            title: "Keep your workforce healthy with continuous health checks.",
-            description: `The app enables organizations to track employee health indicators regularly through 
-            digital forms, wearable integrations, and onsite screening results. 
-            This reduces administrative overhead and ensures timely health intervention.`,
+            title: "Instant Smartphone & Based Damage Assessment",
+            description: `Customers upload a photo of their damaged vehicle, and the AI instantly detects the damage and estimates repair costs, minimizing manual inspections.`,
           },
           {
-            title: "Shift from reactive care to proactive well-being.",
-            description: `Seleris Care offers personalized health tips and risk alerts based on health data analysis.
-            Employers can act early to prevent chronic diseases, absenteeism, and productivity loss.`,
+            title: "Automated Claims Processing & Approvals",
+            description: `Simple claims are auto approved, speeding up processing, cutting costs, and ensuring a smoother experience from accident to resolution.`,
           },
           {
-            title: "Corporate Wellness Optimization & Insights.",
-            description: `With population health dashboards and usage analytics, HR teams can identify trends, 
-            tailor wellness initiatives, and measure ROI. 
-            Custom reports support better planning and budget allocation.`,
+            title: "Fraud Detection & System Integration",
+            description: `The app flags claim inconsistencies or potential fraud and integrates with existing insurance systems for a seamless workflow.`,
           },
         ],
       },
       {
-        quarters: 2,
+        quarters: 4,
         logo: null,
-        title: "Seleris Cough",
-        subtitle: "COVID screening, TB detection, workplace safety",
-        description: `Seleris Cough is an AI-powered mobile application designed for rapid, non-invasive respiratory health screening by analyzing voice and cough sounds to deliver real-time detection results for conditions such as COVID-19, Tuberculosis (TB), Pneumonia, Asthma, and smoking-related risks all without the need for laboratory testing. Tailored for high-volume environments, it enables cost-effective 
-        mass screening with over 87% accuracy, making it an ideal solution for public health agencies, 
-        corporate health programs, and events requiring fast and scalable health verification. 
-        With instant results and detailed health insights, Seleris Cough helps organizations
-        detect diseases early, ensuring faster response and better outcomes.`,
+        title: "Seleris LieXpose",
+        subtitle: "Voice Truth Detection",
+        description: `Seleris LieXpose is an advanced AI-powered voice analysis platform designed to detect deception in real time by leveraging cutting-edge speech recognition and behavioral algorithms to assess truthfulness through natural conversations whether during calls, interviews, or customer interactions.`,
         content: [
           {
-            title: "Real-Time Health Screening Results.",
-            description: `Unlike traditional methods that require lab processing time, Seleris Cough provides instant detection outcomes.
-            Users can see their health status in real time, making the app highly efficient in emergencies or large-scale deployments.`,
+            title: "Real Time Voice Based Deception Detection",
+            description: `Seleris LieXpose analyzes live vocal patterns to detect dishonesty, enabling instant risk assessment in insurance, hiring, and customer service.`,
           },
           {
-            title: "AI-Powered Respiratory Health Analysis.",
-            description: `The app uses advanced machine learning models trained on thousands of voice and cough samples to detect signs of diseases like TB, 
-            COVID-19, pneumonia, asthma, and smoking effects with high confidence and accuracy (87%+).`,
+            title: "Multi Industry Applications & Core Rollout",
+            description: `The platform will add emotional intelligence analysis in Q1 2026 and multi-language support in Q2 2026 for insurance, HR, and customer service sectors.`,
           },
           {
-            title: "Scalable for Mass Public Use.",
-            description: `Designed to handle thousands of screenings per day, Seleris Cough is perfect for airports, offices, schools, and public gatherings. 
-            Its lightweight infrastructure supports easy mobile deployment and offline functionality for rural areas.`,
+            title: "Seamless System Integration & Custom Alerts",
+            description: `LieXpose integrates with call centers and enterprise workflows, offering real-time alerts, customizable thresholds, and audit trails for investigations and compliance.`,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    year: 2026,
+    data: [
+      {
+        quarters: 2,
+        logo: null,
+        title: "Seleris PropScan",
+        subtitle: "Property Assessment Revolution",
+        description: `Seleris PropScan is an AI-driven property assessment platform that revolutionizes the way real estate and insurance industries evaluate properties by combining advanced computer vision, predictive analytics, and 3D modeling technologies.`,
+        content: [
+          {
+            title: "Automated Property Valuation & Condition Assessment",
+            description: `Seleris PropScan uses AI and 3D modeling to value properties and check structures, speeding sales, claims, and maintenance.`,
+          },
+          {
+            title: "Comprehensive Industry Applications & Rollout Plan",
+            description: `PropScan launches in Q2 2026 for real estate, insurance, and facility management, with predictive maintenance in Q3 and drone scanning in Q4.`,
+          },
+          {
+            title: "Seamless System Integration & Custom Reporting",
+            description: `The platform connects with property, insurance, and real estate systems, providing reports, logs, and visuals to ease decisions and audits.`,
+          },
+        ],
+      },
+      {
+        quarters: 3,
+        logo: null,
+        title: "Seleris FraudGuard",
+        subtitle: "Comprehensive Fraud Prevention Suite",
+        description: `Seleris FraudGuard is a comprehensive AI-driven fraud prevention suite that combines multi-modal detection, predictive analytics, adaptive monitoring, advanced risk modeling, and behavioral analysis to identify and mitigate fraudulent activities before they impact businesses.`,
+        content: [
+          {
+            title: "Multi-Modal Fraud Detection & Predictive Prevention",
+            description: `FraudGuard uses transaction, behavior, device, and biometric data to spot suspicious activity, predicting and alerting on fraud before it happens.`,
+          },
+          {
+            title: "Launch, Growth & Expansion Strategy",
+            description: `FraudGuard debuts in Q3 2026 for insurance, banking, and e-commerce fraud detection, adding ID verification in Q1 2027 and AI anomaly simulation in Q2 2027.`,
+          },
+          {
+            title: "Seamless Integration & Real-Time Monitoring",
+            description: `FraudGuard integrates with enterprise systems, offering real-time dashboards, custom alerts, and automated reports for fast, compliant threat response.`,
+          },
+        ],
+      },
+      {
+        quarters: 4,
+        logo: null,
+        title: "Seleris VitalScan",
+        subtitle: "Advanced health monitoring platform",
+        description: `Seleris VitalScan is an advanced health monitoring platform that combines IoT-enabled medical devices with predictive health analytics and AI-driven diagnostics to provide continuous, highly accurate, real-time insights into an individual's well-being.`,
+        content: [
+          {
+            title: "Continuous Health Monitoring & Early Alerts",
+            description: `VitalScan tracks vitals in real time and uses early warnings to detect issues like heart disease, respiratory illness, and chronic fatigue.`,
+          },
+          {
+            title: "Targeted Applications Across Sectors",
+            description: `VitalScan serves healthcare, corporate wellness, and elder care, delivering insights for long-term care, workplace health, and remote monitoring.`,
+          },
+          {
+            title: "IoT Integration & Predictive Health Analytics",
+            description: `VitalScan uses IoT wearables and predictive models to forecast health risks, integrating with medical systems and secure cloud storage to ensure privacy and compliance.`,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    year: 2027,
+    data: [
+      {
+        quarters: null,
+        logo: null,
+        title: "Seleris Enterprise Suite",
+        subtitle: "Integrated AI management platform",
+        description: `Seleris Enterprise Suite is a next-generation integrated AI management platform designed to unify and optimize the operation of all Seleris products under a single, intelligent, secure, scalable, and user-friendly dashboard for seamless business insights`,
+        content: [
+          {
+            title: "Unified Dashboard & Cross-Product Analytics",
+            description: `Seleris Enterprise Suite centralizes all Seleris solutions, letting organizations track performance, analyze trends, and gain real-time insights across products.`,
+          },
+          {
+            title: "Single Sign-On & Streamlined Access Control",
+            description: `The platform features enterprise-grade SSO for secure logins, role-based access, and easy user onboarding with enhanced efficiency.`,
+          },
+          {
+            title: "Centralized Reporting & Advanced Business Intelligence",
+            description: `With BI tools for custom reports, predictive analytics, and KPI tracking, the suite gives leaders a full view of operations for smarter decisions.`,
+          },
+        ],
+      },
+    ],
+  },
+  {
+    year: 2028,
+    data: [
+      {
+        quarters: null,
+        logo: null,
+        title: "Seleris Intelligence Hub",
+        subtitle: "AI-powered strategic decision platform",
+        description: `Seleris Intelligence Hub is an AI-powered strategic decision platform engineered to provide organizations with deep predictive insights, market intelligence, and automated recommendations for faster, smarter, and more data-driven, actionable, business focused decision-making`,
+        content: [
+          {
+            title: "Predictive Analytics Across Multiple Business Domains",
+            description: `Seleris Intelligence Hub uses machine learning on past and real-time data to forecast sales, operations, finance, and supply chain needs, helping leaders act before challenges arise.`,
+          },
+          {
+            title: "Market Intelligence & Trend Detection",
+            description: `The platform monitors global and industry data to detect trends, competitor moves, and disruptions, helping businesses adjust strategies early.`,
+          },
+          {
+            title: "Automated Recommendation & Strategic Planning Tools",
+            description: `The system provides data-driven recommendations with simulations and impact analysis to guide investment, resource allocation, and strategic planning.`,
           },
         ],
       },

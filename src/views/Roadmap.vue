@@ -5,7 +5,7 @@ import { roadmapData } from "@/Data/RoadmapData";
 import { ref } from "vue";
 
 // cari tahun 2023
-const initialYearIndex = roadmapData.findIndex((item) => item.year === 2023);
+const initialYearIndex = roadmapData.findIndex((item) => item.year === 2025);
 // ambil produk pertama
 const initialProduct = roadmapData[initialYearIndex].data[0];
 
@@ -49,7 +49,7 @@ function selectProduct(product) {
     <div class="relative w-full h-auto justify-center">
       <!-- Frame Content Scroll -->
       <div
-        class="flex flex-row w-full full h-[800px] lg:h-[800px] z-20 overflow-x-auto snap-x snap-mandatory scroll-pl-28 pl-28 pr-14 hide-scrollbar"
+        class="flex flex-row w-full full h-[800px] lg:h-[700px] z-20 overflow-x-auto snap-x snap-mandatory scroll-pl-28 pl-28 pr-14 hide-scrollbar"
       >
         <div
           v-for="(yearItem, yearIndex) in roadmapData"
@@ -65,18 +65,18 @@ function selectProduct(product) {
                   <img
                     src="@/assets/images/Diamond.svg"
                     alt=""
-                    class="w-full h-[180px] md:h-[130px] lg:h-[150px] object-cover drop-shadow-[-5px_8px_5px_rgba(0,0,0,0.15)] md:drop-shadow-[-20px_10px_10px_rgba(0,0,0,0.25)]"
+                    class="w-full h-[180px] md:h-[130px] lg:h-[130px] object-cover drop-shadow-[-5px_8px_5px_rgba(0,0,0,0.15)] md:drop-shadow-[-10px_10px_10px_rgba(0,0,0,0.25)] dark:drop-shadow-[0_0_30px_rgba(44,255,255,1)]"
                   />
                 </figure>
               </div>
               <div
-                class="w-auto h-auto relative md:bottom-[250px] lg:bottom-[250px] xl:bottom-[250px] flex justify-center items-center"
+                class="w-auto h-auto relative md:bottom-[250px] lg:bottom-[250px] xl:bottom-[220px] flex justify-center items-center"
               >
                 <div
                   class="w-[100px] h-full py-2 rounded-md bg-gradient-to-r from-[#2C43B7] to-[#50B6EE] flex justify-center items-center"
                 >
                   <span
-                    class="text-[#FAFAFA] font-[400] text-[21px] text-center"
+                    class="text-[#FAFAFA] font-[400] text-[17px] text-center"
                     >{{ yearItem.year }}</span
                   >
                 </div>
@@ -94,16 +94,32 @@ function selectProduct(product) {
             <div class="relative w-full h-full">
               <!-- Titik Tengah Line -->
               <div
-                class="absolute w-10 h-10 p-1.5 rounded-full bg-gradient-to-r from-[#2C43B7] to-[#50B6EE] left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20"
+                @click="
+                  setActive(yearIndex, productIndex);
+                  selectProduct(product);
+                "
+                class="absolute w-8 h-8 p-1.5 rounded-full bg-gradient-to-r from-[#2C43B7] from-20% to-[#50B6EE] to-90% left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 cursor-pointer"
               >
-                <div class="w-full h-full bg-white rounded-full" />
+                <div
+                  class="w-full h-full rounded-full"
+                  :class="{
+                    'bg-white dark:shadow-[0_0_30px_rgba(255,255,255,1)] transition-all duration-500 ease-in-out':
+                      activeProduct.yearIndex === yearIndex &&
+                      activeProduct.productIndex === productIndex,
+                    'dark:bg-transparent transition-all duration-500 ease-in-out':
+                      !(
+                        activeProduct.yearIndex === yearIndex &&
+                        activeProduct.productIndex === productIndex
+                      ),
+                  }"
+                />
               </div>
               <!-- Quarter jika ada -->
               <div
                 v-if="product.quarters"
-                class="absolute bottom-[320px] z-20 px-10 py-1 bg-gradient-to-r from-[#2C43B7] to-[#50B6EE] rounded-md left-1/2 -translate-x-1/2"
+                class="absolute bottom-[280px] z-20 px-10 py-1 bg-gradient-to-r from-[#2C43B7] to-[#50B6EE] rounded-md left-1/2 -translate-x-1/2"
               >
-                <span class="text-white text-[20px]">
+                <span class="text-white text-[17px]">
                   Q{{ product.quarters }}
                 </span>
               </div>
@@ -112,7 +128,7 @@ function selectProduct(product) {
               <div
                 class="relative w-full h-1/2 z-10 flex flex-col"
                 :class="{
-                  'pt-0 transition-all duration-500 ease-in-out':
+                  'pt-2 transition-all duration-500 ease-in-out':
                     activeProduct.yearIndex === yearIndex &&
                     activeProduct.productIndex === productIndex,
                   'pt-20 transition-all duration-500 ease-in-out': !(
@@ -125,7 +141,7 @@ function selectProduct(product) {
                 <div
                   class="flex justify-center relative left-1/2 -translate-x-1/2 w-[350px] p-[3px] rounded-xl"
                   :class="{
-                    'bg-gradient-to-r from-[#2C43B7] to-[#50B6EE]':
+                    'bg-gradient-to-r from-[#2C43B7] via-[#3ED2B2] to-[#50B6EE] dark:shadow-[0_0_30px_rgba(62,210,178,0.3)]':
                       activeProduct.yearIndex === yearIndex &&
                       activeProduct.productIndex === productIndex,
                     '': !(
@@ -142,7 +158,7 @@ function selectProduct(product) {
                     "
                     class="w-[350px] rounded-lg flex flex-col items-center p-5 cursor-pointer"
                     :class="{
-                      'bg-white':
+                      'bg-white dark:bg-[#323232]':
                         activeProduct.yearIndex === yearIndex &&
                         activeProduct.productIndex === productIndex,
                       '': !(
@@ -160,24 +176,36 @@ function selectProduct(product) {
                         alt="logo"
                         class="w-full h-[40px] object-contain mb-4"
                       />
-                      <p class="text-[#195279] font-[500] text-[17px]">
+                      <p class="text-[#195279] font-[500] text-[22px]">
                         {{ product.title }}
                       </p>
                       <p
-                        class="text-[#195279] font-[400] text-[14px] text-center"
+                        class="text-[#195279] font-[400] text-[16px] text-center"
                       >
                         {{ product.subtitle }}
                       </p>
                     </div>
                     <div
                       v-else
-                      class="flex flex-col justify-center items-center h-[100px]"
+                      class="flex flex-col items-center h-[100px]"
+                      :class="{
+                        'justify-center transition-all duration-500 ease-in-out':
+                          activeProduct.yearIndex === yearIndex &&
+                          activeProduct.productIndex === productIndex,
+                        'justify-start transition-all duration-500 ease-in-out':
+                          !(
+                            activeProduct.yearIndex === yearIndex &&
+                            activeProduct.productIndex === productIndex
+                          ),
+                      }"
                     >
-                      <p class="text-[#195279] font-[500] text-[17px]">
+                      <p
+                        class="font-[500] text-[22px] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                      >
                         {{ product.title }}
                       </p>
                       <p
-                        class="text-[#195279] font-[400] text-[14px] text-center"
+                        class="font-[400] text-[16px] text-center text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                       >
                         {{ product.subtitle }}
                       </p>
@@ -199,25 +227,25 @@ function selectProduct(product) {
       </div>
       <!-- Line Full -->
       <div
-        class="absolute top-1/2 w-full h-[6px] bg-gradient-to-r from-[#2C43B7] from-1% via-[#3ED2B2] via-40% to-[#50B6EE] to-100% z-0"
+        class="absolute top-1/2 w-full h-[4px] bg-gradient-to-r from-[#2C43B7] from-1% via-[#3ED2B2] via-40% to-[#50B6EE] to-100% z-0 dark:shadow-[0_0_20px_rgba(80,182,238,1)] rounded-full"
       ></div>
     </div>
   </section>
   <!-- Card Description -->
   <section
     v-if="selectedProduct"
-    class="w-full h-auto -mt-[100px] xl:-mt-[100px] relative z-20"
+    class="w-full h-auto -mt-[100px] xl:-mt-[130px] relative z-20"
   >
     <div class="w-full h-auto flex flex-col">
-      <div class="w-full h-auto px-10">
+      <div class="w-full h-auto px-32">
         <div
           class="w-full h-auto relative p-0.5 bg-gradient-to-r from-[#2C43B7] via-[#3ED2B2] to-[#50B6EE] rounded-[30px]"
         >
           <div
-            class="w-full h-full flex flex-col bg-[#FFFFFF] dark:bg-[#323232] p-8 lg:p-14 rounded-[30px] gap-y-5"
+            class="w-full h-full flex flex-col bg-[#FFFFFF] dark:bg-[#323232] p-8 lg:p-10 rounded-[30px] gap-y-5"
           >
             <p
-              class="md:text-[27px] text-center text-[#195279] font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+              class="md:text-[24px] text-center text-[#195279] font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
             >
               {{ selectedProduct.title }}
             </p>
@@ -229,9 +257,15 @@ function selectProduct(product) {
           </div>
         </div>
       </div>
-      <div class="w-full h-auto mt-4 lg:mt-10">
+      <div class="relative w-full h-auto mt-4 lg:mt-0">
         <div
-          class="relative flex flex-row w-full max-h-screen gap-x-10 sml:gap-x-5 md:gap-x-10 mt-16 sml:mt-4 md:mt-10 py-5 overflow-x-auto snap-x snap-mandatory sml:scroll-pl-10 sml:pl-10 sml:pr-10 md:scroll-pl-10 md:pl-10 md:pr-10 xl:scroll-pl-10 xl:pl-10 xl:pr-10 hide-scrollbar"
+          class="hidden xl:flex absolute w-32 h-full bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-r dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% left-0 z-20 rounded-r-2xl"
+        />
+        <div
+          class="hidden xl:flex absolute w-32 h-full bg-gradient-to-l from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-l dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% right-0 z-20 rounded-l-2xl"
+        />
+        <div
+          class="relative flex flex-row w-full max-h-screen gap-x-10 sml:gap-x-5 md:gap-x-10 mt-16 sml:mt-4 md:mt-10 py-5 overflow-x-auto snap-x snap-mandatory sml:scroll-pl-10 sml:pl-10 sml:pr-10 md:scroll-pl-10 md:pl-10 md:pr-10 xl:scroll-pl-32 xl:pl-32 xl:pr-32 hide-scrollbar"
         >
           <div
             v-for="(item, index) in selectedProduct.content"
@@ -242,12 +276,12 @@ function selectProduct(product) {
               class="w-[300px] md:w-[500px] h-full flex flex-col bg-[#FFFFFF] dark:bg-[#323232] p-5 md:p-8 rounded-[30px] justify-between"
             >
               <p
-                class="text-center md:px-16 pb-4 text-[#195279] font-[500] md:text-[21px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                class="text-center md:px-16 pb-4 text-[#195279] font-[500] md:text-[17px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
               >
                 {{ item.title }}
               </p>
               <p
-                class="text-center text-[#195279] md:text-[17px] dark:text-[#6F6F6F]"
+                class="text-center text-[#195279] md:text-[14px] dark:text-[#6F6F6F]"
               >
                 {{ item.description }}
               </p>

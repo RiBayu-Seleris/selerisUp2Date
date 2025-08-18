@@ -100,6 +100,7 @@ const isSecurityRoute = computed(() => route.path === "/security");
 const isPrivacyRoute = computed(() => route.path === "/privacy");
 const isBookDemoRoute = computed(() => route.path === "/book-a-demo");
 const isCompanyRoute = computed(() => route.path === "/about/company");
+const isBlogDetail = computed(() => route.path === "/blog/details");
 </script>
 
 <template>
@@ -135,9 +136,10 @@ const isCompanyRoute = computed(() => route.path === "/about/company");
   <!-- ✅ Main App Content -->
   <template v-else>
     <template v-if="!isProductRoute">
+      <!-- overflow-x-hidden -->
       <div
         :class="[
-          'relative w-full h-auto font-poppins overflow-x-hidden dark:bg-[#17181A] dark:text-white',
+          'relative w-full h-auto font-poppins dark:bg-[#17181A] dark:text-white',
           isTermsRoute || isSecurityRoute || isPrivacyRoute
             ? 'bg-[#FFFFFF]'
             : 'bg-[#f9fafb]',
@@ -147,6 +149,7 @@ const isCompanyRoute = computed(() => route.path === "/about/company");
           isCompanyRoute
             ? 'min-h-screen w-full dark:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-50%,_#17181A_10%)] dark:md:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-50%,_#17181A_15%)] dark:lg:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-40%,_#17181A_30%)]'
             : '',
+          !isBlogDetail ? 'overflow-x-hidden' : '',
         ]"
       >
         <main
@@ -181,7 +184,12 @@ const isCompanyRoute = computed(() => route.path === "/about/company");
           <section
             class="flex flex-col relative w-full mx-auto h-auto mt-32 px-8"
             v-if="
-              !['/blogs', '/blogs/:slug', '/test-embed'].includes(route.path)
+              ![
+                '/blogs',
+                '/blogs/:slug',
+                '/blog/details',
+                '/test-embed',
+              ].includes(route.path)
             "
           >
             <Touch />
@@ -190,7 +198,7 @@ const isCompanyRoute = computed(() => route.path === "/about/company");
 
         <!-- Footer -->
         <footer
-          class="w-full max-w-[1440px] h-auto px-8 mt-20 mx-auto z-10 dark:bg-[#17181A]/70"
+          class="w-full max-w-[1440px] h-auto px-8 mt-20 mx-auto z-10 dark:bg-[#17181A]/70 animate__animated animate__fadeIn animate__slower"
           v-if="!['/test-embed'].includes(route.path)"
         >
           <Footer />

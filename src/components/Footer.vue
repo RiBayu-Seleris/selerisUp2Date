@@ -29,12 +29,12 @@ import { companyList } from "@/Data/companyList";
                 <img
                   :src="Logo"
                   alt="Logo"
-                  class="w-full sml:h-[60px] md:h-[80px] xl:h-[100px] object-contain object-left dark:hidden"
+                  class="w-full sml:h-[60px] md:h-[80px] xl:h-[80px] object-contain object-left dark:hidden"
                 />
                 <img
                   :src="DarkLogo"
                   alt="Logo"
-                  class="w-full sml:h-[60px] md:h-[80px] xl:h-[100px] object-contain object-left hidden dark:block"
+                  class="w-full sml:h-[60px] md:h-[80px] xl:h-[80px] object-contain object-left hidden dark:block"
                 />
               </div>
               <div

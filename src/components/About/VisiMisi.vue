@@ -1,6 +1,6 @@
 <script setup>
 import VisiMisiCard from "@/components/reusable/VisiMisiCard.vue";
-import VisionVideo from "@/assets/videos/Mission.mp4";
+import VisionVideo from "@/assets/videos/Vision.mp4";
 import MissionVideo from "@/assets/videos/Mission.mp4";
 </script>
 

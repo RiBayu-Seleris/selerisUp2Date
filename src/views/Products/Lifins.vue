@@ -44,7 +44,7 @@ import { lifinsTestimonials } from "@/Data/Products/Lifins/lifinsTestimonials";
     <!-- Hero -->
     <section class="relative w-full h-full rounded-[20px] z-20 p-4" id="hero">
       <div
-        class="relative w-full h-[400px] md:h-[600px] lg:h-[650px] rounded-[20px] z-20"
+        class="relative w-full h-[400px] md:h-[700px] lg:h-[650px] rounded-[20px] z-20"
       >
         <HeroText
           class="relative"
@@ -62,18 +62,18 @@ import { lifinsTestimonials } from "@/Data/Products/Lifins/lifinsTestimonials";
       >
         <!-- Left Circle -->
         <CircleGradientLeft
-          heightClass="h-[280px] md:h-[500px] xl:h-[470px]"
-          positionClass="top-[10px] md:-top-[70px] xl:-top-[100px] -left-[90px]"
+          heightClass="h-[300px] md:h-[470px] xl:h-[470px]"
+          positionClass="-top-[50px] md:-top-[90px] xl:-top-[100px] -left-[190px] md:-left-[230px] xl:-left-[90px]"
         />
         <!-- Center Circle -->
         <CircleGradient
-          heightClass="h-[280px] md:h-[500px] xl:h-[700px]"
-          positionClass="top-[10px] md:-top-[70px] xl:-top-[50px] left-1/2 transform -translate-x-1/2"
+          heightClass="h-[200px] md:h-[400px] xl:h-[700px]"
+          positionClass="-top-[20px] md:-top-[40px] xl:-top-[50px] left-1/2 transform -translate-x-1/2"
         />
         <!-- Right Circle -->
         <CircleGradientRight
-          heightClass="h-[280px] md:h-[500px] xl:h-[470px]"
-          positionClass="top-[10px] md:-top-[70px] xl:-top-[100px] -right-[90px]"
+          heightClass="h-[300px] md:h-[470px] xl:h-[470px]"
+          positionClass="-top-[50px] md:-top-[90px] xl:-top-[100px] -right-[190px] md:-right-[230px] xl:-right-[90px]"
         />
         <PhoneHero />
       </div>

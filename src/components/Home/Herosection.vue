@@ -1,21 +1,22 @@
 <script setup>
-import Banner from "@/assets/images/Hero2.png";
 import SliderDescription from "@/components/SliderDescription.vue";
 
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import { ref, onMounted, onUnmounted, watch } from "vue"; // ← Tambahkan ini!
+// import { ref, onMounted, onUnmounted, watch } from "vue"; // ← Tambahkan ini!
 // import { useScrollStore } from "@/stores/scroll";
 import { useSidebarStore } from "@/stores/sidebar";
+
+import { bannerLists } from "@/Data/BannerLists";
 </script>
 
 <template>
   <div class="relative w-full h-auto rounded-b-3xl mt-28">
     <div
-      class="w-full h-auto lg:bg-hero2 dark:lg:bg-herodark bg-no-repeat bg-cover lg:bg-center dark:lg:bg-center xl:bg-top dark:xl:bg-top lg:pt-16 rounded-3xl"
+      class="w-full h-auto flex justify-center items-center lg:bg-hero2 dark:lg:bg-herodark bg-no-repeat bg-cover lg:bg-center dark:lg:bg-center xl:bg-top dark:xl:bg-top lg:pt-16 rounded-3xl"
     >
       <div
-        class="flex flex-col w-full h-auto text-center justify-center items-center pt-8 lg:pt-0 z-30 bg-[#F3F4F6] dark:bg-black dark:lg:bg-transparent lg:bg-transparent rounded-3xl"
+        class="flex flex-col w-full mx-auto h-auto text-center justify-center items-center pt-8 lg:pt-0 z-30 bg-[#F3F4F6] dark:bg-black dark:lg:bg-transparent lg:bg-transparent rounded-3xl"
       >
         <div class="w-full pb-2 sml:pb-2 sml:pt-4 md:pt-0">
           <p
@@ -76,31 +77,26 @@ import { useSidebarStore } from "@/stores/sidebar";
             :pagination="false"
             :autoplay="{ delay: 3000, disableOnInteraction: false }"
             loop
-            class="w-full h-full lg:h-[310px] group"
+            class="w-full h-full lg:h-[310px] flex justify-center items-center group"
           >
-            <SwiperSlide>
+            <SwiperSlide
+              v-for="(data, index) in bannerLists"
+              :key="index"
+              class="w-full h-full flex items-center justify-center"
+            >
               <img
-                :src="Banner"
-                alt="Logo Besar"
-                class="w-full h-auto lg:h-full object-contain object-top lg:px-10"
+                :src="`/assets/images/hero-image/${data.banner}`"
+                alt="Banner"
+                class="w-full h-auto lg:h-full object-contain object-center lg:px-10"
               />
-              <SliderDescription />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                :src="Banner"
-                alt="Logo Besar"
-                class="w-full h-auto lg:h-full object-contain object-top lg:px-10"
+              <SliderDescription
+                :logo="data.logo"
+                :darklogo="data.darklogo"
+                :descriptions="data.description"
+                :linelightcolor="data.linelightcolor"
+                :linedarkcolor="data.linedarkcolor"
+                :href="data.url"
               />
-              <SliderDescription />
-            </SwiperSlide>
-            <SwiperSlide>
-              <img
-                :src="Banner"
-                alt="Logo Besar"
-                class="w-full h-auto lg:h-full object-contain object-top lg:px-10"
-              />
-              <SliderDescription />
             </SwiperSlide>
           </Swiper>
         </div>

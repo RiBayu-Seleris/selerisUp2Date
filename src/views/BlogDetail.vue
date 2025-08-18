@@ -1,240 +1,367 @@
 <script setup>
-import LikeIcon from "@/components/icons/Like.vue";
-import EyeIcon from "@/components/icons/Eye.vue";
-import CommentIcon from "@/components/icons/Comment.vue";
-import ShareIcon from "@/components/icons/Share.vue";
-import BlogPublic from "@/components/reusable/BlogPublic.vue";
-import BlogShareMenu from "@/components/reusable/BlogShareMenu.vue";
+import ArrowDown from "@/components/icons/ArrowDown.vue";
+import { ref } from "vue";
+import ToC from "@/components/Blog/ToC.vue";
 
-import Instagram from "@/components/icons/Instagram.vue";
-import Linkedin from "@/components/icons/Linkedin.vue";
-import Twitter from "@/components/icons/Twitter.vue";
+const blogimage = "new-example.png";
+const blogimage2 = "example.png";
 
-import { useRoute } from "vue-router";
-import { blogPosts } from "@/Data/BlogPosts";
-import { formatNumber } from "@/components/Helper/numberFormat.js";
-import { ref, onMounted, onBeforeUnmount } from "vue";
+// const articleRef = ref(null);
+const isAccountDropdown = ref(false);
+const isFocusedComment = ref(false);
 
-const route = useRoute();
-const slug = route.params.slug;
-
-// Cari artikel berdasarkan slug
-const post = blogPosts.find((p) => p.slug === slug);
-
-const countlikes = formatNumber(post.likes);
-const countviews = formatNumber(post.views);
-const countcomments = formatNumber(post.comments);
-
-const shareOpenTop = ref(false);
-const shareOpenBottom = ref(false);
-
-const shareTopRef = ref(null);
-const shareBottomRef = ref(null);
-
-const handleTop = () => {
-  shareOpenTop.value = !shareOpenTop.value;
-  shareOpenBottom.value = false;
-};
-const handleBottom = () => {
-  shareOpenBottom.value = !shareOpenBottom.value;
-  shareOpenTop.value = false;
+const toggleDropdown = () => {
+  isAccountDropdown.value = !isAccountDropdown.value;
 };
 
-const handleClickOutside = (event) => {
-  const clickedOutsideTop =
-    shareTopRef.value && !shareTopRef.value.contains(event.target);
-  const clickedOutsideBottom =
-    shareBottomRef.value && !shareBottomRef.value.contains(event.target);
-
-  if (clickedOutsideTop && clickedOutsideBottom) {
-    shareOpenTop.value = false;
-    shareOpenBottom.value = false;
-  }
+const toggleIsFocused = () => {
+  isFocusedComment.value = true;
 };
 
-onMounted(() => {
-  document.addEventListener("click", handleClickOutside);
-});
-onBeforeUnmount(() => {
-  document.removeEventListener("click", handleClickOutside);
-});
+const closeComment = () => {
+  isFocusedComment.value = false;
+};
+
+const comments = [
+  {
+    name: "Riski Maulana Yusuf",
+    date: "21 Jul 2025",
+    comment:
+      "Artikel yang hebat untuk sebuah tema teknologi kami sangat berharap jika kamu terus membuat artikel yang bertemakan teknologi",
+  },
+  {
+    name: "Arya Alfinanto",
+    date: "21 Jul 2025",
+    comment:
+      "Artikel yang hebat untuk sebuah tema teknologi kami sangat berharap jika kamu terus membuat artikel yang bertemakan teknologi",
+  },
+  {
+    name: "Yusuf Rijal",
+    date: "21 Jul 2025",
+    comment:
+      "Artikel yang hebat untuk sebuah tema teknologi kami sangat berharap jika kamu terus membuat artikel yang bertemakan teknologi",
+  },
+];
 </script>
 
 <template>
-  <!-- Gambar Blog -->
-  <section
-    class="flex relative w-full h-auto px-12 xl:px-28 bg-green-400 pt-48 bg-[radial-gradient(ellipse_at_top,_#3CFF7A_-70%,_#FAFAFA_60%)] dark:bg-[radial-gradient(ellipse_at_top,_#3CFF7A_-70%,_#17181A_40%)]"
-  >
-    <!-- Blog Content -->
-    <div class="w-full h-auto">
-      <img
-        src="@/assets/images/blog1.png"
-        alt="CertLogo"
-        class="w-full h-full object-center object-contain"
-      />
-    </div>
-  </section>
-  <section class="flex flex-col relative w-full h-auto px-12 xl:px-28">
-    <div
-      class="flex flex-col w-full h-auto sml:pt-[130px] md:pt-[130px] lg:pt-[150px] xl:pt-[150px]"
-    >
-      <div class="flex flex-col w-full h-auto gap-y-1">
-        <p class="text-[19px] lg:text-[23px] text-[#18AB53] font-[500]">
-          Published {{ post.date }}
+  <div class="w-full h-auto px-12 xl:px-16 pt-40">
+    <section class="w-full h-auto flex flex-row justify-between">
+      <div class="w-full h-auto flex items-center">
+        <p class="text-[#535862] font-[400]">
+          Home > Blog >
+          <span class="text-[#195279]"
+            >Check out SalesGenius, AI tools for smarter sales pitches</span
+          >
         </p>
-        <p
-          class="text-[21px] md:text-[27px] lg:text-[32px] xl:text-[47px] text-[#195279] font-[500] leading-relaxed dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
-        >
-          {{ post.title }}
-        </p>
-        <div
-          class="relative w-40 h-auto py-1 flex justify-center md:py-2 bg-green-500 mt-5 rounded-full"
-        >
-          <p class="text-[#6941C6] text-[14px] md:text-[17px]">
-            {{ post.category }}
-          </p>
+      </div>
+      <div class="w-full h-auto flex justify-end">
+        <div class="w-[60%] flex flex-row">
+          <div class="relative w-full h-auto flex flex-row justify-end">
+            <div class="relative w-[30%] h-auto pt-0 flex justify-end">
+              <button @click="toggleDropdown" class="w-7 h-7 p-1">
+                <ArrowDown />
+              </button>
+              <div
+                v-if="isAccountDropdown"
+                class="absolute w-full h-[50px] border-[1px] top-10 right-0 transition-all duration-500"
+              >
+                <div class="w-full h-full flex justify-center items-center">
+                  <p class="text-[14px]">Logout</p>
+                </div>
+              </div>
+            </div>
+            <div class="w-auto h-auto flex flex-col justify-between px-2">
+              <div class="w-full flex justify-end">
+                <p class="text-[16px] text-[#195279] font-[400] text-end">
+                  Riski Yusuf Maulana
+                </p>
+              </div>
+              <div class="w-full flex justify-end">
+                <p class="text-[16px] text-[#B8B8B8] font-[400]">Account</p>
+              </div>
+            </div>
+          </div>
+          <div class="relative w-[30%] h-auto flex justify-center items-center">
+            <img
+              src="/assets/images/profile/example.png"
+              alt=""
+              class="w-[55px] h-[55px] rounded-full bg-contain object-center"
+            />
+          </div>
         </div>
       </div>
-    </div>
-  </section>
-
-  <!-- Content Blog -->
-  <section
-    class="flex flex-col relative w-full h-auto px-12 md:px-12 xl:px-28 mt-10"
-  >
-    <!-- Blog Content -->
-    <div class="w-full h-auto dark:bg-[#17181A] px-0 md:px-14 lg:px-28 py-5">
-      <!-- {{ post.description }} -->
-      <div
-        v-html="post.description"
-        class="prose prose-base md:prose-lg lg:prose-xl lg:text-[18px] max-w-none text-justify leading-relaxed dark:text-[#FAFAFA]"
-      />
-    </div>
-  </section>
-  <!-- Like, View, Comment, Share (Bottom) -->
-  <div
-    class="flex flex-row justify-between w-full max-w-none md:max-w-xl lg:max-w-4xl h-auto py-2 mx-auto mt-6 px-20 md:px-0"
-  >
-    <div class="w-full h-auto">
-      <div class="flex flex-row gap-x-5 md:gap-x-10">
-        <BlogPublic :count="countlikes">
-          <template #icon>
-            <LikeIcon />
-          </template>
-        </BlogPublic>
-        <BlogPublic :count="countviews">
-          <template #icon>
-            <EyeIcon />
-          </template>
-        </BlogPublic>
-        <BlogPublic :count="countcomments">
-          <template #icon>
-            <CommentIcon />
-          </template>
-        </BlogPublic>
-      </div>
-    </div>
-    <div
-      ref="shareBottomRef"
-      class="relative flex content-end justify-end w-[10%] h-auto text-[#6E6E6E] dark:text-[#B2AEAE]"
-    >
-      <!-- Tombol Share -->
-      <div @click.stop="handleBottom" class="cursor-pointer">
-        <ShareIcon />
-      </div>
-
-      <!-- Dropdown -->
-      <div
-        v-if="shareOpenBottom"
-        class="absolute mt-5 w-48 md:w-56 z-30 left-[50%] md:left-[80%] -translate-x-1/2"
-      >
-        <BlogShareMenu />
-      </div>
-    </div>
-  </div>
-  <div class="w-full mt-10 px-12 md:px-12 xl:px-28">
-    <div class="w-full h-[2px] bg-[#DADADA]" />
-  </div>
-  <!-- Post At and Author -->
-  <section
-    class="flex flex-row justify-between w-full max-w-none md:max-w-xl lg:max-w-4xl h-auto py-2 mx-auto mt-6 px-8 md:px-0"
-  >
-    <div
-      class="flex flex-col md:flex-row w-full h-auto gap-x-2 md:gap-x-5 items-center"
-    >
-      <div
-        class="w-8 h-8 md:w-14 md:h-14 lg:w-14 lg:h-14 mb-2 flex items-center justify-center"
-      >
-        <div class="w-full h-full bg-[#D9D9D9] rounded-full"></div>
-      </div>
-      <div
-        class="w-[80%] md:w-[60%] h-auto flex items-center text-center md:text-start"
-      >
-        <p class="text-[14px] md:text-[14px] lg:text-[17px]">
-          <span class="font-[600]">Published in</span> Seleris Meditekno
-          International
-        </p>
-      </div>
-    </div>
-    <div
-      class="flex flex-col md:flex-row w-full h-auto gap-x-2 md:gap-x-5 md:justify-end items-center"
-    >
-      <div class="w-8 h-8 md:w-14 md:h-14 lg:w-14 lg:h-14 mb-2">
-        <div class="w-full h-full bg-[#D9D9D9] rounded-full" />
-      </div>
-      <div
-        class="w-[80%] md:w-[60%] h-auto flex items-center text-center md:text-start"
-      >
-        <p class="text-[14px] md:text-[14px] lg:text-[17px]">
-          <span class="font-[600]">Written by</span> Annisa Maulida Rahma
-        </p>
-      </div>
-    </div>
-  </section>
-  <!-- Comments -->
-  <section
-    class="flex flex-col w-full max-w-none md:max-w-xl lg:max-w-4xl h-auto py-2 mx-auto mt-6 px-14 md:px-0"
-  >
-    <div class="w-full h-auto">
-      <p>Comments (10)</p>
-    </div>
-    <div class="w-full h-auto mt-5">
-      <input
-        name="comment"
-        type="text"
-        placeholder="Share your thoughts?"
-        class="w-full bg-[#EBEBEB] rounded-[10px] py-3 px-3"
-      />
-    </div>
-  </section>
-  <section
-    class="flex flex-col w-full max-w-none md:max-w-xl lg:max-w-4xl h-auto py-2 mx-auto mt-6 px-14 md:px-0 gap-y-16"
-  >
-    <!-- Comment 2 -->
-    <div class="w-full h-auto flex flex-col">
+    </section>
+    <section class="w-full h-auto flex flex-col mt-10">
+      <!-- Blog Images -->
       <div class="w-full h-auto">
-        <p
-          class="font-[500] text-[#000000] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+        <img :src="`/assets/images/blog/` + blogimage" alt="" class="w-full" />
+      </div>
+      <!-- Frame Blog Detail and Content & Most Popular -->
+      <div
+        class="w-full h-auto flex flex-col-reverse lg:flex-row mt-10 gap-x-5"
+      >
+        <!-- Kolom kiri -->
+        <div class="w-full lg:w-[70%] h-auto flex flex-col gap-y-5 lg:pr-20">
+          <div class="w-full h-auto flex flex-col gap-y-4">
+            <div class="w-full h-auto">
+              <p class="text-[#18AB53] font-[500]">Published 20 Jan 2025</p>
+            </div>
+            <div class="w-full h-auto">
+              <h1
+                class="text-[28px] lg:text-[38px] text-[#195279] font-[500] leading-snug"
+              >
+                Shaping Our World, One Innovation at a Time
+              </h1>
+            </div>
+            <div class="w-full lg:w-[70%] h-auto">
+              <p class="text-[16px] text-[#535862] font-[400] leading-tight">
+                Author:
+                <span class="text-[#535862] font-[600]">
+                  Annisa Maulida Rahma</span
+                >
+              </p>
+            </div>
+          </div>
+          <div class="w-full h-auto flex justify-start items-center">
+            <p
+              class="text-[14px] lg:text-[14px] text-[#6941C6] bg-[#7B61FF]/10 px-4 py-1 rounded-full"
+            >
+              Artificial Intelligent
+            </p>
+          </div>
+          <!-- ref="articleRef" -->
+          <article
+            id="content"
+            class="w-full h-auto flex flex-col leading-relaxed text-[#535862] font-[400] space-y-6 lg:space-y-5 mt-5"
+          >
+            <p>
+              Technology. It's the invisible hand guiding our modern lives, the
+              constant hum in the background, and the driving force behind
+              unprecedented change. Every day, new advancements emerge,
+              seemingly at lightning speed, promising to make our lives easier,
+              smarter, and more connected. But beyond the hype, what truly
+              defines the current landscape of technology, and how is it
+              fundamentally reshaping our world?
+            </p>
+            <div class="flex flex-col space-y-4">
+              <h1 class="text-[28px] lg:text-[34px] text-[#195279] font-[500]">
+                Key Frontiers in Today's Tech Landscape
+              </h1>
+              <h2 class="text-[18px] lg:text-[20px] text-[#535862] font-[500]">
+                Artificial Intelligence (AI) & Machine Learning (ML)
+              </h2>
+              <p class="text-[14px] lg:text-[16px]">
+                Technology. It's the invisible hand guiding our modern lives,
+                the constant hum in the background, and the driving force behind
+                unprecedented change.
+              </p>
+              <h2 class="text-[18px] lg:text-[20px] text-[#535862] font-[500]">
+                Artificial Intelligence (AI) & Machine Learning (ML)
+              </h2>
+              <p class="text-[14px] lg:text-[16px]">
+                Technology. It's the invisible hand guiding our modern lives,
+                the constant hum in the background, and the driving force behind
+                unprecedented change.
+              </p>
+              <h2 class="text-[18px] lg:text-[20px] text-[#535862] font-[500]">
+                Artificial Intelligence (AI) & Machine Learning (ML)
+              </h2>
+              <p class="text-[14px] lg:text-[16px]">
+                Technology. It's the invisible hand guiding our modern lives,
+                the constant hum in the background, and the driving force behind
+                unprecedented change.
+              </p>
+            </div>
+            <div class="flex flex-col space-y-4">
+              <h1 class="text-[28px] lg:text-[34px] text-[#195279] font-[500]">
+                How Tech is Reshaping Our World
+              </h1>
+              <p class="italic text-[16px] lg:text-[20px] font-[500]">
+                “What technological advancements are you most excited (or
+                concerned) about? Share your thoughts below!”
+              </p>
+              <p class="text-[14px] lg:text-[16px]">
+                Technology. It's the invisible hand guiding our modern lives,
+                the constant hum in the background, and the driving force behind
+                unprecedented change.
+              </p>
+              <h2 class="text-[18px] lg:text-[20px] text-[#535862] font-[500]">
+                Artificial Intelligence (AI) & Machine Learning (ML)
+              </h2>
+              <p class="text-[14px] lg:text-[16px]">
+                Technology. It's the invisible hand guiding our modern lives,
+                the constant hum in the background, and the driving force behind
+                unprecedented change.
+              </p>
+            </div>
+          </article>
+        </div>
+
+        <!-- Kolom kanan -->
+        <div class="w-full lg:w-[30%] mb-10 lg:mb-0">
+          <!-- wrapper tinggi sama dengan kolom kiri -->
+          <div class="relative w-full h-full">
+            <div class="sticky top-[17%] flex flex-col gap-y-5">
+              <!-- Box 1 -->
+              <ToC />
+              <!-- Box 2 -->
+              <div
+                class="h-auto border-[1px] rounded-[10px] pt-2 hidden lg:flex lg:flex-col"
+              >
+                <div class="w-full h-auto py-4 px-3">
+                  <p
+                    class="text-[#195279] font-[500] lg:text-[16px] justify-center"
+                  >
+                    Most Popular
+                  </p>
+                </div>
+                <div class="w-full h-auto flex flex-col gap-y-2 pb-2">
+                  <div class="w-full h-auto">
+                    <figure class="w-full h-auto">
+                      <img
+                        :src="`/assets/images/blog/` + blogimage2"
+                        alt="blog"
+                        class="w-full h-auto object-cover"
+                      />
+                    </figure>
+                  </div>
+                  <div class="w-full h-auto grid grid-cols-12">
+                    <div class="col-span-3 w-full h-auto flex justify-center">
+                      <p class="text-[24px] text-[#8EB3CC]">#1</p>
+                    </div>
+                    <div class="col-span-9 flex flex-col pr-8 gap-y-1">
+                      <div class="w-full h-auto">
+                        <p class="text-[#6941C6] text-[14px]">
+                          Artificial Intelligent
+                        </p>
+                      </div>
+                      <div class="w-full h-auto">
+                        <p class="text-[#195279] font-[500] text-[18px]">
+                          Shaping Our World, One Innovation at a Time
+                        </p>
+                      </div>
+                      <div class="w-full h-auto">
+                        <p class="text-[#B8B8B8] text-[12px]">
+                          Anisa Maulida Rahma | 20 Januari 2025
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-full h-[1px] bg-[#D2D2D2]" />
+                <div class="w-full h-auto grid grid-cols-12 py-2">
+                  <div class="col-span-3 w-full h-auto flex justify-center">
+                    <p class="text-[24px] text-[#8EB3CC]">#2</p>
+                  </div>
+                  <div class="col-span-9 flex flex-col pr-8 gap-y-1">
+                    <div class="w-full h-auto">
+                      <p class="text-[#6941C6] text-[14px]">
+                        Artificial Intelligent
+                      </p>
+                    </div>
+                    <div class="w-full h-auto">
+                      <p class="text-[#195279] font-[500] text-[18px]">
+                        Shaping Our World, One Innovation at a Time
+                      </p>
+                    </div>
+                    <div class="w-full h-auto">
+                      <p class="text-[#B8B8B8] text-[12px]">
+                        Anisa Maulida Rahma | 20 Januari 2025
+                      </p>
+                    </div>
+                  </div>
+                </div>
+                <div class="w-full h-[1px] bg-[#D2D2D2]" />
+                <div class="w-full h-auto grid grid-cols-12 py-2">
+                  <div class="col-span-3 w-full h-auto flex justify-center">
+                    <p class="text-[24px] text-[#8EB3CC]">#3</p>
+                  </div>
+                  <div class="col-span-9 flex flex-col pr-8 gap-y-1">
+                    <div class="w-full h-auto">
+                      <p class="text-[#6941C6] text-[14px]">
+                        Artificial Intelligent
+                      </p>
+                    </div>
+                    <div class="w-full h-auto">
+                      <p class="text-[#195279] font-[500] text-[18px]">
+                        Shaping Our World, One Innovation at a Time
+                      </p>
+                    </div>
+                    <div class="w-full h-auto">
+                      <p class="text-[#B8B8B8] text-[12px]">
+                        Anisa Maulida Rahma | 20 Januari 2025
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <section class="w-full lg:w-[70%] h-auto mt-20 flex flex-col">
+      <div class="w-full h-auto flex flex-col">
+        <div class="w-full">
+          <p class="text-[#374151] font-[500]">Comments (10)</p>
+        </div>
+        <div class="w-full mt-4 rounded-[8px]">
+          <textarea
+            type="text"
+            rows="2"
+            class="w-full pl-4 py-2 bg-[#EBEBEB] rounded-[8px] focus:outline-none"
+            placeholder="Share your thoughts?"
+            @focus="toggleIsFocused"
+          />
+        </div>
+        <div
+          v-if="isFocusedComment"
+          class="w-full h-auto flex flex-row justify-end space-x-3 mt-2 transition-all duration-500"
         >
-          Maulana Riski
-        </p>
+          <button
+            @click="closeComment"
+            class="w-auto h-auto bg-slate-300 text-[#FAFAFA] px-8 py-2 rounded-md"
+          >
+            <p>Cancel</p>
+          </button>
+          <button
+            class="w-auto h-auto bg-green-500 text-[#FAFAFA] px-8 py-2 rounded-md"
+          >
+            <p>Send</p>
+          </button>
+        </div>
       </div>
-      <div class="w-full h-auto">
-        <p class="font-[400] text-[#000000] dark:text-[#565656]">21 Jul 2020</p>
+      <!-- Comments Display -->
+      <div class="w-full h-auto flex flex-col mt-14 space-y-6">
+        <div
+          v-for="(comment, index) in comments"
+          :key="index"
+          class="w-full h-auto flex flex-col gap-y-6"
+        >
+          <div class="w-full h-auto flex flex-col">
+            <div class="w-full h-auto">
+              <p class="text-[20px] font-[500] text-[#323232]">
+                {{ comment.name }}
+              </p>
+            </div>
+            <div class="w-full h-auto">
+              <p class="text-[18px] font-[400] text-[#2AB857]">
+                {{ comment.date }}
+              </p>
+            </div>
+          </div>
+          <div class="w-full h-auto">
+            <p class="text-[18px] font-[400] text-[#7A808D]">
+              {{ comment.comment }}
+            </p>
+          </div>
+          <div
+            v-if="index !== comments.length - 1"
+            class="w-full h-[1px] bg-gray-400"
+          />
+        </div>
       </div>
-      <div class="w-full h-auto mt-3">
-        <p class="text-[#535862] dark:text-[#DADADA]">
-          This is a really helpful reminder of how important it is to plan ahead
-          financially, especially with so much uncertainty these days. I
-          appreciate the practical tips!
-        </p>
-      </div>
-    </div>
-    <!-- See More -->
-    <div class="w-full h-auto flex flex-col">
-      <div class="w-full h-auto">
-        <p class="font-[500] text-[#2AB857]">See More..</p>
-      </div>
-    </div>
-  </section>
+    </section>
+  </div>
 </template>

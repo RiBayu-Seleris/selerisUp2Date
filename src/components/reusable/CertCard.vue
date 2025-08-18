@@ -28,7 +28,7 @@ defineProps({
     required: true,
   },
   CertNumber: {
-    type: Number,
+    type: String,
     required: true,
   },
   BodyText: {
@@ -73,11 +73,11 @@ const cekCertIcon = computed(() => {
       <div
         :class="`flex flex-col w-full h-full text-white dark:text-[#3D3434] px-6 xl:px-10 pt-12 gap-y-4 ${textPosition}`"
       >
-        <p class="text-[24px] font-semibold">
+        <p class="text-[19px] font-semibold leading-tight">
           {{ TitleAfter }}
         </p>
         <p class="text-[14px] font-normal">
-          Certificate Number: {{ CertNumber }}
+          {{ CertNumber }}
         </p>
         <p class="text-[12px]">
           {{ BodyText }}

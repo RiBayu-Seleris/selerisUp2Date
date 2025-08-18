@@ -27,20 +27,20 @@ defineProps({
           <slot />
           <!-- INI FRAME DIBAWAH LINGKARAN -->
           <div
-            class="absolute w-full h-full top-0 flex flex-col justify-center items-center px-8 gap-y-1 lg:gap-y-2 pt-4 md:pt-8"
+            class="absolute w-full h-full top-0 flex flex-col justify-center items-center px-8 gap-y-2.5 lg:gap-y-2 pt-4 md:pt-4 lg:pt-8"
           >
-            <div class="w-full flex justify-center">
+            <div class="w-full h-[20px] flex justify-center items-start">
               <p
                 :class="[
-                  `${textcolor} text-center text-[17px] md:text-[23px] lg:text-[21px] `,
+                  `${textcolor} text-center text-[12px] md:text-[16px] lg:text-[22px] `,
                 ]"
               >
                 {{ title }}
               </p>
             </div>
-            <div class="w-full flex justify-center">
+            <div class="w-full h-[50px] flex justify-center">
               <p
-                class="text-center text-[12px] md:text-[14px] lg:text-[17px] text-[#6F6F6F]"
+                class="text-center text-[10px] md:text-[14px] lg:text-[18px] text-[#6F6F6F]"
               >
                 {{ description }}
               </p>
@@ -49,15 +49,19 @@ defineProps({
         </div>
       </div>
       <!-- LineStart -->
-      <div class="w-[90px] md:w-32 lg:w-44 h-auto flex items-center">
+      <div class="w-[90px] md:w-36 lg:w-44 h-auto flex items-center">
         <div class="w-full h-[2.5px] bg-[#868686] rounded-full" />
       </div>
       <!-- Circle -->
       <div class="relative w-auto h-auto rounded-full flex items-center">
-        <div :class="[`w-10 h-10 ${circleColor} rounded-full shadow-xl`]" />
+        <div
+          :class="[
+            `w-7 h-7 lg:w-10 lg:h-10 ${circleColor} rounded-full shadow-xl`,
+          ]"
+        />
       </div>
       <!-- LineEnd -->
-      <div class="w-[90px] md:w-32 lg:w-44 h-auto flex items-center">
+      <div class="w-[90px] md:w-36 lg:w-44 h-auto flex items-center">
         <div
           v-if="!isLast"
           class="w-full h-[2.5px] bg-[#868686] rounded-full"

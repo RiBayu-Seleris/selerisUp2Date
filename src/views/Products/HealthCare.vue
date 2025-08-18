@@ -22,6 +22,9 @@ import EasyQuickText from "@productComponents/EasyQuickText.vue";
 import InnovationIcon from "@/assets/icons/innovation.svg";
 import ArrowRight from "@/assets/Products/icons/arrow-right.svg";
 
+import CareOrnament from "@productComponents/Svg/CareOrnament.vue";
+import CareOrnament2 from "@productComponents/Svg/CareOrnament2.vue";
+
 import imageAbout from "@/assets/products/images/health-care-about.png";
 import FrameLineWorks from "@productComponents/Svg/HealthCareDescriptionWork.vue";
 import medinsframebook from "@/assets/Products/images/bg-book-demo-medins.png";
@@ -40,9 +43,9 @@ import { clientLogos } from "@/Data/Products/Medins/medinsClients";
 <template>
   <div class="relative w-full min-h-screen overflow-hidden">
     <!-- Hero -->
-    <section class="relative w-full h-full rounded-[20px] z-20 p-4" id="hero">
+    <section class="relative w-full h-full rounded-[20px] z-20" id="hero">
       <div
-        class="w-full h-[400px] md:h-[600px] lg:h-[650px] rounded-[20px] z-20"
+        class="w-full h-[450px] md:h-[700px] lg:h-[650px] rounded-[20px] z-20"
       >
         <HeroText
           title="Smarter Corporate Health Monitoring"
@@ -54,9 +57,8 @@ import { clientLogos } from "@/Data/Products/Medins/medinsClients";
         />
       </div>
       <!-- Image Phone -->
-      <div
-        class="relative w-full max-w-[1440px] mx-auto h-auto flex -mt-[120px] md:-mt-[250px]"
-      >
+      <div class="relative w-full h-auto flex -mt-[120px] md:-mt-[250px]">
+        <CareOrnament positionClass="top-[10px] md:-top-[30px] xl:-top-16" />
         <PhoneHero />
       </div>
       <!-- DownloadStore -->
@@ -66,9 +68,10 @@ import { clientLogos } from "@/Data/Products/Medins/medinsClients";
     </section>
 
     <!-- About Us -->
-    <section class="relative w-full h-auto max-w-[1440px] mx-auto" id="about">
+    <section class="relative w-full h-auto" id="about">
+      <CareOrnament2 positionClass="top-[10px] md:top-5 xl:top-20" />
       <div
-        class="relative w-full flex flex-col justify-center items-center z-20 mt-16 md:mt-20 lg:mt-40 px-8"
+        class="relative w-full flex flex-col max-w-[1440px] mx-auto justify-center items-center z-20 mt-16 md:mt-20 lg:mt-40 px-8"
       >
         <AboutUs
           title="About Us"

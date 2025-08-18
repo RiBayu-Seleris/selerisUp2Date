@@ -2,159 +2,180 @@
 import { computed, ref } from "vue";
 
 const props = defineProps({
-  Faq: {
-    type: Array,
-    required: true,
-  },
-  opencolortext: {
-    type: String,
-  },
+  Faq: { type: Array, required: true },
+  opencolortext: { type: String },
 });
 
 const leftFaqs = computed(() => props.Faq.filter((_, i) => i % 2 === 0));
 const rightFaqs = computed(() => props.Faq.filter((_, i) => i % 2 !== 0));
 
 const openedIndex = ref([]);
-const toggle = (key) => {
-  if (openedIndex.value.includes(key)) {
-    openedIndex.value = openedIndex.value.filter((item) => item !== key);
-  } else {
-    openedIndex.value.push(key);
-  }
+function toggle(key) {
+  const idx = openedIndex.value.indexOf(key);
+  if (idx > -1) openedIndex.value.splice(idx, 1);
+  else openedIndex.value.push(key);
+}
+
+const openedIndexMobile = ref(null);
+
+const toggleMobile = (index) => {
+  openedIndexMobile.value = openedIndexMobile.value === index ? null : index;
 };
-
-// Transition hooks
-function beforeEnter(el) {
-  el.style.height = "0";
-  el.style.opacity = "0";
-  el.style.paddingTop = "0";
-  el.style.paddingBottom = "0";
-}
-function enter(el) {
-  el.style.transition = "all 0.4s ease";
-  el.style.height = el.scrollHeight + "px";
-  el.style.opacity = "1";
-  el.style.paddingTop = "0";
-  el.style.paddingBottom = "0";
-}
-function leave(el) {
-  el.style.transition = "all 0.4s ease";
-  el.style.height = "0";
-  el.style.opacity = "0";
-  el.style.paddingTop = "0";
-  el.style.paddingBottom = "0";
-}
-
-function afterEnter(el) {
-  el.style.height = "full";
-}
-function afterLeave(el) {
-  el.style.height = "0";
-}
 </script>
 <template>
   <div
-    class="w-full h-auto lg:max-w-6xl mx-auto grid md:grid-cols-2 gap-y-5 gap-x-10 px-8 lg:px-0 items-start"
+    class="hidden md:grid md:grid-cols-2 lg:max-w-6xl mx-auto gap-y-5 gap-x-10 px-8 lg:px-0"
   >
-    <!-- Kolom Kiri -->
+    <!-- KIRI -->
     <div class="flex flex-col gap-y-5">
       <div
-        v-for="(faq, index) in leftFaqs"
-        :key="`left-${index}`"
-        class="w-full h-auto p-[0.7px] rounded-lg"
+        v-for="(faq, i) in leftFaqs"
+        :key="`left-${i}`"
+        class="rounded-lg shadow-md bg-white dark:bg-gray-800"
       >
-        <div
-          class="w-full rounded-lg shadow-md transition-all bg-[#FFFFFF] overflow-visible"
+        <button
+          class="w-full flex items-center gap-x-3 px-6 py-4"
+          @click="toggle(`left-${i}`)"
         >
-          <button
-            class="w-full flex flex-row gap-x-5 items-center px-6 py-4"
-            @click="toggle(`left-${index}`)"
-          >
-            <span class="text-xl">
-              <span
-                v-if="openedIndex.includes(`left-${index}`)"
-                :class="[opencolortext]"
-                >-</span
-              >
-              <span v-else class="text-[#195279]">+</span>
-            </span>
+          <span class="text-[14px] lg:text-[18px]">
             <span
-              :class="[
-                'font-[500] text-start text-[14px] md:text-[17px]',
-                openedIndex.includes(`left-${index}`)
-                  ? opencolortext
-                  : 'text-[#195279]',
-              ]"
+              v-if="openedIndex.includes(`left-${i}`)"
+              :class="opencolortext"
+              >–</span
             >
-              {{ faq.question }}
-            </span>
-          </button>
+            <span v-else class="text-blue-800">+</span>
+          </span>
 
-          <Transition
-            @before-enter="beforeEnter"
-            @enter="enter"
-            @after-enter="afterEnter"
-            @leave="leave"
-            @after-leave="afterLeave"
+          <span
+            :class="[
+              'flex-1 text-start font-medium text-[14px] lg:text-[14px]',
+              openedIndex.includes(`left-${i}`)
+                ? opencolortext
+                : 'text-blue-800',
+            ]"
+            >{{ faq.question }}</span
+          >
+        </button>
+
+        <transition
+          enter-active-class="transition-all duration-300 ease-out"
+          enter-from-class="opacity-0"
+          enter-to-class="opacity-100"
+          leave-active-class="transition-all duration-300 ease-in"
+          leave-from-class="opacity-100"
+          leave-to-class="opacity-0"
+        >
+          <div
+            v-if="openedIndex.includes(`left-${i}`)"
+            class="overflow-hidden transition-all duration-500"
           >
             <div
-              v-if="openedIndex.includes(`left-${index}`)"
-              class="overflow-hidden px-6 text-[#363049] dark:text-[#FFFFFF] text-sm"
+              class="px-6 pb-4 text-sm text-gray-700 dark:text-gray-100"
               v-html="faq.answer"
             />
-          </Transition>
-        </div>
+          </div>
+        </transition>
       </div>
     </div>
 
-    <!-- Kolom Kanan -->
+    <!-- KANAN (struktur sama, ganti key dan warna ikon) -->
     <div class="flex flex-col gap-y-5">
       <div
-        v-for="(faq, index) in rightFaqs"
-        :key="`right-${index}`"
-        class="w-full h-auto p-[0.7px] rounded-lg dark:bg-gradient-to-tr dark:from-[#565656] dark:to-[#BCBCBC]"
+        v-for="(faq, i) in rightFaqs"
+        :key="`right-${i}`"
+        class="rounded-lg shadow-md bg-white dark:bg-gray-800"
       >
-        <div
-          class="w-full rounded-lg shadow-md transition-all bg-[#FFFFFF] dark:bg-[#323232] overflow-visible"
+        <button
+          class="w-full flex items-center gap-x-3 px-6 py-4"
+          @click="toggle(`right-${i}`)"
         >
-          <button
-            class="w-full flex flex-row gap-x-5 items-center px-6 py-4"
-            @click="toggle(`right-${index}`)"
-          >
-            <span class="text-xl">
-              <span
-                v-if="openedIndex.includes(`right-${index}`)"
-                class="text-[#2AB857]"
-                >-</span
-              >
-              <span v-else class="text-[#195279]">+</span>
-            </span>
+          <span class="text-[14px] lg:text-[18px]">
             <span
-              :class="[
-                'font-[500] text-start text-[14px] md:text-[17px]',
-                openedIndex.includes(`right-${index}`)
-                  ? opencolortext
-                  : 'text-[#195279]',
-              ]"
+              v-if="openedIndex.includes(`right-${i}`)"
+              class="text-green-500"
+              >–</span
             >
-              {{ faq.question }}
-            </span>
-          </button>
+            <span v-else class="text-blue-800">+</span>
+          </span>
 
-          <Transition
-            @before-enter="beforeEnter"
-            @enter="enter"
-            @after-enter="afterEnter"
-            @leave="leave"
-            @after-leave="afterLeave"
+          <span
+            :class="[
+              'flex-1 text-start font-medium text-[14px] lg:text-[14px]',
+              openedIndex.includes(`right-${i}`)
+                ? opencolortext
+                : 'text-blue-800',
+            ]"
+            >{{ faq.question }}</span
+          >
+        </button>
+
+        <transition
+          enter-active-class="transition-all duration-300 ease-out"
+          enter-from-class="opacity-0"
+          enter-to-class="opacity-100"
+          leave-active-class="transition-all duration-300 ease-in"
+          leave-from-class="opacity-100"
+          leave-to-class="opacity-0"
+        >
+          <div
+            v-if="openedIndex.includes(`right-${i}`)"
+            class="overflow-hidden"
           >
             <div
-              v-if="openedIndex.includes(`right-${index}`)"
-              class="overflow-hidden px-6 text-[#363049] dark:text-[#FFFFFF] text-sm"
+              class="px-6 pb-4 text-sm text-gray-700 dark:text-gray-100"
               v-html="faq.answer"
             />
-          </Transition>
-        </div>
+          </div>
+        </transition>
+      </div>
+    </div>
+  </div>
+
+  <!-- Mobile -->
+  <div class="w-full flex md:hidden flex-col px-8 gap-y-5">
+    <div
+      v-for="(faq, index) in props.Faq"
+      :key="index"
+      class="w-full h-auto p-[0.7px] rounded-lg dark:bg-gradient-to-tr dark:from-[#565656] from-0% dark:to-[#BCBCBC]"
+    >
+      <div class="w-full rounded-lg shadow-md bg-[#FFFFFF] dark:bg-[#323232]">
+        <button
+          class="w-full flex flex-row gap-x-3 items-center px-6 py-4"
+          @click="toggleMobile(index)"
+        >
+          <span class="text-[14px]">
+            <span
+              v-if="openedIndexMobile === index"
+              class="text-[#2AB857] dark:text-[#52BD95]"
+              >−</span
+            >
+            <span v-else class="text-[#195279] dark:text-[#FAFAFA]">+</span>
+          </span>
+          <span
+            class="text-[14px] justify-start text-start"
+            :class="
+              openedIndexMobile === index
+                ? 'text-[#2AB857] font-medium'
+                : 'text-[#195279] dark:text-[#FAFAFA] font-medium'
+            "
+          >
+            {{ faq.question }}
+          </span>
+        </button>
+        <transition
+          enter-active-class="transition-all duration-500"
+          enter-from-class="opacity-0"
+          enter-to-class="opacity-100"
+          leave-active-class="transition-all duration-500"
+          leave-from-class="opacity-100"
+          leave-to-class="opacity-0"
+        >
+          <div
+            v-if="openedIndexMobile === index"
+            class="px-6 pb-4 text-[#363049] dark:text-[#FFFFFF] text-[14px]"
+            v-html="faq.answer"
+          ></div>
+        </transition>
       </div>
     </div>
   </div>
