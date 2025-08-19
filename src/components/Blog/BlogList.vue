@@ -155,7 +155,7 @@ const selectPostTime = (option) => {
           <img
             :src="`/assets/images/blog/` + blogimage"
             alt=""
-            class="w-full h-[320px] object-center"
+            class="w-full h-[350px] object-center object-fill rounded-[10px]"
           />
         </figure>
       </div>
@@ -177,7 +177,7 @@ const selectPostTime = (option) => {
       </div>
       <div class="w-full h-auto flex flex-col gap-y-4">
         <div class="w-full h-auto">
-          <p class="text-[22px] text-[#111928] font-[600]">
+          <p class="text-[22px] text-[#111928] font-[500]">
             Check out SalesGenius, AI tools for smarter sales pitches
           </p>
         </div>
@@ -348,7 +348,7 @@ const selectPostTime = (option) => {
       </div>
       <div class="flex w-full h-[65px] text-left">
         <p
-          class="lg:text-[17px] font-[600] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+          class="lg:text-[17px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
         >
           Check out SalesGenius, AI tools for smarter sales pitches
         </p>

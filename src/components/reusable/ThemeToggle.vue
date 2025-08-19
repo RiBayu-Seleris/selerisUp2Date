@@ -14,10 +14,12 @@ const themeStore = useThemeStore();
       class="absolute w-8 h-8 rounded-full bg-white dark:bg-[#878787] shadow-lg transition-all duration-300"
       :class="
         themeStore.isDark
-          ? 'translate-x-[45px] md:translate-x-[43px] lg:translate-x-[25px] xl:translate-x-[43px] xls:translate-x-[43px]'
+          ? 'translate-x-[45px] md:translate-x-[43px] lg:translate-x-[33px] xl:translate-x-[43px]'
           : 'translate-x-[-6px]'
       "
-    ></div>
+    >
+      <!-- lg:translate-x-[25px] -->
+    </div>
 
     <!-- Sun Icon -->
     <svg

@@ -55,7 +55,7 @@ import Roadmap from "@/components/Home/Roadmap.vue";
     <Different />
   </section>
 
-  <section class="flex flex-col relative w-full h-auto my-20">
+  <!-- <section class="flex flex-col relative w-full h-auto my-20">
     <Roadmap />
-  </section>
+  </section> -->
 </template>

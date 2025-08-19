@@ -1,4 +1,5 @@
 <script setup>
+import { ref, onMounted, onUnmounted } from "vue";
 import SliderDescription from "@/components/SliderDescription.vue";
 
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -6,8 +7,23 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 // import { ref, onMounted, onUnmounted, watch } from "vue"; // ← Tambahkan ini!
 // import { useScrollStore } from "@/stores/scroll";
 import { useSidebarStore } from "@/stores/sidebar";
-
 import { bannerLists } from "@/Data/BannerLists";
+
+const activeIndex = ref(0);
+
+const screenIsSmall = ref(window.innerWidth < 1023);
+
+function onSlideChange(swiper) {
+  // pakai realIndex biar tidak bingung dengan duplicate slide
+  activeIndex.value = swiper.realIndex;
+}
+
+function handleResize() {
+  screenIsSmall.value = window.innerWidth < 1023;
+}
+
+onMounted(() => window.addEventListener("resize", handleResize));
+onUnmounted(() => window.removeEventListener("resize", handleResize));
 </script>
 
 <template>
@@ -20,14 +36,14 @@ import { bannerLists } from "@/Data/BannerLists";
       >
         <div class="w-full pb-2 sml:pb-2 sml:pt-4 md:pt-0">
           <p
-            class="text-[24px] sml:text-[21px] lg:text-[26px] xl:text-[32px] text-[#1AB24F] font-[500]"
+            class="text-[22px] sm:text-[22px] md:text-[22px] lg:text-[26px] xl:text-[32px] text-[#1AB24F] font-[500]"
           >
             AI Innovation
           </p>
         </div>
         <div class="w-full pb-2 sml:pb-2">
           <p
-            class="text-[#195279] sml:text-[21px] sml:tracking-[0.5px] md:text-[32px] lg:text-[36px] xl:text-[60px] font-[500] sml:leading-[27px] md:leading-[37px] lg:leading-[45px] xl:leading-tight xl:-tracking-[1px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+            class="text-[#195279] text-[21px] sm:text-[38px] md:text-[36px] lg:text-[36px] xl:text-[60px] font-[500] leading-tight -tracking-[1px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
             The Future of Life <br />
             Technology
@@ -35,12 +51,10 @@ import { bannerLists } from "@/Data/BannerLists";
         </div>
         <!-- Swipe caption -->
         <div
-          class="cursor-pointer flex flex-row items-center mb-4 sml:mb-0 lg:mb-5 mt-6 bg-[#195279] dark:bg-[#2B2E32] border-[1px] dark:border-[1px] dark:border-[#2AB857] px-5 py-2 rounded-full dark:shadow-[0px_4px_18.8px_0px_rgba(0,255,59,0.25)]"
+          class="cursor-pointer flex flex-row items-center mb-4 sml:mb-0 lg:mb-5 mt-4 lg:mt-6 bg-[#195279] dark:bg-[#2B2E32] border-[1px] dark:border-[1px] dark:border-[#2AB857] px-5 py-2 rounded-full dark:shadow-[0px_4px_18.8px_0px_rgba(0,255,59,0.25)]"
         >
           <router-link to="/book-a-demo">
-            <p
-              class="text-[20px] sml:text-[10px] xl:text-[14px] font-[400] text-[#FAFAFA]"
-            >
+            <p class="text-[12px] xl:text-[14px] font-[400] text-[#FAFAFA]">
               Book a Demo
             </p>
           </router-link>
@@ -77,6 +91,7 @@ import { bannerLists } from "@/Data/BannerLists";
             :pagination="false"
             :autoplay="{ delay: 3000, disableOnInteraction: false }"
             loop
+            @slideChange="onSlideChange"
             class="w-full h-full lg:h-[310px] flex justify-center items-center group"
           >
             <SwiperSlide
@@ -87,14 +102,24 @@ import { bannerLists } from "@/Data/BannerLists";
               <img
                 :src="`/assets/images/hero-image/${data.banner}`"
                 alt="Banner"
-                class="w-full h-auto lg:h-full object-contain object-center lg:px-10"
+                class="w-full h-[150px] sm:h-[300px] lg:h-full object-contain object-bottom lg:px-10"
               />
               <SliderDescription
+                :key="activeIndex + '-' + index"
+                class="animate__animated animate__fadeIn lg:!animate-none"
+                :style="screenIsSmall ? 'animation-delay: 500ms' : ''"
                 :logo="data.logo"
                 :darklogo="data.darklogo"
+                :widthSml="data.logoWidth.sml"
+                :heightSml="data.logoHeight.tsml"
+                :widthSm="data.logoWidth.sm"
+                :heightSm="data.logoHeight.sm"
+                :widthMd="data.logoWidth.md"
+                :heightMd="data.logoHeight.md"
+                :widthLg="data.logoWidth.lg"
+                :heightLg="data.logoHeight.lg"
                 :descriptions="data.description"
                 :linelightcolor="data.linelightcolor"
-                :linedarkcolor="data.linedarkcolor"
                 :href="data.url"
               />
             </SwiperSlide>

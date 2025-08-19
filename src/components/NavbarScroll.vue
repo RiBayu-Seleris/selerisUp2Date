@@ -96,7 +96,7 @@ onUnmounted(() => {
                   <ThemeToggle />
                 </div>
                 <div
-                  class="w-[30%] sml:w-[35%] md:w-[15%] h-auto flex items-center justify-end"
+                  class="w-auto h-auto ml-8 lg:ml-0 flex items-center justify-end"
                 >
                   <button
                     type="button"

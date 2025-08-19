@@ -73,7 +73,7 @@ const sidebarStore = useSidebarStore();
         <div class="w-[70%] h-10 flex items-center justify-end">
           <ThemeToggle />
         </div>
-        <div class="w-[30%] md:w-[15%] h-auto flex items-center justify-end">
+        <div class="w-auto h-auto ml-8 lg:ml-0 flex items-center justify-end">
           <button
             type="button"
             id="sidebar-button"

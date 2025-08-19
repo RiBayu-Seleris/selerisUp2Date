@@ -65,7 +65,7 @@ const testimonials = [
         :pagination="{ el: '.custom-pagination', clickable: true }"
         :autoplay="{ delay: 3000, disableOnInteraction: false }"
         loop
-        class="w-full cursor-grab active:cursor-grabbing"
+        class="w-full"
       >
         <SwiperSlide
           v-for="(item, index) in testimonials"
@@ -76,6 +76,7 @@ const testimonials = [
             :name="item.name"
             :position="item.position"
             :text="item.text"
+            class="cursor-grab active:cursor-grabbing"
           />
         </SwiperSlide>
       </Swiper>

@@ -45,17 +45,17 @@ defineProps({
 
   <!-- Mobile Smalls -->
   <div
-    class="lg:hidden sml:flex flex-col snap-start shrink-0 sml:w-full md:w-[60%] h-[200px] rounded-xl p-5 shadow-lg dark:bg-[#1D1F23] border-[0.1px] dark:border-[#FAFAFA]/25"
+    class="lg:hidden sml:flex flex-col snap-start shrink-0 w-full sm:w-[60%] md:w-[60%] h-[200px] rounded-xl p-5 shadow-lg dark:bg-[#1D1F23] border-[0.1px] dark:border-[#FAFAFA]/25"
   >
     <div class="flex flex-row">
       <div class="flex w-[70px] h-[70px]">
         <img
           :src="icon"
           alt="BenefitRobot"
-          class="w-full h-full object-center object-contain"
+          class="w-full h-full object-center object-cover"
         />
       </div>
-      <div class="flex w-full h-auto text-[#2AB857] pl-3 items-center">
+      <div class="flex w-full h-auto text-[#2AB857] pl-5 items-center">
         <p class="text-[24px] sml:text-[20px]">{{ title }}</p>
       </div>
     </div>

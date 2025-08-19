@@ -55,7 +55,7 @@ const toggleDropdown = () => {
   </section>
 
   <section
-    class="flex flex-col relative w-full h-auto md:px-12 xl:px-16 mt-10 lg:mt-8"
+    class="flex flex-col relative w-full h-auto md:px-12 xl:px-16 mt-10 lg:mt-8 mb-20"
   >
     <BlogList />
   </section>

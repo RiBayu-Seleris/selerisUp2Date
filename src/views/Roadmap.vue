@@ -30,21 +30,21 @@ function selectProduct(product) {
 </script>
 <template>
   <section
-    class="flex w-full h-auto sml:pt-[120px] md:pt-[150px] lg:pt-[160px] xl:pt-[160px]"
+    class="flex w-full h-auto sml:pt-[120px] md:pt-[150px] lg:pt-[160px] xl:pt-[160px] mb-20"
   >
     <HeroText
       title="Innovation"
       subtitle="Roadmap Seleris Meditekno Internasional"
     />
   </section>
-  <div class="relative w-full h-auto">
+  <!-- <div class="relative w-full h-auto">
     <img
       src="@/assets/images/frame-wave.png"
       alt=""
       srcset=""
       class="bottom-0 w-full h-full"
     />
-  </div>
+  </div> -->
   <section class="relative w-full h-auto top-0">
     <div class="relative w-full h-auto justify-center">
       <!-- Frame Content Scroll -->

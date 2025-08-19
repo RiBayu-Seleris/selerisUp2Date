@@ -45,7 +45,7 @@ const getShortText = (fullText) => {
     <div
       v-for="(cert, index) in certificates"
       :key="index"
-      class="snap-start shrink-0 w-[85%] sml:w-[250px] sml:h-[240px] md:w-[85%] md:h-[240px] lg:h-[230px] perspective mb-2"
+      class="snap-start shrink-0 w-[85%] sml:w-[250px] sml:h-[240px] sm:w-[400px] sm:h-[200px] md:w-[85%] md:h-[240px] lg:h-[230px] perspective mb-2"
       @click="handleFlip(index)"
     >
       <div
@@ -97,7 +97,7 @@ const getShortText = (fullText) => {
 
         <!-- BACK -->
         <div
-          class="absolute w-full sml:w-[250px] sml:h-[240px] md:w-full py-5 backface-hidden rotate-y-180 bg-[#F9FAFB] dark:bg-[#FAFAFA] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center px-5 sml:px-4"
+          class="absolute w-full sml:w-[250px] sml:h-[240px] sm:w-[400px] sm:h-[200px] md:w-full md:h-[240px] lg:h-[230px] py-5 backface-hidden rotate-y-180 bg-[#F9FAFB] dark:bg-[#FAFAFA] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center px-5 sml:px-4"
         >
           <p
             class="flex text-[16px] sml:text-[12px] md:text-[18px] leading-relaxed overflow-hidden justify-center dark:text-[#3D3434]"

@@ -20,13 +20,33 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  linedarkcolor: {
-    type: String,
-    required: true,
-  },
   href: {
     type: String,
     required: true,
+  },
+  widthSml: {
+    type: Number,
+  },
+  heightSml: {
+    type: Number,
+  },
+  widthSm: {
+    type: Number,
+  },
+  heightSm: {
+    type: Number,
+  },
+  widthMd: {
+    type: Number,
+  },
+  heightMd: {
+    type: Number,
+  },
+  widthLg: {
+    type: Number,
+  },
+  heightLg: {
+    type: Number,
   },
 });
 
@@ -68,27 +88,27 @@ const description = computed(() => {
 
 <template>
   <div
-    class="absolute inset-0 flex items-center justify-end opacity-100 lg:opacity-0 lg:group-hover:opacity-100 sml:mt-0 -mt-2 lg:mt-0 transition-opacity duration-300 z-[999]"
+    class="absolute inset-0 flex items-center justify-end opacity-100 lg:opacity-0 lg:group-hover:opacity-100 mt-0 sm:mt-20 md:mt-10 lg:mt-0 transition-opacity duration-300 z-[999]"
   >
     <!-- Bubble wrapper -->
     <div
-      class="relative w-[240px] h-[150px] sml:w-[200px] sml:h-[110px] md:w-[340px] md:h-[200px] lg:w-[440px] lg:h-[270px] sml:mr-10 md:mr-5 lg:mr-44"
+      class="relative w-[200px] h-[110px] sm:w-[300px] sm:h-[180px] md:w-[340px] md:h-[200px] lg:w-[440px] lg:h-[270px] sml:mr-10 md:mr-5 lg:mr-44"
     >
       <!-- SVG as background -->
       <!-- text-white dark:text-[#363636] -->
       <svg
         class="absolute inset-0 w-full h-full drop-shadow-md z-0 text-white dark:text-[#363636]"
-        :class="`text-${linelightcolor} dark:text-${linedarkcolor}`"
         viewBox="0 0 409 228"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
       >
+        <!-- stroke="#48C97C" -->
         <path
           class="dark:hidden"
           d="M1 30.5731V197.292C1 213.624 14.2403 226.865 30.5731 226.865H378.427C394.76 226.865 408 213.624 408 197.292V79.3688C408 63.036 394.76 49.7956 378.427 49.7956H227.234C213.76 49.7956 202.837 38.8724 202.837 25.3978C202.837 11.9233 191.913 1 178.439 1H30.5731C14.2403 1 1 14.2403 1 30.5731Z"
           fill="currentColor"
-          stroke="#48C97C"
+          :stroke="`${linelightcolor}`"
           stroke-width="0.739328"
         />
         <path
@@ -102,55 +122,70 @@ const description = computed(() => {
 
       <!-- Konten di dalam bubble -->
       <div
-        class="relative z-10 flex flex-col px-5 lg:px-8 pt-5 sml:pt-3 md:pt-5 lg:py-6 w-full h-full"
+        class="relative z-10 flex flex-col px-6 md:px-6 lg:px-7 pt-5 sml:pt-3 sm:pt-6 md:pt-5 lg:pt-8 w-full h-full sm:space-y-1.5 md:space-y-1 lg:space-y-4"
       >
-        <img
-          :src="`/assets/images/product-logo/light/${logo}`"
-          alt="Logo"
-          class="w-[70px] sml:w-[50px] md:w-[90px] lg:w-[130px] h-[60px] object-contain mb-3 dark:hidden"
-        />
-        <img
-          :src="`/assets/images/product-logo/dark/${darklogo}`"
-          alt="Logo"
-          class="w-[70px] sml:w-[50px] md:w-[90px] lg:w-[130px] h-[60px] object-contain mb-3 hidden dark:block"
-        />
         <div
-          class="text-start sml:text-[12px] md:text-[16px] lg:text-[17px] xl:pt-3 leading-snug text-black dark:text-[#FAFAFA]"
+          class="w-auto md:max-h-[55px] lg:max-h-[70px] flex items-center sml:pb-3.5 md:pb-3 xl:pb-4"
         >
-          {{ description }}
+          <img
+            :src="`/assets/images/product-logo/light/${logo}`"
+            alt="LightLogo"
+            class="object-contain object-left dark:hidden"
+            :class="`w-[${widthSml}px] h-[${heightSml}px]
+            sm:w-[${widthSm}px] sm:h-[${heightSm}px]
+            md:w-[${widthMd}px] md:h-[${heightMd}px]
+            lg:w-[${widthLg}px] lg:h-[${heightLg}px]`"
+          />
+          <img
+            :src="`/assets/images/product-logo/dark/${darklogo}`"
+            alt="DarkLogo"
+            class="object-contain object-left hidden dark:block"
+            :class="`w-[${widthSml}px] h-[${heightSml}px]
+            sm:w-[${widthSm}px] sm:h-[${heightSm}px]
+            md:w-[${widthMd}px] md:h-[${heightMd}px]
+            lg:w-[${widthLg}px] lg:h-[${heightLg}px]`"
+          />
         </div>
-        <a
-          :href="href"
-          target="_blank"
-          class="flex flex-row text-[#2AB857] dark:text-[#FAFAFA] mt-2 lg:mt-4 font-medium items-center"
-        >
-          <span class="sml:text-[11px] md:text-[16px] lg:text-[17px]"
-            >View product</span
+        <div class="flex flex-col sm:space-y-2.5 md:space-y-2 lg:space-y-7">
+          <div
+            class="text-start sml:text-[12px] md:text-[16px] lg:text-[17px] leading-snug text-black dark:text-[#FAFAFA]"
           >
-          <svg
-            class="w-[1.1rem] h-[1.1rem] md:w-[1.4rem] md:h-[1.4rem] lg:w-[1.4rem] lg:h-[1.4rem] ml-1 self-center"
-            viewBox="0 0 24 24"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
+            {{ description }}
+          </div>
+          <a
+            :href="href"
+            target="_blank"
+            class="flex flex-row dark:text-[#FAFAFA] font-medium items-center"
+            :style="{ color: linelightcolor }"
           >
-            <path
-              d="M14.43 18.07L20.5 12L14.43 5.92999"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-            <path
-              d="M3.50002 12L20.33 12"
-              stroke="currentColor"
-              stroke-width="1.5"
-              stroke-miterlimit="10"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            />
-          </svg>
-        </a>
+            <span class="sml:text-[11px] md:text-[16px] lg:text-[17px]"
+              >View product</span
+            >
+            <svg
+              class="w-[1.1rem] h-[1.1rem] md:w-[1.4rem] md:h-[1.4rem] lg:w-[1.4rem] lg:h-[1.4rem] ml-1 self-center"
+              viewBox="0 0 24 24"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M14.43 18.07L20.5 12L14.43 5.92999"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M3.50002 12L20.33 12"
+                stroke="currentColor"
+                stroke-width="1.5"
+                stroke-miterlimit="10"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+            </svg>
+          </a>
+        </div>
       </div>
     </div>
   </div>
