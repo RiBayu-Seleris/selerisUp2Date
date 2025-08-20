@@ -19,7 +19,7 @@ const steps = [
   {
     title: "Data Security and Privacy Compliance",
     description:
-      "Seleris ensures that all customer data is securely stored and processed in accordance with global data protection regulations, safeguarding sensitive personal and financial information.",
+      "Seleris securely stores and processes customer data, ensuring compliance with global regulations while protecting sensitive personal, financial information.",
   },
 ];
 
@@ -59,29 +59,27 @@ onMounted(() => {
 
 <template>
   <div
-    class="flex flex-row sml:flex-col-reverse lg:flex-row mx-6 lg:justify-between"
+    class="flex flex-row sml:flex-col-reverse lg:flex-row px-0 lg:px-6 lg:justify-between"
   >
     <div class="flex flex-col w-full h-full justify-center">
-      <div class="w-full pb-2 sml:pb-4 md:pb-5 xl:pb-5">
+      <div class="w-full pb-0 sm:pb-2 md:pb-0 xl:pb-6">
         <p
-          class="sml:text-2xl md:text-3xl lg:text-3xl xl:text-[24px] text-[#1AB24F] font-[500] dark:text-[#FAFAFA]"
+          class="text-[20px] md:text-[24px] text-[#1AB24F] font-[500] dark:text-[#FAFAFA]"
         >
           AI Technology
         </p>
       </div>
-      <div class="w-full sml:pb-4 md:pb-10 lg:pb-0 xl:pb-0 text-[#195279]">
+      <div
+        class="w-full h-auto flex flex-col xl:-space-y-4 sml:pb-4 md:pb-5 lg:pb-0 xl:pb-0 text-[#195279]"
+      >
         <p
-          class="sml:text-3xl md:text-4xl lg:text-4xl xl:text-5xl font-[500] dark:text-[#FAFAFA]"
+          class="text-[26px] sm:text-[34px] md:text-[40px] lg:text-[44px] xl:text-[48px] font-[500] dark:text-[#FAFAFA]"
         >
           How Seleris
-          <span
-            class="sml:inline-flex md:inline-flex lg:hidden dark:text-[#FAFAFA]"
-          >
-            Works?</span
-          >
+          <span class="inline-flex lg:hidden dark:text-[#FAFAFA]"> Works?</span>
         </p>
         <p
-          class="sml:hidden md:hidden lg:block sml:text-3xl lg:text-4xl xl:text-5xl font-[500] xl:mt-5 dark:text-[#FAFAFA]"
+          class="hidden lg:block text-[26px] sm:text-[34px] md:text-[40px] lg:text-[44px] xl:text-[48px] font-[500] dark:text-[#FAFAFA]"
         >
           Works?
         </p>
@@ -135,12 +133,12 @@ onMounted(() => {
             >
               <div>
                 <h3
-                  class="sml:text-[14px] md:text-2xl lg:text-2xl xl:text-[20px] sml:leading-[20px] md:leading-normal text-green-600 font-[500]"
+                  class="text-[16px] sm:text-[20px] md:text-[24px] lg:text-[24px] xl:text-[24px] leading-[20px] sm:leading-normal text-green-600 font-[500]"
                 >
                   {{ step.title }}
                 </h3>
                 <p
-                  class="mt-5 sml:mt-3 text-xl sml:text-[12px] xl:text-[16px] sml:leading-relaxed text-gray-600 dark:text-[#FAFAFA] max-w-xl"
+                  class="mt-3.5 md:mt-5 text-[12px] sm:text-[14px] xl:text-[14px] leading-relaxed text-gray-600 dark:text-[#FAFAFA] max-w-xl"
                 >
                   {{ step.description }}
                 </p>
@@ -151,7 +149,7 @@ onMounted(() => {
       </div>
     </div>
     <div
-      class="flex w-full sml:h-full md:h-[600px] lg:h-full xl:h-[425px] justify-center items-center sml:mb-12 md:mb-20 lg:mb-0"
+      class="flex w-full h-full md:h-[500px] lg:h-full xl:h-[425px] justify-center items-center sml:mb-12 md:mb-20 lg:mb-0"
     >
       <video
         autoplay
@@ -159,7 +157,7 @@ onMounted(() => {
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full object-contain dark:hidden"
+        class="w-full h-full object-fill lg:object-contain dark:hidden"
       >
         <source src="@/assets/videos/Design-Vector-Web2.mp4" type="video/mp4" />
       </video>

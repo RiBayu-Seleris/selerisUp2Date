@@ -25,6 +25,7 @@ const partnerLogos = [
   new URL("@/assets/images/clients-and-partners/data-ai.png", import.meta.url)
     .href,
 ];
+
 const partnerLogosDark = [
   new URL(
     "@/assets/images/clients-and-partners/rynest-dark.png",

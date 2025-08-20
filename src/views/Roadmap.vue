@@ -128,7 +128,7 @@ function selectProduct(product) {
               <div
                 class="relative w-full h-1/2 z-10 flex flex-col"
                 :class="{
-                  'pt-2 transition-all duration-500 ease-in-out':
+                  'pt-0 transition-all duration-500 ease-in-out':
                     activeProduct.yearIndex === yearIndex &&
                     activeProduct.productIndex === productIndex,
                   'pt-20 transition-all duration-500 ease-in-out': !(
@@ -185,11 +185,12 @@ function selectProduct(product) {
                         {{ product.subtitle }}
                       </p>
                     </div>
+                    <!-- Card untuk tidak punya logo -->
                     <div
                       v-else
-                      class="flex flex-col items-center h-[100px]"
+                      class="flex flex-col items-center"
                       :class="{
-                        'justify-center transition-all duration-500 ease-in-out':
+                        'justify-center transition-all duration-500 ease-in h-[100px]':
                           activeProduct.yearIndex === yearIndex &&
                           activeProduct.productIndex === productIndex,
                         'justify-start transition-all duration-500 ease-in-out':

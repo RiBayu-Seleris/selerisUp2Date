@@ -26,13 +26,13 @@ import Roadmap from "@/components/Home/Roadmap.vue";
   </section>
 
   <section
-    class="flex flex-col relative w-full h-auto md:mt-10 lg:mt-10 pt-4 pb-8 lg:pt-0 lg:pb-0"
+    class="flex flex-col relative w-full h-auto md:mt-10 lg:mt-0 pt-4 pb-8 lg:pt-0 lg:pb-0"
   >
     <Certificate />
   </section>
 
   <section
-    class="flex flex-col relative w-full h-auto lg:mt-20 2lg:mt-40 xl:mt-0 px-8"
+    class="flex flex-col relative w-full h-auto mt-20 lg:mt-20 xl:mt-20 px-8"
   >
     <Description />
   </section>

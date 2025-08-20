@@ -1,4 +1,4 @@
-// src/data/heroLists.js
+// src/data/bannerLists.js
 
 export const bannerLists = [
   {
@@ -18,8 +18,8 @@ export const bannerLists = [
     logoHeight: {
       lg: 50,
       md: 40,
-      sm: 55,
-      sml: 35,
+      sm: 50,
+      sml: 25,
     },
   },
   {
@@ -31,16 +31,16 @@ export const bannerLists = [
     linelightcolor: "#2ec4b6",
     url: "/product/medins",
     logoWidth: {
-      lg: 160,
+      lg: 150,
       md: 90,
       sm: 90,
       sml: 70,
     },
     logoHeight: {
-      lg: 50,
+      lg: 38,
       md: 40,
-      sm: 55,
-      sml: 35,
+      sm: 50,
+      sml: 25,
     },
   },
   {
@@ -58,10 +58,10 @@ export const bannerLists = [
       sml: 70,
     },
     logoHeight: {
-      lg: 60,
+      lg: 55,
       md: 40,
-      sm: 40,
-      sml: 35,
+      sm: 50,
+      sml: 25,
     },
   },
   {
@@ -74,15 +74,15 @@ export const bannerLists = [
     url: "/product/health-care",
     logoWidth: {
       lg: 170,
-      md: 110,
-      sm: 100,
+      md: 90,
+      sm: 110,
       sml: 70,
     },
     logoHeight: {
       lg: 55,
-      md: 45,
-      sm: 60,
-      sml: 35,
+      md: 40,
+      sm: 45,
+      sml: 25,
     },
   },
 ];

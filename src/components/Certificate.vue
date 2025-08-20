@@ -1,67 +1,31 @@
 <script setup>
 import CertCard from "@/components/reusable/CertCard.vue";
 import MobileCert from "@/components/CertificateMobile.vue";
-import Cert1 from "@/assets/images/certification/logo/Cert1.png";
-import Cert2 from "@/assets/images/certification/logo/dscui.svg";
-import Cert3 from "@/assets/images/certification/logo/Cert2.png";
 
-const certificateData = [
-  {
-    logo: Cert1,
-    titleBefore: "ISO Certification Award",
-    titleAfter: "ISO Certification",
-    certNumber: "Certificate Number: 2403150020501",
-    description: `PT. Seleris Meditekno Internasional has been awarded ISO/IEC 27001:2022 certification with the number 2403150020501, which demonstrates our commitment to healthcare quality and service excellence. This certification signifies that we meet international standards in quality management, and we continuously strive to improve our service quality.`,
-    divImageBefore: "bg-leftCertBefore dark:bg-leftCertDarkBefore",
-    divImageAfter: "bg-leftCertAfter dark:bg-leftCertDarkAfter",
-    textPosition: "text-start",
-  },
-  {
-    logo: Cert2,
-    titleBefore: "Best Innovation AI Solution for Insurance",
-    titleAfter: "Best Innovation AI Solution for Insurance",
-    certNumber: "SERT-030/UN2.F3.UKK.DSC/DSC-Seleris/4/2024",
-    description: `PT. Seleris Meditekno Internasional is proud to announce that we have won
-    the Best Innovation AI Solution for Insurance award from Data Science center University of
-    Indonesia (DSCUI). This award recognizes our dedication to the outstanding and innovative use of
-    Artificial Intelligence (AI) for the underwriting process for Life and Health Insurance.`,
-    divImageBefore: "bg-centerCertBefore dark:bg-centerCertDarkBefore",
-    divImageAfter: "bg-centerCertAfter dark:bg-centerCertDarkAfter",
-    textPosition: "text-center",
-  },
-  {
-    logo: Cert3,
-    titleBefore: "ISO Certification Award",
-    titleAfter: "ISO Certification",
-    certNumber: "Certificate Number: 2403290020101",
-    description: `PT. Seleris Meditekno Internasional has been awarded ISO 9001:2015 certification with the number , this certificate signifies that our Quality Management System meets stringent international standards, ensuring our products and services are consistent and reliable.`,
-    divImageBefore: "bg-rightCertBefore dark:bg-rightCertDarkBefore",
-    divImageAfter: "bg-rightCertAfter dark:bg-rightCertDarkAfter",
-    textPosition: "text-end",
-  },
-];
+import { certificateData } from "@/Data/certData";
 </script>
 
 <template>
-  <div class="w-full h-auto py-10 xl:px-16 lg:px-8 px-4 sml:px-0">
-    <div class="flex flex-col w-full h-auto max-w-[1440px] mx-auto">
+  <div class="w-full h-auto lg:px-8">
+    <div class="flex flex-col w-full h-auto">
       <!-- Heading -->
       <div class="flex flex-col w-full items-center text-center">
         <p
-          class="text-3xl md:text-4xl lg:text-5xl xl:text-[48px] font-medium text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+          class="text-[24px] sm:text-[30px] md:text-[36px] lg:text-[44px] xl:text-[48px] font-medium text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
         >
           Seleris Certification
         </p>
         <p
-          class="text-lg md:text-xl lg:text-2xl xl:text-[22px] font-normal tracking-wide text-[#1DC457] dark:text-[#6A6A6A] mt-2 lg:mt-4"
+          class="text-[14px] sm:text-[16px] md:text-[20px] lg:text-2xl xl:text-[22px] font-normal tracking-wide text-[#1DC457] dark:text-[#6A6A6A] sm:mt-2 lg:mt-4"
         >
           Seleris Meditekno Internasional
         </p>
       </div>
 
       <!-- Desktop Certificate Cards -->
+      <!-- class="hidden lg:flex flex-row w-full max-w-[1440px] mx-auto gap-x-16 mt-8 mb-12 justify-center" -->
       <div
-        class="hidden lg:flex flex-row w-full max-w-[1440px] mx-auto gap-x-16 mt-8 mb-12 justify-center"
+        class="hidden lg:flex flex-row w-full space-x-16 mt-16 justify-center"
       >
         <CertCard
           v-for="(cert, index) in certificateData"

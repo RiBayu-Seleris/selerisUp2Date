@@ -18,7 +18,7 @@ defineProps({
 
 <template>
   <div
-    class="sml:hidden lg:flex flex-row snap-start shrink-0 md:gap-x-5 w-[80%] md:w-[450px] md:h-[180px] lg:w-[50%] sml:h-[270px] lg:h-[200px] rounded-xl p-5 bg-[#FFFFFF] dark:bg-[#1D1F23] border-[0.1px] dark:border-[#FAFAFA]/25"
+    class="hidden lg:flex flex-row snap-start shrink-0 p-5 md:gap-x-5 w-[80%] sml:h-[270px] md:w-[450px] md:h-[180px] lg:w-[50%] lg:h-auto rounded-xl bg-[#FFFFFF] dark:bg-[#1D1F23] border-[0.1px] dark:border-[#FAFAFA]/25"
   >
     <div class="flex w-[30%] lg:w-[30%] h-auto">
       <img
@@ -27,14 +27,16 @@ defineProps({
         class="w-full h-full object-center object-contain"
       />
     </div>
-    <div class="w-[70%] lg:w-[70%] h-auto justify-center">
+    <div class="w-[70%] lg:w-[70%] h-auto flex justify-center items-center">
       <div class="flex flex-col w-full h-full items-center justify-between">
-        <div class="w-full h-[100px] flex items-center">
-          <p class="text-[24px] text-[#2AB857] md:text-[20px]">{{ title }}</p>
+        <div class="w-full h-[40%] flex items-center">
+          <p class="text-[#2AB857] text-[24px] md:text-[20px] lg:text-[24px]">
+            {{ title }}
+          </p>
         </div>
-        <div class="w-full h-full">
+        <div class="w-full h-[60%] flex justify-start items-start">
           <p
-            class="text-[18px] md:text-[16px] text-[#195279] dark:text-[#FAFAFA]"
+            class="text-[18px] md:text-[16px] lg:text-[18px] text-[#195279] dark:text-[#FAFAFA]"
           >
             {{ body }}
           </p>
@@ -45,24 +47,24 @@ defineProps({
 
   <!-- Mobile Smalls -->
   <div
-    class="lg:hidden sml:flex flex-col snap-start shrink-0 w-full sm:w-[60%] md:w-[60%] h-[200px] rounded-xl p-5 shadow-lg dark:bg-[#1D1F23] border-[0.1px] dark:border-[#FAFAFA]/25"
+    class="flex flex-col lg:hidden snap-start shrink-0 w-full sm:w-[60%] md:w-[60%] h-auto rounded-xl px-5 py-5 sm:py-2 shadow-lg dark:bg-[#1D1F23] border-[0.1px] dark:border-[#FAFAFA]/25 space-y-2 sm:space-y-2"
   >
     <div class="flex flex-row">
-      <div class="flex w-[70px] h-[70px]">
+      <div class="flex w-[40%] h-auto">
         <img
           :src="icon"
           alt="BenefitRobot"
-          class="w-full h-full object-center object-cover"
+          class="w-full h-full object-center object-contain"
         />
       </div>
       <div class="flex w-full h-auto text-[#2AB857] pl-5 items-center">
-        <p class="text-[24px] sml:text-[20px]">{{ title }}</p>
+        <p class="text-[16px] sm:text-[16px]">{{ title }}</p>
       </div>
     </div>
-    <div class="flex flex-col w-full h-full">
-      <div class="flex w-full h-full items-center justify-center">
+    <div class="flex flex-col w-full h-full pb-5">
+      <div class="flex w-full h-full items-start justify-start">
         <p
-          class="text-[1.1rem] sml:text-[14px] text-[#195279] dark:text-[#FAFAFA]"
+          class="text-[12px] sm:text-[14px] text-[#195279] dark:text-[#FAFAFA]"
         >
           {{ body }}
         </p>

@@ -1,4 +1,5 @@
 <script setup>
+import DefaultLogo from "@/assets/images/certification/logo/Cert1.png";
 import { computed } from "vue";
 defineProps({
   divImageBefore: {
@@ -12,6 +13,7 @@ defineProps({
   imageCertLogo: {
     type: String,
     required: true,
+    default: DefaultLogo,
   },
   TitleBefore: {
     type: String,
@@ -41,7 +43,7 @@ const cekCertIcon = computed(() => {
 </script>
 
 <template>
-  <div class="relative w-[335px] h-[419px] group cursor-default">
+  <div class="relative w-[335px] h-[419px] group">
     <!-- Card A -->
     <div
       :class="`absolute top-0 left-0 z-0 flex flex-col w-full h-full bg-cover bg-center ${divImageBefore}`"
@@ -49,7 +51,7 @@ const cekCertIcon = computed(() => {
       <div class="flex flex-col w-full h-auto mt-14">
         <div class="flex w-full h-[194px] justify-center mx-auto">
           <img
-            :src="`/assets/images/certificate-icon/${imageCertLogo}`"
+            :src="imageCertLogo"
             alt="Cert Logo"
             class="w-full h-full object-contain object-center"
           />

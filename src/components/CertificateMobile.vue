@@ -26,8 +26,8 @@ const getShortText = (fullText) => {
   let max = 130;
   if (windowWidth.value >= 1024) max = 140;
   else if (windowWidth.value >= 768) max = 140;
-  else if (windowWidth.value > 425) max = 120;
-  else max = 70;
+  else if (windowWidth.value >= 640) max = 140;
+  else max = 100;
 
   if (length > max) {
     const cut = fullText.slice(0, max).trim();
@@ -40,12 +40,12 @@ const getShortText = (fullText) => {
 
 <template>
   <div
-    class="lg:hidden flex flex-row pt-2 w-full h-auto gap-x-6 mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-10 pl-10 pr-10 hide-scrollbar"
+    class="lg:hidden flex flex-row w-full h-auto gap-x-6 mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-10 pl-10 pr-10 hide-scrollbar py-10"
   >
     <div
       v-for="(cert, index) in certificates"
       :key="index"
-      class="snap-start shrink-0 w-[85%] sml:w-[250px] sml:h-[240px] sm:w-[400px] sm:h-[200px] md:w-[85%] md:h-[240px] lg:h-[230px] perspective mb-2"
+      class="snap-start shrink-0 w-[280px] h-[240px] sm:w-[400px] sm:h-[200px] md:w-[85%] md:h-[240px] lg:h-[230px] perspective mb-2"
       @click="handleFlip(index)"
     >
       <div
@@ -56,30 +56,32 @@ const getShortText = (fullText) => {
       >
         <!-- FRONT -->
         <div
-          class="flex flex-col sml:gap-y-3 md:gap-y-3 absolute w-full h-full backface-hidden bg-[#F9FAFB] dark:bg-[#1D1F23] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 shadow-md px-5 pt-6 border-[0.1px] dark:border-[#FAFAFA]/25"
+          class="flex flex-col space-y-2 md:space-y-3 absolute w-full h-full backface-hidden bg-[#F9FAFB] dark:bg-[#1D1F23] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 shadow-md px-5 pt-6 border-[0.1px] dark:border-[#FAFAFA]/25"
         >
           <div
             class="flex flex-col w-full h-auto text-[#195279] dark:text-[#FAFAFA]"
           >
             <div class="flex flex-col w-full h-auto">
-              <div class="flex flex-row w-full h-auto gap-x-4 mb-3">
+              <div class="flex flex-row w-full h-auto gap-x-4 mb-4">
                 <div
                   class="flex sml:w-[50px] sml:h-[50px] md:w-[60px] md:h-[60px]"
                 >
                   <img
-                    :src="cert.logo"
+                    :src="`/assets/images/certificate-icon/${cert.logo}`"
                     alt="CertLogo"
                     class="w-full h-full object-center object-contain"
                   />
                 </div>
                 <div class="flex md:w-full h-auto items-center">
-                  <p class="sml:text-[14px] md:text-[20px] font-normal">
+                  <p class="text-[14px] md:text-[20px] font-normal">
                     {{ cert.titleBefore }}
                   </p>
                 </div>
               </div>
-              <div class="flex w-full h-auto">
-                <p class="sml:text-[14px] md:text-[18px]">
+              <div class="flex w-full h-[50px] sm:h-[30px]">
+                <p
+                  class="text-[14px] sm:text-[14px] md:text-[18px] tracking-wide"
+                >
                   {{ cert.certNumber }}
                 </p>
               </div>
@@ -89,7 +91,7 @@ const getShortText = (fullText) => {
           <!-- Description -->
           <div class="flex w-full h-auto">
             <p
-              class="text-[14px] sml:text-[12px] md:text-[16px] overflow-hidden"
+              class="text-[12px] md:text-[16px] overflow-hidden"
               v-html="getShortText(cert.description)"
             ></p>
           </div>
@@ -97,10 +99,10 @@ const getShortText = (fullText) => {
 
         <!-- BACK -->
         <div
-          class="absolute w-full sml:w-[250px] sml:h-[240px] sm:w-[400px] sm:h-[200px] md:w-full md:h-[240px] lg:h-[230px] py-5 backface-hidden rotate-y-180 bg-[#F9FAFB] dark:bg-[#FAFAFA] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center px-5 sml:px-4"
+          class="absolute w-[280px] h-[240px] sm:w-[400px] sm:h-[200px] md:w-full md:h-[240px] lg:h-[230px] py-5 backface-hidden rotate-y-180 bg-[#F9FAFB] dark:bg-[#FAFAFA] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center px-5 sml:px-4"
         >
           <p
-            class="flex text-[16px] sml:text-[12px] md:text-[18px] leading-relaxed overflow-hidden justify-center dark:text-[#3D3434]"
+            class="flex text-[12px] sm:text-[12px] md:text-[18px] leading-relaxed overflow-hidden justify-center dark:text-[#3D3434]"
             v-html="cert.description"
           ></p>
         </div>

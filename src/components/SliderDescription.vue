@@ -1,9 +1,6 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from "vue";
 
-// import Logo from "@/assets/images/seleris-logo.svg";
-// import DarkLogo from "@/assets/images/seleris-logo-dark.svg";
-
 const props = defineProps({
   descriptions: {
     type: String,
@@ -24,29 +21,13 @@ const props = defineProps({
     type: String,
     required: true,
   },
-  widthSml: {
-    type: Number,
+  logoWidth: {
+    type: Object,
+    required: true,
   },
-  heightSml: {
-    type: Number,
-  },
-  widthSm: {
-    type: Number,
-  },
-  heightSm: {
-    type: Number,
-  },
-  widthMd: {
-    type: Number,
-  },
-  heightMd: {
-    type: Number,
-  },
-  widthLg: {
-    type: Number,
-  },
-  heightLg: {
-    type: Number,
+  logoHeight: {
+    type: Object,
+    required: true,
   },
 });
 
@@ -72,27 +53,40 @@ const description = computed(() => {
     return length > 100
       ? props.descriptions.substring(0, 100) + "..."
       : props.descriptions;
-  } else if (windowWidth.value > 425 && windowWidth.value < 1024) {
-    // ukuran md → tampilkan 100 karakter
+  } else if (windowWidth.value >= 768 && windowWidth.value < 1024) {
+    // ukuran md → tampilkan 90 karakter
+    return length > 90
+      ? props.descriptions.substring(0, 90) + "..."
+      : props.descriptions;
+  } else if (windowWidth.value >= 640 && windowWidth.value < 768) {
+    // ukuran sm → tampilkan 90 karakter
     return length > 90
       ? props.descriptions.substring(0, 90) + "..."
       : props.descriptions;
   } else {
     // ukuran sm dan di bawahnya → tampilkan 45 karakter
-    return length > 45
-      ? props.descriptions.substring(0, 45) + "..."
+    return length > 80
+      ? props.descriptions.substring(0, 80) + "..."
       : props.descriptions;
   }
 });
+
+function getLogoSize(width, height) {
+  const w = window.innerWidth;
+  if (w >= 1024) return { width: width.lg + "px", height: height.lg + "px" };
+  if (w >= 768) return { width: width.md + "px", height: height.md + "px" };
+  if (w >= 640) return { width: width.sm + "px", height: height.sm + "px" };
+  return { width: width.sml + "px", height: height.sml + "px" };
+}
 </script>
 
 <template>
   <div
-    class="absolute inset-0 flex items-center justify-end opacity-100 lg:opacity-0 lg:group-hover:opacity-100 mt-0 sm:mt-20 md:mt-10 lg:mt-0 transition-opacity duration-300 z-[999]"
+    class="absolute inset-0 flex items-center justify-end opacity-100 lg:opacity-0 lg:group-hover:opacity-100 mt-10 sm:mt-14 md:mt-10 lg:mt-0 transition-opacity duration-300 z-40"
   >
     <!-- Bubble wrapper -->
     <div
-      class="relative w-[200px] h-[110px] sm:w-[300px] sm:h-[180px] md:w-[340px] md:h-[200px] lg:w-[440px] lg:h-[270px] sml:mr-10 md:mr-5 lg:mr-44"
+      class="relative w-[220px] h-[130px] sm:w-[300px] sm:h-[180px] md:w-[340px] md:h-[200px] lg:w-[440px] lg:h-[270px] mr-2.5 sm:mr-10 md:mr-5 lg:mr-44"
     >
       <!-- SVG as background -->
       <!-- text-white dark:text-[#363636] -->
@@ -122,33 +116,29 @@ const description = computed(() => {
 
       <!-- Konten di dalam bubble -->
       <div
-        class="relative z-10 flex flex-col px-6 md:px-6 lg:px-7 pt-5 sml:pt-3 sm:pt-6 md:pt-5 lg:pt-8 w-full h-full sm:space-y-1.5 md:space-y-1 lg:space-y-4"
+        class="relative z-10 flex flex-col px-5 sm:px-5 md:px-6 lg:px-7 pt-3 sm:pt-4 md:pt-5 lg:pt-8 w-full h-full space-y-0.5 sm:space-y-1.5 md:space-y-1 lg:space-y-4"
       >
         <div
-          class="w-auto md:max-h-[55px] lg:max-h-[70px] flex items-center sml:pb-3.5 md:pb-3 xl:pb-4"
+          class="w-auto h-[40px] sm:h-[60px] flex items-center pb-1.5 md:pb-3 xl:pb-4"
         >
           <img
             :src="`/assets/images/product-logo/light/${logo}`"
             alt="LightLogo"
             class="object-contain object-left dark:hidden"
-            :class="`w-[${widthSml}px] h-[${heightSml}px]
-            sm:w-[${widthSm}px] sm:h-[${heightSm}px]
-            md:w-[${widthMd}px] md:h-[${heightMd}px]
-            lg:w-[${widthLg}px] lg:h-[${heightLg}px]`"
+            :style="getLogoSize(props.logoWidth, props.logoHeight)"
           />
           <img
             :src="`/assets/images/product-logo/dark/${darklogo}`"
             alt="DarkLogo"
             class="object-contain object-left hidden dark:block"
-            :class="`w-[${widthSml}px] h-[${heightSml}px]
-            sm:w-[${widthSm}px] sm:h-[${heightSm}px]
-            md:w-[${widthMd}px] md:h-[${heightMd}px]
-            lg:w-[${widthLg}px] lg:h-[${heightLg}px]`"
+            :style="getLogoSize(props.logoWidth, props.logoHeight)"
           />
         </div>
-        <div class="flex flex-col sm:space-y-2.5 md:space-y-2 lg:space-y-7">
+        <div
+          class="flex flex-col space-y-1.5 sm:space-y-2.5 md:space-y-2 lg:space-y-7"
+        >
           <div
-            class="text-start sml:text-[12px] md:text-[16px] lg:text-[17px] leading-snug text-black dark:text-[#FAFAFA]"
+            class="text-start text-[10px] sm:text-[12px] md:text-[14px] lg:text-[17px] leading-snug text-black dark:text-[#FAFAFA]"
           >
             {{ description }}
           </div>
@@ -158,11 +148,12 @@ const description = computed(() => {
             class="flex flex-row dark:text-[#FAFAFA] font-medium items-center"
             :style="{ color: linelightcolor }"
           >
-            <span class="sml:text-[11px] md:text-[16px] lg:text-[17px]"
+            <span
+              class="text-[10px] sm:text-[12px] md:text-[14px] lg:text-[17px]"
               >View product</span
             >
             <svg
-              class="w-[1.1rem] h-[1.1rem] md:w-[1.4rem] md:h-[1.4rem] lg:w-[1.4rem] lg:h-[1.4rem] ml-1 self-center"
+              class="w-[0.9rem] h-[0.9rem] sm:w-[1.1rem] sm:h-[1.1rem] md:w-[1.2rem] md:h-[1.2rem] lg:w-[1.4rem] lg:h-[1.4rem] ml-1 self-center"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

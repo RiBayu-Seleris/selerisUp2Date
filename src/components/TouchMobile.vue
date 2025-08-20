@@ -18,7 +18,7 @@ import CallIcon from "@/components/icons/CallIcon.vue";
     </div>
     <div class="flex w-full h-auto">
       <div
-        class="flex md:flex-row sml:flex-col w-full h-auto justify-between gap-8"
+        class="flex flex-col sm:flex-row w-full h-auto justify-between gap-8"
       >
         <div
           class="flex flex-col w-full h-auto py-5 bg-[#FAFAFA] dark:bg-[#323232] rounded-2xl"

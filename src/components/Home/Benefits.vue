@@ -40,18 +40,18 @@ const benefitList = [
 </script>
 
 <template>
-  <div class="flex flex-col relative w-full py-10 mb-10">
-    <div class="flex flex-col gap-3">
+  <div class="flex flex-col relative w-full py-10">
+    <div class="flex flex-col gap-y-3 xl:gap-y-5">
       <div class="flex w-full h-auto justify-center items-center">
         <p
-          class="sml:text-2xl md:text-3xl lg:text-4xl xl:text-[48px] font-[500] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+          class="sml:text-2xl md:text-[32px] lg:text-[44px] xl:text-[44px] font-[500] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
         >
           Benefits Seleris
         </p>
       </div>
       <div class="flex w-full h-auto justify-center items-center px-10">
         <p
-          class="sml:text-xl md:text-2xl lg:text-3xl xl:text-[20px] font-[400] text-[#1DC457] dark:text-[#6A6A6A] text-center"
+          class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] xl:text-[20px] font-[400] text-[#1DC457] dark:text-[#6A6A6A] text-center"
         >
           Get started with Seleris and see the difference for yourself
         </p>
@@ -65,7 +65,7 @@ const benefitList = [
         class="hidden xl:flex absolute w-32 h-full bg-gradient-to-l from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-l dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% right-0 z-20 rounded-l-2xl"
       />
       <div
-        class="relative flex flex-row w-full max-h-screen gap-x-10 sml:gap-x-5 md:gap-x-5 mt-16 sml:mt-4 md:mt-10 py-5 overflow-x-auto snap-x snap-mandatory sml:scroll-pl-10 sml:pl-10 sml:pr-10 md:scroll-pl-32 md:pl-32 md:pr-32 hide-scrollbar"
+        class="relative flex flex-row w-full max-h-screen gap-x-10 sml:gap-x-5 md:gap-x-5 mt-16 sml:mt-4 md:mt-5 py-5 overflow-x-auto snap-x snap-mandatory sml:scroll-pl-10 sml:pl-10 sml:pr-10 md:scroll-pl-16 md:pl-16 md:pr-16 xl:scroll-pl-32 xl:pl-32 xl:pr-32 hide-scrollbar"
       >
         <CardDefault
           v-for="(benefit, index) in benefitList"

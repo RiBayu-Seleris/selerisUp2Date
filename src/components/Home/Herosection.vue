@@ -29,19 +29,22 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
 <template>
   <div class="relative w-full h-auto rounded-b-3xl mt-28">
     <div
-      class="w-full h-auto flex justify-center items-center lg:bg-hero2 dark:lg:bg-herodark bg-no-repeat bg-cover lg:bg-center dark:lg:bg-center xl:bg-top dark:xl:bg-top lg:pt-16 rounded-3xl"
+      class="relative w-full h-auto flex justify-center items-center lg:bg-hero2 dark:lg:bg-herodark bg-no-repeat bg-cover lg:bg-center dark:lg:bg-center xl:bg-top dark:xl:bg-top lg:pt-16 rounded-3xl"
     >
       <div
-        class="flex flex-col w-full mx-auto h-auto text-center justify-center items-center pt-8 lg:pt-0 z-30 bg-[#F3F4F6] dark:bg-black dark:lg:bg-transparent lg:bg-transparent rounded-3xl"
+        class="relative flex flex-col w-full mx-auto h-auto text-center justify-center items-center pt-8 lg:pt-0 z-30 bg-[#F3F4F6] shadow-[inset_0px_0px_20px_5px_rgba(0,_0,_0,_0.1)] lg:shadow-none dark:shadow-none dark:bg-[#1a1b1f] dark:lg:bg-transparent lg:bg-transparent rounded-3xl"
       >
-        <div class="w-full pb-2 sml:pb-2 sml:pt-4 md:pt-0">
+        <div
+          class="absolute lg:hidden w-full h-[150px] sm:h-[300px] z-10 top-0 rounded-3xl dark:bg-[radial-gradient(circle_at_50%_-100%,_#3CFF7A_-40%,_#1a1b1f_80%)]"
+        />
+        <div class="w-full pb-2 sml:pb-2 sml:pt-4 md:pt-0 z-20">
           <p
             class="text-[22px] sm:text-[22px] md:text-[22px] lg:text-[26px] xl:text-[32px] text-[#1AB24F] font-[500]"
           >
             AI Innovation
           </p>
         </div>
-        <div class="w-full pb-2 sml:pb-2">
+        <div class="w-full pb-2 sml:pb-2 z-20">
           <p
             class="text-[#195279] text-[21px] sm:text-[38px] md:text-[36px] lg:text-[36px] xl:text-[60px] font-[500] leading-tight -tracking-[1px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
@@ -51,7 +54,7 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
         </div>
         <!-- Swipe caption -->
         <div
-          class="cursor-pointer flex flex-row items-center mb-4 sml:mb-0 lg:mb-5 mt-4 lg:mt-6 bg-[#195279] dark:bg-[#2B2E32] border-[1px] dark:border-[1px] dark:border-[#2AB857] px-5 py-2 rounded-full dark:shadow-[0px_4px_18.8px_0px_rgba(0,255,59,0.25)]"
+          class="cursor-pointer flex flex-row items-center mb-0 sm:mb-5 lg:mb-5 mt-4 lg:mt-6 bg-[#195279] dark:bg-[#2B2E32] border-[1px] dark:border-[1px] dark:border-[#2AB857] px-5 py-2 rounded-full dark:shadow-[0px_4px_18.8px_0px_rgba(0,255,59,0.25)] z-30"
         >
           <router-link to="/book-a-demo">
             <p class="text-[12px] xl:text-[14px] font-[400] text-[#FAFAFA]">
@@ -84,7 +87,7 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
             </svg>
           </div>
         </div>
-        <div class="w-full sml:h-auto sml:mt-5 lg:h-auto lg:px-0">
+        <div class="w-full sml:h-auto lg:h-auto lg:px-0 z-30">
           <Swiper
             :modules="[Navigation, Autoplay]"
             :navigation="false"
@@ -102,22 +105,16 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
               <img
                 :src="`/assets/images/hero-image/${data.banner}`"
                 alt="Banner"
-                class="w-full h-[150px] sm:h-[300px] lg:h-full object-contain object-bottom lg:px-10"
+                class="w-full h-[180px] sm:h-[300px] lg:h-full object-contain object-bottom lg:px-10"
               />
               <SliderDescription
                 :key="activeIndex + '-' + index"
-                class="animate__animated animate__fadeIn lg:!animate-none"
+                class="animate__animated animate__fadeIn lg:animate-none"
                 :style="screenIsSmall ? 'animation-delay: 500ms' : ''"
                 :logo="data.logo"
                 :darklogo="data.darklogo"
-                :widthSml="data.logoWidth.sml"
-                :heightSml="data.logoHeight.tsml"
-                :widthSm="data.logoWidth.sm"
-                :heightSm="data.logoHeight.sm"
-                :widthMd="data.logoWidth.md"
-                :heightMd="data.logoHeight.md"
-                :widthLg="data.logoWidth.lg"
-                :heightLg="data.logoHeight.lg"
+                :logoWidth="data.logoWidth"
+                :logoHeight="data.logoHeight"
                 :descriptions="data.description"
                 :linelightcolor="data.linelightcolor"
                 :href="data.url"
