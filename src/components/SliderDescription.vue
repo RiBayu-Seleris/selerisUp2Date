@@ -82,7 +82,7 @@ function getLogoSize(width, height) {
 
 <template>
   <div
-    class="absolute inset-0 flex items-center justify-end opacity-100 lg:opacity-0 lg:group-hover:opacity-100 mt-10 sm:mt-14 md:mt-10 lg:mt-0 transition-opacity duration-300 z-40"
+    class="absolute inset-0 flex items-center justify-end opacity-100 lg:opacity-0 lg:group-hover:opacity-100 mt-5 sm:mt-14 md:mt-10 lg:mt-0 transition-opacity duration-300 z-40"
   >
     <!-- Bubble wrapper -->
     <div

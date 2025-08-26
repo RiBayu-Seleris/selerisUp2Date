@@ -67,7 +67,7 @@ export const bannerLists = [
   {
     banner: "Care.png",
     logo: "care.svg",
-    darklogo: "",
+    darklogo: "care.png",
     description:
       "A corporate health and wellness platform that automates employee health monitoring, delivers real-time preventive insights, and lowers medical costs by up to 20%.",
     linelightcolor: "#13b89c",

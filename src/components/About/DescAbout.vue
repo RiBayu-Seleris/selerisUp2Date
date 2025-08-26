@@ -17,9 +17,9 @@ import DescRobot from "@/assets/images/about-images.png";
     </p>
   </div>
   <!-- div Description 2 -->
-  <div class="flex w-full h-auto my-5 lg:my-14 xl:my-16 lg:px-20">
+  <div class= "flex w-full h-auto my-5 sm:my-8 lg:my-14 xl:my-16 lg:px-20">
     <div
-      class="flex md:flex-row sml:flex-col w-full h-auto justify-between gap-16"
+      class="flex md:flex-row sml:flex-col w-full h-auto justify-between gap-y-5 md:gap-8 lg:gap-x-16"
     >
       <div
         class="flex w-full h-full md:w-[70%] lg:w-[50%] xl:w-[50%] justify-center items-center"
@@ -45,8 +45,8 @@ import DescRobot from "@/assets/images/about-images.png";
       </div>
     </div>
   </div>
-  <!-- div Description 1 -->
-  <div class="flex w-full h-auto xl:mt-5 sml:mt-5 lg:px-20">
+  <!-- div Description 3 -->
+  <div class="flex w-full h-auto xl:mt-5 lg:px-20">
     <p
       class="text-[14px] lg:text-[17px] xl:text-[21px] text-center text-[#195279] dark:text-[#FAFAFA] font-light"
     >

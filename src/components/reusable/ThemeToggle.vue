@@ -14,7 +14,7 @@ const themeStore = useThemeStore();
       class="absolute w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-white dark:bg-[#878787] shadow-lg transition-all duration-300"
       :class="
         themeStore.isDark
-          ? 'translate-x-[34px] sm:translate-x-[45px] md:translate-x-[43px] lg:translate-x-[33px] xl:translate-x-[43px]'
+          ? 'translate-x-[34px] sm:translate-x-[43px] md:translate-x-[43px] lg:translate-x-[27px] xl:translate-x-[43px]'
           : 'translate-x-[-6px]'
       "
     >

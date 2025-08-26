@@ -6,7 +6,7 @@ import MissionVideo from "@/assets/videos/Mission.mp4";
 
 <template>
   <div
-    class="relative w-full pb-10 flex flex-row gap-x-0 lg:gap-x-10 overflow-x-auto lg:overflow-hidden snap-x snap-mandatory lg:snap-none scroll-pl-8 pl-8 pr-8 hide-scrollbar"
+    class="relative w-full h-auto flex flex-col lg:flex-row justify-between space-y-10 lg:space-y-0 lg:gap-x-10"
   >
     <VisiMisiCard
       :video="VisionVideo"
@@ -16,6 +16,7 @@ import MissionVideo from "@/assets/videos/Mission.mp4";
                 equality, empowering communities, and creating opportunities for
                 a secure, sustainable, and prosperous future for all."
     />
+
     <VisiMisiCard
       :video="MissionVideo"
       title="Mission"

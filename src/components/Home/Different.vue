@@ -75,6 +75,7 @@ import performanceIcon from "@/assets/icons/performance.svg";
               :image="missionIcon"
               title="Missions"
               subtitle="Efficient, accurate, and accessible."
+              subtitleClass="pr-10"
             />
           </div>
           <div class="w-full mb-5">

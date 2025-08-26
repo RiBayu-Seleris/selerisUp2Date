@@ -11,12 +11,12 @@ import { certificateData } from "@/Data/certData";
       <!-- Heading -->
       <div class="flex flex-col w-full items-center text-center">
         <p
-          class="text-[24px] sm:text-[30px] md:text-[36px] lg:text-[44px] xl:text-[48px] font-medium text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+          class="text-[24px] sm:text-[30px] md:text-[32px] lg:text-[44px] xl:text-[48px] font-medium text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
         >
           Seleris Certification
         </p>
         <p
-          class="text-[14px] sm:text-[16px] md:text-[20px] lg:text-2xl xl:text-[22px] font-normal tracking-wide text-[#1DC457] dark:text-[#6A6A6A] sm:mt-2 lg:mt-4"
+          class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-2xl xl:text-[22px] font-normal tracking-wide text-[#1DC457] dark:text-[#6A6A6A] sm:mt-2 lg:mt-4"
         >
           Seleris Meditekno Internasional
         </p>

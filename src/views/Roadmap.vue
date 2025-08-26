@@ -37,14 +37,28 @@ function selectProduct(product) {
       subtitle="Roadmap Seleris Meditekno Internasional"
     />
   </section>
-  <!-- <div class="relative w-full h-auto">
-    <img
-      src="@/assets/images/frame-wave.png"
-      alt=""
-      srcset=""
-      class="bottom-0 w-full h-full"
-    />
-  </div> -->
+  <div class="relative w-full h-auto">
+    <video
+      autoplay
+      loop
+      muted
+      playsinline
+      @contextmenu.prevent
+      class="w-full object-cover object-center dark:hidden"
+    >
+      <source src="@/assets/videos/Wave.mp4" type="video/mp4" />
+    </video>
+    <video
+      autoplay
+      loop
+      muted
+      playsinline
+      @contextmenu.prevent
+      class="w-full object-cover object-center hidden dark:block"
+    >
+      <source src="@/assets/videos/WaveDark.mp4" type="video/mp4" />
+    </video>
+  </div>
   <section class="relative w-full h-auto top-0">
     <div class="relative w-full h-auto justify-center">
       <!-- Frame Content Scroll -->

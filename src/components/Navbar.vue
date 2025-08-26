@@ -1,32 +1,53 @@
 <script setup>
+import { ref, onMounted, onUnmounted } from "vue";
+
 import Logo from "@/assets/images/logo.png";
 import DarkLogo from "@/assets/images/darklogo.png";
 import MenuNav from "@/components/MenuNav.vue";
 import MenuIcon from "@/components/icons/MenuIcon.vue";
 import ThemeToggle from "@/components/reusable/ThemeToggle.vue";
-
 import { useSidebarStore } from "@/stores/sidebar";
 
 const sidebarStore = useSidebarStore();
+const isScrolled = ref(false);
+
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 0;
+};
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 
 <template>
   <div
-    class="relative flex justify-center w-full h-auto items-center max-w-[1440px] px-8 pt-6"
+    :class="[
+      'fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in flex justify-center',
+      isScrolled ? 'py-8 px-8 ' : 'bg-transparent py-6',
+    ]"
   >
     <!-- Desktop Navbar -->
-    <div class="hidden lg:grid grid-cols-12 w-full h-auto">
-      <div class="col-span-1 h-auto">
+    <div
+      class="hidden lg:grid grid-cols-12 w-full max-w-[1440px] h-auto px-8"
+      :class="[
+        isScrolled
+          ? 'bg-white py-2 rounded-[10px] dark:bg-black/40 dark:backdrop-blur-3xl dark:border-[0.5px] border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30'
+          : 'bg-transparent',
+      ]"
+    >
+      <div class="col-span-1">
         <router-link to="/">
           <div class="flex w-full items-center">
-            <!-- Logo terang (light mode) -->
             <img
               :src="Logo"
               alt="Logo"
               class="w-[117px] h-[56px] object-contain dark:hidden"
             />
-
-            <!-- Logo gelap (dark mode) -->
             <img
               :src="DarkLogo"
               alt="Dark Logo"
@@ -35,25 +56,27 @@ const sidebarStore = useSidebarStore();
           </div>
         </router-link>
       </div>
-      <div class="flex items-center col-span-10 h-auto">
-        <div class="flex w-full">
-          <!-- rounded-full border shadow-[1px_19px_33px_-14px_rgba(0,_0,_0,_0.08)] bg-white z-[999] -->
-          <nav
-            class="hidden lg:flex items-center w-full justify-center content-center"
-          >
-            <MenuNav />
-          </nav>
-        </div>
+
+      <div class="flex items-center col-span-10">
+        <nav class="hidden lg:flex items-center w-full justify-center">
+          <MenuNav />
+        </nav>
       </div>
-      <div class="col-span-1 h-auto">
-        <div class="flex w-full h-full items-center justify-center">
-          <ThemeToggle />
-        </div>
+
+      <div class="col-span-1 flex justify-center items-center">
+        <ThemeToggle />
       </div>
     </div>
 
     <!-- Mobile Navbar -->
-    <div class="w-full h-auto flex lg:hidden flex-row justify-between">
+    <div
+      class="flex lg:hidden flex-row w-full h-auto justify-between transition-all duration-500 ease-in"
+      :class="[
+        isScrolled
+          ? 'px-4 md:px-8 bg-white py-2 rounded-[10px] dark:bg-black/40 dark:backdrop-blur-3xl dark:border border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30'
+          : 'px-8 bg-transparent',
+      ]"
+    >
       <router-link to="/" class="w-[40%] h-auto flex">
         <!-- Logo terang (light mode) -->
         <img

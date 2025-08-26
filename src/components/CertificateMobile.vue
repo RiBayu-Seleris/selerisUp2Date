@@ -40,7 +40,7 @@ const getShortText = (fullText) => {
 
 <template>
   <div
-    class="lg:hidden flex flex-row w-full h-auto gap-x-6 mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-10 pl-10 pr-10 hide-scrollbar py-10"
+    class="lg:hidden flex flex-row w-full h-auto gap-x-6 overflow-x-auto snap-x snap-mandatory scroll-pl-10 pl-10 pr-10 hide-scrollbar py-10"
   >
     <div
       v-for="(cert, index) in certificates"
@@ -99,10 +99,10 @@ const getShortText = (fullText) => {
 
         <!-- BACK -->
         <div
-          class="absolute w-[280px] h-[240px] sm:w-[400px] sm:h-[200px] md:w-full md:h-[240px] lg:h-[230px] py-5 backface-hidden rotate-y-180 bg-[#F9FAFB] dark:bg-[#FAFAFA] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center px-5 sml:px-4"
+          class="absolute w-[280px] h-[240px] sm:w-[400px] sm:h-[200px] md:w-full md:h-[240px] lg:h-[230px] py-5 px-5 sm:px-4 md:px-6 backface-hidden rotate-y-180 bg-[#F9FAFB] dark:bg-[#FAFAFA] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center"
         >
           <p
-            class="flex text-[12px] sm:text-[12px] md:text-[18px] leading-relaxed overflow-hidden justify-center dark:text-[#3D3434]"
+            class="flex text-[12px] sm:text-[12px] md:text-[18px] leading-normal overflow-hidden justify-center dark:text-[#3D3434]"
             v-html="cert.description"
           ></p>
         </div>

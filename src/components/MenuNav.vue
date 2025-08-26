@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import { useScrollStore } from "@/stores/scroll";
 import { useRoute } from "vue-router";
 import Navlink from "@/components/Navlink.vue";
@@ -9,20 +9,34 @@ import { technologyList } from "@/Data/technologyList";
 import { usecaseList } from "@/Data/usecaseList";
 import { industryList } from "@/Data/industryList";
 
-const { isScrolled } = useScrollStore();
+// const { isScrolled } = useScrollStore();
 const route = useRoute();
 const isHoveringAbout = ref(false);
 const isHoveringProduct = ref(false);
 const isHoveringTechnology = ref(false);
 const isHoveringSolution = ref(false);
+
+const isScrolled = ref(false);
+
+const handleScroll = () => {
+  isScrolled.value = window.scrollY > 50;
+};
+
+onMounted(() => {
+  window.addEventListener("scroll", handleScroll);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", handleScroll);
+});
 </script>
 
 <template>
   <ul
     :class="[
-      'flex items-center text-md font-[400] text-[#374151] ',
+      'flex items-center text-md font-[400] text-[#374151] transition-all duration-500 ease-in',
       isScrolled
-        ? 'lg:gap-[20px] xl:gap-[50px] dark:text-[#DEDEDE] '
+        ? 'lg:gap-[20px] xl:gap-[55px] dark:text-[#DEDEDE] '
         : 'lg:gap-[25px] 2lg:gap-[45px] xl:gap-[63px] 2xl:gap-[70px] justify-center dark:text-[#DEDEDE]',
     ]"
   >
@@ -51,7 +65,7 @@ const isHoveringSolution = ref(false);
         :class="[`absolute left-0 top-full z-50`, isScrolled ? 'pt-8' : 'pt-8']"
       >
         <div
-          class="flex flex-col w-auto bg-white p-4 rounded-2xl shadow-lg gap-5 dark:bg-[#2C2C2C80] dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-sm dark:bg-opacity-20 dark:border-[0.1px] dark:border-[#FAFAFA]/25"
+          class="flex flex-col w-auto bg-white p-4 rounded-2xl shadow-lg gap-5 dark:bg-black/40 dark:backdrop-blur-3xl dark:border-[0.1px] dark:border-[#FAFAFA]/25"
         >
           <Navlink
             v-for="(about, index) in aboutList"

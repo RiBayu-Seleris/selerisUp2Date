@@ -25,33 +25,33 @@ import Roadmap from "@/components/Home/Roadmap.vue";
     <PartnersClientsMobile />
   </section>
 
-  <section
-    class="flex flex-col relative w-full h-auto md:mt-10 lg:mt-0 pt-4 pb-8 lg:pt-0 lg:pb-0"
-  >
+  <section class="flex flex-col relative w-full h-auto mt-10 md:mt-10 lg:mt-24">
     <Certificate />
   </section>
 
   <section
-    class="flex flex-col relative w-full h-auto mt-20 lg:mt-20 xl:mt-20 px-8"
+    class="flex flex-col relative w-full h-auto mt-14 lg:mt-20 xl:mt-28 px-8"
   >
     <Description />
   </section>
 
-  <section class="flex flex-col relative w-full h-auto mt-16">
+  <section
+    class="flex flex-col relative w-full h-auto mt-14 sm:mt-14 md:mt-24 xl:mt-28"
+  >
     <Benefits />
   </section>
 
   <section
-    class="flex flex-col relative w-full h-auto mt-10 lg:mt-10 xl:mt-10 px-8 lg:px-24"
+    class="flex flex-col relative w-full h-auto mt-24 lg:mt-10 xl:mt-28 px-8 sm:px-8 lg:px-24"
   >
     <AiDesc />
   </section>
 
-  <section class="flex flex-col relative w-full h-auto mt-40 sml:mt-24 mb-10">
+  <section class="flex flex-col relative w-full h-auto mt-24 xl:mt-32 mb-10">
     <Testimonial />
   </section>
 
-  <section class="flex flex-col relative w-full h-auto px-8 my-20">
+  <section class="flex flex-col relative w-full h-auto px-8 mt-32">
     <Different />
   </section>
 

@@ -15,7 +15,9 @@ import { useSidebarStore } from "@/stores/sidebar";
 </script>
 
 <template>
-  <section class="dark:hidden flex flex-col relative w-full h-auto md:px-20">
+  <section
+    class="dark:hidden flex flex-col relative w-full h-auto md:px-16 lg:px-20"
+  >
     <Hero />
   </section>
 
@@ -38,7 +40,7 @@ import { useSidebarStore } from "@/stores/sidebar";
     </section>
   </div>
 
-  <section class="relative w-full h-auto lg:px-8 mt-20 lg:mt-28 xl:mt-40">
+  <section class="relative w-full h-auto px-8 mt-20 lg:mt-28 xl:mt-40">
     <VisiMisi />
   </section>
 
@@ -49,14 +51,14 @@ import { useSidebarStore } from "@/stores/sidebar";
   </section>
 
   <section
-    class="flex flex-col relative w-full md:mt-10 lg:mt-10 xl:mt-20 pt-4 pb-8 lg:pt-0 lg:pb-0"
+    class="flex flex-col relative w-full md:mt-10 lg:mt-10 xl:mt-48 pt-4 pb-8 lg:pt-0 lg:pb-0"
   >
     <Certificate />
   </section>
   <!-- Section Step -->
 
   <section
-    class="flex relative w-full h-auto pb-8 lg:pb-0 px-8 md:px-16 lg:px-20 sml:mb-20 md:mb-4 lg:mb-20 xl:mb-20"
+    class="flex relative w-full h-auto pb-8 lg:pb-0 px-8 md:px-16 lg:px-20 mt-40 sm:mt-24 mb-20 md:mb-4 lg:mb-20 xl:mb-20"
   >
     <StepDescription />
   </section>

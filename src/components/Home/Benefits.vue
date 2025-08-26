@@ -10,13 +10,13 @@ const benefitList = [
   {
     icon: new URL("@/assets/icons/Benefits/speed.png", import.meta.url).href,
     title: "Speed",
-    body: "The Seleris app has a lightning fast speed. it can open and run features quickly.",
+    body: "Seleris has a lightning fast speed. it can open and run features quickly.",
   },
   {
     icon: new URL("@/assets/icons/Benefits/efficiency.png", import.meta.url)
       .href,
     title: "Efficiency",
-    body: "The app uses a simple and intuitive interface, so users can quickly find the features they are looking for.",
+    body: "The app’s simple interface helps users quickly find desired features easily.",
   },
   {
     icon: new URL("@/assets/icons/Benefits/testimonial.png", import.meta.url)
@@ -28,19 +28,19 @@ const benefitList = [
     icon: new URL("@/assets/icons/Benefits/experience.png", import.meta.url)
       .href,
     title: "Customer Experience",
-    body: "The best possible Experience that is easy, comfortable, and Safe for Seleris users is our commitment.",
+    body: "We commit to giving Seleris users the best, easy, safe, and comfortable experience.",
   },
   {
     icon: new URL("@/assets/icons/Benefits/guarantee.png", import.meta.url)
       .href,
     title: "Guarantee",
-    body: "The security of your data is our priority. Our apps use cutting-edge security technology",
+    body: "Your data security is our priority, protected with advanced cutting-edge technology.",
   },
 ];
 </script>
 
 <template>
-  <div class="flex flex-col relative w-full py-10">
+  <div class="flex flex-col relative w-full">
     <div class="flex flex-col gap-y-3 xl:gap-y-5">
       <div class="flex w-full h-auto justify-center items-center">
         <p
@@ -65,7 +65,7 @@ const benefitList = [
         class="hidden xl:flex absolute w-32 h-full bg-gradient-to-l from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-l dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% right-0 z-20 rounded-l-2xl"
       />
       <div
-        class="relative flex flex-row w-full max-h-screen gap-x-10 sml:gap-x-5 md:gap-x-5 mt-16 sml:mt-4 md:mt-5 py-5 overflow-x-auto snap-x snap-mandatory sml:scroll-pl-10 sml:pl-10 sml:pr-10 md:scroll-pl-16 md:pl-16 md:pr-16 xl:scroll-pl-32 xl:pl-32 xl:pr-32 hide-scrollbar"
+        class="relative flex flex-row w-full max-h-screen gap-x-5 md:gap-x-5 lg:gap-x-10 mt-16 sml:mt-4 md:mt-5 py-5 overflow-x-auto snap-x snap-mandatory sml:scroll-pl-10 sml:pl-10 sml:pr-10 md:scroll-pl-16 md:pl-16 md:pr-16 xl:scroll-pl-32 xl:pl-32 xl:pr-8 hide-scrollbar"
       >
         <CardDefault
           v-for="(benefit, index) in benefitList"

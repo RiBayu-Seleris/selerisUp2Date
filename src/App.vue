@@ -5,7 +5,7 @@ import { useScrollStore } from "@/stores/scroll";
 import { useThemeStore } from "@/stores/theme";
 
 import Navbar from "@/components/Navbar.vue";
-import NavbarScroll from "@/components/NavbarScroll.vue";
+// import NavbarScroll from "@/components/NavbarScroll.vue";
 import Sidebar from "@/components/Sidebar.vue";
 import Touch from "@/components/Touch.vue";
 import Footer from "@/components/Footer.vue";
@@ -144,10 +144,10 @@ const isBlogDetail = computed(() => route.path === "/blog/details");
             ? 'bg-[#FFFFFF]'
             : 'bg-[#f9fafb]',
           isBookDemoRoute
-            ? 'min-h-screen w-full dark:lg:bg-[radial-gradient(circle_at_0%_30%,_#3CFF7A_-70%,_#17181A_30%)]'
+            ? 'min-h-[100dvh] w-full dark:lg:bg-[radial-gradient(circle_at_0%_30%,_#3CFF7A_-70%,_#17181A_30%)]'
             : '',
           isCompanyRoute
-            ? 'min-h-screen w-full dark:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-50%,_#17181A_10%)] dark:md:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-50%,_#17181A_15%)] dark:lg:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-40%,_#17181A_30%)]'
+            ? 'min-h-[100dvh] w-full dark:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-50%,_#17181A_10%)] dark:md:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-50%,_#17181A_15%)] dark:lg:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-40%,_#17181A_30%)]'
             : '',
           !isBlogDetail ? 'overflow-x-hidden' : '',
         ]"
@@ -157,10 +157,10 @@ const isBlogDetail = computed(() => route.path === "/blog/details");
         >
           <!-- Navbar -->
           <div
-            class="flex fixed top-0 w-full h-auto z-50"
+            class="flex fixed top-0 w-full h-auto z-50 transition-all duration-300 ease-in-out"
             v-if="!['/test-embed'].includes(route.path)"
           >
-            <component :is="scrollStore.isScrolled ? NavbarScroll : Navbar" />
+            <Navbar v-if="!['/test-embed'].includes(route.path)" />
           </div>
 
           <!-- Scroll Tooltip -->
