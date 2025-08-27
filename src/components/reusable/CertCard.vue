@@ -51,7 +51,7 @@ const cekCertIcon = computed(() => {
       :class="`absolute top-0 left-0 z-0 flex flex-col w-full h-full bg-cover bg-center bg-no-repeat bg-centerCertBefore dark:bg-centerCertDarkBefore`"
     >
       <div class="flex flex-col w-full h-auto mt-14">
-        <div class="flex w-full h-[194px] justify-center mx-auto">
+        <div class="flex w-[180px] h-[194px] justify-center mx-auto">
           <img
             :src="`/assets/images/certificate-icon/${imageCertLogo}`"
             alt="Cert Logo"

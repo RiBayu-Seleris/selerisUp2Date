@@ -32,4 +32,11 @@ export const certificateData = [
     certNumber: "Certificate Number: 2403150020502",
     description: `PT. Seleris Meditekno Internasional has been awarded ISO/IEC 20000 certification with the number 2403150020502, which demonstrates our commitment to delivering reliable and high-quality Service Management System. This certification signifies that we meet international standards in IT service management, ensuring efficiency, consistency, and continuous improvement in our services.`,
   },
+  {
+    logo: "Cert4.png",
+    titleBefore: "PSE CERTIFICATION",
+    titleAfter: "PSE CERTIFICATION",
+    certNumber: "Certificate Number: 016827.01/DJAI.PSE/12/2024",
+    description: `PT. Seleris Meditekno Internasional is officially registered as an Electronic System Provider (PSE) with the number 016827.01/DJAI.PSE/12/2024, demonstrating our compliance with government regulations in delivering secure and reliable electronic systems. This recognition reinforces our commitment to trust, transparency, and excellence in digital services.`,
+  },
 ];
