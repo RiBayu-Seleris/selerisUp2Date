@@ -41,10 +41,14 @@ const cekCertIcon = computed(() => {
 </script>
 
 <template>
-  <div class="relative w-[335px] h-[419px] group cursor-default">
+  <!-- <div class="relative w-[335px] h-[419px] group cursor-default"> -->
+  <div
+    class="snap-start shrink-0 relative w-[335px] h-[419px] group cursor-default"
+  >
     <!-- Card A -->
+
     <div
-      :class="`absolute top-0 left-0 z-0 flex flex-col w-full h-full bg-cover bg-center ${divImageBefore}`"
+      :class="`absolute top-0 left-0 z-0 flex flex-col w-full h-full bg-cover bg-center bg-no-repeat bg-centerCertBefore dark:bg-centerCertDarkBefore`"
     >
       <div class="flex flex-col w-full h-auto mt-14">
         <div class="flex w-full h-[194px] justify-center mx-auto">
@@ -63,23 +67,18 @@ const cekCertIcon = computed(() => {
         </div>
       </div>
     </div>
-
     <!-- Card B -->
     <div
-      :class="`absolute top-0 left-0 z-0 flex flex-col w-full h-full bg-cover bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out ${divImageAfter}`"
+      :class="`absolute top-0 left-0 z-0 flex flex-col w-full h-full bg-cover bg-no-repeat bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out bg-centerCertAfter dark:bg-centerCertDarkAfter`"
     >
       <div
-        :class="`flex flex-col w-full h-full text-white dark:text-[#3D3434] px-6 xl:px-10 pt-12 gap-y-4 ${textPosition}`"
+        :class="`flex flex-col w-full h-full text-white dark:text-[#3D3434] px-6 xl:px-10 pt-12 gap-y-4 text-center`"
       >
         <p class="text-[19px] font-semibold leading-tight">
           {{ TitleAfter }}
         </p>
-        <p class="text-[14px] font-normal">
-          {{ CertNumber }}
-        </p>
-        <p class="text-[12px]">
-          {{ BodyText }}
-        </p>
+        <p class="text-[14px] font-normal">{{ CertNumber }}</p>
+        <p class="text-[12px]">{{ BodyText }}</p>
       </div>
     </div>
   </div>

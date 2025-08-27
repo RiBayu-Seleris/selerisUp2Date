@@ -6,7 +6,7 @@ import { certificateData } from "@/Data/certData";
 </script>
 
 <template>
-  <div class="w-full h-auto lg:px-8">
+  <div class="w-full h-auto">
     <div class="flex flex-col w-full h-auto">
       <!-- Heading -->
       <div class="flex flex-col w-full items-center text-center">
@@ -24,21 +24,27 @@ import { certificateData } from "@/Data/certData";
 
       <!-- Desktop Certificate Cards -->
       <!-- class="hidden lg:flex flex-row w-full max-w-[1440px] mx-auto gap-x-16 mt-8 mb-12 justify-center" -->
-      <div
-        class="hidden lg:flex flex-row w-full space-x-16 mt-16 justify-center"
-      >
-        <CertCard
-          v-for="(cert, index) in certificateData"
-          :key="index"
-          :divImageBefore="cert.divImageBefore"
-          :divImageAfter="cert.divImageAfter"
-          :imageCertLogo="cert.logo"
-          :TitleBefore="cert.titleBefore"
-          :textPosition="cert.textPosition"
-          :TitleAfter="cert.titleAfter"
-          :CertNumber="cert.certNumber"
-          :BodyText="cert.description"
+      <div class="relative w-full h-auto">
+        <div
+          class="hidden xl:flex absolute w-32 h-full bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-r dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% left-0 z-20"
         />
+        <div
+          class="hidden xl:flex absolute w-32 h-full bg-gradient-to-l from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-l dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% right-0 z-20"
+        />
+        <div
+          class="relative hidden lg:flex flex-row w-full space-x-6 mt-16 overflow-x-auto snap-x snap-mandatory scroll-pl-10 pl-10 pr-10 hide-scrollbar hide-scrollbar hide-scrollbar"
+        >
+          <CertCard
+            v-for="(cert, index) in certificateData"
+            :key="index"
+            :imageCertLogo="cert.logo"
+            :TitleBefore="cert.titleBefore"
+            :textPosition="cert.textPosition"
+            :TitleAfter="cert.titleAfter"
+            :CertNumber="cert.certNumber"
+            :BodyText="cert.description"
+          />
+        </div>
       </div>
 
       <!-- Mobile Certificate -->
