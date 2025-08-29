@@ -3,40 +3,34 @@ import { computed } from "vue";
 defineProps({
   divImageBefore: {
     type: String,
-    required: true,
   },
   divImageAfter: {
     type: String,
-    required: true,
   },
   imageCertLogo: {
     type: String,
-    required: true,
   },
   TitleBefore: {
     type: String,
-    required: true,
+  },
+  subtitleBefore: {
+    type: String,
+  },
+  subsubtitleBefore: {
+    type: String,
   },
   textPosition: {
     type: String,
-    required: true,
   },
   TitleAfter: {
     type: String,
-    required: true,
   },
   CertNumber: {
     type: String,
-    required: true,
   },
   BodyText: {
     type: String,
-    required: true,
   },
-});
-
-const cekCertIcon = computed(() => {
-  imageCertLogo ? imageCertLogo : DefaultLogo;
 });
 </script>
 
@@ -50,19 +44,24 @@ const cekCertIcon = computed(() => {
     <div
       :class="`absolute top-0 left-0 z-0 flex flex-col w-full h-full bg-cover bg-center bg-no-repeat bg-centerCertBefore dark:bg-centerCertDarkBefore`"
     >
-      <div class="flex flex-col w-full h-auto mt-14">
-        <div class="flex w-[180px] h-[194px] justify-center mx-auto">
+      <div class="flex flex-col w-full h-auto mt-20">
+        <div class="flex w-[180px] h-[150px] justify-center mx-auto">
           <img
             :src="`/assets/images/certificate-icon/${imageCertLogo}`"
             alt="Cert Logo"
             class="w-full h-full object-contain object-center"
           />
         </div>
-        <div class="flex w-full justify-center mt-6 px-10 text-center">
+        <div class="flex flex-col w-full justify-center mt-6 px-10 text-center">
           <p
             class="text-[20px] font-normal text-[#195279] dark:text-[#FAFAFAFA]"
           >
             {{ TitleBefore }}
+          </p>
+          <p
+            class="text-[16px] font-normal text-[#195279] dark:text-[#FAFAFAFA] leading-normal"
+          >
+            {{ subtitleBefore }}
           </p>
         </div>
       </div>

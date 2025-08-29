@@ -43,7 +43,7 @@ defineProps({
       </div>
       <div class="w-full h-auto px-4 sm:px-8">
         <p
-          class="text-[12pt] md:text-[17pt] sml:leading-relaxed md:leading-[32pt] font-normal text-center text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+          class="text-[10pt] sm:text-[12pt] md:text-[16pt] leading-relaxed md:leading-[32pt] font-normal text-center text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
         >
           <!-- We bring solutions to make life insurance for our customers. -->
           {{ subtitle }}

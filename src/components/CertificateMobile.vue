@@ -45,7 +45,7 @@ const getShortText = (fullText) => {
     <div
       v-for="(cert, index) in certificates"
       :key="index"
-      class="snap-start shrink-0 w-[280px] h-[240px] sm:w-[400px] sm:h-[200px] md:w-[85%] md:h-[240px] lg:h-[230px] perspective mb-2"
+      class="cursor-pointer snap-start shrink-0 w-[280px] h-[240px] sm:w-[400px] sm:h-[200px] md:w-[85%] md:h-[240px] lg:h-[230px] perspective mb-2"
       @click="handleFlip(index)"
     >
       <div
@@ -72,9 +72,19 @@ const getShortText = (fullText) => {
                     class="w-full h-full object-center object-contain"
                   />
                 </div>
-                <div class="flex md:w-full h-auto items-center">
-                  <p class="text-[14px] md:text-[20px] font-normal">
+                <div
+                  class="flex md:w-full h-auto items-start justify-center"
+                  :class="[
+                    cert.subsubtitleBefore === null ? '' : 'space-y-1 flex-col',
+                  ]"
+                >
+                  <p class="text-[14px] md:text-[20px] text-start font-normal">
                     {{ cert.titleBefore }}
+                  </p>
+                  <p
+                    class="text-[10px] sm:text-[12px] font-normal text-[#195279] dark:text-[#FAFAFAFA] leading-normal"
+                  >
+                    {{ cert.subtitleBefore }}
                   </p>
                 </div>
               </div>

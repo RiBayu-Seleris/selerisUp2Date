@@ -65,7 +65,7 @@ const benefitList = [
         class="hidden xl:flex absolute w-32 h-full bg-gradient-to-l from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-l dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% right-0 z-20 rounded-l-2xl"
       />
       <div
-        class="relative flex flex-row w-full max-h-screen gap-x-5 md:gap-x-5 lg:gap-x-10 mt-16 sml:mt-4 md:mt-5 py-5 overflow-x-auto snap-x snap-mandatory sml:scroll-pl-10 sml:pl-10 sml:pr-10 md:scroll-pl-16 md:pl-16 md:pr-16 xl:scroll-pl-32 xl:pl-32 xl:pr-8 hide-scrollbar"
+        class="relative flex flex-row w-full max-h-screen gap-x-5 md:gap-x-5 lg:gap-x-10 mt-16 sml:mt-4 md:mt-5 py-5 overflow-x-auto snap-x snap-mandatory sml:scroll-pl-10 sml:pl-10 sml:pr-10 md:scroll-pl-16 md:pl-16 md:pr-16 xl:scroll-pl-32 xl:pl-32 xl:pr-16 hide-scrollbar"
       >
         <CardDefault
           v-for="(benefit, index) in benefitList"

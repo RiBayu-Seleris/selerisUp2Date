@@ -6,7 +6,7 @@ import MissionVideo from "@/assets/videos/Mission.mp4";
 
 <template>
   <div
-    class="relative w-full h-auto flex flex-col lg:flex-row justify-between space-y-10 lg:space-y-0 lg:gap-x-10"
+    class="relative w-full h-auto flex flex-col md:flex-row justify-between space-y-20 md:space-y-0 md:space-x-8 lg:space-x-10"
   >
     <VisiMisiCard
       :video="VisionVideo"

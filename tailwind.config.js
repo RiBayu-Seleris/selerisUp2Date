@@ -108,4 +108,5 @@ module.exports = {
     },
   },
   plugins: [require("@tailwindcss/typography")],
+  // safelist: ["p-[2px]", "p-[4px]", "p-[5px]", "p-[10px]"],
 };

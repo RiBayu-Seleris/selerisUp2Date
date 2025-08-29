@@ -66,23 +66,29 @@ onMounted(() => {
       class="flex md:flex-row sml:flex-col-reverse w-full h-auto gap-x-10 relative"
     >
       <div class="flex flex-col w-full h-auto gap-y-7 lg:gap-y-4 xl:gap-y-10">
-        <div class="w-full h-auto flex flex-col gap-y-3 xl:gap-y-3">
-          <div class="flex w-full h-auto">
-            <p class="text-[17px] lg:text-[21px] xl:text-[30px] text-[#1AB24F]">
+        <div
+          class="w-full h-auto flex flex-col gap-y-1.5 sm:gap-y-3 xl:gap-y-3"
+        >
+          <div class="flex w-full h-auto justify-center md:justify-start">
+            <p
+              class="text-[17px] sm:text-[22px] md:text-[17px] lg:text-[21px] xl:text-[30px] text-[#1AB24F]"
+            >
               App Features
             </p>
           </div>
-          <div class="flex w-full h-auto lg:pr-16 xl:pr-20">
+          <div
+            class="flex w-full h-auto lg:pr-16 xl:pr-20 justify-center md:justify-start"
+          >
             <p
-              class="text-[23px] lg:text-[27px] xl:text-[47px] text-[#195279] leading-[30px] lg:leading-normal xl:leading-[55px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+              class="text-[18px] sm:text-[28px] lg:text-[26px] xl:text-[46px] text-[#195279] leading-[30px] lg:leading-normal xl:leading-[55px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
             >
-              We're company <br />
-              with a vision.
+              We're company
+              <span class="inline md:block">with a vision.</span>
             </p>
           </div>
-          <div class="flex w-full h-auto">
+          <div class="flex w-full h-auto justify-center md:justify-start">
             <p
-              class="text-[14px] lg:text-[14px] xl:text-[17px] text-[#89A6BA] xl:leading-relaxed lg:pr-20 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+              class="text-center md:text-start text-[12px] sm:text-[16px] lg:text-[14px] xl:text-[17px] text-[#89A6BA] xl:leading-relaxed lg:pr-20 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
             >
               Empowering smarter decisions through
               <br class="hidden md:block xl:hidden" />
@@ -100,21 +106,21 @@ onMounted(() => {
             :pagination="false"
             :autoplay="{ delay: 2000, disableOnInteraction: false }"
             loop
-            class="w-full h-full rounded-xl overflow-hidden custom-swiper cursor-grab"
+            class="w-full h-full rounded-xl overflow-hidden custom-swiper cursor-grab active:cursor-grabbing"
           >
             <SwiperSlide v-for="(step, index) in StepsContent" :key="index">
               <div
                 class="w-full h-full flex flex-row items-center text-white text-xl"
               >
-                <div class="flex flex-row text-white text-xl gap-x-5">
+                <div class="flex flex-row text-white text-xl space-x-5">
                   <div class="flex lg:[15%] xl:w-[10%]">
                     <div
-                      class="flex bg-white dark:bg-[#323232] rounded-full shadow-md p-2 md:p-1 xl:p-2 sml:w-[50px] sml:h-[50px] md:w-[45px] md:h-[45px] lg:w-[45px] lg:h-[45px] xl:w-[60px] xl:h-[60px] justify-center md:mt-2 lg:mt-0"
+                      class="flex bg-white dark:bg-[#323232] rounded-full shadow-md p-1.5 sm:p-2 md:p-1 xl:p-2 sml:w-[50px] sml:h-[50px] md:w-[45px] md:h-[45px] lg:w-[45px] lg:h-[45px] xl:w-[60px] xl:h-[60px] justify-center md:mt-2 lg:mt-0"
                     >
                       <img
                         :src="step.icon"
                         alt="Icon"
-                        class="w-full lg:h-full xl:h-full object-contain object-top"
+                        class="w-full lg:h-full xl:h-full object-contain object-center"
                       />
                     </div>
                   </div>
@@ -123,14 +129,14 @@ onMounted(() => {
                   >
                     <div class="w-full h-auto">
                       <p
-                        class="text-[#195279] dark:text-white text-[17px] lg:text-[17px] xl:text-[21px]"
+                        class="text-[#195279] dark:text-white text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[22px]"
                       >
                         {{ step.title }}
                       </p>
                     </div>
                     <div class="w-full h-auto leading-relaxed">
                       <p
-                        class="text-[#195279] dark:text-white text-[13px] lg:text-[14px] xl:text-[19px]"
+                        class="text-[#195279] dark:text-white text-[10px] sm:text-[14px] lg:text-[14px] xl:text-[19px]"
                       >
                         {{ step.description }}
                       </p>
@@ -152,7 +158,7 @@ onMounted(() => {
           muted
           playsinline
           @contextmenu.prevent
-          class="w-full h-full object-cover object-center rounded-3xl dark:hidden"
+          class="w-full h-full sm:w-full sm:h-[400px] md:w-full md:h-full object-contain lg:object-cover object-center rounded-3xl dark:hidden"
         >
           <source src="@/assets/videos/Step.mp4" type="video/mp4" />
         </video>
@@ -162,7 +168,7 @@ onMounted(() => {
           muted
           playsinline
           @contextmenu.prevent
-          class="w-full h-full object-cover object-center rounded-3xl hidden dark:block"
+          class="w-full h-full sm:w-full sm:h-[400px] md:w-full md:h-full object-contain lg:object-cover object-center rounded-3xl hidden dark:block"
         >
           <source src="@/assets/videos/Dark_Step.mp4" type="video/mp4" />
         </video>

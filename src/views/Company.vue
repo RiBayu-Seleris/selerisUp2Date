@@ -45,7 +45,7 @@ import { useSidebarStore } from "@/stores/sidebar";
   </section>
 
   <section
-    class="flex flex-col relative w-full h-auto px-8 mt-10 lg:mt-28 xl:mt-40"
+    class="flex flex-col relative w-full h-auto px-8 mt-40 lg:mt-28 xl:mt-40"
   >
     <Description />
   </section>
@@ -58,7 +58,7 @@ import { useSidebarStore } from "@/stores/sidebar";
   <!-- Section Step -->
 
   <section
-    class="flex relative w-full h-auto pb-8 lg:pb-0 px-8 md:px-16 lg:px-20 mt-40 sm:mt-24 mb-20 md:mb-4 lg:mb-20 xl:mb-20"
+    class="flex relative w-full h-auto pb-8 lg:pb-0 px-8 md:px-8 lg:px-20 mt-10 sm:mt-14 xl:mt-40 mb-20 md:mb-4 lg:mb-20 xl:mb-20"
   >
     <StepDescription />
   </section>

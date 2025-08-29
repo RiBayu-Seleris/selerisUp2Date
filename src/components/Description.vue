@@ -157,7 +157,7 @@ onMounted(() => {
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full object-fill lg:object-contain dark:hidden"
+        class="w-full h-full md:w-auto md:h-[500px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] object-fill lg:object-contain dark:hidden lg:ml-20 xl:pl-0"
       >
         <source src="@/assets/videos/Design-Vector-Web2.mp4" type="video/mp4" />
       </video>
@@ -167,7 +167,7 @@ onMounted(() => {
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] object-contain hidden dark:block rounded-[20px] bg-[#FFFFFF] dark:bg-[#151819] border-[0.1px] dark:border-[#FAFAFA]/25 lg:ml-10 xl:pl-0"
+        class="w-full h-full md:w-auto md:h-[500px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] object-fill lg:object-contain hidden dark:block rounded-[20px] bg-[#FFFFFF] dark:bg-[#151819] border-[0.1px] dark:border-[#FAFAFA]/25 lg:ml-20 xl:pl-0"
       >
         <source
           src="@/assets/videos/Design-Dark-Vector-Web2.mp4"
