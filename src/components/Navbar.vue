@@ -27,13 +27,13 @@ onUnmounted(() => {
 <template>
   <div
     :class="[
-      'fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in flex justify-center',
+      'fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in flex justify-center ',
       isScrolled ? 'py-8 px-8 ' : 'bg-transparent py-6',
     ]"
   >
     <!-- Desktop Navbar -->
     <div
-      class="hidden lg:grid grid-cols-12 w-full max-w-[1440px] h-auto px-8"
+      class="hidden lg:grid grid-cols-12 w-full max-w-[1440px] h-auto px-8 transition-all duration-500 ease-in"
       :class="[
         isScrolled
           ? 'bg-white py-2 rounded-[10px] dark:bg-black/40 dark:backdrop-blur-3xl dark:border-[0.5px] border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30'

@@ -8,6 +8,8 @@ const isAccountDropdown = ref(false);
 const toggleDropdown = () => {
   isAccountDropdown.value = !isAccountDropdown.value;
 };
+
+const loginStatus = ref(false);
 </script>
 
 <template>
@@ -16,7 +18,9 @@ const toggleDropdown = () => {
     <HeroSection />
   </section>
 
+  <!-- Account Section -->
   <section
+    v-if="loginStatus === true"
     class="flex flex-row relative w-full h-[70px] max-w-md mx-auto mt-10 lg:mt-10"
   >
     <div class="relative w-[30%] h-auto flex justify-center items-center">
@@ -55,7 +59,7 @@ const toggleDropdown = () => {
   </section>
 
   <section
-    class="flex flex-col relative w-full h-auto md:px-12 xl:px-16 mt-10 lg:mt-8 mb-20"
+    class="flex flex-col relative w-full h-auto px-8 md:px-8 xl:px-16 mt-10 lg:mt-8 mb-20"
   >
     <BlogList />
   </section>

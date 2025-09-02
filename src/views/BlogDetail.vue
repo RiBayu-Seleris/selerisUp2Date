@@ -1,11 +1,20 @@
 <script setup>
 import ArrowDown from "@/components/icons/ArrowDown.vue";
-import { ref } from "vue";
 import ToC from "@/components/Blog/ToC.vue";
+import { computed, onMounted, ref, watch } from "vue";
+import { useRoute } from "vue-router";
+import { blogsApi } from "../consumeAPI/blogsApi";
+const { getBlogBySlug, error, loading } = blogsApi();
+
+const route = useRoute();
+const slug = route.params.slug;
+
+onMounted(async () => {
+  await getBlogBySlug(slug); // <= WAJIB
+});
 
 const blogimage = "new-example.png";
 const blogimage2 = "example.png";
-
 // const articleRef = ref(null);
 const isAccountDropdown = ref(false);
 const isFocusedComment = ref(false);

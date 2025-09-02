@@ -300,12 +300,12 @@ function selectProduct(product) {
               class="w-[300px] sm:w-[300px] md:w-[500px] h-full flex flex-col bg-[#FFFFFF] dark:bg-[#323232] p-5 md:p-8 rounded-[30px]"
             >
               <p
-                class="text-center h-[60px] bg-green-500 px-0 sm:px-8 md:px-16 pb-4 text-[#195279] font-[500] text-[12px] sm:text-[14px] md:text-[16px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                class="text-center h-[60px] px-0 sm:px-8 md:px-16 pb-4 text-[#195279] font-[500] text-[12px] sm:text-[14px] md:text-[16px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
               >
                 {{ item.title }}
               </p>
               <p
-                class="text-center bg-orange-300 justify-start items-start text-[#195279] text-[12px] sm:text-[12px] md:text-[14px] dark:text-[#6F6F6F]"
+                class="text-center justify-start items-start text-[#195279] text-[12px] sm:text-[12px] md:text-[14px] dark:text-[#6F6F6F]"
               >
                 {{ item.description }}
               </p>

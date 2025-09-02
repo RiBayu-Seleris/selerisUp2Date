@@ -1,6 +1,7 @@
 <script setup>
-import { ref, computed } from "vue";
-import { blogPosts } from "@/Data/blogPosts.js";
+import { ref, computed, onMounted } from "vue";
+import { blogsApi } from "../../consumeAPI/blogsApi";
+
 import BlogCard from "@/components/reusable/BlogCard.vue";
 import SearchIcon from "@/components/icons/Search.vue";
 import FilterIcon from "@/components/icons/Filter.vue";
@@ -10,12 +11,30 @@ import EyeIcon from "@/components/icons/Eye.vue";
 import CommentIcon from "@/components/icons/Comment.vue";
 import ShareIcon from "@/components/icons/Share.vue";
 
-const blogimage = "new-example.png";
-const blogimage2 = "example.png";
+// const blogimage = "new-example.png";
+// const blogimage2 = "example.png";
 
 const isOpenCategory = ref(false);
 const selectedCategory = ref("All Articles");
-const Categories = ["All Articles", "Technology", "Design", "Business"];
+const Categories = [
+  {
+    id: 1,
+    name: "All Articles",
+  },
+  {
+    id: 2,
+    name: "Technology",
+  },
+  {
+    id: 3,
+    name: "Design",
+  },
+  {
+    id: 4,
+    name: "Business",
+  },
+];
+// const Categories = ref({});
 
 const isOpenPostTime = ref(false);
 const selectedPostTime = ref("Latest");
@@ -38,10 +57,38 @@ const selectPostTime = (option) => {
   selectedPostTime.value = option;
   isOpenPostTime.value = false;
 };
+
+const {
+  blogs,
+  newestBlog,
+  popularBlog,
+  getAllBlogs,
+  getNewestBlog,
+  getPopularBlog,
+  error,
+  loading,
+} = blogsApi();
+
+const fromISODate = (dateString) => {
+  const d = new Date(dateString);
+  return d.toLocaleDateString("en-US", {
+    month: "short",
+    day: "2-digit",
+    year: "numeric",
+  });
+};
+
+onMounted(() => {
+  getAllBlogs();
+  getNewestBlog();
+  getPopularBlog();
+});
 </script>
 
 <template>
-  <section class="flex flex-col relative w-full h-auto max-w-2xl mx-auto">
+  <!-- <div v-if="error">{{ error }}</div> -->
+  <!-- <div v-else> -->
+  <section class="flex flex-col relative w-full h-auto lg:max-w-2xl mx-auto">
     <!-- Search Frame -->
     <div
       class="w-full h-14 flex flex-row items-center border-2 dark:bg-[#535353] px-2 md:px-4 rounded-[5px] md:gap-x-3 lg:gap-x-3 xl:gap-x-2.5"
@@ -52,9 +99,9 @@ const selectPostTime = (option) => {
         <SearchIcon />
       </div>
       <div class="w-full h-auto">
+        <!-- v-model="searchQuery" -->
         <input
           name="search"
-          v-model="searchQuery"
           type="text"
           class="bg-transparent outline-none w-full text-[#6C6C6C] dark:text-[#ADADAD]"
           placeholder="Search Article..."
@@ -71,7 +118,6 @@ const selectPostTime = (option) => {
         <ChevronDown
           :class="isOpenCategory ? 'rotate-180 transition' : 'transition'"
         />
-
         <!-- List dropdown -->
         <div
           v-if="isOpenCategory"
@@ -80,14 +126,13 @@ const selectPostTime = (option) => {
           <div
             v-for="(category, index) in Categories"
             :key="index"
-            @click.stop="selectCategory(category)"
+            @click.stop="selectCategory(category.name)"
             class="px-5 py-2 hover:bg-gray-100 cursor-pointer"
           >
-            {{ category }}
+            {{ category.name }}
           </div>
         </div>
       </div>
-
       <div
         @click="handlePostTime"
         class="relative col-span-4 h-auto border-[2px] flex flex-row items-center px-5 py-2 rounded-[5px] justify-between cursor-pointer select-none"
@@ -96,7 +141,6 @@ const selectPostTime = (option) => {
         <ChevronDown
           :class="isOpenPostTime ? 'rotate-180 transition' : 'transition'"
         />
-
         <!-- List dropdown -->
         <div
           v-if="isOpenPostTime"
@@ -139,105 +183,125 @@ const selectPostTime = (option) => {
     </div>
   </section>
   <!-- Newest and Popular -->
-  <section class="w-full h-auto grid grid-cols-12 gap-x-5 mt-10">
-    <!-- Newest -->
+  <section class="w-full h-auto grid grid-cols-12 gap-x-5 xl:gap-x-10 mt-10">
+    <!-- Newest Blog-->
     <div
-      class="col-span-8 w-full h-auto border-[1px] rounded-lg flex flex-col px-6 pb-4 gap-y-4"
+      class="col-span-12 lg:col-span-8 w-full h-auto border-[1px] rounded-lg flex flex-col px-6 pb-4 gap-y-4"
     >
       <div class="w-full h-auto pt-6">
         <p class="text-[#195279] font-[500] lg:text-[22px] justify-center">
           News
         </p>
       </div>
-      <div class="w-full h-auto">
-        <figure class="w-full h-auto">
-          <!-- src="/assets/images/blog/new-example.png" -->
-          <img
-            :src="`/assets/images/blog/` + blogimage"
-            alt=""
-            class="w-full h-[350px] object-center object-fill rounded-[10px]"
-          />
-        </figure>
-      </div>
-      <div class="w-full h-auto flex flex-row justify-between">
-        <div class="w-full h-auto flex justify-start items-center">
-          <p
-            class="text-[14px] text-[#6941C6] bg-[#7B61FF]/10 px-4 py-1 rounded-full"
-          >
-            Artificial Intelligent
-          </p>
-        </div>
-        <div class="w-full h-auto flex justify-end items-center">
-          <p
-            class="text-[14px] text-[#FFFFFF] bg-[#3758F9] px-2 py-1 rounded-md"
-          >
-            Mar 05, 2024
-          </p>
-        </div>
-      </div>
-      <div class="w-full h-auto flex flex-col gap-y-4">
-        <div class="w-full h-auto">
-          <p class="text-[22px] text-[#111928] font-[500]">
-            Check out SalesGenius, AI tools for smarter sales pitches
-          </p>
-        </div>
-        <div class="w-full h-auto">
-          <p class="text-[#637381] font-[400]">
-            Every day, new advancements emerge, seemingly at lightning speed,
-            promising to make our lives easier, smarter, and more connected. But
-            beyond the hype, what truly defines the current landscape of
-            technology, and how is it fundam...
-          </p>
-        </div>
-        <div class="w-full h-auto">
-          <p class="text-[#535862]">
-            Author: <span class="font-[600]">Anisa Maulida Rahma</span>
-          </p>
-        </div>
-      </div>
-      <div class="w-full h-auto">
-        <div class="w-full flex flex-row gap-x-5">
-          <div class="flex flex-row justify-between gap-x-1">
-            <div class="w-full h-auto text-[#6E6E6E] dark:text-[#B2AEAE]">
-              <LikeIcon />
+      <div v-if="loading">Loading Data</div>
+      <div v-else-if="error">{{ error }}</div>
+      <div v-else>
+        <router-link
+          :to="`/blog/${newestBlog.slug}`"
+          class="w-full h-auto flex flex-col gap-y-6"
+        >
+          <div class="w-full h-auto">
+            <figure class="w-full h-auto">
+              <!-- src="/assets/images/blog/new-example.png" -->
+              <img
+                :src="newestBlog.cover"
+                alt="Newest Blog Cover"
+                class="w-full h-[350px] object-center object-fill rounded-[10px]"
+              />
+            </figure>
+          </div>
+          <div class="w-full h-auto flex flex-row justify-between">
+            <div class="w-full h-auto flex justify-start items-center">
+              <p
+                class="text-[14px] text-[#6941C6] bg-[#7B61FF]/10 px-4 py-1 rounded-full"
+              >
+                {{ newestBlog.category_name }}
+              </p>
+            </div>
+            <div class="w-full h-auto flex justify-end items-center">
+              <p
+                class="text-[14px] text-[#FFFFFF] bg-[#3758F9] px-2 py-1 rounded-md"
+              >
+                <!-- Mar 05, 2024 -->
+                {{ fromISODate(newestBlog.created_at) }}
+              </p>
+            </div>
+          </div>
+          <div class="w-full h-auto flex flex-col gap-y-4">
+            <div class="w-full h-auto">
+              <p class="text-[22px] text-[#111928] font-[500]">
+                {{ newestBlog.title }}
+              </p>
             </div>
             <div class="w-full h-auto">
-              <span class="text-[#6E6E6E] dark:text-[#B2AEAE]"> 1k </span>
-            </div>
-          </div>
-          <div class="flex flex-row justify-between gap-x-1">
-            <div class="w-full h-auto text-[#6E6E6E] dark:text-[#B2AEAE]">
-              <EyeIcon />
+              <p class="text-[#637381] font-[400] break-words">
+                {{ newestBlog.synopsis }}
+              </p>
             </div>
             <div class="w-full h-auto">
-              <span class="text-[#6E6E6E] dark:text-[#B2AEAE]"> 600 </span>
+              <p class="text-[#535862]">
+                Author:
+                <span class="font-[600]">{{ newestBlog.author_name }}</span>
+              </p>
             </div>
           </div>
-          <div class="flex flex-row justify-between gap-x-1">
-            <div class="w-full h-auto text-[#6E6E6E] dark:text-[#B2AEAE]">
-              <CommentIcon />
-            </div>
-            <div class="w-full h-auto">
-              <span class="text-[#6E6E6E] dark:text-[#B2AEAE]"> 200 </span>
+          <div class="w-full h-auto">
+            <div class="w-full flex flex-row gap-x-5">
+              <div class="flex flex-row justify-between gap-x-1">
+                <div class="w-full h-auto text-[#6E6E6E] dark:text-[#B2AEAE]">
+                  <LikeIcon />
+                </div>
+                <div class="w-full h-auto">
+                  <span class="text-[#6E6E6E] dark:text-[#B2AEAE]">
+                    {{ newestBlog.likes }}
+                  </span>
+                </div>
+              </div>
+              <div class="flex flex-row justify-between gap-x-1">
+                <div class="w-full h-auto text-[#6E6E6E] dark:text-[#B2AEAE]">
+                  <EyeIcon />
+                </div>
+                <div class="w-full h-auto">
+                  <span class="text-[#6E6E6E] dark:text-[#B2AEAE]">
+                    {{ newestBlog.views }}
+                  </span>
+                </div>
+              </div>
+              <div class="flex flex-row justify-between gap-x-1">
+                <div class="w-full h-auto text-[#6E6E6E] dark:text-[#B2AEAE]">
+                  <CommentIcon />
+                </div>
+                <div class="w-full h-auto">
+                  <span class="text-[#6E6E6E] dark:text-[#B2AEAE]">
+                    {{ newestBlog.comments }}
+                  </span>
+                </div>
+              </div>
+              <div class="w-auto h-auto text-[#6E6E6E] dark:text-[#B2AEAE]">
+                <ShareIcon />
+              </div>
             </div>
           </div>
-          <div class="w-auto h-auto text-[#6E6E6E] dark:text-[#B2AEAE]">
-            <ShareIcon />
-          </div>
-        </div>
+        </router-link>
       </div>
     </div>
     <!-- Most Popular -->
     <div
-      class="col-span-4 w-full h-auto border-[1px] rounded-lg flex flex-col gap-y-4"
+      class="hidden lg:flex lg:flex-col lg:col-span-4 w-full h-auto border-[1px] rounded-lg gap-y-4"
     >
       <div class="w-full h-auto pt-6 px-6">
         <p class="text-[#195279] font-[500] lg:text-[22px] justify-center">
           Most Popular
         </p>
       </div>
-      <div class="w-full h-auto flex flex-col gap-y-4">
-        <div class="w-full h-auto">
+      <div v-if="loading">Loading Data</div>
+      <div v-else-if="error" class="px-6">{{ error }}</div>
+      <div
+        v-for="(data, index) in popularBlog"
+        :key="index"
+        class="w-full h-auto flex flex-col gap-y-4"
+      >
+        <div v-if="index === 0" class="w-full h-auto">
           <figure class="w-full h-auto">
             <img
               src="/assets/images/blog/example.png"
@@ -246,156 +310,36 @@ const selectPostTime = (option) => {
             />
           </figure>
         </div>
-        <div class="w-full h-auto grid grid-cols-12">
+        <div class="w-full h-auto grid grid-cols-12 pr-10">
           <div class="col-span-3 w-full h-auto flex justify-center">
-            <p class="text-[24px] text-[#8EB3CC]">#1</p>
+            <p class="text-[24px] text-[#8EB3CC]">#{{ index + 1 }}</p>
           </div>
-          <div class="col-span-9 flex flex-col pr-8 gap-y-1">
+          <div class="col-span-9 flex flex-col gap-y-1">
             <div class="w-full h-auto">
-              <p class="text-[#6941C6] text-[14px]">Artificial Intelligent</p>
+              <p class="text-[#6941C6] text-[14px]">
+                {{ data.category_name }}
+              </p>
             </div>
-            <div class="w-full h-auto">
+            <div class="w-full flex h-[70px]">
               <p class="text-[#195279] font-[500] text-[18px]">
-                Shaping Our World, One Innovation at a Time
+                {{ data.title }}
               </p>
             </div>
             <div class="w-full h-auto">
               <p class="text-[#B8B8B8] text-[12px]">
-                Anisa Maulida Rahma | 20 Januari 2025
+                {{ data.author_name }} | {{ fromISODate(data.created_at) }}
               </p>
             </div>
           </div>
         </div>
-      </div>
-      <div class="w-full h-[1px] bg-[#D2D2D2]" />
-      <div class="w-full h-auto grid grid-cols-12">
-        <div class="col-span-3 w-full h-auto flex justify-center">
-          <p class="text-[24px] text-[#8EB3CC]">#2</p>
-        </div>
-        <div class="col-span-9 flex flex-col pr-8 gap-y-1">
-          <div class="w-full h-auto">
-            <p class="text-[#6941C6] text-[14px]">Artificial Intelligent</p>
-          </div>
-          <div class="w-full h-auto">
-            <p class="text-[#195279] font-[500] text-[18px]">
-              Shaping Our World, One Innovation at a Time
-            </p>
-          </div>
-          <div class="w-full h-auto">
-            <p class="text-[#B8B8B8] text-[12px]">
-              Anisa Maulida Rahma | 20 Januari 2025
-            </p>
-          </div>
-        </div>
-      </div>
-      <div class="w-full h-[1px] bg-[#D2D2D2]" />
-      <div class="w-full h-auto grid grid-cols-12">
-        <div class="col-span-3 w-full h-auto flex justify-center">
-          <p class="text-[24px] text-[#8EB3CC]">#3</p>
-        </div>
-        <div class="col-span-9 flex flex-col pr-8 gap-y-1">
-          <div class="w-full h-auto">
-            <p class="text-[#6941C6] text-[14px]">Artificial Intelligent</p>
-          </div>
-          <div class="w-full h-auto">
-            <p class="text-[#195279] font-[500] text-[18px]">
-              Shaping Our World, One Innovation at a Time
-            </p>
-          </div>
-          <div class="w-full h-auto">
-            <p class="text-[#B8B8B8] text-[12px]">
-              Anisa Maulida Rahma | 20 Januari 2025
-            </p>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- BlogList -->
-  <section class="w-full h-auto grid grid-cols-3 mt-10 gap-5 mb-20">
-    <!-- <router-link
-      :to="`/blog/${slug}`"
-      class="flex flex-col w-full px-0 sml:px-8 md:px-0 h-auto"
-    > -->
-    <div
-      v-for="(i, index) in 6"
-      :key="index"
-      class="flex flex-col w-full h-auto p-3 border-[1px] rounded-[10px]"
-    >
-      <div class="w-full h-[200px]">
-        <img
-          src="/assets/images/blog/example.png"
-          alt="BlogImage"
-          class="w-full h-full object-cover rounded-[10px]"
+        <div
+          v-if="index !== popularBlog.length - 1"
+          class="w-full h-[1px] bg-[#D2D2D2]"
         />
       </div>
-      <div
-        class="flex flex-row w-full h-auto justify-between text-sm text-[#7A7A7A] my-5"
-      >
-        <div
-          class="flex items-center bg-[#7B61FF]/10 dark:bg-transparent px-4 dark:px-0 rounded-[16px]"
-        >
-          <p
-            class="lg:text-[12px] text-[#7B61FF] dark:text-[#FFFFFF] font-semibold"
-          >
-            Artificial Intelligent
-          </p>
-        </div>
-        <div class="flex items-center bg-[#3758F9] px-5 py-1 rounded-[5px]">
-          <p class="text-[#FFFFFF] lg:text-[12px]">Mar 05, 2024</p>
-        </div>
-      </div>
-      <div class="flex w-full h-[65px] text-left">
-        <p
-          class="lg:text-[17px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
-        >
-          Check out SalesGenius, AI tools for smarter sales pitches
-        </p>
-      </div>
-      <div class="flex w-full h-[70px] justify-start items-start">
-        <!-- <div
-          v-html="description"
-          class="prose max-w-none line-clamp-3 text-[14px] font-[400] text-[#637381] dark:text-[#6F6F6F]"
-        /> -->
-        <p class="text-[#637381]">
-          Tailor your approach with AI-enhanced customer analytics.
-        </p>
-      </div>
-      <div class="flex flex-row justify-between w-full h-auto">
-        <div class="w-[90%] h-auto">
-          <div class="flex flex-row gap-x-5">
-            <div class="flex flex-row justify-between gap-x-1">
-              <div class="w-full h-auto text-[#6E6E6E] dark:text-[#B2AEAE]">
-                <LikeIcon />
-              </div>
-              <div class="w-full h-auto">
-                <span class="text-[#6E6E6E] dark:text-[#B2AEAE]"> 500 </span>
-              </div>
-            </div>
-            <div class="flex flex-row justify-between gap-x-1">
-              <div class="w-full h-auto text-[#6E6E6E] dark:text-[#B2AEAE]">
-                <EyeIcon />
-              </div>
-              <div class="w-full h-auto">
-                <span class="text-[#6E6E6E] dark:text-[#B2AEAE]"> 500 </span>
-              </div>
-            </div>
-            <div class="flex flex-row justify-between gap-x-1">
-              <div class="w-full h-auto text-[#6E6E6E] dark:text-[#B2AEAE]">
-                <CommentIcon />
-              </div>
-              <div class="w-full h-auto">
-                <span class="text-[#6E6E6E] dark:text-[#B2AEAE]"> 500 </span>
-              </div>
-            </div>
-          </div>
-        </div>
-        <div class="w-[10%] h-auto text-[#6E6E6E] dark:text-[#B2AEAE]">
-          <ShareIcon />
-        </div>
-      </div>
     </div>
-    <!-- </router-link> -->
   </section>
+  <!-- BlogList -->
+  <section class="w-full h-auto grid grid-cols-3 mt-10 gap-5 mb-20"></section>
+  <!-- </div> -->
 </template>
