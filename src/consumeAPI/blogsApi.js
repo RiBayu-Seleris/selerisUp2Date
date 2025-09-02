@@ -69,17 +69,22 @@ export function blogsApi() {
     startLoading();
     error.value = null;
 
-    console.log("Slug yang dikirim:", slug);
+    // console.log("Slug yang dikirim:", slug);
     try {
       const response = await axios.get(
         `${BASE_URL}/api/v1/app/blogs/${slug}`,
         headerApi
       );
 
-      console.log("Response Blog By Slug:", response.data);
-      return response.data?.data || null;
+      blogDetail.value = response.data?.data || null;
     } catch (err) {
-      handleError(err);
+      if (err.response && err.response.status === 404) {
+        // Kalau 404, jangan console.error, langsung kasih nilai null atau pesan sendiri
+        blogDetail.value = null;
+        error.value = "Blog tidak ditemukan.";
+      } else {
+        handleError(err);
+      }
     } finally {
       stopLoading();
     }
@@ -126,6 +131,7 @@ export function blogsApi() {
 
   return {
     blogs,
+    blogDetail,
     newestBlog,
     popularBlog,
     getAllBlogs,

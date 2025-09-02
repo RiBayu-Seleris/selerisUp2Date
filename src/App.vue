@@ -184,12 +184,9 @@ const isBlogDetail = computed(() => route.path === "/blog/details");
           <section
             class="flex flex-col relative w-full mx-auto h-auto mt-32 px-8"
             v-if="
-              ![
-                '/blogs',
-                '/blogs/:slug',
-                '/blog/details',
-                '/test-embed',
-              ].includes(route.path)
+              !['/blogs', '/blog/details', '/test-embed'].includes(
+                route.path
+              ) || route.path.startsWith('/blog/')
             "
           >
             <Touch />

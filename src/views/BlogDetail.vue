@@ -3,14 +3,32 @@ import ArrowDown from "@/components/icons/ArrowDown.vue";
 import ToC from "@/components/Blog/ToC.vue";
 import { computed, onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
-import { blogsApi } from "../consumeAPI/blogsApi";
-const { getBlogBySlug, error, loading } = blogsApi();
+import { blogsApi } from "@/consumeAPI/blogsApi";
+import { useUtilsStore } from "@/stores/utils.js";
+import DOMPurify from "dompurify";
+
+const convertDate = useUtilsStore();
+const {
+  blogDetail,
+  popularBlog,
+  getBlogBySlug,
+  getPopularBlog,
+  error,
+  loading,
+} = blogsApi();
+const loginStatus = ref(false);
 
 const route = useRoute();
 const slug = route.params.slug;
 
-onMounted(async () => {
-  await getBlogBySlug(slug); // <= WAJIB
+// HARUS akses .value
+const safeContent = computed(() =>
+  blogDetail.value?.content ? DOMPurify.sanitize(blogDetail.value.content) : ""
+);
+
+onMounted(() => {
+  getBlogBySlug(slug); // <= WAJIB
+  getPopularBlog();
 });
 
 const blogimage = "new-example.png";
@@ -54,17 +72,18 @@ const comments = [
 </script>
 
 <template>
-  <div class="w-full h-auto px-12 xl:px-16 pt-40">
+  <div v-if="loading">Loading Data</div>
+  <div v-else-if="error">{{ error }}</div>
+  <div v-else-if="blogDetail" class="w-full h-auto px-12 xl:px-16 pt-40">
     <section class="w-full h-auto flex flex-row justify-between">
       <div class="w-full h-auto flex items-center">
         <p class="text-[#535862] font-[400]">
           Home > Blog >
-          <span class="text-[#195279]"
-            >Check out SalesGenius, AI tools for smarter sales pitches</span
-          >
+          <span class="text-[#195279]">{{ blogDetail.slug }}</span>
         </p>
       </div>
-      <div class="w-full h-auto flex justify-end">
+      <!-- Akun Section -->
+      <div v-if="loginStatus === true" class="w-full h-auto flex justify-end">
         <div class="w-[60%] flex flex-row">
           <div class="relative w-full h-auto flex flex-row justify-end">
             <div class="relative w-[30%] h-auto pt-0 flex justify-end">
@@ -103,8 +122,13 @@ const comments = [
     </section>
     <section class="w-full h-auto flex flex-col mt-10">
       <!-- Blog Images -->
-      <div class="w-full h-auto">
-        <img :src="`/assets/images/blog/` + blogimage" alt="" class="w-full" />
+      <div class="w-full h-[500px]">
+        <img
+          :src="blogDetail.cover"
+          alt=""
+          class="w-full h-full object-fill rounded-3xl"
+        />
+        <!-- <img :src="`/assets/images/blog/` + blogimage" alt="" class="w-full" /> -->
       </div>
       <!-- Frame Blog Detail and Content & Most Popular -->
       <div
@@ -114,20 +138,22 @@ const comments = [
         <div class="w-full lg:w-[70%] h-auto flex flex-col gap-y-5 lg:pr-20">
           <div class="w-full h-auto flex flex-col gap-y-4">
             <div class="w-full h-auto">
-              <p class="text-[#18AB53] font-[500]">Published 20 Jan 2025</p>
+              <p class="text-[#18AB53] font-[500]">
+                {{ convertDate.fromISODate(blogDetail.created_at) }}
+              </p>
             </div>
             <div class="w-full h-auto">
               <h1
                 class="text-[28px] lg:text-[38px] text-[#195279] font-[500] leading-snug"
               >
-                Shaping Our World, One Innovation at a Time
+                {{ blogDetail.title }}
               </h1>
             </div>
             <div class="w-full lg:w-[70%] h-auto">
               <p class="text-[16px] text-[#535862] font-[400] leading-tight">
                 Author:
                 <span class="text-[#535862] font-[600]">
-                  Annisa Maulida Rahma</span
+                  {{ blogDetail.author_name }}</span
                 >
               </p>
             </div>
@@ -136,7 +162,7 @@ const comments = [
             <p
               class="text-[14px] lg:text-[14px] text-[#6941C6] bg-[#7B61FF]/10 px-4 py-1 rounded-full"
             >
-              Artificial Intelligent
+              {{ blogDetail.category_name }}
             </p>
           </div>
           <!-- ref="articleRef" -->
@@ -145,65 +171,13 @@ const comments = [
             class="w-full h-auto flex flex-col leading-relaxed text-[#535862] font-[400] space-y-6 lg:space-y-5 mt-5"
           >
             <p>
-              Technology. It's the invisible hand guiding our modern lives, the
-              constant hum in the background, and the driving force behind
-              unprecedented change. Every day, new advancements emerge,
-              seemingly at lightning speed, promising to make our lives easier,
-              smarter, and more connected. But beyond the hype, what truly
-              defines the current landscape of technology, and how is it
-              fundamentally reshaping our world?
+              {{ blogDetail.synopsis }}
             </p>
-            <div class="flex flex-col space-y-4">
-              <h1 class="text-[28px] lg:text-[34px] text-[#195279] font-[500]">
-                Key Frontiers in Today's Tech Landscape
-              </h1>
-              <h2 class="text-[18px] lg:text-[20px] text-[#535862] font-[500]">
-                Artificial Intelligence (AI) & Machine Learning (ML)
-              </h2>
-              <p class="text-[14px] lg:text-[16px]">
-                Technology. It's the invisible hand guiding our modern lives,
-                the constant hum in the background, and the driving force behind
-                unprecedented change.
-              </p>
-              <h2 class="text-[18px] lg:text-[20px] text-[#535862] font-[500]">
-                Artificial Intelligence (AI) & Machine Learning (ML)
-              </h2>
-              <p class="text-[14px] lg:text-[16px]">
-                Technology. It's the invisible hand guiding our modern lives,
-                the constant hum in the background, and the driving force behind
-                unprecedented change.
-              </p>
-              <h2 class="text-[18px] lg:text-[20px] text-[#535862] font-[500]">
-                Artificial Intelligence (AI) & Machine Learning (ML)
-              </h2>
-              <p class="text-[14px] lg:text-[16px]">
-                Technology. It's the invisible hand guiding our modern lives,
-                the constant hum in the background, and the driving force behind
-                unprecedented change.
-              </p>
-            </div>
-            <div class="flex flex-col space-y-4">
-              <h1 class="text-[28px] lg:text-[34px] text-[#195279] font-[500]">
-                How Tech is Reshaping Our World
-              </h1>
-              <p class="italic text-[16px] lg:text-[20px] font-[500]">
-                “What technological advancements are you most excited (or
-                concerned) about? Share your thoughts below!”
-              </p>
-              <p class="text-[14px] lg:text-[16px]">
-                Technology. It's the invisible hand guiding our modern lives,
-                the constant hum in the background, and the driving force behind
-                unprecedented change.
-              </p>
-              <h2 class="text-[18px] lg:text-[20px] text-[#535862] font-[500]">
-                Artificial Intelligence (AI) & Machine Learning (ML)
-              </h2>
-              <p class="text-[14px] lg:text-[16px]">
-                Technology. It's the invisible hand guiding our modern lives,
-                the constant hum in the background, and the driving force behind
-                unprecedented change.
-              </p>
-            </div>
+            <!-- Content Blog -->
+            <div
+              class="text-[16px] leading-relaxed font-[400] text-[#535862] space-y-4"
+              v-html="safeContent"
+            ></div>
           </article>
         </div>
 
@@ -225,84 +199,49 @@ const comments = [
                     Most Popular
                   </p>
                 </div>
-                <div class="w-full h-auto flex flex-col gap-y-2 pb-2">
-                  <div class="w-full h-auto">
+                <div
+                  v-for="(data, index) in popularBlog"
+                  :key="index"
+                  class="w-full h-auto flex flex-col gap-y-0"
+                >
+                  <div v-if="index === 0" class="w-full h-auto">
                     <figure class="w-full h-auto">
                       <img
-                        :src="`/assets/images/blog/` + blogimage2"
-                        alt="blog"
-                        class="w-full h-auto object-cover"
+                        :src="data.cover"
+                        alt=""
+                        class="w-full h-[200px] object-center"
                       />
                     </figure>
                   </div>
-                  <div class="w-full h-auto grid grid-cols-12">
+                  <div class="w-full h-auto grid grid-cols-12 pr-10 py-3">
                     <div class="col-span-3 w-full h-auto flex justify-center">
-                      <p class="text-[24px] text-[#8EB3CC]">#1</p>
+                      <p class="text-[24px] text-[#8EB3CC]">#{{ index + 1 }}</p>
                     </div>
-                    <div class="col-span-9 flex flex-col pr-8 gap-y-1">
+                    <div class="col-span-9 flex flex-col gap-y-1">
                       <div class="w-full h-auto">
                         <p class="text-[#6941C6] text-[14px]">
-                          Artificial Intelligent
+                          {{ data.category_name }}
                         </p>
                       </div>
-                      <div class="w-full h-auto">
-                        <p class="text-[#195279] font-[500] text-[18px]">
-                          Shaping Our World, One Innovation at a Time
+                      <div class="w-full flex h-auto">
+                        <p
+                          class="text-[#195279] font-[500] text-[16px] leading-tight"
+                        >
+                          {{ data.title }}
                         </p>
                       </div>
                       <div class="w-full h-auto">
                         <p class="text-[#B8B8B8] text-[12px]">
-                          Anisa Maulida Rahma | 20 Januari 2025
+                          {{ data.author_name }} |
+                          {{ convertDate.fromISODate(data.created_at) }}
                         </p>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="w-full h-[1px] bg-[#D2D2D2]" />
-                <div class="w-full h-auto grid grid-cols-12 py-2">
-                  <div class="col-span-3 w-full h-auto flex justify-center">
-                    <p class="text-[24px] text-[#8EB3CC]">#2</p>
-                  </div>
-                  <div class="col-span-9 flex flex-col pr-8 gap-y-1">
-                    <div class="w-full h-auto">
-                      <p class="text-[#6941C6] text-[14px]">
-                        Artificial Intelligent
-                      </p>
-                    </div>
-                    <div class="w-full h-auto">
-                      <p class="text-[#195279] font-[500] text-[18px]">
-                        Shaping Our World, One Innovation at a Time
-                      </p>
-                    </div>
-                    <div class="w-full h-auto">
-                      <p class="text-[#B8B8B8] text-[12px]">
-                        Anisa Maulida Rahma | 20 Januari 2025
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="w-full h-[1px] bg-[#D2D2D2]" />
-                <div class="w-full h-auto grid grid-cols-12 py-2">
-                  <div class="col-span-3 w-full h-auto flex justify-center">
-                    <p class="text-[24px] text-[#8EB3CC]">#3</p>
-                  </div>
-                  <div class="col-span-9 flex flex-col pr-8 gap-y-1">
-                    <div class="w-full h-auto">
-                      <p class="text-[#6941C6] text-[14px]">
-                        Artificial Intelligent
-                      </p>
-                    </div>
-                    <div class="w-full h-auto">
-                      <p class="text-[#195279] font-[500] text-[18px]">
-                        Shaping Our World, One Innovation at a Time
-                      </p>
-                    </div>
-                    <div class="w-full h-auto">
-                      <p class="text-[#B8B8B8] text-[12px]">
-                        Anisa Maulida Rahma | 20 Januari 2025
-                      </p>
-                    </div>
-                  </div>
+                  <div
+                    v-if="index !== popularBlog.length - 1"
+                    class="w-full h-[1px] bg-[#D2D2D2]"
+                  />
                 </div>
               </div>
             </div>
@@ -343,7 +282,7 @@ const comments = [
       </div>
       <!-- Comments Display -->
       <div class="w-full h-auto flex flex-col mt-14 space-y-6">
-        <div
+        <!-- <div
           v-for="(comment, index) in comments"
           :key="index"
           class="w-full h-auto flex flex-col gap-y-6"
@@ -369,8 +308,9 @@ const comments = [
             v-if="index !== comments.length - 1"
             class="w-full h-[1px] bg-gray-400"
           />
-        </div>
+        </div> -->
       </div>
     </section>
   </div>
+  <div v-else>Blog tidak ditemukan.</div>
 </template>

@@ -1,6 +1,6 @@
 <script setup>
 import { ref, computed, onMounted } from "vue";
-import { blogsApi } from "../../consumeAPI/blogsApi";
+import { blogsApi } from "@/consumeAPI/blogsApi";
 
 import BlogCard from "@/components/reusable/BlogCard.vue";
 import SearchIcon from "@/components/icons/Search.vue";
@@ -10,10 +10,9 @@ import LikeIcon from "@/components/icons/Like.vue";
 import EyeIcon from "@/components/icons/Eye.vue";
 import CommentIcon from "@/components/icons/Comment.vue";
 import ShareIcon from "@/components/icons/Share.vue";
+import { useUtilsStore } from "@/stores/utils.js";
 
-// const blogimage = "new-example.png";
-// const blogimage2 = "example.png";
-
+const convertDate = useUtilsStore();
 const isOpenCategory = ref(false);
 const selectedCategory = ref("All Articles");
 const Categories = [
@@ -68,15 +67,6 @@ const {
   error,
   loading,
 } = blogsApi();
-
-const fromISODate = (dateString) => {
-  const d = new Date(dateString);
-  return d.toLocaleDateString("en-US", {
-    month: "short",
-    day: "2-digit",
-    year: "numeric",
-  });
-};
 
 onMounted(() => {
   getAllBlogs();
@@ -206,7 +196,7 @@ onMounted(() => {
               <img
                 :src="newestBlog.cover"
                 alt="Newest Blog Cover"
-                class="w-full h-[350px] object-center object-fill rounded-[10px]"
+                class="w-full h-[300px] object-center object-fill rounded-[10px]"
               />
             </figure>
           </div>
@@ -223,7 +213,7 @@ onMounted(() => {
                 class="text-[14px] text-[#FFFFFF] bg-[#3758F9] px-2 py-1 rounded-md"
               >
                 <!-- Mar 05, 2024 -->
-                {{ fromISODate(newestBlog.created_at) }}
+                {{ convertDate.fromISODate(newestBlog.created_at) }}
               </p>
             </div>
           </div>
@@ -287,7 +277,7 @@ onMounted(() => {
     </div>
     <!-- Most Popular -->
     <div
-      class="hidden lg:flex lg:flex-col lg:col-span-4 w-full h-auto border-[1px] rounded-lg gap-y-4"
+      class="hidden lg:flex lg:flex-col lg:col-span-4 w-full h-auto border-[1px] rounded-lg gap-y-0"
     >
       <div class="w-full h-auto pt-6 px-6">
         <p class="text-[#195279] font-[500] lg:text-[22px] justify-center">
@@ -299,39 +289,42 @@ onMounted(() => {
       <div
         v-for="(data, index) in popularBlog"
         :key="index"
-        class="w-full h-auto flex flex-col gap-y-4"
+        class="w-full h-auto flex flex-col"
       >
-        <div v-if="index === 0" class="w-full h-auto">
-          <figure class="w-full h-auto">
-            <img
-              src="/assets/images/blog/example.png"
-              alt=""
-              class="w-full h-[200px] object-center"
-            />
-          </figure>
-        </div>
-        <div class="w-full h-auto grid grid-cols-12 pr-10">
-          <div class="col-span-3 w-full h-auto flex justify-center">
-            <p class="text-[24px] text-[#8EB3CC]">#{{ index + 1 }}</p>
+        <router-link :to="`/blog/${data.slug}`">
+          <div v-if="index === 0" class="w-full h-auto">
+            <figure class="w-full h-auto">
+              <img
+                :src="data.cover"
+                alt=""
+                class="w-full h-[200px] object-center"
+              />
+            </figure>
           </div>
-          <div class="col-span-9 flex flex-col gap-y-1">
-            <div class="w-full h-auto">
-              <p class="text-[#6941C6] text-[14px]">
-                {{ data.category_name }}
-              </p>
+          <div class="w-full h-auto grid grid-cols-12 pr-10 py-5">
+            <div class="col-span-3 w-full h-auto flex justify-center">
+              <p class="text-[24px] text-[#8EB3CC]">#{{ index + 1 }}</p>
             </div>
-            <div class="w-full flex h-[70px]">
-              <p class="text-[#195279] font-[500] text-[18px]">
-                {{ data.title }}
-              </p>
-            </div>
-            <div class="w-full h-auto">
-              <p class="text-[#B8B8B8] text-[12px]">
-                {{ data.author_name }} | {{ fromISODate(data.created_at) }}
-              </p>
+            <div class="col-span-9 flex flex-col gap-y-1">
+              <div class="w-full h-auto">
+                <p class="text-[#6941C6] text-[14px]">
+                  {{ data.category_name }}
+                </p>
+              </div>
+              <div class="w-full flex h-auto">
+                <p class="text-[#195279] font-[500] text-[18px]">
+                  {{ data.title }}
+                </p>
+              </div>
+              <div class="w-full h-auto">
+                <p class="text-[#B8B8B8] text-[12px]">
+                  {{ data.author_name }} |
+                  {{ convertDate.fromISODate(newestBlog.created_at) }}
+                </p>
+              </div>
             </div>
           </div>
-        </div>
+        </router-link>
         <div
           v-if="index !== popularBlog.length - 1"
           class="w-full h-[1px] bg-[#D2D2D2]"
@@ -340,6 +333,91 @@ onMounted(() => {
     </div>
   </section>
   <!-- BlogList -->
-  <section class="w-full h-auto grid grid-cols-3 mt-10 gap-5 mb-20"></section>
+  <section class="w-full h-auto grid grid-cols-3 mt-10 gap-5 mb-20">
+    <div
+      v-for="(data, index) in blogs"
+      :key="index"
+      class="flex flex-col w-full h-auto p-3 border-[1px] rounded-[10px]"
+    >
+      <router-link :to="`/blog/${data.slug}`">
+        <div class="w-full h-[200px]">
+          <img
+            :src="data.cover"
+            alt="BlogImage"
+            class="w-full h-full object-cover rounded-[10px]"
+          />
+        </div>
+        <div
+          class="flex flex-row w-full h-auto justify-between text-sm text-[#7A7A7A] my-5"
+        >
+          <div
+            class="flex items-center bg-[#7B61FF]/10 dark:bg-transparent px-4 dark:px-0 rounded-[16px]"
+          >
+            <p
+              class="lg:text-[12px] text-[#7B61FF] dark:text-[#FFFFFF] font-semibold"
+            >
+              {{ data.category_name }}
+            </p>
+          </div>
+          <div class="flex items-center bg-[#3758F9] px-5 py-1 rounded-[5px]">
+            <p class="text-[#FFFFFF] lg:text-[14px]">
+              {{ convertDate.fromISODate(data.created_at) }}
+            </p>
+          </div>
+        </div>
+        <div class="flex w-full h-[65px] text-left">
+          <p
+            class="lg:text-[17px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+          >
+            {{ data.title }}
+          </p>
+        </div>
+        <div class="flex w-full h-[70px] justify-start items-start">
+          <p class="text-[#637381] line-clamp-2">
+            {{ data.synopsis }}
+          </p>
+        </div>
+        <div class="flex flex-row justify-between w-full h-auto">
+          <div class="w-[90%] h-auto">
+            <div class="flex flex-row gap-x-5">
+              <div class="flex flex-row justify-between gap-x-1">
+                <div class="w-full h-auto text-[#6E6E6E] dark:text-[#B2AEAE]">
+                  <LikeIcon />
+                </div>
+                <div class="w-full h-auto">
+                  <span class="text-[#6E6E6E] dark:text-[#B2AEAE]">
+                    {{ data.likes }}
+                  </span>
+                </div>
+              </div>
+              <div class="flex flex-row justify-between gap-x-1">
+                <div class="w-full h-auto text-[#6E6E6E] dark:text-[#B2AEAE]">
+                  <EyeIcon />
+                </div>
+                <div class="w-full h-auto">
+                  <span class="text-[#6E6E6E] dark:text-[#B2AEAE]">
+                    {{ data.views }}
+                  </span>
+                </div>
+              </div>
+              <div class="flex flex-row justify-between gap-x-1">
+                <div class="w-full h-auto text-[#6E6E6E] dark:text-[#B2AEAE]">
+                  <CommentIcon />
+                </div>
+                <div class="w-full h-auto">
+                  <span class="text-[#6E6E6E] dark:text-[#B2AEAE]">
+                    {{ data.comments }}
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="w-[10%] h-auto text-[#6E6E6E] dark:text-[#B2AEAE]">
+            <ShareIcon />
+          </div>
+        </div>
+      </router-link>
+    </div>
+  </section>
   <!-- </div> -->
 </template>
