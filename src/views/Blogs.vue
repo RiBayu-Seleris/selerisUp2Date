@@ -59,7 +59,7 @@ const loginStatus = ref(false);
   </section>
 
   <section
-    class="flex flex-col relative w-full h-auto px-8 md:px-8 xl:px-16 mt-10 lg:mt-8 mb-20"
+    class="flex flex-col relative w-full h-auto xl:px-16 mt-10 lg:mt-8 mb-20"
   >
     <BlogList />
   </section>

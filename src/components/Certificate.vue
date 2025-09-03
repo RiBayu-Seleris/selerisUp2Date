@@ -32,7 +32,7 @@ import { certificateData } from "@/Data/certData";
           class="hidden xl:flex absolute w-32 h-full bg-gradient-to-l from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-l dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% right-0 z-20"
         />
         <div
-          class="relative hidden lg:flex flex-row w-full space-x-6 mt-16 overflow-x-auto snap-x snap-mandatory scroll-pl-16 pl-16 pr-16 hide-scrollbar hide-scrollbar hide-scrollbar"
+          class="relative hidden lg:flex flex-row w-full space-x-6 mt-16 overflow-x-auto snap-x snap-mandatory scroll-pl-16 pl-16 pr-16 hide-scrollbar"
         >
           <CertCard
             v-for="(cert, index) in certificateData"
