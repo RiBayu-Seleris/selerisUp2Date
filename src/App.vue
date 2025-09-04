@@ -100,7 +100,7 @@ const isSecurityRoute = computed(() => route.path === "/security");
 const isPrivacyRoute = computed(() => route.path === "/privacy");
 const isBookDemoRoute = computed(() => route.path === "/book-a-demo");
 const isCompanyRoute = computed(() => route.path === "/about/company");
-const isBlogDetail = computed(() => route.path === "/blog/details");
+const isBlogDetail = computed(() => route.path.startsWith("/blog/"));
 </script>
 
 <template>

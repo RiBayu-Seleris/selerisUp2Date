@@ -78,8 +78,13 @@ const comments = [
     <section class="w-full h-auto flex flex-row justify-between">
       <div class="w-full h-auto flex items-center">
         <p class="text-[#535862] font-[400]">
-          Home > Blog >
-          <span class="text-[#195279]">{{ blogDetail.slug }}</span>
+          <router-link to="/"> <span>Home</span></router-link>
+          <span class="px-2">></span>
+          <router-link to="/blogs"> <span>Blog</span></router-link>
+          <span class="px-2">></span>
+          <span class="text-[#195279] dark:text-[#FAFAFA]">{{
+            blogDetail.title
+          }}</span>
         </p>
       </div>
       <!-- Akun Section -->
@@ -139,12 +144,12 @@ const comments = [
           <div class="w-full h-auto flex flex-col gap-y-4">
             <div class="w-full h-auto">
               <p class="text-[#18AB53] font-[500]">
-                {{ convertDate.fromISODate(blogDetail.created_at) }}
+                Published {{ convertDate.fromISODate(blogDetail.created_at) }}
               </p>
             </div>
             <div class="w-full h-auto">
               <h1
-                class="text-[28px] lg:text-[38px] text-[#195279] font-[500] leading-snug"
+                class="text-[28px] lg:text-[38px] text-[#195279] font-[500] leading-snug dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
               >
                 {{ blogDetail.title }}
               </h1>
@@ -152,7 +157,7 @@ const comments = [
             <div class="w-full lg:w-[70%] h-auto">
               <p class="text-[16px] text-[#535862] font-[400] leading-tight">
                 Author:
-                <span class="text-[#535862] font-[600]">
+                <span class="text-[#535862] font-[600] dark:text-[#B3B3B3]">
                   {{ blogDetail.author_name }}</span
                 >
               </p>
@@ -160,7 +165,7 @@ const comments = [
           </div>
           <div class="w-full h-auto flex justify-start items-center">
             <p
-              class="text-[14px] lg:text-[14px] text-[#6941C6] bg-[#7B61FF]/10 px-4 py-1 rounded-full"
+              class="text-[14px] lg:text-[14px] text-[#6941C6] bg-[#7B61FF]/10 dark:bg-[#340777] px-4 py-1 rounded-full"
             >
               {{ blogDetail.category_name }}
             </p>
@@ -168,14 +173,14 @@ const comments = [
           <!-- ref="articleRef" -->
           <article
             id="content"
-            class="w-full h-auto flex flex-col leading-relaxed text-[#535862] font-[400] space-y-6 lg:space-y-5 mt-5"
+            class="w-full h-auto flex flex-col leading-relaxed text-[#535862] dark:text-[#DADADA] font-[400] space-y-6 lg:space-y-10 mt-5"
           >
             <p>
               {{ blogDetail.synopsis }}
             </p>
             <!-- Content Blog -->
             <div
-              class="text-[16px] leading-relaxed font-[400] text-[#535862] space-y-4"
+              class="prose prose-lg dark:prose-invert text-[16px] font-[400] text-[#535862] dark:text-[#DADADA] prose-headings:my-2 prose-p:my-2 prose-ul:my-2 prose-ol:my-2"
               v-html="safeContent"
             ></div>
           </article>
@@ -204,44 +209,48 @@ const comments = [
                   :key="index"
                   class="w-full h-auto flex flex-col gap-y-0"
                 >
-                  <div v-if="index === 0" class="w-full h-auto">
-                    <figure class="w-full h-auto">
-                      <img
-                        :src="data.cover"
-                        alt=""
-                        class="w-full h-[200px] object-center"
-                      />
-                    </figure>
-                  </div>
-                  <div class="w-full h-auto grid grid-cols-12 pr-10 py-3">
-                    <div class="col-span-3 w-full h-auto flex justify-center">
-                      <p class="text-[24px] text-[#8EB3CC]">#{{ index + 1 }}</p>
+                  <router-link :to="`/blog/${data.slug}`">
+                    <div v-if="index === 0" class="w-full h-auto">
+                      <figure class="w-full h-auto">
+                        <img
+                          :src="data.cover"
+                          alt=""
+                          class="w-full h-[200px] object-center"
+                        />
+                      </figure>
                     </div>
-                    <div class="col-span-9 flex flex-col gap-y-1">
-                      <div class="w-full h-auto">
-                        <p class="text-[#6941C6] text-[14px]">
-                          {{ data.category_name }}
+                    <div class="w-full h-auto grid grid-cols-12 pr-10 py-3">
+                      <div class="col-span-3 w-full h-auto flex justify-center">
+                        <p class="text-[24px] text-[#8EB3CC]">
+                          #{{ index + 1 }}
                         </p>
                       </div>
-                      <div class="w-full flex h-auto">
-                        <p
-                          class="text-[#195279] font-[500] text-[16px] leading-tight"
-                        >
-                          {{ data.title }}
-                        </p>
-                      </div>
-                      <div class="w-full h-auto">
-                        <p class="text-[#B8B8B8] text-[12px]">
-                          {{ data.author_name }} |
-                          {{ convertDate.fromISODate(data.created_at) }}
-                        </p>
+                      <div class="col-span-9 flex flex-col gap-y-1">
+                        <div class="w-full h-auto">
+                          <p class="text-[#6941C6] text-[14px]">
+                            {{ data.category_name }}
+                          </p>
+                        </div>
+                        <div class="w-full flex h-auto">
+                          <p
+                            class="text-[#195279] font-[500] text-[16px] leading-tight"
+                          >
+                            {{ data.title }}
+                          </p>
+                        </div>
+                        <div class="w-full h-auto">
+                          <p class="text-[#B8B8B8] text-[12px]">
+                            {{ data.author_name }} |
+                            {{ convertDate.fromISODate(data.created_at) }}
+                          </p>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div
-                    v-if="index !== popularBlog.length - 1"
-                    class="w-full h-[1px] bg-[#D2D2D2]"
-                  />
+                    <div
+                      v-if="index !== popularBlog.length - 1"
+                      class="w-full h-[1px] bg-[#D2D2D2]"
+                    />
+                  </router-link>
                 </div>
               </div>
             </div>

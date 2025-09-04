@@ -28,9 +28,7 @@ function scrollToId(id) {
       :key="index"
       :class="[
         'hover:text-[#2AB857] cursor-pointer',
-        activeId === item.id
-          ? 'text-[#2AB857] font-semibold'
-          : 'text-[#374151]',
+        activeId === item.id ? 'text-[#2AB857] font-[400]' : 'text-[#909090]',
       ]"
     >
       <a :href="'#' + item.id" @click.prevent="scrollToId(item.id)">

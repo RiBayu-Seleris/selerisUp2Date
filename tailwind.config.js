@@ -26,6 +26,10 @@ module.exports = {
       // "3xl": { raw: "(min-width: 2560px)" },
     },
     extend: {
+      gradientColorStops: {
+        "dark-start": "#565656 0%",
+        "dark-end": "#BCBCBC 70%",
+      },
       backgroundImage: {
         hero2: "url('@/assets/images/hero-banner2.png')",
         touch: "url('@/assets/images/touch-bg.png')",

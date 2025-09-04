@@ -8,7 +8,14 @@ import { useUtilsStore } from "@/stores/utils.js";
 import DOMPurify from "dompurify";
 
 const convertDate = useUtilsStore();
-const { blogDetail, getBlogBySlug, error, loading } = blogsApi();
+const {
+  blogDetail,
+  popularBlog,
+  getBlogBySlug,
+  getPopularBlog,
+  error,
+  loading,
+} = blogsApi();
 const loginStatus = ref(false);
 
 const route = useRoute();
@@ -21,6 +28,7 @@ const safeContent = computed(() =>
 
 onMounted(() => {
   getBlogBySlug(slug); // <= WAJIB
+  getPopularBlog();
 });
 
 const blogimage = "new-example.png";
@@ -70,8 +78,13 @@ const comments = [
     <section class="w-full h-auto flex flex-row justify-between">
       <div class="w-full h-auto flex items-center">
         <p class="text-[#535862] font-[400]">
-          Home > Blog >
-          <span class="text-[#195279]">{{ blogDetail.slug }}</span>
+          <router-link to="/"> <span>Home</span></router-link>
+          <span class="px-2">></span>
+          <router-link to="/blogs"> <span>Blog</span></router-link>
+          <span class="px-2">></span>
+          <span class="text-[#195279] dark:text-[#FAFAFA]">{{
+            blogDetail.title
+          }}</span>
         </p>
       </div>
       <!-- Akun Section -->
@@ -114,9 +127,13 @@ const comments = [
     </section>
     <section class="w-full h-auto flex flex-col mt-10">
       <!-- Blog Images -->
-      <div class="w-full h-auto">
-        <!-- <img :src="blogDetail.cover" alt="" class="w-full" /> -->
-        <img :src="`/assets/images/blog/` + blogimage" alt="" class="w-full" />
+      <div class="w-full h-[500px]">
+        <img
+          :src="blogDetail.cover"
+          alt=""
+          class="w-full h-full object-fill rounded-3xl"
+        />
+        <!-- <img :src="`/assets/images/blog/` + blogimage" alt="" class="w-full" /> -->
       </div>
       <!-- Frame Blog Detail and Content & Most Popular -->
       <div
@@ -127,12 +144,12 @@ const comments = [
           <div class="w-full h-auto flex flex-col gap-y-4">
             <div class="w-full h-auto">
               <p class="text-[#18AB53] font-[500]">
-                {{ convertDate.fromISODate(blogDetail.created_at) }}
+                Published {{ convertDate.fromISODate(blogDetail.created_at) }}
               </p>
             </div>
             <div class="w-full h-auto">
               <h1
-                class="text-[28px] lg:text-[38px] text-[#195279] font-[500] leading-snug"
+                class="text-[28px] lg:text-[38px] text-[#195279] font-[500] leading-snug dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
               >
                 {{ blogDetail.title }}
               </h1>
@@ -140,7 +157,7 @@ const comments = [
             <div class="w-full lg:w-[70%] h-auto">
               <p class="text-[16px] text-[#535862] font-[400] leading-tight">
                 Author:
-                <span class="text-[#535862] font-[600]">
+                <span class="text-[#535862] font-[600] dark:text-[#B3B3B3]">
                   {{ blogDetail.author_name }}</span
                 >
               </p>
@@ -148,7 +165,7 @@ const comments = [
           </div>
           <div class="w-full h-auto flex justify-start items-center">
             <p
-              class="text-[14px] lg:text-[14px] text-[#6941C6] bg-[#7B61FF]/10 px-4 py-1 rounded-full"
+              class="text-[14px] lg:text-[14px] text-[#6941C6] bg-[#7B61FF]/10 dark:bg-[#340777] px-4 py-1 rounded-full"
             >
               {{ blogDetail.category_name }}
             </p>
@@ -156,14 +173,14 @@ const comments = [
           <!-- ref="articleRef" -->
           <article
             id="content"
-            class="w-full h-auto flex flex-col leading-relaxed text-[#535862] font-[400] space-y-6 lg:space-y-5 mt-5"
+            class="w-full h-auto flex flex-col leading-relaxed text-[#535862] dark:text-[#DADADA] font-[400] space-y-6 lg:space-y-10 mt-5"
           >
             <p>
               {{ blogDetail.synopsis }}
             </p>
             <!-- Content Blog -->
             <div
-              class="text-base leading-relaxed text-gray-700 space-y-4"
+              class="prose prose-lg dark:prose-invert text-[16px] font-[400] text-[#535862] dark:text-[#DADADA] prose-headings:my-2 prose-p:my-2 prose-ul:my-2 prose-ol:my-2"
               v-html="safeContent"
             ></div>
           </article>
@@ -187,84 +204,49 @@ const comments = [
                     Most Popular
                   </p>
                 </div>
-                <div class="w-full h-auto flex flex-col gap-y-2 pb-2">
-                  <div class="w-full h-auto">
+                <div
+                  v-for="(data, index) in popularBlog"
+                  :key="index"
+                  class="w-full h-auto flex flex-col gap-y-0"
+                >
+                  <div v-if="index === 0" class="w-full h-auto">
                     <figure class="w-full h-auto">
                       <img
-                        :src="`/assets/images/blog/` + blogimage2"
-                        alt="blog"
-                        class="w-full h-auto object-cover"
+                        :src="data.cover"
+                        alt=""
+                        class="w-full h-[200px] object-center"
                       />
                     </figure>
                   </div>
-                  <div class="w-full h-auto grid grid-cols-12">
+                  <div class="w-full h-auto grid grid-cols-12 pr-10 py-3">
                     <div class="col-span-3 w-full h-auto flex justify-center">
-                      <p class="text-[24px] text-[#8EB3CC]">#1</p>
+                      <p class="text-[24px] text-[#8EB3CC]">#{{ index + 1 }}</p>
                     </div>
-                    <div class="col-span-9 flex flex-col pr-8 gap-y-1">
+                    <div class="col-span-9 flex flex-col gap-y-1">
                       <div class="w-full h-auto">
                         <p class="text-[#6941C6] text-[14px]">
-                          Artificial Intelligent
+                          {{ data.category_name }}
                         </p>
                       </div>
-                      <div class="w-full h-auto">
-                        <p class="text-[#195279] font-[500] text-[18px]">
-                          Shaping Our World, One Innovation at a Time
+                      <div class="w-full flex h-auto">
+                        <p
+                          class="text-[#195279] font-[500] text-[16px] leading-tight"
+                        >
+                          {{ data.title }}
                         </p>
                       </div>
                       <div class="w-full h-auto">
                         <p class="text-[#B8B8B8] text-[12px]">
-                          Anisa Maulida Rahma | 20 Januari 2025
+                          {{ data.author_name }} |
+                          {{ convertDate.fromISODate(data.created_at) }}
                         </p>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="w-full h-[1px] bg-[#D2D2D2]" />
-                <div class="w-full h-auto grid grid-cols-12 py-2">
-                  <div class="col-span-3 w-full h-auto flex justify-center">
-                    <p class="text-[24px] text-[#8EB3CC]">#2</p>
-                  </div>
-                  <div class="col-span-9 flex flex-col pr-8 gap-y-1">
-                    <div class="w-full h-auto">
-                      <p class="text-[#6941C6] text-[14px]">
-                        Artificial Intelligent
-                      </p>
-                    </div>
-                    <div class="w-full h-auto">
-                      <p class="text-[#195279] font-[500] text-[18px]">
-                        Shaping Our World, One Innovation at a Time
-                      </p>
-                    </div>
-                    <div class="w-full h-auto">
-                      <p class="text-[#B8B8B8] text-[12px]">
-                        Anisa Maulida Rahma | 20 Januari 2025
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div class="w-full h-[1px] bg-[#D2D2D2]" />
-                <div class="w-full h-auto grid grid-cols-12 py-2">
-                  <div class="col-span-3 w-full h-auto flex justify-center">
-                    <p class="text-[24px] text-[#8EB3CC]">#3</p>
-                  </div>
-                  <div class="col-span-9 flex flex-col pr-8 gap-y-1">
-                    <div class="w-full h-auto">
-                      <p class="text-[#6941C6] text-[14px]">
-                        Artificial Intelligent
-                      </p>
-                    </div>
-                    <div class="w-full h-auto">
-                      <p class="text-[#195279] font-[500] text-[18px]">
-                        Shaping Our World, One Innovation at a Time
-                      </p>
-                    </div>
-                    <div class="w-full h-auto">
-                      <p class="text-[#B8B8B8] text-[12px]">
-                        Anisa Maulida Rahma | 20 Januari 2025
-                      </p>
-                    </div>
-                  </div>
+                  <div
+                    v-if="index !== popularBlog.length - 1"
+                    class="w-full h-[1px] bg-[#D2D2D2]"
+                  />
                 </div>
               </div>
             </div>

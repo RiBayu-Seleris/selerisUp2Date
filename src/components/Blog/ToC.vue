@@ -54,7 +54,7 @@ const offset = computed(() => {
 
 <template>
   <div class="h-auto flex flex-col p-4 gap-y-2 border-[1px] rounded-[10px]">
-    <p class="text-[16px]">Content</p>
+    <p class="text-[#195279] font-[500] text-[16px]">Content</p>
     <!-- ToC -->
     <ToCList :items="groupedHeadings" :offset="offset" />
   </div>
