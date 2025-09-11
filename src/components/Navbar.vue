@@ -27,16 +27,16 @@ onUnmounted(() => {
 <template>
   <div
     :class="[
-      'fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in flex justify-center ',
+      'fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in flex justify-center',
       isScrolled ? 'py-8 px-8 ' : 'bg-transparent py-6',
     ]"
   >
     <!-- Desktop Navbar -->
     <div
-      class="hidden lg:grid grid-cols-12 w-full max-w-[1440px] h-auto px-8 transition-all duration-500 ease-in"
+      class="hidden lg:grid grid-cols-12 w-full max-w-[1440px] h-auto px-8 lg:px-6 xl:px-8 xls:px-0 transition-all duration-500 ease-in"
       :class="[
         isScrolled
-          ? 'bg-white py-2 rounded-[10px] dark:bg-black/40 dark:backdrop-blur-3xl dark:border-[0.5px] border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30'
+          ? 'bg-white py-2 xls:px-8 rounded-[10px] dark:bg-black/40 dark:backdrop-blur-3xl dark:border-[0.5px] border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30'
           : 'bg-transparent',
       ]"
     >
@@ -74,7 +74,7 @@ onUnmounted(() => {
       :class="[
         isScrolled
           ? 'px-4 md:px-8 bg-white py-2 rounded-[10px] dark:bg-black/40 dark:backdrop-blur-3xl dark:border border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30'
-          : 'px-8 bg-transparent',
+          : 'px-6 sm:px-8 bg-transparent',
       ]"
     >
       <router-link to="/" class="w-[40%] h-auto flex">

@@ -15,19 +15,21 @@ defineProps({
 </script>
 
 <template>
-  <div class="flex flex-col w-full h-auto gap-y-4 justify-center items-center">
+  <div
+    class="flex flex-col w-full h-auto space-y-2 sm:space-y-0 md:space-y-0 lg:space-y-3 xl:space-y-2 justify-center items-center"
+  >
     <p
-      class="text-[25px] md:text-[35px] lg:text-[30px] xl:text-[30px] font-[500] text-[#1AB24F] text-center"
+      class="text-[24px] sm:text-[24px] md:text-[34px] lg:text-[38px] xl:text-[40px] font-[500] tracking-tight text-[#1AB24F] text-center"
     >
       {{ title }}
     </p>
     <p
-      class="text-[23px] md:text-[37px] lg:text-[43px] xl:text-[47px] font-[500] text-[#195279] text-center dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+      class="text-[20px] sm:text-[22px] md:text-[36px] lg:text-[44px] xl:text-[52px] font-[500] lg:tracking-wide xl:tracking-normal text-[#195279] text-center dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
     >
       {{ subtitle }}
     </p>
     <p
-      class="text-[14px] md:text-[23px] lg:text-[24px] xl:text-[24px] font-[400] text-[#195279] dark:text-[#6F6F6F] sml:px-8 md:px-0 xl:px-48 text-center"
+      class="text-[14px] md:text-[18px] lg:text-[18px] xl:text-[18px] font-[400] tracking-wider text-[#89A6BA] dark:text-[#6F6F6F] sml:px-8 md:px-0 lg:px-32 xl:px-52 text-center"
     >
       {{ description }}
     </p>

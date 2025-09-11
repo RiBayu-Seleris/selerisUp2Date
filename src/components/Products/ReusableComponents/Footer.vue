@@ -108,7 +108,7 @@ const connectColor = computed(() => {
                 </div>
                 <div class="w-auto h-[30px] lg:h-[30px] text-[#195279]">
                   <a
-                    href="https://www.linkedin.com/company/seleris-meditekno-internasional/"
+                    href="https://www.linkedin.com/company/seleris-meditekno-internasional-smi/posts/?feedView=all"
                     target="_blank"
                   >
                     <Linkedin />

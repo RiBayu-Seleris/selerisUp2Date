@@ -1,17 +1,17 @@
 <template>
   <div class="flex flex-col w-full h-auto">
     <div
-      class="flex flex-col w-full h-auto justify-center items-center xl:px-14 px-8 md:px-10 lg:px-10 gap-y-3"
+      class="flex flex-col w-full h-auto justify-center items-center xl:px-14 px-8 md:px-10 lg:px-10 gap-y-0"
     >
       <p
-        class="text-[29px] md:text-[37px] lg:text-[48px] xl:text-[48px] font-[500] text-[#1AB24F] text-center dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+        class="text-[29px] md:text-[37px] lg:text-[30px] xl:text-[40px] font-[500] text-[#1AB24F] text-center dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
       >
         Office Team
       </p>
       <p
-        class="text-[15px] md:text-[20px] font-[400] text-[#89A6BA] dark:text-[#6F6F6F] text-center"
+        class="text-[14px] md:text-[18px] lg:text-[18px] xl:text-[20px] tracking-wider font-[400] text-[#89A6BA] dark:text-[#6F6F6F] sml:px-8 md:px-0 lg:px-8 xl:px-40 text-center"
       >
-        Our dev team turns ideas into working code fast, clean, and reliable.
+        Our dev team turns ideas into working code fast, clean, and reliable.
       </p>
     </div>
     <div class="flex w-full h-auto mt-5 px-8 md:px-14">

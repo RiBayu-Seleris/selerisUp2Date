@@ -30,7 +30,7 @@ function selectProduct(product) {
 </script>
 <template>
   <section
-    class="flex w-full h-auto sml:pt-[120px] md:pt-[150px] lg:pt-[160px] xl:pt-[160px] mb-10"
+    class="flex w-full h-auto pt-[120px] sm:pt-[120px] md:pt-[150px] lg:pt-[160px] xl:pt-[160px] mb-10"
   >
     <HeroText
       title="Innovation"
@@ -63,7 +63,7 @@ function selectProduct(product) {
     <div class="relative w-full h-auto justify-center">
       <!-- Frame Content Scroll -->
       <div
-        class="flex flex-row w-full h-[550px] md:h-[550px] lg:h-[700px] z-20 overflow-x-auto snap-x snap-mandatory scroll-pl-28 pl-28 pr-14 hide-scrollbar"
+        class="flex flex-row w-full h-[450px] sm:h-[550px] md:h-[550px] lg:h-[700px] z-20 overflow-x-auto snap-x snap-mandatory scroll-pl-8 pl-8 pr-14 sm:scroll-pl-28 sm:pl-28 sm:pr-14 hide-scrollbar"
       >
         <div
           v-for="(yearItem, yearIndex) in roadmapData"
@@ -79,18 +79,18 @@ function selectProduct(product) {
                   <img
                     src="@/assets/images/Diamond.svg"
                     alt=""
-                    class="w-full h-[120px] sm:h-[120px] md:h-[130px] lg:h-[130px] object-cover drop-shadow-[-5px_8px_5px_rgba(0,0,0,0.15)] md:drop-shadow-[-10px_10px_10px_rgba(0,0,0,0.25)] dark:drop-shadow-[0_0_30px_rgba(44,255,255,1)]"
+                    class="w-full h-[80px] sm:h-[120px] md:h-[130px] lg:h-[130px] object-cover drop-shadow-[-5px_8px_5px_rgba(0,0,0,0.15)] md:drop-shadow-[-10px_10px_10px_rgba(0,0,0,0.25)] dark:drop-shadow-[0_0_30px_rgba(44,255,255,1)]"
                   />
                 </figure>
               </div>
               <div
-                class="w-auto h-auto relative bottom-[150px] sm:bottom-[150px] md:bottom-[150px] lg:bottom-[250px] xl:bottom-[220px] flex justify-center items-center"
+                class="w-auto h-auto relative bottom-[130px] sm:bottom-[150px] md:bottom-[150px] lg:bottom-[250px] xl:bottom-[220px] flex justify-center items-center"
               >
                 <div
-                  class="w-[100px] h-full py-2 rounded-md bg-gradient-to-r from-[#2C43B7] to-[#50B6EE] flex justify-center items-center"
+                  class="w-[100px] sm:w-[100px] h-full py-1 sm:py-2 rounded-md bg-gradient-to-r from-[#2C43B7] to-[#50B6EE] flex justify-center items-center"
                 >
                   <span
-                    class="text-[#FAFAFA] font-[400] text-[17px] text-center"
+                    class="text-[#FAFAFA] font-[400] text-[16px] sm:text-[18px] text-center"
                     >{{ yearItem.year }}</span
                   >
                 </div>
@@ -112,7 +112,7 @@ function selectProduct(product) {
                   setActive(yearIndex, productIndex);
                   selectProduct(product);
                 "
-                class="absolute w-8 h-8 p-1.5 rounded-full bg-gradient-to-r from-[#2C43B7] from-20% to-[#50B6EE] to-90% left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 cursor-pointer"
+                class="absolute w-6 h-6 sm:w-8 sm:h-8 p-1.5 rounded-full bg-gradient-to-r from-[#2C43B7] from-20% to-[#50B6EE] to-90% left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2 z-20 cursor-pointer"
               >
                 <div
                   class="w-full h-full rounded-full"
@@ -131,9 +131,9 @@ function selectProduct(product) {
               <!-- Quarter jika ada -->
               <div
                 v-if="product.quarters"
-                class="absolute bottom-[210px] sm:bottom-[210px] md:bottom-[210px] xl:bottom-[280px] z-20 px-10 py-1 bg-gradient-to-r from-[#2C43B7] to-[#50B6EE] rounded-md left-1/2 -translate-x-1/2"
+                class="absolute bottom-[165px] sm:bottom-[210px] md:bottom-[210px] xl:bottom-[280px] z-20 px-8 sm:px-10 py-1 bg-gradient-to-r from-[#2C43B7] to-[#50B6EE] rounded-md left-1/2 -translate-x-1/2"
               >
-                <span class="text-white text-[17px]">
+                <span class="text-white text-[16px] sm:text-[18px]">
                   Q{{ product.quarters }}
                 </span>
               </div>
@@ -145,7 +145,7 @@ function selectProduct(product) {
                   'pt-0 transition-all duration-500 ease-in':
                     activeProduct.yearIndex === yearIndex &&
                     activeProduct.productIndex === productIndex,
-                  'pt-20 sm:pt-20 md:pt-20 xl:pt-28 transition-all duration-500 ease-in':
+                  'pt-16 sm:pt-20 md:pt-20 xl:pt-36 transition-all duration-500 ease-in':
                     !(
                       activeProduct.yearIndex === yearIndex &&
                       activeProduct.productIndex === productIndex
@@ -154,7 +154,7 @@ function selectProduct(product) {
               >
                 <!-- Tambahkan bg-gradient-to-r from-[#2C43B7] to-[#50B6EE] untuk active -->
                 <div
-                  class="flex justify-center relative left-1/2 -translate-x-1/2 w-[270px] md:w-[250px] xl:w-[350px] p-[3px] rounded-xl"
+                  class="flex justify-center relative left-1/2 -translate-x-1/2 w-[200px] sm:w-[270px] md:w-[250px] xl:w-[350px] p-[3px] rounded-xl"
                   :class="{
                     'bg-gradient-to-r from-[#2C43B7] via-[#3ED2B2] to-[#50B6EE] dark:shadow-[0_0_30px_rgba(62,210,178,0.3)]':
                       activeProduct.yearIndex === yearIndex &&
@@ -205,7 +205,7 @@ function selectProduct(product) {
                       v-else
                       class="flex flex-col items-center"
                       :class="{
-                        'justify-center transition-all duration-500 ease-in h-[60px] md:h-[60px] xl:h-[100px]':
+                        'justify-center transition-all duration-500 ease-in h-[40px] sm:h-[60px] md:h-[60px] xl:h-[100px]':
                           activeProduct.yearIndex === yearIndex &&
                           activeProduct.productIndex === productIndex,
                         'justify-start transition-all duration-500 ease-in': !(
@@ -215,12 +215,12 @@ function selectProduct(product) {
                       }"
                     >
                       <p
-                        class="text-center font-[500] text-[14px] sm:text-[14px] md:text-[16px] xl:text-[22px] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                        class="text-center font-[500] text-[12px] sm:text-[14px] md:text-[16px] xl:text-[22px] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                       >
                         {{ product.title }}
                       </p>
                       <p
-                        class="font-[400] text-[12px] sm:text-[12px] md:text-[12px] xl:text-[16px] text-center text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                        class="font-[400] text-[10px] sm:text-[12px] md:text-[12px] xl:text-[16px] text-center text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                       >
                         {{ product.subtitle }}
                       </p>
@@ -241,7 +241,7 @@ function selectProduct(product) {
                   }"
                 >
                   <div
-                    class="w-5 h-5 rounded-full bg-[#2B9DF4] absolute left-1/2 -translate-x-1/2"
+                    class="w-4 h-4 sm:w-5 sm:h-5 rounded-full bg-[#2B9DF4] absolute left-1/2 -translate-x-1/2"
                   />
                 </div>
               </div>
@@ -258,23 +258,23 @@ function selectProduct(product) {
   <!-- Card Description -->
   <section
     v-if="selectedProduct"
-    class="w-full h-auto -mt-[70px] sm:-mt-[70px] md:-mt-[100px] lg:-mt-[130px] xl:-mt-[130px] relative z-20"
+    class="w-full h-auto -mt-[80px] sm:-mt-[70px] md:-mt-[100px] lg:-mt-[130px] xl:-mt-[130px] relative z-20"
   >
     <div class="w-full h-auto flex flex-col">
-      <div class="w-full h-auto px-8 sm:px-8 md:px-10 xl:px-32">
+      <div class="w-full h-auto px-8 sm:px-8 md:px-10 xl:px-28">
         <div
-          class="w-full h-auto relative p-0.5 bg-gradient-to-r from-[#2C43B7] via-[#3ED2B2] to-[#50B6EE] rounded-[30px]"
+          class="w-full h-auto relative p-[1.5px] bg-gradient-to-r from-[#2C43B7] via-[#3ED2B2] to-[#50B6EE] rounded-[20px] sm:rounded-[30px]"
         >
           <div
-            class="w-full h-full flex flex-col bg-[#FFFFFF] dark:bg-[#323232] p-8 lg:p-10 rounded-[30px] space-y-2 xl:space-y-5"
+            class="w-full h-full flex flex-col bg-[#FFFFFF] dark:bg-[#323232] p-6 sm:p-8 lg:p-10 rounded-[20px] sm:rounded-[30px] space-y-2 xl:space-y-5"
           >
             <p
-              class="text-[18px] sm:text-[20px] md:text-[24px] xl:text-[24px] text-center text-[#195279] font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+              class="text-[14px] sm:text-[20px] md:text-[24px] xl:text-[24px] text-center text-[#195279] font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
             >
               {{ selectedProduct.title }}
             </p>
             <p
-              class="text-center text-[#195279] dark:text-[#6F6F6F] text-[12px] sm:text-[12px] md:text-[14px] lg:text-[20px] lg:px-8"
+              class="text-center text-[#195279] dark:text-[#6F6F6F] text-[10px] sm:text-[12px] md:text-[14px] lg:text-[20px] lg:px-8"
             >
               {{ selectedProduct.description }}
             </p>
@@ -289,23 +289,23 @@ function selectProduct(product) {
           class="hidden xl:flex absolute w-32 h-full bg-gradient-to-l from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-l dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% right-0 z-20 rounded-l-2xl"
         />
         <div
-          class="relative flex flex-row w-full max-h-screen gap-x-10 sml:gap-x-5 md:gap-x-10 py-5 overflow-x-auto snap-x snap-mandatory sml:scroll-pl-10 sml:pl-10 sml:pr-10 md:scroll-pl-10 md:pl-10 md:pr-10 xl:scroll-pl-32 xl:pl-32 xl:pr-32 hide-scrollbar"
+          class="relative flex flex-row w-full max-h-screen gap-x-5 sm:gap-x-5 md:gap-x-10 py-5 overflow-x-auto snap-x snap-mandatory scroll-pl-8 pl-8 pr-8 sm:scroll-pl-10 sm:pl-10 sm:pr-10 md:scroll-pl-10 md:pl-10 md:pr-10 xl:scroll-pl-28 xl:pl-28 xl:pr-28 hide-scrollbar"
         >
           <div
             v-for="(item, index) in selectedProduct.content"
             :key="index"
-            class="w-full h-auto relative p-0.5 bg-gradient-to-r from-[#2C43B7] via-[#3ED2B2] to-[#50B6EE] rounded-[30px]"
+            class="h-auto relative p-[1.5px] rounded-[20px] sm:rounded-[30px] bg-gradient-to-r from-[#2C43B7] via-[#3ED2B2] to-[#50B6EE]"
           >
             <div
-              class="w-[300px] sm:w-[300px] md:w-[500px] h-full flex flex-col bg-[#FFFFFF] dark:bg-[#323232] p-5 md:p-8 rounded-[30px]"
+              class="w-[300px] sm:w-[300px] md:w-[500px] h-full flex flex-col bg-[#FFFFFF] dark:bg-[#323232] p-5 md:p-8 rounded-[20px] sm:rounded-[30px]"
             >
               <p
-                class="text-center h-[60px] px-0 sm:px-8 md:px-16 pb-4 text-[#195279] font-[500] text-[12px] sm:text-[14px] md:text-[16px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                class="text-center h-[60px] px-10 sm:px-8 md:px-16 pb-4 text-[#195279] font-[500] text-[12px] sm:text-[14px] md:text-[16px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
               >
                 {{ item.title }}
               </p>
               <p
-                class="text-center justify-start items-start text-[#195279] text-[12px] sm:text-[12px] md:text-[14px] dark:text-[#6F6F6F]"
+                class="text-center justify-start items-start text-[#195279] text-[10px] sm:text-[12px] md:text-[14px] dark:text-[#6F6F6F]"
               >
                 {{ item.description }}
               </p>

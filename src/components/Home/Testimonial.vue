@@ -42,7 +42,9 @@ const testimonials = [
 
 <template>
   <div class="flex flex-col">
-    <div class="relative flex flex-col w-full h-auto px-8 lg:px-16 gap-y-3">
+    <div
+      class="relative flex flex-col w-full h-auto px-8 lg:px-16 xls:px-8 gap-y-3"
+    >
       <div class="flex w-full h-auto">
         <p
           class="text-[#2AB857] font-[500] text-[21px] sml:text-[19px] lg:text-[21px]"
@@ -70,7 +72,7 @@ const testimonials = [
         <SwiperSlide
           v-for="(item, index) in testimonials"
           :key="index"
-          class="px-8 lg:px-16"
+          class="px-8 lg:px-16 xls:px-8"
         >
           <TestimonialCard
             :name="item.name"

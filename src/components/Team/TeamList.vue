@@ -91,55 +91,75 @@ const teams = [
 <template>
   <div class="flex flex-col w-full h-auto">
     <div
-      class="flex flex-col w-full h-auto justify-center items-center xl:px-14 md:px-10 lg:px-10"
+      class="flex flex-col w-full h-auto justify-center items-center space-y-2 md:px-10 lg:px-10 xl:px-14"
     >
       <p
-        class="text-[27px] md:text-[37px] lg:text-[48px] xl:text-[48px] font-[500] text-[#1AB24F] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+        class="text-[20px] sm:text-[26px] md:text-[32px] lg:text-[36px] xl:text-[40px] font-[500] text-[#1AB24F] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
       >
         Leadership Team
       </p>
       <p
-        class="text-[15px] md:text-[21px] lg:text-[20px] xl:text-[20px] font-[400] px-8 md:px-0 text-[#89A6BA] dark:text-[#6F6F6F] text-center"
+        class="text-[14px] md:text-[18px] lg:text-[18px] xl:text-[20px] font-[400] tracking-wider lg:tracking-normal text-[#89A6BA] dark:text-[#6F6F6F] text-center"
       >
-        Our leadership team brings decades of experiences, a proven track record
-        of success.
+        <!-- Desktop -->
+        <span class="hidden md:block">
+          Our leadership team brings decades of experiences,
+          <br class="md:block lg:hidden" />
+          a proven track record of success.
+        </span>
+        <!-- Mobile -->
+        <span class="block md:hidden">
+          Our leadership team brings decades of experiences,
+          <br class="hidden sm:block" />
+          a proven track
+          <br class="block sm:hidden" />
+          record of success.
+        </span>
       </p>
     </div>
-    <div class="w-full h-auto flex flex-row lg:mt-3 xl:mt-8">
+    <div class="relative w-full h-auto flex flex-row mt-5 xl:mt-10">
       <div
-        class="flex flex-row py-2 w-full h-auto gap-x-5 md:gap-x-10 mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-16 pl-16 pr-16 lg:scroll-pl-16 lg:pl-16 lg:pr-16 hide-scrollbar"
+        class="hidden xl:flex absolute w-32 h-full bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-r dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% left-0 z-20"
+      />
+      <div
+        class="hidden xl:flex absolute w-32 h-full bg-gradient-to-l from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-l dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% right-0 z-20"
+      />
+      <div
+        class="flex flex-row py-0 w-full h-auto gap-x-5 sm:gap-x-7 md:gap-x-8 lg:gap-x-10 mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-10 pl-10 pr-10 sm:scroll-pl-10 sm:pl-10 sm:pr-10 lg:scroll-pl-16 lg:pl-16 lg:pr-16 hide-scrollbar"
       >
         <div
           v-for="(team, index) in teams"
           :key="index"
-          class="snap-start shrink-0 h-auto rounded-[22px]"
+          class="snap-center w-auto shrink-0 h-auto rounded-[22px]"
         >
           <div
-            class="relative flex w-full h-auto bg-blue-300 rounded-[22px] justify-center items-end"
+            class="relative flex w-full h-auto rounded-[22px] justify-center items-end"
           >
             <img
               :src="team.image"
               alt="Photo"
-              class="w-full h-[270px] md:h-[320px] lg:h-[370px] object-cover bg-no-repeat rounded-[22px]"
+              class="w-auto h-[200px] sm:h-[260px] md:h-[310px] lg:h-[370px] xl:h-[350px] object-cover bg-no-repeat rounded-[22px]"
             />
             <div
               class="absolute flex w-full h-auto justify-center items-center pb-3"
             >
               <div class="relative flex justify-center items-center">
                 <DescTeamFrame
-                  svgClass="h-auto w-[250px] md:w-[280px] lg:w-[310px] xl:w-[310px] dark:hidden"
+                  svgClass="h-auto w-[165px] sm:w-[220px] md:w-[260px] lg:w-[310px] xl:w-[300px] dark:hidden"
                 />
                 <DarkDescTeamFrame
-                  svgClass="h-auto w-[250px] md:w-[280px] lg:w-[310px] xl:w-[310px] hidden dark:block"
+                  svgClass="h-auto w-[165px] sm:w-[220px] md:w-[260px] lg:w-[310px] xl:w-[300px] hidden dark:block"
                 />
-                <div class="absolute flex w-full h-auto pl-5 flex-col pt-2">
+                <div
+                  class="absolute flex flex-col w-full h-auto pl-3 lg:pl-5 pt-3 lg:pt-3"
+                >
                   <p
-                    class="font-[600] text-[#195279] dark:text-[#FFFFFF] text-[17px] md:text-[19px] lg:text-[21px]"
+                    class="font-[600] text-[#195279] dark:text-[#FFFFFF] text-[12px] sm:text-[14px] md:text-[16px] lg:text-[20px]"
                   >
                     {{ team.name }}
                   </p>
                   <p
-                    class="font-[400] text-[#195279] dark:text-[#FAFAFA] text-[13px] md:text-[14px] lg:text-[16px]"
+                    class="font-[500] text-[#195279] dark:text-[#FAFAFA] text-[10px] sm:text-[12px] md:text-[14px] lg:text-[16px]"
                   >
                     {{ team.position }}
                   </p>

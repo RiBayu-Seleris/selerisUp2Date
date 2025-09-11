@@ -12,7 +12,7 @@ import Roadmap from "@/components/Home/Roadmap.vue";
 </script>
 
 <template>
-  <section class="relative flex w-full h-auto px-8">
+  <section class="relative flex w-full h-auto px-8 xls:px-0">
     <Herosection />
   </section>
 
@@ -30,7 +30,7 @@ import Roadmap from "@/components/Home/Roadmap.vue";
   </section>
 
   <section
-    class="flex flex-col relative w-full h-auto mt-14 lg:mt-20 xl:mt-28 px-8"
+    class="flex flex-col relative w-full h-auto mt-14 lg:mt-20 xl:mt-28 px-8 xls:px-0"
   >
     <Description />
   </section>
@@ -51,7 +51,7 @@ import Roadmap from "@/components/Home/Roadmap.vue";
     <Testimonial />
   </section>
 
-  <section class="flex flex-col relative w-full h-auto px-8 mt-32">
+  <section class="flex flex-col relative w-full h-auto px-8 xls:px-0 mt-32">
     <Different />
   </section>
 

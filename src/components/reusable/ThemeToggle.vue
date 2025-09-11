@@ -7,7 +7,7 @@ const themeStore = useThemeStore();
 <template>
   <div
     @click="themeStore.toggleTheme"
-    class="w-20 h-10 sm:w-24 sm:h-12 bg-white dark:bg-gray-800 rounded-full border-[0.5px] dark:border-[#FAFAFA]/30 shadow-[inset_0px_0px_17px_-3px_rgba(0,_0,_0,_0.1)] relative cursor-pointer flex items-center px-3 transition-all duration-300"
+    class="w-20 h-10 sm:w-24 sm:h-12 lg:w-full lg:h-10 xl:w-24 xl:h-12 bg-white dark:bg-gray-800 rounded-full border-[0.5px] dark:border-[#FAFAFA]/30 shadow-[inset_0px_0px_17px_-3px_rgba(0,_0,_0,_0.1)] relative cursor-pointer flex items-center px-3 transition-all duration-300"
   >
     <!-- Circle -->
     <div

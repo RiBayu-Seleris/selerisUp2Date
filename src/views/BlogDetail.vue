@@ -16,7 +16,8 @@ const {
   error,
   loading,
 } = blogsApi();
-const loginStatus = ref(false);
+
+const loginStatus = ref(true);
 
 const route = useRoute();
 const slug = route.params.slug;
@@ -74,9 +75,9 @@ const comments = [
 <template>
   <div v-if="loading">Loading Data</div>
   <div v-else-if="error">{{ error }}</div>
-  <div v-else-if="blogDetail" class="w-full h-auto px-12 xl:px-16 pt-40">
+  <div v-else-if="blogDetail" class="w-full h-auto px-12 xl:px-16 pt-32">
     <section class="w-full h-auto flex flex-row justify-between">
-      <div class="w-full h-auto flex items-center">
+      <div class="w-full h-auto flex items-center bg-green-300">
         <p class="text-[#535862] font-[400]">
           <router-link to="/"> <span>Home</span></router-link>
           <span class="px-2">></span>
@@ -88,8 +89,11 @@ const comments = [
         </p>
       </div>
       <!-- Akun Section -->
-      <div v-if="loginStatus === true" class="w-full h-auto flex justify-end">
-        <div class="w-[60%] flex flex-row">
+      <div
+        v-if="loginStatus === true"
+        class="w-[40%] h-auto flex justify-end bg-green-500"
+      >
+        <div class="w-full flex flex-row justify-end">
           <div class="relative w-full h-auto flex flex-row justify-end">
             <div class="relative w-[30%] h-auto pt-0 flex justify-end">
               <button @click="toggleDropdown" class="w-7 h-7 p-1">
@@ -180,7 +184,7 @@ const comments = [
             </p>
             <!-- Content Blog -->
             <div
-              class="prose prose-lg dark:prose-invert text-[16px] font-[400] text-[#535862] dark:text-[#DADADA] prose-headings:my-2 prose-p:my-2 prose-ul:my-2 prose-ol:my-2"
+              class="prose prose-lg dark:prose-invert dark:prose-white text-[16px] font-[400] text-[#535862] dark:text-[#DADADA] prose-headings:my-2 prose-p:my-2 prose-ul:my-2 prose-ol:my-2"
               v-html="safeContent"
             ></div>
           </article>
@@ -199,58 +203,66 @@ const comments = [
               >
                 <div class="w-full h-auto py-4 px-3">
                   <p
-                    class="text-[#195279] font-[500] lg:text-[16px] justify-center"
+                    class="text-[#195279] font-[500] lg:text-[16px] justify-center dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                   >
                     Most Popular
                   </p>
                 </div>
-                <div
-                  v-for="(data, index) in popularBlog"
-                  :key="index"
-                  class="w-full h-auto flex flex-col gap-y-0"
-                >
-                  <router-link :to="`/blog/${data.slug}`">
-                    <div v-if="index === 0" class="w-full h-auto">
-                      <figure class="w-full h-auto">
-                        <img
-                          :src="data.cover"
-                          alt=""
-                          class="w-full h-[200px] object-center"
-                        />
-                      </figure>
-                    </div>
-                    <div class="w-full h-auto grid grid-cols-12 pr-10 py-3">
-                      <div class="col-span-3 w-full h-auto flex justify-center">
-                        <p class="text-[24px] text-[#8EB3CC]">
-                          #{{ index + 1 }}
-                        </p>
-                      </div>
-                      <div class="col-span-9 flex flex-col gap-y-1">
-                        <div class="w-full h-auto">
-                          <p class="text-[#6941C6] text-[14px]">
-                            {{ data.category_name }}
-                          </p>
-                        </div>
-                        <div class="w-full flex h-auto">
-                          <p
-                            class="text-[#195279] font-[500] text-[16px] leading-tight"
-                          >
-                            {{ data.title }}
-                          </p>
-                        </div>
-                        <div class="w-full h-auto">
-                          <p class="text-[#B8B8B8] text-[12px]">
-                            {{ data.author_name }} |
-                            {{ convertDate.fromISODate(data.created_at) }}
-                          </p>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      v-if="index !== popularBlog.length - 1"
-                      class="w-full h-[1px] bg-[#D2D2D2]"
-                    />
+                <div class="flex flex-col w-full h-full mt-4">
+                  <!-- ✅ Hanya tampilkan gambar dari data pertama -->
+                  <router-link
+                    v-if="popularBlog.length > 0"
+                    :to="`/blog/${popularBlog[0].slug}`"
+                    class="w-full h-[50%]"
+                  >
+                    <figure class="w-full h-auto">
+                      <img
+                        :src="popularBlog[0].cover"
+                        alt="cover"
+                        class="w-full h-[200px] object-cover"
+                      />
+                    </figure>
                   </router-link>
+                  <!-- ✅ Daftar lainnya -->
+                  <div class="flex flex-col w-full h-full">
+                    <div
+                      v-for="(data, index) in popularBlog"
+                      :key="index"
+                      class="w-full flex flex-col items-center"
+                    >
+                      <router-link :to="`/blog/${data.slug}`" class="w-full">
+                        <div class="w-full h-auto grid grid-cols-12 pr-10 py-4">
+                          <div class="col-span-3 w-full flex justify-center">
+                            <p class="text-[24px] text-[#8EB3CC]">
+                              #{{ index + 1 }}
+                            </p>
+                          </div>
+                          <div class="col-span-9 flex flex-col gap-y-1">
+                            <p
+                              class="text-[#6941C6] dark:text-[#2AB857] text-[14px]"
+                            >
+                              {{ data.category_name }}
+                            </p>
+                            <p
+                              class="text-[#195279] font-[500] text-[16px] leading-snug dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                            >
+                              {{ data.title }}
+                            </p>
+                            <p
+                              class="text-[#B8B8B8] dark:text-[#6F6F6F] text-[12px]"
+                            >
+                              {{ data.author_name }} |
+                              {{ convertDate.fromISODate(data.created_at) }}
+                            </p>
+                          </div>
+                        </div>
+                      </router-link>
+                      <div
+                        v-if="index !== popularBlog.length - 1"
+                        class="w-full h-[0.5px] bg-[#D9D9D9] dark:bg-[#565656]"
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>

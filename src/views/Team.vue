@@ -7,15 +7,15 @@ import Description from "@/components/Team/Description.vue";
 </script>
 
 <template>
-  <section class="flex relative w-full h-auto md:px-12 xl:px-14">
+  <section class="flex relative w-full h-auto md:px-10 xl:px-14">
     <HeroSection />
   </section>
 
-  <section class="flex relative w-full h-auto mt-20">
+  <section class="flex relative w-full h-auto mt-20 sm:mt-32 xl:mt-28">
     <TeamList />
   </section>
 
-  <section class="flex relative w-full h-auto mt-28">
+  <section class="flex relative w-full h-auto sm:mt-48 md:mt-48 lg:mt-36">
     <DevelopmentTeam />
   </section>
 

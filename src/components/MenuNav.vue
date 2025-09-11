@@ -36,12 +36,14 @@ onUnmounted(() => {
     :class="[
       'flex items-center text-md font-[400] text-[#374151] transition-all duration-500 ease-in',
       isScrolled
-        ? 'lg:gap-[20px] xl:gap-[55px] dark:text-[#DEDEDE] '
-        : 'lg:gap-[25px] 2lg:gap-[45px] xl:gap-[63px] 2xl:gap-[70px] justify-center dark:text-[#DEDEDE]',
+        ? 'lg:gap-[25px] xl:gap-[45px] xls:gap-[60px] dark:text-[#DEDEDE] '
+        : 'lg:gap-[35px] xl:gap-[55px] xls:gap-[75px] justify-center dark:text-[#DEDEDE]',
     ]"
   >
     <li>
-      <Navlink class="text-[11pt]" href="/"> Home </Navlink>
+      <Navlink class="text-[12pt] lg:text-[10pt] xl:text-[12pt]" href="/">
+        Home
+      </Navlink>
     </li>
 
     <!-- ABOUT MENU -->
@@ -52,7 +54,7 @@ onUnmounted(() => {
     >
       <!-- Trigger -->
       <span
-        class="relative inline-block text-animate-hover dark:dark-text-animate-hover hover:font-bold text-[11pt]"
+        class="relative inline-block text-animate-hover dark:dark-text-animate-hover hover:font-bold text-[12pt] lg:text-[10pt] xl:text-[12pt]"
       >
         About ▾
       </span>
@@ -87,7 +89,7 @@ onUnmounted(() => {
     >
       <!-- Trigger -->
       <span
-        class="relative inline-block text-animate-hover dark:dark-text-animate-hover hover:font-bold text-[11pt]"
+        class="relative inline-block text-animate-hover dark:dark-text-animate-hover hover:font-bold text-[12pt] lg:text-[10pt] xl:text-[12pt]"
       >
         Products ▾
       </span>
@@ -136,7 +138,7 @@ onUnmounted(() => {
     >
       <!-- Trigger -->
       <span
-        class="relative inline-block text-animate-hover dark:dark-text-animate-hover hover:font-bold text-[11pt]"
+        class="relative inline-block text-animate-hover dark:dark-text-animate-hover hover:font-bold text-[12pt] lg:text-[10pt] xl:text-[12pt]"
       >
         Technology ▾
       </span>
@@ -171,7 +173,7 @@ onUnmounted(() => {
     >
       <!-- Trigger -->
       <span
-        class="relative inline-block text-animate-hover dark:dark-text-animate-hover hover:font-bold text-[11pt]"
+        class="relative inline-block text-animate-hover dark:dark-text-animate-hover hover:font-bold text-[12pt] lg:text-[10pt] xl:text-[12pt]"
       >
         Solutions ▾
       </span>
@@ -234,13 +236,25 @@ onUnmounted(() => {
 
     <!-- Tambahan menu lainnya -->
     <li>
-      <Navlink class="text-[11pt]" href="/blogs"> Blogs </Navlink>
+      <Navlink class="text-[12pt] lg:text-[10pt] xl:text-[12pt]" href="/blogs">
+        Blogs
+      </Navlink>
     </li>
     <li>
-      <Navlink class="text-[11pt]" href="/services"> Services </Navlink>
+      <Navlink
+        class="text-[12pt] lg:text-[10pt] xl:text-[12pt]"
+        href="/services"
+      >
+        Services
+      </Navlink>
     </li>
     <li>
-      <Navlink class="text-[11pt]" href="/contact"> Contact </Navlink>
+      <Navlink
+        class="text-[12pt] lg:text-[10pt] xl:text-[12pt]"
+        href="/contact"
+      >
+        Contact
+      </Navlink>
     </li>
   </ul>
 </template>

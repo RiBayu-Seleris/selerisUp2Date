@@ -182,7 +182,7 @@ const isBlogDetail = computed(() => route.path.startsWith("/blog/"));
 
           <!-- Touch Section (kecuali di /blogs) -->
           <section
-            class="flex flex-col relative w-full mx-auto h-auto mt-32 px-8"
+            class="flex flex-col relative w-full mx-auto h-auto mt-32 px-8 xls:px-0"
             v-if="
               !['/blogs', '/blog/details', '/test-embed'].includes(
                 route.path
