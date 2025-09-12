@@ -99,7 +99,7 @@ const teams = [
         Leadership Team
       </p>
       <p
-        class="text-[14px] md:text-[18px] lg:text-[18px] xl:text-[20px] font-[400] tracking-wider lg:tracking-normal text-[#89A6BA] dark:text-[#6F6F6F] text-center"
+        class="text-[14px] md:text-[18px] lg:text-[18px] xl:text-[20px] px-10 sm:px-0 font-[400] tracking-wider lg:tracking-normal text-[#89A6BA] dark:text-[#6F6F6F] text-center"
       >
         <!-- Desktop -->
         <span class="hidden md:block">
@@ -117,7 +117,7 @@ const teams = [
         </span>
       </p>
     </div>
-    <div class="relative w-full h-auto flex flex-row mt-5 xl:mt-10">
+    <div class="relative w-full h-auto flex flex-row mt-10">
       <div
         class="hidden xl:flex absolute w-32 h-full bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-r dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% left-0 z-20"
       />

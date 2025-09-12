@@ -15,15 +15,15 @@ import Description from "@/components/Team/Description.vue";
     <TeamList />
   </section>
 
-  <section class="flex relative w-full h-auto sm:mt-48 md:mt-48 lg:mt-36">
+  <section class="flex relative w-full h-auto mt-24 sm:mt-32 md:mt-36 lg:mt-36">
     <DevelopmentTeam />
   </section>
 
-  <section class="flex relative w-full h-auto mt-10">
+  <section class="flex relative w-full h-auto mt-5 sm:mt-10">
     <PositionDescription />
   </section>
 
-  <section class="flex relative w-full h-auto mt-20 lg:mt-28 px-8 md:px-16">
+  <section class="flex relative w-full h-auto mt-20 lg:mt-28 px-8 lg:px-16">
     <Description />
   </section>
 </template>

@@ -4,7 +4,7 @@ import RobotProduct from "@/assets/images/robot-product.png";
 const positions = [
   {
     robot: RobotEngineering,
-    title: "Product Team",
+    title: "Product",
     subtitle:
       "Drives product vision, user experience, and continuous improvement.",
     description:
@@ -12,7 +12,7 @@ const positions = [
   },
   {
     robot: RobotProduct,
-    title: "Sales & Marketing Team",
+    title: "Sales & Marketing",
     subtitle:
       "Connects Seleris to the market through strategy and storytelling.",
     description:
@@ -20,10 +20,10 @@ const positions = [
   },
   {
     robot: RobotEngineering,
-    title: "Engineering Team",
+    title: "Engineering",
     subtitle: "Develops smart, scalable, and reliable AI-driven technology.",
     description:
-      "The engineering team is the backbone of Seleris’s technology. They are responsible for developing and maintaining our AI-powered platform with a focus on performance, scalability, and security. With deep technical expertise, the team continuously innovates to ensure our solutions stay ahead of industry needs and deliver real value to users.",
+      "The engineering team is the backbone of Seleris's technology, responsible for developing and maintaining our AI-powered platform with a focus on performance, scalability, and security, while continuously innovating to keep our solutions ahead of industry needs and delivering real value to users.",
   },
 ];
 </script>
@@ -37,49 +37,53 @@ const positions = [
       class="hidden xl:flex absolute w-32 h-full bg-gradient-to-l from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-l dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% right-0 z-20 rounded-l-2xl"
     />
     <div
-      class="relative flex flex-row py-2 w-full h-auto gap-x-8 md:gap-x-10 mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-10 pl-10 pr-10 md:scroll-pl-14 md:pl-14 md:pr-14 hide-scrollbar"
+      class="relative flex flex-row w-full h-auto gap-x-4 lg:gap-x-10 mt-5 overflow-x-auto snap-x snap-mandatory pl-8 pr-8 lg:pl-14 lg:pr-14 hide-scrollbar"
     >
       <div
         v-for="(position, index) in positions"
         :key="index"
-        class="snap-start shrink-0 sml:h-auto sml:w-[330px] md:w-[740px] md:h-[350px] lg:w-[740px] lg:h-[447px] xl:w-[740px] xl:h-[447px] rounded-[22px]"
+        class="snap-center shrink-0 h-auto w-full md:w-full lg:w-[740px] xl:w-[750px] rounded-[22px]"
       >
         <div
-          class="relative flex w-full h-full bg-[#FFFFFF] dark:bg-[#1D1F23] rounded-[22px] border-[#CFCFCF] border-[0.1px] dark:border-[#FAFAFA]/25 px-4 py-5"
+          class="relative flex w-full h-full bg-[#FFFFFF] dark:bg-[#1D1F23] rounded-[22px] border-[#CFCFCF] border-[0.1px] dark:border-[#FAFAFA]/25 px-6 pt-4 pb-6 lg:pb-8"
         >
-          <div class="flex flex-col w-full h-auto">
-            <div class="flex flex-col md:flex-row w-full h-auto md:gap-x-5">
+          <div class="flex flex-col w-full h-auto gap-y-4 lg:gap-y-6">
+            <div class="flex flex-row w-full h-auto gap-x-3.5">
               <div
-                class="flex w-full justify-center md:justify-start md:w-[20%] lg:w-[30%] h-[176px]"
+                class="flex h-auto justify-center md:justify-start w-[25%] sm:w-[20%] md:w-[20%] lg:w-[20%]"
               >
                 <img
                   :src="position.robot"
                   alt="Robot"
-                  class="w-[180px] h-[180px] md:w-full md:h-full object-contain object-bottom md:object-top"
+                  class="w-full h-full object-contain object-bottom sm:object-top"
                 />
               </div>
-              <div class="flex flex-col w-full md:w-[70%] h-auto gap-y-4 pt-5">
+              <div
+                class="flex flex-col w-[75%] sm:w-[60%] md:w-[80%] lg:w-[80%] h-auto gap-y-1 sm:gap-y-1 xl:gap-y-2 pt-3 sm:pt-4 lg:pt-5"
+              >
                 <div
-                  class="flex w-full h-[60px] md:h-auto justify-center items-center md:justify-start md:items-start"
+                  class="flex w-full h-[auto] sm:h-auto justify-start items-start"
                 >
                   <p
-                    class="text-[23px] md:text-[27px] lg:text-[32px] text-[#2AB857] font-[600] text-center"
+                    class="text-[14px] sm:text-[20px] md:text-[24px] lg:text-[24px] xl:text-[26px] text-[#2AB857] font-[500] text-center"
                   >
-                    {{ position.title }}
+                    {{ position.title }} Team
                   </p>
                 </div>
-                <div class="flex w-full h-auto justify-center md:justify-start">
+                <div
+                  class="flex w-full h-auto justify-start pr-0 sm:pr-8 md:pr-10 lg:pr-12"
+                >
                   <p
-                    class="text-[14px] md:text-[16px] text-[#89A6BA] dark:text-[#6F6F6F] text-center md:text-start"
+                    class="text-[10px] sm:text-[14px] md:text-[14px] lg:text-[16px] leading-relaxed sm:leading-normal md:leading-relaxed md:tracking-widest lg:tracking-wider text-[#89A6BA] font-[400] dark:text-[#6F6F6F] text-start"
                   >
                     {{ position.subtitle }}
                   </p>
                 </div>
               </div>
             </div>
-            <div class="flex w-full h-auto md:px-10 mt-5 md:mt-0 lg:mt-14">
+            <div class="flex w-full h-auto px-2 sm:px-6">
               <p
-                class="text-[14px] md:text-[16px] lg:text-[18px] text-[#195279] dark:text-[#FAFAFA] font-[400] text-center md:text-start"
+                class="text-[10px] sm:text-[14px] md:text-[14px] lg:text-[14px] xl:text-[16px] text-[#195279] dark:text-[#FAFAFA] leading-relaxed tracking-normal font-[400] text-justify"
               >
                 {{ position.description }}
               </p>
