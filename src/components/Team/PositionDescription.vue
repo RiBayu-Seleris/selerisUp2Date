@@ -1,9 +1,10 @@
 <script setup>
-import RobotEngineering from "@/assets/images/robot-engineering.svg";
+import RobotEngineering from "@/assets/images/robot-engineering.png";
 import RobotProduct from "@/assets/images/robot-product.png";
+import RobotSales from "@/assets/images/robot-sales.png";
 const positions = [
   {
-    robot: RobotEngineering,
+    robot: RobotProduct,
     title: "Product",
     subtitle:
       "Drives product vision, user experience, and continuous improvement.",
@@ -11,7 +12,7 @@ const positions = [
       "Our product team shapes the future of Seleris by defining product strategy, enhancing user experience, and translating feedback into meaningful features. Collaborating closely with users and stakeholders, they turn complex ideas into simple, intuitive, and high-impact solutions.",
   },
   {
-    robot: RobotProduct,
+    robot: RobotSales,
     title: "Sales & Marketing",
     subtitle:
       "Connects Seleris to the market through strategy and storytelling.",

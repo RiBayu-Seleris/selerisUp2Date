@@ -25,7 +25,7 @@ defineProps({
   <div
     :class="`hidden lg:block w-full h-auto ${bgImage} rounded-b-[3rem] pb-5`"
   >
-    <div class="flex flex-col w-full h-auto xl:px-10 lg:px-5">
+    <div class="flex flex-col w-full h-auto lg:px-5 xl:px-10">
       <div class="flex flex-col w-full h-auto lg:mt-8 xl:mt-20">
         <div class="flex w-full h-auto">
           <!-- Title -->

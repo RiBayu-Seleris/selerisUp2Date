@@ -18,7 +18,7 @@ defineProps({
 
 <template>
   <div
-    class="hidden lg:flex flex-row snap-start shrink-0 p-5 md:gap-x-5 w-[80%] h-[270px] md:w-[450px] md:h-[180px] lg:w-[50%] lg:h-[180px] rounded-xl bg-[#FFFFFF] dark:bg-[#1D1F23] border-[0.1px] dark:border-[#FAFAFA]/25"
+    class="hidden lg:flex flex-row snap-center shrink-0 p-5 md:gap-x-5 w-[80%] h-[270px] md:w-[450px] md:h-[180px] lg:w-[55%] lg:h-[180px] rounded-xl bg-[#FFFFFF] dark:bg-[#1D1F23] border-[0.1px] dark:border-[#FAFAFA]/25"
   >
     <div class="flex w-[30%] lg:w-[30%] h-auto">
       <img

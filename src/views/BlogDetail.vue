@@ -32,8 +32,6 @@ onMounted(() => {
   getPopularBlog();
 });
 
-const blogimage = "new-example.png";
-const blogimage2 = "example.png";
 // const articleRef = ref(null);
 const isAccountDropdown = ref(false);
 const isFocusedComment = ref(false);
@@ -177,14 +175,14 @@ const comments = [
           <!-- ref="articleRef" -->
           <article
             id="content"
-            class="w-full h-auto flex flex-col leading-relaxed text-[#535862] dark:text-[#DADADA] font-[400] space-y-6 lg:space-y-10 mt-5"
+            class="w-full bg-red-500 h-auto flex flex-col leading-relaxed text-[#535862] dark:text-[#DADADA] font-[400] space-y-6 lg:space-y-10 mt-5"
           >
-            <p>
+            <p class="break-words">
               {{ blogDetail.synopsis }}
             </p>
             <!-- Content Blog -->
             <div
-              class="prose prose-lg dark:prose-invert dark:prose-white text-[16px] font-[400] text-[#535862] dark:text-[#DADADA] prose-headings:my-2 prose-p:my-2 prose-ul:my-2 prose-ol:my-2"
+              class="bg-green-400 prose prose-lg max-w-none dark:prose-invert dark:prose-white text-[16px] font-[400] text-[#535862] dark:text-[#DADADA] prose-headings:my-2 prose-p:my-2 prose-ul:my-2 prose-ol:my-2 break-words"
               v-html="safeContent"
             ></div>
           </article>

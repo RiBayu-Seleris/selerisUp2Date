@@ -64,13 +64,18 @@ const copied = ref(false);
 
 const {
   blogs,
+  blogDetail,
   newestBlog,
   popularBlog,
   getAllBlogs,
+  getBlogBySlug,
   getNewestBlog,
   getPopularBlog,
   error,
   loading,
+  newestError,
+  popularError,
+  blogsError,
 } = blogsApi();
 
 // bikin URL lengkap berdasarkan slug
@@ -127,8 +132,6 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <!-- <div v-if="error">{{ error }}</div> -->
-  <!-- <div v-else> -->
   <section
     class="flex flex-col relative w-full h-auto lg:max-w-2xl mx-auto px-8 md:px-8 lg:px-0"
   >
@@ -232,32 +235,38 @@ onBeforeUnmount(() => {
       class="w-full h-auto flex flex-col lg:grid lg:grid-cols-12 gap-x-5 xl:gap-x-10 mt-10 px-8 md:px-8 lg:px-8 xl:px-0"
     >
       <!-- Newest Blog-->
-      <!-- dark:bg-gradient-to-tr dark:from-[#565656] from-0% dark:to-[#BCBCBC] -->
       <div
         class="w-full h-full col-span-12 lg:col-span-8 rounded-lg bg-[#D9D9D9] !p-[1px] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]"
       >
-        <div v-if="loading">Loading Data</div>
-        <div v-else-if="error">{{ error }}</div>
         <div
-          v-else
-          class="relative w-full h-full rounded-lg flex flex-col pb-5 lg:pb-0 bg-[#FAFAFA] dark:bg-[#1D1F23]"
+          class="relative w-full h-full rounded-lg flex flex-col gap-y-4 px-6 pb-5 lg:pb-0 bg-[#FAFAFA] dark:bg-[#1D1F23]"
         >
-          <router-link
-            :to="`/blog/${newestBlog.slug}`"
-            class="w-full h-full rounded-lg flex flex-col gap-y-4 px-6"
+          <div class="w-full h-auto pt-6">
+            <p
+              class="text-[#195279] dark:text-[#FAFAFA] font-[500] text-[22px] justify-center"
+            >
+              News
+            </p>
+          </div>
+          <!-- Loading -->
+          <div v-if="loading">Loading Data</div>
+          <!-- Error Global -->
+          <div v-else-if="error">{{ error }}</div>
+          <!-- newestError -->
+          <div v-else-if="newestError" class="lg:pb-4">
+            {{ newestError }}
+          </div>
+          <div
+            v-else-if="newestBlog"
+            class="relative w-full h-auto flex flex-col"
           >
-            <div class="w-full h-auto pt-6">
-              <p
-                class="text-[#195279] dark:text-[#FAFAFA] font-[500] lg:text-[22px] justify-center"
-              >
-                News
-              </p>
-            </div>
-
-            <div class="relative flex flex-col lg:pb-3">
-              <div class="w-full h-auto flex flex-col gap-y-4">
-                <div class="w-full h-[300px]">
-                  <figure class="w-full h-[300px]">
+            <router-link
+              :to="`/blog/${newestBlog.slug}`"
+              class="w-full h-full rounded-lg flex flex-col group"
+            >
+              <div class="relative flex flex-col">
+                <div class="w-full h-auto flex flex-col gap-y-4">
+                  <figure class="w-full lg:h-[340px]">
                     <!-- src="/assets/images/blog/new-example.png" -->
                     <img
                       :src="newestBlog.cover"
@@ -265,153 +274,164 @@ onBeforeUnmount(() => {
                       class="w-full h-full object-center object-fill rounded-[10px]"
                     />
                   </figure>
-                </div>
-                <div class="w-full h-auto flex flex-row justify-between">
-                  <div class="w-full h-auto flex justify-start items-center">
-                    <p
-                      class="text-[14px] text-[#6941C6] dark:text-[#2AB857] bg-[#7B61FF]/10 dark:bg-transparent px-4 py-1 dark:px-0 rounded-full"
-                    >
-                      {{ newestBlog.category_name }}
-                    </p>
-                  </div>
-                  <div class="w-full h-auto flex justify-end items-center">
-                    <p
-                      class="text-[14px] text-[#FFFFFF] bg-[#3758F9] px-2 py-1 rounded-md"
-                    >
-                      <!-- Mar 05, 2024 -->
-                      {{ utils.fromISODate(newestBlog.created_at) }}
-                    </p>
-                  </div>
-                </div>
-                <div class="w-full h-auto flex flex-col gap-y-2.5">
-                  <div class="w-full h-auto">
-                    <p
-                      class="text-[22px] text-[#111928] font-[500] dark:font-[600] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
-                    >
-                      {{ newestBlog.title }}
-                    </p>
-                  </div>
-                  <div class="w-full h-[90px]">
-                    <p
-                      class="text-[#637381] font-[400] break-words line-clamp-3"
-                    >
-                      {{ newestBlog.synopsis }}
-                    </p>
-                  </div>
-                  <div class="w-full h-auto">
-                    <p class="text-[#535862] dark:text-[#637381]">
-                      Author:
-                      <span class="font-[600]">{{
-                        newestBlog.author_name
-                      }}</span>
-                    </p>
-                  </div>
-                  <div class="w-auto flex flex-row gap-x-3 justify-start">
-                    <div class="flex flex-row justify-between gap-x-1">
-                      <div
-                        class="w-full h-auto text-[#6E6E6E] dark:text-[#637381]"
+                  <div class="w-full h-auto flex flex-row justify-between">
+                    <div class="w-full h-auto flex justify-start items-center">
+                      <p
+                        class="text-[14px] text-[#6941C6] dark:text-[#2AB857] bg-[#7B61FF]/10 dark:bg-transparent px-4 py-1 dark:px-0 rounded-full"
                       >
-                        <EyeIcon />
-                      </div>
-                      <div class="w-full h-auto">
-                        <span class="text-[#6E6E6E] dark:text-[#637381]">
-                          {{ utils.shortNumber(newestBlog.views) }}
-                        </span>
-                      </div>
+                        {{ newestBlog.category_name }}
+                      </p>
                     </div>
-                    <div class="flex flex-row justify-between gap-x-1">
-                      <div
-                        class="w-full h-auto text-[#6E6E6E] dark:text-[#637381]"
+                    <div class="w-full h-auto flex justify-end items-center">
+                      <p
+                        class="text-[14px] text-[#FFFFFF] bg-[#3758F9] px-2 py-1 rounded-md"
                       >
-                        <CommentIcon />
-                      </div>
-                      <div class="w-full h-auto">
-                        <span class="text-[#6E6E6E] dark:text-[#637381]">
-                          {{ newestBlog.comments }}
-                        </span>
-                      </div>
+                        <!-- Mar 05, 2024 -->
+                        {{ utils.fromISODate(newestBlog.created_at) }}
+                      </p>
+                    </div>
+                  </div>
+                  <div class="w-full h-auto flex flex-col gap-y-3">
+                    <div
+                      class="w-full h-auto transition-all duration-300 ease-in"
+                    >
+                      <p
+                        class="text-[22px] text-[#111928] group-hover:text-blue-500 group-hover:underline font-[500] dark:font-[600] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                      >
+                        {{ newestBlog.title }}
+                      </p>
+                    </div>
+                    <div class="w-full h-auto">
+                      <p
+                        class="text-[#637381] font-[400] break-words line-clamp-3 group-hover:text-blue-500 group-hover:underline"
+                      >
+                        {{ newestBlog.synopsis }}
+                      </p>
+                    </div>
+                    <div class="w-full h-auto">
+                      <p class="text-[#535862] dark:text-[#637381]">
+                        Author:
+                        <span class="font-[600]">{{
+                          newestBlog.author_name
+                        }}</span>
+                      </p>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </router-link>
-          <div
-            class="absolute left-[135px] z-20 bottom-5 lg:bottom-3 xl:bottom-3 w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer"
-            ref="buttonRef"
-            @click="toggleShare"
-          >
-            <ShareIcon />
-          </div>
-          <div
-            v-show="isShareOpen"
-            ref="menuRef"
-            class="absolute z-30 left-[58px] -bottom-[210px] md:-bottom-[210px] lg:-bottom-[220px] xl:-bottom-[220px] w-[180px] h-auto"
-          >
-            <div class="relative">
-              <img
-                src="@/assets/images/blog/share-frame2.svg"
-                alt=""
-                srcset=""
-                class="w-full h-auto object-cover relative"
-              />
-              <div
-                class="absolute w-full h-full top-3 px-5 flex flex-col gap-y-3 justify-center"
-              >
-                <div
-                  class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
-                  @click="copyLink(newestBlog.slug)"
-                >
-                  <div class="w-auto h-auto">
-                    <img
-                      src="@/assets/images/blog/copy-link.svg"
-                      alt=""
-                      srcset=""
-                    />
+            </router-link>
+            <div class="relative w-full h-auto flex flex-row my-4">
+              <div class="w-auto flex flex-row gap-x-3 justify-start">
+                <div class="flex flex-row justify-between gap-x-1">
+                  <div class="w-full h-auto text-[#6E6E6E] dark:text-[#637381]">
+                    <EyeIcon />
                   </div>
-                  <div class="w-[70%] h-auto flex items-center">Copy Link</div>
+                  <div class="w-full h-auto">
+                    <span class="text-[#6E6E6E] dark:text-[#637381]">
+                      {{ utils.shortNumber(newestBlog.views) }}
+                    </span>
+                  </div>
                 </div>
-                <div class="w-full h-[1px] bg-[#EBEBEB]" />
-                <div class="w-full h-auto flex flex-col gap-y-5 cursor-pointer">
-                  <!-- Linked In -->
-                  <div
-                    class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
-                  >
-                    <div class="w-auto h-auto">
-                      <img
-                        src="@/assets/images/blog/linkedin.png"
-                        alt=""
-                        srcset=""
-                      />
-                    </div>
-                    <div class="w-[70%] h-auto flex items-center">LinkedIn</div>
+                <div class="flex flex-row justify-between gap-x-1">
+                  <div class="w-full h-auto text-[#6E6E6E] dark:text-[#637381]">
+                    <CommentIcon />
                   </div>
-                  <!-- Facebook -->
-                  <div
-                    class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
-                  >
-                    <div class="w-auto h-auto">
-                      <img
-                        src="@/assets/images/blog/facebook.png"
-                        alt=""
-                        srcset=""
-                      />
-                    </div>
-                    <div class="w-[70%] h-auto flex items-center">Facebook</div>
+                  <div class="w-full h-auto">
+                    <span class="text-[#6E6E6E] dark:text-[#637381]">
+                      {{ newestBlog.comments }}
+                    </span>
                   </div>
-                  <!-- Twitter -->
+                </div>
+                <div class="relative flex w-full h-auto">
                   <div
-                    class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
+                    class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer"
+                    ref="buttonRef"
+                    @click="toggleShare"
                   >
-                    <div class="w-auto h-auto">
+                    <ShareIcon />
+                  </div>
+
+                  <div
+                    v-show="isShareOpen"
+                    ref="menuRef"
+                    class="absolute z-30 -left-[80px] -bottom-[210px] md:-bottom-[210px] lg:-bottom-[220px] xl:-bottom-[230px] w-[180px] h-auto"
+                  >
+                    <div class="relative">
                       <img
-                        src="@/assets/images/blog/twitter.png"
+                        src="@/assets/images/blog/share-frame2.svg"
                         alt=""
                         srcset=""
+                        class="w-full h-auto object-cover relative"
                       />
-                    </div>
-                    <div class="w-[70%] h-auto flex items-center">
-                      Twitter(X)
+                      <div
+                        class="absolute w-full h-full top-3 px-5 flex flex-col gap-y-3 justify-center"
+                      >
+                        <div
+                          class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
+                          @click="copyLink(newestBlog.slug)"
+                        >
+                          <div class="w-auto h-auto">
+                            <img
+                              src="@/assets/images/blog/copy-link.svg"
+                              alt=""
+                              srcset=""
+                            />
+                          </div>
+                          <div class="w-[70%] h-auto flex items-center">
+                            Copy Link
+                          </div>
+                        </div>
+                        <div class="w-full h-[1px] bg-[#EBEBEB]" />
+                        <div
+                          class="w-full h-auto flex flex-col gap-y-5 cursor-pointer"
+                        >
+                          <!-- Linked In -->
+                          <div
+                            class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
+                          >
+                            <div class="w-auto h-auto">
+                              <img
+                                src="@/assets/images/blog/linkedin.png"
+                                alt=""
+                                srcset=""
+                              />
+                            </div>
+                            <div class="w-[70%] h-auto flex items-center">
+                              LinkedIn
+                            </div>
+                          </div>
+                          <!-- Facebook -->
+                          <div
+                            class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
+                          >
+                            <div class="w-auto h-auto">
+                              <img
+                                src="@/assets/images/blog/facebook.png"
+                                alt=""
+                                srcset=""
+                              />
+                            </div>
+                            <div class="w-[70%] h-auto flex items-center">
+                              Facebook
+                            </div>
+                          </div>
+                          <!-- Twitter -->
+                          <div
+                            class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
+                          >
+                            <div class="w-auto h-auto">
+                              <img
+                                src="@/assets/images/blog/twitter.png"
+                                alt=""
+                                srcset=""
+                              />
+                            </div>
+                            <div class="w-[70%] h-auto flex items-center">
+                              Twitter(X)
+                            </div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -434,20 +454,26 @@ onBeforeUnmount(() => {
               Most Popular
             </p>
           </div>
+          <!-- Loading -->
           <div v-if="loading">Loading Data</div>
-          <div v-else-if="error" class="px-6">{{ error }}</div>
-          <div v-else class="flex flex-col w-full h-full mt-4">
+          <!-- Error Global -->
+          <div v-else-if="error">{{ error }}</div>
+          <!-- popularError -->
+          <div v-else-if="popularError" class="px-6 pt-4">
+            {{ popularError }}
+          </div>
+          <div v-else-if="popularBlog" class="flex flex-col w-full h-full mt-4">
             <!-- ✅ Hanya tampilkan gambar dari data pertama -->
             <router-link
               v-if="popularBlog.length > 0"
               :to="`/blog/${popularBlog[0].slug}`"
-              class="w-full h-[50%]"
+              class="w-full h-auto"
             >
               <figure class="w-full h-auto">
                 <img
                   :src="popularBlog[0].cover"
                   alt="cover"
-                  class="w-full h-[200px] object-cover"
+                  class="w-full h-[180px] object-fill"
                 />
               </figure>
             </router-link>
@@ -528,7 +554,6 @@ onBeforeUnmount(() => {
                   <img
                     :src="data.cover"
                     alt=""
-                    srcset=""
                     class="w-full h-full rounded-lg"
                   />
                 </div>
@@ -641,11 +666,11 @@ onBeforeUnmount(() => {
           <div
             class="flex flex-col w-full h-full p-4 rounded-[10px] bg-[#FAFAFA] dark:bg-[#1D1F23]"
           >
-            <div class="w-full h-[200px]">
+            <div class="w-full h-[180px]">
               <img
                 :src="data.cover"
                 alt="BlogImage"
-                class="w-full h-full object-cover rounded-[10px]"
+                class="w-full h-full object-fill rounded-[10px]"
               />
             </div>
             <div

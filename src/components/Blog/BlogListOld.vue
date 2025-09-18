@@ -13,7 +13,7 @@ import ShareIcon from "@/components/icons/Share.vue";
 import { useUtilsStore } from "@/stores/utils.js";
 import { useRoute } from "vue-router";
 
-const convertDate = useUtilsStore();
+const utils = useUtilsStore();
 const isOpenCategory = ref(false);
 const selectedCategory = ref("All Articles");
 const Categories = [
@@ -87,11 +87,21 @@ const copyLink = async (slug) => {
   }
 };
 
+const activeShareId = ref(null);
 const isShareOpen = ref(false);
 const menuRef = ref(null);
 const buttonRef = ref(null);
 const toggleShare = () => {
   isShareOpen.value = !isShareOpen.value;
+};
+const toggleShareBlogs = (id) => {
+  if (activeShareId.value === id) {
+    // kalau menu yang sama diklik → tutup
+    activeShareId.value = null;
+  } else {
+    // kalau menu lain diklik → ganti ke id itu
+    activeShareId.value = id;
+  }
 };
 const handleClickOutside = (event) => {
   if (
@@ -117,8 +127,6 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <!-- <div v-if="error">{{ error }}</div> -->
-  <!-- <div v-else> -->
   <section
     class="flex flex-col relative w-full h-auto lg:max-w-2xl mx-auto px-8 md:px-8 lg:px-0"
   >
@@ -222,12 +230,27 @@ onBeforeUnmount(() => {
       class="w-full h-auto flex flex-col lg:grid lg:grid-cols-12 gap-x-5 xl:gap-x-10 mt-10 px-8 md:px-8 lg:px-8 xl:px-0"
     >
       <!-- Newest Blog-->
-      <!-- dark:bg-gradient-to-tr dark:from-[#565656] from-0% dark:to-[#BCBCBC] -->
       <div
         class="w-full h-full col-span-12 lg:col-span-8 rounded-lg bg-[#D9D9D9] !p-[1px] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]"
       >
         <div v-if="loading">Loading Data</div>
-        <div v-else-if="error">{{ error }}</div>
+        <!-- <div v-else-if="error">{{ error }}</div> -->
+        <div v-else-if="!newestBlog">
+          <div
+            class="relative w-full h-full rounded-lg flex flex-col pb-5 lg:pb-0 bg-[#FAFAFA] dark:bg-[#1D1F23]"
+          >
+            <div class="w-full h-full rounded-lg flex flex-col gap-y-4 px-6">
+              <div class="w-full h-auto pt-6">
+                <p
+                  class="text-[#195279] dark:text-[#FAFAFA] font-[500] lg:text-[22px] justify-center"
+                >
+                  News
+                </p>
+              </div>
+              <p class="text-gray-500">Belum ada blog terbaru.</p>
+            </div>
+          </div>
+        </div>
         <div
           v-else
           class="relative w-full h-full rounded-lg flex flex-col pb-5 lg:pb-0 bg-[#FAFAFA] dark:bg-[#1D1F23]"
@@ -269,7 +292,7 @@ onBeforeUnmount(() => {
                       class="text-[14px] text-[#FFFFFF] bg-[#3758F9] px-2 py-1 rounded-md"
                     >
                       <!-- Mar 05, 2024 -->
-                      {{ convertDate.fromISODate(newestBlog.created_at) }}
+                      {{ utils.fromISODate(newestBlog.created_at) }}
                     </p>
                   </div>
                 </div>
@@ -305,7 +328,7 @@ onBeforeUnmount(() => {
                       </div>
                       <div class="w-full h-auto">
                         <span class="text-[#6E6E6E] dark:text-[#637381]">
-                          {{ newestBlog.views }}
+                          {{ utils.shortNumber(newestBlog.views) }}
                         </span>
                       </div>
                     </div>
@@ -333,23 +356,23 @@ onBeforeUnmount(() => {
           >
             <ShareIcon />
           </div>
-          <!-- v-show="isShareOpen"
-            ref="menuRef" -->
           <div
-            class="absolute z-20 left-[43px] -bottom-[210px] md:-bottom-[210px] lg:-bottom-[220px] xl:-bottom-[255px] w-[240px] h-auto"
+            v-show="isShareOpen"
+            ref="menuRef"
+            class="absolute z-30 left-[58px] -bottom-[210px] md:-bottom-[210px] lg:-bottom-[220px] xl:-bottom-[220px] w-[180px] h-auto"
           >
             <div class="relative">
               <img
-                src="@/assets/images/blog/share-frame.svg"
+                src="@/assets/images/blog/share-frame2.svg"
                 alt=""
                 srcset=""
                 class="w-full h-auto object-cover relative"
               />
               <div
-                class="absolute w-full h-full top-[70px] flex flex-col gap-y-4"
+                class="absolute w-full h-full top-3 px-5 flex flex-col gap-y-3 justify-center"
               >
                 <div
-                  class="w-full h-auto cursor-pointer flex flex-row gap-x-3 px-7"
+                  class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
                   @click="copyLink(newestBlog.slug)"
                 >
                   <div class="w-auto h-auto">
@@ -359,17 +382,13 @@ onBeforeUnmount(() => {
                       srcset=""
                     />
                   </div>
-                  <div class="w-[70%] h-auto flex items-center">
-                    <span class="text-[14px]">Copy Link</span>
-                  </div>
+                  <div class="w-[70%] h-auto flex items-center">Copy Link</div>
                 </div>
-                <div class="w-full h-auto px-7">
-                  <div class="w-full h-[1px] bg-[#EBEBEB]" />
-                </div>
+                <div class="w-full h-[1px] bg-[#EBEBEB]" />
                 <div class="w-full h-auto flex flex-col gap-y-5 cursor-pointer">
                   <!-- Linked In -->
                   <div
-                    class="w-full h-auto cursor-pointer flex flex-row gap-x-3 pl-7"
+                    class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
                   >
                     <div class="w-auto h-auto">
                       <img
@@ -378,13 +397,11 @@ onBeforeUnmount(() => {
                         srcset=""
                       />
                     </div>
-                    <div class="w-[70%] h-auto flex items-center">
-                      <span class="text-[14px]">Share On LinkedIn</span>
-                    </div>
+                    <div class="w-[70%] h-auto flex items-center">LinkedIn</div>
                   </div>
                   <!-- Facebook -->
                   <div
-                    class="w-full h-auto cursor-pointer flex flex-row gap-x-3 pl-7"
+                    class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
                   >
                     <div class="w-auto h-auto">
                       <img
@@ -393,13 +410,11 @@ onBeforeUnmount(() => {
                         srcset=""
                       />
                     </div>
-                    <div class="w-[70%] h-auto flex items-center">
-                      <span class="text-[14px]">Share On Facebook</span>
-                    </div>
+                    <div class="w-[70%] h-auto flex items-center">Facebook</div>
                   </div>
                   <!-- Twitter -->
                   <div
-                    class="w-full h-auto cursor-pointer flex flex-row gap-x-3 pl-7"
+                    class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
                   >
                     <div class="w-auto h-auto">
                       <img
@@ -409,7 +424,7 @@ onBeforeUnmount(() => {
                       />
                     </div>
                     <div class="w-[70%] h-auto flex items-center">
-                      <span class="text-[14px]">Share On X</span>
+                      Twitter(X)
                     </div>
                   </div>
                 </div>
@@ -474,7 +489,7 @@ onBeforeUnmount(() => {
                       </p>
                       <p class="text-[#B8B8B8] dark:text-[#6F6F6F] text-[12px]">
                         {{ data.author_name }} |
-                        {{ convertDate.fromISODate(data.created_at) }}
+                        {{ utils.fromISODate(data.created_at) }}
                       </p>
                     </div>
                   </div>
@@ -501,12 +516,16 @@ onBeforeUnmount(() => {
       <div
         class="relative flex flex-row w-full h-auto sm:gap-x-4 md:gap-x-8 overflow-x-auto snap-x snap-mandatory mt-3 pb-10 pl-8 pr-8 hide-scrollbar"
       >
-        <template v-for="(data, index) in popularBlog" :key="index">
+        <div v-if="loading">Loading Data</div>
+        <div v-else-if="error" class="px-6">{{ error }}</div>
+        <div
+          v-else
+          v-for="(data, index) in popularBlog"
+          :key="index"
+          class="snap-center shrink-0 relative w-full md:w-[650px] h-[200px] cursor-default shadow-md rounded-lg bg-white !p-[1px] dark:bg-gradient-to-bl dark:from-[#17181A] dark:from-25% dark:to-[#565656]"
+        >
           <!-- Card -->
-          <router-link
-            :to="`/blog/${data.slug}`"
-            class="snap-center shrink-0 relative w-full md:w-[650px] h-[200px] cursor-default shadow-md rounded-lg bg-white !p-[1px] dark:bg-gradient-to-bl dark:from-[#17181A] dark:from-25% dark:to-[#565656]"
-          >
+          <router-link :to="`/blog/${data.slug}`">
             <div
               class="relative h-full w-full p-4 cursor-default shadow-md rounded-lg bg-white dark:bg-[#1D1F23]"
             >
@@ -558,30 +577,12 @@ onBeforeUnmount(() => {
                         class="text-[12px] md:text-[14px] text-[#535862] dark:text-[#6F6F6F]"
                       >
                         <span class="font-[600]">{{ data.author_name }}</span> |
-                        {{ convertDate.fromISODate(data.created_at) }}
+                        {{ utils.fromISODate(data.created_at) }}
                       </p>
                     </div>
                     <div
-                      class="relative w-full items-center flex flex-row justify-end gap-x-2.5"
+                      class="relative w-full items-center flex flex-row justify-end gap-x-2.5 pr-0"
                     >
-                      <div
-                        class="flex flex-row justify-between gap-x-0.5 items-center"
-                      >
-                        <div
-                          class="w-full h-auto text-[#6E6E6E] dark:text-[#6E6E6E]"
-                        >
-                          <EyeIcon
-                            class="sm:w-[16px] sm:h-[16px] md:w-[18px] md:h-[18px]"
-                          />
-                        </div>
-                        <div class="w-full h-auto">
-                          <span
-                            class="sm:text-[12px] md:text-[14px] text-[#6E6E6E] dark:text-[#6E6E6E]"
-                          >
-                            {{ newestBlog.views }}
-                          </span>
-                        </div>
-                      </div>
                       <div
                         class="flex flex-row justify-between gap-x-0.5 items-center"
                       >
@@ -596,16 +597,27 @@ onBeforeUnmount(() => {
                           <span
                             class="sm:text-[12px] md:text-[14px] text-[#6E6E6E] dark:text-[#6E6E6E]"
                           >
-                            {{ newestBlog.comments }}
+                            {{ data.comments }}
                           </span>
                         </div>
                       </div>
                       <div
-                        class="flex w-auto h-auto text-[#6E6E6E] dark:text-[#6E6E6E] items-center"
+                        class="flex flex-row justify-between gap-x-0.5 items-center"
                       >
-                        <ShareIcon
-                          class="sm:w-[16px] sm:h-[16px] md:w-[18px] md:h-[18px]"
-                        />
+                        <div
+                          class="w-full h-auto text-[#6E6E6E] dark:text-[#6E6E6E]"
+                        >
+                          <EyeIcon
+                            class="sm:w-[16px] sm:h-[16px] md:w-[18px] md:h-[18px]"
+                          />
+                        </div>
+                        <div class="w-full h-auto">
+                          <span
+                            class="sm:text-[12px] md:text-[14px] text-[#6E6E6E] dark:text-[#6E6E6E]"
+                          >
+                            {{ utils.shortNumber(data.views) }}
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -613,90 +625,179 @@ onBeforeUnmount(() => {
               </div>
             </div>
           </router-link>
-        </template>
+          <!-- Share button -->
+          <div
+            class="absolute right-[100px] z-20 bottom-[19px] lg:bottom-3 xl:bottom-3 w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer"
+            ref="buttonRef"
+            @click="toggleShare"
+          >
+            <ShareIcon
+              class="sm:w-[16px] sm:h-[16px] md:w-[18px] md:h-[18px]"
+            />
+          </div>
+        </div>
       </div>
     </div>
     <!-- BlogList -->
     <section
-      class="w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-5 mb-20 px-8 md:px-8 xl:px-0"
+      class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-5 mb-20 px-8 md:px-8 xl:px-0"
     >
-      <router-link
-        :to="`/blog/${data.slug}`"
+      <div v-if="loading">Loading Data</div>
+      <div v-else-if="error" class="px-6">{{ error }}</div>
+      <div
+        v-else
         v-for="(data, index) in blogs"
         :key="index"
-        class="w-full h-full !p-[1px] rounded-[10px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-35% dark:to-[#565656]"
+        class="relative w-full h-full !p-[1px] rounded-[10px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-35% dark:to-[#565656]"
       >
-        <div
-          class="flex flex-col w-full h-full p-3 rounded-[10px] bg-[#FAFAFA] dark:bg-[#1D1F23]"
-        >
-          <div class="w-full h-[200px]">
-            <img
-              :src="data.cover"
-              alt="BlogImage"
-              class="w-full h-full object-cover rounded-[10px]"
-            />
-          </div>
+        <router-link :to="`/blog/${data.slug}`" class="w-full h-full">
           <div
-            class="flex flex-row w-full h-auto justify-between text-sm text-[#7A7A7A] my-5"
+            class="flex flex-col w-full h-full p-4 rounded-[10px] bg-[#FAFAFA] dark:bg-[#1D1F23]"
           >
+            <div class="w-full h-[200px]">
+              <img
+                :src="data.cover"
+                alt="BlogImage"
+                class="w-full h-full object-cover rounded-[10px]"
+              />
+            </div>
             <div
-              class="flex items-center bg-[#7B61FF]/10 dark:bg-transparent px-4 dark:px-0 rounded-[16px]"
+              class="flex flex-row w-full h-auto justify-between text-sm text-[#7A7A7A] my-5"
             >
-              <p
-                class="md:text-[14px] lg:text-[14px] text-[#7B61FF] dark:text-[#FFFFFF] font-semibold"
+              <div
+                class="flex items-center bg-[#7B61FF]/10 dark:bg-transparent px-4 dark:px-0 rounded-[16px]"
               >
-                {{ data.category_name }}
+                <p
+                  class="md:text-[14px] lg:text-[14px] text-[#7B61FF] dark:text-[#FFFFFF] font-semibold"
+                >
+                  {{ data.category_name }}
+                </p>
+              </div>
+              <div
+                class="flex items-center bg-[#3758F9] px-5 py-1 rounded-[5px]"
+              >
+                <p class="text-[#FFFFFF] md:text-[12px] lg:text-[14px]">
+                  {{ utils.fromISODate(data.created_at) }}
+                </p>
+              </div>
+            </div>
+            <div class="flex w-full h-[65px] lg:h-[65px] text-left">
+              <p
+                class="md:text-[16px] lg:text-[18px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+              >
+                {{ data.title }}
               </p>
             </div>
-            <div class="flex items-center bg-[#3758F9] px-5 py-1 rounded-[5px]">
-              <p class="text-[#FFFFFF] md:text-[12px] lg:text-[14px]">
-                {{ convertDate.fromISODate(data.created_at) }}
+            <div class="flex w-full h-[70px] justify-start items-start">
+              <p class="text-[#637381] line-clamp-2 lg:text-[14px]">
+                {{ data.synopsis }}
               </p>
             </div>
-          </div>
-          <div class="flex w-full h-[65px] lg:h-[65px] text-left">
-            <p
-              class="md:text-[16px] lg:text-[18px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
-            >
-              {{ data.title }}
-            </p>
-          </div>
-          <div class="flex w-full h-[70px] justify-start items-start">
-            <p class="text-[#637381] line-clamp-2 lg:text-[14px]">
-              {{ data.synopsis }}
-            </p>
-          </div>
-          <div class="flex flex-row justify-between w-full h-auto">
-            <div class="w-[90%] h-auto">
-              <div class="flex flex-row gap-x-3">
-                <div class="flex flex-row justify-between gap-x-1">
-                  <div class="w-full h-auto text-[#6E6E6E] dark:text-[#637381]">
-                    <EyeIcon />
+            <div class="flex flex-row justify-between w-full h-auto">
+              <div class="w-full h-auto">
+                <div class="flex flex-row gap-x-3">
+                  <div class="w-auto flex flex-row">
+                    <div
+                      class="w-full h-auto text-[#6E6E6E] dark:text-[#637381]"
+                    >
+                      <EyeIcon />
+                    </div>
+                    <div class="w-full h-auto pl-1">
+                      <span class="text-[#6E6E6E] dark:text-[#637381]">
+                        {{ utils.shortNumber(data.views) }}
+                      </span>
+                    </div>
                   </div>
-                  <div class="w-full h-auto">
-                    <span class="text-[#6E6E6E] dark:text-[#637381]">
-                      {{ data.views }}
-                    </span>
-                  </div>
-                </div>
-                <div class="flex flex-row justify-between gap-x-1">
-                  <div class="w-full h-auto text-[#6E6E6E] dark:text-[#637381]">
-                    <CommentIcon />
-                  </div>
-                  <div class="w-full h-auto">
-                    <span class="text-[#6E6E6E] dark:text-[#637381]">
-                      {{ data.comments }}
-                    </span>
+                  <div class="w-auto flex flex-row">
+                    <div
+                      class="w-full h-auto text-[#6E6E6E] dark:text-[#637381]"
+                    >
+                      <CommentIcon />
+                    </div>
+                    <div class="w-full h-auto pl-1">
+                      <span class="text-[#6E6E6E] dark:text-[#637381]">
+                        {{ data.comments }}
+                      </span>
+                    </div>
                   </div>
                 </div>
               </div>
             </div>
-            <div class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381]">
-              <ShareIcon />
+          </div>
+        </router-link>
+        <div
+          class="absolute left-[130px] bottom-4 w-auto h-auto text-[#6E6E6E] dark:text-[#637381]"
+        >
+          <ShareIcon />
+        </div>
+        <div
+          v-show="isShareOpen"
+          ref="menuRef"
+          class="absolute z-30 right-[0px] -bottom-[210px] md:-bottom-[210px] lg:-bottom-[220px] xl:-bottom-[220px] w-[180px] h-auto bg-green-500"
+        >
+          <div class="relative">
+            <img
+              src="@/assets/images/blog/share-frame2.svg"
+              alt=""
+              srcset=""
+              class="w-full h-auto object-cover relative"
+            />
+            <div
+              class="absolute w-full h-full top-3 px-5 flex flex-col gap-y-3 justify-center"
+            >
+              <div
+                class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
+                @click="copyLink(data.slug)"
+              >
+                <div class="w-auto h-auto">
+                  <img
+                    src="@/assets/images/blog/copy-link.svg"
+                    alt=""
+                    srcset=""
+                  />
+                </div>
+                <div class="w-[70%] h-auto flex items-center">Copy Link</div>
+              </div>
+              <div class="w-full h-[1px] bg-[#EBEBEB]" />
+              <div class="w-full h-auto flex flex-col gap-y-5 cursor-pointer">
+                <!-- Linked In -->
+                <div class="w-full h-auto cursor-pointer flex flex-row gap-x-3">
+                  <div class="w-auto h-auto">
+                    <img
+                      src="@/assets/images/blog/linkedin.png"
+                      alt=""
+                      srcset=""
+                    />
+                  </div>
+                  <div class="w-[70%] h-auto flex items-center">LinkedIn</div>
+                </div>
+                <!-- Facebook -->
+                <div class="w-full h-auto cursor-pointer flex flex-row gap-x-3">
+                  <div class="w-auto h-auto">
+                    <img
+                      src="@/assets/images/blog/facebook.png"
+                      alt=""
+                      srcset=""
+                    />
+                  </div>
+                  <div class="w-[70%] h-auto flex items-center">Facebook</div>
+                </div>
+                <!-- Twitter -->
+                <div class="w-full h-auto cursor-pointer flex flex-row gap-x-3">
+                  <div class="w-auto h-auto">
+                    <img
+                      src="@/assets/images/blog/twitter.png"
+                      alt=""
+                      srcset=""
+                    />
+                  </div>
+                  <div class="w-[70%] h-auto flex items-center">Twitter(X)</div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-      </router-link>
+      </div>
     </section>
     <!-- </div> -->
   </div>

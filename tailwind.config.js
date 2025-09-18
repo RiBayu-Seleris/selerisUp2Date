@@ -21,7 +21,7 @@ module.exports = {
 
       // Extra Large
       xls: { raw: "(min-width: 1440px)" },
-      // "2xls": { raw: "(min-width: 2560px)" },
+      "2xls": { raw: "(min-width: 2560px)" },
       // xls: { raw: "(min-width: 1440px) and (max-width: 1535px)" },
       // "2xl": { raw: "(min-width: 1536px) and (max-width: 2559px)" },
       // "3xl": { raw: "(min-width: 2560px)" },

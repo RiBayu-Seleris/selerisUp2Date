@@ -107,21 +107,12 @@ export function blogsApi() {
 
       newestBlog.value = data;
     } catch (err) {
-      // error dari API
-      if (err.response) {
-        // Error Global
-        handleError(err);
+      // Error Global
+      handleError(err);
 
-        // Popular Error
-        newestError.value =
-          err.response?.data?.message ||
-          "Terjadi kesalahan saat memuat blog terbaru";
-      } else {
-        // runtime error (typo, bug kode, dll)
-        console.error("Runtime Error:", err);
-        newestError.value = "Kesalahan internal aplikasi. Cek console.";
-      }
-      newestBlog.value = null;
+      // Error khusus Newest
+      newestError.value =
+        err.response?.data?.message || "Gagal memuat blog terbaru";
     } finally {
       stopLoading();
     }
@@ -131,7 +122,7 @@ export function blogsApi() {
   const getPopularBlog = async () => {
     startLoading();
     try {
-      const res = await axios.get(
+      const ress = await axios.get(
         `${BASE_URL}/api/v1/app/blogs/popular`,
         headerApi
       );
@@ -152,22 +143,13 @@ export function blogsApi() {
 
       // Sukses dan ada data
       popularError.value = null;
-      popularBlog.value = res.data.data;
+      popularBlog.value = response.data.data;
     } catch (err) {
-      // error dari API
-      if (err.response) {
-        // Error Global
-        handleError(err);
+      // Error Global
+      handleError(err);
 
-        // Popular Error
-        popularError.value =
-          err.response?.data?.message ||
-          "Terjadi kesalahan saat memuat popular blog";
-      } else {
-        // runtime error (typo, bug kode, dll)
-        console.error("Runtime Error:", err);
-        popularError.value = "Kesalahan internal aplikasi. Cek console.";
-      }
+      // Popular Error
+      popularError.value = err.response?.data?.message || err.message;
       popularBlog.value = null;
     } finally {
       stopLoading();
