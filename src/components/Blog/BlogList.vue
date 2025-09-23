@@ -266,7 +266,7 @@ onBeforeUnmount(() => {
             >
               <div class="relative flex flex-col">
                 <div class="w-full h-auto flex flex-col gap-y-4">
-                  <figure class="w-full lg:h-[340px]">
+                  <figure class="w-full h-auto lg:h-[340px]">
                     <!-- src="/assets/images/blog/new-example.png" -->
                     <img
                       :src="newestBlog.cover"
@@ -277,14 +277,14 @@ onBeforeUnmount(() => {
                   <div class="w-full h-auto flex flex-row justify-between">
                     <div class="w-full h-auto flex justify-start items-center">
                       <p
-                        class="text-[14px] text-[#6941C6] dark:text-[#2AB857] bg-[#7B61FF]/10 dark:bg-transparent px-4 py-1 dark:px-0 rounded-full"
+                        class="text-[12px] sm:text-[14px] text-[#6941C6] dark:text-[#2AB857] bg-[#7B61FF]/10 dark:bg-transparent px-4 py-1 dark:px-0 rounded-full"
                       >
                         {{ newestBlog.category_name }}
                       </p>
                     </div>
                     <div class="w-full h-auto flex justify-end items-center">
                       <p
-                        class="text-[14px] text-[#FFFFFF] bg-[#3758F9] px-2 py-1 rounded-md"
+                        class="text-[12px] sm:text-[14px] text-[#FFFFFF] bg-[#3758F9] px-2 py-1 rounded-md"
                       >
                         <!-- Mar 05, 2024 -->
                         {{ utils.fromISODate(newestBlog.created_at) }}
@@ -296,20 +296,22 @@ onBeforeUnmount(() => {
                       class="w-full h-auto transition-all duration-300 ease-in"
                     >
                       <p
-                        class="text-[22px] text-[#111928] group-hover:text-blue-500 group-hover:underline font-[500] dark:font-[600] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                        class="text-[16px] sm:text-[16px] lg:text-[20px] text-[#111928] lg:group-hover:text-blue-500 lg:group-hover:underline font-[500] dark:font-[600] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                       >
                         {{ newestBlog.title }}
                       </p>
                     </div>
                     <div class="w-full h-auto">
                       <p
-                        class="text-[#637381] font-[400] break-words line-clamp-3 group-hover:text-blue-500 group-hover:underline"
+                        class="text-[14px] lg:text-[16px] text-[#637381] font-[400] break-words line-clamp-3 lg:group-hover:text-blue-500 lg:group-hover:underline"
                       >
                         {{ newestBlog.synopsis }}
                       </p>
                     </div>
                     <div class="w-full h-auto">
-                      <p class="text-[#535862] dark:text-[#637381]">
+                      <p
+                        class="text-[14px] sm:text-[16px] text-[#535862] dark:text-[#637381]"
+                      >
                         Author:
                         <span class="font-[600]">{{
                           newestBlog.author_name
@@ -320,7 +322,7 @@ onBeforeUnmount(() => {
                 </div>
               </div>
             </router-link>
-            <div class="relative w-full h-auto flex flex-row my-4">
+            <div class="relative w-full h-auto flex flex-row mt-4 mb-0 lg:mb-4">
               <div class="w-auto flex flex-row gap-x-3 justify-start">
                 <div class="flex flex-row justify-between gap-x-1">
                   <div class="w-full h-auto text-[#6E6E6E] dark:text-[#637381]">
@@ -527,7 +529,7 @@ onBeforeUnmount(() => {
         </p>
       </div>
       <div
-        class="relative flex flex-row w-full h-auto sm:gap-x-4 md:gap-x-8 overflow-x-auto snap-x snap-mandatory mt-3 pb-10 pl-8 pr-8 hide-scrollbar"
+        class="relative flex flex-row w-full h-auto gap-x-4 sm:gap-x-4 md:gap-x-8 overflow-x-auto snap-x snap-mandatory mt-3 pb-10 pl-8 pr-8 hide-scrollbar"
       >
         <div v-if="loading">Loading Data</div>
         <div v-else-if="error" class="px-6">{{ error }}</div>
@@ -535,7 +537,8 @@ onBeforeUnmount(() => {
           v-else
           v-for="(data, index) in popularBlog"
           :key="index"
-          class="snap-center shrink-0 relative w-full md:w-[650px] h-[200px] cursor-default shadow-md rounded-lg bg-white !p-[1px] dark:bg-gradient-to-bl dark:from-[#17181A] dark:from-25% dark:to-[#565656]"
+          class="snap-center shrink-0 relative cursor-default h-auto shadow-md rounded-lg bg-white !p-[1px] dark:bg-gradient-to-bl dark:from-[#17181A] dark:from-25% dark:to-[#565656]"
+          :class="popularBlog.length === 1 ? 'w-full' : 'w-full md:w-[650px]'"
         >
           <!-- Card -->
           <router-link :to="`/blog/${data.slug}`">
@@ -558,32 +561,34 @@ onBeforeUnmount(() => {
                   />
                 </div>
                 <div
-                  class="w-[60%] h-full flex flex-col items-start gap-y-2 rounded-lg justify-between"
+                  class="w-[60%] sm:h-full flex flex-col items-start gap-y-4 rounded-lg justify-between"
                 >
                   <div class="w-full h-[20%] flex items-center">
                     <p
-                      class="sm:text-[12px] md:text-[14px] text-[#6941C6] dark:text-[#2AB857] bg-[#7B61FF]/10 dark:bg-transparent px-4 dark:px-0 rounded-full w-auto h-full flex items-center"
+                      class="text-[12px] sm:text-[12px] md:text-[14px] text-[#6941C6] dark:text-[#2AB857] bg-[#7B61FF]/10 dark:bg-transparent px-4 dark:px-0 rounded-full w-auto h-full flex items-center"
                     >
                       {{ data.category_name }}
                     </p>
                   </div>
-                  <div class="w-full h-full flex flex-col items-center gap-y-1">
-                    <div class="w-full h-full flex items-center">
+                  <div class="w-full h-full flex flex-col items-center gap-y-3">
+                    <div class="w-full sm:h-full flex items-center">
                       <p
-                        class="text-[14px] md:text-[16px] text-[#111928] font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                        class="text-[14px] lg:text-[16px] text-[#111928] leading-tight font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                       >
                         {{ data.title }}
                       </p>
                     </div>
                     <div class="w-full h-full flex items-start">
                       <p
-                        class="text-[12px] md:text-[12px] leading-tight line-clamp-3 text-[#637381]"
+                        class="text-[12px] md:text-[12px] leading-tight line-clamp-2 lg:line-clamp-3 text-[#637381]"
                       >
                         {{ data.synopsis }}
                       </p>
                     </div>
                   </div>
-                  <div class="w-full h-[15%] flex flex-row items-center">
+                  <div
+                    class="hidden w-full h-[15%] sm:flex flex-row items-center"
+                  >
                     <div class="w-full">
                       <p
                         class="text-[12px] md:text-[14px] text-[#535862] dark:text-[#6F6F6F]"
@@ -592,7 +597,7 @@ onBeforeUnmount(() => {
                         {{ utils.fromISODate(data.created_at) }}
                       </p>
                     </div>
-                    <div
+                    <!-- <div
                       class="relative w-full items-center flex flex-row justify-end gap-x-2.5 pr-0"
                     >
                       <div
@@ -631,14 +636,14 @@ onBeforeUnmount(() => {
                           </span>
                         </div>
                       </div>
-                    </div>
+                    </div> -->
                   </div>
                 </div>
               </div>
             </div>
           </router-link>
           <!-- Share button -->
-          <div
+          <!-- <div
             class="absolute right-[100px] z-20 bottom-[19px] lg:bottom-3 xl:bottom-3 w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer"
             ref="buttonRef"
             @click="toggleShare"
@@ -646,7 +651,7 @@ onBeforeUnmount(() => {
             <ShareIcon
               class="sm:w-[16px] sm:h-[16px] md:w-[18px] md:h-[18px]"
             />
-          </div>
+          </div> -->
         </div>
       </div>
     </div>
@@ -666,7 +671,7 @@ onBeforeUnmount(() => {
           <div
             class="flex flex-col w-full h-full p-4 rounded-[10px] bg-[#FAFAFA] dark:bg-[#1D1F23]"
           >
-            <div class="w-full h-[180px]">
+            <div class="w-full h-[140px] lg:h-[180px]">
               <img
                 :src="data.cover"
                 alt="BlogImage"
@@ -693,15 +698,17 @@ onBeforeUnmount(() => {
                 </p>
               </div>
             </div>
-            <div class="flex w-full h-[65px] lg:h-[65px] text-left">
+            <div class="flex w-full h-[55px] md:h-[65px] lg:h-[65px] text-left">
               <p
-                class="md:text-[16px] lg:text-[18px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                class="sm:text-[14px] md:text-[16px] lg:text-[18px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
               >
                 {{ data.title }}
               </p>
             </div>
             <div class="flex w-full h-[70px] justify-start items-start">
-              <p class="text-[#637381] line-clamp-2 lg:text-[14px]">
+              <p
+                class="text-[12px] lg:text-[14px] text-[#637381] line-clamp-3 lg:line-clamp-2"
+              >
                 {{ data.synopsis }}
               </p>
             </div>

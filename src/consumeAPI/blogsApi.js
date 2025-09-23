@@ -14,10 +14,10 @@ export function blogsApi() {
   const blogs = ref([]);
   const newestBlog = ref([]);
   const popularBlog = ref([]);
-
   const blogDetail = ref(null);
 
   // Error Per Section
+  const blogDetailError = ref(null);
   const newestError = ref(null);
   const popularError = ref(null);
   const blogsError = ref(null);
@@ -64,9 +64,9 @@ export function blogsApi() {
   // Function get blog detail by slug
   const getBlogBySlug = async (slug) => {
     startLoading();
-    error.value = null;
+    blogDetailError.value = null;
+    error.value = null; //Reset Error Global
 
-    // console.log("Slug yang dikirim:", slug);
     try {
       const response = await axios.get(
         `${BASE_URL}/api/v1/app/blogs/${slug}`,
@@ -75,13 +75,21 @@ export function blogsApi() {
 
       blogDetail.value = response.data?.data || null;
     } catch (err) {
-      if (err.response && err.response.status === 404) {
-        // Kalau 404, jangan console.error, langsung kasih nilai null atau pesan sendiri
-        blogDetail.value = null;
-        error.value = "Blog tidak ditemukan.";
-      } else {
+      // error dari API
+      if (err.response) {
+        // Error Global
         handleError(err);
+
+        // Popular Error
+        blogDetailError.value =
+          err.response?.data?.message ||
+          "Terjadi kesalahan saat memuat blog terbaru";
+      } else {
+        // runtime error (typo, bug kode, dll)
+        console.error("Runtime Error:", err);
+        blogDetailError.value = "Kesalahan internal aplikasi. Cek console.";
       }
+      blogDetail.value = null;
     } finally {
       stopLoading();
     }
@@ -130,6 +138,8 @@ export function blogsApi() {
   // get Popular Blog
   const getPopularBlog = async () => {
     startLoading();
+    popularError.value = null;
+    error.value = null; //Reset Error Global
     try {
       const res = await axios.get(
         `${BASE_URL}/api/v1/app/blogs/popular`,
@@ -188,5 +198,6 @@ export function blogsApi() {
     newestError,
     popularError,
     blogsError,
+    blogDetailError,
   };
 }
