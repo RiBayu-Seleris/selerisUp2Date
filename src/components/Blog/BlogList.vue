@@ -296,14 +296,14 @@ onBeforeUnmount(() => {
                       class="w-full h-auto transition-all duration-300 ease-in"
                     >
                       <p
-                        class="text-[16px] sm:text-[16px] lg:text-[20px] text-[#111928] lg:group-hover:text-blue-500 lg:group-hover:underline font-[500] dark:font-[600] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                        class="text-[16px] sm:text-[16px] lg:text-[20px] text-[#111928] font-[500] dark:font-[600] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                       >
                         {{ newestBlog.title }}
                       </p>
                     </div>
                     <div class="w-full h-auto">
                       <p
-                        class="text-[14px] lg:text-[16px] text-[#637381] font-[400] break-words line-clamp-3 lg:group-hover:text-blue-500 lg:group-hover:underline"
+                        class="text-[14px] lg:text-[16px] text-[#637381] font-[400] break-words line-clamp-3"
                       >
                         {{ newestBlog.synopsis }}
                       </p>

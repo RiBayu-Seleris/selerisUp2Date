@@ -47,7 +47,7 @@ defineProps({
 
   <!-- Mobile Smalls -->
   <div
-    class="flex flex-col lg:hidden snap-start shrink-0 w-full sm:w-[60%] md:w-[60%] h-auto rounded-xl px-5 py-5 sm:py-2 shadow-lg dark:bg-[#1D1F23] border-[0.1px] dark:border-[#FAFAFA]/25 space-y-2 sm:space-y-2"
+    class="flex flex-col lg:hidden snap-center shrink-0 w-full sm:w-[60%] md:w-[60%] h-auto rounded-xl px-5 py-5 sm:py-2 shadow-lg dark:bg-[#1D1F23] border-[0.1px] dark:border-[#FAFAFA]/25 space-y-2 sm:space-y-2"
   >
     <div class="flex flex-row">
       <div class="flex w-[40%] h-auto">

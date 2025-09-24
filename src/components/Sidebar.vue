@@ -43,7 +43,7 @@ const handleTechnology = () => {
       class="fixed inset-0 z-50 flex flex-col transition-all duration-300 overflow-y-auto"
     >
       <!-- Overlay -->
-      <div class="absolute inset-0 bg-black/50" @click="sidebar.close"></div>
+      <div class="absolute inset-0 bg-black/50"></div>
 
       <!-- Sidebar -->
       <transition name="slide">

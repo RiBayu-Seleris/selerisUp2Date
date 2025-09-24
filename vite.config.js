@@ -7,7 +7,9 @@ import vueDevTools from "vite-plugin-vue-devtools";
 
 export default defineConfig({
   server: {
-    allowedHosts: ["5ef17f87068e.ngrok-free.app"],
+    host: "0.0.0.0", // supaya bisa diakses dari jaringan lain
+    port: 5500, // sama dengan Live Server
+    strictPort: true, // paksa pakai port ini, error kalau sudah dipakai
   },
   plugins: [
     vue(),

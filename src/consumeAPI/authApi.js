@@ -36,22 +36,21 @@ const handleError = (err) => {
 };
 
 // Fungsi Login
-export const login = async (email, password) => {
+export const login = async (payload) => {
   loading.value = true;
   error.value = null;
   try {
     const res = await axios.post(
       `${BASE_URL}/api/v1/auth/login`,
-      { email, password },
+      payload,
       headerApi
     );
 
     // simpan token
     if (res.data?.data?.token) {
       token.value = res.data.data.token;
-      user.value = res.data.data.user || null;
+      user.value = res.data.data || null;
       localStorage.setItem("token", token.value);
-      localStorage.setItem("loginStatus", "true");
     }
 
     return res.data;
@@ -60,4 +59,29 @@ export const login = async (email, password) => {
   } finally {
     loading.value = false;
   }
+};
+
+export const register = async (payload) => {
+  loading.value = true;
+  error.value = null;
+
+  try {
+    const res = await axios.post(
+      `${BASE_URL}/api/v1/auth/register`,
+      payload,
+      headerApi
+    );
+
+    return res.data;
+  } catch (err) {
+    return handleError(err);
+  } finally {
+    loading.value = false;
+  }
+};
+
+export const logout = () => {
+  token.value = null;
+  user.value = null;
+  localStorage.removeItem("token");
 };

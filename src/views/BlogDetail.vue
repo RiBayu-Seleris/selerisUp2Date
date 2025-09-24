@@ -2,15 +2,18 @@
 import Swal from "sweetalert2";
 import ArrowDown from "@/components/icons/ArrowDown.vue";
 import ToC from "@/components/Blog/ToC.vue";
-import { computed, onMounted, ref, watch } from "vue";
+import { computed, onMounted, reactive, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { blogsApi } from "@/consumeAPI/blogsApi";
 import { useUtilsStore } from "@/stores/utils.js";
 import DOMPurify from "dompurify";
 import {
   login,
+  register,
   loading as authLoading,
   error as authError,
+  logout,
+  token,
 } from "@/consumeAPI/authApi";
 
 const route = useRoute();
@@ -31,17 +34,14 @@ const showPassword = ref(false);
 // State logout dropdown
 const isAccountDropdown = ref(false);
 // Status login user
-const loginStatus = ref(false);
+const loginStatus = computed(() => !!token.value);
 // State untuk kontrol komen textarea
 const isFocusedComment = ref(false);
+
 // State untuk frame modals login
 const showLoginForm = ref(false);
 // State untuk frame modals Register
 const showRegisterForm = ref(false);
-
-// Email dan Password
-const email = ref("");
-const password = ref("");
 
 // HARUS akses .value untun DOM Purify XSS Defender
 const safeContent = computed(() =>
@@ -71,15 +71,21 @@ const closeComment = () => {
 // Menampilkan Login form
 const openLoginForm = () => {
   showLoginForm.value = true;
+  showRegisterForm.value = false;
 };
+// Membuka register Form
+const openRegisterForm = () => {
+  showRegisterForm.value = true;
+  showLoginForm.value = false;
+};
+
 // Menutup Login form
 const closeLoginForm = () => {
   showLoginForm.value = false;
 };
-// Membuka register Form
-const openRegisterForm = () => {
-  showLoginForm.value = false;
-  showRegisterForm.value = true;
+// Menutup Login form
+const closeRegisterForm = () => {
+  showRegisterForm.value = false;
 };
 
 // Watch error dari authApi.js
@@ -89,10 +95,32 @@ watch(error, (val) => {
   }
 });
 
+const loginError = ref(false);
+
+// Fullname, Email dan Password
+const loginData = reactive({
+  email: "",
+  password: "",
+});
+
+const registerData = reactive({
+  fullname: "",
+  email: "",
+  password: "",
+  c_password: "",
+});
+
 const handleLogin = async () => {
-  const data = await login(email.value, password.value);
+  const payload = {
+    email: loginData.email,
+    password: loginData.password,
+  };
+  const data = await login(payload);
+
+  console.log(payload);
   // Jika berhasil
   if (data.status === 200) {
+    loginError.value = false;
     Swal.fire({
       title: "Berhasil Login",
       text: data.message,
@@ -100,7 +128,6 @@ const handleLogin = async () => {
       timer: 2000, // 2 detik otomatis tertutup
       showConfirmButton: false, // tombol OK disembunyikan
     }).then(() => {
-      loginStatus.value = true;
       showLoginForm.value = false;
     });
     return;
@@ -109,20 +136,74 @@ const handleLogin = async () => {
   // Jika akun tidak ada atau salah password
   if (data.status !== 200) {
     // console.log("Login gagal:", data.message);
+    loginError.value = true;
+    return;
+  }
+};
+
+const handleRegister = async () => {
+  const payload = {
+    name: registerData.fullname,
+    email: registerData.email,
+    password: registerData.password,
+    c_password: registerData.password,
+  };
+  const data = await register(payload);
+
+  if (data.status === 422) {
     Swal.fire({
-      title: "Gagal Login",
+      title: "Gagal Register",
       text: data.message,
       icon: "error",
     });
-    return;
+  }
+
+  if (data.status === 200) {
+    Swal.fire({
+      title: "Berhasil Register",
+      text: data.message,
+      icon: "success",
+      timer: 2000, // 2 detik otomatis tertutup
+      showConfirmButton: false, // tombol OK disembunyikan
+    }).then(() => {
+      showLoginForm.value = true;
+    });
+  }
+
+  console.log("register data:", data);
+};
+
+// Logout
+const handleLogout = async () => {
+  // Swal
+  const result = await Swal.fire({
+    title: "Yakin ingin logout?",
+    text: "Kamu akan keluar dari akun saat ini.",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonText: "Ya, logout",
+    cancelButtonText: "Batal",
+  });
+
+  if (result.isConfirmed) {
+    // Panggil fungsi logout
+    logout();
+
+    // Tampilkan notifikasi berhasil
+    Swal.fire({
+      title: "Berhasil Logout",
+      icon: "success",
+      timer: 2000,
+      showConfirmButton: false,
+    }).then(() => {
+      window.location.reload();
+    });
   }
 };
 
 onMounted(() => {
   getBlogBySlug(slug); // <= WAJIB
   getPopularBlog();
-
-  loginStatus.value = localStorage.getItem("loginStatus") === "true";
 });
 </script>
 
@@ -157,14 +238,15 @@ onMounted(() => {
               <button @click="toggleDropdown" class="w-7 h-7 p-1">
                 <ArrowDown />
               </button>
-              <div
+              <button
+                @click="handleLogout"
                 v-if="isAccountDropdown"
                 class="absolute w-full h-[50px] border-[1px] top-10 right-0 transition-all duration-500"
               >
                 <div class="w-full h-full flex justify-center items-center">
                   <p class="text-[14px]">Logout</p>
                 </div>
-              </div>
+              </button>
             </div>
             <div class="w-auto h-auto flex flex-col justify-between px-2">
               <div class="w-full flex justify-end">
@@ -176,13 +258,6 @@ onMounted(() => {
                 <p class="text-[16px] text-[#B8B8B8] font-[400]">Account</p>
               </div>
             </div>
-          </div>
-          <div class="relative w-[30%] h-auto flex justify-center items-center">
-            <img
-              src="/assets/images/profile/example.png"
-              alt=""
-              class="w-[55px] h-[55px] rounded-full bg-contain object-center"
-            />
           </div>
         </div>
       </div>
@@ -271,13 +346,13 @@ onMounted(() => {
                   <router-link
                     v-if="popularBlog.length > 0"
                     :to="`/blog/${popularBlog[0].slug}`"
-                    class="w-full h-[50%]"
+                    class="w-full h-auto"
                   >
                     <figure class="w-full h-auto">
                       <img
                         :src="popularBlog[0].cover"
                         alt="cover"
-                        class="w-full h-[180px] object-fill"
+                        class="w-full h-[180px] lg:h-auto object-fill"
                       />
                     </figure>
                   </router-link>
@@ -302,7 +377,7 @@ onMounted(() => {
                               {{ data.category_name }}
                             </p>
                             <p
-                              class="text-[#195279] font-[500] text-[16px] leading-snug dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                              class="text-[#195279] font-[500] text-[16px] leading-snug line-clamp-2 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                             >
                               {{ data.title }}
                             </p>
@@ -340,7 +415,7 @@ onMounted(() => {
           <textarea
             type="text"
             rows="2"
-            class="w-full pl-4 py-2 bg-[#EBEBEB] rounded-[8px] focus:outline-none"
+            class="w-full pl-4 py-2 bg-[#EBEBEB] rounded-[8px] focus:outline-none cursor-pointer"
             placeholder="Share your thoughts?"
             @focus="toggledTextareaIsFocused"
           />
@@ -403,14 +478,14 @@ onMounted(() => {
   </div>
   <div v-else>Blog tidak ditemukan.</div>
 
-  <!-- Frame Login and Register -->
+  <!-- Login -->
   <Transition
     enter-active-class="animate__animated animate__fadeIn duration-75"
     leave-active-class="animate__animated animate__fadeOut duration-75"
   >
     <div
       v-if="showLoginForm"
-      class="fixed z-50 top-0 w-full h-full bg-[#2F2F2F]/60 px-8 md:px-16 lg:px-0"
+      class="fixed z-50 top-0 left-0 w-full h-full bg-[#2F2F2F]/60 px-8 md:px-16 lg:px-0"
     >
       <div
         class="w-full lg:w-[60%] mx-auto relative top-1/2 -translate-y-1/2 bg-white flex flex-col rounded-xl p-8 space-y-3"
@@ -434,14 +509,14 @@ onMounted(() => {
           </button>
         </div>
         <div
-          class="w-full h-full flex flex-col space-y-4 lg:space-y-6 items-center justify-center px-12 lg:px-6"
+          class="w-full h-full flex flex-col space-y-4 lg:space-y-4 items-center justify-center px-12 lg:px-6"
         >
           <div class="w-full h-auto flex flex-col leading-normal">
             <div class="w-full h-auto">
               <p
                 class="md:text-[32px] lg:text-[38px] font-[500] text-[#195279]"
               >
-                Login
+                Sign In
               </p>
             </div>
             <div class="w-full h-auto">
@@ -455,7 +530,7 @@ onMounted(() => {
           <!-- Email Input and Label -->
           <form
             @submit.prevent="handleLogin"
-            class="w-full h-auto flex flex-col space-y-4 lg:space-y-6"
+            class="w-full h-auto flex flex-col space-y-4 lg:space-y-4"
           >
             <div class="w-full h-auto">
               <label
@@ -467,9 +542,10 @@ onMounted(() => {
               <input
                 required
                 id="email"
-                v-model="email"
+                v-model="loginData.email"
                 placeholder="example@email.com"
                 class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2AB857]"
+                :class="{ 'border-red-500 focus:ring-red-500': loginError }"
               />
             </div>
             <!-- Password Input and Label -->
@@ -485,9 +561,10 @@ onMounted(() => {
                   required
                   id="password"
                   :type="showPassword ? 'text' : 'password'"
-                  v-model="password"
+                  v-model="loginData.password"
                   placeholder="Masukkan password"
-                  class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2AB857]"
+                  class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-0 focus:ring-[#2AB857]"
+                  :class="{ 'border-red-500 focus:ring-red-500': loginError }"
                 />
                 <!-- Tombol toggle mata -->
                 <button
@@ -549,6 +626,12 @@ onMounted(() => {
                 Forgot Password?
               </p>
             </div>
+            <div
+              v-if="loginError"
+              class="w-full h-auto flex justify-center animate__animated animate__fadeIn duration-300"
+            >
+              <p class="text-red-500 font-[500]">Email Atau Password Salah</p>
+            </div>
             <!-- Button Send -->
             <button
               type="submit"
@@ -562,7 +645,185 @@ onMounted(() => {
           >
             <p>
               Don't you have an account?
-              <span class="text-[#2AB857]">Sign up</span>
+              <button @click="openRegisterForm">
+                <span class="text-[#2AB857]">Sign Up</span>
+              </button>
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </Transition>
+
+  <!-- Register -->
+  <Transition
+    enter-active-class="animate__animated animate__fadeIn duration-75"
+    leave-active-class="animate__animated animate__fadeOut duration-75"
+  >
+    <div
+      v-if="showRegisterForm"
+      class="fixed z-50 top-0 left-0 w-full h-full bg-[#2F2F2F]/60 px-8 md:px-16 lg:px-0"
+    >
+      <div
+        class="w-full lg:w-[60%] mx-auto relative top-1/2 -translate-y-1/2 bg-white flex flex-col rounded-xl p-8 space-y-3"
+      >
+        <div
+          class="relative flex justify-end items-end w-full h-auto text-[#ACACAC] rounded-t-xl"
+        >
+          <button @click="closeRegisterForm">
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              x="0px"
+              y="0px"
+              class="w-[20px] h-[20px]"
+              viewBox="0 0 24 24"
+              fill="currentColor"
+            >
+              <path
+                d="M 4.2382812 2.9882812 A 1.250125 1.250125 0 0 0 3.3671875 5.1347656 L 10.232422 12 L 3.3613281 18.869141 A 1.2512475 1.2512475 0 1 0 5.1308594 20.638672 L 12 13.767578 L 18.865234 20.632812 A 1.250125 1.250125 0 1 0 20.632812 18.865234 L 13.767578 12 L 20.625 5.1425781 A 1.250125 1.250125 0 1 0 18.857422 3.375 L 12 10.232422 L 5.1347656 3.3671875 A 1.250125 1.250125 0 0 0 4.2382812 2.9882812 z"
+              ></path>
+            </svg>
+          </button>
+        </div>
+        <div
+          class="w-full h-full flex flex-col space-y-4 lg:space-y-6 items-center justify-center px-12 lg:px-6"
+        >
+          <div class="w-full h-auto flex flex-col leading-normal">
+            <div class="w-full h-auto">
+              <p
+                class="md:text-[32px] lg:text-[38px] font-[500] text-[#195279]"
+              >
+                Sign Up
+              </p>
+            </div>
+            <div class="w-full h-auto">
+              <p
+                class="md:text-[18px] lg:text-[22px] font-[400] tracking-tight text-[#195279]"
+              >
+                Be among the first to discover what it's all about
+              </p>
+            </div>
+          </div>
+          <!-- Email Input and Label -->
+          <form
+            @submit.prevent="handleRegister"
+            class="w-full h-auto flex flex-col space-y-4 lg:space-y-6"
+          >
+            <div class="w-full h-auto">
+              <label
+                for="email"
+                class="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Full Name
+              </label>
+              <input
+                required
+                id="fullname"
+                v-model="registerData.fullname"
+                placeholder="Jhon Doe"
+                class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2AB857]"
+              />
+            </div>
+            <div class="w-full h-auto">
+              <label
+                for="email"
+                class="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Email
+              </label>
+              <input
+                required
+                id="email"
+                v-model="registerData.email"
+                placeholder="example@email.com"
+                class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2AB857]"
+              />
+            </div>
+            <!-- Password Input and Label -->
+            <div class="w-full h-auto">
+              <label
+                for="password"
+                class="block text-sm font-medium text-gray-700 mb-1"
+              >
+                Password
+              </label>
+              <div class="relative">
+                <input
+                  required
+                  id="password"
+                  :type="showPassword ? 'text' : 'password'"
+                  v-model="registerData.password"
+                  placeholder="Masukkan password"
+                  class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2AB857]"
+                />
+                <!-- Tombol toggle mata -->
+                <button
+                  type="button"
+                  @click="togglePassword"
+                  class="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
+                >
+                  <!-- Ikon Mata Terbuka -->
+                  <svg
+                    v-if="!showPassword"
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-gray-600"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.5 12s4-7 9.5-7S21.5 12 21.5 12s-4 7-9.5 7S2.5 12 2.5 12z"
+                    />
+                    <circle cx="12" cy="12" r="3" />
+                  </svg>
+                  <!-- Ikon Mata Tertutup -->
+                  <svg
+                    v-else
+                    xmlns="http://www.w3.org/2000/svg"
+                    class="h-5 w-5 text-gray-600"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.5"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M3 3l18 18"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M10.58 10.58A2.5 2.5 0 0 0 13.42 13.42"
+                    />
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      d="M2.5 12s4-7 9.5-7c2.1 0 4.06.56 5.64 1.5m2.86 3.5s-1.4 2.46-4.45 4.4"
+                    />
+                  </svg>
+                </button>
+              </div>
+            </div>
+            <!-- Button Send -->
+            <button
+              type="submit"
+              class="w-full h-auto bg-[#2AB857] py-1 lg:py-2 rounded-md"
+            >
+              <span class="text-[#FFFFFF] text-[18px]">Send</span>
+            </button>
+          </form>
+          <div
+            class="w-full h-auto flex justify-center items-center cursor-pointer"
+          >
+            <p>
+              Do you have account?
+              <button @click="openLoginForm">
+                <span class="text-[#2AB857]">Sign In</span>
+              </button>
             </p>
           </div>
         </div>
