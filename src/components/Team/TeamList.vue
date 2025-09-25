@@ -9,13 +9,7 @@ const teams = [
       import.meta.url
     ).href,
     name: "Rinaldi Anwar",
-    position: "Founder",
-  },
-  {
-    image: new URL("@/assets/images/leadership-teams/nana.png", import.meta.url)
-      .href,
-    name: "Nana Rangga Permana",
-    position: "Director",
+    position: "Founder & CEO",
   },
   {
     image: new URL("@/assets/images/leadership-teams/prof.png", import.meta.url)
