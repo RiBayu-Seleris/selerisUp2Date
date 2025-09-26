@@ -92,7 +92,7 @@ export function blogsApi() {
         // Popular Error
         blogDetailError.value =
           err.response?.data?.message ||
-          "Terjadi kesalahan saat memuat blog terbaru";
+          "Terjadi kesalahan saat memuat blog detail";
       } else {
         // runtime error (typo, bug kode, dll)
         console.error("Runtime Error:", err);
@@ -198,12 +198,16 @@ export function blogsApi() {
     error.value = null;
 
     try {
-      const res = await axios.get(
+      const res = await axios.post(
         `${BASE_URL}/api/v1/app/blogs/${id}/comments`,
         payload,
         headerApiToken
       );
-    } catch (error) {}
+      return res.data;
+    } catch (error) {
+    } finally {
+      stopLoading();
+    }
   };
 
   return {

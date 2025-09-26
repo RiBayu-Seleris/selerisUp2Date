@@ -49,8 +49,9 @@ export const login = async (payload) => {
     // simpan token
     if (res.data?.data?.token) {
       token.value = res.data.data.token;
-      user.value = res.data.data || null;
+      user.value = res.data.data.name;
       localStorage.setItem("token", token.value);
+      localStorage.setItem("name", user.value);
     }
 
     return res.data;
@@ -84,4 +85,5 @@ export const logout = () => {
   token.value = null;
   user.value = null;
   localStorage.removeItem("token");
+  localStorage.removeItem("name");
 };

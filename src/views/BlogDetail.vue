@@ -30,6 +30,8 @@ const {
   postComment,
 } = blogsApi();
 
+const name = localStorage.getItem("name");
+
 // Toggle Password Eye
 const showPassword = ref(false);
 // State logout dropdown
@@ -214,13 +216,19 @@ const inputCommentData = reactive({
 });
 
 const handleSubmitComment = async () => {
+  const blogId = blogDetail.value?.id;
   const payload = {
-    content: inputCommentData.comment,
+    content: inputCommentData.comment.trim(),
   };
 
-  const data = await postComment(payload);
+  const data = await postComment(payload, blogId);
+  if (data) {
+    // kosongkan textarea
+    inputCommentData.comment = "";
 
-  console.log(data);
+    // refresh komentar agar langsung kelihatan
+    await getBlogBySlug(slug);
+  }
 };
 
 onMounted(() => {
@@ -230,7 +238,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div v-if="loading">Loading Data</div>
+  <div v-if="loading"></div>
   <div v-else-if="error">{{ error }}</div>
   <div
     v-else-if="blogDetail"
@@ -273,7 +281,7 @@ onMounted(() => {
             <div class="w-auto h-auto flex flex-col justify-between px-2">
               <div class="w-full flex justify-end">
                 <p class="text-[16px] text-[#195279] font-[400] text-end">
-                  Riski Yusuf Maulana
+                  {{ name }}
                 </p>
               </div>
               <div class="w-full flex justify-end">
