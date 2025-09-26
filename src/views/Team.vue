@@ -11,7 +11,7 @@ import Description from "@/components/Team/Description.vue";
     <HeroSection />
   </section>
 
-  <section class="flex relative w-full h-auto mt-20 sm:mt-32 xl:mt-28">
+  <section class="flex flex-col relative w-full h-auto mt-20 sm:mt-32 xl:mt-28">
     <TeamList />
   </section>
 

@@ -2,7 +2,7 @@
 import Swal from "sweetalert2";
 import ArrowDown from "@/components/icons/ArrowDown.vue";
 import ToC from "@/components/Blog/ToC.vue";
-import { computed, onMounted, reactive, ref, watch } from "vue";
+import { computed, nextTick, onMounted, reactive, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { blogsApi } from "@/consumeAPI/blogsApi";
 import { useUtilsStore } from "@/stores/utils.js";
@@ -53,9 +53,16 @@ const toggleDropdown = () => {
   isAccountDropdown.value = !isAccountDropdown.value;
 };
 
+const commentTextArea = ref(null);
+
 // Fungsi saat textarea difokuskan
 const toggledTextareaIsFocused = () => {
   if (!loginStatus.value) {
+    // Hapus fokus dari textarea
+    nextTick(() => {
+      commentTextArea.value?.blur();
+    });
+
     // kalau belum login, maka munculkan (panggil function)
     openLoginForm();
     return;
@@ -429,6 +436,7 @@ onMounted(() => {
         <form @submit.prevent="handleSubmitComment">
           <div class="w-full mt-4 rounded-[8px]">
             <textarea
+              ref="commentTextArea"
               v-model="inputCommentData.comment"
               type="text"
               rows="2"
