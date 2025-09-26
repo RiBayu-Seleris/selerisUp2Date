@@ -597,7 +597,7 @@ onMounted(() => {
                   id="password"
                   :type="showPassword ? 'text' : 'password'"
                   v-model="loginData.password"
-                  placeholder="Masukkan password"
+                  placeholder="Password"
                   class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-0 focus:ring-[#2AB857]"
                   :class="{ 'border-red-500 focus:ring-red-500': loginError }"
                 />
@@ -755,7 +755,7 @@ onMounted(() => {
                 required
                 id="fullname"
                 v-model="registerData.fullname"
-                placeholder="Jhon Doe"
+                placeholder="Fullname"
                 class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2AB857]"
               />
             </div>
@@ -788,7 +788,7 @@ onMounted(() => {
                   id="password"
                   :type="showPassword ? 'text' : 'password'"
                   v-model="registerData.password"
-                  placeholder="Masukkan password"
+                  placeholder="Password"
                   class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2AB857]"
                 />
                 <!-- Tombol toggle mata -->

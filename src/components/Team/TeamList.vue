@@ -95,7 +95,7 @@ const managementTeam = [
       <p
         class="text-[20px] sm:text-[26px] md:text-[32px] lg:text-[36px] xl:text-[40px] font-[500] text-[#1AB24F] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
       >
-        Directors and Senior Management Teams
+        Directors and Senior Management Team
       </p>
       <p
         class="text-[14px] md:text-[18px] lg:text-[18px] xl:text-[20px] px-10 sm:px-0 font-[400] tracking-wider lg:tracking-normal text-[#89A6BA] dark:text-[#6F6F6F] text-center"
