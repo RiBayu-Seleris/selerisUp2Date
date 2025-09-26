@@ -27,6 +27,7 @@ const {
   error,
   loading,
   blogDetailError,
+  postComment,
 } = blogsApi();
 
 // Toggle Password Eye
@@ -199,6 +200,20 @@ const handleLogout = async () => {
       window.location.reload();
     });
   }
+};
+
+const inputCommentData = reactive({
+  comment: "",
+});
+
+const handleSubmitComment = async () => {
+  const payload = {
+    content: inputCommentData.comment,
+  };
+
+  const data = await postComment(payload);
+
+  console.log(data);
 };
 
 onMounted(() => {
@@ -411,31 +426,35 @@ onMounted(() => {
             Comments ({{ blogDetail?.comments_data?.length || 0 }})
           </p>
         </div>
-        <div class="w-full mt-4 rounded-[8px]">
-          <textarea
-            type="text"
-            rows="2"
-            class="w-full pl-4 py-2 bg-[#EBEBEB] rounded-[8px] focus:outline-none cursor-pointer"
-            placeholder="Share your thoughts?"
-            @focus="toggledTextareaIsFocused"
-          />
-        </div>
-        <div
-          v-if="isFocusedComment"
-          class="w-full h-auto flex flex-row justify-end space-x-3 mt-2 transition-all duration-500"
-        >
-          <button
-            @click="closeComment"
-            class="w-auto h-auto bg-slate-300 text-[#FAFAFA] px-8 py-2 rounded-md"
+        <form @submit.prevent="handleSubmitComment">
+          <div class="w-full mt-4 rounded-[8px]">
+            <textarea
+              v-model="inputCommentData.comment"
+              type="text"
+              rows="2"
+              class="w-full pl-4 py-2 bg-[#EBEBEB] rounded-[8px] focus:outline-none cursor-pointer"
+              placeholder="Share your thoughts?"
+              @focus="toggledTextareaIsFocused"
+            />
+          </div>
+          <div
+            v-if="isFocusedComment"
+            class="w-full h-auto flex flex-row justify-end space-x-3 mt-2 transition-all duration-500"
           >
-            <p>Cancel</p>
-          </button>
-          <button
-            class="w-auto h-auto bg-green-500 text-[#FAFAFA] px-8 py-2 rounded-md"
-          >
-            <p>Send</p>
-          </button>
-        </div>
+            <button
+              @click="closeComment"
+              class="w-auto h-auto bg-slate-300 text-[#FAFAFA] px-8 py-2 rounded-md"
+            >
+              <p>Cancel</p>
+            </button>
+            <button
+              type="submit"
+              class="w-auto h-auto bg-green-500 text-[#FAFAFA] px-8 py-2 rounded-md"
+            >
+              <p>Send</p>
+            </button>
+          </div>
+        </form>
       </div>
       <!-- Comments Display -->
       <div class="w-full h-auto flex flex-col mt-14 space-y-6">

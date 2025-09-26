@@ -12,12 +12,6 @@ const teams = [
     position: "Founder & CEO",
   },
   {
-    image: new URL("@/assets/images/leadership-teams/prof.png", import.meta.url)
-      .href,
-    name: "Prof. Alhadi Bustamam",
-    position: "Senior Advisor",
-  },
-  {
     image: new URL(
       "@/assets/images/leadership-teams/shandy.png",
       import.meta.url
@@ -57,6 +51,13 @@ const teams = [
     name: "Harum Ananda",
     position: "Chief Research Officer",
   },
+  {
+    image: new URL("@/assets/images/leadership-teams/prof.png", import.meta.url)
+      .href,
+    name: "Prof. Alhadi Bustamam",
+    position: "Senior Advisor",
+  },
+
   {
     image: new URL(
       "@/assets/images/leadership-teams/dhita.png",

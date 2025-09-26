@@ -3,9 +3,18 @@ import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
+const token = localStorage.getItem("token");
+
 const headerApi = {
   headers: {
     Accept: "application/json",
+  },
+};
+
+const headerApiToken = {
+  headers: {
+    Accept: "application/json",
+    Authorization: `Bearer ${token}`,
   },
 };
 // "ngrok-skip-browser-warning": "true",
@@ -184,6 +193,19 @@ export function blogsApi() {
     }
   };
 
+  const postComment = async (payload, id) => {
+    loading.value = true;
+    error.value = null;
+
+    try {
+      const res = await axios.get(
+        `${BASE_URL}/api/v1/app/blogs/${id}/comments`,
+        payload,
+        headerApiToken
+      );
+    } catch (error) {}
+  };
+
   return {
     blogs,
     blogDetail,
@@ -199,5 +221,6 @@ export function blogsApi() {
     popularError,
     blogsError,
     blogDetailError,
+    postComment,
   };
 }
