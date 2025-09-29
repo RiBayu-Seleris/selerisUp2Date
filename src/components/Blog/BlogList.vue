@@ -301,21 +301,21 @@ onBeforeUnmount(() => {
                       class="w-full h-auto transition-all duration-300 ease-in"
                     >
                       <p
-                        class="text-[16px] sm:text-[16px] lg:text-[20px] text-[#111928] font-[500] dark:font-[600] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                        class="text-[12px] sm:text-[16px] lg:text-[20px] text-[#111928] font-[500] dark:font-[600] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                       >
                         {{ newestBlog.title }}
                       </p>
                     </div>
                     <div class="w-full h-auto">
                       <p
-                        class="text-[14px] lg:text-[16px] text-[#637381] font-[400] break-words line-clamp-3"
+                        class="text-[10px] sm:text-[14px] lg:text-[16px] text-[#637381] font-[400] break-words line-clamp-2 sm:line-clamp-3"
                       >
                         {{ newestBlog.synopsis }}
                       </p>
                     </div>
                     <div class="w-full h-auto">
                       <p
-                        class="text-[14px] sm:text-[16px] text-[#535862] dark:text-[#637381]"
+                        class="text-[10px] sm:text-[16px] text-[#535862] dark:text-[#637381]"
                       >
                         Author:
                         <span class="font-[600]">{{
@@ -330,31 +330,39 @@ onBeforeUnmount(() => {
             <div class="relative w-full h-auto flex flex-row mt-4 mb-0 lg:mb-4">
               <div class="w-auto flex flex-row gap-x-3 justify-start">
                 <div class="flex flex-row justify-between gap-x-1">
-                  <div class="w-full h-auto text-[#6E6E6E] dark:text-[#637381]">
-                    <EyeIcon />
+                  <div
+                    class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
+                  >
+                    <EyeIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
                   </div>
-                  <div class="w-full h-auto">
-                    <span class="text-[#6E6E6E] dark:text-[#637381]">
+                  <div class="w-full h-full flex items-center">
+                    <span
+                      class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
+                    >
                       {{ utils.shortNumber(newestBlog.views) }}
                     </span>
                   </div>
                 </div>
                 <div class="flex flex-row justify-between gap-x-1">
-                  <div class="w-full h-auto text-[#6E6E6E] dark:text-[#637381]">
-                    <CommentIcon />
+                  <div
+                    class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
+                  >
+                    <CommentIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
                   </div>
                   <div class="w-full h-auto">
-                    <span class="text-[#6E6E6E] dark:text-[#637381]">
+                    <span
+                      class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
+                    >
                       {{ newestBlog.comments }}
                     </span>
                   </div>
                 </div>
                 <div class="relative flex w-full h-auto share-wrapper">
                   <div
-                    class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer"
+                    class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer flex items-center"
                     @click.stop="toggleShare('newest-' + newestBlog.id)"
                   >
-                    <ShareIcon />
+                    <ShareIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
                   </div>
 
                   <div
@@ -549,7 +557,7 @@ onBeforeUnmount(() => {
               class="relative h-full w-full p-4 cursor-default shadow-md rounded-lg bg-white dark:bg-[#1D1F23]"
             >
               <div
-                class="absolute z-20 w-14 h-8 flex justify-center items-center bg-[#1AB24F] top-0 right-0 rounded-bl-lg rounded-tr-lg"
+                class="absolute z-20 w-12 h-auto sm:w-14 sm:h-8 flex justify-center items-center bg-[#1AB24F] top-0 right-0 rounded-bl-lg rounded-tr-lg"
               >
                 <p class="text-white text-[16px]">#{{ index + 1 }}</p>
               </div>
@@ -564,26 +572,28 @@ onBeforeUnmount(() => {
                   />
                 </div>
                 <div
-                  class="w-[60%] sm:h-full flex flex-col items-start gap-y-2 rounded-lg justify-between"
+                  class="w-[60%] sm:h-full flex flex-col items-start gap-y-2 sm:gap-y-2 rounded-lg justify-between"
                 >
                   <div class="w-full h-[20%] flex items-center">
                     <p
-                      class="text-[12px] sm:text-[12px] md:text-[14px] text-[#6941C6] dark:text-[#2AB857] bg-[#7B61FF]/10 dark:bg-transparent px-4 dark:px-0 rounded-full w-auto h-full flex items-center"
+                      class="text-[10px] sm:text-[12px] md:text-[14px] text-[#6941C6] dark:text-[#2AB857] bg-[#7B61FF]/10 dark:bg-transparent px-2 sm:px-4 dark:px-0 rounded-full w-auto h-full flex items-center"
                     >
                       {{ data.category_name }}
                     </p>
                   </div>
-                  <div class="w-full h-full flex flex-col items-center gap-y-3">
-                    <div class="w-full h-[40px] flex items-center">
+                  <div
+                    class="w-full h-full flex flex-col items-center gap-y-3 sm:gap-y-3"
+                  >
+                    <div class="w-full sm:h-[40px] flex items-center">
                       <p
-                        class="text-[14px] lg:text-[16px] text-[#111928] leading-tight font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] line-clamp-2"
+                        class="text-[10px] sm:text-[14px] lg:text-[16px] text-[#111928] leading-tight font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] line-clamp-2"
                       >
                         {{ data.title }}
                       </p>
                     </div>
                     <div class="w-full h-auto flex items-start">
                       <p
-                        class="text-[12px] md:text-[12px] leading-tight line-clamp-2 lg:line-clamp-3 text-[#637381]"
+                        class="text-[10px] sm:text-[12px] md:text-[12px] leading-tight line-clamp-2 lg:line-clamp-3 text-[#637381]"
                       >
                         {{ data.synopsis }}
                       </p>
@@ -625,11 +635,11 @@ onBeforeUnmount(() => {
             class="flex flex-col w-full h-full p-4 rounded-[10px] bg-[#FAFAFA] dark:bg-[#1D1F23]"
           >
             <router-link :to="`/blog/${data.slug}`">
-              <div class="w-full h-[140px] lg:h-[180px]">
+              <div class="w-full h-auto lg:h-[180px]">
                 <img
                   :src="data.cover"
                   alt="BlogImage"
-                  class="w-full h-full object-fill rounded-[10px]"
+                  class="w-full h-full object-cover lg:object-fill rounded-[10px]"
                 />
               </div>
               <div
@@ -639,7 +649,7 @@ onBeforeUnmount(() => {
                   class="flex items-center bg-[#7B61FF]/10 dark:bg-transparent px-4 dark:px-0 rounded-[16px]"
                 >
                   <p
-                    class="md:text-[14px] lg:text-[14px] text-[#7B61FF] dark:text-[#FFFFFF] font-semibold"
+                    class="text-[12px] md:text-[14px] lg:text-[14px] text-[#7B61FF] dark:text-[#FFFFFF] font-semibold"
                   >
                     {{ data.category_name }}
                   </p>
@@ -647,16 +657,18 @@ onBeforeUnmount(() => {
                 <div
                   class="flex items-center bg-[#3758F9] px-5 py-1 rounded-[5px]"
                 >
-                  <p class="text-[#FFFFFF] md:text-[12px] lg:text-[14px]">
+                  <p
+                    class="text-[#FFFFFF] text-[12px] md:text-[12px] lg:text-[14px]"
+                  >
                     {{ utils.fromISODate(data.created_at) }}
                   </p>
                 </div>
               </div>
               <div
-                class="flex w-full h-[50px] sm:h-[45px] md:h-[50px] lg:h-[55px] text-left overflow-hidden"
+                class="flex w-full h-[40px] sm:h-[45px] md:h-[50px] lg:h-[55px] text-left overflow-hidden"
               >
                 <p
-                  class="sm:text-[14px] md:text-[16px] lg:text-[18px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] line-clamp-2"
+                  class="text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] line-clamp-2"
                 >
                   {{ data.title }}
                 </p>
@@ -669,24 +681,32 @@ onBeforeUnmount(() => {
                 </p>
               </div>
             </router-link>
-            <div class="relative w-full h-auto flex flex-row mt-4 mb-0">
+            <div class="relative w-full h-auto flex flex-row sm:mt-4 mb-0">
               <div class="w-auto flex flex-row gap-x-3 justify-start">
                 <div class="flex flex-row justify-between gap-x-1">
-                  <div class="w-full h-auto text-[#6E6E6E] dark:text-[#637381]">
-                    <EyeIcon />
+                  <div
+                    class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
+                  >
+                    <EyeIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
                   </div>
-                  <div class="w-full h-auto">
-                    <span class="text-[#6E6E6E] dark:text-[#637381]">
+                  <div class="w-full h-auto flex items-center">
+                    <span
+                      class="text-[12px] text-[#6E6E6E] dark:text-[#637381]"
+                    >
                       {{ utils.shortNumber(data.views) }}
                     </span>
                   </div>
                 </div>
                 <div class="flex flex-row justify-between gap-x-1">
-                  <div class="w-full h-auto text-[#6E6E6E] dark:text-[#637381]">
-                    <CommentIcon />
+                  <div
+                    class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
+                  >
+                    <CommentIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
                   </div>
-                  <div class="w-full h-auto">
-                    <span class="text-[#6E6E6E] dark:text-[#637381]">
+                  <div class="w-full h-auto flex items-center">
+                    <span
+                      class="text-[12px] text-[#6E6E6E] dark:text-[#637381]"
+                    >
                       {{ data.comments }}
                     </span>
                   </div>
@@ -696,7 +716,7 @@ onBeforeUnmount(() => {
                     class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer"
                     @click.stop="toggleShare(data.id)"
                   >
-                    <ShareIcon />
+                    <ShareIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
                   </div>
                   <div
                     v-show="activeShareId === data.id"
