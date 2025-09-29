@@ -93,7 +93,7 @@ const managementTeam = [
       class="flex flex-col w-full h-auto justify-center items-center space-y-2 md:px-10 lg:px-10 xl:px-14"
     >
       <p
-        class="text-[20px] sm:text-[26px] md:text-[32px] lg:text-[36px] xl:text-[40px] font-[500] text-[#1AB24F] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+        class="px-8 sm:px-0 text-center text-[20px] sm:text-[26px] md:text-[32px] lg:text-[36px] xl:text-[40px] font-[500] text-[#1AB24F] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
       >
         Directors and Senior Management Team
       </p>
@@ -208,7 +208,7 @@ const managementTeam = [
         class="hidden xl:flex absolute w-32 h-full bg-gradient-to-l from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-l dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% right-0 z-20"
       />
       <div
-        class="flex flex-row justify-center items-center py-0 w-full h-auto gap-x-5 sm:gap-x-7 md:gap-x-8 lg:gap-x-10 mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-10 pl-10 pr-10 sm:scroll-pl-10 sm:pl-10 sm:pr-10 lg:scroll-pl-16 lg:pl-16 lg:pr-16 hide-scrollbar"
+        class="flex flex-row lg:justify-center lg:items-center py-0 w-full h-auto gap-x-5 sm:gap-x-7 md:gap-x-8 lg:gap-x-10 mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-10 pl-10 pr-10 sm:scroll-pl-10 sm:pl-10 sm:pr-10 lg:scroll-pl-16 lg:pl-16 lg:pr-16 hide-scrollbar"
       >
         <div
           v-for="(team, index) in managementTeam"

@@ -30,7 +30,7 @@ const {
   postComment,
 } = blogsApi();
 
-const name = localStorage.getItem("name");
+const name = ref("");
 
 // Toggle Password Eye
 const showPassword = ref(false);
@@ -127,10 +127,11 @@ const handleLogin = async () => {
   };
   const data = await login(payload);
 
-  console.log(payload);
   // Jika berhasil
   if (data.status === 200) {
     loginError.value = false;
+    localStorage.setItem("name", data.data.name); // sudah disimpan di authApi
+    name.value = data.data.name; // <-- update reactive langsung
     Swal.fire({
       title: "Berhasil Login",
       text: data.message,
@@ -179,8 +180,6 @@ const handleRegister = async () => {
       showLoginForm.value = true;
     });
   }
-
-  console.log("register data:", data);
 };
 
 // Logout
@@ -347,7 +346,7 @@ onMounted(() => {
             </p>
             <!-- Content Blog -->
             <div
-              class="prose max-w-none dark:prose-invert dark:prose-white text-[16px] font-[400] text-[#535862] dark:text-[#DADADA] prose-p:my-0 prose-ul:my-1 prose-ol:my-1 break-words"
+              class="prose max-w-none dark:prose-invert dark:prose-white text-[16px] font-[400] text-[#535862] dark:text-[#DADADA] prose-p:my-2 prose-ul:my-0 prose-ol:my-0 prose-headings:mb-4 prose-headings:mt-4 break-words"
               v-html="safeContent"
             ></div>
           </article>

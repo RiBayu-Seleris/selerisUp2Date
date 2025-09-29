@@ -23,15 +23,17 @@ const loginStatus = ref(false);
     v-if="loginStatus === true"
     class="flex flex-row relative w-full h-[70px] max-w-md mx-auto mt-10 lg:mt-10"
   >
-    <div class="relative w-[30%] h-auto flex justify-center items-center">
+    <!-- <div class="relative w-[30%] h-auto flex justify-center items-center">
       <img
         src="/assets/images/profile/example.png"
         alt=""
         class="w-[70px] h-[70px] rounded-full bg-contain object-center"
       />
-    </div>
-    <div class="relative w-full h-auto flex flex-row">
-      <div class="w-[70%] h-auto flex flex-col justify-between px-3">
+    </div> -->
+    <div class="relative w-full h-auto flex flex-row bg-green-500">
+      <div
+        class="w-[70%] h-auto flex flex-col justify-between px-3 bg-orange-400"
+      >
         <div class="w-full">
           <p class="text-[21px] text-[#195279] font-[400]">
             Riski Yusuf Maulana
@@ -41,7 +43,7 @@ const loginStatus = ref(false);
           <p class="text-[19px] text-[#B8B8B8] font-[400]">Account</p>
         </div>
       </div>
-      <div class="relative w-[30%] h-auto pt-0.5">
+      <div class="relative w-[30%] h-auto pt-0.5 bg-purple-600">
         <button @click="toggleDropdown" class="w-7 h-7 p-1">
           <ArrowDown />
         </button>

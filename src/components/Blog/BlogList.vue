@@ -96,8 +96,8 @@ const activeShareId = ref(null);
 const isShareOpen = ref(false);
 const menuRef = ref(null);
 const buttonRef = ref(null);
-const toggleShare = () => {
-  isShareOpen.value = !isShareOpen.value;
+const toggleShare = (id) => {
+  activeShareId.value = activeShareId.value === id ? null : id;
 };
 const toggleShareBlogs = (id) => {
   if (activeShareId.value === id) {
@@ -109,13 +109,18 @@ const toggleShareBlogs = (id) => {
   }
 };
 const handleClickOutside = (event) => {
-  if (
-    menuRef.value &&
-    !menuRef.value.contains(event.target) && // bukan di dalam menu
-    buttonRef.value &&
-    !buttonRef.value.contains(event.target) // bukan di dalam tombol
-  ) {
-    isShareOpen.value = false;
+  // ambil semua share-wrapper
+  const wrappers = document.querySelectorAll(".share-wrapper");
+
+  let clickedInside = false;
+  wrappers.forEach((wrapper) => {
+    if (wrapper.contains(event.target)) {
+      clickedInside = true;
+    }
+  });
+
+  if (!clickedInside) {
+    activeShareId.value = null;
   }
 };
 
@@ -266,7 +271,7 @@ onBeforeUnmount(() => {
             >
               <div class="relative flex flex-col">
                 <div class="w-full h-auto flex flex-col gap-y-4">
-                  <figure class="w-full h-auto lg:h-[340px]">
+                  <figure class="w-full h-auto lg:h-auto">
                     <!-- src="/assets/images/blog/new-example.png" -->
                     <img
                       :src="newestBlog.cover"
@@ -344,18 +349,16 @@ onBeforeUnmount(() => {
                     </span>
                   </div>
                 </div>
-                <div class="relative flex w-full h-auto">
+                <div class="relative flex w-full h-auto share-wrapper">
                   <div
                     class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer"
-                    ref="buttonRef"
-                    @click="toggleShare"
+                    @click.stop="toggleShare('newest-' + newestBlog.id)"
                   >
                     <ShareIcon />
                   </div>
 
                   <div
-                    v-show="isShareOpen"
-                    ref="menuRef"
+                    v-show="activeShareId === 'newest-' + newestBlog.id"
                     class="absolute z-30 -left-[80px] -bottom-[210px] md:-bottom-[210px] lg:-bottom-[220px] xl:-bottom-[230px] w-[180px] h-auto"
                   >
                     <div class="relative">
@@ -475,7 +478,7 @@ onBeforeUnmount(() => {
                 <img
                   :src="popularBlog[0].cover"
                   alt="cover"
-                  class="w-full h-[180px] object-fill"
+                  class="w-full h-auto object-fill"
                 />
               </figure>
             </router-link>
@@ -657,7 +660,7 @@ onBeforeUnmount(() => {
     </div>
     <!-- BlogList -->
     <section
-      class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-5 mb-20 px-8 md:px-8 xl:px-0"
+      class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-5 mb-20 px-8 md:px-8 xl:px-0 pb-20"
     >
       <div v-if="loading">Loading Data</div>
       <div v-else-if="error" class="px-6">{{ error }}</div>
@@ -667,150 +670,166 @@ onBeforeUnmount(() => {
         :key="index"
         class="relative w-full h-full !p-[1px] rounded-[10px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-35% dark:to-[#565656]"
       >
-        <router-link :to="`/blog/${data.slug}`" class="w-full h-full">
+        <div class="w-full h-auto flex flex-col">
           <div
             class="flex flex-col w-full h-full p-4 rounded-[10px] bg-[#FAFAFA] dark:bg-[#1D1F23]"
           >
-            <div class="w-full h-[140px] lg:h-[180px]">
-              <img
-                :src="data.cover"
-                alt="BlogImage"
-                class="w-full h-full object-fill rounded-[10px]"
-              />
-            </div>
-            <div
-              class="flex flex-row w-full h-auto justify-between text-sm text-[#7A7A7A] my-5"
-            >
+            <router-link :to="`/blog/${data.slug}`">
+              <div class="w-full h-[140px] lg:h-[180px]">
+                <img
+                  :src="data.cover"
+                  alt="BlogImage"
+                  class="w-full h-full object-fill rounded-[10px]"
+                />
+              </div>
               <div
-                class="flex items-center bg-[#7B61FF]/10 dark:bg-transparent px-4 dark:px-0 rounded-[16px]"
+                class="flex flex-row w-full h-auto justify-between text-sm text-[#7A7A7A] my-5"
+              >
+                <div
+                  class="flex items-center bg-[#7B61FF]/10 dark:bg-transparent px-4 dark:px-0 rounded-[16px]"
+                >
+                  <p
+                    class="md:text-[14px] lg:text-[14px] text-[#7B61FF] dark:text-[#FFFFFF] font-semibold"
+                  >
+                    {{ data.category_name }}
+                  </p>
+                </div>
+                <div
+                  class="flex items-center bg-[#3758F9] px-5 py-1 rounded-[5px]"
+                >
+                  <p class="text-[#FFFFFF] md:text-[12px] lg:text-[14px]">
+                    {{ utils.fromISODate(data.created_at) }}
+                  </p>
+                </div>
+              </div>
+              <div
+                class="flex w-full h-[55px] md:h-[65px] lg:h-[55px] text-left overflow-hidden"
               >
                 <p
-                  class="md:text-[14px] lg:text-[14px] text-[#7B61FF] dark:text-[#FFFFFF] font-semibold"
+                  class="sm:text-[14px] md:text-[16px] lg:text-[18px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] line-clamp-2"
                 >
-                  {{ data.category_name }}
+                  {{ data.title }}
                 </p>
               </div>
-              <div
-                class="flex items-center bg-[#3758F9] px-5 py-1 rounded-[5px]"
-              >
-                <p class="text-[#FFFFFF] md:text-[12px] lg:text-[14px]">
-                  {{ utils.fromISODate(data.created_at) }}
+              <div class="flex w-full h-auto justify-start items-start my-3">
+                <p
+                  class="text-[12px] lg:text-[14px] text-[#637381] line-clamp-3 lg:line-clamp-2"
+                >
+                  {{ data.synopsis }}
                 </p>
               </div>
-            </div>
-            <div class="flex w-full h-[55px] md:h-[65px] lg:h-[65px] text-left">
-              <p
-                class="sm:text-[14px] md:text-[16px] lg:text-[18px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
-              >
-                {{ data.title }}
-              </p>
-            </div>
-            <div class="flex w-full h-[70px] justify-start items-start">
-              <p
-                class="text-[12px] lg:text-[14px] text-[#637381] line-clamp-3 lg:line-clamp-2"
-              >
-                {{ data.synopsis }}
-              </p>
-            </div>
-            <div class="flex flex-row justify-between w-full h-auto">
-              <div class="w-full h-auto">
-                <div class="flex flex-row gap-x-3">
-                  <div class="w-auto flex flex-row">
-                    <div
-                      class="w-full h-auto text-[#6E6E6E] dark:text-[#637381]"
-                    >
-                      <EyeIcon />
-                    </div>
-                    <div class="w-full h-auto pl-1">
-                      <span class="text-[#6E6E6E] dark:text-[#637381]">
-                        {{ utils.shortNumber(data.views) }}
-                      </span>
-                    </div>
+            </router-link>
+            <div class="relative w-full h-auto flex flex-row mt-4 mb-0">
+              <div class="w-auto flex flex-row gap-x-3 justify-start">
+                <div class="flex flex-row justify-between gap-x-1">
+                  <div class="w-full h-auto text-[#6E6E6E] dark:text-[#637381]">
+                    <EyeIcon />
                   </div>
-                  <div class="w-auto flex flex-row">
-                    <div
-                      class="w-full h-auto text-[#6E6E6E] dark:text-[#637381]"
-                    >
-                      <CommentIcon />
-                    </div>
-                    <div class="w-full h-auto pl-1">
-                      <span class="text-[#6E6E6E] dark:text-[#637381]">
-                        {{ data.comments }}
-                      </span>
-                    </div>
+                  <div class="w-full h-auto">
+                    <span class="text-[#6E6E6E] dark:text-[#637381]">
+                      {{ utils.shortNumber(data.views) }}
+                    </span>
                   </div>
                 </div>
-              </div>
-            </div>
-          </div>
-        </router-link>
-        <div
-          class="absolute left-[130px] bottom-4 w-auto h-auto text-[#6E6E6E] dark:text-[#637381]"
-        >
-          <ShareIcon />
-        </div>
-        <div
-          v-show="isShareOpen"
-          ref="menuRef"
-          class="absolute z-30 right-[0px] -bottom-[210px] md:-bottom-[210px] lg:-bottom-[220px] xl:-bottom-[220px] w-[180px] h-auto bg-green-500"
-        >
-          <div class="relative">
-            <img
-              src="@/assets/images/blog/share-frame2.svg"
-              alt=""
-              srcset=""
-              class="w-full h-auto object-cover relative"
-            />
-            <div
-              class="absolute w-full h-full top-3 px-5 flex flex-col gap-y-3 justify-center"
-            >
-              <div
-                class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
-                @click="copyLink(data.slug)"
-              >
-                <div class="w-auto h-auto">
-                  <img
-                    src="@/assets/images/blog/copy-link.svg"
-                    alt=""
-                    srcset=""
-                  />
-                </div>
-                <div class="w-[70%] h-auto flex items-center">Copy Link</div>
-              </div>
-              <div class="w-full h-[1px] bg-[#EBEBEB]" />
-              <div class="w-full h-auto flex flex-col gap-y-5 cursor-pointer">
-                <!-- Linked In -->
-                <div class="w-full h-auto cursor-pointer flex flex-row gap-x-3">
-                  <div class="w-auto h-auto">
-                    <img
-                      src="@/assets/images/blog/linkedin.png"
-                      alt=""
-                      srcset=""
-                    />
+                <div class="flex flex-row justify-between gap-x-1">
+                  <div class="w-full h-auto text-[#6E6E6E] dark:text-[#637381]">
+                    <CommentIcon />
                   </div>
-                  <div class="w-[70%] h-auto flex items-center">LinkedIn</div>
-                </div>
-                <!-- Facebook -->
-                <div class="w-full h-auto cursor-pointer flex flex-row gap-x-3">
-                  <div class="w-auto h-auto">
-                    <img
-                      src="@/assets/images/blog/facebook.png"
-                      alt=""
-                      srcset=""
-                    />
+                  <div class="w-full h-auto">
+                    <span class="text-[#6E6E6E] dark:text-[#637381]">
+                      {{ data.comments }}
+                    </span>
                   </div>
-                  <div class="w-[70%] h-auto flex items-center">Facebook</div>
                 </div>
-                <!-- Twitter -->
-                <div class="w-full h-auto cursor-pointer flex flex-row gap-x-3">
-                  <div class="w-auto h-auto">
-                    <img
-                      src="@/assets/images/blog/twitter.png"
-                      alt=""
-                      srcset=""
-                    />
+                <div class="relative flex w-full h-auto share-wrapper">
+                  <div
+                    class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer"
+                    @click.stop="toggleShare(data.id)"
+                  >
+                    <ShareIcon />
                   </div>
-                  <div class="w-[70%] h-auto flex items-center">Twitter(X)</div>
+                  <div
+                    v-show="activeShareId === data.id"
+                    class="absolute z-30 -left-[80px] -bottom-[210px] md:-bottom-[210px] lg:-bottom-[220px] xl:-bottom-[230px] w-[180px] h-auto"
+                  >
+                    <div class="relative">
+                      <img
+                        src="@/assets/images/blog/share-frame2.svg"
+                        alt=""
+                        srcset=""
+                        class="w-full h-auto object-cover relative"
+                      />
+                      <div
+                        class="absolute w-full h-full top-3 px-5 flex flex-col gap-y-3 justify-center"
+                      >
+                        <div
+                          class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
+                          @click="copyLink(data.slug)"
+                        >
+                          <div class="w-auto h-auto">
+                            <img
+                              src="@/assets/images/blog/copy-link.svg"
+                              alt=""
+                              srcset=""
+                            />
+                          </div>
+                          <div class="w-[70%] h-auto flex items-center">
+                            Copy Link
+                          </div>
+                        </div>
+                        <div class="w-full h-[1px] bg-[#EBEBEB]" />
+                        <div
+                          class="w-full h-auto flex flex-col gap-y-5 cursor-pointer"
+                        >
+                          <!-- Linked In -->
+                          <div
+                            class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
+                          >
+                            <div class="w-auto h-auto">
+                              <img
+                                src="@/assets/images/blog/linkedin.png"
+                                alt=""
+                                srcset=""
+                              />
+                            </div>
+                            <div class="w-[70%] h-auto flex items-center">
+                              LinkedIn
+                            </div>
+                          </div>
+                          <!-- Facebook -->
+                          <div
+                            class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
+                          >
+                            <div class="w-auto h-auto">
+                              <img
+                                src="@/assets/images/blog/facebook.png"
+                                alt=""
+                                srcset=""
+                              />
+                            </div>
+                            <div class="w-[70%] h-auto flex items-center">
+                              Facebook
+                            </div>
+                          </div>
+                          <!-- Twitter -->
+                          <div
+                            class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
+                          >
+                            <div class="w-auto h-auto">
+                              <img
+                                src="@/assets/images/blog/twitter.png"
+                                alt=""
+                                srcset=""
+                              />
+                            </div>
+                            <div class="w-[70%] h-auto flex items-center">
+                              Twitter(X)
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
