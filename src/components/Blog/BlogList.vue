@@ -93,21 +93,21 @@ const copyLink = async (slug) => {
 };
 
 const activeShareId = ref(null);
-const isShareOpen = ref(false);
-const menuRef = ref(null);
-const buttonRef = ref(null);
+// const isShareOpen = ref(false);
+// const menuRef = ref(null);
+// const buttonRef = ref(null);
 const toggleShare = (id) => {
   activeShareId.value = activeShareId.value === id ? null : id;
 };
-const toggleShareBlogs = (id) => {
-  if (activeShareId.value === id) {
-    // kalau menu yang sama diklik → tutup
-    activeShareId.value = null;
-  } else {
-    // kalau menu lain diklik → ganti ke id itu
-    activeShareId.value = id;
-  }
-};
+// const toggleShareBlogs = (id) => {
+//   if (activeShareId.value === id) {
+//     // kalau menu yang sama diklik → tutup
+//     activeShareId.value = null;
+//   } else {
+//     // kalau menu lain diklik → ganti ke id itu
+//     activeShareId.value = id;
+//   }
+// };
 const handleClickOutside = (event) => {
   // ambil semua share-wrapper
   const wrappers = document.querySelectorAll(".share-wrapper");
@@ -271,7 +271,7 @@ onBeforeUnmount(() => {
             >
               <div class="relative flex flex-col">
                 <div class="w-full h-auto flex flex-col gap-y-4">
-                  <figure class="w-full h-auto lg:h-auto">
+                  <figure class="w-full h-auto">
                     <!-- src="/assets/images/blog/new-example.png" -->
                     <img
                       :src="newestBlog.cover"
@@ -308,7 +308,7 @@ onBeforeUnmount(() => {
                     </div>
                     <div class="w-full h-auto">
                       <p
-                        class="text-[10px] sm:text-[14px] lg:text-[16px] text-[#637381] font-[400] break-words line-clamp-2 sm:line-clamp-3"
+                        class="text-[10px] sm:text-[14px] lg:text-[16px] text-[#637381] font-[400] break-words line-clamp-2 sm:line-clamp-2"
                       >
                         {{ newestBlog.synopsis }}
                       </p>
@@ -586,14 +586,14 @@ onBeforeUnmount(() => {
                   >
                     <div class="w-full sm:h-[40px] flex items-center">
                       <p
-                        class="text-[10px] sm:text-[14px] lg:text-[16px] text-[#111928] leading-tight font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] line-clamp-2"
+                        class="text-[10px] sm:text-[14px] lg:text-[16px] text-[#111928] leading-relaxed font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] line-clamp-2"
                       >
                         {{ data.title }}
                       </p>
                     </div>
                     <div class="w-full h-auto flex items-start">
                       <p
-                        class="text-[10px] sm:text-[12px] md:text-[12px] leading-tight line-clamp-2 lg:line-clamp-3 text-[#637381]"
+                        class="text-[10px] sm:text-[12px] md:text-[12px] leading-normal line-clamp-2 lg:line-clamp-3 text-[#637381]"
                       >
                         {{ data.synopsis }}
                       </p>
@@ -635,7 +635,7 @@ onBeforeUnmount(() => {
             class="flex flex-col w-full h-full p-4 rounded-[10px] bg-[#FAFAFA] dark:bg-[#1D1F23]"
           >
             <router-link :to="`/blog/${data.slug}`">
-              <div class="w-full h-auto lg:h-[180px]">
+              <div class="w-full h-auto">
                 <img
                   :src="data.cover"
                   alt="BlogImage"
@@ -665,7 +665,7 @@ onBeforeUnmount(() => {
                 </div>
               </div>
               <div
-                class="flex w-full h-[40px] sm:h-[45px] md:h-[50px] lg:h-[55px] text-left overflow-hidden"
+                class="flex w-full h-auto sm:h-[45px] md:h-[50px] lg:h-[55px] text-left overflow-hidden"
               >
                 <p
                   class="text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] line-clamp-2"
@@ -675,7 +675,7 @@ onBeforeUnmount(() => {
               </div>
               <div class="flex w-full h-auto justify-start items-start my-3">
                 <p
-                  class="text-[12px] lg:text-[14px] text-[#637381] line-clamp-3 lg:line-clamp-2"
+                  class="text-[12px] lg:text-[14px] text-[#637381] line-clamp-2 lg:line-clamp-2"
                 >
                   {{ data.synopsis }}
                 </p>
@@ -691,7 +691,7 @@ onBeforeUnmount(() => {
                   </div>
                   <div class="w-full h-auto flex items-center">
                     <span
-                      class="text-[12px] text-[#6E6E6E] dark:text-[#637381]"
+                      class="text-[12px] sm:text-[14px] text-[#6E6E6E] dark:text-[#637381]"
                     >
                       {{ utils.shortNumber(data.views) }}
                     </span>
@@ -705,7 +705,7 @@ onBeforeUnmount(() => {
                   </div>
                   <div class="w-full h-auto flex items-center">
                     <span
-                      class="text-[12px] text-[#6E6E6E] dark:text-[#637381]"
+                      class="text-[12px] sm:text-[14px] text-[#6E6E6E] dark:text-[#637381]"
                     >
                       {{ data.comments }}
                     </span>

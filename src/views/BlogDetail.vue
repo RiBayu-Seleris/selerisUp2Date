@@ -1,8 +1,20 @@
 <script setup>
 import Swal from "sweetalert2";
+import LikeIcon from "@/components/icons/Like.vue";
+import EyeIcon from "@/components/icons/Eye.vue";
+import CommentIcon from "@/components/icons/Comment.vue";
+import ShareIcon from "@/components/icons/Share.vue";
 import ArrowDown from "@/components/icons/ArrowDown.vue";
 import ToC from "@/components/Blog/ToC.vue";
-import { computed, nextTick, onMounted, reactive, ref, watch } from "vue";
+import {
+  computed,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  reactive,
+  ref,
+  watch,
+} from "vue";
 import { useRoute } from "vue-router";
 import { blogsApi } from "@/consumeAPI/blogsApi";
 import { useUtilsStore } from "@/stores/utils.js";
@@ -230,9 +242,50 @@ const handleSubmitComment = async () => {
   }
 };
 
+const blogUrl = `${window.location.origin}/blog/${blogDetail.slug}`;
+
+const copyLink = async (slug) => {
+  try {
+    const blogUrl = `${window.location.origin}/blog/${slug}`;
+    await navigator.clipboard.writeText(blogUrl);
+    copied.value = true;
+    setTimeout(() => (copied.value = false), 2000);
+  } catch (err) {
+    console.error("Gagal menyalin link:", err);
+  }
+};
+
+const activeShareId = ref(null);
+
+const toggleShare = (id) => {
+  activeShareId.value = activeShareId.value === id ? null : id;
+};
+
+const handleClickOutside = (event) => {
+  // ambil semua share-wrapper
+  const wrappers = document.querySelectorAll(".share-wrapper");
+
+  let clickedInside = false;
+  wrappers.forEach((wrapper) => {
+    if (wrapper.contains(event.target)) {
+      clickedInside = true;
+    }
+  });
+
+  if (!clickedInside) {
+    activeShareId.value = null;
+  }
+};
+
 onMounted(() => {
   getBlogBySlug(slug); // <= WAJIB
   getPopularBlog();
+
+  document.addEventListener("click", handleClickOutside);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener("click", handleClickOutside);
 });
 </script>
 
@@ -306,50 +359,199 @@ onMounted(() => {
         class="w-full h-auto flex flex-col-reverse lg:flex-row mt-10 gap-x-5"
       >
         <!-- Kolom kiri -->
-        <div class="w-full lg:w-[70%] h-auto flex flex-col gap-y-5 lg:pr-20">
-          <div class="w-full h-auto flex flex-col gap-y-4">
-            <div class="w-full h-auto">
-              <p class="text-[#18AB53] font-[500]">
-                Published {{ utils.fromISODate(blogDetail.created_at) }}
-              </p>
-            </div>
-            <div class="w-full h-auto">
-              <h1
-                class="text-[16px] sm:text-[20px] md:text-[24px] lg:text-[28px] text-[#195279] font-[500] leading-snug dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
-              >
-                {{ blogDetail.title }}
-              </h1>
-            </div>
-            <div class="w-full h-auto">
-              <p class="text-[14px] text-[#535862] font-[400] leading-normal">
-                Author:
-                <span class="text-[#535862] font-[600] dark:text-[#B3B3B3]">
-                  {{ blogDetail.author_name }}</span
+        <div class="w-full lg:w-[70%] h-auto flex flex-col -space-y-0 lg:pr-10">
+          <div class="w-full h-auto flex flex-col gap-y-5">
+            <div class="w-full h-auto flex flex-col gap-y-4">
+              <div class="w-full h-auto">
+                <p class="text-[#18AB53] font-[500]">
+                  Published {{ utils.fromISODate(blogDetail.created_at) }}
+                </p>
+              </div>
+              <div class="w-full h-auto">
+                <h1
+                  class="text-[16px] sm:text-[20px] md:text-[24px] lg:text-[28px] text-[#195279] font-[500] leading-snug dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                 >
+                  {{ blogDetail.title }}
+                </h1>
+              </div>
+              <div class="w-full h-auto">
+                <p class="text-[14px] text-[#535862] font-[400] leading-normal">
+                  Author:
+                  <span class="text-[#535862] font-[600] dark:text-[#B3B3B3]">
+                    {{ blogDetail.author_name }}</span
+                  >
+                </p>
+              </div>
+            </div>
+            <div class="w-full h-auto flex justify-start items-center">
+              <p
+                class="text-[14px] lg:text-[14px] text-[#6941C6] bg-[#7B61FF]/10 dark:bg-[#340777] px-4 py-1 rounded-full"
+              >
+                {{ blogDetail.category_name }}
               </p>
             </div>
-          </div>
-          <div class="w-full h-auto flex justify-start items-center">
-            <p
-              class="text-[14px] lg:text-[14px] text-[#6941C6] bg-[#7B61FF]/10 dark:bg-[#340777] px-4 py-1 rounded-full"
+            <!-- ref="articleRef" -->
+            <article
+              id="content"
+              class="w-full h-auto flex flex-col leading-relaxed text-[#535862] dark:text-[#DADADA] font-[400] space-y-6 lg:space-y-10 mt-5 text-[12px] sm:text-[14px] md:text-[16px]"
             >
-              {{ blogDetail.category_name }}
-            </p>
+              <p class="break-words">
+                {{ blogDetail.synopsis }}
+              </p>
+              <!-- Content Blog -->
+              <div
+                class="prose max-w-none dark:prose-invert prose-p:mt-2 prose-p:mb-0 prose-ul:my-0 prose-ol:my-0 prose-headings:mb-5 prose-headings:mt-5 break-words text-[12px] sm:text-[14px] md:text-[16px] font-[400] dark:[&_*]:!text-[#DADADA]"
+                v-html="safeContent"
+              ></div>
+            </article>
           </div>
-          <!-- ref="articleRef" -->
-          <article
-            id="content"
-            class="w-full h-auto flex flex-col leading-relaxed text-[#535862] dark:text-[#DADADA] font-[400] space-y-6 lg:space-y-10 mt-5"
+
+          <div
+            class="relative w-full h-auto flex flex-row justify-between sm:mt-0 mb-0"
           >
-            <p class="break-words">
-              {{ blogDetail.synopsis }}
-            </p>
-            <!-- Content Blog -->
-            <div
-              class="prose max-w-none dark:prose-invert prose-p:my-4 prose-ul:my-0 prose-ol:my-0 prose-headings:mb-2 prose-headings:mt-14 break-words text-[16px] font-[400] text-[#535862] dark:[&_*]:!text-[#DADADA]"
-              v-html="safeContent"
-            ></div>
-          </article>
+            <div class="w-auto flex flex-row gap-x-6 justify-start">
+              <div class="flex flex-row justify-between space-x-2">
+                <div
+                  class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
+                >
+                  <LikeIcon
+                    class="w-5 h-5 sm:w-auto sm:h-auto md:w-auto md:h-6 lg:w-auto lg:h-7"
+                  />
+                </div>
+                <div class="w-full h-auto flex items-center">
+                  <span
+                    class="text-[12px] sm:text-[14px] lg:text-[18px] text-[#6E6E6E] dark:text-[#637381]"
+                  >
+                    {{ utils.shortNumber(blogDetail.views) }}
+                  </span>
+                </div>
+              </div>
+              <div class="flex flex-row justify-between space-x-2">
+                <div
+                  class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
+                >
+                  <EyeIcon
+                    class="w-5 h-5 sm:w-auto sm:h-auto md:w-auto md:h-6 lg:w-auto lg:h-7"
+                  />
+                </div>
+                <div class="w-full h-auto flex items-center">
+                  <span
+                    class="text-[12px] sm:text-[14px] lg:text-[18px] text-[#6E6E6E] dark:text-[#637381]"
+                  >
+                    {{ utils.shortNumber(blogDetail.views) }}
+                  </span>
+                </div>
+              </div>
+              <div class="flex flex-row justify-between space-x-2">
+                <div
+                  class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
+                >
+                  <CommentIcon
+                    class="w-5 h-5 sm:w-auto sm:h-auto md:w-auto md:h-6 lg:w-auto lg:h-7"
+                  />
+                </div>
+                <div class="w-full h-auto flex items-center">
+                  <span
+                    class="text-[12px] sm:text-[14px] lg:text-[18px] text-[#6E6E6E] dark:text-[#637381]"
+                  >
+                    {{ blogDetail.comments }}
+                  </span>
+                </div>
+              </div>
+            </div>
+            <div class="relative flex w-full h-auto share-wrapper justify-end">
+              <div
+                class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer mr-6 lg:mr-0"
+                @click.stop="toggleShare(blogDetail.id)"
+              >
+                <ShareIcon
+                  class="w-5 h-5 sm:w-auto sm:h-auto md:w-auto md:h-6 lg:w-auto lg:h-7"
+                />
+              </div>
+              <div
+                v-show="activeShareId === blogDetail.id"
+                class="absolute z-30 -right-[200px] md:-right-[75px] -bottom-[230px] md:-bottom-[230px] lg:-bottom-[220px] xl:-bottom-[230px] w-[180px] h-auto"
+              >
+                <div class="relative">
+                  <img
+                    src="@/assets/images/blog/share-frame2.svg"
+                    alt=""
+                    srcset=""
+                    class="w-full h-auto object-cover relative"
+                  />
+                  <div
+                    class="absolute w-full h-full top-3 px-5 flex flex-col gap-y-3 justify-center"
+                  >
+                    <div
+                      class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
+                      @click="copyLink(blogDetail.slug)"
+                    >
+                      <div class="w-auto h-auto">
+                        <img
+                          src="@/assets/images/blog/copy-link.svg"
+                          alt=""
+                          srcset=""
+                        />
+                      </div>
+                      <div class="w-[70%] h-auto flex items-center">
+                        Copy Link
+                      </div>
+                    </div>
+                    <div class="w-full h-[1px] bg-[#EBEBEB]" />
+                    <div
+                      class="w-full h-auto flex flex-col gap-y-5 cursor-pointer"
+                    >
+                      <!-- Linked In -->
+                      <div
+                        class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
+                      >
+                        <div class="w-auto h-auto">
+                          <img
+                            src="@/assets/images/blog/linkedin.png"
+                            alt=""
+                            srcset=""
+                          />
+                        </div>
+                        <div class="w-[70%] h-auto flex items-center">
+                          LinkedIn
+                        </div>
+                      </div>
+                      <!-- Facebook -->
+                      <div
+                        class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
+                      >
+                        <div class="w-auto h-auto">
+                          <img
+                            src="@/assets/images/blog/facebook.png"
+                            alt=""
+                            srcset=""
+                          />
+                        </div>
+                        <div class="w-[70%] h-auto flex items-center">
+                          Facebook
+                        </div>
+                      </div>
+                      <!-- Twitter -->
+                      <div
+                        class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
+                      >
+                        <div class="w-auto h-auto">
+                          <img
+                            src="@/assets/images/blog/twitter.png"
+                            alt=""
+                            srcset=""
+                          />
+                        </div>
+                        <div class="w-[70%] h-auto flex items-center">
+                          Twitter(X)
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
 
         <!-- Kolom kanan -->
@@ -433,7 +635,7 @@ onMounted(() => {
       </div>
     </section>
     <!-- Comments -->
-    <section class="w-full lg:w-[70%] h-auto mt-20 flex flex-col">
+    <section class="w-full lg:w-[70%] h-auto mt-20 flex flex-col lg:pr-10">
       <div class="w-full h-auto flex flex-col">
         <div class="w-full">
           <p class="text-[#374151] font-[500]">
