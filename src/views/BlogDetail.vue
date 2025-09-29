@@ -315,13 +315,13 @@ onMounted(() => {
             </div>
             <div class="w-full h-auto">
               <h1
-                class="text-[24px] sm:text-[28px] md:text-[32px] lg:text-[38px] text-[#195279] font-[500] leading-snug dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                class="text-[16px] sm:text-[20px] md:text-[24px] lg:text-[28px] text-[#195279] font-[500] leading-snug dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
               >
                 {{ blogDetail.title }}
               </h1>
             </div>
-            <div class="w-full lg:w-[70%] h-auto">
-              <p class="text-[16px] text-[#535862] font-[400] leading-tight">
+            <div class="w-full h-auto">
+              <p class="text-[14px] text-[#535862] font-[400] leading-normal">
                 Author:
                 <span class="text-[#535862] font-[600] dark:text-[#B3B3B3]">
                   {{ blogDetail.author_name }}</span
@@ -346,7 +346,7 @@ onMounted(() => {
             </p>
             <!-- Content Blog -->
             <div
-              class="prose max-w-none dark:prose-invert dark:prose-white text-[16px] font-[400] text-[#535862] dark:text-[#DADADA] prose-p:my-2 prose-ul:my-0 prose-ol:my-0 prose-headings:mb-4 prose-headings:mt-4 break-words"
+              class="prose max-w-none dark:prose-invert prose-p:my-4 prose-ul:my-0 prose-ol:my-0 prose-headings:mb-2 prose-headings:mt-14 break-words text-[16px] font-[400] text-[#535862] dark:[&_*]:!text-[#DADADA]"
               v-html="safeContent"
             ></div>
           </article>
