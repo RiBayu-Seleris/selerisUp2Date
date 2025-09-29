@@ -564,7 +564,7 @@ onBeforeUnmount(() => {
                   />
                 </div>
                 <div
-                  class="w-[60%] sm:h-full flex flex-col items-start gap-y-4 rounded-lg justify-between"
+                  class="w-[60%] sm:h-full flex flex-col items-start gap-y-2 rounded-lg justify-between"
                 >
                   <div class="w-full h-[20%] flex items-center">
                     <p
@@ -574,14 +574,14 @@ onBeforeUnmount(() => {
                     </p>
                   </div>
                   <div class="w-full h-full flex flex-col items-center gap-y-3">
-                    <div class="w-full sm:h-full flex items-center">
+                    <div class="w-full h-[40px] flex items-center">
                       <p
-                        class="text-[14px] lg:text-[16px] text-[#111928] leading-tight font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                        class="text-[14px] lg:text-[16px] text-[#111928] leading-tight font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] line-clamp-2"
                       >
                         {{ data.title }}
                       </p>
                     </div>
-                    <div class="w-full h-full flex items-start">
+                    <div class="w-full h-auto flex items-start">
                       <p
                         class="text-[12px] md:text-[12px] leading-tight line-clamp-2 lg:line-clamp-3 text-[#637381]"
                       >
@@ -590,9 +590,9 @@ onBeforeUnmount(() => {
                     </div>
                   </div>
                   <div
-                    class="hidden w-full h-[15%] sm:flex flex-row items-center"
+                    class="hidden w-full h-auto sm:flex flex-row items-center"
                   >
-                    <div class="w-full">
+                    <div class="w-full h-[40px] flex items-end">
                       <p
                         class="text-[12px] md:text-[14px] text-[#535862] dark:text-[#6F6F6F]"
                       >
@@ -600,61 +600,11 @@ onBeforeUnmount(() => {
                         {{ utils.fromISODate(data.created_at) }}
                       </p>
                     </div>
-                    <!-- <div
-                      class="relative w-full items-center flex flex-row justify-end gap-x-2.5 pr-0"
-                    >
-                      <div
-                        class="flex flex-row justify-between gap-x-0.5 items-center"
-                      >
-                        <div
-                          class="w-full h-auto text-[#6E6E6E] dark:text-[#6E6E6E]"
-                        >
-                          <CommentIcon
-                            class="sm:w-[16px] sm:h-[16px] md:w-[18px] md:h-[18px]"
-                          />
-                        </div>
-                        <div class="w-full h-auto">
-                          <span
-                            class="sm:text-[12px] md:text-[14px] text-[#6E6E6E] dark:text-[#6E6E6E]"
-                          >
-                            {{ data.comments }}
-                          </span>
-                        </div>
-                      </div>
-                      <div
-                        class="flex flex-row justify-between gap-x-0.5 items-center"
-                      >
-                        <div
-                          class="w-full h-auto text-[#6E6E6E] dark:text-[#6E6E6E]"
-                        >
-                          <EyeIcon
-                            class="sm:w-[16px] sm:h-[16px] md:w-[18px] md:h-[18px]"
-                          />
-                        </div>
-                        <div class="w-full h-auto">
-                          <span
-                            class="sm:text-[12px] md:text-[14px] text-[#6E6E6E] dark:text-[#6E6E6E]"
-                          >
-                            {{ utils.shortNumber(data.views) }}
-                          </span>
-                        </div>
-                      </div>
-                    </div> -->
                   </div>
                 </div>
               </div>
             </div>
           </router-link>
-          <!-- Share button -->
-          <!-- <div
-            class="absolute right-[100px] z-20 bottom-[19px] lg:bottom-3 xl:bottom-3 w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer"
-            ref="buttonRef"
-            @click="toggleShare"
-          >
-            <ShareIcon
-              class="sm:w-[16px] sm:h-[16px] md:w-[18px] md:h-[18px]"
-            />
-          </div> -->
         </div>
       </div>
     </div>
@@ -703,7 +653,7 @@ onBeforeUnmount(() => {
                 </div>
               </div>
               <div
-                class="flex w-full h-[55px] md:h-[65px] lg:h-[55px] text-left overflow-hidden"
+                class="flex w-full h-[50px] sm:h-[45px] md:h-[50px] lg:h-[55px] text-left overflow-hidden"
               >
                 <p
                   class="sm:text-[14px] md:text-[16px] lg:text-[18px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] line-clamp-2"
@@ -750,7 +700,7 @@ onBeforeUnmount(() => {
                   </div>
                   <div
                     v-show="activeShareId === data.id"
-                    class="absolute z-30 -left-[80px] -bottom-[210px] md:-bottom-[210px] lg:-bottom-[220px] xl:-bottom-[230px] w-[180px] h-auto"
+                    class="absolute z-30 -left-[77px] md:-left-[80px] -bottom-[230px] md:-bottom-[230px] lg:-bottom-[220px] xl:-bottom-[230px] w-[180px] h-auto"
                   >
                     <div class="relative">
                       <img
