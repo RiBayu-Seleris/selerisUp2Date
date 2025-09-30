@@ -393,66 +393,66 @@ onBeforeUnmount(() => {
             <!-- ref="articleRef" -->
             <article
               id="content"
-              class="w-full h-auto flex flex-col leading-relaxed text-[#535862] dark:text-[#DADADA] font-[400] space-y-6 lg:space-y-10 mt-5 text-[12px] sm:text-[14px] md:text-[16px]"
+              class="w-full h-auto flex flex-col leading-loose text-[#535862] dark:text-[#DADADA] font-[500] space-y-6 lg:space-y-10 mt-5 text-[12px] sm:text-[14px] md:text-[16px]"
             >
               <p class="break-words">
                 {{ blogDetail.synopsis }}
               </p>
               <!-- Content Blog -->
               <div
-                class="prose max-w-none dark:prose-invert prose-p:mt-2 prose-p:mb-0 prose-ul:my-0 prose-ol:my-0 prose-headings:mb-5 prose-headings:mt-5 break-words text-[12px] sm:text-[14px] md:text-[16px] font-[400] dark:[&_*]:!text-[#DADADA]"
+                class="prose max-w-none text-[#535862] dark:prose-invert prose-p:mt-2 prose-p:mb-0 prose-ul:my-0 prose-ol:my-0 prose-headings:mb-1 prose-headings:mt-3 break-words text-[12px] sm:text-[14px] md:text-[16px] font-[400] dark:[&_*]:!text-[#DADADA] prose-p:leading-loose"
                 v-html="safeContent"
               ></div>
             </article>
           </div>
 
           <div
-            class="relative w-full h-auto flex flex-row justify-between sm:mt-0 mb-0"
+            class="relative w-full h-auto flex flex-row justify-between px-8 lg:px-0 pt-10"
           >
-            <div class="w-auto flex flex-row gap-x-6 justify-start">
-              <div class="flex flex-row justify-between space-x-2">
+            <div class="w-auto flex flex-row gap-x-4 justify-start">
+              <div class="flex flex-row justify-between space-x-0.5">
                 <div
                   class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                 >
                   <LikeIcon
-                    class="w-5 h-5 sm:w-auto sm:h-auto md:w-auto md:h-6 lg:w-auto lg:h-7"
+                    class="w-auto h-6 sm:w-auto sm:h-8 md:w-auto md:h-7 lg:w-8 lg:h-auto p-0.5"
                   />
                 </div>
-                <div class="w-full h-auto flex items-center">
+                <div class="w-full h-full flex items-center">
                   <span
-                    class="text-[12px] sm:text-[14px] lg:text-[18px] text-[#6E6E6E] dark:text-[#637381]"
+                    class="text-[14px] sm:text-[18px] lg:text-[20px] text-[#6E6E6E] dark:text-[#637381]"
                   >
-                    {{ utils.shortNumber(blogDetail.views) }}
+                    {{ utils.shortNumber(blogDetail.likes) }}
                   </span>
                 </div>
               </div>
-              <div class="flex flex-row justify-between space-x-2">
+              <div class="flex flex-row justify-between space-x-0.5">
                 <div
                   class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                 >
                   <EyeIcon
-                    class="w-5 h-5 sm:w-auto sm:h-auto md:w-auto md:h-6 lg:w-auto lg:h-7"
+                    class="w-auto h-6 sm:w-auto sm:h-8 md:w-auto md:h-7 lg:w-8 lg:h-auto p-0.5"
                   />
                 </div>
-                <div class="w-full h-auto flex items-center">
+                <div class="w-full h-full flex items-center">
                   <span
-                    class="text-[12px] sm:text-[14px] lg:text-[18px] text-[#6E6E6E] dark:text-[#637381]"
+                    class="text-[14px] sm:text-[18px] lg:text-[20px] text-[#6E6E6E] dark:text-[#637381]"
                   >
                     {{ utils.shortNumber(blogDetail.views) }}
                   </span>
                 </div>
               </div>
-              <div class="flex flex-row justify-between space-x-2">
+              <div class="flex flex-row justify-between space-x-0.5">
                 <div
                   class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                 >
                   <CommentIcon
-                    class="w-5 h-5 sm:w-auto sm:h-auto md:w-auto md:h-6 lg:w-auto lg:h-7"
+                    class="w-auto h-6 sm:w-auto sm:h-8 md:w-auto md:h-7 lg:w-8 lg:h-auto p-0.5"
                   />
                 </div>
-                <div class="w-full h-auto flex items-center">
+                <div class="w-full h-full flex items-center">
                   <span
-                    class="text-[12px] sm:text-[14px] lg:text-[18px] text-[#6E6E6E] dark:text-[#637381]"
+                    class="text-[14px] sm:text-[18px] lg:text-[20px] text-[#6E6E6E] dark:text-[#637381]"
                   >
                     {{ blogDetail.comments }}
                   </span>
@@ -461,16 +461,16 @@ onBeforeUnmount(() => {
             </div>
             <div class="relative flex w-full h-auto share-wrapper justify-end">
               <div
-                class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer mr-6 lg:mr-0"
+                class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer mr-5 lg:mr-0"
                 @click.stop="toggleShare(blogDetail.id)"
               >
                 <ShareIcon
-                  class="w-5 h-5 sm:w-auto sm:h-auto md:w-auto md:h-6 lg:w-auto lg:h-7"
+                  class="w-auto h-6 sm:w-auto sm:h-8 md:w-auto md:h-7 lg:w-8 lg:h-auto p-0.5"
                 />
               </div>
               <div
                 v-show="activeShareId === blogDetail.id"
-                class="absolute z-30 -right-[200px] md:-right-[75px] -bottom-[230px] md:-bottom-[230px] lg:-bottom-[220px] xl:-bottom-[230px] w-[180px] h-auto"
+                class="absolute z-30 -right-[40px] sm:-right-[40px] md:-right-[35px] lg:-right-[75px] -bottom-[190px] md:-bottom-[190px] lg:-bottom-[220px] xl:-bottom-[230px] w-[150px] lg:w-[180px] h-auto"
               >
                 <div class="relative">
                   <img
@@ -480,13 +480,13 @@ onBeforeUnmount(() => {
                     class="w-full h-auto object-cover relative"
                   />
                   <div
-                    class="absolute w-full h-full top-3 px-5 flex flex-col gap-y-3 justify-center"
+                    class="absolute w-full h-full top-2 lg:top-3 px-5 flex flex-col gap-y-3 sm:gap-y-3 justify-center"
                   >
                     <div
-                      class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
+                      class="w-full h-auto cursor-pointer flex flex-row items-center gap-x-2 lg:gap-x-3"
                       @click="copyLink(blogDetail.slug)"
                     >
-                      <div class="w-auto h-auto">
+                      <div class="w-5 h-auto lg:w-auto lg:h-auto">
                         <img
                           src="@/assets/images/blog/copy-link.svg"
                           alt=""
@@ -494,18 +494,20 @@ onBeforeUnmount(() => {
                         />
                       </div>
                       <div class="w-[70%] h-auto flex items-center">
-                        Copy Link
+                        <span class="text-[14px] text-[#8C8C8C]"
+                          >Copy Link</span
+                        >
                       </div>
                     </div>
                     <div class="w-full h-[1px] bg-[#EBEBEB]" />
                     <div
-                      class="w-full h-auto flex flex-col gap-y-5 cursor-pointer"
+                      class="w-full h-auto flex flex-col gap-y-4 lg:gap-y-5 cursor-pointer"
                     >
                       <!-- Linked In -->
                       <div
-                        class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
+                        class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                       >
-                        <div class="w-auto h-auto">
+                        <div class="w-5 h-auto lg:w-auto lg:h-auto">
                           <img
                             src="@/assets/images/blog/linkedin.png"
                             alt=""
@@ -513,14 +515,16 @@ onBeforeUnmount(() => {
                           />
                         </div>
                         <div class="w-[70%] h-auto flex items-center">
-                          LinkedIn
+                          <span class="text-[14px] text-[#8C8C8C]"
+                            >LinkedIn</span
+                          >
                         </div>
                       </div>
                       <!-- Facebook -->
                       <div
-                        class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
+                        class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                       >
-                        <div class="w-auto h-auto">
+                        <div class="w-5 h-auto lg:w-auto lg:h-auto">
                           <img
                             src="@/assets/images/blog/facebook.png"
                             alt=""
@@ -528,14 +532,16 @@ onBeforeUnmount(() => {
                           />
                         </div>
                         <div class="w-[70%] h-auto flex items-center">
-                          Facebook
+                          <span class="text-[14px] text-[#8C8C8C]"
+                            >Facebook</span
+                          >
                         </div>
                       </div>
                       <!-- Twitter -->
                       <div
-                        class="w-full h-auto cursor-pointer flex flex-row gap-x-3"
+                        class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                       >
-                        <div class="w-auto h-auto">
+                        <div class="w-5 h-auto lg:w-auto lg:h-auto">
                           <img
                             src="@/assets/images/blog/twitter.png"
                             alt=""
@@ -543,7 +549,9 @@ onBeforeUnmount(() => {
                           />
                         </div>
                         <div class="w-[70%] h-auto flex items-center">
-                          Twitter(X)
+                          <span class="text-[14px] text-[#8C8C8C]"
+                            >Twitter(X)</span
+                          >
                         </div>
                       </div>
                     </div>

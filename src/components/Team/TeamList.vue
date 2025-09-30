@@ -12,14 +12,14 @@ const directorSeniorteams = [
     name: "Rinaldi Anwar",
     position: "Founder & CEO",
   },
-  {
-    image: new URL(
-      "@/assets/images/leadership-teams/shandy.png",
-      import.meta.url
-    ).href,
-    name: "Shandy Rahussholihin",
-    position: "Chief Operation Officer",
-  },
+  // {
+  //   image: new URL(
+  //     "@/assets/images/leadership-teams/shandy.png",
+  //     import.meta.url
+  //   ).href,
+  //   name: "Shandy Rahussholihin",
+  //   position: "Chief Operation Officer",
+  // },
   {
     image: new URL(
       "@/assets/images/leadership-teams/fendy.png",
