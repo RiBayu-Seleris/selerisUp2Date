@@ -50,6 +50,19 @@ export function blogsApi() {
   };
   //End Loading counter
 
+  // get category list
+  const fetchCategory = async () => {
+    try {
+      const response = await axios.get(
+        `${BASE_URL}/api/v1/app/blogs/categories`,
+        headerApi
+      );
+      console.log(response);
+      if (condition) {
+      }
+    } catch (error) {}
+  };
+
   const getAllBlogs = async () => {
     startLoading();
     try {
@@ -211,6 +224,7 @@ export function blogsApi() {
   };
 
   return {
+    fetchCategory, // Get Category
     blogs,
     blogDetail,
     newestBlog,

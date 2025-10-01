@@ -63,12 +63,14 @@ const clientLogos = [
   new URL("@/assets/images/clients-and-partners/fpg.png", import.meta.url).href,
   new URL("@/assets/images/clients-and-partners/heksa.png", import.meta.url)
     .href,
-  new URL(
-    "@/assets/images/clients-and-partners/jamkrida-banten.png",
-    import.meta.url
-  ).href,
-  new URL("@/assets/images/clients-and-partners/nexus.png", import.meta.url)
+  new URL("@/assets/images/clients-and-partners/equity.png", import.meta.url)
     .href,
+  // new URL(
+  //   "@/assets/images/clients-and-partners/jamkrida-banten.png",
+  //   import.meta.url
+  // ).href,
+  // new URL("@/assets/images/clients-and-partners/nexus.png", import.meta.url)
+  //   .href,
 ];
 
 const clientLogosDark = [
@@ -87,13 +89,17 @@ const clientLogosDark = [
     import.meta.url
   ).href,
   new URL(
-    "@/assets/images/clients-and-partners/jamkrida-banten-dark.png",
+    "@/assets/images/clients-and-partners/equity-dark.png",
     import.meta.url
   ).href,
-  new URL(
-    "@/assets/images/clients-and-partners/nexus-dark.png",
-    import.meta.url
-  ).href,
+  // new URL(
+  //   "@/assets/images/clients-and-partners/jamkrida-banten-dark.png",
+  //   import.meta.url
+  // ).href,
+  // new URL(
+  //   "@/assets/images/clients-and-partners/nexus-dark.png",
+  //   import.meta.url
+  // ).href,
 ];
 
 function chunkArray(array, size) {
@@ -178,7 +184,7 @@ onBeforeUnmount(() => {
     </div>
 
     <!-- Content Grid Light -->
-    <transition name="fade" mode="out-in" class="dark:hidden">
+    <transition name="fade" mode="out-in" class="dark:hidden h-[200px]">
       <div :key="showPartners" class="flex flex-col items-center gap-6 mt-5">
         <template v-if="showPartners">
           <div
@@ -196,9 +202,9 @@ onBeforeUnmount(() => {
                 ? 'grid-cols-4'
                 : 'grid-cols-5',
               row.length < columnsPerRow ? 'justify-center' : '',
-              rowIndex === 1 ? 'px-24' : '',
             ]"
           >
+            <!-- rowIndex === 1 ? 'px-24' : 'px-0', -->
             <div
               v-for="(logo, index) in row"
               :key="`${rowIndex}-${index}`"
@@ -248,7 +254,7 @@ onBeforeUnmount(() => {
     </transition>
 
     <!-- Content Grid Dark -->
-    <transition name="fade" mode="out-in" class="hidden dark:flex">
+    <transition name="fade" mode="out-in" class="hidden dark:flex h-[200px]">
       <div :key="showPartners" class="flex flex-col items-center gap-6 mt-5">
         <template v-if="showPartners">
           <div

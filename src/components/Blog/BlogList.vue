@@ -21,10 +21,23 @@ const isCategoryOpen = ref(false);
 const isPostTimeOpen = ref(false);
 const selectedCategory = ref("All Articles");
 const selectedPostTime = ref("Latest");
-const isOpenCategory = ref(false);
-const isOpenPostTime = ref(false);
+const activeShareId = ref(null);
 
-const PostsTime = ["Latest", "Most Like", "Most View"];
+const PostsTime = [
+  {
+    id: 1,
+    name: "Latest",
+  },
+  {
+    id: 2,
+    name: "Most Like",
+  },
+  {
+    id: 3,
+    name: "Most View",
+  },
+];
+
 const Categories = [
   {
     id: 1,
@@ -68,6 +81,7 @@ const {
   newestError,
   popularError,
   blogsError,
+  fetchCategory,
 } = blogsApi();
 
 // bikin URL lengkap berdasarkan slug
@@ -91,16 +105,16 @@ const toggleCategory = () => {
   activeShareId.value = null;
 };
 
-const togglePostTime = () => {
-  isPostTimeOpen.value = !isPostTimeOpen.value;
-  isCategoryOpen.value = false;
-  activeShareId.value = null;
-};
-
 // pilih opsi
 const chooseCategory = (option) => {
   selectedCategory.value = option;
   isCategoryOpen.value = false;
+};
+
+const togglePostTime = () => {
+  isPostTimeOpen.value = !isPostTimeOpen.value;
+  isCategoryOpen.value = false;
+  activeShareId.value = null;
 };
 
 const choosePostTime = (option) => {
@@ -108,46 +122,28 @@ const choosePostTime = (option) => {
   isPostTimeOpen.value = false;
 };
 
-const activeShareId = ref(null);
+// toggle share
 const toggleShare = (id) => {
   activeShareId.value = activeShareId.value === id ? null : id;
   isCategoryOpen.value = false;
   isPostTimeOpen.value = false;
 };
+
+// helper untuk cek klik di luar
+const isClickOutside = (selector, event) => {
+  const elements = document.querySelectorAll(selector);
+  return ![...elements].some((el) => el.contains(event.target));
+};
+
+// klik luar → tutup semua
 const handleClickOutside = (event) => {
-  // cek category
-  const categoryBoxes = document.querySelectorAll(".category-box");
-  let inCategory = false;
-  categoryBoxes.forEach((box) => {
-    if (box.contains(event.target)) {
-      inCategory = true;
-    }
-  });
-  if (!inCategory) {
+  if (isClickOutside(".category-box", event)) {
     isCategoryOpen.value = false;
   }
-
-  // cek posttime
-  const posttimeBoxes = document.querySelectorAll(".posttime-box");
-  let inPostTime = false;
-  posttimeBoxes.forEach((box) => {
-    if (box.contains(event.target)) {
-      inPostTime = true;
-    }
-  });
-  if (!inPostTime) {
+  if (isClickOutside(".posttime-box", event)) {
     isPostTimeOpen.value = false;
   }
-
-  // cek share
-  const shareWrappers = document.querySelectorAll(".share-wrapper");
-  let inShare = false;
-  shareWrappers.forEach((wrapper) => {
-    if (wrapper.contains(event.target)) {
-      inShare = true;
-    }
-  });
-  if (!inShare) {
+  if (isClickOutside(".share-wrapper", event)) {
     activeShareId.value = null;
   }
 };
@@ -156,6 +152,7 @@ onMounted(() => {
   getAllBlogs();
   getNewestBlog();
   getPopularBlog();
+  fetchCategory();
   document.addEventListener("click", handleClickOutside);
 });
 
@@ -227,19 +224,19 @@ watch(searchQuery, (newQuery) => {
         >
           <p>{{ selectedCategory }}</p>
           <ChevronDown
-            :class="isOpenCategory ? 'rotate-180 transition' : 'transition'"
+            :class="isCategoryOpen ? 'rotate-180 transition' : 'transition'"
           />
         </div>
 
         <!-- List dropdown -->
         <div
-          v-if="isOpenCategory"
+          v-if="isCategoryOpen"
           class="absolute left-0 top-12 mt-1 w-full border-[2px] rounded-[5px] shadow bg-white z-10"
         >
           <div
             v-for="(category, index) in Categories"
             :key="index"
-            @click.stop="selectCategory(category.name)"
+            @click.stop="chooseCategory(category.name)"
             class="px-5 py-2 hover:bg-gray-100 cursor-pointer"
           >
             {{ category.name }}
@@ -631,7 +628,10 @@ watch(searchQuery, (newQuery) => {
             </router-link>
             <div class="relative w-full h-auto flex flex-row mt-4 mb-0 lg:mb-4">
               <div class="w-auto flex flex-row gap-x-3 justify-start">
-                <div class="flex flex-row justify-between gap-x-1">
+                <router-link
+                  :to="`/blog/${newestBlog.slug}`"
+                  class="flex flex-row justify-between gap-x-1"
+                >
                   <div
                     class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                   >
@@ -644,8 +644,11 @@ watch(searchQuery, (newQuery) => {
                       {{ utils.shortNumber(newestBlog.views) }}
                     </span>
                   </div>
-                </div>
-                <div class="flex flex-row justify-between gap-x-1">
+                </router-link>
+                <router-link
+                  :to="`/blog/${newestBlog.slug}`"
+                  class="flex flex-row justify-between gap-x-1"
+                >
                   <div
                     class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                   >
@@ -658,7 +661,7 @@ watch(searchQuery, (newQuery) => {
                       {{ newestBlog.comments }}
                     </span>
                   </div>
-                </div>
+                </router-link>
                 <div class="relative flex w-full h-auto share-wrapper">
                   <div
                     class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer flex items-center"
@@ -806,7 +809,7 @@ watch(searchQuery, (newQuery) => {
                     <div class="col-span-3 w-full flex justify-center">
                       <p class="text-[24px] text-[#8EB3CC]">#{{ index + 1 }}</p>
                     </div>
-                    <div class="col-span-9 w-full flex flex-col gap-y-1">
+                    <div class="col-span-9 w-full flex flex-col gap-y-2">
                       <p class="text-[#6941C6] dark:text-[#2AB857] text-[14px]">
                         {{ data.category_name }}
                       </p>
@@ -985,9 +988,12 @@ watch(searchQuery, (newQuery) => {
                 </p>
               </div>
             </router-link>
-            <div class="relative w-full h-auto flex flex-row mt-4 mb-0 xl:mb-4">
+            <div class="relative w-full h-auto flex flex-row mt-4 mb-0 xl:mb-0">
               <div class="w-auto flex flex-row gap-x-3 justify-start">
-                <div class="flex flex-row justify-between gap-x-1">
+                <router-link
+                  :to="`/blog/${data.slug}`"
+                  class="flex flex-row justify-between gap-x-1"
+                >
                   <div
                     class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                   >
@@ -997,11 +1003,14 @@ watch(searchQuery, (newQuery) => {
                     <span
                       class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
                     >
-                      {{ utils.shortNumber(newestBlog.views) }}
+                      {{ utils.shortNumber(data.views) }}
                     </span>
                   </div>
-                </div>
-                <div class="flex flex-row justify-between gap-x-1">
+                </router-link>
+                <router-link
+                  :to="`/blog/${data.slug}`"
+                  class="flex flex-row justify-between gap-x-1"
+                >
                   <div
                     class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                   >
@@ -1011,10 +1020,10 @@ watch(searchQuery, (newQuery) => {
                     <span
                       class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
                     >
-                      {{ newestBlog.comments }}
+                      {{ data.comments }}
                     </span>
                   </div>
-                </div>
+                </router-link>
                 <div class="relative flex w-full h-auto share-wrapper">
                   <div
                     class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer flex items-center"
