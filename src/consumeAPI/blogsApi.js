@@ -24,6 +24,7 @@ export function blogsApi() {
   const newestBlog = ref([]);
   const popularBlog = ref([]);
   const blogDetail = ref(null);
+  const categories = ref([]);
 
   // Error Per Section
   const blogDetailError = ref(null);
@@ -57,27 +58,41 @@ export function blogsApi() {
         `${BASE_URL}/api/v1/app/blogs/categories`,
         headerApi
       );
-      console.log(response);
-      if (condition) {
+      if (response.data?.data) {
+        categories.value = [
+          { id: 0, name: "All Articles" },
+          ...response.data.data,
+        ];
       }
-    } catch (error) {}
+    } catch (error) {
+      console.error("Gagal fetch category:", error);
+    }
   };
 
-  const getAllBlogs = async () => {
+  const getAllBlogs = async (params = {}) => {
     startLoading();
     try {
-      const response = await axios.get(
-        `${BASE_URL}/api/v1/app/blogs`,
-        headerApi
-      );
-      if (response.data.status !== 200) {
-        console.log("Blogs Data Not Found");
-        return;
+      const response = await axios.get(`${BASE_URL}/api/v1/app/blogs`, {
+        headers: headerApi.headers,
+        params,
+      });
+
+      let result = [];
+
+      if (Array.isArray(response.data?.data)) {
+        // kasus: data langsung array
+        result = response.data.data;
+      } else if (Array.isArray(response.data?.data?.data)) {
+        // kasus: data nested (pakai pagination)
+        result = response.data.data.data;
       }
 
-      blogs.value = response.data.data;
+      blogs.value = result;
+
+      console.log("Response blogs (final):", blogs.value);
     } catch (err) {
       handleError(err);
+      blogs.value = [];
     } finally {
       stopLoading();
     }
@@ -224,6 +239,7 @@ export function blogsApi() {
   };
 
   return {
+    categories, //Set Category
     fetchCategory, // Get Category
     blogs,
     blogDetail,

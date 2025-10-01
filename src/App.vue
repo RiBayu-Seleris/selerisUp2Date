@@ -106,7 +106,7 @@ const isBlogDetail = computed(() => route.path.startsWith("/blog/"));
 <template>
   <!-- ⏳ Initial Loading Screen -->
   <div
-    v-if="!isLoad"
+    v-if="!isLoad && !route.path.startsWith('/blog/')"
     class="fixed inset-0 flex flex-col items-center justify-center bg-[#F9F9F9] dark:bg-[#17181A] z-[9999]"
   >
     <!-- Loader Frame -->
@@ -158,9 +158,8 @@ const isBlogDetail = computed(() => route.path.startsWith("/blog/"));
           <!-- Navbar -->
           <div
             class="flex fixed top-0 w-full h-auto z-50 transition-all duration-300 ease-in-out"
-            v-if="!['/test-embed'].includes(route.path)"
           >
-            <Navbar v-if="!['/test-embed'].includes(route.path)" />
+            <Navbar />
           </div>
 
           <!-- Scroll Tooltip -->

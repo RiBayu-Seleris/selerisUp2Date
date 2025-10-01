@@ -114,7 +114,6 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/typography"), // ini boleh tetap
-    require("@tailwindcss/line-clamp"), // ⬅️ plugin yang diperlukan
   ],
   // safelist: ["p-[2px]", "p-[4px]", "p-[5px]", "p-[10px]"],
 };

@@ -15,61 +15,42 @@ import { useUtilsStore } from "@/stores/utils.js";
 import { useRoute } from "vue-router";
 
 const utils = useUtilsStore();
-const isOpenCategory = ref(false);
+
+// state dropdown
+const isCategoryOpen = ref(false);
 const selectedCategory = ref("All Articles");
+const isPostTimeOpen = ref(false);
+const selectedPostTime = ref("Latest");
+const activeShareId = ref(null);
+
+const PostsTime = [
+  {
+    id: 1,
+    name: "Latest",
+  },
+  {
+    id: 2,
+    name: "Most Like",
+  },
+  {
+    id: 3,
+    name: "Most View",
+  },
+];
+
+// const Categories = ref({});
 
 const searchQuery = ref(""); // Search Input
 let timeout = null; // timer untuk manual delay / "debounce"
 const results = ref([]); // 🔥 state untuk simpan hasil
 const loadingTyping = ref(false); //State loading untuk search query
 
-const Categories = [
-  {
-    id: 1,
-    name: "All Articles",
-  },
-  {
-    id: 2,
-    name: "Technology",
-  },
-  {
-    id: 3,
-    name: "Design",
-  },
-  {
-    id: 4,
-    name: "Business",
-  },
-];
-// const Categories = ref({});
-
-const isOpenPostTime = ref(false);
-const selectedPostTime = ref("Latest");
-const PostsTime = ["Latest", "Most Like", "Most View"];
-
-const handleCategory = () => {
-  isOpenCategory.value = !isOpenCategory.value;
-  isOpenPostTime.value = false;
-};
-const handlePostTime = () => {
-  isOpenPostTime.value = !isOpenPostTime.value;
-  isOpenCategory.value = false;
-};
-
-const selectCategory = (option) => {
-  selectedCategory.value = option;
-  isOpenCategory.value = false;
-};
-const selectPostTime = (option) => {
-  selectedPostTime.value = option;
-  isOpenPostTime.value = false;
-};
-
 // CopyLink
 const route = useRoute();
 const copied = ref(false);
 
 const {
+  categories,
   blogs,
   blogDetail,
   newestBlog,
@@ -83,6 +64,7 @@ const {
   newestError,
   popularError,
   blogsError,
+  fetchCategory,
 } = blogsApi();
 
 // bikin URL lengkap berdasarkan slug
@@ -99,22 +81,62 @@ const copyLink = async (slug) => {
   }
 };
 
-const activeShareId = ref(null);
+// toggle dropdown
+const toggleCategory = () => {
+  isCategoryOpen.value = !isCategoryOpen.value;
+  isPostTimeOpen.value = false;
+  activeShareId.value = null;
+};
+
+// pilih opsi
+const chooseCategory = (category) => {
+  console.log("Dipilih kategori:", category); // 👈 log dulu
+
+  selectedCategory.value = category.name;
+  isCategoryOpen.value = false;
+
+  if (category.id === 0) {
+    console.log("Ambil semua artikel"); // 👈 log juga
+    getAllBlogs();
+  } else {
+    console.log("Filter ke kategori id:", category.id);
+    getAllBlogs({ category_id: category.id });
+  }
+};
+
+const togglePostTime = () => {
+  isPostTimeOpen.value = !isPostTimeOpen.value;
+  isCategoryOpen.value = false;
+  activeShareId.value = null;
+};
+
+const choosePostTime = (option) => {
+  selectedPostTime.value = option;
+  isPostTimeOpen.value = false;
+};
+
+// toggle share
 const toggleShare = (id) => {
   activeShareId.value = activeShareId.value === id ? null : id;
+  isCategoryOpen.value = false;
+  isPostTimeOpen.value = false;
 };
+
+// helper untuk cek klik di luar
+const isClickOutside = (selector, event) => {
+  const elements = document.querySelectorAll(selector);
+  return ![...elements].some((el) => el.contains(event.target));
+};
+
+// klik luar → tutup semua
 const handleClickOutside = (event) => {
-  // ambil semua share-wrapper
-  const wrappers = document.querySelectorAll(".share-wrapper");
-
-  let clickedInside = false;
-  wrappers.forEach((wrapper) => {
-    if (wrapper.contains(event.target)) {
-      clickedInside = true;
-    }
-  });
-
-  if (!clickedInside) {
+  if (isClickOutside(".category-box", event)) {
+    isCategoryOpen.value = false;
+  }
+  if (isClickOutside(".posttime-box", event)) {
+    isPostTimeOpen.value = false;
+  }
+  if (isClickOutside(".share-wrapper", event)) {
     activeShareId.value = null;
   }
 };
@@ -123,6 +145,7 @@ onMounted(() => {
   getAllBlogs();
   getNewestBlog();
   getPopularBlog();
+  fetchCategory();
   document.addEventListener("click", handleClickOutside);
 });
 
@@ -158,7 +181,7 @@ watch(searchQuery, (newQuery) => {
     } finally {
       loadingTyping.value = false; // selesai loading setelah fetch
     }
-  }, 1000);
+  }, 2000);
 });
 </script>
 
@@ -168,10 +191,10 @@ watch(searchQuery, (newQuery) => {
   >
     <!-- Search Frame -->
     <div
-      class="w-full h-14 flex flex-row items-center border-2 dark:bg-[#535353] px-2 md:px-4 rounded-[5px] md:gap-x-3 lg:gap-x-3 xl:gap-x-2.5"
+      class="w-full h-14 flex flex-row items-center border-[1.5px] dark:bg-[#535353] px-4 md:px-4 rounded-[5px] gap-x-2 md:gap-x-3 lg:gap-x-3 xl:gap-x-2.5"
     >
       <div
-        class="w-[15%] md:w-[5%] h-full flex justify-center items-center text-[#6C6C6C] dark:text-[#ADADAD]"
+        class="w-[10%] sm:w-[15%] md:w-[5%] h-full flex justify-center items-center text-[#6C6C6C] dark:text-[#ADADAD]"
       >
         <SearchIcon />
       </div>
@@ -184,42 +207,51 @@ watch(searchQuery, (newQuery) => {
         />
       </div>
     </div>
+
     <div class="w-full h-[50px] grid grid-cols-12 gap-x-2 mt-5">
-      <!-- Tombol utama -->
-      <div
-        @click="handleCategory"
-        class="relative col-span-4 h-auto border-[2px] flex flex-row items-center px-5 py-2 rounded-[5px] justify-between cursor-pointer select-none"
-      >
-        <p>{{ selectedCategory }}</p>
-        <ChevronDown
-          :class="isOpenCategory ? 'rotate-180 transition' : 'transition'"
-        />
+      <!-- Category -->
+      <div class="category-box relative col-span-4">
+        <div
+          @click="toggleCategory"
+          class="h-auto border-[2px] flex flex-row items-center px-5 py-2 rounded-[5px] justify-between cursor-pointer select-none"
+        >
+          <p>{{ selectedCategory }}</p>
+          <ChevronDown
+            :class="isCategoryOpen ? 'rotate-180 transition' : 'transition'"
+          />
+        </div>
+
         <!-- List dropdown -->
         <div
-          v-if="isOpenCategory"
+          v-if="isCategoryOpen"
           class="absolute left-0 top-12 mt-1 w-full border-[2px] rounded-[5px] shadow bg-white z-10"
         >
           <div
-            v-for="(category, index) in Categories"
+            v-for="(category, index) in categories"
             :key="index"
-            @click.stop="selectCategory(category.name)"
+            @click.stop="chooseCategory(category)"
             class="px-5 py-2 hover:bg-gray-100 cursor-pointer"
           >
             {{ category.name }}
           </div>
         </div>
       </div>
-      <div
-        @click="handlePostTime"
-        class="relative col-span-4 h-auto border-[2px] flex flex-row items-center px-5 py-2 rounded-[5px] justify-between cursor-pointer select-none"
-      >
-        <p>{{ selectedPostTime }}</p>
-        <ChevronDown
-          :class="isOpenPostTime ? 'rotate-180 transition' : 'transition'"
-        />
+
+      <!-- PostTime -->
+      <div class="posttime-box relative col-span-4">
+        <div
+          @click="togglePostTime"
+          class="h-auto border-[2px] flex flex-row items-center px-5 py-2 rounded-[5px] justify-between cursor-pointer select-none"
+        >
+          <p>{{ selectedPostTime }}</p>
+          <ChevronDown
+            :class="isPostTimeOpen ? 'rotate-180 transition' : 'transition'"
+          />
+        </div>
+
         <!-- List dropdown -->
         <div
-          v-if="isOpenPostTime"
+          v-if="isPostTimeOpen"
           class="absolute left-0 top-12 mt-1 w-full border-[2px] rounded-[5px] shadow bg-white z-10"
         >
           <div
@@ -232,6 +264,8 @@ watch(searchQuery, (newQuery) => {
           </div>
         </div>
       </div>
+
+      <!-- Custom Date -->
       <div
         class="col-span-4 h-auto border-[2px] flex flex-row items-center px-5 rounded-[5px] justify-between"
       >
@@ -260,10 +294,236 @@ watch(searchQuery, (newQuery) => {
   </section>
 
   <!-- Loading Search Query Section -->
-  <div v-if="loadingTyping">Mencari Blog</div>
+  <div
+    v-if="loadingTyping"
+    class="w-full h-auto lg:px-0 pt-4 flex justify-center"
+  >
+    <!-- Loader Frame -->
+    <video
+      autoplay
+      loop
+      muted
+      playsinline
+      @contextmenu.prevent
+      class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center dark:hidden"
+    >
+      <source src="@/assets/videos/loading.mp4" type="video/mp4" />
+    </video>
+
+    <video
+      autoplay
+      loop
+      muted
+      playsinline
+      @contextmenu.prevent
+      class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center hidden dark:flex"
+    >
+      <source src="@/assets/videos/dark-loading.mp4" type="video/mp4" />
+    </video>
+  </div>
+
+  <!-- Hasil Filter by Category -->
+  <div
+    v-if="selectedCategory !== 'All Articles' && !searchQuery && !loadingTyping"
+    class="w-full h-auto mt-5"
+  >
+    <div
+      v-if="blogs.length > 0"
+      class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-5 mb-20 px-8 md:px-8 xl:px-0 pb-20"
+    >
+      <div
+        v-for="(data, index) in blogs"
+        :key="index.id"
+        class="relative w-full h-full !p-[1px] rounded-[10px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-35% dark:to-[#565656]"
+      >
+        <div class="w-full h-auto flex flex-col">
+          <div
+            class="flex flex-col w-full h-full p-4 rounded-[10px] bg-[#FAFAFA] dark:bg-[#1D1F23]"
+          >
+            <div>
+              <div class="w-full h-auto lg:h-[160px]">
+                <!-- src="" -->
+                <img
+                  :src="data.cover"
+                  alt="BlogImage"
+                  class="w-full h-full object-cover lg:object-fill rounded-[10px]"
+                />
+              </div>
+              <div
+                class="flex flex-row w-full h-auto justify-between text-sm text-[#7A7A7A] my-5"
+              >
+                <div
+                  class="flex items-center bg-[#7B61FF]/10 dark:bg-transparent px-4 dark:px-0 rounded-[16px]"
+                >
+                  <p
+                    class="text-[12px] md:text-[14px] lg:text-[14px] text-[#7B61FF] dark:text-[#FFFFFF] font-semibold"
+                  >
+                    {{ data.category_name }}
+                  </p>
+                </div>
+                <div
+                  class="flex items-center bg-[#3758F9] px-5 py-1 rounded-[5px]"
+                >
+                  <p
+                    class="text-[#FFFFFF] text-[12px] md:text-[12px] lg:text-[14px]"
+                  >
+                    {{ utils.fromISODate(data.created_at) }}
+                  </p>
+                </div>
+              </div>
+              <div
+                class="flex w-full h-auto sm:h-[45px] md:h-[50px] lg:h-[55px] text-left overflow-hidden"
+              >
+                <p
+                  class="text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] line-clamp-2"
+                >
+                  {{ data.title }}
+                </p>
+              </div>
+              <div class="flex w-full h-auto justify-start items-start my-3">
+                <p
+                  class="text-[12px] lg:text-[14px] text-[#637381] line-clamp-2 lg:line-clamp-2"
+                >
+                  {{ data.synopsis }}
+                </p>
+              </div>
+            </div>
+            <div class="relative w-full h-auto flex flex-row mt-4 mb-0 xl:mb-0">
+              <div class="w-auto flex flex-row gap-x-3 justify-start">
+                <div class="flex flex-row justify-between gap-x-1">
+                  <div
+                    class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
+                  >
+                    <EyeIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
+                  </div>
+                  <div class="w-full h-full flex items-center">
+                    <span
+                      class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
+                    >
+                      {{ utils.shortNumber(newestBlog.views) }}
+                      <!-- 20 -->
+                    </span>
+                  </div>
+                </div>
+                <div class="flex flex-row justify-between gap-x-1">
+                  <div
+                    class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
+                  >
+                    <CommentIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
+                  </div>
+                  <div class="w-full h-auto">
+                    <span
+                      class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
+                    >
+                      {{ newestBlog.comments }}
+                      <!-- 15 -->
+                    </span>
+                  </div>
+                </div>
+                <div class="relative flex w-full h-auto share-wrapper">
+                  <div
+                    class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer flex items-center"
+                    @click.stop="toggleShare(data.id)"
+                  >
+                    <ShareIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
+                  </div>
+                  <div
+                    v-show="activeShareId === data.id"
+                    class="absolute z-30 -left-[65px] md:-left-[63px] lg:-left-[80px] -bottom-[190px] md:-bottom-[190px] lg:-bottom-[220px] xl:-bottom-[230px] w-[150px] lg:w-[180px] h-auto"
+                  >
+                    <div class="relative">
+                      <img
+                        src="@/assets/images/blog/share-frame2.svg"
+                        alt=""
+                        srcset=""
+                        class="w-full h-auto object-cover relative"
+                      />
+                      <div
+                        class="absolute w-full h-full top-2 lg:top-3 px-5 flex flex-col gap-y-2 sm:gap-y-3 justify-center"
+                      >
+                        <div
+                          class="w-full h-auto cursor-pointer flex flex-row items-center gap-x-2 lg:gap-x-3"
+                          @click="copyLink(data.slug)"
+                        >
+                          <div class="w-5 h-auto lg:w-auto lg:h-auto">
+                            <img
+                              src="@/assets/images/blog/copy-link.svg"
+                              alt=""
+                              srcset=""
+                            />
+                          </div>
+                          <div class="w-[70%] h-auto flex items-center">
+                            <span class="text-[14px]">Copy Link</span>
+                          </div>
+                        </div>
+                        <div class="w-full h-[1px] bg-[#EBEBEB]" />
+                        <div
+                          class="w-full h-auto flex flex-col gap-y-4 lg:gap-y-5 cursor-pointer"
+                        >
+                          <div
+                            class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
+                          >
+                            <div class="w-5 h-auto lg:w-auto lg:h-auto">
+                              <img
+                                src="@/assets/images/blog/linkedin.png"
+                                alt=""
+                                srcset=""
+                              />
+                            </div>
+                            <div class="w-[70%] h-auto flex items-center">
+                              <span class="text-[14px]">LinkedIn</span>
+                            </div>
+                          </div>
+                          <div
+                            class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
+                          >
+                            <div class="w-5 h-auto lg:w-auto lg:h-auto">
+                              <img
+                                src="@/assets/images/blog/facebook.png"
+                                alt=""
+                                srcset=""
+                              />
+                            </div>
+                            <div class="w-[70%] h-auto flex items-center">
+                              <span class="text-[14px]">Facebook</span>
+                            </div>
+                          </div>
+                          <div
+                            class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
+                          >
+                            <div class="w-5 h-auto lg:w-auto lg:h-auto">
+                              <img
+                                src="@/assets/images/blog/twitter.png"
+                                alt=""
+                                srcset=""
+                              />
+                            </div>
+                            <div class="w-[70%] h-auto flex items-center">
+                              <span class="text-[14px]">Twitter(X)</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div v-else class="text-gray-500 text-center py-6">
+      Tidak ada artikel pada kategori ini
+    </div>
+  </div>
 
   <!-- Search Result -->
-  <div v-else-if="results.length" class="w-full h-auto mt-5">
+  <div
+    v-else-if="results.length && searchQuery && !loadingTyping"
+    class="w-full h-auto mt-5"
+  >
     <section
       class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-5 mb-20 px-8 md:px-8 xl:px-0 pb-20"
     >
@@ -459,10 +719,16 @@ watch(searchQuery, (newQuery) => {
     </section>
   </div>
 
-  <div v-else-if="searchQuery && !loadingTyping">Blog tidak ada</div>
+  <!-- Search Result No Blog Found -->
+  <div
+    v-else-if="searchQuery && !loadingTyping"
+    class="w-full h-auto px-8 lg:px-0 pt-4"
+  >
+    Blog tidak ada
+  </div>
 
   <!-- Frame Blog Newest, Popular and Blog Lists -->
-  <div v-else class="w-full h-auto mt-10">
+  <div v-else-if="!searchQuery && !loadingTyping" class="w-full h-auto mt-10">
     <!-- Newest and Popular -->
     <section
       class="w-full h-auto flex flex-col lg:grid lg:grid-cols-12 gap-x-5 xl:gap-x-10 px-8 md:px-8 lg:px-8 xl:px-0"
@@ -557,7 +823,10 @@ watch(searchQuery, (newQuery) => {
             </router-link>
             <div class="relative w-full h-auto flex flex-row mt-4 mb-0 lg:mb-4">
               <div class="w-auto flex flex-row gap-x-3 justify-start">
-                <div class="flex flex-row justify-between gap-x-1">
+                <router-link
+                  :to="`/blog/${newestBlog.slug}`"
+                  class="flex flex-row justify-between gap-x-1"
+                >
                   <div
                     class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                   >
@@ -570,8 +839,11 @@ watch(searchQuery, (newQuery) => {
                       {{ utils.shortNumber(newestBlog.views) }}
                     </span>
                   </div>
-                </div>
-                <div class="flex flex-row justify-between gap-x-1">
+                </router-link>
+                <router-link
+                  :to="`/blog/${newestBlog.slug}`"
+                  class="flex flex-row justify-between gap-x-1"
+                >
                   <div
                     class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                   >
@@ -584,7 +856,7 @@ watch(searchQuery, (newQuery) => {
                       {{ newestBlog.comments }}
                     </span>
                   </div>
-                </div>
+                </router-link>
                 <div class="relative flex w-full h-auto share-wrapper">
                   <div
                     class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer flex items-center"
@@ -714,7 +986,7 @@ watch(searchQuery, (newQuery) => {
                 <img
                   :src="popularBlog[0].cover"
                   alt="cover"
-                  class="w-full h-auto object-fill"
+                  class="w-full h-full object-fill"
                 />
               </figure>
             </router-link>
@@ -732,7 +1004,7 @@ watch(searchQuery, (newQuery) => {
                     <div class="col-span-3 w-full flex justify-center">
                       <p class="text-[24px] text-[#8EB3CC]">#{{ index + 1 }}</p>
                     </div>
-                    <div class="col-span-9 w-full flex flex-col gap-y-1">
+                    <div class="col-span-9 w-full flex flex-col gap-y-2">
                       <p class="text-[#6941C6] dark:text-[#2AB857] text-[14px]">
                         {{ data.category_name }}
                       </p>
@@ -865,7 +1137,7 @@ watch(searchQuery, (newQuery) => {
           >
             <router-link :to="`/blog/${data.slug}`">
               <!-- h-[165px] -->
-              <div class="w-full h-auto lg:h-[160px]">
+              <div class="w-full h-auto lg:h-auto">
                 <img
                   :src="data.cover"
                   alt="BlogImage"
@@ -911,9 +1183,12 @@ watch(searchQuery, (newQuery) => {
                 </p>
               </div>
             </router-link>
-            <div class="relative w-full h-auto flex flex-row mt-4 mb-0 xl:mb-4">
+            <div class="relative w-full h-auto flex flex-row mt-4 mb-0 xl:mb-0">
               <div class="w-auto flex flex-row gap-x-3 justify-start">
-                <div class="flex flex-row justify-between gap-x-1">
+                <router-link
+                  :to="`/blog/${data.slug}`"
+                  class="flex flex-row justify-between gap-x-1"
+                >
                   <div
                     class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                   >
@@ -923,11 +1198,14 @@ watch(searchQuery, (newQuery) => {
                     <span
                       class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
                     >
-                      {{ utils.shortNumber(newestBlog.views) }}
+                      {{ utils.shortNumber(data.views) }}
                     </span>
                   </div>
-                </div>
-                <div class="flex flex-row justify-between gap-x-1">
+                </router-link>
+                <router-link
+                  :to="`/blog/${data.slug}`"
+                  class="flex flex-row justify-between gap-x-1"
+                >
                   <div
                     class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                   >
@@ -937,10 +1215,10 @@ watch(searchQuery, (newQuery) => {
                     <span
                       class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
                     >
-                      {{ newestBlog.comments }}
+                      {{ data.comments }}
                     </span>
                   </div>
-                </div>
+                </router-link>
                 <div class="relative flex w-full h-auto share-wrapper">
                   <div
                     class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer flex items-center"
