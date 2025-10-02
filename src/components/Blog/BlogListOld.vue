@@ -26,16 +26,24 @@ const activeShareId = ref(null);
 const PostsTime = [
   {
     id: 1,
-    name: "Latest",
+    name: "Latest", // tampil di UI
+    value: "updated_at", // dikirim ke API
   },
   {
     id: 2,
-    name: "likes",
+    name: "Oldest",
+    value: "oldest",
   },
   {
     id: 3,
-    name: "oldest",
+    name: "Views",
+    value: "views",
   },
+  // {
+  //   id: 4,
+  //   name: "Likes",
+  //   value: "likes"
+  // }
 ];
 
 // const Categories = ref({});
@@ -88,24 +96,58 @@ const toggleCategory = () => {
   activeShareId.value = null;
 };
 
-// pilih opsi
-const chooseCategory = (category) => {
-  console.log("Dipilih kategori:", category);
-
-  selectedCategory.value = category.name;
-  isCategoryOpen.value = false;
-
+const buildParams = () => {
   const params = {};
 
-  if (category.id !== 0) {
-    params.category_id = category.id;
+  // Category
+  if (selectedCategory.value && selectedCategory.value !== "All Articles") {
+    const categoryObj = categories.value.find(
+      (c) => c.name === selectedCategory.value
+    );
+    if (categoryObj) params.category_id = categoryObj.id;
   }
 
-  // kalau ada search yang sedang aktif → sertakan
+  // Search
   if (searchQuery.value) {
     params.search = searchQuery.value;
   }
 
+  // Sort (langsung pakai value dari dropdown)
+  if (selectedPostTime.value && selectedPostTime.value !== "Latest") {
+    params.sort_by = selectedPostTime.value;
+  }
+
+  return params;
+};
+
+// pilih opsi
+const chooseCategory = (category) => {
+  selectedCategory.value = category.name;
+  isCategoryOpen.value = false;
+  getAllBlogs(buildParams());
+};
+
+const chooseSort = (post) => {
+  selectedPostTime.value = post.name; // untuk ditampilkan di UI
+  isPostTimeOpen.value = false;
+
+  const params = {};
+
+  // category kalau ada
+  if (selectedCategory.value && selectedCategory.value !== "All Articles") {
+    const cat = categories.value.find((c) => c.name === selectedCategory.value);
+    if (cat) params.category_id = cat.id;
+  }
+
+  // search kalau ada
+  if (searchQuery.value) {
+    params.search = searchQuery.value;
+  }
+
+  // pakai value → bukan name
+  params.sort_by = post.value;
+
+  console.log("chooseSort() params:", params);
   getAllBlogs(params);
 };
 
@@ -164,28 +206,8 @@ watch(searchQuery, (newQuery) => {
   clearTimeout(timeout);
 
   timeout = setTimeout(async () => {
-    const params = {};
-
-    // search
-    if (newQuery) {
-      params.search = newQuery;
-    }
-
-    // kategori (kalau ada yang dipilih)
-    if (selectedCategory.value && selectedCategory.value !== "All Articles") {
-      const categoryObj = categories.value.find(
-        (c) => c.name === selectedCategory.value
-      );
-      if (categoryObj) params.category_id = categoryObj.id;
-    }
-
-    try {
-      await getAllBlogs(params); // langsung update blogs.value
-    } catch (error) {
-      blogs.value = [];
-    } finally {
-      loadingTyping.value = false;
-    }
+    await getAllBlogs({ q: newQuery }); // langsung pakai nilai terbaru
+    loadingTyping.value = false;
   }, 500);
 });
 </script>
@@ -248,7 +270,7 @@ watch(searchQuery, (newQuery) => {
           @click="togglePostTime"
           class="h-auto border-[2px] flex flex-row items-center px-5 py-2 rounded-[5px] justify-between cursor-pointer select-none"
         >
-          <p>{{ selectedPostTime }}</p>
+          <p class="capitalize">{{ selectedPostTime }}</p>
           <ChevronDown
             :class="isPostTimeOpen ? 'rotate-180 transition' : 'transition'"
           />
@@ -262,8 +284,8 @@ watch(searchQuery, (newQuery) => {
           <div
             v-for="(post, index) in PostsTime"
             :key="index"
-            @click.stop="selectPostTime(post)"
-            class="px-5 py-2 hover:bg-gray-100 cursor-pointer"
+            @click.stop="chooseSort(post)"
+            class="px-5 py-2 hover:bg-gray-100 cursor-pointer capitalize"
           >
             {{ post.name }}
           </div>
@@ -405,7 +427,7 @@ watch(searchQuery, (newQuery) => {
                     <span
                       class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
                     >
-                      {{ utils.shortNumber(newestBlog.views) }}
+                      {{ utils.shortNumber(data.views) }}
                       <!-- 20 -->
                     </span>
                   </div>
@@ -420,7 +442,7 @@ watch(searchQuery, (newQuery) => {
                     <span
                       class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
                     >
-                      {{ newestBlog.comments }}
+                      {{ data.comments }}
                       <!-- 15 -->
                     </span>
                   </div>
@@ -541,10 +563,8 @@ watch(searchQuery, (newQuery) => {
           <div
             class="flex flex-col w-full h-full p-4 rounded-[10px] bg-[#FAFAFA] dark:bg-[#1D1F23]"
           >
-            <div>
-              <!-- h-[165px] -->
+            <router-link :to="`/blog/${data.slug}`">
               <div class="w-full h-auto lg:h-[160px]">
-                <!-- src="" -->
                 <img
                   :src="data.cover"
                   alt="BlogImage"
@@ -561,7 +581,6 @@ watch(searchQuery, (newQuery) => {
                     class="text-[12px] md:text-[14px] lg:text-[14px] text-[#7B61FF] dark:text-[#FFFFFF] font-semibold"
                   >
                     {{ data.category_name }}
-                    <!-- Technology -->
                   </p>
                 </div>
                 <div
@@ -571,7 +590,6 @@ watch(searchQuery, (newQuery) => {
                     class="text-[#FFFFFF] text-[12px] md:text-[12px] lg:text-[14px]"
                   >
                     {{ utils.fromISODate(data.created_at) }}
-                    <!-- 12 Sep 2025 -->
                   </p>
                 </div>
               </div>
@@ -582,8 +600,6 @@ watch(searchQuery, (newQuery) => {
                   class="text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] line-clamp-2"
                 >
                   {{ data.title }}
-                  <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Suscipit, consequuntur? -->
                 </p>
               </div>
               <div class="flex w-full h-auto justify-start items-start my-3">
@@ -591,15 +607,15 @@ watch(searchQuery, (newQuery) => {
                   class="text-[12px] lg:text-[14px] text-[#637381] line-clamp-2 lg:line-clamp-2"
                 >
                   {{ data.synopsis }}
-                  <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                    Incidunt, optio sequi! Sit ut tempora laudantium, illum
-                    aliquid quae saepe exercitationem. -->
                 </p>
               </div>
-            </div>
+            </router-link>
             <div class="relative w-full h-auto flex flex-row mt-4 mb-0 xl:mb-0">
               <div class="w-auto flex flex-row gap-x-3 justify-start">
-                <div class="flex flex-row justify-between gap-x-1">
+                <router-link
+                  :to="`/blog/${data.slug}`"
+                  class="flex flex-row justify-between gap-x-1"
+                >
                   <div
                     class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                   >
@@ -610,11 +626,13 @@ watch(searchQuery, (newQuery) => {
                       class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
                     >
                       {{ utils.shortNumber(newestBlog.views) }}
-                      <!-- 20 -->
                     </span>
                   </div>
-                </div>
-                <div class="flex flex-row justify-between gap-x-1">
+                </router-link>
+                <router-link
+                  :to="`/blog/${data.slug}`"
+                  class="flex flex-row justify-between gap-x-1"
+                >
                   <div
                     class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                   >
@@ -628,7 +646,7 @@ watch(searchQuery, (newQuery) => {
                       <!-- 15 -->
                     </span>
                   </div>
-                </div>
+                </router-link>
                 <div class="relative flex w-full h-auto share-wrapper">
                   <div
                     class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer flex items-center"
@@ -1164,11 +1182,11 @@ watch(searchQuery, (newQuery) => {
           >
             <router-link :to="`/blog/${data.slug}`">
               <!-- h-[165px] -->
-              <div class="w-full h-auto lg:h-auto">
+              <div class="w-full h-auto">
                 <img
                   :src="data.cover"
                   alt="BlogImage"
-                  class="w-full h-full object-cover lg:object-fill rounded-[10px]"
+                  class="w-full h-full object-fill rounded-[10px]"
                 />
               </div>
               <div

@@ -20,7 +20,10 @@ const utils = useUtilsStore();
 const isCategoryOpen = ref(false);
 const selectedCategory = ref("All Articles");
 const isPostTimeOpen = ref(false);
-const selectedPostTime = ref("Latest");
+const selectedPostTime = ref({
+  name: "Latest", // untuk UI
+  value: "updated_at", // untuk API
+});
 const activeShareId = ref(null);
 
 const PostsTime = [
@@ -99,7 +102,6 @@ const toggleCategory = () => {
 const buildParams = () => {
   const params = {};
 
-  // Category
   if (selectedCategory.value && selectedCategory.value !== "All Articles") {
     const categoryObj = categories.value.find(
       (c) => c.name === selectedCategory.value
@@ -107,14 +109,12 @@ const buildParams = () => {
     if (categoryObj) params.category_id = categoryObj.id;
   }
 
-  // Search
   if (searchQuery.value) {
     params.search = searchQuery.value;
   }
 
-  // Sort (langsung pakai value dari dropdown)
-  if (selectedPostTime.value && selectedPostTime.value !== "Latest") {
-    params.sort_by = selectedPostTime.value;
+  if (selectedPostTime.value?.value) {
+    params.sort_by = selectedPostTime.value.value;
   }
 
   return params;
@@ -128,27 +128,9 @@ const chooseCategory = (category) => {
 };
 
 const chooseSort = (post) => {
-  selectedPostTime.value = post.name; // untuk ditampilkan di UI
+  selectedPostTime.value = post; // simpan seluruh object { name, value }
   isPostTimeOpen.value = false;
-
-  const params = {};
-
-  // category kalau ada
-  if (selectedCategory.value && selectedCategory.value !== "All Articles") {
-    const cat = categories.value.find((c) => c.name === selectedCategory.value);
-    if (cat) params.category_id = cat.id;
-  }
-
-  // search kalau ada
-  if (searchQuery.value) {
-    params.search = searchQuery.value;
-  }
-
-  // pakai value → bukan name
-  params.sort_by = post.value;
-
-  console.log("chooseSort() params:", params);
-  getAllBlogs(params);
+  getAllBlogs(buildParams());
 };
 
 const togglePostTime = () => {
@@ -206,7 +188,7 @@ watch(searchQuery, (newQuery) => {
   clearTimeout(timeout);
 
   timeout = setTimeout(async () => {
-    await getAllBlogs(buildParams());
+    await getAllBlogs({ q: newQuery }); // langsung pakai nilai terbaru
     loadingTyping.value = false;
   }, 500);
 });
@@ -270,7 +252,7 @@ watch(searchQuery, (newQuery) => {
           @click="togglePostTime"
           class="h-auto border-[2px] flex flex-row items-center px-5 py-2 rounded-[5px] justify-between cursor-pointer select-none"
         >
-          <p class="capitalize">{{ selectedPostTime }}</p>
+          <p class="capitalize">{{ selectedPostTime.name }}</p>
           <ChevronDown
             :class="isPostTimeOpen ? 'rotate-180 transition' : 'transition'"
           />
@@ -1182,11 +1164,11 @@ watch(searchQuery, (newQuery) => {
           >
             <router-link :to="`/blog/${data.slug}`">
               <!-- h-[165px] -->
-              <div class="w-full h-auto lg:h-auto">
+              <div class="w-full h-auto">
                 <img
                   :src="data.cover"
                   alt="BlogImage"
-                  class="w-full h-full object-cover lg:object-fill rounded-[10px]"
+                  class="w-full h-full object-fill rounded-[10px]"
                 />
               </div>
               <div
