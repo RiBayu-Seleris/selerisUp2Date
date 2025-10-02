@@ -30,11 +30,11 @@ const PostsTime = [
   },
   {
     id: 2,
-    name: "Most Like",
+    name: "likes",
   },
   {
     id: 3,
-    name: "Most View",
+    name: "oldest",
   },
 ];
 
@@ -90,18 +90,23 @@ const toggleCategory = () => {
 
 // pilih opsi
 const chooseCategory = (category) => {
-  console.log("Dipilih kategori:", category); // 👈 log dulu
+  console.log("Dipilih kategori:", category);
 
   selectedCategory.value = category.name;
   isCategoryOpen.value = false;
 
-  if (category.id === 0) {
-    console.log("Ambil semua artikel"); // 👈 log juga
-    getAllBlogs();
-  } else {
-    console.log("Filter ke kategori id:", category.id);
-    getAllBlogs({ category_id: category.id });
+  const params = {};
+
+  if (category.id !== 0) {
+    params.category_id = category.id;
   }
+
+  // kalau ada search yang sedang aktif → sertakan
+  if (searchQuery.value) {
+    params.search = searchQuery.value;
+  }
+
+  getAllBlogs(params);
 };
 
 const togglePostTime = () => {
@@ -153,35 +158,35 @@ onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
 });
 
-// Setiap kali searchQuery berubah
+// Watch search input
 watch(searchQuery, (newQuery) => {
-  console.log("User mengetik:", newQuery); // langsung log tiap huruf
-  loadingTyping.value = true; // mulai loading
-
-  // delay 500ms sebelum fetch
+  loadingTyping.value = true;
   clearTimeout(timeout);
 
   timeout = setTimeout(async () => {
-    if (!newQuery) {
-      results.value = [];
-      loadingTyping.value = false; // selesai karena query kosong
-      return;
+    const params = {};
+
+    // search
+    if (newQuery) {
+      params.search = newQuery;
+    }
+
+    // kategori (kalau ada yang dipilih)
+    if (selectedCategory.value && selectedCategory.value !== "All Articles") {
+      const categoryObj = categories.value.find(
+        (c) => c.name === selectedCategory.value
+      );
+      if (categoryObj) params.category_id = categoryObj.id;
     }
 
     try {
-      // Panggil API
-      const response = await axios.get(
-        `https://cms-lp.seleris.ai/api/v1/app/blogs?search=${newQuery}`
-      );
-
-      results.value = response.data.data;
+      await getAllBlogs(params); // langsung update blogs.value
     } catch (error) {
-      console.log("error Fetch:", error);
-      results.value = [];
+      blogs.value = [];
     } finally {
-      loadingTyping.value = false; // selesai loading setelah fetch
+      loadingTyping.value = false;
     }
-  }, 2000);
+  }, 500);
 });
 </script>
 
@@ -260,7 +265,7 @@ watch(searchQuery, (newQuery) => {
             @click.stop="selectPostTime(post)"
             class="px-5 py-2 hover:bg-gray-100 cursor-pointer"
           >
-            {{ post }}
+            {{ post.name }}
           </div>
         </div>
       </div>
@@ -521,14 +526,14 @@ watch(searchQuery, (newQuery) => {
 
   <!-- Search Result -->
   <div
-    v-else-if="results.length && searchQuery && !loadingTyping"
+    v-else-if="blogs.length && searchQuery && !loadingTyping"
     class="w-full h-auto mt-5"
   >
     <section
       class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-5 mb-20 px-8 md:px-8 xl:px-0 pb-20"
     >
       <div
-        v-for="(data, index) in results"
+        v-for="(data, index) in blogs"
         :key="index"
         class="relative w-full h-full !p-[1px] rounded-[10px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-35% dark:to-[#565656]"
       >
@@ -720,11 +725,10 @@ watch(searchQuery, (newQuery) => {
   </div>
 
   <!-- Search Result No Blog Found -->
-  <div
-    v-else-if="searchQuery && !loadingTyping"
-    class="w-full h-auto px-8 lg:px-0 pt-4"
-  >
-    Blog tidak ada
+  <div v-else-if="searchQuery && !loadingTyping" class="w-full h-auto mt-5">
+    <div class="text-gray-500 text-center py-6">
+      Artikel yang anda cari tidak ada
+    </div>
   </div>
 
   <!-- Frame Blog Newest, Popular and Blog Lists -->
@@ -748,7 +752,30 @@ watch(searchQuery, (newQuery) => {
             </p>
           </div>
           <!-- Loading -->
-          <div v-if="loading">Loading Data</div>
+          <div v-if="loading">
+            <!-- Loader Frame -->
+            <video
+              autoplay
+              loop
+              muted
+              playsinline
+              @contextmenu.prevent
+              class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center dark:hidden"
+            >
+              <source src="@/assets/videos/loading.mp4" type="video/mp4" />
+            </video>
+
+            <video
+              autoplay
+              loop
+              muted
+              playsinline
+              @contextmenu.prevent
+              class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center hidden dark:flex"
+            >
+              <source src="@/assets/videos/dark-loading.mp4" type="video/mp4" />
+            </video>
+          </div>
           <!-- Error Global -->
           <div v-else-if="error">{{ error }}</div>
           <!-- newestError -->

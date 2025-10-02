@@ -106,8 +106,7 @@ const isBlogDetail = computed(() => route.path.startsWith("/blog/"));
 <template>
   <!-- ⏳ Initial Loading Screen -->
   <!-- && !route.path.startsWith('/blog/') -->
-  <div
-    v-if="!isLoad"
+  <div v-if="!isLoad"
     class="fixed inset-0 flex flex-col items-center justify-center bg-[#F9F9F9] dark:bg-[#17181A] z-[9999]"
   >
     <!-- Loader Frame -->
