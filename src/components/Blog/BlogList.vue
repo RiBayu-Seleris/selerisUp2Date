@@ -200,103 +200,122 @@ watch(searchQuery, (newQuery) => {
   >
     <!-- Search Frame -->
     <div
-      class="w-full h-14 flex flex-row items-center border-[1.5px] dark:bg-[#535353] px-4 md:px-4 rounded-[5px] gap-x-2 md:gap-x-3 lg:gap-x-3 xl:gap-x-2.5"
+      class="w-full h-auto rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656]"
     >
       <div
-        class="w-[10%] sm:w-[15%] md:w-[5%] h-full flex justify-center items-center text-[#6C6C6C] dark:text-[#ADADAD]"
+        class="w-full h-14 flex flex-row items-center bg-[#FAFAFA] dark:bg-[#17181A] px-4 md:px-4 rounded-[5px] gap-x-2 md:gap-x-3 lg:gap-x-3 xl:gap-x-2.5"
       >
-        <SearchIcon />
-      </div>
-      <div class="w-full h-full">
-        <input
-          v-model="searchQuery"
-          type="text"
-          class="bg-transparent outline-none w-full h-full text-[#6C6C6C] dark:text-[#ADADAD]"
-          placeholder="Search Article..."
-        />
+        <div
+          class="w-[10%] sm:w-[15%] md:w-[5%] h-full flex justify-center items-center text-[#6C6C6C] dark:text-[#ADADAD]"
+        >
+          <SearchIcon />
+        </div>
+        <div class="w-full h-full">
+          <input
+            v-model="searchQuery"
+            type="text"
+            class="bg-transparent outline-none w-full h-full text-[#6C6C6C] dark:text-[#ADADAD]"
+            placeholder="Search Article..."
+          />
+        </div>
       </div>
     </div>
 
-    <div class="w-full h-[50px] grid grid-cols-12 gap-x-2 mt-5">
+    <div class="w-full h-auto grid grid-cols-12 gap-x-2 mt-5">
       <!-- Category -->
-      <div class="category-box relative col-span-4">
+      <div
+        class="col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656]"
+      >
         <div
-          @click="toggleCategory"
-          class="h-auto border-[2px] flex flex-row items-center px-5 py-2 rounded-[5px] justify-between cursor-pointer select-none"
-        >
-          <p>{{ selectedCategory }}</p>
-          <ChevronDown
-            :class="isCategoryOpen ? 'rotate-180 transition' : 'transition'"
-          />
-        </div>
-
-        <!-- List dropdown -->
-        <div
-          v-if="isCategoryOpen"
-          class="absolute left-0 top-12 mt-1 w-full border-[2px] rounded-[5px] shadow bg-white z-10"
+          class="category-box relative w-full h-full bg-[#FAFAFA] dark:bg-[#17181A] rounded-[5px]"
         >
           <div
-            v-for="(category, index) in categories"
-            :key="index"
-            @click.stop="chooseCategory(category)"
-            class="px-5 py-2 hover:bg-gray-100 cursor-pointer"
+            @click="toggleCategory"
+            class="w-full h-full flex flex-row items-center px-5 py-2 rounded-[5px] justify-between cursor-pointer select-none"
           >
-            {{ category.name }}
+            <p>{{ selectedCategory }}</p>
+            <ChevronDown
+              :class="isCategoryOpen ? 'rotate-180 transition' : 'transition'"
+            />
+          </div>
+          <!-- List dropdown -->
+          <div
+            v-if="isCategoryOpen"
+            class="absolute left-0 top-12 mt-1 w-full border-[1px] rounded-[5px] shadow bg-white dark:bg-[#17181A] z-10"
+          >
+            <div
+              v-for="(category, index) in categories"
+              :key="index"
+              @click.stop="chooseCategory(category)"
+              class="px-5 py-2 hover:bg-white hover:text-[#17181A] cursor-pointer rounded-[5px]"
+            >
+              {{ category.name }}
+            </div>
           </div>
         </div>
       </div>
 
       <!-- PostTime -->
-      <div class="posttime-box relative col-span-4">
+      <div
+        class="col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656]"
+      >
         <div
-          @click="togglePostTime"
-          class="h-auto border-[2px] flex flex-row items-center px-5 py-2 rounded-[5px] justify-between cursor-pointer select-none"
-        >
-          <p class="capitalize">{{ selectedPostTime.name }}</p>
-          <ChevronDown
-            :class="isPostTimeOpen ? 'rotate-180 transition' : 'transition'"
-          />
-        </div>
-
-        <!-- List dropdown -->
-        <div
-          v-if="isPostTimeOpen"
-          class="absolute left-0 top-12 mt-1 w-full border-[2px] rounded-[5px] shadow bg-white z-10"
+          class="posttime-box relative w-full h-full bg-[#FAFAFA] dark:bg-[#17181A] rounded-[5px]"
         >
           <div
-            v-for="(post, index) in PostsTime"
-            :key="index"
-            @click.stop="chooseSort(post)"
-            class="px-5 py-2 hover:bg-gray-100 cursor-pointer capitalize"
+            @click="togglePostTime"
+            class="h-auto flex flex-row items-center px-5 py-2 rounded-[5px] justify-between cursor-pointer select-none"
           >
-            {{ post.name }}
+            <p class="capitalize">{{ selectedPostTime.name }}</p>
+            <ChevronDown
+              :class="isPostTimeOpen ? 'rotate-180 transition' : 'transition'"
+            />
+          </div>
+
+          <!-- List dropdown -->
+          <div
+            v-if="isPostTimeOpen"
+            class="absolute left-0 top-12 mt-1 w-full border-[1px] rounded-[5px] shadow bg-white dark:bg-[#17181A] z-10"
+          >
+            <div
+              v-for="(post, index) in PostsTime"
+              :key="index"
+              @click.stop="chooseSort(post)"
+              class="px-5 py-2 hover:bg-white hover:text-[#17181A] cursor-pointer capitalize"
+            >
+              {{ post.name }}
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Custom Date -->
       <div
-        class="col-span-4 h-auto border-[2px] flex flex-row items-center px-5 rounded-[5px] justify-between"
+        class="col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656]"
       >
         <div
-          class="flex items-center justify-between py-2 w-full cursor-pointer hover:border-gray-400"
+          class="relative w-full h-full bg-[#FAFAFA] dark:bg-[#17181A] rounded-[5px]"
         >
-          <span class="text-gray-500">Custom Date</span>
-          <!-- Ikon kalender -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            class="w-5 h-5 text-gray-500"
+          <div
+            class="w-full h-full flex flex-row items-center px-5 py-2 rounded-[5px] justify-between cursor-pointer select-none"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-            />
-          </svg>
+            <span class="text-gray-500">Custom Date</span>
+            <!-- Ikon kalender -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke="currentColor"
+              class="w-5 h-5 text-gray-500"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+              />
+            </svg>
+          </div>
         </div>
       </div>
     </div>
