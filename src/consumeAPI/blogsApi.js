@@ -72,6 +72,7 @@ export function blogsApi() {
   const getAllBlogs = async (params = {}) => {
     startLoading();
     try {
+      console.log("API Params:", params); // 👈 Tambahkan ini
       const response = await axios.get(`${BASE_URL}/api/v1/app/blogs`, {
         headers: headerApi.headers,
         params,
@@ -88,8 +89,6 @@ export function blogsApi() {
       }
 
       blogs.value = result;
-
-      console.log("Response blogs (final):", blogs.value);
     } catch (err) {
       handleError(err);
       blogs.value = [];

@@ -20,7 +20,12 @@ const utils = useUtilsStore();
 const isCategoryOpen = ref(false);
 const selectedCategory = ref("All Articles");
 const isPostTimeOpen = ref(false);
-const selectedPostTime = ref("Latest");
+const selectedPostTime = ref({
+  id: 1,
+  name: "Latest", // untuk UI
+  value: "updated_at", // untuk API
+});
+const showDateRange = ref(false);
 const activeShareId = ref(null);
 
 const PostsTime = [
@@ -46,7 +51,10 @@ const PostsTime = [
   // }
 ];
 
-// const Categories = ref({});
+const customDateRange = ref({
+  start: "",
+  end: "",
+});
 
 const searchQuery = ref(""); // Search Input
 let timeout = null; // timer untuk manual delay / "debounce"
@@ -89,17 +97,10 @@ const copyLink = async (slug) => {
   }
 };
 
-// toggle dropdown
-const toggleCategory = () => {
-  isCategoryOpen.value = !isCategoryOpen.value;
-  isPostTimeOpen.value = false;
-  activeShareId.value = null;
-};
-
 const buildParams = () => {
   const params = {};
 
-  // Category
+  // filter category
   if (selectedCategory.value && selectedCategory.value !== "All Articles") {
     const categoryObj = categories.value.find(
       (c) => c.name === selectedCategory.value
@@ -107,17 +108,47 @@ const buildParams = () => {
     if (categoryObj) params.category_id = categoryObj.id;
   }
 
-  // Search
+  // filter search
   if (searchQuery.value) {
     params.search = searchQuery.value;
   }
 
-  // Sort (langsung pakai value dari dropdown)
-  if (selectedPostTime.value && selectedPostTime.value !== "Latest") {
-    params.sort_by = selectedPostTime.value;
+  // filter sort
+  if (selectedPostTime.value?.value) {
+    params.sort_by = selectedPostTime.value.value;
+  }
+
+  // filter date range
+  if (customDateRange.value.start && customDateRange.value.end) {
+    params.start_date = customDateRange.value.start;
+    params.end_date = customDateRange.value.end;
   }
 
   return params;
+};
+
+const toggleDateRange = () => {
+  showDateRange.value = !showDateRange.value;
+};
+
+// toggle dropdown
+const toggleCategory = () => {
+  isCategoryOpen.value = !isCategoryOpen.value;
+  isPostTimeOpen.value = false;
+  activeShareId.value = null;
+};
+
+const togglePostTime = () => {
+  isPostTimeOpen.value = !isPostTimeOpen.value;
+  isCategoryOpen.value = false;
+  activeShareId.value = null;
+};
+
+// toggle share
+const toggleShare = (id) => {
+  activeShareId.value = activeShareId.value === id ? null : id;
+  isCategoryOpen.value = false;
+  isPostTimeOpen.value = false;
 };
 
 // pilih opsi
@@ -128,44 +159,13 @@ const chooseCategory = (category) => {
 };
 
 const chooseSort = (post) => {
-  selectedPostTime.value = post.name; // untuk ditampilkan di UI
+  selectedPostTime.value = post; // simpan seluruh object { name, value }
   isPostTimeOpen.value = false;
-
-  const params = {};
-
-  // category kalau ada
-  if (selectedCategory.value && selectedCategory.value !== "All Articles") {
-    const cat = categories.value.find((c) => c.name === selectedCategory.value);
-    if (cat) params.category_id = cat.id;
-  }
-
-  // search kalau ada
-  if (searchQuery.value) {
-    params.search = searchQuery.value;
-  }
-
-  // pakai value → bukan name
-  params.sort_by = post.value;
-
-  console.log("chooseSort() params:", params);
-  getAllBlogs(params);
-};
-
-const togglePostTime = () => {
-  isPostTimeOpen.value = !isPostTimeOpen.value;
-  isCategoryOpen.value = false;
-  activeShareId.value = null;
+  getAllBlogs(buildParams());
 };
 
 const choosePostTime = (option) => {
   selectedPostTime.value = option;
-  isPostTimeOpen.value = false;
-};
-
-// toggle share
-const toggleShare = (id) => {
-  activeShareId.value = activeShareId.value === id ? null : id;
-  isCategoryOpen.value = false;
   isPostTimeOpen.value = false;
 };
 
@@ -186,6 +186,9 @@ const handleClickOutside = (event) => {
   if (isClickOutside(".share-wrapper", event)) {
     activeShareId.value = null;
   }
+  if (isClickOutside(".daterange-box", event)) {
+    showDateRange.value = false; // ✅ tutup date range
+  }
 };
 
 onMounted(() => {
@@ -200,16 +203,32 @@ onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
 });
 
-// Watch search input
-watch(searchQuery, (newQuery) => {
+// 🔹 Watch searchQuery dengan debounce
+watch(searchQuery, () => {
   loadingTyping.value = true;
   clearTimeout(timeout);
 
   timeout = setTimeout(async () => {
-    await getAllBlogs({ q: newQuery }); // langsung pakai nilai terbaru
+    const params = buildParams(); // ✅ sekarang ikut semua filter
+    await getAllBlogs(params);
     loadingTyping.value = false;
   }, 500);
 });
+
+watch(
+  customDateRange,
+  (newVal) => {
+    console.log("Date range changed:", newVal.start, "→", newVal.end);
+  },
+  { deep: true }
+);
+watch(
+  customDateRange,
+  (newVal) => {
+    console.log("Date range changed:", newVal.start, "→", newVal.end);
+  },
+  { deep: true }
+);
 </script>
 
 <template>
@@ -218,103 +237,164 @@ watch(searchQuery, (newQuery) => {
   >
     <!-- Search Frame -->
     <div
-      class="w-full h-14 flex flex-row items-center border-[1.5px] dark:bg-[#535353] px-4 md:px-4 rounded-[5px] gap-x-2 md:gap-x-3 lg:gap-x-3 xl:gap-x-2.5"
+      class="w-full h-auto rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656]"
     >
       <div
-        class="w-[10%] sm:w-[15%] md:w-[5%] h-full flex justify-center items-center text-[#6C6C6C] dark:text-[#ADADAD]"
+        class="w-full h-14 flex flex-row items-center bg-[#FAFAFA] dark:bg-[#17181A] px-4 md:px-4 rounded-[5px] gap-x-2 md:gap-x-3 lg:gap-x-3 xl:gap-x-2.5"
       >
-        <SearchIcon />
-      </div>
-      <div class="w-full h-full">
-        <input
-          v-model="searchQuery"
-          type="text"
-          class="bg-transparent outline-none w-full h-full text-[#6C6C6C] dark:text-[#ADADAD]"
-          placeholder="Search Article..."
-        />
+        <div
+          class="w-[10%] sm:w-[15%] md:w-[5%] h-full flex justify-center items-center text-[#6C6C6C] dark:text-[#ADADAD]"
+        >
+          <SearchIcon />
+        </div>
+        <div class="w-full h-full">
+          <input
+            v-model="searchQuery"
+            type="text"
+            class="bg-transparent outline-none w-full h-full text-[#6C6C6C] dark:text-[#ADADAD]"
+            placeholder="Search Article..."
+          />
+        </div>
       </div>
     </div>
 
-    <div class="w-full h-[50px] grid grid-cols-12 gap-x-2 mt-5">
+    <div class="w-full h-auto grid grid-cols-12 gap-x-2 mt-5">
       <!-- Category -->
-      <div class="category-box relative col-span-4">
+      <div
+        class="col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656]"
+      >
         <div
-          @click="toggleCategory"
-          class="h-auto border-[2px] flex flex-row items-center px-5 py-2 rounded-[5px] justify-between cursor-pointer select-none"
-        >
-          <p>{{ selectedCategory }}</p>
-          <ChevronDown
-            :class="isCategoryOpen ? 'rotate-180 transition' : 'transition'"
-          />
-        </div>
-
-        <!-- List dropdown -->
-        <div
-          v-if="isCategoryOpen"
-          class="absolute left-0 top-12 mt-1 w-full border-[2px] rounded-[5px] shadow bg-white z-10"
+          class="category-box relative w-full h-full bg-[#FAFAFA] dark:bg-[#17181A] rounded-[5px]"
         >
           <div
-            v-for="(category, index) in categories"
-            :key="index"
-            @click.stop="chooseCategory(category)"
-            class="px-5 py-2 hover:bg-gray-100 cursor-pointer"
+            @click="toggleCategory"
+            class="w-full h-full flex flex-row items-center px-5 py-2 rounded-[5px] justify-between cursor-pointer select-none"
           >
-            {{ category.name }}
+            <p>{{ selectedCategory }}</p>
+            <ChevronDown
+              :class="isCategoryOpen ? 'rotate-180 transition' : 'transition'"
+            />
+          </div>
+          <!-- List dropdown -->
+          <div
+            v-if="isCategoryOpen"
+            class="absolute left-0 top-12 mt-1 w-full border-[1px] rounded-[5px] shadow bg-white dark:bg-[#17181A] z-10"
+          >
+            <div
+              v-for="(category, index) in categories"
+              :key="index"
+              @click.stop="chooseCategory(category)"
+              class="px-5 py-2 hover:bg-white hover:text-[#17181A] cursor-pointer rounded-[5px]"
+            >
+              {{ category.name }}
+            </div>
           </div>
         </div>
       </div>
 
       <!-- PostTime -->
-      <div class="posttime-box relative col-span-4">
+      <div
+        class="col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656]"
+      >
         <div
-          @click="togglePostTime"
-          class="h-auto border-[2px] flex flex-row items-center px-5 py-2 rounded-[5px] justify-between cursor-pointer select-none"
-        >
-          <p class="capitalize">{{ selectedPostTime }}</p>
-          <ChevronDown
-            :class="isPostTimeOpen ? 'rotate-180 transition' : 'transition'"
-          />
-        </div>
-
-        <!-- List dropdown -->
-        <div
-          v-if="isPostTimeOpen"
-          class="absolute left-0 top-12 mt-1 w-full border-[2px] rounded-[5px] shadow bg-white z-10"
+          class="posttime-box relative w-full h-full bg-[#FAFAFA] dark:bg-[#17181A] rounded-[5px]"
         >
           <div
-            v-for="(post, index) in PostsTime"
-            :key="index"
-            @click.stop="chooseSort(post)"
-            class="px-5 py-2 hover:bg-gray-100 cursor-pointer capitalize"
+            @click="togglePostTime"
+            class="w-full h-full flex flex-row items-center px-5 py-2 rounded-[5px] justify-between cursor-pointer select-none"
           >
-            {{ post.name }}
+            <p class="capitalize">{{ selectedPostTime.name }}</p>
+            <ChevronDown
+              :class="isPostTimeOpen ? 'rotate-180 transition' : 'transition'"
+            />
+          </div>
+
+          <!-- List dropdown -->
+          <div
+            v-if="isPostTimeOpen"
+            class="absolute left-0 top-12 mt-1 w-full border-[1px] rounded-[5px] shadow bg-white dark:bg-[#17181A] z-10"
+          >
+            <div
+              v-for="(post, index) in PostsTime"
+              :key="index"
+              @click.stop="chooseSort(post)"
+              class="px-5 py-2 hover:bg-white hover:text-[#17181A] cursor-pointer capitalize"
+            >
+              {{ post.name }}
+            </div>
           </div>
         </div>
       </div>
 
       <!-- Custom Date -->
       <div
-        class="col-span-4 h-auto border-[2px] flex flex-row items-center px-5 rounded-[5px] justify-between"
+        class="col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656]"
       >
         <div
-          class="flex items-center justify-between py-2 w-full cursor-pointer hover:border-gray-400"
+          class="daterange-box relative w-full h-full bg-[#FAFAFA] dark:bg-[#17181A] rounded-[5px]"
         >
-          <span class="text-gray-500">Custom Date</span>
-          <!-- Ikon kalender -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-            class="w-5 h-5 text-gray-500"
+          <div
+            @click="toggleDateRange"
+            class="w-full h-full flex flex-row items-center px-3 py-2 rounded-[5px] justify-between cursor-pointer select-none"
           >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="1.5"
-              d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
-            />
-          </svg>
+            <div class="flex items-center">
+              <span
+                class="flex items-center"
+                :class="[
+                  customDateRange.start && customDateRange.end
+                    ? 'text-[12px]'
+                    : 'capitalize text-gray-500',
+                ]"
+              >
+                {{
+                  customDateRange.start && customDateRange.end
+                    ? utils.fromISODate(customDateRange.start) +
+                      " - " +
+                      utils.fromISODate(customDateRange.end)
+                    : "Custom Date"
+                }}
+              </span>
+            </div>
+            <!-- Ikon kalender -->
+            <div class="flex items-center">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 24 24"
+                stroke="currentColor"
+                class="w-5 h-5 text-gray-500"
+              >
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="1.5"
+                  d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
+                />
+              </svg>
+            </div>
+          </div>
+
+          <!-- Dropdown Date Range -->
+          <div
+            v-if="showDateRange"
+            class="absolute left-0 top-12 w-auto h-auto border-[1px] rounded-[5px] shadow bg-white dark:bg-[#17181A] z-10 p-3"
+          >
+            <div class="flex w-auto flex-row items-center gap-2">
+              <!-- Start Date -->
+              <input
+                type="date"
+                v-model="customDateRange.start"
+                class="w-full border rounded px-2 py-1 text-[14px]"
+              />
+              <span>-</span>
+              <!-- End Date -->
+              <input
+                type="date"
+                v-model="customDateRange.end"
+                class="w-full border rounded px-2 py-1 text-[14px]"
+              />
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -348,6 +428,14 @@ watch(searchQuery, (newQuery) => {
       <source src="@/assets/videos/dark-loading.mp4" type="video/mp4" />
     </video>
   </div>
+
+  <!-- Date Range Filter
+  <div
+    v-else-if="customDateRange.start && customDateRange.end"
+    class="w-full h-auto mt-5"
+  >
+    Tampilkan hasil filter date range
+  </div> -->
 
   <!-- Hasil Filter by Category -->
   <div

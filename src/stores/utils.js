@@ -5,11 +5,12 @@ export const useUtilsStore = defineStore("utils", {
     fromISODate(dateString, locale = "en-US") {
       if (!dateString) return "-";
       const d = new Date(dateString);
-      return d.toLocaleDateString(locale, {
-        month: "short",
-        day: "2-digit",
-        year: "numeric",
-      });
+
+      const day = d.toLocaleDateString(locale, { day: "2-digit" });
+      const month = d.toLocaleDateString(locale, { month: "short" });
+      const year = d.getFullYear();
+
+      return `${day} ${month}, ${year}`;
     },
 
     shortNumber(num) {
