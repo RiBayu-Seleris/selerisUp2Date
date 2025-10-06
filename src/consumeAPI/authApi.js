@@ -12,7 +12,7 @@ const headerApi = {
 
 // State global untuk auth (opsional, bisa diakses ulang dari komponen lain)
 export const token = ref(localStorage.getItem("token") || null);
-export const user = ref(null);
+export const user = ref(localStorage.getItem("name") || null); // penting!
 export const loading = ref(false);
 export const error = ref(null);
 

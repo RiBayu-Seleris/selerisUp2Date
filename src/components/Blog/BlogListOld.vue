@@ -58,6 +58,7 @@ const customDateRange = ref({
 
 const searchQuery = ref(""); // Search Input
 let timeout = null; // timer untuk manual delay / "debounce"
+let lastSearchId = 0;
 const results = ref([]); // 🔥 state untuk simpan hasil
 const loadingTyping = ref(false); //State loading untuk search query
 
@@ -100,7 +101,7 @@ const copyLink = async (slug) => {
 const buildParams = () => {
   const params = {};
 
-  // filter category
+  // Filter kategori
   if (selectedCategory.value && selectedCategory.value !== "All Articles") {
     const categoryObj = categories.value.find(
       (c) => c.name === selectedCategory.value
@@ -108,17 +109,17 @@ const buildParams = () => {
     if (categoryObj) params.category_id = categoryObj.id;
   }
 
-  // filter search
+  // Filter pencarian
   if (searchQuery.value) {
-    params.search = searchQuery.value;
+    params.search = searchQuery.value.trim();
   }
 
-  // filter sort
+  // Filter sorting
   if (selectedPostTime.value?.value) {
     params.sort_by = selectedPostTime.value.value;
   }
 
-  // filter date range
+  // Filter rentang tanggal
   if (customDateRange.value.start && customDateRange.value.end) {
     params.start_date = customDateRange.value.start;
     params.end_date = customDateRange.value.end;
@@ -203,29 +204,52 @@ onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
 });
 
-// 🔹 Watch searchQuery dengan debounce
-watch(searchQuery, () => {
-  loadingTyping.value = true;
+// 🔍 Watch untuk search query (dengan debounce)
+watch(searchQuery, (newQuery) => {
   clearTimeout(timeout);
+  const currentSearchId = ++lastSearchId; // Cegah race condition
 
-  timeout = setTimeout(async () => {
-    const params = buildParams(); // ✅ sekarang ikut semua filter
-    await getAllBlogs(params);
+  // Kalau user hapus semua teks → reset blog
+  if (!newQuery) {
     loadingTyping.value = false;
+    getAllBlogs(buildParams()); // Ambil ulang semua blog default
+    return;
+  }
+
+  // Aktifkan indikator "mengetik"
+  loadingTyping.value = true;
+
+  // Debounce 500ms
+  timeout = setTimeout(async () => {
+    try {
+      const params = buildParams();
+      console.log("🔍 Search triggered with params:", params);
+
+      await getAllBlogs(params);
+    } finally {
+      // Pastikan hanya request terbaru yang menonaktifkan loading
+      if (currentSearchId === lastSearchId) {
+        loadingTyping.value = false;
+      }
+    }
   }, 500);
 });
 
+// 📅 Watch untuk date range (update & reset otomatis)
 watch(
   customDateRange,
-  (newVal) => {
-    console.log("Date range changed:", newVal.start, "→", newVal.end);
-  },
-  { deep: true }
-);
-watch(
-  customDateRange,
-  (newVal) => {
-    console.log("Date range changed:", newVal.start, "→", newVal.end);
+  async (newVal) => {
+    const hasBothDates = newVal.start && newVal.end;
+
+    if (hasBothDates) {
+      console.log("📆 Date range changed:", newVal.start, "→", newVal.end);
+    } else {
+      console.log("🧹 Date range cleared — reset ke semua blog");
+    }
+
+    const params = buildParams();
+    console.log("API Params (date range):", params);
+    await getAllBlogs(params);
   },
   { deep: true }
 );
@@ -270,7 +294,9 @@ watch(
             @click="toggleCategory"
             class="w-full h-full flex flex-row items-center px-5 py-2 rounded-[5px] justify-between cursor-pointer select-none"
           >
-            <p>{{ selectedCategory }}</p>
+            <p class="text-[#6C6C6C] dark:text-[#ADADAD]">
+              {{ selectedCategory }}
+            </p>
             <ChevronDown
               :class="isCategoryOpen ? 'rotate-180 transition' : 'transition'"
             />
@@ -284,7 +310,7 @@ watch(
               v-for="(category, index) in categories"
               :key="index"
               @click.stop="chooseCategory(category)"
-              class="px-5 py-2 hover:bg-white hover:text-[#17181A] cursor-pointer rounded-[5px]"
+              class="px-5 py-2 hover:bg-white hover:text-[#17181A] text-[#6C6C6C] dark:text-[#ADADAD] cursor-pointer rounded-[5px]"
             >
               {{ category.name }}
             </div>
@@ -303,7 +329,9 @@ watch(
             @click="togglePostTime"
             class="w-full h-full flex flex-row items-center px-5 py-2 rounded-[5px] justify-between cursor-pointer select-none"
           >
-            <p class="capitalize">{{ selectedPostTime.name }}</p>
+            <p class="capitalize text-[#6C6C6C] dark:text-[#ADADAD]">
+              {{ selectedPostTime.name }}
+            </p>
             <ChevronDown
               :class="isPostTimeOpen ? 'rotate-180 transition' : 'transition'"
             />
@@ -318,7 +346,7 @@ watch(
               v-for="(post, index) in PostsTime"
               :key="index"
               @click.stop="chooseSort(post)"
-              class="px-5 py-2 hover:bg-white hover:text-[#17181A] cursor-pointer capitalize"
+              class="px-5 py-2 hover:bg-white hover:text-[#17181A] text-[#6C6C6C] dark:text-[#ADADAD] cursor-pointer capitalize"
             >
               {{ post.name }}
             </div>
@@ -342,8 +370,8 @@ watch(
                 class="flex items-center"
                 :class="[
                   customDateRange.start && customDateRange.end
-                    ? 'text-[12px]'
-                    : 'capitalize text-gray-500',
+                    ? 'text-[12px] text-[#6C6C6C] dark:text-[#ADADAD]'
+                    : 'capitalize text-[#6C6C6C] dark:text-[#ADADAD]',
                 ]"
               >
                 {{
@@ -384,14 +412,14 @@ watch(
               <input
                 type="date"
                 v-model="customDateRange.start"
-                class="w-full border rounded px-2 py-1 text-[14px]"
+                class="w-full border rounded px-2 py-1 text-[14px] text-[#6C6C6C] dark:text-[#ADADAD]"
               />
               <span>-</span>
               <!-- End Date -->
               <input
                 type="date"
                 v-model="customDateRange.end"
-                class="w-full border rounded px-2 py-1 text-[14px]"
+                class="w-full border rounded px-2 py-1 text-[14px] text-[#6C6C6C] dark:text-[#ADADAD]"
               />
             </div>
           </div>
@@ -427,211 +455,6 @@ watch(
     >
       <source src="@/assets/videos/dark-loading.mp4" type="video/mp4" />
     </video>
-  </div>
-
-  <!-- Date Range Filter
-  <div
-    v-else-if="customDateRange.start && customDateRange.end"
-    class="w-full h-auto mt-5"
-  >
-    Tampilkan hasil filter date range
-  </div> -->
-
-  <!-- Hasil Filter by Category -->
-  <div
-    v-if="selectedCategory !== 'All Articles' && !searchQuery && !loadingTyping"
-    class="w-full h-auto mt-5"
-  >
-    <div
-      v-if="blogs.length > 0"
-      class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-5 mb-20 px-8 md:px-8 xl:px-0 pb-20"
-    >
-      <div
-        v-for="(data, index) in blogs"
-        :key="index.id"
-        class="relative w-full h-full !p-[1px] rounded-[10px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-35% dark:to-[#565656]"
-      >
-        <div class="w-full h-auto flex flex-col">
-          <div
-            class="flex flex-col w-full h-full p-4 rounded-[10px] bg-[#FAFAFA] dark:bg-[#1D1F23]"
-          >
-            <div>
-              <div class="w-full h-auto lg:h-[160px]">
-                <!-- src="" -->
-                <img
-                  :src="data.cover"
-                  alt="BlogImage"
-                  class="w-full h-full object-cover lg:object-fill rounded-[10px]"
-                />
-              </div>
-              <div
-                class="flex flex-row w-full h-auto justify-between text-sm text-[#7A7A7A] my-5"
-              >
-                <div
-                  class="flex items-center bg-[#7B61FF]/10 dark:bg-transparent px-4 dark:px-0 rounded-[16px]"
-                >
-                  <p
-                    class="text-[12px] md:text-[14px] lg:text-[14px] text-[#7B61FF] dark:text-[#FFFFFF] font-semibold"
-                  >
-                    {{ data.category_name }}
-                  </p>
-                </div>
-                <div
-                  class="flex items-center bg-[#3758F9] px-5 py-1 rounded-[5px]"
-                >
-                  <p
-                    class="text-[#FFFFFF] text-[12px] md:text-[12px] lg:text-[14px]"
-                  >
-                    {{ utils.fromISODate(data.created_at) }}
-                  </p>
-                </div>
-              </div>
-              <div
-                class="flex w-full h-auto sm:h-[45px] md:h-[50px] lg:h-[55px] text-left overflow-hidden"
-              >
-                <p
-                  class="text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] line-clamp-2"
-                >
-                  {{ data.title }}
-                </p>
-              </div>
-              <div class="flex w-full h-auto justify-start items-start my-3">
-                <p
-                  class="text-[12px] lg:text-[14px] text-[#637381] line-clamp-2 lg:line-clamp-2"
-                >
-                  {{ data.synopsis }}
-                </p>
-              </div>
-            </div>
-            <div class="relative w-full h-auto flex flex-row mt-4 mb-0 xl:mb-0">
-              <div class="w-auto flex flex-row gap-x-3 justify-start">
-                <div class="flex flex-row justify-between gap-x-1">
-                  <div
-                    class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
-                  >
-                    <EyeIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
-                  </div>
-                  <div class="w-full h-full flex items-center">
-                    <span
-                      class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
-                    >
-                      {{ utils.shortNumber(data.views) }}
-                      <!-- 20 -->
-                    </span>
-                  </div>
-                </div>
-                <div class="flex flex-row justify-between gap-x-1">
-                  <div
-                    class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
-                  >
-                    <CommentIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
-                  </div>
-                  <div class="w-full h-auto">
-                    <span
-                      class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
-                    >
-                      {{ data.comments }}
-                      <!-- 15 -->
-                    </span>
-                  </div>
-                </div>
-                <div class="relative flex w-full h-auto share-wrapper">
-                  <div
-                    class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer flex items-center"
-                    @click.stop="toggleShare(data.id)"
-                  >
-                    <ShareIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
-                  </div>
-                  <div
-                    v-show="activeShareId === data.id"
-                    class="absolute z-30 -left-[65px] md:-left-[63px] lg:-left-[80px] -bottom-[190px] md:-bottom-[190px] lg:-bottom-[220px] xl:-bottom-[230px] w-[150px] lg:w-[180px] h-auto"
-                  >
-                    <div class="relative">
-                      <img
-                        src="@/assets/images/blog/share-frame2.svg"
-                        alt=""
-                        srcset=""
-                        class="w-full h-auto object-cover relative"
-                      />
-                      <div
-                        class="absolute w-full h-full top-2 lg:top-3 px-5 flex flex-col gap-y-2 sm:gap-y-3 justify-center"
-                      >
-                        <div
-                          class="w-full h-auto cursor-pointer flex flex-row items-center gap-x-2 lg:gap-x-3"
-                          @click="copyLink(data.slug)"
-                        >
-                          <div class="w-5 h-auto lg:w-auto lg:h-auto">
-                            <img
-                              src="@/assets/images/blog/copy-link.svg"
-                              alt=""
-                              srcset=""
-                            />
-                          </div>
-                          <div class="w-[70%] h-auto flex items-center">
-                            <span class="text-[14px]">Copy Link</span>
-                          </div>
-                        </div>
-                        <div class="w-full h-[1px] bg-[#EBEBEB]" />
-                        <div
-                          class="w-full h-auto flex flex-col gap-y-4 lg:gap-y-5 cursor-pointer"
-                        >
-                          <div
-                            class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
-                          >
-                            <div class="w-5 h-auto lg:w-auto lg:h-auto">
-                              <img
-                                src="@/assets/images/blog/linkedin.png"
-                                alt=""
-                                srcset=""
-                              />
-                            </div>
-                            <div class="w-[70%] h-auto flex items-center">
-                              <span class="text-[14px]">LinkedIn</span>
-                            </div>
-                          </div>
-                          <div
-                            class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
-                          >
-                            <div class="w-5 h-auto lg:w-auto lg:h-auto">
-                              <img
-                                src="@/assets/images/blog/facebook.png"
-                                alt=""
-                                srcset=""
-                              />
-                            </div>
-                            <div class="w-[70%] h-auto flex items-center">
-                              <span class="text-[14px]">Facebook</span>
-                            </div>
-                          </div>
-                          <div
-                            class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
-                          >
-                            <div class="w-5 h-auto lg:w-auto lg:h-auto">
-                              <img
-                                src="@/assets/images/blog/twitter.png"
-                                alt=""
-                                srcset=""
-                              />
-                            </div>
-                            <div class="w-[70%] h-auto flex items-center">
-                              <span class="text-[14px]">Twitter(X)</span>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div v-else class="text-gray-500 text-center py-6">
-      Tidak ada artikel pada kategori ini
-    </div>
   </div>
 
   <!-- Search Result -->
@@ -831,9 +654,236 @@ watch(
   </div>
 
   <!-- Search Result No Blog Found -->
-  <div v-else-if="searchQuery && !loadingTyping" class="w-full h-auto mt-5">
-    <div class="text-gray-500 text-center py-6">
-      Artikel yang anda cari tidak ada
+  <div
+    v-else-if="searchQuery && !blogs.length && !loadingTyping"
+    class="w-full h-auto mt-5 text-center py-6 text-gray-500"
+  >
+    <p>
+      Tidak ada artikel yang cocok dengan pencarian
+      <template v-if="selectedCategory !== 'All Articles'">
+        pada kategori <strong>{{ selectedCategory }}</strong>
+      </template>
+      <template v-if="customDateRange.start && customDateRange.end">
+        pada rentang waktu {{ customDateRange.start }} -
+        {{ customDateRange.end }}
+      </template>
+    </p>
+  </div>
+
+  <!-- 📅 4. Filter kategori atau date range aktif tapi hasil kosong -->
+  <div
+    v-else-if="
+      !searchQuery &&
+      (selectedCategory !== 'All Articles' ||
+        customDateRange.start ||
+        customDateRange.end) &&
+      !blogs.length
+    "
+    class="w-full h-auto mt-5"
+  >
+    <p class="text-center text-[#6E6E6E]">
+      Tidak ada artikel
+      <template v-if="selectedCategory !== 'All Articles'">
+        pada kategori <strong>{{ selectedCategory }}</strong>
+      </template>
+      <template v-if="customDateRange.start && customDateRange.end">
+        dalam rentang tanggal {{ customDateRange.start }} -
+        {{ customDateRange.end }}
+      </template>
+    </p>
+  </div>
+
+  <!-- Hasil Filter by Category -->
+  <div
+    v-else-if="
+      selectedCategory !== 'All Articles' && blogs.length && !searchQuery
+    "
+    class="w-full h-auto mt-5"
+  >
+    <div
+      class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-5 mb-20 px-8 md:px-8 xl:px-0 pb-20"
+    >
+      <div
+        v-for="(data, index) in blogs"
+        :key="index.id"
+        class="relative w-full h-full !p-[1px] rounded-[10px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-35% dark:to-[#565656]"
+      >
+        <div class="w-full h-auto flex flex-col">
+          <div
+            class="flex flex-col w-full h-full p-4 rounded-[10px] bg-[#FAFAFA] dark:bg-[#1D1F23]"
+          >
+            <div>
+              <div class="w-full h-auto lg:h-[160px]">
+                <!-- src="" -->
+                <img
+                  :src="data.cover"
+                  alt="BlogImage"
+                  class="w-full h-full object-cover lg:object-fill rounded-[10px]"
+                />
+              </div>
+              <div
+                class="flex flex-row w-full h-auto justify-between text-sm text-[#7A7A7A] my-5"
+              >
+                <div
+                  class="flex items-center bg-[#7B61FF]/10 dark:bg-transparent px-4 dark:px-0 rounded-[16px]"
+                >
+                  <p
+                    class="text-[12px] md:text-[14px] lg:text-[14px] text-[#7B61FF] dark:text-[#FFFFFF] font-semibold"
+                  >
+                    {{ data.category_name }}
+                  </p>
+                </div>
+                <div
+                  class="flex items-center bg-[#3758F9] px-5 py-1 rounded-[5px]"
+                >
+                  <p
+                    class="text-[#FFFFFF] text-[12px] md:text-[12px] lg:text-[14px]"
+                  >
+                    {{ utils.fromISODate(data.created_at) }}
+                  </p>
+                </div>
+              </div>
+              <div
+                class="flex w-full h-auto sm:h-[45px] md:h-[50px] lg:h-[55px] text-left overflow-hidden"
+              >
+                <p
+                  class="text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] line-clamp-2"
+                >
+                  {{ data.title }}
+                </p>
+              </div>
+              <div class="flex w-full h-auto justify-start items-start my-3">
+                <p
+                  class="text-[12px] lg:text-[14px] text-[#637381] line-clamp-2 lg:line-clamp-2"
+                >
+                  {{ data.synopsis }}
+                </p>
+              </div>
+            </div>
+            <div class="relative w-full h-auto flex flex-row mt-4 mb-0 xl:mb-0">
+              <div class="w-auto flex flex-row gap-x-3 justify-start">
+                <div class="flex flex-row justify-between gap-x-1">
+                  <div
+                    class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
+                  >
+                    <EyeIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
+                  </div>
+                  <div class="w-full h-full flex items-center">
+                    <span
+                      class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
+                    >
+                      {{ utils.shortNumber(data.views) }}
+                      <!-- 20 -->
+                    </span>
+                  </div>
+                </div>
+                <div class="flex flex-row justify-between gap-x-1">
+                  <div
+                    class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
+                  >
+                    <CommentIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
+                  </div>
+                  <div class="w-full h-auto">
+                    <span
+                      class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
+                    >
+                      {{ data.comments }}
+                      <!-- 15 -->
+                    </span>
+                  </div>
+                </div>
+                <div class="relative flex w-full h-auto share-wrapper">
+                  <div
+                    class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer flex items-center"
+                    @click.stop="toggleShare(data.id)"
+                  >
+                    <ShareIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
+                  </div>
+                  <div
+                    v-show="activeShareId === data.id"
+                    class="absolute z-30 -left-[65px] md:-left-[63px] lg:-left-[80px] -bottom-[190px] md:-bottom-[190px] lg:-bottom-[220px] xl:-bottom-[230px] w-[150px] lg:w-[180px] h-auto"
+                  >
+                    <div class="relative">
+                      <img
+                        src="@/assets/images/blog/share-frame2.svg"
+                        alt=""
+                        srcset=""
+                        class="w-full h-auto object-cover relative"
+                      />
+                      <div
+                        class="absolute w-full h-full top-2 lg:top-3 px-5 flex flex-col gap-y-2 sm:gap-y-3 justify-center"
+                      >
+                        <div
+                          class="w-full h-auto cursor-pointer flex flex-row items-center gap-x-2 lg:gap-x-3"
+                          @click="copyLink(data.slug)"
+                        >
+                          <div class="w-5 h-auto lg:w-auto lg:h-auto">
+                            <img
+                              src="@/assets/images/blog/copy-link.svg"
+                              alt=""
+                              srcset=""
+                            />
+                          </div>
+                          <div class="w-[70%] h-auto flex items-center">
+                            <span class="text-[14px]">Copy Link</span>
+                          </div>
+                        </div>
+                        <div class="w-full h-[1px] bg-[#EBEBEB]" />
+                        <div
+                          class="w-full h-auto flex flex-col gap-y-4 lg:gap-y-5 cursor-pointer"
+                        >
+                          <div
+                            class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
+                          >
+                            <div class="w-5 h-auto lg:w-auto lg:h-auto">
+                              <img
+                                src="@/assets/images/blog/linkedin.png"
+                                alt=""
+                                srcset=""
+                              />
+                            </div>
+                            <div class="w-[70%] h-auto flex items-center">
+                              <span class="text-[14px]">LinkedIn</span>
+                            </div>
+                          </div>
+                          <div
+                            class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
+                          >
+                            <div class="w-5 h-auto lg:w-auto lg:h-auto">
+                              <img
+                                src="@/assets/images/blog/facebook.png"
+                                alt=""
+                                srcset=""
+                              />
+                            </div>
+                            <div class="w-[70%] h-auto flex items-center">
+                              <span class="text-[14px]">Facebook</span>
+                            </div>
+                          </div>
+                          <div
+                            class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
+                          >
+                            <div class="w-5 h-auto lg:w-auto lg:h-auto">
+                              <img
+                                src="@/assets/images/blog/twitter.png"
+                                alt=""
+                                srcset=""
+                              />
+                            </div>
+                            <div class="w-[70%] h-auto flex items-center">
+                              <span class="text-[14px]">Twitter(X)</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
@@ -858,7 +908,7 @@ watch(
             </p>
           </div>
           <!-- Loading -->
-          <div v-if="loading">
+          <div v-if="loading" class="flex justify-center items-center">
             <!-- Loader Frame -->
             <video
               autoplay
@@ -1101,7 +1151,31 @@ watch(
             </p>
           </div>
           <!-- Loading -->
-          <div v-if="loading">Loading Data</div>
+          <!-- Loading -->
+          <div v-if="loading" class="flex justify-center items-center">
+            <!-- Loader Frame -->
+            <video
+              autoplay
+              loop
+              muted
+              playsinline
+              @contextmenu.prevent
+              class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center dark:hidden"
+            >
+              <source src="@/assets/videos/loading.mp4" type="video/mp4" />
+            </video>
+
+            <video
+              autoplay
+              loop
+              muted
+              playsinline
+              @contextmenu.prevent
+              class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center hidden dark:flex"
+            >
+              <source src="@/assets/videos/dark-loading.mp4" type="video/mp4" />
+            </video>
+          </div>
           <!-- Error Global -->
           <div v-else-if="error">{{ error }}</div>
           <!-- popularError -->
@@ -1175,7 +1249,31 @@ watch(
       <div
         class="relative flex flex-row w-full h-auto gap-x-4 sm:gap-x-4 md:gap-x-8 overflow-x-auto snap-x snap-mandatory mt-3 pb-10 pl-8 pr-8 hide-scrollbar"
       >
-        <div v-if="loading">Loading Data</div>
+        <!-- Loading -->
+        <div v-if="loading" class="flex justify-center items-center">
+          <!-- Loader Frame -->
+          <video
+            autoplay
+            loop
+            muted
+            playsinline
+            @contextmenu.prevent
+            class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center dark:hidden"
+          >
+            <source src="@/assets/videos/loading.mp4" type="video/mp4" />
+          </video>
+
+          <video
+            autoplay
+            loop
+            muted
+            playsinline
+            @contextmenu.prevent
+            class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center hidden dark:flex"
+          >
+            <source src="@/assets/videos/dark-loading.mp4" type="video/mp4" />
+          </video>
+        </div>
         <div v-else-if="error" class="px-6">{{ error }}</div>
         <div
           v-else
@@ -1256,7 +1354,31 @@ watch(
     <section
       class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-5 mb-20 px-8 md:px-8 xl:px-0 pb-20"
     >
-      <div v-if="loading">Loading Data</div>
+      <!-- Loading -->
+      <div v-if="loading" class="w-full flex justify-center items-center">
+        <!-- Loader Frame -->
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          @contextmenu.prevent
+          class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center dark:hidden"
+        >
+          <source src="@/assets/videos/loading.mp4" type="video/mp4" />
+        </video>
+
+        <video
+          autoplay
+          loop
+          muted
+          playsinline
+          @contextmenu.prevent
+          class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center hidden dark:flex"
+        >
+          <source src="@/assets/videos/dark-loading.mp4" type="video/mp4" />
+        </video>
+      </div>
       <div v-else-if="error" class="px-6">{{ error }}</div>
       <div
         v-else

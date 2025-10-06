@@ -148,7 +148,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div class="flex flex-col relative w-full px-12 py-10">
+  <div class="flex flex-col relative w-full px-12 py-10 dark:bg-[#17181A]">
     <!-- Title -->
     <div class="text-center mb-4">
       <div

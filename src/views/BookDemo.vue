@@ -67,10 +67,10 @@ watch(
           >
             Let's Seleris Together
           </p>
-          <p class="text-[14px] md:text-[17px] text-[#6E6E6E]">
+          <!-- <p class="text-[14px] md:text-[17px] text-[#6E6E6E]">
             Join leading AI teams accelerating their ML development with Scale.
             Book a 1:1 demo with us to get started.
-          </p>
+          </p> -->
         </div>
         <div class="w-full h-auto mt-8">
           <form @submit.prevent action="#" class="flex flex-col gap-5">

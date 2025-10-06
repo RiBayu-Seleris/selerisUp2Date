@@ -1,7 +1,9 @@
 <script setup></script>
 
 <template>
-  <div class="flex w-full h-auto sml:pt-[120px] md:pt-[100px] xl:pt-[160px]">
+  <div
+    class="flex w-full h-auto sml:pt-[120px] md:pt-[100px] xl:pt-[160px] dark:bg-[#17181A]"
+  >
     <div
       class="flex flex-col w-full h-auto gap-y-4 justify-center items-center"
     >

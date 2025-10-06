@@ -16,7 +16,7 @@ defineProps({
 
 <template>
   <div
-    class="flex flex-col w-full h-auto space-y-2 sm:space-y-0 md:space-y-0 lg:space-y-3 xl:space-y-2 justify-center items-center"
+    class="flex flex-col w-full h-auto space-y-2 sm:space-y-0 md:space-y-0 lg:space-y-3 xl:space-y-2 justify-center items-center dark:bg-[#17181A]"
   >
     <p
       class="text-[24px] sm:text-[24px] md:text-[34px] lg:text-[38px] xl:text-[40px] font-[500] tracking-tight text-[#1AB24F] text-center"

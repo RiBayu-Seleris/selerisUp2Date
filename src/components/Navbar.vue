@@ -36,7 +36,7 @@ onUnmounted(() => {
       class="hidden lg:grid grid-cols-12 w-full max-w-[1440px] h-auto px-8 lg:px-6 xl:px-8 xls:px-8 2xls:px-0 transition-all duration-500 ease-in"
       :class="[
         isScrolled
-          ? 'bg-white py-2 xls:px-8 2xls:px-8 rounded-[10px] dark:bg-black/40 dark:backdrop-blur-3xl dark:border-[0.5px] border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30'
+          ? 'bg-white py-2 xls:px-8 2xls:px-8 rounded-[10px] dark:bg-black/70 dark:backdrop-blur-sm dark:border-[0.5px] border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30'
           : 'bg-transparent',
       ]"
     >
@@ -73,7 +73,7 @@ onUnmounted(() => {
       class="flex lg:hidden flex-row w-full h-auto justify-between transition-all duration-500 ease-in"
       :class="[
         isScrolled
-          ? 'px-4 md:px-8 bg-white py-2 rounded-[10px] dark:bg-black/40 dark:backdrop-blur-3xl dark:border border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30'
+          ? 'px-4 md:px-8 bg-white py-2 rounded-[10px] dark:bg-[#17181A] dark:backdrop-blur-3xl dark:border border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30'
           : 'px-6 sm:px-8 bg-transparent',
       ]"
     >

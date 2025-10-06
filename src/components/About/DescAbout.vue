@@ -17,7 +17,7 @@ import DescRobot from "@/assets/images/about-images.png";
     </p>
   </div>
   <!-- div Description 2 -->
-  <div class= "flex w-full h-auto my-5 sm:my-8 lg:my-14 xl:my-16 lg:px-20">
+  <div class="flex w-full h-auto my-5 sm:my-8 lg:my-14 xl:my-16 lg:px-20">
     <div
       class="flex md:flex-row sml:flex-col w-full h-auto justify-between gap-y-5 md:gap-8 lg:gap-x-16"
     >

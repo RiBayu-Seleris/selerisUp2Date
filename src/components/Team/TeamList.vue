@@ -88,7 +88,7 @@ const managementTeam = [
 
 <template>
   <!-- Board of Directors and Senior Management -->
-  <div class="flex flex-col w-full h-auto">
+  <div class="flex flex-col w-full h-auto dark:bg-[#17181A]">
     <div
       class="flex flex-col w-full h-auto justify-center items-center space-y-2 md:px-10 lg:px-10 xl:px-14"
     >
@@ -172,7 +172,7 @@ const managementTeam = [
   </div>
 
   <!-- Management Team -->
-  <div class="flex flex-col w-full h-auto mt-24">
+  <div class="flex flex-col w-full h-auto mt-24 dark:bg-[#17181A]">
     <div
       class="flex flex-col w-full h-auto justify-center items-center space-y-2 md:px-10 lg:px-10 xl:px-14"
     >

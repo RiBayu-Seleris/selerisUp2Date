@@ -10,7 +10,9 @@ defineProps({
 </script>
 
 <template>
-  <div class="w-full h-auto flex justify-center mt-14 lg:mt-20 xl:mt-16">
+  <div
+    class="w-full h-auto flex justify-center mt-14 lg:mt-20 xl:mt-16 dark:bg-[#17181A]"
+  >
     <img
       :src="imgUrl"
       alt="Logo"

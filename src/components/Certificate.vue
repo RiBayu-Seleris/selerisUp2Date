@@ -7,7 +7,7 @@ import { certificateData } from "@/Data/certData";
 
 <template>
   <div class="w-full h-auto">
-    <div class="flex flex-col w-full h-auto">
+    <div class="flex flex-col w-full h-auto dark:bg-[#17181A]">
       <!-- Heading -->
       <div class="flex flex-col w-full items-center text-center">
         <p

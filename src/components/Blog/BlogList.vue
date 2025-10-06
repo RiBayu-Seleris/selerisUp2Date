@@ -285,7 +285,7 @@ watch(
     <div class="w-full h-auto grid grid-cols-12 gap-x-2 mt-5">
       <!-- Category -->
       <div
-        class="col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656]"
+        class="col-span-6 sm:col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656]"
       >
         <div
           class="category-box relative w-full h-full bg-[#FAFAFA] dark:bg-[#17181A] rounded-[5px]"
@@ -304,15 +304,17 @@ watch(
           <!-- List dropdown -->
           <div
             v-if="isCategoryOpen"
-            class="absolute left-0 top-12 mt-1 w-full border-[1px] rounded-[5px] shadow bg-white dark:bg-[#17181A] z-10"
+            class="absolute left-0 top-12 mt-1 w-full rounded-[5px] shadow bg-white dark:bg-[#565656] z-10 p-[1px]"
           >
-            <div
-              v-for="(category, index) in categories"
-              :key="index"
-              @click.stop="chooseCategory(category)"
-              class="px-5 py-2 hover:bg-white hover:text-[#17181A] text-[#6C6C6C] dark:text-[#ADADAD] cursor-pointer rounded-[5px]"
-            >
-              {{ category.name }}
+            <div class="w-full h-auto rounded-[5px] bg-white dark:bg-[#17181A]">
+              <div
+                v-for="(category, index) in categories"
+                :key="index"
+                @click.stop="chooseCategory(category)"
+                class="px-5 py-2 hover:bg-white hover:text-[#17181A] text-[#6C6C6C] dark:text-[#ADADAD] cursor-pointer rounded-[5px]"
+              >
+                {{ category.name }}
+              </div>
             </div>
           </div>
         </div>
@@ -320,7 +322,7 @@ watch(
 
       <!-- PostTime -->
       <div
-        class="col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656]"
+        class="col-span-6 sm:col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656]"
       >
         <div
           class="posttime-box relative w-full h-full bg-[#FAFAFA] dark:bg-[#17181A] rounded-[5px]"
@@ -340,15 +342,17 @@ watch(
           <!-- List dropdown -->
           <div
             v-if="isPostTimeOpen"
-            class="absolute left-0 top-12 mt-1 w-full border-[1px] rounded-[5px] shadow bg-white dark:bg-[#17181A] z-10"
+            class="absolute left-0 top-12 mt-1 w-full rounded-[5px] shadow bg-white dark:bg-[#565656] z-10 p-[1px]"
           >
-            <div
-              v-for="(post, index) in PostsTime"
-              :key="index"
-              @click.stop="chooseSort(post)"
-              class="px-5 py-2 hover:bg-white hover:text-[#17181A] text-[#6C6C6C] dark:text-[#ADADAD] cursor-pointer capitalize"
-            >
-              {{ post.name }}
+            <div class="w-full h-auto rounded-[5px] bg-white dark:bg-[#17181A]">
+              <div
+                v-for="(post, index) in PostsTime"
+                :key="index"
+                @click.stop="chooseSort(post)"
+                class="px-5 py-2 hover:bg-white hover:text-[#17181A] text-[#6C6C6C] dark:text-[#ADADAD] cursor-pointer capitalize"
+              >
+                {{ post.name }}
+              </div>
             </div>
           </div>
         </div>
@@ -356,18 +360,18 @@ watch(
 
       <!-- Custom Date -->
       <div
-        class="col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656]"
+        class="col-span-12 sm:col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656] mt-3 sm:mt-0"
       >
         <div
           class="daterange-box relative w-full h-full bg-[#FAFAFA] dark:bg-[#17181A] rounded-[5px]"
         >
           <div
             @click="toggleDateRange"
-            class="w-full h-full flex flex-row items-center px-3 py-2 rounded-[5px] justify-between cursor-pointer select-none"
+            class="w-full h-full flex flex-row items-center px-6 sm:px-3 py-2 rounded-[5px] justify-between cursor-pointer select-none"
           >
             <div class="flex items-center">
               <span
-                class="flex items-center"
+                class="flex items-center text-[14px]"
                 :class="[
                   customDateRange.start && customDateRange.end
                     ? 'text-[12px] text-[#6C6C6C] dark:text-[#ADADAD]'
@@ -379,7 +383,7 @@ watch(
                     ? utils.fromISODate(customDateRange.start) +
                       " - " +
                       utils.fromISODate(customDateRange.end)
-                    : "Custom Date"
+                    : "Start Date - End Date"
                 }}
               </span>
             </div>
@@ -405,22 +409,26 @@ watch(
           <!-- Dropdown Date Range -->
           <div
             v-if="showDateRange"
-            class="absolute left-0 top-12 w-auto h-auto border-[1px] rounded-[5px] shadow bg-white dark:bg-[#17181A] z-10 p-3"
+            class="absolute right-0 top-12 mt-1 w-auto rounded-[5px] shadow bg-white dark:bg-[#565656] z-10 p-[1px]"
           >
-            <div class="flex w-auto flex-row items-center gap-2">
-              <!-- Start Date -->
-              <input
-                type="date"
-                v-model="customDateRange.start"
-                class="w-full border rounded px-2 py-1 text-[14px] text-[#6C6C6C] dark:text-[#ADADAD]"
-              />
-              <span>-</span>
-              <!-- End Date -->
-              <input
-                type="date"
-                v-model="customDateRange.end"
-                class="w-full border rounded px-2 py-1 text-[14px] text-[#6C6C6C] dark:text-[#ADADAD]"
-              />
+            <div
+              class="w-full h-auto rounded-[5px] bg-white dark:bg-[#17181A] p-3"
+            >
+              <div class="flex w-auto flex-row items-center gap-x-1">
+                <!-- Start Date -->
+                <input
+                  type="date"
+                  v-model="customDateRange.start"
+                  class="w-full border rounded px-2 py-1 text-[14px] text-[#6C6C6C] dark:text-black"
+                />
+                <span>-</span>
+                <!-- End Date -->
+                <input
+                  type="date"
+                  v-model="customDateRange.end"
+                  class="w-full border rounded px-2 py-1 text-[14px] text-[#6C6C6C] dark:text-black"
+                />
+              </div>
             </div>
           </div>
         </div>
@@ -891,11 +899,11 @@ watch(
   <div v-else-if="!searchQuery && !loadingTyping" class="w-full h-auto mt-10">
     <!-- Newest and Popular -->
     <section
-      class="w-full h-auto flex flex-col lg:grid lg:grid-cols-12 gap-x-5 xl:gap-x-10 px-8 md:px-8 lg:px-8 xl:px-0"
+      class="w-full h-auto flex flex-col lg:grid lg:grid-cols-12 gap-x-5 xl:gap-x-5 px-8 md:px-8 lg:px-8 xl:px-0"
     >
       <!-- Newest Blog-->
       <div
-        class="w-full h-full col-span-12 lg:col-span-8 rounded-lg bg-[#D9D9D9] !p-[1px] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]"
+        class="w-full h-full col-span-12 lg:col-span-8 rounded-lg bg-[#D9D9D9] p-[1px] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]"
       >
         <div
           class="relative w-full h-full rounded-lg flex flex-col gap-y-4 px-6 pb-5 lg:pb-0 bg-[#FAFAFA] dark:bg-[#1D1F23]"
@@ -1322,13 +1330,13 @@ watch(
                         {{ data.title }}
                       </p>
                     </div>
-                    <div class="w-full h-auto flex items-start">
+                    <!-- <div class="w-full h-auto flex items-start">
                       <p
                         class="text-[10px] sm:text-[12px] md:text-[12px] leading-normal line-clamp-2 lg:line-clamp-3 text-[#637381]"
                       >
                         {{ data.synopsis }}
                       </p>
-                    </div>
+                    </div> -->
                   </div>
                   <div
                     class="hidden w-full h-auto sm:flex flex-row items-center"
@@ -1392,7 +1400,8 @@ watch(
           >
             <router-link :to="`/blog/${data.slug}`">
               <!-- h-[165px] -->
-              <div class="w-full h-auto">
+              <!-- lg:w-[398px] lg:h-[179px] -->
+              <div class="w-full h-auto xl:h-[170px]">
                 <img
                   :src="data.cover"
                   alt="BlogImage"

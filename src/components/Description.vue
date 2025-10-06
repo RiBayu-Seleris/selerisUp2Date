@@ -59,9 +59,9 @@ onMounted(() => {
 
 <template>
   <div
-    class="flex flex-row sml:flex-col-reverse lg:flex-row px-0 lg:px-6 lg:justify-between"
+    class="flex flex-row sml:flex-col-reverse lg:flex-row px-0 lg:px-6 lg:justify-between dark:bg-[#17181A]"
   >
-    <div class="flex flex-col w-full h-full justify-center">
+    <div class="flex flex-col w-full h-full justify-center dark:bg-[#17181A]">
       <div class="w-full pb-0 sm:pb-2 md:pb-0 xl:pb-6">
         <p
           class="text-[20px] md:text-[24px] text-[#1AB24F] font-[500] dark:text-[#FAFAFA]"

@@ -61,7 +61,7 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="w-full h-full">
+  <div class="w-full h-full dark:bg-[#17181A]">
     <div
       class="flex md:flex-row sml:flex-col-reverse w-full h-auto gap-x-10 relative"
     >

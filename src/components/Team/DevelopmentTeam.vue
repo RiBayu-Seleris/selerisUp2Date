@@ -1,5 +1,5 @@
 <template>
-  <div class="flex flex-col w-full h-auto">
+  <div class="flex flex-col w-full h-auto dark:bg-[#17181A]">
     <div
       class="flex flex-col w-full h-auto justify-center items-center px-8 sm:px-8 md:px-10 lg:px-10 xl:px-14 gap-y-2"
     >

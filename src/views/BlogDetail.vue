@@ -26,6 +26,7 @@ import {
   error as authError,
   logout,
   token,
+  user,
 } from "@/consumeAPI/authApi";
 
 const route = useRoute();
@@ -41,8 +42,6 @@ const {
   blogDetailError,
   postComment,
 } = blogsApi();
-
-const name = ref("");
 
 // Toggle Password Eye
 const showPassword = ref(false);
@@ -142,8 +141,6 @@ const handleLogin = async () => {
   // Jika berhasil
   if (data.status === 200) {
     loginError.value = false;
-    localStorage.setItem("name", data.data.name); // sudah disimpan di authApi
-    name.value = data.data.name; // <-- update reactive langsung
     Swal.fire({
       title: "Berhasil Login",
       text: data.message,
@@ -294,7 +291,7 @@ onBeforeUnmount(() => {
   <div v-else-if="error">{{ error }}</div>
   <div
     v-else-if="blogDetail"
-    class="w-full h-auto px-8 md:px-12 xl:px-16 pt-32"
+    class="w-full h-auto px-8 md:px-12 xl:px-16 pt-32 dark:bg-[#17181A]"
   >
     <section class="w-full h-auto flex flex-row justify-between">
       <div class="w-full h-auto flex items-center">
@@ -316,7 +313,9 @@ onBeforeUnmount(() => {
       <div v-if="loginStatus === true" class="w-[40%] h-auto flex justify-end">
         <div class="w-full flex flex-row justify-end">
           <div class="relative w-full h-auto flex flex-row justify-end">
-            <div class="relative w-[30%] h-auto pt-0 flex justify-end">
+            <div
+              class="relative w-[30%] h-auto pt-0 flex justify-end dark:text-white"
+            >
               <button @click="toggleDropdown" class="w-7 h-7 p-1">
                 <ArrowDown />
               </button>
@@ -332,8 +331,10 @@ onBeforeUnmount(() => {
             </div>
             <div class="w-auto h-auto flex flex-col justify-between px-2">
               <div class="w-full flex justify-end">
-                <p class="text-[16px] text-[#195279] font-[400] text-end">
-                  {{ name }}
+                <p
+                  class="text-[16px] text-[#195279] dark:text-white font-[400] text-end"
+                >
+                  {{ user }}
                 </p>
               </div>
               <div class="w-full flex justify-end">
@@ -346,7 +347,7 @@ onBeforeUnmount(() => {
     </section>
     <section class="w-full h-auto flex flex-col mt-10">
       <!-- Blog Images -->
-      <div class="w-full h-auto">
+      <div class="w-full h-auto dark:bg-[17181A]">
         <img
           :src="blogDetail.cover"
           alt=""
@@ -415,12 +416,12 @@ onBeforeUnmount(() => {
                   class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                 >
                   <LikeIcon
-                    class="w-auto h-6 sm:w-auto sm:h-8 md:w-auto md:h-7 lg:w-8 lg:h-auto p-0.5"
+                    class="w-auto h-6 sm:w-auto sm:h-8 md:w-auto md:h-7 lg:w-8 lg:h-full p-0.5"
                   />
                 </div>
-                <div class="w-full h-full flex items-center">
+                <div class="w-full h-full flex items-center justify-center">
                   <span
-                    class="text-[14px] sm:text-[18px] lg:text-[20px] text-[#6E6E6E] dark:text-[#637381]"
+                    class="text-[14px] sm:text-[18px] lg:text-[18px] text-[#6E6E6E] dark:text-[#637381]"
                   >
                     {{ utils.shortNumber(blogDetail.likes) }}
                   </span>
@@ -431,12 +432,12 @@ onBeforeUnmount(() => {
                   class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                 >
                   <EyeIcon
-                    class="w-auto h-6 sm:w-auto sm:h-8 md:w-auto md:h-7 lg:w-8 lg:h-auto p-0.5"
+                    class="w-auto h-6 sm:w-auto sm:h-8 md:w-auto md:h-7 lg:w-8 lg:h-full p-0.5"
                   />
                 </div>
-                <div class="w-full h-full flex items-center">
+                <div class="w-full h-full flex items-center justify-center">
                   <span
-                    class="text-[14px] sm:text-[18px] lg:text-[20px] text-[#6E6E6E] dark:text-[#637381]"
+                    class="text-[14px] sm:text-[18px] lg:text-[18px] text-[#6E6E6E] dark:text-[#637381]"
                   >
                     {{ utils.shortNumber(blogDetail.views) }}
                   </span>
@@ -447,12 +448,12 @@ onBeforeUnmount(() => {
                   class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                 >
                   <CommentIcon
-                    class="w-auto h-6 sm:w-auto sm:h-8 md:w-auto md:h-7 lg:w-8 lg:h-auto p-0.5"
+                    class="w-auto h-6 sm:w-auto sm:h-8 md:w-auto md:h-7 lg:w-8 lg:h-full p-0.5"
                   />
                 </div>
-                <div class="w-full h-full flex items-center">
+                <div class="w-full h-full flex items-center justify-center">
                   <span
-                    class="text-[14px] sm:text-[18px] lg:text-[20px] text-[#6E6E6E] dark:text-[#637381]"
+                    class="text-[14px] sm:text-[18px] lg:text-[18px] text-[#6E6E6E] dark:text-[#637381]"
                   >
                     {{ blogDetail.comments }}
                   </span>
@@ -465,7 +466,7 @@ onBeforeUnmount(() => {
                 @click.stop="toggleShare(blogDetail.id)"
               >
                 <ShareIcon
-                  class="w-auto h-6 sm:w-auto sm:h-8 md:w-auto md:h-7 lg:w-8 lg:h-auto p-0.5"
+                  class="w-auto h-6 sm:w-auto sm:h-8 md:w-auto md:h-7 lg:w-8 lg:h-full p-0.5"
                 />
               </div>
               <div
@@ -571,68 +572,74 @@ onBeforeUnmount(() => {
               <ToC />
               <!-- Box 2 -->
               <div
-                class="h-auto border-[1px] rounded-[10px] pt-2 hidden lg:flex lg:flex-col"
+                class="w-full h-auto p-[1px] rounded-[10px] bg-[#D9D9D9] dark:bg-gradient-to-tl dark:from-[#17181A] dark:from-45% dark:to-[#565656]"
               >
-                <div class="w-full h-auto pt-4 px-3">
-                  <p
-                    class="text-[#195279] font-[500] lg:text-[16px] justify-center dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
-                  >
-                    Most Popular
-                  </p>
-                </div>
-                <div class="flex flex-col w-full h-full mt-4">
-                  <!-- ✅ Hanya tampilkan gambar dari data pertama -->
-                  <router-link
-                    v-if="popularBlog.length > 0"
-                    :to="`/blog/${popularBlog[0].slug}`"
-                    class="w-full h-auto"
-                  >
-                    <figure class="w-full h-auto">
-                      <img
-                        :src="popularBlog[0].cover"
-                        alt="cover"
-                        class="w-full h-[180px] lg:h-auto object-fill"
-                      />
-                    </figure>
-                  </router-link>
-                  <!-- ✅ Daftar lainnya -->
-                  <div class="flex flex-col w-full h-full">
-                    <div
-                      v-for="(data, index) in popularBlog"
-                      :key="index"
-                      class="w-full flex flex-col items-center"
+                <div
+                  class="w-full h-auto rounded-[10px] pt-2 hidden lg:flex lg:flex-col bg-[#FAFAFA] dark:bg-[#1D1F23]"
+                >
+                  <div class="w-full h-auto pt-4 px-3">
+                    <p
+                      class="text-[#195279] font-[500] lg:text-[16px] justify-center dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                     >
-                      <router-link :to="`/blog/${data.slug}`" class="w-full">
-                        <div class="w-full h-auto grid grid-cols-12 pr-10 py-4">
-                          <div class="col-span-3 w-full flex justify-center">
-                            <p class="text-[24px] text-[#8EB3CC]">
-                              #{{ index + 1 }}
-                            </p>
-                          </div>
-                          <div class="col-span-9 flex flex-col gap-y-1">
-                            <p
-                              class="text-[#6941C6] dark:text-[#2AB857] text-[14px]"
-                            >
-                              {{ data.category_name }}
-                            </p>
-                            <p
-                              class="text-[#195279] font-[500] text-[16px] leading-snug line-clamp-2 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
-                            >
-                              {{ data.title }}
-                            </p>
-                            <p
-                              class="text-[#B8B8B8] dark:text-[#6F6F6F] text-[12px]"
-                            >
-                              {{ data.author_name }} |
-                              {{ utils.fromISODate(data.created_at) }}
-                            </p>
-                          </div>
-                        </div>
-                      </router-link>
+                      Most Popular
+                    </p>
+                  </div>
+                  <div class="flex flex-col w-full h-full mt-4">
+                    <!-- ✅ Hanya tampilkan gambar dari data pertama -->
+                    <router-link
+                      v-if="popularBlog.length > 0"
+                      :to="`/blog/${popularBlog[0].slug}`"
+                      class="w-full h-auto"
+                    >
+                      <figure class="w-full h-auto">
+                        <img
+                          :src="popularBlog[0].cover"
+                          alt="cover"
+                          class="w-full h-[180px] lg:h-auto object-fill"
+                        />
+                      </figure>
+                    </router-link>
+                    <!-- ✅ Daftar lainnya -->
+                    <div class="flex flex-col w-full h-full">
                       <div
-                        v-if="index !== popularBlog.length - 1"
-                        class="w-full h-[0.5px] bg-[#D9D9D9] dark:bg-[#565656]"
-                      />
+                        v-for="(data, index) in popularBlog"
+                        :key="index"
+                        class="w-full flex flex-col items-center"
+                      >
+                        <router-link :to="`/blog/${data.slug}`" class="w-full">
+                          <div
+                            class="w-full h-auto grid grid-cols-12 pr-10 py-4"
+                          >
+                            <div class="col-span-3 w-full flex justify-center">
+                              <p class="text-[24px] text-[#8EB3CC]">
+                                #{{ index + 1 }}
+                              </p>
+                            </div>
+                            <div class="col-span-9 flex flex-col gap-y-1">
+                              <p
+                                class="text-[#6941C6] dark:text-[#2AB857] text-[14px]"
+                              >
+                                {{ data.category_name }}
+                              </p>
+                              <p
+                                class="text-[#195279] font-[500] text-[16px] leading-snug line-clamp-2 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                              >
+                                {{ data.title }}
+                              </p>
+                              <p
+                                class="text-[#B8B8B8] dark:text-[#6F6F6F] text-[12px]"
+                              >
+                                {{ data.author_name }} |
+                                {{ utils.fromISODate(data.created_at) }}
+                              </p>
+                            </div>
+                          </div>
+                        </router-link>
+                        <div
+                          v-if="index !== popularBlog.length - 1"
+                          class="w-full h-[0.5px] bg-[#D9D9D9] dark:bg-[#565656]"
+                        />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -643,7 +650,7 @@ onBeforeUnmount(() => {
       </div>
     </section>
     <!-- Comments -->
-    <section class="w-full lg:w-[70%] h-auto mt-20 flex flex-col lg:pr-10">
+    <section class="w-full lg:w-[70%] h-auto pt-10 flex flex-col lg:pr-10">
       <div class="w-full h-auto flex flex-col">
         <div class="w-full">
           <p class="text-[#374151] font-[500]">

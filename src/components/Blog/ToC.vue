@@ -53,13 +53,19 @@ const offset = computed(() => {
 </script>
 
 <template>
-  <div class="h-auto flex flex-col p-4 gap-y-2 border-[1px] rounded-[10px]">
-    <p
-      class="text-[#195279] font-[500] text-[16px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+  <div
+    class="w-full h-auto p-[1px] rounded-[10px] bg-[#D9D9D9] dark:bg-gradient-to-tl dark:from-[#17181A] dark:from-45% dark:to-[#565656]"
+  >
+    <div
+      class="h-auto flex flex-col p-4 gap-y-2 rounded-[10px] bg-[#FAFAFA] dark:bg-[#1D1F23]"
     >
-      Content
-    </p>
-    <!-- ToC -->
-    <ToCList :items="groupedHeadings" :offset="offset" />
+      <p
+        class="text-[#195279] font-[500] text-[16px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+      >
+        Content
+      </p>
+      <!-- ToC -->
+      <ToCList :items="groupedHeadings" :offset="offset" />
+    </div>
   </div>
 </template>

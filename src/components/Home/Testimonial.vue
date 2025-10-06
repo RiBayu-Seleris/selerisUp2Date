@@ -41,7 +41,7 @@ const testimonials = [
 </script>
 
 <template>
-  <div class="flex flex-col">
+  <div class="flex flex-col dark:bg-[#17181A]">
     <div
       class="relative flex flex-col w-full h-auto px-8 lg:px-16 xls:px-8 gap-y-3"
     >

@@ -18,28 +18,32 @@ defineProps({
 
 <template>
   <div
-    class="hidden lg:flex flex-row snap-center shrink-0 p-5 md:gap-x-5 w-[80%] h-[270px] md:w-[450px] md:h-[180px] lg:w-[55%] lg:h-[180px] rounded-xl bg-[#FFFFFF] dark:bg-[#1D1F23] border-[0.1px] dark:border-[#FAFAFA]/25"
+    class="hidden lg:flex flex-row snap-center shrink-0 p-[1px] rounded-xl md:gap-x-5 w-[80%] h-[270px] md:w-[450px] md:h-[180px] lg:w-[55%] lg:h-[180px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]"
   >
-    <div class="flex w-[30%] lg:w-[30%] h-auto">
-      <img
-        :src="icon"
-        alt="BenefitRobot"
-        class="w-full h-full object-center object-contain"
-      />
-    </div>
-    <div class="w-[70%] lg:w-[70%] h-auto flex justify-center items-center">
-      <div class="flex flex-col w-full h-full items-center justify-between">
-        <div class="w-full h-[40%] flex items-center">
-          <p class="text-[#2AB857] text-[24px] md:text-[20px] lg:text-[24px]">
-            {{ title }}
-          </p>
-        </div>
-        <div class="w-full h-[60%] flex justify-start items-start">
-          <p
-            class="text-[18px] md:text-[16px] lg:text-[18px] text-[#195279] dark:text-[#FAFAFA]"
-          >
-            {{ body }}
-          </p>
+    <div
+      class="w-full h-auto hidden lg:flex flex-row rounded-xl bg-[#FAFAFA] dark:bg-[#1D1F23] dark:border-[#FAFAFA]/25 p-5"
+    >
+      <div class="flex w-[30%] lg:w-[30%] h-auto">
+        <img
+          :src="icon"
+          alt="BenefitRobot"
+          class="w-full h-full object-center object-contain"
+        />
+      </div>
+      <div class="w-[70%] lg:w-[70%] h-auto flex justify-center items-center">
+        <div class="flex flex-col w-full h-full items-center justify-between">
+          <div class="w-full h-[40%] flex items-center">
+            <p class="text-[#2AB857] text-[24px] md:text-[20px] lg:text-[24px]">
+              {{ title }}
+            </p>
+          </div>
+          <div class="w-full h-[60%] flex justify-start items-start">
+            <p
+              class="text-[18px] md:text-[16px] lg:text-[18px] text-[#195279] dark:text-[#FAFAFA]"
+            >
+              {{ body }}
+            </p>
+          </div>
         </div>
       </div>
     </div>

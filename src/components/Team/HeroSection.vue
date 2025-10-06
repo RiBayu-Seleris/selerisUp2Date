@@ -4,7 +4,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
 
 <template>
   <div
-    class="flex w-full h-auto pt-[150px] sm:pt-[160px] md:pt-[150px] lg:pt-[160px] xl:pt-[160px]"
+    class="flex w-full h-auto pt-[150px] sm:pt-[160px] md:pt-[150px] lg:pt-[160px] xl:pt-[160px] dark:bg-[#17181A]"
   >
     <div
       class="flex flex-col w-full h-auto space-y-2 sm:space-y-2 md:space-y-2 lg:space-y-3 xl:space-y-1 justify-center items-center"
