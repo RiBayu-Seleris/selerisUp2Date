@@ -293,9 +293,11 @@ onBeforeUnmount(() => {
     v-else-if="blogDetail"
     class="w-full h-auto px-8 md:px-12 xl:px-16 pt-32 dark:bg-[#17181A]"
   >
-    <section class="w-full h-auto flex flex-row justify-between">
+    <section
+      class="w-full h-auto flex flex-col-reverse lg:flex-row justify-between"
+    >
       <div class="w-full h-auto flex items-center">
-        <p class="text-[#535862] font-[400]">
+        <p class="text-[14px] lg:text-[18px] text-[#535862] font-[400]">
           <router-link to="/" class="hover:underline">
             <span>Home</span></router-link
           >
@@ -310,26 +312,36 @@ onBeforeUnmount(() => {
         </p>
       </div>
       <!-- Akun Section -->
-      <div v-if="loginStatus === true" class="w-[40%] h-auto flex justify-end">
+      <div
+        v-if="loginStatus === true"
+        class="w-full lg:w-[40%] h-auto flex justify-end mb-8"
+      >
         <div class="w-full flex flex-row justify-end">
           <div class="relative w-full h-auto flex flex-row justify-end">
-            <div
-              class="relative w-[30%] h-auto pt-0 flex justify-end dark:text-white"
-            >
-              <button @click="toggleDropdown" class="w-7 h-7 p-1">
+            <div class="relative w-[30%] h-auto pt-0 flex justify-end">
+              <button
+                @click="toggleDropdown"
+                class="w-7 h-7 p-1 text-[#195279] dark:text-white"
+              >
                 <ArrowDown />
               </button>
               <button
                 @click="handleLogout"
                 v-if="isAccountDropdown"
-                class="absolute w-full h-[50px] border-[1px] top-10 right-0 transition-all duration-500"
+                class="absolute w-full h-auto border-[1px] top-8 lg:top-10 right-0 transition-all duration-500 bg-white dark:bg-[#17181A] dark:shadow-white rounded-lg"
               >
-                <div class="w-full h-full flex justify-center items-center">
-                  <p class="text-[14px]">Logout</p>
+                <div
+                  class="w-full h-full flex justify-center items-center py-2"
+                >
+                  <p class="text-[14px] text-[#195279] dark:text-[#FAFAFA]">
+                    Logout
+                  </p>
                 </div>
               </button>
             </div>
-            <div class="w-auto h-auto flex flex-col justify-between px-2">
+            <div
+              class="w-auto h-auto flex flex-col justify-between pl-2 lg:px-2"
+            >
               <div class="w-full flex justify-end">
                 <p
                   class="text-[16px] text-[#195279] dark:text-white font-[400] text-end"
@@ -394,14 +406,14 @@ onBeforeUnmount(() => {
             <!-- ref="articleRef" -->
             <article
               id="content"
-              class="w-full h-auto flex flex-col leading-loose text-[#535862] dark:text-[#DADADA] font-[500] space-y-6 lg:space-y-10 mt-5 text-[12px] sm:text-[14px] md:text-[16px]"
+              class="w-full h-auto flex flex-col leading-loose text-[#535862] dark:text-[#DADADA] font-[500] space-y-6 lg:space-y-8 mt-5 text-[12px] sm:text-[14px] md:text-[16px]"
             >
               <p class="break-words">
                 {{ blogDetail.synopsis }}
               </p>
               <!-- Content Blog -->
               <div
-                class="prose max-w-none text-[#535862] dark:prose-invert prose-p:mt-2 prose-p:mb-0 prose-ul:my-0 prose-ol:my-0 prose-headings:mb-1 prose-headings:mt-3 break-words text-[12px] sm:text-[14px] md:text-[16px] font-[400] dark:[&_*]:!text-[#DADADA] prose-p:leading-loose"
+                class="prose max-w-none text-[#535862] dark:prose-invert prose-p:mt-2 prose-p:mb-0 prose-ul:my-0 prose-ol:my-0 prose-headings:mt-10 prose-headings:mb-3 break-words text-[12px] sm:text-[14px] md:text-[16px] font-[400] dark:[&_*]:!text-[#DADADA] prose-p:leading-loose"
                 v-html="safeContent"
               ></div>
             </article>
@@ -572,7 +584,7 @@ onBeforeUnmount(() => {
               <ToC />
               <!-- Box 2 -->
               <div
-                class="w-full h-auto p-[1px] rounded-[10px] bg-[#D9D9D9] dark:bg-gradient-to-tl dark:from-[#17181A] dark:from-45% dark:to-[#565656]"
+                class="hidden lg:flex w-full h-auto p-[1px] rounded-[10px] bg-[#D9D9D9] dark:bg-gradient-to-tl dark:from-[#17181A] dark:from-45% dark:to-[#565656]"
               >
                 <div
                   class="w-full h-auto rounded-[10px] pt-2 hidden lg:flex lg:flex-col bg-[#FAFAFA] dark:bg-[#1D1F23]"
@@ -615,14 +627,16 @@ onBeforeUnmount(() => {
                                 #{{ index + 1 }}
                               </p>
                             </div>
-                            <div class="col-span-9 flex flex-col gap-y-1">
+                            <div
+                              class="col-span-9 w-full flex flex-col gap-y-2"
+                            >
                               <p
                                 class="text-[#6941C6] dark:text-[#2AB857] text-[14px]"
                               >
                                 {{ data.category_name }}
                               </p>
                               <p
-                                class="text-[#195279] font-[500] text-[16px] leading-snug line-clamp-2 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                                class="text-[#195279] h-[45px] font-[500] text-[16px] leading-snug line-clamp-2 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                               >
                                 {{ data.title }}
                               </p>

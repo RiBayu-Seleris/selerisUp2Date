@@ -40,12 +40,12 @@ const getShortText = (fullText) => {
 
 <template>
   <div
-    class="lg:hidden flex flex-row w-full h-auto gap-x-6 overflow-x-auto snap-x snap-mandatory scroll-pl-10 pl-10 pr-10 hide-scrollbar py-10"
+    class="lg:hidden flex flex-row w-full h-auto gap-x-6 overflow-x-auto snap-x snap-mandatory hide-scrollbar px-8 py-10"
   >
     <div
       v-for="(cert, index) in certificates"
       :key="index"
-      class="cursor-pointer snap-start shrink-0 w-[280px] h-[240px] sm:w-[400px] sm:h-[200px] md:w-[85%] md:h-[240px] lg:h-[230px] perspective mb-2"
+      class="cursor-pointer snap-center shrink-0 w-full h-[240px] sm:w-full sm:h-[200px] md:w-full md:h-[240px] lg:h-[230px] perspective mb-2"
       @click="handleFlip(index)"
     >
       <div
@@ -109,7 +109,7 @@ const getShortText = (fullText) => {
 
         <!-- BACK -->
         <div
-          class="absolute w-[280px] h-[240px] sm:w-[400px] sm:h-[200px] md:w-full md:h-[240px] lg:h-[230px] py-5 px-5 sm:px-4 md:px-6 backface-hidden rotate-y-180 bg-[#F9FAFB] dark:bg-[#FAFAFA] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center"
+          class="absolute w-full h-[240px] sm:w-full sm:h-[200px] md:w-full md:h-[240px] lg:h-[230px] py-5 px-5 sm:px-4 md:px-6 backface-hidden rotate-y-180 bg-[#F9FAFB] dark:bg-[#FAFAFA] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center"
         >
           <p
             class="flex text-[12px] sm:text-[12px] md:text-[18px] leading-normal overflow-hidden justify-center dark:text-[#3D3434]"

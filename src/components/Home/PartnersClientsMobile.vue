@@ -27,12 +27,14 @@ const clientLogos = [
   new URL("@/assets/images/clients-and-partners/fpg.png", import.meta.url).href,
   new URL("@/assets/images/clients-and-partners/heksa.png", import.meta.url)
     .href,
-  new URL(
-    "@/assets/images/clients-and-partners/jamkrida-banten.png",
-    import.meta.url
-  ).href,
-  new URL("@/assets/images/clients-and-partners/nexus.png", import.meta.url)
+  new URL("@/assets/images/clients-and-partners/equity.png", import.meta.url)
     .href,
+  // new URL(
+  //   "@/assets/images/clients-and-partners/jamkrida-banten.png",
+  //   import.meta.url
+  // ).href,
+  // new URL("@/assets/images/clients-and-partners/nexus.png", import.meta.url)
+  //   .href,
 ];
 
 const partnerLogosDark = [
@@ -80,13 +82,17 @@ const clientLogosDark = [
     import.meta.url
   ).href,
   new URL(
-    "@/assets/images/clients-and-partners/jamkrida-banten-dark.png",
+    "@/assets/images/clients-and-partners/equity-dark.png",
     import.meta.url
   ).href,
-  new URL(
-    "@/assets/images/clients-and-partners/nexus-dark.png",
-    import.meta.url
-  ).href,
+  // new URL(
+  //   "@/assets/images/clients-and-partners/jamkrida-banten-dark.png",
+  //   import.meta.url
+  // ).href,
+  // new URL(
+  //   "@/assets/images/clients-and-partners/nexus-dark.png",
+  //   import.meta.url
+  // ).href,
 ];
 
 // Gabungkan partner dan client, lalu filter agar tidak duplikat
