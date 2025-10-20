@@ -53,7 +53,9 @@ watch(
 </script>
 
 <template>
-  <div class="w-full flex flex-col space-y-1">
+  <div
+    class="w-full flex flex-col space-y-1 transition-all duration-300 ease-out"
+  >
     <label
       class="text-sm font-medium text-gray-700 dark:text-white"
       for="Country"

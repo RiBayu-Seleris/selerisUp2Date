@@ -97,6 +97,48 @@ export function blogsApi() {
     }
   };
 
+  const likeBlogCheck = async (blog_id) => {
+    try {
+      const like_check = await axios.get(
+        `${BASE_URL}/api/v1/app/blogs/${blog_id}/like`,
+        headerApiToken
+      );
+
+      // console.log("ini response dari BlogsAPI:", like_check);
+      return like_check?.data;
+    } catch (error) {
+      console.error("Error saat check like:", error);
+      return null;
+    }
+  };
+
+  const likeBlog = async (blog_id) => {
+    try {
+      const response = await axios.post(
+        `${BASE_URL}/api/v1/app/blogs/${blog_id}/like`,
+        {},
+        headerApiToken
+      );
+
+      console.log("Ini response api Like Blog", response);
+      return response?.data;
+    } catch (error) {
+      console.error("Error saat like blog:", error);
+      return null;
+    }
+  };
+
+  const unlikeBlog = async (blog_id) => {
+    try {
+      const response = await axios.delete(
+        `${BASE_URL}/api/v1/app/blogs/${blog_id}/like`,
+        headerApiToken
+      );
+
+      console.log("Response unlike dari API", response);
+    } catch {}
+  };
+
   // Function get blog detail by slug
   const getBlogBySlug = async (slug) => {
     startLoading();
@@ -240,6 +282,9 @@ export function blogsApi() {
   return {
     categories, //Set Category
     fetchCategory, // Get Category
+    likeBlogCheck,
+    likeBlog,
+    unlikeBlog,
     blogs,
     blogDetail,
     newestBlog,

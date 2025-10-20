@@ -26,11 +26,6 @@ export const faqList = [
       "Yes, we have a customer support team ready to help. Please contact us via info@seleris.id for questions, feedback, or technical assistance.",
   },
   {
-    question: "Does this application offer customer support?",
-    answer:
-      "Yes, we have a customer support team ready to help. Please contact us via info@seleris.id for questions, feedback, or technical assistance.",
-  },
-  {
     question: "is this application Free?",
     answer:
       "Our app offers free for demo use. Certain features are available for free, while full access to premium features may require a subscription or in-app purchase.",

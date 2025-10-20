@@ -6,6 +6,9 @@ import vueDevTools from "vite-plugin-vue-devtools";
 // "tailwindcss": "^3.3.5",
 
 export default defineConfig({
+  server: {
+    allowedHosts: ["2cb77025c9e7.ngrok-free.app"],
+  },
   plugins: [
     vue(),
     process.env.NODE_ENV === "development" && vueDevTools(),

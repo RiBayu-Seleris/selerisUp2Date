@@ -17,6 +17,7 @@ import Tooltip from "@/assets/images/tooltip.png";
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import axios from "axios";
 
 // Store & route
 const dotLazyLoading = 4;
@@ -101,6 +102,31 @@ const isPrivacyRoute = computed(() => route.path === "/privacy");
 const isBookDemoRoute = computed(() => route.path === "/book-a-demo");
 const isCompanyRoute = computed(() => route.path === "/about/company");
 const isBlogDetail = computed(() => route.path.startsWith("/blog/"));
+
+const BASE_URL = import.meta.env.VITE_API_URL;
+const headerApi = {
+  headers: {
+    Accept: "application/json",
+  },
+};
+
+const getTracking = async () => {
+  console.log("getTracking() dipanggil");
+
+  try {
+    const getGuestData = await axios.get(
+      `${BASE_URL}/v1/app/visitors/track`,
+      headerApi
+    );
+    console.log("Response:", getGuestData);
+  } catch (error) {
+    console.log("Error:", error);
+  }
+};
+
+onMounted(() => {
+  getTracking();
+});
 </script>
 
 <template>

@@ -6,17 +6,13 @@ module.exports = {
     screens: {
       // Mobile breakpoints
       sml: "320px",
-      // sml: { raw: "(min-width: 320px) and (max-width: 425px)" },
       sm: "640px",
 
       // Tablet / Medium
       md: "768px",
-      // md: { raw: "(min-width: 641px) and (max-width: 768px)" },
-      // mds: "853px",
 
       // Desktop
       lg: "1024px",
-      // "2lg": { raw: "(min-width: 1025px) and (max-width: 1279px)" },
       xl: "1280px",
 
       // Extra Large
@@ -32,6 +28,9 @@ module.exports = {
         "dark-end": "#BCBCBC 70%",
       },
       backgroundImage: {
+        frameBookDemo: "url('@/assets/images/frame-about-book-demo2.png')",
+        darkFrameBookDemo:
+          "url('@/assets/images/dark-frame-about-book-demo2.png')",
         hero2: "url('@/assets/images/hero-banner2.png')",
         touch: "url('@/assets/images/touch-bg.png')",
         touchDark: "url('@/assets/images/touch-bg-dark.png')",

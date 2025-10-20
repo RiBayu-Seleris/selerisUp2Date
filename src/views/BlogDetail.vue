@@ -41,6 +41,9 @@ const {
   loading,
   blogDetailError,
   postComment,
+  likeBlogCheck,
+  likeBlog,
+  unlikeBlog,
 } = blogsApi();
 
 // Toggle Password Eye
@@ -51,6 +54,8 @@ const isAccountDropdown = ref(false);
 const loginStatus = computed(() => !!token.value);
 // State untuk kontrol komen textarea
 const isFocusedComment = ref(false);
+// State untuk Like
+const isLiked = ref(false);
 
 // State untuk frame modals login
 const showLoginForm = ref(false);
@@ -110,11 +115,11 @@ const closeRegisterForm = () => {
 };
 
 // Watch error dari authApi.js
-watch(error, (val) => {
-  if (val) {
-    console.log("Error", val, "error");
-  }
-});
+// watch(error, (val) => {
+//   if (val) {
+//     console.log("Error", val, "error");
+//   }
+// });
 
 const loginError = ref(false);
 
@@ -129,6 +134,10 @@ const registerData = reactive({
   email: "",
   password: "",
   c_password: "",
+});
+
+const inputCommentData = reactive({
+  comment: "",
 });
 
 const handleLogin = async () => {
@@ -186,6 +195,7 @@ const handleRegister = async () => {
       timer: 2000, // 2 detik otomatis tertutup
       showConfirmButton: false, // tombol OK disembunyikan
     }).then(() => {
+      showRegisterForm.value = false;
       showLoginForm.value = true;
     });
   }
@@ -219,9 +229,35 @@ const handleLogout = async () => {
   }
 };
 
-const inputCommentData = reactive({
-  comment: "",
-});
+const handleLike = async () => {
+  const blogId = blogDetail.value?.id;
+  if (!blogId) return console.warn("Blog ID tidak ditemukan");
+
+  const checkLike = await likeBlogCheck(blogId);
+  const responseCheck = checkLike?.liked;
+
+  // Jika belum di-like
+  if (!responseCheck) {
+    isLiked.value = false;
+    const liked = await likeBlog(blogId);
+    const responseLiked = liked?.status;
+
+    if (responseLiked === 201) {
+      isLiked.value = true;
+    } else if (responseLiked === 409) {
+      isLiked.value = true;
+    } else {
+      console.warn("Status lain:", responseLiked);
+    }
+  } else {
+    // Jika sudah like
+    isLiked.value = true;
+    const unlike = await unlikeBlog(blogId);
+    if (unlike) {
+      isLiked.value = false;
+    }
+  }
+};
 
 const handleSubmitComment = async () => {
   const blogId = blogDetail.value?.id;
@@ -259,7 +295,6 @@ const toggleShare = (id) => {
 };
 
 const handleClickOutside = (event) => {
-  // ambil semua share-wrapper
   const wrappers = document.querySelectorAll(".share-wrapper");
 
   let clickedInside = false;
@@ -328,10 +363,10 @@ onBeforeUnmount(() => {
               <button
                 @click="handleLogout"
                 v-if="isAccountDropdown"
-                class="absolute w-full h-auto border-[1px] top-8 lg:top-10 right-0 transition-all duration-500 bg-white dark:bg-[#17181A] dark:shadow-white rounded-lg"
+                class="absolute w-full h-auto border-[1px] top-8 lg:top-8 right-0 transition-all duration-500 bg-white dark:bg-[#17181A] dark:shadow-white rounded-lg"
               >
                 <div
-                  class="w-full h-full flex justify-center items-center py-2"
+                  class="w-full h-full flex justify-center items-center py-2 lg:py-3.5"
                 >
                   <p class="text-[14px] text-[#195279] dark:text-[#FAFAFA]">
                     Logout
@@ -424,13 +459,20 @@ onBeforeUnmount(() => {
           >
             <div class="w-auto flex flex-row gap-x-4 justify-start">
               <div class="flex flex-row justify-between space-x-0.5">
-                <div
-                  class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
+                <button
+                  type="submit"
+                  @click="handleLike"
+                  class="w-full h-auto flex items-center"
+                  :class="[
+                    isLiked
+                      ? 'text-blue-800'
+                      : 'text-[#6E6E6E] dark:text-[#637381]',
+                  ]"
                 >
                   <LikeIcon
                     class="w-auto h-6 sm:w-auto sm:h-8 md:w-auto md:h-7 lg:w-8 lg:h-full p-0.5"
                   />
-                </div>
+                </button>
                 <div class="w-full h-full flex items-center justify-center">
                   <span
                     class="text-[14px] sm:text-[18px] lg:text-[18px] text-[#6E6E6E] dark:text-[#637381]"
@@ -472,7 +514,7 @@ onBeforeUnmount(() => {
                 </div>
               </div>
             </div>
-            <div class="relative flex w-full h-auto share-wrapper justify-end">
+            <div class="relative flex w-auto h-auto share-wrapper justify-end">
               <div
                 class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer mr-5 lg:mr-0"
                 @click.stop="toggleShare(blogDetail.id)"
