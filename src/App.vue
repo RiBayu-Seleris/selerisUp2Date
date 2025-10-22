@@ -111,11 +111,9 @@ const headerApi = {
 };
 
 const getTracking = async () => {
-  console.log("getTracking() dipanggil");
-
   try {
     const getGuestData = await axios.get(
-      `${BASE_URL}/v1/app/visitors/track`,
+      `${BASE_URL}/v1/app/visitors/track/`,
       headerApi
     );
     console.log("Response:", getGuestData);
@@ -227,7 +225,7 @@ onMounted(() => {
 
     <!-- Khusus layout product -->
     <template v-else>
-      <router-view />
+      <router-view class="bg-[#FAFAFA]" />
     </template>
   </template>
 </template>

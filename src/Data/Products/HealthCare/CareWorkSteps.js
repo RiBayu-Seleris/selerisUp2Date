@@ -1,4 +1,4 @@
-export const medinsWorkSteps = [
+export const careWorkSteps = [
   {
     title: "Face Scanning",
     description: "Instantly scan face to verify user health identity.",

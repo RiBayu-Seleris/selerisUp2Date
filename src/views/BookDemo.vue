@@ -83,7 +83,7 @@ onMounted(() => {
       class="w-full h-auto bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]/60 p-[1px] rounded-xl"
     >
       <div
-        class="w-full h-full flex flex-col bg-[#F9FAFB] dark:bg-[#1D1F23] dark:border-[#FAFAFA]/25 px-8 py-10 lg:px-6 lg:py-10 rounded-xl"
+        class="justify-between w-full h-full flex flex-col bg-[#F9FAFB] dark:bg-[#1D1F23] dark:border-[#FAFAFA]/25 px-8 py-10 lg:px-6 lg:py-10 rounded-xl"
       >
         <div class="w-full h-auto">
           <p

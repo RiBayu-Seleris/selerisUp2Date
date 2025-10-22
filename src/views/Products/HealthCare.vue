@@ -24,20 +24,32 @@ import ArrowRight from "@/assets/Products/icons/arrow-right.svg";
 
 import CareOrnament from "@productComponents/Svg/CareOrnament.vue";
 import CareOrnament2 from "@productComponents/Svg/CareOrnament2.vue";
+import CareOrnament3 from "@productComponents/Svg/CareOrnament3.vue";
 
-import imageAbout from "@/assets/products/images/health-care-about.png";
+import imageAbout from "@/assets/Products/images/Care/about-care.png";
 import FrameLineWorks from "@productComponents/Svg/HealthCareDescriptionWork.vue";
 import medinsframebook from "@/assets/Products/images/bg-book-demo-medins.png";
+
+import DownloadImage from "@/assets/Products/images/Care/download-care.png";
 
 // HealthCare Data
 import { healthCheck } from "@/Data/Products/HealthCare/healthCheck";
 import { faq } from "@/Data/Products/HealthCare/faq.js";
-import { workSteps } from "@/Data/Products/HealthCare/workSteps.js";
+import { careWorkSteps } from "@/Data/Products/HealthCare/careworkSteps.js";
 import { testimonials } from "@/Data/Products/HealthCare/testimonials";
 
 const work1 = ref(false);
 
 import { clientLogos } from "@/Data/Products/Medins/medinsClients";
+
+// gabungkan otomatis base path + nama file
+const stepsWithPath = careWorkSteps.map((step) => ({
+  ...step,
+  image: new URL(
+    `/src/assets/Products/images/Care/${step.image}`,
+    import.meta.url
+  ).href,
+}));
 </script>
 
 <template>
@@ -58,8 +70,18 @@ import { clientLogos } from "@/Data/Products/Medins/medinsClients";
       </div>
       <!-- Image Phone -->
       <div class="relative w-full h-auto flex -mt-[120px] md:-mt-[250px]">
-        <CareOrnament positionClass="top-[10px] md:-top-[30px] xl:-top-16" />
-        <PhoneHero />
+        <CareOrnament positionClass="top-[10px] md:-top-[30px] xl:-top-5" />
+        <div class="w-full h-auto flex xl:-mt-[0px]">
+          <div class="w-full h-auto flex justify-center items-center">
+            <figure class="w-auto max-w-max h-auto flex">
+              <img
+                src="/assets/images/product-hero-image/care.png"
+                alt=""
+                class="w-full h-[190px] md:h-[300px] lg:h-[450px] object-contain drop-shadow-[-5px_8px_5px_rgba(0,0,0,0.15)] md:drop-shadow-[-10px_10px_10px_rgba(0,0,0,0.3)] lg:drop-shadow-[-20px_10px_10px_rgba(0,0,0,0.25)]"
+              />
+            </figure>
+          </div>
+        </div>
       </div>
       <!-- DownloadStore -->
       <div class="w-full max-w-sm mx-auto h-auto mt-10 md:mt-20">
@@ -69,7 +91,8 @@ import { clientLogos } from "@/Data/Products/Medins/medinsClients";
 
     <!-- About Us -->
     <section class="relative w-full h-auto" id="about">
-      <CareOrnament2 positionClass="top-[10px] md:top-5 xl:top-20" />
+      <CareOrnament3 positionClass="top-[10px] md:top-5 xl:-top-7" />
+      <CareOrnament2 positionClass="top-[10px] md:top-5 xl:top-32" />
       <div
         class="relative w-full flex flex-col max-w-[1440px] mx-auto justify-center items-center z-20 mt-16 md:mt-20 lg:mt-40 px-8"
       >
@@ -81,8 +104,8 @@ import { clientLogos } from "@/Data/Products/Medins/medinsClients";
         <div class="w-full h-auto mt-10 md:mt-10 lg:mt-10">
           <AboutUsDescription
             :image="imageAbout"
-            title="Smart Medical Platform"
-            description=" Seleris Care is an AI-powered platform built for corporate health and wellness. It automates employee health monitoring, delivers real-time preventive care insights, and helps companies optimize wellness programs while reducing medical costs by up to 20%"
+            title="AI Health Metrics Insurance Application"
+            description="Seleris Care is an AI-powered platform built for corporate health and wellness. It automates employee health monitoring, delivers real-time preventive care insights, and helps companies optimize wellness programs while reducing medical costs by up to 20%"
           />
         </div>
       </div>
@@ -90,7 +113,7 @@ import { clientLogos } from "@/Data/Products/Medins/medinsClients";
 
     <!-- How Application Work -->
     <section
-      class="relative w-full h-auto max-w-[1440px] mx-auto mt-14 lg:mt-20"
+      class="relative w-full h-auto max-w-[1440px] mx-auto mt-14 lg:mt-20 xl:mt-44"
       id="work"
     >
       <!-- Application Work Slider -->
@@ -105,7 +128,7 @@ import { clientLogos } from "@/Data/Products/Medins/medinsClients";
           <ApplicationWorkSlider
             circleColor="bg-gradient-to-b from-[#23C4BA] to-[#4ADDD4]"
             textcolor="text-[#38C1AA]"
-            :steps="workSteps"
+            :steps="stepsWithPath"
           >
             <FrameLineWorks />
           </ApplicationWorkSlider>
@@ -216,6 +239,7 @@ import { clientLogos } from "@/Data/Products/Medins/medinsClients";
           description="Stay in control of your health data and claims anytime, anywhere. Our
           AI-powered platform makes medical data processing, claims tracking,
           and risk analysis easier and faster."
+          :img="DownloadImage"
         />
       </div>
     </section>

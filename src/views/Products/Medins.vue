@@ -23,9 +23,11 @@ import EasyQuickText from "@productComponents/EasyQuickText.vue";
 import InnovationIcon from "@/assets/icons/innovation.svg";
 import ArrowRight from "@/assets/Products/icons/arrow-right.svg";
 
-import imageAbout from "@/assets/products/images/medins-about.png";
+import imageAbout from "@/assets/Products/images/Medins/about-medins.png";
 import FrameLineWorks from "@productComponents/Svg/MedinsDescriptionWork.vue";
 import medinsframebook from "@/assets/Products/images/bg-book-demo-medins.png";
+
+import DownloadImage from "@/assets/Products/images/Medins/download-medins.png";
 
 // FAQ
 import { medinsFaq } from "@/Data/Products/Medins/medinsFaq.js";
@@ -35,14 +37,26 @@ const work1 = ref(false);
 
 import { clientLogos } from "@/Data/Products/Medins/medinsClients";
 import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
+
+// gabungkan otomatis base path + nama file
+const stepsWithPath = medinsWorkSteps.map((step) => ({
+  ...step,
+  image: new URL(
+    `/src/assets/Products/images/Medins/${step.image}`,
+    import.meta.url
+  ).href,
+}));
 </script>
 
 <template>
   <div class="relative w-full min-h-screen overflow-hidden">
     <!-- Hero -->
-    <section class="relative w-full h-full rounded-[20px] z-20 p-4" id="hero">
-      <div
+    <section class="relative w-full h-full z-20" id="hero">
+      <!-- <div
         class="w-full h-[400px] md:h-[600px] lg:h-[650px] bg-medins bg-no-repeat bg-cover bg-center rounded-[20px] z-20"
+      > -->
+      <div
+        class="w-full h-[450px] md:h-[600px] lg:h-[650px] xl:h-[800px] bg-[radial-gradient(circle_at_center,_#4ADDD4,_#23C4BA)] z-20"
       >
         <HeroText
           title="Seleris Medins"
@@ -50,9 +64,25 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
           description="Enhance efficiency and accuracy in health insurance operations with AI-driven medical data automation."
         />
       </div>
+      <div
+        class="ocean absolute top-[60%] xl:top-[60%] h-[150px] xl:h-[240px] xl:w-full z-0"
+      >
+        <div class="wave w-[200%] xl:w-[250%] h-full"></div>
+        <div class="wave w-[200%] xl:w-[250%] h-full"></div>
+        <div class="wave w-[200%] xl:w-[250%] h-full"></div>
+      </div>
+      <!-- <div class="wave"></div> -->
       <!-- Image Phone -->
-      <div class="w-full h-auto flex -mt-[120px] md:-mt-[250px]">
-        <PhoneHero />
+      <div class="w-full h-auto flex -mt-[190px] md:-mt-[250px] xl:-mt-[430px]">
+        <div class="w-full h-auto flex justify-center items-center">
+          <figure class="w-auto max-w-max h-auto flex">
+            <img
+              src="/assets/images/product-hero-image/medins.png"
+              alt=""
+              class="w-full h-[190px] md:h-[300px] lg:h-[500px] object-contain drop-shadow-[-5px_8px_5px_rgba(0,0,0,0.15)] md:drop-shadow-[-10px_10px_10px_rgba(0,0,0,0.3)] lg:drop-shadow-[-20px_10px_10px_rgba(0,0,0,0.25)]"
+            />
+          </figure>
+        </div>
       </div>
       <!-- DownloadStore -->
       <div class="w-full max-w-sm mx-auto h-auto mt-10 md:mt-20">
@@ -65,7 +95,7 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
       <!-- Circle First -->
       <Circle
         heightClass="h-[200px] md:h-[400px] xl:h-[600px]"
-        positionClass="-top-[200px] md:-top-[270px] lg:-top-[400px] -right-[60px] lg:right-[70px]"
+        positionClass="-top-[100px] md:-top-[270px] lg:-top-[300px] -right-[60px] lg:right-[70px]"
       />
 
       <!-- Circle Second -->
@@ -84,7 +114,7 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
         <div class="w-full h-auto mt-10 md:mt-10 lg:mt-10">
           <AboutUsDescription
             :image="imageAbout"
-            title="Smart Medical Platform"
+            title="AI Health Care Application"
             description="Seleris Medins uses AI to automate medical data processing and health claims. Our solution helps insurers and corporate healthcare providers reduce costs, detect fraud, predict claim values, and ensure regulatory compliance with ease and accuracy."
           />
         </div>
@@ -114,7 +144,7 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
           <ApplicationWorkSlider
             circleColor="bg-gradient-to-b from-[#23C4BA] to-[#4ADDD4]"
             textcolor="text-[#38C1AA]"
-            :steps="medinsWorkSteps"
+            :steps="stepsWithPath"
           >
             <FrameLineWorks />
           </ApplicationWorkSlider>
@@ -227,7 +257,7 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
           </div>
         </div>
         <div class="w-full mx-auto mt-10 md:mt-10">
-          <FaqFrame :Faq="medinsFaq" opencolortext="text-[#2AB857]" />
+          <FaqFrame :Faq="medinsFaq" opencolortext="text-[#2ec4b6]" />
         </div>
       </div>
     </section>
@@ -243,6 +273,7 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
           description="Stay in control of your health data and claims anytime, anywhere. Our
           AI-powered platform makes medical data processing, claims tracking,
           and risk analysis easier and faster."
+          :img="DownloadImage"
         />
       </div>
     </section>
@@ -260,3 +291,48 @@ import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
     </section>
   </div>
 </template>
+<style scoped>
+/* waves */
+.ocean {
+  /* height: 250px;
+  width: 100%; */
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  overflow: hidden;
+}
+
+.wave {
+  background: url("@/assets/Products/images/Medins/wave.png") repeat-x;
+  background-size: auto 100%; /* memastikan gelombang proporsional */
+  position: absolute;
+  /* width: 250%;
+  height: 100%; */
+  animation: wave 7s linear infinite; /* Hapus delay -3s */
+  /* opacity: 0.8; */
+}
+
+.wave:nth-of-type(2) {
+  background: url("@/assets/Products/images/Medins/wave2.png") repeat-x;
+  bottom: 0;
+  animation: wave 10s linear infinite reverse; /* tetap reverse, hapus delay */
+  /* opacity: 0.5; */
+}
+.wave:nth-of-type(3) {
+  background: url("@/assets/Products/images/Medins/wave.png") repeat-x;
+  bottom: 0;
+  opacity: 0.5;
+  animation: wave 5s linear infinite reverse; /* tetap reverse, hapus delay */
+  /* opacity: 0.5; */
+}
+
+@keyframes wave {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+</style>

@@ -42,10 +42,12 @@ defineProps({
         }}</span>
       </p>
     </div>
-    <div class="md:w-[700px] px-10 h-auto flex flex-col mx-auto justify-center">
+    <div
+      class="xl:w-[700px] px-10 sm:px-16 h-auto flex flex-col mx-auto justify-center"
+    >
       <p
         :class="[
-          `${descriptioncolor} text-[14px] md:text-[20px] lg:text-[20px] text-center font-[400]`,
+          `${descriptioncolor} text-[14px] sm:text-[16px] md:text-[20px] lg:text-[20px] text-center font-[400]`,
         ]"
       >
         {{ description }}

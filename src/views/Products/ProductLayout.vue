@@ -42,8 +42,10 @@ import Tooltip from "@/assets/images/tooltip.png";
     class="relative w-full mx-auto font-poppins animate__animated animate__fadeIn animate__slower"
   >
     <main class="relative w-full mx-auto">
-      <header class="fixed flex top-3 w-full h-auto z-50">
-        <component :is="scrollStore.isScrolled ? NavbarScroll : Navbar" />
+      <header class="fixed top-0 w-full z-50">
+        <transition name="slide-down" mode="out-in">
+          <component :is="scrollStore.isScrolled ? NavbarScroll : Navbar" />
+        </transition>
       </header>
 
       <!-- Scroll Tooltip -->
@@ -51,7 +53,7 @@ import Tooltip from "@/assets/images/tooltip.png";
         <div
           v-if="showTooltip"
           @click="scrollToTop"
-          class="flex fixed justify-center cursor-pointer items-center bottom-5 right-5 lg:right-10 w-9 h-9 lg:w-16 lg:h-16 z-30 bg-white shadow-md border-[0.5px] text-white rounded-full p-1 md:p-2"
+          class="flex fixed justify-center cursor-pointer items-center bottom-5 right-5 lg:right-10 w-9 h-9 lg:w-16 lg:h-16 z-30 bg-[#FAFAFA] shadow-md border-[0.5px] text-white rounded-full p-1 md:p-2"
         >
           <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
         </div>
@@ -66,17 +68,17 @@ import Tooltip from "@/assets/images/tooltip.png";
   </div>
 </template>
 <style scoped>
-.fade-slide-enter-active,
-.fade-slide-leave-active {
-  transition: opacity 0.4s ease, transform 0.4s ease;
+.slide-down-enter-active,
+.slide-down-leave-active {
+  transition: all 0.3s ease;
 }
-.fade-slide-enter-from,
-.fade-slide-leave-to {
+.slide-down-enter-from,
+.slide-down-leave-to {
   opacity: 0;
-  transform: translateY(10px);
+  transform: translateY(-20px);
 }
-.fade-slide-enter-to,
-.fade-slide-leave-from {
+.slide-down-enter-to,
+.slide-down-leave-from {
   opacity: 1;
   transform: translateY(0);
 }

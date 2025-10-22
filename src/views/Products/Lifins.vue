@@ -25,9 +25,11 @@ import EasyQuickText from "@productComponents/EasyQuickText.vue";
 import InnovationIcon from "@/assets/icons/innovation.svg";
 import ArrowRight from "@/assets/Products/icons/arrow-right.svg";
 
-import imageAbout from "@/assets/products/images/lifins-about.png";
+import imageAbout from "@/assets/Products/images/Lifins/about-lifins.png";
 import FrameLineWorks from "@productComponents/Svg/LifinsDescriptionWork.vue";
 import lifinsframebook from "@/assets/Products/images/bg-book-demo-lifins.png";
+
+import DownloadImage from "@/assets/Products/images/Lifins/download-lifins.png";
 
 // FAQ
 import { lifinsFaq } from "@/Data/Products/Lifins/lifinsFaq.js";
@@ -37,6 +39,15 @@ const work1 = ref(false);
 
 import { clientLogos } from "@/Data/Products/Medins/medinsClients";
 import { lifinsTestimonials } from "@/Data/Products/Lifins/lifinsTestimonials";
+
+// gabungkan otomatis base path + nama file
+const stepsWithPath = lifinsWorkSteps.map((step) => ({
+  ...step,
+  image: new URL(
+    `/src/assets/Products/images/Lifins/${step.image}`,
+    import.meta.url
+  ).href,
+}));
 </script>
 
 <template>
@@ -75,7 +86,17 @@ import { lifinsTestimonials } from "@/Data/Products/Lifins/lifinsTestimonials";
           heightClass="h-[300px] md:h-[470px] xl:h-[470px]"
           positionClass="-top-[50px] md:-top-[90px] xl:-top-[100px] -right-[190px] md:-right-[230px] xl:-right-[90px]"
         />
-        <PhoneHero />
+        <div class="w-full h-auto flex mt-[0px]">
+          <div class="w-full h-auto flex justify-center items-center">
+            <figure class="w-auto max-w-max h-auto flex xl:-ml-16">
+              <img
+                src="/assets/images/product-hero-image/lifins.png"
+                alt=""
+                class="w-full h-[190px] md:h-[300px] lg:h-[600px] object-contain drop-shadow-[-5px_8px_5px_rgba(0,0,0,0.15)] md:drop-shadow-[-10px_10px_10px_rgba(0,0,0,0.3)] lg:drop-shadow-[-20px_10px_10px_rgba(0,0,0,0.25)]"
+              />
+            </figure>
+          </div>
+        </div>
       </div>
       <!-- DownloadStore -->
       <div class="w-full max-w-sm mx-auto h-auto mt-10 md:mt-20">
@@ -96,7 +117,7 @@ import { lifinsTestimonials } from "@/Data/Products/Lifins/lifinsTestimonials";
         <div class="w-full h-auto mt-10 md:mt-10 lg:mt-10">
           <AboutUsDescription
             :image="imageAbout"
-            title="Smart Medical Platform"
+            title="AI Underwriting Insurance Application"
             description="Seleris Lifins is an intelligent AI platform designed to automate the underwriting process for individual and group life insurance policies. With a 90% faster decision-making engine and configurable business rules, Lifins empowers insurers to streamline risk assessment, minimize human errors, and deliver exceptional customer experience all through a scalable, API-ready architecture."
           />
         </div>
@@ -120,7 +141,7 @@ import { lifinsTestimonials } from "@/Data/Products/Lifins/lifinsTestimonials";
           <ApplicationWorkSlider
             circleColor="bg-gradient-to-b from-[#2B7C3F] to-[#30C254]"
             textcolor="text-[#2AB857]"
-            :steps="lifinsWorkSteps"
+            :steps="stepsWithPath"
           >
             <FrameLineWorks />
           </ApplicationWorkSlider>
@@ -231,6 +252,7 @@ import { lifinsTestimonials } from "@/Data/Products/Lifins/lifinsTestimonials";
           description="Stay in control of your health data and claims anytime, anywhere. Our
           AI-powered platform makes medical data processing, claims tracking,
           and risk analysis easier and faster."
+          :img="DownloadImage"
         />
       </div>
     </section>

@@ -1,10 +1,13 @@
 <script setup>
 import { computed, ref } from "vue";
+import { useAttrs } from "vue";
 
 const props = defineProps({
   Faq: { type: Array, required: true },
   opencolortext: { type: String },
 });
+
+const attrs = useAttrs();
 
 const leftFaqs = computed(() => props.Faq.filter((_, i) => i % 2 === 0));
 const rightFaqs = computed(() => props.Faq.filter((_, i) => i % 2 !== 0));
@@ -24,6 +27,7 @@ const toggleMobile = (index) => {
 </script>
 <template>
   <div
+    v-bind="attrs"
     class="hidden md:grid md:grid-cols-2 lg:max-w-6xl mx-auto gap-y-5 gap-x-10 px-8 lg:px-0"
   >
     <!-- KIRI -->
@@ -43,7 +47,7 @@ const toggleMobile = (index) => {
               :class="opencolortext"
               >–</span
             >
-            <span v-else class="text-blue-800">+</span>
+            <span v-else class="text-blue-800 dark:text-white">+</span>
           </span>
 
           <span
@@ -51,7 +55,7 @@ const toggleMobile = (index) => {
               'flex-1 text-start font-medium text-[14px] lg:text-[14px]',
               openedIndex.includes(`left-${i}`)
                 ? opencolortext
-                : 'text-blue-800',
+                : 'text-blue-800 dark:text-white',
             ]"
             >{{ faq.question }}</span
           >
@@ -95,7 +99,7 @@ const toggleMobile = (index) => {
               class="text-green-500"
               >–</span
             >
-            <span v-else class="text-blue-800">+</span>
+            <span v-else class="text-blue-800 dark:text-white">+</span>
           </span>
 
           <span
@@ -103,7 +107,7 @@ const toggleMobile = (index) => {
               'flex-1 text-start font-medium text-[14px] lg:text-[14px]',
               openedIndex.includes(`right-${i}`)
                 ? opencolortext
-                : 'text-blue-800',
+                : 'text-blue-800 dark:text-white',
             ]"
             >{{ faq.question }}</span
           >

@@ -24,11 +24,11 @@ defineProps({
 
 <template>
   <div
-    class="relative flex flex-row w-full h-auto pb-8 overflow-x-auto snap-x snap-mandatory scroll-pl-8 pl-8 pr-8 md:scroll-pl-[70px] md:pl-[70px] md:pr-8 hide-scrollbar"
+    class="relative flex flex-row w-full h-auto pb-8 overflow-x-auto snap-x snap-mandatory scroll-pl-8 pl-8 pr-8 md:scroll-pl-[70px] md:pl-[70px] md:pr-8 xl:scroll-pl-0 xl:pl-[50%] xl:pr-[50%+] hide-scrollbar"
   >
     <template v-for="(step, index) in steps" :key="index">
       <!-- Phone -->
-      <WorkPhone />
+      <WorkPhone :image="step.image" />
       <!-- Line Frame -->
       <WorkLine
         :circleColor="circleColor"
@@ -36,6 +36,7 @@ defineProps({
         :title="step.title"
         :description="step.description"
         :isLast="index === steps.length - 1"
+        :index="index"
       >
         <slot />
       </WorkLine>

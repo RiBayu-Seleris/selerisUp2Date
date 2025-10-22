@@ -3,21 +3,14 @@ defineProps({
   positionClass: {
     type: String,
   },
-  heightClass: {
-    type: String,
-  },
 });
 </script>
 
 <template>
   <!-- w-auto -->
-  <figure
-    :class="[
-      `hidden lg:flex lg:absolute w-full h-full ${positionClass} ${heightClass} `,
-    ]"
-  >
+  <figure :class="[`absolute w-full h-full ${positionClass}`]">
     <img
-      src="@/assets/Products/images/CareOrnament2.png"
+      src="@/assets/Products/images/CareOrnament3.png"
       alt="CareOrnament"
       class="object-center bg-no-repeat w-full h-full"
     />

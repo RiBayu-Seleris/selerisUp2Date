@@ -23,7 +23,7 @@ import EasyQuickText from "@productComponents/EasyQuickText.vue";
 import InnovationIcon from "@/assets/icons/innovation.svg";
 import ArrowRight from "@/assets/Products/icons/arrow-right.svg";
 
-import imageAbout from "@/assets/products/images/cc-about.png";
+import imageAbout from "@/assets/Products/images/Credit-Cover/about-cc.png";
 import FrameLineWorks from "@productComponents/Svg/CCDescriptionWork.vue";
 import ccframebook from "@/assets/Products/images/bg-book-demo-cc.png";
 
@@ -31,16 +31,26 @@ import ccframebook from "@/assets/Products/images/bg-book-demo-cc.png";
 import { ccFaq } from "@/Data/Products/CreditCover/CCFaq.js";
 import { ccWorkSteps } from "@/Data/Products/CreditCover/CCWorkSteps.js";
 
+import DownloadImage from "@/assets/Products/images/Credit-Cover/download-cc.png";
+
 const work1 = ref(false);
 
 import { clientLogos } from "@/Data/Products/Medins/medinsClients";
 import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
+
+const stepsWithPath = ccWorkSteps.map((step) => ({
+  ...step,
+  image: new URL(
+    `/src/assets/Products/images/Credit-Cover/${step.image}`,
+    import.meta.url
+  ).href,
+}));
 </script>
 
 <template>
   <div class="relative w-full min-h-screen overflow-hidden">
     <!-- Hero -->
-    <section class="relative w-full h-full rounded-[20px] z-20 p-4" id="hero">
+    <section class="relative w-full h-full rounded-[20px] z-20 p-2" id="hero">
       <div
         class="w-full h-[400px] md:h-[600px] lg:h-[650px] bg-cc bg-no-repeat bg-cover bg-bottom rounded-[20px] z-20"
       >
@@ -52,8 +62,16 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
         />
       </div>
       <!-- Image Phone -->
-      <div class="w-full h-auto flex -mt-[120px] md:-mt-[250px]">
-        <PhoneHero />
+      <div class="w-full h-auto flex -mt-[190px] md:-mt-[250px] xl:-mt-[240px]">
+        <div class="w-full h-auto flex justify-center items-center">
+          <figure class="w-auto max-w-max h-auto flex">
+            <img
+              src="/assets/images/product-hero-image/cc.png"
+              alt=""
+              class="w-full h-[190px] md:h-[300px] lg:h-[400px] object-contain drop-shadow-[-5px_8px_5px_rgba(0,0,0,0.15)] md:drop-shadow-[-10px_10px_10px_rgba(0,0,0,0.3)] lg:drop-shadow-[-20px_10px_10px_rgba(0,0,0,0.25)]"
+            />
+          </figure>
+        </div>
       </div>
       <!-- DownloadStore -->
       <div class="w-full max-w-sm mx-auto h-auto mt-10 md:mt-20">
@@ -79,7 +97,7 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
         <div class="w-full h-auto mt-10 md:mt-10 lg:mt-10">
           <AboutUsDescription
             :image="imageAbout"
-            title="Smart Medical Platform"
+            title="AI Credit Insurance Application"
             description="Seleris Credit Cover is a cutting-edge AI solution designed to streamline credit life insurance and loan protection. Our platform automates credit risk assessments, improves accuracy by up to 25%, and reduces processing time by 80%"
           />
         </div>
@@ -103,7 +121,7 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
           <ApplicationWorkSlider
             circleColor="bg-gradient-to-b from-[#E84C7F] to-[#EF83A6]"
             textcolor="text-[#E84C7F]"
-            :steps="ccWorkSteps"
+            :steps="stepsWithPath"
           >
             <FrameLineWorks />
           </ApplicationWorkSlider>
@@ -232,6 +250,7 @@ import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
           description="Stay in control of your health data and claims anytime, anywhere. Our
           AI-powered platform makes medical data processing, claims tracking,
           and risk analysis easier and faster."
+          :img="DownloadImage"
         />
       </div>
     </section>
