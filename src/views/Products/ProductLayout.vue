@@ -62,7 +62,7 @@ import Tooltip from "@/assets/images/tooltip.png";
       <Sidebar />
       <router-view />
     </main>
-    <footer class="w-full max-w-[1440px] h-auto px-8 mx-auto mt-20">
+    <footer class="w-full max-w-[1440px] h-auto px-8 mx-auto mt-20 lg:mt-40">
       <Footer />
     </footer>
   </div>

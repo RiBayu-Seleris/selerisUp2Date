@@ -10,7 +10,7 @@ import DownloadStore from "@productComponents/DownloadStore.vue";
 import ApplicationWorkText from "@productComponents/ApplicationWorkText.vue";
 import ApplicationWorkSlider from "@productComponents/ApplicationWorkSlider.vue";
 import TitleAndSubCard from "@productComponents/TitleAndSubCard.vue";
-import ClientCardFrame from "@productComponents/ClientCardFrame.vue";
+import ClientCardFrameProduct from "@productComponents/ClientCardFrameProduct.vue";
 import FaqFrame from "@productComponents/FaqFrame.vue";
 import DownloadFrame from "@productComponents/DownloadFrame.vue";
 import BookDemoProduct from "@productComponents/BookDemoProduct.vue";
@@ -79,7 +79,7 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
             <img
               src="/assets/images/product-hero-image/medins.png"
               alt=""
-              class="w-full h-[190px] md:h-[300px] lg:h-[500px] object-contain drop-shadow-[-5px_8px_5px_rgba(0,0,0,0.15)] md:drop-shadow-[-10px_10px_10px_rgba(0,0,0,0.3)] lg:drop-shadow-[-20px_10px_10px_rgba(0,0,0,0.25)]"
+              class="w-full h-[190px] md:h-[300px] lg:h-[350px] xl:h-[500px] object-contain drop-shadow-[-5px_8px_5px_rgba(0,0,0,0.15)] md:drop-shadow-[-10px_10px_10px_rgba(0,0,0,0.3)] lg:drop-shadow-[-20px_10px_10px_rgba(0,0,0,0.25)]"
             />
           </figure>
         </div>
@@ -158,7 +158,7 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
       id="easyquick"
     >
       <div
-        class="w-full h-auto flex flex-col px-8 pt-14 pb-20 bg-[#F3F4F6] rounded-[20px]"
+        class="w-full h-auto flex flex-col px-8 pt-14 pb-14 bg-[#F3F4F6] rounded-[20px]"
       >
         <div class="w-full h-auto flex flex-col gap-y-2">
           <EasyQuickText
@@ -169,7 +169,7 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
           />
         </div>
         <div
-          class="w-full h-auto flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-5 gap-y-4 md:gap-y-8 lg:gap-12 mt-16"
+          class="w-full h-auto flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-5 gap-y-8 md:gap-y-8 lg:gap-12 mt-10 lg:mt-16"
         >
           <div
             v-for="(data, index) in medinsHealthCheck"
@@ -198,7 +198,9 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
           subtitle="Seleris Meditekno Internasional"
           subtitleColor="text-[#42C5AF]"
         />
-        <ClientCardFrame :client-logos="clientLogos" />
+        <div class="mt-10 px-12">
+          <ClientCardFrameProduct :client-logos="clientLogos" />
+        </div>
       </div>
     </section>
 
@@ -267,7 +269,7 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-40"
       id="download"
     >
-      <div class="w-full h-auto md:max-w-6xl mx-auto">
+      <div class="w-full h-auto px-0 md:px-12 lg:px-20 xl:max-w-6xl mx-auto">
         <DownloadFrame
           appname="Seleris Medins"
           description="Stay in control of your health data and claims anytime, anywhere. Our

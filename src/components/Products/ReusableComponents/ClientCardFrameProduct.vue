@@ -45,14 +45,10 @@ const partnerChunks = computed(() =>
       :key="`${rowIndex}-${index}`"
       class="flex items-center justify-center"
     >
-      <CardTilt
-        :image="logo"
-        @mouseenter="isHovered = true"
-        @mouseleave="isHovered = false"
-        class="w-full"
-      />
+      <CardTilt :image="logo" class="w-full" />
     </div>
   </div>
+
   <div class="block lg:hidden">
     <div class="marquee-track animation-row whitespace-nowrap mt-8">
       <div class="flex gap-x-6 w-max pb-5">

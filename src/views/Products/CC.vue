@@ -10,7 +10,7 @@ import DownloadStore from "@productComponents/DownloadStore.vue";
 import ApplicationWorkText from "@productComponents/ApplicationWorkText.vue";
 import ApplicationWorkSlider from "@productComponents/ApplicationWorkSlider.vue";
 import TitleAndSubCard from "@productComponents/TitleAndSubCard.vue";
-import ClientCardFrame from "@productComponents/ClientCardFrame.vue";
+import ClientCardFrameProduct from "@productComponents/ClientCardFrameProduct.vue";
 import FaqFrame from "@productComponents/FaqFrame.vue";
 import DownloadFrame from "@productComponents/DownloadFrame.vue";
 import BookDemoProduct from "@productComponents/BookDemoProduct.vue";
@@ -35,7 +35,7 @@ import DownloadImage from "@/assets/Products/images/Credit-Cover/download-cc.png
 
 const work1 = ref(false);
 
-import { clientLogos } from "@/Data/Products/Medins/medinsClients";
+import { clientLogos } from "@/Data/Products/CreditCover/CCClients";
 import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";
 
 const stepsWithPath = ccWorkSteps.map((step) => ({
@@ -52,7 +52,7 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
     <!-- Hero -->
     <section class="relative w-full h-full rounded-[20px] z-20 p-2" id="hero">
       <div
-        class="w-full h-[400px] md:h-[600px] lg:h-[650px] bg-cc bg-no-repeat bg-cover bg-bottom rounded-[20px] z-20"
+        class="w-full h-[400px] md:h-[550px] lg:h-[650px] bg-cc bg-no-repeat bg-cover bg-bottom rounded-[20px] z-20"
       >
         <!-- subtitle="Application" -->
         <HeroText
@@ -62,7 +62,7 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
         />
       </div>
       <!-- Image Phone -->
-      <div class="w-full h-auto flex -mt-[190px] md:-mt-[250px] xl:-mt-[240px]">
+      <div class="w-full h-auto flex -mt-[120px] md:-mt-[200px] xl:-mt-[240px]">
         <div class="w-full h-auto flex justify-center items-center">
           <figure class="w-auto max-w-max h-auto flex">
             <img
@@ -83,8 +83,8 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
     <section class="relative w-full h-auto max-w-[1440px] mx-auto" id="about">
       <!-- Circle First -->
       <Circle
-        heightClass="h-[200px] md:h-[400px] xl:h-[600px]"
-        positionClass="-top-[200px] md:-top-[270px] lg:-top-[730px] left-1/2 -translate-x-1/2"
+        heightClass="h-[300px] md:h-[400px] xl:h-[600px]"
+        positionClass="-top-[340px] md:-top-[500px] lg:-top-[730px] left-1/2 -translate-x-1/2"
       />
       <div
         class="relative w-full flex flex-col justify-center items-center z-20 mt-16 md:mt-20 lg:mt-40 px-8"
@@ -146,7 +146,7 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
           />
         </div>
         <div
-          class="w-full h-auto flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-5 gap-y-4 md:gap-y-8 lg:gap-12 mt-16"
+          class="w-full h-auto flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-5 gap-y-8 md:gap-y-8 lg:gap-12 mt-10 lg:mt-16"
         >
           <div
             v-for="(data, index) in ccHealthCheck"
@@ -175,7 +175,9 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
           subtitle="Seleris Meditekno Internasional"
           subtitleColor="text-[#E84C7F]"
         />
-        <ClientCardFrame :client-logos="clientLogos" />
+        <div class="mt-10 px-12">
+          <ClientCardFrameProduct :client-logos="clientLogos" />
+        </div>
       </div>
     </section>
 

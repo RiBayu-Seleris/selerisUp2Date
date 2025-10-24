@@ -9,7 +9,7 @@ import DownloadStore from "@productComponents/DownloadStore.vue";
 import ApplicationWorkText from "@productComponents/ApplicationWorkText.vue";
 import ApplicationWorkSlider from "@productComponents/ApplicationWorkSlider.vue";
 import TitleAndSubCard from "@productComponents/TitleAndSubCard.vue";
-import ClientCardFrame from "@productComponents/ClientCardFrame.vue";
+import ClientCardFrameProduct from "@productComponents/ClientCardFrameProduct.vue";
 import FaqFrame from "@productComponents/FaqFrame.vue";
 import DownloadFrame from "@productComponents/DownloadFrame.vue";
 import BookDemoProduct from "@productComponents/BookDemoProduct.vue";
@@ -40,7 +40,7 @@ import { testimonials } from "@/Data/Products/HealthCare/testimonials";
 
 const work1 = ref(false);
 
-import { clientLogos } from "@/Data/Products/Medins/medinsClients";
+import { clientLogos } from "@/Data/Products/HealthCare/CareClients";
 
 // gabungkan otomatis base path + nama file
 const stepsWithPath = careWorkSteps.map((step) => ({
@@ -92,7 +92,7 @@ const stepsWithPath = careWorkSteps.map((step) => ({
     <!-- About Us -->
     <section class="relative w-full h-auto" id="about">
       <CareOrnament3 positionClass="top-[10px] md:top-5 xl:-top-7" />
-      <CareOrnament2 positionClass="top-[10px] md:top-5 xl:top-32" />
+      <CareOrnament2 positionClass="top-[10px] md:top-5 xl:top-44" />
       <div
         class="relative w-full flex flex-col max-w-[1440px] mx-auto justify-center items-center z-20 mt-16 md:mt-20 lg:mt-40 px-8"
       >
@@ -113,7 +113,7 @@ const stepsWithPath = careWorkSteps.map((step) => ({
 
     <!-- How Application Work -->
     <section
-      class="relative w-full h-auto max-w-[1440px] mx-auto mt-14 lg:mt-20 xl:mt-44"
+      class="relative w-full h-auto max-w-[1440px] mx-auto mt-14 lg:mt-20 xl:mt-48"
       id="work"
     >
       <!-- Application Work Slider -->
@@ -153,7 +153,7 @@ const stepsWithPath = careWorkSteps.map((step) => ({
           />
         </div>
         <div
-          class="w-full h-auto flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-5 gap-y-4 md:gap-y-8 lg:gap-12 mt-16"
+          class="w-full h-auto flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-5 gap-y-8 md:gap-y-8 lg:gap-12 mt-10 lg:mt-16"
         >
           <div
             v-for="(data, index) in healthCheck"
@@ -182,7 +182,9 @@ const stepsWithPath = careWorkSteps.map((step) => ({
           subtitle="Seleris Meditekno Internasional"
           subtitleColor="text-[#42C5AF]"
         />
-        <ClientCardFrame :client-logos="clientLogos" />
+        <div class="mt-10 px-12">
+          <ClientCardFrameProduct :client-logos="clientLogos" />
+        </div>
       </div>
     </section>
 

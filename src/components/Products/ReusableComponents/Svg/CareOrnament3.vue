@@ -8,7 +8,9 @@ defineProps({
 
 <template>
   <!-- w-auto -->
-  <figure :class="[`absolute w-full h-full ${positionClass}`]">
+  <figure
+    :class="[`hidden lg:flex lg:absolute  w-full h-full ${positionClass}`]"
+  >
     <img
       src="@/assets/Products/images/CareOrnament3.png"
       alt="CareOrnament"

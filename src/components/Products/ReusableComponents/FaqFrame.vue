@@ -28,7 +28,7 @@ const toggleMobile = (index) => {
 <template>
   <div
     v-bind="attrs"
-    class="hidden md:grid md:grid-cols-2 lg:max-w-6xl mx-auto gap-y-5 gap-x-10 px-8 lg:px-0"
+    class="hidden md:grid md:grid-cols-2 lg:max-w-7xl mx-auto gap-y-5 gap-x-10 px-8 lg:px-16 xl:px-10"
   >
     <!-- KIRI -->
     <div class="flex flex-col gap-y-5">

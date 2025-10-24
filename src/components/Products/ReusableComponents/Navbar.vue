@@ -40,7 +40,7 @@ const LogoLink = computed(() => {
 
 <template>
   <div
-    class="relative flex justify-center w-full h-auto items-center max-w-[1440px] mx-auto px-10 md:px-14 pt-4 md:pt-6 xl:pt-8"
+    class="relative flex justify-center w-full h-auto items-center max-w-[1440px] mx-auto px-10 md:px-14 xl:px-16 xls:px-20 pt-4 md:pt-6 xl:pt-8"
   >
     <!-- Desktop Navbar -->
     <div class="hidden lg:grid grid-cols-12 w-full h-auto">

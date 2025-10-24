@@ -20,20 +20,20 @@ defineProps({
       class="w-full h-full bg-no-repeat bg-cover bg-center"
     />
     <div
-      class="absolute w-full h-full top-0 flex flex-row justify-between items-center px-4 md:px-10 pt-2 md:pt-8 lg:pt-11"
+      class="absolute w-full h-full top-0 flex flex-row justify-between items-center px-4 md:px-10 pt-2 md:pt-8 xl:pt-11"
     >
       <div class="w-full h-full flex items-center">
         <div class="w-full h-auto flex flex-col gap-y-2 md:gap-y-4 lg:gap-y-8">
           <div class="w-full h-full">
             <p
-              class="text-[#FAFAFA] font-[500] text-[9px] md:text-[21px] lg:text-[37px] leading-tight"
+              class="text-[#FAFAFA] font-[500] text-[10px] md:text-[22px] lg:text-[24px] xl:text-[36px] leading-tight"
             >
               {{ title }}
             </p>
           </div>
           <div class="w-full h-auto">
             <p
-              class="text-[#FAFAFA] font-[500] text-[8px] md:text-[19px] lg:text-[23px]"
+              class="text-[#FAFAFA] font-[500] text-[10px] md:text-[20px] lg:text-[24px]"
             >
               Request Demo Now!
             </p>

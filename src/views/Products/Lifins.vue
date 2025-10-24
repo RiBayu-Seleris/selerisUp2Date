@@ -10,7 +10,7 @@ import DownloadStore from "@productComponents/DownloadStore.vue";
 import ApplicationWorkText from "@productComponents/ApplicationWorkText.vue";
 import ApplicationWorkSlider from "@productComponents/ApplicationWorkSlider.vue";
 import TitleAndSubCard from "@productComponents/TitleAndSubCard.vue";
-import ClientCardFrame from "@productComponents/ClientCardFrame.vue";
+import ClientCardFrameProduct from "@productComponents/ClientCardFrameProduct.vue";
 import FaqFrame from "@productComponents/FaqFrame.vue";
 import DownloadFrame from "@productComponents/DownloadFrame.vue";
 import BookDemoProduct from "@productComponents/BookDemoProduct.vue";
@@ -37,7 +37,7 @@ import { lifinsWorkSteps } from "@/Data/Products/Lifins/lifinsWorkSteps.js";
 
 const work1 = ref(false);
 
-import { clientLogos } from "@/Data/Products/Medins/medinsClients";
+import { clientLogos } from "@/Data/Products/Lifins/LifinsClients";
 import { lifinsTestimonials } from "@/Data/Products/Lifins/lifinsTestimonials";
 
 // gabungkan otomatis base path + nama file
@@ -166,7 +166,7 @@ const stepsWithPath = lifinsWorkSteps.map((step) => ({
           />
         </div>
         <div
-          class="w-full h-auto flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-5 gap-y-4 md:gap-y-8 lg:gap-12 mt-16"
+          class="w-full h-auto flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-5 gap-y-8 md:gap-y-8 lg:gap-12 mt-10 lg:mt-16"
         >
           <div
             v-for="(data, index) in lifinsHealthCheck"
@@ -195,7 +195,9 @@ const stepsWithPath = lifinsWorkSteps.map((step) => ({
           subtitle="Seleris Meditekno Internasional"
           subtitleColor="text-[#2AB857]"
         />
-        <ClientCardFrame :client-logos="clientLogos" />
+        <div class="mt-10 px-12">
+          <ClientCardFrameProduct :client-logos="clientLogos" />
+        </div>
       </div>
     </section>
 

@@ -66,7 +66,7 @@ const connectColor = computed(() => {
                   v-if="logo"
                   :src="logo"
                   alt="Logo"
-                  class="w-full sml:h-[60px] md:h-[80px] xl:h-[40px] object-contain object-left"
+                  class="w-full sml:h-[60px] md:h-[80px] lg:h-[40px] object-contain object-left"
                 />
               </div>
               <div
@@ -269,14 +269,14 @@ const connectColor = computed(() => {
                 <img
                   :src="playstore"
                   alt="Playstore"
-                  class="w-full md:w-[300px] xl:w-[200px] h-[100px] object-contain object-center"
+                  class="w-full h-[100px] md:w-[300px] lg:w-[200px] object-contain object-center"
                 />
               </a>
               <div
                 class="flex w-full h-full justify-center items-center content-center xl:justify-start xl:content-start xl:-mt-5"
               >
                 <div
-                  class="relative group w-full md:w-[300px] xl:w-[200px] h-[100px]"
+                  class="relative group w-full h-[100px] md:w-[300px] lg:w-[200px]"
                 >
                   <img
                     :src="appstore"

@@ -53,9 +53,11 @@ const toggleContent = () => {
             <slot />
             <!-- INI FRAME DIBAWAH LINGKARAN -->
             <div
-              class="absolute w-full h-full top-0 flex flex-col justify-center items-center px-8 gap-y-2.5 lg:gap-y-2 pt-4 md:pt-4 lg:pt-8"
+              class="absolute w-full h-full top-0 flex flex-col justify-center items-center px-8 gap-y-2.5 lg:gap-y-2 pt-5 sm:pt-9 md:pt-3 lg:pt-8"
             >
-              <div class="w-full h-[35px] flex justify-center items-start">
+              <div
+                class="w-full h-[15px] sm:h-[15px] md:h-[20px] lg:h-[35px] flex justify-center items-start"
+              >
                 <p
                   :class="[
                     `${textcolor} text-center text-[12px] md:text-[16px] lg:text-[22px] `,

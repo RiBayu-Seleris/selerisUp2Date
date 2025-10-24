@@ -158,6 +158,10 @@ onBeforeUnmount(() => {
         <div class="relative">
           <span
             class="cursor-pointer transition-colors"
+            @click="
+              showPartners = true;
+              progress = 0;
+            "
             :class="
               showPartners
                 ? 'text-[#2AB857] dark:text-[#FAFAFA]'
@@ -171,6 +175,10 @@ onBeforeUnmount(() => {
         <div class="relative">
           <span
             class="cursor-pointer transition-colors"
+            @click="
+              showPartners = false;
+              progress = 0;
+            "
             :class="
               !showPartners
                 ? 'text-[#2AB857] dark:text-[#FAFAFA]'
