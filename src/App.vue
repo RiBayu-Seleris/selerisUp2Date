@@ -183,6 +183,7 @@ onMounted(() => {
           <!-- Navbar -->
           <div
             class="flex fixed top-0 w-full h-auto z-50 transition-all duration-300 ease-in-out"
+            v-if="route.path !== '/chatbot' && route.path !== '/chatbot2'"
           >
             <Navbar />
           </div>
@@ -207,7 +208,12 @@ onMounted(() => {
           <!-- Touch Section (kecuali di /blogs) -->
           <section
             class="flex flex-col relative w-full mx-auto h-auto mt-32 px-8 xls:px-8 2xls:px-0"
-            v-if="route.path !== '/blogs' && !route.path.startsWith('/blog/')"
+            v-if="
+              route.path !== '/blogs' &&
+              route.path !== '/chatbot' &&
+              route.path !== '/chatbot2' &&
+              !route.path.startsWith('/blog/')
+            "
           >
             <Touch />
           </section>
@@ -216,7 +222,7 @@ onMounted(() => {
         <!-- Footer -->
         <footer
           class="w-full max-w-[1440px] h-auto px-8 mt-20 mx-auto z-10 dark:bg-[#17181A]/70 animate__animated animate__fadeIn animate__slower"
-          v-if="!['/test-embed'].includes(route.path)"
+          v-if="!['/test-embed', '/chatbot', '/chatbot2'].includes(route.path)"
         >
           <Footer />
         </footer>

@@ -91,8 +91,14 @@ const stepsWithPath = careWorkSteps.map((step) => ({
 
     <!-- About Us -->
     <section class="relative w-full h-auto" id="about">
-      <CareOrnament3 positionClass="top-[10px] md:top-5 xl:-top-7" />
-      <CareOrnament2 positionClass="top-[10px] md:top-5 xl:top-44" />
+      <CareOrnament3
+        positionClass="top-[150px] sm:-top-5 xl:-top-7"
+        heightClass="w-full h-auto lg:h-full"
+      />
+      <CareOrnament2
+        positionClass="bottom-[100px] sm:bottom-0 xl:top-44"
+        heightClass="w-full h-auto lg:h-full"
+      />
       <div
         class="relative w-full flex flex-col max-w-[1440px] mx-auto justify-center items-center z-20 mt-16 md:mt-20 lg:mt-40 px-8"
       >

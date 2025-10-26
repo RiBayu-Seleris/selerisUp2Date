@@ -68,7 +68,7 @@ const ApiCards = [
             class="flex snap-start shrink-0 w-[100%] md:w-[60%] lg:w-[55%] xl:w-[60%] sml:h-[150px] md:h-auto lg:h-auto xl:h-[200px] rounded-[22px] items-center bg-[#FAFAFA] dark:bg-[#323232]"
           >
             <div
-              class="flex flex-row w-full h-full py-4 xl:py-7 gap-x-5 md:gap-x-5 xl:gap-x-8 justify-center"
+              class="flex flex-row w-full h-full py-5 gap-x-5 md:gap-x-5 xl:gap-x-8 justify-center px-2 sm:px-0"
             >
               <div
                 class="flex sml:w-[50px] sml:h-[50px] md:w-[50px] md:h-[50px] lg:w-[55px] lg:h-[55px] xl:w-[70px] xl:h-[70px] justify-center md:mt-2 lg:mt-0"
@@ -76,7 +76,7 @@ const ApiCards = [
                 <img
                   :src="ApiCard.icon"
                   alt="Icon"
-                  class="w-full lg:h-full xl:h-full object-contain object-top bg-white rounded-full shadow-lg p-3"
+                  class="w-full lg:h-full xl:h-full object-contain object-top bg-white dark:bg-[#323232] rounded-full shadow-lg dark:shadow-white dark:shadow-[0px_0px_25px_-16px_#ffffff] p-3"
                 />
               </div>
               <div
@@ -91,7 +91,7 @@ const ApiCards = [
                 </div>
                 <div class="flex w-full h-auto">
                   <p
-                    class="text-[#195279] font-[400] text-[13px] lg:text-[15px] xl:text-[19px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                    class="text-[#195279] font-[400] text-[12px] sm:text-[14px] lg:text-[15px] xl:text-[19px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                   >
                     {{ ApiCard.description }}
                   </p>

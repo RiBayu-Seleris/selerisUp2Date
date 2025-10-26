@@ -161,11 +161,22 @@ const routes = [
     name: "NotFound",
     redirect: "/",
   },
+
   // Testing
   {
     path: "/test-embed",
     name: "Testing",
     component: () => import("@/views/TestEmbed.vue"),
+  },
+  {
+    path: "/chatbot",
+    name: "TestChat",
+    component: () => import("@/views/ChatBotLearn.vue"),
+  },
+  {
+    path: "/chatbot2",
+    name: "TestChat2",
+    component: () => import("@/views/ChatBotLearn2.vue"),
   },
 ];
 

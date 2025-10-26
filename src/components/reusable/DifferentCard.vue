@@ -56,7 +56,7 @@ defineProps({
         <img
           :src="image"
           alt="Icon"
-          class="w-[20%] sml:w-[50px] h-full object-contain bg-white rounded-full shadow-lg p-2"
+          class="w-[20%] sml:w-[50px] h-full object-contain bg-white dark:bg-[#323232] rounded-full shadow-lg p-2"
         />
       </div>
       <div class="flex flex-col w-full h-auto md:justify-center pl-5 sm:pl-4">

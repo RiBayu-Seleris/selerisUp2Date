@@ -88,8 +88,8 @@ import CallIcon from "@/components/icons/CallIcon.vue";
             Be among the first to discover what it's all about
           </p>
         </div>
-        <div class="w-full h-[1px] bg-[#F3F4F6] my-3 rounded-full" />
-        <div class="flex flex-col w-full mb-4">
+        <!-- <div class="w-full h-[1px] bg-[#F3F4F6] my-3 rounded-full" /> -->
+        <div class="flex flex-col w-full mt-5 mb-4">
           <div class="w-full mb-2">
             <p>Full Name:</p>
           </div>
@@ -97,7 +97,7 @@ import CallIcon from "@/components/icons/CallIcon.vue";
             <input
               name="fullname"
               type="text"
-              class="w-full p-2 rounded-md border border-gray-300 dark:bg-[#565656] focus:outline-none focus:ring-2 focus:ring-[#2AB857] dark:focus:ring-white"
+              class="w-full p-2 rounded-[8px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:outline-none focus:ring-1 focus:ring-[#2AB857] dark:focus:border-none"
             />
           </div>
         </div>
@@ -109,7 +109,7 @@ import CallIcon from "@/components/icons/CallIcon.vue";
             <input
               name="email"
               type="email"
-              class="w-full p-2 rounded-md border border-gray-300 dark:bg-[#565656] focus:outline-none focus:ring-2 focus:ring-[#2AB857] dark:focus:ring-white"
+              class="w-full p-2 rounded-[8px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:outline-none focus:ring-1 focus:ring-[#2AB857] dark:focus:border-none"
             />
           </div>
         </div>
@@ -119,8 +119,8 @@ import CallIcon from "@/components/icons/CallIcon.vue";
           </div>
           <div class="w-full">
             <textarea
-              rows="5"
-              class="w-full p-2 rounded-md border border-gray-300 dark:bg-[#565656] focus:outline-none focus:ring-2 focus:ring-[#2AB857] dark:focus:ring-white resize-none align-top"
+              class="w-full lg:h-[70px] xl:h-[130px] p-2 rounded-[8px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:outline-none focus:ring-1 focus:ring-[#2AB857] resize-none align-top"
+              placeholder="Message"
             />
           </div>
         </div>

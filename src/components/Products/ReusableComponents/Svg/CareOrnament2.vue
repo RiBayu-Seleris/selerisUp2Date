@@ -12,9 +12,7 @@ defineProps({
 <template>
   <!-- w-auto -->
   <figure
-    :class="[
-      `hidden lg:flex lg:absolute w-full h-full ${positionClass} ${heightClass} `,
-    ]"
+    :class="[`hidden sm:flex sm:absolute ${positionClass} ${heightClass} `]"
   >
     <img
       src="@/assets/Products/images/CareOrnament2.png"
