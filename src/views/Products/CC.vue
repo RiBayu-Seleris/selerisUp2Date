@@ -62,7 +62,9 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
         />
       </div>
       <!-- Image Phone -->
-      <div class="w-full h-auto flex -mt-[120px] md:-mt-[200px] xl:-mt-[240px]">
+      <div
+        class="w-full h-auto flex -mt-[120px] md:-mt-[200px] lg:-mt-[250px] xl:-mt-[240px]"
+      >
         <div class="w-full h-auto flex justify-center items-center">
           <figure class="w-auto max-w-max h-auto flex">
             <img
@@ -107,7 +109,7 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
     <!-- How Application Work -->
     <section
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-14 lg:mt-20"
-      id="work"
+      id="howapplicationwork"
     >
       <!-- Application Work Slider -->
       <div

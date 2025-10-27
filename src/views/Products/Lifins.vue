@@ -127,7 +127,7 @@ const stepsWithPath = lifinsWorkSteps.map((step) => ({
     <!-- How Application Work -->
     <section
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-14 lg:mt-20"
-      id="work"
+      id="howapplicationwork"
     >
       <!-- Application Work Slider -->
       <div

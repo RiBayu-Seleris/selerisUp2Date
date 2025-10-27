@@ -33,7 +33,7 @@ const props = defineProps({
   modelValue: String, // product ID
 });
 
-// Contoh daftar produk
+// Contoh daftar produks
 const products = ref([
   { id: "Seleris-Credit-Cover", name: "Seleris Credit Cover" },
   { id: "Seleris-Lifins", name: "Seleris Lifins" },
@@ -369,7 +369,8 @@ onMounted(() => {
                     </span>
                   </transition>
                 </div>
-                <div
+                <router-link
+                  :to="productBannerLists[activeIndex].url"
                   class="w-full h-auto cursor-pointer flex flex-row items-center justify-start"
                   :class="productBannerLists[activeIndex].color"
                 >
@@ -407,7 +408,7 @@ onMounted(() => {
                       />
                     </svg>
                   </div>
-                </div>
+                </router-link>
               </div>
             </div>
           </div>
