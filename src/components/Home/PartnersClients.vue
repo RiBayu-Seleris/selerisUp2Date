@@ -71,12 +71,6 @@ const clientLogos = [
     .href,
   new URL("@/assets/images/clients-and-partners/equity.png", import.meta.url)
     .href,
-  // new URL(
-  //   "@/assets/images/clients-and-partners/jamkrida-banten.png",
-  //   import.meta.url
-  // ).href,
-  // new URL("@/assets/images/clients-and-partners/nexus.png", import.meta.url)
-  //   .href,
 ];
 
 const clientLogosDark = [
@@ -98,14 +92,6 @@ const clientLogosDark = [
     "@/assets/images/clients-and-partners/equity-dark.png",
     import.meta.url
   ).href,
-  // new URL(
-  //   "@/assets/images/clients-and-partners/jamkrida-banten-dark.png",
-  //   import.meta.url
-  // ).href,
-  // new URL(
-  //   "@/assets/images/clients-and-partners/nexus-dark.png",
-  //   import.meta.url
-  // ).href,
 ];
 
 function chunkArray(array, size) {
