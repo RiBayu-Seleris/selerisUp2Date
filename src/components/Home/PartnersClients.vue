@@ -24,6 +24,8 @@ const partnerLogos = [
   ).href,
   new URL("@/assets/images/clients-and-partners/data-ai.png", import.meta.url)
     .href,
+  new URL("@/assets/images/clients-and-partners/idpay.png", import.meta.url)
+    .href,
 ];
 
 const partnerLogosDark = [
@@ -51,6 +53,10 @@ const partnerLogosDark = [
   ).href,
   new URL(
     "@/assets/images/clients-and-partners/data-ai-dark.png",
+    import.meta.url
+  ).href,
+  new URL(
+    "@/assets/images/clients-and-partners/idpay-dark.png",
     import.meta.url
   ).href,
 ];
@@ -280,7 +286,6 @@ onBeforeUnmount(() => {
                 ? 'grid-cols-4'
                 : 'grid-cols-5',
               row.length < columnsPerRow ? 'justify-center' : '',
-              rowIndex === 1 ? 'px-24' : '',
             ]"
           >
             <div
