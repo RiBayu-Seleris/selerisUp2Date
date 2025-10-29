@@ -1,11 +1,23 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount, computed } from "vue";
+import {
+  ref,
+  onMounted,
+  onBeforeUnmount,
+  computed,
+  watch,
+  nextTick,
+} from "vue";
 
 const showPartners = ref(true);
-const intervalTime = 3000;
+const intervalTime = 4000;
 const progress = ref(0);
 const isHovered = ref(false);
 let progressInterval = null;
+let observer = null;
+
+// 🧩 untuk menyimpan tinggi maksimal
+const maxHeight = ref(0);
+const logoContainer = ref(null);
 
 // Logo list
 const partnerLogos = [
@@ -97,20 +109,20 @@ const clientLogosDark = [
 // ✅ Sinkron ke Tailwind darkMode (pakai class “dark”)
 const isDark = ref(document.documentElement.classList.contains("dark"));
 
-let observer;
-
 onMounted(() => {
-  // observe perubahan class di <html>
+  // Observe perubahan class di <html>
   observer = new MutationObserver(() => {
     isDark.value = document.documentElement.classList.contains("dark");
   });
-
   observer.observe(document.documentElement, {
     attributes: true,
     attributeFilter: ["class"],
   });
 
   startProgress();
+
+  // Hitung tinggi awal
+  nextTick(() => updateMaxHeight());
 });
 
 onBeforeUnmount(() => {
@@ -127,6 +139,22 @@ const currentLogos = computed(() => {
   }
 });
 
+// 🧮 Hitung tinggi maksimum dari kontainer
+const updateMaxHeight = async () => {
+  await nextTick();
+  if (logoContainer.value) {
+    const height = logoContainer.value.scrollHeight;
+    if (height > maxHeight.value) {
+      maxHeight.value = height;
+    }
+  }
+};
+
+// Saat berganti partner/client → cek apakah tinggi perlu di-update
+watch(showPartners, async () => {
+  await updateMaxHeight();
+});
+
 // progress auto switch
 const startProgress = () => {
   const step = 100 / (intervalTime / 100);
@@ -140,7 +168,6 @@ const startProgress = () => {
     }
   }, 100);
 };
-
 const stopProgress = () => clearInterval(progressInterval);
 </script>
 
@@ -171,11 +198,12 @@ const stopProgress = () => clearInterval(progressInterval);
     </div>
 
     <!-- LOGO GRID -->
-    <!-- LOGO GRID -->
     <transition name="fade" mode="out-in">
       <div
+        ref="logoContainer"
         :key="showPartners + (isDark ? '-dark' : '-light')"
-        class="flex flex-wrap justify-center gap-6 mt-4 h-[500px] sm:h-[350px] md:h-[300px] content-start transition-all duration-300"
+        class="flex flex-wrap justify-center gap-6 mt-4 content-start transition-all duration-300"
+        :style="{ minHeight: maxHeight + 'px' }"
       >
         <div
           v-for="(logo, i) in currentLogos"
