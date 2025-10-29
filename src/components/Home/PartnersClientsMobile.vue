@@ -1,6 +1,13 @@
 <script setup>
-import CardSlide from "@/components/reusable/CardSlide.vue";
+import { ref, onMounted, onBeforeUnmount, computed } from "vue";
 
+const showPartners = ref(true);
+const intervalTime = 3000;
+const progress = ref(0);
+const isHovered = ref(false);
+let progressInterval = null;
+
+// Logo list
 const partnerLogos = [
   new URL("@/assets/images/clients-and-partners/rynest.png", import.meta.url)
     .href,
@@ -17,24 +24,8 @@ const partnerLogos = [
   ).href,
   new URL("@/assets/images/clients-and-partners/data-ai.png", import.meta.url)
     .href,
-];
-
-const clientLogos = [
-  new URL("@/assets/images/clients-and-partners/boa.png", import.meta.url).href,
-  new URL("@/assets/images/clients-and-partners/grm.png", import.meta.url).href,
-  new URL("@/assets/images/clients-and-partners/chubb.png", import.meta.url)
+  new URL("@/assets/images/clients-and-partners/idpay.png", import.meta.url)
     .href,
-  new URL("@/assets/images/clients-and-partners/fpg.png", import.meta.url).href,
-  new URL("@/assets/images/clients-and-partners/heksa.png", import.meta.url)
-    .href,
-  new URL("@/assets/images/clients-and-partners/equity.png", import.meta.url)
-    .href,
-  // new URL(
-  //   "@/assets/images/clients-and-partners/jamkrida-banten.png",
-  //   import.meta.url
-  // ).href,
-  // new URL("@/assets/images/clients-and-partners/nexus.png", import.meta.url)
-  //   .href,
 ];
 
 const partnerLogosDark = [
@@ -64,6 +55,22 @@ const partnerLogosDark = [
     "@/assets/images/clients-and-partners/data-ai-dark.png",
     import.meta.url
   ).href,
+  new URL(
+    "@/assets/images/clients-and-partners/idpay-dark.png",
+    import.meta.url
+  ).href,
+];
+
+const clientLogos = [
+  new URL("@/assets/images/clients-and-partners/boa.png", import.meta.url).href,
+  new URL("@/assets/images/clients-and-partners/grm.png", import.meta.url).href,
+  new URL("@/assets/images/clients-and-partners/chubb.png", import.meta.url)
+    .href,
+  new URL("@/assets/images/clients-and-partners/fpg.png", import.meta.url).href,
+  new URL("@/assets/images/clients-and-partners/heksa.png", import.meta.url)
+    .href,
+  new URL("@/assets/images/clients-and-partners/equity.png", import.meta.url)
+    .href,
 ];
 
 const clientLogosDark = [
@@ -85,74 +92,118 @@ const clientLogosDark = [
     "@/assets/images/clients-and-partners/equity-dark.png",
     import.meta.url
   ).href,
-  // new URL(
-  //   "@/assets/images/clients-and-partners/jamkrida-banten-dark.png",
-  //   import.meta.url
-  // ).href,
-  // new URL(
-  //   "@/assets/images/clients-and-partners/nexus-dark.png",
-  //   import.meta.url
-  // ).href,
 ];
 
-// Gabungkan partner dan client, lalu filter agar tidak duplikat
-const combinedLogos = Array.from(new Set([...partnerLogos, ...clientLogos]));
-const combinedLogosDark = Array.from(
-  new Set([...partnerLogosDark, ...clientLogosDark])
-);
+// ✅ Sinkron ke Tailwind darkMode (pakai class “dark”)
+const isDark = ref(document.documentElement.classList.contains("dark"));
+
+let observer;
+
+onMounted(() => {
+  // observe perubahan class di <html>
+  observer = new MutationObserver(() => {
+    isDark.value = document.documentElement.classList.contains("dark");
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+
+  startProgress();
+});
+
+onBeforeUnmount(() => {
+  stopProgress();
+  if (observer) observer.disconnect();
+});
+
+// computed pilih logo sesuai mode
+const currentLogos = computed(() => {
+  if (showPartners.value) {
+    return isDark.value ? partnerLogosDark : partnerLogos;
+  } else {
+    return isDark.value ? clientLogosDark : clientLogos;
+  }
+});
+
+// progress auto switch
+const startProgress = () => {
+  const step = 100 / (intervalTime / 100);
+  progressInterval = setInterval(() => {
+    if (!isHovered.value) {
+      progress.value += step;
+      if (progress.value >= 100) {
+        progress.value = 0;
+        showPartners.value = !showPartners.value;
+      }
+    }
+  }, 100);
+};
+
+const stopProgress = () => clearInterval(progressInterval);
 </script>
 
 <template>
-  <div class="w-full h-auto flex flex-col py-14 sm:py-20 md:py-14">
-    <div
-      class="flex w-full h-auto justify-center items-center text-center pb-5"
-    >
-      <p
-        class="text-[18px] sm:text-[24px] text-[#89A6BA] dark:text-[#6A6A6A] font-[400]"
+  <div class="flex flex-col w-full px-8 py-10 dark:bg-[#17181A] duration-300">
+    <!-- Title -->
+    <div class="text-center mb-4">
+      <div
+        class="inline-flex gap-2 items-end text-[20px] font-[400] text-[#89A6BA] dark:text-[#6A6A6A]"
       >
-        Seleris Partners & Clients
-      </p>
-    </div>
-    <div class="marquee-track animation-row-1 whitespace-nowrap">
-      <div class="flex gap-x-6 w-max dark:hidden">
-        <template v-for="i in 2">
-          <CardSlide
-            v-for="(logo, index) in combinedLogos"
-            :key="`combined-${i}-${index}`"
-            :image="logo"
-          />
-        </template>
-      </div>
-      <div class="dark:flex gap-x-6 w-max hidden">
-        <template v-for="i in 2">
-          <CardSlide
-            v-for="(logo, index) in combinedLogosDark"
-            :key="`combined-${i}-${index}`"
-            :image="logo"
-          />
-        </template>
+        <span>Seleris</span>
+        <span
+          class="cursor-pointer"
+          @click="(showPartners = true), (progress = 0)"
+          :class="showPartners ? 'text-[#2AB857] dark:text-[#FAFAFA]' : ''"
+        >
+          Partners
+        </span>
+        <span>&</span>
+        <span
+          class="cursor-pointer"
+          @click="(showPartners = false), (progress = 0)"
+          :class="!showPartners ? 'text-[#2AB857] dark:text-[#FAFAFA]' : ''"
+        >
+          Clients
+        </span>
       </div>
     </div>
+
+    <!-- LOGO GRID -->
+    <!-- LOGO GRID -->
+    <transition name="fade" mode="out-in">
+      <div
+        :key="showPartners + (isDark ? '-dark' : '-light')"
+        class="flex flex-wrap justify-center gap-6 mt-4 h-[500px] sm:h-[350px] md:h-[300px] content-start transition-all duration-300"
+      >
+        <div
+          v-for="(logo, i) in currentLogos"
+          :key="i"
+          class="group w-[45%] sm:w-[30%] md:w-[22%] lg:w-[18%] h-[80px] p-[1px] rounded-xl bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656] hover:dark:bg-none hover:dark:bg-[#D9D9D9] transition-all duration-300 ease-out"
+        >
+          <div
+            class="flex w-full h-full rounded-xl justify-center items-center bg-[#F9FAFB] hover:bg-white dark:bg-[#1D1F23] dark:border-[#FAFAFA]/25"
+          >
+            <img
+              :src="logo"
+              alt="partner logo"
+              class="w-[184px] h-full object-contain filter transition duration-300"
+            />
+          </div>
+        </div>
+      </div>
+    </transition>
   </div>
 </template>
 
 <style scoped>
-.marquee-track {
-  display: flex;
-  width: fit-content;
-  white-space: nowrap;
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s ease;
 }
-
-.animation-row-1 {
-  animation: marquee-left 60s linear infinite;
-}
-
-@keyframes marquee-left {
-  0% {
-    transform: translateX(0%);
-  }
-  100% {
-    transform: translateX(-50%);
-  }
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
 }
 </style>

@@ -16,4 +16,8 @@ export const aboutList = [
     url: "/about/frequently-ask-question",
     name: "FAQ",
   },
+  {
+    url: "/contact",
+    name: "Contact Us",
+  },
 ];

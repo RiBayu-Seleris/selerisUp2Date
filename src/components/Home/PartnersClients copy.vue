@@ -1,6 +1,5 @@
 <script setup>
 import { ref, onMounted, onBeforeUnmount, computed } from "vue";
-import CardTilt from "@/components/reusable/CardTilt.vue";
 
 const showPartners = ref(true);
 const intervalTime = 3000;
@@ -8,6 +7,7 @@ const progress = ref(0);
 const isHovered = ref(false);
 let progressInterval = null;
 
+// Logo list
 const partnerLogos = [
   new URL("@/assets/images/clients-and-partners/rynest.png", import.meta.url)
     .href,
@@ -24,7 +24,10 @@ const partnerLogos = [
   ).href,
   new URL("@/assets/images/clients-and-partners/data-ai.png", import.meta.url)
     .href,
+  new URL("@/assets/images/clients-and-partners/idpay.png", import.meta.url)
+    .href,
 ];
+
 const partnerLogosDark = [
   new URL(
     "@/assets/images/clients-and-partners/rynest-dark.png",
@@ -52,6 +55,10 @@ const partnerLogosDark = [
     "@/assets/images/clients-and-partners/data-ai-dark.png",
     import.meta.url
   ).href,
+  new URL(
+    "@/assets/images/clients-and-partners/idpay-dark.png",
+    import.meta.url
+  ).href,
 ];
 
 const clientLogos = [
@@ -62,11 +69,7 @@ const clientLogos = [
   new URL("@/assets/images/clients-and-partners/fpg.png", import.meta.url).href,
   new URL("@/assets/images/clients-and-partners/heksa.png", import.meta.url)
     .href,
-  new URL(
-    "@/assets/images/clients-and-partners/jamkrida-banten.png",
-    import.meta.url
-  ).href,
-  new URL("@/assets/images/clients-and-partners/nexus.png", import.meta.url)
+  new URL("@/assets/images/clients-and-partners/equity.png", import.meta.url)
     .href,
 ];
 
@@ -86,36 +89,47 @@ const clientLogosDark = [
     import.meta.url
   ).href,
   new URL(
-    "@/assets/images/clients-and-partners/jamkrida-banten-dark.png",
-    import.meta.url
-  ).href,
-  new URL(
-    "@/assets/images/clients-and-partners/nexus-dark.png",
+    "@/assets/images/clients-and-partners/equity-dark.png",
     import.meta.url
   ).href,
 ];
 
-function chunkArray(array, size) {
-  const result = [];
-  for (let i = 0; i < array.length; i += size) {
-    result.push(array.slice(i, i + size));
+// ✅ Sinkron ke Tailwind darkMode (pakai class “dark”)
+const isDark = ref(document.documentElement.classList.contains("dark"));
+
+let observer;
+
+onMounted(() => {
+  // observe perubahan class di <html>
+  observer = new MutationObserver(() => {
+    isDark.value = document.documentElement.classList.contains("dark");
+  });
+
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+
+  startProgress();
+});
+
+onBeforeUnmount(() => {
+  stopProgress();
+  if (observer) observer.disconnect();
+});
+
+// computed pilih logo sesuai mode
+const currentLogos = computed(() => {
+  if (showPartners.value) {
+    return isDark.value ? partnerLogosDark : partnerLogos;
+  } else {
+    return isDark.value ? clientLogosDark : clientLogos;
   }
-  return result;
-}
+});
 
-const columnsPerRow = 5;
-const partnerChunks = computed(() => chunkArray(partnerLogos, columnsPerRow));
-const clientChunks = computed(() => chunkArray(clientLogos, columnsPerRow));
-
-const partnerChunksDark = computed(() =>
-  chunkArray(partnerLogosDark, columnsPerRow)
-);
-const clientChunksDark = computed(() =>
-  chunkArray(clientLogosDark, columnsPerRow)
-);
-
+// progress auto switch
 const startProgress = () => {
-  const step = 100 / (intervalTime / 100); // 100ms update
+  const step = 100 / (intervalTime / 100);
   progressInterval = setInterval(() => {
     if (!isHovered.value) {
       progress.value += step;
@@ -127,194 +141,58 @@ const startProgress = () => {
   }, 100);
 };
 
-const stopProgress = () => {
-  clearInterval(progressInterval);
-};
-
-onMounted(() => {
-  startProgress();
-});
-
-onBeforeUnmount(() => {
-  stopProgress();
-});
+const stopProgress = () => clearInterval(progressInterval);
 </script>
 
 <template>
-  <div class="flex flex-col relative w-full px-12 py-10">
+  <div class="flex flex-col w-full px-8 py-10 dark:bg-[#17181A] duration-300">
     <!-- Title -->
     <div class="text-center mb-4">
       <div
-        class="inline-flex gap-2 items-end relative text-[20px] font-[400] text-[#89A6BA] dark:text-[#6A6A6A]"
+        class="inline-flex gap-2 items-end text-[20px] font-[400] text-[#89A6BA] dark:text-[#6A6A6A]"
       >
         <span>Seleris</span>
-        <div class="relative">
-          <span
-            class="cursor-pointer transition-colors"
-            :class="
-              showPartners
-                ? 'text-[#2AB857] dark:text-[#FAFAFA]'
-                : 'text-[#89A6BA] dark:text-[#6A6A6A]'
-            "
-          >
-            Partners
-          </span>
-        </div>
+        <span
+          class="cursor-pointer"
+          @click="(showPartners = true), (progress = 0)"
+          :class="showPartners ? 'text-[#2AB857] dark:text-[#FAFAFA]' : ''"
+        >
+          Partners
+        </span>
         <span>&</span>
-        <div class="relative">
-          <span
-            class="cursor-pointer transition-colors"
-            :class="
-              !showPartners
-                ? 'text-[#2AB857] dark:text-[#FAFAFA]'
-                : 'text-[#89A6BA] dark:text-[#6A6A6A]'
-            "
-          >
-            Clients
-          </span>
-        </div>
+        <span
+          class="cursor-pointer"
+          @click="(showPartners = false), (progress = 0)"
+          :class="!showPartners ? 'text-[#2AB857] dark:text-[#FAFAFA]' : ''"
+        >
+          Clients
+        </span>
       </div>
     </div>
 
-    <!-- Content Grid Light -->
-    <transition name="fade" mode="out-in" class="dark:hidden">
-      <div :key="showPartners" class="flex flex-col items-center gap-6 mt-5">
-        <template v-if="showPartners">
+    <!-- LOGO GRID -->
+    <transition name="fade" mode="out-in">
+      <div
+        :key="showPartners + (isDark ? '-dark' : '-light')"
+        class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6 mt-4 h-[500px] content-start justify-center transition-all duration-300"
+      >
+        <div
+          v-for="(logo, i) in currentLogos"
+          :key="i"
+          class="group w-full h-[80px] p-[1px] rounded-xl bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656] hover:dark:bg-none hover:dark:bg-[#D9D9D9] transition-all duration-300 ease-out"
+        >
           <div
-            v-for="(row, rowIndex) in partnerChunks"
-            :key="'row-' + rowIndex"
-            class="grid gap-6"
-            :class="[
-              row.length === 1
-                ? 'grid-cols-1'
-                : row.length === 2
-                ? 'grid-cols-2'
-                : row.length === 3
-                ? 'grid-cols-3'
-                : row.length === 4
-                ? 'grid-cols-4'
-                : 'grid-cols-5',
-              row.length < columnsPerRow ? 'justify-center' : '',
-              rowIndex === 1 ? 'px-24' : '',
-            ]"
+            class="flex w-full h-full rounded-xl justify-center items-center bg-[#F9FAFB] hover:bg-white dark:bg-[#1D1F23] dark:border-[#FAFAFA]/25"
           >
-            <div
-              v-for="(logo, index) in row"
-              :key="`${rowIndex}-${index}`"
-              class="flex items-center justify-center"
-            >
-              <CardTilt
-                :image="logo"
-                @mouseenter="isHovered = true"
-                @mouseleave="isHovered = false"
-              />
-            </div>
+            <img
+              :src="logo"
+              alt="partner logo"
+              class="w-[184px] h-full object-contain filter transition duration-300"
+            />
           </div>
-        </template>
-
-        <template v-else>
-          <div
-            v-for="(row, rowIndex) in clientChunks"
-            :key="'client-row-' + rowIndex"
-            class="grid gap-6"
-            :class="[
-              row.length === 1
-                ? 'grid-cols-1'
-                : row.length === 2
-                ? 'grid-cols-2'
-                : row.length === 3
-                ? 'grid-cols-3'
-                : row.length === 4
-                ? 'grid-cols-4'
-                : 'grid-cols-5',
-              row.length < columnsPerRow ? 'justify-center' : '',
-            ]"
-          >
-            <div
-              v-for="(logo, index) in row"
-              :key="`${rowIndex}-${index}`"
-              class="flex items-center justify-center"
-            >
-              <CardTilt
-                :image="logo"
-                @mouseenter="isHovered = true"
-                @mouseleave="isHovered = false"
-              />
-            </div>
-          </div>
-        </template>
+        </div>
       </div>
     </transition>
-
-    <!-- Content Grid Dark -->
-    <!-- <transition name="fade" mode="out-in" class="hidden dark:flex">
-      <div :key="showPartners" class="flex flex-col items-center gap-6 mt-5">
-        <template v-if="showPartners">
-          <div
-            v-for="(row, rowIndex) in partnerChunksDark"
-            :key="'row-' + rowIndex"
-            class="grid gap-6"
-            :class="[
-              row.length === 1
-                ? 'grid-cols-1'
-                : row.length === 2
-                ? 'grid-cols-2'
-                : row.length === 3
-                ? 'grid-cols-3'
-                : row.length === 4
-                ? 'grid-cols-4'
-                : 'grid-cols-5',
-              row.length < columnsPerRow ? 'justify-center' : '',
-              rowIndex === 1 ? 'px-24' : '',
-            ]"
-          >
-            <div
-              v-for="(logo, index) in row"
-              :key="`${rowIndex}-${index}`"
-              class="flex items-center justify-center"
-            >
-              <CardTilt
-                :image="logo"
-                @mouseenter="isHovered = true"
-                @mouseleave="isHovered = false"
-              />
-            </div>
-          </div>
-        </template>
-
-        <template v-else>
-          <div
-            v-for="(row, rowIndex) in clientChunksDark"
-            :key="'client-row-' + rowIndex"
-            class="grid gap-6"
-            :class="[
-              row.length === 1
-                ? 'grid-cols-1'
-                : row.length === 2
-                ? 'grid-cols-2'
-                : row.length === 3
-                ? 'grid-cols-3'
-                : row.length === 4
-                ? 'grid-cols-4'
-                : 'grid-cols-5',
-              row.length < columnsPerRow ? 'justify-center' : '',
-            ]"
-          >
-            <div
-              v-for="(logo, index) in row"
-              :key="`${rowIndex}-${index}`"
-              class="flex items-center justify-center"
-            >
-              <CardTilt
-                :image="logo"
-                @mouseenter="isHovered = true"
-                @mouseleave="isHovered = false"
-              />
-            </div>
-          </div>
-        </template>
-      </div>
-    </transition> -->
   </div>
 </template>
 
