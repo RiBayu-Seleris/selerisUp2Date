@@ -39,6 +39,7 @@ const handleError = (err) => {
 export const login = async (payload) => {
   loading.value = true;
   error.value = null;
+
   try {
     const res = await axios.post(
       `${BASE_URL}/api/v1/auth/login`,
@@ -46,7 +47,7 @@ export const login = async (payload) => {
       headerApi
     );
 
-    // simpan token
+    // ✅ simpan token kalau berhasil
     if (res.data?.data?.token) {
       token.value = res.data.data.token;
       user.value = res.data.data.name;
@@ -54,9 +55,24 @@ export const login = async (payload) => {
       localStorage.setItem("name", user.value);
     }
 
-    return res.data;
+    return {
+      success: true,
+      data: res.data,
+    };
   } catch (err) {
-    return handleError(err); // jangan lupa return hasil handleError
+    // ✅ Tangani error 401 dengan aman
+    if (err.response && err.response.status === 401) {
+      return {
+        success: false,
+        message: "Email atau password salah",
+      };
+    }
+
+    // untuk error lain
+    return {
+      success: false,
+      message: err.message || "Terjadi kesalahan saat login",
+    };
   } finally {
     loading.value = false;
   }

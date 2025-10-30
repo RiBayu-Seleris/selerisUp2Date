@@ -114,13 +114,6 @@ const closeRegisterForm = () => {
   showRegisterForm.value = false;
 };
 
-// Watch error dari authApi.js
-// watch(error, (val) => {
-//   if (val) {
-//     console.log("Error", val, "error");
-//   }
-// });
-
 const loginError = ref(false);
 
 // Fullname, Email dan Password
@@ -148,25 +141,29 @@ const handleLogin = async () => {
   const data = await login(payload);
 
   // Jika berhasil
-  if (data.status === 200) {
+  if (data?.success) {
     loginError.value = false;
     Swal.fire({
       title: "Berhasil Login",
-      text: data.message,
+      text: "Selamat datang kembali!",
       icon: "success",
-      timer: 2000, // 2 detik otomatis tertutup
-      showConfirmButton: false, // tombol OK disembunyikan
+      timer: 2000,
+      showConfirmButton: false,
     }).then(() => {
       showLoginForm.value = false;
     });
     return;
   }
 
-  // Jika akun tidak ada atau salah password
-  if (data.status !== 200) {
-    // console.log("Login gagal:", data.message);
+  if (!data?.success) {
     loginError.value = true;
-    return;
+    // Swal.fire({
+    //   title: "Login gagal",
+    //   text: data.message || "Email atau password salah",
+    //   icon: "error",
+    //   timer: 2000,
+    //   showConfirmButton: false,
+    // });
   }
 };
 
@@ -233,10 +230,16 @@ const handleLike = async () => {
   const blogId = blogDetail.value?.id;
   if (!blogId) return console.warn("Blog ID tidak ditemukan");
 
+  // 🔹 Pindahkan ini ke awal
+  if (!loginStatus.value) {
+    openLoginForm();
+    return;
+  }
+
+  // 🔹 Baru lakukan pengecekan ke API setelah login
   const checkLike = await likeBlogCheck(blogId);
   const responseCheck = checkLike?.liked;
 
-  // Jika belum di-like
   if (!responseCheck) {
     isLiked.value = false;
     const liked = await likeBlog(blogId);
@@ -261,17 +264,23 @@ const handleLike = async () => {
 
 const handleSubmitComment = async () => {
   const blogId = blogDetail.value?.id;
+
+  // 🔹 Pastikan user sudah login dulu
+  if (!loginStatus.value) {
+    openLoginForm();
+    return;
+  }
+
   const payload = {
     content: inputCommentData.comment.trim(),
   };
 
+  if (!payload.content) return; // jangan kirim kalau kosong
+
   const data = await postComment(payload, blogId);
   if (data) {
-    // kosongkan textarea
     inputCommentData.comment = "";
-
-    // refresh komentar agar langsung kelihatan
-    await getBlogBySlug(slug);
+    await getBlogBySlug(slug); // refresh komentar
   }
 };
 
@@ -309,11 +318,36 @@ const handleClickOutside = (event) => {
   }
 };
 
-onMounted(() => {
+onMounted(async () => {
   getBlogBySlug(slug); // <= WAJIB
   getPopularBlog();
 
   document.addEventListener("click", handleClickOutside);
+
+  const BASE_URL = import.meta.env.VITE_API_URL;
+
+  const token = localStorage.getItem("token");
+  const blogId = blogDetail.value?.id;
+  if (!blogId) return;
+
+  try {
+    // GET untuk cek liked
+    const response = await fetch(
+      `${BASE_URL}/api/v1/app/blogs/${blogId}/like`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          // kalau pakai auth token
+          Authorization: `Bearer ${userToken.value}`,
+        },
+      }
+    );
+    const data = await response.json();
+    isLiked.value = !!data.liked; // true/false sesuai API
+  } catch (error) {
+    console.warn("Gagal cek like:", error);
+  }
 });
 
 onBeforeUnmount(() => {
@@ -749,36 +783,36 @@ onBeforeUnmount(() => {
         <div
           v-for="(comment, index) in blogDetail?.comments_data"
           :key="index"
-          class="w-full h-auto flex flex-col gap-y-6"
+          class="w-full h-auto flex flex-col gap-y-0 mb-6"
         >
           <div class="w-full h-auto flex flex-col">
             <div class="w-full h-auto">
               <p
-                class="text-[16px] md:text-[18px] lg:text-[20px] font-[500] text-[#323232]"
+                class="text-[16px] md:text-[18px] lg:text-[20px] font-[500] text-[#323232] dark:text-[#FAFAFA]"
               >
                 {{ comment.user }}
               </p>
             </div>
-            <div class="w-full h-auto">
+            <div class="w-full h-auto mt-4 mb-2">
               <p
-                class="text-[14px] md:text-[16px] lg:text-[18px] font-[400] text-[#2AB857]"
+                class="text-[14px] md:text-[16px] lg:text-[18px] font-[400] text-[#7A808D]"
               >
-                <!-- {{ comment.date }} -->
-                {{ utils.fromISODate(comment.created_at) }}
+                {{ comment.content }}
               </p>
             </div>
           </div>
           <div class="w-full h-auto">
             <p
-              class="text-[14px] md:text-[16px] lg:text-[18px] font-[400] text-[#7A808D]"
+              class="text-[14px] md:text-[16px] lg:text-[18px] font-[400] text-[#2AB857]"
             >
-              {{ comment.content }}
+              <!-- {{ comment.date }} -->
+              {{ utils.fromISODate(comment.created_at) }}
             </p>
           </div>
-          <div
+          <!-- <div
             v-if="index !== blogDetail.value?.comments_data.length - 1"
             class="w-full h-[1px] bg-gray-400"
-          />
+          /> -->
         </div>
       </div>
     </section>

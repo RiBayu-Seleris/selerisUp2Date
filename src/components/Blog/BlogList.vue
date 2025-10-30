@@ -1,5 +1,12 @@
 <script setup>
-import { ref, computed, onMounted, onBeforeUnmount, watch } from "vue";
+import {
+  ref,
+  computed,
+  onMounted,
+  onBeforeUnmount,
+  watch,
+  nextTick,
+} from "vue";
 import axios from "axios";
 import { blogsApi } from "@/consumeAPI/blogsApi";
 
@@ -82,7 +89,53 @@ const {
   popularError,
   blogsError,
   fetchCategory,
+  pagination,
 } = blogsApi();
+
+const dummyPagination = {
+  current_page: 1,
+  last_page: 5,
+};
+
+const logoContainer = ref(null);
+const maxHeight = ref(0);
+
+const updateMaxHeight = async () => {
+  await nextTick();
+  if (!logoContainer.value) return;
+
+  const height = logoContainer.value.scrollHeight;
+
+  // Simpan tinggi terbesar yang pernah dicapai
+  if (height > maxHeight.value) {
+    maxHeight.value = height;
+  }
+};
+
+const changePage = async (page) => {
+  if (page < 1 || page > pagination.value.last_page) return;
+
+  // Tunggu data baru dimuat (pastikan getAllBlogs mengembalikan Promise)
+  await getAllBlogs({ ...buildParams(), page });
+
+  // Tunggu DOM selesai update
+  await nextTick();
+
+  const section = document.getElementById("blogSection");
+  if (section) {
+    const width = window.innerWidth;
+    let offset = 130; // default offset
+
+    // Kamu bisa aktifkan logika dinamis lagi kalau mau:
+    // if (width >= 1280) offset = 130;
+    // else if (width >= 1024) offset = 120;
+    // else if (width >= 768) offset = 110;
+    // else offset = 100;
+
+    const y = section.getBoundingClientRect().top + window.pageYOffset - offset;
+    window.scrollTo({ top: y, behavior: "smooth" });
+  }
+};
 
 // bikin URL lengkap berdasarkan slug
 const blogUrl = `${window.location.origin}/blog/${newestBlog.slug}`;
@@ -198,6 +251,9 @@ onMounted(() => {
   getPopularBlog();
   fetchCategory();
   document.addEventListener("click", handleClickOutside);
+
+  // Hitung tinggi awal
+  nextTick(() => updateMaxHeight());
 });
 
 onBeforeUnmount(() => {
@@ -223,7 +279,7 @@ watch(searchQuery, (newQuery) => {
   timeout = setTimeout(async () => {
     try {
       const params = buildParams();
-      console.log("🔍 Search triggered with params:", params);
+      // console.log("🔍 Search triggered with params:", params);
 
       await getAllBlogs(params);
     } finally {
@@ -242,14 +298,23 @@ watch(
     const hasBothDates = newVal.start && newVal.end;
 
     if (hasBothDates) {
-      console.log("📆 Date range changed:", newVal.start, "→", newVal.end);
+      // console.log("📆 Date range changed:", newVal.start, "→", newVal.end);
     } else {
-      console.log("🧹 Date range cleared — reset ke semua blog");
+      // console.log("🧹 Date range cleared — reset ke semua blog");
     }
 
     const params = buildParams();
-    console.log("API Params (date range):", params);
+    // console.log("API Params (date range):", params);
     await getAllBlogs(params);
+  },
+  { deep: true }
+);
+
+// 🔁 Pantau setiap kali daftar blog berubah (misal pagination)
+watch(
+  () => blogs.value,
+  async () => {
+    await updateMaxHeight();
   },
   { deep: true }
 );
@@ -471,7 +536,7 @@ watch(
     class="w-full h-auto mt-5"
   >
     <section
-      class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-5 mb-20 px-8 md:px-8 xl:px-0 pb-20"
+      class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-5 px-8 md:px-8 xl:px-0"
     >
       <div
         v-for="(data, index) in blogs"
@@ -659,6 +724,44 @@ watch(
         </div>
       </div>
     </section>
+
+    <!-- Pagination -->
+    <div
+      v-if="pagination?.last_page >= 1"
+      class="pagination flex gap-2 justify-end px-8 xl:px-0 mb-20 mt-10"
+    >
+      <!-- Tombol Prev -->
+      <button
+        class="px-3 py-1 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition disabled:opacity-50"
+        :disabled="pagination.current_page === 1"
+        @click="changePage(pagination.current_page - 1)"
+      >
+        Prev
+      </button>
+
+      <!-- Nomor halaman -->
+      <button
+        v-for="page in pagination.last_page"
+        :key="page"
+        class="px-3 py-1 rounded transition"
+        :class="{
+          'bg-blue-600 text-white': page === pagination.current_page,
+          'bg-gray-200 hover:bg-gray-300': page !== pagination.current_page,
+        }"
+        @click="changePage(page)"
+      >
+        {{ page }}
+      </button>
+
+      <!-- Tombol Next -->
+      <button
+        class="px-3 py-1 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition disabled:opacity-50"
+        :disabled="pagination.current_page === pagination.last_page"
+        @click="changePage(pagination.current_page + 1)"
+      >
+        Next
+      </button>
+    </div>
   </div>
 
   <!-- Search Result No Blog Found -->
@@ -709,7 +812,7 @@ watch(
     class="w-full h-auto mt-5"
   >
     <div
-      class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-5 mb-20 px-8 md:px-8 xl:px-0 pb-20"
+      class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-5 px-8 md:px-8 xl:px-0"
     >
       <div
         v-for="(data, index) in blogs"
@@ -720,13 +823,12 @@ watch(
           <div
             class="flex flex-col w-full h-full p-4 rounded-[10px] bg-[#FAFAFA] dark:bg-[#1D1F23]"
           >
-            <div>
-              <div class="w-full h-auto lg:h-[160px]">
-                <!-- src="" -->
+            <router-link :to="`/blog/${data.slug}`">
+              <div class="w-full h-auto xl:h-[170px]">
                 <img
                   :src="data.cover"
                   alt="BlogImage"
-                  class="w-full h-full object-cover lg:object-fill rounded-[10px]"
+                  class="w-full h-full object-fill rounded-[10px]"
                 />
               </div>
               <div
@@ -767,10 +869,13 @@ watch(
                   {{ data.synopsis }}
                 </p>
               </div>
-            </div>
+            </router-link>
             <div class="relative w-full h-auto flex flex-row mt-4 mb-0 xl:mb-0">
               <div class="w-auto flex flex-row gap-x-3 justify-start">
-                <div class="flex flex-row justify-between gap-x-1">
+                <router-link
+                  :to="`/blog/${data.slug}`"
+                  class="flex flex-row justify-between gap-x-1"
+                >
                   <div
                     class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                   >
@@ -781,11 +886,13 @@ watch(
                       class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
                     >
                       {{ utils.shortNumber(data.views) }}
-                      <!-- 20 -->
                     </span>
                   </div>
-                </div>
-                <div class="flex flex-row justify-between gap-x-1">
+                </router-link>
+                <router-link
+                  :to="`/blog/${data.slug}`"
+                  class="flex flex-row justify-between gap-x-1"
+                >
                   <div
                     class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                   >
@@ -796,10 +903,9 @@ watch(
                       class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
                     >
                       {{ data.comments }}
-                      <!-- 15 -->
                     </span>
                   </div>
-                </div>
+                </router-link>
                 <div class="relative flex w-full h-auto share-wrapper">
                   <div
                     class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer flex items-center"
@@ -807,6 +913,7 @@ watch(
                   >
                     <ShareIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
                   </div>
+
                   <div
                     v-show="activeShareId === data.id"
                     class="absolute z-30 -left-[65px] md:-left-[63px] lg:-left-[80px] -bottom-[190px] md:-bottom-[190px] lg:-bottom-[220px] xl:-bottom-[230px] w-[150px] lg:w-[180px] h-auto"
@@ -840,6 +947,7 @@ watch(
                         <div
                           class="w-full h-auto flex flex-col gap-y-4 lg:gap-y-5 cursor-pointer"
                         >
+                          <!-- Linked In -->
                           <div
                             class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                           >
@@ -854,6 +962,7 @@ watch(
                               <span class="text-[14px]">LinkedIn</span>
                             </div>
                           </div>
+                          <!-- Facebook -->
                           <div
                             class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                           >
@@ -868,6 +977,7 @@ watch(
                               <span class="text-[14px]">Facebook</span>
                             </div>
                           </div>
+                          <!-- Twitter -->
                           <div
                             class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                           >
@@ -892,6 +1002,44 @@ watch(
           </div>
         </div>
       </div>
+    </div>
+
+    <!-- Pagination -->
+    <div
+      v-if="pagination?.last_page >= 1"
+      class="pagination flex gap-2 justify-end px-8 xl:px-0 mb-20 mt-10"
+    >
+      <!-- Tombol Prev -->
+      <button
+        class="px-3 py-1 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition disabled:opacity-50"
+        :disabled="pagination.current_page === 1"
+        @click="changePage(pagination.current_page - 1)"
+      >
+        Prev
+      </button>
+
+      <!-- Nomor halaman -->
+      <button
+        v-for="page in pagination.last_page"
+        :key="page"
+        class="px-3 py-1 rounded transition"
+        :class="{
+          'bg-blue-600 text-white': page === pagination.current_page,
+          'bg-gray-200 hover:bg-gray-300': page !== pagination.current_page,
+        }"
+        @click="changePage(page)"
+      >
+        {{ page }}
+      </button>
+
+      <!-- Tombol Next -->
+      <button
+        class="px-3 py-1 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition disabled:opacity-50"
+        :disabled="pagination.current_page === pagination.last_page"
+        @click="changePage(pagination.current_page + 1)"
+      >
+        Next
+      </button>
     </div>
   </div>
 
@@ -1360,8 +1508,12 @@ watch(
     </div>
     <!-- BlogList -->
     <section
-      class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-5 mb-20 px-8 md:px-8 xl:px-0 pb-20"
+      ref="logoContainer"
+      id="blogSection"
+      class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-5 px-8 md:px-8 xl:px-0"
     >
+      <!-- :style="{ minHeight: maxHeight + 'px' }" -->
+      <!-- :style="{ minHeight: `${maxHeight}px` }" -->
       <!-- Loading -->
       <div v-if="loading" class="w-full flex justify-center items-center">
         <!-- Loader Frame -->
@@ -1389,185 +1541,176 @@ watch(
       </div>
       <div v-else-if="error" class="px-6">{{ error }}</div>
       <div
-        v-else
         v-for="(data, index) in blogs"
         :key="index"
-        class="relative w-full h-full !p-[1px] rounded-[10px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-35% dark:to-[#565656]"
+        class="relative w-full h-full grid rounded-[10px] p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:to-[#565656]"
       >
-        <div class="w-full h-auto flex flex-col">
-          <div
-            class="flex flex-col w-full h-full p-4 rounded-[10px] bg-[#FAFAFA] dark:bg-[#1D1F23]"
-          >
-            <router-link :to="`/blog/${data.slug}`">
-              <!-- h-[165px] -->
-              <!-- lg:w-[398px] lg:h-[179px] -->
-              <div class="w-full h-auto xl:h-[170px]">
-                <img
-                  :src="data.cover"
-                  alt="BlogImage"
-                  class="w-full h-full object-fill rounded-[10px]"
-                />
-              </div>
+        <div
+          class="flex flex-col w-full h-auto p-4 rounded-[9px] bg-[#FAFAFA] dark:bg-[#1D1F23]"
+        >
+          <router-link :to="`/blog/${data.slug}`">
+            <div class="w-full h-auto xl:h-[170px]">
+              <img
+                :src="data.cover"
+                alt="BlogImage"
+                class="w-full h-full object-fill rounded-[10px]"
+              />
+            </div>
+            <div
+              class="flex flex-row w-full h-auto justify-between text-sm text-[#7A7A7A] my-5"
+            >
               <div
-                class="flex flex-row w-full h-auto justify-between text-sm text-[#7A7A7A] my-5"
-              >
-                <div
-                  class="flex items-center bg-[#7B61FF]/10 dark:bg-transparent px-4 dark:px-0 rounded-[16px]"
-                >
-                  <p
-                    class="text-[12px] md:text-[14px] lg:text-[14px] text-[#7B61FF] dark:text-[#FFFFFF] font-semibold"
-                  >
-                    {{ data.category_name }}
-                  </p>
-                </div>
-                <div
-                  class="flex items-center bg-[#3758F9] px-5 py-1 rounded-[5px]"
-                >
-                  <p
-                    class="text-[#FFFFFF] text-[12px] md:text-[12px] lg:text-[14px]"
-                  >
-                    {{ utils.fromISODate(data.created_at) }}
-                  </p>
-                </div>
-              </div>
-              <div
-                class="flex w-full h-auto sm:h-[45px] md:h-[50px] lg:h-[55px] text-left overflow-hidden"
+                class="flex items-center bg-[#7B61FF]/10 dark:bg-transparent px-4 dark:px-0 rounded-[16px]"
               >
                 <p
-                  class="text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] line-clamp-2"
+                  class="text-[12px] md:text-[14px] lg:text-[14px] text-[#7B61FF] dark:text-[#FFFFFF] font-semibold"
                 >
-                  {{ data.title }}
+                  {{ data.category_name }}
                 </p>
               </div>
-              <div class="flex w-full h-auto justify-start items-start my-3">
+              <div
+                class="flex items-center bg-[#3758F9] px-5 py-1 rounded-[5px]"
+              >
                 <p
-                  class="text-[12px] lg:text-[14px] text-[#637381] line-clamp-2 lg:line-clamp-2"
+                  class="text-[#FFFFFF] text-[12px] md:text-[12px] lg:text-[14px]"
                 >
-                  {{ data.synopsis }}
+                  {{ utils.fromISODate(data.created_at) }}
                 </p>
               </div>
-            </router-link>
-            <div class="relative w-full h-auto flex flex-row mt-4 mb-0 xl:mb-0">
-              <div class="w-auto flex flex-row gap-x-3 justify-start">
-                <router-link
-                  :to="`/blog/${data.slug}`"
-                  class="flex flex-row justify-between gap-x-1"
+            </div>
+            <div
+              class="flex w-full h-auto sm:h-[45px] md:h-[50px] lg:h-[55px] text-left overflow-hidden"
+            >
+              <p
+                class="text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] line-clamp-2"
+              >
+                {{ data.title }}
+              </p>
+            </div>
+            <div class="flex w-full h-auto justify-start items-start my-3">
+              <p
+                class="text-[12px] lg:text-[14px] text-[#637381] line-clamp-2 lg:line-clamp-2"
+              >
+                {{ data.synopsis }}
+              </p>
+            </div>
+          </router-link>
+          <div class="relative w-full h-auto flex flex-row mt-4 mb-0 xl:mb-0">
+            <div class="w-auto flex flex-row gap-x-3 justify-start">
+              <router-link
+                :to="`/blog/${data.slug}`"
+                class="flex flex-row justify-between gap-x-1"
+              >
+                <div
+                  class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                 >
-                  <div
-                    class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
-                  >
-                    <EyeIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
-                  </div>
-                  <div class="w-full h-full flex items-center">
-                    <span
-                      class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
-                    >
-                      {{ utils.shortNumber(data.views) }}
-                    </span>
-                  </div>
-                </router-link>
-                <router-link
-                  :to="`/blog/${data.slug}`"
-                  class="flex flex-row justify-between gap-x-1"
+                  <EyeIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
+                </div>
+                <div class="w-full h-full flex items-center">
+                  <span class="text-[14px] text-[#6E6E6E] dark:text-[#637381]">
+                    {{ utils.shortNumber(data.views) }}
+                  </span>
+                </div>
+              </router-link>
+              <router-link
+                :to="`/blog/${data.slug}`"
+                class="flex flex-row justify-between gap-x-1"
+              >
+                <div
+                  class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
                 >
-                  <div
-                    class="w-full h-auto text-[#6E6E6E] dark:text-[#637381] flex items-center"
-                  >
-                    <CommentIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
-                  </div>
-                  <div class="w-full h-auto">
-                    <span
-                      class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
-                    >
-                      {{ data.comments }}
-                    </span>
-                  </div>
-                </router-link>
-                <div class="relative flex w-full h-auto share-wrapper">
-                  <div
-                    class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer flex items-center"
-                    @click.stop="toggleShare(data.id)"
-                  >
-                    <ShareIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
-                  </div>
+                  <CommentIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
+                </div>
+                <div class="w-full h-auto">
+                  <span class="text-[14px] text-[#6E6E6E] dark:text-[#637381]">
+                    {{ data.comments }}
+                  </span>
+                </div>
+              </router-link>
+              <div class="relative flex w-full h-auto share-wrapper">
+                <div
+                  class="w-auto h-auto text-[#6E6E6E] dark:text-[#637381] cursor-pointer flex items-center"
+                  @click.stop="toggleShare(data.id)"
+                >
+                  <ShareIcon class="w-5 h-5 sm:w-auto sm:h-auto" />
+                </div>
 
-                  <div
-                    v-show="activeShareId === data.id"
-                    class="absolute z-30 -left-[65px] md:-left-[63px] lg:-left-[80px] -bottom-[190px] md:-bottom-[190px] lg:-bottom-[220px] xl:-bottom-[230px] w-[150px] lg:w-[180px] h-auto"
-                  >
-                    <div class="relative">
-                      <img
-                        src="@/assets/images/blog/share-frame2.svg"
-                        alt=""
-                        srcset=""
-                        class="w-full h-auto object-cover relative"
-                      />
+                <div
+                  v-show="activeShareId === data.id"
+                  class="absolute z-30 -left-[65px] md:-left-[63px] lg:-left-[80px] -bottom-[190px] md:-bottom-[190px] lg:-bottom-[220px] xl:-bottom-[230px] w-[150px] lg:w-[180px] h-auto"
+                >
+                  <div class="relative">
+                    <img
+                      src="@/assets/images/blog/share-frame2.svg"
+                      alt=""
+                      srcset=""
+                      class="w-full h-auto object-cover relative"
+                    />
+                    <div
+                      class="absolute w-full h-full top-2 lg:top-3 px-5 flex flex-col gap-y-2 sm:gap-y-3 justify-center"
+                    >
                       <div
-                        class="absolute w-full h-full top-2 lg:top-3 px-5 flex flex-col gap-y-2 sm:gap-y-3 justify-center"
+                        class="w-full h-auto cursor-pointer flex flex-row items-center gap-x-2 lg:gap-x-3"
+                        @click="copyLink(data.slug)"
                       >
+                        <div class="w-5 h-auto lg:w-auto lg:h-auto">
+                          <img
+                            src="@/assets/images/blog/copy-link.svg"
+                            alt=""
+                            srcset=""
+                          />
+                        </div>
+                        <div class="w-[70%] h-auto flex items-center">
+                          <span class="text-[14px]">Copy Link</span>
+                        </div>
+                      </div>
+                      <div class="w-full h-[1px] bg-[#EBEBEB]" />
+                      <div
+                        class="w-full h-auto flex flex-col gap-y-4 lg:gap-y-5 cursor-pointer"
+                      >
+                        <!-- Linked In -->
                         <div
-                          class="w-full h-auto cursor-pointer flex flex-row items-center gap-x-2 lg:gap-x-3"
-                          @click="copyLink(data.slug)"
+                          class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                         >
                           <div class="w-5 h-auto lg:w-auto lg:h-auto">
                             <img
-                              src="@/assets/images/blog/copy-link.svg"
+                              src="@/assets/images/blog/linkedin.png"
                               alt=""
                               srcset=""
                             />
                           </div>
                           <div class="w-[70%] h-auto flex items-center">
-                            <span class="text-[14px]">Copy Link</span>
+                            <span class="text-[14px]">LinkedIn</span>
                           </div>
                         </div>
-                        <div class="w-full h-[1px] bg-[#EBEBEB]" />
+                        <!-- Facebook -->
                         <div
-                          class="w-full h-auto flex flex-col gap-y-4 lg:gap-y-5 cursor-pointer"
+                          class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                         >
-                          <!-- Linked In -->
-                          <div
-                            class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
-                          >
-                            <div class="w-5 h-auto lg:w-auto lg:h-auto">
-                              <img
-                                src="@/assets/images/blog/linkedin.png"
-                                alt=""
-                                srcset=""
-                              />
-                            </div>
-                            <div class="w-[70%] h-auto flex items-center">
-                              <span class="text-[14px]">LinkedIn</span>
-                            </div>
+                          <div class="w-5 h-auto lg:w-auto lg:h-auto">
+                            <img
+                              src="@/assets/images/blog/facebook.png"
+                              alt=""
+                              srcset=""
+                            />
                           </div>
-                          <!-- Facebook -->
-                          <div
-                            class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
-                          >
-                            <div class="w-5 h-auto lg:w-auto lg:h-auto">
-                              <img
-                                src="@/assets/images/blog/facebook.png"
-                                alt=""
-                                srcset=""
-                              />
-                            </div>
-                            <div class="w-[70%] h-auto flex items-center">
-                              <span class="text-[14px]">Facebook</span>
-                            </div>
+                          <div class="w-[70%] h-auto flex items-center">
+                            <span class="text-[14px]">Facebook</span>
                           </div>
-                          <!-- Twitter -->
-                          <div
-                            class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
-                          >
-                            <div class="w-5 h-auto lg:w-auto lg:h-auto">
-                              <img
-                                src="@/assets/images/blog/twitter.png"
-                                alt=""
-                                srcset=""
-                              />
-                            </div>
-                            <div class="w-[70%] h-auto flex items-center">
-                              <span class="text-[14px]">Twitter(X)</span>
-                            </div>
+                        </div>
+                        <!-- Twitter -->
+                        <div
+                          class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
+                        >
+                          <div class="w-5 h-auto lg:w-auto lg:h-auto">
+                            <img
+                              src="@/assets/images/blog/twitter.png"
+                              alt=""
+                              srcset=""
+                            />
+                          </div>
+                          <div class="w-[70%] h-auto flex items-center">
+                            <span class="text-[14px]">Twitter(X)</span>
                           </div>
                         </div>
                       </div>
@@ -1580,6 +1723,43 @@ watch(
         </div>
       </div>
     </section>
-    <!-- </div> -->
+
+    <!-- Pagination -->
+    <div
+      v-if="pagination?.last_page >= 1"
+      class="pagination flex gap-2 justify-end px-8 xl:px-0 mb-20 mt-10"
+    >
+      <!-- Tombol Prev -->
+      <button
+        class="px-3 py-1 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition disabled:opacity-50"
+        :disabled="pagination.current_page === 1"
+        @click="changePage(pagination.current_page - 1)"
+      >
+        Prev
+      </button>
+
+      <!-- Nomor halaman -->
+      <button
+        v-for="page in pagination.last_page"
+        :key="page"
+        class="px-3 py-1 rounded transition"
+        :class="{
+          'bg-blue-600 text-white': page === pagination.current_page,
+          'bg-gray-200 hover:bg-gray-300': page !== pagination.current_page,
+        }"
+        @click="changePage(page)"
+      >
+        {{ page }}
+      </button>
+
+      <!-- Tombol Next -->
+      <button
+        class="px-3 py-1 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition disabled:opacity-50"
+        :disabled="pagination.current_page === pagination.last_page"
+        @click="changePage(pagination.current_page + 1)"
+      >
+        Next
+      </button>
+    </div>
   </div>
 </template>

@@ -116,9 +116,9 @@ const getTracking = async () => {
       `${BASE_URL}/v1/app/visitors/track/`,
       headerApi
     );
-    console.log("Response:", getGuestData);
+    // console.log("Response:", getGuestData);
   } catch (error) {
-    console.log("Error:", error);
+    // console.log("Error:", error);
   }
 };
 

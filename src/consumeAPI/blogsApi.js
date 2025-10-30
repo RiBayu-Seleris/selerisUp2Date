@@ -17,6 +17,16 @@ const headerApiToken = {
     Authorization: `Bearer ${token}`,
   },
 };
+
+const getHeaderApiToken = () => {
+  const token = localStorage.getItem("token");
+  return {
+    headers: {
+      Accept: "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+  };
+};
 // "ngrok-skip-browser-warning": "true",
 
 export function blogsApi() {
@@ -34,6 +44,14 @@ export function blogsApi() {
 
   // Error Global
   const error = ref(null);
+
+  // Paginations
+  const pagination = ref({
+    current_page: 1,
+    last_page: 1,
+    total: 0,
+    per_page: 10,
+  });
 
   // Loading State
   const loading = ref(false);
@@ -72,26 +90,41 @@ export function blogsApi() {
   const getAllBlogs = async (params = {}) => {
     startLoading();
     try {
-      console.log("API Params:", params); // 👈 Tambahkan ini
       const response = await axios.get(`${BASE_URL}/api/v1/app/blogs`, {
         headers: headerApi.headers,
-        params,
+        params: {
+          limit: 6,
+          ...params, // biar bisa override limit/page kalau dibutuhkan
+        },
       });
 
+      const data = response.data;
       let result = [];
+      let meta = {};
 
-      if (Array.isArray(response.data?.data)) {
-        // kasus: data langsung array
-        result = response.data.data;
-      } else if (Array.isArray(response.data?.data?.data)) {
-        // kasus: data nested (pakai pagination)
-        result = response.data.data.data;
+      // === Handle dua kemungkinan struktur response ===
+      if (Array.isArray(data?.data)) {
+        // ✅ Kasus 1: data langsung berupa array (tanpa pagination object)
+        result = data.data;
+        meta = data.pagination || {}; // ambil pagination kalau tersedia di root
+      } else if (Array.isArray(data?.data?.data)) {
+        // ✅ Kasus 2: data nested di bawah "data.data" (Laravel pagination style)
+        result = data.data.data;
+        meta = {
+          current_page: data.data.current_page,
+          last_page: data.data.last_page,
+          total: data.data.total,
+          per_page: data.data.per_page,
+        };
       }
 
+      // === Simpan hasil ke state ===
       blogs.value = result;
+      pagination.value = meta;
     } catch (err) {
       handleError(err);
       blogs.value = [];
+      pagination.value = {};
     } finally {
       stopLoading();
     }
@@ -101,10 +134,8 @@ export function blogsApi() {
     try {
       const like_check = await axios.get(
         `${BASE_URL}/api/v1/app/blogs/${blog_id}/like`,
-        headerApiToken
+        getHeaderApiToken()
       );
-
-      // console.log("ini response dari BlogsAPI:", like_check);
       return like_check?.data;
     } catch (error) {
       console.error("Error saat check like:", error);
@@ -117,13 +148,12 @@ export function blogsApi() {
       const response = await axios.post(
         `${BASE_URL}/api/v1/app/blogs/${blog_id}/like`,
         {},
-        headerApiToken
+        getHeaderApiToken()
       );
-
-      console.log("Ini response api Like Blog", response);
+      // console.log("Ini response api Like Blog", response);
       return response?.data;
     } catch (error) {
-      console.error("Error saat like blog:", error);
+      // console.error("Error saat like blog:", error);
       return null;
     }
   };
@@ -132,11 +162,12 @@ export function blogsApi() {
     try {
       const response = await axios.delete(
         `${BASE_URL}/api/v1/app/blogs/${blog_id}/like`,
-        headerApiToken
+        getHeaderApiToken()
       );
-
       console.log("Response unlike dari API", response);
-    } catch {}
+    } catch (error) {
+      console.error("Error saat unlike:", error);
+    }
   };
 
   // Function get blog detail by slug
@@ -270,10 +301,12 @@ export function blogsApi() {
       const res = await axios.post(
         `${BASE_URL}/api/v1/app/blogs/${id}/comments`,
         payload,
-        headerApiToken
+        getHeaderApiToken() // pastikan ambil token terbaru seperti sebelumnya
       );
       return res.data;
-    } catch (error) {
+    } catch (err) {
+      console.error("Gagal posting komentar:", err);
+      return null;
     } finally {
       stopLoading();
     }
@@ -300,5 +333,6 @@ export function blogsApi() {
     blogsError,
     blogDetailError,
     postComment,
+    pagination,
   };
 }
