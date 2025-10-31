@@ -132,26 +132,25 @@ export function blogsApi() {
 
   const likeBlogCheck = async (blog_id) => {
     try {
-      const like_check = await axios.get(
+      const res = await axios.get(
         `${BASE_URL}/api/v1/app/blogs/${blog_id}/like`,
         getHeaderApiToken()
       );
-      return like_check?.data;
+      return res?.data;
     } catch (error) {
-      console.error("Error saat check like:", error);
+      // console.error("Error saat check like:", error);
       return null;
     }
   };
 
   const likeBlog = async (blog_id) => {
     try {
-      const response = await axios.post(
+      const res = await axios.post(
         `${BASE_URL}/api/v1/app/blogs/${blog_id}/like`,
         {},
         getHeaderApiToken()
       );
-      // console.log("Ini response api Like Blog", response);
-      return response?.data;
+      return res; // ✅ kembalikan full response agar bisa cek status
     } catch (error) {
       // console.error("Error saat like blog:", error);
       return null;
@@ -160,13 +159,15 @@ export function blogsApi() {
 
   const unlikeBlog = async (blog_id) => {
     try {
-      const response = await axios.delete(
+      const res = await axios.delete(
         `${BASE_URL}/api/v1/app/blogs/${blog_id}/like`,
         getHeaderApiToken()
       );
-      console.log("Response unlike dari API", response);
+      // console.log("Response unlike dari API", res);
+      return res; // ✅ WAJIB return response agar bisa dicek
     } catch (error) {
       console.error("Error saat unlike:", error);
+      return null;
     }
   };
 

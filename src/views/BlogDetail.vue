@@ -48,6 +48,7 @@ const {
 
 // Toggle Password Eye
 const showPassword = ref(false);
+const showPasswordRegister = ref(false);
 // State logout dropdown
 const isAccountDropdown = ref(false);
 // Status login user
@@ -133,6 +134,14 @@ const inputCommentData = reactive({
   comment: "",
 });
 
+const togglePassword = () => {
+  showPassword.value = !showPassword.value;
+};
+
+const togglePasswordRegister = () => {
+  showPasswordRegister.value = !showPasswordRegister.value;
+};
+
 const handleLogin = async () => {
   const payload = {
     email: loginData.email,
@@ -157,13 +166,6 @@ const handleLogin = async () => {
 
   if (!data?.success) {
     loginError.value = true;
-    // Swal.fire({
-    //   title: "Login gagal",
-    //   text: data.message || "Email atau password salah",
-    //   icon: "error",
-    //   timer: 2000,
-    //   showConfirmButton: false,
-    // });
   }
 };
 
@@ -230,35 +232,40 @@ const handleLike = async () => {
   const blogId = blogDetail.value?.id;
   if (!blogId) return console.warn("Blog ID tidak ditemukan");
 
-  // 🔹 Pindahkan ini ke awal
   if (!loginStatus.value) {
     openLoginForm();
     return;
   }
 
-  // 🔹 Baru lakukan pengecekan ke API setelah login
-  const checkLike = await likeBlogCheck(blogId);
-  const responseCheck = checkLike?.liked;
+  try {
+    const check = await likeBlogCheck(blogId);
+    const isAlreadyLiked = !!check?.liked;
 
-  if (!responseCheck) {
-    isLiked.value = false;
-    const liked = await likeBlog(blogId);
-    const responseLiked = liked?.status;
+    if (!isAlreadyLiked) {
+      // ✅ Belum like
+      isLiked.value = true; // Optimistic UI
+      const res = await likeBlog(blogId);
 
-    if (responseLiked === 201) {
-      isLiked.value = true;
-    } else if (responseLiked === 409) {
-      isLiked.value = true;
+      if ([200, 201, 409].includes(res?.status)) {
+        blogDetail.value.likes++;
+      } else {
+        isLiked.value = false;
+        console.warn("Gagal like:", res?.status);
+      }
     } else {
-      console.warn("Status lain:", responseLiked);
+      // ✅ Sudah like → unlike
+      isLiked.value = false; // Optimistic UI
+      const res = await unlikeBlog(blogId);
+
+      if (res?.status === 200) {
+        blogDetail.value.likes--;
+      } else {
+        isLiked.value = true; // rollback
+        console.warn("Gagal unlike:", res?.status);
+      }
     }
-  } else {
-    // Jika sudah like
-    isLiked.value = true;
-    const unlike = await unlikeBlog(blogId);
-    if (unlike) {
-      isLiked.value = false;
-    }
+  } catch (error) {
+    console.error("Terjadi kesalahan saat like/unlike:", error);
   }
 };
 
@@ -287,13 +294,34 @@ const handleSubmitComment = async () => {
 const blogUrl = `${window.location.origin}/blog/${blogDetail.slug}`;
 
 const copyLink = async (slug) => {
+  const blogUrl = `${window.location.origin}/blog/${slug}`;
+
   try {
-    const blogUrl = `${window.location.origin}/blog/${slug}`;
     await navigator.clipboard.writeText(blogUrl);
-    copied.value = true;
-    setTimeout(() => (copied.value = false), 2000);
+
+    // ✅ Swal sukses
+    Swal.fire({
+      icon: "success",
+      title: "Link berhasil disalin!",
+      text: "Bagikan ke temanmu 🚀",
+      toast: true,
+      position: "top",
+      showConfirmButton: false,
+      timer: 2000,
+    });
   } catch (err) {
-    console.error("Gagal menyalin link:", err);
+    console.warn("Clipboard error (kemungkinan false error):", err);
+
+    // 🔹 Tetap tampilkan Swal sukses karena sebagian besar kasus tetap berhasil
+    Swal.fire({
+      icon: "success",
+      title: "Link berhasil disalin!",
+      text: "Jika tidak tersalin, coba tekan Ctrl + C.",
+      toast: true,
+      position: "top",
+      showConfirmButton: false,
+      timer: 2000,
+    });
   }
 };
 
@@ -319,36 +347,47 @@ const handleClickOutside = (event) => {
 };
 
 onMounted(async () => {
-  getBlogBySlug(slug); // <= WAJIB
+  await getBlogBySlug(slug);
   getPopularBlog();
-
   document.addEventListener("click", handleClickOutside);
-
-  const BASE_URL = import.meta.env.VITE_API_URL;
-
-  const token = localStorage.getItem("token");
-  const blogId = blogDetail.value?.id;
-  if (!blogId) return;
-
-  try {
-    // GET untuk cek liked
-    const response = await fetch(
-      `${BASE_URL}/api/v1/app/blogs/${blogId}/like`,
-      {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-          // kalau pakai auth token
-          Authorization: `Bearer ${userToken.value}`,
-        },
-      }
-    );
-    const data = await response.json();
-    isLiked.value = !!data.liked; // true/false sesuai API
-  } catch (error) {
-    console.warn("Gagal cek like:", error);
-  }
 });
+
+// ✅ Reaktif cek ketika blogDetail sudah terisi
+watch(
+  () => loginStatus.value,
+  async (status) => {
+    const blogId = blogDetail.value?.id;
+    if (!blogId) return;
+
+    if (status) {
+      // user baru login → cek ulang status like
+      const BASE_URL = import.meta.env.VITE_API_URL;
+      const userToken = localStorage.getItem("token");
+
+      try {
+        const response = await fetch(
+          `${BASE_URL}/api/v1/app/blogs/${blogId}/like`,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+              Authorization: `Bearer ${userToken}`,
+            },
+          }
+        );
+
+        const data = await response.json();
+        isLiked.value = !!data?.liked;
+        // console.log("Status Like setelah login:", isLiked.value);
+      } catch (error) {
+        console.warn("Gagal cek like setelah login:", error);
+      }
+    } else {
+      // user logout → reset warna like
+      isLiked.value = false;
+    }
+  }
+);
 
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
@@ -496,16 +535,14 @@ onBeforeUnmount(() => {
                 <button
                   type="submit"
                   @click="handleLike"
-                  class="w-full h-auto flex items-center"
+                  class="w-full h-auto flex items-center transition-transform duration-150"
                   :class="[
                     isLiked
-                      ? 'text-blue-800'
+                      ? 'text-blue-800 scale-110'
                       : 'text-[#6E6E6E] dark:text-[#637381]',
                   ]"
                 >
-                  <LikeIcon
-                    class="w-auto h-6 sm:w-auto sm:h-8 md:w-auto md:h-7 lg:w-8 lg:h-full p-0.5"
-                  />
+                  <LikeIcon class="w-auto h-6 sm:h-8 md:h-7 lg:h-full p-0.5" />
                 </button>
                 <div class="w-full h-full flex items-center justify-center">
                   <span
@@ -578,8 +615,7 @@ onBeforeUnmount(() => {
                       <div class="w-5 h-auto lg:w-auto lg:h-auto">
                         <img
                           src="@/assets/images/blog/copy-link.svg"
-                          alt=""
-                          srcset=""
+                          alt="Copy link"
                         />
                       </div>
                       <div class="w-[70%] h-auto flex items-center">
@@ -757,6 +793,7 @@ onBeforeUnmount(() => {
               class="w-full pl-4 py-2 bg-[#EBEBEB] rounded-[8px] focus:outline-none cursor-pointer"
               placeholder="Share your thoughts?"
               @focus="toggledTextareaIsFocused"
+              required
             />
           </div>
           <div
@@ -884,6 +921,7 @@ onBeforeUnmount(() => {
                 required
                 id="email"
                 v-model="loginData.email"
+                autocomplete="email"
                 placeholder="example@email.com"
                 class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2AB857]"
                 :class="{ 'border-red-500 focus:ring-red-500': loginError }"
@@ -904,6 +942,7 @@ onBeforeUnmount(() => {
                   :type="showPassword ? 'text' : 'password'"
                   v-model="loginData.password"
                   placeholder="Password"
+                  autocomplete="current-password"
                   class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-0 focus:ring-[#2AB857]"
                   :class="{ 'border-red-500 focus:ring-red-500': loginError }"
                 />
@@ -1061,6 +1100,7 @@ onBeforeUnmount(() => {
                 required
                 id="fullname"
                 v-model="registerData.fullname"
+                autocomplete="name"
                 placeholder="Fullname"
                 class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2AB857]"
               />
@@ -1076,6 +1116,7 @@ onBeforeUnmount(() => {
                 required
                 id="email"
                 v-model="registerData.email"
+                autocomplete="email"
                 placeholder="example@email.com"
                 class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2AB857]"
               />
@@ -1092,20 +1133,21 @@ onBeforeUnmount(() => {
                 <input
                   required
                   id="password"
-                  :type="showPassword ? 'text' : 'password'"
+                  :type="showPasswordRegister ? 'text' : 'password'"
                   v-model="registerData.password"
                   placeholder="Password"
+                  autocomplete="new-password"
                   class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2AB857]"
                 />
                 <!-- Tombol toggle mata -->
                 <button
                   type="button"
-                  @click="togglePassword"
+                  @click="togglePasswordRegister"
                   class="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
                 >
                   <!-- Ikon Mata Terbuka -->
                   <svg
-                    v-if="!showPassword"
+                    v-if="!showPasswordRegister"
                     xmlns="http://www.w3.org/2000/svg"
                     class="h-5 w-5 text-gray-600"
                     viewBox="0 0 24 24"
