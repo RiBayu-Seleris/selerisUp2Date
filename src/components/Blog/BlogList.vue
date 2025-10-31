@@ -160,30 +160,7 @@ const copyLink = async (slug) => {
       timerProgressBar: true,
     });
   } catch (err) {
-    console.warn("Clipboard error (kemungkinan false error):", err);
-
-    // ⚠️ Jika navigator.clipboard tidak diizinkan
-    try {
-      const textArea = document.createElement("textarea");
-      textArea.value = blogUrl;
-      document.body.appendChild(textArea);
-      textArea.select();
-      document.execCommand("copy");
-      document.body.removeChild(textArea);
-    } catch (fallbackErr) {
-      console.error("Fallback copy gagal:", fallbackErr);
-    }
-
-    Swal.fire({
-      icon: "info",
-      title: "Link disalin (mungkin dengan peringatan)",
-      text: "Jika tidak tersalin, coba tekan Ctrl + C.",
-      toast: true,
-      position: "bottom",
-      showConfirmButton: false,
-      timer: 2500,
-      timerProgressBar: true,
-    });
+    console.log("Clipboard error (kemungkinan false error):", err);
   }
 };
 

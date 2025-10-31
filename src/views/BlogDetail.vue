@@ -310,18 +310,7 @@ const copyLink = async (slug) => {
       timer: 2000,
     });
   } catch (err) {
-    console.warn("Clipboard error (kemungkinan false error):", err);
-
-    // 🔹 Tetap tampilkan Swal sukses karena sebagian besar kasus tetap berhasil
-    Swal.fire({
-      icon: "success",
-      title: "Link berhasil disalin!",
-      text: "Jika tidak tersalin, coba tekan Ctrl + C.",
-      toast: true,
-      position: "bottom",
-      showConfirmButton: false,
-      timer: 2000,
-    });
+    console.log("Clipboard error (kemungkinan false error):", err);
   }
 };
 
