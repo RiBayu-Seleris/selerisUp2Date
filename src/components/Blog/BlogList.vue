@@ -9,6 +9,7 @@ import {
 } from "vue";
 import axios from "axios";
 import { blogsApi } from "@/consumeAPI/blogsApi";
+import Swal from "sweetalert2";
 
 import BlogCard from "@/components/reusable/BlogCard.vue";
 import SearchIcon from "@/components/icons/Search.vue";
@@ -141,13 +142,48 @@ const changePage = async (page) => {
 const blogUrl = `${window.location.origin}/blog/${newestBlog.slug}`;
 
 const copyLink = async (slug) => {
+  const blogUrl = `${window.location.origin}/blog/${slug}`;
+
   try {
-    const blogUrl = `${window.location.origin}/blog/${slug}`;
+    // ✅ Salin ke clipboard
     await navigator.clipboard.writeText(blogUrl);
-    copied.value = true;
-    setTimeout(() => (copied.value = false), 2000);
+
+    // ✅ Notifikasi sukses
+    Swal.fire({
+      icon: "success",
+      title: "Link berhasil disalin!",
+      text: "Bagikan ke temanmu 🚀",
+      toast: true,
+      position: "bottom", // 👈 Lebih umum untuk toast-style
+      showConfirmButton: false,
+      timer: 2000,
+      timerProgressBar: true,
+    });
   } catch (err) {
-    console.error("Gagal menyalin link:", err);
+    console.warn("Clipboard error (kemungkinan false error):", err);
+
+    // ⚠️ Jika navigator.clipboard tidak diizinkan
+    try {
+      const textArea = document.createElement("textarea");
+      textArea.value = blogUrl;
+      document.body.appendChild(textArea);
+      textArea.select();
+      document.execCommand("copy");
+      document.body.removeChild(textArea);
+    } catch (fallbackErr) {
+      console.error("Fallback copy gagal:", fallbackErr);
+    }
+
+    Swal.fire({
+      icon: "info",
+      title: "Link disalin (mungkin dengan peringatan)",
+      text: "Jika tidak tersalin, coba tekan Ctrl + C.",
+      toast: true,
+      position: "bottom",
+      showConfirmButton: false,
+      timer: 2500,
+      timerProgressBar: true,
+    });
   }
 };
 
@@ -659,12 +695,13 @@ watch(
                           <div class="w-5 h-auto lg:w-auto lg:h-auto">
                             <img
                               src="@/assets/images/blog/copy-link.svg"
-                              alt=""
-                              srcset=""
+                              alt="Copy Link"
                             />
                           </div>
                           <div class="w-[70%] h-auto flex items-center">
-                            <span class="text-[14px]">Copy Link</span>
+                            <span class="text-[14px] text-[#8C8C8C]"
+                              >Copy Link</span
+                            >
                           </div>
                         </div>
                         <div class="w-full h-[1px] bg-[#EBEBEB]" />
@@ -935,12 +972,13 @@ watch(
                           <div class="w-5 h-auto lg:w-auto lg:h-auto">
                             <img
                               src="@/assets/images/blog/copy-link.svg"
-                              alt=""
-                              srcset=""
+                              alt="Copy Link"
                             />
                           </div>
                           <div class="w-[70%] h-auto flex items-center">
-                            <span class="text-[14px]">Copy Link</span>
+                            <span class="text-[14px] text-[#8C8C8C]"
+                              >Copy Link</span
+                            >
                           </div>
                         </div>
                         <div class="w-full h-[1px] bg-[#EBEBEB]" />
