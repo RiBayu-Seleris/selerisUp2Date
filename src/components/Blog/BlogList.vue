@@ -154,7 +154,7 @@ const copyLink = async (slug) => {
       title: "Link berhasil disalin!",
       text: "Bagikan ke temanmu 🚀",
       toast: true,
-      position: "bottom", // 👈 Lebih umum untuk toast-style
+      position: "top", // 👈 Lebih umum untuk toast-style
       showConfirmButton: false,
       timer: 2000,
       timerProgressBar: true,

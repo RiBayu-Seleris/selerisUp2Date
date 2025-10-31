@@ -305,7 +305,7 @@ const copyLink = async (slug) => {
       title: "Link berhasil disalin!",
       text: "Bagikan ke temanmu 🚀",
       toast: true,
-      position: "bottom",
+      position: "top",
       showConfirmButton: false,
       timer: 2000,
     });
