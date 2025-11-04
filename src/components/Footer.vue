@@ -93,7 +93,7 @@ import { companyList } from "@/Data/companyList";
           <!-- lg:pl-6 xl:pl-12 -->
           <div class="flex flex-col w-full h-auto lg:pl-8 xl:px-8">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[19px] sml:text-[24px] lg:text-[18px] xl:text-[22px] font-medium pb-"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[18px] sml:text-[24px] lg:text-[18px] xl:text-[22px] font-medium"
             >
               Products
             </p>
@@ -103,7 +103,7 @@ import { companyList } from "@/Data/companyList";
                 :key="index"
                 :to="product.url"
               >
-                <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
+                <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] pt-3">
                   {{ product.name }}
                 </p>
               </router-link>
@@ -114,7 +114,7 @@ import { companyList } from "@/Data/companyList";
         <div class="flex relative w-full h-auto">
           <div class="flex flex-col w-full h-auto lg:pl-8 xl:pl-5">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[20px] xl:text-[22px] font-medium pb-2"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[20px] xl:text-[22px] font-medium"
             >
               Company
             </p>
@@ -123,7 +123,7 @@ import { companyList } from "@/Data/companyList";
               :key="index"
               :to="company.url"
             >
-              <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
+              <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] pt-3">
                 {{ company.name }}
               </p>
             </router-link>
@@ -133,14 +133,14 @@ import { companyList } from "@/Data/companyList";
         <div class="w-full h-auto xl:w-[170%]">
           <div class="flex flex-col">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[18px] xl:text-[22px] font-medium pb-"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[18px] xl:text-[22px] font-medium"
             >
               Stay Connects
             </p>
 
             <div class="mb-3">
               <p
-                class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[18px] lg:text-[18px] xl:text-[22px] sml:pb-2"
+                class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[18px] lg:text-[18px] xl:text-[22px] pb-2 pt-3"
               >
                 Address
               </p>
@@ -213,7 +213,7 @@ import { companyList } from "@/Data/companyList";
         <div class="w-full h-auto">
           <div class="flex flex-col lg:pl-10">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[18px] xl:text-[22px] font-medium pb- sml:pb-0"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[18px] xl:text-[22px] font-medium sml:pb-0"
             >
               Get The App
             </p>
@@ -258,9 +258,9 @@ import { companyList } from "@/Data/companyList";
           </div>
         </div>
       </div>
-      <div class="flex w-full justify-center text-center items-center pb-8">
+      <div class="flex w-full justify-center text-center items-center py-8">
         <p
-          class="text-[14px] lg:text-[16px] xl:text-[17px] dark:text-[#FAFAFA]/40 font-[400]"
+          class="text-[14px] lg:text-[16px] xl:text-[18px] dark:text-[#FAFAFA]/40 font-[400]"
         >
           © 2023 Seleris Asia Pacific Technology. All rights reserved
         </p>

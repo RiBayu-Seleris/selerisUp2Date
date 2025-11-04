@@ -58,17 +58,17 @@ const ApiCards = [
         </div>
       </div>
       <!-- Cards -->
-      <div class="w-full h-auto flex flex-row mt-5 lg:mt-3 xl:mt-8">
+      <div class="w-full h-auto flex flex-row mt-5 lg:mt-3 xl:mt-8 pl-1">
         <div
           class="flex flex-row w-full h-auto mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-8 pl-8 pr-8 lg:scroll-pl-14 lg:pl-14 lg:pr-14 xl:scroll-pl-16 xl:pl-16 xl:pr-16 hide-scrollbar gap-x-5 md:gap-x-10"
         >
           <div
             v-for="(ApiCard, index) in ApiCards"
             :key="index"
-            class="flex snap-start shrink-0 w-[100%] md:w-[60%] lg:w-[55%] xl:w-[60%] sml:h-[150px] md:h-auto lg:h-auto xl:h-[200px] rounded-[22px] items-center bg-[#FAFAFA] dark:bg-[#323232]"
+            class="flex snap-start shrink-0 w-[100%] md:w-[60%] lg:w-[55%] xl:w-[60%] sml:h-[150px] md:h-auto lg:h-auto xl:h-[200px] rounded-[22px] items-center bg-[#FAFAFA] dark:bg-[#323232] p-[1px] md:gap-x-5 dark:bg-gradient-to-tr dark:from-[#1E1F1C] dark:from-45% dark:to-[#565656]"
           >
             <div
-              class="flex flex-row w-full h-full py-5 gap-x-5 md:gap-x-5 xl:gap-x-8 justify-center px-2 sm:px-0"
+              class="flex flex-row w-full h-full py-5 gap-x-5 md:gap-x-5 xl:gap-x-8 justify-center px-2 sm:px-0 bg-[#FAFAFA] dark:bg-[#1D1F23] dark:border-[#FAFAFA]/25 rounded-[22px]"
             >
               <div
                 class="flex sml:w-[50px] sml:h-[50px] md:w-[50px] md:h-[50px] lg:w-[55px] lg:h-[55px] xl:w-[70px] xl:h-[70px] justify-center md:mt-2 lg:mt-0"
