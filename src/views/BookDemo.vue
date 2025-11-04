@@ -490,4 +490,31 @@ onMounted(() => {
 .fade-leave-to {
   opacity: 0;
 }
+
+/* 🌞 LIGHT MODE */
+input {
+  border: 0.25px solid #d1d5db;
+  background-color: #ffffff;
+  color: #000;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+input:focus {
+  border-color: #2ab857 !important;
+  outline: none;
+  box-shadow: 0 0 0 1px #2ab857 !important;
+}
+
+/* 🌙 DARK MODE */
+.dark input {
+  border: 0.25px solid rgba(250, 250, 250, 0.25);
+  background-color: #323232;
+  color: #fafafa;
+}
+
+.dark input:focus {
+  border-color: #2ab857 !important;
+  outline: none;
+  box-shadow: 0 0 0 1px #2ab857 !important;
+}
 </style>

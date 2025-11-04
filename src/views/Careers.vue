@@ -1,6 +1,6 @@
 <script setup>
 import HeroSection from "@/components/Careers/HeroSection.vue";
-// import CareerList from "@/components/Careers/CareerList.vue";
+import CareerList from "@/components/Careers/CareerList.vue";
 </script>
 
 <template>
