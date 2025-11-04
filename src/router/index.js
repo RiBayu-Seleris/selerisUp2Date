@@ -155,11 +155,12 @@ const routes = [
       },
     ],
   },
-  // catch-all route (harus di paling bawah)
+
+  // Careers
   {
-    path: "/:pathMatch(.*)*",
-    name: "NotFound",
-    redirect: "/",
+    path: "/careers",
+    name: "Careers",
+    component: () => import("@/views/Careers.vue"),
   },
 
   // Testing
@@ -178,13 +179,42 @@ const routes = [
     name: "TestChat2",
     component: () => import("@/views/ChatBotLearn2.vue"),
   },
+
+  // catch-all route (harus di paling bawah)
+  {
+    path: "/:pathMatch(.*)*",
+    name: "NotFound",
+    redirect: "/",
+  },
 ];
+
+// const router = createRouter({
+//   history: createWebHistory(),
+//   routes,
+//   scrollBehavior(to, from, savedPosition) {
+//     // Saat reload atau navigasi baru, scroll ke atas
+//     return { top: 0 };
+//   },
+// });
 
 const router = createRouter({
   history: createWebHistory(),
   routes,
   scrollBehavior(to, from, savedPosition) {
-    // Saat reload atau navigasi baru, scroll ke atas
+    // Jika menekan tombol "back" browser
+    // if (savedPosition) {
+    //   return savedPosition;
+    // }
+
+    // Jika ada hash (#howapplicationwork)
+    if (to.hash) {
+      return {
+        el: to.hash,
+        behavior: "smooth",
+      };
+    }
+
+    // Default scroll ke atas
     return { top: 0 };
   },
 });

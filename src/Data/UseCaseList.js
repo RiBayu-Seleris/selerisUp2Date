@@ -1,23 +1,23 @@
 // src/data/usecaseList.js
 export const usecaseList = [
   {
-    url: "/",
+    url: "#",
     name: "AI Ops",
   },
   {
-    url: "/",
+    url: "#",
     name: "Data Observability",
   },
   {
-    url: "/",
+    url: "#",
     name: "ETL/ELT",
   },
   {
-    url: "/",
+    url: "#",
     name: "MLOps",
   },
   {
-    url: "/",
+    url: "#",
     name: "Analytics and Reporting",
   },
 ];

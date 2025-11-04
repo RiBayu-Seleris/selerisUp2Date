@@ -1,19 +1,19 @@
 // src/data/industryList.js
 export const industryList = [
   {
-    url: "/",
+    url: "#",
     name: "Financial Services",
   },
   {
-    url: "/",
+    url: "#",
     name: "Retail",
   },
   {
-    url: "/",
+    url: "#",
     name: "Manufacturing",
   },
   {
-    url: "/",
+    url: "#",
     name: "Healthcare",
   },
 ];

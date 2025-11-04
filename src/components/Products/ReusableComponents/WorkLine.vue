@@ -2,47 +2,48 @@
 import { onMounted, ref } from "vue";
 
 const props = defineProps({
-  circleColor: {
-    type: String,
-  },
-  textcolor: {
-    type: String,
-  },
-  title: {
-    type: String,
-  },
-  description: {
-    type: String,
-  },
-  isLast: {
-    type: Boolean,
-    default: false,
-  },
-  index: {
-    type: Number,
-    default: 0,
-  },
+  circleColor: String,
+  textcolor: String,
+  title: String,
+  description: String,
+  isLast: Boolean,
+  index: Number,
 });
 
 const showContent = ref(false);
+const lineRef = ref(null);
 
 onMounted(() => {
-  // ✅ Kalau ini item pertama (index 0), tampilkan otomatis
-  if (props.index === 0) {
-    showContent.value = true;
-  }
-});
+  if (props.index === 0) showContent.value = true;
 
-const toggleContent = () => {
-  // Kalau bukan index 0, baru toggle
-  // if (props.index !== 0) {
-  showContent.value = !showContent.value;
-  // }
-};
+  const thresholdValue = 0.8; // misal 40% terlihat horizontal
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const visibleWidth = entry.intersectionRect.width;
+        const totalWidth = entry.boundingClientRect.width;
+        const horizontalRatio = visibleWidth / totalWidth;
+
+        if (horizontalRatio >= thresholdValue) {
+          showContent.value = true;
+        } else {
+          showContent.value = false;
+        }
+      });
+    },
+    {
+      root: null, // viewport
+      threshold: [0, 0.1, 0.25, 0.4, 0.5, 1], // array optional supaya update sering
+    }
+  );
+
+  if (lineRef.value) observer.observe(lineRef.value);
+});
 </script>
 
 <template>
-  <div class="w-auto h-auto flex items-center">
+  <div ref="lineRef" class="w-auto h-auto flex items-center">
     <div class="relative flex flex-row w-auto h-full">
       <div class="absolute w-full h-1/2 bottom-[0px] justify-center flex pt-8">
         <transition name="fade">
@@ -88,7 +89,7 @@ const toggleContent = () => {
       >
         <div
           :class="[
-            `w-6 h-6 sm:w-8 sm:h-8 lg:w-12 lg:h-12 p-2 rounded-full ${circleColor} cursor-pointer`,
+            `w-6 h-6 sm:w-8 sm:h-8 lg:w-12 lg:h-12 p-[5px] sm:p-[6px] md:p-[6px] lg:p-[8px] rounded-full ${circleColor} cursor-pointer`,
           ]"
         >
           <div

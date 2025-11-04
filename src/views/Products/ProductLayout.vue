@@ -1,24 +1,42 @@
-<!-- views/product/ProductLayout.vue -->
 <script setup>
 import Navbar from "@productComponents/Navbar.vue";
 import NavbarScroll from "@productComponents/NavbarScroll.vue";
 import Footer from "@productComponents/Footer.vue";
 import Sidebar from "@productComponents/Sidebar.vue";
 
-import { onMounted, onUnmounted, ref, computed, watch } from "vue";
+import { onMounted, onUnmounted, computed, nextTick, watch } from "vue";
 import { useScrollStore } from "@/stores/scroll";
+import { useRoute } from "vue-router";
 
 const scrollStore = useScrollStore();
-// Tooltip (scroll to top)
+const route = useRoute();
+
+// Tooltip scroll ke atas
 const showTooltip = computed(() => scrollStore.isScrolled);
-const handleScroll = () => {
-  scrollStore.updateScroll();
+const handleScroll = () => scrollStore.updateScroll();
+const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+// Fungsi scroll ke hash (dengan retry)
+const scrollToHash = async (hash) => {
+  if (!hash) return;
+  let attempt = 0;
+  const maxAttempt = 20;
+
+  const tryScroll = () => {
+    const el = document.querySelector(hash);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", block: "start" });
+    } else if (attempt < maxAttempt) {
+      attempt++;
+      setTimeout(tryScroll, 200);
+    }
+  };
+
+  await nextTick();
+  setTimeout(tryScroll, 400);
 };
 
-const scrollToTop = () => {
-  window.scrollTo({ top: 0, behavior: "smooth" });
-};
-
+// Saat halaman dimount
 onMounted(() => {
   window.addEventListener("scroll", handleScroll);
   document.body.style.overflow = "";
@@ -28,11 +46,27 @@ onMounted(() => {
     once: true,
     disable: false,
   });
+
+  // 🔥 Cek hash saat pertama kali masuk ke halaman produk
+  if (route.hash) scrollToHash(route.hash);
 });
+
+// Pantau perubahan route agar hash juga bekerja setelah navigasi
+watch(
+  () => route.fullPath,
+  (newPath) => {
+    const hashIndex = newPath.indexOf("#");
+    if (hashIndex !== -1) {
+      const hash = newPath.substring(hashIndex);
+      scrollToHash(hash);
+    }
+  }
+);
 
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
 });
+
 // Icon
 import Tooltip from "@/assets/images/tooltip.png";
 </script>
@@ -60,13 +94,16 @@ import Tooltip from "@/assets/images/tooltip.png";
       </transition>
 
       <Sidebar />
+      <!-- router-view produk -->
       <router-view />
     </main>
+
     <footer class="w-full max-w-[1440px] h-auto px-8 mx-auto mt-20 lg:mt-40">
       <Footer />
     </footer>
   </div>
 </template>
+
 <style scoped>
 .slide-down-enter-active,
 .slide-down-leave-active {

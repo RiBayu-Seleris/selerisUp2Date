@@ -88,14 +88,12 @@ import { companyList } from "@/Data/companyList";
             </div>
           </div>
         </div>
-        <div
-          class="flex lg:hidden w-full h-[1px] bg-[#F3F4F6] rounded-full my-3"
-        />
+        <div class="flex lg:hidden w-full h-[1px] rounded-full mt-8" />
         <div class="w-full h-auto">
           <!-- lg:pl-6 xl:pl-12 -->
           <div class="flex flex-col w-full h-auto lg:pl-8 xl:px-8">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[19px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[19px] sml:text-[24px] lg:text-[18px] xl:text-[22px] font-medium pb-"
             >
               Products
             </p>
@@ -112,13 +110,11 @@ import { companyList } from "@/Data/companyList";
             </div>
           </div>
         </div>
-        <div
-          class="flex lg:hidden w-full h-[1px] bg-[#F3F4F6] rounded-full my-3"
-        />
+        <div class="flex lg:hidden w-full h-[1px] rounded-full mt-8" />
         <div class="flex relative w-full h-auto">
           <div class="flex flex-col w-full h-auto lg:pl-8 xl:pl-5">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[20px] xl:text-[22px] font-medium pb-2"
             >
               Company
             </p>
@@ -133,13 +129,11 @@ import { companyList } from "@/Data/companyList";
             </router-link>
           </div>
         </div>
-        <div
-          class="flex lg:hidden w-full h-[1px] bg-[#F3F4F6] rounded-full my-3"
-        />
+        <div class="flex lg:hidden w-full h-[1px] rounded-full mt-8" />
         <div class="w-full h-auto xl:w-[170%]">
           <div class="flex flex-col">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[18px] xl:text-[22px] font-medium pb-"
             >
               Stay Connects
             </p>
@@ -215,13 +209,11 @@ import { companyList } from "@/Data/companyList";
             </div>
           </div>
         </div>
-        <div
-          class="flex lg:hidden w-full h-[1px] bg-[#F3F4F6] rounded-full my-3"
-        />
+        <div class="flex lg:hidden w-full h-[1px] rounded-full mt-10" />
         <div class="w-full h-auto">
           <div class="flex flex-col lg:pl-10">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2 sml:pb-0"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[18px] xl:text-[22px] font-medium pb- sml:pb-0"
             >
               Get The App
             </p>

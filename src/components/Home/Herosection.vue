@@ -37,14 +37,14 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
         <div
           class="absolute lg:hidden w-full h-[150px] sm:h-[300px] z-10 top-0 rounded-3xl dark:bg-[radial-gradient(circle_at_50%_-100%,_#3CFF7A_-40%,_#1a1b1f_80%)]"
         />
-        <div class="w-full pb-2 sml:pb-2 sml:pt-4 md:pt-0 z-20">
+        <div class="w-full pb-2 sm:pt-4 md:pt-0 z-20">
           <p
             class="text-[22px] sm:text-[22px] md:text-[22px] lg:text-[26px] xl:text-[32px] text-[#1AB24F] font-[500]"
           >
             AI Innovation
           </p>
         </div>
-        <div class="w-full pb-2 sml:pb-2 z-20">
+        <div class="w-full pb-2 sm:pb-2 z-20">
           <p
             class="text-[#195279] text-[21px] sm:text-[38px] md:text-[36px] lg:text-[36px] xl:text-[60px] font-[500] leading-tight -tracking-[1px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
@@ -55,7 +55,7 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
         <!-- Swipe caption -->
         <router-link
           to="/book-a-demo"
-          class="cursor-pointer flex flex-row items-center mb-0 sm:mb-5 lg:mb-5 mt-4 lg:mt-6 bg-[#195279] dark:bg-[#2B2E32] border-[1px] dark:border-[1px] dark:border-[#2AB857] px-5 py-2 rounded-full dark:shadow-[0px_4px_18.8px_0px_rgba(0,255,59,0.25)] z-30 transition-all duration-300 hover:shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.4),inset_0px_-4px_0px_0px_rgba(0,0,0,0.2),0px_0px_0px_2px_rgba(255,255,255,0.2),0px_0px_180px_0px_#2AB857] dark:hover:shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.4),inset_0px_-4px_0px_0px_rgba(0,0,0,0.2),0px_0px_0px_2px_rgba(0,255,59,0.25),0px_0px_180px_0px_#2AB857] hover:translate-y-[-2px]"
+          class="cursor-pointer flex flex-row items-center mb-5 sm:mb-5 lg:mb-5 mt-4 lg:mt-6 bg-[#195279] dark:bg-[#2B2E32] border-[1px] dark:border-[1px] dark:border-[#2AB857] px-5 py-2 rounded-full dark:shadow-[0px_4px_18.8px_0px_rgba(0,255,59,0.25)] z-30 transition-all duration-300 hover:shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.4),inset_0px_-4px_0px_0px_rgba(0,0,0,0.2),0px_0px_0px_2px_rgba(255,255,255,0.2),0px_0px_180px_0px_#2AB857] dark:hover:shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.4),inset_0px_-4px_0px_0px_rgba(0,0,0,0.2),0px_0px_0px_2px_rgba(0,255,59,0.25),0px_0px_180px_0px_#2AB857] hover:translate-y-[-2px]"
         >
           <div>
             <p class="text-[12px] xl:text-[14px] font-[400] text-[#FAFAFA]">
@@ -64,7 +64,7 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
           </div>
           <div class="ml-1 text-[#FAFAFA] dark:text-[#FAFAFA]">
             <svg
-              class="w-5 h-5 sml:w-3 sml:h-3 xl:w-5 xl:h-5"
+              class="w-5 h-5 sm:w-3 sm:h-3 xl:w-5 xl:h-5"
               viewBox="0 0 24 24"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"
@@ -88,7 +88,7 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
             </svg>
           </div>
         </router-link>
-        <div class="w-full sml:h-auto lg:h-auto lg:px-0 z-30">
+        <div class="w-full sm:h-auto lg:h-auto lg:px-0 z-30">
           <Swiper
             :modules="[Navigation, Autoplay]"
             :navigation="false"

@@ -109,27 +109,6 @@ const clientLogosDark = [
 // ✅ Sinkron ke Tailwind darkMode (pakai class “dark”)
 const isDark = ref(document.documentElement.classList.contains("dark"));
 
-onMounted(() => {
-  // Observe perubahan class di <html>
-  observer = new MutationObserver(() => {
-    isDark.value = document.documentElement.classList.contains("dark");
-  });
-  observer.observe(document.documentElement, {
-    attributes: true,
-    attributeFilter: ["class"],
-  });
-
-  startProgress();
-
-  // Hitung tinggi awal
-  nextTick(() => updateMaxHeight());
-});
-
-onBeforeUnmount(() => {
-  stopProgress();
-  if (observer) observer.disconnect();
-});
-
 // computed pilih logo sesuai mode
 const currentLogos = computed(() => {
   if (showPartners.value) {
@@ -143,10 +122,7 @@ const currentLogos = computed(() => {
 const updateMaxHeight = async () => {
   await nextTick();
   if (logoContainer.value) {
-    const height = logoContainer.value.scrollHeight;
-    if (height > maxHeight.value) {
-      maxHeight.value = height;
-    }
+    maxHeight.value = logoContainer.value.scrollHeight;
   }
 };
 
@@ -169,6 +145,31 @@ const startProgress = () => {
   }, 100);
 };
 const stopProgress = () => clearInterval(progressInterval);
+
+onMounted(() => {
+  observer = new MutationObserver(() => {
+    isDark.value = document.documentElement.classList.contains("dark");
+  });
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+
+  startProgress();
+
+  nextTick(() => updateMaxHeight());
+
+  // ✅ Tambahkan ini
+  window.addEventListener("resize", updateMaxHeight);
+});
+
+onBeforeUnmount(() => {
+  stopProgress();
+  if (observer) observer.disconnect();
+
+  // ✅ Jangan lupa hapus listener-nya agar tidak memory leak
+  window.removeEventListener("resize", updateMaxHeight);
+});
 </script>
 
 <template>
@@ -208,7 +209,7 @@ const stopProgress = () => clearInterval(progressInterval);
         <div
           v-for="(logo, i) in currentLogos"
           :key="i"
-          class="group w-[45%] sm:w-[30%] md:w-[22%] lg:w-[18%] h-[80px] p-[1px] rounded-xl bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656] hover:dark:bg-none hover:dark:bg-[#D9D9D9] transition-all duration-300 ease-out"
+          class="group w-[45%] sm:w-[30%] md:w-[22.4%] lg:w-[18%] h-[80px] p-[1px] rounded-xl bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656] hover:dark:bg-none hover:dark:bg-[#D9D9D9] transition-all duration-300 ease-out"
         >
           <div
             class="flex w-full h-full rounded-xl justify-center items-center bg-[#F9FAFB] hover:bg-white dark:bg-[#1D1F23] dark:border-[#FAFAFA]/25"
@@ -216,7 +217,7 @@ const stopProgress = () => clearInterval(progressInterval);
             <img
               :src="logo"
               alt="partner logo"
-              class="w-[184px] h-full object-contain filter transition duration-300"
+              class="w-auto h-full object-contain filter transition duration-300"
             />
           </div>
         </div>

@@ -1,5 +1,4 @@
 <script setup>
-import { lifinsHealthCheck } from "@/Data/Products/Lifins/lifinsHealthCheck";
 import { ref } from "vue";
 
 import HeroText from "@productComponents/HeroText.vue";
@@ -30,6 +29,7 @@ import FrameLineWorks from "@productComponents/Svg/LifinsDescriptionWork.vue";
 import lifinsframebook from "@/assets/Products/images/bg-book-demo-lifins.png";
 
 import DownloadImage from "@/assets/Products/images/Lifins/download-lifins.png";
+import { lifinsHealthCheck } from "@/Data/Products/Lifins/lifinsHealthCheck";
 
 // FAQ
 import { lifinsFaq } from "@/Data/Products/Lifins/lifinsFaq.js";
@@ -126,7 +126,7 @@ const stepsWithPath = lifinsWorkSteps.map((step) => ({
 
     <!-- How Application Work -->
     <section
-      class="relative w-full h-auto max-w-[1440px] mx-auto mt-14 lg:mt-20"
+      class="relative w-full h-auto max-w-[1440px] mx-auto mt-14 lg:mt-20 scroll-mt-[80px]"
       id="howapplicationwork"
     >
       <!-- Application Work Slider -->

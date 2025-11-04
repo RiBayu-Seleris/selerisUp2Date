@@ -63,7 +63,7 @@ watch(
     >
 
     <div
-      class="relative w-full p-2 rounded-[8px] border border-gray-300 dark:bg-[#323232] dark:border-[#FAFAFA]/25 cursor-pointer"
+      class="relative w-full p-2 rounded-[8px] bg-white border border-gray-300 dark:bg-[#323232] dark:border-[#FAFAFA]/25 cursor-pointer"
       @click="showDropdown = !showDropdown"
     >
       <div class="flex items-center justify-between">

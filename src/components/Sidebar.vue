@@ -40,27 +40,27 @@ const handleTechnology = () => {
   <transition name="fade">
     <div
       v-if="sidebar.isOpen"
-      class="fixed inset-0 z-50 flex flex-col transition-all duration-300 overflow-y-auto"
+      class="fixed inset-0 z-50 flex flex-col transition-all duration-300 overflow-y-auto bg-black/50"
     >
       <!-- Overlay -->
-      <div class="absolute inset-0 bg-black/50"></div>
+      <!-- <div class="absolute inset-0 bg-black/50"></div> -->
 
       <!-- Sidebar -->
       <transition name="slide">
-        <div class="ml-auto w-full h-auto px-4 pt-6 z-50">
+        <div class="ml-auto w-full h-auto px-4 py-6 z-50">
           <div
             class="w-full h-full bg-white dark:bg-[#17181A] relative z-50 flex flex-col items-center py-6 px-5 rounded-xl"
           >
             <div
               class="flex flex-row w-full h-auto justify-between items-center"
             >
-              <div class="w-[80%] h-auto">
+              <router-link to="/" class="w-[80%] h-auto">
                 <p
                   class="text-[#195279] dark:text-[#FAFAFA] font-semibold sml:text-md md:text-[1.7rem]"
                 >
                   PT Seleris Meditekno Internasional
                 </p>
-              </div>
+              </router-link>
               <div class="w-[20%] h-auto flex justify-end">
                 <button
                   type="button"
