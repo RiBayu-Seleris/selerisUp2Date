@@ -16,7 +16,7 @@ const lineRef = ref(null);
 onMounted(() => {
   if (props.index === 0) showContent.value = true;
 
-  const thresholdValue = 0.8; // misal 40% terlihat horizontal
+  const thresholdValue = 0.6; // misal 40% terlihat horizontal
 
   const observer = new IntersectionObserver(
     (entries) => {

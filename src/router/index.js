@@ -48,25 +48,6 @@ const routes = [
       },
     ],
   },
-  // Blogs
-  {
-    path: "/blogs",
-    name: "Blog",
-    component: () => import("@/views/Blogs.vue"),
-    meta: { title: "Blogs" },
-  },
-  {
-    path: "/blog/:slug",
-    name: "BlogDetail",
-    component: () => import("@/views/BlogDetail.vue"),
-    meta: { title: "BlogDetail" },
-  },
-  {
-    path: "/blog/details",
-    name: "BlogDetails",
-    component: () => import("@/views/BlogDetail.vue"),
-    meta: { title: "BlogDetail" },
-  },
   {
     path: "/services",
     name: "Service",
@@ -156,11 +137,37 @@ const routes = [
     ],
   },
 
+  // Blogs
+  {
+    path: "/blogs",
+    name: "Blog",
+    component: () => import("@/views/Blogs.vue"),
+    meta: { title: "Blogs" },
+  },
+  {
+    path: "/blog/:slug",
+    name: "BlogDetail",
+    component: () => import("@/views/BlogDetail.vue"),
+    meta: { title: "BlogDetail" },
+  },
+  {
+    path: "/blog/details",
+    name: "BlogDetails",
+    component: () => import("@/views/BlogDetail.vue"),
+    meta: { title: "BlogDetail" },
+  },
+
   // Careers
   {
     path: "/careers",
     name: "Careers",
     component: () => import("@/views/Careers.vue"),
+    meta: { title: "Career" },
+  },
+  {
+    path: "/careers/details",
+    name: "CareerDetails",
+    component: () => import("@/views/CareerDetail.vue"),
   },
 
   // Testing
