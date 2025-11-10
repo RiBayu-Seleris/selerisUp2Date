@@ -1,5 +1,5 @@
 <script setup>
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 const steps = [
   { number: "Step 1", title: "Personal Info" },
@@ -12,14 +12,46 @@ const steps = [
 ];
 
 const currentStep = ref(0);
+const animatedStep = ref(0);
+const activeStep = ref(0); // ⬅️ step yang “menyala” setelah garis selesai
 
+// Navigasi
 const nextStep = () => {
   if (currentStep.value < steps.length - 1) currentStep.value++;
 };
-
 const prevStep = () => {
   if (currentStep.value > 0) currentStep.value--;
 };
+
+// Watch animasi garis + kotak
+watch(currentStep, (newVal, oldVal) => {
+  // 1️⃣ animasikan garis dulu
+  if (newVal > oldVal) {
+    let i = oldVal;
+    const interval = setInterval(() => {
+      i++;
+      animatedStep.value = i;
+      if (i >= newVal) clearInterval(interval);
+    }, 120);
+
+    // 2️⃣ setelah 700ms (sesuai durasi garis), aktifkan kotak
+    setTimeout(() => {
+      activeStep.value = newVal;
+    }, 700);
+  } else if (newVal < oldVal) {
+    let i = oldVal;
+    const interval = setInterval(() => {
+      i--;
+      animatedStep.value = i;
+      if (i <= newVal) clearInterval(interval);
+    }, 120);
+
+    // mundur juga butuh delay biar smooth
+    setTimeout(() => {
+      activeStep.value = newVal;
+    }, 400);
+  }
+});
 </script>
 
 <template>
@@ -45,7 +77,12 @@ const prevStep = () => {
             <!-- Step Sudah Dilakukan -->
             <template v-if="index < currentStep">
               <div
-                class="flex items-center justify-center w-8 h-8 rounded-md bg-[#2AB857]/30 p-1 text-white"
+                class="flex items-center justify-center w-8 h-8 rounded-md transition-all duration-500 ease-in-out"
+                :class="{
+                  'bg-[#2AB857] scale-110 shadow-lg': index === activeStep,
+                  'bg-[#2AB857]/30': index < activeStep,
+                  'bg-[#D9D9D9]': index > activeStep,
+                }"
               >
                 <div
                   class="flex items-center justify-center w-full h-full rounded-md bg-[#2AB857] text-white"
@@ -56,7 +93,7 @@ const prevStep = () => {
             </template>
 
             <!-- Step Sedang Dilakukan -->
-            <template v-else-if="index === currentStep">
+            <template v-else-if="index === activeStep">
               <div
                 class="flex items-center justify-center w-8 h-8 rounded-md bg-[#2AB857] p-1.5 text-white"
               >
@@ -96,9 +133,13 @@ const prevStep = () => {
             class="flex flex-1 items-center self-stretch px-0.5 rounded-full"
           >
             <div
-              class="w-full h-[3px] rounded-full"
-              :class="index < currentStep ? 'bg-[#2AB857]' : 'bg-[#D9D9D9]'"
-            />
+              class="relative w-full h-[3px] rounded-full bg-[#D9D9D9] overflow-hidden"
+            >
+              <div
+                class="absolute top-0 left-0 h-full bg-[#2AB857] transition-all duration-700 ease-in-out"
+                :style="{ width: index < animatedStep ? '100%' : '0%' }"
+              ></div>
+            </div>
           </div>
         </template>
       </div>
