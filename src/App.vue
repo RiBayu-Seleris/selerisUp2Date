@@ -118,7 +118,7 @@ const getTracking = async () => {
     );
     // console.log("Response:", getGuestData);
   } catch (error) {
-    // console.log("Error:", error);
+    console.log("Error:", error);
   }
 };
 
@@ -193,7 +193,7 @@ onMounted(() => {
             <div
               v-if="showTooltip"
               @click="scrollToTop"
-              class="flex fixed justify-center cursor-pointer items-center bottom-5 right-5 lg:right-10 w-9 h-9 lg:w-16 lg:h-16 z-30 bg-white dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white rounded-full p-1 md:p-2"
+              class="flex fixed justify-center cursor-pointer items-center bottom-5 right-5 lg:right-10 w-9 h-9 lg:w-12 lg:h-12 z-30 bg-white dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white rounded-full p-1 md:p-2"
             >
               <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
             </div>

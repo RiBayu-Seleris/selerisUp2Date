@@ -181,6 +181,11 @@ const handleTechnology = () => {
                   <p class="text-[12px] dark:text-[#FAFAFA]">Contact</p>
                 </Navlink>
               </div>
+              <div class="w-full h-auto">
+                <Navlink href="/careers">
+                  <p class="text-[12px] dark:text-[#FAFAFA]">Careers</p>
+                </Navlink>
+              </div>
             </nav>
           </div>
         </div>

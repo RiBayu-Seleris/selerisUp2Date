@@ -47,7 +47,7 @@ export const jobPosts = [
       "Menyusun dokumentasi internal dan eksternal, membuat panduan implementasi, memperbarui dokumen sesuai perubahan produk, melakukan riset untuk memahami fitur secara mendalam, dan memastikan dokumentasi selalu up to date. Mengatur struktur dokumentasi agar mudah diakses, melakukan review konten, serta menjaga standar penulisan yang konsisten.",
     requirements:
       "Minimal 2 tahun pengalaman sebagai Technical Writer atau posisi serupa. Mampu memahami konsep teknis dengan cepat, memiliki kemampuan menulis yang jelas dan terstruktur, terbiasa menggunakan tools dokumentasi seperti Notion, Confluence, atau GitBook, serta memiliki perhatian tinggi terhadap detail.",
-    benefits: "BPJS, asuransi kesehatan, remote work",
+    // benefits: "BPJS, asuransi kesehatan, remote work",
     positions_available: 1,
     experience_years: 2,
     education_level: "S1 Informatika",
@@ -67,7 +67,7 @@ export const jobPosts = [
     location_category: 1,
     job_type_category: 1,
     employment_level: 3,
-    salary_status: true,
+    salary_status: false,
     salary_min: 9000000,
     salary_max: 17000000,
     salary_currency: "IDR",

@@ -8,7 +8,7 @@ import Tiktok from "@/components/icons/Tiktok.vue";
 import LinkedIn from "@/components/icons/Linkedin.vue";
 
 import { timeAgo } from "@/components/Helper/timeAgo.js";
-
+import { formatNumberSeparator } from "@/components/Helper/numberFormat.js";
 import {
   jobPosts,
   employment_level_list,
@@ -55,6 +55,17 @@ function formatDate(dateStr) {
 }
 
 const isModalOpen = ref(false);
+const selectedJob = ref(null);
+
+// contoh buka modal
+const openModal = (job) => {
+  selectedJob.value = job;
+  isModalOpen.value = true;
+};
+
+const closeModal = () => {
+  isModalOpen.value = false;
+};
 
 // Kunci atau buka scroll body tergantung modal
 watch(isModalOpen, (value) => {
@@ -64,14 +75,6 @@ watch(isModalOpen, (value) => {
     document.body.classList.remove("overflow-hidden"); // enable scroll
   }
 });
-
-// contoh buka modal
-const openModal = () => {
-  isModalOpen.value = true;
-};
-const closeModal = () => {
-  isModalOpen.value = false;
-};
 </script>
 
 <template>
@@ -87,7 +90,7 @@ const closeModal = () => {
     <div
       v-for="job in jobPosts"
       :key="job.id"
-      @click="openModal"
+      @click="openModal(job)"
       class="w-full h-auto rounded-[10px] p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:to-[#565656] transition-all duration-300 hover:scale-[1.03]"
     >
       <div
@@ -170,14 +173,24 @@ const closeModal = () => {
                 <p
                   class="text-[30px] font-[600] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                 >
-                  Technical Writer
+                  {{ selectedJob?.title }}
+                  <span
+                    v-if="selectedJob?.salary_status"
+                    class="text-[12px] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                  >
+                    (
+                    {{ selectedJob?.salary_currency }}
+                    {{ formatNumberSeparator(selectedJob?.salary_min) }} -
+                    {{ formatNumberSeparator(selectedJob?.salary_max) }}
+                    )
+                  </span>
                 </p>
               </div>
               <div class="w-full h-auto mt-1 px-20">
                 <p
                   class="text-[16px] font-[400] text-[#B8B8B8] dark:text-[#B8B8B8]"
                 >
-                  23 Hours Ago
+                  {{ timeAgo(selectedJob?.created_at) }}
                 </p>
               </div>
               <div class="w-full h-auto flex flex-row my-8 space-x-5 px-20">
@@ -185,71 +198,100 @@ const closeModal = () => {
                   class="flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
                 >
                   <BoardFill />
-                  <p class="font-[400] text-[14px]">Product Department</p>
+                  <p class="font-[400] text-[14px]">
+                    {{ getDivisionName(selectedJob?.division_category) }}
+                    Department
+                  </p>
                 </div>
 
                 <div
                   class="flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
                 >
                   <ProfileFill />
-                  <p class="font-[400] text-[14px]">Experienced</p>
+                  <p class="font-[400] text-[14px]">
+                    {{ getJobTypeName(selectedJob?.job_type_category) }}
+                  </p>
                 </div>
                 <div
                   class="flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
                 >
                   <MapPin />
-                  <p class="font-[400] text-[14px]">Jakarta</p>
+                  <p class="font-[400] text-[14px]">
+                    {{ getLocationName(selectedJob?.location_category) }}
+                  </p>
                 </div>
               </div>
               <!-- Ini Deskripsi -->
               <div
-                class="w-full h-auto mt-10 flex flex-col gap-y-5 text-[18px] font-[400] dark:text-[#B8B8B8] pr-48 pl-20"
+                v-if="selectedJob?.description"
+                class="w-full h-auto mt-10 flex flex-col gap-y-5 text-[18px] font-[400] text-[#323232] dark:text-[#B8B8B8] pr-20 pl-20"
               >
-                <p>
-                  We think you also hate when travel app is giving you a
-                  headache, right? A slight misinformation can ruin the trip.
-                </p>
-                <p>
-                  That is exactly what we are tackling as t-fam! Making sure
-                  that our 50+ million users have the best experience in
-                  crafting their own adventure.
-                </p>
-                <p>#LI-FL1</p>
+                <p>{{ selectedJob.description }}</p>
               </div>
+
+              <!--  === GARIS === -->
               <div class="w-full h-auto flex flex-row gap-x-2 my-10">
                 <div
                   v-for="i in 40"
                   :key="i"
-                  class="w-full h-[3px] bg-[#6F6F6F]"
+                  class="w-full h-[1px] bg-[#E1E1E1]"
                 />
               </div>
+
+              <!-- === Responsibilities === -->
               <div
-                class="w-full h-auto mt-10 flex flex-col gap-y-5 text-[18px] font-[400] dark:text-[#B8B8B8] pr-48 pl-20"
+                v-if="selectedJob?.responsibilities"
+                class="w-full h-auto mt-10 flex flex-col gap-y-2 text-[18px] font-[400] text-[#323232] dark:text-[#B8B8B8] pr-20 pl-20"
               >
-                <!-- Ini title dari data, misal Responsibilities -->
-                <p class="text-[20px]">Your main duties in flying with us</p>
-                <ul class="list-disc pl-5 space-y-3">
-                  <li>
-                    Conduct research on potential partner industries, companies,
-                    and trends (e.g., loyalty platforms, fintechs, telcos, super
-                    apps)
-                  </li>
-                  <li>
-                    Analyze data to identify opportunities for partnership
-                    growth and optimization
-                  </li>
-                  <li>
-                    Help build and maintain internal documentation, including
-                    partner trackers, campaign calendars, contact logs, and deal
-                    summaries
-                  </li>
-                  <li>
-                    Contribute to structuring templates and Standard Operating
-                    Procedures (SOPs) for partner onboarding, campaign planning,
-                    and reporting
-                  </li>
-                  <li>
-                    Assistant API team with mapping and other task when required
+                <p
+                  class="text-[20px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
+                >
+                  Tanggung Jawab Utama
+                </p>
+                <p>{{ selectedJob.responsibilities }}</p>
+              </div>
+
+              <!-- === Requirements === -->
+              <div
+                v-if="selectedJob?.requirements"
+                class="w-full h-auto mt-10 flex flex-col gap-y-2 text-[18px] font-[400] text-[#323232] dark:text-[#B8B8B8] pr-20 pl-20"
+              >
+                <p
+                  class="text-[20px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
+                >
+                  Kualifikasi
+                </p>
+                <p>{{ selectedJob.requirements }}</p>
+              </div>
+
+              <!-- === Benefits === -->
+              <div
+                v-if="selectedJob?.benefits"
+                class="w-full h-auto mt-10 flex flex-col gap-y-2 text-[18px] font-[400] text-[#323232] dark:text-[#B8B8B8] pr-20 pl-20"
+              >
+                <p
+                  class="text-[20px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
+                >
+                  Benefit
+                </p>
+                <p>{{ selectedJob.benefits }}</p>
+              </div>
+
+              <div
+                v-if="selectedJob?.requirements"
+                class="w-full h-auto mt-10 flex flex-col gap-y-2 text-[18px] font-[400] text-[#323232] dark:text-[#B8B8B8] pr-20 pl-20"
+              >
+                <p
+                  class="text-[20px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
+                >
+                  Requirements:
+                </p>
+                <ul class="list-disc pl-5 space-y-2">
+                  <li
+                    v-for="(item, index) in selectedJob.requirements.split(',')"
+                    :key="index"
+                  >
+                    {{ item.trim() }}
                   </li>
                 </ul>
               </div>

@@ -249,7 +249,10 @@ onUnmounted(() => {
       </Navlink>
     </li>
     <li>
-      <Navlink class="text-[12pt] lg:text-[10pt] xl:text-[12pt]" href="/">
+      <Navlink
+        class="text-[12pt] lg:text-[10pt] xl:text-[12pt]"
+        href="/careers"
+      >
         Careers
       </Navlink>
     </li>
