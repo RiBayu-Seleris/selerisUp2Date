@@ -104,6 +104,7 @@ const isCompanyRoute = computed(() => route.path === "/about/company");
 const isBlogDetail = computed(() => route.path.startsWith("/blog/"));
 
 const BASE_URL = import.meta.env.VITE_API_URL;
+// const isCareerDetail = computed(() => route.path === "/careers/details");
 const headerApi = {
   headers: {
     Accept: "application/json",
@@ -177,6 +178,7 @@ onMounted(() => {
           !isBlogDetail ? 'overflow-x-hidden' : '',
         ]"
       >
+        <!-- isCareerDetail ? 'overflow-x-hidden' : '', -->
         <main
           class="relative w-full max-w-[1440px] mx-auto animate__animated animate__fadeIn animate__slower z-10"
         >
@@ -215,6 +217,7 @@ onMounted(() => {
               !route.path.startsWith('/blog/')
             "
           >
+            <!-- isCareerDetail -->
             <Touch />
           </section>
         </main>

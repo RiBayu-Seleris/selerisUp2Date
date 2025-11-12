@@ -1,8 +1,111 @@
 <script setup>
-import { ref, watch } from "vue";
+import { ref, onMounted, onBeforeUnmount, watch } from "vue";
+import PersonalInfo from "@/components/Careers/StepPersonal.vue";
+import Education from "@/components/Careers/StepEducation.vue";
 
+/* ============================
+   ✅ COUNTRY DROPDOWN
+=============================== */
+const countries = ref([]);
+const selectedCountry = ref(null);
+const showCountryDropdown = ref(false);
+
+function toggleCountry() {
+  showCountryDropdown.value = !showCountryDropdown.value;
+  if (showCountryDropdown.value) showGenderDropdown.value = false;
+}
+
+function selectCountry(country) {
+  if (!country) return;
+  selectedCountry.value = country;
+  showCountryDropdown.value = false;
+}
+
+/* ============================
+   ✅ GENDER DROPDOWN
+=============================== */
+const showGenderDropdown = ref(false);
+const selectedGender = ref(null);
+
+const genderOptions = [
+  { value: "male", label: "Laki-laki" },
+  { value: "female", label: "Perempuan" },
+];
+
+function toggleGender() {
+  showGenderDropdown.value = !showGenderDropdown.value;
+  if (showGenderDropdown.value) showCountryDropdown.value = false;
+}
+
+function selectGender(gender) {
+  if (!gender) return;
+  selectedGender.value = gender;
+  showGenderDropdown.value = false;
+}
+
+/* ============================
+   ✅ Education DROPDOWN
+=============================== */
+const showEducationDropdown = ref(false);
+const selectedEducation = ref(null);
+
+const educationOptions = [
+  { value: "highschool", label: "High School" },
+  { value: "diploma", label: "Diploma" },
+  { value: "bachelor", label: "Bachelor’s Degree" },
+  { value: "master", label: "Master’s Degree" },
+  { value: "doctorate", label: "Doctorate / PhD" },
+];
+
+function toggleEducation() {
+  showEducationDropdown.value = !showEducationDropdown.value;
+}
+
+function selectEducation(education) {
+  if (!education) return;
+  selectedEducation.value = education;
+  showEducationDropdown.value = false;
+}
+
+/* ============================
+   ✅ CLICK OUTSIDE HANDLER
+=============================== */
+function closeAll() {
+  showGenderDropdown.value = false;
+  showCountryDropdown.value = false;
+  showEducationDropdown.value = false;
+}
+
+onMounted(async () => {
+  try {
+    const res = await fetch(
+      "https://restcountries.com/v3.1/all?fields=name,flags,cca2"
+    );
+    const data = await res.json();
+    const targetCountries = ["Indonesia", "Malaysia", "Singapore"];
+
+    countries.value = data
+      .filter((c) => targetCountries.includes(c.name.common))
+      .map((c) => ({
+        name: c.name.common,
+        code: c.cca2.toUpperCase(),
+        flag: `https://flagcdn.com/w40/${c.cca2.toLowerCase()}.png`,
+      }))
+      .sort((a, b) => a.name.localeCompare(b.name));
+
+    // Set default country
+    const defaultCountry = countries.value.find((c) => c.code === "ID");
+    if (defaultCountry) selectCountry(defaultCountry);
+  } catch (err) {
+    console.error("Failed to load countries:", err);
+  }
+});
+
+/* ============================
+   ✅ STEPPER DATA
+=============================== */
 const steps = [
-  { number: "Step 1", title: "Personal Info" },
+  { number: "Step 1", title: "Personal" },
   { number: "Step 2", title: "Education" },
   { number: "Step 3", title: "Experience" },
   { number: "Step 4", title: "Skills" },
@@ -13,19 +116,34 @@ const steps = [
 
 const currentStep = ref(0);
 const animatedStep = ref(0);
-const activeStep = ref(0); // ⬅️ step yang “menyala” setelah garis selesai
+const activeStep = ref(0);
 
-// Navigasi
+/* ============================
+   ✅ STEPPER NAVIGATION
+=============================== */
+const formTop = ref(null);
+
+const scrollToTop = () => {
+  formTop.value?.scrollIntoView({
+    behavior: "smooth",
+    block: "start",
+  });
+};
+
 const nextStep = () => {
   if (currentStep.value < steps.length - 1) currentStep.value++;
-};
-const prevStep = () => {
-  if (currentStep.value > 0) currentStep.value--;
+  scrollToTop();
 };
 
-// Watch animasi garis + kotak
+const prevStep = () => {
+  if (currentStep.value > 0) currentStep.value--;
+  scrollToTop();
+};
+
+/* ============================
+   ✅ STEPPER ANIMATION
+=============================== */
 watch(currentStep, (newVal, oldVal) => {
-  // 1️⃣ animasikan garis dulu
   if (newVal > oldVal) {
     let i = oldVal;
     const interval = setInterval(() => {
@@ -34,79 +152,87 @@ watch(currentStep, (newVal, oldVal) => {
       if (i >= newVal) clearInterval(interval);
     }, 120);
 
-    // 2️⃣ setelah 700ms (sesuai durasi garis), aktifkan kotak
     setTimeout(() => {
       activeStep.value = newVal;
     }, 700);
   } else if (newVal < oldVal) {
+    activeStep.value = newVal;
     let i = oldVal;
     const interval = setInterval(() => {
       i--;
       animatedStep.value = i;
       if (i <= newVal) clearInterval(interval);
     }, 120);
-
-    // mundur juga butuh delay biar smooth
-    setTimeout(() => {
-      activeStep.value = newVal;
-    }, 400);
   }
 });
+
+/* ============================
+   ✅ SUBMIT HANDLER
+=============================== */
+const handleSubmit = () => {
+  console.log("Form submitted:", {
+    country: selectedCountry.value,
+    gender: selectedGender.value,
+  });
+};
 </script>
 
 <template>
   <div
-    class="w-full h-auto px-8 md:px-12 xl:px-24 xl:max-w-6xl mx-auto pt-32 dark:bg-[#17181A]"
+    class="w-full flex flex-col px-8 md:px-12 xl:px-24 xl:max-w-6xl mx-auto pt-32 dark:bg-[#17181A]"
   >
-    <div class="w-full h-auto flex flex-col">
-      <div class="w-full h-auto">
+    <div class="w-full flex flex-col" ref="formTop">
+      <div class="w-full">
         <p class="text-[#195279] font-[500] text-[36px]">Technical Writer</p>
       </div>
-      <div class="w-full h-auto my-3">
+      <div class="w-full my-3">
         <p class="text-[#6E6E6E] font-[400] text-[16px]">
           Office Department - Technical Writer / Full Time / Jakarta
         </p>
       </div>
 
-      <!-- TESTINGGGGGGGGGGGGGGGGGGGG -->
       <!-- Stepper -->
       <div class="flex flex-row w-full h-auto mt-20 mb-10 items-center">
         <template v-for="(step, index) in steps" :key="index">
-          <!-- Step -->
           <div class="relative flex items-center w-auto h-auto">
-            <!-- Step Sudah Dilakukan -->
+            <!-- Step Completed -->
             <template v-if="index < currentStep">
               <div
-                class="flex items-center justify-center w-8 h-8 rounded-md transition-all duration-500 ease-in-out"
+                class="flex items-center justify-center w-8 h-8 rounded-md p-1 text-white transition-all duration-500 ease-in-out transform"
                 :class="{
-                  'bg-[#2AB857] scale-110 shadow-lg': index === activeStep,
+                  'bg-[#2AB857] scale-110 shadow-md': index === activeStep,
                   'bg-[#2AB857]/30': index < activeStep,
                   'bg-[#D9D9D9]': index > activeStep,
                 }"
               >
                 <div
-                  class="flex items-center justify-center w-full h-full rounded-md bg-[#2AB857] text-white"
+                  class="flex items-center justify-center w-full h-full rounded-md bg-[#2AB857] text-white transition-transform duration-500 ease-in-out"
+                  :class="{ 'scale-105': index === activeStep }"
                 >
                   ✓
                 </div>
               </div>
             </template>
 
-            <!-- Step Sedang Dilakukan -->
+            <!-- Current Step -->
             <template v-else-if="index === activeStep">
               <div
-                class="flex items-center justify-center w-8 h-8 rounded-md bg-[#2AB857] p-1.5 text-white"
+                class="flex items-center justify-center w-8 h-8 rounded-md bg-[#2AB857] p-1 text-white transition-all duration-500 ease-in-out transform scale-110 shadow-md"
               >
                 <div
-                  class="flex items-center justify-center w-full h-full rounded-md bg-[#FAFAFA] text-white"
-                />
+                  class="flex items-center justify-center w-full h-full rounded-md bg-[#FAFAFA] text-[#2AB857] font-[600] transition-colors duration-500 ease-in-out"
+                >
+                  <p class="flex items-center justify-center text-center">
+                    {{ activeStep + 1 }}
+                  </p>
+                </div>
               </div>
             </template>
 
-            <!-- Step Belum Dilakukan -->
+            <!-- Step Not Done -->
             <template v-else>
               <div
-                class="flex items-center justify-center w-8 h-8 rounded-md bg-[#D9D9D9] p-[3px] text-white"
+                class="flex items-center justify-center w-8 h-8 rounded-md bg-[#D9D9D9] p-[3px] text-white transition-all duration-500 ease-in-out transform"
               >
                 <div
                   class="flex items-center justify-center w-full h-full rounded-md bg-[#D9D9D9] border-white border-[5px]"
@@ -116,18 +242,20 @@ watch(currentStep, (newVal, oldVal) => {
 
             <!-- Label -->
             <div
-              class="absolute flex flex-col text-center w-[100px] top-10 -left-8"
+              class="absolute flex flex-col items-center text-center justify-center w-[100px] top-10 -left-8"
             >
-              <span class="font-[500] text-[16px] text-[#195279]">
-                {{ step.number }}
-              </span>
-              <p class="font-[400] text-[12px] text-[#195279] leading-normal">
+              <span class="font-[500] text-[16px] text-[#195279]">{{
+                step.number
+              }}</span>
+              <p
+                class="font-[400] text-[12px] text-[#195279] leading-normal flex items-center text-center justify-center"
+              >
                 {{ step.title }}
               </p>
             </div>
           </div>
 
-          <!-- Garis antar step -->
+          <!-- Connector Line -->
           <div
             v-if="index !== steps.length - 1"
             class="flex flex-1 items-center self-stretch px-0.5 rounded-full"
@@ -138,7 +266,7 @@ watch(currentStep, (newVal, oldVal) => {
               <div
                 class="absolute top-0 left-0 h-full bg-[#2AB857] transition-all duration-700 ease-in-out"
                 :style="{ width: index < animatedStep ? '100%' : '0%' }"
-              ></div>
+              />
             </div>
           </div>
         </template>
@@ -147,54 +275,105 @@ watch(currentStep, (newVal, oldVal) => {
       <!-- Form -->
       <div class="mt-16 p-0">
         <div v-if="currentStep === 0">
-          <h2 class="text-xl font-semibold text-[#195279] mb-4">
-            Personal Info
-          </h2>
+          <!-- id="personal-info" -->
+          <PersonalInfo
+            :selectedGender="selectedGender"
+            :selectedCountry="selectedCountry"
+            :countries="countries"
+            :genderOptions="genderOptions"
+            :isOpenGender="showGenderDropdown"
+            :isOpenCountry="showCountryDropdown"
+            @update:gender="selectGender"
+            @update:country="selectCountry"
+            @toggleGender="toggleGender"
+            @toggleCountry="toggleCountry"
+            @closeAll="closeAll"
+          />
         </div>
 
         <div v-if="currentStep === 1">
-          <h2 class="text-xl font-semibold text-[#195279] mb-4">Education</h2>
+          <Education
+            :selectedEducation="selectedEducation"
+            :educationOptions="educationOptions"
+            :isOpenEducation="showEducationDropdown"
+            @update:education="selectEducation"
+            @toggleEducation="toggleEducation"
+            @closeAll="closeAll"
+          />
         </div>
-
         <div v-if="currentStep === 2">
           <h2 class="text-xl font-semibold text-[#195279] mb-4">Experience</h2>
         </div>
-
         <div v-if="currentStep === 3">
           <h2 class="text-xl font-semibold text-[#195279] mb-4">Skills</h2>
         </div>
-
         <div v-if="currentStep === 4">
           <h2 class="text-xl font-semibold text-[#195279] mb-4">Motivation</h2>
         </div>
-
         <div v-if="currentStep === 5">
           <h2 class="text-xl font-semibold text-[#195279] mb-4">Documents</h2>
         </div>
-
         <div v-if="currentStep === 6">
           <h2 class="text-xl font-semibold text-[#195279] mb-4">Declaration</h2>
         </div>
 
-        <!-- Navigasi -->
         <div class="flex justify-between mt-8">
           <button
             @click="prevStep"
             class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg"
+            :class="[
+              currentStep === 0
+                ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
+                : 'text-gray-700',
+            ]"
             :disabled="currentStep === 0"
           >
-            Sebelumnya
+            Previous
           </button>
 
           <button
+            v-if="currentStep < steps.length - 1"
             @click="nextStep"
-            class="bg-[#2AB857] text-white px-4 py-2 rounded-lg"
-            :disabled="currentStep === steps.length - 1"
+            class="bg-[#2AB857] text-white px-4 py-2 rounded-lg ml-auto hover:bg-[#259d4c] transition-all"
           >
-            Selanjutnya
+            Next
+          </button>
+
+          <button
+            v-else
+            class="bg-[#2AB857] text-white px-4 py-2 rounded-lg ml-auto hover:bg-[#259d4c] transition-all"
+            @click="handleSubmit"
+          >
+            Submit
           </button>
         </div>
       </div>
     </div>
   </div>
 </template>
+
+<style>
+/* === GLOBAL AUTO-FILL FIX === */
+/* Light */
+input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #000 !important;
+  border: 0.25px solid #d1d5db !important;
+}
+/* Light Focus */
+input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1px #2ab857 inset, 0 0 0px 1000px #ffffff inset !important;
+  -webkit-text-fill-color: #000 !important;
+}
+/* Dark */
+.dark input:-webkit-autofill {
+  -webkit-box-shadow: 0 0 0px 1000px #323232 inset !important;
+  -webkit-text-fill-color: #fafafa !important;
+  border: 0.25px solid rgba(250, 250, 250, 0.25) !important;
+}
+/* Dark Focus */
+.dark input:-webkit-autofill:focus {
+  -webkit-box-shadow: 0 0 0 1px #2ab857 inset, 0 0 0px 1000px #323232 inset !important;
+  -webkit-text-fill-color: #fafafa !important;
+}
+</style>

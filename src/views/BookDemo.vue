@@ -1,15 +1,16 @@
 <script setup>
 import Input from "@/components/reusable/Input.vue";
 import CountrySelect from "@/components/reusable/CountrySelect.vue";
+import ProductSelect from "@/components/reusable/ProductSelect.vue";
 import RobotImage from "@/assets/images/robot-ai5-full.png";
 import { productBannerLists } from "@/Data/ListProduct";
 import { faqList } from "@/Data/faqList.js";
 import SliderDescription from "@/components/SliderDescription.vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 
-import { ref, onMounted, watch, computed } from "vue";
-
+// --- Form data ---
 const FullName = ref("");
 const CompanyName = ref("");
 const Email = ref("");
@@ -21,64 +22,93 @@ const Country = ref({
   code: "ID",
   flag: "https://flagcdn.com/w40/id.png",
 });
+
+// --- UI control ---
 const activeIndex = ref(0);
 const currentIndex = ref(0);
 const show = ref(true);
 
-const showDropdown = ref(false);
-const showDropdownApps = ref(false);
+// --- Dropdown control ---
+const showCountryDropdown = ref(false);
+const showProductDropdown = ref(false);
 
-const emit = defineEmits(["update:modelValue"]);
-const props = defineProps({
-  modelValue: String, // product ID
-});
+// Gunakan ref untuk elemen dropdown (lebih aman dari querySelector)
+const countryRef = ref(null);
+const productRef = ref(null);
 
-// Contoh daftar produks
-const products = ref([
-  { id: "Seleris-Credit-Cover", name: "Seleris Credit Cover" },
-  { id: "Seleris-Lifins", name: "Seleris Lifins" },
-  { id: "Seleris-Medins", name: "Seleris Medins" },
-  { id: "Seleris-Care", name: "Seleris Care" },
-  { id: "Seleris-Cough", name: "Seleris Cough" },
-]);
-
-const selectedId = ref(props.modelValue || "");
-
-const selectedProduct = computed(() =>
-  products.value.find((p) => p.id === selectedId.value)
-);
-
-function onSlideChange(swiper) {
-  activeIndex.value = swiper.realIndex; // gunakan realIndex karena loop = true
+function toggleCountryDropdown() {
+  showCountryDropdown.value = !showCountryDropdown.value;
+  if (showCountryDropdown.value) showProductDropdown.value = false;
 }
 
-function selectProduct(id) {
-  selectedId.value = id;
-  emit("update:modelValue", id);
-  showDropdown.value = false;
+function toggleProductDropdown() {
+  showProductDropdown.value = !showProductDropdown.value;
+  if (showProductDropdown.value) showCountryDropdown.value = false;
 }
 
-watch(
-  () => props.modelValue,
-  (newVal) => {
-    selectedId.value = newVal;
+const activeDropdown = ref(null);
+
+function handleDropdownOpen(type) {
+  // jika klik dropdown yang sedang aktif → tutup
+  if (activeDropdown.value === type) {
+    activeDropdown.value = null;
+  } else {
+    // buka dropdown baru dan tutup lainnya
+    activeDropdown.value = type;
   }
-);
+}
+
+function handleClickOutside(e) {
+  // jika klik di luar semua dropdown, tutup
+  if (
+    !e.target.closest(".country-selector-wrapper") &&
+    !e.target.closest(".product-selector-wrapper")
+  ) {
+    activeDropdown.value = null;
+  }
+}
 
 onMounted(() => {
-  setInterval(() => {
+  document.addEventListener("click", handleClickOutside);
+});
+
+onBeforeUnmount(() => {
+  document.removeEventListener("click", handleClickOutside);
+});
+
+onMounted(() => {
+  document.addEventListener("click", handleClickOutside);
+
+  // Animasi FAQ berganti otomatis
+  const interval = setInterval(() => {
     show.value = false;
     setTimeout(() => {
       currentIndex.value = (currentIndex.value + 1) % faqList.length;
       show.value = true;
-    }, 500); // tunggu fade-out selesai
-  }, 4000); // ganti teks tiap 3 detik
+    }, 500);
+  }, 4000);
+
+  // Bersihkan interval saat komponen dilepas
+  onBeforeUnmount(() => {
+    clearInterval(interval);
+    document.removeEventListener("click", handleClickOutside);
+  });
 });
+
+onBeforeUnmount(() => {
+  clearInterval(interval);
+  document.removeEventListener("click", handleClickOutside);
+});
+
+// --- Swiper ---
+function onSlideChange(swiper) {
+  activeIndex.value = swiper.realIndex;
+}
 </script>
 
 <template>
   <div class="px-8 pt-40 lg:grid lg:grid-cols-2 w-full h-auto gap-x-5">
-    <!-- Kiri -->
+    <!-- KIRI -->
     <div
       class="w-full h-auto bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]/60 p-[1px] rounded-xl"
     >
@@ -91,13 +121,11 @@ onMounted(() => {
           >
             Let's Seleris Together
           </p>
-          <!-- <p class="text-[14px] md:text-[17px] text-[#6E6E6E]">
-            Join leading AI teams accelerating their ML development with Scale.
-            Book a 1:1 demo with us to get started.
-          </p> -->
         </div>
+
         <div class="w-full h-auto mt-8">
-          <form @submit.prevent action="#" class="flex flex-col gap-5">
+          <form @submit.prevent class="flex flex-col gap-5">
+            <!-- Input dua kolom -->
             <div
               class="w-full h-auto flex flex-col md:grid md:grid-cols-2 gap-5"
             >
@@ -126,6 +154,8 @@ onMounted(() => {
                 placeholder="Title"
               />
             </div>
+
+            <!-- Email -->
             <div class="w-full h-auto">
               <Input
                 name="email"
@@ -134,54 +164,34 @@ onMounted(() => {
                 placeholder="example@gmail.com"
               />
             </div>
-            <div class="w-full h-auto flex flex-col space-y-1">
-              <CountrySelect v-model="Country" />
+
+            <!-- COUNTRY SELECT -->
+            <div
+              id="country-selector"
+              ref="countryRef"
+              class="w-full h-auto flex flex-col space-y-1 relative"
+            >
+              <CountrySelect
+                v-model="selectedCountry"
+                :is-open="activeDropdown === 'country'"
+                @open="handleDropdownOpen"
+              />
             </div>
-            <!-- Application Seleris -->
-            <div class="w-full flex flex-col space-y-1 relative">
-              <label class="text-sm font-medium text-gray-700 dark:text-white"
-                >Product</label
-              >
 
-              <div
-                class="p-2 border rounded-lg cursor-pointer bg-white dark:bg-[#2b2b2b] border-gray-300 dark:border-gray-600 flex justify-between items-center"
-                @click="showDropdown = !showDropdown"
-              >
-                <span class="text-sm dark:text-white">
-                  {{ selectedProduct?.name || "Select Product" }}
-                </span>
-                <svg
-                  class="w-4 h-4 text-gray-400"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    stroke-width="2"
-                    d="M19 9l-7 7-7-7"
-                  />
-                </svg>
-              </div>
-
-              <!-- Hidden input for backend -->
-              <input type="hidden" name="product_id" :value="selectedId" />
-
-              <ul
-                v-if="showDropdown"
-                class="w-full bg-white dark:bg-[#2b2b2b] border border-gray-300 dark:border-gray-600 rounded-md shadow-md max-h-40 overflow-auto"
-              >
-                <li
-                  v-for="product in products"
-                  :key="product.id"
-                  @click.stop="selectProduct(product.id)"
-                  class="px-3 py-2 hover:bg-gray-100 dark:hover:bg-[#3B3B3B] cursor-pointer text-sm"
-                >
-                  {{ product.name }}
-                </li>
-              </ul>
+            <!-- PRODUCT SELECT -->
+            <div
+              id="product-selector"
+              ref="productRef"
+              class="w-full h-auto flex flex-col space-y-1 relative"
+            >
+              <ProductSelect
+                v-model="selectedProduct"
+                :is-open="activeDropdown === 'product'"
+                @open="handleDropdownOpen"
+              />
             </div>
+
+            <!-- MESSAGE -->
             <div class="w-full h-auto space-y-1">
               <label for="Message">Message</label>
               <textarea
@@ -189,6 +199,8 @@ onMounted(() => {
                 placeholder="Message"
               />
             </div>
+
+            <!-- PRIVACY POLICY -->
             <div class="w-full h-auto">
               <p
                 class="text-[14px] md:text-[17px] text-[#6E6E6E] dark:text-[#FFFFFF]"
@@ -200,8 +212,11 @@ onMounted(() => {
                 >
               </p>
             </div>
+
+            <!-- BUTTON -->
             <div class="w-full h-auto">
               <button
+                type="submit"
                 class="w-full h-auto py-2 flex justify-center items-center bg-[#2AB857] rounded-[20px]"
               >
                 <p class="text-white">Send</p>
@@ -212,7 +227,7 @@ onMounted(() => {
       </div>
     </div>
 
-    <!-- Kanan -->
+    <!-- KANAN -->
     <div
       class="flex flex-col w-full h-full rounded-xl justify-between lg:justify-between xl:justify-between gap-y-5 md:gap-y-8 lg:gap-y-10 xl:gap-y-5 mt-5 md:mt-10 lg:mt-0"
     >
@@ -477,9 +492,9 @@ onMounted(() => {
         </div>
       </div>
     </div>
-    <!-- <div class="hidden xl:flex w-full h-auto bg-red-400">v</div> -->
   </div>
 </template>
+
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {

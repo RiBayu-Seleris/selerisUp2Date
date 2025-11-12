@@ -7,7 +7,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
     <HeroText
       title="Careers"
       subtitle="Explore Your Career Destination"
-      description="Find answers to frequently asked questions about the seleris app below."
+      description="Find everything you need to start and grow your career journey with Seleris."
     />
   </div>
 </template>

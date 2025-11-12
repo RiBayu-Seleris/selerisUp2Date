@@ -462,7 +462,6 @@ onBeforeUnmount(() => {
           alt=""
           class="w-full h-full object-fill rounded-lg sm:rounded-3xl"
         />
-        <!-- <img :src="`/assets/images/blog/` + blogimage" alt="" class="w-full" /> -->
       </div>
       <!-- Frame Blog Detail and Content & Most Popular -->
       <div

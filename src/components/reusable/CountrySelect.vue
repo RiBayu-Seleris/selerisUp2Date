@@ -1,20 +1,24 @@
-<!-- src/components/CountrySelector.vue -->
+<!-- src/components/CountrySelect.vue -->
 <script setup>
 import { ref, onMounted, watch } from "vue";
 
-const emit = defineEmits(["update:modelValue"]);
+const emit = defineEmits(["update:modelValue", "open"]);
 const props = defineProps({
   modelValue: Object,
+  isOpen: Boolean,
 });
 
-const showDropdown = ref(false);
 const countries = ref([]);
-const selected = ref(props.modelValue || null);
+const selectedCountry = ref(props.modelValue || null);
 
-function selectCountry(country) {
-  selected.value = country;
+function chooseCountry(country) {
+  selectedCountry.value = country;
   emit("update:modelValue", country);
-  showDropdown.value = false;
+  emit("open", null); // 🔥 tambahkan ini untuk menutup dropdown
+}
+
+function toggleDropdown() {
+  emit("open", "country");
 }
 
 onMounted(async () => {
@@ -34,10 +38,9 @@ onMounted(async () => {
       }))
       .sort((a, b) => a.name.localeCompare(b.name));
 
-    // Update selected if modelValue belum ada
-    if (!selected.value) {
+    if (!selectedCountry.value) {
       const defaultCountry = countries.value.find((c) => c.code === "ID");
-      selectCountry(defaultCountry);
+      chooseCountry(defaultCountry);
     }
   } catch (error) {
     console.error("Failed to load countries", error);
@@ -47,59 +50,61 @@ onMounted(async () => {
 watch(
   () => props.modelValue,
   (newVal) => {
-    selected.value = newVal;
+    selectedCountry.value = newVal;
   }
 );
 </script>
 
 <template>
-  <div
-    class="w-full flex flex-col space-y-1 transition-all duration-300 ease-out"
-  >
-    <label
-      class="text-sm font-medium text-gray-700 dark:text-white"
-      for="Country"
-      >Country</label
-    >
+  <div class="flex flex-col w-full country-selector-wrapper">
+    <label class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F]">
+      Country <span class="text-red-500">*</span>
+    </label>
 
-    <div
-      class="relative w-full p-2 rounded-[8px] bg-white border border-gray-300 dark:bg-[#323232] dark:border-[#FAFAFA]/25 cursor-pointer"
-      @click="showDropdown = !showDropdown"
-    >
-      <div class="flex items-center justify-between">
-        <!-- Text -->
-        <div class="text-sm dark:text-white">
-          {{ selected?.name || "Select Country" }}
-        </div>
+    <div class="relative w-full">
+      <div
+        class="w-full p-2 rounded-[8px] border-gray-300 bg-white dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:ring-1 focus:ring-[#2AB857] cursor-pointer flex justify-between items-center"
+        @click.stop="toggleDropdown"
+      >
+        <span>{{ selectedCountry?.name || "Select Country" }}</span>
 
-        <!-- Flag & Dropdown Icon -->
-        <div class="flex items-center gap-2">
-          <img
-            v-if="selected"
-            :src="selected.flag"
-            :alt="selected.code"
-            class="w-5 h-5 rounded-full border border-gray-300"
-          />
-        </div>
+        <img
+          v-if="selectedCountry"
+          :src="selectedCountry.flag"
+          :alt="selectedCountry.code"
+          class="w-8 h-auto rounded border"
+        />
       </div>
 
-      <!-- Dropdown -->
-      <ul
-        v-if="showDropdown"
-        class="left-0 top-full mt-3 w-full max-h-40 overflow-auto rounded-md"
-      >
-        <li
-          v-for="country in countries"
-          :key="country.code"
-          @click.stop="selectCountry(country)"
-          class="flex items-center gap-2 px-3 py-2 cursor-pointer"
+      <transition name="fade">
+        <ul
+          v-if="props.isOpen"
+          class="absolute w-full max-h-40 overflow-auto mt-2 bg-white shadow-md rounded-md z-20"
         >
-          <img :src="country.flag" class="w-5 h-5 rounded-full" />
-          <span class="text-sm">{{ country.name }}</span>
-        </li>
-      </ul>
+          <li
+            v-for="cty in countries"
+            :key="cty.code"
+            @click="chooseCountry(cty)"
+            class="flex justify-between px-3 py-2 hover:bg-gray-100 cursor-pointer"
+          >
+            <span>{{ cty.name }}</span>
+            <img :src="cty.flag" class="w-6 h-4 rounded" />
+          </li>
+        </ul>
+      </transition>
     </div>
-    <!-- Tambahkan di bawah dropdown (dalam <template>) -->
-    <input type="hidden" name="country" :value="selected?.code" />
+
+    <input type="hidden" name="country" :value="selectedCountry?.code" />
   </div>
 </template>
+
+<style scoped>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.15s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+</style>

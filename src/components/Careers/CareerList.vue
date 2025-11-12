@@ -173,7 +173,12 @@ watch(isModalOpen, (value) => {
                 <p
                   class="text-[30px] font-[600] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                 >
-                  {{ selectedJob?.title }}
+                  {{
+                    `${getEmploymentLevel(selectedJob?.employment_level)} - ${
+                      selectedJob?.title
+                    }`
+                  }}
+                  <!-- {{ selectedJob?.title }} -->
                   <span
                     v-if="selectedJob?.salary_status"
                     class="text-[12px] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"

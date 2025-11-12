@@ -44,4 +44,13 @@ export const certificateData = [
     certNumber: "Certificate Number: 2403150020502",
     description: `PT. Seleris Meditekno Internasional has been awarded ISO/IEC 20000 certification with the number 2403150020502, which demonstrates our commitment to delivering reliable and high-quality Service Management System. This certification signifies that we meet international standards in IT service management, ensuring efficiency, consistency, and continuous improvement in our services.`,
   },
+  {
+    logo: "Cert5.png",
+    titleBefore: "ISO Certification Award",
+    subtitleBefore: "Medical Devices Quality Management System",
+    titleAfter: "ISO 13485:2016 Certification",
+    certNumber: "Certificate Number: JHSBDTCU20251105IDNMD1T3",
+    description:
+      "PT.Seleris Meditekno Internasional has been awarded ISO 13485: 2016 certification with the number JHSBDTCU20251105IDNMD1T3.This certification demonstrates our commitment to maintaining high standards in the design, development, and maintenance of medical device software and AI- based healthcare solutions.It signifies that our organization complies with international standards for quality management in the medical device industry, ensuring reliability, safety, and continuous improvement in our healthcare technology services.,",
+  },
 ];

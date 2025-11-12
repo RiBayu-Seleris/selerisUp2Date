@@ -8,6 +8,15 @@ import {
   nextTick,
 } from "vue";
 
+import {
+  partnerLogos,
+  partnerLogosDark,
+} from "@/Data/Partners-Clients/PartnerList.js";
+import {
+  clientLogos,
+  clientLogosDark,
+} from "@/Data/Partners-Clients/ClientList.js";
+
 const showPartners = ref(true);
 const intervalTime = 4000;
 const progress = ref(0);
@@ -18,93 +27,6 @@ let observer = null;
 // 🧩 untuk menyimpan tinggi maksimal
 const maxHeight = ref(0);
 const logoContainer = ref(null);
-
-// Logo list
-const partnerLogos = [
-  new URL("@/assets/images/clients-and-partners/rynest.png", import.meta.url)
-    .href,
-  new URL("@/assets/images/clients-and-partners/boa.png", import.meta.url).href,
-  new URL("@/assets/images/clients-and-partners/grm.png", import.meta.url).href,
-  new URL("@/assets/images/clients-and-partners/cc.png", import.meta.url).href,
-  new URL("@/assets/images/clients-and-partners/bc.png", import.meta.url).href,
-  new URL("@/assets/images/clients-and-partners/dsc.png", import.meta.url).href,
-  new URL("@/assets/images/clients-and-partners/hunting.png", import.meta.url)
-    .href,
-  new URL(
-    "@/assets/images/clients-and-partners/math-faculty.png",
-    import.meta.url
-  ).href,
-  new URL("@/assets/images/clients-and-partners/data-ai.png", import.meta.url)
-    .href,
-  new URL("@/assets/images/clients-and-partners/idpay.png", import.meta.url)
-    .href,
-];
-
-const partnerLogosDark = [
-  new URL(
-    "@/assets/images/clients-and-partners/rynest-dark.png",
-    import.meta.url
-  ).href,
-  new URL("@/assets/images/clients-and-partners/boa-dark.png", import.meta.url)
-    .href,
-  new URL("@/assets/images/clients-and-partners/grm-dark.png", import.meta.url)
-    .href,
-  new URL("@/assets/images/clients-and-partners/cc-dark.png", import.meta.url)
-    .href,
-  new URL("@/assets/images/clients-and-partners/bc-dark.png", import.meta.url)
-    .href,
-  new URL("@/assets/images/clients-and-partners/dsc-dark.png", import.meta.url)
-    .href,
-  new URL(
-    "@/assets/images/clients-and-partners/hunting-dark.png",
-    import.meta.url
-  ).href,
-  new URL(
-    "@/assets/images/clients-and-partners/math-faculty-dark.png",
-    import.meta.url
-  ).href,
-  new URL(
-    "@/assets/images/clients-and-partners/data-ai-dark.png",
-    import.meta.url
-  ).href,
-  new URL(
-    "@/assets/images/clients-and-partners/idpay-dark.png",
-    import.meta.url
-  ).href,
-];
-
-const clientLogos = [
-  new URL("@/assets/images/clients-and-partners/boa.png", import.meta.url).href,
-  new URL("@/assets/images/clients-and-partners/grm.png", import.meta.url).href,
-  new URL("@/assets/images/clients-and-partners/chubb.png", import.meta.url)
-    .href,
-  new URL("@/assets/images/clients-and-partners/fpg.png", import.meta.url).href,
-  new URL("@/assets/images/clients-and-partners/heksa.png", import.meta.url)
-    .href,
-  new URL("@/assets/images/clients-and-partners/equity.png", import.meta.url)
-    .href,
-];
-
-const clientLogosDark = [
-  new URL("@/assets/images/clients-and-partners/boa-dark.png", import.meta.url)
-    .href,
-  new URL("@/assets/images/clients-and-partners/grm-dark.png", import.meta.url)
-    .href,
-  new URL(
-    "@/assets/images/clients-and-partners/chubb-dark.png",
-    import.meta.url
-  ).href,
-  new URL("@/assets/images/clients-and-partners/fpg-dark.png", import.meta.url)
-    .href,
-  new URL(
-    "@/assets/images/clients-and-partners/heksa-dark.png",
-    import.meta.url
-  ).href,
-  new URL(
-    "@/assets/images/clients-and-partners/equity-dark.png",
-    import.meta.url
-  ).href,
-];
 
 // ✅ Sinkron ke Tailwind darkMode (pakai class “dark”)
 const isDark = ref(document.documentElement.classList.contains("dark"));
