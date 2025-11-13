@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineProps, defineEmits, onMounted, onBeforeUnmount } from "vue";
+import { ref, onMounted, onBeforeUnmount } from "vue";
 
 const props = defineProps({
   selectedEducation: String,
@@ -118,6 +118,39 @@ onBeforeUnmount(() => {
       placeholder="e.g., Computer Science"
     />
   </div>
+  <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+    <!-- Label -->
+    <label
+      class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+    >
+      Tahun Masuk dan Tahun Lulus <span class="text-red-500">*</span>
+    </label>
+
+    <!-- Input -->
+    <div class="relative">
+      <input
+        type="text"
+        placeholder="12 Desember 2025 - 12 September 2029"
+        class="w-full rounded-md border border-gray-300 px-3 py-2 text-sm text-gray-700 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-green-500"
+      />
+      <!-- Icon kalender -->
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        viewBox="0 0 24 24"
+        stroke-width="1.5"
+        stroke="currentColor"
+        class="absolute right-3 top-2.5 h-5 w-5 text-gray-500"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          d="M6.75 3v1.5M17.25 3v1.5M3.75 8.25h16.5M4.5 21h15a1.5 1.5 0 001.5-1.5V7.5a1.5 1.5 0 00-1.5-1.5h-15A1.5 1.5 0 003 7.5v12a1.5 1.5 0 001.5 1.5z"
+        />
+      </svg>
+    </div>
+  </div>
+
   <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
     <label class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F]">
       GPA (Grade Point Average) <span class="text-red-500">*</span>

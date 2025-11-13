@@ -5,7 +5,6 @@ import ProductSelect from "@/components/reusable/ProductSelect.vue";
 import RobotImage from "@/assets/images/robot-ai5-full.png";
 import { productBannerLists } from "@/Data/ListProduct";
 import { faqList } from "@/Data/faqList.js";
-import SliderDescription from "@/components/SliderDescription.vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { ref, onMounted, onBeforeUnmount } from "vue";
@@ -29,37 +28,13 @@ const currentIndex = ref(0);
 const show = ref(true);
 
 // --- Dropdown control ---
-const showCountryDropdown = ref(false);
-const showProductDropdown = ref(false);
-
-// Gunakan ref untuk elemen dropdown (lebih aman dari querySelector)
-const countryRef = ref(null);
-const productRef = ref(null);
-
-function toggleCountryDropdown() {
-  showCountryDropdown.value = !showCountryDropdown.value;
-  if (showCountryDropdown.value) showProductDropdown.value = false;
-}
-
-function toggleProductDropdown() {
-  showProductDropdown.value = !showProductDropdown.value;
-  if (showProductDropdown.value) showCountryDropdown.value = false;
-}
-
 const activeDropdown = ref(null);
 
 function handleDropdownOpen(type) {
-  // jika klik dropdown yang sedang aktif → tutup
-  if (activeDropdown.value === type) {
-    activeDropdown.value = null;
-  } else {
-    // buka dropdown baru dan tutup lainnya
-    activeDropdown.value = type;
-  }
+  activeDropdown.value = activeDropdown.value === type ? null : type;
 }
 
 function handleClickOutside(e) {
-  // jika klik di luar semua dropdown, tutup
   if (
     !e.target.closest(".country-selector-wrapper") &&
     !e.target.closest(".product-selector-wrapper")
@@ -68,36 +43,25 @@ function handleClickOutside(e) {
   }
 }
 
-onMounted(() => {
-  document.addEventListener("click", handleClickOutside);
-});
-
-onBeforeUnmount(() => {
-  document.removeEventListener("click", handleClickOutside);
-});
+let interval;
 
 onMounted(() => {
-  document.addEventListener("click", handleClickOutside);
+  // Tambahkan event listener dengan passive
+  document.addEventListener("click", handleClickOutside, { passive: true });
 
   // Animasi FAQ berganti otomatis
-  const interval = setInterval(() => {
+  interval = setInterval(() => {
     show.value = false;
     setTimeout(() => {
       currentIndex.value = (currentIndex.value + 1) % faqList.length;
       show.value = true;
     }, 500);
   }, 4000);
-
-  // Bersihkan interval saat komponen dilepas
-  onBeforeUnmount(() => {
-    clearInterval(interval);
-    document.removeEventListener("click", handleClickOutside);
-  });
 });
 
 onBeforeUnmount(() => {
   clearInterval(interval);
-  document.removeEventListener("click", handleClickOutside);
+  document.removeEventListener("click", handleClickOutside, { passive: true });
 });
 
 // --- Swiper ---
@@ -171,8 +135,8 @@ function onSlideChange(swiper) {
               ref="countryRef"
               class="w-full h-auto flex flex-col space-y-1 relative"
             >
+              <!-- v-model="selectedCountry" -->
               <CountrySelect
-                v-model="selectedCountry"
                 :is-open="activeDropdown === 'country'"
                 @open="handleDropdownOpen"
               />
@@ -184,8 +148,8 @@ function onSlideChange(swiper) {
               ref="productRef"
               class="w-full h-auto flex flex-col space-y-1 relative"
             >
+              <!-- v-model="selectedProduct" -->
               <ProductSelect
-                v-model="selectedProduct"
                 :is-open="activeDropdown === 'product'"
                 @open="handleDropdownOpen"
               />
