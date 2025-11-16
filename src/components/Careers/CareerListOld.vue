@@ -9,10 +9,43 @@ import LinkedIn from "@/components/icons/Linkedin.vue";
 
 import { timeAgo } from "@/components/Helper/timeAgo.js";
 import { formatNumberSeparator } from "@/components/Helper/numberFormat.js";
+// import {
+//   jobPosts,
+//   employment_level_list,
+//   division_list,
+//   location_list,
+//   job_type_list,
+// } from "@/Data/Careers.js";
 import { onMounted, ref, watch } from "vue";
 import axios from "axios";
 
 const jobs = ref([]);
+
+// === Helper functions ===
+
+// Ambil nama division
+// function getDivisionName(id) {
+//   const division = division_list.find((d) => d.id === id);
+//   return division ? division.name : "-";
+// }
+
+// Ambil Employment Level
+// function getEmploymentLevel(id) {
+//   const level = employment_level_list.find((d) => d.id === id);
+//   return level ? level.name : "-";
+// }
+
+// Ambil nama job type
+// function getJobTypeName(id) {
+//   const type = job_type_list.find((t) => t.id === id);
+//   return type ? type.name : "-";
+// }
+
+// Ambil nama location
+// function getLocationName(id) {
+//   const loc = location_list.find((l) => l.id === id);
+//   return loc ? loc.name : "-";
+// }
 
 // Format tanggal (contoh sederhana)
 function formatDate(dateStr) {
@@ -51,32 +84,13 @@ onMounted(async () => {
 
   try {
     const response = await axios.get(`${BASEURL}/api/job`, {
-      headers: { Accept: "application/json" },
+      headers: {
+        Accept: "application/json",
+      },
     });
 
-    const raw = response.data.data;
-
-    // Normalisasi data
-    jobs.value = raw.map((job) => ({
-      id: job.id,
-      title: job.job_title?.title || "-", // ambil title sebenarnya
-      slug: job.slug,
-      created_at: job.posted_at, // samakan dengan UI-mu
-      employment_level: job.employee_level_data?.employee_level || "-",
-      work_type: job.job_type_data?.job_type || "-",
-      location: job.location_data?.location || "-",
-      department: job.department_data?.department || "-",
-
-      salary_status: true,
-      salary_currency: job.salary_currency,
-      salary_min: job.salary_min,
-      salary_max: job.salary_max,
-
-      description: job.description,
-      responsibilities: job.responsibilities,
-      requirements: job.requirements,
-      benefits: job.benefits,
-    }));
+    console.log("LIHAT DATA", response.data);
+    jobs.value = response.data;
   } catch (error) {
     console.log("data gagal diambil", error);
   }
@@ -86,40 +100,8 @@ onMounted(async () => {
 <template>
   <!-- Frame Filter -->
   <section
-    class="flex flex-col relative w-full h-auto lg:max-w-4xl mx-auto px-8 md:px-8 lg:px-0 pt-5"
-  >
-    <div
-      class="w-full h-auto p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:to-[#565656] rounded-[10px]"
-    >
-      <div
-        class="flex flex-row w-full h-auto p-2 rounded-[10px] bg-[#FAFAFA] dark:bg-[#1D1F23] gap-x-5"
-      >
-        <div
-          class="w-full h-auto flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-[10px] border-[1px] border-[#DADADA] dark:border-none"
-        >
-          <BoardFill />
-          <p class="font-[400] text-[14px]">Department</p>
-        </div>
-        <div
-          class="w-full h-auto flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-[10px] border-[1px] border-[#DADADA] dark:border-none"
-        >
-          <BoardFill />
-          <p class="font-[400] text-[14px]">Department</p>
-        </div>
-        <div
-          class="w-full h-auto flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-[10px] border-[1px] border-[#DADADA] dark:border-none"
-        >
-          <BoardFill />
-          <p class="font-[400] text-[14px]">Department</p>
-        </div>
-        <div
-          class="w-auto h-auto bg-orange-400 rounded-xl flex items-center px-8"
-        >
-          <p>Cari</p>
-        </div>
-      </div>
-    </div>
-  </section>
+    class="flex flex-col relative w-full h-auto lg:max-w-2xl mx-auto px-8 md:px-8 lg:px-0"
+  ></section>
 
   <!-- Frame Jobs -->
   <section
@@ -143,10 +125,10 @@ onMounted(async () => {
         </div>
         <div class="w-full h-auto mt-3">
           <p class="text-[12px] text-[#B8B8B8] font-[400]">
-            {{ timeAgo(job.posted_at) }}
+            {{ timeAgo(job.created_at) }}
           </p>
         </div>
-        <div class="flex flex-wrap gap-x-3 gap-y-4 mt-6 pr-4">
+        <div class="flex flex-wrap gap-x-3 gap-y-4 mt-6">
           <div
             class="flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
           >
@@ -216,8 +198,11 @@ onMounted(async () => {
                 <p
                   class="text-[30px] font-[600] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                 >
-                  {{ selectedJob?.employment_level }} -
-                  {{ selectedJob?.title }}
+                  {{
+                    `${getEmploymentLevel(selectedJob?.employment_level)} - ${
+                      selectedJob?.title
+                    }`
+                  }}
                   <span
                     v-if="selectedJob?.salary_status"
                     class="text-[12px] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -243,7 +228,7 @@ onMounted(async () => {
                 >
                   <BoardFill />
                   <p class="font-[400] text-[14px]">
-                    {{ selectedJob?.division_category }}
+                    {{ getDivisionName(selectedJob?.division_category) }}
                     Department
                   </p>
                 </div>
@@ -253,7 +238,7 @@ onMounted(async () => {
                 >
                   <ProfileFill />
                   <p class="font-[400] text-[14px]">
-                    {{ selectedJob?.work_type }}
+                    {{ getJobTypeName(selectedJob?.job_type_category) }}
                   </p>
                 </div>
                 <div
@@ -261,7 +246,7 @@ onMounted(async () => {
                 >
                   <MapPin />
                   <p class="font-[400] text-[14px]">
-                    {{ selectedJob?.location }}
+                    {{ getLocationName(selectedJob?.location_category) }}
                   </p>
                 </div>
               </div>

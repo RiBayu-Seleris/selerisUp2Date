@@ -3,7 +3,7 @@ import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
-const token = localStorage.getItem("token");
+// const token = localStorage.getItem("token");
 
 const headerApi = {
   headers: {
@@ -11,12 +11,12 @@ const headerApi = {
   },
 };
 
-const headerApiToken = {
-  headers: {
-    Accept: "application/json",
-    Authorization: `Bearer ${token}`,
-  },
-};
+// const headerApiToken = {
+//   headers: {
+//     Accept: "application/json",
+//     Authorization: `Bearer ${token}`,
+//   },
+// };
 
 const getHeaderApiToken = () => {
   const token = localStorage.getItem("token");

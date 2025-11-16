@@ -3,11 +3,25 @@ import { ref, onMounted, onBeforeUnmount, watch } from "vue";
 import PersonalInfo from "@/components/Careers/StepPersonal.vue";
 import Education from "@/components/Careers/StepEducation.vue";
 
+const formData = ref({
+  // STEP PERSONAL
+  fullname: "",
+  email: "",
+  phone: "",
+  address: "",
+  gender: null,
+  country: null,
+
+  // STEP EDUCATION
+  schoolName: "",
+  fieldOfStudy: "",
+  education: null,
+});
+
 /* ============================
    ✅ COUNTRY DROPDOWN
 =============================== */
 const countries = ref([]);
-const selectedCountry = ref(null);
 const showCountryDropdown = ref(false);
 
 function toggleCountry() {
@@ -17,7 +31,7 @@ function toggleCountry() {
 
 function selectCountry(country) {
   if (!country) return;
-  selectedCountry.value = country;
+  formData.value.country = country; // simpan object lengkap
   showCountryDropdown.value = false;
 }
 
@@ -25,7 +39,6 @@ function selectCountry(country) {
    ✅ GENDER DROPDOWN
 =============================== */
 const showGenderDropdown = ref(false);
-const selectedGender = ref(null);
 
 const genderOptions = [
   { value: "male", label: "Laki-laki" },
@@ -39,7 +52,7 @@ function toggleGender() {
 
 function selectGender(gender) {
   if (!gender) return;
-  selectedGender.value = gender;
+  formData.value.gender = gender; // simpan object lengkap
   showGenderDropdown.value = false;
 }
 
@@ -47,7 +60,6 @@ function selectGender(gender) {
    ✅ Education DROPDOWN
 =============================== */
 const showEducationDropdown = ref(false);
-const selectedEducation = ref(null);
 
 const educationOptions = [
   { value: "highschool", label: "High School" },
@@ -63,7 +75,7 @@ function toggleEducation() {
 
 function selectEducation(education) {
   if (!education) return;
-  selectedEducation.value = education;
+  formData.value.education = education; // simpan object lengkap
   showEducationDropdown.value = false;
 }
 
@@ -87,11 +99,11 @@ onMounted(async () => {
     countries.value = data
       .filter((c) => targetCountries.includes(c.name.common))
       .map((c) => ({
-        name: c.name.common,
-        code: c.cca2.toUpperCase(),
+        label: c.name.common,
+        value: c.cca2.toUpperCase(), // sama seperti gender & education
         flag: `https://flagcdn.com/w40/${c.cca2.toLowerCase()}.png`,
       }))
-      .sort((a, b) => a.name.localeCompare(b.name));
+      .sort((a, b) => a.label.localeCompare(b.label));
 
     // Set default country
     const defaultCountry = countries.value.find((c) => c.code === "ID");
@@ -107,11 +119,11 @@ onMounted(async () => {
 const steps = [
   { number: "Step 1", title: "Personal" },
   { number: "Step 2", title: "Education" },
-  { number: "Step 3", title: "Experience" },
-  { number: "Step 4", title: "Skills" },
-  { number: "Step 5", title: "Motivation" },
-  { number: "Step 6", title: "Documents" },
-  { number: "Step 7", title: "Declaration" },
+  // { number: "Step 3", title: "Experience" },
+  // { number: "Step 4", title: "Skills" },
+  // { number: "Step 5", title: "Motivation" },
+  // { number: "Step 6", title: "Documents" },
+  // { number: "Step 7", title: "Declaration" },
 ];
 
 const currentStep = ref(0);
@@ -170,10 +182,16 @@ watch(currentStep, (newVal, oldVal) => {
    ✅ SUBMIT HANDLER
 =============================== */
 const handleSubmit = () => {
-  console.log("Form submitted:", {
-    country: selectedCountry.value,
-    gender: selectedGender.value,
-  });
+  // Buat payload baru dengan hanya value dari dropdown
+  const payload = {
+    ...formData.value, // copy semua field
+    gender: formData.value.gender?.value || null,
+    country: formData.value.country?.value || null,
+    education: formData.value.education?.value || null,
+  };
+
+  console.log("Payload siap dikirim:", payload);
+  // Sekarang payload.gender, payload.country, payload.education adalah string, bukan object
 };
 </script>
 
@@ -277,14 +295,16 @@ const handleSubmit = () => {
         <div v-if="currentStep === 0">
           <!-- id="personal-info" -->
           <PersonalInfo
-            :selectedGender="selectedGender"
-            :selectedCountry="selectedCountry"
+            v-model:fullname="formData.fullname"
+            v-model:selectedGender="formData.gender"
+            v-model:email="formData.email"
+            v-model:phone="formData.phone"
+            v-model:selectedCountry="formData.country"
+            v-model:address="formData.address"
             :countries="countries"
             :genderOptions="genderOptions"
             :isOpenGender="showGenderDropdown"
             :isOpenCountry="showCountryDropdown"
-            @update:gender="selectGender"
-            @update:country="selectCountry"
             @toggleGender="toggleGender"
             @toggleCountry="toggleCountry"
             @closeAll="closeAll"
@@ -293,29 +313,30 @@ const handleSubmit = () => {
 
         <div v-if="currentStep === 1">
           <Education
-            :selectedEducation="selectedEducation"
+            v-model:schoolName="formData.schoolName"
+            v-model:fieldOfStudy="formData.fieldOfStudy"
+            v-model:selectedEducation="formData.education"
             :educationOptions="educationOptions"
             :isOpenEducation="showEducationDropdown"
-            @update:education="selectEducation"
             @toggleEducation="toggleEducation"
             @closeAll="closeAll"
           />
         </div>
-        <div v-if="currentStep === 2">
+        <!-- <div v-if="currentStep === 2">
           <h2 class="text-xl font-semibold text-[#195279] mb-4">Experience</h2>
-        </div>
-        <div v-if="currentStep === 3">
+        </div> -->
+        <!-- <div v-if="currentStep === 3">
           <h2 class="text-xl font-semibold text-[#195279] mb-4">Skills</h2>
-        </div>
-        <div v-if="currentStep === 4">
+        </div> -->
+        <!-- <div v-if="currentStep === 4">
           <h2 class="text-xl font-semibold text-[#195279] mb-4">Motivation</h2>
-        </div>
-        <div v-if="currentStep === 5">
+        </div> -->
+        <!-- <div v-if="currentStep === 5">
           <h2 class="text-xl font-semibold text-[#195279] mb-4">Documents</h2>
-        </div>
-        <div v-if="currentStep === 6">
+        </div> -->
+        <!-- <div v-if="currentStep === 6">
           <h2 class="text-xl font-semibold text-[#195279] mb-4">Declaration</h2>
-        </div>
+        </div> -->
 
         <div class="flex justify-between mt-8">
           <button

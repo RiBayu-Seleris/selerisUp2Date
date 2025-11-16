@@ -2,7 +2,12 @@
 import { ref, onMounted, onBeforeUnmount } from "vue";
 
 const props = defineProps({
-  selectedGender: String,
+  fullname: String,
+  email: String,
+  phone: String,
+  address: String,
+
+  selectedGender: Object, // FIX 1
   selectedCountry: Object,
   countries: Array,
   genderOptions: Array,
@@ -11,24 +16,28 @@ const props = defineProps({
 });
 
 const emit = defineEmits([
-  "update:gender",
-  "update:country",
+  "update:fullname",
+  "update:email",
+  "update:phone",
+  "update:address",
+  "update:selectedGender", // FIX 2
+  "update:selectedCountry", // FIX 3
   "toggleGender",
   "toggleCountry",
-  "closeAll", // emit baru untuk menutup semuanya
+  "closeAll",
 ]);
 
 const genderWrapper = ref(null);
 const countryWrapper = ref(null);
 
-const chooseGender = (value) => {
-  emit("update:gender", value);
-  emit("closeAll"); // tutup semua dropdown setelah pilih
+const chooseGender = (gender) => {
+  emit("update:selectedGender", gender); // kirim object
+  emit("closeAll");
 };
 
 const chooseCountry = (country) => {
-  emit("update:country", country);
-  emit("closeAll"); // tutup semua dropdown setelah pilih
+  emit("update:selectedCountry", country);
+  emit("closeAll");
 };
 
 function handleClickOutside(e) {
@@ -54,14 +63,18 @@ onBeforeUnmount(() => {
 
   <!-- FULL NAME -->
   <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
-    <label class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F]">
+    <label
+      class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+    >
       Full Name <span class="text-red-500">*</span>
     </label>
     <input
+      @input="emit('update:fullname', $event.target.value)"
       name="fullname"
       type="text"
       class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
       placeholder="Full Name"
+      :value="fullname"
     />
   </div>
 
@@ -71,7 +84,9 @@ onBeforeUnmount(() => {
     class="flex flex-col w-full lg:mb-3 xl:mb-4"
     @click.stop
   >
-    <label class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F]">
+    <label
+      class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+    >
       Gender <span class="text-red-500">*</span>
     </label>
 
@@ -87,7 +102,7 @@ onBeforeUnmount(() => {
             'text-gray-800': selectedGender, // normal saat sudah pilih
           }"
         >
-          {{ selectedGender || "Choose Gender" }}
+          {{ selectedGender?.label || "Choose Gender" }}
         </span>
 
         <svg
@@ -115,7 +130,7 @@ onBeforeUnmount(() => {
           <div
             v-for="gender in genderOptions"
             :key="gender.value"
-            @click.stop="chooseGender(gender.label)"
+            @click.stop="chooseGender(gender)"
             class="p-2 hover:bg-gray-100 cursor-pointer"
           >
             {{ gender.label }}
@@ -129,12 +144,16 @@ onBeforeUnmount(() => {
   <div class="flex gap-10">
     <!-- Email -->
     <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
-      <label class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F]">
+      <label
+        class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+      >
         Email <span class="text-red-500">*</span>
       </label>
 
       <input
         type="email"
+        :value="email"
+        @input="emit('update:email', $event.target.value)"
         class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
         placeholder="email@example.com"
       />
@@ -142,12 +161,16 @@ onBeforeUnmount(() => {
 
     <!-- Phone -->
     <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
-      <label class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F]">
+      <label
+        class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+      >
         Phone Number <span class="text-red-500">*</span>
       </label>
 
       <input
         type="text"
+        :value="phone"
+        @input="emit('update:phone', $event.target.value)"
         class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
         placeholder="08xxxx"
       />
@@ -160,7 +183,9 @@ onBeforeUnmount(() => {
     class="flex flex-col w-full lg:mb-3 xl:mb-4"
     @click.stop
   >
-    <label class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F]">
+    <label
+      class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+    >
       Country <span class="text-red-500">*</span>
     </label>
 
@@ -174,7 +199,7 @@ onBeforeUnmount(() => {
             'text-[#9CA3AF]': !selectedCountry, // warna merah saat belum pilih
             'text-gray-800': selectedCountry, // warna normal saat sudah pilih
           }"
-          >{{ selectedCountry?.name || "Select Country" }}</span
+          >{{ selectedCountry?.label || "Select Country" }}</span
         >
 
         <img
@@ -195,7 +220,7 @@ onBeforeUnmount(() => {
             @click="chooseCountry(cty)"
             class="flex justify-between px-3 py-2 hover:bg-gray-100 cursor-pointer"
           >
-            <span>{{ cty.name }}</span>
+            <span>{{ cty.label }}</span>
             <img :src="cty.flag" class="w-6 h-4 rounded" />
           </li>
         </ul>
@@ -205,12 +230,16 @@ onBeforeUnmount(() => {
 
   <!-- ADDRESS -->
   <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
-    <label class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F]">
+    <label
+      class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+    >
       Address <span class="text-red-500">*</span>
     </label>
 
     <input
       type="text"
+      :value="address"
+      @input="emit('update:address', $event.target.value)"
       class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
       placeholder="Address"
     />
