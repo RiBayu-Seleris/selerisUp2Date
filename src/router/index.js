@@ -150,12 +150,12 @@ const routes = [
     component: () => import("@/views/BlogDetail.vue"),
     meta: { title: "BlogDetail" },
   },
-  {
-    path: "/blog/details",
-    name: "BlogDetails",
-    component: () => import("@/views/BlogDetail.vue"),
-    meta: { title: "BlogDetail" },
-  },
+  // {
+  //   path: "/blog/details",
+  //   name: "BlogDetails",
+  //   component: () => import("@/views/BlogDetail.vue"),
+  //   meta: { title: "BlogDetail" },
+  // },
 
   // Careers
   {
@@ -168,6 +168,7 @@ const routes = [
     path: "/careers/details",
     name: "CareerDetails",
     component: () => import("@/views/CareerDetail.vue"),
+    meta: { title: "Pelamaran" },
   },
 
   // Testing

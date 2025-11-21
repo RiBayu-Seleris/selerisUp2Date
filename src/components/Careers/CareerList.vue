@@ -95,22 +95,22 @@ onMounted(async () => {
         class="flex flex-row w-full h-auto p-2 rounded-[10px] bg-[#FAFAFA] dark:bg-[#1D1F23] gap-x-5"
       >
         <div
-          class="w-full h-auto flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-[10px] border-[1px] border-[#DADADA] dark:border-none"
+          class="w-full h-auto flex flex-row justify-center items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#0088FF] dark:text-[#FAFAFA] py-1 rounded-[10px] border-[1px] border-[#DADADA] dark:border-none"
         >
           <BoardFill />
-          <p class="font-[400] text-[14px]">Department</p>
+          <p class="font-[400] text-[14px] text-[#195279]">Department</p>
         </div>
         <div
-          class="w-full h-auto flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-[10px] border-[1px] border-[#DADADA] dark:border-none"
+          class="w-full h-auto flex flex-row justify-center items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#FF383C] dark:text-[#FAFAFA] py-1 rounded-[10px] border-[1px] border-[#DADADA] dark:border-none"
         >
-          <BoardFill />
-          <p class="font-[400] text-[14px]">Department</p>
+          <MapPin />
+          <p class="font-[400] text-[14px] text-[#195279]">Semua Lokasi</p>
         </div>
         <div
-          class="w-full h-auto flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-[10px] border-[1px] border-[#DADADA] dark:border-none"
+          class="w-full h-auto flex flex-row justify-center items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#34C759] dark:text-[#FAFAFA] py-1 rounded-[10px] border-[1px] border-[#DADADA] dark:border-none"
         >
-          <BoardFill />
-          <p class="font-[400] text-[14px]">Department</p>
+          <ProfileFill />
+          <p class="font-[400] text-[14px] text-[#195279]">Semua Pelamar</p>
         </div>
         <div
           class="w-auto h-auto bg-orange-400 rounded-xl flex items-center px-8"

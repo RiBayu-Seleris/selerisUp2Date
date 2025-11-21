@@ -2,6 +2,15 @@
 import { ref, onMounted, onBeforeUnmount, watch } from "vue";
 import PersonalInfo from "@/components/Careers/StepPersonal.vue";
 import Education from "@/components/Careers/StepEducation.vue";
+import Experience from "@/components/Careers/StepExperience.vue";
+import Skills from "@/components/Careers/StepSkills.vue";
+import Motivations from "@/components/Careers/StepMotivations.vue";
+import Documents from "@/components/Careers/StepDocuments.vue";
+import Declarations from "@/components/Careers/StepDeclarations.vue";
+
+import { useUtilsStore } from "@/stores/utils.js";
+
+const utils = useUtilsStore();
 
 const formData = ref({
   // STEP PERSONAL
@@ -16,6 +25,20 @@ const formData = ref({
   schoolName: "",
   fieldOfStudy: "",
   education: null,
+  educationPeriod: "",
+  gpaScore: "",
+
+  // StepExperience
+  lastCompany: "",
+  lastPosition: "",
+  salary: "",
+  startDateExperience: "",
+  endDate: "",
+  description: "",
+
+  // Motivations
+  startDateMotivations: "",
+  expectedSalary: "",
 });
 
 /* ============================
@@ -119,11 +142,11 @@ onMounted(async () => {
 const steps = [
   { number: "Step 1", title: "Personal" },
   { number: "Step 2", title: "Education" },
-  // { number: "Step 3", title: "Experience" },
-  // { number: "Step 4", title: "Skills" },
-  // { number: "Step 5", title: "Motivation" },
-  // { number: "Step 6", title: "Documents" },
-  // { number: "Step 7", title: "Declaration" },
+  { number: "Step 3", title: "Experience" },
+  { number: "Step 4", title: "Skills" },
+  { number: "Step 5", title: "Motivations" },
+  { number: "Step 6", title: "Documents" },
+  { number: "Step 7", title: "Declaration" },
 ];
 
 const currentStep = ref(0);
@@ -184,10 +207,32 @@ watch(currentStep, (newVal, oldVal) => {
 const handleSubmit = () => {
   // Buat payload baru dengan hanya value dari dropdown
   const payload = {
-    ...formData.value, // copy semua field
+    // STEP PERSONAL
+    fullname: formData.value.fullname,
+    email: formData.value.email,
+    phone: formData.value.phone,
+    address: formData.value.address,
     gender: formData.value.gender?.value || null,
     country: formData.value.country?.value || null,
+
+    // STEP EDUCATION
+    schoolName: formData.value.schoolName,
+    fieldOfStudy: formData.value.fieldOfStudy,
     education: formData.value.education?.value || null,
+    educationPeriod: formData.value.educationPeriod,
+    gpaScore: formData.value.gpaScore,
+
+    // StepExperience
+    lastCompany: formData.value.lastCompany,
+    lastPosition: formData.value.lastPosition,
+    salary: utils.cleanNumber(formData.value.salary),
+    startDateExperience: formData.value.startDateExperience,
+    endDate: formData.value.endDate,
+    description: formData.value.description,
+
+    // Motivations
+    startDateMotivations: formData.value.startDateMotivations,
+    expectedSalary: utils.cleanNumber(formData.value.expectedSalary),
   };
 
   console.log("Payload siap dikirim:", payload);
@@ -316,27 +361,39 @@ const handleSubmit = () => {
             v-model:schoolName="formData.schoolName"
             v-model:fieldOfStudy="formData.fieldOfStudy"
             v-model:selectedEducation="formData.education"
+            v-model:gpaScore="formData.gpaScore"
+            v-model:educationPeriod="formData.educationPeriod"
             :educationOptions="educationOptions"
             :isOpenEducation="showEducationDropdown"
             @toggleEducation="toggleEducation"
             @closeAll="closeAll"
           />
         </div>
-        <!-- <div v-if="currentStep === 2">
-          <h2 class="text-xl font-semibold text-[#195279] mb-4">Experience</h2>
-        </div> -->
-        <!-- <div v-if="currentStep === 3">
-          <h2 class="text-xl font-semibold text-[#195279] mb-4">Skills</h2>
-        </div> -->
-        <!-- <div v-if="currentStep === 4">
-          <h2 class="text-xl font-semibold text-[#195279] mb-4">Motivation</h2>
-        </div> -->
-        <!-- <div v-if="currentStep === 5">
-          <h2 class="text-xl font-semibold text-[#195279] mb-4">Documents</h2>
-        </div> -->
-        <!-- <div v-if="currentStep === 6">
-          <h2 class="text-xl font-semibold text-[#195279] mb-4">Declaration</h2>
-        </div> -->
+        <div v-if="currentStep === 2">
+          <Experience
+            v-model:lastCompany="formData.lastCompany"
+            v-model:lastPosition="formData.lastPosition"
+            v-model:salary="formData.salary"
+            v-model:startDate="formData.startDateExperience"
+            v-model:endDate="formData.endDate"
+            v-model:content="formData.description"
+          />
+        </div>
+        <div v-if="currentStep === 3">
+          <Skills />
+        </div>
+        <div v-if="currentStep === 4">
+          <Motivations
+            v-model:startDate="formData.startDateMotivations"
+            v-model:salary="formData.expectedSalary"
+          />
+        </div>
+        <div v-if="currentStep === 5">
+          <Documents />
+        </div>
+        <div v-if="currentStep === 6">
+          <Declarations />
+        </div>
 
         <div class="flex justify-between mt-8">
           <button

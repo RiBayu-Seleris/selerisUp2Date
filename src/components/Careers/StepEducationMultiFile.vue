@@ -8,7 +8,6 @@ import { useUtilsStore } from "@/stores/utils.js";
 const props = defineProps({
   schoolName: String,
   fieldOfStudy: String,
-  gpaScore: String,
   educationPeriod: String,
 
   selectedEducation: Object,
@@ -21,7 +20,6 @@ const emit = defineEmits([
   "update:fieldOfStudy",
   "update:selectedEducation",
   "update:educationPeriod",
-  "update:gpaScore",
   "toggleEducation",
   "closeAll", // menutup dropdown lain
 ]);
@@ -52,7 +50,6 @@ function handleClickOutside(e) {
   if (
     wrapper?.contains(e.target) ||
     e.target.closest(".calendar-popup") ||
-    e.target.closest(".daterange-box") || // ➕ TAMBAHKAN INI
     e.target.tagName === "INPUT"
   ) {
     return;
@@ -95,15 +92,19 @@ const triggerFileInput = () => {
 
 // 📂 Saat memilih file manual
 const handleFileChange = (event) => {
-  const file = event.target.files[0];
-  addFile(file);
+  const files = event.target.files;
+  for (const file of files) {
+    addFile(file);
+  }
 };
 
 // 📂 Saat drag & drop file
 const handleDrop = (event) => {
   isDragging.value = false;
-  const file = event.dataTransfer.files[0];
-  addFile(file);
+  const files = event.dataTransfer.files;
+  for (const file of files) {
+    addFile(file);
+  }
 };
 
 // Saat file diseret masuk & keluar (ubah state UI)
@@ -118,13 +119,11 @@ const handleDragLeave = () => {
 // ➕ Tambah file ke daftar
 const addFile = (file) => {
   if (!file) return;
-  uploadedFiles.value = [
-    {
-      file,
-      name: file.name,
-      url: URL.createObjectURL(file),
-    },
-  ];
+  uploadedFiles.value.push({
+    file, // simpan file asli
+    name: file.name,
+    url: URL.createObjectURL(file),
+  });
 };
 
 // ➕ Klik tombol tambah → buka file picker
@@ -245,8 +244,8 @@ const viewFile = (file) => {
         Tahun Masuk dan Tahun Lulus <span class="text-red-500">*</span>
       </label>
       <!-- Input -->
-      <!-- ref="educationWrapper" -->
       <div
+        ref="educationWrapper"
         class="col-span-12 sm:col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656] mt-3 sm:mt-0"
       >
         <div
@@ -331,8 +330,6 @@ const viewFile = (file) => {
       </label>
       <input
         type="text"
-        :value="gpaScore"
-        @input="emit('update:gpaScore', $event.target.value)"
         class="w-full p-2 rounded-[8px] border-gray-300 dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25"
         placeholder="e.g., 3.85"
       />
@@ -343,7 +340,7 @@ const viewFile = (file) => {
     <label
       class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
     >
-      Sertifikat pelatihan tambahan jika ada (gabungkan menjadi 1 pdf)
+      Sertifikat pelatihan tambahan (jika ada)
     </label>
     <div class="w-full h-auto flex flex-col gap-y-5">
       <!-- 🟩 Frame Input Upload -->
@@ -375,16 +372,10 @@ const viewFile = (file) => {
 
           <!-- Teks -->
           <p class="text-sm">
-            <span v-if="uploadedFiles.length === 0">
-              <span class="text-green-600 font-medium"
-                >Klik untuk Mengunggah</span
-              >
-              atau seret dan lepas
-            </span>
-
-            <span v-else class="text-green-600 font-medium">
-              {{ uploadedFiles[0].name }}
-            </span>
+            <span class="text-green-600 font-medium"
+              >Klik untuk Mengunggah</span
+            >
+            atau seret dan lepas
           </p>
 
           <!-- Input File Asli (disembunyikan) -->
@@ -392,8 +383,57 @@ const viewFile = (file) => {
             type="file"
             ref="fileInput"
             class="hidden"
+            multiple
             @change="handleFileChange"
           />
+        </div>
+      </div>
+
+      <!-- Tombol + -->
+      <!-- <div
+          class="w-10 h-10 flex justify-center bg-[#2AB857]/30 items-center rounded-xl p-1"
+        >
+          <div class="w-full h-full rounded-xl">
+            <button
+              type="button"
+              class="w-full h-full bg-green-400 rounded-xl hover:bg-green-500 transition"
+              @click="triggerFileInput"
+            >
+              <p class="text-[24px] font-[400] text-white">+</p>
+            </button>
+          </div>
+        </div> -->
+      <!-- </div> -->
+
+      <!-- 🧾 Daftar File Sertifikat -->
+      <div
+        v-for="(file, index) in uploadedFiles"
+        :key="index"
+        class="flex flex-row gap-x-3 w-full h-auto items-center"
+      >
+        <div class="w-full h-auto">
+          <div
+            class="w-full p-2 rounded-[8px] bg-[#EDEEEF] flex items-center justify-between"
+          >
+            <p class="font-[400] text-[14px] text-[#6F6F6F] truncate">
+              {{ file.name }}
+              <span
+                class="text-[#1091F3] font-[600] cursor-pointer hover:underline"
+                @click="viewFile(file)"
+              >
+                Lihat Dokumen
+              </span>
+            </p>
+          </div>
+        </div>
+        <div class="w-10 h-10 flex justify-center items-center rounded-xl">
+          <button
+            type="button"
+            class="w-full h-full bg-[#FFBABA] rounded-xl hover:bg-[#ff9b9b] transition"
+            @click="removeFile(index)"
+          >
+            <p class="text-[24px] font-[400] text-white">-</p>
+          </button>
         </div>
       </div>
     </div>

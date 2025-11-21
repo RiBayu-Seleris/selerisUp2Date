@@ -29,5 +29,16 @@ export const useUtilsStore = defineStore("utils", {
 
       return num.toString(); // aman karena sudah difilter di atas
     },
+
+    separatorNumber(num) {
+      if (!num) return ""; // kalau kosong jangan return '-'
+      const clean = num.toString().replace(/\D/g, ""); // hilangkan karakter non angka
+      return clean.replace(/\B(?=(\d{3})+(?!\d))/g, "."); // kasih separator
+    },
+
+    // 🆕 Hapus semua non-digit (untuk kirim API)
+    cleanNumber(value) {
+      return value?.toString().replace(/\D/g, "") || null;
+    },
   },
 });
