@@ -58,6 +58,14 @@ const directorSeniorteams = [
     name: "Prof. Alhadi Bustamam",
     position: "Senior Advisor",
   },
+  {
+    image: new URL(
+      "@/assets/images/leadership-teams/Benedicta.png",
+      import.meta.url
+    ).href,
+    name: "dr. Benedicta E.T, M.Kes",
+    position: "Senior Medical Advisor",
+  },
 ];
 const managementTeam = [
   // Management Team

@@ -97,19 +97,25 @@ onMounted(async () => {
         <div
           class="w-full h-auto flex flex-row justify-center items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#0088FF] dark:text-[#FAFAFA] py-1 rounded-[10px] border-[1px] border-[#DADADA] dark:border-none"
         >
-          <BoardFill />
+          <BoardFill
+            sizes="w-[24px] h-[24px] lg:w-[20px] lg:h-[20px] xl:w-[24px] xl:h-[24px]"
+          />
           <p class="font-[400] text-[14px] text-[#195279]">Department</p>
         </div>
         <div
           class="w-full h-auto flex flex-row justify-center items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#FF383C] dark:text-[#FAFAFA] py-1 rounded-[10px] border-[1px] border-[#DADADA] dark:border-none"
         >
-          <MapPin />
+          <MapPin
+            sizes="w-[24px] h-[24px] lg:w-[20px] lg:h-[20px] xl:w-[24px] xl:h-[24px]"
+          />
           <p class="font-[400] text-[14px] text-[#195279]">Semua Lokasi</p>
         </div>
         <div
           class="w-full h-auto flex flex-row justify-center items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#34C759] dark:text-[#FAFAFA] py-1 rounded-[10px] border-[1px] border-[#DADADA] dark:border-none"
         >
-          <ProfileFill />
+          <ProfileFill
+            sizes="w-[24px] h-[24px] lg:w-[20px] lg:h-[20px] xl:w-[24px] xl:h-[24px]"
+          />
           <p class="font-[400] text-[14px] text-[#195279]">Semua Pelamar</p>
         </div>
         <div
@@ -123,7 +129,7 @@ onMounted(async () => {
 
   <!-- Frame Jobs -->
   <section
-    class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-6 px-8 md:px-8 xl:px-0"
+    class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-6 px-8 md:px-8 xl:px-0 mt-10"
   >
     <!-- v-for="job in jobPosts" -->
     <div
@@ -136,7 +142,7 @@ onMounted(async () => {
         class="flex flex-col w-full h-full p-5 rounded-[9px] bg-[#FAFAFA] dark:bg-[#1D1F23] cursor-pointer"
       >
         <div class="w-full h-full flex items-start">
-          <p class="text-[22px] text-[#2AB857] font-[600]">
+          <p class="lg:text-[18px] xl:text-[22px] text-[#2AB857] font-[600]">
             <!-- {{ `${getEmploymentLevel(job.employment_level)} - ${job.title}` }} -->
             {{ job.employment_level }} - {{ job.title }}
           </p>
@@ -150,8 +156,10 @@ onMounted(async () => {
           <div
             class="flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
           >
-            <BoardFill />
-            <p class="font-[400] text-[14px]">
+            <BoardFill
+              sizes="w-[24px] h-[24px] lg:w-[20px] lg:h-[20px] xl:w-[24px] xl:h-[24px]"
+            />
+            <p class="font-[400] lg:text-[12px] xl:text-[14px]">
               <!-- {{ getDivisionName(job.division_category) }} -->
               {{ job.department }}
               Department
@@ -161,7 +169,9 @@ onMounted(async () => {
           <div
             class="flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
           >
-            <ProfileFill />
+            <ProfileFill
+              sizes="w-[24px] h-[24px] lg:w-[20px] lg:h-[20px] xl:w-[24px] xl:h-[24px]"
+            />
             <p class="font-[400] text-[14px]">
               <!-- {{ getJobTypeName(job.job_type_category) }} -->
               {{ job.work_type }}
@@ -170,7 +180,9 @@ onMounted(async () => {
           <div
             class="flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
           >
-            <MapPin />
+            <MapPin
+              sizes="w-[24px] h-[24px] lg:w-[20px] lg:h-[20px] xl:w-[24px] xl:h-[24px]"
+            />
             <p class="font-[400] text-[14px]">
               <!-- {{ getLocationName(job.location_category) }} -->
               {{ job.location }}
