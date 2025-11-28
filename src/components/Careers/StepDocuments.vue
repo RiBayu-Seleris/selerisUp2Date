@@ -1,61 +1,236 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount } from "vue";
+import { ref, watch } from "vue";
 
+/* ======================================
+📌 Props untuk v-model:cvFile
+====================================== */
 const props = defineProps({
-  fullname: String,
-  email: String,
-  phone: String,
-  address: String,
-
-  selectedGender: Object, // FIX 1
-  selectedCountry: Object,
-  countries: Array,
-  genderOptions: Array,
-  isOpenGender: Boolean,
-  isOpenCountry: Boolean,
+  cvFile: File,
+  clFile: File,
+  diplomaFile: File,
+  transcriptFile: File,
+  experienceCertificateFile: File,
+  portfolioFile: File,
+  portfolioFile: File,
+  photoFile: File,
 });
 
+/* ======================================
+📌 Emit untuk v-model:cvFile
+(⚠️ WAJIB: update:cvFile)
+====================================== */
 const emit = defineEmits([
-  "update:fullname",
-  "update:email",
-  "update:phone",
-  "update:address",
-  "update:selectedGender", // FIX 2
-  "update:selectedCountry", // FIX 3
-  "toggleGender",
-  "toggleCountry",
-  "closeAll",
+  "update:cvFile",
+  "update:clFile",
+  "update:diplomaFile",
+  "update:transcriptFile",
+  "update:experienceCertificateFile",
+  "update:portfolioFile",
+  "update:photoFile",
 ]);
 
-const genderWrapper = ref(null);
-const countryWrapper = ref(null);
+/* ======================================
+📌 Upload CV
+====================================== */
+const cvInput = ref(null);
+const cvFileName = ref("");
 
-const chooseGender = (gender) => {
-  emit("update:selectedGender", gender); // kirim object
-  emit("closeAll");
+const openCvUpload = () => {
+  cvInput.value?.click();
 };
 
-const chooseCountry = (country) => {
-  emit("update:selectedCountry", country);
-  emit("closeAll");
-};
+const handleCvChange = (event) => {
+  const file = event.target.files[0];
 
-function handleClickOutside(e) {
-  const genderEl = genderWrapper.value;
-  const countryEl = countryWrapper.value;
+  if (file) {
+    cvFileName.value = file.name;
 
-  if (!genderEl?.contains(e.target) && !countryEl?.contains(e.target)) {
-    emit("closeAll");
+    // 🔥 Kirim ke parent via v-model:cvFile
+    emit("update:cvFile", file);
   }
-}
+};
 
-onMounted(() => {
-  document.addEventListener("click", handleClickOutside);
-});
+watch(
+  () => props.cvFile,
+  (newVal) => {
+    cvFileName.value = newVal ? newVal.name : "";
+  },
+  { immediate: true }
+);
 
-onBeforeUnmount(() => {
-  document.removeEventListener("click", handleClickOutside);
-});
+/* ======================================
+📌 Upload Cover Letter
+====================================== */
+const clInput = ref(null);
+const clFileName = ref("");
+
+const openClUpload = () => {
+  clInput.value?.click();
+};
+
+const handleClChange = (event) => {
+  const file = event.target.files[0];
+
+  if (file) {
+    clFileName.value = file.name;
+
+    // 🔥 Kirim ke parent via v-model:clFile
+    emit("update:clFile", file);
+  }
+};
+
+watch(
+  () => props.clFile,
+  (newVal) => {
+    clFileName.value = newVal ? newVal.name : "";
+  },
+  { immediate: true }
+);
+
+/* ======================================
+📌 Upload Diploma
+====================================== */
+const diplomaInput = ref(null);
+const diplomaFileName = ref("");
+
+const openDiplomaUpload = () => {
+  diplomaInput.value?.click();
+};
+
+const handleDiplomaChange = (event) => {
+  const file = event.target.files[0];
+
+  if (file) {
+    diplomaFileName.value = file.name;
+
+    // 🔥 Kirim ke parent via v-model:cvFile
+    emit("update:diplomaFile", file);
+  }
+};
+
+watch(
+  () => props.diplomaFile,
+  (newVal) => {
+    diplomaFileName.value = newVal ? newVal.name : "";
+  },
+  { immediate: true }
+);
+
+/* ======================================
+📌 Upload Transkrip
+====================================== */
+const transcriptInput = ref(null);
+const transcriptFileName = ref("");
+
+const openTranscriptUpload = () => {
+  transcriptInput.value?.click();
+};
+
+const handleTranscriptChange = (event) => {
+  const file = event.target.files[0];
+
+  if (file) {
+    transcriptFileName.value = file.name;
+
+    // 🔥 Kirim ke parent via v-model:cvFile
+    emit("update:transcriptFile", file);
+  }
+};
+
+watch(
+  () => props.transcriptFile,
+  (newVal) => {
+    transcriptFileName.value = newVal ? newVal.name : "";
+  },
+  { immediate: true }
+);
+
+/* ======================================
+📌 Upload Experience Certificate
+====================================== */
+const experienceCertificateInput = ref(null);
+const experienceCertificateFileName = ref("");
+
+const openExperienceCertificateUpload = () => {
+  experienceCertificateInput.value?.click();
+};
+
+const handleExperienceCertificateChange = (event) => {
+  const file = event.target.files[0];
+
+  if (file) {
+    experienceCertificateFileName.value = file.name;
+
+    // 🔥 Kirim ke parent via v-model:cvFile
+    emit("update:experienceCertificateFile", file);
+  }
+};
+
+watch(
+  () => props.experienceCertificateFile,
+  (newVal) => {
+    experienceCertificateFileName.value = newVal ? newVal.name : "";
+  },
+  { immediate: true }
+);
+
+/* ======================================
+📌 Upload Portfolio
+====================================== */
+const portfolioInput = ref(null);
+const portfolioFileName = ref("");
+
+const openPortfolioUpload = () => {
+  portfolioInput.value?.click();
+};
+
+const handlePortfolioChange = (event) => {
+  const file = event.target.files[0];
+
+  if (file) {
+    portfolioFileName.value = file.name;
+
+    // 🔥 Kirim ke parent via v-model:cvFile
+    emit("update:portfolioFile", file);
+  }
+};
+
+watch(
+  () => props.portfolioFile,
+  (newVal) => {
+    portfolioFileName.value = newVal ? newVal.name : "";
+  },
+  { immediate: true }
+);
+
+/* ======================================
+📌 Upload Photo Terbaru
+====================================== */
+const photoInput = ref(null);
+const photoFileName = ref("");
+
+const openPhotoUpload = () => {
+  photoInput.value?.click();
+};
+
+const handlePhotoChange = (event) => {
+  const file = event.target.files[0];
+
+  if (file) {
+    photoFileName.value = file.name;
+
+    // 🔥 Kirim ke parent via v-model:cvFile
+    emit("update:photoFile", file);
+  }
+};
+
+watch(
+  () => props.photoFile,
+  (newVal) => {
+    photoFileName.value = newVal ? newVal.name : "";
+  },
+  { immediate: true }
+);
 </script>
 
 <template>
@@ -70,11 +245,11 @@ onBeforeUnmount(() => {
     >
       Curriculum Vitae (CV)
     </label>
-    <div class="w-full h-auto flex flex-row gap-5">
+    <div class="w-full h-auto grid grid-cols-2 gap-5">
       <!-- 🟩 Frame Input Upload -->
-      <!-- <div class="flex flex-row gap-x-3 w-full h-auto items-center"> -->
       <div class="w-full h-full flex items-center">
         <div
+          @click="openCvUpload"
           class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
         >
           <!-- Ikon Upload -->
@@ -104,22 +279,29 @@ onBeforeUnmount(() => {
           </p>
 
           <!-- Input File Asli (disembunyikan) -->
-          <input type="file" ref="fileInput" class="hidden" />
+          <input
+            type="file"
+            ref="cvInput"
+            @change="handleCvChange"
+            class="hidden"
+          />
         </div>
       </div>
-      <div class="w-full h-auto flex items-center">
-        <div
-          class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
-        >
-          <!-- Teks -->
-          <p class="text-sm">
-            <span class="font-medium">
-              Dokumen Sertifikat My Skill
-              <span class="text-[#1091F3]"> Lihat Dokumen </span>
-            </span>
-          </p>
+      <transition name="fade">
+        <div v-if="cvFileName" class="w-full h-auto flex items-center">
+          <div
+            class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+          >
+            <!-- Teks -->
+            <p class="text-sm">
+              <span class="font-medium">
+                {{ cvFileName || "Belum ada dokumen" }}
+                <span class="text-[#1091F3]"> Lihat Dokumen </span>
+              </span>
+            </p>
+          </div>
         </div>
-      </div>
+      </transition>
     </div>
   </div>
 
@@ -130,11 +312,11 @@ onBeforeUnmount(() => {
     >
       Cover Letter
     </label>
-    <div class="w-full h-auto flex flex-row gap-5">
+    <div class="w-full h-auto grid grid-cols-2 gap-5">
       <!-- 🟩 Frame Input Upload -->
-      <!-- <div class="flex flex-row gap-x-3 w-full h-auto items-center"> -->
       <div class="w-full h-full flex items-center">
         <div
+          @click="openClUpload"
           class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
         >
           <!-- Ikon Upload -->
@@ -164,22 +346,29 @@ onBeforeUnmount(() => {
           </p>
 
           <!-- Input File Asli (disembunyikan) -->
-          <input type="file" ref="fileInput" class="hidden" />
+          <input
+            type="file"
+            ref="clInput"
+            @change="handleClChange"
+            class="hidden"
+          />
         </div>
       </div>
-      <div class="w-full h-auto flex items-center">
-        <div
-          class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
-        >
-          <!-- Teks -->
-          <p class="text-sm">
-            <span class="font-medium">
-              Dokumen Sertifikat My Skill
-              <span class="text-[#1091F3]"> Lihat Dokumen </span>
-            </span>
-          </p>
+      <transition name="fade">
+        <div v-if="clFileName" class="w-full h-auto flex items-center">
+          <div
+            class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+          >
+            <!-- Teks -->
+            <p class="text-sm">
+              <span class="font-medium">
+                {{ clFileName || "Belum ada dokumen" }}
+                <span class="text-[#1091F3]"> Lihat Dokumen </span>
+              </span>
+            </p>
+          </div>
         </div>
-      </div>
+      </transition>
     </div>
   </div>
 
@@ -190,11 +379,11 @@ onBeforeUnmount(() => {
     >
       Diploma
     </label>
-    <div class="w-full h-auto flex flex-row gap-5">
+    <div class="w-full h-auto grid grid-cols-2 gap-5">
       <!-- 🟩 Frame Input Upload -->
-      <!-- <div class="flex flex-row gap-x-3 w-full h-auto items-center"> -->
       <div class="w-full h-full flex items-center">
         <div
+          @click="openDiplomaUpload"
           class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
         >
           <!-- Ikon Upload -->
@@ -224,37 +413,44 @@ onBeforeUnmount(() => {
           </p>
 
           <!-- Input File Asli (disembunyikan) -->
-          <input type="file" ref="fileInput" class="hidden" />
+          <input
+            type="file"
+            ref="diplomaInput"
+            @change="handleDiplomaChange"
+            class="hidden"
+          />
         </div>
       </div>
-      <div class="w-full h-auto flex items-center">
-        <div
-          class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
-        >
-          <!-- Teks -->
-          <p class="text-sm">
-            <span class="font-medium">
-              Dokumen Sertifikat My Skill
-              <span class="text-[#1091F3]"> Lihat Dokumen </span>
-            </span>
-          </p>
+      <transition name="fade">
+        <div v-if="diplomaFileName" class="w-full h-auto flex items-center">
+          <div
+            class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+          >
+            <!-- Teks -->
+            <p class="text-sm">
+              <span class="font-medium">
+                {{ diplomaFileName || "Belum ada dokumen" }}
+                <span class="text-[#1091F3]"> Lihat Dokumen </span>
+              </span>
+            </p>
+          </div>
         </div>
-      </div>
+      </transition>
     </div>
   </div>
 
-  <!-- === Academic Transcript === -->
+  <!-- === Transkrip Nilai === -->
   <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
     <label
       class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
     >
       Academic Transcript
     </label>
-    <div class="w-full h-auto flex flex-row gap-5">
+    <div class="w-full h-auto grid grid-cols-2 gap-5">
       <!-- 🟩 Frame Input Upload -->
-      <!-- <div class="flex flex-row gap-x-3 w-full h-auto items-center"> -->
       <div class="w-full h-full flex items-center">
         <div
+          @click="openTranscriptUpload"
           class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
         >
           <!-- Ikon Upload -->
@@ -284,37 +480,44 @@ onBeforeUnmount(() => {
           </p>
 
           <!-- Input File Asli (disembunyikan) -->
-          <input type="file" ref="fileInput" class="hidden" />
+          <input
+            type="file"
+            ref="transcriptInput"
+            @change="handleTranscriptChange"
+            class="hidden"
+          />
         </div>
       </div>
-      <div class="w-full h-auto flex items-center">
-        <div
-          class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
-        >
-          <!-- Teks -->
-          <p class="text-sm">
-            <span class="font-medium">
-              Dokumen Sertifikat My Skill
-              <span class="text-[#1091F3]"> Lihat Dokumen </span>
-            </span>
-          </p>
+      <transition name="fade">
+        <div v-if="transcriptFileName" class="w-full h-auto flex items-center">
+          <div
+            class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+          >
+            <!-- Teks -->
+            <p class="text-sm">
+              <span class="font-medium">
+                {{ transcriptFileName || "Belum ada dokumen" }}
+                <span class="text-[#1091F3]"> Lihat Dokumen </span>
+              </span>
+            </p>
+          </div>
         </div>
-      </div>
+      </transition>
     </div>
   </div>
 
-  <!-- === Training/Work Experience Certificates === -->
+  <!-- === •	Sertifikat pelatihan / pengalaman kerja === -->
   <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
     <label
       class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
     >
       Training/Work Experience Certificates
     </label>
-    <div class="w-full h-auto flex flex-row gap-5">
+    <div class="w-full h-auto grid grid-cols-2 gap-5">
       <!-- 🟩 Frame Input Upload -->
-      <!-- <div class="flex flex-row gap-x-3 w-full h-auto items-center"> -->
       <div class="w-full h-full flex items-center">
         <div
+          @click="openExperienceCertificateUpload"
           class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
         >
           <!-- Ikon Upload -->
@@ -344,37 +547,47 @@ onBeforeUnmount(() => {
           </p>
 
           <!-- Input File Asli (disembunyikan) -->
-          <input type="file" ref="fileInput" class="hidden" />
+          <input
+            type="file"
+            ref="experienceCertificateInput"
+            @change="handleExperienceCertificateChange"
+            class="hidden"
+          />
         </div>
       </div>
-      <div class="w-full h-auto flex items-center">
+      <transition name="fade">
         <div
-          class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+          v-if="experienceCertificateFileName"
+          class="w-full h-auto flex items-center"
         >
-          <!-- Teks -->
-          <p class="text-sm">
-            <span class="font-medium">
-              Dokumen Sertifikat My Skill
-              <span class="text-[#1091F3]"> Lihat Dokumen </span>
-            </span>
-          </p>
+          <div
+            class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+          >
+            <!-- Teks -->
+            <p class="text-sm">
+              <span class="font-medium">
+                {{ experienceCertificateFileName || "Belum ada dokumen" }}
+                <span class="text-[#1091F3]"> Lihat Dokumen </span>
+              </span>
+            </p>
+          </div>
         </div>
-      </div>
+      </transition>
     </div>
   </div>
 
-  <!-- === Portfolio Link/File (PDF) === -->
+  <!-- === Portfolio === -->
   <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
     <label
       class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
     >
-      Portfolio Link/File (PDF)
+      Portfolio
     </label>
-    <div class="w-full h-auto flex flex-row gap-5">
+    <div class="w-full h-auto grid grid-cols-2 gap-5">
       <!-- 🟩 Frame Input Upload -->
-      <!-- <div class="flex flex-row gap-x-3 w-full h-auto items-center"> -->
       <div class="w-full h-full flex items-center">
         <div
+          @click="openPortfolioUpload"
           class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
         >
           <!-- Ikon Upload -->
@@ -404,37 +617,44 @@ onBeforeUnmount(() => {
           </p>
 
           <!-- Input File Asli (disembunyikan) -->
-          <input type="file" ref="fileInput" class="hidden" />
+          <input
+            type="file"
+            ref="portfolioInput"
+            @change="handlePortfolioChange"
+            class="hidden"
+          />
         </div>
       </div>
-      <div class="w-full h-auto flex items-center">
-        <div
-          class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
-        >
-          <!-- Teks -->
-          <p class="text-sm">
-            <span class="font-medium">
-              Dokumen Sertifikat My Skill
-              <span class="text-[#1091F3]"> Lihat Dokumen </span>
-            </span>
-          </p>
+      <transition name="fade">
+        <div v-if="portfolioFileName" class="w-full h-auto flex items-center">
+          <div
+            class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+          >
+            <!-- Teks -->
+            <p class="text-sm">
+              <span class="font-medium">
+                {{ portfolioFileName || "Belum ada dokumen" }}
+                <span class="text-[#1091F3]"> Lihat Dokumen </span>
+              </span>
+            </p>
+          </div>
         </div>
-      </div>
+      </transition>
     </div>
   </div>
 
-  <!-- === Recent Formal Photograph === -->
+  <!-- === Recent formal photograph === -->
   <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
     <label
       class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
     >
-      Recent Formal Photograph
+      Recent formal photograph
     </label>
-    <div class="w-full h-auto flex flex-row gap-5">
+    <div class="w-full h-auto grid grid-cols-2 gap-5">
       <!-- 🟩 Frame Input Upload -->
-      <!-- <div class="flex flex-row gap-x-3 w-full h-auto items-center"> -->
       <div class="w-full h-full flex items-center">
         <div
+          @click="openPhotoUpload"
           class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
         >
           <!-- Ikon Upload -->
@@ -464,22 +684,29 @@ onBeforeUnmount(() => {
           </p>
 
           <!-- Input File Asli (disembunyikan) -->
-          <input type="file" ref="fileInput" class="hidden" />
+          <input
+            type="file"
+            ref="photoInput"
+            @change="handlePhotoChange"
+            class="hidden"
+          />
         </div>
       </div>
-      <div class="w-full h-auto flex items-center">
-        <div
-          class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
-        >
-          <!-- Teks -->
-          <p class="text-sm">
-            <span class="font-medium">
-              Dokumen Sertifikat My Skill
-              <span class="text-[#1091F3]"> Lihat Dokumen </span>
-            </span>
-          </p>
+      <transition name="fade">
+        <div v-if="photoFileName" class="w-full h-auto flex items-center">
+          <div
+            class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+          >
+            <!-- Teks -->
+            <p class="text-sm">
+              <span class="font-medium">
+                {{ photoFileName || "Belum ada dokumen" }}
+                <span class="text-[#1091F3]"> Lihat Dokumen </span>
+              </span>
+            </p>
+          </div>
         </div>
-      </div>
+      </transition>
     </div>
   </div>
 </template>

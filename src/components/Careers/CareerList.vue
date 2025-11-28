@@ -61,7 +61,7 @@ onMounted(async () => {
       id: job.id,
       title: job.job_title?.title || "-", // ambil title sebenarnya
       slug: job.slug,
-      created_at: job.posted_at, // samakan dengan UI-mu
+      posted_at: job.posted_at, // samakan dengan UI-mu
       employment_level: job.employee_level_data?.employee_level || "-",
       work_type: job.job_type_data?.job_type || "-",
       location: job.location_data?.location || "-",
@@ -85,17 +85,17 @@ onMounted(async () => {
 
 <template>
   <!-- Frame Filter -->
-  <section
+  <!-- <section
     class="flex flex-col relative w-full h-auto lg:max-w-4xl mx-auto px-8 md:px-8 lg:px-0 pt-5"
   >
     <div
       class="w-full h-auto p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:to-[#565656] rounded-[10px]"
     >
       <div
-        class="flex flex-row w-full h-auto p-2 rounded-[10px] bg-[#FAFAFA] dark:bg-[#1D1F23] gap-x-5"
+        class="w-full h-auto grid grid-cols-12 p-2 rounded-[10px] bg-[#FAFAFA] dark:bg-[#1D1F23] gap-2"
       >
         <div
-          class="w-full h-auto flex flex-row justify-center items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#0088FF] dark:text-[#FAFAFA] py-1 rounded-[10px] border-[1px] border-[#DADADA] dark:border-none"
+          class="col-span-12 sm:col-span-4 xl:col-span-3 w-full h-auto flex flex-row justify-center items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#0088FF] dark:text-[#FAFAFA] py-1 rounded-[10px] border-[1px] border-[#DADADA] dark:border-none"
         >
           <BoardFill
             sizes="w-[24px] h-[24px] lg:w-[20px] lg:h-[20px] xl:w-[24px] xl:h-[24px]"
@@ -103,7 +103,7 @@ onMounted(async () => {
           <p class="font-[400] text-[14px] text-[#195279]">Department</p>
         </div>
         <div
-          class="w-full h-auto flex flex-row justify-center items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#FF383C] dark:text-[#FAFAFA] py-1 rounded-[10px] border-[1px] border-[#DADADA] dark:border-none"
+          class="col-span-12 sm:col-span-4 xl:col-span-3 w-full h-auto flex flex-row justify-center items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#FF383C] dark:text-[#FAFAFA] py-1 rounded-[10px] border-[1px] border-[#DADADA] dark:border-none"
         >
           <MapPin
             sizes="w-[24px] h-[24px] lg:w-[20px] lg:h-[20px] xl:w-[24px] xl:h-[24px]"
@@ -111,7 +111,7 @@ onMounted(async () => {
           <p class="font-[400] text-[14px] text-[#195279]">Semua Lokasi</p>
         </div>
         <div
-          class="w-full h-auto flex flex-row justify-center items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#34C759] dark:text-[#FAFAFA] py-1 rounded-[10px] border-[1px] border-[#DADADA] dark:border-none"
+          class="col-span-12 sm:col-span-4 xl:col-span-3 w-full h-auto flex flex-row justify-center items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#34C759] dark:text-[#FAFAFA] py-1 rounded-[10px] border-[1px] border-[#DADADA] dark:border-none"
         >
           <ProfileFill
             sizes="w-[24px] h-[24px] lg:w-[20px] lg:h-[20px] xl:w-[24px] xl:h-[24px]"
@@ -119,13 +119,13 @@ onMounted(async () => {
           <p class="font-[400] text-[14px] text-[#195279]">Semua Pelamar</p>
         </div>
         <div
-          class="w-auto h-auto bg-orange-400 rounded-xl flex items-center px-8"
+          class="col-span-12 sm:col-span-4 xl:col-span-3 w-auto h-auto bg-orange-400 rounded-xl flex items-center justify-center px-8"
         >
           <p>Cari</p>
         </div>
       </div>
     </div>
-  </section>
+  </section> -->
 
   <!-- Frame Jobs -->
   <section
@@ -246,14 +246,16 @@ onMounted(async () => {
                 <p
                   class="text-[16px] font-[400] text-[#B8B8B8] dark:text-[#B8B8B8]"
                 >
-                  {{ timeAgo(selectedJob?.created_at) }}
+                  {{ timeAgo(selectedJob?.posted_at) }}
                 </p>
               </div>
               <div class="w-full h-auto flex flex-row my-8 space-x-5 px-20">
                 <div
                   class="flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
                 >
-                  <BoardFill />
+                  <BoardFill
+                    sizes="w-[24px] h-[24px] lg:w-[20px] lg:h-[20px] xl:w-[24px] xl:h-[24px]"
+                  />
                   <p class="font-[400] text-[14px]">
                     {{ selectedJob?.division_category }}
                     Department
@@ -263,7 +265,9 @@ onMounted(async () => {
                 <div
                   class="flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
                 >
-                  <ProfileFill />
+                  <ProfileFill
+                    sizes="w-[24px] h-[24px] lg:w-[20px] lg:h-[20px] xl:w-[24px] xl:h-[24px]"
+                  />
                   <p class="font-[400] text-[14px]">
                     {{ selectedJob?.work_type }}
                   </p>
@@ -271,7 +275,9 @@ onMounted(async () => {
                 <div
                   class="flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
                 >
-                  <MapPin />
+                  <MapPin
+                    sizes="w-[24px] h-[24px] lg:w-[20px] lg:h-[20px] xl:w-[24px] xl:h-[24px]"
+                  />
                   <p class="font-[400] text-[14px]">
                     {{ selectedJob?.location }}
                   </p>

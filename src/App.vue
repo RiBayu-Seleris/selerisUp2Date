@@ -49,7 +49,7 @@ function updateDarkMode() {
 onMounted(() => {
   themeStore.loadTheme();
   window.addEventListener("scroll", handleScroll);
-  document.body.style.overflow = "";
+  // document.body.style.overflow = "";
 
   // Loading hanya jika user ada di halaman awal (misalnya "/")
   if (route.path === "/") {

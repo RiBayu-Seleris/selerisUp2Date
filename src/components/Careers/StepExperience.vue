@@ -15,7 +15,8 @@ const props = defineProps({
   salary: String,
   startDate: String,
   endDate: String,
-  content: String,
+  jobDescription: String,
+  achievementDescription: String,
 });
 
 /* ===========================
@@ -27,7 +28,9 @@ const emit = defineEmits([
   "update:salary",
   "update:startDate",
   "update:endDate",
-  "update:content",
+  "update:jobDescription",
+  "update:achievementDescription",
+  "closeAll",
 ]);
 
 // toggleStartDate;
@@ -36,15 +39,19 @@ const emit = defineEmits([
 /* ===========================
    LOCAL REFS
 =========================== */
-const quillEditor = ref(null);
-const quill = ref(null);
-const contentError = ref(null);
+const jobDescriptionEditor = ref(null);
+const jobDescription = ref(null);
+const jobDescriptionError = ref(null);
+
+const achievementDescriptionEditor = ref(null);
+const achievementDescription = ref(null);
+const achievementDescriptionError = ref(null);
 
 const startDateWrapper = ref(null);
 const isStartDateOpen = ref(false);
 
 const endDateWrapper = ref(null);
-const showEndDate = ref(false);
+const isEndDateOpen = ref(false);
 
 /* ===========================
    COMPUTED (sync props <-> parent via emit)
@@ -60,19 +67,19 @@ const startDateModel = computed({
   set: (val) => emit("update:startDate", val ?? ""),
 });
 
-// const startDateModel = computed({
-//   get: () => props.startDate ?? "",
-//   set: (val) => emit("update:startDate", val ?? ""),
-// });
-
 const endDateModel = computed({
   get: () => props.endDate ?? "",
   set: (val) => emit("update:endDate", val ?? ""),
 });
 
-const contentModel = computed({
-  get: () => props.content ?? "",
-  set: (val) => emit("update:content", val ?? ""),
+const jobDescriptionModel = computed({
+  get: () => props.jobDescription ?? "",
+  set: (val) => emit("update:jobDescription", val ?? ""),
+});
+
+const achievementDescriptionModel = computed({
+  get: () => props.achievementDescription ?? "",
+  set: (val) => emit("update:achievementDescription", val ?? ""),
 });
 
 /* ===========================
@@ -91,29 +98,39 @@ function onSalaryInput(e) {
 =========================== */
 const toggleStartDate = () => {
   isStartDateOpen.value = !isStartDateOpen.value;
+  emit("closeAll");
+  isEndDateOpen.value = false;
 };
 
 const toggleEndDate = () => {
-  showEndDate.value = !showEndDate.value;
+  isEndDateOpen.value = !isEndDateOpen.value;
+  isStartDateOpen.value = false;
+  emit("closeAll");
 };
 
 /* ===========================
    OUTSIDE CLICK HANDLER
 =========================== */
 function handleClickOutside(e) {
-  if (startDateWrapper.value?.contains(e.target)) return;
-  if (endDateWrapper.value?.contains(e.target)) return;
-  if (e.target.closest(".daterange-box")) return;
+  const startWrapper = startDateWrapper.value;
+  const endWrapper = endDateWrapper.value;
 
-  isStartDateOpen.value = false;
-  showEndDate.value = false;
+  if (!startWrapper?.contains(e.target)) {
+    isStartDateOpen.value = false;
+  }
+  if (!endWrapper?.contains(e.target)) {
+    isEndDateOpen.value = false;
+  }
+
+  emit("closeAll");
 }
 
 /* ===========================
    QUILL INIT
 =========================== */
+// Job Description
 onMounted(() => {
-  quill.value = new Quill(quillEditor.value, {
+  jobDescription.value = new Quill(jobDescriptionEditor.value, {
     theme: "snow",
     placeholder: "Write your job description...",
     modules: {
@@ -126,20 +143,49 @@ onMounted(() => {
   });
 
   // set initial content from parent (if any)
-  if (contentModel.value) {
-    quill.value.root.innerHTML = contentModel.value;
+  if (jobDescriptionModel.value) {
+    jobDescription.value.root.innerHTML = jobDescriptionModel.value;
   }
 
   // Listen changes and emit to parent
-  quill.value.on("text-change", () => {
-    const value = quill.value.root.innerHTML;
-    contentModel.value = value;
+  jobDescription.value.on("text-change", () => {
+    const jobDescriptionValue = jobDescription.value.root.innerHTML;
+    jobDescriptionModel.value = jobDescriptionValue;
 
-    if (!value || value === "<p><br></p>") {
-      contentError.value = "Description cannot be empty";
-    } else {
-      contentError.value = null;
-    }
+    // if (!jobDescriptionValue || jobDescriptionValue === "<p><br></p>") {
+    //   jobDescriptionError.value = "Description cannot be empty";
+    // } else {
+    //   jobDescriptionError.value = null;
+    // }
+  });
+});
+
+onMounted(() => {
+  achievementDescription.value = new Quill(achievementDescriptionEditor.value, {
+    theme: "snow",
+    placeholder: "Write your achievement in last company if any...",
+    toolbar: [
+      ["bold", "italic", "underline"],
+      [{ list: "ordered" }, { list: "bullet" }],
+      ["link"],
+    ],
+  });
+
+  if (achievementDescriptionModel.value) {
+    achievementDescription.value.root.innerHTML =
+      achievementDescriptionModel.value;
+  }
+
+  achievementDescription.value.on("text-change", () => {
+    const achievementDescriptionValue =
+      achievementDescription.value.root.innerHTML;
+    achievementDescriptionModel.value = achievementDescriptionValue;
+
+    // if (!achievementDescriptionValue || achievementDescriptionValue === "<p><br></p>") {
+    //   achievementDescriptionError.value = "Achievement cannot be empty";
+    // } else {
+    //   achievementDescriptionError.value = null;
+    // }
   });
 });
 
@@ -152,19 +198,6 @@ onMounted(() => {
 =========================== */
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
-});
-
-/* ===========================
-   AUTO CLOSE DATE PICKERS
-   watch the computed models (local changes)
-=========================== */
-watch(startDateModel, (val) => {
-  if (val) {
-    isStartDateOpen.value = false;
-  }
-});
-watch(endDateModel, (val) => {
-  if (val) showEndDate.value = false;
 });
 </script>
 
@@ -212,7 +245,7 @@ watch(endDateModel, (val) => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Start Date <span class="text-red-500">*</span>
+        Start Date Work <span class="text-red-500">*</span>
       </label>
 
       <div
@@ -266,6 +299,7 @@ watch(endDateModel, (val) => {
                   <input
                     type="date"
                     v-model="startDateModel"
+                    @change="isStartDateOpen = false"
                     @click.stop
                     class="w-full border rounded px-2 py-1 text-[14px] text-[#6C6C6C] dark:text-black"
                   />
@@ -282,7 +316,7 @@ watch(endDateModel, (val) => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Akhir Bekerja <span class="text-red-500">*</span>
+        End Date Work <span class="text-red-500">*</span>
       </label>
 
       <div
@@ -293,7 +327,7 @@ watch(endDateModel, (val) => {
           class="daterange-box relative w-full h-full bg-white dark:bg-[#323232] rounded-[5px]"
         >
           <div
-            @click="toggleEndDate"
+            @click.stop="toggleEndDate"
             class="w-full h-full flex flex-row items-center px-6 sm:px-3 py-2 rounded-[5px] justify-between cursor-pointer select-none"
           >
             <div class="flex items-center">
@@ -323,9 +357,9 @@ watch(endDateModel, (val) => {
 
           <transition name="fade">
             <div
-              v-if="showEndDate"
+              v-if="isEndDateOpen"
               @click.stop
-              class="absolute right-0 top-10 mt-1 w-full rounded-[5px] shadow bg-white dark:bg-[#565656] z-10 p-[1px]"
+              class="absolute right-0 top-10 mt-1 w-full h-full rounded-[5px] shadow bg-white dark:bg-[#565656] z-10 p-[1px]"
             >
               <div
                 class="w-full h-auto rounded-[5px] bg-white dark:bg-[#17181A] p-3"
@@ -334,6 +368,8 @@ watch(endDateModel, (val) => {
                   <input
                     type="date"
                     v-model="endDateModel"
+                    @change="isEndDateOpen = false"
+                    @click.stop
                     class="w-full border rounded px-2 py-1 text-[14px] text-[#6C6C6C] dark:text-black"
                   />
                 </div>
@@ -380,7 +416,25 @@ watch(endDateModel, (val) => {
     <div class="editor-wrapper">
       <div class="quill-container">
         <div
-          ref="quillEditor"
+          ref="jobDescriptionEditor"
+          class="w-full p-2 border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
+        ></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Prestasi -->
+  <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+    <label
+      class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+    >
+      Relevant Achievements or Accomplishments
+      <span class="text-red-500">*</span>
+    </label>
+    <div class="editor-wrapper">
+      <div class="quill-container">
+        <div
+          ref="achievementDescriptionEditor"
           class="w-full p-2 border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
         ></div>
       </div>

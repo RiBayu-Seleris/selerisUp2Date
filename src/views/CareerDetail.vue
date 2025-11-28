@@ -1,5 +1,5 @@
 <script setup>
-import { ref, onMounted, onBeforeUnmount, watch } from "vue";
+import { ref, onMounted, onBeforeUnmount, watch, reactive } from "vue";
 import PersonalInfo from "@/components/Careers/StepPersonal.vue";
 import Education from "@/components/Careers/StepEducation.vue";
 import Experience from "@/components/Careers/StepExperience.vue";
@@ -9,13 +9,16 @@ import Documents from "@/components/Careers/StepDocuments.vue";
 import Declarations from "@/components/Careers/StepDeclarations.vue";
 
 import { useUtilsStore } from "@/stores/utils.js";
+import axios from "axios";
 
 const utils = useUtilsStore();
 
-const formData = ref({
+const formData = reactive({
   // STEP PERSONAL
   fullname: "",
   email: "",
+  pob: "",
+  dob: "",
   phone: "",
   address: "",
   gender: null,
@@ -25,20 +28,46 @@ const formData = ref({
   schoolName: "",
   fieldOfStudy: "",
   education: null,
-  educationPeriod: "",
+  startDateEducation: "",
+  endDateEducation: "",
   gpaScore: "",
+  certificateFileEducation: null,
+  certificateFileEducationUrl: "",
 
   // StepExperience
   lastCompany: "",
   lastPosition: "",
   salary: "",
   startDateExperience: "",
-  endDate: "",
-  description: "",
+  endDateExperience: "",
+  jobDescription: "",
+  achievementDescription: "",
+
+  // StepSkills
+  technicalSkills: "",
+  softSkills: "",
+  languageSkills: "",
 
   // Motivations
   startDateMotivations: "",
   expectedSalary: "",
+  reasonDescription: "",
+
+  // Documents
+  cvFile: null,
+  cvFileUrl: "",
+  clFile: null,
+  clFileUrl: "",
+  diplomaFile: null,
+  diplomaFileUrl: "",
+  transcriptFile: null,
+  transcriptFileUrl: "",
+  experienceCertificateFile: null,
+  experienceCertificateFileUrl: "",
+  portfolioFile: null,
+  portfolioFileUrl: "",
+  photoFile: null,
+  photoFileUrl: "",
 });
 
 /* ============================
@@ -54,7 +83,7 @@ function toggleCountry() {
 
 function selectCountry(country) {
   if (!country) return;
-  formData.value.country = country; // simpan object lengkap
+  formData.country = country; // simpan object lengkap
   showCountryDropdown.value = false;
 }
 
@@ -75,7 +104,7 @@ function toggleGender() {
 
 function selectGender(gender) {
   if (!gender) return;
-  formData.value.gender = gender; // simpan object lengkap
+  formData.gender = gender; // simpan object lengkap
   showGenderDropdown.value = false;
 }
 
@@ -98,7 +127,7 @@ function toggleEducation() {
 
 function selectEducation(education) {
   if (!education) return;
-  formData.value.education = education; // simpan object lengkap
+  formData.education = education; // simpan object lengkap
   showEducationDropdown.value = false;
 }
 
@@ -129,7 +158,7 @@ onMounted(async () => {
       .sort((a, b) => a.label.localeCompare(b.label));
 
     // Set default country
-    const defaultCountry = countries.value.find((c) => c.code === "ID");
+    const defaultCountry = countries.value.find((c) => c.value === "ID");
     if (defaultCountry) selectCountry(defaultCountry);
   } catch (err) {
     console.error("Failed to load countries:", err);
@@ -146,7 +175,7 @@ const steps = [
   { number: "Step 4", title: "Skills" },
   { number: "Step 5", title: "Motivations" },
   { number: "Step 6", title: "Documents" },
-  { number: "Step 7", title: "Declaration" },
+  // { number: "Step 7", title: "Declaration" },
 ];
 
 const currentStep = ref(0);
@@ -202,41 +231,188 @@ watch(currentStep, (newVal, oldVal) => {
 });
 
 /* ============================
+   Fungsi Upload File
+=============================== */
+const uploadFile = async (file, urlField) => {
+  try {
+    const form = new FormData();
+    form.append("file", file);
+
+    const response = await axios.post(
+      "https://staging-api-gateway.seleris.id/v1/seleris-credit-cover/web/upload-file",
+      form,
+      {
+        headers: {
+          Accept: "application/json",
+        },
+      }
+    );
+
+    formData[urlField] = response.data.data.path;
+
+    console.log(`Sukses Upload File ${urlField}`, response.data.data.path);
+  } catch (err) {
+    console.error("Upload failed:", err);
+  }
+};
+
+/* ============================
+   Watch Uploaded File
+=============================== */
+const fileWatchMap = {
+  certificateFileEducation: "certificateFileEducationUrl",
+  cvFile: "cvFileUrl",
+  clFile: "clFileUrl",
+  diplomaFile: "diplomaFileUrl",
+  transcriptFile: "transcriptFileUrl",
+  experienceCertificateFile: "experienceCertificateFileUrl",
+  portfolioFile: "portfolioFileUrl",
+  photoFile: "photoFileUrl",
+};
+watch(
+  () => {
+    const values = {};
+    for (const key in fileWatchMap) {
+      values[key] = formData[key]; // ambil file mentah
+    }
+    return values;
+  },
+  async (newVal, oldVal) => {
+    for (const key in newVal) {
+      const file = newVal[key];
+      if (file && file !== oldVal[key]) {
+        const urlField = fileWatchMap[key];
+        await uploadFile(file, urlField);
+      }
+    }
+  }
+);
+
+/* ============================
    ✅ SUBMIT HANDLER
 =============================== */
-const handleSubmit = () => {
-  // Buat payload baru dengan hanya value dari dropdown
+const handleSubmit = async () => {
+  // Extract semua value dari reactive formData
+  const {
+    // PERSONAL
+    fullname,
+    pob,
+    dob,
+    gender,
+    email,
+    phone,
+    address,
+    country,
+
+    // EDUCATION
+    schoolName,
+    fieldOfStudy,
+    education,
+    startDateEducation,
+    endDateEducation,
+    gpaScore,
+    certificateFileEducationUrl,
+
+    // EXPERIENCE
+    lastCompany,
+    lastPosition,
+    salary,
+    startDateExperience,
+    endDateExperience,
+    jobDescription,
+    achievementDescription,
+
+    // SKILLS
+    technicalSkills,
+    softSkills,
+    languageSkills,
+
+    // MOTIVATIONS
+    startDateMotivations,
+    expectedSalary,
+    reasonDescription,
+
+    // DOCUMENTS
+    cvFileUrl,
+    clFileUrl,
+    diplomaFileUrl,
+    transcriptFileUrl,
+    experienceCertificateFileUrl,
+    portfolioFileUrl,
+    photoFileUrl,
+  } = formData;
+
   const payload = {
     // STEP PERSONAL
-    fullname: formData.value.fullname,
-    email: formData.value.email,
-    phone: formData.value.phone,
-    address: formData.value.address,
-    gender: formData.value.gender?.value || null,
-    country: formData.value.country?.value || null,
+    nama_lengkap: fullname || "",
+    tempat_lahir: pob || "",
+    tanggal_lahir: dob || "",
+    jenis_kelamin: gender?.value || "",
+    email: email || "",
+    no_hp: phone || "",
+    alamat: address || "",
+    kewarganegaraan: country?.value || "",
 
     // STEP EDUCATION
-    schoolName: formData.value.schoolName,
-    fieldOfStudy: formData.value.fieldOfStudy,
-    education: formData.value.education?.value || null,
-    educationPeriod: formData.value.educationPeriod,
-    gpaScore: formData.value.gpaScore,
+    institusi_pendidikan: schoolName || "",
+    jurusan: fieldOfStudy || "",
+    pendidikan_terakhir: education?.value || "",
+    tahun_masuk: startDateEducation
+      ? utils.formatToDDMMYYYY(startDateEducation)
+      : "",
+    tahun_lulus: endDateEducation
+      ? utils.formatToDDMMYYYY(endDateEducation)
+      : "",
+    ipk: Number(gpaScore) || null,
+    sertifikasi_tambahan: certificateFileEducationUrl || "",
 
     // StepExperience
-    lastCompany: formData.value.lastCompany,
-    lastPosition: formData.value.lastPosition,
-    salary: utils.cleanNumber(formData.value.salary),
-    startDateExperience: formData.value.startDateExperience,
-    endDate: formData.value.endDate,
-    description: formData.value.description,
+    perusahaan_sebelumnya: lastCompany || "",
+    jabatan_terakhir: lastPosition || "",
+
+    // Gaji sebelumnya — null jika kosong
+    gaji_sebelumnya:
+      salary === "" || salary === null || salary === undefined
+        ? null
+        : Number(utils.cleanNumber(salary)),
+
+    // Periode bekerja — tetap string kosong jika salah satu kosong
+    periode_bekerja:
+      startDateExperience && endDateExperience
+        ? `${utils.fromISODateSlash(
+            startDateExperience
+          )}-${utils.fromISODateSlash(endDateExperience)}`
+        : "",
+
+    job_description: jobDescription || "",
+    prestasi: achievementDescription || "",
+
+    // Skills
+    keahlian_teknis: utils.formatTextToArray(technicalSkills) || "",
+    keahlian_non_teknis: utils.formatTextToArray(softSkills) || "",
+    bahasa: utils.formatTextToArray(languageSkills) || "",
 
     // Motivations
-    startDateMotivations: formData.value.startDateMotivations,
-    expectedSalary: utils.cleanNumber(formData.value.expectedSalary),
+    tanggal_mulai_kerja: startDateMotivations || "",
+    expectedSalary:
+      expectedSalary === "" ||
+      expectedSalary === null ||
+      expectedSalary === undefined
+        ? null
+        : Number(utils.cleanNumber(expectedSalary)),
+    alasan_melamar: reasonDescription || "",
+
+    // Documents
+    file_cv: cvFileUrl || "",
+    file_surat_lamaran: clFileUrl || "",
+    file_ijazah: diplomaFileUrl || "",
+    file_transkrip: transcriptFileUrl || "",
+    file_sertifikat: experienceCertificateFileUrl || "",
+    file_portofolio: portfolioFileUrl || "",
+    foto_diri: photoFileUrl || "",
   };
 
-  console.log("Payload siap dikirim:", payload);
-  // Sekarang payload.gender, payload.country, payload.education adalah string, bukan object
+  console.table(payload);
 };
 </script>
 
@@ -338,10 +514,11 @@ const handleSubmit = () => {
       <!-- Form -->
       <div class="mt-16 p-0">
         <div v-if="currentStep === 0">
-          <!-- id="personal-info" -->
           <PersonalInfo
             v-model:fullname="formData.fullname"
             v-model:selectedGender="formData.gender"
+            v-model:pob="formData.pob"
+            v-model:dob="formData.dob"
             v-model:email="formData.email"
             v-model:phone="formData.phone"
             v-model:selectedCountry="formData.country"
@@ -355,14 +532,15 @@ const handleSubmit = () => {
             @closeAll="closeAll"
           />
         </div>
-
         <div v-if="currentStep === 1">
           <Education
             v-model:schoolName="formData.schoolName"
             v-model:fieldOfStudy="formData.fieldOfStudy"
             v-model:selectedEducation="formData.education"
             v-model:gpaScore="formData.gpaScore"
-            v-model:educationPeriod="formData.educationPeriod"
+            v-model:startDate="formData.startDateEducation"
+            v-model:endDate="formData.endDateEducation"
+            v-model:file="formData.certificateFileEducation"
             :educationOptions="educationOptions"
             :isOpenEducation="showEducationDropdown"
             @toggleEducation="toggleEducation"
@@ -375,25 +553,41 @@ const handleSubmit = () => {
             v-model:lastPosition="formData.lastPosition"
             v-model:salary="formData.salary"
             v-model:startDate="formData.startDateExperience"
-            v-model:endDate="formData.endDate"
-            v-model:content="formData.description"
+            v-model:endDate="formData.endDateExperience"
+            v-model:jobDescription="formData.jobDescription"
+            v-model:achievementDescription="formData.achievementDescription"
           />
         </div>
         <div v-if="currentStep === 3">
-          <Skills />
+          <Skills
+            v-model:technicalSkills="formData.technicalSkills"
+            v-model:softSkills="formData.softSkills"
+            v-model:languageSkills="formData.languageSkills"
+          />
         </div>
         <div v-if="currentStep === 4">
           <Motivations
             v-model:startDate="formData.startDateMotivations"
             v-model:salary="formData.expectedSalary"
+            v-model:reasonDescription="formData.reasonDescription"
           />
         </div>
         <div v-if="currentStep === 5">
-          <Documents />
+          <Documents
+            v-model:cvFile="formData.cvFile"
+            v-model:clFile="formData.clFile"
+            v-model:diplomaFile="formData.diplomaFile"
+            v-model:transcriptFile="formData.transcriptFile"
+            v-model:experienceCertificateFile="
+              formData.experienceCertificateFile
+            "
+            v-model:portfolioFile="formData.portfolioFile"
+            v-model:photoFile="formData.photoFile"
+          />
         </div>
-        <div v-if="currentStep === 6">
+        <!-- <div v-if="currentStep === 6">
           <Declarations />
-        </div>
+        </div> -->
 
         <div class="flex justify-between mt-8">
           <button

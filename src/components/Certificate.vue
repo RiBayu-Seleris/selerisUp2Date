@@ -2,11 +2,34 @@
 import CertCard from "@/components/reusable/CertCard.vue";
 import MobileCert from "@/components/CertificateMobile.vue";
 
+import CloseIcon from "@/components/icons/CloseIcon.vue";
+
 import { certificateData } from "@/Data/certData";
+import { ref, watch } from "vue";
+
+const isModalOpen = ref(false);
+const selectedCert = ref(null);
+
+const openModal = (cert) => {
+  selectedCert.value = cert;
+  isModalOpen.value = true;
+};
+
+const closeModal = () => {
+  isModalOpen.value = false;
+};
+
+watch(isModalOpen, (open) => {
+  if (open) {
+    document.body.style.overflow = "hidden";
+  } else {
+    document.body.style.overflow = "";
+  }
+});
 </script>
 
 <template>
-  <div class="w-full h-auto">
+  <div class="relative w-full h-auto">
     <div class="flex flex-col w-full h-auto dark:bg-[#17181A]">
       <!-- Heading -->
       <div class="flex flex-col w-full items-center text-center">
@@ -44,8 +67,40 @@ import { certificateData } from "@/Data/certData";
             :TitleAfter="cert.titleAfter"
             :CertNumber="cert.certNumber"
             :BodyText="cert.description"
+            @readmore="openModal(cert)"
           />
         </div>
+        <!-- Modal -->
+        <transition name="fade">
+          <div
+            v-if="isModalOpen"
+            class="fixed inset-0 z-50 flex flex-col transition-all duration-300 overflow-hidden bg-[#1C1B1B]/80"
+          >
+            <transition name="slide">
+              <div class="ml-auto w-full h-full p-20 z-50">
+                <div
+                  class="w-full h-auto bg-white dark:bg-[#17181A] relative z-50 flex flex-col items-center rounded-3xl"
+                >
+                  <div
+                    @click="closeModal"
+                    class="w-auto h-auto absolute top-6 right-6 bg-[#94FBB5] rounded-full text-[#2AB857] cursor-pointer"
+                  >
+                    <CloseIcon class="w-auto h-[40px]" />
+                  </div>
+                  <div class="w-full h-auto py-8">
+                    <div class="w-full h-auto px-20">
+                      <p
+                        class="text-[20px] font-[600] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                      >
+                        {{ selectedCert?.description }}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </transition>
+          </div>
+        </transition>
       </div>
 
       <!-- Mobile Certificate -->
@@ -61,5 +116,45 @@ import { certificateData } from "@/Data/certData";
 .hide-scrollbar {
   -ms-overflow-style: none; /* IE and Edge */
   scrollbar-width: none; /* Firefox */
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+  opacity: 0;
+}
+
+.slide-enter-to,
+.slide-leave-from {
+  opacity: 1;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.3s ease-in-out;
+}
+
+.slide-enter-from {
+  transform: translateY(-100%);
+}
+
+.slide-enter-to {
+  transform: translateY(0%);
+}
+
+.slide-leave-from {
+  transform: translateY(0%);
+}
+
+.slide-leave-to {
+  transform: translateY(-100%);
 }
 </style>
