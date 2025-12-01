@@ -165,9 +165,9 @@ const routes = [
     meta: { title: "Career" },
   },
   {
-    path: "/careers/details",
-    name: "CareerDetails",
-    component: () => import("@/views/CareerDetail.vue"),
+    path: "/careers/apply",
+    name: "CareerApply",
+    component: () => import("@/views/CareerApply.vue"),
     meta: { title: "Pelamaran" },
   },
 
