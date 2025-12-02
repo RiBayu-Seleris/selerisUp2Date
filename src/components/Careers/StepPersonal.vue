@@ -218,7 +218,7 @@ onBeforeUnmount(() => {
               'text-gray-800': selectedGender, // normal saat sudah pilih
             }"
           >
-            {{ selectedGender?.label || "Choose Gender" }}
+            {{ selectedGender?.value || "Choose Gender" }}
           </span>
           <svg
             class="w-5 h-auto transition-transform"
@@ -248,7 +248,7 @@ onBeforeUnmount(() => {
               class="p-2 hover:bg-gray-100 cursor-pointer"
               required
             >
-              {{ gender.label }}
+              {{ gender.value }}
             </div>
           </div>
         </transition>

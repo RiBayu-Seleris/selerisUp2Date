@@ -14,6 +14,16 @@ export const clientLogos = [
     .href,
   new URL("@/assets/images/clients-and-partners/reindo.png", import.meta.url)
     .href,
+  new URL(
+    "@/assets/images/clients-and-partners/bumiputera.png",
+    import.meta.url
+  ).href,
+  new URL(
+    "@/assets/images/clients-and-partners/bumiputera-syariah.png",
+    import.meta.url
+  ).href,
+  new URL("@/assets/images/clients-and-partners/bumida.png", import.meta.url)
+    .href,
 ];
 
 export const clientLogosDark = [
@@ -41,6 +51,18 @@ export const clientLogosDark = [
   ).href,
   new URL(
     "@/assets/images/clients-and-partners/reindo-dark.png",
+    import.meta.url
+  ).href,
+  new URL(
+    "@/assets/images/clients-and-partners/bumiputera-dark.png",
+    import.meta.url
+  ).href,
+  new URL(
+    "@/assets/images/clients-and-partners/bumiputera-syariah-dark.png",
+    import.meta.url
+  ).href,
+  new URL(
+    "@/assets/images/clients-and-partners/bumida-dark.png",
     import.meta.url
   ).href,
 ];

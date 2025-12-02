@@ -274,7 +274,6 @@ watch(
               <span class="text-green-600 font-medium"
                 >Klik untuk Mengunggah</span
               >
-              atau seret dan lepas
             </span>
           </p>
 
@@ -341,7 +340,6 @@ watch(
               <span class="text-green-600 font-medium"
                 >Klik untuk Mengunggah</span
               >
-              atau seret dan lepas
             </span>
           </p>
 
@@ -408,7 +406,6 @@ watch(
               <span class="text-green-600 font-medium"
                 >Klik untuk Mengunggah</span
               >
-              atau seret dan lepas
             </span>
           </p>
 
@@ -475,7 +472,6 @@ watch(
               <span class="text-green-600 font-medium"
                 >Klik untuk Mengunggah</span
               >
-              atau seret dan lepas
             </span>
           </p>
 
@@ -542,7 +538,6 @@ watch(
               <span class="text-green-600 font-medium"
                 >Klik untuk Mengunggah</span
               >
-              atau seret dan lepas
             </span>
           </p>
 
@@ -612,7 +607,6 @@ watch(
               <span class="text-green-600 font-medium"
                 >Klik untuk Mengunggah</span
               >
-              atau seret dan lepas
             </span>
           </p>
 
@@ -679,7 +673,6 @@ watch(
               <span class="text-green-600 font-medium"
                 >Klik untuk Mengunggah</span
               >
-              atau seret dan lepas
             </span>
           </p>
 

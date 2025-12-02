@@ -55,13 +55,19 @@ const handleApply = () => {
 };
 
 // Kunci atau buka scroll body tergantung modal
-watch(isModalOpen, (value) => {
-  if (value) {
-    document.body.classList.add("overflow-hidden"); // disable scroll
-  } else {
-    document.body.classList.remove("overflow-hidden"); // enable scroll
+// watch(isModalOpen, (value) => {
+//   if (value) {
+//     document.body.classList.add("overflow-hidden"); // disable scroll
+//   } else {
+//     document.body.classList.remove("overflow-hidden"); // enable scroll
+//   }
+// });
+watch(
+  () => isModalOpen.value,
+  (v) => {
+    document.body.style.overflow = v ? "hidden" : "auto";
   }
-});
+);
 
 onMounted(async () => {
   const BASEURL = "https://alentest.my.id";
@@ -97,6 +103,11 @@ onMounted(async () => {
   } catch (error) {
     console.log("data gagal diambil", error);
   }
+});
+
+// Hapus localstorage careers
+onMounted(() => {
+  jobApplyStore.clearJob();
 });
 </script>
 
@@ -218,7 +229,6 @@ onMounted(async () => {
       v-if="isModalOpen"
       class="fixed inset-0 z-50 flex flex-col transition-all duration-300 overflow-auto bg-[#1C1B1B]/80"
     >
-      <!-- Sidebar -->
       <transition name="slide">
         <div class="ml-auto w-full h-auto p-5 lg:p-20 z-50">
           <div
@@ -245,14 +255,14 @@ onMounted(async () => {
             <div class="w-full h-auto py-8">
               <div class="w-full h-auto px-8 lg:px-20">
                 <p
-                  class="text-[16px] lg:text-[24px] xl:text-[30px] font-[600] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                  class="text-[16px] lg:text-[24px] xl:text-[28px] font-[600] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                 >
                   {{ selectedJob?.employment_level }} -
                   {{ selectedJob?.title }}
                   <br class="block sm:hidden" />
                   <span
                     v-if="selectedJob?.salary_status"
-                    class="text-[14px] lg:text-[16px] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                    class="text-[14px] lg:text-[16px] xl:text-[18px] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                   >
                     (
                     {{ selectedJob?.salary_currency }}
@@ -311,14 +321,16 @@ onMounted(async () => {
                 class="w-full h-auto mt-10 flex flex-col gap-y-5 px-8 lg:px-20"
               >
                 <p
-                  class="text-[14px] sm:text-[16px] lg:text-[20px] xl:text-[24px] font-[400] text-[#323232] dark:text-[#B8B8B8]"
+                  class="text-[14px] sm:text-[16px] lg:text-[20px] xl:text-[20px] font-[400] text-[#323232] dark:text-[#B8B8B8]"
                 >
                   {{ selectedJob.description }}
                 </p>
               </div>
 
               <!--  === GARIS === -->
-              <div class="hidden sm:flex flex-row w-full h-auto gap-x-2 my-6">
+              <div
+                class="hidden sm:flex flex-row w-full h-auto gap-x-2 my-6 xl:my-10"
+              >
                 <div
                   v-for="i in 20"
                   :key="i"
@@ -340,11 +352,11 @@ onMounted(async () => {
                 class="w-full h-auto mt-5 lg:mt-10 flex flex-col gap-y-2 text-[18px] font-[400] text-[#323232] dark:text-[#B8B8B8] px-8 lg:px-20"
               >
                 <p
-                  class="text-[16px] lg:text-[20px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
+                  class="text-[16px] lg:text-[20px] xl:text-[22px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
                 >
                   Tanggung Jawab Utama
                 </p>
-                <p class="text-[14px] lg:text-[18px] xl:text-[24px]">
+                <p class="text-[14px] lg:text-[18px] xl:text-[20px]">
                   {{ selectedJob.responsibilities }}
                 </p>
               </div>
@@ -355,11 +367,11 @@ onMounted(async () => {
                 class="w-full h-auto mt-5 lg:mt-10 flex flex-col gap-y-2 text-[18px] font-[400] text-[#323232] dark:text-[#B8B8B8] px-8 lg:px-20"
               >
                 <p
-                  class="text-[16px] lg:text-[20px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
+                  class="text-[16px] lg:text-[20px] xl:text-[22px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
                 >
                   Kualifikasi
                 </p>
-                <p class="text-[14px] lg:text-[18px] xl:text-[24px]">
+                <p class="text-[14px] lg:text-[18px] xl:text-[20px]">
                   {{ selectedJob.requirements }}
                 </p>
               </div>
@@ -370,11 +382,11 @@ onMounted(async () => {
                 class="w-full h-auto mt-5 lg:mt-10 flex flex-col gap-y-2 text-[18px] font-[400] text-[#323232] dark:text-[#B8B8B8] px-8 lg:px-20"
               >
                 <p
-                  class="text-[16px] lg:text-[20px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
+                  class="text-[16px] lg:text-[20px] xl:text-[22px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
                 >
                   Benefit
                 </p>
-                <p class="text-[14px] lg:text-[18px] xl:text-[24px]">
+                <p class="text-[14px] lg:text-[18px] xl:text-[20px]">
                   {{ selectedJob.benefits }}
                 </p>
               </div>
@@ -384,7 +396,7 @@ onMounted(async () => {
                 class="w-full h-auto mt-5 lg:mt-10 flex flex-col gap-y-2 text-[18px] font-[400] text-[#323232] dark:text-[#B8B8B8] px-8 lg:px-20"
               >
                 <p
-                  class="text-[16px] lg:text-[20px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
+                  class="text-[16px] lg:text-[20px] xl:text-[22px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
                 >
                   Requirements:
                 </p>
@@ -392,7 +404,7 @@ onMounted(async () => {
                   <li
                     v-for="(item, index) in selectedJob.requirements.split(',')"
                     :key="index"
-                    class="text-[14px] lg:text-[18px] xl:text-[24px]"
+                    class="text-[14px] lg:text-[18px] xl:text-[20px]"
                   >
                     {{ item.trim() }}
                   </li>
@@ -441,7 +453,7 @@ onMounted(async () => {
                     class="w-full h-full flex items-center justify-center px-10 lg:px-14 py-1.5 rounded-full bg-[#FFC9C9] dark:bg-[#E43939] text-[#FF0000]"
                   >
                     <p
-                      class="text-[12px] lg:text-[16px] text-[#FF0000] font-500 dark:text-[#FAFAFA]"
+                      class="text-[12px] lg:text-[16px] xl:text-[20px] text-[#FF0000] font-500 dark:text-[#FAFAFA]"
                     >
                       Close
                     </p>
@@ -455,7 +467,7 @@ onMounted(async () => {
                     class="w-full h-full flex items-center justify-center px-10 lg:px-14 py-1.5 rounded-full bg-[#195279] dark:bg-gradient-to-br dark:from-[#195279] dark:from-[50%] dark:to-[#2E97DF] dark:to-[100%]"
                   >
                     <p
-                      class="text-[12px] lg:text-[16px] text-[#FAFAFA] font-500 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                      class="text-[12px] lg:text-[16px] xl:text-[20px] text-[#FAFAFA] font-500 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                     >
                       Apply
                     </p>

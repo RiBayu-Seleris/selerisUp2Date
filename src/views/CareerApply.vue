@@ -15,10 +15,13 @@ import Motivations from "@/components/Careers/StepMotivations.vue";
 import Documents from "@/components/Careers/StepDocuments.vue";
 import Declarations from "@/components/Careers/StepDeclarations.vue";
 
+import ReviewData from "@/components/reusable/ModalsCareerApply.vue";
+
 import { useUtilsStore } from "@/stores/utils.js";
 import { useJobApplyStore } from "@/stores/jobApply.js";
 import axios from "axios";
 import { useRouter } from "vue-router";
+import CloseIcon from "@/components/icons/CloseIcon.vue";
 import Swal from "sweetalert2";
 
 const utils = useUtilsStore();
@@ -29,6 +32,16 @@ const apply_department = computed(() => jobApply.selectedJobData?.department);
 const apply_title = computed(() => jobApply.selectedJobData?.title);
 const apply_work_type = computed(() => jobApply.selectedJobData?.work_type);
 const apply_location = computed(() => jobApply.selectedJobData?.location);
+
+const isModalOpen = ref(false);
+
+const handleToggleModal = () => {
+  isModalOpen.value = true;
+};
+
+const closeModal = () => {
+  isModalOpen.value = false;
+};
 
 // Kondisi jika Job tidak diambil dari list job
 onMounted(() => {
@@ -123,8 +136,8 @@ function selectCountry(country) {
 const showGenderDropdown = ref(false);
 
 const genderOptions = [
-  { value: "male", label: "Laki-laki" },
-  { value: "female", label: "Perempuan" },
+  { value: "Male", label: "Laki-laki" },
+  { value: "Female", label: "Perempuan" },
 ];
 
 function toggleGender() {
@@ -321,7 +334,7 @@ watch(
 /* ============================
    ✅ SUBMIT HANDLER
 =============================== */
-const handleSubmit = async () => {
+const handleApply = async () => {
   // Extract semua value dari reactive formData
   const {
     // PERSONAL
@@ -465,7 +478,6 @@ const handleSubmit = async () => {
       },
     });
 
-    console.log("ini response dari api", response.data.data);
     if (response.data.success === true) {
       // ✅ Notifikasi sukses
       Swal.fire({
@@ -475,7 +487,11 @@ const handleSubmit = async () => {
         showConfirmButton: false,
         timer: 3000,
         timerProgressBar: true,
-      }).then(() => router.push("/career"));
+        didClose: () => {
+          document.body.style.overflow = "auto"; // jaga-jaga
+          router.push("/careers");
+        },
+      });
     }
   } catch (error) {
     console.log("ERROR RESPONSE:", error.response?.data);
@@ -483,6 +499,13 @@ const handleSubmit = async () => {
 
   // console.table(payload);
 };
+
+watch(
+  () => isModalOpen.value,
+  (v) => {
+    document.body.style.overflow = v ? "hidden" : "auto";
+  }
+);
 </script>
 
 <template>
@@ -691,17 +714,199 @@ const handleSubmit = async () => {
           <button
             v-else
             class="bg-[#2AB857] text-white px-4 py-2 rounded-lg ml-auto hover:bg-[#259d4c] transition-all"
-            @click="handleSubmit"
+            @click="handleToggleModal"
           >
+            <!-- @click="handleSubmit" -->
             Submit
           </button>
         </div>
       </div>
     </div>
   </div>
+
+  <!-- Modal Cheking Data -->
+  <transition name="fade">
+    <div
+      v-if="isModalOpen"
+      class="fixed inset-0 z-50 flex flex-col transition-all duration-300 overflow-auto bg-[#1C1B1B]/80"
+    >
+      <transition name="slide">
+        <div class="ml-auto w-full h-auto px-5 py-5 lg:px-20 lg:py-10 z-50">
+          <div
+            class="w-full h-full bg-white dark:bg-[#17181A] relative z-50 flex flex-col items-center rounded-2xl"
+          >
+            <!-- MODALS HEADER  -->
+            <div
+              class="relative w-full h-auto flex flex-col bg-[#2AB857] py-6 px-6 lg:py-10 lg:px-14 rounded-t-2xl"
+            >
+              <div
+                @click="closeModal"
+                class="w-auto h-auto absolute top-6 right-6 xl:right-10 bg-[#94FBB5] rounded-full text-[#2AB857] cursor-pointer"
+              >
+                <CloseIcon class="w-auto h-[28px] lg:h-[36px]" />
+              </div>
+              <div class="w-full h-auto text-[#FAFAFA]">
+                <p class="text-[18px] lg:text-[32px] font-[600]">
+                  Review Your Application
+                </p>
+              </div>
+            </div>
+            <!-- MODALS BODY -->
+            <div
+              class="w-full h-auto py-8 px-6 lg:px-14 xl:px-14 grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-10"
+            >
+              <!-- === Personal Info === -->
+              <ReviewData
+                title="Personal"
+                :items="{
+                  Fullname: formData.fullname,
+                  'Place Of Birth': formData.pob,
+                  'Date Of Birth': utils.fromISODate(formData.dob),
+                  Gender: formData.gender.value,
+                  Email: formData.email,
+                  'Phone Number': formData.phone,
+                  Address: formData.address,
+                  Country: formData.country.label,
+                }"
+              />
+              <!-- === Education === -->
+              <ReviewData
+                title="Education"
+                :items="{
+                  'School Name': formData.schoolName,
+                  'Field Of Study': formData.fieldOfStudy,
+                  Education: formData.education.value,
+                  'Start Date Education': utils.fromISODate(
+                    formData.startDateEducation
+                  ),
+                  'End Date Education': utils.fromISODate(
+                    formData.endDateEducation
+                  ),
+                  'GPA Score': formData.gpaScore,
+                  'certificate ': formData.certificateFileEducation.name,
+                }"
+              />
+              <!-- === Experience === -->
+              <ReviewData
+                title="Experience"
+                :items="{
+                  'Last Company': formData.lastCompany,
+                  'Last Position': formData.lastPosition,
+                  Salary: 'Rp ' + formData.salary,
+                  'Start Date': utils.fromISODate(formData.startDateExperience),
+                  'End Date': utils.fromISODate(formData.endDateExperience),
+                }"
+              />
+              <!-- 'Job Description': formData.jobDescription,
+                  'Achievement Description': formData.achievementDescription, -->
+
+              <!-- === Skills === -->
+              <ReviewData
+                title="Skills"
+                :items="{
+                  'Technical Skills': formData.technicalSkills,
+                  'Soft Skills': formData.softSkills,
+                  Language: formData.languageSkills,
+                }"
+              />
+              <!-- === Motivations === -->
+              <ReviewData
+                title="Motivations"
+                :items="{
+                  'Date of Joining': formData.startDateMotivations,
+                  'Expected Salary': 'Rp ' + formData.expectedSalary,
+                  'Reason for applying': formData.reasonDescription,
+                }"
+              />
+              <!-- === Documents === -->
+              <ReviewData
+                title="Documents"
+                :items="{
+                  'Curriculum Vitae (CV) File': formData.cvFile.name,
+                  'Cover Letter File': formData.clFile.name,
+                  'Diploma File': formData.diplomaFile.name,
+                  'Transcript File': formData.transcriptFile.name,
+                  'Experience Certificate File':
+                    formData.experienceCertificateFile.name,
+                  'Portfolio File': formData.portfolioFile.name,
+                  'Photo File': formData.photoFile.name,
+                }"
+              />
+            </div>
+
+            <!-- MODALS FOOTER -->
+            <div
+              class="relative bottom-0 flex flex-col sm:flex-row sm:justify-between gap-x-10 gap-y-0 w-full h-auto py-5 px-6 lg:px-10 bg-[#D6E8F4] dark:bg-gradient-to-r dark:from-[#424242] dark:from-[75%] dark:to-[#696969] rounded-b-2xl"
+            >
+              <div class="flex items-center w-full gap-x-4" />
+
+              <div
+                class="flex flex-row lg:items-center justify-between lg:justify-end w-full h-auto gap-x-5"
+              >
+                <button
+                  @click="closeModal"
+                  class="w-full h-auto lg:w-auto lg:h-auto p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-r dark:from-[#565656] dark:from-0% dark:to-[#BCBCBC] shadow-lg rounded-full cursor-pointer"
+                >
+                  <div
+                    class="w-full h-full flex items-center justify-center px-10 lg:px-14 py-1.5 rounded-full bg-[#FFC9C9] dark:bg-[#E43939] text-[#FF0000]"
+                  >
+                    <p
+                      class="text-[12px] lg:text-[16px] xl:text-[16px] text-[#FF0000] font-500 dark:text-[#FAFAFA]"
+                    >
+                      Close
+                    </p>
+                  </div>
+                </button>
+                <button
+                  @click="handleApply"
+                  class="w-full h-auto lg:w-auto lg:h-auto p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-r dark:from-[#565656] dark:from-0% dark:to-[#BCBCBC] shadow-lg rounded-full cursor-pointer"
+                >
+                  <div
+                    class="w-full h-full flex items-center justify-center px-10 lg:px-14 py-1.5 rounded-full bg-[#195279] dark:bg-gradient-to-br dark:from-[#195279] dark:from-[50%] dark:to-[#2E97DF] dark:to-[100%]"
+                  >
+                    <p
+                      class="text-[12px] lg:text-[16px] xl:text-[16px] text-[#FAFAFA] font-500 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                    >
+                      Submit
+                    </p>
+                  </div>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </transition>
+    </div>
+  </transition>
 </template>
 
 <style>
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+.slide-enter-active,
+.slide-leave-active {
+  transition: transform 0.3s ease-in-out;
+}
+.slide-enter-from {
+  transform: translateX(100%);
+}
+.slide-enter-to {
+  transform: translateX(0%);
+}
+.slide-leave-from {
+  transform: translateX(0%);
+}
+.slide-leave-to {
+  transform: translateX(100%);
+}
+
 /* === GLOBAL AUTO-FILL FIX === */
 /* Light */
 input:-webkit-autofill {
