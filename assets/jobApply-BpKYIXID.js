@@ -1,0 +1,1 @@
+import{a4 as t}from"./index-CKVHsYtN.js";const s=t("jobApply",{state:()=>({selectedJobId:null,selectedJobData:null}),actions:{setJob(e){this.selectedJobId=e.id,this.selectedJobData=e}}});export{s as u};
