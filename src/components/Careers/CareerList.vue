@@ -146,7 +146,7 @@ onMounted(async () => {
 
   <!-- Frame Jobs -->
   <section
-    class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-6 lg:gap-3 px-8 md:px-8 xl:px-0 mt-10"
+    class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-4 xl:gap-6 px-8 md:px-8 xl:px-0 mt-10"
   >
     <!-- v-for="job in jobPosts" -->
     <div
@@ -170,10 +170,10 @@ onMounted(async () => {
           </p>
         </div>
         <div
-          class="flex flex-wrap gap-x-3 gap-y-4 mt-4 lg:mt-6 pr-0 lg:pr-4 xl:pr-0"
+          class="flex flex-wrap sm:flex-col md:flex-row md:flex-wrap gap-x-3 gap-y-2 sm:gap-y-2 mt-4 lg:mt-6 pr-0 lg:pr-4 xl:pr-0"
         >
           <div
-            class="flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
+            class="max-w-fit flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
           >
             <BoardFill
               sizes="w-[16px] h-[16px] lg:w-[20px] lg:h-[20px] xl:w-[24px] xl:h-[24px]"
@@ -186,7 +186,7 @@ onMounted(async () => {
           </div>
 
           <div
-            class="flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
+            class="max-w-fit flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
           >
             <ProfileFill
               sizes="w-[16px] h-[16px] lg:w-[20px] lg:h-[20px] xl:w-[24px] xl:h-[24px]"
@@ -197,7 +197,7 @@ onMounted(async () => {
             </p>
           </div>
           <div
-            class="flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
+            class="max-w-fit flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
           >
             <MapPin
               sizes="w-[16px] h-[16px] lg:w-[20px] lg:h-[20px] xl:w-[24px] xl:h-[24px]"
@@ -232,7 +232,7 @@ onMounted(async () => {
                 @click="closeModal"
                 class="w-auto h-auto absolute top-6 right-6 bg-[#94FBB5] rounded-full text-[#2AB857] cursor-pointer"
               >
-                <CloseIcon class="w-auto h-[40px]" />
+                <CloseIcon class="w-auto h-[28px] lg:h-[36px]" />
               </div>
               <div class="w-full h-auto text-[#FAFAFA]">
                 <p class="text-[16px] lg:text-[20px] font-[400]">Grow With</p>
@@ -245,13 +245,14 @@ onMounted(async () => {
             <div class="w-full h-auto py-8">
               <div class="w-full h-auto px-8 lg:px-20">
                 <p
-                  class="text-[14px] lg:text-[30px] font-[600] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                  class="text-[16px] lg:text-[24px] xl:text-[30px] font-[600] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                 >
                   {{ selectedJob?.employment_level }} -
                   {{ selectedJob?.title }}
+                  <br class="block sm:hidden" />
                   <span
                     v-if="selectedJob?.salary_status"
-                    class="text-[12px] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                    class="text-[14px] lg:text-[16px] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                   >
                     (
                     {{ selectedJob?.salary_currency }}
@@ -261,7 +262,7 @@ onMounted(async () => {
                   </span>
                 </p>
               </div>
-              <div class="w-full h-auto mt-4 lg:mt-1 px-8 lg:px-20">
+              <div class="w-full h-auto mt-2 lg:mt-1 px-8 lg:px-20">
                 <p
                   class="text-[12px] lg:text-[16px] font-[400] text-[#B8B8B8] dark:text-[#B8B8B8]"
                 >
@@ -269,22 +270,22 @@ onMounted(async () => {
                 </p>
               </div>
               <div
-                class="w-full h-auto flex flex-col lg:flex-row my-8 gap-y-3 lg:gap-y-0 lg:gap-x-5 px-8 lg:px-20"
+                class="w-full h-auto flex flex-wrap lg:flex-row my-8 gap-y-3 lg:gap-y-0 gap-x-5 lg:gap-x-5 px-8 lg:px-20"
               >
                 <div
-                  class="flex flex-row h-auto items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
+                  class="max-w-fit flex flex-row h-auto items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
                 >
                   <BoardFill
                     sizes="w-[16px] h-auto lg:w-[20px] lg:h-auto xl:w-[24px] xl:h-auto"
                   />
                   <p class="font-[400] text-[12px] lg:text-[14px]">
-                    {{ selectedJob?.division_category }}
+                    {{ selectedJob?.department }}
                     Department
                   </p>
                 </div>
 
                 <div
-                  class="flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
+                  class="max-w-fit flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
                 >
                   <ProfileFill
                     sizes="w-[16px] h-auto lg:w-[20px] lg:h-auto xl:w-[24px] xl:h-auto"
@@ -294,7 +295,7 @@ onMounted(async () => {
                   </p>
                 </div>
                 <div
-                  class="flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
+                  class="max-w-fit flex flex-row items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#195279] dark:text-[#FAFAFA] px-5 lg:px-5 py-1 rounded-full border-[1px] border-[#DADADA] dark:border-none"
                 >
                   <MapPin
                     sizes="w-[16px] h-auto lg:w-[20px] lg:h-auto xl:w-[24px] xl:h-auto"
@@ -307,21 +308,25 @@ onMounted(async () => {
               <!-- Ini Deskripsi -->
               <div
                 v-if="selectedJob?.description"
-                class="w-full h-auto mt-10 flex flex-col gap-y-5 text-[14px] lg:text-[18px] font-[400] text-[#323232] dark:text-[#B8B8B8] px-8 lg:px-20"
+                class="w-full h-auto mt-10 flex flex-col gap-y-5 px-8 lg:px-20"
               >
-                <p>{{ selectedJob.description }}</p>
+                <p
+                  class="text-[14px] sm:text-[16px] lg:text-[20px] xl:text-[24px] font-[400] text-[#323232] dark:text-[#B8B8B8]"
+                >
+                  {{ selectedJob.description }}
+                </p>
               </div>
 
               <!--  === GARIS === -->
-              <div class="hidden lg:flex flex-row w-full h-auto gap-x-2 my-10">
+              <div class="hidden sm:flex flex-row w-full h-auto gap-x-2 my-6">
                 <div
-                  v-for="i in 40"
+                  v-for="i in 20"
                   :key="i"
                   class="w-full h-[1px] bg-[#E1E1E1]"
                 />
               </div>
 
-              <div class="lg:hidden flex flex-row w-full h-auto gap-x-2 my-8">
+              <div class="sm:hidden flex flex-row w-full h-auto gap-x-2 my-8">
                 <div
                   v-for="i in 15"
                   :key="i"
@@ -335,11 +340,11 @@ onMounted(async () => {
                 class="w-full h-auto mt-5 lg:mt-10 flex flex-col gap-y-2 text-[18px] font-[400] text-[#323232] dark:text-[#B8B8B8] px-8 lg:px-20"
               >
                 <p
-                  class="text-[20px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
+                  class="text-[16px] lg:text-[20px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
                 >
                   Tanggung Jawab Utama
                 </p>
-                <p class="text-[14px] lg:text-[24px]">
+                <p class="text-[14px] lg:text-[18px] xl:text-[24px]">
                   {{ selectedJob.responsibilities }}
                 </p>
               </div>
@@ -350,11 +355,11 @@ onMounted(async () => {
                 class="w-full h-auto mt-5 lg:mt-10 flex flex-col gap-y-2 text-[18px] font-[400] text-[#323232] dark:text-[#B8B8B8] px-8 lg:px-20"
               >
                 <p
-                  class="text-[20px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
+                  class="text-[16px] lg:text-[20px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
                 >
                   Kualifikasi
                 </p>
-                <p class="text-[14px] lg:text-[24px]">
+                <p class="text-[14px] lg:text-[18px] xl:text-[24px]">
                   {{ selectedJob.requirements }}
                 </p>
               </div>
@@ -365,11 +370,11 @@ onMounted(async () => {
                 class="w-full h-auto mt-5 lg:mt-10 flex flex-col gap-y-2 text-[18px] font-[400] text-[#323232] dark:text-[#B8B8B8] px-8 lg:px-20"
               >
                 <p
-                  class="text-[20px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
+                  class="text-[16px] lg:text-[20px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
                 >
                   Benefit
                 </p>
-                <p class="text-[14px] lg:text-[24px]">
+                <p class="text-[14px] lg:text-[18px] xl:text-[24px]">
                   {{ selectedJob.benefits }}
                 </p>
               </div>
@@ -379,7 +384,7 @@ onMounted(async () => {
                 class="w-full h-auto mt-5 lg:mt-10 flex flex-col gap-y-2 text-[18px] font-[400] text-[#323232] dark:text-[#B8B8B8] px-8 lg:px-20"
               >
                 <p
-                  class="text-[20px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
+                  class="text-[16px] lg:text-[20px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
                 >
                   Requirements:
                 </p>
@@ -387,6 +392,7 @@ onMounted(async () => {
                   <li
                     v-for="(item, index) in selectedJob.requirements.split(',')"
                     :key="index"
+                    class="text-[14px] lg:text-[18px] xl:text-[24px]"
                   >
                     {{ item.trim() }}
                   </li>
@@ -396,7 +402,7 @@ onMounted(async () => {
 
             <!-- MODALS FOOTER -->
             <div
-              class="relative bottom-0 flex flex-col lg:flex-row lg:justify-between gap-x-10 gap-y-5 lg:gap-y-0 w-full h-auto py-5 px-8 lg:px-20 bg-[#D6E8F4] dark:bg-gradient-to-r dark:from-[#424242] dark:from-[75%] dark:to-[#696969] rounded-b-3xl"
+              class="relative bottom-0 flex flex-col sm:flex-row sm:justify-between gap-x-10 gap-y-5 lg:gap-y-0 w-full h-auto py-5 px-8 lg:px-20 bg-[#D6E8F4] dark:bg-gradient-to-r dark:from-[#424242] dark:from-[75%] dark:to-[#696969] rounded-b-3xl"
             >
               <div class="flex items-center w-full gap-x-4">
                 <p class="font-medium text-[#195279] dark:text-[#FAFAFA]">
@@ -432,9 +438,11 @@ onMounted(async () => {
                   class="w-full h-auto lg:w-auto lg:h-auto p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-r dark:from-[#565656] dark:from-0% dark:to-[#BCBCBC] shadow-lg rounded-full cursor-pointer"
                 >
                   <div
-                    class="w-full h-full flex items-center justify-center px-10 lg:px-14 py-2 rounded-full bg-[#FFC9C9] dark:bg-[#E43939] text-[#FF0000]"
+                    class="w-full h-full flex items-center justify-center px-10 lg:px-14 py-1.5 rounded-full bg-[#FFC9C9] dark:bg-[#E43939] text-[#FF0000]"
                   >
-                    <p class="text-[#FF0000] font-500 dark:text-[#FAFAFA]">
+                    <p
+                      class="text-[12px] lg:text-[16px] text-[#FF0000] font-500 dark:text-[#FAFAFA]"
+                    >
                       Close
                     </p>
                   </div>
@@ -444,10 +452,10 @@ onMounted(async () => {
                   class="w-full h-auto lg:w-auto lg:h-auto p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-r dark:from-[#565656] dark:from-0% dark:to-[#BCBCBC] shadow-lg rounded-full cursor-pointer"
                 >
                   <div
-                    class="w-full h-full flex items-center justify-center px-10 lg:px-14 py-2 rounded-full bg-[#195279] dark:bg-gradient-to-br dark:from-[#195279] dark:from-[50%] dark:to-[#2E97DF] dark:to-[100%]"
+                    class="w-full h-full flex items-center justify-center px-10 lg:px-14 py-1.5 rounded-full bg-[#195279] dark:bg-gradient-to-br dark:from-[#195279] dark:from-[50%] dark:to-[#2E97DF] dark:to-[100%]"
                   >
                     <p
-                      class="text-[#FAFAFA] font-500 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                      class="text-[12px] lg:text-[16px] text-[#FAFAFA] font-500 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                     >
                       Apply
                     </p>
