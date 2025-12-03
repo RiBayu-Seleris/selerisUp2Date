@@ -1,19 +1,30 @@
 <template>
-  <div class="w-full h-[100vh] relative z-10">
-    <div class="w-full h-full">
-      <iframe
-        src="https://my.spline.design/nexusmountain-lav7SnLm45btHVuCxZ8BEooT/"
-        frameborder="0"
-        class="w-full h-full relative z-10"
-      ></iframe>
-    </div>
-    <div
-      class="absolute w-auto h-auto top-[200px] left-1/2 -translate-x-1/2 justify-center items-center z-50 text-white"
-    >
-      <p class="text-[40px]">Seleris Meditekno Internasional</p>
-      <p class="text-[18px] text-center tracking-[20px] font-[400]">
-        AI SOLUTION
-      </p>
-    </div>
+  <div class="w-full flex justify-center mt-20">
+    <div ref="container" style="width: 300px; height: 300px"></div>
   </div>
 </template>
+
+<script setup>
+import { ref, onMounted } from "vue";
+import lottie from "lottie-web";
+
+// 📌 Import JSON Anda langsung
+// Pastikan file ada di: src/assets/myAnimation.json
+import myAnimation from "@/assets/videos/videojson.json";
+
+const container = ref(null);
+
+onMounted(() => {
+  lottie.loadAnimation({
+    container: container.value, // elemen target
+    renderer: "svg",
+    loop: true,
+    autoplay: true,
+    animationData: myAnimation, // langsung pakai data JSON
+  });
+});
+</script>
+
+<style scoped>
+/* opsional */
+</style>

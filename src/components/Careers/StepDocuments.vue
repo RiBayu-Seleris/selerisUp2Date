@@ -238,468 +238,467 @@ watch(
     Additional Documents
   </h2>
 
-  <!-- === Curriculum Vitae (CV) === -->
-  <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
-    <label
-      class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
-    >
-      Curriculum Vitae (CV)
-    </label>
-    <div class="w-full h-auto grid grid-cols-2 gap-5">
-      <!-- 🟩 Frame Input Upload -->
-      <div class="w-full h-full flex items-center">
-        <div
-          @click="openCvUpload"
-          class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
-        >
-          <!-- Ikon Upload -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6 text-green-600 mb-1"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
-            />
-          </svg>
-
-          <!-- Teks -->
-          <p class="text-sm">
-            <span>
-              <span class="text-green-600 font-medium"
-                >Klik untuk Mengunggah</span
-              >
-            </span>
-          </p>
-
-          <!-- Input File Asli (disembunyikan) -->
-          <input
-            type="file"
-            ref="cvInput"
-            @change="handleCvChange"
-            class="hidden"
-          />
-        </div>
-      </div>
-      <transition name="fade">
-        <div v-if="cvFileName" class="w-full h-auto flex items-center">
+  <div class="w-full h-auto flex flex-col gap-y-3 lg:gap-y-0">
+    <!-- === Curriculum Vitae (CV) === -->
+    <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+      <label
+        class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+      >
+        Curriculum Vitae (CV)
+      </label>
+      <div
+        class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
+      >
+        <!-- 🟩 Frame Input Upload -->
+        <div class="w-full h-full flex items-center">
           <div
-            class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+            @click="openCvUpload"
+            class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
           >
+            <!-- Ikon Upload -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6 text-green-600 mb-1"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
+              />
+            </svg>
             <!-- Teks -->
             <p class="text-sm">
-              <span class="font-medium">
-                {{ cvFileName || "Belum ada dokumen" }}
-                <span class="text-[#1091F3]"> Lihat Dokumen </span>
+              <span>
+                <span class="text-green-600 font-medium"
+                  >Klik untuk Mengunggah</span
+                >
               </span>
             </p>
+            <!-- Input File Asli (disembunyikan) -->
+            <input
+              type="file"
+              ref="cvInput"
+              @change="handleCvChange"
+              class="hidden"
+            />
           </div>
         </div>
-      </transition>
+        <transition name="fade">
+          <div v-if="cvFileName" class="w-full h-auto flex items-center">
+            <div
+              class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+            >
+              <!-- Teks -->
+              <p class="text-sm">
+                <span class="font-medium">
+                  {{ cvFileName || "Belum ada dokumen" }}
+                  <span class="text-[#1091F3]"> Lihat Dokumen </span>
+                </span>
+              </p>
+            </div>
+          </div>
+        </transition>
+      </div>
     </div>
-  </div>
-
-  <!-- === Cover Letter === -->
-  <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
-    <label
-      class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
-    >
-      Cover Letter
-    </label>
-    <div class="w-full h-auto grid grid-cols-2 gap-5">
-      <!-- 🟩 Frame Input Upload -->
-      <div class="w-full h-full flex items-center">
-        <div
-          @click="openClUpload"
-          class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
-        >
-          <!-- Ikon Upload -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6 text-green-600 mb-1"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
-            />
-          </svg>
-
-          <!-- Teks -->
-          <p class="text-sm">
-            <span>
-              <span class="text-green-600 font-medium"
-                >Klik untuk Mengunggah</span
-              >
-            </span>
-          </p>
-
-          <!-- Input File Asli (disembunyikan) -->
-          <input
-            type="file"
-            ref="clInput"
-            @change="handleClChange"
-            class="hidden"
-          />
-        </div>
-      </div>
-      <transition name="fade">
-        <div v-if="clFileName" class="w-full h-auto flex items-center">
+    <!-- === Cover Letter === -->
+    <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+      <label
+        class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+      >
+        Cover Letter
+      </label>
+      <div
+        class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
+      >
+        <!-- 🟩 Frame Input Upload -->
+        <div class="w-full h-full flex items-center">
           <div
-            class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+            @click="openClUpload"
+            class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
           >
+            <!-- Ikon Upload -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6 text-green-600 mb-1"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
+              />
+            </svg>
             <!-- Teks -->
             <p class="text-sm">
-              <span class="font-medium">
-                {{ clFileName || "Belum ada dokumen" }}
-                <span class="text-[#1091F3]"> Lihat Dokumen </span>
+              <span>
+                <span class="text-green-600 font-medium"
+                  >Klik untuk Mengunggah</span
+                >
               </span>
             </p>
+            <!-- Input File Asli (disembunyikan) -->
+            <input
+              type="file"
+              ref="clInput"
+              @change="handleClChange"
+              class="hidden"
+            />
           </div>
         </div>
-      </transition>
+        <transition name="fade">
+          <div v-if="clFileName" class="w-full h-auto flex items-center">
+            <div
+              class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+            >
+              <!-- Teks -->
+              <p class="text-sm">
+                <span class="font-medium">
+                  {{ clFileName || "Belum ada dokumen" }}
+                  <span class="text-[#1091F3]"> Lihat Dokumen </span>
+                </span>
+              </p>
+            </div>
+          </div>
+        </transition>
+      </div>
     </div>
-  </div>
-
-  <!-- === Diploma === -->
-  <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
-    <label
-      class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
-    >
-      Diploma
-    </label>
-    <div class="w-full h-auto grid grid-cols-2 gap-5">
-      <!-- 🟩 Frame Input Upload -->
-      <div class="w-full h-full flex items-center">
-        <div
-          @click="openDiplomaUpload"
-          class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
-        >
-          <!-- Ikon Upload -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6 text-green-600 mb-1"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
-            />
-          </svg>
-
-          <!-- Teks -->
-          <p class="text-sm">
-            <span>
-              <span class="text-green-600 font-medium"
-                >Klik untuk Mengunggah</span
-              >
-            </span>
-          </p>
-
-          <!-- Input File Asli (disembunyikan) -->
-          <input
-            type="file"
-            ref="diplomaInput"
-            @change="handleDiplomaChange"
-            class="hidden"
-          />
-        </div>
-      </div>
-      <transition name="fade">
-        <div v-if="diplomaFileName" class="w-full h-auto flex items-center">
+    <!-- === Diploma === -->
+    <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+      <label
+        class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+      >
+        Diploma
+      </label>
+      <div
+        class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
+      >
+        <!-- 🟩 Frame Input Upload -->
+        <div class="w-full h-full flex items-center">
           <div
-            class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+            @click="openDiplomaUpload"
+            class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
           >
+            <!-- Ikon Upload -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6 text-green-600 mb-1"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
+              />
+            </svg>
             <!-- Teks -->
             <p class="text-sm">
-              <span class="font-medium">
-                {{ diplomaFileName || "Belum ada dokumen" }}
-                <span class="text-[#1091F3]"> Lihat Dokumen </span>
+              <span>
+                <span class="text-green-600 font-medium"
+                  >Klik untuk Mengunggah</span
+                >
               </span>
             </p>
+            <!-- Input File Asli (disembunyikan) -->
+            <input
+              type="file"
+              ref="diplomaInput"
+              @change="handleDiplomaChange"
+              class="hidden"
+            />
           </div>
         </div>
-      </transition>
+        <transition name="fade">
+          <div v-if="diplomaFileName" class="w-full h-auto flex items-center">
+            <div
+              class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+            >
+              <!-- Teks -->
+              <p class="text-sm">
+                <span class="font-medium">
+                  {{ diplomaFileName || "Belum ada dokumen" }}
+                  <span class="text-[#1091F3]"> Lihat Dokumen </span>
+                </span>
+              </p>
+            </div>
+          </div>
+        </transition>
+      </div>
     </div>
-  </div>
-
-  <!-- === Transkrip Nilai === -->
-  <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
-    <label
-      class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
-    >
-      Academic Transcript
-    </label>
-    <div class="w-full h-auto grid grid-cols-2 gap-5">
-      <!-- 🟩 Frame Input Upload -->
-      <div class="w-full h-full flex items-center">
-        <div
-          @click="openTranscriptUpload"
-          class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
-        >
-          <!-- Ikon Upload -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6 text-green-600 mb-1"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
-            />
-          </svg>
-
-          <!-- Teks -->
-          <p class="text-sm">
-            <span>
-              <span class="text-green-600 font-medium"
-                >Klik untuk Mengunggah</span
-              >
-            </span>
-          </p>
-
-          <!-- Input File Asli (disembunyikan) -->
-          <input
-            type="file"
-            ref="transcriptInput"
-            @change="handleTranscriptChange"
-            class="hidden"
-          />
-        </div>
-      </div>
-      <transition name="fade">
-        <div v-if="transcriptFileName" class="w-full h-auto flex items-center">
+    <!-- === Transkrip Nilai === -->
+    <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+      <label
+        class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+      >
+        Academic Transcript
+      </label>
+      <div
+        class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
+      >
+        <!-- 🟩 Frame Input Upload -->
+        <div class="w-full h-full flex items-center">
           <div
-            class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+            @click="openTranscriptUpload"
+            class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
           >
+            <!-- Ikon Upload -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6 text-green-600 mb-1"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
+              />
+            </svg>
             <!-- Teks -->
             <p class="text-sm">
-              <span class="font-medium">
-                {{ transcriptFileName || "Belum ada dokumen" }}
-                <span class="text-[#1091F3]"> Lihat Dokumen </span>
+              <span>
+                <span class="text-green-600 font-medium"
+                  >Klik untuk Mengunggah</span
+                >
               </span>
             </p>
+            <!-- Input File Asli (disembunyikan) -->
+            <input
+              type="file"
+              ref="transcriptInput"
+              @change="handleTranscriptChange"
+              class="hidden"
+            />
           </div>
         </div>
-      </transition>
+        <transition name="fade">
+          <div
+            v-if="transcriptFileName"
+            class="w-full h-auto flex items-center"
+          >
+            <div
+              class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+            >
+              <!-- Teks -->
+              <p class="text-sm">
+                <span class="font-medium">
+                  {{ transcriptFileName || "Belum ada dokumen" }}
+                  <span class="text-[#1091F3]"> Lihat Dokumen </span>
+                </span>
+              </p>
+            </div>
+          </div>
+        </transition>
+      </div>
     </div>
-  </div>
-
-  <!-- === •	Sertifikat pelatihan / pengalaman kerja === -->
-  <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
-    <label
-      class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
-    >
-      Training/Work Experience Certificates
-    </label>
-    <div class="w-full h-auto grid grid-cols-2 gap-5">
-      <!-- 🟩 Frame Input Upload -->
-      <div class="w-full h-full flex items-center">
-        <div
-          @click="openExperienceCertificateUpload"
-          class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
-        >
-          <!-- Ikon Upload -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6 text-green-600 mb-1"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
-            />
-          </svg>
-
-          <!-- Teks -->
-          <p class="text-sm">
-            <span>
-              <span class="text-green-600 font-medium"
-                >Klik untuk Mengunggah</span
-              >
-            </span>
-          </p>
-
-          <!-- Input File Asli (disembunyikan) -->
-          <input
-            type="file"
-            ref="experienceCertificateInput"
-            @change="handleExperienceCertificateChange"
-            class="hidden"
-          />
-        </div>
-      </div>
-      <transition name="fade">
-        <div
-          v-if="experienceCertificateFileName"
-          class="w-full h-auto flex items-center"
-        >
+    <!-- === •	Sertifikat pelatihan / pengalaman kerja === -->
+    <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+      <label
+        class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+      >
+        Training/Work Experience Certificates
+      </label>
+      <div
+        class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
+      >
+        <!-- 🟩 Frame Input Upload -->
+        <div class="w-full h-full flex items-center">
           <div
-            class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+            @click="openExperienceCertificateUpload"
+            class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
           >
+            <!-- Ikon Upload -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6 text-green-600 mb-1"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
+              />
+            </svg>
             <!-- Teks -->
             <p class="text-sm">
-              <span class="font-medium">
-                {{ experienceCertificateFileName || "Belum ada dokumen" }}
-                <span class="text-[#1091F3]"> Lihat Dokumen </span>
+              <span>
+                <span class="text-green-600 font-medium"
+                  >Klik untuk Mengunggah</span
+                >
               </span>
             </p>
+            <!-- Input File Asli (disembunyikan) -->
+            <input
+              type="file"
+              ref="experienceCertificateInput"
+              @change="handleExperienceCertificateChange"
+              class="hidden"
+            />
           </div>
         </div>
-      </transition>
+        <transition name="fade">
+          <div
+            v-if="experienceCertificateFileName"
+            class="w-full h-auto flex items-center"
+          >
+            <div
+              class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+            >
+              <!-- Teks -->
+              <p class="text-sm">
+                <span class="font-medium">
+                  {{ experienceCertificateFileName || "Belum ada dokumen" }}
+                  <span class="text-[#1091F3]"> Lihat Dokumen </span>
+                </span>
+              </p>
+            </div>
+          </div>
+        </transition>
+      </div>
     </div>
-  </div>
-
-  <!-- === Portfolio === -->
-  <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
-    <label
-      class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
-    >
-      Portfolio
-    </label>
-    <div class="w-full h-auto grid grid-cols-2 gap-5">
-      <!-- 🟩 Frame Input Upload -->
-      <div class="w-full h-full flex items-center">
-        <div
-          @click="openPortfolioUpload"
-          class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
-        >
-          <!-- Ikon Upload -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6 text-green-600 mb-1"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
-            />
-          </svg>
-
-          <!-- Teks -->
-          <p class="text-sm">
-            <span>
-              <span class="text-green-600 font-medium"
-                >Klik untuk Mengunggah</span
-              >
-            </span>
-          </p>
-
-          <!-- Input File Asli (disembunyikan) -->
-          <input
-            type="file"
-            ref="portfolioInput"
-            @change="handlePortfolioChange"
-            class="hidden"
-          />
-        </div>
-      </div>
-      <transition name="fade">
-        <div v-if="portfolioFileName" class="w-full h-auto flex items-center">
+    <!-- === Portfolio === -->
+    <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+      <label
+        class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+      >
+        Portfolio
+      </label>
+      <div
+        class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
+      >
+        <!-- 🟩 Frame Input Upload -->
+        <div class="w-full h-full flex items-center">
           <div
-            class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+            @click="openPortfolioUpload"
+            class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
           >
+            <!-- Ikon Upload -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6 text-green-600 mb-1"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
+              />
+            </svg>
             <!-- Teks -->
             <p class="text-sm">
-              <span class="font-medium">
-                {{ portfolioFileName || "Belum ada dokumen" }}
-                <span class="text-[#1091F3]"> Lihat Dokumen </span>
+              <span>
+                <span class="text-green-600 font-medium"
+                  >Klik untuk Mengunggah</span
+                >
               </span>
             </p>
+            <!-- Input File Asli (disembunyikan) -->
+            <input
+              type="file"
+              ref="portfolioInput"
+              @change="handlePortfolioChange"
+              class="hidden"
+            />
           </div>
         </div>
-      </transition>
+        <transition name="fade">
+          <div v-if="portfolioFileName" class="w-full h-auto flex items-center">
+            <div
+              class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+            >
+              <!-- Teks -->
+              <p class="text-sm">
+                <span class="font-medium">
+                  {{ portfolioFileName || "Belum ada dokumen" }}
+                  <span class="text-[#1091F3]"> Lihat Dokumen </span>
+                </span>
+              </p>
+            </div>
+          </div>
+        </transition>
+      </div>
     </div>
-  </div>
-
-  <!-- === Recent formal photograph === -->
-  <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
-    <label
-      class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
-    >
-      Recent formal photograph
-    </label>
-    <div class="w-full h-auto grid grid-cols-2 gap-5">
-      <!-- 🟩 Frame Input Upload -->
-      <div class="w-full h-full flex items-center">
-        <div
-          @click="openPhotoUpload"
-          class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
-        >
-          <!-- Ikon Upload -->
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6 text-green-600 mb-1"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
-            />
-          </svg>
-
-          <!-- Teks -->
-          <p class="text-sm">
-            <span>
-              <span class="text-green-600 font-medium"
-                >Klik untuk Mengunggah</span
-              >
-            </span>
-          </p>
-
-          <!-- Input File Asli (disembunyikan) -->
-          <input
-            type="file"
-            ref="photoInput"
-            @change="handlePhotoChange"
-            class="hidden"
-          />
-        </div>
-      </div>
-      <transition name="fade">
-        <div v-if="photoFileName" class="w-full h-auto flex items-center">
+    <!-- === Recent formal photograph === -->
+    <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+      <label
+        class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+      >
+        Recent formal photograph
+      </label>
+      <div
+        class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
+      >
+        <!-- 🟩 Frame Input Upload -->
+        <div class="w-full h-full flex items-center">
           <div
-            class="w-full h-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+            @click="openPhotoUpload"
+            class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
           >
+            <!-- Ikon Upload -->
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              stroke-width="1.5"
+              stroke="currentColor"
+              class="w-6 h-6 text-green-600 mb-1"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
+              />
+            </svg>
             <!-- Teks -->
             <p class="text-sm">
-              <span class="font-medium">
-                {{ photoFileName || "Belum ada dokumen" }}
-                <span class="text-[#1091F3]"> Lihat Dokumen </span>
+              <span>
+                <span class="text-green-600 font-medium"
+                  >Klik untuk Mengunggah</span
+                >
               </span>
             </p>
+            <!-- Input File Asli (disembunyikan) -->
+            <input
+              type="file"
+              ref="photoInput"
+              @change="handlePhotoChange"
+              class="hidden"
+            />
           </div>
         </div>
-      </transition>
+        <transition name="fade">
+          <div v-if="photoFileName" class="w-full h-auto flex items-center">
+            <div
+              class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
+            >
+              <!-- Teks -->
+              <p class="text-sm">
+                <span class="font-medium">
+                  {{ photoFileName || "Belum ada dokumen" }}
+                  <span class="text-[#1091F3]"> Lihat Dokumen </span>
+                </span>
+              </p>
+            </div>
+          </div>
+        </transition>
+      </div>
     </div>
   </div>
 </template>

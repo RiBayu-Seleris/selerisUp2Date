@@ -173,12 +173,12 @@ const viewFile = (file) => {
 <template>
   <h2 class="text-xl font-semibold text-[#195279] mb-4">Education</h2>
 
-  <div class="w-full h-auto flex flex-col gap-y-5">
-    <div class="flex gap-x-5">
+  <div class="w-full h-auto flex flex-col gap-y-3 lg:gap-y-0">
+    <div class="flex flex-col lg:flex-row gap-y-3 lg:gap-y-0 lg:gap-x-5">
       <!-- Highest Education DROPDOWN -->
       <div ref="educationWrapper" class="flex flex-col w-full">
         <label
-          class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+          class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] lg:mb-1"
         >
           Highest Level of Education <span class="text-red-500">*</span>
         </label>
@@ -233,7 +233,7 @@ const viewFile = (file) => {
       <!-- School/University -->
       <div class="flex flex-col w-full">
         <label
-          class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+          class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] lg:mb-1"
         >
           School / University Name <span class="text-red-500">*</span>
         </label>
@@ -249,7 +249,7 @@ const viewFile = (file) => {
     </div>
     <div class="flex flex-col w-full">
       <label
-        class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+        class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] lg:mb-1"
       >
         Field of Study <span class="text-red-500">*</span>
       </label>
@@ -263,18 +263,20 @@ const viewFile = (file) => {
       />
     </div>
     <!-- FRAME Tanggal Masuk dan Lulus serta Nilai Rata-Rata (GPA) -->
-    <div class="flex flex-row w-full h-auto gap-x-5">
+    <div
+      class="flex flex-col lg:flex-row w-full h-auto gap-y-3 lg:gap-y-0 lg:gap-x-5"
+    >
       <!-- Tanggal Masuk -->
       <div class="flex flex-col w-full">
         <label
-          class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+          class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] lg:mb-1"
         >
           Start Date Of Study <span class="text-red-500">*</span>
         </label>
         <!-- ref="dobWrapper" -->
         <div
           ref="startDateWrapper"
-          class="col-span-12 sm:col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656] mt-3 sm:mt-0"
+          class="col-span-12 sm:col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656] mt-0"
         >
           <div
             class="startdate-box relative w-full h-full bg-white dark:bg-[#323232] rounded-[5px]"
@@ -342,14 +344,14 @@ const viewFile = (file) => {
       <!-- Tanggal Selesai -->
       <div class="flex flex-col w-full">
         <label
-          class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+          class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] lg:mb-1"
         >
           End Date Of Study <span class="text-red-500">*</span>
         </label>
         <!-- ref="dobWrapper" -->
         <div
           ref="endDateWrapper"
-          class="col-span-12 sm:col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656] mt-3 sm:mt-0"
+          class="col-span-12 sm:col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656] mt-0"
         >
           <div
             class="enddate-box relative w-full h-full bg-white dark:bg-[#323232] rounded-[5px]"
@@ -417,7 +419,7 @@ const viewFile = (file) => {
       <!-- GPA ATAU NILAI RATA-RATA -->
       <div class="flex flex-col w-full h-full">
         <label
-          class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+          class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] lg:mb-1"
         >
           GPA (Grade Point Average) <span class="text-red-500">*</span>
         </label>
@@ -433,7 +435,7 @@ const viewFile = (file) => {
     <!-- Dokumen File Pendukung -->
     <div class="flex flex-col w-full">
       <label
-        class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
+        class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] lg:mb-1"
       >
         Additional training certificates, if any (combine into a single PDF)
       </label>
@@ -456,7 +458,7 @@ const viewFile = (file) => {
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="w-6 h-6 text-green-600 mb-1"
+              class="w-6 h-6 text-green-600 lg:mb-1"
             >
               <path
                 stroke-linecap="round"

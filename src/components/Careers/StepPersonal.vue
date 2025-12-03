@@ -90,7 +90,7 @@ onBeforeUnmount(() => {
 <template>
   <h2 class="text-xl font-semibold text-[#195279] mb-4">Personal Info</h2>
 
-  <div class="w-full h-auto flex flex-col gap-y-3">
+  <div class="w-full h-auto flex flex-col gap-y-3 lg:gap-y-0">
     <!-- FULL NAME -->
     <div class="flex flex-col w-full">
       <label
@@ -109,7 +109,7 @@ onBeforeUnmount(() => {
       />
     </div>
     <!-- POB DOB -->
-    <div class="w-full h-auto flex flex-row gap-x-5">
+    <div class="w-full h-auto flex flex-col lg:flex-row gap-y-2 lg:gap-x-5">
       <div class="w-full h-full flex flex-col">
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
@@ -136,14 +136,14 @@ onBeforeUnmount(() => {
 
         <div
           ref="dobWrapper"
-          class="col-span-12 sm:col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656] mt-3 sm:mt-0"
+          class="col-span-12 sm:col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656] mt-0"
         >
           <div
             class="daterange-box relative w-full h-full bg-white dark:bg-[#323232] rounded-[5px]"
           >
             <div
               @click.stop="toggleDob"
-              class="w-full h-full flex flex-row items-center px-6 sm:px-3 py-2 rounded-[5px] justify-between cursor-pointer select-none"
+              class="w-full h-full flex flex-row items-center px-3 sm:px-3 py-2 rounded-[5px] justify-between cursor-pointer select-none"
             >
               <div class="flex items-center">
                 <span
