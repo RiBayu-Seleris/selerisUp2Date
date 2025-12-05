@@ -24,7 +24,7 @@ const emit = defineEmits([
 
   <!-- Skills -->
   <!-- <div class="flex flex-row w-full h-auto gap-10"> -->
-  <div class="w-full h-auto flex flex-col gap-y-3 lg:gap-y-0">
+  <div class="w-full h-auto flex flex-col gap-y-3">
     <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"

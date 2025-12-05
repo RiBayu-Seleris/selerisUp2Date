@@ -24,6 +24,8 @@ export const clientLogos = [
   ).href,
   new URL("@/assets/images/clients-and-partners/bumida.png", import.meta.url)
     .href,
+  new URL("@/assets/images/clients-and-partners/bosowa.png", import.meta.url)
+    .href,
 ];
 
 export const clientLogosDark = [
@@ -63,6 +65,10 @@ export const clientLogosDark = [
   ).href,
   new URL(
     "@/assets/images/clients-and-partners/bumida-dark.png",
+    import.meta.url
+  ).href,
+  new URL(
+    "@/assets/images/clients-and-partners/bosowa-dark.png",
     import.meta.url
   ).href,
 ];

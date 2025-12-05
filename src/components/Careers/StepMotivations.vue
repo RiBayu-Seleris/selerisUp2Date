@@ -116,7 +116,7 @@ onBeforeUnmount(() => {
     Motivation & Preferences
   </h2>
 
-  <div class="w-full h-auto flex flex-col gap-y-3 lg:gap-y-0">
+  <div class="w-full h-auto flex flex-col gap-y-3">
     <!-- Date of Joining -->
     <div class="flex flex-col w-full">
       <label

@@ -90,7 +90,7 @@ onBeforeUnmount(() => {
 <template>
   <h2 class="text-xl font-semibold text-[#195279] mb-4">Personal Info</h2>
 
-  <div class="w-full h-auto flex flex-col gap-y-3 lg:gap-y-0">
+  <div class="w-full h-auto flex flex-col gap-y-3">
     <!-- FULL NAME -->
     <div class="flex flex-col w-full">
       <label

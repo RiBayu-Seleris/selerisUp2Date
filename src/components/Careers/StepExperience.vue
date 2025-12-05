@@ -204,9 +204,9 @@ onBeforeUnmount(() => {
 <template>
   <h2 class="text-xl font-semibold text-[#195279] mb-4">Experience</h2>
 
-  <div class="w-full h-auto flex flex-col gap-y-3 lg:gap-y-0">
+  <div class="w-full h-auto flex flex-col gap-y-3">
     <!-- Nama Perusahaan Sebelumnya -->
-    <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+    <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
@@ -222,7 +222,7 @@ onBeforeUnmount(() => {
       />
     </div>
     <!-- Jabatan Terakhis -->
-    <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+    <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
@@ -240,7 +240,7 @@ onBeforeUnmount(() => {
     <!-- Start + End Date job -->
     <div class="flex gap-10">
       <!-- Start Date -->
-      <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+      <div class="flex flex-col w-full">
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
         >
@@ -308,7 +308,7 @@ onBeforeUnmount(() => {
         </div>
       </div>
       <!-- End Date -->
-      <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+      <div class="flex flex-col w-full">
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
         >
@@ -376,7 +376,7 @@ onBeforeUnmount(() => {
         </div>
       </div>
     </div>
-    <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+    <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
@@ -399,7 +399,7 @@ onBeforeUnmount(() => {
       </div>
     </div>
     <!-- Deskripsi Pekerjaan -->
-    <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+    <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
@@ -415,7 +415,7 @@ onBeforeUnmount(() => {
       </div>
     </div>
     <!-- Prestasi -->
-    <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+    <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >

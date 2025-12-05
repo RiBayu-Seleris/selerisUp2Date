@@ -238,9 +238,9 @@ watch(
     Additional Documents
   </h2>
 
-  <div class="w-full h-auto flex flex-col gap-y-3 lg:gap-y-0">
+  <div class="w-full h-auto flex flex-col gap-y-3">
     <!-- === Curriculum Vitae (CV) === -->
-    <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+    <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
@@ -305,7 +305,7 @@ watch(
       </div>
     </div>
     <!-- === Cover Letter === -->
-    <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+    <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
@@ -370,7 +370,7 @@ watch(
       </div>
     </div>
     <!-- === Diploma === -->
-    <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+    <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
@@ -435,7 +435,7 @@ watch(
       </div>
     </div>
     <!-- === Transkrip Nilai === -->
-    <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+    <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
@@ -503,7 +503,7 @@ watch(
       </div>
     </div>
     <!-- === •	Sertifikat pelatihan / pengalaman kerja === -->
-    <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+    <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
@@ -571,7 +571,7 @@ watch(
       </div>
     </div>
     <!-- === Portfolio === -->
-    <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+    <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
@@ -636,7 +636,7 @@ watch(
       </div>
     </div>
     <!-- === Recent formal photograph === -->
-    <div class="flex flex-col w-full lg:mb-3 xl:mb-4">
+    <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
