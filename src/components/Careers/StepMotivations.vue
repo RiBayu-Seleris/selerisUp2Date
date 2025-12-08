@@ -112,10 +112,6 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <h2 class="text-xl font-semibold text-[#195279] mb-4">
-    Motivation & Preferences
-  </h2>
-
   <div class="w-full h-auto flex flex-col gap-y-3">
     <!-- Date of Joining -->
     <div class="flex flex-col w-full">

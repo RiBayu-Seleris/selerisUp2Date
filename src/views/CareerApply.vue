@@ -6,6 +6,7 @@ import {
   watch,
   reactive,
   computed,
+  nextTick,
 } from "vue";
 import PersonalInfo from "@/components/Careers/StepPersonal.vue";
 import Education from "@/components/Careers/StepEducation.vue";
@@ -112,6 +113,33 @@ const formData = reactive({
   dataPermission: false,
   backgroundCheck: false,
 });
+
+const hasExperience = ref(false);
+
+const selectExperience = (value) => {
+  hasExperience.value = value;
+  // Optional: reset form data kalau tidak ada pengalaman
+  if (!value) {
+    formData.lastCompany = "-";
+    formData.lastPosition = "-";
+    formData.salary = 0;
+    formData.startDateExperience = "";
+    formData.endDateExperience = "";
+    formData.jobDescription = "-";
+    formData.achievementDescription = "-";
+
+    // langsung lanjut ke step berikutnya
+    nextStep();
+  } else {
+    formData.lastCompany = "";
+    formData.lastPosition = "";
+    formData.salary = 0;
+    formData.startDateExperience = "";
+    formData.endDateExperience = "";
+    formData.jobDescription = "";
+    formData.achievementDescription = "";
+  }
+};
 
 /* ============================
    ✅ COUNTRY DROPDOWN
@@ -237,8 +265,29 @@ const scrollToTop = () => {
   });
 };
 
+// const scrollToTop = () => {
+//   setTimeout(() => {
+//     window.scrollTo({ top: 0, behavior: "smooth" });
+//   }, 160); // delay kecil untuk menunggu DOM stabil
+// };
+
 const nextStep = () => {
-  if (currentStep.value < steps.length - 1) currentStep.value++;
+  const isValid = stepValidators[currentStep.value]();
+  // console.log(`Validator result: ${currentStep.value}`, isValid);
+
+  if (!isValid) {
+    Swal.fire({
+      icon: "error",
+      title: "Incomplete Data",
+      text: "Please complete all required fields before continuing.",
+    });
+    return;
+  }
+
+  if (currentStep.value < steps.length - 1) {
+    currentStep.value++;
+  }
+
   scrollToTop();
 };
 
@@ -293,7 +342,7 @@ const uploadFile = async (file, urlField) => {
 
     formData[urlField] = response.data.data.path;
 
-    console.log(`Sukses Upload File ${urlField}`, response.data.data.path);
+    // console.log(`Sukses Upload File ${urlField}`, response.data.data.path);
   } catch (err) {
     console.error("Upload failed:", err);
   }
@@ -330,6 +379,62 @@ watch(
     }
   }
 );
+
+/* ============================
+   Step Validator
+=============================== */
+const stepValidators = [
+  // STEP 0 — Personal
+  () =>
+    Boolean(
+      formData.fullname?.trim() &&
+        formData.pob?.trim() &&
+        formData.dob?.trim() &&
+        formData.gender &&
+        formData.email?.trim() &&
+        formData.phone?.trim() &&
+        formData.address?.trim() &&
+        formData.country
+    ),
+
+  // STEP 1 — Education
+  () =>
+    Boolean(
+      formData.schoolName?.trim() &&
+        formData.fieldOfStudy?.trim() &&
+        formData.education &&
+        formData.startDateEducation &&
+        formData.endDateEducation &&
+        formData.gpaScore?.trim()
+    ),
+
+  // STEP 2 — Experience
+  () => {
+    // Jika user tidak punya pengalaman → step valid
+    if (!hasExperience.value) return true;
+
+    // Jika punya pengalaman → semua field wajib diisi
+    return Boolean(
+      formData.lastCompany?.trim() &&
+        formData.lastPosition?.trim() &&
+        formData.startDateExperience &&
+        formData.endDateExperience &&
+        formData.jobDescription?.trim()
+    );
+  },
+
+  // STEP 3 — Skills
+  () => true, // tidak required
+
+  // STEP 4 — Motivations
+  () => true,
+
+  // STEP 6 — Declaration
+  () =>
+    Boolean(
+      formData.trueData && formData.dataPermission && formData.backgroundCheck
+    ),
+];
 
 /* ============================
    ✅ SUBMIT HANDLER
@@ -494,7 +599,7 @@ const handleApply = async () => {
       });
     }
   } catch (error) {
-    console.log("ERROR RESPONSE:", error.response?.data);
+    // console.log("ERROR RESPONSE:", error.response?.data);
   }
 
   // console.table(payload);
@@ -610,6 +715,9 @@ watch(
       <!-- Form -->
       <div class="mt-16 p-0">
         <div v-if="currentStep === 0">
+          <h2 class="text-xl font-semibold text-[#195279] mb-4">
+            Personal Info
+          </h2>
           <PersonalInfo
             v-model:fullname="formData.fullname"
             v-model:selectedGender="formData.gender"
@@ -626,9 +734,11 @@ watch(
             @toggleGender="toggleGender"
             @toggleCountry="toggleCountry"
             @closeAll="closeAll"
+            :required="true"
           />
         </div>
         <div v-if="currentStep === 1">
+          <h2 class="text-xl font-semibold text-[#195279] mb-4">Education</h2>
           <Education
             v-model:schoolName="formData.schoolName"
             v-model:fieldOfStudy="formData.fieldOfStudy"
@@ -644,7 +754,30 @@ watch(
           />
         </div>
         <div v-if="currentStep === 2">
+          <h2 class="text-xl font-semibold text-[#195279] mb-4">Experience</h2>
+          <div class="flex flex-col w-full h-auto gap-y-3">
+            <div class="w-full h-auto">
+              <p class="text-[20px]">
+                Apakah anda memiliki pengalaman terakhir?
+              </p>
+            </div>
+            <div class="flex flex-row w-full h-auto gap-x-5">
+              <button
+                class="max-w-fit h-auto px-10 py-2 bg-red-400"
+                @click="selectExperience(true)"
+              >
+                Ya
+              </button>
+              <button
+                class="max-w-fit h-auto px-10 py-2 bg-red-400"
+                @click="selectExperience(false)"
+              >
+                Tidak
+              </button>
+            </div>
+          </div>
           <Experience
+            v-if="hasExperience"
             v-model:lastCompany="formData.lastCompany"
             v-model:lastPosition="formData.lastPosition"
             v-model:salary="formData.salary"
@@ -655,6 +788,9 @@ watch(
           />
         </div>
         <div v-if="currentStep === 3">
+          <h2 class="text-xl font-semibold text-[#195279] mb-4">
+            Skills & Competencies
+          </h2>
           <Skills
             v-model:technicalSkills="formData.technicalSkills"
             v-model:softSkills="formData.softSkills"
@@ -662,6 +798,9 @@ watch(
           />
         </div>
         <div v-if="currentStep === 4">
+          <h2 class="text-xl font-semibold text-[#195279] mb-4">
+            Motivation & Preferences
+          </h2>
           <Motivations
             v-model:startDate="formData.startDateMotivations"
             v-model:salary="formData.expectedSalary"
@@ -669,6 +808,9 @@ watch(
           />
         </div>
         <div v-if="currentStep === 5">
+          <h2 class="text-xl font-semibold text-[#195279] mb-4">
+            Additional Documents
+          </h2>
           <Documents
             v-model:cvFile="formData.cvFile"
             v-model:clFile="formData.clFile"
@@ -682,6 +824,9 @@ watch(
           />
         </div>
         <div v-if="currentStep === 6">
+          <h2 class="text-xl font-semibold text-[#195279] mb-4">
+            Declaration and Consent
+          </h2>
           <Declarations
             v-model:trueData="formData.trueData"
             v-model:dataPermission="formData.dataPermission"
@@ -708,6 +853,7 @@ watch(
             @click="nextStep"
             class="bg-[#2AB857] text-white px-4 py-2 rounded-lg ml-auto hover:bg-[#259d4c] transition-all"
           >
+            <!-- :disabled="!stepValidators[currentStep]" -->
             Next
           </button>
 
@@ -929,5 +1075,9 @@ input:-webkit-autofill:focus {
 .dark input:-webkit-autofill:focus {
   -webkit-box-shadow: 0 0 0 1px #2ab857 inset, 0 0 0px 1000px #323232 inset !important;
   -webkit-text-fill-color: #fafafa !important;
+}
+
+.swal2-shown {
+  padding-right: 0 !important;
 }
 </style>

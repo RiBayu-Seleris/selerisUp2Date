@@ -171,8 +171,6 @@ const viewFile = (file) => {
 </script>
 
 <template>
-  <h2 class="text-xl font-semibold text-[#195279] mb-4">Education</h2>
-
   <div class="w-full h-auto flex flex-col gap-y-3">
     <div class="flex flex-col lg:flex-row gap-y-3 lg:gap-y-0 lg:gap-x-5">
       <!-- Highest Education DROPDOWN -->

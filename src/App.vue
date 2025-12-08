@@ -119,7 +119,7 @@ const getTracking = async () => {
     );
     // console.log("Response:", getGuestData);
   } catch (error) {
-    console.log("Error:", error);
+    // console.log("Error:", error);
   }
 };
 

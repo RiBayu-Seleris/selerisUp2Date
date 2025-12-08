@@ -89,10 +89,10 @@ onMounted(async () => {
       },
     });
 
-    console.log("LIHAT DATA", response.data);
+    // console.log("LIHAT DATA", response.data);
     jobs.value = response.data;
   } catch (error) {
-    console.log("data gagal diambil", error);
+    // console.log("data gagal diambil", error);
   }
 });
 </script>

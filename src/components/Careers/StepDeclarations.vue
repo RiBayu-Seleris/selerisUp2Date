@@ -15,10 +15,6 @@ const emit = defineEmits([
 </script>
 
 <template>
-  <h2 class="text-xl font-semibold text-[#195279] mb-4">
-    Declaration and Consent
-  </h2>
-
   <div class="space-y-5">
     <label class="flex items-start gap-4 w-full cursor-pointer">
       <input

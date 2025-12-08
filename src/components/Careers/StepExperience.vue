@@ -202,9 +202,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <h2 class="text-xl font-semibold text-[#195279] mb-4">Experience</h2>
-
-  <div class="w-full h-auto flex flex-col gap-y-3">
+  <div class="w-full h-auto flex flex-col mt-5 gap-y-3">
     <!-- Nama Perusahaan Sebelumnya -->
     <div class="flex flex-col w-full">
       <label

@@ -18,6 +18,8 @@ export const partnerLogos = [
     .href,
   new URL("@/assets/images/clients-and-partners/idpay.png", import.meta.url)
     .href,
+  new URL("@/assets/images/clients-and-partners/it-ads.png", import.meta.url)
+    .href,
 ];
 
 export const partnerLogosDark = [
@@ -49,6 +51,10 @@ export const partnerLogosDark = [
   ).href,
   new URL(
     "@/assets/images/clients-and-partners/idpay-dark.png",
+    import.meta.url
+  ).href,
+  new URL(
+    "@/assets/images/clients-and-partners/it-ads-dark.png",
     import.meta.url
   ).href,
 ];

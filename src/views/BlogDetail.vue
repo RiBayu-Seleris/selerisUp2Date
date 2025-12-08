@@ -310,7 +310,7 @@ const copyLink = async (slug) => {
       timer: 2000,
     });
   } catch (err) {
-    console.log("Clipboard error (kemungkinan false error):", err);
+    // console.log("Clipboard error (kemungkinan false error):", err);
   }
 };
 

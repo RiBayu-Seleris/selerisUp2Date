@@ -18,10 +18,6 @@ const emit = defineEmits([
 </script>
 
 <template>
-  <h2 class="text-xl font-semibold text-[#195279] mb-4">
-    Skills & Competencies
-  </h2>
-
   <!-- Skills -->
   <!-- <div class="flex flex-row w-full h-auto gap-10"> -->
   <div class="w-full h-auto flex flex-col gap-y-3">

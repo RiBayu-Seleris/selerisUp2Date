@@ -18,6 +18,8 @@ const props = defineProps({
   genderOptions: Array,
   isOpenGender: Boolean,
   isOpenCountry: Boolean,
+
+  required: Boolean,
 });
 
 const emit = defineEmits([
@@ -88,8 +90,6 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <h2 class="text-xl font-semibold text-[#195279] mb-4">Personal Info</h2>
-
   <div class="w-full h-auto flex flex-col gap-y-3">
     <!-- FULL NAME -->
     <div class="flex flex-col w-full">
@@ -105,7 +105,7 @@ onBeforeUnmount(() => {
         class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
         placeholder="Full Name"
         :value="fullname"
-        required
+        :required="required"
       />
     </div>
     <!-- POB DOB -->
@@ -123,7 +123,7 @@ onBeforeUnmount(() => {
           class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
           placeholder="Place Of Birth"
           :value="pob"
-          required
+          :required="required"
         />
       </div>
       <!-- Start Date -->
@@ -186,7 +186,7 @@ onBeforeUnmount(() => {
                       @change="isDobOpen = false"
                       @click.stop
                       class="w-full border rounded px-2 py-1 text-[14px] text-[#6C6C6C] dark:text-black"
-                      required
+                      :required="required"
                     />
                   </div>
                 </div>
@@ -246,7 +246,7 @@ onBeforeUnmount(() => {
               :key="gender.value"
               @click.stop="chooseGender(gender)"
               class="p-2 hover:bg-gray-100 cursor-pointer"
-              required
+              :required="required"
             >
               {{ gender.value }}
             </div>
@@ -269,7 +269,7 @@ onBeforeUnmount(() => {
           @input="emit('update:email', $event.target.value)"
           class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
           placeholder="email@example.com"
-          required
+          :required="required"
         />
       </div>
       <!-- Phone -->
@@ -285,7 +285,7 @@ onBeforeUnmount(() => {
           @input="emit('update:phone', $event.target.value)"
           class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
           placeholder="08xxx"
-          required
+          :required="required"
         />
       </div>
     </div>
@@ -303,7 +303,7 @@ onBeforeUnmount(() => {
         @input="emit('update:address', $event.target.value)"
         class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
         placeholder="Address"
-        required
+        :required="required"
       />
     </div>
 
