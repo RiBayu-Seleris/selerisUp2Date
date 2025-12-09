@@ -39,6 +39,9 @@ const emit = defineEmits([
 const genderWrapper = ref(null);
 const countryWrapper = ref(null);
 
+const localEmail = ref(props.email);
+const emailError = ref("");
+
 const dobWrapper = ref(null);
 const isDobOpen = ref(false);
 
@@ -62,6 +65,42 @@ const chooseCountry = (country) => {
 const toggleDob = () => {
   emit("closeAll");
   isDobOpen.value = !isDobOpen.value;
+};
+
+const onPhoneInput = (e) => {
+  let clean = e.target.value.replace(/\D/g, ""); // hapus semua karakter non angka
+  e.target.value = clean; // paksa update ke input
+  emit("update:phone", clean); // update parent
+};
+
+watch(
+  () => props.email,
+  (val) => {
+    localEmail.value = val; // sinkron kalau parent update
+  }
+);
+
+const validateEmail = (value) => {
+  const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+  if (!regex.test(value)) {
+    emailError.value = "Email tidak valid";
+    // console.log("❌ Email tidak valid:", value);
+  } else {
+    emailError.value = "";
+    // console.log("✅ Email valid:", value);
+  }
+
+  emit("update:email", value);
+};
+
+let debounceTimer = null;
+
+const validateEmailDebounced = (value) => {
+  clearTimeout(debounceTimer);
+  debounceTimer = setTimeout(() => {
+    validateEmail(value); // jalankan validasi asli
+  }, 200); // jeda 500ms
 };
 
 function handleClickOutside(e) {
@@ -266,11 +305,14 @@ onBeforeUnmount(() => {
         <input
           type="email"
           :value="email"
-          @input="emit('update:email', $event.target.value)"
+          @input="validateEmailDebounced($event.target.value)"
           class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
           placeholder="email@example.com"
           :required="required"
         />
+        <p v-if="emailError" class="text-red-600/80 pt-1 text-[14px]">
+          {{ emailError }}
+        </p>
       </div>
       <!-- Phone -->
       <div class="flex flex-col w-full">
@@ -282,9 +324,10 @@ onBeforeUnmount(() => {
         <input
           type="text"
           :value="phone"
-          @input="emit('update:phone', $event.target.value)"
+          @input="onPhoneInput($event)"
           class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
           placeholder="08xxx"
+          maxlength="15"
           :required="required"
         />
       </div>

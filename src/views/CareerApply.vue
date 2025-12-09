@@ -114,12 +114,21 @@ const formData = reactive({
   backgroundCheck: false,
 });
 
-const hasExperience = ref(false);
+const hasExperience = ref(null);
 
 const selectExperience = (value) => {
+  const previousValue = hasExperience.value;
   hasExperience.value = value;
-  // Optional: reset form data kalau tidak ada pengalaman
-  if (!value) {
+
+  console.log("CEKKK", hasExperience.value);
+
+  // Jika pilihannya YA dan sama → return
+  if (value === true && previousValue === true) {
+    return;
+  }
+
+  // Jika TIDAK → selalu jalankan nextStep
+  if (value === false) {
     formData.lastCompany = "-";
     formData.lastPosition = "-";
     formData.salary = 0;
@@ -128,12 +137,15 @@ const selectExperience = (value) => {
     formData.jobDescription = "-";
     formData.achievementDescription = "-";
 
-    // langsung lanjut ke step berikutnya
     nextStep();
-  } else {
+    return;
+  }
+
+  // Jika YA → reset sekali
+  if (value === true) {
     formData.lastCompany = "";
     formData.lastPosition = "";
-    formData.salary = 0;
+    formData.salary = "";
     formData.startDateExperience = "";
     formData.endDateExperience = "";
     formData.jobDescription = "";
@@ -217,7 +229,7 @@ onMounted(async () => {
       "https://restcountries.com/v3.1/all?fields=name,flags,cca2"
     );
     const data = await res.json();
-    const targetCountries = ["Indonesia", "Malaysia", "Singapore"];
+    const targetCountries = ["Indonesia"];
 
     countries.value = data
       .filter((c) => targetCountries.includes(c.name.common))
@@ -410,6 +422,11 @@ const stepValidators = [
 
   // STEP 2 — Experience
   () => {
+    // WAJIB pilih dulu Ya / Tidak
+    if (hasExperience.value === null || hasExperience.value === undefined) {
+      return false;
+    }
+
     // Jika user tidak punya pengalaman → step valid
     if (!hasExperience.value) return true;
 
@@ -424,10 +441,22 @@ const stepValidators = [
   },
 
   // STEP 3 — Skills
-  () => true, // tidak required
+  () => {
+    return Boolean(
+      formData.technicalSkills?.trim() &&
+        formData.softSkills?.trim() &&
+        formData.languageSkills?.trim()
+    );
+  }, // tidak required
 
   // STEP 4 — Motivations
-  () => true,
+  () => {
+    return Boolean(
+      formData.startDateMotivations.trim() &&
+        formData.expectedSalary.trim() &&
+        formData.reasonDescription.trim()
+    );
+  },
 
   // STEP 6 — Declaration
   () =>
@@ -755,21 +784,21 @@ watch(
         </div>
         <div v-if="currentStep === 2">
           <h2 class="text-xl font-semibold text-[#195279] mb-4">Experience</h2>
-          <div class="flex flex-col w-full h-auto gap-y-3">
-            <div class="w-full h-auto">
-              <p class="text-[20px]">
+          <div class="flex flex-col lg:flex-row w-full h-auto gap-y-3">
+            <div class="w-full h-auto flex items-center">
+              <p class="text-[16px] lg:text-[20px]">
                 Apakah anda memiliki pengalaman terakhir?
               </p>
             </div>
-            <div class="flex flex-row w-full h-auto gap-x-5">
+            <div class="flex flex-row w-full h-auto gap-x-5 lg:justify-end">
               <button
-                class="max-w-fit h-auto px-10 py-2 bg-red-400"
+                class="w-24 lg:w-28 h-auto py-2 bg-[#AAD7FF] border-[#1091F3] border-[1.5px] text-[#1091F3] rounded-lg font-medium"
                 @click="selectExperience(true)"
               >
                 Ya
               </button>
               <button
-                class="max-w-fit h-auto px-10 py-2 bg-red-400"
+                class="w-24 lg:w-28 h-auto py-2 bg-[#FFBABA] border-[#FF4B4E] border-[1.5px] text-[#FF4B4E] rounded-lg font-medium"
                 @click="selectExperience(false)"
               >
                 Tidak
@@ -849,16 +878,19 @@ watch(
           </button>
 
           <button
-            v-if="currentStep < steps.length - 1"
+            v-if="
+              (currentStep !== 2 && currentStep < steps.length - 1) ||
+              (currentStep === 2 && hasExperience === true)
+            "
             @click="nextStep"
+            :disabled="!stepValidators[currentStep]"
             class="bg-[#2AB857] text-white px-4 py-2 rounded-lg ml-auto hover:bg-[#259d4c] transition-all"
           >
-            <!-- :disabled="!stepValidators[currentStep]" -->
             Next
           </button>
 
           <button
-            v-else
+            v-else-if="currentStep !== 2"
             class="bg-[#2AB857] text-white px-4 py-2 rounded-lg ml-auto hover:bg-[#259d4c] transition-all"
             @click="handleToggleModal"
           >
