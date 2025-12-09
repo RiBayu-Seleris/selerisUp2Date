@@ -36,10 +36,6 @@ const apply_location = computed(() => jobApply.selectedJobData?.location);
 
 const isModalOpen = ref(false);
 
-const handleToggleModal = () => {
-  isModalOpen.value = true;
-};
-
 const closeModal = () => {
   isModalOpen.value = false;
 };
@@ -120,7 +116,7 @@ const selectExperience = (value) => {
   const previousValue = hasExperience.value;
   hasExperience.value = value;
 
-  console.log("CEKKK", hasExperience.value);
+  // console.log("CEKKK", hasExperience.value);
 
   // Jika pilihannya YA dan sama → return
   if (value === true && previousValue === true) {
@@ -458,12 +454,31 @@ const stepValidators = [
     );
   },
 
+  // STEP 5 — Documents
+  () => true,
+
   // STEP 6 — Declaration
   () =>
     Boolean(
       formData.trueData && formData.dataPermission && formData.backgroundCheck
     ),
 ];
+
+const handleToggleModal = () => {
+  const isValid = stepValidators[currentStep.value]();
+  // console.log(`Validator result: ${currentStep.value}`, isValid);
+
+  if (!isValid) {
+    Swal.fire({
+      icon: "error",
+      title: "Incomplete Data",
+      text: "Please complete all required fields before continuing.",
+    });
+    return;
+  }
+
+  isModalOpen.value = true;
+};
 
 /* ============================
    ✅ SUBMIT HANDLER
@@ -931,7 +946,7 @@ watch(
             </div>
             <!-- MODALS BODY -->
             <div
-              class="w-full h-auto py-8 px-6 lg:px-14 xl:px-14 grid grid-cols-1 lg:grid-cols-2 gap-x-10 gap-y-10"
+              class="w-full h-auto py-8 px-6 lg:px-14 xl:px-14 grid grid-cols-1 lg:grid-cols-2 gap-5"
             >
               <!-- === Personal Info === -->
               <ReviewData
@@ -961,7 +976,8 @@ watch(
                     formData.endDateEducation
                   ),
                   'GPA Score': formData.gpaScore,
-                  'certificate ': formData.certificateFileEducation.name,
+                  'certificate ':
+                    formData.certificateFileEducation?.name || '-',
                 }"
               />
               <!-- === Experience === -->
@@ -1000,14 +1016,14 @@ watch(
               <ReviewData
                 title="Documents"
                 :items="{
-                  'Curriculum Vitae (CV) File': formData.cvFile.name,
-                  'Cover Letter File': formData.clFile.name,
-                  'Diploma File': formData.diplomaFile.name,
-                  'Transcript File': formData.transcriptFile.name,
+                  'Curriculum Vitae (CV) File': formData.cvFile?.name || '-',
+                  'Cover Letter File': formData.clFile?.name || '-',
+                  'Diploma File': formData.diplomaFile?.name || '-',
+                  'Transcript File': formData.transcriptFile?.name || '-',
                   'Experience Certificate File':
-                    formData.experienceCertificateFile.name,
-                  'Portfolio File': formData.portfolioFile.name,
-                  'Photo File': formData.photoFile.name,
+                    formData.experienceCertificateFile?.name || '-',
+                  'Portfolio File': formData.portfolioFile?.name || '-',
+                  'Photo File': formData.photoFile?.name || '-',
                 }"
               />
             </div>

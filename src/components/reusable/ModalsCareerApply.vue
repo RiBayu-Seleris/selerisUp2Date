@@ -13,7 +13,7 @@ defineProps({
       class="w-full h-full p-5 flex flex-col gap-y-2 text-[18px] font-[400] text-[#323232] dark:text-[#B8B8B8] bg-[#F9FAFB] dark:bg-[#1D1F23] dark:border-[#FAFAFA]/25 rounded-xl"
     >
       <p
-        class="text-[20px] lg:text-[20px] xl:text-[22px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
+        class="text-[20px] lg:text-[18px] xl:text-[20px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
       >
         {{ title }}
       </p>

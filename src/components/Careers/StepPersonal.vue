@@ -294,7 +294,7 @@ onBeforeUnmount(() => {
       </div>
     </div>
     <!-- EMAIL + PHONE -->
-    <div class="flex gap-x-5">
+    <div class="flex flex-col sm:flex-row gap-y-3 sm:gap-y-0 sm:gap-x-5">
       <!-- Email -->
       <div class="flex flex-col w-full">
         <label
