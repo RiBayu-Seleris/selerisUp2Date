@@ -620,12 +620,14 @@ const handleApply = async () => {
 
   const BASE_URL = "https://alentest.my.id";
   try {
+    console.time("SUBMIT");
     const response = await axios.post(`${BASE_URL}/api/pelamar`, payload, {
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
       },
     });
+    console.timeEnd("SUBMIT");
 
     if (response.data.success === true) {
       // ✅ Notifikasi sukses

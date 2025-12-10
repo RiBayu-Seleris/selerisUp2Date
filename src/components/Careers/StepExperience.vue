@@ -93,6 +93,20 @@ function onSalaryInput(e) {
   salaryModel.value = formatted;
 }
 
+function allowOnlyNumber(e) {
+  const char = e.key;
+
+  // Izinkan special keys: Backspace, Delete, Arrow keys, Tab
+  if (["Backspace", "Delete", "ArrowLeft", "ArrowRight"].includes(char)) {
+    return;
+  }
+
+  // Jika bukan angka, cegah input
+  if (!/^\d$/.test(char)) {
+    e.preventDefault();
+  }
+}
+
 /* ===========================
    DATE TOGGLES
 =========================== */
@@ -163,7 +177,7 @@ onMounted(() => {
 onMounted(() => {
   achievementDescription.value = new Quill(achievementDescriptionEditor.value, {
     theme: "snow",
-    placeholder: "Write your achievement in last company if any...",
+    placeholder: `Please write your achievements in your last company, or type '-' if you have none.`,
     toolbar: [
       ["bold", "italic", "underline"],
       [{ list: "ordered" }, { list: "bullet" }],
@@ -391,6 +405,7 @@ onBeforeUnmount(() => {
           type="text"
           :value="salaryModel"
           @input="onSalaryInput"
+          @keypress="allowOnlyNumber"
           class="w-full pl-10 p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
           placeholder="0"
         />

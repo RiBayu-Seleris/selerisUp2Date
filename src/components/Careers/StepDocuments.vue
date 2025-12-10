@@ -224,6 +224,53 @@ const handlePhotoChange = (event) => {
   }
 };
 
+const handleDeleteFile = (type) => {
+  switch (type) {
+    case "cv":
+      emit("update:cvFile", null);
+      cvFileName.value = "";
+      if (cvInput.value) cvInput.value.value = null;
+      break;
+
+    case "cl":
+      emit("update:clFile", null);
+      clFileName.value = "";
+      if (clInput.value) clInput.value.value = null;
+      break;
+
+    case "diploma":
+      emit("update:diplomaFile", null);
+      diplomaFileName.value = "";
+      if (diplomaInput.value) diplomaInput.value.value = null;
+      break;
+
+    case "transcript":
+      emit("update:transcriptFile", null);
+      transcriptFileName.value = "";
+      if (transcriptInput.value) transcriptInput.value.value = null;
+      break;
+
+    case "experience":
+      emit("update:experienceCertificateFile", null);
+      experienceCertificateFileName.value = "";
+      if (experienceCertificateInput.value)
+        experienceCertificateInput.value.value = null;
+      break;
+
+    case "portfolio":
+      emit("update:portfolioFile", null);
+      portfolioFileName.value = "";
+      if (portfolioInput.value) portfolioInput.value.value = null;
+      break;
+
+    case "photo":
+      emit("update:photoFile", null);
+      photoFileName.value = "";
+      if (photoInput.value) photoInput.value.value = null;
+      break;
+  }
+};
+
 watch(
   () => props.photoFile,
   (newVal) => {
@@ -284,7 +331,10 @@ watch(
           </div>
         </div>
         <transition name="fade">
-          <div v-if="cvFileName" class="w-full h-auto flex items-center">
+          <div
+            v-if="cvFileName"
+            class="relative w-full h-auto flex items-center"
+          >
             <div
               class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
             >
@@ -296,6 +346,12 @@ watch(
                 </span>
               </p>
             </div>
+            <button
+              @click.stop="handleDeleteFile('cv')"
+              class="absolute right-3 w-auto h-auto p-3 flex items-center bg-[#FFBABA] rounded-[6px] cursor-pointer"
+            >
+              <div class="w-3.5 h-1 bg-[#FF2020] rounded-full" />
+            </button>
           </div>
         </transition>
       </div>
@@ -349,7 +405,10 @@ watch(
           </div>
         </div>
         <transition name="fade">
-          <div v-if="clFileName" class="w-full h-auto flex items-center">
+          <div
+            v-if="clFileName"
+            class="relative w-full h-auto flex items-center"
+          >
             <div
               class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
             >
@@ -361,6 +420,12 @@ watch(
                 </span>
               </p>
             </div>
+            <button
+              @click.stop="handleDeleteFile('cl')"
+              class="absolute right-3 w-auto h-auto p-3 flex items-center bg-[#FFBABA] rounded-[6px] cursor-pointer"
+            >
+              <div class="w-3.5 h-1 bg-[#FF2020] rounded-full" />
+            </button>
           </div>
         </transition>
       </div>
@@ -414,7 +479,10 @@ watch(
           </div>
         </div>
         <transition name="fade">
-          <div v-if="diplomaFileName" class="w-full h-auto flex items-center">
+          <div
+            v-if="diplomaFileName"
+            class="relative w-full h-auto flex items-center"
+          >
             <div
               class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
             >
@@ -426,6 +494,12 @@ watch(
                 </span>
               </p>
             </div>
+            <button
+              @click.stop="handleDeleteFile('diploma')"
+              class="absolute right-3 w-auto h-auto p-3 flex items-center bg-[#FFBABA] rounded-[6px] cursor-pointer"
+            >
+              <div class="w-3.5 h-1 bg-[#FF2020] rounded-full" />
+            </button>
           </div>
         </transition>
       </div>
@@ -481,7 +555,7 @@ watch(
         <transition name="fade">
           <div
             v-if="transcriptFileName"
-            class="w-full h-auto flex items-center"
+            class="relative w-full h-auto flex items-center"
           >
             <div
               class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
@@ -494,6 +568,12 @@ watch(
                 </span>
               </p>
             </div>
+            <button
+              @click.stop="handleDeleteFile('transcript')"
+              class="absolute right-3 w-auto h-auto p-3 flex items-center bg-[#FFBABA] rounded-[6px] cursor-pointer"
+            >
+              <div class="w-3.5 h-1 bg-[#FF2020] rounded-full" />
+            </button>
           </div>
         </transition>
       </div>
@@ -549,7 +629,7 @@ watch(
         <transition name="fade">
           <div
             v-if="experienceCertificateFileName"
-            class="w-full h-auto flex items-center"
+            class="relative w-full h-auto flex items-center"
           >
             <div
               class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
@@ -562,6 +642,12 @@ watch(
                 </span>
               </p>
             </div>
+            <button
+              @click.stop="handleDeleteFile('experience')"
+              class="absolute right-3 w-auto h-auto p-3 flex items-center bg-[#FFBABA] rounded-[6px] cursor-pointer"
+            >
+              <div class="w-3.5 h-1 bg-[#FF2020] rounded-full" />
+            </button>
           </div>
         </transition>
       </div>
@@ -615,7 +701,10 @@ watch(
           </div>
         </div>
         <transition name="fade">
-          <div v-if="portfolioFileName" class="w-full h-auto flex items-center">
+          <div
+            v-if="portfolioFileName"
+            class="relative w-full h-auto flex items-center"
+          >
             <div
               class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
             >
@@ -627,6 +716,12 @@ watch(
                 </span>
               </p>
             </div>
+            <button
+              @click.stop="handleDeleteFile('portfolio')"
+              class="absolute right-3 w-auto h-auto p-3 flex items-center bg-[#FFBABA] rounded-[6px] cursor-pointer"
+            >
+              <div class="w-3.5 h-1 bg-[#FF2020] rounded-full" />
+            </button>
           </div>
         </transition>
       </div>
@@ -680,7 +775,10 @@ watch(
           </div>
         </div>
         <transition name="fade">
-          <div v-if="photoFileName" class="w-full h-auto flex items-center">
+          <div
+            v-if="photoFileName"
+            class="relative w-full h-auto flex items-center"
+          >
             <div
               class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
             >
@@ -692,6 +790,12 @@ watch(
                 </span>
               </p>
             </div>
+            <button
+              @click.stop="handleDeleteFile('photo')"
+              class="absolute right-3 w-auto h-auto p-3 flex items-center bg-[#FFBABA] rounded-[6px] cursor-pointer"
+            >
+              <div class="w-3.5 h-1 bg-[#FF2020] rounded-full" />
+            </button>
           </div>
         </transition>
       </div>

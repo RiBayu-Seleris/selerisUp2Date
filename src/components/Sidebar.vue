@@ -4,6 +4,8 @@ import { useSidebarStore } from "@/stores/sidebar";
 import { useRoute } from "vue-router";
 import MenuIconClose from "@/components/icons/CloseIcon.vue";
 import Navlink from "@/components/Navlink.vue";
+import Logo from "@/assets/images/logo.png";
+import DarkLogo from "@/assets/images/darklogo.png";
 
 import { aboutList } from "@/Data/aboutList";
 import { productList } from "@/Data/productList";
@@ -23,16 +25,28 @@ watch(
 );
 
 // Dropdown toggle
+const isAboutOpen = ref(false);
 const isProductOpen = ref(false);
 const isTechnologyOpen = ref(false);
+const isSolutionOpen = ref(false);
 
-const handleProduct = () => {
-  isProductOpen.value = !isProductOpen.value;
-  isTechnologyOpen.value = false;
+const toggleAbout = () => {
+  isAboutOpen.value = !isAboutOpen.value;
+  // isProductOpen.value = false;
 };
-const handleTechnology = () => {
+
+const toggleProduct = () => {
+  isProductOpen.value = !isProductOpen.value;
+  // isAboutOpen.value = false;
+};
+const toggleTechnology = () => {
   isTechnologyOpen.value = !isTechnologyOpen.value;
-  isProductOpen.value = false;
+  // isProductOpen.value = false;
+};
+
+const toggleSolution = () => {
+  isSolutionOpen.value = !isSolutionOpen.value;
+  // isProductOpen.value = false;
 };
 </script>
 
@@ -55,11 +69,18 @@ const handleTechnology = () => {
               class="flex flex-row w-full h-auto justify-between items-center"
             >
               <router-link to="/" class="w-[80%] h-auto">
-                <p
-                  class="text-[#195279] dark:text-[#FAFAFA] font-semibold sml:text-md md:text-[1.7rem]"
-                >
-                  PT Seleris Meditekno Internasional
-                </p>
+                <img
+                  :src="Logo"
+                  alt="Logo"
+                  class="w-[117px] h-[56px] sml:w-[80px] sml:h-[56px] object-contain dark:hidden"
+                />
+
+                <!-- Logo gelap (dark mode) -->
+                <img
+                  :src="DarkLogo"
+                  alt="Dark Logo"
+                  class="w-[117px] h-[56px] sml:w-[80px] sml:h-[56px] object-contain hidden dark:block"
+                />
               </router-link>
               <div class="w-[20%] h-auto flex justify-end">
                 <button
@@ -73,117 +94,250 @@ const handleTechnology = () => {
               </div>
             </div>
             <nav
-              class="w-full flex flex-wrap mt-8 text-lg font-semibold text-gray-800 gap-y-2"
+              class="w-full flex flex-col mt-8 text-lg font-semibold text-gray-800 gap-y-5"
             >
               <div class="w-full h-auto">
                 <Navlink href="/">
-                  <p class="dark:text-[#FAFAFA] text-[12px]">Home</p>
+                  <p class="text-[#374151] font-[500] text-[16px]">Home</p>
                 </Navlink>
               </div>
-              <div class="w-full h-[2px] bg-[#1AB24F]/40" />
+
+              <!-- About -->
               <div class="w-full h-auto flex flex-col">
-                <p class="text-slate-400 text-[16px] font-[600]">About</p>
-                <div class="w-full h-auto flex flex-wrap">
-                  <div
-                    v-for="(about, index) in aboutList"
-                    :key="index"
-                    class="w-[50%] h-auto"
-                  >
-                    <Navlink :href="about.url">
-                      <p class="text-[12px] font-[500] dark:text-[#FAFAFA]">
-                        {{ about.name }}
-                      </p>
-                    </Navlink>
+                <button
+                  @click.stop="toggleAbout"
+                  class="w-full h-auto flex flex-row justify-between pr-2"
+                >
+                  <div class="w-full h-auto flex items-center">
+                    <p class="text-[#374151] text-[16px] font-[500]">About</p>
                   </div>
-                </div>
-              </div>
-              <div class="w-full h-[2px] bg-[#1AB24F]/40" />
-              <div class="w-full h-auto flex flex-col">
-                <p class="text-slate-400 text-[16px]">Products</p>
-                <div class="w-full h-auto flex flex-wrap">
-                  <div
-                    v-for="(product, index) in productList"
-                    :key="index"
-                    class="w-[50%] h-auto"
-                  >
-                    <Navlink :href="product.url">
-                      <p class="dark:text-[#FAFAFA] text-[12px] font-[500]">
-                        {{ product.name }}
-                      </p>
-                    </Navlink>
-                  </div>
-                </div>
-              </div>
-              <div class="w-full h-[2px] bg-[#1AB24F]/40" />
-              <div class="w-full h-auto flex flex-col">
-                <p class="text-slate-400 text-[16px]">Technology</p>
-                <div class="w-full h-auto flex flex-wrap">
-                  <div
-                    v-for="(technology, index) in technologyList"
-                    :key="index"
-                    class="w-[50%] h-auto"
-                  >
-                    <Navlink :href="technology.url">
-                      <p class="dark:text-[#FAFAFA] text-[12px] font-[500]">
-                        {{ technology.name }}
-                      </p>
-                    </Navlink>
-                  </div>
-                </div>
-              </div>
-              <div class="w-full h-[2px] bg-[#1AB24F]/40" />
-              <div class="w-full h-auto flex flex-col">
-                <p class="text-slate-400 text-[16px]">Solutions</p>
-                <div class="w-full h-auto grid grid-cols-2">
-                  <div>
-                    <p>Use Case</p>
-                    <div
-                      v-for="(usecase, index) in usecaseList"
-                      :key="index"
-                      class="w-[50%] h-auto"
+                  <div class="text-[#374151]">
+                    <svg
+                      class="w-5 h-auto transition-transform duration-200 transform"
+                      :class="{ 'rotate-90': isAboutOpen }"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      viewBox="0 0 24 24"
                     >
-                      <Navlink :href="usecase.url">
-                        <p class="dark:text-[#FAFAFA] text-[12px] font-[500]">
-                          {{ usecase.name }}
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
+                </button>
+                <transition name="fade">
+                  <div
+                    v-if="isAboutOpen"
+                    class="w-full h-auto grid grid-cols-2"
+                  >
+                    <div
+                      v-for="(about, index) in aboutList"
+                      :key="index"
+                      class="w-auto h-auto"
+                    >
+                      <Navlink :href="about.url">
+                        <p
+                          class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#FAFAFA]"
+                        >
+                          {{ about.name }}
                         </p>
                       </Navlink>
                     </div>
                   </div>
-                  <div>
-                    <p>Industries</p>
-                    <div
-                      v-for="(industry, index) in industryList"
-                      :key="index"
-                      class="w-[50%] h-auto"
+                </transition>
+              </div>
+
+              <!-- Products -->
+              <div class="w-full h-auto flex flex-col">
+                <button
+                  @click.stop="toggleProduct"
+                  class="w-full h-auto flex flex-row justify-between pr-2"
+                >
+                  <div class="w-full h-auto flex items-center">
+                    <p class="text-[#374151] text-[16px] font-[500]">
+                      Products
+                    </p>
+                  </div>
+                  <div class="text-[#374151]">
+                    <svg
+                      class="w-5 h-auto transition-transform duration-200 transform"
+                      :class="{ 'rotate-90': isProductOpen }"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      viewBox="0 0 24 24"
                     >
-                      <Navlink :href="industry.url">
-                        <p class="dark:text-[#FAFAFA] text-[12px] font-[500]">
-                          {{ industry.name }}
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
+                </button>
+                <transition name="fade">
+                  <div
+                    v-if="isProductOpen"
+                    class="w-full h-auto grid grid-cols-2"
+                  >
+                    <div
+                      v-for="(product, index) in productList"
+                      :key="index"
+                      class="w-auto h-auto"
+                    >
+                      <Navlink :href="product.url">
+                        <p
+                          class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#FAFAFA]"
+                        >
+                          {{ product.name }}
                         </p>
                       </Navlink>
                     </div>
                   </div>
-                </div>
+                </transition>
               </div>
-              <div class="w-full h-[2px] bg-[#1AB24F]/40" />
+
+              <!-- Technology -->
+              <div class="w-full h-auto flex flex-col">
+                <button
+                  @click.stop="toggleTechnology"
+                  class="w-full h-auto flex flex-row justify-between pr-2"
+                >
+                  <div class="w-full h-auto flex items-center">
+                    <p class="text-[#374151] text-[16px] font-[500]">
+                      Technology
+                    </p>
+                  </div>
+                  <div class="text-[#374151]">
+                    <svg
+                      class="w-5 h-auto transition-transform duration-200 transform"
+                      :class="{ 'rotate-90': isTechnologyOpen }"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
+                </button>
+                <transition name="fade">
+                  <div
+                    v-if="isTechnologyOpen"
+                    class="w-full h-auto grid grid-cols-2"
+                  >
+                    <div
+                      v-for="(technology, index) in technologyList"
+                      :key="index"
+                      class="w-auto h-auto"
+                    >
+                      <Navlink :href="technology.url">
+                        <p
+                          class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#FAFAFA]"
+                        >
+                          {{ technology.name }}
+                        </p>
+                      </Navlink>
+                    </div>
+                  </div>
+                </transition>
+              </div>
+
+              <!-- Technology -->
+              <div class="w-full h-auto flex flex-col">
+                <button
+                  @click.stop="toggleSolution"
+                  class="w-full h-auto flex flex-row justify-between pr-2"
+                >
+                  <div class="w-full h-auto flex items-center">
+                    <p class="text-[#374151] text-[16px] font-[500]">
+                      Solutions
+                    </p>
+                  </div>
+                  <div class="text-[#374151]">
+                    <svg
+                      class="w-5 h-auto transition-transform duration-200 transform"
+                      :class="{ 'rotate-90': isSolutionOpen }"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
+                </button>
+                <transition name="fade">
+                  <div v-if="isSolutionOpen" class="w-full flex flex-row">
+                    <div class="w-full h-auto flex flex-col">
+                      <p class="text-[#374151] text-[16px] font-[500] mt-2">
+                        Use Case
+                      </p>
+                      <div
+                        v-for="(technology, index) in technologyList"
+                        :key="index"
+                        class="w-auto h-auto"
+                      >
+                        <Navlink :href="technology.url">
+                          <p
+                            class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#FAFAFA]"
+                          >
+                            {{ technology.name }}
+                          </p>
+                        </Navlink>
+                      </div>
+                    </div>
+                    <div class="w-full h-auto flex flex-col">
+                      <p class="text-[#374151] text-[16px] font-[500] mt-2">
+                        Industries
+                      </p>
+                      <div
+                        v-for="(industry, index) in industryList"
+                        :key="index"
+                        class="w-auto h-auto"
+                      >
+                        <Navlink :href="industry.url">
+                          <p
+                            class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#FAFAFA]"
+                          >
+                            {{ industry.name }}
+                          </p>
+                        </Navlink>
+                      </div>
+                    </div>
+                  </div>
+                </transition>
+              </div>
+
+              <!-- Blogs -->
               <div class="w-full h-auto">
                 <Navlink href="/blogs">
-                  <p class="text-[12px] dark:text-[#FAFAFA]">Blogs</p>
+                  <p class="text-[#374151] font-[500] text-[16px]">Blogs</p>
                 </Navlink>
               </div>
+
+              <!-- Services -->
               <div class="w-full h-auto">
                 <Navlink href="/services">
-                  <p class="text-[12px] dark:text-[#FAFAFA]">Services</p>
+                  <p class="text-[#374151] font-[500] text-[16px]">Services</p>
                 </Navlink>
               </div>
-              <div class="w-full h-auto">
-                <Navlink href="/contact">
-                  <p class="text-[12px] dark:text-[#FAFAFA]">Contact</p>
-                </Navlink>
-              </div>
+
+              <!-- Careers -->
               <div class="w-full h-auto">
                 <Navlink href="/careers">
-                  <p class="text-[12px] dark:text-[#FAFAFA]">Careers</p>
+                  <p class="text-[#374151] font-[500] text-[16px]">Careers</p>
                 </Navlink>
               </div>
             </nav>

@@ -18,7 +18,8 @@ defineProps({
         {{ title }}
       </p>
 
-      <div class="w-full h-auto flex flex-col gap-y-2">
+      <!-- Desktop -->
+      <div class="hidden lg:flex flex-col w-full h-auto gap-y-2">
         <div
           v-for="(value, key) in items"
           :key="key"
@@ -44,6 +45,40 @@ defineProps({
 
             <!-- 🔥 jika value adalah teks biasa atau angka -->
             <p v-else class="text-[14px] font-[500]">
+              {{ value }}
+            </p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Mobile -->
+      <div class="lg:hidden flex flex-col w-full h-auto gap-y-2">
+        <div
+          v-for="(value, key) in items"
+          :key="key"
+          class="flex flex-col w-full h-auto"
+        >
+          <div class="w-full h-auto flex flex-row">
+            <div class="max-w-fit h-auto">
+              <p class="text-[14px] font-[500]">{{ key }}</p>
+            </div>
+            <div class="max-w-fit h-auto pl-2">
+              <p class="text-[14px]">:</p>
+            </div>
+          </div>
+
+          <div class="w-full h-auto pl-0">
+            <!-- 🔥 jika value berisi tag HTML (hasil Quill) -->
+            <p
+              v-if="
+                typeof value === 'string' && /<\/?[a-z][\s\S]*>/i.test(value)
+              "
+              class="text-[14px] font-[500] prose max-w-none mb-1"
+              v-html="value"
+            ></p>
+
+            <!-- 🔥 jika value adalah teks biasa atau angka -->
+            <p v-else class="text-[14px] font-[500] mb-1">
               {{ value }}
             </p>
           </div>
