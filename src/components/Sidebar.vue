@@ -94,7 +94,7 @@ const toggleSolution = () => {
               </div>
             </div>
             <nav
-              class="w-full flex flex-col mt-8 text-lg font-semibold text-gray-800 gap-y-5"
+              class="w-full flex flex-col mt-8 gap-y-4 sm:gap-y-5 md:gap-y-6"
             >
               <div class="w-full h-auto">
                 <Navlink href="/">
@@ -106,7 +106,7 @@ const toggleSolution = () => {
               <div class="w-full h-auto flex flex-col">
                 <button
                   @click.stop="toggleAbout"
-                  class="w-full h-auto flex flex-row justify-between pr-2"
+                  class="w-full h-auto flex flex-row justify-between pr-1"
                 >
                   <div class="w-full h-auto flex items-center">
                     <p class="text-[#374151] text-[16px] font-[500]">About</p>
@@ -131,12 +131,12 @@ const toggleSolution = () => {
                 <transition name="fade">
                   <div
                     v-if="isAboutOpen"
-                    class="w-full h-auto grid grid-cols-2"
+                    class="w-full h-auto grid grid-cols-2 mt-0.5 sm:gap-y-2 sm:mt-1.5 md:mt-2.5"
                   >
                     <div
                       v-for="(about, index) in aboutList"
                       :key="index"
-                      class="w-auto h-auto"
+                      class="w-full h-auto"
                     >
                       <Navlink :href="about.url">
                         <p
@@ -154,7 +154,7 @@ const toggleSolution = () => {
               <div class="w-full h-auto flex flex-col">
                 <button
                   @click.stop="toggleProduct"
-                  class="w-full h-auto flex flex-row justify-between pr-2"
+                  class="w-full h-auto flex flex-row justify-between pr-1"
                 >
                   <div class="w-full h-auto flex items-center">
                     <p class="text-[#374151] text-[16px] font-[500]">
@@ -181,12 +181,12 @@ const toggleSolution = () => {
                 <transition name="fade">
                   <div
                     v-if="isProductOpen"
-                    class="w-full h-auto grid grid-cols-2"
+                    class="w-full h-auto grid grid-cols-2 mt-0.5 sm:gap-y-2 sm:mt-1.5 md:mt-2.5"
                   >
                     <div
                       v-for="(product, index) in productList"
                       :key="index"
-                      class="w-auto h-auto"
+                      class="w-full h-auto"
                     >
                       <Navlink :href="product.url">
                         <p
@@ -204,7 +204,7 @@ const toggleSolution = () => {
               <div class="w-full h-auto flex flex-col">
                 <button
                   @click.stop="toggleTechnology"
-                  class="w-full h-auto flex flex-row justify-between pr-2"
+                  class="w-full h-auto flex flex-row justify-between pr-1"
                 >
                   <div class="w-full h-auto flex items-center">
                     <p class="text-[#374151] text-[16px] font-[500]">
@@ -231,12 +231,12 @@ const toggleSolution = () => {
                 <transition name="fade">
                   <div
                     v-if="isTechnologyOpen"
-                    class="w-full h-auto grid grid-cols-2"
+                    class="w-full h-auto grid grid-cols-2 mt-0.5 sm:gap-y-2 sm:mt-1.5 md:mt-2.5"
                   >
                     <div
                       v-for="(technology, index) in technologyList"
                       :key="index"
-                      class="w-auto h-auto"
+                      class="w-full h-auto"
                     >
                       <Navlink :href="technology.url">
                         <p
@@ -254,7 +254,7 @@ const toggleSolution = () => {
               <div class="w-full h-auto flex flex-col">
                 <button
                   @click.stop="toggleSolution"
-                  class="w-full h-auto flex flex-row justify-between pr-2"
+                  class="w-full h-auto flex flex-row justify-between pr-1"
                 >
                   <div class="w-full h-auto flex items-center">
                     <p class="text-[#374151] text-[16px] font-[500]">
@@ -285,17 +285,21 @@ const toggleSolution = () => {
                         Use Case
                       </p>
                       <div
-                        v-for="(technology, index) in technologyList"
-                        :key="index"
-                        class="w-auto h-auto"
+                        class="w-full h-auto flex flex-col mt-0.5 sm:gap-y-2 sm:mt-1.5 md:mt-2.5"
                       >
-                        <Navlink :href="technology.url">
-                          <p
-                            class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#FAFAFA]"
-                          >
-                            {{ technology.name }}
-                          </p>
-                        </Navlink>
+                        <div
+                          v-for="(technology, index) in technologyList"
+                          :key="index"
+                          class="w-full h-auto"
+                        >
+                          <Navlink :href="technology.url">
+                            <p
+                              class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#FAFAFA]"
+                            >
+                              {{ technology.name }}
+                            </p>
+                          </Navlink>
+                        </div>
                       </div>
                     </div>
                     <div class="w-full h-auto flex flex-col">
@@ -303,17 +307,21 @@ const toggleSolution = () => {
                         Industries
                       </p>
                       <div
-                        v-for="(industry, index) in industryList"
-                        :key="index"
-                        class="w-auto h-auto"
+                        class="w-full h-auto flex flex-col mt-0.5 sm:gap-y-2 sm:mt-1.5 md:mt-2.5"
                       >
-                        <Navlink :href="industry.url">
-                          <p
-                            class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#FAFAFA]"
-                          >
-                            {{ industry.name }}
-                          </p>
-                        </Navlink>
+                        <div
+                          v-for="(industry, index) in industryList"
+                          :key="index"
+                          class="w-full h-auto"
+                        >
+                          <Navlink :href="industry.url">
+                            <p
+                              class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#FAFAFA]"
+                            >
+                              {{ industry.name }}
+                            </p>
+                          </Navlink>
+                        </div>
                       </div>
                     </div>
                   </div>
