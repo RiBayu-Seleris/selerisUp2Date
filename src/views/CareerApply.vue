@@ -257,7 +257,7 @@ const steps = [
   { number: "Step 7", title: "Declaration" },
 ];
 
-const currentStep = ref(1);
+const currentStep = ref(0);
 const animatedStep = ref(0);
 const activeStep = ref(0);
 
