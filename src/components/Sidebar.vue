@@ -93,12 +93,14 @@ const toggleSolution = () => {
                 </button>
               </div>
             </div>
-            <nav
-              class="w-full flex flex-col mt-8 gap-y-4 sm:gap-y-5 md:gap-y-6"
-            >
+            <nav class="w-full flex flex-col mt-8 gap-y-8">
               <div class="w-full h-auto">
                 <Navlink href="/">
-                  <p class="text-[#374151] font-[500] text-[16px]">Home</p>
+                  <p
+                    class="text-[#374151] dark:text-[#FAFAFA] font-[500] text-[18px]"
+                  >
+                    Home
+                  </p>
                 </Navlink>
               </div>
 
@@ -109,9 +111,13 @@ const toggleSolution = () => {
                   class="w-full h-auto flex flex-row justify-between pr-1"
                 >
                   <div class="w-full h-auto flex items-center">
-                    <p class="text-[#374151] text-[16px] font-[500]">About</p>
+                    <p
+                      class="text-[#374151] dark:text-[#FAFAFA] text-[18px] font-[500]"
+                    >
+                      About
+                    </p>
                   </div>
-                  <div class="text-[#374151]">
+                  <div class="text-[#374151] dark:text-[#FAFAFA]">
                     <svg
                       class="w-5 h-auto transition-transform duration-200 transform"
                       :class="{ 'rotate-90': isAboutOpen }"
@@ -131,7 +137,7 @@ const toggleSolution = () => {
                 <transition name="fade">
                   <div
                     v-if="isAboutOpen"
-                    class="w-full h-auto grid grid-cols-2 mt-0.5 sm:gap-y-2 sm:mt-1.5 md:mt-2.5"
+                    class="w-full h-auto grid grid-cols-2 mt-0.5 sm:mt-3 md:mt-2.5 gap-x-2 gap-y-1 sm:gap-y-2.5 md:gap-y-3"
                   >
                     <div
                       v-for="(about, index) in aboutList"
@@ -140,7 +146,7 @@ const toggleSolution = () => {
                     >
                       <Navlink :href="about.url">
                         <p
-                          class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#FAFAFA]"
+                          class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#8E98A8]"
                         >
                           {{ about.name }}
                         </p>
@@ -157,11 +163,13 @@ const toggleSolution = () => {
                   class="w-full h-auto flex flex-row justify-between pr-1"
                 >
                   <div class="w-full h-auto flex items-center">
-                    <p class="text-[#374151] text-[16px] font-[500]">
+                    <p
+                      class="text-[#374151] dark:text-[#FAFAFA] text-[18px] font-[500]"
+                    >
                       Products
                     </p>
                   </div>
-                  <div class="text-[#374151]">
+                  <div class="text-[#374151] dark:text-[#FAFAFA]">
                     <svg
                       class="w-5 h-auto transition-transform duration-200 transform"
                       :class="{ 'rotate-90': isProductOpen }"
@@ -181,7 +189,7 @@ const toggleSolution = () => {
                 <transition name="fade">
                   <div
                     v-if="isProductOpen"
-                    class="w-full h-auto grid grid-cols-2 mt-0.5 sm:gap-y-2 sm:mt-1.5 md:mt-2.5"
+                    class="w-full h-auto grid grid-cols-2 mt-0.5 sm:mt-3 md:mt-2.5 gap-x-2 gap-y-1 sm:gap-y-2.5 md:gap-y-3"
                   >
                     <div
                       v-for="(product, index) in productList"
@@ -190,7 +198,7 @@ const toggleSolution = () => {
                     >
                       <Navlink :href="product.url">
                         <p
-                          class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#FAFAFA]"
+                          class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#8E98A8]"
                         >
                           {{ product.name }}
                         </p>
@@ -207,11 +215,13 @@ const toggleSolution = () => {
                   class="w-full h-auto flex flex-row justify-between pr-1"
                 >
                   <div class="w-full h-auto flex items-center">
-                    <p class="text-[#374151] text-[16px] font-[500]">
+                    <p
+                      class="text-[#374151] dark:text-[#FAFAFA] text-[18px] font-[500]"
+                    >
                       Technology
                     </p>
                   </div>
-                  <div class="text-[#374151]">
+                  <div class="text-[#374151] dark:text-[#FAFAFA]">
                     <svg
                       class="w-5 h-auto transition-transform duration-200 transform"
                       :class="{ 'rotate-90': isTechnologyOpen }"
@@ -231,7 +241,7 @@ const toggleSolution = () => {
                 <transition name="fade">
                   <div
                     v-if="isTechnologyOpen"
-                    class="w-full h-auto grid grid-cols-2 mt-0.5 sm:gap-y-2 sm:mt-1.5 md:mt-2.5"
+                    class="w-full h-auto grid grid-cols-2 mt-0.5 sm:mt-3 md:mt-2.5 gap-x-2 gap-y-1 sm:gap-y-2.5 md:gap-y-3"
                   >
                     <div
                       v-for="(technology, index) in technologyList"
@@ -240,7 +250,7 @@ const toggleSolution = () => {
                     >
                       <Navlink :href="technology.url">
                         <p
-                          class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#FAFAFA]"
+                          class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#8E98A8]"
                         >
                           {{ technology.name }}
                         </p>
@@ -257,11 +267,13 @@ const toggleSolution = () => {
                   class="w-full h-auto flex flex-row justify-between pr-1"
                 >
                   <div class="w-full h-auto flex items-center">
-                    <p class="text-[#374151] text-[16px] font-[500]">
+                    <p
+                      class="text-[#374151] dark:text-[#FAFAFA] text-[18px] font-[500]"
+                    >
                       Solutions
                     </p>
                   </div>
-                  <div class="text-[#374151]">
+                  <div class="text-[#374151] dark:text-[#FAFAFA]">
                     <svg
                       class="w-5 h-auto transition-transform duration-200 transform"
                       :class="{ 'rotate-90': isSolutionOpen }"
@@ -280,34 +292,38 @@ const toggleSolution = () => {
                 </button>
                 <transition name="fade">
                   <div v-if="isSolutionOpen" class="w-full flex flex-row">
-                    <div class="w-full h-auto flex flex-col">
-                      <p class="text-[#374151] text-[16px] font-[500] mt-2">
+                    <div class="w-full h-auto flex flex-col my-2">
+                      <p
+                        class="text-[#374151] dark:text-[#FAFAFA] text-[16px] font-[500] mt-2"
+                      >
                         Use Case
                       </p>
                       <div
-                        class="w-full h-auto flex flex-col mt-0.5 sm:gap-y-2 sm:mt-1.5 md:mt-2.5"
+                        class="w-full h-auto flex flex-col mt-0.5 sm:gap-y-2 md:gap-y-3 sm:mt-2 md:mt-2.5"
                       >
                         <div
-                          v-for="(technology, index) in technologyList"
+                          v-for="(usecase, index) in usecaseList"
                           :key="index"
                           class="w-full h-auto"
                         >
-                          <Navlink :href="technology.url">
+                          <Navlink :href="usecase.url">
                             <p
-                              class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#FAFAFA]"
+                              class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#8E98A8]"
                             >
-                              {{ technology.name }}
+                              {{ usecase.name }}
                             </p>
                           </Navlink>
                         </div>
                       </div>
                     </div>
-                    <div class="w-full h-auto flex flex-col">
-                      <p class="text-[#374151] text-[16px] font-[500] mt-2">
+                    <div class="w-full h-auto flex flex-col my-2">
+                      <p
+                        class="text-[#374151] dark:text-[#FAFAFA] text-[16px] font-[500] mt-2"
+                      >
                         Industries
                       </p>
                       <div
-                        class="w-full h-auto flex flex-col mt-0.5 sm:gap-y-2 sm:mt-1.5 md:mt-2.5"
+                        class="w-full h-auto flex flex-col mt-0.5 sm:gap-y-2 md:gap-y-3 sm:mt-2 md:mt-2.5"
                       >
                         <div
                           v-for="(industry, index) in industryList"
@@ -316,7 +332,7 @@ const toggleSolution = () => {
                         >
                           <Navlink :href="industry.url">
                             <p
-                              class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#FAFAFA]"
+                              class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#8E98A8]"
                             >
                               {{ industry.name }}
                             </p>
@@ -331,21 +347,33 @@ const toggleSolution = () => {
               <!-- Blogs -->
               <div class="w-full h-auto">
                 <Navlink href="/blogs">
-                  <p class="text-[#374151] font-[500] text-[16px]">Blogs</p>
+                  <p
+                    class="text-[#374151] dark:text-[#FAFAFA] font-[500] text-[18px]"
+                  >
+                    Blogs
+                  </p>
                 </Navlink>
               </div>
 
               <!-- Services -->
               <div class="w-full h-auto">
                 <Navlink href="/services">
-                  <p class="text-[#374151] font-[500] text-[16px]">Services</p>
+                  <p
+                    class="text-[#374151] dark:text-[#FAFAFA] font-[500] text-[18px]"
+                  >
+                    Services
+                  </p>
                 </Navlink>
               </div>
 
               <!-- Careers -->
               <div class="w-full h-auto">
                 <Navlink href="/careers">
-                  <p class="text-[#374151] font-[500] text-[16px]">Careers</p>
+                  <p
+                    class="text-[#374151] dark:text-[#FAFAFA] font-[500] text-[18px]"
+                  >
+                    Careers
+                  </p>
                 </Navlink>
               </div>
             </nav>

@@ -24,8 +24,8 @@ const emit = defineEmits([
         @change="emit('update:trueData', $event.target.checked)"
       />
       <span class="text-justify">
-        Saya menyatakan bahwa seluruh data yang saya isi dalam formulir ini
-        adalah benar dan dapat dipertanggungjawabkan
+        I hereby declare that all information provided in this form is true and
+        accurate to the best of my knowledge and can be held accountable.
       </span>
     </label>
 
@@ -37,8 +37,8 @@ const emit = defineEmits([
         @change="emit('update:dataPermission', $event.target.checked)"
       />
       <span class="text-justify">
-        Saya memberikan izin kepada perusahaan untuk menggunakan data ini dalam
-        proses rekrutmen sesuai kebijakan yang berlaku.
+        I grant permission to the company to use this information for
+        recruitment purposes in accordance with applicable policies.
       </span>
     </label>
 
@@ -50,8 +50,8 @@ const emit = defineEmits([
         @change="emit('update:backgroundCheck', $event.target.checked)"
       />
       <span class="text-justify">
-        Saya bersedia untuk dilakukan proses pemeriksaan latar belakang
-        (background check) sesuai dengan ketentuan perusahaan.
+        I agree to undergo a background check process in accordance with the
+        company's regulations.
       </span>
     </label>
   </div>

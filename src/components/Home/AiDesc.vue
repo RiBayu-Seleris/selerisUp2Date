@@ -12,7 +12,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="w-full h-auto flex sml:flex-col md:flex-col lg:flex-row xl:flex-row lg:gap-x-8 xl:gap-x-10"
+    class="w-full h-auto flex sml:flex-col md:flex-col lg:flex-row xl:flex-row lg:gap-x-8 xl:gap-x-10 sm:px-10"
   >
     <div
       class="flex sml:w-full sml:h-[300px] md:w-full md:h-[300px] lg:w-[50%] lg:h-[370px] xl:w-[50%] xl:h-[500px] sml:mb-5 md:mb-5"

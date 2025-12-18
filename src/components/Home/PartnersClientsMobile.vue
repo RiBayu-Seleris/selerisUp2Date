@@ -125,13 +125,13 @@ onBeforeUnmount(() => {
       <div
         ref="logoContainer"
         :key="showPartners + (isDark ? '-dark' : '-light')"
-        class="flex flex-wrap justify-center gap-6 mt-4 content-start transition-all duration-300"
+        class="flex flex-wrap justify-center gap-3 sm:gap-6 mt-4 content-start transition-all duration-300"
         :style="{ minHeight: maxHeight + 'px' }"
       >
         <div
           v-for="(logo, i) in currentLogos"
           :key="i"
-          class="group w-[45%] sm:w-[30%] md:w-[22.4%] lg:w-[18%] h-[80px] p-[1px] rounded-xl bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656] hover:dark:bg-none hover:dark:bg-[#D9D9D9] transition-all duration-300 ease-out"
+          class="group w-[30%] sm:w-[30%] md:w-[22.4%] lg:w-[18%] h-[65px] sm:h-[80px] p-[1px] rounded-xl bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656] hover:dark:bg-none hover:dark:bg-[#D9D9D9] transition-all duration-300 ease-out"
         >
           <div
             class="flex w-full h-full rounded-xl justify-center items-center bg-[#F9FAFB] hover:bg-white dark:bg-[#1D1F23] dark:border-[#FAFAFA]/25"

@@ -34,6 +34,7 @@ const emit = defineEmits([
 ====================================== */
 const cvInput = ref(null);
 const cvFileName = ref("");
+const cvPreviewUrl = ref("");
 
 const openCvUpload = () => {
   cvInput.value?.click();
@@ -41,19 +42,30 @@ const openCvUpload = () => {
 
 const handleCvChange = (event) => {
   const file = event.target.files[0];
-
   if (file) {
-    cvFileName.value = file.name;
-
-    // 🔥 Kirim ke parent via v-model:cvFile
     emit("update:cvFile", file);
+  }
+};
+
+const openCvPreviewPage = () => {
+  if (cvPreviewUrl.value) {
+    window.open(cvPreviewUrl.value, "_blank");
   }
 };
 
 watch(
   () => props.cvFile,
-  (newVal) => {
-    cvFileName.value = newVal ? newVal.name : "";
+  (file) => {
+    cvFileName.value = file ? file.name : "";
+
+    if (cvPreviewUrl.value) {
+      URL.revokeObjectURL(cvPreviewUrl.value);
+      cvPreviewUrl.value = "";
+    }
+
+    if (file) {
+      cvPreviewUrl.value = URL.createObjectURL(file);
+    }
   },
   { immediate: true }
 );
@@ -63,6 +75,7 @@ watch(
 ====================================== */
 const clInput = ref(null);
 const clFileName = ref("");
+const clPreviewUrl = ref("");
 
 const openClUpload = () => {
   clInput.value?.click();
@@ -79,10 +92,25 @@ const handleClChange = (event) => {
   }
 };
 
+const openClPreviewPage = () => {
+  if (clPreviewUrl.value) {
+    window.open(clPreviewUrl.value, "_blank");
+  }
+};
+
 watch(
   () => props.clFile,
-  (newVal) => {
-    clFileName.value = newVal ? newVal.name : "";
+  (file) => {
+    clFileName.value = file ? file.name : "";
+
+    if (clPreviewUrl.value) {
+      URL.revokeObjectURL(clPreviewUrl.value);
+      clPreviewUrl.value = "";
+    }
+
+    if (file) {
+      clPreviewUrl.value = URL.createObjectURL(file);
+    }
   },
   { immediate: true }
 );
@@ -92,6 +120,7 @@ watch(
 ====================================== */
 const diplomaInput = ref(null);
 const diplomaFileName = ref("");
+const diplomaPreviewUrl = ref("");
 
 const openDiplomaUpload = () => {
   diplomaInput.value?.click();
@@ -103,15 +132,30 @@ const handleDiplomaChange = (event) => {
   if (file) {
     diplomaFileName.value = file.name;
 
-    // 🔥 Kirim ke parent via v-model:cvFile
+    // 🔥 Kirim ke parent via v-model:diplomaFile
     emit("update:diplomaFile", file);
+  }
+};
+
+const openDiplomaPreviewPage = () => {
+  if (diplomaPreviewUrl.value) {
+    window.open(diplomaPreviewUrl.value, "_blank");
   }
 };
 
 watch(
   () => props.diplomaFile,
-  (newVal) => {
-    diplomaFileName.value = newVal ? newVal.name : "";
+  (file) => {
+    diplomaFileName.value = file ? file.name : "";
+
+    if (diplomaPreviewUrl.value) {
+      URL.revokeObjectURL(diplomaPreviewUrl.value);
+      diplomaPreviewUrl.value = "";
+    }
+
+    if (file) {
+      diplomaPreviewUrl.value = URL.createObjectURL(file);
+    }
   },
   { immediate: true }
 );
@@ -121,6 +165,7 @@ watch(
 ====================================== */
 const transcriptInput = ref(null);
 const transcriptFileName = ref("");
+const transcriptPreviewUrl = ref("");
 
 const openTranscriptUpload = () => {
   transcriptInput.value?.click();
@@ -137,10 +182,25 @@ const handleTranscriptChange = (event) => {
   }
 };
 
+const openTranscriptPreviewPage = () => {
+  if (transcriptPreviewUrl.value) {
+    window.open(transcriptPreviewUrl.value, "_blank");
+  }
+};
+
 watch(
   () => props.transcriptFile,
-  (newVal) => {
-    transcriptFileName.value = newVal ? newVal.name : "";
+  (file) => {
+    transcriptFileName.value = file ? file.name : "";
+
+    if (transcriptPreviewUrl.value) {
+      URL.revokeObjectURL(transcriptPreviewUrl.value);
+      transcriptPreviewUrl.value = "";
+    }
+
+    if (file) {
+      transcriptPreviewUrl.value = URL.createObjectURL(file);
+    }
   },
   { immediate: true }
 );
@@ -150,6 +210,7 @@ watch(
 ====================================== */
 const experienceCertificateInput = ref(null);
 const experienceCertificateFileName = ref("");
+const experienceCertificatePreviewUrl = ref("");
 
 const openExperienceCertificateUpload = () => {
   experienceCertificateInput.value?.click();
@@ -166,10 +227,25 @@ const handleExperienceCertificateChange = (event) => {
   }
 };
 
+const openExperienceCertificatePreviewPage = () => {
+  if (experienceCertificatePreviewUrl.value) {
+    window.open(experienceCertificatePreviewUrl.value, "_blank");
+  }
+};
+
 watch(
   () => props.experienceCertificateFile,
-  (newVal) => {
-    experienceCertificateFileName.value = newVal ? newVal.name : "";
+  (file) => {
+    experienceCertificateFileName.value = file ? file.name : "";
+
+    if (experienceCertificatePreviewUrl.value) {
+      URL.revokeObjectURL(experienceCertificatePreviewUrl.value);
+      experienceCertificatePreviewUrl.value = "";
+    }
+
+    if (file) {
+      experienceCertificatePreviewUrl.value = URL.createObjectURL(file);
+    }
   },
   { immediate: true }
 );
@@ -179,6 +255,7 @@ watch(
 ====================================== */
 const portfolioInput = ref(null);
 const portfolioFileName = ref("");
+const portfolioPreviewUrl = ref("");
 
 const openPortfolioUpload = () => {
   portfolioInput.value?.click();
@@ -195,10 +272,25 @@ const handlePortfolioChange = (event) => {
   }
 };
 
+const openPortfolioPreviewPage = () => {
+  if (portfolioPreviewUrl.value) {
+    window.open(portfolioPreviewUrl.value, "_blank");
+  }
+};
+
 watch(
   () => props.portfolioFile,
-  (newVal) => {
-    portfolioFileName.value = newVal ? newVal.name : "";
+  (file) => {
+    portfolioFileName.value = file ? file.name : "";
+
+    if (portfolioPreviewUrl.value) {
+      URL.revokeObjectURL(portfolioPreviewUrl.value);
+      portfolioPreviewUrl.value = "";
+    }
+
+    if (file) {
+      portfolioPreviewUrl.value = URL.createObjectURL(file);
+    }
   },
   { immediate: true }
 );
@@ -208,6 +300,7 @@ watch(
 ====================================== */
 const photoInput = ref(null);
 const photoFileName = ref("");
+const photoPreviewUrl = ref("");
 
 const openPhotoUpload = () => {
   photoInput.value?.click();
@@ -223,6 +316,29 @@ const handlePhotoChange = (event) => {
     emit("update:photoFile", file);
   }
 };
+
+const openPhotoPreviewPage = () => {
+  if (photoPreviewUrl.value) {
+    window.open(photoPreviewUrl.value, "_blank");
+  }
+};
+
+watch(
+  () => props.photoFile,
+  (file) => {
+    photoFileName.value = file ? file.name : "";
+
+    if (photoPreviewUrl.value) {
+      URL.revokeObjectURL(photoPreviewUrl.value);
+      photoPreviewUrl.value = "";
+    }
+
+    if (file) {
+      photoPreviewUrl.value = URL.createObjectURL(file);
+    }
+  },
+  { immediate: true }
+);
 
 const handleDeleteFile = (type) => {
   switch (type) {
@@ -270,14 +386,6 @@ const handleDeleteFile = (type) => {
       break;
   }
 };
-
-watch(
-  () => props.photoFile,
-  (newVal) => {
-    photoFileName.value = newVal ? newVal.name : "";
-  },
-  { immediate: true }
-);
 </script>
 
 <template>
@@ -342,7 +450,9 @@ watch(
               <p class="text-sm">
                 <span class="font-medium">
                   {{ cvFileName || "Belum ada dokumen" }}
-                  <span class="text-[#1091F3]"> Lihat Dokumen </span>
+                  <span class="text-[#1091F3]" @click.stop="openCvPreviewPage">
+                    Lihat Dokumen
+                  </span>
                 </span>
               </p>
             </div>
@@ -416,7 +526,9 @@ watch(
               <p class="text-sm">
                 <span class="font-medium">
                   {{ clFileName || "Belum ada dokumen" }}
-                  <span class="text-[#1091F3]"> Lihat Dokumen </span>
+                  <span class="text-[#1091F3]" @click.stop="openClPreviewPage">
+                    Lihat Dokumen
+                  </span>
                 </span>
               </p>
             </div>
@@ -490,7 +602,12 @@ watch(
               <p class="text-sm">
                 <span class="font-medium">
                   {{ diplomaFileName || "Belum ada dokumen" }}
-                  <span class="text-[#1091F3]"> Lihat Dokumen </span>
+                  <span
+                    class="text-[#1091F3]"
+                    @click.stop="openDiplomaPreviewPage"
+                  >
+                    Lihat Dokumen
+                  </span>
                 </span>
               </p>
             </div>
@@ -564,7 +681,12 @@ watch(
               <p class="text-sm">
                 <span class="font-medium">
                   {{ transcriptFileName || "Belum ada dokumen" }}
-                  <span class="text-[#1091F3]"> Lihat Dokumen </span>
+                  <span
+                    class="text-[#1091F3]"
+                    @click.stop="openTranscriptPreviewPage"
+                  >
+                    Lihat Dokumen
+                  </span>
                 </span>
               </p>
             </div>
@@ -638,7 +760,12 @@ watch(
               <p class="text-sm">
                 <span class="font-medium">
                   {{ experienceCertificateFileName || "Belum ada dokumen" }}
-                  <span class="text-[#1091F3]"> Lihat Dokumen </span>
+                  <span
+                    class="text-[#1091F3]"
+                    @click.stop="openExperienceCertificatePreviewPage"
+                  >
+                    Lihat Dokumen
+                  </span>
                 </span>
               </p>
             </div>
@@ -712,7 +839,12 @@ watch(
               <p class="text-sm">
                 <span class="font-medium">
                   {{ portfolioFileName || "Belum ada dokumen" }}
-                  <span class="text-[#1091F3]"> Lihat Dokumen </span>
+                  <span
+                    class="text-[#1091F3]"
+                    @click.stop="openPortfolioPreviewPage"
+                  >
+                    Lihat Dokumen
+                  </span>
                 </span>
               </p>
             </div>
@@ -786,7 +918,12 @@ watch(
               <p class="text-sm">
                 <span class="font-medium">
                   {{ photoFileName || "Belum ada dokumen" }}
-                  <span class="text-[#1091F3]"> Lihat Dokumen </span>
+                  <span
+                    class="text-[#1091F3]"
+                    @click.stop="openPhotoPreviewPage"
+                  >
+                    Lihat Dokumen
+                  </span>
                 </span>
               </p>
             </div>

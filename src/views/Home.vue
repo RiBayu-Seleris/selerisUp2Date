@@ -4,6 +4,7 @@ import PartnersClients from "@/components/Home/PartnersClients.vue";
 import PartnersClientsMobile from "@/components/Home/PartnersClientsMobile.vue";
 import Description from "@/components/Description.vue";
 import AiDesc from "@/components/Home/AiDesc.vue";
+import Technology from "@/components/Home/Technology.vue";
 import Certificate from "@/components/Certificate.vue";
 import Benefits from "@/components/Home/Benefits.vue";
 import Testimonial from "@/components/Home/Testimonial.vue";
@@ -42,9 +43,15 @@ import Roadmap from "@/components/Home/Roadmap.vue";
   </section>
 
   <section
-    class="flex flex-col relative w-full h-auto mt-24 lg:mt-10 xl:mt-28 px-8 sm:px-8 lg:px-24"
+    class="flex flex-col relative w-full h-auto mt-24 lg:mt-10 px-8 xl:mt-28"
   >
     <AiDesc />
+  </section>
+
+  <section
+    class="flex flex-col relative w-full h-auto mt-24 lg:mt-10 px-8 xl:mt-28"
+  >
+    <Technology />
   </section>
 
   <section class="flex flex-col relative w-full h-auto mt-24 xl:mt-32 mb-10">

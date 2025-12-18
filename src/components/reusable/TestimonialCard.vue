@@ -36,7 +36,7 @@ defineProps({
           />
         </svg>
         <p
-          class="text-[12px] sml:text-[14px] md:text-[18px] lg:text-[20px] xl:text-[20px] text-[#535862] dark:text-[#FAFAFA] leading-relaxed"
+          class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] xl:text-[20px] text-[#535862] dark:text-[#FAFAFA] leading-relaxed"
         >
           {{ text }}
         </p>

@@ -257,7 +257,7 @@ const steps = [
   { number: "Step 7", title: "Declaration" },
 ];
 
-const currentStep = ref(0);
+const currentStep = ref(1);
 const animatedStep = ref(0);
 const activeStep = ref(0);
 
@@ -280,6 +280,7 @@ const scrollToTop = () => {
 // };
 
 const nextStep = () => {
+  console.log(formData.dob);
   const isValid = stepValidators[currentStep.value]();
   // console.log(`Validator result: ${currentStep.value}`, isValid);
 
@@ -804,7 +805,7 @@ watch(
           <div class="flex flex-col lg:flex-row w-full h-auto gap-y-3">
             <div class="w-full h-auto flex items-center">
               <p class="text-[16px] lg:text-[20px]">
-                Apakah anda memiliki pengalaman terakhir?
+                Do you have any previous work experience?
               </p>
             </div>
             <div class="flex flex-row w-full h-auto gap-x-5 lg:justify-end">
@@ -812,13 +813,13 @@ watch(
                 class="w-24 lg:w-28 h-auto py-2 bg-[#AAD7FF] border-[#1091F3] border-[1.5px] text-[#1091F3] rounded-lg font-medium"
                 @click="selectExperience(true)"
               >
-                Ya
+                Yes
               </button>
               <button
                 class="w-24 lg:w-28 h-auto py-2 bg-[#FFBABA] border-[#FF4B4E] border-[1.5px] text-[#FF4B4E] rounded-lg font-medium"
                 @click="selectExperience(false)"
               >
-                Tidak
+                No
               </button>
             </div>
           </div>

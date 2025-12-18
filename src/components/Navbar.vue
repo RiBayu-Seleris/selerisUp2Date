@@ -73,7 +73,7 @@ onUnmounted(() => {
       class="flex lg:hidden flex-row w-full h-auto justify-between transition-all duration-500 ease-in"
       :class="[
         isScrolled
-          ? 'px-4 md:px-8 bg-white py-2 rounded-[10px] dark:bg-[#17181A] dark:backdrop-blur-3xl dark:border border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30'
+          ? 'px-4 md:px-10 bg-white py-2 rounded-[10px] dark:bg-[#17181A] dark:backdrop-blur-3xl dark:border border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30'
           : 'px-6 sm:px-8 bg-transparent',
       ]"
     >
@@ -97,12 +97,12 @@ onUnmounted(() => {
           <ThemeToggle />
         </div>
         <div
-          class="w-auto h-auto ml-4 sm:ml-8 lg:ml-0 flex items-center justify-end"
+          class="w-auto h-auto ml-4 sm:ml-8 lg:ml-0 flex items-center justify-end p-[1px] dark:bg-gradient-to-r dark:from-[#17181A] dark:from-45% dark:to-[#565656] rounded-lg"
         >
           <button
             type="button"
             id="sidebar-button"
-            class="bg-white p-2 rounded-lg shadow-md text-[#1AB24F]"
+            class="bg-white dark:bg-[#323232] p-2 rounded-lg shadow-md text-[#1AB24F] dark:text-[#FAFAFA]"
             @click="sidebarStore.open"
           >
             <MenuIcon />
