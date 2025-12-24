@@ -93,7 +93,7 @@ export function blogsApi() {
       const response = await axios.get(`${BASE_URL}/api/v1/app/blogs`, {
         headers: headerApi.headers,
         params: {
-          limit: 6,
+          limit: 12,
           ...params, // biar bisa override limit/page kalau dibutuhkan
         },
       });

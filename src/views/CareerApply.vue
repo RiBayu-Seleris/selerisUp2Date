@@ -248,13 +248,41 @@ onMounted(async () => {
    ✅ STEPPER DATA
 =============================== */
 const steps = [
-  { number: "Step 1", title: "Personal" },
-  { number: "Step 2", title: "Education" },
-  { number: "Step 3", title: "Experience" },
-  { number: "Step 4", title: "Skills" },
-  { number: "Step 5", title: "Motivations" },
-  { number: "Step 6", title: "Documents" },
-  { number: "Step 7", title: "Declaration" },
+  {
+    number: "Step 1",
+    title: "Personal",
+    next: "Education",
+  },
+  {
+    number: "Step 2",
+    title: "Education",
+    next: "Experience",
+  },
+  {
+    number: "Step 3",
+    title: "Experience",
+    next: "Skills",
+  },
+  {
+    number: "Step 4",
+    title: "Skills",
+    next: "Motivations",
+  },
+  {
+    number: "Step 5",
+    title: "Motivations",
+    next: "Documents",
+  },
+  {
+    number: "Step 6",
+    title: "Documents",
+    next: "Declaration",
+  },
+  {
+    number: "Step 7",
+    title: "Declaration",
+    next: "Finish",
+  },
 ];
 
 const currentStep = ref(0);
@@ -278,6 +306,15 @@ const scrollToTop = () => {
 //     window.scrollTo({ top: 0, behavior: "smooth" });
 //   }, 160); // delay kecil untuk menunggu DOM stabil
 // };
+
+/* ---------------- PROGRESS ---------------- */
+const circumference = 2 * Math.PI * 50;
+
+const dashOffset = computed(() => {
+  return circumference * (1 - (currentStep.value + 1) / steps.length);
+});
+
+const isLastStep = computed(() => currentStep.value === steps.length - 1);
 
 const nextStep = () => {
   console.log(formData.dob);
@@ -666,12 +703,12 @@ watch(
   >
     <div class="w-full flex flex-col" ref="formTop">
       <div class="w-full">
-        <p class="text-[#195279] font-[500] text-[36px]">
+        <p class="text-[#195279] font-[500] text-[24px] md:text-[36px]">
           {{ apply_title }}
         </p>
       </div>
       <div class="w-full my-3">
-        <p class="text-[#6E6E6E] font-[400] text-[16px]">
+        <p class="text-[#6E6E6E] font-[400] text-[12px] md:text-[16px]">
           {{ apply_department }} Department - {{ apply_title }} /
           {{ apply_work_type }} /
           {{ apply_location }}
@@ -679,7 +716,9 @@ watch(
       </div>
 
       <!-- Stepper -->
-      <div class="flex flex-row w-full h-auto mt-20 mb-10 items-center">
+      <div
+        class="hidden md:flex flex-row w-full h-auto mt-20 mb-10 items-center"
+      >
         <template v-for="(step, index) in steps" :key="index">
           <div class="relative flex items-center w-auto h-auto">
             <!-- Step Completed -->
@@ -759,8 +798,51 @@ watch(
         </template>
       </div>
 
+      <!-- MOBILE STEPPER -->
+      <div
+        class="md:hidden w-full h-auto flex flex-row gap-x-3 items-center my-5"
+      >
+        <div class="relative w-auto h-auto scale-95">
+          <svg class="w-28 h-28 rotate-[-90deg]">
+            <circle
+              cx="56"
+              cy="56"
+              r="50"
+              stroke-width="7"
+              fill="none"
+              class="stroke-gray-200"
+            />
+            <circle
+              cx="56"
+              cy="56"
+              r="50"
+              stroke-width="7"
+              fill="none"
+              stroke-linecap="round"
+              class="stroke-green-500 transition-all duration-300"
+              :stroke-dasharray="circumference"
+              :stroke-dashoffset="dashOffset"
+            />
+          </svg>
+          <div
+            class="absolute w-full h-full top-0 text-sm font-semibold text-[#195279] flex items-center justify-center"
+          >
+            Step {{ currentStep + 1 }} of {{ steps.length }}
+          </div>
+        </div>
+
+        <div class="w-full h-auto flex flex-col gap-y-1">
+          <h3 class="text-lg font-[500] text-[#195279]">
+            Step {{ steps[currentStep].title }}
+          </h3>
+          <p class="text-sm text-gray-400">
+            Next Step: {{ steps[currentStep].next }}
+          </p>
+        </div>
+      </div>
+
       <!-- Form -->
-      <div class="mt-16 p-0">
+      <div class="md:mt-16 p-0">
         <div v-if="currentStep === 0">
           <h2 class="text-xl font-semibold text-[#195279] mb-4">
             Personal Info

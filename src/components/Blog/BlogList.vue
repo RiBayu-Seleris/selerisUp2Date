@@ -1522,13 +1522,19 @@ watch(
       </div>
     </div>
     <!-- BlogList -->
+
+    <div
+      v-if="pagination?.last_page"
+      class="w-full h-auto lg:mt-8 mb-2 text-sm text-[#6E6E6E]"
+    >
+      Page {{ pagination.current_page }} of {{ pagination.last_page }}
+    </div>
+
     <section
       ref="logoContainer"
       id="blogSection"
-      class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-5 px-8 md:px-8 xl:px-0"
+      class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-8 md:px-8 xl:px-0"
     >
-      <!-- :style="{ minHeight: maxHeight + 'px' }" -->
-      <!-- :style="{ minHeight: `${maxHeight}px` }" -->
       <!-- Loading -->
       <div v-if="loading" class="w-full flex justify-center items-center">
         <!-- Loader Frame -->
