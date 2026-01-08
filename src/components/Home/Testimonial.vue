@@ -7,29 +7,6 @@ const modules = [Navigation, Pagination, Autoplay];
 
 const testimonials = [
   {
-    name: "Michael Tan",
-    position: "Vice President, Digital Innovation at Chubb Life",
-    text: `Seleris has significantly streamlined our customer risk assessment process.
-    With facial video analysis powered by AI, we’re able to evaluate applications faster,
-    more accurately, and with far less friction especially for life insurance products.
-    It’s a game-changer in digital transformation.`,
-  },
-  {
-    name: "Ari Wibowo",
-    position: "Head of Digital Services - Jamkrida Banten",
-    text: `Seleris has helped us modernize the way we evaluate individuals.
-    The facial video-based system is fast, accurate, and easy to integrate with our existing workflows.
-    What we value most is how seamless the process is no manual steps, no lengthy interviews.
-    It's a reliable solution that supports our digital transformation goals.`,
-  },
-  {
-    name: "Dewi Lestari",
-    position: "VP of Operations - FPG Insurance Indonesia",
-    text: `Partnering with Seleris has significantly improved our customer evaluation process.
-    The AI-driven facial video technology gives us a faster, smarter way to assess individuals with minimal friction.
-    Integration was smooth, and the support team has been responsive and professional.`,
-  },
-  {
     name: "Edhie Mulyono",
     position: "Technical Director - PT Asuransi FPG Indonesia",
     text: `Seleris empowers FPG's technical team with health data insights that were previously inaccessible. 

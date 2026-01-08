@@ -46,7 +46,7 @@ function resetTransform() {
         <img
           :src="image"
           alt="partner logo"
-          class="w-[184px] h-full object-contain filter grayscale group-hover:filter-none transition duration-300"
+          class="w-[200px] h-full object-contain filter grayscale group-hover:filter-none transition duration-300"
         />
       </div>
     </div>

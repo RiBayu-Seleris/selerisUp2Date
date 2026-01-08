@@ -59,7 +59,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="flex flex-row sml:flex-col-reverse lg:flex-row px-0 lg:px-6 lg:justify-between dark:bg-[#17181A]"
+    class="flex flex-col-reverse lg:flex-row px-0 lg:px-6 lg:justify-between dark:bg-[#17181A]"
   >
     <div class="flex flex-col w-full h-full justify-center dark:bg-[#17181A]">
       <div class="w-full pb-0 sm:pb-2 md:pb-0 xl:pb-6">
@@ -70,7 +70,7 @@ onMounted(() => {
         </p>
       </div>
       <div
-        class="w-full h-auto flex flex-col xl:-space-y-4 sml:pb-4 md:pb-5 lg:pb-0 xl:pb-0 text-[#195279]"
+        class="w-full h-auto flex flex-col xl:-space-y-4 pb-4 md:pb-5 lg:pb-0 xl:pb-0 text-[#195279]"
       >
         <p
           class="text-[26px] sm:text-[34px] md:text-[40px] lg:text-[44px] xl:text-[48px] font-[500] dark:text-[#FAFAFA]"
@@ -84,13 +84,11 @@ onMounted(() => {
           Works?
         </p>
       </div>
-      <div
-        class="w-full sml:h-[200px] md:h-[200px] lg:h-[320px] xl:h-[200px] lg:mt-5"
-      >
+      <div class="w-full h-[200px] lg:h-[320px] xl:h-[200px] lg:mt-5">
         <div class="h-full relative overflow-hidden">
           <!-- Scroll Indicator dengan Garis -->
           <div
-            class="absolute xl:left-3 sml:left-0 top-1/2 -translate-y-1/2 flex flex-col gap-12 sml:gap-6 z-0"
+            class="absolute left-0 xl:left-3 top-1/2 -translate-y-1/2 flex flex-col gap-6 z-0"
           >
             <!-- Garis Progress -->
             <div

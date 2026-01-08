@@ -79,17 +79,19 @@ onUnmounted(() => {
     >
       <router-link to="/" class="w-[40%] h-auto flex">
         <!-- Logo terang (light mode) -->
+        <!-- w-[117px] h-[56px] -->
         <img
           :src="Logo"
           alt="Logo"
-          class="w-[117px] h-[56px] sml:w-[80px] sml:h-[56px] object-contain dark:hidden"
+          class="w-[80px] h-[56px] object-contain dark:hidden"
         />
 
         <!-- Logo gelap (dark mode) -->
+        <!-- w-[117px] h-[56px] -->
         <img
           :src="DarkLogo"
           alt="Dark Logo"
-          class="w-[117px] h-[56px] sml:w-[80px] sml:h-[56px] object-contain hidden dark:block"
+          class="w-[80px] h-[56px] object-contain hidden dark:block"
         />
       </router-link>
       <div class="w-[60%] h-auto flex items-center flex-row justify-end">

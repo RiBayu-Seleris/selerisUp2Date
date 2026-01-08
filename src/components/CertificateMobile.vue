@@ -63,9 +63,7 @@ const getShortText = (fullText) => {
           >
             <div class="flex flex-col w-full h-auto">
               <div class="flex flex-row w-full h-auto gap-x-4 mb-4">
-                <div
-                  class="flex sml:w-[50px] sml:h-[50px] md:w-[60px] md:h-[60px]"
-                >
+                <div class="flex w-[50px] h-[50px] md:w-[60px] md:h-[60px]">
                   <img
                     :src="`/assets/images/certificate-icon/${cert.logo}`"
                     alt="CertLogo"

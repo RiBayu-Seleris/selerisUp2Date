@@ -1,5 +1,6 @@
 <script setup>
 import Navbar from "@productComponents/Navbar.vue";
+import Navbar3 from "@productComponents/Navbar3.vue";
 import NavbarScroll from "@productComponents/NavbarScroll.vue";
 import Footer from "@productComponents/Footer.vue";
 import Sidebar from "@productComponents/Sidebar.vue";
@@ -15,6 +16,10 @@ const route = useRoute();
 const showTooltip = computed(() => scrollStore.isScrolled);
 const handleScroll = () => scrollStore.updateScroll();
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+
+const isSelerisCredit = computed(
+  () => route.path === "/product/seleris-credit"
+);
 
 // Fungsi scroll ke hash (dengan retry)
 const scrollToHash = async (hash) => {
@@ -76,9 +81,14 @@ import Tooltip from "@/assets/images/tooltip.png";
     class="relative w-full mx-auto font-poppins animate__animated animate__fadeIn animate__slower"
   >
     <main class="relative w-full mx-auto">
-      <header class="fixed top-0 w-full z-50">
+      <header v-if="!isSelerisCredit" class="fixed top-0 w-full z-50">
         <transition name="slide-down" mode="out-in">
           <component :is="scrollStore.isScrolled ? NavbarScroll : Navbar" />
+        </transition>
+      </header>
+      <header v-else class="fixed top-0 w-full z-50">
+        <transition name="slide-down" mode="out-in">
+          <component :is="scrollStore.isScrolled ? NavbarScroll : Navbar3" />
         </transition>
       </header>
 

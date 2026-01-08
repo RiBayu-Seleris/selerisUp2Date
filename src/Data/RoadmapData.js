@@ -55,6 +55,31 @@ export const roadmapData = [
     year: 2026,
     data: [
       {
+        quarters: 1,
+        logo: null,
+        title: "Seleris Credit",
+        subtitle: "AI-Powered Credit Life Underwriting Intelligence",
+        description:
+          "Seleris Credit is an AI-driven credit life underwriting platform that transforms how insurers and financial institutions assess debtor mortality risk. By leveraging artificial intelligence, actuarial science, and predictive analytics, Seleris Credit enables faster, more objective, and prudent underwriting decisions for credit-linked insurance products.",
+        content: [
+          {
+            title: "Automated Credit Life Underwriting & Risk Scoring",
+            description:
+              "Seleris Credit automates underwriting decisions by analyzing vital signs, health biomarkers, and disease risk indicators to generate real-time underwriting outcomes such as Accepted Standard, Accepted Sub-Standard, or Declined.",
+          },
+          {
+            title: "Quantitative Extra Mortality & Predictive Risk Assessment",
+            description:
+              "The platform calculates extra mortality values using AI-based predictive models, enabling insurers to quantify health-related risks accurately while reducing subjectivity and improving portfolio sustainability.",
+          },
+          {
+            title: "Seamless Integration & Regulatory-Ready Reporting",
+            description:
+              "Seleris Credit integrates with insurance, banking, and financing systems, delivering structured underwriting logs, audit-ready reports, and decision transparency aligned with prudent risk management and regulatory standards.",
+          },
+        ],
+      },
+      {
         quarters: 2,
         logo: null,
         title: "Seleris PropScan",

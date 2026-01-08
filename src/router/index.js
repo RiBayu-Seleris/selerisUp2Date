@@ -134,6 +134,12 @@ const routes = [
         component: () => import("@/views/Products/HealthCare.vue"),
         meta: { title: "Health Care" },
       },
+      {
+        path: "seleris-credit",
+        name: "SelerisCredit",
+        component: () => import("@/views/Products/Credit.vue"),
+        meta: { title: "Seleris Credit" },
+      },
     ],
   },
 

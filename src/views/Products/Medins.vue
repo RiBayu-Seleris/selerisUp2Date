@@ -266,10 +266,12 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
 
     <!-- Download App -->
     <section
-      class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-40"
+      class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-40 z-40"
       id="download"
     >
-      <div class="w-full h-auto px-0 md:px-12 lg:px-20 xl:max-w-6xl mx-auto">
+      <div
+        class="w-full h-auto px-0 md:px-12 lg:px-20 xl:max-w-6xl mx-auto relative"
+      >
         <DownloadFrame
           appname="Seleris Medins"
           description="Stay in control of your health data and claims anytime, anywhere. Our
@@ -282,14 +284,21 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
 
     <!-- Book Demo -->
     <section
-      class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-40 px-8"
+      class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-40 px-8 z-30 pt-24"
       id="bookdemo"
     >
-      <BookDemoProduct
-        title="Seleris Medins A Complete Solution for Your Health Needs"
-        :framebookdemo="medinsframebook"
-        colorarrow="text-[#42C5AF]"
+      <!-- Circle Sixth -->
+      <Circle
+        heightClass="h-[200px] md:h-[500px] xl:h-[600px]"
+        positionClass="-top-[20px] md:top-[200px] xl:top-[-100px] -left-[200px] lg:-left-[80px]"
       />
+      <div>
+        <BookDemoProduct
+          title="Seleris Medins A Complete Solution for Your Health Needs"
+          :framebookdemo="medinsframebook"
+          colorarrow="text-[#42C5AF]"
+        />
+      </div>
     </section>
   </div>
 </template>

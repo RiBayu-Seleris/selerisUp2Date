@@ -1409,7 +1409,9 @@ watch(
       </div>
     </section>
     <!-- Most Popular Mobile -->
-    <div class="relative flex flex-col lg:hidden w-full h-auto mt-10 py-4">
+    <div
+      class="relative hidden md:flex flex-col lg:hidden w-full h-auto mt-10 py-4"
+    >
       <div class="w-full h-auto px-8">
         <p
           class="text-[#195279] font-[500] sm:text-[20px] md:text-[24px] justify-center dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -1525,9 +1527,11 @@ watch(
 
     <div
       v-if="pagination?.last_page"
-      class="w-full h-auto lg:mt-8 mb-2 text-sm text-[#6E6E6E]"
+      class="w-full h-auto mb-2 lg:mb-4 text-sm text-[#6E6E6E] px-8 lg:px-0 mt-20 md:mt-0 lg:mt-14 relative z-0"
     >
-      Page {{ pagination.current_page }} of {{ pagination.last_page }}
+      <p class="text-[20px] font-[400]">
+        Page {{ pagination.current_page }} of {{ pagination.last_page }}
+      </p>
     </div>
 
     <section

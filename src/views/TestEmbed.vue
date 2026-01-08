@@ -82,7 +82,7 @@ import lottie from "lottie-web";
 
 // 📌 Import JSON Anda langsung
 // Pastikan file ada di: src/assets/myAnimation.json
-import myAnimation from "@/assets/videos/videojson.json";
+import myAnimation from "@/assets/Products/images/Credit/scene-1.json";
 /* ---------------- STATE ---------------- */
 const currentStep = ref(0);
 

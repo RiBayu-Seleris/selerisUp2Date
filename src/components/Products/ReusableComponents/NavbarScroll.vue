@@ -26,6 +26,9 @@ const LogoLink = computed(() => {
   if (route.path === "/product/health-care") {
     return "/product/health-care";
   }
+  if (route.path === "/product/seleris-credit") {
+    return "/product/seleris-credit";
+  }
   return "";
 });
 

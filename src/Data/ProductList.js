@@ -5,4 +5,5 @@ export const productList = [
   { url: "/product/medins", name: "Seleris Medins" },
   { url: "/product/health-care", name: "Seleris Care" },
   { url: "/", name: "Seleris Cough" },
+  { url: "/", name: "Seleris Credit" },
 ];

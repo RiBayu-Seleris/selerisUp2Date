@@ -30,6 +30,12 @@ export function useProductLogo() {
         import.meta.url
       ).href;
     }
+    if (route.path === "/product/seleris-credit") {
+      return new URL(
+        "@/assets/Products/images/Logo/Credit-logo.png",
+        import.meta.url
+      ).href;
+    }
     return null; // fallback
   });
 

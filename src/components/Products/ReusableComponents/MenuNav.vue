@@ -6,6 +6,8 @@ import Navlink from "@productComponents/Navlink.vue";
 
 const { isScrolled } = useScrollStore();
 const route = useRoute();
+
+const isSelerisCredit = ref(route.path === "/product/seleris-credit");
 </script>
 
 <template>
@@ -14,6 +16,8 @@ const route = useRoute();
       'flex items-center text-md font-[400]  ',
       isScrolled
         ? 'lg:gap-[20px] xl:gap-[50px] text-[#717171] font-[500] '
+        : isSelerisCredit
+        ? 'lg:gap-[25px] 2lg:gap-[45px] xl:gap-[63px] 2xl:gap-[70px] justify-center text-[#374151]'
         : 'lg:gap-[25px] 2lg:gap-[45px] xl:gap-[63px] 2xl:gap-[70px] justify-center text-[#FAFAFA]',
     ]"
   >

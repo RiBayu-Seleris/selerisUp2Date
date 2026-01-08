@@ -27,7 +27,7 @@ const partnerChunks = computed(() =>
   <div
     v-for="(row, rowIndex) in partnerChunks"
     :key="'row-' + rowIndex"
-    class="hidden lg:grid mt-0 gap-x-5 pb-8 mx-auto w-full"
+    class="hidden lg:grid mt-0 gap-x-5 py-4 mx-auto w-full"
     :class="[
       row.length === 1
         ? 'grid-cols-1 max-w-[240px] px-2 lg:px-10 xl:px-2'

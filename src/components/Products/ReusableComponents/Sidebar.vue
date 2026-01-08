@@ -48,6 +48,9 @@ const titleSidebar = () => {
   if (route.path === "/product/health-care") {
     return "Care";
   }
+  if (route.path === "/product/seleris-credit") {
+    return "Credit";
+  }
 };
 </script>
 

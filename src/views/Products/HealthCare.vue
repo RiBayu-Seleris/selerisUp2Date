@@ -25,6 +25,7 @@ import ArrowRight from "@/assets/Products/icons/arrow-right.svg";
 import CareOrnament from "@productComponents/Svg/CareOrnament.vue";
 import CareOrnament2 from "@productComponents/Svg/CareOrnament2.vue";
 import CareOrnament3 from "@productComponents/Svg/CareOrnament3.vue";
+import CareOrnament4 from "@productComponents/Svg/CareOrnament4.vue";
 
 import imageAbout from "@/assets/Products/images/Care/about-care.png";
 import FrameLineWorks from "@productComponents/Svg/HealthCareDescriptionWork.vue";
@@ -241,7 +242,11 @@ const stepsWithPath = careWorkSteps.map((step) => ({
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-40"
       id="download"
     >
-      <div class="w-full h-auto md:max-w-6xl mx-auto">
+      <CareOrnament4
+        positionClass="top-[150px] sm:-top-5 xl:-top-[200px]"
+        heightClass="w-full h-auto lg:h-full"
+      />
+      <div class="w-full h-auto md:max-w-6xl mx-auto relative z-30">
         <DownloadFrame
           appname="Seleris Medins"
           description="Stay in control of your health data and claims anytime, anywhere. Our
