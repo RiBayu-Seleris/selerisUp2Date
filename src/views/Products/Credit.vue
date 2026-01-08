@@ -115,30 +115,30 @@ onMounted(() => {
 <template>
   <div class="relative w-full overflow-hidden max-w-[1440px] mx-auto">
     <!-- Hero -->
-    <section class="relative w-full h-full rounded-[20px] z-20 p-4" id="hero">
-      <figure class="absolute w-auto h-auto right-0 top-40 lg:top-24">
+    <section class="relative w-full h-full rounded-[20px] z-20" id="hero">
+      <figure class="absolute w-auto h-auto right-0 top-20 lg:top-24">
         <img
           src="@/assets/Products/images/Credit/blue-wave.png"
           alt=""
-          class="w-full h-[100px] md:h-[280px] lg:w-[600px] lg:h-[300px] object-contain"
+          class="w-full h-[100px] md:w-[600px] md:h-[280px] lg:w-[600px] lg:h-[300px] object-contain"
         />
       </figure>
-      <figure class="absolute w-auto h-auto right-0 bottom-0">
+      <figure class="absolute w-auto h-auto right-0 bottom-[350px] lg:bottom-0">
         <img
           src="@/assets/Products/images/Credit/orange-wave.png"
           alt=""
-          class="w-full h-[100px] md:h-[280px] lg:w-full lg:h-[300px] object-contain"
+          class="w-full h-[100px] md:h-auto lg:w-full lg:h-[300px] object-contain"
         />
       </figure>
       <div
-        class="relative w-full h-[400px] md:h-[600px] lg:h-auto rounded-[20px] z-20"
+        class="relative w-full h-[400px] md:h-auto lg:h-auto rounded-[20px] z-20"
       >
         <div
-          class="relative w-full h-full flex flex-col lg:flex-row gap-x-0 pt-32 lg:px-28 lg:pt-32 gap-y-10"
+          class="relative w-full h-full flex flex-col lg:flex-row gap-x-0 pt-32 lg:px-28 lg:pt-40 gap-y-10"
         >
           <!-- Phone mobile -->
           <div
-            class="flex relative lg:hidden flex-row gap-x-5 items-center justify-center lg:items-end lg:justify-end w-full h-auto"
+            class="flex relative lg:hidden flex-row gap-x-5 items-end justify-center lg:items-end lg:justify-end w-full h-auto"
           >
             <figure class="w-auto h-auto">
               <img
@@ -164,21 +164,25 @@ onMounted(() => {
               <div
                 class="w-full h-auto flex flex-col gap-y-0 justify-center items-center lg:justify-normal lg:items-start"
               >
-                <p class="font-[500] text-[24px] lg:text-[50px]">
+                <p class="font-[500] text-[42px] lg:text-[50px]">
                   <span class="text-[#195279]">AI Powered </span>
                   <span class="text-[#FDB403]">Credit Life</span>
                 </p>
-                <p class="text-[#1889D1] font-[600] text-[14px] lg:text-[40px]">
+                <p class="text-[#1889D1] font-[600] text-[32px] lg:text-[40px]">
                   Underwriting Intelligence
                 </p>
               </div>
-              <p class="text-[#6F6F6F] text-[22px] w-[80%]">
+              <p
+                class="text-[#6F6F6F] text-[22px] lg:text-[22px] w-[80%] text-center lg:text-start"
+              >
                 Point your camera at any damage and let
                 <span class="font-[600]">artificial intelligence</span>
                 do the work.
               </p>
             </div>
-            <div class="w-full h-auto flex flex-row gap-x-5">
+            <div
+              class="w-full h-auto flex flex-row gap-x-5 justify-center lg:justify-start"
+            >
               <button
                 class="w-auto h-auto px-6 py-2 bg-[#195279] rounded-[40px]"
               >
@@ -226,11 +230,13 @@ onMounted(() => {
 
     <!-- Section About -->
     <section
-      class="relative flex flex-col w-full h-full rounded-[20px] z-20 p-4 mt-10"
+      class="relative w-full h-full rounded-[20px] z-20 mt-10"
       id="about"
     >
       <!-- SELERIS CREDIT -->
-      <div class="relative w-full h-[480px] flex flex-row px-28">
+      <div
+        class="relative w-full h-[380px] lg:h-[480px] flex flex-row px-12 lg:px-28 gap-x-5 lg:gap-x-0"
+      >
         <div class="relative flex w-full h-full justify-center">
           <figure class="w-auto h-auto flex justify-center items-center pt-10">
             <img
@@ -240,17 +246,21 @@ onMounted(() => {
             />
           </figure>
         </div>
-        <div class="w-full h-auto bg-[#FFFFFF] rounded-[38px]">
+        <div class="w-full h-auto bg-[#FFFFFF] rounded-[38px] md:py-10 lg:py-0">
           <div
-            class="flex flex-col gap-y-10 items-center justify-center w-full h-full px-10"
+            class="flex flex-col md:gap-y-5 lg:gap-y-10 items-center justify-center w-full h-full px-10"
           >
             <div class="w-full h-auto">
-              <p class="text-[#1889D1] font-[600] text-[40px]">
+              <p
+                class="text-[#1889D1] font-[600] md:text-[26px] lg:text-[40px]"
+              >
                 Seleris <span class="text-[#FDB403]">Credit</span>
               </p>
             </div>
             <div class="w-full h-auto">
-              <p class="text-[#626262] font-[400] text-[20px]">
+              <p
+                class="text-[#626262] font-[400] md:text-[14px] lg:text-[20px] leading-relaxed lg:leading-relaxed"
+              >
                 <span class="font-[600]"
                   >Seleris Credit adalah platform underwriting</span
                 >
@@ -265,19 +275,25 @@ onMounted(() => {
       </div>
 
       <!-- TRANSFORMASI ASURANSI -->
-      <div class="relative w-full h-auto flex flex-row pr-28 pl-24 mt-36">
+      <div
+        class="relative w-full h-auto flex flex-row lg:pr-28 lg:pl-24 mt-36 px-10 lg:px-16"
+      >
         <div class="relative flex w-full h-full justify-center">
           <div
-            class="flex flex-col gap-y-8 items-start justify-start w-full h-full px-10 pt-10"
+            class="flex flex-col md:gap-y-5 lg:gap-y-8 items-start justify-start w-full h-full lg:px-10 pt-5 lg:pt-10"
           >
             <div class="w-full h-auto">
-              <p class="text-[#111827] font-[600] text-[40px]">
+              <p
+                class="text-[#111827] font-[600] md:text-[24px] lg:text-[40px]"
+              >
                 Tranformasi <br />
                 Asuransi Kredit
               </p>
             </div>
-            <div class="w-full h-auto">
-              <p class="text-[#626262] font-[400] text-[18px] leading-loose">
+            <div class="w-full h-auto pr-8 lg:pr-0">
+              <p
+                class="text-[#626262] font-[400] md:text-[12px] lg:text-[18px] leading-loose"
+              >
                 Sebagai transformasi dari aplikasi
                 <span class="font-[600]">Smart Credit</span> yang telah
                 digunakan oleh mitra perusahaan asuransi dan broker asuransi,
@@ -299,22 +315,28 @@ onMounted(() => {
 
     <!-- Section Apa Yang Dikerjakan Seleris -->
     <section
-      class="relative flex flex-col w-full h-auto bg-[#FFFFFF] z-20 py-20 mt-10 gap-y-14"
+      class="relative flex flex-col w-full h-auto bg-[#FFFFFF] z-20 py-20 mt-10 gap-y-10 lg:gap-y-14"
     >
       <div class="w-full h-auto flex flex-col gap-y-4">
         <div class="w-full h-auto flex justify-center items-center">
-          <p class="font-[600] text-[40px] text-center text-[#2C3131]">
+          <p
+            class="font-[600] md:text-[28px] lg:text-[40px] text-center text-[#2C3131]"
+          >
             Apa yang Dikerjakan Seleris Credit?
           </p>
         </div>
         <div class="w-full h-auto flex justify-center items-center">
-          <p class="font-[400] text-[24px] text-center text-[#626262]">
+          <p
+            class="font-[400] md:text-[20px] lg:text-[24px] text-center text-[#626262]"
+          >
             Seleris Credit melakukan deteksi dan penilaian <br />
             risiko mortalitas debitur melalui analisis
           </p>
         </div>
       </div>
-      <div class="w-full h-auto flex flex-row gap-x-10 px-20">
+      <div
+        class="hidden w-full h-auto lg:flex flex-row gap-x-5 lg:gap-x-10 px-12 lg:px-20"
+      >
         <div
           v-for="(data, index) in SelerisDo"
           :key="index"
@@ -343,9 +365,40 @@ onMounted(() => {
           </div>
         </div>
       </div>
-      <div class="w-full h-auto px-44">
+      <div
+        class="relative flex lg:hidden flex-row w-full max-h-screen gap-x-5 md:gap-x-10 py-5 overflow-x-auto snap-x snap-mandatory sm:pl-10 px-8 sm:pr-10 md:pl-12 md:pr-12 hide-scrollbar"
+      >
+        <div
+          v-for="(data, index) in SelerisDo"
+          :key="index"
+          class="flex flex-col lg:hidden snap-center shrink-0 w-full sm:w-[60%] md:w-[60%] h-auto rounded-xl px-5 py-5 sm:py-2 shadow-lg border-[1px] gap-y-5"
+        >
+          <div class="flex flex-row">
+            <div class="flex w-[40%] h-auto">
+              <img
+                :src="data.icon"
+                alt="BenefitRobot"
+                class="w-full h-full object-center object-contain"
+              />
+            </div>
+            <div class="flex w-full h-auto pl-5 pt-9 items-center">
+              <p class="text-[20px] text-[#2C3131] font-[600]">
+                {{ data.title }}
+              </p>
+            </div>
+          </div>
+          <div class="flex flex-col w-full h-full pb-5">
+            <div class="flex w-full h-full items-start justify-start">
+              <p class="text-[14px] text-[#626262] font-[400]">
+                {{ data.description }}
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="w-full h-auto px-12 lg:px-44">
         <p
-          class="text-center text-[#626262] font-[400] text-[18px] leading-relaxed"
+          class="text-center text-[#626262] font-[400] text-[16px] lg:text-[18px] leading-relaxed"
         >
           Parameter-parameter ini diolah menggunakan teknologi AI untuk
           membangun model penilaian risiko yang komprehensif dan konsisten,
@@ -356,16 +409,17 @@ onMounted(() => {
     </section>
 
     <!-- Keunggulan Utama Seleris Credit -->
-    <section
-      class="relative flex flex-col w-full h-full rounded-[20px] z-20 mt-32"
-    >
+    <section class="relative w-full h-full rounded-[20px] z-20 mt-32">
       <!-- TRANSFORMASI ASURANSI -->
-      <div class="relative w-full h-[550px] flex flex-row">
-        <div class="relative flex w-1/2 h-full bg-white">
-          <div class="flex flex-col gap-y-6 w-full h-full px-20 pt-16">
+      <div class="relative w-full h-[480px] lg:h-[550px] flex flex-row">
+        <div class="relative flex w-[55%] lg:w-1/2 h-full bg-white">
+          <div
+            class="flex flex-col gap-y-8 lg:gap-y-10 w-full h-full px-12 lg:px-20 pt-10 lg:pt-8"
+          >
             <!-- TITLE -->
-            <h2 class="text-[#1889D1] font-semibold text-[40px]">
-              Keunggulan Utama Seleris Credit
+            <h2 class="text-[#1889D1] font-[600] text-[24px] lg:text-[38px]">
+              Keunggulan Utama <br />
+              Seleris Credit
             </h2>
 
             <!-- SWIPER WRAPPER (INI YANG NGUNCI LEBAR) -->
@@ -379,19 +433,23 @@ onMounted(() => {
                 loop
               >
                 <SwiperSlide class="w-full h-auto">
-                  <div class="w-full h-auto flex flex-col gap-y-10">
+                  <div class="w-full h-auto flex flex-col gap-y-8">
                     <div
                       v-for="(data_slider1, index) in slider1"
                       :key="index"
-                      class="w-full h-auto flex flex-col"
+                      class="w-full h-auto flex flex-col gap-y-1"
                     >
                       <div class="w-full h-auto flex flex-col">
-                        <p class="text-[#2C3131] font-[600]">
+                        <p
+                          class="text-[#2C3131] font-[600] text-[16px] lg:text-[20px]"
+                        >
                           {{ data_slider1.title }}
                         </p>
                       </div>
-                      <div class="w-full h-auto flex flex-col">
-                        <p class="text-[#626262] font-[400]">
+                      <div class="w-full h-auto flex flex-col pr-0 lg:pr-28">
+                        <p
+                          class="text-[#626262] font-[400] text-[14px] lg:text-[16px]"
+                        >
                           {{ data_slider1.description }}
                         </p>
                       </div>
@@ -403,13 +461,18 @@ onMounted(() => {
                   <div class="w-full h-auto flex flex-col gap-y-8">
                     <div class="w-full h-auto flex flex-col gap-y-2">
                       <div class="w-full h-auto">
-                        <p class="text-[#2C3131] font-[600] text-[24px]">
+                        <p
+                          class="text-[#2C3131] font-[600] text-[18px] lg:text-[24px]"
+                        >
                           Automated Underwriting Decision
                         </p>
                       </div>
                       <div class="w-full h-auto">
-                        <p class="text-[#626262] font-[400] text-[18px]">
-                          Menentukan keputusan underwriting secara <br />
+                        <p
+                          class="text-[#626262] font-[400] text-[14px] lg:text-[18px]"
+                        >
+                          Menentukan keputusan underwriting secara
+                          <br class="hidden lg:block" />
                           real time:
                         </p>
                       </div>
@@ -418,17 +481,19 @@ onMounted(() => {
                       <div
                         v-for="(data_slider2, index) in slider2"
                         :key="index"
-                        class="w-full h-auto flex flex-row gap-x-10"
+                        class="w-full h-auto flex flex-row gap-x-4 lg:gap-x-10"
                       >
                         <div class="w-[5%] h-auto">
                           <div
-                            class="w-7 h-7 lg:w-7 lg:h-7 xl:w-8 xl:h-8 bg-[#1889D1] rounded-[8px]"
+                            class="w-6 h-6 lg:w-8 lg:h-8 xl:w-8 xl:h-8 bg-[#1889D1] rounded-[8px]"
                           >
                             <ChecklistIcon />
                           </div>
                         </div>
                         <div class="w-full h-auto flex items-center">
-                          <p class="text-[#1889D1] font-[600] text-[18px]">
+                          <p
+                            class="text-[#1889D1] font-[600] text-[16px] lg:text-[18px]"
+                          >
                             {{ data_slider2.title }}
                           </p>
                         </div>
@@ -449,7 +514,9 @@ onMounted(() => {
     </section>
 
     <!-- Untuk Siapa Seleris Credit -->
-    <section class="relative w-full h-auto z-20 mt-32 bg-white py-20 px-20">
+    <section
+      class="relative w-full h-auto z-20 mt-32 bg-white py-14 lg:py-20 px-12 lg:px-20"
+    >
       <div class="w-full h-auto flex flex-row gap-x-10">
         <div class="w-[60%] h-auto flex">
           <img
@@ -458,7 +525,7 @@ onMounted(() => {
             class="w-full h-full object-cover object-center rounded-[37px]"
           />
         </div>
-        <div class="w-full h-auto flex flex-col gap-y-10">
+        <div class="w-full h-auto flex flex-col gap-y-8 lg:gap-y-10">
           <div class="w-full h-auto flex flex-row gap-x-5 pt-8">
             <div class="w-[30%] h-auto flex items-end">
               <img
@@ -468,7 +535,7 @@ onMounted(() => {
               />
             </div>
             <div class="w-full h-auto flex items-end">
-              <p class="text-[#195279] font-[600] text-[40px]">
+              <p class="text-[#195279] font-[600] text-[24px] lg:text-[40px]">
                 Untuk Siapa <br />
                 <span class="text-[#1485CB]">Seleris </span>
                 <span class="text-[#FDB403]">Credit?</span>
@@ -476,31 +543,35 @@ onMounted(() => {
             </div>
           </div>
           <div class="w-full h-auto">
-            <p class="text-[#626262] font-[400] text-[18px]">
+            <p class="text-[#626262] font-[400] text-[16px] lg:text-[18px]">
               Seleris Credit melakukan deteksi dan penilaian <br />
               risiko mortalitas debitur melalui analisis
             </p>
           </div>
           <div
-            class="w-full h-auto bg-[#FFFFFF] border-[2px] rounded-[22px] px-12 py-10"
+            class="w-full h-auto bg-[#FFFFFF] border-[2px] rounded-[22px] px-8 lg:px-12 py-4 lg:py-10"
           >
             <div class="w-full h-auto flex flex-row gap-x-5">
               <div class="w-auto h-auto pt-1">
                 <img
                   src="@/assets/Products/icons/shield.png"
                   alt=""
-                  class="w-16 h-auto object-cover object-center p-3 rounded-full bg-[#1485CB]"
+                  class="w-12 lg:w-16 h-auto object-cover object-center p-1.5 lg:p-3 rounded-full bg-[#1485CB]"
                 />
               </div>
-              <div class="w-full h-auto flex flex-col gap-y-5">
+              <div class="w-full h-auto flex flex-col gap-y-3 lg:gap-y-5">
                 <div class="w-full h-auto">
-                  <p class="text-[#195279] font-[600] text-[20px]">
+                  <p
+                    class="text-[#195279] font-[600] text-[14px] lg:text-[20px]"
+                  >
                     Perusahaan Asuransi Jiwa, Asuransi Umum dan Penjaminan
                     Kredit
                   </p>
                 </div>
                 <div class="w-full h-auto">
-                  <p class="text-[#626262] font-[400] text-[16px]">
+                  <p
+                    class="text-[#626262] font-[400] text-[12px] lg:text-[16px]"
+                  >
                     Meningkatkan kualitas underwriting dan keberlanjutan
                     portofolio asuransi jiwa kredit
                   </p>
@@ -513,22 +584,24 @@ onMounted(() => {
     </section>
 
     <!-- Mengapa Seleris Credit -->
-    <section
-      class="relative flex flex-col w-full h-full rounded-[20px] z-20 mt-32"
-    >
+    <section class="relative w-full h-full rounded-[20px] z-20 mt-32">
       <!-- TRANSFORMASI ASURANSI -->
-      <div class="relative w-full h-[550px] flex flex-row">
-        <div class="w-full h-auto bg-white py-16">
-          <div class="w-full h-full flex flex-col justify-between pl-20 pr-20">
+      <div class="relative w-full h-[450px] lg:h-[550px] flex flex-row">
+        <div class="w-full h-auto bg-white py-12 lg:py-16">
+          <div
+            class="w-full h-full flex flex-col justify-between pl-12 lg:pl-20 pr-8 lg:pr-20"
+          >
             <div class="w-full h-auto">
-              <p class="text-[38px] font-[600]">
+              <p class="text-[28px] lg:text-[38px] font-[600]">
                 Mengapa <br />
                 <span class="text-[#1485CB]"> Seleris </span>
                 <span class="text-[#FDB403]">Credit?</span>
               </p>
             </div>
             <div class="w-full h-auto">
-              <p class="text-[20px] font-[400] text-[#626262] leading-relaxed">
+              <p
+                class="text-[14px] lg:text-[20px] font-[400] text-[#626262] leading-relaxed"
+              >
                 Di era digital dan AI, underwriting tidak lagi cukup berbasis
                 intuisi dan proses manual.
                 <span class="font-[600]">Seleris Credit</span> menghadirkan
@@ -556,31 +629,33 @@ onMounted(() => {
     </section>
 
     <!-- Book A Demo -->
-    <section class="relative w-full h-auto z-20 mt-32 px-20">
+    <section class="relative w-full h-auto z-20 mt-32 px-12 lg:px-20">
       <div
-        class="w-full h-auto flex flex-row bg-[#1485CB] gap-x-10 rounded-[24px] py-14"
+        class="w-full h-auto flex flex-row bg-[#1485CB] gap-x-10 rounded-[24px] py-10 lg:py-14"
       >
         <div class="w-[60%] h-full flex items-center">
           <div
-            class="w-full h-full flex flex-col items-center justify-center px-20 gap-y-5"
+            class="w-full h-full flex flex-col items-center justify-center pl-12 lg:px-20 gap-y-5"
           >
             <div class="w-full h-auto flex items-center">
-              <p class="text-[#FAFAFA] font-[600] text-[30px] leading-tight">
+              <p
+                class="text-[#FAFAFA] font-[600] text-[20px] lg:text-[30px] leading-tight"
+              >
                 Smarter Risk. Faster Decision. <br />
                 Sustainable Protection
               </p>
             </div>
             <div class="w-full h-auto">
-              <p class="text-[#FAFAFA] font-[400] text-[20px]">
+              <p class="text-[#FAFAFA] font-[400] text-[14px] lg:text-[20px]">
                 Request Demo Now!
               </p>
             </div>
           </div>
         </div>
-        <div class="w-[40%] h-auto flex items-center justify-center">
+        <div class="w-[45%] lg:w-[40%] h-auto flex items-center justify-center">
           <a href="/book-a-demo" target="_blank">
             <div
-              class="w-auto h-auto flex flex-row bg-[#FAFAFA] px-14 py-3 rounded-[10px]"
+              class="w-auto h-auto flex flex-row bg-[#FAFAFA] px-4 lg:px-14 py-2 lg:py-3 rounded-[10px]"
             >
               <div
                 class="w-full h-full flex items-center justify-center gap-x-2 md:gap-x-2 text-[#1485CB]"
@@ -589,7 +664,7 @@ onMounted(() => {
                   Book a Demo
                 </p>
                 <svg
-                  class="w-6 h-6 md:w-12 md:h-12"
+                  class="w-8 h-8 lg:w-12 lg:h-12"
                   viewBox="0 0 48 48"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
