@@ -117,24 +117,26 @@ onMounted(() => {
     <!-- Hero -->
     <section class="relative w-full h-full rounded-[20px] z-20" id="hero">
       <figure
-        class="absolute w-auto h-auto right-0 top-[120px] md:top-32 lg:top-24"
+        class="absolute w-auto h-auto -right-0 md:right-0 top-[120px] md:top-32 lg:top-24"
       >
         <img
           src="@/assets/Products/images/Credit/blue-wave.png"
           alt=""
-          class="w-[300px] h-auto md:w-[280px] md:h-auto lg:w-[600px] lg:h-[300px] object-contain"
+          class="w-[300px] h-auto md:w-[400px] md:h-auto lg:w-[600px] lg:h-[300px] object-contain"
         />
       </figure>
       <figure
-        class="absolute w-auto h-auto -right-10 md:right-0 bottom-[250px] md:bottom-0 lg:bottom-0"
+        class="absolute w-auto h-auto -right-10 md:right-0 bottom-[250px] md:bottom-[0px] lg:bottom-0"
       >
         <img
           src="@/assets/Products/images/Credit/orange-wave.png"
           alt=""
-          class="w-full h-[300px] md:w-[580px] md:h-auto lg:w-full lg:h-[300px] object-contain"
+          class="w-full h-[250px] md:h-auto lg:w-full lg:h-[300px] object-contain"
         />
       </figure>
-      <div class="relative w-full h-auto rounded-[20px] z-20">
+      <div
+        class="relative w-full h-auto md:h-auto lg:h-auto rounded-[20px] z-20"
+      >
         <div
           class="relative w-full h-full flex flex-col md:flex-row gap-x-0 pt-32 px-0 lg:px-28 lg:pt-40 gap-y-10"
         >
@@ -215,14 +217,14 @@ onMounted(() => {
               <img
                 src="@/assets/Products/images/Credit/phone1.png"
                 alt=""
-                class="w-full h-[180px] md:h-[240px] lg:h-[400px] object-contain"
+                class="w-full h-[180px] md:h-[250px] lg:h-[400px] object-contain"
               />
             </figure>
             <figure class="w-auto h-auto">
               <img
                 src="@/assets/Products/images/Credit/phone2.png"
                 alt=""
-                class="w-full h-[180px] md:h-[300px] lg:h-[500px] object-contain"
+                class="w-full h-[180px] md:h-[340px] lg:h-[500px] object-contain"
               />
             </figure>
           </div>
