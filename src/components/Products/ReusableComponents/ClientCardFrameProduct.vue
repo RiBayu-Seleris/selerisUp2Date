@@ -49,12 +49,20 @@ const partnerChunks = computed(() =>
     </div>
   </div>
 
-  <div class="block lg:hidden">
-    <div class="marquee-track animation-row whitespace-nowrap mt-8">
+  <div class="block lg:hidden overflow-hidden">
+    <div class="marquee-track animation-row mt-8">
       <div class="flex gap-x-6 w-max pb-5">
+        <!-- SET PERTAMA -->
         <CardSlide
           v-for="(logo, index) in props.clientLogos"
-          :key="index"
+          :key="'a-' + index"
+          :image="logo"
+        />
+
+        <!-- SET KEDUA (DUPLIKAT) -->
+        <CardSlide
+          v-for="(logo, index) in props.clientLogos"
+          :key="'b-' + index"
           :image="logo"
         />
       </div>
@@ -64,8 +72,7 @@ const partnerChunks = computed(() =>
 <style scoped>
 .marquee-track {
   display: flex;
-  width: fit-content;
-  white-space: nowrap;
+  width: max-content;
 }
 
 .animation-row {
@@ -74,7 +81,7 @@ const partnerChunks = computed(() =>
 
 @keyframes marquee-left {
   0% {
-    transform: translateX(0%);
+    transform: translateX(0);
   }
   100% {
     transform: translateX(-50%);

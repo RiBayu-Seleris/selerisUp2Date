@@ -1,5 +1,5 @@
 <script setup>
-import { onMounted, ref } from "vue";
+import { onBeforeUnmount, onMounted, ref } from "vue";
 
 import HeroText from "@productComponents/HeroText.vue";
 import TitleAndSubCard from "@productComponents/TitleAndSubCard.vue";
@@ -11,14 +11,49 @@ import ChecklistIcon from "@/components/icons/Checklist.vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
-import lottie from "lottie-web/build/player/lottie_light";
-import Scene1 from "@/assets/Products/images/Credit/scene-1.json";
-import Scene2 from "@/assets/Products/images/Credit/scene-2.json";
-import Scene3 from "@/assets/Products/images/Credit/scene-3.json";
+import { useVideoOnView } from "@/composables/useVideoOnView";
 
-const container = ref(null);
-const container2 = ref(null);
-const container3 = ref(null);
+const creditVideo = ref(null);
+const creditBlock = ref(null);
+
+const transformVideo = ref(null);
+const transformBlock = ref(null);
+
+const keunggulanVideo = ref(null);
+const keunggulanBlock = ref(null);
+
+const selerisVideo = ref(null);
+const selerisBlock = ref(null);
+
+const card = ref(null);
+const transformStyle = ref("perspective(1200px) rotateX(0deg) rotateY(0deg)");
+
+function handleMouseMove(e) {
+  if (!card.value) return;
+
+  const rect = card.value.getBoundingClientRect();
+
+  const x = e.clientX - rect.left;
+  const y = e.clientY - rect.top;
+
+  const rotateX = (y / rect.height - 0.5) * -10;
+  const rotateY = (x / rect.width - 0.5) * 10;
+
+  transformStyle.value = `
+    perspective(1200px)
+    rotateX(${rotateX.toFixed(2)}deg)
+    rotateY(${rotateY.toFixed(2)}deg)
+    translateY(-6px)
+  `;
+}
+
+function resetTransform() {
+  transformStyle.value = `
+    perspective(1200px)
+    rotateX(0deg)
+    rotateY(0deg)
+  `;
+}
 
 const SelerisDo = [
   {
@@ -26,14 +61,14 @@ const SelerisDo = [
       .href,
     title: "Vital Signs",
     description:
-      "Buy Bitcoin or Ethereum, the securely store it in your wallet or send it on easily to friends ",
+      "Dengan teknologi facial scanning, AI menganalisis tanda vital dan menilai kondisi kesehatan secara cepat",
   },
   {
     icon: new URL("@/assets/Products/icons/bio-marker.png", import.meta.url)
       .href,
     title: "Biomarker kesehatan",
     description:
-      "Choose you preferred payment method such as bank transfer or credit card to top up your wallet ",
+      "AI mengolah biomarker kesehatan untuk menghasilkan insight objektif dan terukur mengenai kondisi kesehatan secara menyeluruh",
   },
   {
     icon: new URL(
@@ -42,7 +77,7 @@ const SelerisDo = [
     ).href,
     title: "Prediksi Risiko Penyakit",
     description:
-      "Sign up for free wallet on web, IOS or Android and follow our easy process to set up your profile",
+      "Teknologi AI menganalisis data kesehatan untuk memprediksi risiko penyakit secara lebih akurat",
   },
 ];
 
@@ -76,46 +111,20 @@ const slider2 = [
   },
 ];
 
-onMounted(() => {
-  lottie.loadAnimation({
-    container: container.value, // elemen target
-    renderer: "svg",
-    loop: true,
-    autoplay: true,
-    animationData: Scene1, // langsung pakai data JSON
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice", // <-- penting: "slice" memotong area kosong
-    },
-  });
-
-  lottie.loadAnimation({
-    container: container2.value,
-    renderer: "svg",
-    loop: true,
-    autoplay: true,
-    animationData: Scene2,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  });
-
-  lottie.loadAnimation({
-    container: container3.value,
-    renderer: "svg",
-    loop: true,
-    autoplay: true,
-    animationData: Scene3,
-    rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice",
-    },
-  });
-});
+// Credit section
+useVideoOnView(creditVideo, creditBlock);
+useVideoOnView(transformVideo, transformBlock);
+useVideoOnView(keunggulanVideo, keunggulanBlock);
+useVideoOnView(selerisVideo, selerisBlock);
 </script>
 
 <template>
   <div class="relative w-full overflow-hidden max-w-[1440px] mx-auto">
     <!-- Hero -->
-    <section class="relative w-full h-full rounded-[20px] z-20" id="hero">
+    <section
+      class="relative w-full h-full rounded-[20px] z-20 mx-auto"
+      id="hero"
+    >
       <figure
         class="absolute w-auto h-auto right-0 top-[120px] md:top-32 lg:top-24"
       >
@@ -136,7 +145,7 @@ onMounted(() => {
       </figure>
       <div class="relative w-full h-auto rounded-[20px] z-20">
         <div
-          class="relative w-full h-full flex flex-col md:flex-row gap-x-0 pt-32 px-0 lg:px-28 lg:pt-40 gap-y-10"
+          class="relative w-full h-full flex flex-col md:flex-row gap-x-0 pt-32 px-0 lg:px-16 xl:px-20 lg:pt-40 gap-y-10"
         >
           <!-- Phone mobile -->
           <div
@@ -166,18 +175,20 @@ onMounted(() => {
               <div
                 class="w-full h-auto flex flex-col gap-y-0 justify-center items-center md:justify-normal md:items-start pl-0 md:pl-12 lg:pl-0"
               >
-                <p class="font-[500] text-[28px] md:text-[24px] lg:text-[50px]">
+                <p
+                  class="font-[500] text-[28px] md:text-[24px] lg:text-[38px] xl:text-[50px]"
+                >
                   <span class="text-[#195279]">AI Powered </span>
                   <span class="text-[#FDB403]">Credit Life</span>
                 </p>
                 <p
-                  class="text-[#1889D1] font-[600] text-[22px] md:text-[18px] lg:text-[40px]"
+                  class="text-[#1889D1] font-[600] text-[22px] md:text-[18px] lg:text-[32px] xl:text-[40px]"
                 >
                   Underwriting Intelligence
                 </p>
               </div>
               <p
-                class="text-[#6F6F6F] text-[14px] md:text-[16px] lg:text-[22px] px-12 md:px-0 md:pl-12 lg:pl-0 w-full lg:w-[80%] text-center md:text-start"
+                class="text-[#6F6F6F] text-[14px] md:text-[16px] lg:text-[18px] xl:text-[22px] px-12 md:px-0 md:pl-12 lg:pl-0 w-full lg:w-[80%] text-center md:text-start"
               >
                 Point your camera at any damage and let
                 <span class="font-[600]">artificial intelligence</span>
@@ -209,20 +220,20 @@ onMounted(() => {
           </div>
           <!-- Phone Desktop -->
           <div
-            class="hidden relative md:flex flex-row gap-x-5 items-center justify-end md:items-end lg:justify-end w-full h-auto pr-12 lg:pr-0"
+            class="hidden w-full h-auto relative md:flex flex-row gap-x-5 items-center justify-end md:items-end lg:justify-end pr-12 lg:pr-0"
           >
             <figure class="w-auto h-auto">
               <img
                 src="@/assets/Products/images/Credit/phone1.png"
                 alt=""
-                class="w-full h-[180px] md:h-[240px] lg:h-[400px] object-contain"
+                class="w-full h-[180px] md:h-[240px] lg:h-[360px] xl:h-[400px] object-contain"
               />
             </figure>
             <figure class="w-auto h-auto">
               <img
                 src="@/assets/Products/images/Credit/phone2.png"
                 alt=""
-                class="w-full h-[180px] md:h-[300px] lg:h-[500px] object-contain"
+                class="w-full h-[180px] md:h-[300px] lg:h-[450px] xl:h-[500px] object-contain"
               />
             </figure>
           </div>
@@ -232,10 +243,17 @@ onMounted(() => {
 
     <!-- Section Partner -->
     <section
-      class="relative w-full h-auto max-w-[1440px] mx-auto px-[132px] mt-10"
+      class="relative w-full h-auto max-w-[1440px] mx-auto px-0 lg:px-16 xl:px-24 mt-16 flex flex-col gap-y-0"
       id="client"
     >
-      <div class="mt-10">
+      <div class="w-full h-auto flex justify-center items-center">
+        <p
+          class="text-[#626262] font-[500] md:text-[28px] lg:text-[32px] leading-relaxed lg:leading-relaxed"
+        >
+          Seleris Credit Clients
+        </p>
+      </div>
+      <div class="w-full h-auto">
         <ClientCardFrameProduct :client-logos="clientLogos" />
       </div>
     </section>
@@ -247,18 +265,33 @@ onMounted(() => {
     >
       <!-- SELERIS CREDIT -->
       <div
-        class="relative w-full h-[380px] lg:h-[480px] flex flex-row px-12 lg:px-28 gap-x-5 lg:gap-x-0"
+        ref="creditBlock"
+        class="relative w-full h-[380px] lg:h-[480px] flex flex-row px-12 lg:px-16 xl:px-28 gap-x-5 lg:gap-x-0"
       >
         <div class="relative flex w-full h-full justify-center">
           <figure class="w-auto h-auto flex justify-center items-center pt-10">
-            <img
-              src="@/assets/Products/images/Credit/health-score.gif"
-              alt=""
-              class="w-full h-full object-cover object-center"
-            />
+            <video
+              ref="creditVideo"
+              muted
+              playsinline
+              preload="auto"
+              loop
+              class="w-full h-full object-cover"
+            >
+              <source
+                src="@/assets/Products/images/Credit/health-score.webm"
+                type="video/webm"
+              />
+            </video>
           </figure>
         </div>
-        <div class="w-full h-auto bg-[#FFFFFF] rounded-[38px] md:py-10 lg:py-0">
+        <div
+          ref="card"
+          :style="{ transform: transformStyle }"
+          @mousemove="handleMouseMove"
+          @mouseleave="resetTransform"
+          class="w-full h-auto bg-[#FFFFFF] rounded-[38px] md:py-10 lg:py-0 transform-gpu transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:rotate-x-[6deg] hover:-rotate-y-[6deg] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.25)] [perspective:1200px]"
+        >
           <div
             class="flex flex-col md:gap-y-5 lg:gap-y-10 items-center justify-center w-full h-full px-10"
           >
@@ -288,6 +321,7 @@ onMounted(() => {
 
       <!-- TRANSFORMASI ASURANSI -->
       <div
+        ref="transformBlock"
         class="relative w-full h-auto flex flex-row lg:pr-28 lg:pl-24 mt-36 px-10 lg:px-16"
       >
         <div class="relative flex w-full h-full justify-center">
@@ -318,15 +352,28 @@ onMounted(() => {
         <div
           class="relative flex flex-col justify-center w-full h-auto rounded-[38px]"
         >
-          <div class="flex items-center justify-center w-full h-full">
-            <div class="flex w-auto h-full" ref="container"></div>
-          </div>
+          <figure class="flex items-center justify-center w-full h-full">
+            <video
+              ref="transformVideo"
+              muted
+              playsinline
+              preload="auto"
+              loop
+              class="w-full h-full object-cover"
+            >
+              <source
+                src="@/assets/Products/images/Credit/transformasi.webm"
+                type="video/webm"
+              />
+            </video>
+          </figure>
         </div>
       </div>
     </section>
 
     <!-- Section Apa Yang Dikerjakan Seleris -->
     <section
+      id="technology"
       class="relative flex flex-col w-full h-auto bg-[#FFFFFF] z-20 py-20 mt-10 gap-y-10 lg:gap-y-14"
     >
       <div class="w-full h-auto flex flex-col gap-y-4">
@@ -352,7 +399,7 @@ onMounted(() => {
         <div
           v-for="(data, index) in SelerisDo"
           :key="index"
-          class="w-full h-auto flex flex-col bg-[#FFFFFF] border-[1px] border-[#E3E3E3] rounded-[20px] px-8 pb-8 gap-y-10"
+          class="w-full h-auto flex flex-col bg-[#FFFFFF] border-[1px] border-[#E3E3E3] rounded-[20px] px-8 pb-8 gap-y-10 transform-gpu transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-[#1889D1] hover:-translate-y-2 hover:rotate-x-[6deg] hover:-rotate-y-[6deg] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.25)] [perspective:1200px]"
         >
           <div class="w-full h-auto flex items-center justify-center">
             <img
@@ -422,8 +469,11 @@ onMounted(() => {
 
     <!-- Keunggulan Utama Seleris Credit -->
     <section class="relative w-full h-full rounded-[20px] z-20 mt-32">
-      <!-- TRANSFORMASI ASURANSI -->
-      <div class="relative w-full h-[480px] lg:h-[550px] flex flex-row">
+      <!-- Keunggulan Video -->
+      <div
+        ref="keunggulanBlock"
+        class="relative w-full h-[480px] lg:h-[550px] flex flex-row"
+      >
         <div class="relative flex w-[55%] lg:w-1/2 h-full bg-white">
           <div
             class="flex flex-col gap-y-8 lg:gap-y-10 w-full h-full px-12 lg:px-20 pt-10 lg:pt-8"
@@ -518,9 +568,21 @@ onMounted(() => {
           </div>
         </div>
         <div class="relative flex flex-col justify-center w-full h-auto">
-          <div class="flex items-center justify-center w-full h-full">
-            <div class="flex w-full h-full" ref="container2"></div>
-          </div>
+          <figure class="flex items-center justify-center w-full h-full">
+            <video
+              ref="keunggulanVideo"
+              muted
+              playsinline
+              preload="auto"
+              loop
+              class="w-full h-full object-cover"
+            >
+              <source
+                src="@/assets/Products/images/Credit/keunggulan-utama.webm"
+                type="video/webm"
+              />
+            </video>
+          </figure>
         </div>
       </div>
     </section>
@@ -598,7 +660,10 @@ onMounted(() => {
     <!-- Mengapa Seleris Credit -->
     <section class="relative w-full h-full rounded-[20px] z-20 mt-32">
       <!-- TRANSFORMASI ASURANSI -->
-      <div class="relative w-full h-[450px] lg:h-[550px] flex flex-row">
+      <div
+        ref="selerisBlock"
+        class="relative w-full h-[450px] lg:h-[550px] flex flex-row"
+      >
         <div class="w-full h-auto bg-white py-12 lg:py-16">
           <div
             class="w-full h-full flex flex-col justify-between pl-12 lg:pl-20 pr-8 lg:pr-20"
@@ -633,9 +698,21 @@ onMounted(() => {
           </div>
         </div>
         <div class="relative flex flex-col justify-center w-full h-auto">
-          <div class="flex items-center justify-center w-full h-full">
-            <div class="flex w-full h-full" ref="container3"></div>
-          </div>
+          <figure class="flex items-center justify-center w-full h-full">
+            <video
+              ref="selerisVideo"
+              muted
+              playsinline
+              preload="auto"
+              loop
+              class="w-full h-full object-cover"
+            >
+              <source
+                src="@/assets/Products/images/Credit/kenapa-seleris.webm"
+                type="video/webm"
+              />
+            </video>
+          </figure>
         </div>
       </div>
     </section>

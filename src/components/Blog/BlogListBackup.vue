@@ -296,7 +296,7 @@ watch(searchQuery, (newQuery) => {
 
       await getAllBlogs(params);
     } finally {
-      // Pastikan hanya request terbaru yang menonaktifkan loading
+      // Pastikan hanya request terbaru yang menonaktifkan loading  
       if (currentSearchId === lastSearchId) {
         loadingTyping.value = false;
       }

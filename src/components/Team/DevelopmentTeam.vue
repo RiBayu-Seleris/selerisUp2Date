@@ -23,11 +23,11 @@
         </span>
       </p>
     </div>
-    <div class="flex w-full h-auto mt-5 px-8 lg:px-14">
+    <div class="relative flex w-full h-auto mt-5 px-8 lg:px-14">
       <img
-        src="@/assets/images/development-teams/example.png"
+        src="@/assets/images/development-teams/teams2025.png"
         alt="Robot"
-        class="w-full h-full object-cover rounded-[22px]"
+        class="w-full h-full object-cover rounded-[22px] z-10"
       />
     </div>
   </div>

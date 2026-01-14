@@ -31,7 +31,7 @@ const LogoLink = computed(() => {
 
 <template>
   <div
-    class="relative flex justify-center w-full h-auto items-center max-w-[1440px] mx-auto px-10 md:px-14 xl:px-44 xls:px-48 pt-4 md:pt-6 xl:pt-8"
+    class="relative flex justify-center w-full h-auto items-center max-w-[1440px] mx-auto px-10 md:px-14 lg:px-28 xl:px-32 xls:px-48 pt-4 md:pt-6 xl:pt-8"
   >
     <!-- Desktop Navbar -->
     <div
