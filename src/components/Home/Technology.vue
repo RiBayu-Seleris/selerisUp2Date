@@ -6,13 +6,6 @@ import lottie from "lottie-web/build/player/lottie_light";
 // Pastikan file ada di: src/assets/myAnimation.json
 import myAnimation from "@/assets/videos/videojson.json";
 
-const container = ref(null);
-const currentIndex = ref(0);
-
-const showDescription = ref(false);
-
-let interval = null;
-
 const technologyItems = [
   {
     title: "What is rPPG? Understanding Core Basics.",
@@ -36,20 +29,34 @@ const technologyItems = [
   },
 ];
 
-onMounted(() => {
-  lottie.loadAnimation({
-    container: container.value, // elemen target
+const container = ref(null);
+const currentIndex = ref(0);
+const showDescription = ref(false);
+
+let interval = null;
+let timeout = null;
+let lottieInstance = null;
+
+// ⏱️ konfigurasi timing (biar gampang diatur)
+const SLIDE_DURATION = 4000;
+const TITLE_ANIM_DURATION = 500;
+
+onMounted(async () => {
+  // ✅ lazy-load lottie (aman & ringan)
+  const lottie = (await import("lottie-web")).default;
+
+  lottieInstance = lottie.loadAnimation({
+    container: container.value,
     renderer: "svg",
     loop: true,
     autoplay: true,
-    animationData: myAnimation, // langsung pakai data JSON
+    animationData: myAnimation,
     rendererSettings: {
-      preserveAspectRatio: "xMidYMid slice", // <-- penting: "slice" memotong area kosong
+      preserveAspectRatio: "xMidYMid slice",
     },
   });
 
-  // Interval untuk animasi teks
-  interval = setInterval(() => {
+  const runCycle = () => {
     showDescription.value = false;
 
     currentIndex.value =
@@ -57,16 +64,24 @@ onMounted(() => {
         ? 0
         : currentIndex.value + 1;
 
-    // ⏱️ tunggu title sampai top-0
-    setTimeout(() => {
+    timeout = setTimeout(() => {
       showDescription.value = true;
-    }, 500); // samakan dengan duration animasi title
-  }, 4000);
+    }, TITLE_ANIM_DURATION);
+  };
 
+  // ▶️ first show
   showDescription.value = true;
+
+  // 🔁 interval utama
+  interval = setInterval(runCycle, SLIDE_DURATION);
 });
+
 onBeforeUnmount(() => {
   clearInterval(interval);
+  clearTimeout(timeout);
+
+  // 🧹 bersihin lottie instance (penting!)
+  lottieInstance?.destroy();
 });
 </script>
 

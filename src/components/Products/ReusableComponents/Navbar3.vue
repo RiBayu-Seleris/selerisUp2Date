@@ -68,7 +68,7 @@ const LogoLink = computed(() => {
           <button
             type="button"
             id="sidebar-button"
-            class="bg-white p-2 rounded-lg shadow-md text-[#1AB24F]"
+            class="bg-white p-2 rounded-lg shadow-md text-[#1485CB]"
             @click="sidebarStore.open"
           >
             <MenuIcon />

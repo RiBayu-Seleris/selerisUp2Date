@@ -13,6 +13,10 @@ const route = useRoute(); // ✅ Ambil route saat ini
 
 const { logo } = useProductLogoColor();
 
+const isSelerisCredit = computed(
+  () => route.path === "/product/seleris-credit"
+);
+
 const LogoLink = computed(() => {
   if (route.path === "/product/credit-cover") {
     return "/product/credit-cover";
@@ -98,7 +102,10 @@ onUnmounted(() => {
                   <button
                     type="button"
                     id="sidebar-button"
-                    class="bg-white p-2 rounded-lg shadow-md text-[#1AB24F]"
+                    class="bg-white p-2 rounded-lg shadow-md"
+                    :class="
+                      isSelerisCredit ? 'text-[#1485CB]' : 'text-[#1AB24F]'
+                    "
                     @click="sidebarStore.open"
                   >
                     <MenuIcon />

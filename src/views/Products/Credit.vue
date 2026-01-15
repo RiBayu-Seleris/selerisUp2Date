@@ -55,6 +55,21 @@ function resetTransform() {
   `;
 }
 
+const whosContent = [
+  {
+    // icon: Innovation,
+    title: "Perusahaan Asuransi Jiwa, Asuransi Umum dan Penjaminan Kredit",
+    subtitle:
+      "Meningkatkan kualitas underwriting dan keberlanjutan portofolio asuransi jiwa kredit",
+  },
+  {
+    // icon: Innovation,
+    title: "Perusahaan Asuransi Jiwa, Asuransi Umum dan Penjaminan Kredit",
+    subtitle:
+      "Meningkatkan kualitas underwriting dan keberlanjutan portofolio asuransi jiwa kredit",
+  },
+];
+
 const SelerisDo = [
   {
     icon: new URL("@/assets/Products/icons/vital-sign.png", import.meta.url)
@@ -243,7 +258,7 @@ useVideoOnView(selerisVideo, selerisBlock);
 
     <!-- Section Partner -->
     <section
-      class="relative w-full h-auto max-w-[1440px] mx-auto px-0 lg:px-16 xl:px-24 mt-16 flex flex-col gap-y-0"
+      class="relative w-full h-auto max-w-[1440px] mx-auto px-0 lg:px-16 xl:px-24 sm:mt-16 flex flex-col gap-y-0"
       id="client"
     >
       <div class="w-full h-auto flex justify-center items-center">
@@ -266,10 +281,12 @@ useVideoOnView(selerisVideo, selerisBlock);
       <!-- SELERIS CREDIT -->
       <div
         ref="creditBlock"
-        class="relative w-full h-[380px] lg:h-[480px] flex flex-row px-12 lg:px-16 xl:px-28 gap-x-5 lg:gap-x-0"
+        class="relative w-full h-auto sm:h-[380px] lg:h-[480px] flex flex-col sm:flex-row px-8 sm:px-12 lg:px-16 xl:px-28 gap-y-3 sm:gap-y-0 gap-x-5 lg:gap-x-0"
       >
         <div class="relative flex w-full h-full justify-center">
-          <figure class="w-auto h-auto flex justify-center items-center pt-10">
+          <figure
+            class="w-auto h-auto flex justify-center items-center xm:pt-10"
+          >
             <video
               ref="creditVideo"
               muted
@@ -290,21 +307,21 @@ useVideoOnView(selerisVideo, selerisBlock);
           :style="{ transform: transformStyle }"
           @mousemove="handleMouseMove"
           @mouseleave="resetTransform"
-          class="w-full h-auto bg-[#FFFFFF] rounded-[38px] md:py-10 lg:py-0 transform-gpu transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:rotate-x-[6deg] hover:-rotate-y-[6deg] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.25)] [perspective:1200px]"
+          class="w-full h-auto bg-[#FFFFFF] rounded-[20px] sm:rounded-[38px] py-5 md:py-10 lg:py-0 transform-gpu transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:rotate-x-[6deg] hover:-rotate-y-[6deg] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.25)] [perspective:1200px]"
         >
           <div
-            class="flex flex-col md:gap-y-5 lg:gap-y-10 items-center justify-center w-full h-full px-10"
+            class="flex flex-col gap-y-3 md:gap-y-5 lg:gap-y-10 items-center justify-center w-full h-full px-10"
           >
             <div class="w-full h-auto">
               <p
-                class="text-[#1889D1] font-[600] md:text-[26px] lg:text-[40px]"
+                class="text-[#1889D1] font-[600] text-[24px] md:text-[26px] lg:text-[40px]"
               >
                 Seleris <span class="text-[#FDB403]">Credit</span>
               </p>
             </div>
             <div class="w-full h-auto">
               <p
-                class="text-[#626262] font-[400] md:text-[14px] lg:text-[20px] leading-relaxed lg:leading-relaxed"
+                class="text-[#626262] font-[400] text-[14px] md:text-[14px] lg:text-[20px] leading-relaxed lg:leading-relaxed"
               >
                 <span class="font-[600]"
                   >Seleris Credit adalah platform underwriting</span
@@ -322,23 +339,23 @@ useVideoOnView(selerisVideo, selerisBlock);
       <!-- TRANSFORMASI ASURANSI -->
       <div
         ref="transformBlock"
-        class="relative w-full h-auto flex flex-row lg:pr-28 lg:pl-24 mt-36 px-10 lg:px-16"
+        class="relative w-full h-auto flex flex-col-reverse gap-y-3 sm:flex-row lg:pr-28 lg:pl-24 mt-20 sm:mt-36 px-10 lg:px-16"
       >
         <div class="relative flex w-full h-full justify-center">
           <div
-            class="flex flex-col md:gap-y-5 lg:gap-y-8 items-start justify-start w-full h-full lg:px-10 pt-5 lg:pt-10"
+            class="flex flex-col gap-y-2 md:gap-y-5 lg:gap-y-8 items-start justify-start w-full h-full lg:px-10 pt-5 lg:pt-10"
           >
             <div class="w-full h-auto">
               <p
-                class="text-[#111827] font-[600] md:text-[24px] lg:text-[40px]"
+                class="text-[#111827] font-[600] text-[24px] md:text-[24px] lg:text-[40px] text-center sm:text-start"
               >
-                Tranformasi <br />
+                Tranformasi <br class="hidden sm:block" />
                 Asuransi Kredit
               </p>
             </div>
-            <div class="w-full h-auto pr-8 lg:pr-0">
+            <div class="w-full h-auto sm:pr-8 lg:pr-0">
               <p
-                class="text-[#626262] font-[400] md:text-[12px] lg:text-[18px] leading-loose"
+                class="text-[#626262] font-[400] text-[14px] md:text-[12px] lg:text-[18px] leading-loose text-center sm:text-start"
               >
                 Sebagai transformasi dari aplikasi
                 <span class="font-[600]">Smart Credit</span> yang telah
@@ -374,27 +391,29 @@ useVideoOnView(selerisVideo, selerisBlock);
     <!-- Section Apa Yang Dikerjakan Seleris -->
     <section
       id="technology"
-      class="relative flex flex-col w-full h-auto bg-[#FFFFFF] z-20 py-20 mt-10 gap-y-10 lg:gap-y-14"
+      class="relative flex flex-col w-full h-auto bg-[#FFFFFF] z-20 py-10 sm:py-20 mt-10 gap-y-5 sm:gap-y-10 lg:gap-y-14"
     >
-      <div class="w-full h-auto flex flex-col gap-y-4">
+      <div class="w-full h-auto flex flex-col gap-y-4 px-8">
         <div class="w-full h-auto flex justify-center items-center">
           <p
-            class="font-[600] md:text-[28px] lg:text-[40px] text-center text-[#2C3131]"
+            class="font-[600] text-[18px] sm:text-[28px] lg:text-[40px] text-center text-[#2C3131]"
           >
             Apa yang Dikerjakan Seleris Credit?
           </p>
         </div>
         <div class="w-full h-auto flex justify-center items-center">
           <p
-            class="font-[400] md:text-[20px] lg:text-[24px] text-center text-[#626262]"
+            class="font-[400] text-[12px] sm:text-[20px] xl:text-[20px] text-center text-[#626262]"
           >
-            Seleris Credit melakukan deteksi dan penilaian <br />
+            Seleris Credit melakukan deteksi dan penilaian
+            <br class="hidden sm:block" />
             risiko mortalitas debitur melalui analisis
           </p>
         </div>
       </div>
+      <!-- Desktop -->
       <div
-        class="hidden w-full h-auto lg:flex flex-row gap-x-5 lg:gap-x-10 px-12 lg:px-20"
+        class="hidden w-full h-auto lg:flex flex-row sm:gap-x-5 lg:gap-x-10 px-12 lg:px-20"
       >
         <div
           v-for="(data, index) in SelerisDo"
@@ -424,13 +443,14 @@ useVideoOnView(selerisVideo, selerisBlock);
           </div>
         </div>
       </div>
+      <!-- mobile -->
       <div
         class="relative flex lg:hidden flex-row w-full max-h-screen gap-x-5 md:gap-x-10 py-5 overflow-x-auto snap-x snap-mandatory sm:pl-10 px-8 sm:pr-10 md:pl-12 md:pr-12 hide-scrollbar"
       >
         <div
           v-for="(data, index) in SelerisDo"
           :key="index"
-          class="flex flex-col lg:hidden snap-center shrink-0 w-full sm:w-[60%] md:w-[60%] h-auto rounded-xl px-5 py-5 sm:py-2 shadow-lg border-[1px] gap-y-5"
+          class="flex flex-col lg:hidden snap-center shrink-0 w-full sm:w-[60%] md:w-[60%] h-auto rounded-xl px-5 py-2 sm:py-2 shadow-lg border-[1px] gap-y-5"
         >
           <div class="flex flex-row">
             <div class="flex w-[40%] h-auto">
@@ -448,16 +468,16 @@ useVideoOnView(selerisVideo, selerisBlock);
           </div>
           <div class="flex flex-col w-full h-full pb-5">
             <div class="flex w-full h-full items-start justify-start">
-              <p class="text-[14px] text-[#626262] font-[400]">
+              <p class="text-[12px] sm:text-[14px] text-[#626262] font-[400]">
                 {{ data.description }}
               </p>
             </div>
           </div>
         </div>
       </div>
-      <div class="w-full h-auto px-12 lg:px-44">
+      <div class="w-full h-auto px-8 sm:px-12 lg:px-44">
         <p
-          class="text-center text-[#626262] font-[400] text-[16px] lg:text-[18px] leading-relaxed"
+          class="text-center text-[#626262] font-[400] text-[14px] sm:text-[16px] lg:text-[18px] leading-relaxed"
         >
           Parameter-parameter ini diolah menggunakan teknologi AI untuk
           membangun model penilaian risiko yang komprehensif dan konsisten,
@@ -472,11 +492,11 @@ useVideoOnView(selerisVideo, selerisBlock);
       <!-- Keunggulan Video -->
       <div
         ref="keunggulanBlock"
-        class="relative w-full h-[480px] lg:h-[550px] flex flex-row"
+        class="relative w-full h-auto sm:h-[480px] lg:h-[550px] flex flex-col-reverse sm:flex-row"
       >
-        <div class="relative flex w-[55%] lg:w-1/2 h-full bg-white">
+        <div class="relative flex w-full sm:w-[55%] lg:w-1/2 h-full bg-white">
           <div
-            class="flex flex-col gap-y-8 lg:gap-y-10 w-full h-full px-12 lg:px-20 pt-10 lg:pt-8"
+            class="flex flex-col gap-y-8 lg:gap-y-10 w-full h-full px-12 lg:px-20 pt-10 pb-10 sm:pt-10 sm:pb-0 lg:pt-8"
           >
             <!-- TITLE -->
             <h2 class="text-[#1889D1] font-[600] text-[24px] lg:text-[38px]">
@@ -485,7 +505,7 @@ useVideoOnView(selerisVideo, selerisBlock);
             </h2>
 
             <!-- SWIPER WRAPPER (INI YANG NGUNCI LEBAR) -->
-            <div class="relative w-full max-w-full overflow-hidden">
+            <div class="relative w-full max-w-full overflow-hidden h-auto">
               <Swiper
                 class="w-full h-full cursor-grab active:cursor-grabbing"
                 :modules="[Navigation, Autoplay]"
@@ -589,68 +609,95 @@ useVideoOnView(selerisVideo, selerisBlock);
 
     <!-- Untuk Siapa Seleris Credit -->
     <section
-      class="relative w-full h-auto z-20 mt-32 bg-white py-14 lg:py-20 px-12 lg:px-20"
+      class="relative w-full h-auto z-20 mt-32 bg-white py-14 lg:py-20 px-8 sm:px-12 lg:px-20"
     >
-      <div class="w-full h-auto flex flex-row gap-x-10">
-        <div class="w-[60%] h-auto flex">
+      <div class="w-full h-auto flex flex-col sm:flex-row gap-x-10">
+        <div class="w-full sm:w-[60%] h-auto flex">
           <img
             src="@/assets/Products/images/Credit/image1.png"
             alt=""
-            class="w-full h-full object-cover object-center rounded-[37px]"
+            class="w-full h-full object-fill sm:object-cover object-center rounded-none sm:rounded-[37px]"
           />
         </div>
+
         <div class="w-full h-auto flex flex-col gap-y-8 lg:gap-y-10">
-          <div class="w-full h-auto flex flex-row gap-x-5 pt-8">
-            <div class="w-[30%] h-auto flex items-end">
-              <img
-                src="@/assets/Products/images/Credit/icons1.png"
-                alt=""
-                class="w-full h-full object-contain object-center"
-              />
-            </div>
-            <div class="w-full h-auto flex items-end">
-              <p class="text-[#195279] font-[600] text-[24px] lg:text-[40px]">
-                Untuk Siapa <br />
-                <span class="text-[#1485CB]">Seleris </span>
-                <span class="text-[#FDB403]">Credit?</span>
-              </p>
-            </div>
-          </div>
-          <div class="w-full h-auto">
-            <p class="text-[#626262] font-[400] text-[16px] lg:text-[18px]">
-              Seleris Credit melakukan deteksi dan penilaian <br />
-              risiko mortalitas debitur melalui analisis
-            </p>
-          </div>
-          <div
-            class="w-full h-auto bg-[#FFFFFF] border-[2px] rounded-[22px] px-8 lg:px-12 py-4 lg:py-10"
-          >
-            <div class="w-full h-auto flex flex-row gap-x-5">
-              <div class="w-auto h-auto pt-1">
+          <div class="w-full h-auto flex flex-col gap-y-8 lg:gap-y-10">
+            <div class="w-full h-auto flex flex-row gap-x-5 pt-8">
+              <div class="w-[30%] h-auto flex items-end">
                 <img
-                  src="@/assets/Products/icons/shield.png"
+                  src="@/assets/Products/images/Credit/icons1.png"
                   alt=""
-                  class="w-12 lg:w-16 h-auto object-cover object-center p-1.5 lg:p-3 rounded-full bg-[#1485CB]"
+                  class="w-full h-full object-contain object-center"
                 />
               </div>
-              <div class="w-full h-auto flex flex-col gap-y-3 lg:gap-y-5">
-                <div class="w-full h-auto">
-                  <p
-                    class="text-[#195279] font-[600] text-[14px] lg:text-[20px]"
-                  >
-                    Perusahaan Asuransi Jiwa, Asuransi Umum dan Penjaminan
-                    Kredit
-                  </p>
-                </div>
-                <div class="w-full h-auto">
-                  <p
-                    class="text-[#626262] font-[400] text-[12px] lg:text-[16px]"
-                  >
-                    Meningkatkan kualitas underwriting dan keberlanjutan
-                    portofolio asuransi jiwa kredit
-                  </p>
-                </div>
+              <div class="w-full h-auto flex items-end">
+                <p class="text-[#195279] font-[600] text-[24px] lg:text-[40px]">
+                  Untuk Siapa <br />
+                  <span class="text-[#1485CB]">Seleris </span>
+                  <span class="text-[#FDB403]">Credit?</span>
+                </p>
               </div>
+            </div>
+            <div class="w-full h-auto">
+              <p
+                class="text-[#626262] font-[400] text-[14px] sm:text-[16px] lg:text-[18px]"
+              >
+                Seleris Credit melakukan deteksi dan penilaian
+                <br class="hidden sm:block" />
+                risiko mortalitas debitur melalui analisis
+              </p>
+            </div>
+            <div
+              class="w-full h-[130px] sm:h-[140px] lg:h-[240px] flex items-center justify-center"
+            >
+              <Swiper
+                :modules="[Navigation, Autoplay, Pagination]"
+                :direction="'vertical'"
+                :navigation="false"
+                :pagination="false"
+                :autoplay="{ delay: 3000, disableOnInteraction: false }"
+                loop
+                class="h-full rounded-xl overflow-hidden flex justify-center items-center"
+              >
+                <SwiperSlide
+                  v-for="(item, index) in whosContent"
+                  :key="index"
+                  class="!flex items-center justify-center"
+                >
+                  <!-- CARD -->
+                  <div
+                    class="w-full h-auto bg-[#FFFFFF] border-[2px] rounded-[22px] px-8 lg:px-12 py-4 lg:py-10"
+                  >
+                    <div class="w-full h-auto flex flex-row gap-x-5">
+                      <div class="w-auto h-auto pt-0.5 sm:pt-1">
+                        <img
+                          src="@/assets/Products/icons/shield.png"
+                          alt=""
+                          class="w-10 sm:w-12 lg:w-16 h-auto object-cover object-center p-1.5 lg:p-3 rounded-full bg-[#1485CB]"
+                        />
+                      </div>
+                      <div
+                        class="w-full h-auto flex flex-col gap-y-3 lg:gap-y-5"
+                      >
+                        <div class="w-full h-auto">
+                          <p
+                            class="text-[#195279] font-[600] text-[12px] sm:text-[14px] lg:text-[20px]"
+                          >
+                            {{ item.title }}
+                          </p>
+                        </div>
+                        <div class="w-full h-auto">
+                          <p
+                            class="text-[#626262] font-[400] text-[10px] sm:text-[12px] lg:text-[16px]"
+                          >
+                            {{ item.subtitle }}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </SwiperSlide>
+              </Swiper>
             </div>
           </div>
         </div>
@@ -658,19 +705,22 @@ useVideoOnView(selerisVideo, selerisBlock);
     </section>
 
     <!-- Mengapa Seleris Credit -->
-    <section class="relative w-full h-full rounded-[20px] z-20 mt-32">
+    <section
+      class="relative w-full h-full rounded-[20px] z-20 mt-32 py-14 lg:py-20"
+      id="whyus"
+    >
       <!-- TRANSFORMASI ASURANSI -->
       <div
         ref="selerisBlock"
-        class="relative w-full h-[450px] lg:h-[550px] flex flex-row"
+        class="relative w-full h-auto sm:h-[450px] lg:h-[550px] flex flex-col-reverse sm:flex-row"
       >
-        <div class="w-full h-auto bg-white py-12 lg:py-16">
+        <div class="w-full h-auto bg-white py-8 sm:py-12 lg:py-16">
           <div
-            class="w-full h-full flex flex-col justify-between pl-12 lg:pl-20 pr-8 lg:pr-20"
+            class="w-full h-full flex flex-col justify-between px-8 gap-y-4 sm:gap-y-0 sm:px-0 sm:pl-12 lg:pl-20 sm:pr-8 lg:pr-20"
           >
             <div class="w-full h-auto">
               <p class="text-[28px] lg:text-[38px] font-[600]">
-                Mengapa <br />
+                Mengapa <br class="hidden sm:block" />
                 <span class="text-[#1485CB]"> Seleris </span>
                 <span class="text-[#FDB403]">Credit?</span>
               </p>
@@ -718,33 +768,39 @@ useVideoOnView(selerisVideo, selerisBlock);
     </section>
 
     <!-- Book A Demo -->
-    <section class="relative w-full h-auto z-20 mt-32 px-12 lg:px-20">
+    <section
+      class="relative w-full h-auto z-20 mt-16 sm:mt-32 px-8 sm:px-12 lg:px-20"
+    >
       <div
-        class="w-full h-auto flex flex-row bg-[#1485CB] gap-x-10 rounded-[24px] py-10 lg:py-14"
+        class="w-full h-auto flex flex-row bg-[#1485CB] gap-x-3 sm:gap-x-10 rounded-[24px] py-5 sm:py-10 lg:py-14"
       >
-        <div class="w-[60%] h-full flex items-center">
+        <div class="w-full sm:w-[60%] h-full flex items-center">
           <div
-            class="w-full h-full flex flex-col items-center justify-center pl-12 lg:px-20 gap-y-5"
+            class="w-full h-full flex flex-col items-center justify-center pl-4 sm:pl-12 lg:px-20 gap-y-5"
           >
             <div class="w-full h-auto flex items-center">
               <p
-                class="text-[#FAFAFA] font-[600] text-[20px] lg:text-[30px] leading-tight"
+                class="text-[#FAFAFA] font-[600] text-[14px] sm:text-[20px] lg:text-[30px] leading-tight"
               >
-                Smarter Risk. Faster Decision. <br />
+                Smarter Risk. Faster Decision. <br class="hidden sm:block" />
                 Sustainable Protection
               </p>
             </div>
             <div class="w-full h-auto">
-              <p class="text-[#FAFAFA] font-[400] text-[14px] lg:text-[20px]">
+              <p
+                class="text-[#FAFAFA] font-[400] text-[12px] sm:text-[14px] lg:text-[20px]"
+              >
                 Request Demo Now!
               </p>
             </div>
           </div>
         </div>
-        <div class="w-[45%] lg:w-[40%] h-auto flex items-center justify-center">
+        <div
+          class="w-[70%] sm:w-[45%] lg:w-[40%] h-auto flex items-center justify-center"
+        >
           <a href="/book-a-demo" target="_blank">
             <div
-              class="w-auto h-auto flex flex-row bg-[#FAFAFA] px-4 lg:px-14 py-2 lg:py-3 rounded-[10px]"
+              class="w-auto h-auto flex flex-row bg-[#FAFAFA] px-2 sm:px-4 lg:px-14 py-2 lg:py-3 rounded-[10px]"
             >
               <div
                 class="w-full h-full flex items-center justify-center gap-x-2 md:gap-x-2 text-[#1485CB]"
@@ -753,7 +809,7 @@ useVideoOnView(selerisVideo, selerisBlock);
                   Book a Demo
                 </p>
                 <svg
-                  class="w-8 h-8 lg:w-12 lg:h-12"
+                  class="w-6 h-6 sm:w-8 sm:h-8 lg:w-12 lg:h-12"
                   viewBox="0 0 48 48"
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"

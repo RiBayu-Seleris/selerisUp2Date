@@ -52,6 +52,54 @@ const titleSidebar = () => {
     return "Credit";
   }
 };
+
+const defaultProductMenu = [
+  {
+    href: "#hero",
+    label: "Home",
+  },
+  {
+    href: "#about",
+    label: "About",
+  },
+  {
+    href: "#testimonial",
+    label: "Testimonial",
+  },
+  {
+    href: "#faq",
+    label: "FAQ",
+  },
+  {
+    href: "/contact",
+    label: "Contact",
+  },
+];
+
+const creditProductMenu = [
+  {
+    href: "#hero",
+    label: "Home",
+  },
+  {
+    href: "#about",
+    label: "Product",
+  },
+  {
+    href: "#technology",
+    label: "Technology",
+  },
+  {
+    href: "#whyus",
+    label: "Why Us",
+  },
+  {
+    href: "/contact",
+    label: "Contact",
+  },
+];
+
+const isSelerisCredit = ref(route.path === "/product/seleris-credit");
 </script>
 
 <template>
@@ -91,24 +139,31 @@ const titleSidebar = () => {
               </div>
             </div>
             <nav
+              v-if="isSelerisCredit"
               class="w-full flex flex-wrap mt-8 text-lg font-semibold text-gray-800 gap-y-2"
             >
-              <div class="w-full h-auto">
-                <Navlink class="text-[11pt]" href="#hero"> Home </Navlink>
-              </div>
-              <div class="w-full h-auto">
-                <Navlink class="text-[11pt]" href="#about"> About </Navlink>
-              </div>
-              <div class="w-full h-auto">
-                <Navlink class="text-[11pt]" href="#testimonial">
-                  Testimonial
+              <div
+                class="w-full h-auto"
+                v-for="(menuDefault, index) in creditProductMenu"
+                :key="index"
+              >
+                <Navlink class="text-[11pt]" :href="menuDefault.href">
+                  {{ menuDefault.label }}
                 </Navlink>
               </div>
-              <div class="w-full h-auto">
-                <Navlink class="text-[11pt]" href="#faq"> FAQ </Navlink>
-              </div>
-              <div class="w-full h-auto">
-                <Navlink class="text-[11pt]" href="/contact"> Contact </Navlink>
+            </nav>
+            <nav
+              v-else
+              class="w-full flex flex-wrap mt-8 text-lg font-semibold text-gray-800 gap-y-2"
+            >
+              <div
+                class="w-full h-auto"
+                v-for="(menuDefault, index) in defaultProductMenu"
+                :key="index"
+              >
+                <Navlink class="text-[11pt]" :href="menuDefault.href">
+                  {{ menuDefault.label }}
+                </Navlink>
               </div>
             </nav>
           </div>

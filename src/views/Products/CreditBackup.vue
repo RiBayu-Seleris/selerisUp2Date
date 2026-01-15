@@ -11,10 +11,6 @@ import ChecklistIcon from "@/components/icons/Checklist.vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
-// import lottie from "lottie-web/build/player/lottie_light";
-// import Scene1 from "@/assets/Products/images/Credit/scene-1-(1).json";
-// import Scene2 from "@/assets/Products/images/Credit/scene-2.json";
-// import Scene3 from "@/assets/Products/images/Credit/scene-3.json";
 import { useVideoOnView } from "@/composables/useVideoOnView";
 
 const creditVideo = ref(null);
@@ -94,46 +90,6 @@ useVideoOnView(creditVideo, creditBlock);
 useVideoOnView(transformVideo, transformBlock);
 useVideoOnView(keunggulanVideo, keunggulanBlock);
 useVideoOnView(selerisVideo, selerisBlock);
-
-// Transform section (kalau nanti ada video)
-// useVideoOnView(transformVideo, transformBlock, {
-//   threshold: 0.5,
-// });
-
-// onMounted(() => {
-//   lottie.loadAnimation({
-//     container: container.value, // elemen target
-//     renderer: "svg",
-//     loop: true,
-//     autoplay: true,
-//     animationData: Scene1, // langsung pakai data JSON
-//     rendererSettings: {
-//       preserveAspectRatio: "xMidYMid slice", // <-- penting: "slice" memotong area kosong
-//     },
-//   });
-
-//   lottie.loadAnimation({
-//     container: container2.value,
-//     renderer: "svg",
-//     loop: true,
-//     autoplay: true,
-//     animationData: Scene2,
-//     rendererSettings: {
-//       preserveAspectRatio: "xMidYMid slice",
-//     },
-//   });
-
-//   lottie.loadAnimation({
-//     container: container3.value,
-//     renderer: "svg",
-//     loop: true,
-//     autoplay: true,
-//     animationData: Scene3,
-//     rendererSettings: {
-//       preserveAspectRatio: "xMidYMid slice",
-//     },
-//   });
-// });
 </script>
 
 <template>

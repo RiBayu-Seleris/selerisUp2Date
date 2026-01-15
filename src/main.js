@@ -3,8 +3,8 @@ import { createApp } from "vue";
 import { createPinia } from "pinia";
 import router from "./router";
 import "./style.css";
-import AOS from "aos";
-import "aos/dist/aos.css";
+// import AOS from "aos";
+// import "aos/dist/aos.css";
 
 import App from "./App.vue";
 import { useSidebarStore } from "@/stores/sidebar"; // ✅ import store
@@ -25,4 +25,4 @@ router.beforeEach((to, from, next) => {
 useSidebarStore().initRouterGuard(router); // << PENTING
 
 app.mount("#app");
-AOS.init();
+// Aos.init();

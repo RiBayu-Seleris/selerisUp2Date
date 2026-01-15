@@ -255,7 +255,7 @@ const connectColor = computed(() => {
         <div class="w-full h-auto">
           <div class="flex flex-col lg:pl-10">
             <p
-              class="text-[#195279] text-[24px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2 sml:pb-0"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[18px] xl:text-[22px] font-medium sml:pb-0"
             >
               Get The App
             </p>
@@ -264,19 +264,19 @@ const connectColor = computed(() => {
                 href="https://play.google.com/store/apps/developer?id=PT.+Seleris+Meditekno+Internasional"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="flex w-full h-full md:justify-start justify-center items-center content-center xl:justify-start xl:content-start"
+                class="flex w-auto h-full md:justify-start justify-center items-center content-center xl:justify-start xl:content-start"
               >
                 <img
                   :src="playstore"
                   alt="Playstore"
-                  class="w-full h-[100px] md:w-[300px] lg:w-[200px] object-contain object-center"
+                  class="w-full sm:w-[200px] md:w-[200px] xl:w-[200px] h-[100px] object-contain object-center"
                 />
               </a>
               <div
-                class="flex w-full h-full justify-center items-center content-center xl:justify-start xl:content-start xl:-mt-5"
+                class="flex w-auto h-full justify-center items-center content-center xl:justify-start xl:content-start xl:-mt-5"
               >
                 <div
-                  class="relative group w-full h-[100px] md:w-[300px] lg:w-[200px]"
+                  class="relative group w-full sm:w-[200px] md:w-[200px] xl:w-[200px] h-[100px]"
                 >
                   <img
                     :src="appstore"
