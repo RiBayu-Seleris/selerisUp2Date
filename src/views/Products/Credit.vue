@@ -191,23 +191,28 @@ useVideoOnView(selerisVideo, selerisBlock);
                 class="w-full h-auto flex flex-col gap-y-0 justify-center items-center md:justify-normal md:items-start pl-0 md:pl-12 lg:pl-0"
               >
                 <p
-                  class="font-[500] text-[28px] md:text-[24px] lg:text-[38px] xl:text-[50px]"
+                  class="font-[500] text-[28px] md:text-[28px] lg:text-[38px] xl:text-[50px]"
                 >
                   <span class="text-[#195279]">AI Powered </span>
                   <span class="text-[#FDB403]">Credit Life</span>
                 </p>
                 <p
-                  class="text-[#1889D1] font-[600] text-[22px] md:text-[18px] lg:text-[32px] xl:text-[40px]"
+                  class="text-[#1889D1] font-[600] text-[22px] md:text-[22px] lg:text-[32px] xl:text-[40px]"
                 >
                   Underwriting Intelligence
                 </p>
               </div>
               <p
-                class="text-[#6F6F6F] text-[14px] md:text-[16px] lg:text-[18px] xl:text-[22px] px-12 md:px-0 md:pl-12 lg:pl-0 w-full lg:w-[80%] text-center md:text-start"
+                class="text-[#6F6F6F] text-[14px] md:text-[16px] lg:text-[18px] xl:text-[22px] px-8 sm:px-12 md:px-0 md:pl-12 lg:pl-0 w-full lg:w-full text-center md:text-start"
               >
-                Point your camera at any damage and let
-                <span class="font-[600]">artificial intelligence</span>
-                do the work.
+                Leverage
+                <span class="font-[600]">artificial intelligence</span> to
+                assess <span class="font-[600]">mortality risk</span> and
+                automate
+                <span class="font-[600]"
+                  >credit life underwriting decisions
+                </span>
+                .
               </p>
             </div>
             <div
@@ -219,10 +224,11 @@ useVideoOnView(selerisVideo, selerisBlock);
                 <p
                   class="text-[#FFFFFF] text-[14px] md:text-[12px] lg:text-[16px]"
                 >
-                  Try To Free
+                  View Demo
                 </p>
               </button>
-              <button
+              <router-link
+                to="/book-a-demo"
                 class="w-auto h-auto px-6 py-2 bg-[#1889D1] rounded-[40px]"
               >
                 <p
@@ -230,7 +236,7 @@ useVideoOnView(selerisVideo, selerisBlock);
                 >
                   Request Demo
                 </p>
-              </button>
+              </router-link>
             </div>
           </div>
           <!-- Phone Desktop -->
@@ -310,7 +316,7 @@ useVideoOnView(selerisVideo, selerisBlock);
           class="w-full h-auto bg-[#FFFFFF] rounded-[20px] sm:rounded-[38px] py-5 md:py-10 lg:py-0 transform-gpu transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-2 hover:rotate-x-[6deg] hover:-rotate-y-[6deg] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.25)] [perspective:1200px]"
         >
           <div
-            class="flex flex-col gap-y-3 md:gap-y-5 lg:gap-y-10 items-center justify-center w-full h-full px-10"
+            class="flex flex-col gap-y-3 md:gap-y-5 lg:gap-y-10 items-center justify-center w-full h-full px-8 sm:px-10"
           >
             <div class="w-full h-auto">
               <p
@@ -496,11 +502,13 @@ useVideoOnView(selerisVideo, selerisBlock);
       >
         <div class="relative flex w-full sm:w-[55%] lg:w-1/2 h-full bg-white">
           <div
-            class="flex flex-col gap-y-8 lg:gap-y-10 w-full h-full px-12 lg:px-20 pt-10 pb-10 sm:pt-10 sm:pb-0 lg:pt-8"
+            class="flex flex-col gap-y-8 lg:gap-y-10 w-full h-full pt-10 pb-10 sm:pt-10 sm:pb-0 lg:pt-8"
           >
             <!-- TITLE -->
-            <h2 class="text-[#1889D1] font-[600] text-[24px] lg:text-[38px]">
-              Keunggulan Utama <br />
+            <h2
+              class="text-[#1889D1] font-[600] text-[26px] sm:text-[24px] lg:text-[38px] px-8 sm:px-12 lg:px-20"
+            >
+              Keunggulan Utama <br class="hidden sm:block" />
               Seleris Credit
             </h2>
 
@@ -514,7 +522,7 @@ useVideoOnView(selerisVideo, selerisBlock);
                 :autoplay="{ delay: 3000, disableOnInteraction: false }"
                 loop
               >
-                <SwiperSlide class="w-full h-auto">
+                <SwiperSlide class="w-full h-auto px-8 sm:px-12 lg:px-20">
                   <div class="w-full h-auto flex flex-col gap-y-8">
                     <div
                       v-for="(data_slider1, index) in slider1"
@@ -539,7 +547,7 @@ useVideoOnView(selerisVideo, selerisBlock);
                   </div>
                 </SwiperSlide>
 
-                <SwiperSlide class="w-full h-auto">
+                <SwiperSlide class="w-full h-auto px-8 sm:px-12 lg:px-20">
                   <div class="w-full h-auto flex flex-col gap-y-8">
                     <div class="w-full h-auto flex flex-col gap-y-2">
                       <div class="w-full h-auto">
