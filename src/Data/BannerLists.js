@@ -13,13 +13,13 @@ export const bannerLists = [
       lg: 160,
       md: 90,
       sm: 90,
-      sml: 70,
+      base: 70,
     },
     logoHeight: {
       lg: 50,
       md: 40,
       sm: 50,
-      sml: 25,
+      base: 25,
     },
   },
   {
@@ -34,13 +34,13 @@ export const bannerLists = [
       lg: 150,
       md: 90,
       sm: 90,
-      sml: 70,
+      base: 70,
     },
     logoHeight: {
       lg: 38,
       md: 40,
       sm: 50,
-      sml: 25,
+      base: 25,
     },
   },
   {
@@ -55,13 +55,13 @@ export const bannerLists = [
       lg: 160,
       md: 90,
       sm: 90,
-      sml: 70,
+      base: 70,
     },
     logoHeight: {
       lg: 55,
       md: 40,
       sm: 50,
-      sml: 25,
+      base: 25,
     },
   },
   {
@@ -76,13 +76,13 @@ export const bannerLists = [
       lg: 170,
       md: 90,
       sm: 110,
-      sml: 70,
+      base: 70,
     },
     logoHeight: {
       lg: 55,
       md: 40,
       sm: 45,
-      sml: 25,
+      base: 25,
     },
   },
 ];

@@ -27,7 +27,7 @@ import { SCI_Content } from "@/Data/SCI_Content";
   <section
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-center mt-10 md:mt-20"
   >
-    <!-- sml:h-[190px] md:h-[400px] lg:h-[470px] xl:h-[640px] -->
+    <!-- h-[190px] md:h-[400px] lg:h-[470px] xl:h-[640px] -->
     <div
       class="w-full h-auto aspect-[16/8] flex justify-center mt-10 lg:mt-20 dark:bg-[#323232] rounded-3xl"
     >

@@ -429,7 +429,7 @@ function onSlideChange(swiper) {
             </router-link>
             <div class="ml-1 text-[#2AB857] dark:text-[#2AB857]">
               <svg
-                class="w-5 h-5 sml:w-3 sml:h-3 lg:w-6 lg:h-6"
+                class="w-3 h-3 lg:w-6 lg:h-6"
                 viewBox="0 0 24 24"
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
@@ -475,7 +475,9 @@ input {
   border: 0.25px solid #d1d5db;
   background-color: #ffffff;
   color: #000;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 input:focus {

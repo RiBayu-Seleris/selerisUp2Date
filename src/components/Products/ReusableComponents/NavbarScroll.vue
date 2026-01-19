@@ -14,7 +14,7 @@ const route = useRoute(); // ✅ Ambil route saat ini
 const { logo } = useProductLogoColor();
 
 const isSelerisCredit = computed(
-  () => route.path === "/product/seleris-credit"
+  () => route.path === "/product/seleris-credit",
 );
 
 const LogoLink = computed(() => {
@@ -82,7 +82,7 @@ onUnmounted(() => {
 
             <!-- Mobile Navbar with Sidebar Button -->
             <div
-              class="flex lg:hidden flex-row w-full h-auto justify-between md:px-8 sml:px-4"
+              class="flex lg:hidden flex-row w-full h-auto justify-between px-4 md:px-8"
             >
               <router-link to="/" class="w-[40%] h-auto flex">
                 <!-- Logo terang (light mode) -->
@@ -90,14 +90,14 @@ onUnmounted(() => {
                   v-if="logo"
                   :src="logo"
                   alt="Logo"
-                  class="w-[117px] h-[56px] sml:w-[80px] sml:h-[56px] object-contain dark:hidden"
+                  class="w-[80px] h-[56px] object-contain dark:hidden"
                 />
               </router-link>
               <div
                 class="w-[60%] h-auto flex items-center flex-row justify-end"
               >
                 <div
-                  class="w-[30%] sml:w-[35%] md:w-[15%] h-auto flex items-center justify-end"
+                  class="w-[35%] md:w-[15%] h-auto flex items-center justify-end"
                 >
                   <button
                     type="button"

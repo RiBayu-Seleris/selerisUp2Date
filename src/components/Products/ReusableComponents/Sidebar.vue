@@ -19,7 +19,7 @@ watch(
   () => route.fullPath,
   () => {
     sidebar.close();
-  }
+  },
 );
 
 // Dropdown toggle
@@ -122,7 +122,7 @@ const isSelerisCredit = ref(route.path === "/product/seleris-credit");
             >
               <div class="w-[80%] h-auto">
                 <p
-                  class="text-[#195279] dark:text-[#FAFAFA] font-semibold sml:text-md md:text-[1.7rem]"
+                  class="text-[#195279] dark:text-[#FAFAFA] font-semibold text-md md:text-[1.7rem]"
                 >
                   Seleris {{ titleSidebar() }}
                 </p>

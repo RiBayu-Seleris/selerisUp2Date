@@ -9,7 +9,7 @@ defineProps({
 
 <template>
   <div
-    class="flex w-full h-auto sml:pt-[120px] md:pt-[120px] lg:pt-[140px] xl:pt-[160px]"
+    class="flex w-full h-auto pt-[120px] md:pt-[120px] lg:pt-[140px] xl:pt-[160px]"
   >
     <div
       class="flex flex-col w-full h-auto gap-y-2 justify-center items-center"

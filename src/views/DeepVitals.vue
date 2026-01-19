@@ -25,7 +25,7 @@ import { SDV_Content } from "@/Data/SDV_Content";
   <section
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-center"
   >
-    <!-- sml:h-[200px] md:h-[250px] lg:h-[350px] xl:h-[650px] -->
+    <!-- h-[200px] md:h-[250px] lg:h-[350px] xl:h-[650px] -->
     <div
       class="w-full h-auto aspect-[16/8] flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
     >

@@ -4,7 +4,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
 
 <template>
   <section class="flex relative w-full h-auto md:px-12 xl:px-14">
-    <div class="flex w-full h-auto sml:pt-[90px] md:pt-[100px] xl:pt-[140px]">
+    <div class="flex w-full h-auto pt-[90px] md:pt-[100px] xl:pt-[140px]">
       <div
         class="flex flex-col w-full h-auto space-y-2 sm:space-y-0 md:space-y-0 lg:space-y-3 xl:space-y-2 justify-center items-center dark:bg-[#17181A]"
       >
@@ -19,7 +19,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
           We're building something amazing
         </p>
         <p
-          class="text-[14px] md:text-[18px] lg:text-[18px] xl:text-[18px] font-[400] tracking-wider text-[#195279] dark:text-[#6F6F6F] sml:px-8 md:px-0 lg:px-32 xl:px-52 text-center"
+          class="text-[14px] md:text-[18px] lg:text-[18px] xl:text-[18px] font-[400] tracking-wider text-[#195279] dark:text-[#6F6F6F] px-8 md:px-0 lg:px-32 xl:px-52 text-center"
         >
           Our website is currently under development. Stay tuned — we’ll be
           launching soon with exciting features and a better experience.

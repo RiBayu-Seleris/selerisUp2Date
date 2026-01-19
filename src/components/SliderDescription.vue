@@ -72,11 +72,22 @@ const description = computed(() => {
 });
 
 function getLogoSize(width, height) {
-  const w = window.innerWidth;
-  if (w >= 1024) return { width: width.lg + "px", height: height.lg + "px" };
-  if (w >= 768) return { width: width.md + "px", height: height.md + "px" };
-  if (w >= 640) return { width: width.sm + "px", height: height.sm + "px" };
-  return { width: width.sml + "px", height: height.sml + "px" };
+  const w = windowWidth.value; // pakai reactive value
+
+  if (w >= 1024 && width.lg && height.lg)
+    return { width: width.lg + "px", height: height.lg + "px" };
+
+  if (w >= 768 && width.md && height.md)
+    return { width: width.md + "px", height: height.md + "px" };
+
+  if (w >= 640 && width.sm && height.sm)
+    return { width: width.sm + "px", height: height.sm + "px" };
+
+  // < sm → BASE
+  return {
+    width: width.base + "px",
+    height: height.base + "px",
+  };
 }
 </script>
 

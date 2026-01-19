@@ -4,7 +4,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
 
 <template>
   <div class="flex flex-col w-full h-auto">
-    <div class="flex w-full h-auto xl:pt-[100px] md:pt-[100px] sml:pt-[90px]">
+    <div class="flex w-full h-auto pt-[90px] md:pt-[100px] xl:pt-[100px]">
       <HeroText
         title="Benefits"
         subtitle="Benefits of Using the Seleris API"

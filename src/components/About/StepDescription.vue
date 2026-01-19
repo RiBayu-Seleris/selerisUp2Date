@@ -63,7 +63,7 @@ onMounted(() => {
 <template>
   <div class="w-full h-full dark:bg-[#17181A]">
     <div
-      class="flex md:flex-row sml:flex-col-reverse w-full h-auto gap-x-10 relative"
+      class="flex flex-col-reverse md:flex-row w-full h-auto gap-x-10 relative"
     >
       <div class="flex flex-col w-full h-auto gap-y-7 lg:gap-y-4 xl:gap-y-10">
         <div
@@ -115,7 +115,7 @@ onMounted(() => {
                 <div class="flex flex-row text-white text-xl space-x-5">
                   <div class="flex lg:[15%] xl:w-[10%]">
                     <div
-                      class="flex bg-white dark:bg-[#323232] rounded-full shadow-md p-1.5 sm:p-2 md:p-1 xl:p-2 sml:w-[50px] sml:h-[50px] md:w-[45px] md:h-[45px] lg:w-[45px] lg:h-[45px] xl:w-[60px] xl:h-[60px] justify-center md:mt-2 lg:mt-0"
+                      class="flex bg-white dark:bg-[#323232] rounded-full shadow-md p-1.5 sm:p-2 md:p-1 xl:p-2 w-[50px] h-[50px] md:w-[45px] md:h-[45px] lg:w-[45px] lg:h-[45px] xl:w-[60px] xl:h-[60px] justify-center md:mt-2 lg:mt-0"
                     >
                       <img
                         :src="step.icon"
@@ -149,9 +149,7 @@ onMounted(() => {
         </div>
       </div>
 
-      <div
-        class="w-full h-auto sml:h-full lg:w-full lg:h-full flex mb-6 md:mb-0"
-      >
+      <div class="w-full h-full flex mb-6 md:mb-0">
         <video
           autoplay
           loop

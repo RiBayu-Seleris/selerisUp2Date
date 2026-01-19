@@ -122,7 +122,7 @@ onMounted(() => {
           <!-- Scrollable Sections -->
           <div
             ref="scrollContainer"
-            class="h-full overflow-y-scroll snap-y snap-mandatory scroll-smooth scroll-hide pr-10 sml:pl-8 sml:pr-0 md:pl-10 lg:pl-10 xl:pl-14 xl:pr-20"
+            class="h-full overflow-y-scroll snap-y snap-mandatory scroll-smooth scroll-hide pl-8 pr-0 sm:pl-8 sm:pr-0 md:pl-10 lg:pl-10 xl:pl-14 xl:pr-20"
           >
             <section
               v-for="(step, index) in steps"
@@ -147,7 +147,7 @@ onMounted(() => {
       </div>
     </div>
     <div
-      class="flex w-full h-full md:h-[500px] lg:h-full xl:h-[425px] justify-center items-center sml:mb-12 md:mb-20 lg:mb-0"
+      class="flex w-full h-full md:h-[500px] lg:h-full xl:h-[425px] justify-center items-center mb-12 md:mb-20 lg:mb-0"
     >
       <video
         autoplay

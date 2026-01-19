@@ -27,7 +27,7 @@ const paginationOptions = {
     <div class="flex flex-col gap-3">
       <div class="flex w-full h-auto justify-center items-center">
         <p
-          class="sml:text-2xl md:text-[27px] lg:text-[27px] font-[500] text-[#1DC457] dark:text-[#1AB24F] text-center"
+          class="text-2xl md:text-[27px] lg:text-[27px] font-[500] text-[#1DC457] dark:text-[#1AB24F] text-center"
         >
           Innovation
         </p>
@@ -36,7 +36,7 @@ const paginationOptions = {
         class="flex lg:w-[50%] mx-auto h-auto justify-center items-center text-center"
       >
         <p
-          class="sml:text-xl md:text-[32px] lg:text-[32px] font-[400] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] md:leading-relaxed"
+          class="text-xl md:text-[32px] lg:text-[32px] font-[400] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] md:leading-relaxed"
         >
           Roadmap Seleris Meditekno Internasional
         </p>

@@ -3,7 +3,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
 </script>
 <template>
   <section
-    class="flex w-full h-auto sml:pt-[120px] md:pt-[150px] lg:pt-[160px] xl:pt-[160px] sml:px-6 md:px-0"
+    class="flex w-full h-auto pt-[120px] md:pt-[150px] lg:pt-[160px] xl:pt-[160px] px-6 md:px-0"
   >
     <HeroText title="Security" subtitle="Customer Security Comes First" />
   </section>

@@ -25,7 +25,7 @@ import { SDR_Content } from "@/Data/SDR_Content";
   <section
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-center"
   >
-    <!-- sml:h-[140px] md:h-[250px] lg:h-[350px] xl:h-[470px] xls:h-[490px] -->
+    <!-- h-[140px] md:h-[250px] lg:h-[350px] xl:h-[470px] xls:h-[490px] -->
     <div
       class="relative w-full h-auto flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
     >
@@ -53,7 +53,7 @@ import { SDR_Content } from "@/Data/SDR_Content";
   </section>
 
   <section
-    class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-start mt-14 md:mt-20 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar gap-x-10 scroll-pl-8 pl-8 pr-8"
+    class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-start mt-14 md:mt-20 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar gap-x-5 sm:gap-x-10 scroll-pl-8 pl-8 pr-8"
   >
     <TechCard
       v-for="(cardContent, index) in SDR_Content"

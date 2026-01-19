@@ -4,23 +4,14 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     screens: {
-      // Mobile breakpoints
-      sml: "320px",
       sm: "640px",
-
-      // Tablet / Medium
       md: "768px",
-
-      // Desktop
       lg: "1024px",
       xl: "1280px",
+      xls: "1440px",
 
-      // Extra Large
-      xls: { raw: "(min-width: 1440px)" },
-      "2xls": { raw: "(min-width: 2560px)" },
-      // xls: { raw: "(min-width: 1440px) and (max-width: 1535px)" },
-      // "2xl": { raw: "(min-width: 1536px) and (max-width: 2559px)" },
-      // "3xl": { raw: "(min-width: 2560px)" },
+      // custom query (tanpa min/max)
+      retina: { raw: "(min-resolution: 2dppx)" },
     },
     extend: {
       gradientColorStops: {
@@ -116,3 +107,16 @@ module.exports = {
   ],
   safelist: ["rotate-90", "transform"],
 };
+
+// screens: {
+//   // Mobile breakpoints
+//   sm: "640px",
+//   // Tablet / Medium
+//   md: "768px",
+//   // Desktop
+//   lg: "1024px",
+//   xl: "1280px",
+//   // Extra Large
+//   xls: { raw: "(min-width: 1440px)" },
+//   "2xls": { raw: "(min-width: 2560px)" },
+// },

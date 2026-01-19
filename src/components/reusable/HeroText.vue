@@ -29,7 +29,7 @@ defineProps({
       {{ subtitle }}
     </p>
     <p
-      class="text-[14px] md:text-[18px] lg:text-[18px] xl:text-[18px] font-[400] tracking-wider text-[#195279] dark:text-[#6F6F6F] sml:px-8 md:px-0 lg:px-32 xl:px-52 text-center"
+      class="text-[14px] md:text-[18px] lg:text-[18px] xl:text-[18px] font-[400] tracking-wider text-[#195279] dark:text-[#6F6F6F] px-8 md:px-0 lg:px-32 xl:px-52 text-center"
     >
       {{ description }}
     </p>

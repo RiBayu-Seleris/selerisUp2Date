@@ -16,12 +16,12 @@ defineProps({
     <img
       :src="imgUrl"
       alt="Logo"
-      class="w-full h-full sml:w-[150px] md:w-[250px] xl:w-[300px] object-contain lg:object-cover dark:hidden"
+      class="w-[150px] h-full md:w-[250px] xl:w-[300px] object-contain lg:object-cover dark:hidden"
     />
     <img
       :src="darkImgUrl"
       alt="Logo"
-      class="w-full h-full sml:w-[150px] md:w-[250px] xl:w-[300px] object-contain lg:object-cover hidden dark:block"
+      class="w-[150px] h-full md:w-[250px] xl:w-[300px] object-contain lg:object-cover hidden dark:block"
     />
   </div>
 </template>

@@ -21,7 +21,7 @@ defineProps({
 <template>
   <router-link
     :to="`/blog/${slug}`"
-    class="flex flex-col w-full px-0 sml:px-8 md:px-0 h-auto"
+    class="flex flex-col w-full px-8 md:px-0 h-auto"
   >
     <div class="w-full h-[200px]">
       <img

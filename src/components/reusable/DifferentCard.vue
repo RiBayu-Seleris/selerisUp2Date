@@ -51,12 +51,12 @@ defineProps({
 
   <!-- Mobile & Tabs -->
   <div class="flex lg:hidden w-full h-auto md:justify-center">
-    <div class="flex flex-col sml:flex-row w-full h-full md:justify-center">
-      <div class="flex w-full sml:w-[20%] h-full md:justify-center">
+    <div class="flex flex-row w-full h-full md:justify-center">
+      <div class="flex w-[20%] h-full md:justify-center">
         <img
           :src="image"
           alt="Icon"
-          class="w-[20%] sml:w-[50px] h-full object-contain bg-white dark:bg-[#323232] rounded-full shadow-lg p-2"
+          class="w-[50px] h-full object-contain bg-white dark:bg-[#323232] rounded-full shadow-lg p-2"
         />
       </div>
       <div class="flex flex-col w-full h-auto md:justify-center pl-5 sm:pl-4">

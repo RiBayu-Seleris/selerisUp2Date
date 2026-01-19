@@ -21,7 +21,7 @@ watch(
   () => route.fullPath,
   () => {
     sidebar.close();
-  }
+  },
 );
 
 // Dropdown toggle
@@ -72,14 +72,14 @@ const toggleSolution = () => {
                 <img
                   :src="Logo"
                   alt="Logo"
-                  class="w-[117px] h-[56px] sml:w-[80px] sml:h-[56px] object-contain dark:hidden"
+                  class="w-[117px] h-[56px] sm:w-[80px] sm:h-[56px] object-contain dark:hidden"
                 />
 
                 <!-- Logo gelap (dark mode) -->
                 <img
                   :src="DarkLogo"
                   alt="Dark Logo"
-                  class="w-[117px] h-[56px] sml:w-[80px] sml:h-[56px] object-contain hidden dark:block"
+                  class="w-[117px] h-[56px] sm:w-[80px] sm:h-[56px] object-contain hidden dark:block"
                 />
               </router-link>
               <div class="w-[20%] h-auto flex justify-end">

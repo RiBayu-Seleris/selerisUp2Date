@@ -15,13 +15,11 @@ defineProps({
     >
       <div class="flex flex-col w-full h-auto mb-5 gap-y-1 my-5">
         <h3
-          class="text-[17px] sml:text-[14px] md:text-[20px] lg:text-[24px] font-[500] text-[#195279] dark:text-[#FAFAFA]"
+          class="text-[14px] md:text-[20px] lg:text-[24px] font-[500] text-[#195279] dark:text-[#FAFAFA]"
         >
           {{ name }}
         </h3>
-        <p
-          class="text-[14px] sml:text-[14px] md:text-[16px] lg:text-[18px] text-[#717276]"
-        >
+        <p class="text-[14px] md:text-[16px] lg:text-[18px] text-[#717276]">
           {{ position }}
         </p>
       </div>

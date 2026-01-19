@@ -17,7 +17,7 @@ watch(
   () => route.fullPath,
   () => {
     sidebarStore.close();
-  }
+  },
 );
 
 const { logo } = useProductLogo();
@@ -80,7 +80,7 @@ const LogoLink = computed(() => {
           v-if="logo"
           :src="logo"
           alt="Logo"
-          class="w-[117px] h-[56px] sml:w-[80px] sml:h-[56px] object-contain"
+          class="w-[80px] h-[56px] object-contain"
         />
       </router-link>
       <div class="w-[60%] h-auto flex items-center flex-row justify-end">

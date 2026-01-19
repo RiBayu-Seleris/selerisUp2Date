@@ -29,19 +29,19 @@ import { companyList } from "@/Data/companyList";
                 <img
                   :src="Logo"
                   alt="Logo"
-                  class="w-full sml:h-[60px] md:h-[80px] xl:h-[80px] object-contain object-left dark:hidden"
+                  class="w-full h-[75%] md:h-[80px] xl:h-[80px] object-contain object-left dark:hidden"
                 />
                 <img
                   :src="DarkLogo"
                   alt="Logo"
-                  class="w-full sml:h-[60px] md:h-[80px] xl:h-[80px] object-contain object-left hidden dark:block"
+                  class="w-full h-[75%] md:h-[80px] xl:h-[80px] object-contain object-left hidden dark:block"
                 />
               </div>
               <div
                 class="flex w-full h-auto lg:mt-4 justify-center items-center"
               >
                 <p
-                  class="text-[#195279] dark:text-[#FAFAFA] font-normal sml:text-base md:text-[1.7rem] lg:text-lg xl:text-[18px]"
+                  class="text-[#195279] dark:text-[#FAFAFA] font-normal md:text-[28px] lg:text-[22px] xl:text-[18px] leading-tight lg:leading-snug"
                 >
                   PT Seleris Meditekno Internasional
                 </p>
@@ -93,7 +93,7 @@ import { companyList } from "@/Data/companyList";
           <!-- lg:pl-6 xl:pl-12 -->
           <div class="flex flex-col w-full h-auto lg:pl-8 xl:px-8">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[18px] sml:text-[24px] lg:text-[18px] xl:text-[22px] font-medium"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] lg:text-[20px] xl:text-[22px] font-medium"
             >
               Products
             </p>
@@ -114,7 +114,7 @@ import { companyList } from "@/Data/companyList";
         <div class="flex relative w-full h-auto">
           <div class="flex flex-col w-full h-auto lg:pl-8 xl:pl-5">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[20px] xl:text-[22px] font-medium"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] lg:text-[20px] xl:text-[22px] font-medium"
             >
               Company
             </p>
@@ -133,21 +133,21 @@ import { companyList } from "@/Data/companyList";
         <div class="w-full h-auto xl:w-[170%]">
           <div class="flex flex-col">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[18px] xl:text-[22px] font-medium"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] lg:text-[18px] xl:text-[22px] font-medium"
             >
               Stay Connects
             </p>
 
             <div class="mb-3">
               <p
-                class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[18px] lg:text-[18px] xl:text-[22px] pb-2 pt-3"
+                class="text-[#195279] dark:text-[#FAFAFA] text-[18px] lg:text-[18px] xl:text-[22px] pb-2 pt-3"
               >
                 Address
               </p>
               <div class="w-full h-auto flex flex-col xl:flex-row">
-                <div class="w-full h-auto sml:pb-2 lg:pr-5">
+                <div class="w-full h-auto pb-2 lg:pr-5">
                   <p
-                    class="text-[#343F52] dark:text-[#FAFAFA] font-[500] sml:text-[14px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 sml:pb-1"
+                    class="text-[#343F52] dark:text-[#FAFAFA] font-[500] text-[14px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 pb-1"
                   >
                     Seleris Asia Pacific Technology Pte.Ltd
                   </p>
@@ -155,7 +155,7 @@ import { companyList } from "@/Data/companyList";
                     href="https://maps.app.goo.gl/8EZcoxw2NPYhc7ed8"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-[#2AB857] sml:text-[12px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 w-full"
+                    class="text-[#2AB857] text-[12px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 w-full"
                   >
                     16 Raffles Quay #35 - 01B Hong Leong Building SINGAPORE
                     (048581)
@@ -163,7 +163,7 @@ import { companyList } from "@/Data/companyList";
                 </div>
                 <div class="w-full h-auto lg:pr-5">
                   <p
-                    class="text-[#343F52] dark:text-[#FAFAFA] font-[500] sml:text-[14px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 sml:pb-1"
+                    class="text-[#343F52] dark:text-[#FAFAFA] font-[500] text-[14px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 pb-1"
                   >
                     PT Seleris Meditekno Internasional
                   </p>
@@ -171,7 +171,7 @@ import { companyList } from "@/Data/companyList";
                     href="https://maps.app.goo.gl/ywhqmCdfhGod9Mps6"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-[#2AB857] sml:text-[12px] lg:text-[14px] xl:text-[16px] lg:pt-1.5"
+                    class="text-[#2AB857] text-[12px] lg:text-[14px] xl:text-[16px] lg:pt-1.5"
                   >
                     Graha SMI, Jl. Raya Ragunan No. 29 A, Jakarta Selatan,
                     Indonesia 12540
@@ -213,7 +213,7 @@ import { companyList } from "@/Data/companyList";
         <div class="w-full h-auto">
           <div class="flex flex-col lg:pl-10">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[18px] xl:text-[22px] font-medium sml:pb-0"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] lg:text-[18px] xl:text-[22px] font-medium pb-0"
             >
               Get The App
             </p>

@@ -43,7 +43,7 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
   ...step,
   image: new URL(
     `/src/assets/Products/images/Medins/${step.image}`,
-    import.meta.url
+    import.meta.url,
   ).href,
 }));
 </script>
@@ -130,7 +130,7 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
       <Circle
         positionClass="-top-[200px] lg:-top-[170px] -right-0 lg:-right-[70px]"
         heightClass="md:h-[400px] xl:h-[550px]"
-        class="sml:hidden md:block"
+        class="hidden md:block"
       />
       <!-- Application Work Slider -->
       <div

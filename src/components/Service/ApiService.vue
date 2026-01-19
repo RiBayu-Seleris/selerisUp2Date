@@ -29,7 +29,7 @@ const ApiCards = [
     class="flex w-full h-auto lg:h-[588px] xl:h-auto pb-5 lg:pb-10 dark:bg-transparent lg:bg-api dark:lg:bg-darkapi bg-no-repeat bg-cover bg-top xl:rounded-b-[3rem]"
   >
     <div
-      class="flex flex-col w-full h-auto bg-[#F3F4F6] sml:pb-10 lg:pb-0 lg:bg-transparent dark:bg-[#1E1F1C] dark:lg:bg-transparent rounded-[1.5rem]"
+      class="flex flex-col w-full h-auto bg-[#F3F4F6] pb-10 lg:pb-0 lg:bg-transparent dark:bg-[#1E1F1C] dark:lg:bg-transparent rounded-[1.5rem]"
     >
       <div
         class="flex flex-col w-full h-auto mt-8 lg:mt-10 xl:mt-14 px-8 lg:px-14 gap-y-4 xl:gap-y-6"
@@ -65,13 +65,13 @@ const ApiCards = [
           <div
             v-for="(ApiCard, index) in ApiCards"
             :key="index"
-            class="flex snap-start shrink-0 w-[100%] md:w-[60%] lg:w-[55%] xl:w-[60%] sml:h-[150px] md:h-auto lg:h-auto xl:h-[200px] rounded-[22px] items-center bg-[#FAFAFA] dark:bg-[#323232] p-[1px] md:gap-x-5 dark:bg-gradient-to-tr dark:from-[#1E1F1C] dark:from-45% dark:to-[#565656]"
+            class="flex snap-start shrink-0 w-[100%] h-[150px] md:w-[60%] lg:w-[55%] xl:w-[60%] xl:h-[200px] md:h-auto lg:h-auto rounded-[22px] items-center bg-[#FAFAFA] dark:bg-[#323232] p-[1px] md:gap-x-5 dark:bg-gradient-to-tr dark:from-[#1E1F1C] dark:from-45% dark:to-[#565656]"
           >
             <div
               class="flex flex-row w-full h-full py-5 gap-x-5 md:gap-x-5 xl:gap-x-8 justify-center px-2 sm:px-0 bg-[#FAFAFA] dark:bg-[#1D1F23] dark:border-[#FAFAFA]/25 rounded-[22px]"
             >
               <div
-                class="flex sml:w-[50px] sml:h-[50px] md:w-[50px] md:h-[50px] lg:w-[55px] lg:h-[55px] xl:w-[70px] xl:h-[70px] justify-center md:mt-2 lg:mt-0"
+                class="flex w-[50px] h-[50px] md:w-[50px] md:h-[50px] lg:w-[55px] lg:h-[55px] xl:w-[70px] xl:h-[70px] justify-center md:mt-2 lg:mt-0"
               >
                 <img
                   :src="ApiCard.icon"

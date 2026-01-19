@@ -26,11 +26,11 @@ defineProps({
 
 <template>
   <div
-    class="flex flex-col snap-start snap-mandatory shrink-0 md:gap-x-5 h-auto w-[85%] md:w-[45%] lg:w-[45%] xl:w-[47%] rounded-xl py-6 px-5 lg:px-10 border-[0.1px] bg-[#FFFFFF] dark:bg-[#1D1F23] dark:border-[#FAFAFA]/25"
+    class="flex flex-col snap-start snap-mandatory shrink-0 md:gap-x-5 h-auto w-full sm:w-[85%] md:w-[45%] lg:w-[45%] xl:w-[47%] rounded-xl py-6 px-5 lg:px-10 border-[0.1px] bg-[#FFFFFF] dark:bg-[#1D1F23] dark:border-[#FAFAFA]/25"
   >
     <div class="flex flex-row w-full h-auto">
       <div
-        :class="`flex w-[20%] lg:w-[15%] xl:w-[20%] h-auto rounded-full p-2 md:p-3 xl:p-6 ${bgCard}`"
+        :class="`flex w-[20%] lg:w-[15%] xl:w-[20%] h-auto rounded-full p-2.5 md:p-3 xl:p-6 ${bgCard}`"
       >
         <img
           :src="icon"

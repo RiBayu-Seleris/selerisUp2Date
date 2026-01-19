@@ -1,3 +1,3 @@
 <template>
-  <div>ini test embed</div>
+  <div></div>
 </template>

@@ -22,7 +22,7 @@ import { useSidebarStore } from "@/stores/sidebar";
   </section>
 
   <section
-    class="dark:hidden flex flex-col relative w-full h-auto px-8 sml:mt-20 lg:mt-28"
+    class="dark:hidden flex flex-col relative w-full h-auto px-8 mt-20 lg:mt-28"
   >
     <DescAbout />
   </section>
@@ -33,9 +33,7 @@ import { useSidebarStore } from "@/stores/sidebar";
       <Hero />
     </section>
 
-    <section
-      class="flex flex-col relative w-full h-auto px-8 sml:mt-20 lg:mt-28"
-    >
+    <section class="flex flex-col relative w-full h-auto px-8 mt-20 lg:mt-28">
       <DescAbout />
     </section>
   </div>

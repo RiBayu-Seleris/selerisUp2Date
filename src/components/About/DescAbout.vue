@@ -19,7 +19,7 @@ import DescRobot from "@/assets/images/about-images.png";
   <!-- div Description 2 -->
   <div class="flex w-full h-auto my-5 sm:my-8 lg:my-14 xl:my-16 lg:px-20">
     <div
-      class="flex md:flex-row sml:flex-col w-full h-auto justify-between gap-y-5 md:gap-8 lg:gap-x-16"
+      class="flex flex-col md:flex-row w-full h-auto justify-between gap-y-5 md:gap-8 lg:gap-x-16"
     >
       <div
         class="flex w-full h-full md:w-[70%] lg:w-[50%] xl:w-[50%] justify-center items-center"
@@ -27,12 +27,12 @@ import DescRobot from "@/assets/images/about-images.png";
         <img
           :src="DescRobot"
           alt="About Banner"
-          class="w-full h-full sml:w-[200px] lg:w-[400px] object-cover"
+          class="h-full w-[200px] lg:w-[400px] object-cover"
         />
       </div>
       <div class="flex w-full items-center pr-2 lg:pr-8 xl:pr-14">
         <p
-          class="text-[14px] lg:text-[17px] xl:text-[21px] text-[#195279] dark:text-[#FAFAFA] font-light sml:text-center md:text-justify lg:text-justify xl:text-justify"
+          class="text-[14px] lg:text-[17px] xl:text-[21px] text-[#195279] dark:text-[#FAFAFA] font-light text-center md:text-justify lg:text-justify xl:text-justify"
         >
           Founded in 2019 by experienced entrepreneurs and technologists,
           Seleris is built on the belief that everyone deserves access to

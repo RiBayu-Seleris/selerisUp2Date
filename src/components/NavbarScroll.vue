@@ -72,21 +72,21 @@ onUnmounted(() => {
 
             <!-- Mobile Navbar with Sidebar Button -->
             <div
-              class="flex lg:hidden flex-row w-full h-auto justify-between md:px-8 sml:px-4"
+              class="flex lg:hidden flex-row w-full h-auto justify-between px-4 md:px-8"
             >
               <router-link to="/" class="w-[40%] h-auto flex">
                 <!-- Logo terang (light mode) -->
                 <img
                   :src="Logo"
                   alt="Logo"
-                  class="w-[117px] h-[56px] sml:w-[80px] sml:h-[56px] object-contain dark:hidden"
+                  class="w-[117px] h-[56px] sm:w-[80px] sm:h-[56px] object-contain dark:hidden"
                 />
 
                 <!-- Logo gelap (dark mode) -->
                 <img
                   :src="DarkLogo"
                   alt="Dark Logo"
-                  class="w-[117px] h-[56px] sml:w-[80px] sml:h-[56px] object-contain hidden dark:block"
+                  class="w-[117px] h-[56px] sm:w-[80px] sm:h-[56px] object-contain hidden dark:block"
                 />
               </router-link>
               <div

@@ -23,15 +23,13 @@ const testimonials = [
       class="relative flex flex-col w-full h-auto px-8 lg:px-16 xls:px-8 gap-y-3"
     >
       <div class="flex w-full h-auto">
-        <p
-          class="text-[#2AB857] font-[500] text-[21px] sml:text-[19px] lg:text-[21px]"
-        >
+        <p class="text-[#2AB857] font-[500] text-[18px] lg:text-[20px]">
           Client Feedback
         </p>
       </div>
       <div class="flex w-full h-auto">
         <p
-          class="text-[#195279] font-[500] text-[24px] sml:text-[20px] lg:text-[34px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+          class="text-[#195279] font-[500] text-[20px] lg:text-[34px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
         >
           What they say after using our product
         </p>

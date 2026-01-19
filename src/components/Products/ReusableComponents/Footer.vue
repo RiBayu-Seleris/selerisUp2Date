@@ -66,7 +66,7 @@ const connectColor = computed(() => {
                   v-if="logo"
                   :src="logo"
                   alt="Logo"
-                  class="w-full sml:h-[60px] md:h-[80px] lg:h-[40px] object-contain object-left"
+                  class="w-full h-[60px] md:h-[80px] lg:h-[40px] object-contain object-left"
                 />
               </div>
               <div
@@ -74,14 +74,14 @@ const connectColor = computed(() => {
               >
                 <div class="w-full h-full flex items-end">
                   <p
-                    class="sml:text-base md:text-[27px] lg:text-[17px] text-[#195279] font-[400]"
+                    class="text-base md:text-[27px] lg:text-[17px] text-[#195279] font-[400]"
                   >
                     {{ footerTitle }}
                   </p>
                 </div>
                 <div class="w-full h-full">
                   <p
-                    class="sml:text-base md:text-[21px] lg:text-[16px] text-[#195279] font-[400] lg:leading-snug"
+                    class="text-base md:text-[21px] lg:text-[16px] text-[#195279] font-[400] lg:leading-snug"
                   >
                     Powered by Seleris Meditekno International
                   </p>
@@ -128,7 +128,7 @@ const connectColor = computed(() => {
           <!-- lg:pl-6 xl:pl-12 -->
           <div class="flex flex-col w-full h-auto lg:pl-8 xl:px-8">
             <p
-              class="text-[#195279] text-[19px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2"
+              class="text-[#195279] text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2"
             >
               Products
             </p>
@@ -152,7 +152,7 @@ const connectColor = computed(() => {
         <div class="flex relative w-full h-auto">
           <div class="flex flex-col w-full h-auto lg:pl-8 xl:pl-5">
             <p
-              class="text-[#195279] text-[24px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2"
+              class="text-[#195279] text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2"
             >
               Company
             </p>
@@ -173,21 +173,21 @@ const connectColor = computed(() => {
         <div class="w-full h-auto xl:w-[170%]">
           <div class="flex flex-col">
             <p
-              class="text-[#195279] text-[24px] sml:text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2"
+              class="text-[#195279] text-[24px] lg:text-[19px] xl:text-[22px] font-medium pb-2"
             >
               Stay Connects
             </p>
 
             <div class="mb-3">
               <p
-                class="text-[#195279] text-[24px] sml:text-[18px] lg:text-[18px] xl:text-[22px] sml:pb-2"
+                class="text-[#195279] text-[18px] lg:text-[18px] xl:text-[22px] pb-2"
               >
                 Address
               </p>
               <div class="w-full h-auto flex flex-col xl:flex-row">
-                <div class="w-full h-auto sml:pb-2 lg:pr-5">
+                <div class="w-full h-auto pb-2 lg:pr-5">
                   <p
-                    class="text-[#343F52] font-[500] sml:text-[14px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 sml:pb-1"
+                    class="text-[#343F52] font-[500] text-[14px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 pb-1"
                   >
                     Seleris Asia Pacific Technology Pte.Ltd
                   </p>
@@ -196,7 +196,7 @@ const connectColor = computed(() => {
                     target="_blank"
                     rel="noopener noreferrer"
                     :class="[
-                      `${connectColor} sml:text-[12px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 w-full`,
+                      `${connectColor} text-[12px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 w-full`,
                     ]"
                   >
                     16 Raffles Quay #35 - 01B Hong Leong Building SINGAPORE
@@ -205,7 +205,7 @@ const connectColor = computed(() => {
                 </div>
                 <div class="w-full h-auto lg:pr-5">
                   <p
-                    class="text-[#343F52] font-[500] sml:text-[14px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 sml:pb-1"
+                    class="text-[#343F52] font-[500] text-[14px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 pb-1"
                   >
                     PT Seleris Meditekno Internasional
                   </p>
@@ -214,7 +214,7 @@ const connectColor = computed(() => {
                     target="_blank"
                     rel="noopener noreferrer"
                     :class="[
-                      `${connectColor} sml:text-[12px] lg:text-[14px] xl:text-[16px] lg:pt-1.5`,
+                      `${connectColor} text-[12px] lg:text-[14px] xl:text-[16px] lg:pt-1.5`,
                     ]"
                   >
                     Graha SMI, Jl. Raya Ragunan No. 29 A, Jakarta Selatan,
@@ -255,7 +255,7 @@ const connectColor = computed(() => {
         <div class="w-full h-auto">
           <div class="flex flex-col lg:pl-10">
             <p
-              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] sml:text-[24px] lg:text-[18px] xl:text-[22px] font-medium sml:pb-0"
+              class="text-[#195279] dark:text-[#FAFAFA] text-[24px] lg:text-[18px] xl:text-[22px] font-medium pb-0"
             >
               Get The App
             </p>
