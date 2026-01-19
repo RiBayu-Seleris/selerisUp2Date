@@ -88,7 +88,7 @@ const SelerisDo = [
   {
     icon: new URL(
       "@/assets/Products/icons/prediksi-risiko.png",
-      import.meta.url
+      import.meta.url,
     ).href,
     title: "Prediksi Risiko Penyakit",
     description:
@@ -203,16 +203,11 @@ useVideoOnView(selerisVideo, selerisBlock);
                 </p>
               </div>
               <p
-                class="text-[#6F6F6F] text-[14px] md:text-[16px] lg:text-[18px] xl:text-[22px] px-8 sm:px-12 md:px-0 md:pl-12 lg:pl-0 w-full lg:w-full text-center md:text-start"
+                class="text-[#6F6F6F] text-[14px] md:text-[16px] lg:text-[18px] xl:text-[22px] px-12 md:px-0 md:pl-12 lg:pl-0 w-full lg:w-[80%] text-center md:text-start"
               >
-                Leverage
-                <span class="font-[600]">artificial intelligence</span> to
-                assess <span class="font-[600]">mortality risk</span> and
-                automate
-                <span class="font-[600]"
-                  >credit life underwriting decisions
-                </span>
-                .
+                Point your camera to your face and let
+                <span class="font-[600]">artificial intelligence</span> do the
+                work.
               </p>
             </div>
             <div
@@ -487,8 +482,8 @@ useVideoOnView(selerisVideo, selerisBlock);
         >
           Parameter-parameter ini diolah menggunakan teknologi AI untuk
           membangun model penilaian risiko yang komprehensif dan konsisten,
-          sehingga risiko kesehatan laten dapat diidentifikasi lebih dini dan
-          objektif.
+          sehingga potensi risiko kesehatan yang belum terdeteksi dapat
+          diidentifikasi lebih dini dan objektif.
         </p>
       </div>
     </section>
