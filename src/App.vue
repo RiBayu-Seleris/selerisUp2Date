@@ -82,7 +82,7 @@ watch(
         isLoad.value = true;
       }, 2000);
     }
-  }
+  },
 );
 
 // Helpers
@@ -115,7 +115,7 @@ const getTracking = async () => {
   try {
     const getGuestData = await axios.get(
       `${BASE_URL}/v1/app/visitors/track/`,
-      headerApi
+      headerApi,
     );
     // console.log("Response:", getGuestData);
   } catch (error) {
@@ -195,10 +195,13 @@ onMounted(() => {
             <div
               v-if="showTooltip"
               @click="scrollToTop"
-              class="flex fixed justify-center cursor-pointer items-center bottom-5 right-5 lg:right-10 w-9 h-9 lg:w-12 lg:h-12 z-30 bg-white dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white rounded-full p-1 md:p-2"
+              class="flex fixed justify-center cursor-pointer items-center bottom-5 right-5 lg:right-10 w-9 h-9 lg:w-12 lg:h-12 z-50 bg-white dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white rounded-full p-1 md:p-2"
             >
               <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
             </div>
+            <!-- <div
+              class="flex fixed justify-center cursor-pointer items-center bottom-5 right-5 lg:right-10 w-9 h-9 lg:w-12 lg:h-12 z-50 bg-white dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white rounded-full p-1 md:p-2"
+            ></div> -->
           </transition>
 
           <!-- Sidebar -->
@@ -242,7 +245,9 @@ onMounted(() => {
 <style scoped>
 .fade-slide-enter-active,
 .fade-slide-leave-active {
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition:
+    opacity 0.4s ease,
+    transform 0.4s ease;
 }
 .fade-slide-enter-from,
 .fade-slide-leave-to {

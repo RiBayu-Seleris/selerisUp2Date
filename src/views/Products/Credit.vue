@@ -134,31 +134,33 @@ useVideoOnView(selerisVideo, selerisBlock);
 </script>
 
 <template>
-  <div class="relative w-full overflow-hidden max-w-[1440px] mx-auto">
+  <div class="relative w-full overflow-hidden">
     <!-- Hero -->
     <section
-      class="relative w-full h-full rounded-[20px] z-20 mx-auto"
+      class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px]"
       id="hero"
     >
       <figure
-        class="absolute w-auto h-auto right-0 top-[120px] md:top-32 lg:top-24"
+        class="absolute w-auto h-auto top-[15%] md:top-[29%] lg:top-[20%] xl:top-[150px] -right-[60%] md:-right-[30%] lg:-right-[37%] xl:-right-[23%]"
       >
         <img
-          src="@/assets/Products/images/Credit/blue-wave.png"
+          src="@/assets/Products/images/Credit/blue-wave2.png"
           alt=""
-          class="w-[300px] h-auto md:w-[280px] md:h-auto lg:w-[600px] lg:h-[300px] object-contain"
+          class="h-auto w-[650px] md:w-[600px] lg:w-full object-cover"
         />
       </figure>
       <figure
-        class="absolute w-auto h-auto -right-10 md:right-0 bottom-[250px] md:bottom-0 lg:bottom-0"
+        class="absolute w-auto h-auto bottom-[44%] md:bottom-[0%] lg:-bottom-0 xl:bottom-0 -right-[15%] md:-right-[10%] lg:-right-[35%] xl:-right-[200px]"
       >
         <img
-          src="@/assets/Products/images/Credit/orange-wave.png"
+          src="@/assets/Products/images/Credit/orange-wave2.png"
           alt=""
-          class="w-full h-[300px] md:w-[580px] md:h-auto lg:w-full lg:h-[300px] object-contain"
+          class="h-auto w-full md:w-[600px] lg:w-full object-cover"
         />
       </figure>
-      <div class="relative w-full h-auto rounded-[20px] z-20">
+      <div
+        class="relative w-full h-auto rounded-[20px] z-20 max-w-[1440px] mx-auto"
+      >
         <div
           class="relative w-full h-full flex flex-col md:flex-row gap-x-0 pt-32 px-0 lg:px-16 xl:px-20 lg:pt-40 gap-y-10"
         >
@@ -276,7 +278,7 @@ useVideoOnView(selerisVideo, selerisBlock);
 
     <!-- Section About -->
     <section
-      class="relative w-full h-full rounded-[20px] z-20 mt-10"
+      class="max-w-[1440px] mx-auto relative w-full h-full rounded-[20px] z-20 mt-10"
       id="about"
     >
       <!-- SELERIS CREDIT -->
@@ -392,7 +394,7 @@ useVideoOnView(selerisVideo, selerisBlock);
     <!-- Section Apa Yang Dikerjakan Seleris -->
     <section
       id="technology"
-      class="relative flex flex-col w-full h-auto bg-[#FFFFFF] z-20 py-10 sm:py-20 mt-10 gap-y-5 sm:gap-y-10 lg:gap-y-14"
+      class="max-w-[1440px] mx-auto relative flex flex-col w-full h-auto bg-[#FFFFFF] z-20 py-10 sm:py-20 mt-10 gap-y-5 sm:gap-y-10 lg:gap-y-14"
     >
       <div class="w-full h-auto flex flex-col gap-y-4 px-8">
         <div class="w-full h-auto flex justify-center items-center">
@@ -489,7 +491,9 @@ useVideoOnView(selerisVideo, selerisBlock);
     </section>
 
     <!-- Keunggulan Utama Seleris Credit -->
-    <section class="relative w-full h-full rounded-[20px] z-20 mt-32">
+    <section
+      class="max-w-[1440px] mx-auto relative w-full h-full rounded-[20px] z-20 mt-32"
+    >
       <!-- Keunggulan Video -->
       <div
         ref="keunggulanBlock"
@@ -612,7 +616,7 @@ useVideoOnView(selerisVideo, selerisBlock);
 
     <!-- Untuk Siapa Seleris Credit -->
     <section
-      class="relative w-full h-auto z-20 mt-32 bg-white py-14 lg:py-20 px-8 sm:px-12 lg:px-20"
+      class="max-w-[1440px] mx-auto relative w-full h-auto z-20 mt-32 bg-white py-14 lg:py-20 px-8 sm:px-12 lg:px-20"
     >
       <div class="w-full h-auto flex flex-col sm:flex-row gap-x-10">
         <div class="w-full sm:w-[60%] h-auto flex">
@@ -709,7 +713,7 @@ useVideoOnView(selerisVideo, selerisBlock);
 
     <!-- Mengapa Seleris Credit -->
     <section
-      class="relative w-full h-full rounded-[20px] z-20 mt-32 py-14 lg:py-20"
+      class="max-w-[1440px] mx-auto relative w-full h-full rounded-[20px] z-20 mt-32 py-14 lg:py-20"
       id="whyus"
     >
       <!-- TRANSFORMASI ASURANSI -->
@@ -772,7 +776,7 @@ useVideoOnView(selerisVideo, selerisBlock);
 
     <!-- Book A Demo -->
     <section
-      class="relative w-full h-auto z-20 mt-16 sm:mt-32 px-8 sm:px-12 lg:px-20"
+      class="max-w-[1440px] mx-auto relative w-full h-auto z-20 mt-16 sm:mt-32 px-8 sm:px-12 lg:px-20"
     >
       <div
         class="w-full h-auto flex flex-row bg-[#1485CB] gap-x-3 sm:gap-x-10 rounded-[24px] py-5 sm:py-10 lg:py-14"

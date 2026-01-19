@@ -47,7 +47,7 @@ const SelerisDo = [
   {
     icon: new URL(
       "@/assets/Products/icons/prediksi-risiko.png",
-      import.meta.url
+      import.meta.url,
     ).href,
     title: "Prediksi Risiko Penyakit",
     description:
@@ -103,7 +103,7 @@ useVideoOnView(selerisVideo, selerisBlock);
         class="absolute w-auto h-auto right-0 top-[120px] md:top-32 lg:top-24"
       >
         <img
-          src="@/assets/Products/images/Credit/blue-wave.png"
+          src="@/assets/Products/images/Credit/blue-wave2.png"
           alt=""
           class="w-[300px] h-auto md:w-[280px] md:h-auto lg:w-[600px] lg:h-[300px] object-contain"
         />
@@ -112,7 +112,7 @@ useVideoOnView(selerisVideo, selerisBlock);
         class="absolute w-auto h-auto -right-10 md:right-0 bottom-[250px] md:bottom-0 lg:bottom-0"
       >
         <img
-          src="@/assets/Products/images/Credit/orange-wave.png"
+          src="@/assets/Products/images/Credit/orange-wave2.png"
           alt=""
           class="w-full h-[300px] md:w-[580px] md:h-auto lg:w-full lg:h-[300px] object-contain"
         />

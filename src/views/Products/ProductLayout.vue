@@ -18,7 +18,7 @@ const handleScroll = () => scrollStore.updateScroll();
 const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
 
 const isSelerisCredit = computed(
-  () => route.path === "/product/seleris-credit"
+  () => route.path === "/product/seleris-credit",
 );
 
 // Fungsi scroll ke hash (dengan retry)
@@ -65,7 +65,7 @@ watch(
       const hash = newPath.substring(hashIndex);
       scrollToHash(hash);
     }
-  }
+  },
 );
 
 onUnmounted(() => {

@@ -14,12 +14,14 @@ import { productList } from "@/Data/productList";
 import { companyList } from "@/Data/companyList";
 import { useProductLogoColor } from "@/Data/Products/useProductLogoColor.js";
 
-import { computed } from "vue";
+import { computed, ref } from "vue";
 import { useRoute } from "vue-router"; // ✅ Tambahkan ini
 
 const route = useRoute(); // ✅ Ambil route saat ini
 
 const { logo } = useProductLogoColor();
+
+const isSelerisCredit = ref(route.path === "/product/seleris-credit");
 
 const footerTitle = computed(() => {
   if (route.path === "/product/credit-cover") {
@@ -33,6 +35,9 @@ const footerTitle = computed(() => {
   }
   if (route.path === "/product/health-care") {
     return "Seleris Care";
+  }
+  if (route.path === "/product/seleris-credit") {
+    return "Seleris Credit";
   }
 });
 
@@ -66,7 +71,7 @@ const connectColor = computed(() => {
                   v-if="logo"
                   :src="logo"
                   alt="Logo"
-                  class="w-full h-[60px] md:h-[80px] lg:h-[40px] object-contain object-left"
+                  class="w-full h-[60px] md:h-[80px] lg:h-[40px] xl:h-[70px] object-contain object-left"
                 />
               </div>
               <div
@@ -252,7 +257,7 @@ const connectColor = computed(() => {
         <div
           class="flex lg:hidden w-full h-[1px] bg-[#F3F4F6] rounded-full my-3"
         />
-        <div class="w-full h-auto">
+        <div v-if="!isSelerisCredit" class="w-full h-auto">
           <div class="flex flex-col lg:pl-10">
             <p
               class="text-[#195279] dark:text-[#FAFAFA] text-[24px] lg:text-[18px] xl:text-[22px] font-medium pb-0"
