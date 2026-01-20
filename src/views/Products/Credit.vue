@@ -745,14 +745,16 @@ useVideoOnView(selerisVideo, selerisBlock);
               </p>
             </div>
             <div class="w-full h-auto">
-              <button
-                aria-label="Request Demo Seleris Credit"
-                class="w-auto h-auto px-8 py-3 bg-[#1485CB] rounded-[8px]"
-              >
-                <p class="text-[#FFFFFF] font-[600] text-[14px]">
-                  Request Demo
-                </p>
-              </button>
+              <router-link to="/book-a-demo">
+                <button
+                  aria-label="Request Demo Seleris Credit"
+                  class="w-auto h-auto px-8 py-3 bg-[#1485CB] rounded-[8px]"
+                >
+                  <p class="text-[#FFFFFF] font-[600] text-[14px]">
+                    Request Demo
+                  </p>
+                </button>
+              </router-link>
             </div>
           </div>
         </div>
