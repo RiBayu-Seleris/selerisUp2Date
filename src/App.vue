@@ -200,7 +200,7 @@ onMounted(() => {
           </div>
 
           <!-- Scroll Tooltip -->
-          <!-- <transition name="fade-slide">
+          <transition name="fade-slide">
             <div
               v-if="showTooltip"
               @click="scrollToTop"
@@ -208,9 +208,9 @@ onMounted(() => {
             >
               <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
             </div>
-          </transition> -->
+          </transition>
 
-          <transition name="fade-slide">
+          <!-- <transition name="fade-slide">
             <div
               v-if="showTooltip"
               @click="toggleTooltip"
@@ -234,7 +234,7 @@ onMounted(() => {
             >
               <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
             </div>
-          </transition>
+          </transition> -->
 
           <!-- Sidebar -->
           <Sidebar />
