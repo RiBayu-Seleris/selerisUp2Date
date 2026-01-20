@@ -25,6 +25,8 @@ const themeStore = useThemeStore();
 const route = useRoute();
 const scrollStore = useScrollStore();
 
+const isTooltipOpen = ref(false);
+
 // Loading control
 const isLoad = ref(false);
 
@@ -33,6 +35,10 @@ const showTooltip = computed(() => scrollStore.isScrolled);
 
 const handleScroll = () => {
   scrollStore.updateScroll();
+};
+
+const toggleTooltip = () => {
+  isTooltipOpen.value = !isTooltipOpen.value;
 };
 
 const scrollToTop = () => {
@@ -59,11 +65,14 @@ onMounted(() => {
     }, 2000);
   }
 
-  AOS.init({
-    duration: 800,
-    once: true,
-    disable: false,
-  });
+  if (window.AOS) {
+    window.AOS.init({
+      duration: 800,
+      once: true,
+      disable: () =>
+        window.matchMedia("(prefers-reduced-motion: reduce)").matches,
+    });
+  }
 });
 
 onUnmounted(() => {
@@ -191,7 +200,7 @@ onMounted(() => {
           </div>
 
           <!-- Scroll Tooltip -->
-          <transition name="fade-slide">
+          <!-- <transition name="fade-slide">
             <div
               v-if="showTooltip"
               @click="scrollToTop"
@@ -199,9 +208,32 @@ onMounted(() => {
             >
               <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
             </div>
-            <!-- <div
-              class="flex fixed justify-center cursor-pointer items-center bottom-5 right-5 lg:right-10 w-9 h-9 lg:w-12 lg:h-12 z-50 bg-white dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white rounded-full p-1 md:p-2"
-            ></div> -->
+          </transition> -->
+
+          <transition name="fade-slide">
+            <div
+              v-if="showTooltip"
+              @click="toggleTooltip"
+              class="fixed bottom-[20px] right-[20px] lg:bottom-[20px] lg:right-[40px] w-12 h-12 flex items-start z-50 bg-blue-800 dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white p-1 md:p-2 rounded-full"
+            >
+              +
+            </div>
+          </transition>
+          <transition name="fade-slide">
+            <div
+              v-if="showTooltip && isTooltipOpen"
+              class="fixed lg:bottom-[20px] lg:right-[95px] w-12 h-12 flex items-start z-50 bg-blue-800 dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white p-1 md:p-2 rounded-full"
+            >
+              <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
+            </div>
+          </transition>
+          <transition name="fade-slide">
+            <div
+              v-if="showTooltip && isTooltipOpen"
+              class="fixed lg:bottom-[75px] lg:right-[40px] w-12 h-12 flex items-start z-50 bg-blue-800 dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white p-1 md:p-2 rounded-full"
+            >
+              <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
+            </div>
           </transition>
 
           <!-- Sidebar -->

@@ -216,6 +216,7 @@ useVideoOnView(selerisVideo, selerisBlock);
               class="w-full h-auto flex flex-row gap-x-5 justify-center md:justify-start pl-0 md:pl-12 lg:pl-0"
             >
               <button
+                aria-label="View Demo Seleris Credit"
                 class="w-auto h-auto px-6 py-2 bg-[#195279] rounded-[40px]"
               >
                 <p
@@ -745,6 +746,7 @@ useVideoOnView(selerisVideo, selerisBlock);
             </div>
             <div class="w-full h-auto">
               <button
+                aria-label="Request Demo Seleris Credit"
                 class="w-auto h-auto px-8 py-3 bg-[#1485CB] rounded-[8px]"
               >
                 <p class="text-[#FFFFFF] font-[600] text-[14px]">

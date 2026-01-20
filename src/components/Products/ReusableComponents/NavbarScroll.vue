@@ -100,6 +100,7 @@ onUnmounted(() => {
                   class="w-[35%] md:w-[15%] h-auto flex items-center justify-end"
                 >
                   <button
+                    aria-label="Open Sidebar Scroll Product"
                     type="button"
                     id="sidebar-button"
                     class="bg-white p-2 rounded-lg shadow-md"

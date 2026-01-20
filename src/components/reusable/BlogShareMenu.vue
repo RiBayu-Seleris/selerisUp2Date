@@ -12,7 +12,10 @@ import FrameShare from "@/components/icons/FrameShare.vue";
     <div
       class="absolute inset-0 flex flex-col justify-center px-8 md:px-8 pt-8 md:space-y-1 text-[13px]"
     >
-      <button class="flex flex-row items-center gap-x-2 w-full py-2 rounded">
+      <button
+        aria-label="Copy Link"
+        class="flex flex-row items-center gap-x-2 w-full py-2 rounded"
+      >
         <div class="w-[15%] justify-center items-center">
           <svg
             class="w-full h-full"
@@ -31,7 +34,10 @@ import FrameShare from "@/components/icons/FrameShare.vue";
         </div>
       </button>
       <hr class="border-gray-300 dark:border-gray-600" />
-      <button class="flex flex-row items-center gap-x-2 w-full py-2 rounded">
+      <button
+        aria-label="Share Linked In"
+        class="flex flex-row items-center gap-x-2 w-full py-2 rounded"
+      >
         <div class="w-[15%] justify-center items-center">
           <svg
             class="w-full h-full"
@@ -49,7 +55,10 @@ import FrameShare from "@/components/icons/FrameShare.vue";
           <p><span class="hidden md:inline-block">Share on</span> LinkedIn</p>
         </div>
       </button>
-      <button class="flex flex-row items-center gap-x-2 w-full py-2 rounded">
+      <button
+        aria-label="Share Facebook"
+        class="flex flex-row items-center gap-x-2 w-full py-2 rounded"
+      >
         <div class="w-[15%] justify-center items-center">
           <svg
             class="w-full h-full"
@@ -67,7 +76,10 @@ import FrameShare from "@/components/icons/FrameShare.vue";
           <p><span class="hidden md:inline-block">Share on</span> Facebook</p>
         </div>
       </button>
-      <button class="flex flex-row items-center gap-x-2 w-full py-2 rounded">
+      <button
+        aria-label="Share Twitter"
+        class="flex flex-row items-center gap-x-2 w-full py-2 rounded"
+      >
         <div class="w-[15%] justify-center items-center">
           <svg
             class="w-full h-full"

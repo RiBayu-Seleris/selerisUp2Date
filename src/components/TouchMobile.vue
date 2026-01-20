@@ -9,6 +9,7 @@ import CallIcon from "@/components/icons/CallIcon.vue";
   >
     <div class="flex w-full h-auto rounded-3xl">
       <iframe
+        title="Map showing Seleris Development Office location"
         class="w-full h-[300px] rounded-3xl border-2"
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.8339793616797!2d106.83314007441082!3d-6.285542461522718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3001660852f%3A0x1ac61febb98f4350!2sSeleris%20Development%20Office!5e0!3m2!1sid!2sid!4v1751444288952!5m2!1sid!2sid"
         allowfullscreen=""
@@ -91,10 +92,11 @@ import CallIcon from "@/components/icons/CallIcon.vue";
         <!-- <div class="w-full h-[1px] bg-[#F3F4F6] my-3 rounded-full" /> -->
         <div class="flex flex-col w-full mt-5 mb-4">
           <div class="w-full mb-2">
-            <p>Full Name:</p>
+            <label for="fullname">Full Name:</label>
           </div>
           <div class="w-full">
             <input
+              id="fullname"
               name="fullname"
               type="text"
               class="w-full p-2 rounded-[8px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:outline-none focus:ring-1 focus:ring-[#2AB857] dark:focus:border-none"
@@ -103,10 +105,11 @@ import CallIcon from "@/components/icons/CallIcon.vue";
         </div>
         <div class="flex flex-col w-full mb-4">
           <div class="w-full mb-2">
-            <p>Email:</p>
+            <label for="email">Email:</label>
           </div>
           <div class="w-full">
             <input
+              id="email"
               name="email"
               type="email"
               class="w-full p-2 rounded-[8px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:outline-none focus:ring-1 focus:ring-[#2AB857] dark:focus:border-none"
@@ -115,17 +118,22 @@ import CallIcon from "@/components/icons/CallIcon.vue";
         </div>
         <div class="flex flex-col w-full mb-4">
           <div class="w-full mb-2">
-            <p>Message:</p>
+            <label for="message">Message:</label>
           </div>
           <div class="w-full">
             <textarea
+              id="message"
+              name="message"
               class="w-full lg:h-[70px] xl:h-[130px] p-2 rounded-[8px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:outline-none focus:ring-1 focus:ring-[#2AB857] resize-none align-top"
               placeholder="Message"
             />
           </div>
         </div>
         <div class="flex w-full h-auto rounded-lg mt-2">
-          <button class="w-full h-12 bg-[#2AB857] text-white rounded-lg">
+          <button
+            aria-label="Kirim Get In Touch Mobile"
+            class="w-full h-12 bg-[#2AB857] text-white rounded-lg"
+          >
             Submit
           </button>
         </div>
@@ -139,7 +147,9 @@ input {
   border: 0.25px solid #d1d5db;
   background-color: #ffffff;
   color: #000;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+  transition:
+    border-color 0.2s ease,
+    box-shadow 0.2s ease;
 }
 
 input:focus {

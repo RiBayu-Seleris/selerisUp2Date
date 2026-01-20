@@ -100,6 +100,7 @@ const shortText = computed(() => {
         <p class="text-[12px]">
           {{ shortText }}
           <button
+            aria-label="Readmore"
             v-if="showReadMore"
             @click="emit('readmore')"
             class="font-bold hover:underline"

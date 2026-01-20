@@ -69,7 +69,7 @@ watch(messages, scrollToBottom, { deep: true });
         @keyup.enter="sendMessage"
         placeholder="Ketik pesan..."
       />
-      <button @click="sendMessage">Kirim</button>
+      <button aria-label="Chatbot Send 3" @click="sendMessage">Kirim</button>
     </div>
   </div>
 
@@ -114,7 +114,10 @@ watch(messages, scrollToBottom, { deep: true });
         placeholder="Ketik pesan..."
         class="flex-1 p-3 outline-none"
       />
-      <button class="px-4 text-white bg-blue-500 hover:bg-blue-600">
+      <button
+        aria-label="Chatbot Send 3"
+        class="px-4 text-white bg-blue-500 hover:bg-blue-600"
+      >
         Kirim
       </button>
     </div>

@@ -129,6 +129,7 @@ const isSelerisCredit = ref(route.path === "/product/seleris-credit");
               </div>
               <div class="w-[20%] h-auto flex justify-end">
                 <button
+                  aria-label="Sidebar Close Product"
                   type="button"
                   id="sidebar-button"
                   @click="sidebar.close"

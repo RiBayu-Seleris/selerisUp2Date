@@ -33,7 +33,10 @@
         placeholder="Ketik pesan..."
         class="flex-1 p-3 outline-none"
       />
-      <button class="h-auto px-4 text-white bg-blue-500 hover:bg-blue-600">
+      <button
+        aria-label="Chatbot Send 2"
+        class="h-auto px-4 text-white bg-blue-500 hover:bg-blue-600"
+      >
         Kirim
       </button>
     </div>

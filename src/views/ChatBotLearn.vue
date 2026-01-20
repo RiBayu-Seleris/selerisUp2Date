@@ -78,7 +78,7 @@ async function sendMessage() {
             },
           ],
         }),
-      }
+      },
     );
 
     const data = await response.json();
@@ -125,7 +125,7 @@ watch(messages, scrollToBottom, { deep: true });
         @keyup.enter="sendMessage"
         placeholder="Ketik pesan..."
       />
-      <button @click="sendMessage">Kirim</button>
+      <button aria-label="Chatbot Send" @click="sendMessage">Kirim</button>
     </div>
   </div>
 </template>

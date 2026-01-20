@@ -39,6 +39,7 @@ function scrollToId(id) {
 
 <template>
   <button
+    aria-label="Nav Link Product"
     v-if="href.startsWith('#')"
     @click="scrollToId(href.replace('#', ''))"
     :class="[
@@ -46,10 +47,10 @@ function scrollToId(id) {
       route.path === '/product/lifins'
         ? 'text-[#374151]'
         : route.path === '/product/health-care'
-        ? 'text-[#374151]'
-        : route.path === href
-        ? 'text-[#374151]'
-        : '',
+          ? 'text-[#374151]'
+          : route.path === href
+            ? 'text-[#374151]'
+            : '',
     ]"
   >
     <slot />
@@ -63,10 +64,10 @@ function scrollToId(id) {
       route.path === '/product/lifins'
         ? 'text-[#374151]'
         : route.path === '/product/health-care'
-        ? 'text-[#374151]'
-        : route.path === href
-        ? 'text-[#374151]'
-        : '',
+          ? 'text-[#374151]'
+          : route.path === href
+            ? 'text-[#374151]'
+            : '',
     ]"
   >
     <slot />

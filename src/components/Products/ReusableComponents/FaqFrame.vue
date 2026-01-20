@@ -38,6 +38,7 @@ const toggleMobile = (index) => {
         class="rounded-lg shadow-md bg-white dark:bg-gray-800"
       >
         <button
+          aria-label="Open FAQ"
           class="w-full flex items-center gap-x-3 px-6 py-4"
           @click="toggle(`left-${i}`)"
         >
@@ -90,6 +91,7 @@ const toggleMobile = (index) => {
         class="rounded-lg shadow-md bg-white dark:bg-gray-800"
       >
         <button
+          aria-label="Open FAQ"
           class="w-full flex items-center gap-x-3 px-6 py-4"
           @click="toggle(`right-${i}`)"
         >
@@ -144,6 +146,7 @@ const toggleMobile = (index) => {
     >
       <div class="w-full rounded-lg shadow-md bg-[#FFFFFF] dark:bg-[#323232]">
         <button
+          aria-label="Open FAQ"
           class="w-full flex flex-row gap-x-3 items-center px-6 py-4"
           @click="toggleMobile(index)"
         >

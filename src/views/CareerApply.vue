@@ -222,7 +222,7 @@ function closeAll() {
 onMounted(async () => {
   try {
     const res = await fetch(
-      "https://restcountries.com/v3.1/all?fields=name,flags,cca2"
+      "https://restcountries.com/v3.1/all?fields=name,flags,cca2",
     );
     const data = await res.json();
     const targetCountries = ["Indonesia"];
@@ -383,7 +383,7 @@ const uploadFile = async (file, urlField) => {
         headers: {
           Accept: "application/json",
         },
-      }
+      },
     );
 
     formData[urlField] = response.data.data.path;
@@ -423,7 +423,7 @@ watch(
         await uploadFile(file, urlField);
       }
     }
-  }
+  },
 );
 
 /* ============================
@@ -434,24 +434,24 @@ const stepValidators = [
   () =>
     Boolean(
       formData.fullname?.trim() &&
-        formData.pob?.trim() &&
-        formData.dob?.trim() &&
-        formData.gender &&
-        formData.email?.trim() &&
-        formData.phone?.trim() &&
-        formData.address?.trim() &&
-        formData.country
+      formData.pob?.trim() &&
+      formData.dob?.trim() &&
+      formData.gender &&
+      formData.email?.trim() &&
+      formData.phone?.trim() &&
+      formData.address?.trim() &&
+      formData.country,
     ),
 
   // STEP 1 — Education
   () =>
     Boolean(
       formData.schoolName?.trim() &&
-        formData.fieldOfStudy?.trim() &&
-        formData.education &&
-        formData.startDateEducation &&
-        formData.endDateEducation &&
-        formData.gpaScore?.trim()
+      formData.fieldOfStudy?.trim() &&
+      formData.education &&
+      formData.startDateEducation &&
+      formData.endDateEducation &&
+      formData.gpaScore?.trim(),
     ),
 
   // STEP 2 — Experience
@@ -467,10 +467,10 @@ const stepValidators = [
     // Jika punya pengalaman → semua field wajib diisi
     return Boolean(
       formData.lastCompany?.trim() &&
-        formData.lastPosition?.trim() &&
-        formData.startDateExperience &&
-        formData.endDateExperience &&
-        formData.jobDescription?.trim()
+      formData.lastPosition?.trim() &&
+      formData.startDateExperience &&
+      formData.endDateExperience &&
+      formData.jobDescription?.trim(),
     );
   },
 
@@ -478,8 +478,8 @@ const stepValidators = [
   () => {
     return Boolean(
       formData.technicalSkills?.trim() &&
-        formData.softSkills?.trim() &&
-        formData.languageSkills?.trim()
+      formData.softSkills?.trim() &&
+      formData.languageSkills?.trim(),
     );
   }, // tidak required
 
@@ -487,8 +487,8 @@ const stepValidators = [
   () => {
     return Boolean(
       formData.startDateMotivations.trim() &&
-        formData.expectedSalary.trim() &&
-        formData.reasonDescription.trim()
+      formData.expectedSalary.trim() &&
+      formData.reasonDescription.trim(),
     );
   },
 
@@ -498,7 +498,7 @@ const stepValidators = [
   // STEP 6 — Declaration
   () =>
     Boolean(
-      formData.trueData && formData.dataPermission && formData.backgroundCheck
+      formData.trueData && formData.dataPermission && formData.backgroundCheck,
     ),
 ];
 
@@ -615,7 +615,7 @@ const handleApply = async () => {
     periode_bekerja:
       startDateExperience && endDateExperience
         ? `${utils.fromISODateSlash(
-            startDateExperience
+            startDateExperience,
           )}-${utils.fromISODateSlash(endDateExperience)}`
         : "",
 
@@ -693,7 +693,7 @@ watch(
   () => isModalOpen.value,
   (v) => {
     document.body.style.overflow = v ? "hidden" : "auto";
-  }
+  },
 );
 </script>
 
@@ -892,12 +892,14 @@ watch(
             </div>
             <div class="flex flex-row w-full h-auto gap-x-5 lg:justify-end">
               <button
+                aria-label="Yes Work Experience"
                 class="w-24 lg:w-28 h-auto py-2 bg-[#AAD7FF] border-[#1091F3] border-[1.5px] text-[#1091F3] rounded-lg font-medium"
                 @click="selectExperience(true)"
               >
                 Yes
               </button>
               <button
+                aria-label="No Work Experience"
                 class="w-24 lg:w-28 h-auto py-2 bg-[#FFBABA] border-[#FF4B4E] border-[1.5px] text-[#FF4B4E] rounded-lg font-medium"
                 @click="selectExperience(false)"
               >
@@ -965,6 +967,7 @@ watch(
 
         <div class="flex justify-between mt-8">
           <button
+            aria-label="Previous Steps"
             @click="prevStep"
             class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg"
             :class="[
@@ -978,6 +981,7 @@ watch(
           </button>
 
           <button
+            aria-label="Next Steps"
             v-if="
               (currentStep !== 2 && currentStep < steps.length - 1) ||
               (currentStep === 2 && hasExperience === true)
@@ -990,6 +994,7 @@ watch(
           </button>
 
           <button
+            aria-label="Submit Form Steps"
             v-else-if="currentStep !== 2"
             class="bg-[#2AB857] text-white px-4 py-2 rounded-lg ml-auto hover:bg-[#259d4c] transition-all"
             @click="handleToggleModal"
@@ -1055,10 +1060,10 @@ watch(
                   'Field Of Study': formData.fieldOfStudy,
                   Education: formData.education.value,
                   'Start Date Education': utils.fromISODate(
-                    formData.startDateEducation
+                    formData.startDateEducation,
                   ),
                   'End Date Education': utils.fromISODate(
-                    formData.endDateEducation
+                    formData.endDateEducation,
                   ),
                   'GPA Score': formData.gpaScore,
                   'certificate ':
@@ -1123,6 +1128,7 @@ watch(
                 class="flex flex-row lg:items-center justify-between lg:justify-end w-full h-auto gap-x-5"
               >
                 <button
+                  aria-label="Close Modals Checking"
                   @click="closeModal"
                   class="w-full h-auto lg:w-auto lg:h-auto p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-r dark:from-[#565656] dark:from-0% dark:to-[#BCBCBC] shadow-lg rounded-full cursor-pointer"
                 >
@@ -1137,6 +1143,7 @@ watch(
                   </div>
                 </button>
                 <button
+                  aria-label="Send Apply Career"
                   @click="handleApply"
                   class="w-full h-auto lg:w-auto lg:h-auto p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-r dark:from-[#565656] dark:from-0% dark:to-[#BCBCBC] shadow-lg rounded-full cursor-pointer"
                 >
@@ -1195,7 +1202,9 @@ input:-webkit-autofill {
 }
 /* Light Focus */
 input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1px #2ab857 inset, 0 0 0px 1000px #ffffff inset !important;
+  -webkit-box-shadow:
+    0 0 0 1px #2ab857 inset,
+    0 0 0px 1000px #ffffff inset !important;
   -webkit-text-fill-color: #000 !important;
 }
 /* Dark */
@@ -1206,7 +1215,9 @@ input:-webkit-autofill:focus {
 }
 /* Dark Focus */
 .dark input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1px #2ab857 inset, 0 0 0px 1000px #323232 inset !important;
+  -webkit-box-shadow:
+    0 0 0 1px #2ab857 inset,
+    0 0 0px 1000px #323232 inset !important;
   -webkit-text-fill-color: #fafafa !important;
 }
 

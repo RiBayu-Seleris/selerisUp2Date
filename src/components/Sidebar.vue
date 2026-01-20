@@ -85,7 +85,8 @@ const toggleSolution = () => {
               <div class="w-[20%] h-auto flex justify-end">
                 <button
                   type="button"
-                  id="sidebar-button"
+                  aria-label="Open sidebar menu"
+                  id="sidebarCloseButton"
                   @click="sidebar.close"
                   class="ml-auto text-2xl font-bold text-gray-700 hover:text-black dark:text-[#FAFAFA]"
                 >
@@ -107,6 +108,8 @@ const toggleSolution = () => {
               <!-- About -->
               <div class="w-full h-auto flex flex-col">
                 <button
+                  id="buttonAboutListMenu"
+                  aria-label="Open About menu"
                   @click.stop="toggleAbout"
                   class="w-full h-auto flex flex-row justify-between pr-1"
                 >
@@ -159,6 +162,8 @@ const toggleSolution = () => {
               <!-- Products -->
               <div class="w-full h-auto flex flex-col">
                 <button
+                  id="buttonProductListMenu"
+                  aria-label="Open Products menu"
                   @click.stop="toggleProduct"
                   class="w-full h-auto flex flex-row justify-between pr-1"
                 >
@@ -211,6 +216,8 @@ const toggleSolution = () => {
               <!-- Technology -->
               <div class="w-full h-auto flex flex-col">
                 <button
+                  id="buttonTechnologyListMenu"
+                  aria-label="Open Technology menu"
                   @click.stop="toggleTechnology"
                   class="w-full h-auto flex flex-row justify-between pr-1"
                 >
@@ -263,6 +270,8 @@ const toggleSolution = () => {
               <!-- Technology -->
               <div class="w-full h-auto flex flex-col">
                 <button
+                  id="buttonSolutionsListMenu"
+                  aria-label="Open Solutions menu"
                   @click.stop="toggleSolution"
                   class="w-full h-auto flex flex-row justify-between pr-1"
                 >

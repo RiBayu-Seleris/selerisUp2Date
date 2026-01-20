@@ -150,6 +150,7 @@ onMounted(() => {
       class="flex w-full h-full md:h-[500px] lg:h-full xl:h-[425px] justify-center items-center mb-12 md:mb-20 lg:mb-0"
     >
       <video
+        aria-hidden="true"
         autoplay
         loop
         muted
@@ -160,6 +161,7 @@ onMounted(() => {
         <source src="@/assets/videos/Design-Vector-Web2.mp4" type="video/mp4" />
       </video>
       <video
+        aria-hidden="true"
         autoplay
         loop
         muted

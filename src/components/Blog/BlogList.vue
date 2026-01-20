@@ -170,7 +170,7 @@ const buildParams = () => {
   // Filter kategori
   if (selectedCategory.value && selectedCategory.value !== "All Articles") {
     const categoryObj = categories.value.find(
-      (c) => c.name === selectedCategory.value
+      (c) => c.name === selectedCategory.value,
     );
     if (categoryObj) params.category_id = categoryObj.id;
   }
@@ -320,7 +320,7 @@ watch(
     // console.log("API Params (date range):", params);
     await getAllBlogs(params);
   },
-  { deep: true }
+  { deep: true },
 );
 
 // 🔁 Pantau setiap kali daftar blog berubah (misal pagination)
@@ -329,7 +329,7 @@ watch(
   async () => {
     await updateMaxHeight();
   },
-  { deep: true }
+  { deep: true },
 );
 </script>
 
@@ -746,6 +746,7 @@ watch(
     >
       <!-- Tombol Prev -->
       <button
+        aria-label="Pagination Previous"
         class="px-3 py-1 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition disabled:opacity-50"
         :disabled="pagination.current_page === 1"
         @click="changePage(pagination.current_page - 1)"
@@ -756,6 +757,7 @@ watch(
       <!-- Nomor halaman -->
       <button
         v-for="page in pagination.last_page"
+        aria-label="Pagination Number"
         :key="page"
         class="px-3 py-1 rounded transition"
         :class="{
@@ -769,6 +771,7 @@ watch(
 
       <!-- Tombol Next -->
       <button
+        aria-label="Pagination Next"
         class="px-3 py-1 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition disabled:opacity-50"
         :disabled="pagination.current_page === pagination.last_page"
         @click="changePage(pagination.current_page + 1)"
@@ -1026,6 +1029,7 @@ watch(
     >
       <!-- Tombol Prev -->
       <button
+        aria-label="Pagination Previous"
         class="px-3 py-1 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition disabled:opacity-50"
         :disabled="pagination.current_page === 1"
         @click="changePage(pagination.current_page - 1)"
@@ -1035,6 +1039,7 @@ watch(
 
       <!-- Nomor halaman -->
       <button
+        aria-label="Pagination Number"
         v-for="page in pagination.last_page"
         :key="page"
         class="px-3 py-1 rounded transition"
@@ -1049,6 +1054,7 @@ watch(
 
       <!-- Tombol Next -->
       <button
+        aria-label="Pagination Next"
         class="px-3 py-1 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition disabled:opacity-50"
         :disabled="pagination.current_page === pagination.last_page"
         @click="changePage(pagination.current_page + 1)"
@@ -1756,6 +1762,7 @@ watch(
     >
       <!-- Tombol Prev -->
       <button
+        aria-label="Pagination Previous"
         class="px-3 py-1 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition disabled:opacity-50"
         :disabled="pagination.current_page === 1"
         @click="changePage(pagination.current_page - 1)"
@@ -1765,6 +1772,7 @@ watch(
 
       <!-- Nomor halaman -->
       <button
+        aria-label="Pagination Number"
         v-for="page in pagination.last_page"
         :key="page"
         class="px-3 py-1 rounded transition"
@@ -1779,6 +1787,7 @@ watch(
 
       <!-- Tombol Next -->
       <button
+        aria-label="Pagination Next"
         class="px-3 py-1 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition disabled:opacity-50"
         :disabled="pagination.current_page === pagination.last_page"
         @click="changePage(pagination.current_page + 1)"

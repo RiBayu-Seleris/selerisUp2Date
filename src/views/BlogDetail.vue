@@ -65,7 +65,7 @@ const showRegisterForm = ref(false);
 
 // HARUS akses .value untun DOM Purify XSS Defender
 const safeContent = computed(() =>
-  blogDetail.value?.content ? DOMPurify.sanitize(blogDetail.value.content) : ""
+  blogDetail.value?.content ? DOMPurify.sanitize(blogDetail.value.content) : "",
 );
 
 const toggleDropdown = () => {
@@ -362,7 +362,7 @@ watch(
               "Content-Type": "application/json",
               Authorization: `Bearer ${userToken}`,
             },
-          }
+          },
         );
 
         const data = await response.json();
@@ -375,7 +375,7 @@ watch(
       // user logout → reset warna like
       isLiked.value = false;
     }
-  }
+  },
 );
 
 onBeforeUnmount(() => {
@@ -417,12 +417,14 @@ onBeforeUnmount(() => {
           <div class="relative w-full h-auto flex flex-row justify-end">
             <div class="relative w-[30%] h-auto pt-0 flex justify-end">
               <button
+                aria-label="Toggle Dropdown"
                 @click="toggleDropdown"
                 class="w-7 h-7 p-1 text-[#195279] dark:text-white"
               >
                 <ArrowDown />
               </button>
               <button
+                aria-label="Logout"
                 @click="handleLogout"
                 v-if="isAccountDropdown"
                 class="absolute w-full h-auto border-[1px] top-8 lg:top-8 right-0 transition-all duration-500 bg-white dark:bg-[#17181A] dark:shadow-white rounded-lg"
@@ -521,6 +523,7 @@ onBeforeUnmount(() => {
             <div class="w-auto flex flex-row gap-x-4 justify-start">
               <div class="flex flex-row justify-between space-x-0.5">
                 <button
+                  aria-label="Like Button"
                   type="submit"
                   @click="handleLike"
                   class="w-full h-auto flex items-center transition-transform duration-150"
@@ -780,6 +783,7 @@ onBeforeUnmount(() => {
               rows="2"
               class="w-full pl-4 py-2 bg-[#EBEBEB] rounded-[8px] focus:outline-none cursor-pointer"
               placeholder="Share your thoughts?"
+              aria-label="Write a comment"
               @focus="toggledTextareaIsFocused"
               required
             />
@@ -789,12 +793,14 @@ onBeforeUnmount(() => {
             class="w-full h-auto flex flex-row justify-end space-x-3 mt-2 transition-all duration-500"
           >
             <button
+              aria-label="Close Comment"
               @click="closeComment"
               class="w-auto h-auto bg-slate-300 text-[#FAFAFA] px-8 py-2 rounded-md"
             >
               <p>Cancel</p>
             </button>
             <button
+              aria-label="Send Comment"
               type="submit"
               class="w-auto h-auto bg-green-500 text-[#FAFAFA] px-8 py-2 rounded-md"
             >
@@ -859,7 +865,7 @@ onBeforeUnmount(() => {
         <div
           class="relative flex justify-end items-end w-full h-auto text-[#ACACAC] rounded-t-xl"
         >
-          <button @click="closeLoginForm">
+          <button aria-label="Close Login Modal" @click="closeLoginForm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               x="0px"
@@ -906,6 +912,7 @@ onBeforeUnmount(() => {
                 Email
               </label>
               <input
+                type="email"
                 required
                 id="email"
                 v-model="loginData.email"
@@ -936,6 +943,7 @@ onBeforeUnmount(() => {
                 />
                 <!-- Tombol toggle mata -->
                 <button
+                  aria-label="Toggle Password"
                   type="button"
                   @click="togglePassword"
                   class="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
@@ -1002,6 +1010,7 @@ onBeforeUnmount(() => {
             </div>
             <!-- Button Send -->
             <button
+              aria-label="Login Button"
               type="submit"
               class="w-full h-auto bg-[#2AB857] py-1 lg:py-2 rounded-md"
             >
@@ -1013,7 +1022,7 @@ onBeforeUnmount(() => {
           >
             <p>
               Don't you have an account?
-              <button @click="openRegisterForm">
+              <button aria-label="Open Register" @click="openRegisterForm">
                 <span class="text-[#2AB857]">Sign Up</span>
               </button>
             </p>
@@ -1038,7 +1047,7 @@ onBeforeUnmount(() => {
         <div
           class="relative flex justify-end items-end w-full h-auto text-[#ACACAC] rounded-t-xl"
         >
-          <button @click="closeRegisterForm">
+          <button aria-label="Close Register" @click="closeRegisterForm">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               x="0px"
@@ -1079,7 +1088,7 @@ onBeforeUnmount(() => {
           >
             <div class="w-full h-auto">
               <label
-                for="email"
+                for="fullname"
                 class="block text-sm font-medium text-gray-700 mb-1"
               >
                 Full Name
@@ -1129,6 +1138,7 @@ onBeforeUnmount(() => {
                 />
                 <!-- Tombol toggle mata -->
                 <button
+                  aria-label="Toggle Password Register"
                   type="button"
                   @click="togglePasswordRegister"
                   class="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
@@ -1181,6 +1191,7 @@ onBeforeUnmount(() => {
             </div>
             <!-- Button Send -->
             <button
+              aria-label="Send Register Button"
               type="submit"
               class="w-full h-auto bg-[#2AB857] py-1 lg:py-2 rounded-md"
             >
@@ -1192,7 +1203,7 @@ onBeforeUnmount(() => {
           >
             <p>
               Do you have account?
-              <button @click="openLoginForm">
+              <button aria-label="Open Login" @click="openLoginForm">
                 <span class="text-[#2AB857]">Sign In</span>
               </button>
             </p>

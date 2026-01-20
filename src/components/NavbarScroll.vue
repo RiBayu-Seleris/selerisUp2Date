@@ -100,7 +100,8 @@ onUnmounted(() => {
                 >
                   <button
                     type="button"
-                    id="sidebar-button"
+                    aria-label="Open sidebar menu"
+                    id="sidebarScrollOpenButton"
                     class="bg-white p-2 rounded-lg shadow-md text-[#1AB24F]"
                     @click="sidebarStore.open"
                   >

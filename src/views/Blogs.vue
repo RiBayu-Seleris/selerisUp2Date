@@ -44,7 +44,11 @@ const loginStatus = ref(false);
         </div>
       </div>
       <div class="relative w-[30%] h-auto pt-0.5 bg-purple-600">
-        <button @click="toggleDropdown" class="w-7 h-7 p-1">
+        <button
+          aria-label="Toggle Logout Button"
+          @click="toggleDropdown"
+          class="w-7 h-7 p-1"
+        >
           <ArrowDown />
         </button>
         <div

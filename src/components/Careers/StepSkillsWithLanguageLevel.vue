@@ -139,6 +139,7 @@ onBeforeUnmount(() => {
 
     <!-- Add Skill Button -->
     <button
+      aria-label="Add Language Skill"
       @click="addLanguageSkill"
       class="w-full border border-dashed border-green-400 bg-green-50 hover:bg-green-100 text-green-600 py-2 rounded-md flex justify-center items-center gap-2 mb-3"
     >
@@ -210,6 +211,7 @@ onBeforeUnmount(() => {
           </div>
           <!-- Delete -->
           <button
+            aria-label="Remove Language Skill"
             @click="removeLanguageSkill(index)"
             class="mt-4 p-2 text-red-500 hover:bg-red-50 rounded-md"
           >

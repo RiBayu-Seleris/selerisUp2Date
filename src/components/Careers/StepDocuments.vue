@@ -67,7 +67,7 @@ watch(
       cvPreviewUrl.value = URL.createObjectURL(file);
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 /* ======================================
@@ -112,7 +112,7 @@ watch(
       clPreviewUrl.value = URL.createObjectURL(file);
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 /* ======================================
@@ -157,7 +157,7 @@ watch(
       diplomaPreviewUrl.value = URL.createObjectURL(file);
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 /* ======================================
@@ -202,7 +202,7 @@ watch(
       transcriptPreviewUrl.value = URL.createObjectURL(file);
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 /* ======================================
@@ -247,7 +247,7 @@ watch(
       experienceCertificatePreviewUrl.value = URL.createObjectURL(file);
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 /* ======================================
@@ -292,7 +292,7 @@ watch(
       portfolioPreviewUrl.value = URL.createObjectURL(file);
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 /* ======================================
@@ -337,7 +337,7 @@ watch(
       photoPreviewUrl.value = URL.createObjectURL(file);
     }
   },
-  { immediate: true }
+  { immediate: true },
 );
 
 const handleDeleteFile = (type) => {
@@ -457,6 +457,7 @@ const handleDeleteFile = (type) => {
               </p>
             </div>
             <button
+              aria-label="CV"
               @click.stop="handleDeleteFile('cv')"
               class="absolute right-3 w-auto h-auto p-3 flex items-center bg-[#FFBABA] rounded-[6px] cursor-pointer"
             >
@@ -533,6 +534,7 @@ const handleDeleteFile = (type) => {
               </p>
             </div>
             <button
+              aria-label="CL"
               @click.stop="handleDeleteFile('cl')"
               class="absolute right-3 w-auto h-auto p-3 flex items-center bg-[#FFBABA] rounded-[6px] cursor-pointer"
             >
@@ -612,6 +614,7 @@ const handleDeleteFile = (type) => {
               </p>
             </div>
             <button
+              aria-label="Diploma"
               @click.stop="handleDeleteFile('diploma')"
               class="absolute right-3 w-auto h-auto p-3 flex items-center bg-[#FFBABA] rounded-[6px] cursor-pointer"
             >
@@ -691,6 +694,7 @@ const handleDeleteFile = (type) => {
               </p>
             </div>
             <button
+              aria-label="Transcript"
               @click.stop="handleDeleteFile('transcript')"
               class="absolute right-3 w-auto h-auto p-3 flex items-center bg-[#FFBABA] rounded-[6px] cursor-pointer"
             >
@@ -770,6 +774,7 @@ const handleDeleteFile = (type) => {
               </p>
             </div>
             <button
+              aria-label="Experience"
               @click.stop="handleDeleteFile('experience')"
               class="absolute right-3 w-auto h-auto p-3 flex items-center bg-[#FFBABA] rounded-[6px] cursor-pointer"
             >
@@ -849,6 +854,7 @@ const handleDeleteFile = (type) => {
               </p>
             </div>
             <button
+              aria-label="Portfolio"
               @click.stop="handleDeleteFile('portfolio')"
               class="absolute right-3 w-auto h-auto p-3 flex items-center bg-[#FFBABA] rounded-[6px] cursor-pointer"
             >
@@ -928,6 +934,7 @@ const handleDeleteFile = (type) => {
               </p>
             </div>
             <button
+              aria-label="Photo"
               @click.stop="handleDeleteFile('photo')"
               class="absolute right-3 w-auto h-auto p-3 flex items-center bg-[#FFBABA] rounded-[6px] cursor-pointer"
             >

@@ -159,6 +159,8 @@ function onSlideChange(swiper) {
             <div class="w-full h-auto space-y-1">
               <label for="Message">Message</label>
               <textarea
+                id="messageBookDemo"
+                aria-label="Message Book Demo"
                 class="w-full lg:h-[70px] xl:h-[130px] p-2 rounded-[8px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:outline-none focus:ring-1 focus:ring-[#2AB857] resize-none align-top"
                 placeholder="Message"
               />
@@ -180,6 +182,7 @@ function onSlideChange(swiper) {
             <!-- BUTTON -->
             <div class="w-full h-auto">
               <button
+                aria-label="Send Book Demo"
                 type="submit"
                 class="w-full h-auto py-2 flex justify-center items-center bg-[#2AB857] rounded-[20px]"
               >

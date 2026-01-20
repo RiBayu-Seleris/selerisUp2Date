@@ -63,6 +63,8 @@ import { companyList } from "@/Data/companyList";
                   <a
                     href="https://www.instagram.com/selerisindonesia/?igsh=MXJ1Y3c1ZnFtZGdhNA%3D%3D#"
                     target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Seleris Instagram"
                   >
                     <Instagram />
                   </a>
@@ -73,6 +75,8 @@ import { companyList } from "@/Data/companyList";
                   <a
                     href="https://www.linkedin.com/company/seleris-meditekno-internasional-smi/posts/?feedView=all"
                     target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Seleris LinkedIn"
                   >
                     <Linkedin />
                   </a>
@@ -80,7 +84,12 @@ import { companyList } from "@/Data/companyList";
                 <div
                   class="w-auto h-[30px] lg:h-[30px] text-[#195279] dark:text-[#FAFAFA]"
                 >
-                  <a href="https://www.tiktok.com/@seleris.id" target="_blank">
+                  <a
+                    href="https://www.tiktok.com/@seleris.id"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Seleris TikTok"
+                  >
                     <Tiktok />
                   </a>
                 </div>

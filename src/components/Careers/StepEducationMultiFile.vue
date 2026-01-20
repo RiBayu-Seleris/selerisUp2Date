@@ -75,7 +75,7 @@ watch(
       emit("update:educationPeriod", `${start} - ${end}`);
       showDateRange.value = false;
     }
-  }
+  },
 );
 
 /* ================================
@@ -395,6 +395,7 @@ const viewFile = (file) => {
         >
           <div class="w-full h-full rounded-xl">
             <button
+              aria-label="Add File"
               type="button"
               class="w-full h-full bg-green-400 rounded-xl hover:bg-green-500 transition"
               @click="triggerFileInput"
@@ -428,6 +429,7 @@ const viewFile = (file) => {
         </div>
         <div class="w-10 h-10 flex justify-center items-center rounded-xl">
           <button
+            aria-label="Remove File"
             type="button"
             class="w-full h-full bg-[#FFBABA] rounded-xl hover:bg-[#ff9b9b] transition"
             @click="removeFile(index)"

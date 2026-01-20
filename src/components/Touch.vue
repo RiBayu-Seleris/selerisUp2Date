@@ -76,7 +76,10 @@ import CallIcon from "@/components/icons/CallIcon.vue";
                 </div>
               </div>
               <div class="flex w-full h-auto rounded-lg mt-2">
-                <button class="w-full h-12 bg-[#2AB857] text-white rounded-lg">
+                <button
+                  aria-label="Kirim Get In Touch"
+                  class="w-full h-12 bg-[#2AB857] text-white rounded-lg"
+                >
                   Submit
                 </button>
               </div>
@@ -94,6 +97,7 @@ import CallIcon from "@/components/icons/CallIcon.vue";
             >
               <div class="flex w-full h-full rounded-xl">
                 <iframe
+                  title="Map showing Seleris Development Office location"
                   class="w-full h-full rounded-2xl"
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.8339793616797!2d106.83314007441082!3d-6.285542461522718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3001660852f%3A0x1ac61febb98f4350!2sSeleris%20Development%20Office!5e0!3m2!1sid!2sid!4v1751444288952!5m2!1sid!2sid"
                   allowfullscreen=""
@@ -200,7 +204,9 @@ input:-webkit-autofill {
 
 /* Light Focus */
 input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1px #2ab857 inset, 0 0 0px 1000px #ffffff inset !important;
+  -webkit-box-shadow:
+    0 0 0 1px #2ab857 inset,
+    0 0 0px 1000px #ffffff inset !important;
   -webkit-text-fill-color: #000 !important;
 }
 
@@ -213,7 +219,9 @@ input:-webkit-autofill:focus {
 
 /* Dark Focus */
 .dark input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1px #2ab857 inset, 0 0 0px 1000px #323232 inset !important;
+  -webkit-box-shadow:
+    0 0 0 1px #2ab857 inset,
+    0 0 0px 1000px #323232 inset !important;
   -webkit-text-fill-color: #fafafa !important;
 }
 </style>

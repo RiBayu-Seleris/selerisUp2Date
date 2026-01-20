@@ -66,7 +66,7 @@ watch(
   () => isModalOpen.value,
   (v) => {
     document.body.style.overflow = v ? "hidden" : "auto";
-  }
+  },
 );
 
 onMounted(async () => {
@@ -423,18 +423,21 @@ onMounted(() => {
 
                 <div class="flex items-center gap-x-3">
                   <button
+                    aria-label="Instagram"
                     class="w-auto h-8 lg:h-10 p-2 rounded-full text-[#195279] bg-[#92D1FC]"
                   >
                     <Instagram class="w-full h-full" />
                   </button>
 
                   <button
+                    aria-label="Linkedin"
                     class="w-auto h-8 lg:h-10 p-2 rounded-full text-[#195279] bg-[#92D1FC]"
                   >
                     <LinkedIn class="w-full h-full" />
                   </button>
 
                   <button
+                    aria-label="Tiktok"
                     class="w-auto h-8 lg:h-10 p-2 rounded-full text-[#195279] bg-[#92D1FC]"
                   >
                     <Tiktok class="w-full h-full" />
@@ -446,6 +449,7 @@ onMounted(() => {
                 class="flex flex-row lg:items-center justify-between lg:justify-end w-full h-auto gap-x-5"
               >
                 <button
+                  aria-label="Close Career Modals"
                   @click="closeModal"
                   class="w-full h-auto lg:w-auto lg:h-auto p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-r dark:from-[#565656] dark:from-0% dark:to-[#BCBCBC] shadow-lg rounded-full cursor-pointer"
                 >
@@ -460,6 +464,7 @@ onMounted(() => {
                   </div>
                 </button>
                 <button
+                  aria-label="Apply Career"
                   @click="handleApply"
                   class="w-full h-auto lg:w-auto lg:h-auto p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-r dark:from-[#565656] dark:from-0% dark:to-[#BCBCBC] shadow-lg rounded-full cursor-pointer"
                 >

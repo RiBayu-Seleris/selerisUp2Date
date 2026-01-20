@@ -66,6 +66,7 @@ const LogoLink = computed(() => {
       <div class="w-[60%] h-auto flex items-center flex-row justify-end">
         <div class="w-[30%] md:w-[15%] h-auto flex items-center justify-end">
           <button
+            aria-label="Open Sidebar Care"
             type="button"
             id="sidebar-button"
             class="bg-white p-2 rounded-lg shadow-md text-[#1485CB]"
