@@ -1,0 +1,1 @@
+import{a as e}from"./index-2ql9rTQJ.js";import{U as r,H as t}from"./vendor-CtK5Ozmz.js";import"./charts-B72-6nuq.js";import"./swiper-DB4fMOOP.js";const o={};function c(n,s){return t(),r("div")}const i=e(o,[["render",c]]);export{i as default};

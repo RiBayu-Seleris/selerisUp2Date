@@ -39,6 +39,9 @@ const footerTitle = computed(() => {
   if (route.path === "/product/seleris-credit") {
     return "Seleris Credit";
   }
+  if (route.path === "/product/seleris-care-applicator") {
+    return "Seleris Care Applicator";
+  }
 });
 
 const connectColor = computed(() => {
@@ -63,7 +66,9 @@ const connectColor = computed(() => {
       <div class="lg:flex lg:flex-row w-full h-auto lg:mb-14 mb-0">
         <div class="flex w-full h-auto">
           <div class="flex flex-col">
-            <div class="flex flex-col md:flex-row lg:flex-col w-full h-auto">
+            <div
+              class="flex flex-col md:flex-row lg:flex-col w-full h-auto gap-x-5"
+            >
               <div
                 class="flex w-full h-full md:w-[60%] lg:w-full lg:justify-start lg:items-start lg:content-start justify-center items-center content-center"
               >

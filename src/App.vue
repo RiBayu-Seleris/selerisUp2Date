@@ -3,8 +3,10 @@ import { useRoute } from "vue-router";
 import { onMounted, onUnmounted, ref, computed, watch } from "vue";
 import { useScrollStore } from "@/stores/scroll";
 import { useThemeStore } from "@/stores/theme";
+import { useSidebarStore } from "@/stores/sidebar";
 
 import Navbar from "@/components/Navbar.vue";
+import GestureScroll from "@/components/GestureScroll.vue";
 // import NavbarScroll from "@/components/NavbarScroll.vue";
 import Sidebar from "@/components/Sidebar.vue";
 import Touch from "@/components/Touch.vue";
@@ -26,6 +28,7 @@ const route = useRoute();
 const scrollStore = useScrollStore();
 
 const isTooltipOpen = ref(false);
+const sidebarStore = useSidebarStore();
 
 // Loading control
 const isLoad = ref(false);
@@ -107,6 +110,9 @@ const isSecurityRoute = computed(() => route.path === "/security");
 const isPrivacyRoute = computed(() => route.path === "/privacy");
 const isBookDemoRoute = computed(() => route.path === "/book-a-demo");
 const isCompanyRoute = computed(() => route.path === "/about/company");
+const isSelerisCareApplicator = computed(
+  () => route.path === "/product/seleris-care-applicator",
+);
 const isBlogDetail = computed(() => route.path.startsWith("/blog/"));
 
 const BASE_URL = import.meta.env.VITE_API_URL;
@@ -128,6 +134,15 @@ const getTracking = async () => {
     // console.log("Error:", error);
   }
 };
+
+watch(
+  () => scrollStore.isScrolled,
+  (isScrolled) => {
+    if (!isScrolled) {
+      isTooltipOpen.value = false;
+    }
+  },
+);
 
 onMounted(() => {
   getTracking();
@@ -191,7 +206,11 @@ onMounted(() => {
           <!-- Navbar -->
           <div
             class="flex fixed top-0 w-full h-auto z-50 transition-all duration-300 ease-in-out"
-            v-if="route.path !== '/chatbot' && route.path !== '/chatbot2'"
+            v-if="
+              route.path !== '/test-embed' &&
+              route.path !== '/chatbot' &&
+              route.path !== '/chatbot2'
+            "
           >
             <Navbar />
           </div>
@@ -207,27 +226,39 @@ onMounted(() => {
             </div>
           </transition>
 
+          <!-- Ini Open Menu -->
           <!-- <transition name="fade-slide">
             <div
               v-if="showTooltip"
               @click="toggleTooltip"
-              class="fixed bottom-[20px] right-[20px] lg:bottom-[20px] lg:right-[40px] w-12 h-12 flex items-start z-50 bg-blue-800 dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white p-1 md:p-2 rounded-full"
-            >
-              +
-            </div>
-          </transition>
-          <transition name="fade-slide">
-            <div
-              v-if="showTooltip && isTooltipOpen"
-              class="fixed lg:bottom-[20px] lg:right-[95px] w-12 h-12 flex items-start z-50 bg-blue-800 dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white p-1 md:p-2 rounded-full"
+              class="fixed bottom-[20px] right-[20px] lg:bottom-[20px] lg:right-[40px] w-12 h-12 flex items-start z-50 bg-white dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white p-1 md:p-2 rounded-full cursor-pointer"
             >
               <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
             </div>
-          </transition>
-          <transition name="fade-slide">
+          </transition> -->
+
+          <!-- Ini Gesture -->
+          <!-- <transition name="fade-slide">
             <div
               v-if="showTooltip && isTooltipOpen"
-              class="fixed lg:bottom-[75px] lg:right-[40px] w-12 h-12 flex items-start z-50 bg-blue-800 dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white p-1 md:p-2 rounded-full"
+              class="fixed bottom-[20px] lg:bottom-[80px] lg:right-[40px] w-12 h-12 flex items-start z-50 bg-white dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white p-1 md:p-2 rounded-full cursor-pointer"
+            >
+              <GestureScroll
+                :enable-sidebar-gesture="true"
+                :disable-scroll="sidebarStore.isOpen"
+                @open-sidebar="sidebarStore.open"
+                @close-sidebar="sidebarStore.close"
+              />
+              <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
+            </div>
+          </transition> -->
+
+          <!-- Ini Scroll To Top -->
+          <!-- <transition name="fade-slide">
+            <div
+              v-if="showTooltip && isTooltipOpen"
+              @click="scrollToTop"
+              class="fixed bottom-[20px] lg:bottom-[135px] lg:right-[40px] w-12 h-12 flex items-start z-50 bg-white dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white p-1 md:p-2 rounded-full cursor-pointer"
             >
               <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
             </div>
@@ -266,7 +297,10 @@ onMounted(() => {
 
     <!-- Khusus layout product -->
     <template v-else>
-      <router-view class="bg-[#FAFAFA]" />
+      <router-view
+        :class="[isSelerisCareApplicator ? 'bg-[#FFFFFF]' : 'bg-[#FAFAFA]']"
+      />
+      <!-- class="bg-[#FAFAFA]" -->
     </template>
   </template>
 </template>

@@ -31,7 +31,7 @@ const isPostTimeOpen = ref(false);
 const selectedPostTime = ref({
   id: 1,
   name: "Latest", // untuk UI
-  value: "updated_at", // untuk API
+  value: "latest", // untuk API
 });
 const showDateRange = ref(false);
 const activeShareId = ref(null);
@@ -40,7 +40,7 @@ const PostsTime = [
   {
     id: 1,
     name: "Latest", // tampil di UI
-    value: "updated_at", // dikirim ke API
+    value: "latest", // dikirim ke API
   },
   {
     id: 2,
@@ -219,16 +219,20 @@ const toggleShare = (id) => {
 };
 
 // pilih opsi
-const chooseCategory = (category) => {
+const chooseCategory = async (category) => {
   selectedCategory.value = category.name;
   isCategoryOpen.value = false;
-  getAllBlogs(buildParams());
+
+  await fetchWithResetPage(); // ✅
+  // getAllBlogs(buildParams());
 };
 
-const chooseSort = (post) => {
+const chooseSort = async (post) => {
   selectedPostTime.value = post; // simpan seluruh object { name, value }
   isPostTimeOpen.value = false;
-  getAllBlogs(buildParams());
+
+  await fetchWithResetPage(); // ✅
+  // getAllBlogs(buildParams());
 };
 
 const choosePostTime = (option) => {
@@ -240,6 +244,13 @@ const choosePostTime = (option) => {
 const isClickOutside = (selector, event) => {
   const elements = document.querySelectorAll(selector);
   return ![...elements].some((el) => el.contains(event.target));
+};
+
+const fetchWithResetPage = async () => {
+  await getAllBlogs({
+    ...buildParams(),
+    page: 1,
+  });
 };
 
 // klik luar → tutup semua
@@ -274,29 +285,31 @@ onBeforeUnmount(() => {
 });
 
 // 🔍 Watch untuk search query (dengan debounce)
-watch(searchQuery, (newQuery) => {
+watch(searchQuery, async (newQuery) => {
   clearTimeout(timeout);
-  const currentSearchId = ++lastSearchId; // Cegah race condition
+  const currentSearchId = ++lastSearchId;
 
-  // Kalau user hapus semua teks → reset blog
+  // Kalau input kosong → reset & balik ke page 1
   if (!newQuery) {
     loadingTyping.value = false;
-    getAllBlogs(buildParams()); // Ambil ulang semua blog default
+
+    await getAllBlogs({
+      ...buildParams(),
+      page: 1, // ✅ reset page
+    });
+
     return;
   }
 
-  // Aktifkan indikator "mengetik"
   loadingTyping.value = true;
 
-  // Debounce 500ms
   timeout = setTimeout(async () => {
     try {
-      const params = buildParams();
-      // console.log("🔍 Search triggered with params:", params);
-
-      await getAllBlogs(params);
+      await getAllBlogs({
+        ...buildParams(),
+        page: 1, // ✅ reset page juga saat search
+      });
     } finally {
-      // Pastikan hanya request terbaru yang menonaktifkan loading
       if (currentSearchId === lastSearchId) {
         loadingTyping.value = false;
       }
@@ -310,15 +323,13 @@ watch(
   async (newVal) => {
     const hasBothDates = newVal.start && newVal.end;
 
-    if (hasBothDates) {
-      // console.log("📆 Date range changed:", newVal.start, "→", newVal.end);
-    } else {
-      // console.log("🧹 Date range cleared — reset ke semua blog");
-    }
+    // Optional: skip kalau dua-duanya kosong
+    // if (!hasBothDates && !newVal.start && !newVal.end) return;
 
-    const params = buildParams();
-    // console.log("API Params (date range):", params);
-    await getAllBlogs(params);
+    await getAllBlogs({
+      ...buildParams(),
+      page: 1, // 🔥 WAJIB reset page
+    });
   },
   { deep: true },
 );
@@ -331,6 +342,55 @@ watch(
   },
   { deep: true },
 );
+
+const finalBlogs = computed(() => {
+  if (!blogs.value?.length) return [];
+
+  let result = [...blogs.value]; // clone dulu (PENTING)
+
+  /* 🔎 SEARCH */
+  if (searchQuery.value) {
+    const q = searchQuery.value.toLowerCase();
+    result = result.filter(
+      (b) =>
+        b.title?.toLowerCase().includes(q) ||
+        b.synopsis?.toLowerCase().includes(q),
+    );
+  }
+
+  /* 🏷️ CATEGORY */
+  if (selectedCategory.value !== "All Articles") {
+    result = result.filter((b) => b.category_name === selectedCategory.value);
+  }
+
+  /* 📅 DATE RANGE */
+  if (customDateRange.start && customDateRange.end) {
+    const start = new Date(customDateRange.start);
+    const end = new Date(customDateRange.end);
+
+    result = result.filter((b) => {
+      const date = new Date(b.created_at);
+      return date >= start && date <= end;
+    });
+  }
+
+  /* 🔃 SORTING */
+  switch (selectedPostTime.value.value) {
+    case "latest":
+      result.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+      break;
+
+    case "oldest":
+      result.sort((a, b) => new Date(a.created_at) - new Date(b.created_at));
+      break;
+
+    case "views":
+      result.sort((a, b) => (b.views || 0) - (a.views || 0));
+      break;
+  }
+
+  return result;
+});
 </script>
 
 <template>
@@ -545,14 +605,14 @@ watch(
 
   <!-- Search Result -->
   <div
-    v-else-if="blogs.length && searchQuery && !loadingTyping"
+    v-else-if="finalBlogs.length && searchQuery && !loadingTyping"
     class="w-full h-auto mt-5"
   >
     <section
       class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-5 px-8 md:px-8 xl:px-0"
     >
       <div
-        v-for="(data, index) in blogs"
+        v-for="(data, index) in finalBlogs"
         :key="index"
         class="relative w-full h-full !p-[1px] rounded-[10px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-35% dark:to-[#565656]"
       >
@@ -783,7 +843,7 @@ watch(
 
   <!-- Search Result No Blog Found -->
   <div
-    v-else-if="searchQuery && !blogs.length && !loadingTyping"
+    v-else-if="searchQuery && !finalBlogs.length && !loadingTyping"
     class="w-full h-auto mt-5 text-center py-6 text-gray-500"
   >
     <p>
@@ -805,7 +865,7 @@ watch(
       (selectedCategory !== 'All Articles' ||
         customDateRange.start ||
         customDateRange.end) &&
-      !blogs.length
+      !finalBlogs.length
     "
     class="w-full h-auto mt-5"
   >
@@ -824,7 +884,7 @@ watch(
   <!-- Hasil Filter by Category -->
   <div
     v-else-if="
-      selectedCategory !== 'All Articles' && blogs.length && !searchQuery
+      selectedCategory !== 'All Articles' && finalBlogs.length && !searchQuery
     "
     class="w-full h-auto mt-5"
   >
@@ -832,7 +892,7 @@ watch(
       class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-5 px-8 md:px-8 xl:px-0"
     >
       <div
-        v-for="(data, index) in blogs"
+        v-for="(data, index) in finalBlogs"
         :key="index.id"
         class="relative w-full h-full !p-[1px] rounded-[10px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-35% dark:to-[#565656]"
       >
@@ -1572,7 +1632,7 @@ watch(
       </div>
       <div v-else-if="error" class="px-6">{{ error }}</div>
       <div
-        v-for="(data, index) in blogs"
+        v-for="(data, index) in finalBlogs"
         :key="index"
         class="relative w-full h-full grid rounded-[10px] p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:to-[#565656]"
       >

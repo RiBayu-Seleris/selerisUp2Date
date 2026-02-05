@@ -128,7 +128,7 @@ onBeforeUnmount(() => {
                 "
               >
                 <p
-                  class="font-[500] leading-snug tracking-normal transition-all duration-500 ease-out text-[16px] sm:text-[20px] lg:text-[16px] xl:text-[24px] max-[375px]:!text-[140px]"
+                  class="font-[500] leading-snug tracking-normal transition-all duration-500 ease-out text-[16px] sm:text-[20px] lg:text-[16px] xl:text-[24px] max-[321px]:!text-[14px] max-[376px]:!text-[14px]"
                   :class="
                     index === currentIndex
                       ? 'text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]'
@@ -140,10 +140,10 @@ onBeforeUnmount(() => {
               </div>
               <div
                 v-if="index === currentIndex && showDescription"
-                class="absolute bottom-0 sm:bottom-3 lg:-bottom-3 xl:-bottom-1 xls:-bottom-1 left-0 w-full h-auto transition-all duration-500 ease-out animate__animated animate__fadeIn"
+                class="absolute bottom-0 sm:bottom-3 lg:-bottom-3 xl:-bottom-1 xls:-bottom-1 max-[321px]:!bottom-4 left-0 w-full h-auto transition-all duration-500 ease-out animate__animated animate__fadeIn"
               >
                 <p
-                  class="font-[500] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] text-[12px] sm:text-[16px] lg:text-[12px] xl:text-[16px] xls:text-[18px] leading-snug tracking-wide"
+                  class="font-[500] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] text-[12px] sm:text-[16px] lg:text-[12px] xl:text-[16px] xls:text-[18px] max-[321px]:!text-[10px] leading-snug tracking-wide"
                 >
                   {{ technology.description }}
                 </p>

@@ -6,4 +6,8 @@ export const productList = [
   { url: "/product/health-care", name: "Seleris Care" },
   { url: "/", name: "Seleris Cough" },
   { url: "/product/seleris-credit", name: "Seleris Credit" },
+  {
+    url: "/product/seleris-care-applicator",
+    name: "Seleris Care Applicator",
+  },
 ];

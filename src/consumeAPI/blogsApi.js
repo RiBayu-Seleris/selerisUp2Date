@@ -74,7 +74,7 @@ export function blogsApi() {
     try {
       const response = await axios.get(
         `${BASE_URL}/api/v1/app/blogs/categories`,
-        headerApi
+        headerApi,
       );
       if (response.data?.data) {
         categories.value = [
@@ -94,6 +94,7 @@ export function blogsApi() {
         headers: headerApi.headers,
         params: {
           limit: 12,
+          // sort_by: "latest",
           ...params, // biar bisa override limit/page kalau dibutuhkan
         },
       });
@@ -134,7 +135,7 @@ export function blogsApi() {
     try {
       const res = await axios.get(
         `${BASE_URL}/api/v1/app/blogs/${blog_id}/like`,
-        getHeaderApiToken()
+        getHeaderApiToken(),
       );
       return res?.data;
     } catch (error) {
@@ -148,7 +149,7 @@ export function blogsApi() {
       const res = await axios.post(
         `${BASE_URL}/api/v1/app/blogs/${blog_id}/like`,
         {},
-        getHeaderApiToken()
+        getHeaderApiToken(),
       );
       return res; // ✅ kembalikan full response agar bisa cek status
     } catch (error) {
@@ -161,7 +162,7 @@ export function blogsApi() {
     try {
       const res = await axios.delete(
         `${BASE_URL}/api/v1/app/blogs/${blog_id}/like`,
-        getHeaderApiToken()
+        getHeaderApiToken(),
       );
       // console.log("Response unlike dari API", res);
       return res; // ✅ WAJIB return response agar bisa dicek
@@ -180,7 +181,7 @@ export function blogsApi() {
     try {
       const response = await axios.get(
         `${BASE_URL}/api/v1/app/blogs/${slug}`,
-        headerApi
+        headerApi,
       );
 
       blogDetail.value = response.data?.data || null;
@@ -213,7 +214,7 @@ export function blogsApi() {
     try {
       const res = await axios.get(
         `${BASE_URL}/api/v1/app/blogs/newest`,
-        headerApi
+        headerApi,
       );
       const { status, data, message } = res.data || {};
 
@@ -253,7 +254,7 @@ export function blogsApi() {
     try {
       const res = await axios.get(
         `${BASE_URL}/api/v1/app/blogs/popular`,
-        headerApi
+        headerApi,
       );
       const { status, data, message } = res.data || {};
 
@@ -302,7 +303,7 @@ export function blogsApi() {
       const res = await axios.post(
         `${BASE_URL}/api/v1/app/blogs/${id}/comments`,
         payload,
-        getHeaderApiToken() // pastikan ambil token terbaru seperti sebelumnya
+        getHeaderApiToken(), // pastikan ambil token terbaru seperti sebelumnya
       );
       return res.data;
     } catch (err) {

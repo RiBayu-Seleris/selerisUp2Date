@@ -25,8 +25,15 @@ const LogoLink = computed(() => {
   if (route.path === "/product/seleris-credit") {
     return "/product/seleris-credit";
   }
+  if (route.path === "/product/seleris-care-applicator") {
+    return "/product/seleris-care-applicator";
+  }
   return "";
 });
+
+const isSelerisCareApplicator = computed(
+  () => route.path === "/product/seleris-care-applicator",
+);
 </script>
 
 <template>
@@ -39,7 +46,7 @@ const LogoLink = computed(() => {
     >
       <router-link
         :to="LogoLink"
-        class="absolute w-auto h-full left-14 top-0 py-3"
+        class="absolute w-auto h-full left-10 top-0 py-3"
       >
         <img
           v-if="logo"
@@ -50,6 +57,17 @@ const LogoLink = computed(() => {
       </router-link>
       <div class="w-full h-full py-3">
         <MenuNav />
+      </div>
+
+      <div
+        v-if="isSelerisCareApplicator"
+        class="absolute w-auto h-full right-10 top-0 py-3"
+      >
+        <div
+          class="w-auto h-full flex items-center justify-center px-6 bg-[#13B89C] shadow-[0px_4px_8px_0px_#13B89C40] rounded-[24px]"
+        >
+          <span class="text-[#FFFFFF] font-[600] text-[14px]">Gabung SCA</span>
+        </div>
       </div>
     </div>
 
