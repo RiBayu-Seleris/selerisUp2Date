@@ -80,18 +80,18 @@ const connectColor = computed(() => {
                 />
               </div>
               <div
-                class="flex flex-col w-full h-auto mt-5 md:mt-0 lg:mt-4 justify-between lg:justify-center items-center space-y-2 lg:space-y-2"
+                class="flex flex-col w-full h-auto mt-5 md:mt-0 lg:mt-4 justify-between lg:justify-center items-center space-y-2 md:space-y-0 lg:space-y-2"
               >
                 <div class="w-full h-full flex items-end">
                   <p
-                    class="text-base md:text-[27px] lg:text-[17px] text-[#195279] font-[400]"
+                    class="text-base md:text-[20px] lg:text-[16px] text-[#195279] font-[400]"
                   >
                     {{ footerTitle }}
                   </p>
                 </div>
-                <div class="w-full h-full">
+                <div class="w-full h-full flex items-end">
                   <p
-                    class="text-base md:text-[21px] lg:text-[16px] text-[#195279] font-[400] lg:leading-snug"
+                    class="text-base md:text-[18px] lg:text-[16px] text-[#195279] font-[400] lg:leading-snug"
                   >
                     Powered by Seleris Meditekno International
                   </p>

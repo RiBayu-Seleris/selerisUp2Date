@@ -44,7 +44,7 @@ export const login = async (payload) => {
     const res = await axios.post(
       `${BASE_URL}/api/v1/auth/login`,
       payload,
-      headerApi
+      headerApi,
     );
 
     // ✅ simpan token kalau berhasil
@@ -86,7 +86,7 @@ export const register = async (payload) => {
     const res = await axios.post(
       `${BASE_URL}/api/v1/auth/register`,
       payload,
-      headerApi
+      headerApi,
     );
 
     return res.data;

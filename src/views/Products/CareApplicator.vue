@@ -1,6 +1,6 @@
 <script setup>
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
-import { formatNumberSeparator } from "@/components/Helper/numberFormat.js";
+import { formatRupiahSmart } from "@/components/Helper/numberFormat.js";
 
 import ThunderIcon from "@/assets/Products/images/Care-Applicator/thunder-icon.vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -16,6 +16,7 @@ import { whatsSelerisCare } from "@/Data/Products/CareApplicator/WhatsSelerisCar
 import { whatsSCAList } from "@/Data/Products/CareApplicator/WhatsSCAList.js";
 import { whyJoinSCA } from "@/Data/Products/CareApplicator/WhyJoinSCA.js";
 import { howToJoin } from "@/Data/Products/CareApplicator/HowToJoin.js";
+import { benefits } from "@/Data/Products/CareApplicator/benefits.js";
 
 import ArrowLeft from "@/assets/icons/arrow-left.svg";
 
@@ -31,10 +32,13 @@ const activeIndex = ref(0);
 let interval = null;
 
 const targetPerDay = ref(1);
+const MIN_TARGET = 1;
+const MAX_TARGET = 999;
 const PRICE_PER_SCAN = 300000;
 const DIRECT_PERCENT = 0.15;
 const PASSIVE_PERCENT = 0.1;
 const DAYS_PER_MONTH = 30;
+const activeHover = ref(null);
 
 const monthlyScan = computed(() => targetPerDay.value * DAYS_PER_MONTH);
 
@@ -44,6 +48,14 @@ const directIncome = computed(
 
 const passiveIncome = computed(
   () => monthlyScan.value * PRICE_PER_SCAN * PASSIVE_PERCENT,
+);
+
+const paketKeanggotaan = computed(
+  () => benefits.find((b) => b.title === "Paket Keanggotaan")?.items || [],
+);
+
+const supportBerkelanjutan = computed(
+  () => benefits.find((b) => b.title === "Support Berkelanjutan")?.items || [],
 );
 
 const toggleExpand = (index) => {
@@ -155,18 +167,51 @@ const chartOptions = {
     },
   },
 };
-
-/* VALIDASI VALUE */
-watch(targetPerDay, (val) => {
-  if (!val || val < 1) targetPerDay.value = 1;
-});
-
 /* FONT SIZE (UI) */
 const displaySizeClass = computed(() => {
   const len = String(targetPerDay.value).length;
   if (len >= 4) return "text-[12px]";
   if (len === 3) return "text-[14px]";
   return "text-[16px]";
+});
+
+const totalParameters = computed(() => {
+  if (!selectedPackage.value) return 0;
+
+  // Jumlahkan semua values di setiap modalValues
+  return selectedPackage.value.modalValues.reduce((sum, section) => {
+    return sum + section.values.length;
+  }, 0);
+});
+
+const increase = () => {
+  if (targetPerDay.value < MAX_TARGET) {
+    targetPerDay.value++;
+  }
+};
+
+const decrease = () => {
+  if (targetPerDay.value > MIN_TARGET) {
+    targetPerDay.value--;
+  }
+};
+
+/* VALIDASI VALUE */
+watch(targetPerDay, (val) => {
+  const numeric = Number(val);
+
+  if (isNaN(numeric)) {
+    targetPerDay.value = MIN_TARGET;
+    return;
+  }
+
+  if (numeric < MIN_TARGET) {
+    targetPerDay.value = MIN_TARGET;
+  } else if (numeric > MAX_TARGET) {
+    targetPerDay.value = MAX_TARGET;
+  } else {
+    targetPerDay.value = numeric;
+  }
 });
 
 onMounted(() => {
@@ -204,7 +249,7 @@ watch(showModal, (isOpen) => {
         class="relative w-full h-auto rounded-[20px] z-20 max-w-[1440px] mx-auto"
       >
         <div
-          class="relative w-full h-full flex flex-col lg:flex-row pt-32 px-0 lg:px-16 xl:px-20 lg:pt-48 gap-y-10 lg:gap-x-10 xl:gap-x-0"
+          class="relative w-full h-full flex flex-col lg:flex-row pt-32 px-0 lg:px-16 xl:px-20 xls:px-32 lg:pt-48 xls:pt-56 gap-y-10 lg:gap-x-10 xl:gap-x-0"
         >
           <!-- Phone mobile -->
           <div
@@ -268,7 +313,7 @@ watch(showModal, (isOpen) => {
             >
               <button
                 aria-label="Daftar Jadi SCA"
-                class="inline-flex items-center gap-x-3 w-full lg:w-auto px-6 md:px-8 lg:px-4 xl:px-6 py-2.5 md:py-2 bg-[#3DDAC1] rounded-[12px]"
+                class="inline-flex justify-between md:justify-start items-center gap-x-3 w-full lg:w-auto px-20 md:px-8 lg:px-4 xl:px-6 py-3 md:py-2 bg-[#3DDAC1] rounded-[12px]"
               >
                 <span
                   class="text-white whitespace-nowrap text-[14px] md:text-[16px] lg:text-[14px] xl:text-[18px] font-[500]"
@@ -340,7 +385,7 @@ watch(showModal, (isOpen) => {
 
     <!-- About -->
     <section
-      class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px] px-8 md:px-12 lg:px-20 mt-40"
+      class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px] px-8 md:px-12 lg:px-16 xl:px-20 xls:px-32 mt-40"
     >
       <div
         class="w-full h-auto py-10 md:py-14 px-4 md:px-8 lg:px-10 xl:px-12 bg-[#FAFAFA] flex flex-col gap-y-14 rounded-xl"
@@ -372,7 +417,7 @@ watch(showModal, (isOpen) => {
             v-for="(data, index) in whatsSelerisCare"
             :key="data.id"
             :class="[
-              'relative w-full h-[190px] sm:h-[150px] md:h-[180px] lg:h-[210px] xl:h-[180px] p-[2px] rounded-2xl cursor-default',
+              'relative w-full h-[190px] sm:h-[150px] md:h-[180px] lg:h-[190px] xl:h-[180px] p-[2px] rounded-2xl cursor-default',
               'transition-all duration-300 ease-out',
               (data.id === 2 || data.id === 4) && 'mt-8 md:mt-14',
 
@@ -381,7 +426,7 @@ watch(showModal, (isOpen) => {
             ]"
           >
             <div
-              class="w-full h-[190px] sm:h-[150px] md:h-[180px] lg:h-[210px] xl:h-[180px] flex flex-col justify-between bg-white rounded-2xl p-4 lg:p-3 xl:p-4"
+              class="w-full h-[190px] sm:h-[150px] md:h-[180px] lg:h-[190px] xl:h-[180px] flex flex-col justify-between bg-white rounded-2xl p-4 lg:p-3 xl:p-4"
             >
               <div
                 class="w-auto h-auto"
@@ -420,7 +465,7 @@ watch(showModal, (isOpen) => {
 
     <!-- APA ITU SCA -->
     <section
-      class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px] px-8 md:px-12 lg:px-20 mt-20 md:mt-32 lg:mt-40"
+      class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px] px-8 md:px-12 lg:px-16 xl:px-20 xls:px-32 mt-20 md:mt-32 lg:mt-40"
     >
       <!-- Desktop -->
       <div class="flex relative w-full h-auto">
@@ -442,7 +487,7 @@ watch(showModal, (isOpen) => {
             >
               <div class="w-full h-auto flex">
                 <span
-                  class="text-[#FFFFFF] text-[18px] sm:text-[28px] md:text-[32px] lg:text-[24px] xl:text-[42px] font-[600] tracking-wider leading-snug"
+                  class="text-[#FFFFFF] text-[18px] sm:text-[28px] md:text-[32px] lg:text-[24px] xl:text-[42px] xls:text-[42px] font-[600] leading-snug"
                 >
                   Apa Itu Seleris Care <br />
                   Applicator (SCA) ?
@@ -450,7 +495,7 @@ watch(showModal, (isOpen) => {
               </div>
               <div class="w-full h-auto flex">
                 <span
-                  class="text-[12px] sm:text-[14px] md:text-[16px] lg:text-[14px] xl:text-[16px] text-[#FFFFFF] leading-snug font-[400]"
+                  class="text-[12px] sm:text-[14px] md:text-[16px] lg:text-[14px] xl:text-[16px] xls:text-[16px] text-[#FFFFFF] leading-snug font-[400]"
                 >
                   SCA adalah mitra resmi
                   <span class="font-[600]">Seleris Care</span> yang bertugas
@@ -461,7 +506,7 @@ watch(showModal, (isOpen) => {
               </div>
             </div>
             <div
-              class="w-auto h-auto flex flex-col gap-y-3 sm:gap-y-4 md:gap-y-6 lg:gap-y-4 xl:gap-y-5 items-start"
+              class="w-auto h-auto flex flex-col gap-y-3 sm:gap-y-4 md:gap-y-6 lg:gap-y-4 xl:gap-y-5 xls:gap-y-5 items-start"
             >
               <div
                 v-for="(data, index) in whatsSCAList"
@@ -469,18 +514,18 @@ watch(showModal, (isOpen) => {
                 class="w-auto h-auto flex flex-row"
               >
                 <div
-                  class="w-auto h-auto flex flex-row bg-[#47D2B4]/40 gap-x-1.5 md:gap-x-3 py-2 px-3 md:py-1.5 sm:px-5 xl:py-3 lg:px-4 xl:px-6 rounded-full"
+                  class="w-auto h-auto flex flex-row bg-[#47D2B4]/40 gap-x-1.5 md:gap-x-3 px-3 md:py-1.5 sm:px-5 py-2 lg:py-2.5 xl:py-3 lg:px-4 xl:px-6 rounded-full"
                 >
                   <div class="flex items-center">
                     <img
                       src="@/assets/Products/images/Care-Applicator/checklist.png"
                       alt=""
-                      class="w-4 h-4 sm:w-6 sm:h-6 md:w-5 md:h-5 object-contain shrink-0"
+                      class="w-4 h-4 sm:w-6 sm:h-6 md:w-5 md:h-5 xls:w-5 xls:h-5 object-contain shrink-0"
                     />
                   </div>
                   <div class="flex items-center">
                     <span
-                      class="text-white text-[10px] sm:text-[14px] lg:text-[12px] xl:text-[16px]"
+                      class="text-white text-[10px] sm:text-[14px] lg:text-[12px] xl:text-[16px] xls:text-[16px]"
                     >
                       {{ data.content }}
                     </span>
@@ -489,9 +534,13 @@ watch(showModal, (isOpen) => {
               </div>
             </div>
           </div>
-          <div class="relative w-full h-auto lg:pt-[100px] xl:pt-[130px]">
-            <div class="w-full h-auto flex flex-col gap-y-5 lg:pl-2 lg:pr-10">
-              <div class="w-full h-auto flex flex-row gap-5 xl:gap-5">
+          <div
+            class="relative w-full h-auto lg:pt-[110px] xl:pt-[130px] xls:pt-[130px]"
+          >
+            <div
+              class="w-full h-auto flex flex-col gap-y-5 xls:gap-y-5 lg:pl-2 lg:pr-10"
+            >
+              <div class="w-full h-auto flex flex-row gap-5 xl:gap-5 xls:gap-5">
                 <div
                   class="w-full h-auto flex flex-col bg-[#DDDDDD]/40 gap-y-5 border-[#FFFFFF]/20 border-[1px] px-5 py-5 md:py-10 lg:py-5 xl:py-10 rounded-[12px]"
                 >
@@ -549,7 +598,7 @@ watch(showModal, (isOpen) => {
               </div>
               <div class="w-full h-auto">
                 <div
-                  class="w-full h-auto flex flex-row gap-x-5 md:gap-x-5 px-5 py-5 md:py-8 lg:py-4 xl:py-8 bg-[#FFFFFF]/40 border-[1px] border-[#DDDDDD]/20 rounded-[12px]"
+                  class="w-full h-auto flex flex-row gap-x-5 md:gap-x-5 px-5 py-5 md:py-8 lg:py-6 xl:py-8 xls:py-8 bg-[#FFFFFF]/40 border-[1px] border-[#DDDDDD]/20 rounded-[12px]"
                 >
                   <div
                     class="w-auto h-auto flex p-[1px] bg-gradient-to-br from-[#AFEFFF] from-[40%] to-[#AFEFFF]/0 rounded-[12px]"
@@ -592,7 +641,7 @@ watch(showModal, (isOpen) => {
 
     <!-- Paket Pemeriksaan Kesehatan -->
     <section
-      class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px] px-8 md:px-12 lg:px-20 mt-32 lg:mt-40"
+      class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px] px-8 md:px-12 lg:px-16 xls:px-32 mt-32 lg:mt-40"
     >
       <div class="w-full h-auto flex flex-col gap-y-10">
         <div class="w-full h-auto flex flex-col gap-y-5">
@@ -765,7 +814,7 @@ watch(showModal, (isOpen) => {
                 />
 
                 <ul
-                  class="px-5 py-5 mx-5 list-disc list-outside pl-5 flex flex-col gap-y-3 text-[16px]"
+                  class="px-5 py-5 mx-5 list-disc list-outside pl-5 flex flex-col gap-y-3 text-[14px] md:text-[16px]"
                 >
                   <li v-for="(val, i) in pkg.mobileValues" :key="i">
                     {{ val }}
@@ -805,9 +854,10 @@ watch(showModal, (isOpen) => {
         v-if="showModal"
         class="fixed inset-0 w-auto h-auto z-50 flex transition-all justify-center items-center duration-300 overflow-auto bg-[#FFFFFF]"
       >
-        <transition name="slide">
+        <transition name="zoom">
           <div
-            class="w-full h-auto max-w-4xl relative z-50 flex flex-col items-center gap-y-6"
+            v-if="selectedPackage"
+            class="w-full h-auto max-w-4xl relative z-50 flex flex-col items-center gap-y-6 lg:gap-y-14 xls:gap-y-16"
           >
             <div class="w-full h-auto flex">
               <button
@@ -850,25 +900,28 @@ watch(showModal, (isOpen) => {
                 </div>
               </button>
             </div>
-            <div class="w-full h-[550px] bg-blue-600 flex flex-row gap-x-10">
-              <div
-                class="w-full h-full flex flex-col gap-y-5 items-start bg-orange-600"
-              >
-                <div
-                  class="w-auto h-auto shrink-0 flex p-[2px] bg-gradient-to-r from-[#4273C2] to-[#4273C2]/0 rounded-full"
-                >
+            <div class="w-full h-auto xls:h-auto flex flex-row gap-x-0">
+              <div class="w-full h-full flex flex-col gap-y-5 items-start">
+                <div class="w-full h-[45px] flex items-start">
                   <div
-                    class="w-auto h-auto bg-[#C4EAFF] px-10 py-2 rounded-full"
+                    class="w-auto h-auto shrink-0 flex p-[2px] bg-gradient-to-r from-[#4273C2] to-[#4273C2]/0 rounded-full"
                   >
-                    <span class="text-[#4273C2] font-[600] text-[16px]">
-                      Paket Essential
-                    </span>
+                    <div
+                      class="w-auto h-auto bg-[#C4EAFF] px-10 py-2 rounded-full"
+                    >
+                      <span class="text-[#4273C2] font-[600] text-[16px]">
+                        Paket
+                        <span class="uppercase">
+                          {{ selectedPackage.name }}
+                        </span>
+                      </span>
+                    </div>
                   </div>
                 </div>
                 <div class="w-full h-auto flex flex-col gap-y-3">
                   <div class="w-full h-auto flex">
                     <span
-                      class="text-[38px] text-[#374151] font-[600] leading-tight"
+                      class="text-[38px] xls:text-[38px] text-[#374151] font-[600] leading-tight tracking-wider"
                     >
                       Kesehatan Anda, <br />
                       Analisis
@@ -882,7 +935,7 @@ watch(showModal, (isOpen) => {
                   </div>
                   <div class="w-full h-auto flex">
                     <span
-                      class="text-[#8E98A8] font-[400] text-[16px] leading-relaxed"
+                      class="text-[#8E98A8] font-[400] text-[16px] leading-relaxed tracking-wide"
                     >
                       Solusi cepat untuk pemantauan <br />
                       rutin kesehatan dasar Anda.
@@ -890,16 +943,16 @@ watch(showModal, (isOpen) => {
                   </div>
                 </div>
                 <div
-                  class="w-[70%] h-auto flex flex-col gap-y-2 items-start bg-[#FAFAFA] p-5 rounded-[24px]"
+                  class="w-[70%] h-auto flex flex-col gap-y-2 items-start bg-[#FAFAFA] px-5 py-4 rounded-[24px]"
                 >
                   <div class="w-full h-auto flex">
-                    <span class="text-[16px] font-[500] text-[#374151]"
-                      >Harga Retail Layanan</span
-                    >
+                    <span class="text-[16px] font-[500] text-[#374151]">
+                      Harga Retail Layanan
+                    </span>
                   </div>
                   <div class="w-full h-auto flex">
-                    <span class="text-[32px] font-[600] text-[#374151]">
-                      Rp 150.000
+                    <span class="text-[28px] font-[600] text-[#374151]">
+                      {{ selectedPackage.price }}
                     </span>
                   </div>
                   <div
@@ -923,10 +976,10 @@ watch(showModal, (isOpen) => {
                 </div>
                 <button
                   aria-label="Daftar Jadi SCA"
-                  class="w-[85%] h-auto inline-flex justify-center items-center gap-x-3 py-2.5 md:py-2 xl:py-5 bg-[#3DDAC1] rounded-[8px]"
+                  class="w-[83%] h-auto inline-flex justify-center items-center gap-x-3 py-2.5 md:py-2 lg:py-4 bg-[#3DDAC1] rounded-[8px]"
                 >
                   <span
-                    class="text-white whitespace-nowrap text-[14px] md:text-[16px] lg:text-[14px] xl:text-[18px] font-[500]"
+                    class="text-white whitespace-nowrap text-[14px] md:text-[16px] lg:text-[18px] font-[500]"
                   >
                     Daftar SCA & Mulai Jualan
                   </span>
@@ -935,7 +988,7 @@ watch(showModal, (isOpen) => {
                     class="w-auto h-auto text-[#FFFFFF] flex items-end justify-center"
                   >
                     <svg
-                      class="w-5 h-5 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-5 lg:h-5 xl:w-6 xl:h-6"
+                      class="w-5 h-5 sm:w-5 sm:h-5 md:w-6 md:h-6 lg:w-5 lg:h-5 xl:w-6 xl:h-6 xls:w-8 xls:h-8"
                       viewBox="0 0 24 24"
                       fill="none"
                       xmlns="http://www.w3.org/2000/svg"
@@ -960,7 +1013,48 @@ watch(showModal, (isOpen) => {
                   </div>
                 </button>
               </div>
-              <div class="w-full h-full bg-fuchsia-600"></div>
+              <div
+                class="w-full lg:h-[530px] xls:h-[560px] flex flex-col gap-y-5"
+              >
+                <div class="w-full h-[45px] flex items-center flex-shrink-0">
+                  <span class="text-[24px] font-[600] text-[#374151]">
+                    Detail Parameter {{ totalParameters }}
+                  </span>
+                </div>
+                <div
+                  class="w-full h-auto flex flex-col gap-y-5 overflow-y-auto pr-3"
+                >
+                  <div
+                    v-for="data in selectedPackage.modalValues"
+                    :key="data.title"
+                    class="w-full h-auto flex flex-col bg-[#FFFFFF] gap-6 px-6 py-8 border-[0.5px] border-[#DADADA] rounded-[16px]"
+                  >
+                    <div class="w-full h-auto flex">
+                      <span class="text-[#374151] font-[600] text-[20px]">
+                        {{ data.title }}
+                      </span>
+                    </div>
+                    <div class="w-full h-auto flex flex-wrap gap-4">
+                      <div
+                        v-for="item in data.values"
+                        :key="item"
+                        class="w-auto h-auto flex flex-row gap-x-1.5 md:gap-x-2 rounded-full"
+                      >
+                        <div class="w-auto h-auto flex items-center">
+                          <div class="w-3 h-3 rounded-full bg-[#2DDBBD]" />
+                        </div>
+                        <div class="flex items-center">
+                          <span
+                            class="text-[#374151] text-[10px] sm:text-[14px] lg:text-[12px] xl:text-[16px]"
+                          >
+                            {{ item }}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </transition>
@@ -969,11 +1063,11 @@ watch(showModal, (isOpen) => {
 
     <!-- Mengapa bergabung SCA? -->
     <section
-      class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px] px-8 md:px-12 lg:px-12 mt-20 md:mt-32 pt-20"
+      class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px] px-8 md:px-12 lg:px-16 xl:px-20 xls:px-32 mt-20 md:mt-32 pt-20"
       id="keunggulan"
     >
       <div
-        class="w-full h-auto flex flex-col bg-[#EAFCFA] px-4 md:px-10 py-10 md:py-20 gap-y-8 md:gap-y-14 rounded-[20px] md:rounded-[48px]"
+        class="w-full h-auto flex flex-col bg-[#EAFCFA] px-4 md:px-10 xls:px-4 py-10 md:py-20 gap-y-8 md:gap-y-14 rounded-[20px] md:rounded-[48px]"
       >
         <div class="w-full h-auto flex flex-col gap-y-2 md:gap-y-0">
           <div class="w-full h-auto flex justify-center items-center">
@@ -992,7 +1086,7 @@ watch(showModal, (isOpen) => {
           </div>
         </div>
         <div
-          class="w-full h-auto grid grid-cols-2 md:grid-cols-3 lg:px-16 gap-5"
+          class="w-full h-auto grid grid-cols-2 md:grid-cols-3 xl:px-16 gap-5"
         >
           <div
             v-for="(data, index) in whyJoinSCA"
@@ -1000,7 +1094,7 @@ watch(showModal, (isOpen) => {
             class="w-full h-full bg-[#FFFFFF] rounded-[12px]"
           >
             <div
-              class="w-full h-full flex flex-col gap-y-2 md:gap-y-4 p-3 md:p-4 lg:p-10 bg-[#FFFFFF] border-[0.5px] border-[#000000]/10 rounded-[12px]"
+              class="w-full h-full flex flex-col gap-y-2 md:gap-y-4 p-3 md:p-4 lg:p-6 xl:p-10 bg-[#FFFFFF] border-[0.5px] border-[#000000]/10 rounded-[12px]"
             >
               <div class="w-full h-auto flex justify-center items-center">
                 <div
@@ -1016,7 +1110,7 @@ watch(showModal, (isOpen) => {
                   class="w-full h-[35px] md:h-[45px] lg:h-auto flex justify-center items-center"
                 >
                   <span
-                    class="text-[#374151] font-[600] text-[12px] md:text-[16px] lg:text-[24px] text-center leading-snug"
+                    class="text-[#374151] font-[600] text-[12px] md:text-[16px] lg:text-[20px] xl:text-[20px] text-center leading-snug"
                   >
                     {{ data.title }}
                   </span>
@@ -1197,17 +1291,17 @@ watch(showModal, (isOpen) => {
 
     <!-- Komisi -->
     <section
-      class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px] px-8 md:px-12 lg:px-12 mt-14 md:mt-32 pt-20"
+      class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px] px-8 md:px-12 lg:px-16 xl:px-20 xls:px-32 mt-14 md:mt-32 pt-20"
       id="komisi"
     >
       <div class="w-full h-auto bg-[#FAFAFA] rounded-[16px]">
         <div
-          class="w-full h-auto flex flex-col lg:flex-row gap-x-5 py-12 px-4 md:px-12 lg:px-8 xl:px-20 rounded-[16px]"
+          class="w-full h-auto flex flex-col lg:flex-row gap-x-5 py-12 px-4 md:px-12 lg:px-8 xl:px-20 xls:px-14 rounded-[16px]"
         >
           <div class="w-full h-auto flex flex-col gap-y-5">
             <div class="w-full h-auto flex justify-center lg:justify-start">
               <span
-                class="text-[#374151] font-[600] text-[16px] md:text-[26px]"
+                class="text-[#374151] font-[600] text-[16px] lg:text-[24px] xl:text-[26px]"
               >
                 Struktur Komisi & <br class="hidden lg:block" />
                 Simulasi Penghasilan
@@ -1330,12 +1424,12 @@ watch(showModal, (isOpen) => {
               </div>
             </div>
             <div
-              class="w-full h-auto flex flex-col gap-y-5 px-8 py-5 bg-[#114365] border-[0.3px] border-[#CCCCCC] rounded-[18px]"
+              class="w-full h-auto flex flex-col gap-y-5 px-4 xl:px-8 py-5 bg-[#114365] border-[0.3px] border-[#CCCCCC] rounded-[18px]"
             >
               <div class="w-full h-auto flex flex-row justify-between">
                 <div class="w-auto h-auto flex items-center">
                   <span
-                    class="text-[12px] md:text-[14px] text-[#FFFFFF] font-[600]"
+                    class="text-[12px] md:text-[18px] lg:text-[14px] xls:text-[16px] text-[#FFFFFF] font-[600]"
                   >
                     Target Scanning per Hari
                   </span>
@@ -1345,27 +1439,28 @@ watch(showModal, (isOpen) => {
                     class="w-full h-full grid grid-cols-3 bg-[#DFDFDF]/50 border-[0.5px] border-[#799BB2] rounded-[6px]"
                   >
                     <div
-                      class="w-[30px] md:w-[45px] h-full flex justify-center items-center md:pl-5 py-1 cursor-pointer"
-                      @click="targetPerDay > 1 && targetPerDay--"
+                      class="w-[30px] md:w-[55px] lg:w-[40px] xl:w-[45px] h-full flex justify-center items-center md:pl-5 py-1 cursor-pointer"
+                      @click="decrease"
                     >
                       <span class="text-[16px] text-[#FFFFFF] font-[500]">
                         -
                       </span>
                     </div>
                     <div
-                      class="w-[30px] md:w-[45px] h-full flex justify-center items-center py-1"
+                      class="w-[30px] md:w-[55px] lg:w-[40px] xl:w-[45px] h-full flex justify-center items-center py-1"
                     >
                       <input
                         type="number"
-                        v-model="targetPerDay"
+                        v-model.number="targetPerDay"
                         min="1"
+                        max="999"
                         class="w-full bg-transparent text-center outline-none text-white font-[500] transition-all duration-150"
                         :class="displaySizeClass"
                       />
                     </div>
                     <div
-                      class="w-[30px] md:w-[45px] h-full flex justify-center items-center md:pr-5 py-1 cursor-pointer"
-                      @click="targetPerDay++"
+                      class="w-[30px] md:w-[55px] lg:w-[40px] xl:w-[45px] h-full flex justify-center items-center md:pr-5 py-1 cursor-pointer"
+                      @click="increase"
                     >
                       <span class="text-[16px] text-[#FFFFFF] font-[500]">
                         +
@@ -1378,7 +1473,7 @@ watch(showModal, (isOpen) => {
                 <div class="w-full h-auto flex flex-row justify-between">
                   <div class="w-full md:w-auto h-auto flex items-center">
                     <span
-                      class="text-[12px] md:text-[14px] text-[#37B3D5] font-[400]"
+                      class="text-[12px] md:text-[18px] lg:text-[14px] text-[#37B3D5] font-[400]"
                     >
                       Potensi Income Bulanan Anda
                     </span>
@@ -1388,9 +1483,9 @@ watch(showModal, (isOpen) => {
                   >
                     <div class="w-auto h-full flex items-center">
                       <span
-                        class="text-[14px] md:text-[18px] text-[#37D5BC] font-[600] md:tracking-widest"
+                        class="text-[14px] md:text-[18px] lg:text-[16px] xl:text-[18px] text-[#37D5BC] font-[600] tracking-widest"
                       >
-                        Rp {{ formatNumberSeparator(directIncome) }}
+                        Rp {{ formatRupiahSmart(directIncome) }}
                       </span>
                     </div>
                   </div>
@@ -1426,12 +1521,12 @@ watch(showModal, (isOpen) => {
       class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px] mt-32 pt-20"
     >
       <!-- px-8 md:px-12 lg:px-12 -->
-      <div class="w-full h-auto flex flex-col gap-y-10">
+      <div class="w-full h-auto hidden lg:flex flex-col gap-y-10">
         <div class="w-full h-auto flex flex-col gap-y-3">
           <div class="w-full h-auto flex justify-center items-center">
-            <span class="font-[600] text-[#374151] xl:text-[42px] text-center"
-              >Cara Bergabung</span
-            >
+            <span class="font-[600] text-[#374151] xl:text-[42px] text-center">
+              Cara Bergabung
+            </span>
           </div>
           <div class="w-full h-auto flex justify-center items-center">
             <span
@@ -1458,38 +1553,51 @@ watch(showModal, (isOpen) => {
             >
               <div class="w-full h-full flex justify-center items-end">
                 <div
-                  class="w-14 h-14 bg-[#D7F3F1] p-1.5 rounded-[8px] flex justify-center items-center box-shadow: 0px 20px 15.7px 0px rgba(0, 0, 0, 0.05);"
+                  @mouseenter="activeHover = data.id"
+                  @mouseleave="activeHover = null"
+                  class="w-14 h-14 p-1.5 rounded-[8px] flex justify-center items-center transition-all duration-300 shadow-[0px_20px_15.7px_0px_rgba(0,0,0,0.05)]"
+                  :class="
+                    activeHover === data.id ? 'bg-[#34C9B1]' : 'bg-[#D7F3F1]'
+                  "
                 >
                   <div
-                    class="w-full h-full bg-[#FFFFFF] flex items-center justify-center rounded-[8px]"
+                    class="w-full h-full bg-[#FFFFFF] flex items-center justify-center rounded-[8px] p-2"
                   >
-                    s
+                    <img :src="data.icon" alt="" srcset="" />
                   </div>
                 </div>
               </div>
               <div class="w-full h-full flex justify-center items-center">
                 <div
-                  class="w-10 h-10 bg-[#34C9B1] rounded-full flex justify-center items-center"
+                  @mouseenter="activeHover = data.id"
+                  @mouseleave="activeHover = null"
+                  class="w-10 h-10 bg-[#34C9B1] rounded-full flex justify-center items-center cursor-pointer"
                 >
                   <span class="text-white font-[600] text-[21px] text-center">
                     {{ data.id }}
                   </span>
                 </div>
               </div>
-              <div class="w-full h-full flex flex-col gap-y-2 items-center">
-                <div class="w-full h-auto flex items-center justify-center">
-                  <span
-                    class="text-[#374151] text-[18px] font-[600] text-center"
-                  >
-                    {{ data.step }}
-                  </span>
-                </div>
-                <div class="w-full h-auto flex items-center justify-center">
-                  <span
-                    class="text-[#8E98A8] text-[14px] font-[400] text-center px-10"
-                  >
-                    {{ data.content }}
-                  </span>
+              <div class="w-full h-full flex">
+                <div
+                  @mouseenter="activeHover = data.id"
+                  @mouseleave="activeHover = null"
+                  class="w-full h-auto flex flex-col gap-y-2 items-center cursor-pointer"
+                >
+                  <div class="w-full h-auto flex items-center justify-center">
+                    <span
+                      class="text-[#374151] text-[18px] font-[600] text-center"
+                    >
+                      {{ data.step }}
+                    </span>
+                  </div>
+                  <div class="w-full h-auto flex items-center justify-center">
+                    <span
+                      class="text-[#8E98A8] text-[14px] font-[400] text-center px-10 lg:px-8"
+                    >
+                      {{ data.content }}
+                    </span>
+                  </div>
                 </div>
               </div>
             </div>
@@ -1500,23 +1608,25 @@ watch(showModal, (isOpen) => {
 
     <!-- Benefit SCA -->
     <section
-      class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px] px-8 md:px-12 lg:px-12 mt-20 md:mt-32 pt-20"
+      class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px] px-8 md:px-12 lg:px-12 xl:px-20 xls:px-32 mt-20 md:mt-32 pt-20"
       id="keunggulan"
     >
       <div
-        class="w-full h-auto flex flex-col bg-[#FAFAFA] px-4 md:px-6 py-10 md:py-20 gap-y-8 md:gap-y-10 lg::gap-y-14 rounded-[20px] md:rounded-[48px]"
+        class="w-full h-auto flex flex-col bg-[#FAFAFA] px-4 md:px-6 py-10 md:py-20 gap-y-8 md:gap-y-10 lg:gap-y-14 rounded-[20px] md:rounded-[48px]"
       >
         <div class="w-full h-auto flex flex-col gap-y-2 md:gap-y-5">
           <div class="w-full h-auto flex justify-center items-center">
             <span
-              class="text-[#374151] text-[20px] sm:text-[32px] lg:text-[44px] font-[600] text-center"
+              class="text-[#374151] text-[20px] sm:text-[32px] lg:text-[40px] xl:text-[44px] font-[600] text-center"
             >
               Benefit Menjadi SCA
             </span>
           </div>
-          <div class="w-full h-auto flex justify-center items-center">
+          <div
+            class="w-full h-auto flex justify-center items-center px-6 md:px-0"
+          >
             <span
-              class="text-[12px] sm:text-[14px] lg:text-[16px] text-[#374151] font-[400] text-center"
+              class="text-[12px] sm:text-[14px] xl:text-[16px] text-[#374151] font-[400] text-center"
             >
               Kami memberikan semua yang Anda butuhkan untuk membangun
               <br class="hidden md:block" />
@@ -1525,7 +1635,7 @@ watch(showModal, (isOpen) => {
           </div>
         </div>
         <div
-          class="md:max-w-4xl md:mx-auto w-full h-auto flex flex-col sm:flex-row gap-y-5 sm:gap-x-4 xl:gap-x-8"
+          class="md:max-w-4xl lg:max-w-3xl xl:max-w-4xl md:mx-auto w-full h-auto flex flex-col sm:flex-row gap-y-5 sm:gap-x-4 xl:gap-x-8 px-4"
         >
           <div
             class="w-full h-auto bg-gradient-to-b from-[#42C5AF]/0 to-[#54B5FF] p-0.5 rounded-xl overflow-hidden"
@@ -1560,7 +1670,7 @@ watch(showModal, (isOpen) => {
                 class="w-auto h-auto flex flex-col gap-y-3 md:gap-y-3.5 lg:gap-y-4 xl:gap-y-5 items-start"
               >
                 <div
-                  v-for="i in 7"
+                  v-for="(item, i) in paketKeanggotaan"
                   :key="i"
                   class="w-auto h-auto flex flex-row"
                 >
@@ -1578,7 +1688,7 @@ watch(showModal, (isOpen) => {
                       <span
                         class="text-[#374151] font-[500] text-[12px] lg:text-[12px] xl:text-[16px]"
                       >
-                        Update produk dan teknologi terbaru
+                        {{ item.content }}
                       </span>
                     </div>
                   </div>
@@ -1619,7 +1729,7 @@ watch(showModal, (isOpen) => {
                 class="w-auto h-auto flex flex-col gap-y-3 md:gap-y-3.5 lg:gap-y-4 xl:gap-y-5 items-start"
               >
                 <div
-                  v-for="i in 4"
+                  v-for="(item, i) in supportBerkelanjutan"
                   :key="i"
                   class="w-auto h-auto flex flex-row"
                 >
@@ -1637,7 +1747,7 @@ watch(showModal, (isOpen) => {
                       <span
                         class="text-[#374151] font-[500] text-[12px] md:text-[12px] lg:text-[12px] xl:text-[16px]"
                       >
-                        Update produk dan teknologi terbaru
+                        {{ item.content }}
                       </span>
                     </div>
                   </div>
@@ -1647,13 +1757,13 @@ watch(showModal, (isOpen) => {
                 >
                   <div class="w-full h-auto">
                     <p
-                      class="font-[600] text-[16px] md:text-[20px] lg:text-[22px]"
+                      class="font-[600] text-[16px] md:text-[20px] xl:text-[22px]"
                     >
                       Kenapa Kami
                     </p>
                   </div>
                   <div
-                    class="w-full h-auto text-[10px] md:text-[12px] lg:text-[14px]"
+                    class="w-full h-auto text-[10px] md:text-[12px] xl:text-[14px]"
                   >
                     <p>
                       "Kami tidak hanya memberikan alat, tapi kami membangun
@@ -1670,7 +1780,7 @@ watch(showModal, (isOpen) => {
 
     <!-- Testimonial -->
     <section
-      class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px] mt-32"
+      class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px] lg:px-0 xls:max-w-full xls:px-14 mt-32"
       id="testimonials"
     >
       <div
@@ -1678,7 +1788,7 @@ watch(showModal, (isOpen) => {
       >
         <div class="w-full h-auto flex flex-col gap-y-10 lg:gap-y-10">
           <div
-            class="w-full h-auto flex flex-col gap-y-3 lg:gap-y-4 max-[375px]:!px-6 px-8 md:px-12 lg:px-20"
+            class="w-full h-auto flex flex-col gap-y-3 lg:gap-y-4 max-[375px]:!px-6 px-8 md:px-12 lg:px-20 xls:px-32"
           >
             <div class="w-full h-auto flex justify-center items-center">
               <span
@@ -1727,7 +1837,7 @@ watch(showModal, (isOpen) => {
                   },
                   768: {
                     slidesPerView: 2,
-                    spaceBetween: -30,
+                    spaceBetween: -45,
                   },
                   1024: {
                     slidesPerView: 3,
@@ -1738,7 +1848,7 @@ watch(showModal, (isOpen) => {
               >
                 <SwiperSlide v-for="(item, index) in testimonials" :key="index">
                   <!-- wrapper ini TIDAK mengubah desain -->
-                  <div class="pb-6 px-6 sm:px-8 lg:px-0">
+                  <div class="pb-6 px-8 sm:px-8 md:px-12 lg:px-0">
                     <div
                       class="w-full max-[375px]:!h-[190px] min-[1439px]:!h-[230px] h-[200px] sm:h-[230px] md:h-[210px] lg:h-[220px] xl:h-[250px] p-[1px] bg-[#D9D9D9] rounded-lg cursor-grab active:cursor-grabbing shadow-[0px_5px_15px_0px_rgba(92,92,92,0.1)]"
                     >
@@ -1782,10 +1892,10 @@ watch(showModal, (isOpen) => {
 
     <!-- Akses Eksklusif -->
     <section
-      class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px] px-8 md:px-12 lg:px-12 mt-20 md:mt-32 pt-20"
+      class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px] px-8 md:px-12 lg:px-16 xl:px-20 xls:px-32 mt-20 md:mt-32 pt-20"
     >
       <div
-        class="w-full h-auto flex flex-col lg:flex-row bg-[#EAFCFA] gap-x-5 gap-y-6 md:gap-y-8 lg:gap-y-0 px-0 md:px-6 xl:px-20 py-10 md:py-20 rounded-[20px] md:rounded-[48px]"
+        class="w-full h-auto flex flex-col lg:flex-row bg-[#EAFCFA] gap-x-5 gap-y-6 md:gap-y-8 lg:gap-y-0 px-0 md:px-6 lg:px-10 xl:px-20 py-10 md:py-20 xls:py-16 rounded-[20px] md:rounded-[48px]"
       >
         <!-- Phone mobile -->
         <div
@@ -1800,7 +1910,7 @@ watch(showModal, (isOpen) => {
           </figure>
         </div>
         <div
-          class="relative flex flex-col w-full h-auto gap-y-8 md:gap-y-6 lg:gap-y-10 justify-end px-8 md:px-12 lg:px-0"
+          class="relative flex flex-col w-full h-auto gap-y-8 md:gap-y-6 lg:gap-y-10 justify-end lg:justify-between lg:pt-10 px-8 md:px-12 lg:px-0"
         >
           <div
             class="w-full h-auto flex flex-col gap-y-4 md:gap-y-5 justify-start md:justify-normal items-start"
@@ -1809,7 +1919,7 @@ watch(showModal, (isOpen) => {
               class="w-full h-auto flex flex-col gap-y-0 justify-normal items-start"
             >
               <p
-                class="font-[600] text-[18px] md:text-[28px] lg:text-[40px] xl:text-[40px]"
+                class="font-[600] text-[18px] md:text-[28px] lg:text-[32px] xls:text-[36px]"
               >
                 <span class="text-[#374151]">
                   Siap Memulai Bisnis <br class="hidden lg:block" />
@@ -1822,7 +1932,7 @@ watch(showModal, (isOpen) => {
               </p>
             </div>
             <p
-              class="text-[#374151] text-[12px] md:text-[16px] lg:text-[14px] xl:text-[18px] w-full"
+              class="text-[#374151] text-[12px] md:text-[16px] lg:text-[14px] xl:text-[16px] w-full"
             >
               Dapatkan akses eksklusif ke teknologi AI kesehatan terbaik dan
               bangun penghasilan mandiri sekarang juga.
@@ -1879,7 +1989,7 @@ watch(showModal, (isOpen) => {
             <img
               src="@/assets/Products/images/Care-Applicator/phone-hero.png"
               alt=""
-              class="w-full h-[180px] md:h-[300px] lg:h-full xl:h-[400px] object-contain"
+              class="w-full h-[180px] md:h-[300px] lg:h-[300px] xl:h-[400px] xls:h-[350px] object-contain"
             />
           </figure>
         </div>
@@ -1898,5 +2008,37 @@ input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
   -webkit-appearance: none;
   margin: 0;
+}
+
+/* Overlay fade in/out */
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.3s ease;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+.fade-enter-to,
+.fade-leave-from {
+  opacity: 1;
+}
+
+/* Zoom modal dari tengah */
+.zoom-enter-active {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.zoom-leave-active {
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.zoom-enter-from,
+.zoom-leave-to {
+  opacity: 0;
+  transform: scale(0.5); /* mulai dari tengah, kecil */
+}
+.zoom-enter-to,
+.zoom-leave-from {
+  opacity: 1;
+  transform: scale(1); /* ukuran final */
 }
 </style>

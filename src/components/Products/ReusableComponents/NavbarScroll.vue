@@ -57,7 +57,7 @@ onUnmounted(() => {
       <div class="w-full h-auto mt-0">
         <div class="max-w-full mx-auto px-0">
           <div
-            class="w-full flex items-center justify-between bg-[#FDFDFD] shadow-md px-4 lg:px-20 xl:px-20 xls:px-20 2xls:px-40 py-2 border-[0.5px] border-[#DEDEDE]"
+            class="w-full flex items-center justify-between bg-[#FDFDFD] shadow-md px-4 lg:px-16 xl:px-20 xls:px-32 2xls:px-40 py-2 border-[0.5px] border-[#DEDEDE]"
           >
             <div
               class="hidden max-w-[1440px] mx-auto lg:grid lg:grid-cols-12 w-full h-auto"

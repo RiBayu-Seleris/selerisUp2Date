@@ -6,6 +6,7 @@ import Description from "@/components/Description.vue";
 import AiDesc from "@/components/Home/AiDesc.vue";
 import Technology from "@/components/Home/Technology.vue";
 import Certificate from "@/components/Certificate.vue";
+import Supported from "@/components/Supported.vue";
 import Benefits from "@/components/Home/Benefits.vue";
 import Testimonial from "@/components/Home/Testimonial.vue";
 import Blogs from "@/components/Home/Blogs.vue";
@@ -29,6 +30,10 @@ import Different from "@/components/Home/Different.vue";
 
   <section class="flex flex-col relative w-full h-auto mt-10 md:mt-10 lg:mt-24">
     <Certificate />
+  </section>
+
+  <section class="flex flex-col relative w-full h-auto mt-10 md:mt-10 lg:mt-24">
+    <Supported />
   </section>
 
   <section

@@ -425,7 +425,7 @@ function onSlideChange(swiper) {
           <div
             class="w-full h-auto cursor-pointer flex flex-row items-center justify-end"
           >
-            <router-link to="/book-a-demo">
+            <router-link to="/about/frequently-ask-question">
               <p class="text-[14px] lg:text-[16px] font-[400] text-[#2AB857]">
                 Read More
               </p>

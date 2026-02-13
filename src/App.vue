@@ -274,6 +274,7 @@ onMounted(() => {
           <section
             class="flex flex-col relative w-full mx-auto h-auto mt-32 px-8 xls:px-8 2xls:px-0"
             v-if="
+              route.path !== '/test-embed' &&
               route.path !== '/blogs' &&
               route.path !== '/chatbot' &&
               route.path !== '/chatbot2' &&

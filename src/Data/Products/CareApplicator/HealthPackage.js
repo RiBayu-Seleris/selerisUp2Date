@@ -15,7 +15,7 @@ export const packages = [
   {
     label: "Paket Dasar",
     name: "Essential",
-    price: "Rp 150.000",
+    price: "Rp 300.000",
     priceColor: "text-[#355F7C]",
     highlight: false,
     expanded: false,
@@ -84,13 +84,13 @@ export const packages = [
   {
     label: "Paling Populer",
     name: "Core",
-    price: "Rp 250.000",
+    price: "Rp 400.000",
     priceColor: "text-[#355F7C]",
     highlight: true,
     expanded: false,
 
     values: [
-      "27 Parameter",
+      "32 Parameter",
       "5 Parameter",
       "5 Parameter",
       "3 Parameter",
@@ -183,7 +183,7 @@ export const packages = [
   {
     label: "Komprehensif",
     name: "Prime",
-    price: "Rp 300.000",
+    price: "Rp 500.000",
     priceColor: "text-[#355F7C]",
     highlight: false,
     expanded: false,

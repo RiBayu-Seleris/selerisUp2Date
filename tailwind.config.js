@@ -4,6 +4,18 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      screens: {
+        // Mobile breakpoints
+        sm: "640px",
+        // Tablet / Medium
+        md: "768px",
+        // Desktop
+        lg: "1024px",
+        xl: "1280px",
+        // Extra Large
+        xls: { raw: "(min-width: 1440px)" },
+        "2xls": { raw: "(min-width: 2560px)" },
+      },
       gradientColorStops: {
         "dark-start": "#565656 0%",
         "dark-end": "#BCBCBC 70%",

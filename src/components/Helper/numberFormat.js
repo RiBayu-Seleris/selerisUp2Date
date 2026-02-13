@@ -17,3 +17,20 @@ export function formatNumberSeparator(num) {
   if (num == null) return "-";
   return new Intl.NumberFormat("id-ID").format(num);
 }
+
+export function formatRupiahSmart(num) {
+  if (num == null || isNaN(num)) return "-";
+
+  const units = ["", "rb", "jt", "M", "T", "P", "E"];
+  let unitIndex = 0;
+  let value = num;
+
+  while (value >= 1000 && unitIndex < units.length - 1) {
+    value /= 1000;
+    unitIndex++;
+  }
+
+  const formatted = value.toFixed(2).replace(/\.?0+$/, "");
+
+  return formatted + units[unitIndex];
+}
