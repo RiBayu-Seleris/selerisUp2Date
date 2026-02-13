@@ -1,0 +1,1 @@
+function o(t){return t==null?"-":new Intl.NumberFormat("id-ID").format(t)}function i(t){if(t==null||isNaN(t))return"-";const a=["","rb","jt","M","T","P","E"];let r=0,e=t;for(;e>=1e3&&r<a.length-1;)e/=1e3,r++;return e.toFixed(2).replace(/\.?0+$/,"")+a[r]}export{o as a,i as f};
