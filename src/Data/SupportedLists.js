@@ -3,9 +3,10 @@
 export const supportedLists = [
   {
     logo: "Kemenkes.svg",
+    subTitle: "",
     certificate_number: "SKP-IP-01261-26",
     name: "KEMENTRIAN KESEHATAN REPUBLIK INDONESIA",
     description:
-      "Produk dan layanan ini telah menerima dukungan resmi sesuai dengan peraturan dan standar kesehatan yang berlaku. Sertifikasi tersebut menegaskan bahwa layanan ini telah melalui proses evaluasi untuk memastikan kualitas, keamanan, serta kepatuhan terhadap regulasi yang ditetapkan.",
+      "Seleris Care is classified as an AI-based medical device in accordance with the regulations of the Ministry of Health of the Republic of Indonesia and complies with Minister of Health Regulation No. 14 of 2021",
   },
 ];

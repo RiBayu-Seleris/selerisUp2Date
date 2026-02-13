@@ -30,7 +30,7 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
       class="flex flex-col gap-y-7 md:gap-y-10 lg:gap-y-10 xl:gap-y-20 py-10 w-full max-w-sm md:max-w-2xl lg:max-w-3xl xl:max-w-5xl mx-auto h-auto dark:bg-[#17181A] border-2 rounded-xl"
     >
       <!-- Heading -->
-      <div class="flex flex-col w-full gap-y-2 items-center text-center">
+      <div class="flex flex-col w-full gap-y-3 items-center text-center">
         <p
           class="text-[12px] sm:text-[18px] md:text-[22px] lg:text-[24px] xl:text-[24px] font-medium text-[#2AB857] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
         >
@@ -40,6 +40,14 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
           class="text-[14px] sm:text-[16px] md:text-[20px] lg:text-[32] xl:text-[32px] font-[500] tracking-wide text-[#195279] dark:text-[#6A6A6A]"
         >
           Telah di dukung secara resmi
+        </p>
+        <p
+          class="px-8 sm:px-0 text-[10px] sm:text-[12px] md:text-[12px] lg:text-[14px] xl:text-[14px] font-medium text-[#3D6986] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+        >
+          Seleris Care diklasifikasikan sebagai Alat Kesehatan berbasis AI
+          sesuai regulasi <br class="hidden sm:block" />
+          Kementerian Kesehatan RI dan mengikuti ketentuan Permenkes No.14 Tahun
+          2021
         </p>
       </div>
       <Swiper
@@ -91,7 +99,7 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
                 class="w-full h-auto flex justify-center items-center text-center px-4 sm:px-10 lg:px-14 xl:px-32"
               >
                 <span
-                  class="text-[#AEA9B1] font-[400] text-[10px] sm:text-[12px] lg:text-[12px] xl:text-[16px]"
+                  class="text-[#AEA9B1] font-[400] text-[10px] sm:text-[12px] lg:text-[16px] xl:text-[16px]"
                 >
                   {{ data.description }}
                 </span>
