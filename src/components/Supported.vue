@@ -31,16 +31,18 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
     >
       <!-- Heading -->
       <div class="flex flex-col w-full gap-y-3 items-center text-center">
+        <!-- class="text-[12px] sm:text-[18px] md:text-[22px] lg:text-[24px] xl:text-[24px] font-medium text-[#2AB857] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]" -->
         <p
-          class="text-[12px] sm:text-[18px] md:text-[22px] lg:text-[24px] xl:text-[24px] font-medium text-[#2AB857] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+          class="text-[16px] sm:text-[18px] md:text-[22px] lg:text-[24px] xl:text-[24px] font-medium text-[#2AB857] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
         >
-          Sertifikasi
+          <!-- Sertifikasi -->
+          Surat Keterangan
         </p>
-        <p
+        <!-- <p
           class="text-[14px] sm:text-[16px] md:text-[20px] lg:text-[32] xl:text-[32px] font-[500] tracking-wide text-[#195279] dark:text-[#6A6A6A]"
         >
           Telah di dukung secara resmi
-        </p>
+        </p> -->
         <p
           class="px-8 sm:px-0 text-[10px] sm:text-[12px] md:text-[12px] lg:text-[14px] xl:text-[14px] font-medium text-[#3D6986] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
         >

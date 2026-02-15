@@ -5,6 +5,7 @@ module.exports = {
   theme: {
     extend: {
       screens: {
+        smallest: "320px",
         // Mobile breakpoints
         sm: "640px",
         // Tablet / Medium
