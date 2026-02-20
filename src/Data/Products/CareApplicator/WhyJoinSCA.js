@@ -12,7 +12,7 @@ export const whyJoinSCA = [
     content: "Aplikasi mudah, tracking otomatis",
   },
   {
-    title: "Dua Sumber Income",
+    title: "Sumber Income",
     content: "Komisi langsung + komisi jaringan",
   },
   {

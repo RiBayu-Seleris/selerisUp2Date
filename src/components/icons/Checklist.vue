@@ -7,7 +7,7 @@
   >
     <path
       d="M18 32.26L26.5068 41L45 22"
-      stroke="#FAFAFA"
+      stroke="currentColor"
       stroke-width="6"
       stroke-linecap="round"
     />

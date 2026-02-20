@@ -16,15 +16,17 @@ export const clientLogos = [
     .href,
   new URL(
     "@/assets/images/clients-and-partners/bumiputera.png",
-    import.meta.url
+    import.meta.url,
   ).href,
   new URL(
     "@/assets/images/clients-and-partners/bumiputera-syariah.png",
-    import.meta.url
+    import.meta.url,
   ).href,
   new URL("@/assets/images/clients-and-partners/bumida.png", import.meta.url)
     .href,
   new URL("@/assets/images/clients-and-partners/bosowa.png", import.meta.url)
+    .href,
+  new URL("@/assets/images/clients-and-partners/higea.png", import.meta.url)
     .href,
 ];
 
@@ -35,40 +37,44 @@ export const clientLogosDark = [
     .href,
   new URL(
     "@/assets/images/clients-and-partners/chubb-dark.png",
-    import.meta.url
+    import.meta.url,
   ).href,
   new URL("@/assets/images/clients-and-partners/fpg-dark.png", import.meta.url)
     .href,
   new URL(
     "@/assets/images/clients-and-partners/heksa-dark.png",
-    import.meta.url
+    import.meta.url,
   ).href,
   new URL(
     "@/assets/images/clients-and-partners/equity-dark.png",
-    import.meta.url
+    import.meta.url,
   ).href,
   new URL(
     "@/assets/images/clients-and-partners/indore-dark.png",
-    import.meta.url
+    import.meta.url,
   ).href,
   new URL(
     "@/assets/images/clients-and-partners/reindo-dark.png",
-    import.meta.url
+    import.meta.url,
   ).href,
   new URL(
     "@/assets/images/clients-and-partners/bumiputera-dark.png",
-    import.meta.url
+    import.meta.url,
   ).href,
   new URL(
     "@/assets/images/clients-and-partners/bumiputera-syariah-dark.png",
-    import.meta.url
+    import.meta.url,
   ).href,
   new URL(
     "@/assets/images/clients-and-partners/bumida-dark.png",
-    import.meta.url
+    import.meta.url,
   ).href,
   new URL(
     "@/assets/images/clients-and-partners/bosowa-dark.png",
-    import.meta.url
+    import.meta.url,
+  ).href,
+  new URL(
+    "@/assets/images/clients-and-partners/higea-dark.png",
+    import.meta.url,
   ).href,
 ];

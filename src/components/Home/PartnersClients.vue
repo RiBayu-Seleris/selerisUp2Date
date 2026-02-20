@@ -29,10 +29,10 @@ const partnerChunks = computed(() => chunkArray(partnerLogos, columnsPerRow));
 const clientChunks = computed(() => chunkArray(clientLogos, columnsPerRow));
 
 const partnerChunksDark = computed(() =>
-  chunkArray(partnerLogosDark, columnsPerRow)
+  chunkArray(partnerLogosDark, columnsPerRow),
 );
 const clientChunksDark = computed(() =>
-  chunkArray(clientLogosDark, columnsPerRow)
+  chunkArray(clientLogosDark, columnsPerRow),
 );
 
 const startProgress = () => {
@@ -117,12 +117,12 @@ onBeforeUnmount(() => {
               row.length === 1
                 ? 'grid-cols-1'
                 : row.length === 2
-                ? 'grid-cols-2'
-                : row.length === 3
-                ? 'grid-cols-3'
-                : row.length === 4
-                ? 'grid-cols-4'
-                : 'grid-cols-5',
+                  ? 'grid-cols-2'
+                  : row.length === 3
+                    ? 'grid-cols-3'
+                    : row.length === 4
+                      ? 'grid-cols-4'
+                      : 'grid-cols-5',
               row.length < columnsPerRow ? 'justify-center' : '',
             ]"
           >
@@ -150,12 +150,12 @@ onBeforeUnmount(() => {
               row.length === 1
                 ? 'grid-cols-1'
                 : row.length === 2
-                ? 'grid-cols-2'
-                : row.length === 3
-                ? 'grid-cols-3'
-                : row.length === 4
-                ? 'grid-cols-4'
-                : 'grid-cols-5',
+                  ? 'grid-cols-2'
+                  : row.length === 3
+                    ? 'grid-cols-3'
+                    : row.length === 4
+                      ? 'grid-cols-4'
+                      : 'grid-cols-5',
               row.length < columnsPerRow ? 'justify-center' : '',
             ]"
           >
@@ -187,12 +187,12 @@ onBeforeUnmount(() => {
               row.length === 1
                 ? 'grid-cols-1'
                 : row.length === 2
-                ? 'grid-cols-2'
-                : row.length === 3
-                ? 'grid-cols-3'
-                : row.length === 4
-                ? 'grid-cols-4'
-                : 'grid-cols-5',
+                  ? 'grid-cols-2'
+                  : row.length === 3
+                    ? 'grid-cols-3'
+                    : row.length === 4
+                      ? 'grid-cols-4'
+                      : 'grid-cols-5',
               row.length < columnsPerRow ? 'justify-center' : '',
             ]"
           >
@@ -219,12 +219,12 @@ onBeforeUnmount(() => {
               row.length === 1
                 ? 'grid-cols-1'
                 : row.length === 2
-                ? 'grid-cols-2'
-                : row.length === 3
-                ? 'grid-cols-3'
-                : row.length === 4
-                ? 'grid-cols-4'
-                : 'grid-cols-5',
+                  ? 'grid-cols-2'
+                  : row.length === 3
+                    ? 'grid-cols-3'
+                    : row.length === 4
+                      ? 'grid-cols-4'
+                      : 'grid-cols-5',
               row.length < columnsPerRow ? 'justify-center' : '',
             ]"
           >

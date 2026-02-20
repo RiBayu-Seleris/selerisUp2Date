@@ -65,7 +65,7 @@ const ApiServices = [
               >
                 <div class="w-[5%] h-auto">
                   <div
-                    class="w-7 h-7 lg:w-7 lg:h-7 xl:w-8 xl:h-8 mt-2 bg-[#1AB24F] rounded-full"
+                    class="w-7 h-7 lg:w-7 lg:h-7 xl:w-8 xl:h-8 mt-2 bg-[#1AB24F] text-[#FAFAFA] rounded-full"
                   >
                     <ChecklistIcon />
                   </div>

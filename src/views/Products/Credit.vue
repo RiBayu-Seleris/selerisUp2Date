@@ -575,7 +575,7 @@ useVideoOnView(selerisVideo, selerisBlock);
                       >
                         <div class="w-[5%] h-auto">
                           <div
-                            class="w-6 h-6 lg:w-8 lg:h-8 xl:w-8 xl:h-8 bg-[#1889D1] rounded-[8px]"
+                            class="w-6 h-6 lg:w-8 lg:h-8 xl:w-8 xl:h-8 bg-[#1889D1] text-[#FAFAFA] rounded-[8px]"
                           >
                             <ChecklistIcon />
                           </div>

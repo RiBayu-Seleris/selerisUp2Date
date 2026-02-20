@@ -54,11 +54,27 @@ const getBlogs = async () => {
 };
 
 /* =========================
+   RESPONSIVE WIDTH
+========================= */
+const windowWidth = ref(window.innerWidth);
+
+const handleResize = () => {
+  windowWidth.value = window.innerWidth;
+};
+
+/* =========================
    COMPUTED
 ========================= */
 const latestBlogs = computed(() => {
   if (!Array.isArray(blogs.value)) return [];
-  return blogs.value.slice(0, 3);
+
+  const width = windowWidth.value;
+
+  // const limit = width > 768 && width < 1024 ? 4 : 3;
+  const limit = width >= 768 && width < 1024 ? 4 : 3;
+  console.log("WIDTH:", width, "LIMIT:", limit);
+
+  return blogs.value.slice(0, limit);
 });
 
 /* =========================
@@ -103,10 +119,12 @@ const handleClickOutside = (event) => {
 onMounted(() => {
   getBlogs();
   document.addEventListener("click", handleClickOutside);
+  window.addEventListener("resize", handleResize); // 👈 tambah ini
 });
 
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
+  window.removeEventListener("resize", handleResize); // 👈 tambah ini
 });
 </script>
 
