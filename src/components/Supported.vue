@@ -69,7 +69,18 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
           <div
             class="w-full h-auto flex flex-col gap-y-8 md:gap-y-10 lg:gap-y-10 xl:gap-y-20 justify-center items-center"
           >
-            <div class="w-full h-auto flex justify-center items-center">
+            <div
+              class="hidden w-full h-auto dark:flex justify-center items-center"
+            >
+              <img
+                :src="`/assets/images/certificate-icon/${data.darkLogo}`"
+                alt="Banner"
+                class="w-full h-[50px] sm:h-[90px] lg:h-[100px] xl:h-[150px] object-contain"
+              />
+            </div>
+            <div
+              class="dark:hidden w-full h-auto flex justify-center items-center"
+            >
               <img
                 :src="`/assets/images/certificate-icon/${data.logo}`"
                 alt="Banner"
@@ -77,13 +88,13 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
               />
             </div>
             <div
-              class="w-full h-auto flex flex-col gap-y-4 md:gap-y-4 lg:gap-y-4 xl:gap-y-5 justify-center items-center"
+              class="w-full h-auto flex flex-col gap-y-4 md:gap-y-4 lg:gap-y-4 xl:gap-y-5 justify-center items-center dark:text-[#FAFAFA]"
             >
               <div
                 class="w-full h-auto flex justify-center items-center text-center"
               >
                 <span
-                  class="text-[#195279] font-[600] text-[14px] lg:text-[20px] xl:text-[24px]"
+                  class="text-[#195279] dark:text-[#FAFAFA] font-[600] text-[14px] lg:text-[20px] xl:text-[24px]"
                 >
                   {{ data.certificate_number }}
                 </span>
@@ -92,7 +103,7 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
                 class="w-full h-auto flex justify-center items-center text-center"
               >
                 <span
-                  class="text-[#195279] font-[500] text-[12px] md:text-[16px] xl:text-[16px]"
+                  class="text-[#195279] dark:text-[#FAFAFA] font-[500] text-[12px] md:text-[16px] xl:text-[16px]"
                 >
                   {{ data.name }}
                 </span>

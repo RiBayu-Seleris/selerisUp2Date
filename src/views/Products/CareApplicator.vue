@@ -6,10 +6,10 @@ import ThunderIcon from "@/assets/Products/images/Care-Applicator/thunder-icon.v
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
-import {
-  features,
-  packages,
-} from "@/Data/Products/CareApplicator/HealthPackage.js";
+// import {
+//   features,
+//   packages,
+// } from "@/Data/Products/CareApplicator/HealthPackage.js";
 import { testimonials } from "@/Data/Products/CareApplicator/Testimonials.js";
 import { membershipLevels } from "@/Data/Products/CareApplicator/MembershipLevels.js";
 import { whatsSelerisCare } from "@/Data/Products/CareApplicator/WhatsSelerisCare.js";
@@ -19,6 +19,9 @@ import { howToJoin } from "@/Data/Products/CareApplicator/HowToJoin.js";
 import { benefits } from "@/Data/Products/CareApplicator/benefits.js";
 
 import ArrowLeft from "@/assets/icons/arrow-left.svg";
+import PaketPemeriksaan from "@/components/SCA/paketPemeriksaan.vue";
+import HealthParameterTabs from "@/components/SCA/healthParameters.vue";
+import { payPerScanPackages } from "@/Data/Products/CareApplicator/HealthPackage";
 
 const modules = [Navigation, Pagination, Autoplay];
 
@@ -58,8 +61,26 @@ const supportBerkelanjutan = computed(
   () => benefits.find((b) => b.title === "Support Berkelanjutan")?.items || [],
 );
 
+const pricingType = ref("payPerScan");
+
+const isSubscribe = computed(() => pricingType.value === "subscribe");
+
+const tabs = [
+  { id: "Cardiovascular", label: "Cardiovascular" },
+  { id: "Metabolic", label: "Metabolic" },
+  { id: "Metabolic2", label: "Metabolic2" },
+];
+
+const toggle = () => {
+  pricingType.value = isSubscribe.value ? "payPerScan" : "subscribe";
+};
+
 const toggleExpand = (index) => {
   packages[index].expanded = !packages[index].expanded;
+};
+
+const openDetail = (pkg) => {
+  selectedPackage.value = pkg;
 };
 
 function handleOpenModal(pkg) {
@@ -556,14 +577,14 @@ watch(showModal, (isOpen) => {
                       <span
                         class="text-[#FFFFFF] font-[600] text-[16px] md:text-[24px] lg:text-[18px] xl:text-[24px]"
                       >
-                        Mitra Resmi
+                        Partner Resmi
                       </span>
                     </div>
                     <div class="w-full h-auto flex">
                       <span
                         class="text-[#ECECEC] font-[400] text-[10px] md:text-[12px]"
                       >
-                        Identity Verified
+                        Telah melalui proses verifikasi dan sertifikasi
                       </span>
                     </div>
                   </div>
@@ -581,16 +602,16 @@ watch(showModal, (isOpen) => {
                   <div class="w-full h-auto flex flex-col">
                     <div class="w-full h-auto flex">
                       <span
-                        class="text-[#FFFFFF] font-[600] text-[16px] md:text-[24px] lg:text-[18px] xl:text-[24px]"
+                        class="text-[#FFFFFF] font-[600] text-[16px] md:text-[24px] lg:text-[18px] xl:text-[24px] whitespace-nowrap"
                       >
-                        Mitra Resmi
+                        Solusi Kesehatan
                       </span>
                     </div>
                     <div class="w-full h-auto flex">
                       <span
                         class="text-[#ECECEC] font-[400] text-[10px] md:text-[12px]"
                       >
-                        Identity Verified
+                        Didukung teknologi scanning modern
                       </span>
                     </div>
                   </div>
@@ -620,14 +641,14 @@ watch(showModal, (isOpen) => {
                       <span
                         class="text-[#FFFFFF] font-[600] text-[16px] md:text-[20px] lg:text-[18px] xl:text-[20px]"
                       >
-                        Digital Ecosystem
+                        Platform Digital Pintar
                       </span>
                     </div>
                     <div class="w-full h-auto flex">
                       <span
                         class="text-[#ECECEC] font-[400] text-[12px] md:text-[14px] lg:text-[12px] xl:text-[14px]"
                       >
-                        Identity Verified
+                        Pelaporan dan pemantauan terintegrasi
                       </span>
                     </div>
                   </div>
@@ -639,208 +660,85 @@ watch(showModal, (isOpen) => {
       </div>
     </section>
 
+    <!-- 30 Health Parameter -->
+    <!-- <section
+      class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px] px-8 md:px-12 lg:px-16 xls:px-32 mt-32 lg:mt-40"
+    >
+      <div class="w-full h-auto flex flex-col">
+        <div
+          class="max-w-xl mx-auto w-full h-auto flex flex-col gap-y-2 justify-center items-center text-center"
+        >
+          <p class="text-[#374151] font-[600] text-[48px]">
+            30 Health Parameters
+          </p>
+          <p class="text-[#374151] font-[400] text-[16px]">
+            Teknologi AI kami menganalisis spektrum kesehatan tubuh secara
+            mendalam hanya dalam satu sesi pemindaian.
+          </p>
+        </div>
+        <HealthParameterTabs :tabs="tabs">
+          <template #default="{ activeTab }">
+            <div class="p-4 bg-white rounded shadow">
+              <div v-if="activeTab === 'Cardiovascular'">
+                <p>Ini isi Tab 1</p>
+              </div>
+              <div v-else-if="activeTab === 'Metabolic'">
+                <p>Ini isi Tab 2</p>
+              </div>
+              <div v-else-if="activeTab === 'Metabolic2'">
+                <p>Ini isi Tab 2</p>
+              </div>
+              <div v-else>
+                <p>Ini isi Tab 3</p>
+              </div>
+            </div>
+          </template>
+        </HealthParameterTabs>
+      </div>
+    </section> -->
+
     <!-- Paket Pemeriksaan Kesehatan -->
     <section
       class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px] px-8 md:px-12 lg:px-16 xls:px-32 mt-32 lg:mt-40"
     >
-      <div class="w-full h-auto flex flex-col gap-y-10">
-        <div class="w-full h-auto flex flex-col gap-y-5">
+      <div class="w-full h-auto flex">
+        <div class="w-full h-auto flex flex-col gap-y-10">
           <div class="w-full h-auto flex justify-center items-center">
             <span
               class="text-[24px] md:text-[28px] lg:text-[36px] text-[#374151] font-[600] text-center leading-tight tracking-wider"
             >
-              Pilih Paket Pemeriksaan <br />
-              Kesehatan Anda
+              Pilih Paket Kesehatan <br />
+              Sesuai Kebutuhan Anda
             </span>
           </div>
-          <div class="w-full h-auto flex justify-center items-center">
-            <span
-              class="text-[10px] md:text-[14px] lg:text-[16px] text-[#374151] font-[400] text-center"
-            >
-              Klik salah satu paket untuk melihat rincian lengkap parameternya.
-            </span>
-          </div>
-        </div>
-        <!-- DESKTOP -->
-        <div class="hidden md:block w-full">
-          <div
-            class="grid grid-cols-[1fr_repeat(3,1fr)] border rounded-lg overflow-hidden"
-          >
-            <!-- HEADER -->
-            <div
-              class="border-b px-6 py-4 font-semibold h-auto flex items-center"
-            >
-              Fitur & Parameter
-            </div>
-
-            <template v-for="pkg in packages" :key="pkg.name">
+          <div class="w-full h-auto flex flex-col gap-y-6">
+            <!-- <div class="flex items-center justify-center gap-6">
+              <p :class="!isSubscribe ? 'text-black' : 'text-gray-400'">
+                Pay Per Scan
+              </p>
               <div
-                class="relative border-b px-6 py-4"
-                :class="pkg.highlight && 'bg-[#E7FFFB]'"
+                @click="toggle"
+                class="relative w-20 h-10 bg-white border rounded-full cursor-pointer"
               >
                 <div
-                  v-if="pkg.highlight"
-                  class="absolute top-0 left-0 w-full h-2 bg-[#26DBBD] rounded-b-[20px]"
+                  :class="[
+                    'absolute w-6 h-6 top-1/2 -translate-y-1/2 left-2 bg-[#FFFFFF] rounded-full border-[2px] border-[#E6E8F0] shadow-[0px_7px_11.8px_0px_#80808026,_inset_0px_8px_6.4px_0px_#0000000F] transition-all duration-300',
+                    isSubscribe ? 'left-[calc(100%-36px)]' : 'left-2',
+                  ]"
                 />
-                <p
-                  class="text-xs font-semibold"
-                  :class="pkg.highlight ? 'text-[#22B098]' : 'text-[#374151]'"
-                >
-                  {{ pkg.label }}
-                </p>
-                <p class="text-lg font-semibold text-[#374151] uppercase">
-                  {{ pkg.name }}
-                </p>
               </div>
-            </template>
-
-            <!-- ROW: HARGA -->
-            <div class="border-b px-6 py-4 font-semibold text-[#57788E]">
-              Harga
-            </div>
-
-            <template v-for="pkg in packages" :key="pkg.name + '-price'">
-              <div
-                class="border-b px-6 py-4"
-                :class="pkg.highlight && 'bg-[#E7FFFB]'"
-              >
-                <span :class="`${pkg.priceColor} font-[600]`">
-                  {{ pkg.price }}
-                </span>
-              </div>
-            </template>
-
-            <!-- ROWS: FITUR -->
-            <template v-for="(feat, i) in features" :key="feat">
-              <div class="border-b px-6 py-4 font-semibold text-[#57788E]">
-                {{ feat }}
-              </div>
-
-              <template v-for="pkg in packages" :key="pkg.name + i">
-                <div
-                  class="border-b px-6 py-4 h-auto flex items-center"
-                  :class="pkg.highlight && 'bg-[#E7FFFB]'"
-                >
-                  <span v-if="pkg.values[i]" class="text-[#000]">
-                    {{ pkg.values[i] }}
-                  </span>
-                  <span v-if="pkg.values[i] === null" class="text-[#000]">
-                    -
-                  </span>
-                </div>
-              </template>
-            </template>
-
-            <!-- CTA -->
-            <div></div>
-
-            <template v-for="pkg in packages" :key="pkg.name + '-cta'">
-              <div
-                class="w-full md:px-4 lg:px-6 py-3 font-semibold h-auto flex items-center justify-center"
-                :class="pkg.highlight && 'bg-[#E7FFFB]'"
-              >
-                <button
-                  class="w-full h-auto py-2 flex justify-center items-center rounded-[10px] cursor-pointer"
-                  :class="
-                    pkg.name === 'Essential'
-                      ? 'bg-[#C4EAFF] text-[#488DB3]'
-                      : pkg.name === 'Core'
-                        ? 'bg-[#2BE1C2] text-[#FFFFFF] shadow'
-                        : pkg.name === 'Prime'
-                          ? 'bg-[#0067B5] text-[#FFFFFF]'
-                          : ''
-                  "
-                  @click="handleOpenModal(pkg)"
-                >
-                  <span class="font-[600] md:text-[12px] lg:text-[14px]">
-                    Lihat Detail {{ pkg.name }}
-                  </span>
-                </button>
-              </div>
-            </template>
-          </div>
-        </div>
-
-        <!-- MOBILE -->
-        <div class="flex flex-col gap-y-5 md:hidden w-full">
-          <div
-            v-for="(pkg, index) in packages"
-            :key="pkg.name"
-            class="p-[1px] rounded-[10px]"
-            :class="
-              pkg.name === 'CORE'
-                ? 'bg-gradient-to-b from-[#26DBBD] from-[20%] to-[#26DBBD]/0'
-                : 'bg-[#DADADA]'
-            "
-          >
-            <div class="relative bg-white rounded-[10px] flex flex-col">
-              <!-- HEADER -->
-              <div
-                v-if="pkg.name === 'CORE'"
-                class="w-[50%] h-1.5 absolute top-0 left-1/2 -translate-x-1/2 bg-[#27DBBD] rounded-b-full"
-              />
-              <div class="flex justify-between px-5 pt-5 pb-3">
-                <div>
-                  <p class="text-[12px] text-[#374151]">
-                    {{ pkg.label }}
-                  </p>
-                  <p class="text-[20px] font-[600] text-[#374151] uppercase">
-                    {{ pkg.name }}
-                  </p>
-                </div>
-                <div class="flex items-end">
-                  <span class="text-[18px] font-[600]" :class="pkg.priceColor">
-                    {{ pkg.price }}
-                  </span>
-                </div>
-              </div>
-
-              <div class="h-[1px] bg-[#DADADA]" />
-
-              <!-- CONTENT -->
-              <div
-                ref="contentRefs"
-                class="relative overflow-hidden transition-[max-height] duration-300 ease-in-out will-change-[max-height]"
-                :style="{
-                  maxHeight: pkg.expanded
-                    ? contentHeights[index] + 'px'
-                    : '160px',
-                }"
-              >
-                <!-- GRADIENT -->
-                <div
-                  v-if="!pkg.expanded"
-                  class="absolute inset-0 z-10 bg-gradient-to-b from-white/30 to-white"
+              <p :class="isSubscribe ? 'text-black' : 'text-gray-400'">
+                Subscribe
+              </p>
+            </div> -->
+            <div class="max-w-5xl w-full h-auto mx-auto">
+              <div class="w-full h-auto flex flex-row gap-x-5">
+                <PaketPemeriksaan
+                  v-for="pkg in payPerScanPackages"
+                  :key="pkg.id"
+                  :pkg="pkg"
+                  @show-detail="openDetail"
                 />
-
-                <ul
-                  class="px-5 py-5 mx-5 list-disc list-outside pl-5 flex flex-col gap-y-3 text-[14px] md:text-[16px]"
-                >
-                  <li v-for="(val, i) in pkg.mobileValues" :key="i">
-                    {{ val }}
-                  </li>
-                </ul>
-              </div>
-
-              <!-- BUTTON -->
-              <div class="px-5 py-3">
-                <div
-                  class="rounded-[8px] py-2 text-center cursor-pointer"
-                  :class="
-                    pkg.name === 'ESSENTIAL'
-                      ? 'bg-[#C4EAFF] text-[#488DB3]'
-                      : pkg.name === 'CORE'
-                        ? 'bg-[#2BE1C2] text-[#FFFFFF] shadow'
-                        : pkg.name === 'PRIME'
-                          ? 'bg-[#0067B5] text-[#FFFFFF]'
-                          : ''
-                  "
-                  @click="toggleExpand(index)"
-                >
-                  <span class="font-[600] text-[14px]">
-                    {{ pkg.expanded ? "Tutup" : "Lihat Lebih Banyak" }}
-                  </span>
-                </div>
               </div>
             </div>
           </div>
@@ -857,7 +755,7 @@ watch(showModal, (isOpen) => {
         <transition name="zoom">
           <div
             v-if="selectedPackage"
-            class="w-full h-auto max-w-4xl relative z-50 flex flex-col items-center gap-y-6 lg:gap-y-14 xls:gap-y-16"
+            class="w-full h-auto max-w-md lg:max-w-4xl relative z-50 flex flex-col justify-center items-center gap-y-6 lg:gap-y-14 xls:gap-y-16 bg-green-500"
           >
             <div class="w-full h-auto flex">
               <button
@@ -900,7 +798,9 @@ watch(showModal, (isOpen) => {
                 </div>
               </button>
             </div>
-            <div class="w-full h-auto xls:h-auto flex flex-row gap-x-0">
+            <div
+              class="w-full h-auto xls:h-auto flex flex-col lg:flex-row gap-x-0"
+            >
               <div class="w-full h-full flex flex-col gap-y-5 items-start">
                 <div class="w-full h-[45px] flex items-start">
                   <div
@@ -909,7 +809,9 @@ watch(showModal, (isOpen) => {
                     <div
                       class="w-auto h-auto bg-[#C4EAFF] px-10 py-2 rounded-full"
                     >
-                      <span class="text-[#4273C2] font-[600] text-[16px]">
+                      <span
+                        class="text-[#4273C2] font-[600] text-[14px] lg:text-[16px]"
+                      >
                         Paket
                         <span class="uppercase">
                           {{ selectedPackage.name }}
@@ -921,7 +823,7 @@ watch(showModal, (isOpen) => {
                 <div class="w-full h-auto flex flex-col gap-y-3">
                   <div class="w-full h-auto flex">
                     <span
-                      class="text-[38px] xls:text-[38px] text-[#374151] font-[600] leading-tight tracking-wider"
+                      class="text-[28px] lg:text-[38px] text-[#374151] font-[600] leading-tight tracking-wider"
                     >
                       Kesehatan Anda, <br />
                       Analisis
@@ -1022,7 +924,7 @@ watch(showModal, (isOpen) => {
                   </span>
                 </div>
                 <div
-                  class="w-full h-auto flex flex-col gap-y-5 overflow-y-auto pr-3"
+                  class="w-full h-[200px] lg:h-auto flex flex-col gap-y-5 overflow-y-auto pr-3"
                 >
                   <div
                     v-for="data in selectedPackage.modalValues"

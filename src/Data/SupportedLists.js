@@ -3,6 +3,7 @@
 export const supportedLists = [
   {
     logo: "Kemenkes.svg",
+    darkLogo: "Kemenkes-Dark.svg",
     subTitle: "",
     certificate_number: "SKP-IP-01261-26",
     name: "KEMENTERIAN KESEHATAN REPUBLIK INDONESIA",
