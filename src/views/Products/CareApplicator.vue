@@ -1180,7 +1180,8 @@ watch(showModal, (isOpen) => {
             </div>
           </div>
         </div>
-        <div
+        <a
+          href="https://sca.seleriscare.ai/register"
           class="w-full md:w-auto md:mx-auto h-auto flex bg-[#38D8BF] justify-center items-center py-3 md:py-2.5 px-10 rounded-[8px] cursor-pointer shadow-[0px_9px_30px_0px_rgba(61,218,193,0.25)]"
         >
           <span
@@ -1188,7 +1189,7 @@ watch(showModal, (isOpen) => {
           >
             Bergabung Sekarang
           </span>
-        </div>
+        </a>
       </div>
     </section>
 
@@ -1845,7 +1846,8 @@ watch(showModal, (isOpen) => {
             class="w-full flex flex-col-reverse md:flex-row gap-y-3 md:gap-x-6"
           >
             <!-- PRIMARY BUTTON -->
-            <button
+            <a
+              href="https://sca.seleriscare.ai/register"
               aria-label="Daftar Jadi SCA"
               class="inline-flex justify-center items-center gap-x-3 w-full lg:w-auto px-6 md:px-8 lg:px-4 xl:px-6 py-2.5 md:py-2 xl:py-3 bg-[#3DDAC1] rounded-[12px]"
             >
@@ -1854,10 +1856,11 @@ watch(showModal, (isOpen) => {
               >
                 Daftar Jadi SCA Sekarang
               </span>
-            </button>
+            </a>
 
             <!-- SECONDARY BUTTON -->
-            <button
+            <router-link
+              to="/contact"
               aria-label="Hubungi Admin"
               class="inline-flex justify-center items-center gap-x-3 w-full lg:w-auto px-6 md:px-8 lg:px-4 xl:px-6 py-2.5 md:py-2 xl:py-3 bg-[#31423F] rounded-[12px]"
             >
@@ -1881,7 +1884,7 @@ watch(showModal, (isOpen) => {
               >
                 Hubungi Admin
               </span>
-            </button>
+            </router-link>
           </div>
         </div>
         <!-- Phone Desktop -->
