@@ -226,6 +226,44 @@ onMounted(() => {
             </div>
           </transition>
 
+          <!-- Ini Open Menu -->
+          <!-- <transition name="fade-slide">
+            <div
+              v-if="showTooltip"
+              @click="toggleTooltip"
+              class="fixed bottom-[20px] right-[20px] lg:bottom-[20px] lg:right-[40px] w-12 h-12 flex items-start z-50 bg-white dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white p-1 md:p-2 rounded-full cursor-pointer"
+            >
+              <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
+            </div>
+          </transition> -->
+
+          <!-- Ini Gesture -->
+          <!-- <transition name="fade-slide">
+            <div
+              v-if="showTooltip && isTooltipOpen"
+              class="fixed bottom-[20px] lg:bottom-[80px] lg:right-[40px] w-12 h-12 flex items-start z-50 bg-white dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white p-1 md:p-2 rounded-full cursor-pointer"
+            >
+              <GestureScroll
+                :enable-sidebar-gesture="true"
+                :disable-scroll="sidebarStore.isOpen"
+                @open-sidebar="sidebarStore.open"
+                @close-sidebar="sidebarStore.close"
+              />
+              <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
+            </div>
+          </transition> -->
+
+          <!-- Ini Scroll To Top -->
+          <!-- <transition name="fade-slide">
+            <div
+              v-if="showTooltip && isTooltipOpen"
+              @click="scrollToTop"
+              class="fixed bottom-[20px] lg:bottom-[135px] lg:right-[40px] w-12 h-12 flex items-start z-50 bg-white dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white p-1 md:p-2 rounded-full cursor-pointer"
+            >
+              <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
+            </div>
+          </transition> -->
+
           <!-- Sidebar -->
           <Sidebar />
 

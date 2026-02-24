@@ -332,7 +332,8 @@ watch(showModal, (isOpen) => {
             <div
               class="w-full h-auto flex flex-col-reverse sm:flex-row gap-y-3 sm:gap-x-14 lg:gap-x-6 lg:justify-between"
             >
-              <button
+              <a
+                href="https://sca.seleriscare.ai/register"
                 aria-label="Daftar Jadi SCA"
                 class="inline-flex justify-between md:justify-start items-center gap-x-3 w-full lg:w-auto px-20 md:px-8 lg:px-4 xl:px-6 py-3 md:py-2 bg-[#3DDAC1] rounded-[12px]"
               >
@@ -369,7 +370,7 @@ watch(showModal, (isOpen) => {
                     />
                   </svg>
                 </div>
-              </button>
+              </a>
               <div
                 class="w-full lg:w-auto px-4 lg:px-2 xl:px-4 py-2 bg-[#EBF7FC] rounded-[12px] flex items-center gap-x-4"
               >
@@ -712,7 +713,7 @@ watch(showModal, (isOpen) => {
             </span>
           </div>
           <div class="w-full h-auto flex flex-col gap-y-6">
-            <!-- <div class="flex items-center justify-center gap-6">
+            <div class="flex items-center justify-center gap-6">
               <p :class="!isSubscribe ? 'text-black' : 'text-gray-400'">
                 Pay Per Scan
               </p>
@@ -730,7 +731,7 @@ watch(showModal, (isOpen) => {
               <p :class="isSubscribe ? 'text-black' : 'text-gray-400'">
                 Subscribe
               </p>
-            </div> -->
+            </div>
             <div class="max-w-5xl w-full h-auto mx-auto">
               <div class="w-full h-auto flex flex-row gap-x-5">
                 <PaketPemeriksaan

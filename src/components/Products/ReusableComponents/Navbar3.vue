@@ -8,6 +8,7 @@ import ThemeToggle from "@/components/reusable/ThemeToggle.vue";
 
 import { useSidebarStore } from "@/stores/sidebar";
 import { useProductLogo } from "@/Data/Products/useProductLogo.js";
+import router from "../../../router";
 
 const sidebarStore = useSidebarStore();
 const route = useRoute(); // ✅ Ambil route saat ini
@@ -59,7 +60,8 @@ const isSelerisCareApplicator = computed(
         <MenuNav />
       </div>
 
-      <div
+      <a
+        href="https://sca.seleriscare.ai/register"
         v-if="isSelerisCareApplicator"
         class="absolute w-auto h-full right-10 top-0 py-3"
       >
@@ -68,7 +70,7 @@ const isSelerisCareApplicator = computed(
         >
           <span class="text-[#FFFFFF] font-[600] text-[14px]">Gabung SCA</span>
         </div>
-      </div>
+      </a>
     </div>
 
     <!-- Mobile Navbar -->
