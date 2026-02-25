@@ -44,7 +44,10 @@ const currentLogos = computed(() => {
 const updateMaxHeight = async () => {
   await nextTick();
   if (logoContainer.value) {
-    maxHeight.value = logoContainer.value.scrollHeight;
+    const currentHeight = logoContainer.value.scrollHeight;
+    if (currentHeight > maxHeight.value) {
+      maxHeight.value = currentHeight;
+    }
   }
 };
 
@@ -104,7 +107,7 @@ onBeforeUnmount(() => {
         <span>Seleris</span>
         <span
           class="cursor-pointer"
-          @click="(showPartners = true), (progress = 0)"
+          @click="((showPartners = true), (progress = 0))"
           :class="showPartners ? 'text-[#2AB857] dark:text-[#FAFAFA]' : ''"
         >
           Partners
@@ -112,7 +115,7 @@ onBeforeUnmount(() => {
         <span>&</span>
         <span
           class="cursor-pointer"
-          @click="(showPartners = false), (progress = 0)"
+          @click="((showPartners = false), (progress = 0))"
           :class="!showPartners ? 'text-[#2AB857] dark:text-[#FAFAFA]' : ''"
         >
           Clients

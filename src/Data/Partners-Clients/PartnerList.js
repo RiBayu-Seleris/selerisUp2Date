@@ -12,7 +12,7 @@ export const partnerLogos = [
     .href,
   new URL(
     "@/assets/images/clients-and-partners/math-faculty.png",
-    import.meta.url
+    import.meta.url,
   ).href,
   new URL("@/assets/images/clients-and-partners/data-ai.png", import.meta.url)
     .href,
@@ -20,12 +20,16 @@ export const partnerLogos = [
     .href,
   new URL("@/assets/images/clients-and-partners/it-ads.png", import.meta.url)
     .href,
+  new URL(
+    "@/assets/images/clients-and-partners/kitamedika.png",
+    import.meta.url,
+  ).href,
 ];
 
 export const partnerLogosDark = [
   new URL(
     "@/assets/images/clients-and-partners/rynest-dark.png",
-    import.meta.url
+    import.meta.url,
   ).href,
   new URL("@/assets/images/clients-and-partners/boa-dark.png", import.meta.url)
     .href,
@@ -39,22 +43,26 @@ export const partnerLogosDark = [
     .href,
   new URL(
     "@/assets/images/clients-and-partners/hunting-dark.png",
-    import.meta.url
+    import.meta.url,
   ).href,
   new URL(
     "@/assets/images/clients-and-partners/math-faculty-dark.png",
-    import.meta.url
+    import.meta.url,
   ).href,
   new URL(
     "@/assets/images/clients-and-partners/data-ai-dark.png",
-    import.meta.url
+    import.meta.url,
   ).href,
   new URL(
     "@/assets/images/clients-and-partners/idpay-dark.png",
-    import.meta.url
+    import.meta.url,
   ).href,
   new URL(
     "@/assets/images/clients-and-partners/it-ads-dark.png",
-    import.meta.url
+    import.meta.url,
+  ).href,
+  new URL(
+    "@/assets/images/clients-and-partners/kitamedika-dark.png",
+    import.meta.url,
   ).href,
 ];

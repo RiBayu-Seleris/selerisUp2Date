@@ -12,8 +12,8 @@ const card = ref(null);
 const transformStyle = ref("perspective(1000px)");
 
 function handleMouseMove(e) {
-  if (!card.value) return
-  
+  if (!card.value) return;
+
   const cardRect = card.value.getBoundingClientRect();
   const centerX = cardRect.left + cardRect.width / 2;
   const centerY = cardRect.top + cardRect.height / 2;
@@ -33,10 +33,9 @@ function resetTransform() {
 </script>
 
 <template>
-  <!-- shadow-md -->
   <div
     ref="card"
-    class="group w-[222px] h-[80px] p-[1px] rounded-xl bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656] hover:dark:bg-none hover:dark:bg-[#D9D9D9] transition-all duration-300 ease-out"
+    class="animated-border-wrapper group w-[222px] h-[80px] p-[1px] rounded-xl transition-all duration-300 ease-out"
     @mousemove="handleMouseMove"
     @mouseleave="resetTransform"
     :style="{ transform: transformStyle }"
@@ -54,3 +53,38 @@ function resetTransform() {
     </div>
   </div>
 </template>
+
+<style scoped>
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin-border {
+  to {
+    --angle: 360deg;
+  }
+}
+
+.animated-border-wrapper {
+  background: #d9d9d9;
+}
+
+.dark .animated-border-wrapper {
+  background: linear-gradient(135deg, #17181a 45%, #565656);
+}
+
+/* Dark mode hover: baru animasi aktif */
+.dark .animated-border-wrapper:hover {
+  background: conic-gradient(
+    from calc(15deg + var(--angle)),
+    #17181a 0%,
+    #565656 40%,
+    #888888 55%,
+    #565656 70%,
+    #17181a 100%
+  ) !important;
+  animation: spin-border 5s linear infinite;
+}
+</style>

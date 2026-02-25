@@ -45,74 +45,83 @@ const getShortText = (fullText) => {
     <div
       v-for="(cert, index) in certificates"
       :key="index"
-      class="cursor-pointer snap-center shrink-0 w-full h-[240px] sm:w-full sm:h-[200px] md:w-full md:h-[240px] lg:h-[230px] perspective mb-2"
-      @click="handleFlip(index)"
+      class="animated-border-wrapper p-[1px] rounded-[20px] snap-center shrink-0 w-full h-[240px] sm:h-[200px] md:h-[240px] lg:h-[230px] mb-2"
     >
+      <!-- Card flip -->
       <div
-        :class="[
-          'relative w-full h-full duration-700 transform-style preserve-3d',
-          flippedIndex === index ? 'rotate-y-180' : '',
-        ]"
+        class="cursor-pointer w-full h-full perspective"
+        @click="handleFlip(index)"
       >
-        <!-- FRONT -->
         <div
-          class="flex flex-col space-y-2 md:space-y-3 absolute w-full h-full backface-hidden bg-[#F9FAFB] dark:bg-[#1D1F23] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 shadow-md px-5 pt-6 border-[0.1px] dark:border-[#FAFAFA]/25"
+          :class="[
+            'relative w-full h-full duration-700 transform-style preserve-3d',
+            flippedIndex === index ? 'rotate-y-180' : '',
+          ]"
         >
+          <!-- FRONT -->
           <div
-            class="flex flex-col w-full h-auto text-[#195279] dark:text-[#FAFAFA]"
+            class="flex flex-col space-y-2 md:space-y-3 absolute w-full h-full backface-hidden bg-[#F9FAFB] dark:bg-[#1D1F23] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 shadow-md px-5 pt-6 border-[0.1px] dark:border-[#FAFAFA]/25"
           >
-            <div class="flex flex-col w-full h-auto">
-              <div class="flex flex-row w-full h-auto gap-x-4 mb-4">
-                <div class="flex w-[50px] h-[50px] md:w-[60px] md:h-[60px]">
-                  <img
-                    :src="`/assets/images/certificate-icon/${cert.logo}`"
-                    alt="CertLogo"
-                    class="w-full h-full object-center object-contain"
-                  />
-                </div>
-                <div
-                  class="flex md:w-full h-auto items-start justify-center"
-                  :class="[
-                    cert.subsubtitleBefore === null ? '' : 'space-y-1 flex-col',
-                  ]"
-                >
-                  <p class="text-[14px] md:text-[20px] text-start font-normal">
-                    {{ cert.titleBefore }}
-                  </p>
-                  <p
-                    class="text-[10px] sm:text-[12px] font-normal text-[#195279] dark:text-[#FAFAFAFA] leading-normal"
+            <div
+              class="flex flex-col w-full h-auto text-[#195279] dark:text-[#FAFAFA]"
+            >
+              <div class="flex flex-col w-full h-auto">
+                <div class="flex flex-row w-full h-auto gap-x-4 mb-4">
+                  <div class="flex w-[50px] h-[50px] md:w-[60px] md:h-[60px]">
+                    <img
+                      :src="`/assets/images/certificate-icon/${cert.logo}`"
+                      alt="CertLogo"
+                      class="w-full h-full object-center object-contain"
+                    />
+                  </div>
+                  <div
+                    class="flex md:w-full h-auto items-start justify-center"
+                    :class="[
+                      cert.subsubtitleBefore === null
+                        ? ''
+                        : 'space-y-1 flex-col',
+                    ]"
                   >
-                    {{ cert.subtitleBefore }}
+                    <p
+                      class="text-[14px] md:text-[20px] text-start font-normal"
+                    >
+                      {{ cert.titleBefore }}
+                    </p>
+                    <p
+                      class="text-[10px] sm:text-[12px] font-normal text-[#195279] dark:text-[#FAFAFAFA] leading-normal"
+                    >
+                      {{ cert.subtitleBefore }}
+                    </p>
+                  </div>
+                </div>
+                <div class="flex w-full h-[50px] sm:h-[30px]">
+                  <p
+                    class="text-[14px] sm:text-[14px] md:text-[18px] tracking-wide"
+                  >
+                    {{ cert.certNumber }}
                   </p>
                 </div>
               </div>
-              <div class="flex w-full h-[50px] sm:h-[30px]">
-                <p
-                  class="text-[14px] sm:text-[14px] md:text-[18px] tracking-wide"
-                >
-                  {{ cert.certNumber }}
-                </p>
-              </div>
+            </div>
+
+            <!-- Description -->
+            <div class="flex w-full h-auto">
+              <p
+                class="text-[12px] md:text-[16px] overflow-hidden"
+                v-html="getShortText(cert.description)"
+              ></p>
             </div>
           </div>
 
-          <!-- Description -->
-          <div class="flex w-full h-auto">
+          <!-- BACK -->
+          <div
+            class="absolute w-full h-full py-5 px-5 sm:px-4 md:px-6 backface-hidden rotate-y-180 bg-[#F9FAFB] dark:bg-[#FAFAFA] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center"
+          >
             <p
-              class="text-[12px] md:text-[16px] overflow-hidden"
-              v-html="getShortText(cert.description)"
+              class="flex text-[12px] sm:text-[12px] md:text-[18px] leading-normal overflow-hidden justify-center dark:text-[#3D3434]"
+              v-html="cert.description"
             ></p>
           </div>
-        </div>
-
-        <!-- BACK -->
-        <div
-          class="absolute w-full h-[240px] sm:w-full sm:h-[200px] md:w-full md:h-[240px] lg:h-[230px] py-5 px-5 sm:px-4 md:px-6 backface-hidden rotate-y-180 bg-[#F9FAFB] dark:bg-[#FAFAFA] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center"
-        >
-          <p
-            class="flex text-[12px] sm:text-[12px] md:text-[18px] leading-normal overflow-hidden justify-center dark:text-[#3D3434]"
-            v-html="cert.description"
-          ></p>
         </div>
       </div>
     </div>
@@ -138,5 +147,38 @@ const getShortText = (fullText) => {
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;
+}
+
+/* Daftarkan CSS custom property agar bisa di-animasi */
+@property --angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
+
+@keyframes spin-border {
+  to {
+    --angle: 360deg;
+  }
+}
+
+/* Light mode: gradient border hijau-biru berputar */
+.animated-border-wrapper {
+  background: #f9fafb;
+}
+
+/* Dark mode: gradient border abu gelap berputar */
+.dark .animated-border-wrapper {
+  background: conic-gradient(
+    from var(--angle),
+    #1a1a1a 0%,
+    #4a4a4a 25%,
+    #e8e8e8 45%,
+    #ffffff 50%,
+    #e8e8e8 55%,
+    #4a4a4a 75%,
+    #1a1a1a 100%
+  );
+  animation: spin-border 10s linear infinite;
 }
 </style>

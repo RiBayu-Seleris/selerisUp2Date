@@ -117,8 +117,8 @@ onUnmounted(() => {
             <Navlink
               v-for="(product, index) in productList"
               :key="index"
-              target="_blank"
               :href="product.url"
+              :target="product.target || '_self'"
               class="flex justify-center items-center w-[170px]"
             >
               <span class="text-[#9CA3AF] dark:text-[#FAFAFA] font-[400]">
