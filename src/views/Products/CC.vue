@@ -42,7 +42,7 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
   ...step,
   image: new URL(
     `/src/assets/Products/images/Credit-Cover/${step.image}`,
-    import.meta.url
+    import.meta.url,
   ).href,
 }));
 </script>
@@ -265,7 +265,7 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
       id="bookdemo"
     >
       <BookDemoProduct
-        title="Seleris Medins A Complete Solution for Your Health Needs"
+        title="Seleris Credit Cover A Complete Solution for Your Health Needs"
         :framebookdemo="ccframebook"
         colorarrow="text-[#E84C7F]"
       />

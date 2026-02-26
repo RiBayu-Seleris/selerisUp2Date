@@ -45,7 +45,7 @@ const stepsWithPath = lifinsWorkSteps.map((step) => ({
   ...step,
   image: new URL(
     `/src/assets/Products/images/Lifins/${step.image}`,
-    import.meta.url
+    import.meta.url,
   ).href,
 }));
 </script>
@@ -265,7 +265,7 @@ const stepsWithPath = lifinsWorkSteps.map((step) => ({
       id="bookdemo"
     >
       <BookDemoProduct
-        title="Seleris Medins A Complete Solution for Your Health Needs"
+        title="Seleris Lifins A Complete Solution for Your Health Needs"
         :framebookdemo="lifinsframebook"
         colorarrow="text-[#2AB857]"
       />

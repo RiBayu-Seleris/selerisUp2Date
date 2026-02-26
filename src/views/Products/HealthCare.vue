@@ -48,7 +48,7 @@ const stepsWithPath = careWorkSteps.map((step) => ({
   ...step,
   image: new URL(
     `/src/assets/Products/images/Care/${step.image}`,
-    import.meta.url
+    import.meta.url,
   ).href,
 }));
 </script>
@@ -263,7 +263,7 @@ const stepsWithPath = careWorkSteps.map((step) => ({
       id="bookdemo"
     >
       <BookDemoProduct
-        title="Seleris Medins A Complete Solution for Your Health Needs"
+        title="Seleris Care A Complete Solution for Your Health Needs"
         :framebookdemo="medinsframebook"
         colorarrow="text-[#42C5AF]"
       />

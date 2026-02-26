@@ -33,6 +33,7 @@ const isExternal = (url) => /^https?:\/\//.test(url);
   <router-link
     v-else
     :to="href"
+    :target="target"
     :class="[
       'relative inline-block text-animate-hover dark:dark-text-animate-hover hover:font-semibold',
       route.path === href
