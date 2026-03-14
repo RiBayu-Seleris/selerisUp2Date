@@ -140,12 +140,12 @@ const routes = [
         component: () => import("@/views/Products/Credit.vue"),
         meta: { title: "Seleris Credit" },
       },
-      {
-        path: "seleris-care-applicator",
-        name: "SelerisCareApplicator",
-        component: () => import("@/views/Products/CareApplicator.vue"),
-        meta: { title: "Seleris Care Applicator" },
-      },
+      // {
+      //   path: "seleris-care-applicator",
+      //   name: "SelerisCareApplicator",
+      //   component: () => import("@/views/Products/CareApplicator.vue"),
+      //   meta: { title: "Seleris Care Applicator" },
+      // },
     ],
   },
 

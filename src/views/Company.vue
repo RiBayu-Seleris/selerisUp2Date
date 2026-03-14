@@ -6,6 +6,7 @@ import Description from "@/components/Description.vue";
 import StepDescription from "@/components/About/StepDescription.vue";
 import Certificate from "@/components/Certificate.vue";
 import Deliver from "@/components/About/Deliver.vue";
+import Visionary from "@/components/About/Visionary.vue";
 
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
@@ -37,6 +38,10 @@ import { useSidebarStore } from "@/stores/sidebar";
       <DescAbout />
     </section>
   </div>
+
+  <section class="relative w-full h-auto px-0 mt-32 md:mt-40 lg:mt-36 xl:mt-56">
+    <Visionary />
+  </section>
 
   <section class="relative w-full h-auto px-8 mt-20 lg:mt-28 xl:mt-40">
     <VisiMisi />
