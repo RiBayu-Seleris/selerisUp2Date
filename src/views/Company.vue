@@ -17,7 +17,7 @@ import { useSidebarStore } from "@/stores/sidebar";
 
 <template>
   <section
-    class="dark:hidden flex flex-col relative w-full h-auto md:px-8 lg:px-20"
+    class="dark:hidden flex flex-col relative w-full h-auto md:px-8 lg:px-16 xl:px-20"
   >
     <Hero />
   </section>

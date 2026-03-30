@@ -37,10 +37,10 @@ import FrameCaptionAboutHero from "@/assets/images/About-frame-hero2.svg";
         </div>
       </div>
       <div
-        class="relative flex flex-col gap-y-5 md:gap-y-0 w-full h-auto md:w-full lg:w-[60%] xl:w-auto justify-end lg:justify-end items-end pt-10 md:pt-5 lg:pt-0"
+        class="relative flex flex-col gap-y-5 md:gap-y-0 w-full h-auto md:w-full lg:w-[55%] xl:w-auto justify-end lg:justify-end items-end pt-10 md:pt-5 lg:pt-0"
       >
         <div
-          class="hidden md:flex absolute md:w-[80%] xl:w-[75%] h-auto md:-top-[10px] xl:-top-[24px] md:-left-[25%] xl:-left-[25%]"
+          class="hidden md:flex absolute md:w-[80%] lg:w-[60%] xl:w-[75%] md:-top-[10px] lg:-top-[33px] xl:-top-[24px] md:-left-[25%] lg:left-[7%] xl:-left-[25%] -left-custom-target"
         >
           <div class="relative w-full h-full">
             <img
@@ -144,3 +144,12 @@ import FrameCaptionAboutHero from "@/assets/images/About-frame-hero2.svg";
     </div>
   </div>
 </template>
+<style scoped>
+/* Target layar dari 853px sampai sebelum xl (1280px) */
+@media (min-width: 853px) and (max-width: 854px) {
+  .-left-custom-target {
+    left: -20% !important;
+    top: -20px !important;
+  }
+}
+</style>

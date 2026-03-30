@@ -25,11 +25,11 @@ defineProps({
   <div
     :class="`hidden lg:block w-full h-auto ${bgImage} rounded-b-[3rem] pb-5`"
   >
-    <div class="flex flex-col w-full h-auto lg:px-5 xl:px-10">
-      <div class="flex flex-col w-full h-auto lg:mt-8 xl:mt-20">
+    <div class="flex flex-col w-full h-auto lg:px-8 xl:px-10">
+      <div class="flex flex-col w-full h-auto lg:mt-10 xl:mt-20">
         <div class="flex w-full h-auto">
           <!-- Title -->
-          <p class="text-[23px] xl:text-[24px] text-[#1DC457]">
+          <p class="text-[22px] xl:text-[28px] text-[#1DC457]">
             <!-- What Makes Us Different? -->
             {{ title }}
           </p>
@@ -37,14 +37,14 @@ defineProps({
         <div class="flex w-[70%] h-auto mt-2 xl:mt-5">
           <!-- Title Body -->
           <p
-            class="lg:text-2xl xl:text-[41px] text-[#195279] dark:text-[#FAFAFA] leading-[40px] xl:leading-[65px] font-[500]"
+            class="lg:text-[24px] xl:text-[32px] text-[#195279] dark:text-[#FAFAFA] leading-[40px] lg:leading-normal font-[500]"
           >
             <!-- We bring solutions to make life insurance for our customers. -->
             {{ subtitle }}
           </p>
         </div>
       </div>
-      <div class="flex flex-row w-full h-auto lg:mt-5 xl:mt-10">
+      <div class="flex flex-row w-full h-auto lg:mt-8 xl:mt-10">
         <div class="flex flex-col w-8/12 h-auto">
           <slot />
         </div>
@@ -54,7 +54,7 @@ defineProps({
             <img
               :src="robotImage"
               alt="Robot"
-              class="w-full lg:h-[250px] xl:h-[300px] object-contain object-top top-0 md:animate__animated md:animate-bounce2"
+              class="w-full lg:h-[230px] xl:h-[300px] object-contain object-top top-0 md:animate__animated md:animate-bounce2"
             />
           </div>
         </div>

@@ -27,23 +27,27 @@ defineProps({
   <!-- Desktop -->
   <div class="hidden lg:flex w-full h-auto">
     <div class="flex flex-row w-full h-full">
-      <div class="flex w-[15%] xl:w-[25%] h-full">
+      <div class="flex w-[15%] xl:w-[15%] h-full">
         <img
           :src="image"
           alt="Icon"
-          class="w-[70px] lg:w-[45px] lg:h-[45px] xl:w-[70px] xl:h-[70px] p-3 xl:p-3 object-contain bg-white dark:bg-[#323232] rounded-full shadow-lg"
+          class="w-[70px] lg:w-[40px] lg:h-[40px] xl:w-[50px] xl:h-[50px] p-3 lg:p-2.5 xl:p-3 object-contain bg-white dark:bg-[#323232] rounded-full shadow-lg"
         />
       </div>
       <div
         class="flex flex-col w-[85%] xl:w-full h-auto lg:pl-2 xl:pl-4 justify-start items-start"
       >
         <div class="flex w-full h-auto text-[#195279] dark:text-[#FAFAFA]">
-          <p class="lg:text-[16px] xl:text-[20px] pt-3 pb-2">{{ title }}</p>
+          <p class="lg:text-[16px] xl:text-[20px] lg:pt-2 xl:pt-2 pb-2">
+            {{ title }}
+          </p>
         </div>
         <div
           :class="`flex w-full h-auto text-[#4F90BC] dark:text-[#6F6F6F] ${subtitleClass}`"
         >
-          <p class="text-[18px] lg:text-[16px]">{{ subtitle }}</p>
+          <p class="text-[18px] lg:text-[14px] xl:text-[16px]">
+            {{ subtitle }}
+          </p>
         </div>
       </div>
     </div>
@@ -56,10 +60,12 @@ defineProps({
         <img
           :src="image"
           alt="Icon"
-          class="w-[50px] h-full object-contain bg-white dark:bg-[#323232] rounded-full shadow-lg p-2"
+          class="w-[50px] md:w-[40px] h-full object-contain bg-white dark:bg-[#323232] rounded-full shadow-lg p-2 md:p-2.5"
         />
       </div>
-      <div class="flex flex-col w-full h-auto md:justify-center pl-5 sm:pl-4">
+      <div
+        class="flex flex-col w-full h-auto md:justify-center pl-5 sm:pl-4 md:pl-2 lg:pl-4"
+      >
         <div class="flex w-full h-auto text-[#195279]">
           <p
             class="text-[14px] sm:text-[16px] md:text-[16px] pb-1 md:text-center text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"

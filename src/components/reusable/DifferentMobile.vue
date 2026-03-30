@@ -51,7 +51,7 @@ defineProps({
       </div>
     </div>
     <div
-      class="flex flex-col sm:grid sm:grid-cols-2 sm:gap-x-5 md:gap-x-10 w-full mt-10 px-5 sm:px-8 md:px-5"
+      class="flex flex-col sm:grid sm:grid-cols-2 sm:gap-x-5 md:gap-x-10 w-full mt-10 px-5 sm:px-8 md:px-10"
     >
       <slot name="mobileContentDifferent" />
     </div>

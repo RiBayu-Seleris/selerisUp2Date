@@ -28,7 +28,9 @@
         <div
           class="w-full h-full flex justify-end lg:flex-row lg:justify-between"
         >
-          <div class="w-full h-auto hidden lg:flex flex-col gap-y-3 ml-10 pt-7">
+          <div
+            class="w-full h-auto hidden lg:flex flex-col gap-y-3 lg:ml-8 xl:ml-10 pt-7"
+          >
             <p
               class="font-[500] dark:font-[400] text-[20px] xl:text-[28px] text-[#1AB24F] dark:text-[#01F27D]"
             >
