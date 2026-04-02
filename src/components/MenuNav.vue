@@ -209,6 +209,7 @@ onUnmounted(() => {
         <div
           class="w-full h-auto p-[1px] bg-gradient-to-r from-[#565656]/0 to-[#BCBCBC]/30 rounded-2xl shadow-lg"
         >
+          <!-- Ini saat tidak underconstruction -->
           <!-- <div class="w-full h-auto flex flex-col bg-white py-6 px-5 rounded-2xl dark:bg-[#1D2426]">
             <div class="w-full h-auto flex mb-4">
               <p

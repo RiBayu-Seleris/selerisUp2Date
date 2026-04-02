@@ -10,8 +10,7 @@ import DarkLogo from "@/assets/images/darklogo.png";
 import { aboutList } from "@/Data/aboutList";
 import { productList } from "@/Data/productList";
 import { technologyList } from "@/Data/technologyList";
-import { usecaseList } from "@/Data/usecaseList";
-import { industryList } from "@/Data/industryList";
+import { SolutionLists } from "@/Data/SolutionLists";
 
 const sidebar = useSidebarStore();
 const route = useRoute();
@@ -29,6 +28,7 @@ const isAboutOpen = ref(false);
 const isProductOpen = ref(false);
 const isTechnologyOpen = ref(false);
 const isSolutionOpen = ref(false);
+const showUnderConstructionModal = ref(false);
 
 const toggleAbout = () => {
   isAboutOpen.value = !isAboutOpen.value;
@@ -268,7 +268,7 @@ const toggleSolution = () => {
               </div>
 
               <!-- Technology -->
-              <div class="w-full h-auto flex flex-col">
+              <div class="w-full h-auto flex flex-col gap-y-4">
                 <button
                   id="buttonSolutionsListMenu"
                   aria-label="Open Solutions menu"
@@ -299,53 +299,97 @@ const toggleSolution = () => {
                     </svg>
                   </div>
                 </button>
-                <transition name="fade">
-                  <div v-if="isSolutionOpen" class="w-full flex flex-row">
-                    <div class="w-full h-auto flex flex-col my-2">
-                      <p
-                        class="text-[#374151] dark:text-[#FAFAFA] text-[16px] font-[500] mt-2"
-                      >
-                        Use Case
-                      </p>
-                      <div
-                        class="w-full h-auto flex flex-col mt-0.5 sm:gap-y-2 md:gap-y-3 sm:mt-2 md:mt-2.5"
-                      >
+
+                <!-- Ini saat tidak underconstruction -->
+                <!-- <div v-if="isSolutionOpen" class="w-full flex flex-col gap-y-4">
+                  <Navlink
+                    v-for="(solution, index) in SolutionLists"
+                    :key="index"
+                    :href="solution.url"
+                    class="flex justify-start items-start group transition-all duration-300 cursor-pointer"
+                  >
+                    <div
+                      class="w-full h-auto flex flex-row gap-x-3 justify-center items-center group-hover:bg-[#55FC8A]/10 p-2 rounded-md"
+                    >
+                      <div class="w-fit h-auto flex justify-center items-start">
                         <div
-                          v-for="(usecase, index) in usecaseList"
-                          :key="index"
-                          class="w-full h-auto"
+                          class="w-9 h-9 rounded-md flex justify-center items-center p-2 bg-[#ADF9C5] dark:bg-[#2AB857] text-[#2AB857] dark:text-[#AFFAC6]"
                         >
-                          <Navlink :href="usecase.url">
-                            <p
-                              class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#8E98A8]"
-                            >
-                              {{ usecase.name }}
-                            </p>
-                          </Navlink>
+                          <component
+                            :is="solution.icons"
+                            class="w-full h-full"
+                          />
+                        </div>
+                      </div>
+                      <div
+                        class="w-full h-auto flex flex-col justify-center items-start"
+                      >
+                        <span
+                          class="text-[14px] font-[600] text-[#374151] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                          >{{ solution.title }}</span
+                        >
+                        <span
+                          class="text-[12px] text-[#9CA3AF] font-[500] group-hover:text-[#2AB857] group-hover:font-[500] dark:text-[#FAFAFA] text-animate-group-hover dark:dark-text-animate-group-hover"
+                          >{{ solution.content }}</span
+                        >
+                      </div>
+                      <div class="w-fit h-auto flex justify-center items-start">
+                        <div
+                          class="w-9 h-auto rounded-md flex justify-center items-center p-2 text-[#C9C9C9] group-hover:text-[#2AB857] dark:text-[#C9C9C9] group-hover:dark:text-[#2AB857]"
+                        >
+                          <ArrowRight class="w-full h-full" />
                         </div>
                       </div>
                     </div>
-                    <div class="w-full h-auto flex flex-col my-2">
-                      <p
-                        class="text-[#374151] dark:text-[#FAFAFA] text-[16px] font-[500] mt-2"
-                      >
-                        Industries
-                      </p>
+                  </Navlink>
+                </div> -->
+
+                <transition name="fade">
+                  <div
+                    v-if="isSolutionOpen"
+                    class="w-full flex flex-col gap-y-4"
+                  >
+                    <div
+                      v-for="(solution, index) in SolutionLists"
+                      :key="index"
+                      class="flex justify-start items-start group transition-all duration-300 cursor-pointer"
+                      @click="showUnderConstructionModal = true"
+                    >
                       <div
-                        class="w-full h-auto flex flex-col mt-0.5 sm:gap-y-2 md:gap-y-3 sm:mt-2 md:mt-2.5"
+                        class="w-full h-auto flex flex-row gap-x-3 justify-center items-center group-hover:bg-[#55FC8A]/10 p-2 rounded-md"
                       >
                         <div
-                          v-for="(industry, index) in industryList"
-                          :key="index"
-                          class="w-full h-auto"
+                          class="w-fit h-auto flex justify-center items-start"
                         >
-                          <Navlink :href="industry.url">
-                            <p
-                              class="text-[12px] sm:text-[16px] font-[500] text-[#8E98A8] dark:text-[#8E98A8]"
-                            >
-                              {{ industry.name }}
-                            </p>
-                          </Navlink>
+                          <div
+                            class="w-8 h-8 rounded-md flex justify-center items-center p-2 bg-[#ADF9C5] dark:bg-[#2AB857] text-[#2AB857] dark:text-[#AFFAC6]"
+                          >
+                            <component
+                              :is="solution.icons"
+                              class="w-full h-full"
+                            />
+                          </div>
+                        </div>
+                        <div
+                          class="w-full h-auto flex flex-col justify-center items-start"
+                        >
+                          <span
+                            class="text-[14px] font-[600] text-[#374151] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                            >{{ solution.title }}</span
+                          >
+                          <span
+                            class="text-[12px] text-[#9CA3AF] font-[500] group-hover:text-[#2AB857] group-hover:font-[500] dark:text-[#FAFAFA] text-animate-group-hover dark:dark-text-animate-group-hover"
+                            >{{ solution.content }}</span
+                          >
+                        </div>
+                        <div
+                          class="w-fit h-auto flex justify-center items-start"
+                        >
+                          <div
+                            class="w-9 h-auto rounded-md flex justify-center items-center p-2 text-[#C9C9C9] group-hover:text-[#2AB857] dark:text-[#C9C9C9] group-hover:dark:text-[#2AB857]"
+                          >
+                            <ArrowRight class="w-full h-full" />
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -391,6 +435,47 @@ const toggleSolution = () => {
       </transition>
     </div>
   </transition>
+  <Teleport to="body">
+    <Transition
+      enter-active-class="transition-opacity duration-200 ease-out"
+      leave-active-class="transition-opacity duration-150 ease-in"
+      enter-from-class="opacity-0"
+      leave-to-class="opacity-0"
+    >
+      <div
+        v-if="showUnderConstructionModal"
+        class="fixed inset-0 z-[9999] flex items-center justify-center bg-black/50 backdrop-blur-sm"
+        @click.self="showUnderConstructionModal = false"
+      >
+        <div
+          class="relative bg-white dark:bg-[#1D2426] rounded-2xl shadow-xl p-8 w-[90%] max-w-md flex flex-col items-center gap-4"
+        >
+          <!-- Icon -->
+          <div
+            class="w-16 h-16 rounded-full bg-[#ADF9C5] dark:bg-[#2AB857]/20 flex items-center justify-center text-4xl"
+          >
+            🚧
+          </div>
+
+          <!-- Text -->
+          <h2 class="text-[20px] font-[700] text-[#374151] dark:text-white">
+            Under Construction
+          </h2>
+          <p class="text-[14px] text-[#9CA3AF] text-center dark:text-[#D1D5DB]">
+            Halaman ini sedang dalam pengembangan. Silakan kembali lagi nanti.
+          </p>
+
+          <!-- Close Button -->
+          <button
+            @click="showUnderConstructionModal = false"
+            class="mt-2 px-6 py-2 bg-[#2AB857] hover:bg-[#22a04a] text-white text-[14px] font-[600] rounded-xl transition-colors duration-200"
+          >
+            Oke, Mengerti
+          </button>
+        </div>
+      </div>
+    </Transition>
+  </Teleport>
 </template>
 
 <style scoped>
