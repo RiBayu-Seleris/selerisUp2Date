@@ -15,8 +15,8 @@ export const Solutions = [
   },
   {
     id: 2,
-    title: "Mobile Health – Seleriscare.ai",
-    content: "Kesehatan Mobile – Seleriscare.ai",
+    title: "Mobile Health - Seleriscare.ai",
+    content: "Kesehatan Mobile - Seleriscare.ai",
     icons: phone,
   },
   {
