@@ -141,6 +141,25 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+.solution-animate-group-hover {
+  position: relative;
+  display: inline-block;
+  background-image: linear-gradient(to right, #8e98a8 0%, #8e98a8 100%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  background-position: left;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition:
+    background-size 1.5s ease,
+    -webkit-text-fill-color 1.5s ease;
+}
+
+.group:hover .solution-animate-group-hover {
+  background-size: 100% 100%;
+  -webkit-text-fill-color: transparent;
+}
+
 /* Autofill Light */
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;

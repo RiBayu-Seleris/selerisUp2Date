@@ -292,12 +292,14 @@ onUnmounted(() => {
                   >
                     <span
                       class="text-[14px] font-[600] text-[#374151] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
-                      >{{ solution.title }}</span
                     >
+                      {{ solution.title }}
+                    </span>
                     <span
                       class="text-[12px] text-[#9CA3AF] font-[500] group-hover:text-[#2AB857] group-hover:font-[500] dark:text-[#FAFAFA] text-animate-group-hover dark:dark-text-animate-group-hover"
-                      >{{ solution.content }}</span
                     >
+                      {{ solution.content }}
+                    </span>
                   </div>
                   <div class="w-fit h-auto flex justify-center items-start">
                     <div

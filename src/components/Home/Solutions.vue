@@ -60,14 +60,14 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <div class="w-full h-auto flex flex-col gap-y-5 lg:gap-y-10">
+  <div class="w-full h-auto flex flex-col gap-y-4 sm:gap-y-5 lg:gap-y-10">
     <!-- Heading -->
     <div
-      class="w-full h-auto flex flex-col text-center justify-center items-center xl:px-8"
+      class="w-full h-auto flex flex-col gap-y-1.5 text-center justify-center items-center xl:px-8"
     >
       <p class="text-[20px] text-[#2AB857] font-[500]">Solutions</p>
       <p
-        class="md:text-[32px] lg:text-[34px] xl:text-[46px] tracking-wider text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] font-[500]"
+        class="text-[18px] md:text-[32px] lg:text-[34px] xl:text-[46px] tracking-wider text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] font-[500]"
       >
         7 AI-Powered Health Solutions
       </p>
@@ -83,7 +83,7 @@ onUnmounted(() => {
         <div
           v-for="data in row1"
           :key="data.id"
-          class="card-wrapper relative rounded-2xl h-auto p-[1px] cursor-pointer"
+          class="card-wrapper group relative rounded-2xl h-auto p-[1px] cursor-pointer"
           :class="
             Solutions.indexOf(data) === activeIndex
               ? 'is-active border-none'
@@ -125,12 +125,14 @@ onUnmounted(() => {
                       ? 'dark:text-[#2AB857]'
                       : 'text-[#374151] dark:text-[#357EAF]'
                   "
-                  >{{ data.title }}</span
                 >
+                  {{ data.title }}
+                </span>
                 <span
-                  class="text-[#8E98A8] text-[14px] leading-normal font-[400]"
-                  >{{ data.content }}</span
+                  class="text-[#8E98A8] text-[14px] leading-normal font-[400] solution-animate-group-hover"
                 >
+                  {{ data.content }}
+                </span>
               </div>
               <div class="w-full h-5">
                 <Transition name="fade-link">
@@ -152,7 +154,7 @@ onUnmounted(() => {
         <div
           v-for="data in row2"
           :key="data.id"
-          class="card-wrapper relative rounded-2xl h-auto p-[1px] cursor-pointer"
+          class="card-wrapper group relative rounded-2xl h-auto p-[1px] cursor-pointer"
           :class="
             Solutions.indexOf(data) === activeIndex
               ? 'is-active border-none'
@@ -199,7 +201,7 @@ onUnmounted(() => {
                   >{{ data.title }}</span
                 >
                 <span
-                  class="text-[#8E98A8] text-[12px] xl:text-[14px] leading-normal font-[400]"
+                  class="text-[#8E98A8] text-[12px] xl:text-[14px] leading-normal font-[400] solution-animate-group-hover"
                   >{{ data.content }}</span
                 >
               </div>
@@ -223,7 +225,7 @@ onUnmounted(() => {
         <div
           v-for="data in row3"
           :key="data.id"
-          class="card-wrapper relative rounded-2xl h-auto p-[1px] cursor-pointer"
+          class="card-wrapper group relative rounded-2xl h-auto p-[1px] cursor-pointer"
           :class="
             Solutions.indexOf(data) === activeIndex
               ? 'is-active border-none'
@@ -268,7 +270,7 @@ onUnmounted(() => {
                   >{{ data.title }}</span
                 >
                 <span
-                  class="text-[#8E98A8] text-[14px] leading-normal font-[400]"
+                  class="text-[#8E98A8] text-[14px] leading-normal font-[400] text-animate-group-hover dark:dark-text-animate-group-hover solution-animate-group-hover"
                   >{{ data.content }}</span
                 >
               </div>
