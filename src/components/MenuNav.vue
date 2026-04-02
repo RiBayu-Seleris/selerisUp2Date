@@ -202,7 +202,7 @@ onUnmounted(() => {
         @mouseenter="isHoveringSolution = true"
         @mouseleave="isHoveringSolution = false"
         :class="[
-          `absolute -left-[300px] top-full z-50 w-max h-auto`,
+          `absolute lg:-left-[400px] xl:-left-[300px] top-full z-50 w-max h-auto`,
           isScrolled ? 'pt-8' : 'pt-8',
         ]"
       >
