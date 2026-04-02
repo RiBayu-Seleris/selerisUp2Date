@@ -79,7 +79,7 @@ onUnmounted(() => {
     >
       <p class="text-[20px] text-[#2AB857] font-[500]">Solutions</p>
       <p
-        class="text-[18px] md:text-[32px] lg:text-[34px] xl:text-[46px] tracking-wider text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] font-[500]"
+        class="text-[16px] md:text-[32px] lg:text-[34px] xl:text-[46px] tracking-wider text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] font-[500]"
       >
         7 AI-Powered Health Solutions
       </p>
