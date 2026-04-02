@@ -94,11 +94,11 @@ const toggleSolution = () => {
                 </button>
               </div>
             </div>
-            <nav class="w-full flex flex-col mt-8 gap-y-8">
+            <nav class="w-full flex flex-col mt-8 gap-y-6 sm:gap-y-8">
               <div class="w-full h-auto">
                 <Navlink href="/">
                   <p
-                    class="text-[#374151] dark:text-[#FAFAFA] font-[500] text-[18px]"
+                    class="text-[#374151] dark:text-[#FAFAFA] font-[500] text-[16px] sm:text-[18px]"
                   >
                     Home
                   </p>
@@ -115,14 +115,14 @@ const toggleSolution = () => {
                 >
                   <div class="w-full h-auto flex items-center">
                     <p
-                      class="text-[#374151] dark:text-[#FAFAFA] text-[18px] font-[500]"
+                      class="text-[#374151] dark:text-[#FAFAFA] text-[16px] sm:text-[18px] font-[500]"
                     >
                       About
                     </p>
                   </div>
                   <div class="text-[#374151] dark:text-[#FAFAFA]">
                     <svg
-                      class="w-5 h-auto transition-transform duration-200 transform"
+                      class="w-4 sm:w-5 h-auto transition-transform duration-200 transform"
                       :class="{ 'rotate-90': isAboutOpen }"
                       fill="none"
                       stroke="currentColor"
@@ -169,14 +169,14 @@ const toggleSolution = () => {
                 >
                   <div class="w-full h-auto flex items-center">
                     <p
-                      class="text-[#374151] dark:text-[#FAFAFA] text-[18px] font-[500]"
+                      class="text-[#374151] dark:text-[#FAFAFA] text-[16px] sm:text-[18px] font-[500]"
                     >
                       Products
                     </p>
                   </div>
                   <div class="text-[#374151] dark:text-[#FAFAFA]">
                     <svg
-                      class="w-5 h-auto transition-transform duration-200 transform"
+                      class="w-4 sm:w-5 h-auto transition-transform duration-200 transform"
                       :class="{ 'rotate-90': isProductOpen }"
                       fill="none"
                       stroke="currentColor"
@@ -223,14 +223,14 @@ const toggleSolution = () => {
                 >
                   <div class="w-full h-auto flex items-center">
                     <p
-                      class="text-[#374151] dark:text-[#FAFAFA] text-[18px] font-[500]"
+                      class="text-[#374151] dark:text-[#FAFAFA] text-[16px] sm:text-[18px] font-[500]"
                     >
                       Technology
                     </p>
                   </div>
                   <div class="text-[#374151] dark:text-[#FAFAFA]">
                     <svg
-                      class="w-5 h-auto transition-transform duration-200 transform"
+                      class="w-4 sm:w-5 h-auto transition-transform duration-200 transform"
                       :class="{ 'rotate-90': isTechnologyOpen }"
                       fill="none"
                       stroke="currentColor"
@@ -268,7 +268,7 @@ const toggleSolution = () => {
               </div>
 
               <!-- Technology -->
-              <div class="w-full h-auto flex flex-col gap-y-4">
+              <div class="w-full h-auto flex flex-col gap-y-2 sm:gap-y-4">
                 <button
                   id="buttonSolutionsListMenu"
                   aria-label="Open Solutions menu"
@@ -277,14 +277,14 @@ const toggleSolution = () => {
                 >
                   <div class="w-full h-auto flex items-center">
                     <p
-                      class="text-[#374151] dark:text-[#FAFAFA] text-[18px] font-[500]"
+                      class="text-[#374151] dark:text-[#FAFAFA] text-[16px] sm:text-[18px] font-[500]"
                     >
                       Solutions
                     </p>
                   </div>
                   <div class="text-[#374151] dark:text-[#FAFAFA]">
                     <svg
-                      class="w-5 h-auto transition-transform duration-200 transform"
+                      class="w-4 sm:w-5 h-auto transition-transform duration-200 transform"
                       :class="{ 'rotate-90': isSolutionOpen }"
                       fill="none"
                       stroke="currentColor"
@@ -347,7 +347,7 @@ const toggleSolution = () => {
                 <transition name="fade">
                   <div
                     v-if="isSolutionOpen"
-                    class="w-full flex flex-col gap-y-4"
+                    class="w-full flex flex-col gap-y-2.5 sm:gap-y-4"
                   >
                     <div
                       v-for="(solution, index) in SolutionLists"
@@ -356,7 +356,7 @@ const toggleSolution = () => {
                       @click="showUnderConstructionModal = true"
                     >
                       <div
-                        class="w-full h-auto flex flex-row gap-x-3 justify-center items-center group-hover:bg-[#55FC8A]/10 p-2 rounded-md"
+                        class="w-full h-auto flex flex-row gap-x-3 justify-center items-center group-hover:bg-[#55FC8A]/10 p-1.5 sm:p-2 rounded-md"
                       >
                         <div
                           class="w-fit h-auto flex justify-center items-start"
@@ -374,11 +374,11 @@ const toggleSolution = () => {
                           class="w-full h-auto flex flex-col justify-center items-start"
                         >
                           <span
-                            class="text-[14px] font-[600] text-[#374151] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                            class="text-[12px] sm:text-[14px] font-[600] text-[#374151] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                             >{{ solution.title }}</span
                           >
                           <span
-                            class="text-[12px] text-[#9CA3AF] font-[500] group-hover:text-[#2AB857] group-hover:font-[500] dark:text-[#FAFAFA] text-animate-group-hover dark:dark-text-animate-group-hover"
+                            class="text-[10px] sm:text-[12px] text-[#9CA3AF] font-[500] group-hover:text-[#2AB857] group-hover:font-[500] dark:text-[#FAFAFA] text-animate-group-hover dark:dark-text-animate-group-hover"
                             >{{ solution.content }}</span
                           >
                         </div>
@@ -401,7 +401,7 @@ const toggleSolution = () => {
               <div class="w-full h-auto">
                 <Navlink href="/blogs">
                   <p
-                    class="text-[#374151] dark:text-[#FAFAFA] font-[500] text-[18px]"
+                    class="text-[#374151] dark:text-[#FAFAFA] font-[500] text-[16px] sm:text-[18px]"
                   >
                     Blogs
                   </p>
@@ -412,7 +412,7 @@ const toggleSolution = () => {
               <div class="w-full h-auto">
                 <Navlink href="/services">
                   <p
-                    class="text-[#374151] dark:text-[#FAFAFA] font-[500] text-[18px]"
+                    class="text-[#374151] dark:text-[#FAFAFA] font-[500] text-[16px] sm:text-[18px]"
                   >
                     Services
                   </p>
@@ -423,7 +423,7 @@ const toggleSolution = () => {
               <div class="w-full h-auto">
                 <Navlink href="/careers">
                   <p
-                    class="text-[#374151] dark:text-[#FAFAFA] font-[500] text-[18px]"
+                    class="text-[#374151] dark:text-[#FAFAFA] font-[500] text-[16px] sm:text-[18px]"
                   >
                     Careers
                   </p>
