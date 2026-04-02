@@ -49,7 +49,7 @@ const getShortText = (fullText) => {
     >
       <!-- Card flip -->
       <div
-        class="cursor-pointer w-full h-full perspective"
+        class="cursor-pointer w-full h-full perspective rounded-[20px]"
         @click="handleFlip(index)"
       >
         <div

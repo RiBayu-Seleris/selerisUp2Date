@@ -1,7 +1,7 @@
 <script setup>
 import AboutHero from "@/assets/images/About-hero-image2.png";
 import FrameCaptionAboutHero from "@/assets/images/About-frame-hero2.svg";
-// import FrameCaptionAboutHero from "@/assets/images/About-frame-hero.png";
+import FrameCaptionAboutHeroDark from "@/assets/images/About-frame-hero2-dark.svg";
 </script>
 
 <template>
@@ -46,7 +46,12 @@ import FrameCaptionAboutHero from "@/assets/images/About-frame-hero2.svg";
             <img
               :src="FrameCaptionAboutHero"
               alt="About Banner"
-              class="w-full h-full drop-shadow-[0_10px_15px_rgba(0,0,0,0.07)]"
+              class="block dark:hidden w-full h-full drop-shadow-[0_10px_15px_rgba(0,0,0,0.07)]"
+            />
+            <img
+              :src="FrameCaptionAboutHeroDark"
+              alt="About Banner"
+              class="hidden dark:block w-full h-full drop-shadow-[0_10px_15px_rgba(0,0,0,0.07)]"
             />
             <a
               href="https://maps.app.goo.gl/ywhqmCdfhGod9Mps6"
@@ -67,7 +72,7 @@ import FrameCaptionAboutHero from "@/assets/images/About-frame-hero2.svg";
                     class="md:w-5 md:h-5 xl:w-6 xl:h-6 bg-[#2AB857] rounded-full md:p-[2px] xl:p-[2.5px] flex justify-center items-center"
                   >
                     <div
-                      class="w-full h-full bg-white rounded-full md:p-[3.5px] xl:p-[5px] flex justify-center items-center"
+                      class="w-full h-full bg-white dark:bg-[#323232] rounded-full md:p-[3.5px] xl:p-[5px] flex justify-center items-center"
                     >
                       <div
                         class="w-full h-full bg-[#2AB857] rounded-full"
@@ -79,14 +84,14 @@ import FrameCaptionAboutHero from "@/assets/images/About-frame-hero2.svg";
               <div class="w-full h-auto flex flex-col justify-center gap-y-1.5">
                 <div class="w-auto h-auto">
                   <p
-                    class="text-[#195279] font-[400] text-[14px] xl:text-[16px]"
+                    class="text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] font-[500] text-[14px] xl:text-[16px]"
                   >
                     Seleris Development Office
                   </p>
                 </div>
                 <div class="w-auto h-auto">
                   <p
-                    class="text-[#8E98A8] font-[300] text-[10px] xl:text-[12px]"
+                    class="text-[#8E98A8] font-[400] text-[10px] xl:text-[12px]"
                   >
                     Royal Spring , Jakarta Selatan.....
                   </p>

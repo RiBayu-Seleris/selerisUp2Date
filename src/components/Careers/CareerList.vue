@@ -155,8 +155,25 @@ onMounted(() => {
     </div>
   </section> -->
 
+  <!-- Tampil jika jobs kosong -->
+  <div v-if="jobs.length === 0" class="w-full h-auto flex px-8 lg:px-0">
+    <div
+      class="w-full h-auto p-[1px] bg-[#E3E3E3] dark:bg-gradient-to-r dark:from-[#1D2426] dark:to-[#BCBCBC]/50 rounded-lg"
+    >
+      <div
+        class="flex w-auto bg-white py-4 rounded-lg gap-5 dark:bg-[#1D2426] justify-center items-center px-14 lg:px-0"
+      >
+        <span class="text-[16px] text-center">
+          Saat ini belum ada lowongan pekerjaan. Pantau media sosial kami untuk
+          informasi terbaru.
+        </span>
+      </div>
+    </div>
+  </div>
+
   <!-- Frame Jobs -->
   <section
+    v-else
     class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-4 xl:gap-6 px-8 md:px-8 xl:px-0 mt-10"
   >
     <!-- v-for="job in jobPosts" -->

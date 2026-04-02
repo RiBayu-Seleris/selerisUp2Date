@@ -149,6 +149,18 @@ const routes = [
     ],
   },
 
+  // Redirect jika akses langsung ke /Solution
+  {
+    path: "/solution",
+    redirect: "/", // bisa juga ke "/about/company" atau "/not-found"
+  },
+  // Routes Solution
+  {
+    path: "/solution/:slug",
+    name: "SolutionDetail",
+    component: () => import("@/views/Solutions.vue"),
+  },
+
   // Blogs
   {
     path: "/blogs",

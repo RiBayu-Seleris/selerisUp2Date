@@ -2,6 +2,11 @@
 @tailwind components;
 @tailwind utilities;
 
+html,
+body {
+  overscroll-behavior: none;
+}
+
 body {
   scrollbar-gutter: stable;
 }
@@ -70,7 +75,9 @@ body {
   background-position: left;
   -webkit-background-clip: text;
   background-clip: text;
-  transition: background-size 0.5s ease, -webkit-text-fill-color 0.5s ease;
+  transition:
+    background-size 0.5s ease,
+    -webkit-text-fill-color 0.5s ease;
 }
 
 .text-animate-hover:hover {
@@ -87,9 +94,49 @@ body {
   background-position: left;
   -webkit-background-clip: text;
   background-clip: text;
-  transition: background-size 0.5s ease, -webkit-text-fill-color 0.5s ease;
+  transition:
+    background-size 0.5s ease,
+    -webkit-text-fill-color 0.5s ease;
 }
 .dark .dark-text-animate-hover:hover {
+  background-size: 100% 100%;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-animate-group-hover {
+  position: relative;
+  display: inline-block;
+  background-image: linear-gradient(to right, #18ab53 0%, #18ab53 100%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  background-position: left;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition:
+    background-size 0.5s ease,
+    -webkit-text-fill-color 0.5s ease;
+}
+
+.group:hover .text-animate-group-hover {
+  background-size: 100% 100%;
+  -webkit-text-fill-color: transparent;
+}
+
+.dark .dark-text-animate-group-hover {
+  position: relative;
+  display: inline-block;
+  background-image: linear-gradient(to right, #eeeeee 0%, #eeeeee 100%);
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  background-position: left;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition:
+    background-size 0.5s ease,
+    -webkit-text-fill-color 0.5s ease;
+}
+
+.dark .group:hover .dark-text-animate-group-hover {
   background-size: 100% 100%;
   -webkit-text-fill-color: transparent;
 }
@@ -104,7 +151,9 @@ input:-webkit-autofill {
 
 /* Autofill Light Focus */
 input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1px #2ab857 inset, 0 0 0px 1000px #ffffff inset !important;
+  -webkit-box-shadow:
+    0 0 0 1px #2ab857 inset,
+    0 0 0px 1000px #ffffff inset !important;
   -webkit-text-fill-color: #000 !important;
   border: 0.25px solid #2ab857 !important;
 }
@@ -120,7 +169,9 @@ input:-webkit-autofill:focus {
 
 /* Autofill Dark Focus */
 .dark input:-webkit-autofill:focus {
-  -webkit-box-shadow: 0 0 0 1px #2ab857 inset, 0 0 0px 1000px #323232 inset !important;
+  -webkit-box-shadow:
+    0 0 0 1px #2ab857 inset,
+    0 0 0px 1000px #323232 inset !important;
   -webkit-text-fill-color: #fafafa !important;
   border: 0.25px solid #2ab857 !important;
   outline: none;

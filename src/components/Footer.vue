@@ -166,8 +166,7 @@ import { companyList } from "@/Data/companyList";
                     rel="noopener noreferrer"
                     class="text-[#2AB857] text-[12px] lg:text-[14px] xl:text-[16px] lg:pt-1.5 w-full"
                   >
-                    16 Raffles Quay #35 - 01B Hong Leong Building SINGAPORE
-                    (048581)
+                    8 Robinson Road #15-01 Singapore 048547.
                   </a>
                 </div>
                 <div class="w-full h-auto lg:pr-5">

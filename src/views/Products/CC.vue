@@ -20,8 +20,6 @@ import Circle from "@productComponents/Svg/Circle.vue";
 
 import CardWithIcon from "@productComponents/CardWithIcon.vue";
 import EasyQuickText from "@productComponents/EasyQuickText.vue";
-import InnovationIcon from "@/assets/icons/innovation.svg";
-import ArrowRight from "@/assets/Products/icons/arrow-right.svg";
 
 import imageAbout from "@/assets/Products/images/Credit-Cover/about-cc.png";
 import FrameLineWorks from "@productComponents/Svg/CCDescriptionWork.vue";
@@ -32,8 +30,6 @@ import { ccFaq } from "@/Data/Products/CreditCover/CCFaq.js";
 import { ccWorkSteps } from "@/Data/Products/CreditCover/CCWorkSteps.js";
 
 import DownloadImage from "@/assets/Products/images/Credit-Cover/download-cc.png";
-
-const work1 = ref(false);
 
 import { clientLogos } from "@/Data/Products/CreditCover/CCClients";
 import { ccTestimonials } from "@/Data/Products/CreditCover/CCTestimonials";

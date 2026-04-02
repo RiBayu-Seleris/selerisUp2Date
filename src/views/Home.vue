@@ -5,6 +5,7 @@ import PartnersClientsMobile from "@/components/Home/PartnersClientsMobile.vue";
 import Description from "@/components/Description.vue";
 import AiDesc from "@/components/Home/AiDesc.vue";
 import Technology from "@/components/Home/Technology.vue";
+import Solutions from "@/components/Home/Solutions.vue";
 import Certificate from "@/components/Certificate.vue";
 import Supported from "@/components/Supported.vue";
 import Benefits from "@/components/Home/Benefits.vue";
@@ -58,6 +59,10 @@ import Different from "@/components/Home/Different.vue";
     class="flex flex-col relative w-full h-auto mt-24 lg:mt-10 px-8 xl:mt-28"
   >
     <Technology />
+  </section>
+
+  <section class="flex flex-col relative w-full h-auto mt-24 lg:mt-10 xl:mt-36">
+    <Solutions />
   </section>
 
   <section class="flex flex-col relative w-full h-auto mt-24 xl:mt-32 mb-10">

@@ -14,13 +14,29 @@ const testimonials = [
     and identify high-risk exposures has optimized our health insurance underwriting. 
     This is the new foundation for sustainable growth in the industry's most dynamic segment`,
   },
+  {
+    name: "Edhie Mulyono",
+    position: "Technical Director - PT Asuransi FPG Indonesia",
+    text: `Seleris empowers FPG's technical team with health data insights that were previously inaccessible. 
+    Its ability to process medical big data,  predict chronic claim patterns, 
+    and identify high-risk exposures has optimized our health insurance underwriting. 
+    This is the new foundation for sustainable growth in the industry's most dynamic segment`,
+  },
+  {
+    name: "Edhie Mulyono",
+    position: "Technical Director - PT Asuransi FPG Indonesia",
+    text: `Seleris empowers FPG's technical team with health data insights that were previously inaccessible. 
+    Its ability to process medical big data,  predict chronic claim patterns, 
+    and identify high-risk exposures has optimized our health insurance underwriting. 
+    This is the new foundation for sustainable growth in the industry's most dynamic segment`,
+  },
 ];
 </script>
 
 <template>
   <div class="flex flex-col dark:bg-[#17181A]">
     <div
-      class="relative flex flex-col w-full h-auto px-8 lg:px-16 xls:px-8 gap-y-3"
+      class="relative flex flex-col w-full h-auto px-8 lg:px-16 xl:px-18 gap-y-3"
     >
       <div class="flex w-full h-auto">
         <p class="text-[#2AB857] font-[500] text-[18px] lg:text-[20px]">
@@ -47,7 +63,7 @@ const testimonials = [
         <SwiperSlide
           v-for="(item, index) in testimonials"
           :key="index"
-          class="px-8 lg:px-16 xls:px-8"
+          class="px-8 lg:px-16 xl:px-16"
         >
           <TestimonialCard
             :name="item.name"

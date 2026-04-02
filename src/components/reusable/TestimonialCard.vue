@@ -8,7 +8,7 @@ defineProps({
 
 <template>
   <div
-    class="w-full h-[420px] sm:h-[230px] md:h-[300px] lg:h-[280px] xl:h-[270px] p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656] shadow-lg rounded-lg"
+    class="w-full h-[420px] sm:h-[230px] md:h-[300px] lg:h-[280px] xl:h-[270px] p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656] shadow-sm rounded-lg"
   >
     <div
       class="w-full h-full flex flex-col px-6 lg:px-8 rounded-lg shadow-sm bg-[#FFFFFF] dark:bg-[#1D1F23] dark:border-[#FAFAFA]/25"

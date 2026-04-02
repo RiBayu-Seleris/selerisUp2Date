@@ -21,8 +21,6 @@ import CircleGradientRight from "@productComponents/Svg/CircleGradientRight.vue"
 
 import CardWithIcon from "@productComponents/CardWithIcon.vue";
 import EasyQuickText from "@productComponents/EasyQuickText.vue";
-import InnovationIcon from "@/assets/icons/innovation.svg";
-import ArrowRight from "@/assets/Products/icons/arrow-right.svg";
 
 import imageAbout from "@/assets/Products/images/Lifins/about-lifins.png";
 import FrameLineWorks from "@productComponents/Svg/LifinsDescriptionWork.vue";
@@ -34,8 +32,6 @@ import { lifinsHealthCheck } from "@/Data/Products/Lifins/lifinsHealthCheck";
 // FAQ
 import { lifinsFaq } from "@/Data/Products/Lifins/lifinsFaq.js";
 import { lifinsWorkSteps } from "@/Data/Products/Lifins/lifinsWorkSteps.js";
-
-const work1 = ref(false);
 
 import { clientLogos } from "@/Data/Products/Lifins/LifinsClients";
 import { lifinsTestimonials } from "@/Data/Products/Lifins/lifinsTestimonials";

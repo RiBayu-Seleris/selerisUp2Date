@@ -20,8 +20,6 @@ import Circle from "@productComponents/Svg/Circle.vue";
 
 import CardWithIcon from "@productComponents/CardWithIcon.vue";
 import EasyQuickText from "@productComponents/EasyQuickText.vue";
-import InnovationIcon from "@/assets/icons/innovation.svg";
-import ArrowRight from "@/assets/Products/icons/arrow-right.svg";
 
 import imageAbout from "@/assets/Products/images/Medins/about-medins.png";
 import FrameLineWorks from "@productComponents/Svg/MedinsDescriptionWork.vue";
@@ -32,8 +30,6 @@ import DownloadImage from "@/assets/Products/images/Medins/download-medins.png";
 // FAQ
 import { medinsFaq } from "@/Data/Products/Medins/medinsFaq.js";
 import { medinsWorkSteps } from "@/Data/Products/Medins/medinsWorkSteps.js";
-
-const work1 = ref(false);
 
 import { clientLogos } from "@/Data/Products/Medins/medinsClients";
 import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";

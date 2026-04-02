@@ -24,7 +24,7 @@ const isExternal = (url) => /^https?:\/\//.test(url);
     :href="href"
     :target="target"
     rel="noopener noreferrer"
-    class="relative inline-block text-animate-hover dark:dark-text-animate-hover hover:font-semibold"
+    class="relative inline-block justify-start text-start"
   >
     <slot />
   </a>
@@ -35,10 +35,8 @@ const isExternal = (url) => /^https?:\/\//.test(url);
     :to="href"
     :target="target"
     :class="[
-      'relative inline-block text-animate-hover dark:dark-text-animate-hover hover:font-semibold',
-      route.path === href
-        ? 'text-[#18AB53] dark:text-[#EEEEEE] font-semibold'
-        : '',
+      'relative inline-block justify-start text-start',
+      route.path === href ? 'text-[#18AB53] dark:text-[#EEEEEE]' : '',
     ]"
   >
     <slot />

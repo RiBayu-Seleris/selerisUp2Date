@@ -15,12 +15,9 @@ import DownloadFrame from "@productComponents/DownloadFrame.vue";
 import BookDemoProduct from "@productComponents/BookDemoProduct.vue";
 
 import TestimonialCommentFrame from "@productComponents/TestimonialCommentFrame.vue";
-import Circle from "@productComponents/Svg/Circle.vue";
 
 import CardWithIcon from "@productComponents/CardWithIcon.vue";
 import EasyQuickText from "@productComponents/EasyQuickText.vue";
-import InnovationIcon from "@/assets/icons/innovation.svg";
-import ArrowRight from "@/assets/Products/icons/arrow-right.svg";
 
 import CareOrnament from "@productComponents/Svg/CareOrnament.vue";
 import CareOrnament2 from "@productComponents/Svg/CareOrnament2.vue";
@@ -38,8 +35,6 @@ import { healthCheck } from "@/Data/Products/HealthCare/healthCheck";
 import { faq } from "@/Data/Products/HealthCare/faq.js";
 import { careWorkSteps } from "@/Data/Products/HealthCare/careworkSteps.js";
 import { testimonials } from "@/Data/Products/HealthCare/testimonials";
-
-const work1 = ref(false);
 
 import { clientLogos } from "@/Data/Products/HealthCare/CareClients";
 

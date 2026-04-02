@@ -71,7 +71,7 @@ export const bannerLists = [
     description:
       "A corporate health and wellness platform that automates employee health monitoring, delivers real-time preventive insights, and lowers medical costs by up to 20%.",
     linelightcolor: "#13b89c",
-    url: "/product/health-care",
+    url: "https://seleriscare.ai/",
     logoWidth: {
       lg: 170,
       md: 90,

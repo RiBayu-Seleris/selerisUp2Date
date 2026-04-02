@@ -1,0 +1,43 @@
+<script setup>
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+import { SolutionLists } from "@/Data/SolutionLists";
+
+const route = useRoute();
+
+const currentSolution = computed(() => {
+  return SolutionLists.find((s) => s.url === route.path);
+});
+</script>
+
+<template>
+  <div
+    class="flex w-full h-auto pt-[120px] md:pt-[100px] xl:pt-[160px] dark:bg-[#17181A]"
+  >
+    <div
+      class="flex flex-col w-full h-auto gap-y-4 justify-center items-center"
+    >
+      <div class="w-full h-auto">
+        <p
+          class="text-[25px] md:text-[35px] lg:text-[30px] xl:text-[30px] font-[500] text-[#1AB24F] text-center"
+        >
+          Solution
+        </p>
+      </div>
+      <div class="w-full h-auto">
+        <p
+          class="text-[27px] md:text-[37px] lg:text-[43px] xl:text-[47px] font-[500] text-[#195279] text-center leading-[35px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+        >
+          {{ currentSolution?.title }}
+        </p>
+      </div>
+      <div class="w-full h-auto">
+        <p
+          class="text-[14px] md:text-[22px] lg:text-[24px] xl:text-[16px] font-[400] text-[#195279] px-8 md:px-0 xl:px-48 text-center leading-normal dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+        >
+          "{{ currentSolution?.content }}"
+        </p>
+      </div>
+    </div>
+  </div>
+</template>

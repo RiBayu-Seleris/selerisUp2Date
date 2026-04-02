@@ -1,0 +1,250 @@
+<script setup>
+import { computed } from "vue";
+import { useRoute } from "vue-router";
+import { SolutionLists } from "@/Data/SolutionLists";
+import Circle from "@/assets/icons/Solutions/circle.vue";
+import Circle2 from "@/assets/icons/Solutions/circle2.vue";
+import Circle3 from "@/assets/icons/Solutions/circle3.vue";
+import ChecklistIcon from "@/components/icons/Checklist.vue";
+
+const route = useRoute();
+const data = computed(() =>
+  SolutionLists.find((s) => s.slug === route.params.slug),
+);
+</script>
+
+<template>
+  <div
+    v-if="data"
+    class="dark:bg-[#17181A] w-full h-auto flex flex-col gap-y-10"
+  >
+    <!-- Hero -->
+    <section
+      class="flex w-full h-auto pt-[120px] md:pt-[100px] xl:pt-[160px] dark:bg-[#17181A]"
+    >
+      <div
+        class="flex flex-col w-full h-auto gap-y-4 justify-center items-center"
+      >
+        <div class="w-full h-auto">
+          <p
+            class="text-[24px] md:text-[34px] lg:text-[30px] xl:text-[30px] font-[500] text-[#1AB24F] text-center"
+          >
+            Solution
+          </p>
+        </div>
+        <div class="w-full h-auto">
+          <p
+            class="text-[26px] md:text-[36px] lg:text-[42px] xl:text-[46px] font-[500] text-[#195279] text-center leading-relaxed dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+          >
+            {{ data.hero.title }}
+          </p>
+        </div>
+        <div class="w-full h-auto">
+          <p
+            class="text-[14px] md:text-[22px] lg:text-[24px] xl:text-[16px] font-[400] text-[#195279] px-8 md:px-0 xl:px-48 text-center leading-normal dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+          >
+            "{{ data.hero.subtitle }}"
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Overview -->
+    <div class="w-full h-auto flex flex-col gap-y-10">
+      <section class="flex flex-col md:flex-row gap-x-6 px-8 xl:px-32">
+        <div
+          class="w-full h-auto p-[1px] rounded-2xl bg-[#E3E3E3] dark:bg-gradient-to-r dark:from-[#17181A] dark:to-[#000000]/60"
+        >
+          <div
+            class="w-full h-full bg-white dark:bg-[#1D1F23] rounded-2xl px-6 pt-5 pb-10 lg:pb-0"
+          >
+            <p class="text-[#1AB24F] font-[500] text-[18px] mb-4">Overview</p>
+            <p
+              class="text-[#374151] dark:text-[#E8ECF3] text-[16px] leading-loose"
+            >
+              {{ data.overview.description }}
+            </p>
+          </div>
+        </div>
+        <div
+          class="relative w-[35%] shrink-0 h-auto bg-[#2A6993] dark:bg-gradient-to-br dark:from-[#2C7AAF] dark:from-[40%] dark:via-[#164A6B] dark:via-[130%] dark:to-[#0D202D] dark:to-[20%] rounded-2xl px-8 py-0 lg:py-10 justify-center flex flex-col gap-y-8 overflow-hidden shadow-[-9px_11px_200px_0_rgba(42,105,147,0.2)] dark:shadow-[-9px_11px_200px_0_rgba(42,105,147,0.2)]"
+        >
+          <div
+            class="absolute z-10 w-full h-full -right-[45%] top-[40%] text-[#4882A9]"
+          >
+            <Circle class="w-full h-full" />
+          </div>
+          <div
+            v-for="(stat, i) in data.overview.stats"
+            :key="i"
+            class="relative z-20 w-full h-auto flex flex-col gap-y-2"
+          >
+            <p
+              class="text-white text-[30px] font-[500] leading-tight tracking-wide"
+            >
+              {{ stat.value }}
+            </p>
+            <p class="text-[#87C6F2] text-[14px]">{{ stat.label }}</p>
+          </div>
+        </div>
+      </section>
+      <!-- Key Features -->
+      <section class="flex flex-col lg:flex-row gap-6 px-8 xl:px-32">
+        <!-- Desktop -->
+        <div
+          class="hidden lg:flex relative w-full h-auto bg-[#8EE7AB] justify-center items-center overflow-hidden rounded-2xl"
+        >
+          <div
+            class="absolute z-10 w-full h-full -left-[0%] top-[45%] text-[#C4FFD7]"
+          >
+            <Circle2 class="w-auto h-auto" />
+          </div>
+          <div
+            class="absolute z-20 w-full h-auto -bottom-[9%] flex justify-center"
+          >
+            <img
+              src="@/assets/images/girl-pict.svg"
+              class="w-full xl:w-[78%] h-full object-contain object-bottom"
+            />
+          </div>
+        </div>
+        <!-- Mobile -->
+        <div
+          class="flex lg:hidden relative w-full h-auto bg-[#8EE7AB] justify-center items-center overflow-hidden rounded-2xl"
+        >
+          <div
+            class="absolute z-10 w-full h-full flex justify-center -bottom-[10%] text-[#C4FFD7]"
+          >
+            <Circle3 class="w-full h-full bg-orange-300" />
+          </div>
+          <div
+            class="relative z-20 w-auto h-auto flex -bottom-[37px] justify-center"
+          >
+            <img
+              src="@/assets/images/girl-pict.svg"
+              class="w-full h-full object-contain object-bottom"
+            />
+          </div>
+        </div>
+        <div
+          class="w-full lg:w-[65%] h-auto shrink-0 p-[1px] bg-[#E3E3E3] dark:bg-gradient-to-r dark:from-[#17181A] dark:to-[#000000]/60 rounded-2xl"
+        >
+          <div
+            class="w-full h-full flex flex-col gap-y-6 bg-[#FAFAFA] px-10 py-8 rounded-2xl dark:bg-[#1D1F23] dark:text-[#E8ECF3]"
+          >
+            <p class="text-[#2AB857] font-[500] text-[22px]">Key Features</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+              <div
+                v-for="(feature, i) in data.keyFeatures.items"
+                :key="i"
+                class="w-full h-auto flex flex-col gap-y-2"
+              >
+                <p
+                  class="text-[#195279] dark:text-white font-[500] text-[18px]"
+                >
+                  {{ feature.title }}
+                </p>
+                <p class="text-[#9CA3AF] text-[14px] h-20">
+                  {{ feature.description }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- More Features -->
+      <section class="flex flex-col gap-y-3 px-8 xl:px-32 w-full h-auto">
+        <p class="text-[#1AB24F] font-[500] text-[18px]">More Features</p>
+        <div
+          class="grid gap-4"
+          :class="
+            data.moreFeatures.length > 3
+              ? 'lg:grid-cols-4'
+              : data.moreFeatures.length === 3
+                ? 'lg:grid-cols-3'
+                : data.moreFeatures.length === 2
+                  ? 'lg:grid-cols-2'
+                  : 'lg:grid-cols-1'
+          "
+        >
+          <div
+            v-for="(feature, i) in data.moreFeatures"
+            :key="i"
+            class="w-full h-auto flex flex-col gap-y-3 bg-white dark:bg-[#2C2C2C] rounded-2xl p-4 shadow"
+          >
+            <p class="text-[#2A6993] dark:text-white font-[400] text-[16px]">
+              {{ feature.title }}
+            </p>
+            <p class="text-[#5C6778] text-[12px] mt-2">
+              {{ feature.description }}
+            </p>
+          </div>
+        </div>
+      </section>
+      <!-- Business Benefits -->
+      <section class="px-8 xl:px-32 w-full h-auto">
+        <div
+          class="w-full h-auto p-[1px] bg-[#E3E3E3] dark:bg-gradient-to-r dark:from-[#1D2426] dark:to-[#BCBCBC]/50 rounded-lg"
+        >
+          <div
+            class="flex flex-col w-auto bg-white rounded-lg gap-y-6 dark:bg-[#1D2426] justify-center items-center px-14 lg:px-8 py-6"
+          >
+            <div class="w-full h-auto flex flex-col gap-y-1">
+              <p class="text-[#1AB24F] font-[500] text-[20px] text-center">
+                {{ data.businessBenefits.title }}
+              </p>
+              <p class="text-[#9CA3AF] text-[13px] text-center">
+                {{ data.businessBenefits.subtitle }}
+              </p>
+            </div>
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
+              <div
+                v-for="(item, i) in data.businessBenefits.items"
+                :key="i"
+                class="flex flex-col items-center gap-y-4 text-center"
+              >
+                <div
+                  class="w-10 h-10 rounded-full bg-[#ADF9C5] dark:bg-[#2AB857] flex items-center justify-center p-2"
+                >
+                  <div
+                    class="w-full h-full bg-gradient-to-b from-[#2AB857] to-[#7DD89A] rounded-full flex items-center justify-center text-white shadow-[0_12px_11.8px_0_rgba(0,0,0,0.1)]"
+                  >
+                    <ChecklistIcon />
+                  </div>
+                </div>
+                <p class="text-[#195279] dark:text-[#D4D4D4] text-[14px]">
+                  {{ item.label }}
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+      <!-- CTA Banner -->
+      <section
+        class="w-full h-auto flex flex-col justify-center items-center px-32"
+      >
+        <div
+          class="w-full h-auto bg-[#1AB24F] rounded-2xl p-10 flex flex-col items-center gap-4"
+        >
+          <p class="text-white font-[600] text-[20px] text-center">
+            Smarter Risk. Faster Decision. Sustainable Protection
+          </p>
+          <p class="text-white text-[14px] text-center">
+            Smarter Risk. Faster Decision. Sustainable Protection
+          </p>
+          <a
+            href="/book-a-demo"
+            class="bg-white text-[#1AB24F] font-[500] px-6 py-2 rounded-full hover:opacity-90 transition"
+          >
+            Book a Demo!
+          </a>
+        </div>
+      </section>
+    </div>
+  </div>
+
+  <div v-else class="flex justify-center items-center h-screen">
+    <p class="text-[#9CA3AF]">Solution tidak ditemukan.</p>
+  </div>
+</template>
