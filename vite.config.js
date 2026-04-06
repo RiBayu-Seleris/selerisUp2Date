@@ -7,6 +7,8 @@ import { visualizer } from "rollup-plugin-visualizer";
 // "tailwindcss": "^3.3.5",
 
 export default defineConfig({
+  base: "/selerisUp2Date/", // 🔥 TAMBAHKAN INI
+
   server: {
     allowedHosts: ["954cd8c1ef8e.ngrok-free.app"],
     port: 5179,
@@ -24,11 +26,11 @@ export default defineConfig({
   ].filter(Boolean),
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./src"), // <-- alias '@' ke 'src'
+      "@": path.resolve(__dirname, "./src"),
       "@productComponents": path.resolve(
         __dirname,
         "./src/components/Products/ReusableComponents",
-      ), // <-- alias '@' ke 'src'
+      ),
     },
   },
   build: {
