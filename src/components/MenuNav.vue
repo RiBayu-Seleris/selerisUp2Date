@@ -210,7 +210,9 @@ onUnmounted(() => {
           class="w-full h-auto p-[1px] bg-gradient-to-r from-[#565656]/0 to-[#BCBCBC]/30 rounded-2xl shadow-lg"
         >
           <!-- Ini saat tidak underconstruction -->
-          <!-- <div class="w-full h-auto flex flex-col bg-white py-6 px-5 rounded-2xl dark:bg-[#1D2426]">
+          <div
+            class="w-full h-auto flex flex-col bg-white py-6 px-5 rounded-2xl dark:bg-[#1D2426]"
+          >
             <div class="w-full h-auto flex mb-4">
               <p
                 class="text-[#4B5563] dark:text-white font-[500] lg:text-[18px]"
@@ -257,12 +259,11 @@ onUnmounted(() => {
                 </div>
               </Navlink>
             </div>
-          </div> -->
+          </div>
 
-          <div
+          <!-- <div
             class="w-full h-auto flex flex-col bg-white py-6 px-5 rounded-2xl dark:bg-[#1D2426]"
           >
-            <!-- Title -->
             <div class="w-full h-auto flex mb-4">
               <p
                 class="text-[#4B5563] dark:text-white font-[500] lg:text-[18px]"
@@ -311,7 +312,7 @@ onUnmounted(() => {
                 </div>
               </div>
             </div>
-          </div>
+          </div> -->
         </div>
       </div>
     </li>
