@@ -93,7 +93,7 @@ const data = computed(() =>
       <!-- Key Features -->
       <section class="flex flex-col lg:flex-row gap-6 px-8 xl:px-28">
         <div
-          class="flex relative w-full sm:h-[440px] bg-[#8EE7AB] justify-center items-center overflow-hidden rounded-2xl"
+          class="flex relative w-full sm:h-[420px] md:h-[440px] bg-[#8EE7AB] justify-center items-center overflow-hidden rounded-2xl"
         >
           <div
             class="absolute z-10 w-full h-full -left-[0%] -bottom-[40%] lg:top-[45%] text-[#C4FFD7]"
@@ -106,11 +106,11 @@ const data = computed(() =>
             />
           </div>
           <div
-            class="relative lg:absolute z-20 w-auto lg:w-full h-auto flex -bottom-[30px] sm:-bottom-[35px] lg:-bottom-[9%] justify-center"
+            class="relative lg:absolute z-20 w-auto lg:w-full h-auto flex -bottom-[30px] sm:-bottom-[38px] md:-bottom-[35px] lg:-bottom-[9%] justify-center"
           >
             <img
               src="@/assets/images/girl-pict.svg"
-              class="w-[70%] sm:w-full xl:w-[75%] h-full object-contain object-bottom"
+              class="w-[70%] sm:w-[90%] md:w-full xl:w-[75%] h-full object-contain object-bottom"
             />
           </div>
         </div>
@@ -119,15 +119,15 @@ const data = computed(() =>
           class="w-full lg:w-[63%] h-auto shrink-0 p-[1px] bg-[#E3E3E3] dark:bg-gradient-to-r dark:from-[#17181A] dark:to-[#000000]/60 rounded-2xl"
         >
           <div
-            class="w-full h-full flex flex-col gap-y-4 sm:gap-y-6 xl:gap-y-8 px-8 sm:px-10 py-8 lg:py-0 justify-center rounded-2xl bg-[#FAFAFA] dark:bg-[#1D1F23] dark:text-[#E8ECF3]"
+            class="w-full h-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 px-8 sm:px-10 py-8 lg:py-0 justify-center rounded-2xl bg-[#FAFAFA] dark:bg-[#1D1F23] dark:text-[#E8ECF3]"
           >
             <p
-              class="text-[#2AB857] font-[500] text-[16px] sm:text-[20px] xl:text-[20px]"
+              class="text-[#2AB857] font-[500] text-[16px] md:text-[20px] xl:text-[20px]"
             >
               Key Features
             </p>
             <div
-              class="grid grid-cols-1 md:grid-cols-2 gap-x-2 xl:gap-x-5 gap-y-4 sm:gap-y-4 md:gap-y-8 lg:gap-y-8 xl:gap-y-10"
+              class="grid grid-cols-1 md:grid-cols-2 gap-x-2 xl:gap-x-5 gap-y-4 sm:gap-y-6 md:gap-y-8 lg:gap-y-8 xl:gap-y-10"
             >
               <div
                 v-for="(feature, i) in data.keyFeatures.items"
@@ -135,13 +135,11 @@ const data = computed(() =>
                 class="w-full h-auto flex flex-col gap-y-1 md:gap-y-3 lg:gap-y-2"
               >
                 <p
-                  class="h-auto sm:h-14 md:h-auto text-[#195279] dark:text-white font-[500] text-[14px] sm:text-[18px] xl:text-[18px]"
+                  class="h-auto text-[#195279] dark:text-white font-[500] text-[14px] sm:text-[16px] md:text-[18px] xl:text-[18px]"
                 >
                   {{ feature.title }}
                 </p>
-                <p
-                  class="text-[#9CA3AF] text-[12px] sm:text-[14px] xl:text-[14px] h-auto sm:h-20 md:h-auto"
-                >
+                <p class="text-[#9CA3AF] text-[12px] md:text-[14px] h-auto">
                   {{ feature.description }}
                 </p>
               </div>
@@ -200,7 +198,9 @@ const data = computed(() =>
                 {{ data.businessBenefits.subtitle }}
               </p>
             </div>
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-5">
+            <div
+              class="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8 md:gap-x-5 md:gap-y-6"
+            >
               <div
                 v-for="(item, i) in data.businessBenefits.items"
                 :key="i"
@@ -230,19 +230,21 @@ const data = computed(() =>
         class="w-full h-auto flex flex-col justify-center items-center px-8 xl:px-28"
       >
         <div
-          class="w-full h-auto bg-[#1AB24F] rounded-2xl px-5 py-10 sm:px-10 sm:py-10 flex flex-col items-center gap-4"
+          class="w-full h-auto bg-[#1AB24F] rounded-2xl px-5 py-10 sm:px-0 sm:py-10 flex flex-col items-center gap-6 md:gap-4"
         >
-          <p
-            class="text-white font-[600] text-[16px] sm:text-[20px] text-center"
-          >
-            Smarter Risk. Faster Decision. Sustainable Protection
-          </p>
-          <p class="text-white text-[14px] text-center">
-            Smarter Risk. Faster Decision. Sustainable Protection
-          </p>
+          <div class="w-full h-auto flex flex-col gap-y-2">
+            <p
+              class="text-white font-[600] text-[16px] sm:text-[18px] md:text-[20px] text-center"
+            >
+              Smarter Risk. Faster Decision. Sustainable Protection
+            </p>
+            <p class="text-white text-[12px] md:text-[14px] text-center">
+              Smarter Risk. Faster Decision. Sustainable Protection
+            </p>
+          </div>
           <a
             href="/book-a-demo"
-            class="bg-white text-[#1AB24F] text-[14px] sm:text-[16px] font-[500] px-8 sm:px-6 py-2 rounded-full hover:opacity-90 transition"
+            class="bg-white text-[#1AB24F] text-[14px] md:text-[16px] font-[500] px-8 sm:px-6 py-2 rounded-full hover:opacity-90 transition"
           >
             Book a Demo!
           </a>

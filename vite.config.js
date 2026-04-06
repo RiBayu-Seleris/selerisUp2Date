@@ -7,7 +7,7 @@ import { visualizer } from "rollup-plugin-visualizer";
 // "tailwindcss": "^3.3.5",
 
 export default defineConfig({
-  base: "/selerisUp2Date/", // 🔥 TAMBAHKAN INI
+  // base: "/selerisUp2Date/", // 🔥 TAMBAHKAN INI
 
   server: {
     allowedHosts: ["954cd8c1ef8e.ngrok-free.app"],
