@@ -177,7 +177,9 @@ const data = computed(() =>
               >
                 {{ feature.title }}
               </p>
-              <p class="text-[#5C6778] text-[12px] md:text-[14px] font-[400]">
+              <p
+                class="text-[#5C6778] text-[12px] md:text-[14px] lg:text-[16px] font-[400]"
+              >
                 {{ feature.description }}
               </p>
             </div>

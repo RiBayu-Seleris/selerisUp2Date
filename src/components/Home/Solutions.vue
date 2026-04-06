@@ -88,10 +88,10 @@ onUnmounted(() => {
     <!-- Ini ukuran LG -->
     <!-- Cards Grid 2-3-2 -->
     <div
-      class="w-full h-auto hidden lg:flex flex-col gap-y-4 lg:gap-y-4 lg:px-8"
+      class="w-full h-auto hidden lg:flex flex-col gap-y-4 lg:gap-y-4 lg:px-8 xl:px-16"
     >
       <!-- Row 1: 2 cards -->
-      <div class="w-full grid grid-cols-2 gap-3">
+      <div class="w-full grid grid-cols-2 gap-4">
         <div
           v-for="data in row1"
           :key="data.id"
@@ -99,7 +99,7 @@ onUnmounted(() => {
           :class="
             SolutionLists.indexOf(data) === activeIndex
               ? 'is-active border-none'
-              : 'border-2 border-[#E6F0ED] dark:border-none dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]'
+              : 'bg-[#E6F0ED] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]'
           "
           @mouseenter="onMouseEnter(SolutionLists.indexOf(data))"
           @mouseleave="onMouseLeave"
@@ -163,7 +163,7 @@ onUnmounted(() => {
       </div>
 
       <!-- Row 2: 3 cards -->
-      <div class="w-full grid grid-cols-3 gap-3">
+      <div class="w-full grid grid-cols-3 gap-4">
         <div
           v-for="data in row2"
           :key="data.id"
@@ -171,7 +171,7 @@ onUnmounted(() => {
           :class="
             SolutionLists.indexOf(data) === activeIndex
               ? 'is-active border-none'
-              : 'border-2 border-[#E6F0ED] dark:border-none dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]'
+              : 'bg-[#E6F0ED] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]'
           "
           @mouseenter="onMouseEnter(SolutionLists.indexOf(data))"
           @mouseleave="onMouseLeave"
@@ -235,7 +235,7 @@ onUnmounted(() => {
       </div>
 
       <!-- Row 3: 2 cards -->
-      <div class="w-full grid grid-cols-2 gap-3">
+      <div class="w-full grid grid-cols-2 gap-4">
         <div
           v-for="data in row3"
           :key="data.id"
@@ -243,7 +243,7 @@ onUnmounted(() => {
           :class="
             SolutionLists.indexOf(data) === activeIndex
               ? 'is-active border-none'
-              : 'border-2 border-[#E6F0ED] dark:border-none dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]'
+              : 'bg-[#E6F0ED] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]'
           "
           @mouseenter="onMouseEnter(SolutionLists.indexOf(data))"
           @mouseleave="onMouseLeave"
@@ -314,15 +314,15 @@ onUnmounted(() => {
         :key="index"
         class="card-wrapper group relative rounded-2xl flex-shrink-0 p-[1px] cursor-pointer w-[80vw] sm:w-[60%] md:w-[460px] snap-center"
         :class="
-          index === activeIndex
+          SolutionLists.indexOf(data) === activeIndex
             ? 'is-active border-none'
-            : 'border-2 border-[#E6F0ED] dark:border-none dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]'
+            : 'bg-[#E6F0ED] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]'
         "
         @mouseenter="onMouseEnter(index)"
         @mouseleave="onMouseLeave"
-        @click="showUnderConstructionModal = true"
+        @click="handleCardClick(data)"
       >
-        <!-- @click="handleCardClick(data)" -->
+        <!-- @click="showUnderConstructionModal = true" -->
         <div
           class="w-full h-full flex flex-col justify-between bg-white dark:bg-[#1D1F23] rounded-2xl px-5 py-6 gap-y-6"
         >

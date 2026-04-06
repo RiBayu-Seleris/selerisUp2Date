@@ -60,7 +60,7 @@ const getShortText = (fullText) => {
         >
           <!-- FRONT -->
           <div
-            class="flex flex-col space-y-2 md:space-y-3 absolute w-full h-full backface-hidden bg-[#F9FAFB] dark:bg-[#1D1F23] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 shadow-md px-5 pt-6 border-[0.1px] dark:border-[#FAFAFA]/25"
+            class="flex flex-col space-y-2 md:space-y-3 absolute w-full h-full backface-hidden bg-[#F9FAFB] dark:bg-[#1D1F23] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 shadow-md px-5 pt-6"
           >
             <div
               class="flex flex-col w-full h-auto text-[#195279] dark:text-[#FAFAFA]"
