@@ -105,13 +105,13 @@ export const SolutionLists = [
     id: 2,
     slug: "mobile-health",
     url: "/solution/mobile-health",
-    title: "Mobile Health — Seleriscare.ai",
+    title: "Mobile Health",
     content: "Kesehatan Mobile — Seleriscare.ai",
     icons: phone,
 
     hero: {
       label: "Solution 02",
-      title: "Mobile Health — Seleriscare.ai",
+      title: "Mobile Health",
       subtitle: "Comprehensive Health Check, 60 Seconds, Anywhere.",
     },
 
@@ -357,7 +357,7 @@ export const SolutionLists = [
     id: 5,
     slug: "biological-age",
     url: "/solution/biological-age",
-    title: "Biological Age Assessment — Seleriscare.ai",
+    title: "Biological Age Assessment",
     content: "Penilaian Usia Biologis — Seleriscare.ai",
     icons: dna,
 
@@ -437,7 +437,7 @@ export const SolutionLists = [
     id: 6,
     slug: "population-health",
     url: "/solution/population-health",
-    title: "Population Health Screening — Seleriscare.ai",
+    title: "Population Health Screening",
     content: "Skrining Kesehatan Populasi — Seleriscare.ai",
     icons: users,
 
@@ -514,7 +514,7 @@ export const SolutionLists = [
     id: 7,
     slug: "b2b-partnership",
     url: "/solution/b2b-partnership",
-    title: "B2B Partnership & Licensing — Seleriscare.ai",
+    title: "B2B Partnership & Licensing",
     content: "Kemitraan & Lisensi B2B — Seleriscare.ai",
     icons: hands,
 
