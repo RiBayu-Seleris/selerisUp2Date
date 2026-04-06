@@ -58,7 +58,9 @@ const data = computed(() =>
           <div
             class="w-full h-full bg-white dark:bg-[#1D1F23] rounded-2xl px-6 pt-5 pb-10 lg:pb-0"
           >
-            <p class="text-[#1AB24F] font-[500] text-[18px] mb-4">Overview</p>
+            <p class="text-[#1AB24F] font-[500] text-[18px] mb-2 sm:mb-4">
+              Overview
+            </p>
             <p
               class="text-[#374151] dark:text-[#E8ECF3] text-[14px] sm:text-[16px] leading-loose"
             >
