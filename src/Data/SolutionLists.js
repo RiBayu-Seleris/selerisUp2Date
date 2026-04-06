@@ -355,7 +355,7 @@ export const SolutionLists = [
 
   {
     id: 5,
-    slug: "biological-age-assessment",
+    slug: "biological-age",
     url: "/solution/biological-age",
     title: "Biological Age Assessment — Seleriscare.ai",
     content: "Penilaian Usia Biologis — Seleriscare.ai",
@@ -435,7 +435,7 @@ export const SolutionLists = [
 
   {
     id: 6,
-    slug: "population-health-screening",
+    slug: "population-health",
     url: "/solution/population-health",
     title: "Population Health Screening — Seleriscare.ai",
     content: "Skrining Kesehatan Populasi — Seleriscare.ai",
@@ -512,7 +512,7 @@ export const SolutionLists = [
 
   {
     id: 7,
-    slug: "b2b-partnership-licensing",
+    slug: "b2b-partnership",
     url: "/solution/b2b-partnership",
     title: "B2B Partnership & Licensing — Seleriscare.ai",
     content: "Kemitraan & Lisensi B2B — Seleriscare.ai",
