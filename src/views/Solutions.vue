@@ -34,7 +34,7 @@ const data = computed(() =>
         </div>
         <div class="w-full h-auto">
           <p
-            class="text-[26px] md:text-[28px] lg:text-[42px] xl:text-[46px] font-[500] text-[#195279] text-center leading-relaxed dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+            class="text-[20px] sm:text-[24px] md:text-[28px] lg:text-[42px] xl:text-[46px] font-[500] text-[#195279] text-center leading-relaxed dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
             {{ data.hero.title }}
           </p>
@@ -58,18 +58,20 @@ const data = computed(() =>
           <div
             class="w-full h-full bg-white dark:bg-[#1D1F23] rounded-2xl px-6 pt-5 pb-10 lg:pb-0"
           >
-            <p class="text-[#1AB24F] font-[500] text-[18px] mb-2 sm:mb-4">
+            <p
+              class="text-[#1AB24F] font-[500] text-[14px] sm:text-[18px] mb-2 sm:mb-4"
+            >
               Overview
             </p>
             <p
-              class="text-[#374151] dark:text-[#E8ECF3] text-[14px] sm:text-[16px] md:text-[14px] lg:text-[16px] leading-loose"
+              class="text-[#374151] dark:text-[#E8ECF3] text-[12px] sm:text-[16px] md:text-[14px] lg:text-[16px] leading-loose"
             >
               {{ data.overview.description }}
             </p>
           </div>
         </div>
         <div
-          class="relative w-full lg:w-[30%] shrink-0 h-auto bg-[#2A6993] dark:bg-gradient-to-br dark:from-[#2C7AAF] dark:from-[40%] dark:via-[#164A6B] dark:via-[130%] dark:to-[#0D202D] dark:to-[20%] rounded-2xl px-8 py-8 lg:py-10 justify-center flex flex-col gap-y-8 overflow-hidden shadow-[-9px_11px_200px_0_rgba(42,105,147,0.2)] dark:shadow-[-9px_11px_200px_0_rgba(42,105,147,0.2)]"
+          class="relative w-full lg:w-[30%] shrink-0 h-auto bg-[#2A6993] dark:bg-gradient-to-br dark:from-[#2C7AAF] dark:from-[40%] dark:via-[#164A6B] dark:via-[130%] dark:to-[#0D202D] dark:to-[20%] rounded-2xl px-8 py-8 lg:py-10 justify-center flex flex-col gap-y-4 sm:gap-y-8 overflow-hidden shadow-[-9px_11px_200px_0_rgba(42,105,147,0.2)] dark:shadow-[-9px_11px_200px_0_rgba(42,105,147,0.2)]"
         >
           <div
             class="absolute z-10 w-full h-full -right-[45%] top-[40%] text-[#4882A9]"
@@ -82,7 +84,7 @@ const data = computed(() =>
             class="relative z-20 w-full h-auto flex flex-col gap-y-2"
           >
             <p
-              class="text-white text-[24px] sm:text-[30px] font-[500] leading-tight tracking-wide"
+              class="text-white text-[20px] sm:text-[30px] font-[500] leading-tight tracking-wide"
             >
               {{ stat.value }}
             </p>
@@ -127,7 +129,7 @@ const data = computed(() =>
               Key Features
             </p>
             <div
-              class="grid grid-cols-1 md:grid-cols-2 gap-x-2 md:gap-x-4 xl:gap-x-5 gap-y-4 sm:gap-y-6 md:gap-y-8 lg:gap-y-8 xl:gap-y-10"
+              class="grid grid-cols-1 md:grid-cols-2 gap-x-2 md:gap-x-4 xl:gap-x-5 gap-y-4 sm:gap-y-6 md:gap-y-8 lg:gap-y-10 xl:gap-y-14"
             >
               <div
                 v-for="(feature, i) in data.keyFeatures.items"
