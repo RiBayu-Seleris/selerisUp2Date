@@ -103,9 +103,9 @@ onUnmounted(() => {
           "
           @mouseenter="onMouseEnter(SolutionLists.indexOf(data))"
           @mouseleave="onMouseLeave"
-          @click="showUnderConstructionModal = true"
+          @click="handleCardClick(data)"
         >
-          <!-- @click="handleCardClick(data)" -->
+          <!-- @click="showUnderConstructionModal = true" -->
           <div
             class="w-full h-full flex flex-col justify-between bg-white dark:bg-[#1D1F23] rounded-2xl px-5 py-6"
           >

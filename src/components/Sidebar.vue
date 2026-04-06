@@ -301,7 +301,7 @@ const toggleSolution = () => {
                 </button>
 
                 <!-- Ini saat tidak underconstruction -->
-                <!-- <div v-if="isSolutionOpen" class="w-full flex flex-col gap-y-4">
+                <div v-if="isSolutionOpen" class="w-full flex flex-col gap-y-4">
                   <Navlink
                     v-for="(solution, index) in SolutionLists"
                     :key="index"
@@ -342,9 +342,9 @@ const toggleSolution = () => {
                       </div>
                     </div>
                   </Navlink>
-                </div> -->
+                </div>
 
-                <transition name="fade">
+                <!-- <transition name="fade">
                   <div
                     v-if="isSolutionOpen"
                     class="w-full flex flex-col gap-y-2.5 sm:gap-y-4"
@@ -394,7 +394,7 @@ const toggleSolution = () => {
                       </div>
                     </div>
                   </div>
-                </transition>
+                </transition> -->
               </div>
 
               <!-- Blogs -->
