@@ -166,7 +166,7 @@ const data = computed(() =>
             class="w-full h-auto p-[1px] bg-[#E3E3E3] dark:bg-gradient-to-r dark:from-[#17181A] dark:to-[#000000]/60 rounded-2xl"
           >
             <div
-              class="w-full h-auto flex flex-col gap-y-3 xl:gap-y-2 bg-white dark:bg-[#2C2C2C] rounded-2xl p-4 xl:p-6 shadow"
+              class="w-full h-full flex flex-col gap-y-3 xl:gap-y-2 bg-white dark:bg-[#2C2C2C] rounded-2xl p-4 xl:p-6 shadow"
             >
               <p
                 class="text-[#2A6993] dark:text-white font-[500] text-[16px] xl:text-[18px]"
