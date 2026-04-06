@@ -23,7 +23,7 @@ const data = computed(() =>
       class="flex w-full h-auto pt-[120px] md:pt-[100px] xl:pt-[160px] dark:bg-[#17181A]"
     >
       <div
-        class="flex flex-col w-full h-auto gap-y-4 justify-center items-center"
+        class="flex flex-col w-full h-auto gap-y-2 lg:gap-y-4 justify-center items-center"
       >
         <div class="w-full h-auto">
           <p
@@ -34,14 +34,14 @@ const data = computed(() =>
         </div>
         <div class="w-full h-auto">
           <p
-            class="text-[26px] md:text-[36px] lg:text-[42px] xl:text-[46px] font-[500] text-[#195279] text-center leading-relaxed dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+            class="text-[26px] md:text-[28px] lg:text-[42px] xl:text-[46px] font-[500] text-[#195279] text-center leading-relaxed dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
             {{ data.hero.title }}
           </p>
         </div>
         <div class="w-full h-auto">
           <p
-            class="text-[14px] md:text-[22px] lg:text-[24px] xl:text-[16px] font-[400] text-[#195279] px-8 md:px-0 xl:px-48 text-center leading-normal dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+            class="text-[14px] md:text-[18px] lg:text-[24px] xl:text-[16px] font-[400] text-[#195279] px-8 md:px-0 xl:px-48 text-center leading-normal dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
             "{{ data.hero.subtitle }}"
           </p>
