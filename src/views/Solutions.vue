@@ -60,7 +60,7 @@ const data = computed(() =>
           >
             <p class="text-[#1AB24F] font-[500] text-[18px] mb-4">Overview</p>
             <p
-              class="text-[#374151] dark:text-[#E8ECF3] text-[16px] leading-loose"
+              class="text-[#374151] dark:text-[#E8ECF3] text-[14px] sm:text-[16px] leading-loose"
             >
               {{ data.overview.description }}
             </p>
@@ -80,7 +80,7 @@ const data = computed(() =>
             class="relative z-20 w-full h-auto flex flex-col gap-y-2"
           >
             <p
-              class="text-white text-[30px] font-[500] leading-tight tracking-wide"
+              class="text-white text-[24px] sm:text-[30px] font-[500] leading-tight tracking-wide"
             >
               {{ stat.value }}
             </p>
@@ -91,7 +91,7 @@ const data = computed(() =>
       <!-- Key Features -->
       <section class="flex flex-col lg:flex-row gap-6 px-8 xl:px-28">
         <div
-          class="flex relative w-full h-[440px] bg-[#8EE7AB] justify-center items-center overflow-hidden rounded-2xl"
+          class="flex relative w-full sm:h-[440px] bg-[#8EE7AB] justify-center items-center overflow-hidden rounded-2xl"
         >
           <div
             class="absolute z-10 w-full h-full -left-[0%] -bottom-[40%] lg:top-[45%] text-[#C4FFD7]"
@@ -104,11 +104,11 @@ const data = computed(() =>
             />
           </div>
           <div
-            class="relative lg:absolute z-20 w-auto lg:w-full h-auto flex -bottom-[35px] lg:-bottom-[9%] justify-center"
+            class="relative lg:absolute z-20 w-auto lg:w-full h-auto flex -bottom-[30px] sm:-bottom-[35px] lg:-bottom-[9%] justify-center"
           >
             <img
               src="@/assets/images/girl-pict.svg"
-              class="w-full xl:w-[75%] h-full object-contain object-bottom"
+              class="w-[70%] sm:w-full xl:w-[75%] h-full object-contain object-bottom"
             />
           </div>
         </div>
@@ -117,13 +117,15 @@ const data = computed(() =>
           class="w-full lg:w-[63%] h-auto shrink-0 p-[1px] bg-[#E3E3E3] dark:bg-gradient-to-r dark:from-[#17181A] dark:to-[#000000]/60 rounded-2xl"
         >
           <div
-            class="w-full h-full flex flex-col gap-y-6 xl:gap-y-8 px-10 justify-center rounded-2xl bg-[#FAFAFA] dark:bg-[#1D1F23] dark:text-[#E8ECF3]"
+            class="w-full h-full flex flex-col gap-y-4 sm:gap-y-6 xl:gap-y-8 px-8 sm:px-10 py-8 lg:py-0 justify-center rounded-2xl bg-[#FAFAFA] dark:bg-[#1D1F23] dark:text-[#E8ECF3]"
           >
-            <p class="text-[#2AB857] font-[500] text-[20px] xl:text-[20px]">
+            <p
+              class="text-[#2AB857] font-[500] text-[16px] sm:text-[20px] xl:text-[20px]"
+            >
               Key Features
             </p>
             <div
-              class="grid grid-cols-1 md:grid-cols-2 gap-x-2 xl:gap-x-5 gap-y-4 md:gap-y-8 lg:gap-y-8 xl:gap-y-10"
+              class="grid grid-cols-1 md:grid-cols-2 gap-x-2 xl:gap-x-5 gap-y-4 sm:gap-y-4 md:gap-y-8 lg:gap-y-8 xl:gap-y-10"
             >
               <div
                 v-for="(feature, i) in data.keyFeatures.items"
@@ -131,12 +133,12 @@ const data = computed(() =>
                 class="w-full h-auto flex flex-col gap-y-1 md:gap-y-3 lg:gap-y-2"
               >
                 <p
-                  class="h-14 md:h-auto text-[#195279] dark:text-white font-[500] text-[18px] xl:text-[18px]"
+                  class="h-auto sm:h-14 md:h-auto text-[#195279] dark:text-white font-[500] text-[14px] sm:text-[18px] xl:text-[18px]"
                 >
                   {{ feature.title }}
                 </p>
                 <p
-                  class="text-[#9CA3AF] text-[14px] xl:text-[14px] h-20 md:h-auto"
+                  class="text-[#9CA3AF] text-[12px] sm:text-[14px] xl:text-[14px] h-auto sm:h-20 md:h-auto"
                 >
                   {{ feature.description }}
                 </p>
@@ -156,7 +158,7 @@ const data = computed(() =>
               : data.moreFeatures.length === 3
                 ? 'grid-cols-3'
                 : data.moreFeatures.length === 2
-                  ? 'grid-cols-2'
+                  ? 'grid-cols-1 sm:grid-cols-2'
                   : 'grid-cols-1'
           "
         >
@@ -186,7 +188,7 @@ const data = computed(() =>
           class="w-full h-auto p-[1px] bg-[#E3E3E3] dark:bg-gradient-to-r dark:from-[#17181A] dark:to-[#000000]/60 rounded-2xl"
         >
           <div
-            class="flex flex-col w-auto gap-y-6 bg-[#FAFAFA] dark:bg-[#1D1F23] justify-center items-center px-14 lg:px-8 py-6 rounded-2xl"
+            class="flex flex-col w-auto gap-y-8 sm:gap-y-6 bg-[#FAFAFA] dark:bg-[#1D1F23] justify-center items-center px-6 sm:px-14 lg:px-8 py-6 rounded-2xl"
           >
             <div class="w-full h-auto flex flex-col gap-y-1">
               <p class="text-[#1AB24F] font-[500] text-[20px] text-center">
@@ -196,14 +198,14 @@ const data = computed(() =>
                 {{ data.businessBenefits.subtitle }}
               </p>
             </div>
-            <div class="grid grid-cols-2 lg:grid-cols-4 gap-5">
+            <div class="grid grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-5">
               <div
                 v-for="(item, i) in data.businessBenefits.items"
                 :key="i"
-                class="flex flex-col items-center gap-y-4 text-center"
+                class="flex flex-col items-center gap-y-2 sm:gap-y-4 text-center"
               >
                 <div
-                  class="w-10 h-10 rounded-full bg-[#ADF9C5] dark:bg-[#2AB857] flex items-center justify-center p-2"
+                  class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#ADF9C5] dark:bg-[#2AB857] flex items-center justify-center p-1.5 sm:p-2"
                 >
                   <div
                     class="w-full h-full bg-gradient-to-b from-[#2AB857] to-[#7DD89A] rounded-full flex items-center justify-center text-white shadow-[0_12px_11.8px_0_rgba(0,0,0,0.1)]"
@@ -211,7 +213,9 @@ const data = computed(() =>
                     <ChecklistIcon />
                   </div>
                 </div>
-                <p class="text-[#195279] dark:text-[#D4D4D4] text-[14px]">
+                <p
+                  class="text-[#195279] dark:text-[#D4D4D4] text-[12px] sm:text-[14px]"
+                >
                   {{ item.label }}
                 </p>
               </div>
@@ -224,9 +228,11 @@ const data = computed(() =>
         class="w-full h-auto flex flex-col justify-center items-center px-8 xl:px-28"
       >
         <div
-          class="w-full h-auto bg-[#1AB24F] rounded-2xl p-10 flex flex-col items-center gap-4"
+          class="w-full h-auto bg-[#1AB24F] rounded-2xl px-5 py-10 sm:px-10 sm:py-10 flex flex-col items-center gap-4"
         >
-          <p class="text-white font-[600] text-[20px] text-center">
+          <p
+            class="text-white font-[600] text-[16px] sm:text-[20px] text-center"
+          >
             Smarter Risk. Faster Decision. Sustainable Protection
           </p>
           <p class="text-white text-[14px] text-center">
@@ -234,7 +240,7 @@ const data = computed(() =>
           </p>
           <a
             href="/book-a-demo"
-            class="bg-white text-[#1AB24F] font-[500] px-6 py-2 rounded-full hover:opacity-90 transition"
+            class="bg-white text-[#1AB24F] text-[14px] sm:text-[16px] font-[500] px-8 sm:px-6 py-2 rounded-full hover:opacity-90 transition"
           >
             Book a Demo!
           </a>

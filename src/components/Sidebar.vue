@@ -301,48 +301,57 @@ const toggleSolution = () => {
                 </button>
 
                 <!-- Ini saat tidak underconstruction -->
-                <div v-if="isSolutionOpen" class="w-full flex flex-col gap-y-4">
-                  <Navlink
-                    v-for="(solution, index) in SolutionLists"
-                    :key="index"
-                    :href="solution.url"
-                    class="flex justify-start items-start group transition-all duration-300 cursor-pointer"
+                <transition name="fade">
+                  <div
+                    v-if="isSolutionOpen"
+                    class="w-full flex flex-col gap-y-4"
                   >
-                    <div
-                      class="w-full h-auto flex flex-row gap-x-3 justify-center items-center group-hover:bg-[#55FC8A]/10 p-2 rounded-md"
+                    <Navlink
+                      v-for="(solution, index) in SolutionLists"
+                      :key="index"
+                      :href="solution.url"
+                      class="flex justify-start items-start group transition-all duration-300 cursor-pointer"
                     >
-                      <div class="w-fit h-auto flex justify-center items-start">
-                        <div
-                          class="w-9 h-9 rounded-md flex justify-center items-center p-2 bg-[#ADF9C5] dark:bg-[#2AB857] text-[#2AB857] dark:text-[#AFFAC6]"
-                        >
-                          <component
-                            :is="solution.icons"
-                            class="w-full h-full"
-                          />
-                        </div>
-                      </div>
                       <div
-                        class="w-full h-auto flex flex-col justify-center items-start"
+                        class="w-full h-auto flex flex-row gap-x-3 justify-center items-center group-hover:bg-[#55FC8A]/10 p-1.5 sm:p-2 rounded-md"
                       >
-                        <span
-                          class="text-[14px] font-[600] text-[#374151] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
-                          >{{ solution.title }}</span
-                        >
-                        <span
-                          class="text-[12px] text-[#9CA3AF] font-[500] group-hover:text-[#2AB857] group-hover:font-[500] dark:text-[#FAFAFA] text-animate-group-hover dark:dark-text-animate-group-hover"
-                          >{{ solution.content }}</span
-                        >
-                      </div>
-                      <div class="w-fit h-auto flex justify-center items-start">
                         <div
-                          class="w-9 h-auto rounded-md flex justify-center items-center p-2 text-[#C9C9C9] group-hover:text-[#2AB857] dark:text-[#C9C9C9] group-hover:dark:text-[#2AB857]"
+                          class="w-fit h-auto flex justify-center items-start"
                         >
-                          <ArrowRight class="w-full h-full" />
+                          <div
+                            class="w-8 h-8 rounded-md flex justify-center items-center p-2 bg-[#ADF9C5] dark:bg-[#2AB857] text-[#2AB857] dark:text-[#AFFAC6]"
+                          >
+                            <component
+                              :is="solution.icons"
+                              class="w-full h-full"
+                            />
+                          </div>
+                        </div>
+                        <div
+                          class="w-full h-auto flex flex-col justify-center items-start"
+                        >
+                          <span
+                            class="text-[12px] sm:text-[14px] font-[600] text-[#374151] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+                            >{{ solution.title }}</span
+                          >
+                          <span
+                            class="text-[10px] sm:text-[12px] text-[#9CA3AF] font-[500] group-hover:text-[#2AB857] group-hover:font-[500] dark:text-[#FAFAFA] text-animate-group-hover dark:dark-text-animate-group-hover"
+                            >{{ solution.content }}</span
+                          >
+                        </div>
+                        <div
+                          class="w-fit h-auto flex justify-center items-start"
+                        >
+                          <div
+                            class="w-9 h-auto rounded-md flex justify-center items-center p-2 text-[#C9C9C9] group-hover:text-[#2AB857] dark:text-[#C9C9C9] group-hover:dark:text-[#2AB857]"
+                          >
+                            <ArrowRight class="w-full h-full" />
+                          </div>
                         </div>
                       </div>
-                    </div>
-                  </Navlink>
-                </div>
+                    </Navlink>
+                  </div>
+                </transition>
 
                 <!-- <transition name="fade">
                   <div

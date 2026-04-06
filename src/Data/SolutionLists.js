@@ -48,9 +48,9 @@ export const SolutionLists = [
             "From application, screening, to risk decision — all in one seamless digital workflow without paperwork",
         },
         {
-          title: "39 Physiological Parameters",
+          title: "Integrated Actuarial Risk Algorithm",
           description:
-            "Heart Rate, HRV, Respiratory Rate, Blood Pressure estimation, Stress Index, Cardiovascular Risk Score, Biological Age, BMI, and more",
+            "Risk scores are directly translated into evidence-based individual premium recommendation",
         },
         {
           title: "Compliance-Ready",
@@ -201,7 +201,7 @@ export const SolutionLists = [
       description:
         "Seleris Corporate Wellness Platform changes the conventional wellness approach entirely: mass employee health screenings can now be conducted contactlessly, quickly, and at scale — directly from each employee's smartphone, anytime, anywhere. Aggregated workforce health data empowers HR teams and management to understand health risk profiles in real-time.",
       stats: [
-        { value: "0", label: "Operational Disruption" },
+        { value: "Zero", label: "Operational Disruption" },
         { value: "Real-time", label: "Aggregated Data" },
         { value: "ROI", label: "Measurable Impact" },
       ],
