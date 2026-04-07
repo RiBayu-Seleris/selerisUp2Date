@@ -140,9 +140,9 @@ import CallIcon from "@/components/icons/CallIcon.vue";
                   </div>
                   <div class="flex w-full justify-center items-center">
                     <a
-                      href="mailto:info@seleris.id"
+                      href="mailto:info@seleris.ai"
                       class="text-[#2AB857] xl:text-[14px]"
-                      >info@seleris.id</a
+                      >info@seleris.ai</a
                     >
                   </div>
                 </div>

@@ -7,10 +7,25 @@ import Circle2 from "@/assets/icons/Solutions/circle2.vue";
 import Circle3 from "@/assets/icons/Solutions/circle3.vue";
 import ChecklistIcon from "@/components/icons/Checklist.vue";
 
+import { Swiper, SwiperSlide } from "swiper/vue";
+import { Pagination, Autoplay } from "swiper/modules";
+import "swiper/css";
+import "swiper/css/pagination";
+
+// Hapus defineProps
 const route = useRoute();
 const data = computed(() =>
   SolutionLists.find((s) => s.slug === route.params.slug),
 );
+
+const slidePairs = computed(() => {
+  const items = data.value?.keyFeatures?.items ?? [];
+  const pairs = [];
+  for (let i = 0; i < items.length; i += 2) {
+    pairs.push(items.slice(i, i + 2));
+  }
+  return pairs;
+});
 </script>
 
 <template>
@@ -93,43 +108,33 @@ const data = computed(() =>
         </div>
       </section>
       <!-- Key Features -->
-      <section class="flex flex-col lg:flex-row gap-6 px-8 xl:px-28">
-        <div
-          class="flex relative w-full sm:h-[420px] md:h-[460px] lg:h-[440px] bg-[#8EE7AB] justify-center items-center overflow-hidden rounded-2xl"
-        >
-          <div
-            class="absolute z-10 w-full h-full -left-[0%] -bottom-[40%] lg:top-[45%] text-[#C4FFD7]"
+      <section class="flex flex-col md:flex-row gap-6 px-8 xl:px-28">
+        <div class="relative w-full h-auto overflow-hidden rounded-2xl">
+          <video
+            autoplay
+            loop
+            muted
+            playsinline
+            @contextmenu.prevent
+            class="w-full h-full object-center rounded-2xl"
           >
-            <img
-              src="@/assets/icons/Solutions/circle-2.svg"
-              alt=""
-              srcset=""
-              class="w-full h-full object-cover object-top"
-            />
-          </div>
-          <div
-            class="relative lg:absolute z-20 w-auto lg:w-full h-auto flex -bottom-[30px] sm:-bottom-[38px] md:-bottom-[35px] lg:-bottom-[9%] justify-center"
-          >
-            <img
-              src="@/assets/images/girl-pict.svg"
-              class="w-[70%] sm:w-[90%] md:w-full xl:w-[75%] h-full object-contain object-bottom"
-            />
-          </div>
+            <source src="@/assets/videos/girl-video.mp4" type="video/mp4" />
+          </video>
         </div>
 
         <div
-          class="w-full lg:w-[63%] h-auto shrink-0 p-[1px] bg-[#E3E3E3] dark:bg-gradient-to-r dark:from-[#17181A] dark:to-[#000000]/60 rounded-2xl"
+          class="w-full md:w-[50%] lg:w-[63%] h-auto shrink-0 p-[1px] bg-[#E3E3E3] dark:bg-gradient-to-br dark:from-[#17181A] dark:to-[#000000]/60 rounded-2xl"
         >
           <div
-            class="w-full h-full flex flex-col gap-y-4 md:gap-y-6 xl:gap-y-8 px-8 sm:px-10 md:px-8 lg:px-10 py-8 lg:py-0 justify-center rounded-2xl bg-[#FAFAFA] dark:bg-[#1D1F23] dark:text-[#E8ECF3]"
+            class="w-full h-full flex flex-col gap-y-6 md:gap-y-10 xl:gap-y-8 px-8 sm:px-10 md:px-0 lg:px-10 py-8 lg:py-0 justify-center md:justify-start lg:justify-center rounded-2xl bg-[#FAFAFA] dark:bg-[#1D1F23] dark:text-[#E8ECF3]"
           >
             <p
-              class="text-[#2AB857] font-[500] text-[16px] md:text-[20px] xl:text-[20px]"
+              class="text-[#2AB857] font-[500] text-[16px] md:text-[20px] xl:text-[20px] md:px-8 lg:px-0"
             >
               Key Features
             </p>
             <div
-              class="grid grid-cols-1 md:grid-cols-2 gap-x-2 md:gap-x-4 xl:gap-x-5 gap-y-4 sm:gap-y-6 md:gap-y-8 lg:gap-y-10 xl:gap-y-14"
+              class="grid md:hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-x-2 md:gap-x-4 xl:gap-x-5 gap-y-6 sm:gap-y-6 md:gap-y-8 lg:gap-y-10 xl:gap-y-10"
             >
               <div
                 v-for="(feature, i) in data.keyFeatures.items"
@@ -137,13 +142,51 @@ const data = computed(() =>
                 class="w-full h-auto flex flex-col gap-y-1 md:gap-y-1.5 lg:gap-y-2"
               >
                 <p
-                  class="h-auto text-[#195279] dark:text-white font-[500] text-[14px] sm:text-[16px] md:text-[16px] xl:text-[18px]"
+                  class="h-auto text-[#2A6993] dark:text-[#2A89CB] font-[500] text-[14px] sm:text-[16px] md:text-[16px] xl:text-[18px]"
                 >
                   {{ feature.title }}
                 </p>
                 <p class="text-[#9CA3AF] text-[12px] lg:text-[14px] h-auto">
                   {{ feature.description }}
                 </p>
+              </div>
+            </div>
+            <div class="hidden md:block lg:hidden w-full h-auto px-8">
+              <div class="w-full h-auto">
+                <Swiper
+                  :modules="[Autoplay, Pagination]"
+                  :slides-per-view="1"
+                  :space-between="16"
+                  :loop="true"
+                  :autoplay="{
+                    delay: 1500,
+                    disableOnInteraction: false,
+                  }"
+                  :pagination="{ clickable: true }"
+                  class="w-full pb-14 cursor-pointer"
+                >
+                  <SwiperSlide
+                    v-for="(pair, slideIndex) in slidePairs"
+                    :key="slideIndex"
+                  >
+                    <div class="grid grid-cols-1 gap-x-4 gap-y-6">
+                      <div
+                        v-for="(feature, itemIndex) in pair"
+                        :key="itemIndex"
+                        class="w-full h-auto flex flex-col gap-y-1"
+                      >
+                        <p
+                          class="h-auto text-[#2A6993] dark:text-[#2A89CB] font-[500] text-[14px] sm:text-[16px]"
+                        >
+                          {{ feature.title }}
+                        </p>
+                        <p class="text-[#9CA3AF] text-[10px] h-auto">
+                          {{ feature.description }}
+                        </p>
+                      </div>
+                    </div>
+                  </SwiperSlide>
+                </Swiper>
               </div>
             </div>
           </div>
@@ -170,7 +213,7 @@ const data = computed(() =>
             class="w-full h-auto p-[1px] bg-[#E3E3E3] dark:bg-gradient-to-r dark:from-[#17181A] dark:to-[#000000]/60 rounded-2xl"
           >
             <div
-              class="w-full h-full flex flex-col gap-y-3 xl:gap-y-2 bg-white dark:bg-[#2C2C2C] rounded-2xl p-4 xl:p-6 shadow"
+              class="w-full h-full flex flex-col gap-y-3 xl:gap-y-2 bg-[#FAFAFA] dark:bg-[#1D1F23] rounded-2xl p-4 md:p-6 shadow"
             >
               <p
                 class="text-[#2A6993] dark:text-white font-[500] text-[16px] xl:text-[18px]"
@@ -192,26 +235,28 @@ const data = computed(() =>
           class="w-full h-auto p-[1px] bg-[#E3E3E3] dark:bg-gradient-to-r dark:from-[#17181A] dark:to-[#000000]/60 rounded-2xl"
         >
           <div
-            class="flex flex-col w-auto gap-y-8 sm:gap-y-6 bg-[#FAFAFA] dark:bg-[#1D1F23] justify-center items-center px-6 sm:px-14 lg:px-8 py-6 rounded-2xl"
+            class="flex flex-col w-auto gap-y-8 sm:gap-y-6 xl:gap-y-10 bg-[#FAFAFA] dark:bg-[#1D1F23] justify-center items-center px-6 sm:px-14 lg:px-8 pt-6 pb-6 xl:pb-14 rounded-2xl"
           >
             <div class="w-full h-auto flex flex-col gap-y-1">
-              <p class="text-[#1AB24F] font-[500] text-[20px] text-center">
+              <p
+                class="text-[#1AB24F] font-[500] text-[20px] xl:text-[24px] text-center"
+              >
                 {{ data.businessBenefits.title }}
               </p>
-              <p class="text-[#9CA3AF] text-[13px] text-center">
+              <p class="text-[#9CA3AF] text-[12px] xl:text-[16px] text-center">
                 {{ data.businessBenefits.subtitle }}
               </p>
             </div>
             <div
-              class="grid grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-8 md:gap-x-5 md:gap-y-6"
+              class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-4 sm:gap-y-8 md:gap-x-5 md:gap-y-6"
             >
               <div
                 v-for="(item, i) in data.businessBenefits.items"
                 :key="i"
-                class="flex flex-col items-center gap-y-2 sm:gap-y-4 text-center"
+                class="flex flex-row md:flex-col items-center gap-y-1 sm:gap-y-4 md:text-center gap-x-3 md:gap-x-0"
               >
                 <div
-                  class="w-8 h-8 sm:w-10 sm:h-10 rounded-full bg-[#ADF9C5] dark:bg-[#2AB857] flex items-center justify-center p-1.5 sm:p-2"
+                  class="w-6 h-6 shrink-0 md:shrink sm:w-10 sm:h-10 rounded-full bg-[#ADF9C5] dark:bg-[#2AB857] flex items-center justify-center p-1 sm:p-2"
                 >
                   <div
                     class="w-full h-full bg-gradient-to-b from-[#2AB857] to-[#7DD89A] rounded-full flex items-center justify-center text-white shadow-[0_12px_11.8px_0_rgba(0,0,0,0.1)]"
@@ -220,7 +265,7 @@ const data = computed(() =>
                   </div>
                 </div>
                 <p
-                  class="text-[#195279] dark:text-[#D4D4D4] text-[12px] sm:text-[14px]"
+                  class="text-[#195279] dark:text-[#D4D4D4] text-[12px] sm:text-[14px] md:px-2"
                 >
                   {{ item.label }}
                 </p>
@@ -261,3 +306,20 @@ const data = computed(() =>
     <p class="text-[#9CA3AF]">Solution tidak ditemukan.</p>
   </div>
 </template>
+<style scoped>
+:deep(.swiper-pagination) {
+  position: relative;
+  margin-top: 16px;
+  bottom: auto;
+}
+
+:deep(.swiper-pagination-bullet) {
+  background-color: #2a6993;
+  opacity: 0.4;
+  margin: 0 4px !important;
+}
+
+:deep(.swiper-pagination-bullet-active) {
+  opacity: 1;
+}
+</style>

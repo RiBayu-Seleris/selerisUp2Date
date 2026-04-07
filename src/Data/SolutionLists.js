@@ -14,6 +14,10 @@ export const SolutionLists = [
     title: "AI-Powered Insurance Underwriting",
     content: "Underwriting Asuransi Berbasis AI",
     icons: shield,
+    bgColor: "#ADF9C5",
+    darkBgColor: "#2AB857",
+    iconColor: "#2AB857",
+    darkIconColor: "#FFFFFF",
 
     // Hero
     hero: {
@@ -108,6 +112,10 @@ export const SolutionLists = [
     title: "Mobile Health",
     content: "Kesehatan Mobile — Seleriscare.ai",
     icons: phone,
+    bgColor: "#ADF9D6",
+    darkBgColor: "#23D88F",
+    iconColor: "#02C285",
+    darkIconColor: "#FFFFFF",
 
     hero: {
       label: "Solution 02",
@@ -190,6 +198,10 @@ export const SolutionLists = [
     title: "Corporate Wellness",
     content: "Wellness Korporasi",
     icons: trash,
+    bgColor: "#ADECF9",
+    darkBgColor: "#3595E8",
+    iconColor: "#2A7FB8",
+    darkIconColor: "#FFFFFF",
 
     hero: {
       label: "Solution 03",
@@ -272,6 +284,10 @@ export const SolutionLists = [
     title: "Remote Patient Monitoring",
     content: "Pemantauan Pasien Jarak Jauh",
     icons: lens,
+    bgColor: "#FFCDB5",
+    darkBgColor: "#F5942C",
+    iconColor: "#F05222",
+    darkIconColor: "#FFFFFF",
 
     hero: {
       label: "Solution 04",
@@ -360,6 +376,10 @@ export const SolutionLists = [
     title: "Biological Age Assessment",
     content: "Penilaian Usia Biologis — Seleriscare.ai",
     icons: dna,
+    bgColor: "#FFC2C2",
+    darkBgColor: "#FF5F46",
+    iconColor: "#FF5F46",
+    darkIconColor: "#FFFFFF",
 
     hero: {
       label: "Solution 05",
@@ -440,6 +460,10 @@ export const SolutionLists = [
     title: "Population Health Screening",
     content: "Skrining Kesehatan Populasi — Seleriscare.ai",
     icons: users,
+    bgColor: "#F9F1AD",
+    darkBgColor: "#FFBE4D",
+    iconColor: "#E9A928",
+    darkIconColor: "#FFFFFF",
 
     hero: {
       label: "Solution 06",
@@ -517,6 +541,10 @@ export const SolutionLists = [
     title: "B2B Partnership & Licensing",
     content: "Kemitraan & Lisensi B2B — Seleriscare.ai",
     icons: hands,
+    bgColor: "#ADF9C5",
+    darkBgColor: "#2AB857",
+    iconColor: "#2AB857",
+    darkIconColor: "#FFFFFF",
 
     hero: {
       label: "Solution 07",

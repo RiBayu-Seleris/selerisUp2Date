@@ -16,18 +16,31 @@ const isHoveringProduct = ref(false);
 const isHoveringTechnology = ref(false);
 const isHoveringSolution = ref(false);
 const showUnderConstructionModal = ref(false);
-
 const isScrolled = ref(false);
+
+// Di dalam setup() atau <script setup>
+const isHovered = ref(null);
+
+const isDark = ref(document.documentElement.classList.contains("dark"));
+
+const observer = new MutationObserver(() => {
+  isDark.value = document.documentElement.classList.contains("dark");
+});
 
 const handleScroll = () => {
   isScrolled.value = window.scrollY > 50;
 };
 
 onMounted(() => {
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
   window.addEventListener("scroll", handleScroll);
 });
 
 onUnmounted(() => {
+  observer.disconnect();
   window.removeEventListener("scroll", handleScroll);
 });
 </script>
@@ -71,7 +84,7 @@ onUnmounted(() => {
         :class="[`absolute left-0 top-full z-50`, isScrolled ? 'pt-8' : 'pt-8']"
       >
         <div
-          class="w-full h-auto p-[1px] bg-gradient-to-r from-[#565656]/0 to-[#BCBCBC]/50 rounded-2xl shadow-lg"
+          class="w-full h-auto p-[1px] dark:bg-gradient-to-r dark:from-[#565656]/0 dark:to-[#BCBCBC]/50 rounded-2xl shadow-lg"
         >
           <div
             class="flex flex-col w-auto bg-white p-4 rounded-2xl shadow-lg gap-5 dark:bg-[#1D2426]"
@@ -82,7 +95,10 @@ onUnmounted(() => {
               :href="about.url"
               class="flex justify-start items-start text-start w-[300px] text-animate-hover dark:dark-text-animate-hover"
             >
-              <span class="text-[15px] font-[500]">{{ about.name }}</span>
+              <span
+                class="text-[15px] font-[500] text-[#9CA3AF] dark:text-[#FAFAFA]"
+                >{{ about.name }}</span
+              >
             </Navlink>
           </div>
         </div>
@@ -107,38 +123,25 @@ onUnmounted(() => {
         v-if="isHoveringProduct"
         @mouseenter="isHoveringProduct = true"
         @mouseleave="isHoveringProduct = false"
-        :class="[
-          `absolute left-0 top-full z-50 w-max h-auto`,
-          isScrolled ? 'pt-8' : 'pt-8',
-        ]"
+        :class="[`absolute left-0 top-full z-50`, isScrolled ? 'pt-8' : 'pt-8']"
       >
         <div
-          class="w-full h-auto p-[1px] bg-gradient-to-r from-[#565656]/0 to-[#BCBCBC]/50 rounded-2xl shadow-lg"
+          class="w-full h-auto p-[1px] dark:bg-gradient-to-r dark:from-[#565656]/0 dark:to-[#BCBCBC]/50 rounded-2xl shadow-lg"
         >
           <div
-            class="w-full h-auto flex flex-col bg-white p-8 rounded-2xl shadow-lg dark:bg-[#1D2426]"
+            class="flex flex-col w-auto bg-white p-4 rounded-2xl shadow-lg gap-5 dark:bg-[#1D2426]"
           >
-            <!-- Title -->
-            <div class="w-full h-auto flex mb-6">
-              <p
-                class="text-[#4B5563] dark:text-white font-[500] lg:text-[18px]"
+            <Navlink
+              v-for="(product, index) in productList"
+              :key="index"
+              :href="product.url"
+              class="flex justify-start items-start text-start w-[300px] text-animate-hover dark:dark-text-animate-hover"
+            >
+              <span
+                class="text-[15px] font-[500] text-[#9CA3AF] dark:text-[#FAFAFA]"
+                >{{ product.name }}</span
               >
-                Seleris Products
-              </p>
-            </div>
-            <div class="grid grid-cols-3 w-auto gap-5">
-              <Navlink
-                v-for="(product, index) in productList"
-                :key="index"
-                :href="product.url"
-                :target="product.target || '_self'"
-                class="flex justify-start items-start text-start w-[170px] text-animate-hover dark:dark-text-animate-hover"
-              >
-                <span class="text-[#9CA3AF] dark:text-[#FAFAFA] font-[400]">
-                  {{ product.name }}
-                </span>
-              </Navlink>
-            </div>
+            </Navlink>
           </div>
         </div>
       </div>
@@ -165,7 +168,7 @@ onUnmounted(() => {
         :class="[`absolute left-0 top-full z-50`, isScrolled ? 'pt-8' : 'pt-8']"
       >
         <div
-          class="w-full h-auto p-[1px] bg-gradient-to-r from-[#565656]/0 to-[#BCBCBC]/50 rounded-2xl shadow-lg"
+          class="w-full h-auto p-[1px] dark:bg-gradient-to-r dark:from-[#565656]/0 dark:to-[#BCBCBC]/50 rounded-2xl shadow-lg"
         >
           <div
             class="flex flex-col w-auto bg-white p-4 rounded-2xl shadow-lg gap-5 dark:bg-[#1D2426]"
@@ -176,7 +179,10 @@ onUnmounted(() => {
               :href="technology.url"
               class="flex justify-start items-start text-start w-[300px] text-animate-hover dark:dark-text-animate-hover"
             >
-              <span class="text-[15px] font-[500]">{{ technology.name }}</span>
+              <span
+                class="text-[15px] font-[500] text-[#9CA3AF] dark:text-[#FAFAFA]"
+                >{{ technology.name }}</span
+              >
             </Navlink>
           </div>
         </div>
@@ -228,11 +234,25 @@ onUnmounted(() => {
                 class="flex justify-start items-start group transition-all duration-300"
               >
                 <div
-                  class="w-full h-auto flex flex-row gap-x-3 justify-center items-center group-hover:bg-[#55FC8A]/10 p-2 rounded-md"
+                  class="w-full h-auto flex flex-row gap-x-3 justify-center items-center p-2 rounded-md transition-colors duration-200"
+                  :style="{
+                    backgroundColor:
+                      isHovered === index ? solution.bgColor + '40' : '',
+                  }"
+                  @mouseenter="isHovered = index"
+                  @mouseleave="isHovered = null"
                 >
                   <div class="w-fit h-auto flex justify-center items-start">
                     <div
-                      class="w-9 h-9 rounded-md flex justify-center items-center p-2 bg-[#ADF9C5] dark:bg-[#2AB857] text-[#2AB857] dark:text-[#AFFAC6]"
+                      class="w-9 h-9 rounded-md flex justify-center items-center p-2"
+                      :style="{
+                        backgroundColor: isDark
+                          ? solution.darkBgColor
+                          : solution.bgColor,
+                        color: isDark
+                          ? solution.darkIconColor
+                          : solution.iconColor,
+                      }"
                     >
                       <component :is="solution.icons" class="w-full h-full" />
                     </div>
@@ -245,15 +265,29 @@ onUnmounted(() => {
                       >{{ solution.title }}</span
                     >
                     <span
-                      class="text-[12px] text-[#9CA3AF] font-[500] group-hover:text-[#2AB857] group-hover:font-[500] dark:text-[#FAFAFA] text-animate-group-hover dark:dark-text-animate-group-hover"
+                      class="text-[12px] font-[500] solution-text-animate"
+                      :class="{ 'is-hovered': isHovered === index }"
+                      :style="{
+                        '--solution-color': solution.iconColor,
+                      }"
                       >{{ solution.content }}</span
                     >
                   </div>
                   <div class="w-fit h-auto flex justify-center items-start">
                     <div
-                      class="w-9 h-auto rounded-md flex justify-center items-center p-2 text-[#C9C9C9] group-hover:text-[#2AB857] dark:text-[#C9C9C9] group-hover:dark:text-[#2AB857]"
+                      class="w-9 h-auto rounded-md flex justify-center items-center p-2"
                     >
-                      <ArrowRight class="w-full h-full" />
+                      <span
+                        class="w-full h-full transition-colors duration-200"
+                        :style="{
+                          color:
+                            isHovered === index
+                              ? solution.iconColor
+                              : '#C9C9C9',
+                        }"
+                      >
+                        <ArrowRight class="w-full h-full" />
+                      </span>
                     </div>
                   </div>
                 </div>

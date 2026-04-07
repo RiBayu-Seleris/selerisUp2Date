@@ -1,5 +1,5 @@
 <script setup>
-import { ref, watch } from "vue";
+import { onUnmounted, ref, watch } from "vue";
 import { useSidebarStore } from "@/stores/sidebar";
 import { useRoute } from "vue-router";
 import MenuIconClose from "@/components/icons/CloseIcon.vue";
@@ -11,9 +11,19 @@ import { aboutList } from "@/Data/aboutList";
 import { productList } from "@/Data/productList";
 import { technologyList } from "@/Data/technologyList";
 import { SolutionLists } from "@/Data/SolutionLists";
+import { onMounted } from "vue";
 
 const sidebar = useSidebarStore();
 const route = useRoute();
+
+// Di dalam setup() atau <script setup>
+const isHovered = ref(null);
+
+const isDark = ref(document.documentElement.classList.contains("dark"));
+
+const observer = new MutationObserver(() => {
+  isDark.value = document.documentElement.classList.contains("dark");
+});
 
 // Tutup saat pindah halaman
 watch(
@@ -48,6 +58,17 @@ const toggleSolution = () => {
   isSolutionOpen.value = !isSolutionOpen.value;
   // isProductOpen.value = false;
 };
+
+onMounted(() => {
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class"],
+  });
+});
+
+onUnmounted(() => {
+  observer.disconnect();
+});
 </script>
 
 <template>
@@ -312,14 +333,31 @@ const toggleSolution = () => {
                       :href="solution.url"
                       class="flex justify-start items-start group transition-all duration-300 cursor-pointer"
                     >
-                      <div
+                      <!-- <div
                         class="w-full h-auto flex flex-row gap-x-3 justify-center items-center group-hover:bg-[#55FC8A]/10 p-1.5 sm:p-2 rounded-md"
+                      > -->
+                      <div
+                        class="w-full h-auto flex flex-row gap-x-3 justify-center items-center p-1.5 sm:p-2 rounded-md transition-colors duration-200"
+                        :style="{
+                          backgroundColor:
+                            isHovered === index ? solution.bgColor + '40' : '',
+                        }"
+                        @mouseenter="isHovered = index"
+                        @mouseleave="isHovered = null"
                       >
                         <div
                           class="w-fit h-auto flex justify-center items-start"
                         >
                           <div
-                            class="w-8 h-8 rounded-md flex justify-center items-center p-2 bg-[#ADF9C5] dark:bg-[#2AB857] text-[#2AB857] dark:text-[#AFFAC6]"
+                            class="w-8 h-8 rounded-md flex justify-center items-center p-2"
+                            :style="{
+                              backgroundColor: isDark
+                                ? solution.darkBgColor
+                                : solution.bgColor,
+                              color: isDark
+                                ? solution.darkIconColor
+                                : solution.iconColor,
+                            }"
                           >
                             <component
                               :is="solution.icons"
@@ -335,7 +373,11 @@ const toggleSolution = () => {
                             >{{ solution.title }}</span
                           >
                           <span
-                            class="text-[10px] sm:text-[12px] text-[#9CA3AF] font-[500] group-hover:text-[#2AB857] group-hover:font-[500] dark:text-[#FAFAFA] text-animate-group-hover dark:dark-text-animate-group-hover"
+                            class="text-[10px] sm:text-[12px] font-[500] solution-text-animate"
+                            :class="{ 'is-hovered': isHovered === index }"
+                            :style="{
+                              '--solution-color': solution.iconColor,
+                            }"
                             >{{ solution.content }}</span
                           >
                         </div>
@@ -343,9 +385,19 @@ const toggleSolution = () => {
                           class="w-fit h-auto flex justify-center items-start"
                         >
                           <div
-                            class="w-9 h-auto rounded-md flex justify-center items-center p-2 text-[#C9C9C9] group-hover:text-[#2AB857] dark:text-[#C9C9C9] group-hover:dark:text-[#2AB857]"
+                            class="w-9 h-auto rounded-md flex justify-center items-center p-2"
                           >
-                            <ArrowRight class="w-full h-full" />
+                            <span
+                              class="w-full h-full transition-colors duration-200"
+                              :style="{
+                                color:
+                                  isHovered === index
+                                    ? solution.iconColor
+                                    : '#C9C9C9',
+                              }"
+                            >
+                              <ArrowRight class="w-full h-full" />
+                            </span>
                           </div>
                         </div>
                       </div>

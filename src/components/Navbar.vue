@@ -77,7 +77,7 @@ onUnmounted(() => {
           : 'px-6 sm:px-8 bg-transparent',
       ]"
     >
-      <router-link to="/" class="w-[40%] h-auto flex">
+      <router-link to="/" class="w-auto lg:w-[40%] h-auto flex">
         <!-- Logo terang (light mode) -->
         <!-- w-[117px] h-[56px] -->
         <img

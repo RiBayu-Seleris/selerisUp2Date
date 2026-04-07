@@ -85,6 +85,30 @@ body {
   -webkit-text-fill-color: transparent;
 }
 
+.solution-text-animate {
+  position: relative;
+  display: inline-block;
+  background-image: linear-gradient(
+    to right,
+    var(--solution-color, #18ab53) 0%,
+    var(--solution-color, #18ab53) 100%
+  );
+  background-size: 0% 100%;
+  background-repeat: no-repeat;
+  background-position: left;
+  -webkit-background-clip: text;
+  background-clip: text;
+  transition:
+    background-size 0.5s ease,
+    -webkit-text-fill-color 0.5s ease;
+  color: #9ca3af;
+}
+
+.solution-text-animate.is-hovered {
+  background-size: 100% 100%;
+  -webkit-text-fill-color: transparent;
+}
+
 .dark .dark-text-animate-hover {
   position: relative;
   display: inline-block;
