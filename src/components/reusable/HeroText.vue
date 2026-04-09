@@ -24,7 +24,7 @@ defineProps({
       {{ title }}
     </p>
     <p
-      class="text-[20px] sm:text-[22px] md:text-[34px] lg:text-[44px] xl:text-[52px] font-[500] lg:tracking-wide xl:tracking-normal text-[#195279] text-center dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+      class="over-smallest:px-10 text-[20px] sm:text-[22px] md:text-[34px] lg:text-[44px] xl:text-[52px] font-[500] lg:tracking-wide xl:tracking-normal text-[#195279] text-center dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
     >
       {{ subtitle }}
     </p>

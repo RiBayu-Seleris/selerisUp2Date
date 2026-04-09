@@ -161,9 +161,9 @@ onMounted(() => {
       class="w-full h-auto p-[1px] bg-[#E3E3E3] dark:bg-gradient-to-r dark:from-[#1D2426] dark:to-[#BCBCBC]/50 rounded-lg"
     >
       <div
-        class="flex w-auto bg-white py-4 rounded-lg gap-5 dark:bg-[#1D2426] justify-center items-center px-14 lg:px-0"
+        class="flex w-auto bg-white py-4 rounded-lg gap-5 dark:bg-[#1D2426] justify-center items-center max-smallest:px-6 px-14 lg:px-0"
       >
-        <span class="text-[16px] text-center">
+        <span class="max-smallest:text-[14px] text-[16px] text-center">
           Saat ini belum ada lowongan pekerjaan. Pantau media sosial kami untuk
           informasi terbaru.
         </span>
