@@ -205,7 +205,7 @@ import { companyList } from "@/Data/companyList";
                 <p
                   class="text-[#195279] dark:text-[#FAFAFA] text-[20px] lg:text-[18px]"
                 >
-                  E-Mail
+                  Email
                 </p>
                 <a
                   href="mailto:info@seleris.ai"
