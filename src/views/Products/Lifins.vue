@@ -182,7 +182,7 @@ const stepsWithPath = lifinsWorkSteps.map((step) => ({
 
     <!-- Client -->
     <section
-      class="relative w-full h-auto max-w-[1440px] mx-auto px-8 mt-20"
+      class="relative w-full h-auto max-w-[1440px] mx-auto max-smallest:px-0 px-8 mt-20"
       id="client"
     >
       <div class="w-full h-auto flex flex-col">
@@ -191,7 +191,7 @@ const stepsWithPath = lifinsWorkSteps.map((step) => ({
           subtitle="Seleris Meditekno Internasional"
           subtitleColor="text-[#2AB857]"
         />
-        <div class="mt-10 px-12">
+        <div class="mt-10 max-smallest:px-0 px-12">
           <ClientCardFrameProduct :client-logos="clientLogos" />
         </div>
       </div>
@@ -241,7 +241,7 @@ const stepsWithPath = lifinsWorkSteps.map((step) => ({
 
     <!-- Download App -->
     <section
-      class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-40"
+      class="relative w-full h-auto max-w-[1440px] mx-auto md:px-12 mt-20 lg:mt-40"
       id="download"
     >
       <div class="w-full h-auto md:max-w-6xl mx-auto">
@@ -264,6 +264,7 @@ const stepsWithPath = lifinsWorkSteps.map((step) => ({
         title="Seleris Lifins A Complete Solution for Your Health Needs"
         :framebookdemo="lifinsframebook"
         colorarrow="text-[#2AB857]"
+        bgProduct="bg-[#2AB857]"
       />
     </section>
   </div>

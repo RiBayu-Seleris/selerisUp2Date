@@ -4,7 +4,9 @@ import appstore from "@/assets/images/appstore.png";
 </script>
 
 <template>
-  <div class="w-full h-auto flex flex-row justify-center px-8 md:px-0 gap-x-10">
+  <div
+    class="w-full h-auto flex flex-row justify-center max-smallest:px-6 px-8 md:px-0 gap-x-10"
+  >
     <div class="w-full h-full flex justify-center">
       <a
         href="https://play.google.com/store/apps/developer?id=PT.+Seleris+Meditekno+Internasional"

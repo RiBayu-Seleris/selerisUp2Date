@@ -9,11 +9,14 @@ defineProps({
   colorarrow: {
     type: String,
   },
+  bgProduct: {
+    type: String,
+  },
 });
 </script>
 
 <template>
-  <div class="relative w-full h-auto top-0">
+  <div class="over-smallest:hidden flex relative w-full h-auto top-0">
     <img
       :src="framebookdemo"
       alt="FrameBookDemoSection"
@@ -81,6 +84,59 @@ defineProps({
           </div>
         </div>
       </div>
+    </div>
+  </div>
+  <div
+    :class="`w-full h-auto over-smallest:flex flex-col gap-y-5 hidden ${bgProduct} p-4 rounded-xl justify-center items-center`"
+  >
+    <div class="w-full h-full flex items-center">
+      <div class="w-full h-auto flex flex-col gap-y-2 md:gap-y-4 lg:gap-y-8">
+        <div class="w-full h-full">
+          <p class="text-[#FAFAFA] font-[500] text-[12px] leading-tight">
+            {{ title }}
+          </p>
+        </div>
+        <div class="w-full h-auto">
+          <p class="text-[#FAFAFA] font-[500] text-[12px]">Request Demo Now!</p>
+        </div>
+      </div>
+    </div>
+    <div class="w-full h-auto flex items-center justify-center">
+      <a
+        href="https://seleris.ai/book-a-demo"
+        target="_blank"
+        class="w-full h-auto"
+      >
+        <div
+          class="w-full h-auto py-1 rounded-lg flex flex-row px-2 bg-[#FAFAFA]"
+        >
+          <div
+            :class="[
+              `w-full h-full flex items-center justify-center gap-x-2 md:gap-x-2 ${colorarrow}`,
+            ]"
+          >
+            <p class="font-[500] text-[12px]">Book a Demo</p>
+            <svg
+              class="w-6 h-6"
+              viewBox="0 0 48 48"
+              fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M28 36L40 24L28 12"
+                stroke="currentColor"
+                stroke-width="3"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+              />
+              <path
+                d="M11 22.5C10.1716 22.5 9.5 23.1716 9.5 24C9.5 24.8284 10.1716 25.5 11 25.5V24V22.5ZM39.5 24V22.5H11V24V25.5H39.5V24Z"
+                fill="currentColor"
+              />
+            </svg>
+          </div>
+        </div>
+      </a>
     </div>
   </div>
 </template>

@@ -7,7 +7,7 @@ module.exports = {
       screens: {
         smallest: "320px",
         // Mobile breakpoints
-        "over-smallest": { max: "325px" },
+        "over-smallest": { max: "360px" },
         "max-smallest": { max: "375px" },
         sm: "640px",
         // Tablet / Medium

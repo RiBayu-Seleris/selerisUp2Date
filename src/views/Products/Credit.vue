@@ -656,7 +656,7 @@ useVideoOnView(selerisVideo, selerisBlock);
               </p>
             </div>
             <div
-              class="w-full h-[130px] sm:h-[140px] lg:h-[240px] flex items-center justify-center"
+              class="w-full max-smallest:h-[170px] h-[130px] sm:h-[140px] lg:h-[240px] flex items-center justify-center"
             >
               <Swiper
                 :modules="[Navigation, Autoplay, Pagination]"
@@ -665,7 +665,7 @@ useVideoOnView(selerisVideo, selerisBlock);
                 :pagination="false"
                 :autoplay="{ delay: 3000, disableOnInteraction: false }"
                 loop
-                class="h-full rounded-xl overflow-hidden flex justify-center items-center"
+                class="h-full rounded-xl overflow-hidden flex justify-center items-center cursor-pointer"
               >
                 <SwiperSlide
                   v-for="(item, index) in whosContent"
@@ -780,14 +780,14 @@ useVideoOnView(selerisVideo, selerisBlock);
 
     <!-- Book A Demo -->
     <section
-      class="max-w-[1440px] mx-auto relative w-full h-auto z-20 mt-16 sm:mt-32 px-8 sm:px-12 lg:px-20"
+      class="max-w-[1440px] mx-auto relative w-full h-auto z-20 max-smallest:mt-8 mt-16 sm:mt-32 px-8 sm:px-12 lg:px-20"
     >
       <div
-        class="w-full h-auto flex flex-row bg-[#1485CB] gap-x-3 sm:gap-x-10 rounded-[24px] py-5 sm:py-10 lg:py-14"
+        class="w-full h-auto flex max-smallest:flex-col flex-row bg-[#1485CB] gap-3 sm:gap-10 rounded-[24px] py-5 sm:py-10 lg:py-14"
       >
         <div class="w-full sm:w-[60%] h-full flex items-center">
           <div
-            class="w-full h-full flex flex-col items-center justify-center pl-4 sm:pl-12 lg:px-20 gap-y-5"
+            class="w-full h-full flex flex-col items-center justify-center pl-4 sm:pl-12 lg:px-20 max-smallest:gap-y-3 gap-y-5"
           >
             <div class="w-full h-auto flex items-center">
               <p
@@ -807,16 +807,22 @@ useVideoOnView(selerisVideo, selerisBlock);
           </div>
         </div>
         <div
-          class="w-[70%] sm:w-[45%] lg:w-[40%] h-auto flex items-center justify-center"
+          class="max-smallest:w-full w-[70%] sm:w-[45%] lg:w-[40%] h-auto flex items-center justify-center max-smallest:px-4"
         >
-          <a href="/book-a-demo" target="_blank">
+          <a
+            href="/book-a-demo"
+            target="_blank"
+            class="max-smallest:w-full h-auto"
+          >
             <div
-              class="w-auto h-auto flex flex-row bg-[#FAFAFA] px-2 sm:px-4 lg:px-14 py-2 lg:py-3 rounded-[10px]"
+              class="max-smallest:w-full w-auto h-auto flex flex-row bg-[#FAFAFA] max-smallest:px-0 px-2 sm:px-4 lg:px-14 max-smallest:py-1 py-2 lg:py-3 rounded-[10px]"
             >
               <div
                 class="w-full h-full flex items-center justify-center gap-x-2 md:gap-x-2 text-[#1485CB]"
               >
-                <p class="font-[500] text-[10px] md:text-[16px] lg:text-[24px]">
+                <p
+                  class="font-[500] max-smallest:text-[12px] text-[10px] md:text-[16px] lg:text-[24px]"
+                >
                   Book a Demo
                 </p>
                 <svg

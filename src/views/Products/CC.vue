@@ -164,7 +164,7 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
 
     <!-- Client -->
     <section
-      class="relative w-full h-auto max-w-[1440px] mx-auto px-8 mt-20"
+      class="relative w-full h-auto max-w-[1440px] mx-auto max-smallest:px-0 px-8 mt-20"
       id="client"
     >
       <div class="w-full h-auto flex flex-col">
@@ -173,7 +173,7 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
           subtitle="Seleris Meditekno Internasional"
           subtitleColor="text-[#E84C7F]"
         />
-        <div class="mt-10 px-12">
+        <div class="mt-10 max-smallest:px-0 px-12">
           <ClientCardFrameProduct :client-logos="clientLogos" />
         </div>
       </div>
@@ -241,7 +241,7 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
 
     <!-- Download App -->
     <section
-      class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-40"
+      class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 md:px-12 lg:mt-40"
       id="download"
     >
       <div class="w-full h-auto md:max-w-6xl mx-auto">
@@ -264,6 +264,7 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
         title="Seleris Credit Cover A Complete Solution for Your Health Needs"
         :framebookdemo="ccframebook"
         colorarrow="text-[#E84C7F]"
+        bgProduct="bg-[#E84C7F]"
       />
     </section>
   </div>

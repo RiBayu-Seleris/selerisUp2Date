@@ -185,7 +185,7 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
 
     <!-- Client -->
     <section
-      class="relative w-full h-auto max-w-[1440px] mx-auto px-8 mt-20"
+      class="relative w-full h-auto max-w-[1440px] mx-auto max-smallest:px-0 px-8 mt-20"
       id="client"
     >
       <div class="w-full h-auto flex flex-col">
@@ -194,7 +194,7 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
           subtitle="Seleris Meditekno Internasional"
           subtitleColor="text-[#42C5AF]"
         />
-        <div class="mt-10 px-12">
+        <div class="mt-10 max-smallest:px-0 px-12">
           <ClientCardFrameProduct :client-logos="clientLogos" />
         </div>
       </div>
@@ -293,6 +293,7 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
           title="Seleris Medins A Complete Solution for Your Health Needs"
           :framebookdemo="medinsframebook"
           colorarrow="text-[#42C5AF]"
+          bgProduct="bg-[#42C5AF]"
         />
       </div>
     </section>

@@ -19,7 +19,7 @@ function chunkArray(array, size) {
 }
 const columnsPerRow = 5;
 const partnerChunks = computed(() =>
-  chunkArray(props.clientLogos, columnsPerRow)
+  chunkArray(props.clientLogos, columnsPerRow),
 );
 </script>
 
@@ -32,12 +32,12 @@ const partnerChunks = computed(() =>
       row.length === 1
         ? 'grid-cols-1 max-w-[240px] px-2 lg:px-10 xl:px-2'
         : row.length === 2
-        ? 'grid-cols-2 max-w-[600px] px-10'
-        : row.length === 3
-        ? 'grid-cols-3 max-w-[1024px]'
-        : row.length === 4
-        ? 'grid-cols-4 max-w-[1200px]'
-        : 'grid-cols-5 max-w-[1400px]',
+          ? 'grid-cols-2 max-w-[600px] px-10'
+          : row.length === 3
+            ? 'grid-cols-3 max-w-[1024px]'
+            : row.length === 4
+              ? 'grid-cols-4 max-w-[1200px]'
+              : 'grid-cols-5 max-w-[1400px]',
     ]"
   >
     <div
