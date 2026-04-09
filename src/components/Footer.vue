@@ -208,10 +208,10 @@ import { companyList } from "@/Data/companyList";
                   E-Mail
                 </p>
                 <a
-                  href="mailto:info@seleris.id"
+                  href="mailto:info@seleris.ai"
                   class="text-[#2AB857] text-sm lg:text-base xl:text-[18px] lg:pt-1.5"
                 >
-                  info@seleris.id
+                  info@seleris.ai
                 </a>
               </div>
             </div>

@@ -22,7 +22,7 @@ import FrameCaptionAboutHeroDark from "@/assets/images/About-frame-hero2-dark.sv
           </div>
           <div class="w-full h-auto">
             <p
-              class="text-[24px] md:text-[30px] lg:text-[32px] xl:text-[60px] font-[500] text-[#195279] lg:leading-[54px] xl:leading-tight dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+              class="text-[24px] md:text-[30px] lg:text-[32px] xl:text-[60px] font-[500] text-[#195279] lg:leading-[54px] xl:leading-tight dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] px-10 sm:px-0"
             >
               Seleris Meditekno Internasional
             </p>
@@ -133,7 +133,9 @@ import FrameCaptionAboutHeroDark from "@/assets/images/About-frame-hero2-dark.sv
             </div>
             <div class="w-full h-auto flex flex-col justify-center gap-y-1.5">
               <div class="w-auto h-auto">
-                <p class="text-[#195279] font-[400] text-[16px]">
+                <p
+                  class="text-[#195279] font-[400] over-smallest:text-[12px] max-smallest:text-[14px] text-[16px]"
+                >
                   Seleris Development Office
                 </p>
               </div>
