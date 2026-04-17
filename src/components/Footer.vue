@@ -14,6 +14,7 @@ import appstore from "@/assets/images/appstore.png";
 
 import { productList } from "@/Data/productList";
 import { companyList } from "@/Data/companyList";
+import Navlink from "./Navlink.vue";
 </script>
 
 <template>
@@ -106,8 +107,8 @@ import { companyList } from "@/Data/companyList";
             >
               Products
             </p>
-            <div>
-              <router-link
+            <div class="flex flex-col">
+              <!-- <router-link
                 v-for="(product, index) in productList"
                 :key="index"
                 :to="product.url"
@@ -115,7 +116,16 @@ import { companyList } from "@/Data/companyList";
                 <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] pt-3">
                   {{ product.name }}
                 </p>
-              </router-link>
+              </router-link> -->
+              <Navlink
+                v-for="(product, index) in productList"
+                :key="index"
+                :href="product.url"
+              >
+                <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] pt-3">
+                  {{ product.name }}
+                </p>
+              </Navlink>
             </div>
           </div>
         </div>
