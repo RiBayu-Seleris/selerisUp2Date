@@ -42,8 +42,8 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
           <p
             class="px-8 sm:px-0 text-[10px] sm:text-[12px] md:text-[12px] lg:text-[14px] xl:text-[14px] font-medium text-[#3D6986] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
-            Seleris Care diklasifikasikan sebagai Alat Kesehatan berbasis AI
-            sesuai regulasi <br class="hidden sm:block" />
+            SELICA diklasifikasikan sebagai Alat Kesehatan berbasis AI sesuai
+            regulasi <br class="hidden sm:block" />
             Kementerian Kesehatan RI dan mengikuti ketentuan Permenkes No.14
             Tahun 2021
           </p>
