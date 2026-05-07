@@ -286,7 +286,7 @@ onUnmounted(() => {
                               : '#C9C9C9',
                         }"
                       >
-                        <ArrowRight class="w-full h-full" />
+                        <ArrowRight />
                       </span>
                     </div>
                   </div>

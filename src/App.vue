@@ -55,12 +55,20 @@ function updateDarkMode() {
   if (isLightOnlyPage) html.classList.remove("dark");
 }
 
+// Halaman standalone (tanpa navbar, footer, touch, loading)
+const standaloneRoutes = [
+  "/test-embed",
+  "/chatbot",
+  "/chatbot2",
+  "/face-tracking",
+];
+
+const isStandaloneRoute = computed(() => standaloneRoutes.includes(route.path));
+
 onMounted(() => {
   themeStore.loadTheme();
   window.addEventListener("scroll", handleScroll);
-  // document.body.style.overflow = "";
 
-  // Loading hanya jika user ada di halaman awal (misalnya "/")
   if (route.path === "/") {
     isLoad.value = false;
     setTimeout(() => {
@@ -84,8 +92,12 @@ watch(
   (newPath, oldPath) => {
     updateDarkMode();
 
-    // Jika route ke /blogs, trigger loading
     if (newPath !== oldPath) {
+      // Standalone routes tidak perlu loading screen
+      if (standaloneRoutes.includes(newPath)) {
+        isLoad.value = true;
+        return;
+      }
       isLoad.value = false;
       setTimeout(() => {
         isLoad.value = true;
@@ -116,7 +128,6 @@ const isSelerisCareApplicator = computed(
 const isBlogDetail = computed(() => route.path.startsWith("/blog/"));
 
 const BASE_URL = import.meta.env.VITE_API_URL;
-// const isCareerDetail = computed(() => route.path === "/careers/details");
 const headerApi = {
   headers: {
     Accept: "application/json",
@@ -150,120 +161,111 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- ⏳ Initial Loading Screen -->
-  <!-- && !route.path.startsWith('/blog/') -->
-  <div
-    v-if="!isLoad"
-    class="fixed inset-0 flex flex-col items-center justify-center bg-[#F9F9F9] dark:bg-[#17181A] z-[9999]"
-  >
-    <!-- Loader Frame -->
-    <video
-      autoplay
-      loop
-      muted
-      playsinline
-      @contextmenu.prevent
-      class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[400px] lg:h-[400px] object-cover object-center dark:hidden"
-    >
-      <source src="@/assets/videos/loading.mp4" type="video/mp4" />
-    </video>
-    <!-- Loader Frame -->
-    <video
-      autoplay
-      loop
-      muted
-      playsinline
-      @contextmenu.prevent
-      class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[400px] lg:h-[400px] object-cover object-center hidden dark:flex"
-    >
-      <source src="@/assets/videos/dark-loading.mp4" type="video/mp4" />
-    </video>
-  </div>
+  <!-- Standalone routes: langsung render tanpa loading/navbar/footer -->
+  <template v-if="isStandaloneRoute">
+    <div class="w-full h-auto !bg-[#F4F4F4]">
+      <router-view />
+    </div>
+  </template>
 
-  <!-- ✅ Main App Content -->
+  <!-- Normal routes -->
   <template v-else>
-    <template v-if="!isProductRoute">
-      <!-- overflow-x-hidden -->
-      <div
-        :class="[
-          'relative w-full h-auto font-poppins dark:bg-[#17181A] dark:text-white',
-          isTermsRoute || isSecurityRoute || isPrivacyRoute
-            ? 'bg-[#FFFFFF]'
-            : 'bg-[#f9fafb]',
-          isBookDemoRoute
-            ? 'min-h-[100dvh] w-full dark:lg:bg-[radial-gradient(circle_at_0%_30%,_#3CFF7A_-70%,_#17181A_30%)]'
-            : '',
-          isCompanyRoute
-            ? 'min-h-[100dvh] w-full dark:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-50%,_#17181A_10%)] dark:md:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-50%,_#17181A_15%)] dark:lg:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-40%,_#17181A_30%)]'
-            : '',
-          !isBlogDetail ? 'overflow-x-hidden' : '',
-        ]"
+    <!-- ⏳ Initial Loading Screen -->
+    <div
+      v-if="!isLoad"
+      class="fixed inset-0 flex flex-col items-center justify-center bg-[#F9F9F9] dark:bg-[#17181A] z-[9999]"
+    >
+      <video
+        autoplay
+        loop
+        muted
+        playsinline
+        @contextmenu.prevent
+        class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[400px] lg:h-[400px] object-cover object-center dark:hidden"
       >
-        <!-- isCareerDetail ? 'overflow-x-hidden' : '', -->
-        <main
-          class="relative w-full max-w-[1440px] mx-auto animate__animated animate__fadeIn animate__slower z-10"
-        >
-          <!-- Navbar -->
-          <div
-            class="flex fixed top-0 w-full h-auto z-50 transition-all duration-300 ease-in-out"
-            v-if="
-              route.path !== '/test-embed' &&
-              route.path !== '/chatbot' &&
-              route.path !== '/chatbot2'
-            "
-          >
-            <Navbar />
-          </div>
+        <source src="@/assets/videos/loading.mp4" type="video/mp4" />
+      </video>
+      <video
+        autoplay
+        loop
+        muted
+        playsinline
+        @contextmenu.prevent
+        class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[400px] lg:h-[400px] object-cover object-center hidden dark:flex"
+      >
+        <source src="@/assets/videos/dark-loading.mp4" type="video/mp4" />
+      </video>
+    </div>
 
-          <!-- Scroll Tooltip -->
-          <transition name="fade-slide">
-            <div
-              v-if="showTooltip"
-              @click="scrollToTop"
-              class="flex fixed justify-center cursor-pointer items-center bottom-5 right-5 lg:right-10 w-9 h-9 lg:w-12 lg:h-12 z-50 bg-white dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white rounded-full p-1 md:p-2"
-            >
-              <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
-            </div>
-          </transition>
-
-          <!-- Sidebar -->
-          <Sidebar />
-
-          <!-- Page content -->
-          <router-view />
-
-          <!-- Touch Section (kecuali di /blogs) -->
-          <section
-            class="flex flex-col relative w-full mx-auto h-auto mt-32 px-8 xls:px-8 2xls:px-0"
-            v-if="
-              route.path !== '/test-embed' &&
-              route.path !== '/blogs' &&
-              route.path !== '/chatbot' &&
-              route.path !== '/chatbot2' &&
-              !route.path.startsWith('/blog/')
-            "
-          >
-            <!-- isCareerDetail -->
-            <Touch />
-          </section>
-        </main>
-
-        <!-- Footer -->
-        <footer
-          class="w-full max-w-[1440px] h-auto px-8 mt-20 mx-auto z-10 dark:bg-[#17181A]/70 animate__animated animate__fadeIn animate__slower"
-          v-if="!['/test-embed', '/chatbot', '/chatbot2'].includes(route.path)"
-        >
-          <Footer />
-        </footer>
-      </div>
-    </template>
-
-    <!-- Khusus layout product -->
+    <!-- ✅ Main App Content -->
     <template v-else>
-      <router-view
-        :class="[isSelerisCareApplicator ? 'bg-[#FFFFFF]' : 'bg-[#FAFAFA]']"
-      />
-      <!-- class="bg-[#FAFAFA]" -->
+      <template v-if="!isProductRoute">
+        <div
+          :class="[
+            'relative w-full h-auto font-poppins dark:bg-[#17181A] dark:text-white',
+            isTermsRoute || isSecurityRoute || isPrivacyRoute
+              ? 'bg-[#FFFFFF]'
+              : 'bg-[#f9fafb]',
+            isBookDemoRoute
+              ? 'min-h-[100dvh] w-full dark:lg:bg-[radial-gradient(circle_at_0%_30%,_#3CFF7A_-70%,_#17181A_30%)]'
+              : '',
+            isCompanyRoute
+              ? 'min-h-[100dvh] w-full dark:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-50%,_#17181A_10%)] dark:md:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-50%,_#17181A_15%)] dark:lg:bg-[radial-gradient(circle_at_120%_0%,_#3CFF7A_-40%,_#17181A_30%)]'
+              : '',
+            !isBlogDetail ? 'overflow-x-hidden' : '',
+          ]"
+        >
+          <main
+            class="relative w-full max-w-[1440px] mx-auto animate__animated animate__fadeIn animate__slower z-10"
+          >
+            <!-- Navbar -->
+            <div
+              class="flex fixed top-0 w-full h-auto z-50 transition-all duration-300 ease-in-out"
+            >
+              <Navbar />
+            </div>
+
+            <!-- Scroll Tooltip -->
+            <transition name="fade-slide">
+              <div
+                v-if="showTooltip"
+                @click="scrollToTop"
+                class="flex fixed justify-center cursor-pointer items-center bottom-5 right-5 lg:right-10 w-9 h-9 lg:w-12 lg:h-12 z-50 bg-white dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white rounded-full p-1 md:p-2"
+              >
+                <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
+              </div>
+            </transition>
+
+            <!-- Sidebar -->
+            <Sidebar />
+
+            <!-- Page content -->
+            <router-view />
+
+            <!-- Touch Section -->
+            <section
+              class="flex flex-col relative w-full mx-auto h-auto mt-32 px-8 xls:px-8 2xls:px-0"
+              v-if="route.path !== '/blogs' && !route.path.startsWith('/blog/')"
+            >
+              <Touch />
+            </section>
+          </main>
+
+          <!-- Footer -->
+          <footer
+            class="w-full max-w-[1440px] h-auto px-8 mt-20 mx-auto z-10 dark:bg-[#17181A]/70 animate__animated animate__fadeIn animate__slower"
+          >
+            <Footer />
+          </footer>
+        </div>
+      </template>
+
+      <!-- Khusus layout product -->
+      <template v-else>
+        <router-view
+          :class="[isSelerisCareApplicator ? 'bg-[#FFFFFF]' : 'bg-[#FAFAFA]']"
+        />
+      </template>
     </template>
   </template>
 </template>

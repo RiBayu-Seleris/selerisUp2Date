@@ -12,6 +12,7 @@ import { productList } from "@/Data/productList";
 import { technologyList } from "@/Data/technologyList";
 import { SolutionLists } from "@/Data/SolutionLists";
 import { onMounted } from "vue";
+import ArrowRight from "@/components/icons/ArrowRight.vue";
 
 const sidebar = useSidebarStore();
 const route = useRoute();

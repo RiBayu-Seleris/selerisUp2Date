@@ -72,7 +72,7 @@ const latestBlogs = computed(() => {
 
   // const limit = width > 768 && width < 1024 ? 4 : 3;
   const limit = width >= 768 && width < 1024 ? 4 : 3;
-  console.log("WIDTH:", width, "LIMIT:", limit);
+  // console.log("WIDTH:", width, "LIMIT:", limit);
 
   return blogs.value.slice(0, limit);
 });

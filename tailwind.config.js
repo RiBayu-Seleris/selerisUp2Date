@@ -25,6 +25,7 @@ module.exports = {
       },
       backgroundImage: {
         frameBookDemo: "url('@/assets/images/frame-about-book-demo2.png')",
+        faceTrackerBg: "url('@/assets/images/facetracker/person.png')",
         darkFrameBookDemo:
           "url('@/assets/images/dark-frame-about-book-demo2.png')",
         hero2: "url('@/assets/images/hero-banner2.png')",

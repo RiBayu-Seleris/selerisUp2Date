@@ -12,6 +12,7 @@ import Benefits from "@/components/Home/Benefits.vue";
 import Testimonial from "@/components/Home/Testimonial.vue";
 import Blogs from "@/components/Home/Blogs.vue";
 import Different from "@/components/Home/Different.vue";
+import FaceTracker from "@/components/Home/FaceTracker.vue";
 // import Roadmap from "@/components/Home/Roadmap.vue";
 </script>
 
@@ -59,6 +60,10 @@ import Different from "@/components/Home/Different.vue";
     class="flex flex-col relative w-full h-auto mt-24 lg:mt-10 px-8 xl:mt-28"
   >
     <Technology />
+  </section>
+
+  <section class="flex relative w-full h-auto mt-24 lg:mt-10 px-8 xl:mt-28">
+    <FaceTracker />
   </section>
 
   <section class="flex flex-col relative w-full h-auto mt-24 lg:mt-10 xl:mt-36">

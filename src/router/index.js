@@ -195,6 +195,13 @@ const routes = [
     meta: { title: "Pelamaran" },
   },
 
+  // Face Tracking
+  {
+    path: "/face-tracking",
+    name: "Facetracking",
+    component: () => import("@/views/SelerisFaceTracker.vue"),
+  },
+
   // Testing
   {
     path: "/test-embed",
