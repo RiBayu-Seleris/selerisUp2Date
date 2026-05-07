@@ -62,7 +62,7 @@ import FaceTracker from "@/components/Home/FaceTracker.vue";
     <Technology />
   </section>
 
-  <section class="flex relative w-full h-auto mt-24 lg:mt-10 px-8 xl:mt-28">
+  <section class="flex relative w-full h-auto mt-24 lg:mt-10 xl:mt-28">
     <FaceTracker />
   </section>
 

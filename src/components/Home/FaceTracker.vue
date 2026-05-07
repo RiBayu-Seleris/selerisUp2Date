@@ -1,6 +1,6 @@
 <script setup>
 import gridFaceTracker from "@/assets/images/facetracker/grid-face-tracker2.svg";
-import Person from "@/assets/images/facetracker/person2.png";
+import Person from "@/assets/images/facetracker/person3.png";
 // import Person from "@/assets/images/facetracker/person2.svg";
 // import FaceMask from "@/assets/images/facetracker/masking-face2.svg";
 import FaceMask from "@/assets/images/facetracker/MaskingFace2.vue";
@@ -8,7 +8,9 @@ import FaceIcon from "@/assets/icons/FaceTracker/face-icon.svg";
 import CardTracker from "../CardTracker.vue";
 </script>
 <template>
-  <div class="relative w-full h-auto flex flex-col gap-y-14 bg-[#F9FAFB]">
+  <div
+    class="relative w-full h-auto flex flex-col gap-y-14 bg-[#F9FAFB] dark:bg-[#17181A]"
+  >
     <div class="absolute w-full h-auto"></div>
     <div
       class="w-full h-auto flex flex-col gap-y-1.5 text-center justify-center items-center xl:px-8"
@@ -31,7 +33,7 @@ import CardTracker from "../CardTracker.vue";
         >
           <div class="relative w-full h-auto">
             <div
-              class="absolute w-auto h-auto top-[9%] left-1/2 -translate-x-1/2"
+              class="absolute w-auto h-auto top-[10%] left-1/2 -translate-x-1/2"
             >
               <div class="w-[83%] h-auto object-contain object-center ml-[7%]">
                 <FaceMask />
@@ -57,7 +59,7 @@ import CardTracker from "../CardTracker.vue";
         </div>
         <!-- Button Scan Now -->
         <div
-          class="absolute z-30 w-fit h-auto flex flex-row gap-x-5 justify-center items-center left-1/2 -translate-x-1/2 bottom-10 bg-gradient-to-tr from-[#1E6493] from-[20%] to-[#2E97DF] to-[100%] px-10 py-2.5 rounded-xl shadow-[0_32px_29px_0_rgba(39,128,188,0.16)] hover:scale-[1.2] transition-all duration-300 ease-in-out cursor-pointer"
+          class="absolute z-30 w-fit h-auto flex flex-row gap-x-5 justify-center items-center left-1/2 -translate-x-1/2 bottom-10 bg-gradient-to-tr from-[#1E6493] from-[20%] to-[#2E97DF] to-[100%] px-10 py-2.5 rounded-xl shadow-[0_20px_20px_0_rgba(39,128,188,0.16)] hover:scale-[1.2] transition-all duration-300 ease-in-out cursor-pointer"
         >
           <div class="w-6 h-6 shrink-0 flex justify-center items-center">
             <img :src="FaceIcon" alt="" srcset="" class="w-full h-full" />
@@ -75,13 +77,13 @@ import CardTracker from "../CardTracker.vue";
   animation: floatLeft 3s ease-in-out infinite;
 }
 .card-float-left-delay {
-  animation: floatLeft 3s ease-in-out infinite 1s;
+  animation: floatLeft 3s ease-in-out infinite 2s;
 }
 .card-float-right {
   animation: floatRight 3s ease-in-out infinite;
 }
 .card-float-right-delay {
-  animation: floatRight 3s ease-in-out infinite 1s;
+  animation: floatRight 3s ease-in-out infinite 2s;
 }
 
 @keyframes floatLeft {
@@ -90,7 +92,7 @@ import CardTracker from "../CardTracker.vue";
     transform: translateX(0px);
   }
   50% {
-    transform: translateX(-30px);
+    transform: translateX(-50px);
   }
 }
 @keyframes floatRight {
@@ -99,7 +101,7 @@ import CardTracker from "../CardTracker.vue";
     transform: translateX(0px);
   }
   50% {
-    transform: translateX(30px);
+    transform: translateX(50px);
   }
 }
 </style>
