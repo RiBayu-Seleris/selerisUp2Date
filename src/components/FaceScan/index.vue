@@ -1,419 +1,788 @@
+<script setup>
+import { ref, onMounted, onUnmounted, computed } from "vue";
+import Checklist from "@/assets/icons/FaceTracker/checklist.svg";
+
+const videoRef = ref(null);
+const canvasRef = ref(null);
+const ellipseRef = ref(null);
+
+const cameraActive = ref(false);
+const personDetected = ref(false);
+const scanProgress = ref(0);
+const isGazePaused = ref(false);
+
+const isDetecting = computed(() => personDetected.value && !isGazePaused.value);
+
+let faceLandmarker = null;
+let handLandmarker = null; // ← tambahan
+let arAnimId = null;
+let stream = null;
+let pulseT = 0;
+let lastArTime = -1;
+let isUnmounted = false;
+
+// ─── Scan progress state ──────────────────────────────────────────────────────
+const SCAN_DURATION_MS = 15000;
+const GAZE_AWAY_FRAMES = 8;
+let gazeAwayCount = 0;
+let scanStartMs = null;
+let accumulatedMs = 0;
+let pauseStartMs = null;
+let scanComplete = ref(false);
+
+// ─── Oval cache ───────────────────────────────────────────────────────────────
+let cachedOval = null;
+let ovalResizeObserver = null;
+
+function invalidateOvalCache() {
+  cachedOval = null;
+}
+
+function getOvalInCanvasSpace(canvas) {
+  if (cachedOval) return cachedOval;
+  const ellipse = ellipseRef.value;
+  if (!ellipse) return null;
+  const svgEl = ellipse.closest("svg");
+  if (!svgEl) return null;
+  const svgRect = svgEl.getBoundingClientRect();
+  const ellipseRect = ellipse.getBoundingClientRect();
+  if (svgRect.width === 0 || svgRect.height === 0) return null;
+  const centerXScreen = ellipseRect.left + ellipseRect.width / 2 - svgRect.left;
+  const centerYScreen = ellipseRect.top + ellipseRect.height / 2 - svgRect.top;
+  const scaleX = canvas.width / svgRect.width;
+  const scaleY = canvas.height / svgRect.height;
+  cachedOval = {
+    cx: centerXScreen * scaleX,
+    cy: centerYScreen * scaleY,
+    rx: (ellipseRect.width / 2) * scaleX,
+    ry: (ellipseRect.height / 2) * scaleY,
+  };
+  return cachedOval;
+}
+
+// ─── Init MediaPipe ───────────────────────────────────────────────────────────
+async function initFaceLandmarker() {
+  const { FaceLandmarker, HandLandmarker, FilesetResolver } =
+    await import("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/vision_bundle.mjs");
+
+  const vision = await FilesetResolver.forVisionTasks(
+    "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm",
+  );
+
+  // Face
+  faceLandmarker = await FaceLandmarker.createFromOptions(vision, {
+    baseOptions: {
+      modelAssetPath:
+        "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
+      delegate: "GPU",
+    },
+    outputFaceBlendshapes: false,
+    runningMode: "VIDEO",
+    numFaces: 1,
+  });
+
+  // Hand
+  handLandmarker = await HandLandmarker.createFromOptions(vision, {
+    baseOptions: {
+      modelAssetPath:
+        "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task",
+      delegate: "GPU",
+    },
+    runningMode: "VIDEO",
+    numHands: 2,
+  });
+
+  window.__FL_TESS = FaceLandmarker.FACE_LANDMARKS_TESSELATION;
+}
+
+// ─── Camera ───────────────────────────────────────────────────────────────────
+async function initFaceTracker() {
+  try {
+    await initFaceLandmarker();
+    stream = await navigator.mediaDevices.getUserMedia({
+      video: { facingMode: "user", width: 640, height: 480 },
+      audio: false,
+    });
+    if (!videoRef.value || isUnmounted) return;
+    videoRef.value.srcObject = stream;
+    videoRef.value.onloadeddata = () => {
+      if (isUnmounted) return;
+      cameraActive.value = true;
+      // scanStartMs = performance.now();
+      if (canvasRef.value) {
+        ovalResizeObserver = new ResizeObserver(invalidateOvalCache);
+        ovalResizeObserver.observe(canvasRef.value);
+      }
+      arPredict();
+    };
+  } catch (err) {
+    console.error("FaceTracker init error:", err);
+  }
+}
+
+// ─── Gaze detection (yaw + pitch) ────────────────────────────────────────────
+let lastGazeLmKey = null;
+let lastGazeResult = false;
+
+function isLookingAway(lm) {
+  const key = `${lm[1].x.toFixed(3)},${lm[1].y.toFixed(3)},${lm[234].x.toFixed(3)},${lm[454].x.toFixed(3)},${lm[152].y.toFixed(3)}`;
+  if (key === lastGazeLmKey) return lastGazeResult;
+  lastGazeLmKey = key;
+
+  const nose = lm[1];
+  const leftEar = lm[234];
+  const rightEar = lm[454];
+  const chin = lm[152];
+  const forehead = lm[10];
+
+  const faceW = Math.abs(leftEar.x - rightEar.x);
+  const centerX = (leftEar.x + rightEar.x) / 2;
+  const yawDev = Math.abs(nose.x - centerX) / faceW;
+  if (yawDev > 0.26) {
+    lastGazeResult = true;
+    return true;
+  }
+
+  const faceH = Math.abs(chin.y - forehead.y);
+  const centerY = (chin.y + forehead.y) / 2;
+  const pitchDev = Math.abs(nose.y - centerY) / faceH;
+
+  lastGazeResult = pitchDev > 0.22;
+  return lastGazeResult;
+}
+
+// ─── Hand covering face detection ────────────────────────────────────────────
+// Threshold: berapa banyak landmark tangan yang harus ada di dalam
+// bounding box wajah agar dianggap "menutupi" — 3 cukup untuk
+// menghindari false positive saat tangan hanya lewat di pinggir wajah
+const HAND_COVER_THRESHOLD = 3;
+
+function isHandCoveringFace(faceLm, handResults, canvasW, canvasH) {
+  if (!handResults?.landmarks?.length) return false;
+
+  // Bounding box wajah dari semua landmark
+  let minX = Infinity,
+    maxX = -Infinity;
+  let minY = Infinity,
+    maxY = -Infinity;
+
+  for (let i = 0; i < faceLm.length; i++) {
+    const p = faceLm[i];
+    const px = p.x * canvasW;
+    const py = p.y * canvasH;
+    if (px < minX) minX = px;
+    if (px > maxX) maxX = px;
+    if (py < minY) minY = py;
+    if (py > maxY) maxY = py;
+  }
+
+  // Cek setiap tangan yang terdeteksi
+  for (const handLm of handResults.landmarks) {
+    let count = 0;
+    for (const p of handLm) {
+      const hx = p.x * canvasW;
+      const hy = p.y * canvasH;
+      if (hx >= minX && hx <= maxX && hy >= minY && hy <= maxY) {
+        count++;
+        if (count >= HAND_COVER_THRESHOLD) return true;
+      }
+    }
+  }
+
+  return false;
+}
+
+// ─── Pause / resume ───────────────────────────────────────────────────────────
+function pauseScan(reason = "Wajah berpaling") {
+  if (isGazePaused.value) return;
+  isGazePaused.value = true;
+  pauseStartMs = performance.now();
+}
+
+function resumeScan() {
+  if (!isGazePaused.value) return;
+  isGazePaused.value = false;
+  gazeAwayCount = 0;
+  pauseStartMs = null;
+}
+
+// ─── pointInOval ─────────────────────────────────────────────────────────────
+function pointInOval(px, py, cx, cy, rx, ry) {
+  const dx = (px - cx) / rx;
+  const dy = (py - cy) / ry;
+  return dx * dx + dy * dy <= 1;
+}
+
+const FACE_OVAL_INDICES = [
+  10, 338, 297, 332, 284, 251, 389, 356, 454, 323, 361, 288, 397, 365, 379, 378,
+  400, 377, 152, 148, 176, 149, 150, 136, 172, 58, 132, 93, 234, 127, 162, 21,
+  54, 103, 67, 109,
+];
+
+// ─── Gradient cache ───────────────────────────────────────────────────────────
+let cachedScanGrad = null;
+let cachedScanGradY = -1;
+
+function getScanGrad(ctx, scanY) {
+  if (cachedScanGrad && Math.abs(scanY - cachedScanGradY) < 1)
+    return cachedScanGrad;
+  cachedScanGrad = ctx.createLinearGradient(0, scanY - 12, 0, scanY + 12);
+  cachedScanGrad.addColorStop(0, "rgba(74,222,128,0)");
+  cachedScanGrad.addColorStop(0.5, "rgba(74,222,128,0.18)");
+  cachedScanGrad.addColorStop(1, "rgba(74,222,128,0)");
+  cachedScanGradY = scanY;
+  return cachedScanGrad;
+}
+
+// ─── Draw mesh ────────────────────────────────────────────────────────────────
+function drawMesh(lm, canvas) {
+  const ctx = canvas.getContext("2d");
+  if (!ctx) return;
+
+  const W = canvas.width;
+  const H = canvas.height;
+
+  ctx.clearRect(0, 0, W, H);
+  ctx.save();
+  ctx.translate(W, 0);
+  ctx.scale(-1, 1);
+  ctx.drawImage(videoRef.value, 0, 0, W, H);
+  ctx.restore();
+
+  const tess = window.__FL_TESS;
+  if (!tess) return;
+
+  pulseT += isGazePaused.value ? 0 : 0.016;
+  const scanY = H * 0.5 + Math.sin(pulseT) * H * 0.4;
+  const band = H * 0.26;
+  const bandInv = 1 / band;
+
+  ctx.save();
+  ctx.translate(W, 0);
+  ctx.scale(-1, 1);
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round";
+  ctx.lineWidth = 0.55;
+
+  for (let i = 0; i < tess.length; i++) {
+    const { start, end } = tess[i];
+    const a = lm[start];
+    const b = lm[end];
+    const midY = (a.y + b.y) * 0.5 * H;
+    const dist = Math.abs(midY - scanY);
+    if (dist > band) continue;
+
+    const norm = 1 - dist * bandInv;
+    const ease = norm * norm;
+    const alpha = isGazePaused.value ? 0.06 + ease * 0.12 : 0.1 + ease * 0.52;
+    const lum = Math.round(180 + ease * 75);
+
+    ctx.strokeStyle = `rgba(${lum},${lum},${lum},${alpha})`;
+    ctx.beginPath();
+    ctx.moveTo(a.x * W, a.y * H);
+    ctx.lineTo(b.x * W, b.y * H);
+    ctx.stroke();
+  }
+
+  if (!isGazePaused.value) {
+    const la = 0.1 + 0.04 * Math.sin(pulseT * 3.5);
+    ctx.fillStyle = `rgba(74,222,128,${la})`;
+    ctx.fillRect(0, scanY - 0.5, W, 1.5);
+  }
+
+  ctx.restore();
+
+  if (!isGazePaused.value) {
+    ctx.save();
+    ctx.fillStyle = getScanGrad(ctx, scanY);
+    ctx.fillRect(0, scanY - 12, W, 24);
+    ctx.restore();
+  }
+}
+
+function drawIdleFrame(canvas) {
+  const ctx = canvas.getContext("2d");
+  if (!ctx || !videoRef.value) return;
+  const W = canvas.width;
+  const H = canvas.height;
+  ctx.clearRect(0, 0, W, H);
+  ctx.save();
+  ctx.translate(W, 0);
+  ctx.scale(-1, 1);
+  ctx.drawImage(videoRef.value, 0, 0, W, H);
+  ctx.restore();
+}
+
+// ─── Main predict loop ────────────────────────────────────────────────────────
+function arPredict() {
+  if (isUnmounted) return;
+  if (document.hidden) {
+    arAnimId = requestAnimationFrame(arPredict);
+    return;
+  }
+
+  const video = videoRef.value;
+  const canvas = canvasRef.value;
+
+  if (!faceLandmarker || !handLandmarker || !video || video.readyState < 2) {
+    arAnimId = requestAnimationFrame(arPredict);
+    return;
+  }
+
+  const vw = video.videoWidth || 640;
+  const vh = video.videoHeight || 480;
+  if (canvas.width !== vw || canvas.height !== vh) {
+    canvas.width = vw;
+    canvas.height = vh;
+    invalidateOvalCache();
+  }
+
+  const now = performance.now();
+  if (now === lastArTime) {
+    arAnimId = requestAnimationFrame(arPredict);
+    return;
+  }
+
+  let faceResult;
+  let handResult;
+  try {
+    faceResult = faceLandmarker.detectForVideo(video, now);
+    handResult = handLandmarker.detectForVideo(video, now);
+  } catch {
+    arAnimId = requestAnimationFrame(arPredict);
+    return;
+  }
+
+  if (faceResult?.faceLandmarks?.length > 0) {
+    personDetected.value = true;
+    const lm = faceResult.faceLandmarks[0];
+    const cw = canvas.width;
+    const ch = canvas.height;
+
+    // ── Cek wajah di dalam oval ──
+    const oval = getOvalInCanvasSpace(canvas);
+    let faceInOval = false;
+    if (oval) {
+      const { cx, cy, rx, ry } = oval;
+      faceInOval = FACE_OVAL_INDICES.every((idx) => {
+        const p = lm[idx];
+        return p ? pointInOval(p.x * cw, p.y * ch, cx, cy, rx, ry) : true;
+      });
+    }
+
+    // ── Gaze check ──
+    const lookingAway = isLookingAway(lm);
+
+    // ── Hand cover check ──
+    const handCovering = isHandCoveringFace(lm, handResult, cw, ch);
+
+    if (!faceInOval || lookingAway || handCovering) {
+      gazeAwayCount++;
+      if (gazeAwayCount >= GAZE_AWAY_FRAMES) {
+        personDetected.value = false;
+        const reason = !faceInOval
+          ? "Wajah keluar frame"
+          : handCovering
+            ? "Wajah terhalang tangan"
+            : "Wajah berpaling";
+        pauseScan(reason);
+      }
+    } else {
+      gazeAwayCount = 0;
+
+      // ← Akumulasi dulu SEBELUM resume
+      if (isGazePaused.value && pauseStartMs !== null) {
+        accumulatedMs += now - pauseStartMs;
+        pauseStartMs = null;
+      }
+
+      if (isGazePaused.value) {
+        resumeScan();
+      }
+
+      if (scanStartMs === null) {
+        accumulatedMs = 0;
+        pauseStartMs = null;
+        scanStartMs = performance.now();
+        scanProgress.value = 1;
+      }
+    }
+
+    if (scanStartMs !== null && !scanComplete.value) {
+      if (!isGazePaused.value && pauseStartMs !== null) {
+        accumulatedMs += now - pauseStartMs;
+        pauseStartMs = null;
+      }
+
+      const effectiveNow = isGazePaused.value ? (pauseStartMs ?? now) : now;
+      const elapsed = Math.max(0, effectiveNow - scanStartMs - accumulatedMs);
+      const pct = Math.min(100, (elapsed / SCAN_DURATION_MS) * 100);
+      scanProgress.value = pct;
+
+      if (pct >= 100) {
+        scanComplete.value = true;
+        onScanComplete();
+      }
+    }
+
+    drawMesh(lm, canvas);
+  } else {
+    personDetected.value = false;
+    gazeAwayCount = 0;
+    pauseScan("Wajah tidak terdeteksi");
+    drawIdleFrame(canvas);
+  }
+
+  lastArTime = now;
+  arAnimId = requestAnimationFrame(arPredict);
+}
+
+// ─── Scan complete ────────────────────────────────────────────────────────────
+function onScanComplete() {
+  console.log("[scan] selesai 15 detik!");
+}
+
+// ─── Lifecycle ────────────────────────────────────────────────────────────────
+onMounted(async () => {
+  await initFaceTracker();
+});
+
+onUnmounted(() => {
+  cleanup();
+});
+
+function cleanup() {
+  isUnmounted = true;
+  cancelAnimationFrame(arAnimId);
+  ovalResizeObserver?.disconnect();
+  if (stream) {
+    stream.getTracks().forEach((t) => t.stop());
+    stream = null;
+  }
+  if (faceLandmarker) {
+    faceLandmarker.close();
+    faceLandmarker = null;
+  }
+  if (handLandmarker) {
+    handLandmarker.close();
+    handLandmarker = null;
+  }
+  if (videoRef.value) videoRef.value.srcObject = null;
+  cachedOval = null;
+  cachedScanGrad = null;
+  lastGazeLmKey = null;
+}
+</script>
+
 <template>
-  <div class="w-full h-full flex flex-col">
-    <!-- Camera Area -->
+  <div
+    class="w-full h-full flex flex-col justify-between rounded-t-2xl rounded-b-xl overflow-hidden"
+  >
     <div
-      ref="cameraAreaRef"
-      class="relative flex-1 bg-[#2a2a2a] overflow-hidden"
+      class="relative w-full h-[70%] shrink-0 overflow-hidden bg-black rounded-t-2xl"
     >
-      <!-- Video Feed -->
       <video
         ref="videoRef"
-        class="w-full h-full object-cover"
-        :class="{ invisible: !cameraActive }"
+        class="absolute inset-0 w-full h-full object-cover invisible"
         autoplay
-        muted
         playsinline
+        muted
       />
 
-      <!-- Oval Mask Overlay -->
-      <div class="absolute inset-0">
+      <canvas
+        ref="canvasRef"
+        class="absolute inset-0 w-full h-full object-cover pointer-events-none"
+      />
+
+      <!-- IDLE OVERLAY -->
+      <Transition name="fade-overlay">
+        <div
+          v-if="!personDetected"
+          class="absolute inset-0 bg-black/35 flex flex-col items-center justify-center pointer-events-none"
+        >
+          <div
+            class="w-16 h-16 rounded-2xl border border-white/10 bg-white/[0.04] flex justify-center items-center mb-4"
+          >
+            <svg
+              class="w-7 h-7 text-white/20"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+            >
+              <path
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                stroke-width="1.5"
+                d="M15 10l4.553-2.069A1 1 0 0121 8.82v6.36a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
+              />
+            </svg>
+          </div>
+          <p class="text-white/70 text-sm font-medium">
+            Arahkan wajah ke kamera
+          </p>
+          <p class="text-white/35 text-xs mt-1">
+            Sistem sedang mendeteksi wajah
+          </p>
+        </div>
+      </Transition>
+
+      <!-- PAUSED OVERLAY -->
+      <Transition name="fade-overlay">
+        <div
+          v-if="personDetected && isGazePaused"
+          class="absolute inset-0 bg-black/50 flex flex-col items-center justify-center gap-3 pointer-events-none"
+        >
+          <div
+            class="w-12 h-12 rounded-full border border-yellow-400/40 flex items-center justify-center"
+          >
+            <svg class="w-5 h-5 fill-yellow-400/80" viewBox="0 0 16 16">
+              <rect x="3" y="2" width="3.5" height="12" rx="1" />
+              <rect x="9.5" y="2" width="3.5" height="12" rx="1" />
+            </svg>
+          </div>
+          <p
+            class="text-[11px] font-mono uppercase tracking-[0.15em] text-yellow-400/80"
+          >
+            Scan ditunda
+          </p>
+          <p
+            class="text-[10px] font-mono uppercase tracking-[0.1em] text-white/30"
+          >
+            Hadap kamera untuk lanjut
+          </p>
+        </div>
+      </Transition>
+
+      <!-- DARK OVERLAY -->
+      <div
+        class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70 pointer-events-none"
+      />
+
+      <!-- VIGNETTE -->
+      <div
+        class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_20%,rgba(0,0,0,0.55)_100%)]"
+      />
+
+      <!-- OVAL -->
+      <div class="absolute inset-0 pointer-events-none">
         <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
           <defs>
-            <mask id="ovalMask">
+            <mask id="oval-mask">
               <rect width="100%" height="100%" fill="white" />
-              <ellipse cx="50%" cy="46%" rx="30%" ry="36%" fill="black" />
+              <ellipse cx="50%" cy="50%" rx="130" ry="150" fill="black" />
             </mask>
           </defs>
-          <!-- Dark overlay with oval hole -->
           <rect
             width="100%"
             height="100%"
-            fill="rgba(0,0,0,0.55)"
-            mask="url(#ovalMask)"
+            fill="rgba(0,0,0,0.45)"
+            mask="url(#oval-mask)"
           />
-          <!-- Oval border — color reacts to detection state -->
           <ellipse
+            ref="ellipseRef"
             cx="50%"
-            cy="46%"
-            rx="30%"
-            ry="36%"
+            cy="50%"
+            rx="130"
+            ry="150"
             fill="none"
-            :stroke="ovalStroke"
-            stroke-width="3"
-            style="transition: stroke 0.4s ease"
+            :stroke="
+              isDetecting
+                ? '#4ade80'
+                : isGazePaused
+                  ? '#facc15'
+                  : 'rgba(255,255,255,0.4)'
+            "
+            stroke-width="2.5"
+            style="transition: all 0.35s ease"
           />
         </svg>
       </div>
 
-      <!-- Scanning progress bar (only when face detected & scanning) -->
+      <!-- TOP HUD -->
       <div
-        v-if="status === 'scanning' || status === 'lost'"
-        class="absolute bottom-0 left-0 h-1 transition-all duration-100"
-        :class="status === 'lost' ? 'bg-[#c0392b]' : 'bg-[#2e7d4f]'"
-        :style="{ width: scanProgress + '%' }"
-      />
+        class="absolute top-4 left-4 flex flex-col gap-1 pointer-events-none"
+      >
+        <div class="flex items-center gap-1.5">
+          <span
+            class="w-1.5 h-1.5 rounded-full transition-colors duration-300"
+            :class="
+              isDetecting
+                ? 'bg-[#4ade80] animate-pulse'
+                : isGazePaused
+                  ? 'bg-yellow-400'
+                  : 'bg-red-400'
+            "
+          />
+          <span
+            class="text-[9px] font-mono uppercase tracking-widest transition-colors duration-300"
+            :class="
+              isDetecting
+                ? 'text-[#4ade80]'
+                : isGazePaused
+                  ? 'text-yellow-400'
+                  : 'text-red-400'
+            "
+          >
+            {{
+              isDetecting
+                ? "Wajah Terdeteksi"
+                : isGazePaused
+                  ? "Scan Ditunda"
+                  : "Mencari Wajah..."
+            }}
+          </span>
+        </div>
+      </div>
 
-      <!-- Face lost warning overlay -->
-      <Transition name="fade">
+      <!-- TOP CENTER BADGE -->
+      <div class="absolute top-4 left-1/2 -translate-x-1/2">
         <div
-          v-if="status === 'lost'"
-          class="absolute inset-0 flex items-center justify-center pointer-events-none"
+          class="px-3 py-1 rounded-full text-[11px] font-medium flex items-center gap-1.5 backdrop-blur-md border transition-all duration-300"
+          :class="
+            isDetecting
+              ? 'bg-[#4ade80]/15 border-[#4ade80]/30 text-[#4ade80]'
+              : isGazePaused
+                ? 'bg-yellow-400/15 border-yellow-400/30 text-yellow-400'
+                : 'bg-black/30 border-white/10 text-white/60'
+          "
         >
           <div
-            class="flex flex-col items-center gap-2 bg-black/50 rounded-2xl px-6 py-4"
-          >
-            <svg
-              class="w-10 h-10 text-[#e74c3c]"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="12" cy="12" r="10" />
-              <line x1="12" y1="8" x2="12" y2="12" />
-              <line x1="12" y1="16" x2="12.01" y2="16" />
-            </svg>
-            <p class="text-white text-sm font-semibold text-center">
-              Return your face<br />to the frame
-            </p>
-          </div>
+            class="w-2 h-2 rounded-full"
+            :class="
+              isDetecting
+                ? 'bg-[#4ade80] animate-pulse'
+                : isGazePaused
+                  ? 'bg-yellow-400'
+                  : 'bg-white/30'
+            "
+          />
+          {{
+            isDetecting ? "Scanning..." : isGazePaused ? "Paused" : "Mencari..."
+          }}
         </div>
-      </Transition>
+      </div>
 
-      <!-- Loading models overlay -->
+      <!-- BOTTOM PROGRESS -->
       <div
-        v-if="status === 'loading'"
-        class="absolute inset-0 flex items-center justify-center bg-black/60"
+        v-if="personDetected || scanProgress > 0"
+        class="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-10 bg-gradient-to-t from-black/70 to-transparent pointer-events-none"
       >
-        <div class="flex flex-col items-center gap-3">
-          <svg
-            class="animate-spin w-8 h-8 text-white"
-            viewBox="0 0 24 24"
-            fill="none"
+        <div class="flex items-center justify-between mb-1.5">
+          <span
+            class="text-[9px] font-mono uppercase tracking-widest transition-colors duration-300"
+            :class="isGazePaused ? 'text-yellow-400/80' : 'text-[#4ade80]/80'"
           >
-            <circle
-              cx="12"
-              cy="12"
-              r="10"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-dasharray="30 10"
-            />
-          </svg>
-          <p class="text-white text-sm font-medium">
-            Loading face detection...
-          </p>
+            {{ isGazePaused ? "Paused" : "Tracking" }}
+          </span>
+          <span class="text-[9px] font-mono text-white/40">
+            <!-- {{ Math.round(scanProgress) }}% -->
+            <!-- {{ Math.ceil(scanProgress) }}% -->
+            {{
+              scanProgress < 1 && scanProgress > 0
+                ? 1
+                : Math.round(scanProgress)
+            }}%
+          </span>
+        </div>
+        <div class="w-full h-[2px] bg-white/10 rounded-full overflow-hidden">
+          <div
+            class="h-full rounded-full transition-all duration-300"
+            :class="isGazePaused ? 'bg-yellow-400/70' : 'bg-[#4ade80]'"
+            :style="{ width: `${scanProgress}%` }"
+          />
         </div>
       </div>
     </div>
 
-    <!-- Bottom Panel -->
+    <!-- Bottom Section -->
     <div
-      class="bg-white flex flex-col items-center justify-center gap-4 py-7 px-6 min-h-[180px]"
+      class="flex-1 flex flex-col justify-between py-14 items-center bg-[#FFFFFF]"
     >
-      <div class="w-10 h-1 rounded-full bg-gray-200" />
-
-      <!-- Instruction Text -->
-      <div class="text-center leading-snug">
-        <p class="text-[#3a4a3f] font-semibold text-[15px]">
-          {{ instructionLine1 }}
-        </p>
-        <p class="text-[#3a4a3f] font-semibold text-[15px]">
-          {{ instructionLine2 }}
+      <div class="w-full h-auto flex justify-center items-center text-center">
+        <p>
+          Point the Camera at Your Face <br />
+          Camera Will Detect!
         </p>
       </div>
+      <div class="w-full h-auto flex justify-center items-center">
+        <div
+          class="w-fit h-auto flex flex-row gap-x-3 justify-center items-center rounded-full px-5 py-2.5 transition-all duration-300"
+          :class="
+            scanComplete
+              ? 'bg-[#DDF7E5]'
+              : isGazePaused
+                ? 'bg-yellow-100'
+                : isDetecting
+                  ? 'bg-[#DFF4E6]'
+                  : 'bg-[#F3F4F6]'
+          "
+        >
+          <!-- Dot Pulse -->
+          <div class="relative w-3 h-3">
+            <span
+              class="absolute inset-0 rounded-full animate-ping"
+              :class="
+                scanComplete
+                  ? 'bg-[#22C55E]/40'
+                  : isGazePaused
+                    ? 'bg-yellow-400/40'
+                    : isDetecting
+                      ? 'bg-[#22C55E]/40'
+                      : 'bg-gray-400/30'
+              "
+            />
+            <span
+              class="relative block w-3 h-3 rounded-full"
+              :class="
+                scanComplete
+                  ? 'bg-[#22C55E]'
+                  : isGazePaused
+                    ? 'bg-yellow-400'
+                    : isDetecting
+                      ? 'bg-[#22C55E]'
+                      : 'bg-gray-400'
+              "
+            />
+          </div>
 
-      <!-- Status Badge -->
-      <div
-        class="flex items-center gap-2 font-semibold text-[14px] px-6 py-3 rounded-full transition-colors duration-300"
-        :class="badgeClass"
-      >
-        <!-- Icon -->
-        <svg
-          v-if="status === 'ready' || status === 'detected'"
-          class="w-5 h-5 flex-shrink-0"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <polyline points="9 12 11 14 15 10" />
-        </svg>
-        <svg
-          v-else-if="status === 'lost'"
-          class="w-5 h-5 flex-shrink-0"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <circle cx="12" cy="12" r="10" />
-          <line x1="12" y1="8" x2="12" y2="12" />
-          <line x1="12" y1="16" x2="12.01" y2="16" />
-        </svg>
-        <svg
-          v-else-if="status === 'scanning'"
-          class="animate-spin w-5 h-5 flex-shrink-0"
-          viewBox="0 0 24 24"
-          fill="none"
-        >
-          <circle
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-dasharray="30 10"
-          />
-        </svg>
-        <svg
-          v-else-if="status === 'done'"
-          class="w-5 h-5 flex-shrink-0"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          stroke-width="2.5"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-        >
-          <path d="M20 6L9 17l-5-5" />
-        </svg>
-        <svg
-          v-else
-          class="animate-spin w-5 h-5 flex-shrink-0"
-          viewBox="0 0 24 24"
-          fill="none"
-        >
-          <circle
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-dasharray="30 10"
-          />
-        </svg>
-        {{ badgeText }}
+          <!-- Text -->
+          <p
+            class="text-[15px] font-medium tracking-[0.02em] transition-colors duration-300"
+            :class="
+              scanComplete
+                ? 'text-[#15803D]'
+                : isGazePaused
+                  ? 'text-yellow-700'
+                  : isDetecting
+                    ? 'text-[#16A34A]'
+                    : 'text-[#6B7280]'
+            "
+          >
+            {{
+              scanComplete
+                ? "Scan Complete"
+                : isGazePaused
+                  ? "Scanning Paused"
+                  : isDetecting
+                    ? "Scanning Face..."
+                    : "Waiting for Face"
+            }}
+          </p>
+        </div>
       </div>
     </div>
   </div>
 </template>
 
-<script setup>
-import { ref, computed, onMounted, onUnmounted } from "vue";
-
-// ── Emits ──────────────────────────────────────────────────────────────────
-const emit = defineEmits(["scan-complete"]);
-
-// ── Refs ───────────────────────────────────────────────────────────────────
-const videoRef = ref(null);
-const cameraAreaRef = ref(null);
-const cameraActive = ref(false);
-const scanProgress = ref(0);
-
-// status: 'loading' | 'ready' | 'detected' | 'scanning' | 'lost' | 'done'
-const status = ref("loading");
-
-let stream = null;
-let detectionLoop = null;
-let scanInterval = null;
-let faceApiLoaded = false;
-let lostFaceTimeout = null; // debounce sebelum declare "lost"
-let resumeTimeout = null; // delay sebelum resume scan setelah wajah kembali
-
-// ── Computed UI ────────────────────────────────────────────────────────────
-const ovalStroke = computed(() => {
-  if (status.value === "lost") return "#c0392b";
-  if (status.value === "detected" || status.value === "scanning")
-    return "#2e7d4f";
-  if (status.value === "done") return "#2e7d4f";
-  return "rgba(255,255,255,0.25)";
-});
-
-const instructionLine1 = computed(() => {
-  if (status.value === "lost") return "Face Not Detected!";
-  if (status.value === "scanning") return "Hold Still, Scanning...";
-  if (status.value === "done") return "Scan Complete!";
-  if (status.value === "detected") return "Face Detected!";
-  return "Point the Camera at Your Face";
-});
-
-const instructionLine2 = computed(() => {
-  if (status.value === "lost") return "Please return to the frame";
-  if (status.value === "scanning") return "Please do not move";
-  if (status.value === "done") return "Processing your results";
-  if (status.value === "detected") return "Starting scan automatically...";
-  return "Camera Will Detect!";
-});
-
-const badgeText = computed(() => {
-  const map = {
-    loading: "Loading...",
-    ready: "Ready to Scanning",
-    detected: "Face Detected",
-    scanning: "Scanning...",
-    lost: "Face Lost",
-    done: "Scan Complete",
-  };
-  return map[status.value] ?? "Ready to Scanning";
-});
-
-const badgeClass = computed(() => {
-  if (status.value === "lost") return "bg-[#fdecea] text-[#c0392b]";
-  if (status.value === "scanning") return "bg-[#e8f4fb] text-[#1a6fa0]";
-  if (status.value === "done") return "bg-[#e8f7ee] text-[#2e7d4f]";
-  if (status.value === "detected") return "bg-[#e8f7ee] text-[#2e7d4f]";
-  return "bg-[#e8f7ee] text-[#2e7d4f]";
-});
-
-// ── face-api.js loader ─────────────────────────────────────────────────────
-function loadScript(src) {
-  return new Promise((resolve, reject) => {
-    if (document.querySelector(`script[src="${src}"]`)) return resolve();
-    const s = document.createElement("script");
-    s.src = src;
-    s.onload = resolve;
-    s.onerror = reject;
-    document.head.appendChild(s);
-  });
-}
-
-async function loadFaceApi() {
-  await loadScript(
-    "https://cdn.jsdelivr.net/npm/face-api.js@0.22.2/dist/face-api.min.js",
-  );
-  const MODEL_URL = "https://cdn.jsdelivr.net/npm/@vladmandic/face-api/model";
-  await Promise.all([faceapi.nets.tinyFaceDetector.loadFromUri(MODEL_URL)]);
-  faceApiLoaded = true;
-}
-
-// ── Detection loop ─────────────────────────────────────────────────────────
-function startDetectionLoop() {
-  detectionLoop = setInterval(async () => {
-    if (!faceApiLoaded || !videoRef.value || status.value === "done") return;
-    try {
-      const detection = await faceapi.detectSingleFace(
-        videoRef.value,
-        new faceapi.TinyFaceDetectorOptions({
-          inputSize: 224,
-          scoreThreshold: 0.5,
-        }),
-      );
-
-      if (detection) {
-        // Wajah ada — batalkan timer "lost" jika ada
-        clearTimeout(lostFaceTimeout);
-        lostFaceTimeout = null;
-
-        if (status.value === "ready") {
-          status.value = "detected";
-          setTimeout(startScan, 800);
-        } else if (status.value === "lost") {
-          // Wajah kembali setelah hilang — resume scan dengan delay kecil
-          clearTimeout(resumeTimeout);
-          resumeTimeout = setTimeout(() => {
-            status.value = "scanning";
-            continueScan();
-          }, 600);
-        }
-      } else {
-        // Wajah tidak terdeteksi
-        clearTimeout(resumeTimeout);
-        resumeTimeout = null;
-
-        if (status.value === "scanning") {
-          // Debounce 600ms sebelum benar-benar declare lost
-          // (hindari false positive karena 1-2 frame gagal deteksi)
-          if (!lostFaceTimeout) {
-            lostFaceTimeout = setTimeout(() => {
-              pauseScan();
-              status.value = "lost";
-            }, 600);
-          }
-        } else if (status.value === "detected") {
-          status.value = "ready";
-        }
-      }
-    } catch (_) {
-      /* ignore frame errors */
-    }
-  }, 300);
-}
-
-function pauseScan() {
-  clearInterval(scanInterval);
-  scanInterval = null;
-}
-
-function continueScan() {
-  // Lanjutkan dari progress yang sudah ada (tidak reset)
-  scanInterval = setInterval(() => {
-    scanProgress.value += 2;
-    if (scanProgress.value >= 100) {
-      clearInterval(scanInterval);
-      status.value = "done";
-      emit("scan-complete");
-    }
-  }, 60);
-}
-
-function startScan() {
-  if (status.value === "done") return;
-  status.value = "scanning";
-  scanProgress.value = 0;
-  continueScan();
-}
-
-// ── Lifecycle ──────────────────────────────────────────────────────────────
-onMounted(async () => {
-  // 1. Start camera
-  try {
-    stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: "user" },
-      audio: false,
-    });
-    if (videoRef.value) {
-      videoRef.value.srcObject = stream;
-      cameraActive.value = true;
-    }
-  } catch (err) {
-    console.warn("Camera unavailable:", err);
-  }
-
-  // 2. Load face-api models
-  try {
-    await loadFaceApi();
-    status.value = "ready";
-    startDetectionLoop();
-  } catch (err) {
-    console.warn("face-api load failed:", err);
-    status.value = "ready"; // graceful fallback — no detection but camera still shows
-  }
-});
-
-onUnmounted(() => {
-  clearInterval(detectionLoop);
-  clearInterval(scanInterval);
-  clearTimeout(lostFaceTimeout);
-  clearTimeout(resumeTimeout);
-  if (stream) stream.getTracks().forEach((t) => t.stop());
-});
-</script>
-
 <style scoped>
-.fade-enter-active,
-.fade-leave-active {
+.fade-overlay-enter-active {
   transition: opacity 0.3s ease;
 }
-.fade-enter-from,
-.fade-leave-to {
+.fade-overlay-leave-active {
+  transition: opacity 0.25s ease;
+}
+.fade-overlay-enter-from,
+.fade-overlay-leave-to {
   opacity: 0;
 }
 </style>

@@ -33,9 +33,11 @@ import CardTracker from "../CardTracker.vue";
         >
           <div class="relative w-full h-auto">
             <div
-              class="absolute w-auto h-auto top-[10%] left-1/2 -translate-x-1/2"
+              class="absolute w-auto h-auto top-[9.5%] xl:top-[9%] left-1/2 -translate-x-1/2"
             >
-              <div class="w-[83%] h-auto object-contain object-center ml-[7%]">
+              <div
+                class="lg:w-[70%] xl:w-[85%] h-auto object-contain object-center ml-[17%] xl:ml-[10.5%]"
+              >
                 <FaceMask />
               </div>
             </div>
@@ -47,19 +49,23 @@ import CardTracker from "../CardTracker.vue";
           <div class="absolute left-[10%] top-[20%] card-float-left">
             <card-tracker />
           </div>
-          <div class="absolute left-[14%] bottom-[20%] card-float-left-delay">
+          <div
+            class="absolute left-[14%] bottom-[25%] xl:bottom-[20%] card-float-left-delay"
+          >
             <card-tracker />
           </div>
           <div class="absolute right-[10%] top-[20%] card-float-right">
             <card-tracker />
           </div>
-          <div class="absolute right-[14%] bottom-[20%] card-float-right-delay">
+          <div
+            class="absolute right-[14%] bottom-[25%] xl:bottom-[20%] card-float-right-delay"
+          >
             <card-tracker />
           </div>
         </div>
         <!-- Button Scan Now -->
         <div
-          class="absolute z-30 w-fit h-auto flex flex-row gap-x-5 justify-center items-center left-1/2 -translate-x-1/2 bottom-10 bg-gradient-to-tr from-[#1E6493] from-[20%] to-[#2E97DF] to-[100%] px-10 py-2.5 rounded-xl shadow-[0_20px_20px_0_rgba(39,128,188,0.16)] hover:scale-[1.2] transition-all duration-300 ease-in-out cursor-pointer"
+          class="absolute z-30 w-fit h-auto flex flex-row gap-x-5 justify-center items-center left-1/2 -translate-x-1/2 lg:bottom-6 xl:bottom-10 bg-gradient-to-tr from-[#1E6493] from-[20%] to-[#2E97DF] to-[100%] px-10 py-2.5 rounded-xl shadow-[0_20px_20px_0_rgba(39,128,188,0.16)] hover:scale-[1.2] transition-all duration-300 ease-in-out cursor-pointer"
         >
           <div class="w-6 h-6 shrink-0 flex justify-center items-center">
             <img :src="FaceIcon" alt="" srcset="" class="w-full h-full" />
