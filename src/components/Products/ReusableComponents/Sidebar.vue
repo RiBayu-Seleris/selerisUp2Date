@@ -8,8 +8,8 @@ import Navlink from "@productComponents/Navlink.vue";
 import { aboutList } from "@/Data/AboutList";
 import { productList } from "@/Data/ProductList";
 import { technologyList } from "@/Data/TechnologyList";
-import { usecaseList } from "@/Data/usecaseList";
-import { industryList } from "@/Data/industryList";
+import { usecaseList } from "@/Data/UseCaseList";
+import { industryList } from "@/Data/IndustryList";
 
 const sidebar = useSidebarStore();
 const route = useRoute();
