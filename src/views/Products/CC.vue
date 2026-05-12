@@ -1,5 +1,5 @@
 <script setup>
-import { ccHealthCheck } from "@/Data/Products/CreditCover/ccHealthCheck";
+import { ccHealthCheck } from "@/Data/Products/CreditCover/CCHealthCheck";
 import { ref } from "vue";
 
 import HeroText from "@productComponents/HeroText.vue";

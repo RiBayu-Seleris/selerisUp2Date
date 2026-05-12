@@ -1,5 +1,5 @@
 <script setup>
-import { medinsHealthCheck } from "@/Data/Products/Medins/medinsHealthCheck";
+import { medinsHealthCheck } from "@/Data/Products/Medins/MedinsHealthCheck";
 import { ref } from "vue";
 
 import HeroText from "@productComponents/HeroText.vue";

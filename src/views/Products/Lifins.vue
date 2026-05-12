@@ -27,7 +27,7 @@ import FrameLineWorks from "@productComponents/Svg/LifinsDescriptionWork.vue";
 import lifinsframebook from "@/assets/Products/images/bg-book-demo-lifins.png";
 
 import DownloadImage from "@/assets/Products/images/Lifins/download-lifins.png";
-import { lifinsHealthCheck } from "@/Data/Products/Lifins/lifinsHealthCheck";
+import { lifinsHealthCheck } from "@/Data/Products/Lifins/LifinsHealthCheck";
 
 // FAQ
 import { lifinsFaq } from "@/Data/Products/Lifins/lifinsFaq.js";

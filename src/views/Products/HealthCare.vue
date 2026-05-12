@@ -31,7 +31,7 @@ import medinsframebook from "@/assets/Products/images/bg-book-demo-medins.png";
 import DownloadImage from "@/assets/Products/images/Care/download-care.png";
 
 // HealthCare Data
-import { healthCheck } from "@/Data/Products/HealthCare/healthCheck";
+import { healthCheck } from "@/Data/Products/HealthCare/HealthCheck";
 import { faq } from "@/Data/Products/HealthCare/faq.js";
 import { careWorkSteps } from "@/Data/Products/HealthCare/careworkSteps.js";
 import { testimonials } from "@/Data/Products/HealthCare/testimonials";
