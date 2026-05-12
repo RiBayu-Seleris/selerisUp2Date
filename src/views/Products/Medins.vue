@@ -29,7 +29,7 @@ import DownloadImage from "@/assets/Products/images/Medins/download-medins.png";
 
 // FAQ
 import { medinsFaq } from "@/Data/Products/Medins/MedinsFaq.js";
-import { medinsWorkSteps } from "@/Data/Products/Medins/medinsWorkSteps.js";
+import { medinsWorkSteps } from "@/Data/Products/Medins/MedinsWorkSteps.js";
 
 import { clientLogos } from "@/Data/Products/Medins/medinsClients";
 import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";

@@ -9,7 +9,7 @@ import DarkLogo from "@/assets/images/darklogo.png";
 
 import { aboutList } from "@/Data/AboutList";
 import { productList } from "@/Data/productList";
-import { technologyList } from "@/Data/technologyList";
+import { technologyList } from "@/Data/TechnologyList";
 import { SolutionLists } from "@/Data/SolutionLists";
 import { onMounted } from "vue";
 import ArrowRight from "@/components/icons/ArrowRight.vue";

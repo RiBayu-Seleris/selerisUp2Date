@@ -5,7 +5,7 @@ import { useRoute } from "vue-router";
 import Navlink from "@/components/Navlink.vue";
 import { productList } from "@/Data/productList";
 import { aboutList } from "@/Data/AboutList";
-import { technologyList } from "@/Data/technologyList";
+import { technologyList } from "@/Data/TechnologyList";
 import { SolutionLists } from "@/Data/SolutionLists";
 import ArrowRight from "@/components/icons/ArrowRight.vue";
 
