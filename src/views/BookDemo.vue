@@ -4,7 +4,7 @@ import CountrySelect from "@/components/reusable/CountrySelect.vue";
 import ProductSelect from "@/components/reusable/ProductSelect.vue";
 import RobotImage from "@/assets/images/robot-ai5-full.png";
 import { productBannerLists } from "@/Data/ListProduct";
-import { faqList } from "@/Data/faqList.js";
+import { faqList } from "@/Data/FaqList.js";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { ref, onMounted, onBeforeUnmount } from "vue";
