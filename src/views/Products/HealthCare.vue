@@ -34,7 +34,7 @@ import DownloadImage from "@/assets/Products/images/Care/download-care.png";
 import { healthCheck } from "@/Data/Products/HealthCare/HealthCheck";
 import { faq } from "@/Data/Products/HealthCare/Faq.js";
 import { careWorkSteps } from "@/Data/Products/HealthCare/CareWorkSteps.js";
-import { testimonials } from "@/Data/Products/HealthCare/testimonials";
+import { testimonials } from "@/Data/Products/HealthCare/Testimonials.js";
 
 import { clientLogos } from "@/Data/Products/HealthCare/CareClients";
 
