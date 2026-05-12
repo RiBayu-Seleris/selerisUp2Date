@@ -4,7 +4,7 @@ import MobileCert from "@/components/CertificateMobile.vue";
 
 import CloseIcon from "@/components/icons/CloseIcon.vue";
 
-import { certificateData } from "@/Data/certData";
+import { certificateData } from "@/Data/CertData";
 import { ref, watch } from "vue";
 
 const isModalOpen = ref(false);
