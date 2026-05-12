@@ -1,7 +1,7 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from "vue";
 import axios from "axios";
-import { resultAPI } from "@/data/Results2";
+import { resultAPI } from "@/Data/Results2";
 
 const props = defineProps({
   autoStart: {
