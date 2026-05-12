@@ -30,7 +30,7 @@ import DownloadImage from "@/assets/Products/images/Lifins/download-lifins.png";
 import { lifinsHealthCheck } from "@/Data/Products/Lifins/LifinsHealthCheck";
 
 // FAQ
-import { lifinsFaq } from "@/Data/Products/Lifins/lifinsFaq.js";
+import { lifinsFaq } from "@/Data/Products/Lifins/LifinsFaq.js";
 import { lifinsWorkSteps } from "@/Data/Products/Lifins/lifinsWorkSteps.js";
 
 import { clientLogos } from "@/Data/Products/Lifins/LifinsClients";

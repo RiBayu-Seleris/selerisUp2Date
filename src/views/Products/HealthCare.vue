@@ -32,7 +32,7 @@ import DownloadImage from "@/assets/Products/images/Care/download-care.png";
 
 // HealthCare Data
 import { healthCheck } from "@/Data/Products/HealthCare/HealthCheck";
-import { faq } from "@/Data/Products/HealthCare/faq.js";
+import { faq } from "@/Data/Products/HealthCare/Faq.js";
 import { careWorkSteps } from "@/Data/Products/HealthCare/careworkSteps.js";
 import { testimonials } from "@/Data/Products/HealthCare/testimonials";
 

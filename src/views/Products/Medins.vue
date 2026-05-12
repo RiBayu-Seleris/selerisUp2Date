@@ -28,7 +28,7 @@ import medinsframebook from "@/assets/Products/images/bg-book-demo-medins.png";
 import DownloadImage from "@/assets/Products/images/Medins/download-medins.png";
 
 // FAQ
-import { medinsFaq } from "@/Data/Products/Medins/medinsFaq.js";
+import { medinsFaq } from "@/Data/Products/Medins/MedinsFaq.js";
 import { medinsWorkSteps } from "@/Data/Products/Medins/medinsWorkSteps.js";
 
 import { clientLogos } from "@/Data/Products/Medins/medinsClients";
