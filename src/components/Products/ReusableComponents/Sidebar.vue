@@ -3,7 +3,7 @@ import { ref, watch } from "vue";
 import { useSidebarStore } from "@/stores/sidebar";
 import { useRoute } from "vue-router";
 import MenuIconClose from "@/components/icons/CloseIcon.vue";
-import Navlink from "@productComponents/Navlink.vue";
+import Navlink from "@productComponents/NavLink.vue";
 
 import { aboutList } from "@/Data/AboutList";
 import { productList } from "@/Data/ProductList";
