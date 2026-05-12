@@ -14,7 +14,7 @@ import appstore from "@/assets/images/appstore.png";
 
 import { productList } from "@/Data/ProductList";
 import { companyList } from "@/Data/CompanyList";
-import Navlink from "@components/Navlink.vue";
+import Navlink from "@/components/Navlink.vue";
 </script>
 
 <template>
