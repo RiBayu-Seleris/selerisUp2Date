@@ -32,7 +32,7 @@ import { medinsFaq } from "@/Data/Products/Medins/MedinsFaq.js";
 import { medinsWorkSteps } from "@/Data/Products/Medins/MedinsWorkSteps.js";
 
 import { clientLogos } from "@/Data/Products/Medins/MedinsClients";
-import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
+import { medinsTestimonials } from "@/Data/Products/Medins/MedinsTestimonials";
 
 // gabungkan otomatis base path + nama file
 const stepsWithPath = medinsWorkSteps.map((step) => ({

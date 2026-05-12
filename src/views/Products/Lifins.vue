@@ -34,7 +34,7 @@ import { lifinsFaq } from "@/Data/Products/Lifins/LifinsFaq.js";
 import { lifinsWorkSteps } from "@/Data/Products/Lifins/LifinsWorkSteps.js";
 
 import { clientLogos } from "@/Data/Products/Lifins/LifinsClients";
-import { lifinsTestimonials } from "@/Data/Products/Lifins/lifinsTestimonials";
+import { lifinsTestimonials } from "@/Data/Products/Lifins/LifinsTestimonials";
 
 // gabungkan otomatis base path + nama file
 const stepsWithPath = lifinsWorkSteps.map((step) => ({
