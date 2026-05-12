@@ -2,7 +2,7 @@
 import HeroText from "@/components/reusable/HeroText.vue";
 
 import { ref } from "vue";
-import { faqList } from "@/Data/faqList.js";
+import { faqList } from "@/Data/FaqList.js";
 
 import FaqFrame from "@productComponents/FaqFrame.vue";
 
