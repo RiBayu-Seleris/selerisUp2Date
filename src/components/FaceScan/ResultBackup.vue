@@ -1,7 +1,7 @@
 <script setup>
 import { computed } from "vue";
 
-import CsIcon from "@/assets/icons/FaceTracker/cs-icon.svg";
+import CsIcon from "@/assets/icons/facetracker/cs-icon.svg";
 import ChevronLeft from "@/assets/icons/chevron-left.svg";
 
 // =========================
