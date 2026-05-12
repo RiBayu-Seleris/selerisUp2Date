@@ -13,7 +13,7 @@ import playstore from "@/assets/images/playstore.png";
 import appstore from "@/assets/images/appstore.png";
 
 import { productList } from "@/Data/productList";
-import { companyList } from "@/Data/companyList";
+import { companyList } from "@/Data/CompanyList";
 import Navlink from "./Navlink.vue";
 </script>
 
