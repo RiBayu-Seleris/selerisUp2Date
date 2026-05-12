@@ -7,7 +7,7 @@ import Navlink from "@productComponents/Navlink.vue";
 
 import { aboutList } from "@/Data/AboutList";
 import { productList } from "@/Data/productList";
-import { technologyList } from "@/Data/technologyList";
+import { technologyList } from "@/Data/TechnologyList";
 import { usecaseList } from "@/Data/usecaseList";
 import { industryList } from "@/Data/industryList";
 
