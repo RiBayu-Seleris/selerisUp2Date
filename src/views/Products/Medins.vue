@@ -31,7 +31,7 @@ import DownloadImage from "@/assets/Products/images/Medins/download-medins.png";
 import { medinsFaq } from "@/Data/Products/Medins/MedinsFaq.js";
 import { medinsWorkSteps } from "@/Data/Products/Medins/MedinsWorkSteps.js";
 
-import { clientLogos } from "@/Data/Products/Medins/medinsClients";
+import { clientLogos } from "@/Data/Products/Medins/MedinsClients";
 import { medinsTestimonials } from "@/Data/Products/Medins/medinsTestimonials";
 
 // gabungkan otomatis base path + nama file
