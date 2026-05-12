@@ -6,7 +6,7 @@ import MenuIconClose from "@/components/icons/CloseIcon.vue";
 import Navlink from "@productComponents/Navlink.vue";
 
 import { aboutList } from "@/Data/AboutList";
-import { productList } from "@/Data/productList";
+import { productList } from "@/Data/ProductList";
 import { technologyList } from "@/Data/TechnologyList";
 import { usecaseList } from "@/Data/usecaseList";
 import { industryList } from "@/Data/industryList";

@@ -3,7 +3,7 @@ import { onMounted, onUnmounted, ref } from "vue";
 import { useScrollStore } from "@/stores/scroll";
 import { useRoute } from "vue-router";
 import Navlink from "@/components/Navlink.vue";
-import { productList } from "@/Data/productList";
+import { productList } from "@/Data/ProductList";
 import { aboutList } from "@/Data/AboutList";
 import { technologyList } from "@/Data/TechnologyList";
 import { SolutionLists } from "@/Data/SolutionLists";
