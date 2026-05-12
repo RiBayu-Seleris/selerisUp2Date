@@ -5,7 +5,7 @@ import gridFaceTracker from "@/assets/images/facetracker/grid-face-tracker2.svg"
 import Person from "@/assets/images/facetracker/person3.png";
 import FaceMask from "@/assets/images/facetracker/MaskingFace2.vue";
 import FaceIcon from "@/assets/icons/FaceTracker/face-icon.svg";
-import CardTracker from "@/CardTracker.vue";
+import CardTracker from "@/components/CardTracker.vue";
 import { useRouter } from "vue-router";
 
 const router = useRouter();
