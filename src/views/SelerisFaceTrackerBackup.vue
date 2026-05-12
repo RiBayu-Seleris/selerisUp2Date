@@ -20,16 +20,12 @@ import Lens from "@/assets/icons/facetracker/lens.svg";
 
 import FaceTracker from "@/components/FaceScan/index.vue";
 import Result from "@/components/FaceScan/Result.vue";
-import { ref, computed, onMounted, watch, nextTick } from "vue";
+import { ref, computed } from "vue";
 
-// const currentView = ref("scan");
-const currentView = ref(null);
-// const currentView = ref("scan");
+const currentView = ref("scan");
 const scanResult = ref(null);
 const uploadProgress = ref(0);
 const uploadStep = ref("Mengirim ke server...");
-const faceTrackerRef = ref(null);
-const isLimitReached = ref(false);
 
 // ─── Retry state ──────────────────────────────────────────────────────────────
 const retryAttempt = ref(0);
@@ -66,33 +62,25 @@ let progressRaf = null;
 
 function onScanComplete() {
   currentView.value = "uploading";
-
   uploadProgress.value = 0;
   retryAttempt.value = 0;
   isRetrying.value = false;
 
   let si = 0;
-
-  clearInterval(stepInterval);
-
   stepInterval = setInterval(() => {
-    if (isRetrying.value) return;
-
+    if (isRetrying.value) return; // jangan ganti teks saat retry
     si = (si + 1) % uploadSteps.length;
     uploadStep.value = uploadSteps[si];
   }, 1300);
 
+  // Progress simulasi berhenti di 94%, sisanya tunggu API
   let p = 0;
-
   const tick = () => {
     if (p >= 94) return;
-
     p += p < 40 ? 0.7 : p < 72 ? 0.4 : 0.18;
-
     uploadProgress.value = p;
     progressRaf = requestAnimationFrame(tick);
   };
-
   tick();
 }
 
@@ -126,78 +114,10 @@ function onUploadDone(result) {
   retryAttempt.value = 0;
   uploadProgress.value = 100;
   scanResult.value = result;
-
-  localStorage.setItem("lp_facetracker_last_result", JSON.stringify(result));
-
-  const prev = parseInt(
-    document.cookie
-      .split("; ")
-      .find((r) => r.startsWith("lp_facetracker_count="))
-      ?.split("=")[1] || "0",
-    10,
-  );
-  const newCount = prev + 1;
-  const expires = new Date();
-  expires.setDate(expires.getDate() + 30);
-  document.cookie = `lp_facetracker_count=${newCount}; expires=${expires.toUTCString()}; path=/; SameSite=Lax`;
-
-  // ← Tambahkan ini
-  if (newCount >= Infinity) {
-    isLimitReached.value = true;
-  }
-
   setTimeout(() => {
     currentView.value = "result";
   }, 400);
 }
-
-function onBackToScan() {
-  if (isLimitReached.value) return;
-
-  localStorage.removeItem("lp_facetracker_last_result");
-
-  currentView.value = "scan";
-  uploadProgress.value = 0;
-  uploadStep.value = "Mengirim ke server...";
-  scanResult.value = null;
-  isRetrying.value = false;
-  retryAttempt.value = 0;
-  retryCountdown.value = 0;
-
-  faceTrackerRef.value?.resetScan();
-}
-
-onMounted(async () => {
-  const count = parseInt(
-    document.cookie
-      .split("; ")
-      .find((r) => r.startsWith("lp_facetracker_count="))
-      ?.split("=")[1] || "0",
-    10,
-  );
-
-  // cek limit
-  if (count >= Infinity) {
-    isLimitReached.value = true;
-  }
-
-  // cek hasil terakhir
-  const saved = localStorage.getItem("lp_facetracker_last_result");
-
-  if (saved) {
-    try {
-      scanResult.value = JSON.parse(saved);
-      currentView.value = "result";
-      return;
-    } catch (err) {
-      console.error("Failed parsing saved result:", err);
-      localStorage.removeItem("lp_facetracker_last_result");
-    }
-  }
-
-  // default
-  currentView.value = "scan";
-});
 
 const rules = [
   {
@@ -222,12 +142,14 @@ const rules = [
 
 const indicators = [
   { icon: HeartRate, title: "Heart Rate" },
-  { icon: Heart, title: "Breath Rate" },
-  { icon: StressLevel, title: "Diastole" },
-  { icon: Blood, title: "HRV" },
-  { icon: BMI, title: "systole" },
+  { icon: StressLevel, title: "Stress Level" },
+  { icon: Blood, title: "Blood Pressure" },
+  { icon: BMI, title: "Body Mass Index" },
+  { icon: GenCell, title: "Blood Glucose" },
+  { icon: Heart, title: "Heart Health" },
 ];
 </script>
+
 <template>
   <div class="w-full h-screen p-5">
     <div
@@ -238,13 +160,11 @@ const indicators = [
         <div
           class="w-full h-auto flex flex-row gap-x-4 justify-start items-center bg-[#FFFFFF] rounded-full text-[#000000] border-[1px]"
         >
-          <a
-            href="/"
-            target="_blank"
+          <div
             class="w-10 h-10 flex justify-center items-center bg-[#F7F7F7] rounded-full p-1.5 border-[1px]"
           >
             <ArrowLeft />
-          </a>
+          </div>
           <div class="w-full h-full flex items-center">
             <p class="text-[16px] font-[400]">Back to Site</p>
           </div>
@@ -278,21 +198,20 @@ const indicators = [
             </div>
             <div class="w-full h-auto flex justify-center items-center">
               <div class="flex-1 flex justify-center items-center">
-                <img :src="TrustedImage" alt="" srcset="" />
+                <img :src="TrustedImage" alt="" />
               </div>
             </div>
           </div>
         </div>
       </div>
+
       <!-- CENTER CONTENT -->
       <div
         class="w-[35%] h-full shrink-0 relative overflow-hidden flex justify-center items-start"
       >
         <Transition name="view-fade">
           <FaceTracker
-            v-if="currentView === 'scan' || currentView === 'uploading'"
-            ref="faceTrackerRef"
-            :auto-start="currentView === 'scan'"
+            v-if="currentView === 'scan'"
             class="w-full h-full"
             @scan-complete="onScanComplete"
             @upload-done="onUploadDone"
@@ -474,12 +393,11 @@ const indicators = [
           <Result
             v-if="currentView === 'result'"
             :data="scanResult"
-            :is-last-result="isLimitReached"
             class="absolute inset-0"
-            @back="onBackToScan"
           />
         </Transition>
       </div>
+
       <!-- RIGHT CONTENT -->
       <div class="w-full h-full flex flex-col justify-between">
         <div
@@ -498,15 +416,15 @@ const indicators = [
           </div>
         </div>
         <div
-          class="w-full h-auto grid grid-cols-2 gap-5 justify-start items-center"
+          class="w-full h-auto grid grid-cols-2 gap-3 justify-start items-center"
         >
           <div v-for="(indicator, index) in indicators" :key="index">
             <div
-              class="w-full h-auto flex flex-col gap-y-1 justify-between items-start bg-[#FFFFFF] p-6 rounded-lg"
+              class="w-full h-auto flex flex-col gap-y-1 justify-between items-start bg-[#FFFFFF] p-5 rounded-lg"
             >
               <div class="w-full h-auto flex justify-start items-start">
                 <div class="w-8 h-8 flex justify-center items-center p-1">
-                  <img :src="indicator.icon" alt="" srcset="" />
+                  <img :src="indicator.icon" alt="" />
                 </div>
               </div>
               <div class="w-full h-auto flex">
@@ -516,40 +434,46 @@ const indicators = [
           </div>
         </div>
         <div
+          class="w-full h-auto flex flex-row justify-between items-center px-4 py-2 bg-[#FFFFFF] rounded-lg"
+        >
+          <div class="w-full h-auto flex justify-start items-center">
+            <img :src="Lens" alt="" class="w-full h-full" />
+          </div>
+          <div class="w-full h-auto flex justify-end items-center">
+            <p class="text-[#6A6A6A] font-[500] text-[14px]">
+              +24 Parameters Makers
+            </p>
+          </div>
+        </div>
+        <div
           class="w-full h-auto flex flex-col gap-y-5 justify-center items-center p-8 bg-[#FFFFFF] rounded-lg"
         >
-          <div class="w-full h-auto flex justify-center items-center">
-            <p class="text-[#A7A7A7]">Get the apps</p>
-          </div>
-          <div class="flex flex-row lg:flex-row gap-5 px-12">
+          <p class="text-[#A7A7A7]">Get the apps</p>
+          <div class="flex flex-row gap-5 px-12">
             <a
               href="https://play.google.com/store/apps/developer?id=PT.+Seleris+Meditekno+Internasional"
               target="_blank"
               rel="noopener noreferrer"
-              class="flex w-auto h-full md:justify-start justify-center items-center content-center xl:justify-start xl:content-start"
+              class="flex w-auto h-full justify-center items-center"
             >
               <img
                 :src="playstore"
                 alt="Playstore"
-                class="w-full h-full object-contain object-center"
+                class="w-full h-full object-contain"
               />
             </a>
-            <div
-              class="flex w-auto h-full justify-center items-center content-center xl:justify-start xl:content-start"
-            >
+            <div class="flex w-auto h-full justify-center items-center">
               <div class="relative group w-full h-full">
                 <img
                   :src="appstore"
                   alt="Appstore"
-                  class="w-full h-full object-contain object-center"
+                  class="w-full h-full object-contain"
                 />
-
-                <!-- Hover Overlay -->
                 <div
-                  class="absolute flex items-center justify-center inset-0 group-hover:opacity-100 transition duration-300 bg-opacity-60 opacity-0"
+                  class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition duration-300"
                 >
                   <div
-                    class="w-full h-full bg-[#FDFDFD] bg-opacity-60 flex items-center justify-center text-white cursor-pointer"
+                    class="w-full h-full bg-[#FDFDFD]/60 flex items-center justify-center text-white cursor-pointer"
                   >
                     <span>Coming Soon!</span>
                   </div>
@@ -558,27 +482,23 @@ const indicators = [
             </div>
           </div>
           <div class="w-full h-auto flex justify-between items-center px-20">
-            <div class="w-full h-auto flex justify-center items-center">
-              <p class="text-[#A9A9A9] font-[500] text-[18px]">Powered by</p>
-            </div>
-            <div class="w-full h-full flex justify-start items-center">
-              <img
-                :src="Logo"
-                alt=""
-                srcset=""
-                class="w-full h-[75%] md:h-[50px] xl:h-[40px] object-contain object-center"
-              />
-            </div>
+            <p class="text-[#A9A9A9] font-[500] text-[18px]">Powered by</p>
+            <img
+              :src="Logo"
+              alt=""
+              class="w-full h-[75%] md:h-[50px] xl:h-[40px] object-contain object-center"
+            />
           </div>
         </div>
       </div>
     </div>
   </div>
 </template>
+
 <style scoped>
 .view-fade-enter-active,
 .view-fade-leave-active {
-  transition: opacity 0.4s ease;
+  transition: opacity 0.35s ease;
 }
 .view-fade-enter-from,
 .view-fade-leave-to {
@@ -593,5 +513,38 @@ const indicators = [
 .slide-up-enter-from {
   transform: translateY(40px);
   opacity: 0;
+}
+
+.dot-wave {
+  animation: dot-wave 1.4s ease-in-out infinite;
+}
+.dot-wave-green {
+  background: rgba(74, 222, 128, 0.25);
+}
+.dot-wave-yellow {
+  background: rgba(250, 204, 21, 0.25);
+}
+
+@keyframes dot-wave {
+  0%,
+  60%,
+  100% {
+    transform: scaleY(1);
+  }
+  30% {
+    transform: scaleY(2.2);
+  }
+}
+
+.shimmer-bar {
+  animation: shimmer 1.6s ease-in-out infinite;
+}
+@keyframes shimmer {
+  0% {
+    transform: translateX(-32px);
+  }
+  100% {
+    transform: translateX(280px);
+  }
 }
 </style>

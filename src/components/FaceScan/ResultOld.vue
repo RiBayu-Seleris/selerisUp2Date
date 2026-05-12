@@ -274,6 +274,14 @@ const metricCards = computed(() => {
                     </span>
                   </p>
                 </div>
+
+                <!-- Status -->
+                <div
+                  class="text-[12px] font-[600]"
+                  :class="statusColor(card.status)"
+                >
+                  {{ card.status }}
+                </div>
               </div>
 
               <!-- Description -->

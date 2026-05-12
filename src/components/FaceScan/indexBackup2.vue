@@ -17,11 +17,10 @@ const canvasRef = ref(null);
 const ellipseRef = ref(null);
 
 const cameraActive = ref(false);
+const cameraReady = ref(false);
 const personDetected = ref(false);
 const scanProgress = ref(0);
 const isGazePaused = ref(false);
-
-// ─── FIX: isUnmounted sebagai ref agar reset setiap kali mount ───────────────
 const isUnmounted = ref(false);
 
 const isDetecting = computed(() => personDetected.value && !isGazePaused.value);
@@ -33,7 +32,6 @@ let stream = null;
 let pulseT = 0;
 let lastArTime = -1;
 
-// ─── Scan progress state ──────────────────────────────────────────────────────
 const SCAN_DURATION_MS = 30000;
 const GAZE_AWAY_FRAMES = 3;
 const MIN_CHUNKS_BEFORE_POP = 3;
@@ -43,7 +41,6 @@ let accumulatedMs = 0;
 let pauseStartMs = null;
 let scanComplete = ref(false);
 
-// ─── MediaRecorder ────────────────────────────────────────────────────────────
 let mediaRecorder = null;
 let recordedChunks = [];
 let recordingMimeType = "";
@@ -55,7 +52,6 @@ const emit = defineEmits([
   "upload-retry",
 ]);
 
-// ─── Retry state ──────────────────────────────────────────────────────────────
 let lastBlob = null;
 let retryCount = 0;
 let retryTimeoutId = null;
@@ -63,6 +59,60 @@ let retryAborted = false;
 let isUploadDone = false;
 
 const RETRY_DELAYS = [3000, 5000, 8000, 12000, 15000];
+
+// ─── BVP Wave ─────────────────────────────────────────────────────────────────
+const bvpCanvasRef = ref(null);
+let bvpAnimId = null;
+let bvpOffset = 0;
+
+function drawBvpWave() {
+  const canvas = bvpCanvasRef.value;
+  if (!canvas) {
+    bvpAnimId = requestAnimationFrame(drawBvpWave);
+    return;
+  }
+
+  const dpr = window.devicePixelRatio || 1;
+  const w = canvas.offsetWidth;
+  const h = canvas.offsetHeight;
+
+  if (!w || !h) {
+    bvpAnimId = requestAnimationFrame(drawBvpWave);
+    return;
+  }
+
+  if (canvas.width !== w * dpr || canvas.height !== h * dpr) {
+    canvas.width = w * dpr;
+    canvas.height = h * dpr;
+  }
+
+  const ctx = canvas.getContext("2d");
+  ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+  ctx.clearRect(0, 0, w, h);
+
+  const mid = h / 2;
+  const amp = h * 0.36;
+  const freq = 0.045;
+
+  ctx.beginPath();
+  ctx.strokeStyle = "#22c55e";
+  ctx.lineWidth = 1.8;
+  ctx.lineJoin = "round";
+
+  for (let x = 0; x <= w; x++) {
+    const t = (x + bvpOffset) * freq;
+    const y =
+      mid -
+      amp * 0.85 * Math.sin(t) -
+      amp * 0.25 * Math.sin(2.1 * t + 0.5) -
+      amp * 0.08 * Math.sin(3.3 * t + 1.1);
+    x === 0 ? ctx.moveTo(x, y) : ctx.lineTo(x, y);
+  }
+
+  ctx.stroke();
+  bvpOffset += 1.5;
+  bvpAnimId = requestAnimationFrame(drawBvpWave);
+}
 
 function getRetryDelay(attempt) {
   return RETRY_DELAYS[Math.min(attempt, RETRY_DELAYS.length - 1)];
@@ -76,7 +126,6 @@ function cancelRetry() {
   }
 }
 
-// ─── Recording ────────────────────────────────────────────────────────────────
 function startRecording() {
   if (!stream || mediaRecorder) return;
 
@@ -102,26 +151,12 @@ function startRecording() {
     if (e.data && e.data.size > 0) recordedChunks.push(e.data);
   };
 
-  // mediaRecorder.onstop = () => {
-  //   const blob = new Blob(recordedChunks, { type: recordingMimeType });
-  //   lastBlob = blob;
-  //   emit("scan-complete");
-  //   sendVideoToApi(blob);
-  // };
-
   mediaRecorder.onstop = () => {
     console.log("[scan] onstop fired, chunks:", recordedChunks.length);
-
-    const blob = new Blob(recordedChunks, {
-      type: recordingMimeType,
-    });
-
+    const blob = new Blob(recordedChunks, { type: recordingMimeType });
     lastBlob = blob;
-
-    emit("upload-start"); // ← TAMBAHAN
-
+    emit("upload-start");
     emit("scan-complete");
-
     sendVideoToApi(blob);
   };
 
@@ -155,6 +190,7 @@ function resetScan() {
   gazeAwayCount = 0;
   isGazePaused.value = false;
   personDetected.value = false;
+  cameraReady.value = false;
   recordedChunks = [];
   lastBlob = null;
   retryCount = 0;
@@ -164,7 +200,6 @@ function resetScan() {
   cancelRetry();
 }
 
-// ─── API ──────────────────────────────────────────────────────────────────────
 async function sendVideoToApi(blob) {
   if (retryAborted || isUploadDone) return;
 
@@ -218,19 +253,13 @@ function scheduleRetry(blob) {
   retryCount++;
   const delay = getRetryDelay(retryCount - 1);
 
-  emit("upload-retry", {
-    attempt: retryCount,
-    delayMs: delay,
-  });
+  emit("upload-retry", { attempt: retryCount, delayMs: delay });
 
   retryTimeoutId = setTimeout(() => {
-    if (!retryAborted && !isUploadDone) {
-      sendVideoToApi(blob);
-    }
+    if (!retryAborted && !isUploadDone) sendVideoToApi(blob);
   }, delay);
 }
 
-// ─── Oval cache ───────────────────────────────────────────────────────────────
 let cachedOval = null;
 let ovalResizeObserver = null;
 
@@ -260,7 +289,6 @@ function getOvalInCanvasSpace(canvas) {
   return cachedOval;
 }
 
-// ─── Init MediaPipe ───────────────────────────────────────────────────────────
 async function initFaceLandmarker() {
   const { FaceLandmarker, HandLandmarker, FilesetResolver } =
     await import("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/vision_bundle.mjs");
@@ -293,7 +321,6 @@ async function initFaceLandmarker() {
   window.__FL_TESS = FaceLandmarker.FACE_LANDMARKS_TESSELATION;
 }
 
-// ─── Camera ───────────────────────────────────────────────────────────────────
 async function initFaceTracker() {
   try {
     await initFaceLandmarker();
@@ -301,12 +328,12 @@ async function initFaceTracker() {
       video: { facingMode: "user", width: 640, height: 480 },
       audio: false,
     });
-    // ─── FIX: cek isUnmounted.value (bukan isUnmounted) ──────────────────────
     if (!videoRef.value || isUnmounted.value) return;
     videoRef.value.srcObject = stream;
     videoRef.value.onloadeddata = () => {
       if (isUnmounted.value) return;
       cameraActive.value = true;
+      cameraReady.value = true;
       if (canvasRef.value) {
         ovalResizeObserver = new ResizeObserver(invalidateOvalCache);
         ovalResizeObserver.observe(canvasRef.value);
@@ -318,7 +345,6 @@ async function initFaceTracker() {
   }
 }
 
-// ─── Gaze detection ───────────────────────────────────────────────────────────
 let lastGazeLmKey = null;
 let lastGazeResult = false;
 
@@ -349,7 +375,6 @@ function isLookingAway(lm) {
   return lastGazeResult;
 }
 
-// ─── Hand covering face ───────────────────────────────────────────────────────
 const HAND_COVER_THRESHOLD = 3;
 
 function isHandCoveringFace(faceLm, handResults, canvasW, canvasH) {
@@ -384,36 +409,26 @@ function isHandCoveringFace(faceLm, handResults, canvasW, canvasH) {
   return false;
 }
 
-// ─── Pause / resume ───────────────────────────────────────────────────────────
 function pauseScan(reason = "Wajah berpaling") {
   if (isGazePaused.value) return;
   isGazePaused.value = true;
   pauseStartMs = performance.now();
-
-  // if (recordedChunks.length > MIN_CHUNKS_BEFORE_POP) {
-  //   recordedChunks.pop();
-  // }
-
   pauseRecording();
 }
 
 function resumeScan() {
   if (!isGazePaused.value) return;
-
   if (pauseStartMs !== null) {
     accumulatedMs += performance.now() - pauseStartMs;
   }
-
   isGazePaused.value = false;
   gazeAwayCount = 0;
   pauseStartMs = null;
-
   setTimeout(() => {
     resumeRecording();
   }, 150);
 }
 
-// ─── pointInOval ─────────────────────────────────────────────────────────────
 function pointInOval(px, py, cx, cy, rx, ry) {
   const dx = (px - cx) / rx;
   const dy = (py - cy) / ry;
@@ -426,7 +441,6 @@ const FACE_OVAL_INDICES = [
   54, 103, 67, 109,
 ];
 
-// ─── Gradient cache ───────────────────────────────────────────────────────────
 let cachedScanGrad = null;
 let cachedScanGradY = -1;
 
@@ -441,7 +455,6 @@ function getScanGrad(ctx, scanY) {
   return cachedScanGrad;
 }
 
-// ─── Draw mesh ────────────────────────────────────────────────────────────────
 function drawMesh(lm, canvas) {
   const ctx = canvas.getContext("2d");
   if (!ctx) return;
@@ -520,9 +533,7 @@ function drawIdleFrame(canvas) {
   ctx.restore();
 }
 
-// ─── Main predict loop ────────────────────────────────────────────────────────
 function arPredict() {
-  // ─── FIX: isUnmounted.value ───────────────────────────────────────────────
   if (isUnmounted.value) return;
   if (document.hidden) {
     arAnimId = requestAnimationFrame(arPredict);
@@ -582,7 +593,6 @@ function arPredict() {
 
     if (!faceInOval || lookingAway || handCovering) {
       gazeAwayCount++;
-
       if (gazeAwayCount >= GAZE_AWAY_FRAMES) {
         personDetected.value = false;
         const reason = !faceInOval
@@ -594,14 +604,11 @@ function arPredict() {
       }
     } else {
       gazeAwayCount = 0;
-
       if (isGazePaused.value && pauseStartMs !== null) {
         accumulatedMs += now - pauseStartMs;
         pauseStartMs = null;
       }
-
       if (isGazePaused.value) resumeScan();
-
       if (scanStartMs === null) {
         accumulatedMs = 0;
         pauseStartMs = null;
@@ -613,20 +620,16 @@ function arPredict() {
 
     if (scanStartMs !== null && !scanComplete.value) {
       let elapsed;
-
       if (isGazePaused.value) {
-        // Saat pause → waktu berhenti
         elapsed = Math.max(
           0,
           (pauseStartMs ?? now) - scanStartMs - accumulatedMs,
         );
       } else {
-        // Saat running normal
         elapsed = Math.max(0, now - scanStartMs - accumulatedMs);
       }
 
       const pct = Math.min(100, (elapsed / SCAN_DURATION_MS) * 100);
-
       scanProgress.value = pct;
 
       if (pct >= 100) {
@@ -647,18 +650,8 @@ function arPredict() {
   arAnimId = requestAnimationFrame(arPredict);
 }
 
-// ─── Scan complete ────────────────────────────────────────────────────────────
-// function onScanComplete() {
-//   if (mediaRecorder && mediaRecorder.state !== "inactive") {
-//     mediaRecorder.stop();
-//     mediaRecorder = null;
-//   } else {
-//     emit("scan-complete");
-//   }
-// }
-
 function onScanComplete() {
-  console.log("[scan] onScanComplete, recorder state:", mediaRecorder?.state); // ← tambah
+  console.log("[scan] onScanComplete, recorder state:", mediaRecorder?.state);
   if (mediaRecorder && mediaRecorder.state !== "inactive") {
     mediaRecorder.stop();
     mediaRecorder = null;
@@ -667,12 +660,10 @@ function onScanComplete() {
   }
 }
 
-// ─── Lifecycle ────────────────────────────────────────────────────────────────
 onMounted(async () => {
   isUnmounted.value = false;
-
+  drawBvpWave();
   if (!props.autoStart) return;
-
   await initFaceTracker();
 });
 
@@ -681,8 +672,8 @@ onUnmounted(() => {
 });
 
 function cleanup() {
-  // ─── FIX: isUnmounted.value ───────────────────────────────────────────────
   isUnmounted.value = true;
+  cancelAnimationFrame(bvpAnimId);
   cancelRetry();
   stopRecording();
   cancelAnimationFrame(arAnimId);
@@ -704,28 +695,23 @@ function cleanup() {
   cachedScanGrad = null;
   lastGazeLmKey = null;
   lastBlob = null;
+  cameraReady.value = false;
 }
 
 function stopCamera() {
   cancelAnimationFrame(arAnimId);
-
   cancelRetry();
-
-  if (mediaRecorder) {
-    stopRecording();
-  }
-
+  if (mediaRecorder) stopRecording();
   if (stream) {
     stream.getTracks().forEach((t) => t.stop());
     stream = null;
   }
-
   cameraActive.value = false;
 }
 
 function startCamera() {
   if (!stream) {
-    isUnmounted.value = false; // ← tambah ini
+    isUnmounted.value = false;
     initFaceTracker();
   }
 }
@@ -737,6 +723,7 @@ defineExpose({ resetScan, stopCamera, startCamera });
   <div
     class="w-full h-full flex flex-col justify-between rounded-t-2xl rounded-b-xl overflow-hidden"
   >
+    <!-- ── Camera Section ─────────────────────────────────────────────────── -->
     <div
       class="relative w-full h-[70%] shrink-0 overflow-hidden bg-black rounded-t-2xl"
     >
@@ -893,31 +880,58 @@ defineExpose({ resetScan, stopCamera, startCamera });
         </div>
       </div>
 
-      <!-- TOP CENTER BADGE -->
-      <div class="absolute top-4 left-1/2 -translate-x-1/2">
+      <!-- TOP RIGHT BADGE -->
+      <div class="absolute top-4 right-6">
         <div
-          class="px-3 py-1 rounded-full text-[11px] font-medium flex items-center gap-1.5 backdrop-blur-md border transition-all duration-300"
+          class="min-w-[130px] px-4 py-3 rounded-2xl backdrop-blur-xl border shadow-[0_8px_30px_rgba(0,0,0,0.18)] transition-all duration-500 ease-out"
           :class="
             isDetecting
-              ? 'bg-[#4ade80]/15 border-[#4ade80]/30 text-[#4ade80]'
+              ? 'bg-[#4ade80]/10 border-[#4ade80]/20 text-[#4ade80]'
               : isGazePaused
-                ? 'bg-yellow-400/15 border-yellow-400/30 text-yellow-400'
-                : 'bg-black/30 border-white/10 text-white/60'
+                ? 'bg-yellow-400/10 border-yellow-400/20 text-yellow-300'
+                : 'bg-black/25 border-white/10 text-white/70'
           "
         >
-          <div
-            class="w-2 h-2 rounded-full"
-            :class="
-              isDetecting
-                ? 'bg-[#4ade80] animate-pulse'
-                : isGazePaused
-                  ? 'bg-yellow-400'
-                  : 'bg-white/30'
-            "
-          />
-          {{
-            isDetecting ? "Scanning..." : isGazePaused ? "Paused" : "Mencari..."
-          }}
+          <template v-if="isDetecting">
+            <div class="flex flex-col items-center gap-y-2">
+              <div class="flex items-center gap-x-2">
+                <span class="w-2 h-2 rounded-full bg-[#4ade80] animate-pulse" />
+                <p
+                  class="text-[10px] uppercase tracking-[0.18em] font-mono text-[#4ade80]/80"
+                >
+                  Accuracy
+                </p>
+              </div>
+              <div class="flex items-end gap-x-1 leading-none">
+                <p class="text-[32px] font-[700] tracking-tight">30</p>
+                <span class="text-[14px] mb-1 opacity-70">%</span>
+              </div>
+              <div
+                class="w-full h-[4px] bg-white/10 rounded-full overflow-hidden"
+              >
+                <div
+                  class="h-full rounded-full bg-[#4ade80] transition-all duration-500"
+                  style="width: 30%"
+                />
+              </div>
+            </div>
+          </template>
+          <template v-else-if="isGazePaused">
+            <div class="flex items-center gap-x-2">
+              <div class="w-2 h-2 rounded-full bg-yellow-400" />
+              <p class="text-[11px] uppercase tracking-[0.15em] font-mono">
+                Scan Paused
+              </p>
+            </div>
+          </template>
+          <template v-else>
+            <div class="flex items-center gap-x-2">
+              <div class="w-2 h-2 rounded-full bg-white/40 animate-pulse" />
+              <p class="text-[11px] uppercase tracking-[0.15em] font-mono">
+                Mencari Wajah...
+              </p>
+            </div>
+          </template>
         </div>
       </div>
 
@@ -951,82 +965,129 @@ defineExpose({ resetScan, stopCamera, startCamera });
       </div>
     </div>
 
-    <!-- Bottom Section -->
+    <!-- ── Bottom Section ─────────────────────────────────────────────────── -->
     <div
-      class="flex-1 flex flex-col justify-between py-14 items-center bg-[#FFFFFF]"
+      class="w-full flex-1 min-h-0 flex flex-col p-0 items-center bg-[#FFFFFF]"
     >
-      <div class="w-full h-auto flex justify-center items-center text-center">
-        <p>
-          Point the Camera at Your Face <br />
-          Camera Will Detect!
-        </p>
-      </div>
-      <div class="w-full h-auto flex justify-center items-center">
+      <Transition name="fade-status" mode="out-in">
+        <!-- PAUSED -->
         <div
-          class="w-fit h-auto flex flex-row gap-x-3 justify-center items-center rounded-full px-5 py-2.5 transition-all duration-300"
-          :class="
-            scanComplete
-              ? 'bg-[#DDF7E5]'
-              : isGazePaused
-                ? 'bg-yellow-100'
-                : isDetecting
-                  ? 'bg-[#DFF4E6]'
-                  : 'bg-[#F3F4F6]'
-          "
+          v-if="cameraReady && isGazePaused"
+          key="paused"
+          class="w-full h-full flex justify-center items-center px-5"
         >
-          <!-- Dot Pulse -->
-          <div class="relative w-3 h-3">
-            <span
-              class="absolute inset-0 rounded-full animate-ping"
-              :class="
-                scanComplete
-                  ? 'bg-[#22C55E]/40'
-                  : isGazePaused
-                    ? 'bg-yellow-400/40'
-                    : isDetecting
-                      ? 'bg-[#22C55E]/40'
-                      : 'bg-gray-400/30'
-              "
-            />
-            <span
-              class="relative block w-3 h-3 rounded-full"
-              :class="
-                scanComplete
-                  ? 'bg-[#22C55E]'
-                  : isGazePaused
-                    ? 'bg-yellow-400'
-                    : isDetecting
-                      ? 'bg-[#22C55E]'
-                      : 'bg-gray-400'
-              "
-            />
+          <div
+            class="w-full rounded-2xl border border-yellow-200 bg-yellow-50 px-5 py-5 shadow-sm"
+          >
+            <div class="flex flex-col items-center text-center gap-y-3">
+              <div class="relative flex items-center justify-center">
+                <span
+                  class="absolute w-5 h-5 rounded-full bg-yellow-400/30 animate-ping"
+                />
+                <span class="relative w-5 h-5 rounded-full bg-yellow-400" />
+              </div>
+              <div class="flex flex-col gap-y-1">
+                <p class="text-[18px] font-[600] text-yellow-700">
+                  Scan Paused
+                </p>
+                <p class="text-[13px] leading-relaxed text-yellow-700/80">
+                  Pastikan wajah berada di dalam frame dan menghadap kamera
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- DETECTING -->
+        <div
+          v-else-if="cameraReady && !isGazePaused"
+          key="detecting"
+          class="w-full h-full flex flex-col justify-between items-center gap-3"
+        >
+          <!-- TOP 2 CARD -->
+          <div class="w-full h-[45%] shrink-0 grid grid-cols-2 gap-3">
+            <!-- Heart Rate -->
+            <div
+              class="w-full h-full rounded-b-2xl border-[2px] border-t-0 border-[#DCFCE7] bg-[#F0FDF4] shadow-sm"
+            >
+              <div
+                class="w-full h-full flex flex-col px-4 py-4 justify-between"
+              >
+                <div class="w-full flex justify-between items-start">
+                  <p class="text-[15px] font-[500] text-[#15803D]">
+                    Heart Rate
+                  </p>
+                  <div class="relative flex items-center justify-center">
+                    <span
+                      class="absolute w-2.5 h-2.5 rounded-full bg-[#22C55E]/30 animate-ping"
+                    />
+                    <span
+                      class="relative w-2.5 h-2.5 rounded-full bg-[#22C55E]"
+                    />
+                  </div>
+                </div>
+                <div class="w-full flex justify-start items-end gap-x-1">
+                  <p class="text-[30px] font-[700] text-[#111827]">83</p>
+                  <span class="text-[13px] text-[#6B7280] mb-1">BPM</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Breath Rate -->
+            <div
+              class="w-full h-full rounded-b-2xl border-[2px] border-t-0 border-[#DBEAFE] bg-[#EFF6FF] shadow-sm"
+            >
+              <div
+                class="w-full h-full flex flex-col px-4 py-4 justify-between"
+              >
+                <div class="w-full flex justify-between items-start">
+                  <p class="text-[15px] font-[500] text-[#2563EB]">
+                    Breath Rate
+                  </p>
+                  <div class="relative flex items-center justify-center">
+                    <span
+                      class="absolute w-2.5 h-2.5 rounded-full bg-[#3B82F6]/30 animate-ping"
+                    />
+                    <span
+                      class="relative w-2.5 h-2.5 rounded-full bg-[#3B82F6]"
+                    />
+                  </div>
+                </div>
+                <div class="w-full flex justify-start items-end gap-x-1">
+                  <p class="text-[30px] font-[700] text-[#111827]">16</p>
+                  <span class="text-[13px] text-[#6B7280] mb-1">BRPM</span>
+                </div>
+              </div>
+            </div>
           </div>
 
-          <!-- Text -->
-          <p
-            class="text-[15px] font-medium tracking-[0.02em] transition-colors duration-300"
-            :class="
-              scanComplete
-                ? 'text-[#15803D]'
-                : isGazePaused
-                  ? 'text-yellow-700'
-                  : isDetecting
-                    ? 'text-[#16A34A]'
-                    : 'text-[#6B7280]'
-            "
+          <!-- BOTTOM CARD — BVP -->
+          <div
+            class="w-full min-h-0 flex-1 flex justify-center items-center rounded-xl border-[2px] border-b-0 border-[#DCFCE7] bg-[#F9FAFB] shadow-sm overflow-hidden"
           >
-            {{
-              scanComplete
-                ? "Scan Complete"
-                : isGazePaused
-                  ? "Scanning Paused"
-                  : isDetecting
-                    ? "Scanning Face..."
-                    : "Waiting for Face"
-            }}
-          </p>
+            <div class="w-full h-full flex flex-col">
+              <div
+                class="w-full shrink-0 flex justify-between items-center mb-2 p-3"
+              >
+                <p class="text-[13px] font-[500] text-[#15803D]">Heart Rate</p>
+                <span class="text-[11px] text-[#6B7280] font-mono">BVP</span>
+              </div>
+              <div class="w-full flex-1 min-h-0">
+                <canvas ref="bvpCanvasRef" class="w-full h-full block" />
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+
+        <!-- LOADING (kamera belum siap) -->
+        <div
+          v-else
+          key="loading"
+          class="w-full h-full flex justify-center items-center"
+        >
+          <span class="text-[12px] text-gray-300 font-mono">Memuat...</span>
+        </div>
+      </Transition>
     </div>
   </div>
 </template>
@@ -1041,5 +1102,15 @@ defineExpose({ resetScan, stopCamera, startCamera });
 .fade-overlay-enter-from,
 .fade-overlay-leave-to {
   opacity: 0;
+}
+
+.fade-status-enter-active,
+.fade-status-leave-active {
+  transition: all 0.35s ease;
+}
+.fade-status-enter-from,
+.fade-status-leave-to {
+  opacity: 0;
+  transform: translateY(10px);
 }
 </style>

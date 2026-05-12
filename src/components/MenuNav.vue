@@ -275,7 +275,7 @@ onUnmounted(() => {
                   </div>
                   <div class="w-fit h-auto flex justify-center items-start">
                     <div
-                      class="w-9 h-auto rounded-md flex justify-center items-center p-2"
+                      class="w-11 h-auto rounded-md flex justify-center items-center p-2"
                     >
                       <span
                         class="w-full h-full transition-colors duration-200"
