@@ -132,13 +132,13 @@ const submitForm = () => {
               class="absolute w-auto h-auto top-[9.5%] xl:top-[9%] left-1/2 -translate-x-1/2"
             >
               <div
-                class="lg:w-[70%] xl:w-[85%] h-auto object-contain object-center ml-[17%] xl:ml-[10.5%]"
+                class="w-[50%] md:w-[70%] xl:w-[85%] h-auto object-contain object-center ml-[17%] xl:ml-[10.5%]"
               >
                 <FaceMask />
               </div>
             </div>
 
-            <img :src="Person" alt="" class="w-full h-full" />
+            <img :src="Person" alt="" class="w-full h-full object-cover" />
           </div>
         </div>
 
@@ -149,7 +149,7 @@ const submitForm = () => {
           </div>
 
           <div
-            class="absolute left-[14%] bottom-[25%] xl:bottom-[20%] card-float-left-delay"
+            class="absolute left-[14%] bottom-[20%] lg:bottom-[25%] xl:bottom-[20%] card-float-left-delay"
           >
             <card-tracker />
           </div>
@@ -159,7 +159,7 @@ const submitForm = () => {
           </div>
 
           <div
-            class="absolute right-[14%] bottom-[25%] xl:bottom-[20%] card-float-right-delay"
+            class="absolute right-[14%] bottom-[20%] lg:bottom-[25%] xl:bottom-[20%] card-float-right-delay"
           >
             <card-tracker />
           </div>
@@ -169,7 +169,7 @@ const submitForm = () => {
         <div
           @click="openModal"
           :class="[
-            'absolute z-30 w-fit h-auto flex flex-row gap-x-5 justify-center items-center left-1/2 -translate-x-1/2 lg:bottom-6 xl:bottom-10 px-10 py-2.5 rounded-xl transition-all duration-300 ease-in-out',
+            'absolute z-30 w-fit h-auto flex flex-row gap-x-5 justify-center items-center left-1/2 -translate-x-1/2 bottom-0 lg:bottom-6 xl:bottom-10 px-10 py-2.5 rounded-xl transition-all duration-300 ease-in-out',
             isBlocked
               ? 'bg-gray-400 cursor-not-allowed opacity-60'
               : 'bg-gradient-to-tr from-[#1E6493] from-[20%] to-[#2E97DF] to-[100%] shadow-[0_20px_20px_0_rgba(39,128,188,0.16)] hover:scale-[1.1] cursor-pointer',

@@ -135,6 +135,7 @@ onUnmounted(() => {
               v-for="(product, index) in productList"
               :key="index"
               :href="product.url"
+              target="_blank"
               class="flex justify-start items-start text-start w-[300px] text-animate-hover dark:dark-text-animate-hover"
             >
               <span

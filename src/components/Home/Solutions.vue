@@ -203,31 +203,33 @@ onUnmounted(() => {
                   <component :is="data.icons" class="w-full h-full" />
                 </div>
               </div>
-              <div
-                class="w-full h-14 xl:h-12 flex flex-col gap-y-1 xl:gap-y-1.5"
-              >
-                <span
-                  class="font-[600] text-[14px] xl:text-[20px]"
-                  :class="
-                    SolutionLists.indexOf(data) === activeIndex
-                      ? 'dark:text-[#2AB857]'
-                      : 'text-[#374151] dark:text-[#357EAF]'
-                  "
-                  >{{ data.title }}</span
+              <div class="w-full h-auto flex flex-col gap-y-1">
+                <div
+                  class="w-full h-14 xl:h-12 flex flex-col gap-y-1 xl:gap-y-1.5"
                 >
-                <span
-                  class="text-[#8E98A8] text-[12px] xl:text-[14px] leading-normal font-[400] solution-animate-group-hover"
-                  >{{ data.content }}</span
-                >
-              </div>
-              <div class="w-full h-5">
-                <Transition name="fade-link">
                   <span
-                    v-if="SolutionLists.indexOf(data) === activeIndex"
-                    class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[12px] xl:text-[14px] font-[500] cursor-pointer"
-                    >Learn More <span>→</span>
-                  </span>
-                </Transition>
+                    class="font-[600] text-[14px] xl:text-[20px]"
+                    :class="
+                      SolutionLists.indexOf(data) === activeIndex
+                        ? 'dark:text-[#2AB857]'
+                        : 'text-[#374151] dark:text-[#357EAF]'
+                    "
+                    >{{ data.title }}</span
+                  >
+                  <span
+                    class="text-[#8E98A8] text-[12px] xl:text-[14px] leading-normal font-[400] solution-animate-group-hover"
+                    >{{ data.content }}</span
+                  >
+                </div>
+                <div class="w-full h-5 flex items-center">
+                  <Transition name="fade-link">
+                    <span
+                      v-if="SolutionLists.indexOf(data) === activeIndex"
+                      class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[12px] xl:text-[14px] font-[500] cursor-pointer"
+                      >Learn More <span>→</span>
+                    </span>
+                  </Transition>
+                </div>
               </div>
             </div>
           </div>
