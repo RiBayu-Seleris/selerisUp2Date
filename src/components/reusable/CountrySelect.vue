@@ -1,6 +1,6 @@
 <!-- src/components/CountrySelect.vue -->
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { ref, watch } from "vue";
 
 const emit = defineEmits(["update:modelValue", "open"]);
 const props = defineProps({
@@ -8,49 +8,29 @@ const props = defineProps({
   isOpen: Boolean,
 });
 
-const countries = ref([]);
-const selectedCountry = ref(props.modelValue || null);
+const COUNTRIES = [
+  { name: "Indonesia", code: "ID", flag: "https://flagcdn.com/w40/id.png" },
+  { name: "Malaysia",  code: "MY", flag: "https://flagcdn.com/w40/my.png" },
+  { name: "Singapore", code: "SG", flag: "https://flagcdn.com/w40/sg.png" },
+];
+
+const countries = ref(COUNTRIES);
+const selectedCountry = ref(props.modelValue || COUNTRIES[0]);
 
 function chooseCountry(country) {
   selectedCountry.value = country;
   emit("update:modelValue", country);
-  emit("open", null); // 🔥 tambahkan ini untuk menutup dropdown
+  emit("open", null);
 }
 
 function toggleDropdown() {
   emit("open", "country");
 }
 
-onMounted(async () => {
-  try {
-    const res = await fetch(
-      "https://restcountries.com/v3.1/all?fields=name,flags,cca2"
-    );
-    const data = await res.json();
-    const targetCountries = ["Indonesia", "Malaysia", "Singapore"];
-
-    countries.value = data
-      .filter((country) => targetCountries.includes(country.name.common))
-      .map((country) => ({
-        name: country.name.common,
-        code: country.cca2.toUpperCase(),
-        flag: `https://flagcdn.com/w40/${country.cca2.toLowerCase()}.png`,
-      }))
-      .sort((a, b) => a.name.localeCompare(b.name));
-
-    if (!selectedCountry.value) {
-      const defaultCountry = countries.value.find((c) => c.code === "ID");
-      chooseCountry(defaultCountry);
-    }
-  } catch (error) {
-    console.error("Failed to load countries", error);
-  }
-});
-
 watch(
   () => props.modelValue,
   (newVal) => {
-    selectedCountry.value = newVal;
+    if (newVal) selectedCountry.value = newVal;
   }
 );
 </script>

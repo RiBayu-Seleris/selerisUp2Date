@@ -36,8 +36,13 @@ const isLoad = ref(false);
 // Tooltip (scroll to top)
 const showTooltip = computed(() => scrollStore.isScrolled);
 
+let scrollRafId = null;
 const handleScroll = () => {
-  scrollStore.updateScroll();
+  if (scrollRafId) return;
+  scrollRafId = requestAnimationFrame(() => {
+    scrollStore.updateScroll();
+    scrollRafId = null;
+  });
 };
 
 const toggleTooltip = () => {
@@ -67,7 +72,7 @@ const isStandaloneRoute = computed(() => standaloneRoutes.includes(route.path));
 
 onMounted(() => {
   themeStore.loadTheme();
-  window.addEventListener("scroll", handleScroll);
+  window.addEventListener("scroll", handleScroll, { passive: true });
 
   if (route.path === "/") {
     isLoad.value = false;
@@ -85,6 +90,7 @@ onMounted(() => {
 
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
+  if (scrollRafId) cancelAnimationFrame(scrollRafId);
 });
 
 watch(

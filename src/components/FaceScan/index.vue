@@ -1,1045 +1,857 @@
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from "vue";
-import axios from "axios";
+import { FaceMesh, FACEMESH_TESSELATION } from "@mediapipe/face_mesh";
 import { resultAPI } from "@/Data/Results2";
 
 const props = defineProps({
-  autoStart: {
-    type: Boolean,
-    default: true,
-  },
+  autoStart: { type: Boolean, default: true },
 });
 
-const USE_MOCK_API = true;
-
-const videoRef = ref(null);
-const canvasRef = ref(null);
-const ellipseRef = ref(null);
-
-const cameraActive = ref(false);
-const personDetected = ref(false);
-const scanProgress = ref(0);
-const isGazePaused = ref(false);
-
-// ─── FIX: isUnmounted sebagai ref agar reset setiap kali mount ───────────────
-const isUnmounted = ref(false);
-
-const isDetecting = computed(() => personDetected.value && !isGazePaused.value);
-
-let faceLandmarker = null;
-let handLandmarker = null;
-let arAnimId = null;
-let stream = null;
-let pulseT = 0;
-let lastArTime = -1;
-
-// ─── Scan progress state ──────────────────────────────────────────────────────
+const USE_MOCK_API     = false;
+const WS_URL           = import.meta.env.VITE_RPPG_WS_URL || "ws://localhost:8000/ws";
+const FRAME_MS         = 67;
+const DETECT_MS        = 150;
+const BVP_BUFFER_SIZE  = 100;
 const SCAN_DURATION_MS = 30000;
-const GAZE_AWAY_FRAMES = 3;
-const MIN_CHUNKS_BEFORE_POP = 3;
-let gazeAwayCount = 0;
-let scanStartMs = null;
-let accumulatedMs = 0;
-let pauseStartMs = null;
-let scanComplete = ref(false);
 
-// ─── MediaRecorder ────────────────────────────────────────────────────────────
-let mediaRecorder = null;
-let recordedChunks = [];
-let recordingMimeType = "";
+// ─── Landmark index paths (ordered for smooth bezier rendering) ───────────────
+const FACE_OVAL_PATH = [
+  10, 338, 297, 332, 284, 251, 389, 356, 454, 323, 361, 288,
+  397, 365, 379, 378, 400, 377, 152, 148, 176, 149, 150, 136,
+  172, 58, 132, 93, 234, 127, 162, 21, 54, 103, 67, 109,
+];
+const LEFT_EYE_PATH   = [33, 246, 161, 160, 159, 158, 157, 173, 133, 155, 154, 153, 145, 144, 163, 7];
+const RIGHT_EYE_PATH  = [362, 398, 384, 385, 386, 387, 388, 466, 263, 249, 390, 373, 374, 380, 381, 382];
+// Brow: start inner corner → top arc outward → outer end → bottom arc inward → close
+// This forms a proper closed arch without self-crossing loops
+const LEFT_BROW_PATH  = [55, 70, 63, 105, 66, 107, 46, 53, 52, 65];
+const RIGHT_BROW_PATH = [285, 300, 293, 334, 296, 336, 276, 283, 282, 295];
+const NOSE_BRIDGE_PATH = [168, 6, 197, 195, 5, 4];
+const NOSE_BOTTOM_PATH = [129, 49, 48, 64, 98, 97, 2, 326, 327, 294, 279, 358];
+const UPPER_LIP_PATH  = [61, 185, 40, 39, 37, 0, 267, 269, 270, 409, 291];
+const LOWER_LIP_PATH  = [291, 375, 321, 405, 314, 17, 84, 181, 91, 146, 61];
 
-const emit = defineEmits([
-  "scan-complete",
-  "upload-start",
-  "upload-done",
-  "upload-retry",
-]);
+// Key pulsing dots (outer eye corners, nose tip, mouth corners, chin, top)
+const KEY_DOTS = [33, 263, 4, 61, 291, 152, 10];
 
-// ─── Retry state ──────────────────────────────────────────────────────────────
-let lastBlob = null;
-let retryCount = 0;
-let retryTimeoutId = null;
-let retryAborted = false;
-let isUploadDone = false;
+const OVAL_INDICES = FACE_OVAL_PATH; // reused for position check
 
-const RETRY_DELAYS = [3000, 5000, 8000, 12000, 15000];
+// ─── Refs ─────────────────────────────────────────────────────────────────────
+const videoRef     = ref(null);
+const canvasRef    = ref(null);
+const cameraActive = ref(false);
+const isUnmounted  = ref(false);
+const meshReady    = ref(false);
 
-function getRetryDelay(attempt) {
-  return RETRY_DELAYS[Math.min(attempt, RETRY_DELAYS.length - 1)];
-}
+const faceStatus   = ref("no_face");
+const isGazePaused = ref(false);
+const isDetecting  = computed(() => faceStatus.value === "ok" && !isGazePaused.value);
+const hasFace      = computed(() => faceStatus.value !== "no_face");
 
-function cancelRetry() {
-  retryAborted = true;
-  if (retryTimeoutId) {
-    clearTimeout(retryTimeoutId);
-    retryTimeoutId = null;
+const latestMetrics = ref(null);
+const displayHR = computed(() => {
+  const v = latestMetrics.value?.hr;
+  return !v || v === 0 ? "-" : Math.round(v);
+});
+const displayBreathing = computed(() => {
+  const v = latestMetrics.value?.hrv?.breathing_rate;
+  return !v || v === 0 ? "-" : Math.round(v);
+});
+
+const faceGuidanceText = computed(() => {
+  if (isDetecting.value) return "Wajah Terdeteksi";
+  switch (faceStatus.value) {
+    case "not_centered": return "Arahkan ke tengah";
+    case "too_close":    return "Mundur sedikit";
+    case "too_far":      return "Maju sedikit";
+    case "tilt":         return "Tegakkan kepala";
+    default:             return "Mencari Wajah...";
   }
-}
+});
 
-// ─── Recording ────────────────────────────────────────────────────────────────
-function startRecording() {
-  if (!stream || mediaRecorder) return;
+const meshColor = computed(() =>
+  faceStatus.value === "ok" || faceStatus.value === "no_face" ? "#4ade80" : "#fb923c"
+);
+const ovalGuideColor = computed(() => {
+  if (faceStatus.value === "ok")      return "#4ade80";
+  if (faceStatus.value === "no_face") return "rgba(255,255,255,0.3)";
+  return "#f87171";
+});
 
-  recordedChunks = [];
-  lastBlob = null;
-  retryCount = 0;
-  retryAborted = false;
+// ─── BVP Signal ───────────────────────────────────────────────────────────────
+const bvpBuffer = ref([]);
+let bvpEmptyCount = 0;
+const hasBvpSignal = computed(() => bvpBuffer.value.length > 1);
 
-  recordingMimeType = MediaRecorder.isTypeSupported("video/mp4")
-    ? "video/mp4"
-    : MediaRecorder.isTypeSupported("video/webm;codecs=h264")
-      ? "video/webm;codecs=h264"
-      : "video/webm";
-
-  try {
-    mediaRecorder = new MediaRecorder(stream, { mimeType: recordingMimeType });
-  } catch {
-    mediaRecorder = new MediaRecorder(stream);
-    recordingMimeType = mediaRecorder.mimeType;
+const bvpPoints = computed(() => {
+  const buf = bvpBuffer.value;
+  if (buf.length < 2) return "";
+  const W = 300, H = 52;
+  let min = buf[0], max = buf[0];
+  for (let i = 1; i < buf.length; i++) {
+    if (buf[i] < min) min = buf[i];
+    if (buf[i] > max) max = buf[i];
   }
+  const range = max - min || 1;
+  return buf.map((v, i) =>
+    `${((i / (buf.length - 1)) * W).toFixed(1)},${(H - ((v - min) / range) * (H - 6) - 3).toFixed(1)}`
+  ).join(" ");
+});
 
-  mediaRecorder.ondataavailable = (e) => {
-    if (e.data && e.data.size > 0) recordedChunks.push(e.data);
-  };
+// ─── Scan state ───────────────────────────────────────────────────────────────
+let scanStartMs = null, accumulatedMs = 0, pauseStartMs = null;
+const scanComplete = ref(false);
+const scanProgress = ref(0);
+let arAnimId = null;
 
-  // mediaRecorder.onstop = () => {
-  //   const blob = new Blob(recordedChunks, { type: recordingMimeType });
-  //   lastBlob = blob;
-  //   emit("scan-complete");
-  //   sendVideoToApi(blob);
-  // };
-
-  mediaRecorder.onstop = () => {
-    console.log("[scan] onstop fired, chunks:", recordedChunks.length);
-
-    const blob = new Blob(recordedChunks, {
-      type: recordingMimeType,
-    });
-
-    lastBlob = blob;
-
-    emit("upload-start"); // ← TAMBAHAN
-
-    emit("scan-complete");
-
-    sendVideoToApi(blob);
-  };
-
-  mediaRecorder.start(500);
-}
-
-function pauseRecording() {
-  if (mediaRecorder?.state === "recording") mediaRecorder.pause();
-}
-
-function resumeRecording() {
-  if (mediaRecorder?.state === "paused") mediaRecorder.resume();
-}
-
-function stopRecording() {
-  if (
-    mediaRecorder &&
-    (mediaRecorder.state === "recording" || mediaRecorder.state === "paused")
-  ) {
-    mediaRecorder.stop();
-  }
-  mediaRecorder = null;
-}
-
-function resetScan() {
-  scanComplete.value = false;
-  scanProgress.value = 0;
-  scanStartMs = null;
-  accumulatedMs = 0;
-  pauseStartMs = null;
-  gazeAwayCount = 0;
-  isGazePaused.value = false;
-  personDetected.value = false;
-  recordedChunks = [];
-  lastBlob = null;
-  retryCount = 0;
-  retryAborted = false;
-  isUploadDone = false;
-  stopRecording();
-  cancelRetry();
-}
-
-// ─── API ──────────────────────────────────────────────────────────────────────
-async function sendVideoToApi(blob) {
-  if (retryAborted || isUploadDone) return;
-
-  if (USE_MOCK_API) {
-    await new Promise((resolve) => setTimeout(resolve, 1500));
-    isUploadDone = true;
-    emit("upload-done", resultAPI[0]);
-    return;
-  }
-
-  const ext = recordingMimeType.includes("mp4") ? "mp4" : "webm";
-  const filename = `scan-${Date.now()}.${ext}`;
-  const formData = new FormData();
-  formData.append("file", blob, filename);
-
-  try {
-    const uploadRes = await axios.post(
-      "https://api-gateway.seleris.id/v1/seleris-credit-cover/web/upload-file",
-      formData,
-      { headers: { "Content-Type": "multipart/form-data" } },
-    );
-
-    const videoUrl =
-      uploadRes.data?.url ??
-      uploadRes.data?.data?.url ??
-      uploadRes.data?.data?.path;
-
-    if (!videoUrl) {
-      console.error("[scan] URL tidak ditemukan:", uploadRes.data);
-      scheduleRetry(blob);
-      return;
-    }
-
-    const predictRes = await axios.post(
-      "https://202.51.196.227:5001/predict",
-      { video_url: videoUrl },
-      { headers: { "Content-Type": "application/json" } },
-    );
-
-    isUploadDone = true;
-    emit("upload-done", predictRes.data);
-  } catch (err) {
-    console.error(`[scan] error (attempt ${retryCount + 1}):`, err.message);
-    scheduleRetry(blob);
-  }
-}
-
-function scheduleRetry(blob) {
-  if (retryAborted || isUploadDone) return;
-
-  retryCount++;
-  const delay = getRetryDelay(retryCount - 1);
-
-  emit("upload-retry", {
-    attempt: retryCount,
-    delayMs: delay,
-  });
-
-  retryTimeoutId = setTimeout(() => {
-    if (!retryAborted && !isUploadDone) {
-      sendVideoToApi(blob);
-    }
-  }, delay);
-}
-
-// ─── Oval cache ───────────────────────────────────────────────────────────────
-let cachedOval = null;
-let ovalResizeObserver = null;
-
-function invalidateOvalCache() {
-  cachedOval = null;
-}
-
-function getOvalInCanvasSpace(canvas) {
-  if (cachedOval) return cachedOval;
-  const ellipse = ellipseRef.value;
-  if (!ellipse) return null;
-  const svgEl = ellipse.closest("svg");
-  if (!svgEl) return null;
-  const svgRect = svgEl.getBoundingClientRect();
-  const ellipseRect = ellipse.getBoundingClientRect();
-  if (svgRect.width === 0 || svgRect.height === 0) return null;
-  const centerXScreen = ellipseRect.left + ellipseRect.width / 2 - svgRect.left;
-  const centerYScreen = ellipseRect.top + ellipseRect.height / 2 - svgRect.top;
-  const scaleX = canvas.width / svgRect.width;
-  const scaleY = canvas.height / svgRect.height;
-  cachedOval = {
-    cx: centerXScreen * scaleX,
-    cy: centerYScreen * scaleY,
-    rx: (ellipseRect.width / 2) * scaleX,
-    ry: (ellipseRect.height / 2) * scaleY,
-  };
-  return cachedOval;
-}
-
-// ─── Init MediaPipe ───────────────────────────────────────────────────────────
-async function initFaceLandmarker() {
-  const { FaceLandmarker, HandLandmarker, FilesetResolver } =
-    await import("https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/vision_bundle.mjs");
-
-  const vision = await FilesetResolver.forVisionTasks(
-    "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.3/wasm",
-  );
-
-  faceLandmarker = await FaceLandmarker.createFromOptions(vision, {
-    baseOptions: {
-      modelAssetPath:
-        "https://storage.googleapis.com/mediapipe-models/face_landmarker/face_landmarker/float16/1/face_landmarker.task",
-      delegate: "GPU",
-    },
-    outputFaceBlendshapes: false,
-    runningMode: "VIDEO",
-    numFaces: 1,
-  });
-
-  handLandmarker = await HandLandmarker.createFromOptions(vision, {
-    baseOptions: {
-      modelAssetPath:
-        "https://storage.googleapis.com/mediapipe-models/hand_landmarker/hand_landmarker/float16/1/hand_landmarker.task",
-      delegate: "GPU",
-    },
-    runningMode: "VIDEO",
-    numHands: 2,
-  });
-
-  window.__FL_TESS = FaceLandmarker.FACE_LANDMARKS_TESSELATION;
-}
-
-// ─── Camera ───────────────────────────────────────────────────────────────────
-async function initFaceTracker() {
-  try {
-    await initFaceLandmarker();
-    stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: "user", width: 640, height: 480 },
-      audio: false,
-    });
-    // ─── FIX: cek isUnmounted.value (bukan isUnmounted) ──────────────────────
-    if (!videoRef.value || isUnmounted.value) return;
-    videoRef.value.srcObject = stream;
-    videoRef.value.onloadeddata = () => {
-      if (isUnmounted.value) return;
-      cameraActive.value = true;
-      if (canvasRef.value) {
-        ovalResizeObserver = new ResizeObserver(invalidateOvalCache);
-        ovalResizeObserver.observe(canvasRef.value);
-      }
-      arPredict();
-    };
-  } catch (err) {
-    console.error("FaceTracker init error:", err);
-  }
-}
-
-// ─── Gaze detection ───────────────────────────────────────────────────────────
-let lastGazeLmKey = null;
-let lastGazeResult = false;
-
-function isLookingAway(lm) {
-  const key = `${lm[1].x.toFixed(3)},${lm[1].y.toFixed(3)},${lm[234].x.toFixed(3)},${lm[454].x.toFixed(3)},${lm[152].y.toFixed(3)}`;
-  if (key === lastGazeLmKey) return lastGazeResult;
-  lastGazeLmKey = key;
-
-  const nose = lm[1];
-  const leftEar = lm[234];
-  const rightEar = lm[454];
-  const chin = lm[152];
-  const forehead = lm[10];
-
-  const faceW = Math.abs(leftEar.x - rightEar.x);
-  const centerX = (leftEar.x + rightEar.x) / 2;
-  const yawDev = Math.abs(nose.x - centerX) / faceW;
-  if (yawDev > 0.26) {
-    lastGazeResult = true;
-    return true;
-  }
-
-  const faceH = Math.abs(chin.y - forehead.y);
-  const centerY = (chin.y + forehead.y) / 2;
-  const pitchDev = Math.abs(nose.y - centerY) / faceH;
-
-  lastGazeResult = pitchDev > 0.22;
-  return lastGazeResult;
-}
-
-// ─── Hand covering face ───────────────────────────────────────────────────────
-const HAND_COVER_THRESHOLD = 3;
-
-function isHandCoveringFace(faceLm, handResults, canvasW, canvasH) {
-  if (!handResults?.landmarks?.length) return false;
-
-  let minX = Infinity,
-    maxX = -Infinity;
-  let minY = Infinity,
-    maxY = -Infinity;
-
-  for (let i = 0; i < faceLm.length; i++) {
-    const p = faceLm[i];
-    const px = p.x * canvasW;
-    const py = p.y * canvasH;
-    if (px < minX) minX = px;
-    if (px > maxX) maxX = px;
-    if (py < minY) minY = py;
-    if (py > maxY) maxY = py;
-  }
-
-  for (const handLm of handResults.landmarks) {
-    let count = 0;
-    for (const p of handLm) {
-      const hx = p.x * canvasW;
-      const hy = p.y * canvasH;
-      if (hx >= minX && hx <= maxX && hy >= minY && hy <= maxY) {
-        count++;
-        if (count >= HAND_COVER_THRESHOLD) return true;
-      }
-    }
-  }
-  return false;
-}
-
-// ─── Pause / resume ───────────────────────────────────────────────────────────
-function pauseScan(reason = "Wajah berpaling") {
+function pauseScan() {
   if (isGazePaused.value) return;
   isGazePaused.value = true;
   pauseStartMs = performance.now();
-
-  // if (recordedChunks.length > MIN_CHUNKS_BEFORE_POP) {
-  //   recordedChunks.pop();
-  // }
-
-  pauseRecording();
 }
-
 function resumeScan() {
   if (!isGazePaused.value) return;
+  if (pauseStartMs !== null) accumulatedMs += performance.now() - pauseStartMs;
+  isGazePaused.value = false;
+  pauseStartMs = null;
+}
+function startProgressLoop() {
+  if (arAnimId) return;
+  function tick() {
+    if (isUnmounted.value || scanComplete.value) return;
+    if (scanStartMs !== null) {
+      const now = performance.now();
+      const elapsed = isGazePaused.value
+        ? Math.max(0, (pauseStartMs ?? now) - scanStartMs - accumulatedMs)
+        : Math.max(0, now - scanStartMs - accumulatedMs);
+      const pct = Math.min(100, (elapsed / SCAN_DURATION_MS) * 100);
+      if (Math.abs(pct - scanProgress.value) >= 0.15) scanProgress.value = pct;
+      if (pct >= 100) { scanComplete.value = true; onScanComplete(); return; }
+    }
+    arAnimId = requestAnimationFrame(tick);
+  }
+  arAnimId = requestAnimationFrame(tick);
+}
 
-  if (pauseStartMs !== null) {
-    accumulatedMs += performance.now() - pauseStartMs;
+// ─── Face position check ──────────────────────────────────────────────────────
+function checkFaceFromLandmarks(landmarks) {
+  if (!landmarks || landmarks.length === 0) return "no_face";
+  const ovalPts = OVAL_INDICES.map((i) => landmarks[i]);
+  const xs = ovalPts.map((p) => p.x), ys = ovalPts.map((p) => p.y);
+  const cx = xs.reduce((a, b) => a + b, 0) / xs.length;
+  const cy = ys.reduce((a, b) => a + b, 0) / ys.length;
+  const rx = (Math.max(...xs) - Math.min(...xs)) / 2;
+  if (Math.abs(cx - 0.5) > 0.22 || Math.abs(cy - 0.5) > 0.25) return "not_centered";
+  if (rx > 0.27) return "too_close";
+  if (rx < 0.14) return "too_far";
+  const L = landmarks[33], R = landmarks[263];
+  if (Math.abs(Math.atan2(R.y - L.y, R.x - L.x) * (180 / Math.PI)) > 15) return "tilt";
+  return "ok";
+}
+
+function applyFaceStatus(status) {
+  faceStatus.value = status;
+  if (status === "ok") {
+    if (isGazePaused.value) resumeScan();
+    if (scanStartMs === null && !scanComplete.value) {
+      scanStartMs = performance.now();
+      accumulatedMs = 0;
+      scanProgress.value = 1;
+      startProgressLoop();
+    }
+  } else {
+    pauseScan();
+  }
+}
+
+// ─── Canvas drawing system ────────────────────────────────────────────────────
+function hexToRgb(hex) {
+  return `${parseInt(hex.slice(1,3),16)},${parseInt(hex.slice(3,5),16)},${parseInt(hex.slice(5,7),16)}`;
+}
+
+// Build a smooth quadratic bezier path through ordered pixel-space points
+function buildSmoothPath(ctx, pts, closed) {
+  if (pts.length < 2) return;
+  if (closed) {
+    const sx = (pts[pts.length-1].x + pts[0].x) / 2;
+    const sy = (pts[pts.length-1].y + pts[0].y) / 2;
+    ctx.moveTo(sx, sy);
+    for (let i = 0; i < pts.length; i++) {
+      const c = pts[i], n = pts[(i+1) % pts.length];
+      ctx.quadraticCurveTo(c.x, c.y, (c.x+n.x)/2, (c.y+n.y)/2);
+    }
+    ctx.closePath();
+  } else {
+    ctx.moveTo(pts[0].x, pts[0].y);
+    for (let i = 0; i < pts.length - 2; i++) {
+      const c = pts[i+1], n = pts[i+2];
+      ctx.quadraticCurveTo(c.x, c.y, (c.x+n.x)/2, (c.y+n.y)/2);
+    }
+    ctx.lineTo(pts[pts.length-1].x, pts[pts.length-1].y);
+  }
+}
+
+// Convert landmark indices → pixel pts
+function lmPx(landmarks, indices, W, H) {
+  return indices.map(i => landmarks[i]).filter(Boolean).map(p => ({ x: p.x*W, y: p.y*H }));
+}
+
+// Smooth stroke through landmark indices
+function strokeSmoothPath(ctx, landmarks, indices, W, H, closed) {
+  const pts = lmPx(landmarks, indices, W, H);
+  ctx.beginPath();
+  buildSmoothPath(ctx, pts, closed);
+  ctx.stroke();
+}
+
+// ── Layer 1: Radial gradient fill inside face oval ────────────────────────────
+function drawFaceOvalFill(ctx, ovalPx, cx, cy, radius, rgb) {
+  const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 0.9);
+  grad.addColorStop(0,   `rgba(${rgb},0.13)`);
+  grad.addColorStop(0.55,`rgba(${rgb},0.07)`);
+  grad.addColorStop(1,   `rgba(${rgb},0.01)`);
+  ctx.save();
+  ctx.fillStyle = grad;
+  ctx.beginPath();
+  buildSmoothPath(ctx, ovalPx, true);
+  ctx.fill();
+  ctx.restore();
+}
+
+// ── Layer 2: Full 468-point tesselation — two-pass for depth ─────────────────
+function drawTesselation(ctx, landmarks, W, H, rgb, alpha) {
+  // Pre-collect edges once
+  const edges = [];
+  for (const [s, e] of FACEMESH_TESSELATION) {
+    const p1 = landmarks[s], p2 = landmarks[e];
+    if (p1 && p2) edges.push(p1.x*W, p1.y*H, p2.x*W, p2.y*H);
   }
 
-  isGazePaused.value = false;
-  gazeAwayCount = 0;
-  pauseStartMs = null;
+  function strokeEdges(lineWidth, a) {
+    ctx.save();
+    ctx.strokeStyle = `rgba(${rgb},${a})`;
+    ctx.lineWidth   = lineWidth;
+    ctx.beginPath();
+    for (let i = 0; i < edges.length; i += 4) {
+      ctx.moveTo(edges[i], edges[i+1]);
+      ctx.lineTo(edges[i+2], edges[i+3]);
+    }
+    ctx.stroke();
+    ctx.restore();
+  }
 
-  setTimeout(() => {
-    resumeRecording();
-  }, 150);
+  // Pass 1 — wide soft glow (gives mesh lines weight/depth)
+  strokeEdges(1.5, alpha * 0.30);
+  // Pass 2 — narrow crisp line on top
+  strokeEdges(0.55, alpha);
 }
 
-// ─── pointInOval ─────────────────────────────────────────────────────────────
-function pointInOval(px, py, cx, cy, rx, ry) {
-  const dx = (px - cx) / rx;
-  const dy = (py - cy) / ry;
-  return dx * dx + dy * dy <= 1;
-}
-
-const FACE_OVAL_INDICES = [
-  10, 338, 297, 332, 284, 251, 389, 356, 454, 323, 361, 288, 397, 365, 379, 378,
-  400, 377, 152, 148, 176, 149, 150, 136, 172, 58, 132, 93, 234, 127, 162, 21,
-  54, 103, 67, 109,
-];
-
-// ─── Gradient cache ───────────────────────────────────────────────────────────
-let cachedScanGrad = null;
-let cachedScanGradY = -1;
-
-function getScanGrad(ctx, scanY) {
-  if (cachedScanGrad && Math.abs(scanY - cachedScanGradY) < 1)
-    return cachedScanGrad;
-  cachedScanGrad = ctx.createLinearGradient(0, scanY - 12, 0, scanY + 12);
-  cachedScanGrad.addColorStop(0, "rgba(74,222,128,0)");
-  cachedScanGrad.addColorStop(0.5, "rgba(74,222,128,0.18)");
-  cachedScanGrad.addColorStop(1, "rgba(74,222,128,0)");
-  cachedScanGradY = scanY;
-  return cachedScanGrad;
-}
-
-// ─── Draw mesh ────────────────────────────────────────────────────────────────
-function drawMesh(lm, canvas) {
-  const ctx = canvas.getContext("2d");
-  if (!ctx) return;
-
-  const W = canvas.width;
-  const H = canvas.height;
-
-  ctx.clearRect(0, 0, W, H);
+// ── Layer 3: All 468 vertex dots — batched in one path ───────────────────────
+function drawAllVertexDots(ctx, landmarks, W, H, rgb, alpha, r) {
   ctx.save();
-  ctx.translate(W, 0);
-  ctx.scale(-1, 1);
-  ctx.drawImage(videoRef.value, 0, 0, W, H);
+  ctx.fillStyle = `rgba(${rgb},${alpha})`;
+  ctx.beginPath();
+  for (const pt of landmarks) {
+    if (!pt) continue;
+    ctx.moveTo(pt.x*W + r, pt.y*H);
+    ctx.arc(pt.x*W, pt.y*H, r, 0, Math.PI * 2);
+  }
+  ctx.fill();
+  ctx.restore();
+}
+
+// ── Layer 4: Scan sweep clipped to face oval ──────────────────────────────────
+function drawScanSweep(ctx, ts, ovalPx, boxX, boxY, boxW, boxH, col, rgb) {
+  const sweepFrac = (ts / 2500) % 1;
+  const sweepY    = boxY + boxH * sweepFrac;
+
+  ctx.save();
+  ctx.beginPath();
+  buildSmoothPath(ctx, ovalPx, true);
+  ctx.clip();
+
+  // Scanned-area tint
+  const trail = ctx.createLinearGradient(0, boxY, 0, sweepY);
+  trail.addColorStop(0, `rgba(${rgb},0)`);
+  trail.addColorStop(1, `rgba(${rgb},0.10)`);
+  ctx.fillStyle = trail;
+  ctx.fillRect(boxX, boxY, boxW, sweepY - boxY);
+
+  // Horizontal glow line
+  const lineGrad = ctx.createLinearGradient(boxX, 0, boxX+boxW, 0);
+  lineGrad.addColorStop(0,   `rgba(${rgb},0)`);
+  lineGrad.addColorStop(0.1, `rgba(${rgb},1)`);
+  lineGrad.addColorStop(0.9, `rgba(${rgb},1)`);
+  lineGrad.addColorStop(1,   `rgba(${rgb},0)`);
+
+  ctx.shadowBlur  = 22;
+  ctx.shadowColor = col;
+  ctx.strokeStyle = lineGrad;
+  ctx.lineWidth   = 2;
+  ctx.beginPath();
+  ctx.moveTo(boxX, sweepY);
+  ctx.lineTo(boxX+boxW, sweepY);
+  ctx.stroke();
+
+  ctx.restore();
+}
+
+// ── Layer 5: Bright glowing feature contours ──────────────────────────────────
+function drawFeatureContours(ctx, landmarks, W, H, col, rgb, isOk) {
+  const glowOval = isOk ? 18 : 8;
+  const glowFeat = isOk ? 11 : 5;
+  const aOval    = isOk ? 0.90 : 0.60;
+  const aEye     = isOk ? 0.85 : 0.55;
+  const aBrow    = isOk ? 0.70 : 0.40;
+  const aNose    = isOk ? 0.58 : 0.32;
+  const aLip     = isOk ? 0.80 : 0.50;
+
+  // Face oval
+  ctx.save();
+  ctx.shadowBlur  = glowOval;
+  ctx.shadowColor = col;
+  ctx.strokeStyle = `rgba(${rgb},${aOval})`;
+  ctx.lineWidth   = 2.2;
+  strokeSmoothPath(ctx, landmarks, FACE_OVAL_PATH, W, H, true);
   ctx.restore();
 
-  const tess = window.__FL_TESS;
-  if (!tess) return;
-
-  pulseT += isGazePaused.value ? 0 : 0.016;
-  const scanY = H * 0.5 + Math.sin(pulseT) * H * 0.4;
-  const band = H * 0.26;
-  const bandInv = 1 / band;
-
+  // Eyes
   ctx.save();
-  ctx.translate(W, 0);
-  ctx.scale(-1, 1);
-  ctx.lineJoin = "round";
-  ctx.lineCap = "round";
-  ctx.lineWidth = 0.55;
+  ctx.shadowBlur  = glowFeat;
+  ctx.shadowColor = col;
+  ctx.strokeStyle = `rgba(${rgb},${aEye})`;
+  ctx.lineWidth   = 1.5;
+  strokeSmoothPath(ctx, landmarks, LEFT_EYE_PATH,  W, H, true);
+  strokeSmoothPath(ctx, landmarks, RIGHT_EYE_PATH, W, H, true);
+  ctx.restore();
 
-  for (let i = 0; i < tess.length; i++) {
-    const { start, end } = tess[i];
-    const a = lm[start];
-    const b = lm[end];
-    const midY = (a.y + b.y) * 0.5 * H;
-    const dist = Math.abs(midY - scanY);
-    if (dist > band) continue;
-
-    const norm = 1 - dist * bandInv;
-    const ease = norm * norm;
-    const alpha = isGazePaused.value ? 0.06 + ease * 0.12 : 0.1 + ease * 0.52;
-    const lum = Math.round(180 + ease * 75);
-
-    ctx.strokeStyle = `rgba(${lum},${lum},${lum},${alpha})`;
+  // Eyebrows — filled arch (closed path so no loops)
+  ctx.save();
+  ctx.shadowBlur  = glowFeat;
+  ctx.shadowColor = col;
+  ctx.lineJoin    = "round";
+  ctx.lineCap     = "round";
+  for (const path of [LEFT_BROW_PATH, RIGHT_BROW_PATH]) {
+    const pts = lmPx(landmarks, path, W, H);
+    // Fill — solid arch body
+    ctx.fillStyle   = `rgba(${rgb},${isOk ? 0.42 : 0.22})`;
+    ctx.strokeStyle = `rgba(${rgb},${aBrow})`;
+    ctx.lineWidth   = 0.9;
     ctx.beginPath();
-    ctx.moveTo(a.x * W, a.y * H);
-    ctx.lineTo(b.x * W, b.y * H);
+    buildSmoothPath(ctx, pts, true);
+    ctx.fill();
     ctx.stroke();
   }
-
-  if (!isGazePaused.value) {
-    const la = 0.1 + 0.04 * Math.sin(pulseT * 3.5);
-    ctx.fillStyle = `rgba(74,222,128,${la})`;
-    ctx.fillRect(0, scanY - 0.5, W, 1.5);
-  }
-
   ctx.restore();
 
-  if (!isGazePaused.value) {
+  // Nose
+  ctx.save();
+  ctx.shadowBlur  = glowFeat;
+  ctx.shadowColor = col;
+  ctx.strokeStyle = `rgba(${rgb},${aNose})`;
+  ctx.lineWidth   = 1.1;
+  ctx.lineCap     = "round";
+  strokeSmoothPath(ctx, landmarks, NOSE_BRIDGE_PATH, W, H, false);
+  strokeSmoothPath(ctx, landmarks, NOSE_BOTTOM_PATH, W, H, false);
+  ctx.restore();
+
+  // Lips
+  ctx.save();
+  ctx.shadowBlur  = glowFeat;
+  ctx.shadowColor = col;
+  ctx.strokeStyle = `rgba(${rgb},${aLip})`;
+  ctx.lineWidth   = 1.5;
+  ctx.lineCap     = "round";
+  strokeSmoothPath(ctx, landmarks, UPPER_LIP_PATH, W, H, false);
+  strokeSmoothPath(ctx, landmarks, LOWER_LIP_PATH, W, H, false);
+  ctx.restore();
+}
+
+// ── Layer 6: Large pulsing dots at key landmark intersections ─────────────────
+function drawKeyDots(ctx, landmarks, col, ts, W, H) {
+  const pulse = 0.5 + 0.5 * Math.sin(ts / 600);
+  const rgb   = hexToRgb(col);
+  for (const i of KEY_DOTS) {
+    const pt = landmarks[i];
+    if (!pt) continue;
     ctx.save();
-    ctx.fillStyle = getScanGrad(ctx, scanY);
-    ctx.fillRect(0, scanY - 12, W, 24);
+    ctx.shadowBlur  = 12 + pulse * 12;
+    ctx.shadowColor = col;
+    ctx.fillStyle   = `rgba(${rgb},${0.6 + pulse * 0.4})`;
+    ctx.beginPath();
+    ctx.arc(pt.x*W, pt.y*H, 1.8 + pulse*1.6, 0, Math.PI * 2);
+    ctx.fill();
     ctx.restore();
   }
 }
 
-function drawIdleFrame(canvas) {
-  const ctx = canvas.getContext("2d");
-  if (!ctx || !videoRef.value) return;
-  const W = canvas.width;
-  const H = canvas.height;
-  ctx.clearRect(0, 0, W, H);
+// ── Layer 7: Corner tracking brackets ────────────────────────────────────────
+function drawCornerBrackets(ctx, boxX, boxY, boxW, boxH, col, isOk) {
+  const bLen = Math.min(boxW, boxH) * 0.13;
+  const rgb  = hexToRgb(col);
   ctx.save();
-  ctx.translate(W, 0);
-  ctx.scale(-1, 1);
-  ctx.drawImage(videoRef.value, 0, 0, W, H);
+  ctx.strokeStyle = `rgba(${rgb},${isOk ? 1 : 0.5})`;
+  ctx.lineWidth   = isOk ? 2.5 : 1.8;
+  ctx.lineCap     = "square";
+  ctx.shadowBlur  = isOk ? 16 : 6;
+  ctx.shadowColor = col;
+  const corners = [
+    [[boxX, boxY+bLen],[boxX,boxY],[boxX+bLen,boxY]],
+    [[boxX+boxW-bLen,boxY],[boxX+boxW,boxY],[boxX+boxW,boxY+bLen]],
+    [[boxX,boxY+boxH-bLen],[boxX,boxY+boxH],[boxX+bLen,boxY+boxH]],
+    [[boxX+boxW-bLen,boxY+boxH],[boxX+boxW,boxY+boxH],[boxX+boxW,boxY+boxH-bLen]],
+  ];
+  for (const [[ax,ay],[bx,by],[cx2,cy2]] of corners) {
+    ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(bx,by); ctx.lineTo(cx2,cy2); ctx.stroke();
+  }
   ctx.restore();
 }
 
-// ─── Main predict loop ────────────────────────────────────────────────────────
-function arPredict() {
-  // ─── FIX: isUnmounted.value ───────────────────────────────────────────────
-  if (isUnmounted.value) return;
-  if (document.hidden) {
-    arAnimId = requestAnimationFrame(arPredict);
-    return;
+// ── No-face: expanding ripple rings ──────────────────────────────────────────
+function drawSearchRipples(ctx, ts, W, H) {
+  const cx = W/2, cy = H*0.48, t = (ts/2200)%1;
+  for (let i = 0; i < 3; i++) {
+    const frac = (t + i/3) % 1;
+    ctx.save();
+    ctx.strokeStyle = `rgba(74,222,128,${(1-frac)*0.18})`;
+    ctx.lineWidth   = 1.5;
+    ctx.beginPath();
+    ctx.arc(cx, cy, 40 + frac*100, 0, Math.PI*2);
+    ctx.stroke();
+    ctx.restore();
   }
+  const blink = 0.4 + 0.6*Math.abs(Math.sin(ts/700));
+  ctx.save();
+  ctx.shadowBlur=10; ctx.shadowColor="#4ade80";
+  ctx.fillStyle=`rgba(74,222,128,${blink*0.6})`;
+  ctx.beginPath(); ctx.arc(cx,cy,4,0,Math.PI*2); ctx.fill();
+  ctx.restore();
+}
 
-  const video = videoRef.value;
+// ── Main render — called every rAF tick ───────────────────────────────────────
+function renderAnimatedMesh(ts, landmarks) {
   const canvas = canvasRef.value;
+  if (!canvas) return;
+  const ctx = canvas.getContext("2d");
 
-  if (!faceLandmarker || !handLandmarker || !video || video.readyState < 2) {
-    arAnimId = requestAnimationFrame(arPredict);
+  // Clear in display space (identity transform)
+  ctx.resetTransform();
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+  // Apply same object-cover scale+crop as the video element.
+  // All drawing uses VIDEO-intrinsic coordinates; the transform maps to display.
+  ctx.setTransform(coverS, 0, 0, coverS, -coverOX, -coverOY);
+
+  // W/H = video intrinsic size — landmark coords are relative to this
+  const W = videoW, H = videoH;
+
+  if (!landmarks || landmarks.length === 0) {
+    drawSearchRipples(ctx, ts, W, H);
     return;
   }
 
-  const vw = video.videoWidth || 640;
-  const vh = video.videoHeight || 480;
-  if (canvas.width !== vw || canvas.height !== vh) {
-    canvas.width = vw;
-    canvas.height = vh;
-    invalidateOvalCache();
+  const isOk = faceStatus.value === "ok";
+  const col  = meshColor.value;
+  const rgb  = hexToRgb(col);
+
+  // Pre-compute oval in pixel space
+  const ovalPx = lmPx(landmarks, FACE_OVAL_PATH, W, H);
+  const oxs = ovalPx.map(p=>p.x), oys = ovalPx.map(p=>p.y);
+  const boxX = Math.min(...oxs), boxY = Math.min(...oys);
+  const boxW = Math.max(...oxs)-boxX, boxH = Math.max(...oys)-boxY;
+  const cx = boxX+boxW/2, cy = boxY+boxH/2;
+  const radius = Math.max(boxW, boxH)/2;
+
+  // 1. Holographic face fill
+  drawFaceOvalFill(ctx, ovalPx, cx, cy, radius, rgb);
+
+  // 2. Full 468-point jaring/net
+  drawTesselation(ctx, landmarks, W, H, rgb, isOk ? 0.30 : 0.18);
+
+  // 3. All 468 vertex dots (tiny, batched)
+  drawAllVertexDots(ctx, landmarks, W, H, rgb, isOk ? 0.58 : 0.38, 1.2);
+
+  // 4. Animated scan sweep (clipped to face oval)
+  if (isOk && !scanComplete.value) {
+    drawScanSweep(ctx, ts, ovalPx, boxX, boxY, boxW, boxH, col, rgb);
   }
 
-  const now = performance.now();
-  if (now === lastArTime) {
-    arAnimId = requestAnimationFrame(arPredict);
-    return;
-  }
+  // 5. Glowing feature contours on top
+  drawFeatureContours(ctx, landmarks, W, H, col, rgb, isOk);
 
-  let faceResult;
-  let handResult;
+  // 6. Large pulsing key-feature dots
+  drawKeyDots(ctx, landmarks, col, ts, W, H);
+
+  // 7. Corner tracking brackets
+  drawCornerBrackets(ctx, boxX, boxY, boxW, boxH, col, isOk);
+}
+
+// ─── Object-cover transform state ────────────────────────────────────────────
+// Landmark coords (0-1) are in VIDEO-intrinsic space.
+// We apply the same scale+crop as the video's CSS object-cover so the mesh
+// perfectly overlays the video regardless of container aspect ratio.
+let videoW  = 640, videoH  = 480;
+let coverS  = 1,   coverOX = 0, coverOY = 0;
+
+// ─── MediaPipe FaceMesh ───────────────────────────────────────────────────────
+let faceMesh         = null;
+let currentLandmarks = null;
+let lastDetectTs     = 0;
+let detectBusy       = false;
+let renderLoopId     = null;
+
+async function initFaceMesh() {
+  faceMesh = new FaceMesh({
+    locateFile: (f) =>
+      `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.4.1633559619/${f}`,
+  });
+  faceMesh.setOptions({
+    maxNumFaces: 1, refineLandmarks: false,
+    minDetectionConfidence: 0.5, minTrackingConfidence: 0.5,
+  });
+  faceMesh.onResults((results) => {
+    if (isUnmounted.value) return;
+    const lm = results.multiFaceLandmarks?.[0] ?? null;
+    currentLandmarks = lm;
+    applyFaceStatus(lm ? checkFaceFromLandmarks(lm) : "no_face");
+    detectBusy = false;
+  });
+  await faceMesh.initialize();
+  meshReady.value = true;
+}
+
+function startRenderLoop() {
+  if (renderLoopId) return;
+  function renderFrame(ts) {
+    if (isUnmounted.value) { renderLoopId = null; return; }
+    const video = videoRef.value;
+    if (!detectBusy && faceMesh && video && video.readyState >= 2 && ts - lastDetectTs >= DETECT_MS) {
+      detectBusy = true; lastDetectTs = ts;
+      faceMesh.send({ image: video }).catch(() => { detectBusy = false; });
+    }
+    renderAnimatedMesh(ts, currentLandmarks);
+    renderLoopId = requestAnimationFrame(renderFrame);
+  }
+  renderLoopId = requestAnimationFrame(renderFrame);
+}
+
+function stopRenderLoop() {
+  if (renderLoopId) { cancelAnimationFrame(renderLoopId); renderLoopId = null; }
+  detectBusy = false; currentLandmarks = null;
+  const c = canvasRef.value;
+  if (c) c.getContext("2d").clearRect(0, 0, c.width, c.height);
+}
+
+// ─── WebSocket ────────────────────────────────────────────────────────────────
+let ws = null, captureCanvas = null, frameIntervalId = null;
+
+function startSendingFrames() {
+  if (frameIntervalId) return;
+  captureCanvas = document.createElement("canvas");
+  frameIntervalId = setInterval(() => {
+    const video = videoRef.value;
+    if (!video || ws?.readyState !== WebSocket.OPEN) return;
+    const vw = video.videoWidth||480, vh = video.videoHeight||480;
+    captureCanvas.width=vw; captureCanvas.height=vh;
+    captureCanvas.getContext("2d").drawImage(video,0,0,vw,vh);
+    ws.send(captureCanvas.toDataURL("image/jpeg",0.7).split(",")[1]);
+  }, FRAME_MS);
+}
+
+function stopSendingFrames() { clearInterval(frameIntervalId); frameIntervalId = null; }
+
+function handleWSData(data) {
+  latestMetrics.value = data;
+  const bvp = data.bvp;
+  if (Array.isArray(bvp) && bvp.length > 0) { bvpBuffer.value = bvp.slice(-BVP_BUFFER_SIZE); bvpEmptyCount = 0; }
+  else { bvpEmptyCount++; if (bvpEmptyCount >= 3) bvpBuffer.value = []; }
+}
+
+function connectWS() {
+  if (ws) return;
+  ws = new WebSocket(WS_URL);
+  ws.onopen    = () => startSendingFrames();
+  ws.onmessage = (e) => { if (isUnmounted.value || scanComplete.value) return; try { handleWSData(JSON.parse(e.data)); } catch {} };
+  ws.onerror   = () => { cameraActive.value = false; };
+  ws.onclose   = () => stopSendingFrames();
+}
+
+function disconnectWS() { stopSendingFrames(); ws?.close(1000,"done"); ws = null; }
+
+// ─── Camera ───────────────────────────────────────────────────────────────────
+let mediaStream = null;
+
+async function startCamera() {
   try {
-    faceResult = faceLandmarker.detectForVideo(video, now);
-    handResult = handLandmarker.detectForVideo(video, now);
-  } catch {
-    arAnimId = requestAnimationFrame(arPredict);
-    return;
-  }
+    mediaStream = await navigator.mediaDevices.getUserMedia({
+      video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: "user" }, audio: false,
+    });
+    const video = videoRef.value;
+    video.srcObject = mediaStream;
+    await new Promise((resolve) => { video.onloadedmetadata = resolve; });
 
-  if (faceResult?.faceLandmarks?.length > 0) {
-    personDetected.value = true;
-    const lm = faceResult.faceLandmarks[0];
-    const cw = canvas.width;
-    const ch = canvas.height;
+    videoW = video.videoWidth  || 640;
+    videoH = video.videoHeight || 480;
 
-    const oval = getOvalInCanvasSpace(canvas);
-    let faceInOval = false;
-    if (oval) {
-      const { cx, cy, rx, ry } = oval;
-      faceInOval = FACE_OVAL_INDICES.every((idx) => {
-        const p = lm[idx];
-        return p ? pointInOval(p.x * cw, p.y * ch, cx, cy, rx, ry) : true;
-      });
+    // Wait one frame for CSS layout to settle, then compute object-cover transform
+    await new Promise(r => requestAnimationFrame(r));
+    const canvas = canvasRef.value;
+    if (canvas) {
+      const rect = canvas.getBoundingClientRect();
+      const dW = Math.round(rect.width)  || videoW;
+      const dH = Math.round(rect.height) || videoH;
+      canvas.width  = dW;
+      canvas.height = dH;
+      // Same scale/crop that CSS object-cover applies to the video
+      coverS  = Math.max(dW / videoW, dH / videoH);
+      coverOX = (videoW * coverS - dW) / 2;
+      coverOY = (videoH * coverS - dH) / 2;
     }
 
-    const lookingAway = isLookingAway(lm);
-    const handCovering = isHandCoveringFace(lm, handResult, cw, ch);
+    cameraActive.value = true;
+    connectWS();
+    startRenderLoop();
+  } catch (err) { console.error("[Camera] getUserMedia error:", err); }
+}
 
-    if (!faceInOval || lookingAway || handCovering) {
-      gazeAwayCount++;
+function stopCameraHard() {
+  stopRenderLoop(); disconnectWS();
+  if (mediaStream) { mediaStream.getTracks().forEach(t => t.stop()); mediaStream = null; }
+  if (videoRef.value) videoRef.value.srcObject = null;
+  cameraActive.value = false; faceStatus.value = "no_face";
+}
 
-      if (gazeAwayCount >= GAZE_AWAY_FRAMES) {
-        personDetected.value = false;
-        const reason = !faceInOval
-          ? "Wajah keluar frame"
-          : handCovering
-            ? "Wajah terhalang tangan"
-            : "Wajah berpaling";
-        pauseScan(reason);
-      }
-    } else {
-      gazeAwayCount = 0;
-
-      if (isGazePaused.value && pauseStartMs !== null) {
-        accumulatedMs += now - pauseStartMs;
-        pauseStartMs = null;
-      }
-
-      if (isGazePaused.value) resumeScan();
-
-      if (scanStartMs === null) {
-        accumulatedMs = 0;
-        pauseStartMs = null;
-        scanStartMs = performance.now();
-        scanProgress.value = 1;
-        startRecording();
-      }
-    }
-
-    if (scanStartMs !== null && !scanComplete.value) {
-      let elapsed;
-
-      if (isGazePaused.value) {
-        // Saat pause → waktu berhenti
-        elapsed = Math.max(
-          0,
-          (pauseStartMs ?? now) - scanStartMs - accumulatedMs,
-        );
-      } else {
-        // Saat running normal
-        elapsed = Math.max(0, now - scanStartMs - accumulatedMs);
-      }
-
-      const pct = Math.min(100, (elapsed / SCAN_DURATION_MS) * 100);
-
-      scanProgress.value = pct;
-
-      if (pct >= 100) {
-        scanComplete.value = true;
-        onScanComplete();
-      }
-    }
-
-    drawMesh(lm, canvas);
-  } else {
-    personDetected.value = false;
-    gazeAwayCount = 0;
-    pauseScan("Wajah tidak terdeteksi");
-    drawIdleFrame(canvas);
-  }
-
-  lastArTime = now;
-  arAnimId = requestAnimationFrame(arPredict);
+// ─── Result mapping ───────────────────────────────────────────────────────────
+function mapMetricsToResult(m) {
+  return {
+    heart_rate:  m?.hr ?? null,
+    breath_rate: m?.hrv?.breathing_rate ?? null,
+    hrv:         m?.hrv?.SDNN ?? null,
+    systole:     m?.sbp ?? null,
+    diastole:    m?.dbp ?? null,
+  };
 }
 
 // ─── Scan complete ────────────────────────────────────────────────────────────
-// function onScanComplete() {
-//   if (mediaRecorder && mediaRecorder.state !== "inactive") {
-//     mediaRecorder.stop();
-//     mediaRecorder = null;
-//   } else {
-//     emit("scan-complete");
-//   }
-// }
+const emit = defineEmits(["scan-complete", "upload-start", "upload-done"]);
+let isUploadDone = false;
+
+async function sendResult() {
+  if (isUploadDone) return;
+  if (USE_MOCK_API) {
+    await new Promise(r => setTimeout(r, 1500));
+    isUploadDone = true; emit("upload-done", resultAPI[0]); return;
+  }
+  isUploadDone = true;
+  emit("upload-done", mapMetricsToResult(latestMetrics.value));
+}
 
 function onScanComplete() {
-  console.log("[scan] onScanComplete, recorder state:", mediaRecorder?.state); // ← tambah
-  if (mediaRecorder && mediaRecorder.state !== "inactive") {
-    mediaRecorder.stop();
-    mediaRecorder = null;
-  } else {
-    emit("scan-complete");
-  }
+  cancelAnimationFrame(arAnimId); arAnimId = null;
+  emit("upload-start"); emit("scan-complete");
+  stopCameraHard(); sendResult();
+}
+
+// ─── Reset ────────────────────────────────────────────────────────────────────
+function resetScan() {
+  scanComplete.value=false; scanProgress.value=0;
+  scanStartMs=null; accumulatedMs=0; pauseStartMs=null;
+  isGazePaused.value=false; faceStatus.value="no_face";
+  isUploadDone=false; latestMetrics.value=null;
+  bvpBuffer.value=[]; bvpEmptyCount=0;
+  cancelAnimationFrame(arAnimId); arAnimId=null;
+  isUnmounted.value=false; startCamera();
 }
 
 // ─── Lifecycle ────────────────────────────────────────────────────────────────
 onMounted(async () => {
   isUnmounted.value = false;
-
-  if (!props.autoStart) return;
-
-  await initFaceTracker();
+  await initFaceMesh();
+  if (props.autoStart) await startCamera();
 });
-
 onUnmounted(() => {
-  cleanup();
+  isUnmounted.value = true;
+  cancelAnimationFrame(arAnimId); arAnimId = null;
+  stopCameraHard();
 });
 
-function cleanup() {
-  // ─── FIX: isUnmounted.value ───────────────────────────────────────────────
-  isUnmounted.value = true;
-  cancelRetry();
-  stopRecording();
-  cancelAnimationFrame(arAnimId);
-  ovalResizeObserver?.disconnect();
-  if (stream) {
-    stream.getTracks().forEach((t) => t.stop());
-    stream = null;
-  }
-  if (faceLandmarker) {
-    faceLandmarker.close();
-    faceLandmarker = null;
-  }
-  if (handLandmarker) {
-    handLandmarker.close();
-    handLandmarker = null;
-  }
-  if (videoRef.value) videoRef.value.srcObject = null;
-  cachedOval = null;
-  cachedScanGrad = null;
-  lastGazeLmKey = null;
-  lastBlob = null;
-}
-
-function stopCamera() {
-  cancelAnimationFrame(arAnimId);
-
-  cancelRetry();
-
-  if (mediaRecorder) {
-    stopRecording();
-  }
-
-  if (stream) {
-    stream.getTracks().forEach((t) => t.stop());
-    stream = null;
-  }
-
-  cameraActive.value = false;
-}
-
-function startCamera() {
-  if (!stream) {
-    isUnmounted.value = false; // ← tambah ini
-    initFaceTracker();
-  }
-}
-
-defineExpose({ resetScan, stopCamera, startCamera });
+defineExpose({
+  resetScan,
+  stopCamera:  () => { cancelAnimationFrame(arAnimId); arAnimId=null; stopCameraHard(); },
+  startCamera: () => { isUnmounted.value=false; resetScan(); },
+});
 </script>
 
 <template>
-  <div
-    class="w-full h-full flex flex-col justify-between rounded-t-2xl rounded-b-xl overflow-hidden"
-  >
-    <div
-      class="relative w-full h-[70%] shrink-0 overflow-hidden bg-black rounded-t-2xl"
-    >
+  <div class="w-full h-full flex flex-col justify-between rounded-t-2xl rounded-b-xl overflow-hidden">
+
+    <!-- ── Camera area ──────────────────────────────────────────────────────── -->
+    <div class="relative w-full h-[70%] shrink-0 overflow-hidden bg-black rounded-t-2xl">
+
       <video
-        ref="videoRef"
-        class="absolute inset-0 w-full h-full object-cover invisible"
-        autoplay
-        playsinline
-        muted
+        ref="videoRef" autoplay playsinline muted
+        class="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        style="transform:scaleX(-1);"
       />
 
+      <!-- Mesh + animation canvas -->
       <canvas
         ref="canvasRef"
-        class="absolute inset-0 w-full h-full object-cover pointer-events-none"
+        class="absolute inset-0 w-full h-full pointer-events-none"
+        style="transform:scaleX(-1);"
       />
 
-      <!-- IDLE OVERLAY -->
+      <!-- Dashed oval guide when no face -->
       <Transition name="fade-overlay">
         <div
-          v-if="!personDetected"
-          class="absolute inset-0 bg-black/35 flex flex-col items-center justify-center pointer-events-none"
+          v-if="!hasFace"
+          class="absolute inset-0 flex items-center justify-center pointer-events-none"
         >
-          <div
-            class="w-16 h-16 rounded-2xl border border-white/10 bg-white/[0.04] flex justify-center items-center mb-4"
-          >
-            <svg
-              class="w-7 h-7 text-white/20"
-              fill="none"
-              stroke="currentColor"
-              viewBox="0 0 24 24"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="1.5"
-                d="M15 10l4.553-2.069A1 1 0 0121 8.82v6.36a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"
-              />
-            </svg>
-          </div>
-          <p class="text-white/70 text-sm font-medium">
-            Arahkan wajah ke kamera
-          </p>
-          <p class="text-white/35 text-xs mt-1">
-            Sistem sedang mendeteksi wajah
-          </p>
+          <div :style="{
+            width:'52%', height:'84%', borderRadius:'9999px',
+            border:`1.5px dashed ${ovalGuideColor}`, opacity:0.3,
+          }"/>
         </div>
       </Transition>
 
-      <!-- PAUSED OVERLAY -->
+      <!-- Loading -->
       <Transition name="fade-overlay">
         <div
-          v-if="personDetected && isGazePaused"
-          class="absolute inset-0 bg-black/50 flex flex-col items-center justify-center gap-3 pointer-events-none"
+          v-if="!meshReady"
+          class="absolute inset-0 flex items-center justify-center bg-black/60 pointer-events-none"
         >
-          <div
-            class="w-12 h-12 rounded-full border border-yellow-400/40 flex items-center justify-center"
-          >
-            <svg class="w-5 h-5 fill-yellow-400/80" viewBox="0 0 16 16">
-              <rect x="3" y="2" width="3.5" height="12" rx="1" />
-              <rect x="9.5" y="2" width="3.5" height="12" rx="1" />
-            </svg>
+          <div class="flex flex-col items-center gap-3">
+            <div class="w-6 h-6 rounded-full border-2 border-[#4ade80]/40 border-t-[#4ade80] animate-spin"/>
+            <span class="text-[10px] font-mono text-white/50 uppercase tracking-widest">Memuat Model...</span>
           </div>
-          <p
-            class="text-[11px] font-mono uppercase tracking-[0.15em] text-yellow-400/80"
-          >
-            Scan ditunda
-          </p>
-          <p
-            class="text-[10px] font-mono uppercase tracking-[0.1em] text-white/30"
-          >
-            Hadap kamera untuk lanjut
-          </p>
         </div>
       </Transition>
 
-      <!-- DARK OVERLAY -->
-      <div
-        class="absolute inset-0 bg-gradient-to-b from-black/40 via-transparent to-black/70 pointer-events-none"
-      />
-
-      <!-- VIGNETTE -->
-      <div
-        class="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,transparent_20%,rgba(0,0,0,0.55)_100%)]"
-      />
-
-      <!-- OVAL -->
-      <div class="absolute inset-0 pointer-events-none">
-        <svg class="w-full h-full" xmlns="http://www.w3.org/2000/svg">
-          <defs>
-            <mask id="oval-mask">
-              <rect width="100%" height="100%" fill="white" />
-              <ellipse cx="50%" cy="50%" rx="130" ry="150" fill="black" />
-            </mask>
-          </defs>
-          <rect
-            width="100%"
-            height="100%"
-            fill="rgba(0,0,0,0.45)"
-            mask="url(#oval-mask)"
-          />
-          <ellipse
-            ref="ellipseRef"
-            cx="50%"
-            cy="50%"
-            rx="130"
-            ry="150"
-            fill="none"
-            :stroke="
-              isDetecting
-                ? '#4ade80'
-                : isGazePaused
-                  ? '#facc15'
-                  : 'rgba(255,255,255,0.4)'
-            "
-            stroke-width="2.5"
-            style="transition: all 0.35s ease"
-          />
-        </svg>
-      </div>
-
-      <!-- TOP HUD -->
-      <div
-        class="absolute top-4 left-4 flex flex-col gap-1 pointer-events-none"
-      >
-        <div class="flex items-center gap-1.5">
-          <span
-            class="w-1.5 h-1.5 rounded-full transition-colors duration-300"
-            :class="
-              isDetecting
-                ? 'bg-[#4ade80] animate-pulse'
-                : isGazePaused
-                  ? 'bg-yellow-400'
-                  : 'bg-red-400'
-            "
-          />
-          <span
-            class="text-[9px] font-mono uppercase tracking-widest transition-colors duration-300"
-            :class="
-              isDetecting
-                ? 'text-[#4ade80]'
-                : isGazePaused
-                  ? 'text-yellow-400'
-                  : 'text-red-400'
-            "
-          >
-            {{
-              isDetecting
-                ? "Wajah Terdeteksi"
-                : isGazePaused
-                  ? "Scan Ditunda"
-                  : "Mencari Wajah..."
-            }}
+      <!-- Position guidance -->
+      <Transition name="fade-overlay">
+        <div
+          v-if="hasFace && faceStatus !== 'ok'"
+          class="absolute bottom-20 left-1/2 -translate-x-1/2 pointer-events-none"
+        >
+          <span class="text-[10px] font-mono uppercase tracking-widest px-3 py-1.5 rounded-full"
+            style="background:rgba(0,0,0,0.55);color:#fb923c;">
+            {{ faceGuidanceText }}
           </span>
         </div>
+      </Transition>
+
+      <!-- TOP-LEFT dot + label -->
+      <div class="absolute top-4 left-4 flex items-center gap-1.5 pointer-events-none">
+        <span class="w-1.5 h-1.5 rounded-full transition-colors duration-300"
+          :class="isDetecting?'bg-[#4ade80] animate-pulse':hasFace?'bg-amber-400':'bg-white/30'"/>
+        <span class="text-[9px] font-mono uppercase tracking-widest transition-colors duration-300"
+          :class="isDetecting?'text-[#4ade80]':hasFace?'text-amber-400':'text-white/40'">
+          {{ faceGuidanceText }}
+        </span>
       </div>
 
-      <!-- TOP CENTER BADGE -->
+      <!-- TOP-CENTER badge -->
       <div class="absolute top-4 left-1/2 -translate-x-1/2">
-        <div
-          class="px-3 py-1 rounded-full text-[11px] font-medium flex items-center gap-1.5 backdrop-blur-md border transition-all duration-300"
-          :class="
-            isDetecting
-              ? 'bg-[#4ade80]/15 border-[#4ade80]/30 text-[#4ade80]'
-              : isGazePaused
-                ? 'bg-yellow-400/15 border-yellow-400/30 text-yellow-400'
-                : 'bg-black/30 border-white/10 text-white/60'
-          "
-        >
-          <div
-            class="w-2 h-2 rounded-full"
-            :class="
-              isDetecting
-                ? 'bg-[#4ade80] animate-pulse'
-                : isGazePaused
-                  ? 'bg-yellow-400'
-                  : 'bg-white/30'
-            "
-          />
-          {{
-            isDetecting ? "Scanning..." : isGazePaused ? "Paused" : "Mencari..."
-          }}
+        <div class="px-3 py-1 rounded-full text-[11px] font-medium flex items-center gap-1.5 backdrop-blur-md border transition-all duration-300"
+          :class="isDetecting?'bg-[#4ade80]/15 border-[#4ade80]/30 text-[#4ade80]'
+            :hasFace?'bg-amber-400/15 border-amber-400/30 text-amber-400'
+            :'bg-black/30 border-white/10 text-white/60'">
+          <div class="w-2 h-2 rounded-full"
+            :class="isDetecting?'bg-[#4ade80] animate-pulse':hasFace?'bg-amber-400':'bg-white/30'"/>
+          {{ isDetecting ? "Scanning..." : hasFace ? "Posisikan Wajah" : "Mencari..." }}
         </div>
       </div>
 
       <!-- BOTTOM PROGRESS -->
       <div
-        v-if="personDetected || scanProgress > 0"
+        v-if="scanProgress > 0"
         class="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-10 bg-gradient-to-t from-black/70 to-transparent pointer-events-none"
       >
         <div class="flex items-center justify-between mb-1.5">
-          <span
-            class="text-[9px] font-mono uppercase tracking-widest transition-colors duration-300"
-            :class="isGazePaused ? 'text-yellow-400/80' : 'text-[#4ade80]/80'"
-          >
+          <span class="text-[9px] font-mono uppercase tracking-widest"
+            :class="isGazePaused?'text-amber-400/80':'text-[#4ade80]/80'">
             {{ isGazePaused ? "Paused" : "Tracking" }}
           </span>
           <span class="text-[9px] font-mono text-white/40">
-            {{
-              scanProgress < 1 && scanProgress > 0
-                ? 1
-                : Math.round(scanProgress)
-            }}%
+            {{ scanProgress < 1 ? 1 : Math.round(scanProgress) }}%
           </span>
         </div>
         <div class="w-full h-[2px] bg-white/10 rounded-full overflow-hidden">
-          <div
-            class="h-full rounded-full transition-all duration-300"
-            :class="isGazePaused ? 'bg-yellow-400/70' : 'bg-[#4ade80]'"
-            :style="{ width: `${scanProgress}%` }"
-          />
+          <div class="h-full rounded-full transition-all duration-300"
+            :class="isGazePaused?'bg-amber-400/70':'bg-[#4ade80]'"
+            :style="{width:`${scanProgress}%`}"/>
         </div>
       </div>
     </div>
 
-    <!-- Bottom Section -->
-    <div
-      class="flex-1 flex flex-col justify-between py-14 items-center bg-[#FFFFFF]"
-    >
-      <div class="w-full h-auto flex justify-center items-center text-center">
-        <p>
-          Point the Camera at Your Face <br />
-          Camera Will Detect!
-        </p>
+    <!-- ── Bottom section ───────────────────────────────────────────────────── -->
+    <div class="flex-1 flex flex-col justify-between py-14 items-center bg-[#FFFFFF]">
+      <div class="w-full flex justify-center items-center text-center">
+        <p>Point the Camera at Your Face <br/>Camera Will Detect!</p>
       </div>
-      <div class="w-full h-auto flex justify-center items-center">
-        <div
-          class="w-fit h-auto flex flex-row gap-x-3 justify-center items-center rounded-full px-5 py-2.5 transition-all duration-300"
-          :class="
-            scanComplete
-              ? 'bg-[#DDF7E5]'
-              : isGazePaused
-                ? 'bg-yellow-100'
-                : isDetecting
-                  ? 'bg-[#DFF4E6]'
-                  : 'bg-[#F3F4F6]'
-          "
-        >
-          <!-- Dot Pulse -->
-          <div class="relative w-3 h-3">
-            <span
-              class="absolute inset-0 rounded-full animate-ping"
-              :class="
-                scanComplete
-                  ? 'bg-[#22C55E]/40'
-                  : isGazePaused
-                    ? 'bg-yellow-400/40'
-                    : isDetecting
-                      ? 'bg-[#22C55E]/40'
-                      : 'bg-gray-400/30'
-              "
-            />
-            <span
-              class="relative block w-3 h-3 rounded-full"
-              :class="
-                scanComplete
-                  ? 'bg-[#22C55E]'
-                  : isGazePaused
-                    ? 'bg-yellow-400'
-                    : isDetecting
-                      ? 'bg-[#22C55E]'
-                      : 'bg-gray-400'
-              "
-            />
-          </div>
 
-          <!-- Text -->
-          <p
-            class="text-[15px] font-medium tracking-[0.02em] transition-colors duration-300"
-            :class="
-              scanComplete
-                ? 'text-[#15803D]'
-                : isGazePaused
-                  ? 'text-yellow-700'
-                  : isDetecting
-                    ? 'text-[#16A34A]'
-                    : 'text-[#6B7280]'
-            "
-          >
-            {{
-              scanComplete
-                ? "Scan Complete"
-                : isGazePaused
-                  ? "Scanning Paused"
-                  : isDetecting
-                    ? "Scanning Face..."
-                    : "Waiting for Face"
-            }}
-          </p>
+      <!-- Live Metrics -->
+      <div class="w-full flex justify-center items-center gap-8 py-2">
+        <div class="flex flex-col items-center gap-0.5">
+          <span class="text-[10px] text-[#A0A0A0] uppercase tracking-widest font-mono">Heart Rate</span>
+          <span class="text-[26px] font-semibold text-[#1A1A1A] font-mono leading-none">{{ displayHR }}</span>
+          <span class="text-[9px] text-[#C0C0C0] font-mono">bpm</span>
+        </div>
+        <div class="w-px self-stretch bg-[#E5E5E5]"/>
+        <div class="flex flex-col items-center gap-0.5">
+          <span class="text-[10px] text-[#A0A0A0] uppercase tracking-widest font-mono">Breathing</span>
+          <span class="text-[26px] font-semibold text-[#1A1A1A] font-mono leading-none">{{ displayBreathing }}</span>
+          <span class="text-[9px] text-[#C0C0C0] font-mono">rpm</span>
         </div>
       </div>
+
+      <!-- BVP Signal -->
+      <div class="w-full px-4">
+        <div class="w-full h-[68px] rounded-xl overflow-hidden relative flex items-center justify-center transition-colors duration-500"
+          :class="hasBvpSignal?'bg-[#F0FDF4] border border-[#BBF7D0]':'bg-[#F9FAFB] border border-[#E5E7EB]'">
+          <Transition name="fade-overlay">
+            <div v-if="hasBvpSignal" class="absolute inset-0">
+              <svg class="w-full h-full" viewBox="0 0 300 56" preserveAspectRatio="none">
+                <defs>
+                  <linearGradient id="bvp-fade" x1="0" x2="1" y1="0" y2="0">
+                    <stop offset="0%"   stop-color="#22C55E" stop-opacity="0"/>
+                    <stop offset="20%"  stop-color="#22C55E" stop-opacity="1"/>
+                    <stop offset="100%" stop-color="#22C55E" stop-opacity="1"/>
+                  </linearGradient>
+                </defs>
+                <polyline :points="bvpPoints" fill="none" stroke="url(#bvp-fade)"
+                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+              <span class="absolute right-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#22C55E] animate-pulse"/>
+            </div>
+          </Transition>
+          <Transition name="fade-overlay">
+            <p v-if="!hasBvpSignal" class="text-[10px] font-mono text-[#9CA3AF] uppercase tracking-widest">
+              Sinyal kurang baik
+            </p>
+          </Transition>
+        </div>
+      </div>
+
+      <!-- Scan Complete -->
+      <Transition name="fade-overlay">
+        <div v-if="scanComplete" class="w-full flex justify-center items-center">
+          <div class="flex flex-row gap-x-3 items-center rounded-full px-5 py-2.5 bg-[#DDF7E5]">
+            <div class="relative w-3 h-3">
+              <span class="absolute inset-0 rounded-full animate-ping bg-[#22C55E]/40"/>
+              <span class="relative block w-3 h-3 rounded-full bg-[#22C55E]"/>
+            </div>
+            <p class="text-[15px] font-medium tracking-[0.02em] text-[#15803D]">Scan Complete</p>
+          </div>
+        </div>
+      </Transition>
     </div>
   </div>
 </template>
 
 <style scoped>
-.fade-overlay-enter-active {
-  transition: opacity 0.3s ease;
-}
-.fade-overlay-leave-active {
-  transition: opacity 0.25s ease;
-}
+.fade-overlay-enter-active { transition: opacity 0.35s ease; }
+.fade-overlay-leave-active  { transition: opacity 0.25s ease; }
 .fade-overlay-enter-from,
-.fade-overlay-leave-to {
-  opacity: 0;
-}
+.fade-overlay-leave-to      { opacity: 0; }
 </style>

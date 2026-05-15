@@ -125,6 +125,15 @@ function onUploadDone(result) {
   isRetrying.value = false;
   retryAttempt.value = 0;
   uploadProgress.value = 100;
+
+  // Jika HR kosong, sinyal tidak cukup — minta scan ulang
+  if (!result?.heart_rate) {
+    setTimeout(() => {
+      currentView.value = "failed";
+    }, 400);
+    return;
+  }
+
   scanResult.value = result;
 
   localStorage.setItem("lp_facetracker_last_result", JSON.stringify(result));
@@ -141,7 +150,6 @@ function onUploadDone(result) {
   expires.setDate(expires.getDate() + 30);
   document.cookie = `lp_facetracker_count=${newCount}; expires=${expires.toUTCString()}; path=/; SameSite=Lax`;
 
-  // ← Tambahkan ini
   if (newCount >= Infinity) {
     isLimitReached.value = true;
   }
@@ -478,6 +486,46 @@ const indicators = [
             class="absolute inset-0"
             @back="onBackToScan"
           />
+        </Transition>
+
+        <!-- FAILED STATE -->
+        <Transition name="slide-up">
+          <div
+            v-if="currentView === 'failed'"
+            class="absolute inset-0 flex flex-col items-center justify-center gap-6 bg-[#060a0f] rounded-t-2xl rounded-b-xl overflow-hidden px-8"
+          >
+            <div
+              class="absolute inset-0 pointer-events-none"
+              style="background-image: radial-gradient(circle, rgba(239,68,68,0.06) 1px, transparent 1px); background-size: 24px 24px;"
+            />
+            <div
+              class="absolute inset-0 pointer-events-none"
+              style="background: radial-gradient(circle at center, transparent 35%, #060a0f 80%);"
+            />
+
+            <div class="relative z-10 flex flex-col items-center gap-6 w-full">
+              <!-- Icon -->
+              <div class="w-16 h-16 rounded-full border border-red-500/30 flex items-center justify-center bg-red-500/05">
+                <svg class="w-7 h-7 text-red-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
+                </svg>
+              </div>
+
+              <!-- Teks -->
+              <div class="text-center">
+                <p class="text-white/85 text-[15px] font-medium font-mono mb-1">Sinyal tidak terdeteksi</p>
+                <p class="text-white/35 text-[11px] font-mono uppercase tracking-widest">Pastikan wajah terlit dengan baik</p>
+              </div>
+
+              <!-- Tombol scan ulang -->
+              <button
+                @click="onBackToScan"
+                class="px-6 py-2.5 rounded-full text-[13px] font-medium font-mono border border-white/15 text-white/70 hover:bg-white/08 hover:text-white transition-all duration-200 uppercase tracking-widest"
+              >
+                Scan Ulang
+              </button>
+            </div>
+          </div>
         </Transition>
       </div>
       <!-- RIGHT CONTENT -->
