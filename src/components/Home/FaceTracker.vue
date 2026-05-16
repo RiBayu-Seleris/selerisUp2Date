@@ -8,6 +8,11 @@ import FaceIcon from "@/assets/icons/facetracker/face-icon.svg";
 import CardTracker from "@/components/CardTracker.vue";
 import { useRouter } from "vue-router";
 
+import Time from "@/assets/icons/facetracker/Time.vue";
+import Rate from "@/assets/icons/facetracker/Rate.vue";
+import UserScan from "@/assets/icons/facetracker/UserScan.vue";
+import MedicalNote from "@/assets/icons/facetracker/MedicalNote.vue";
+
 const router = useRouter();
 
 // =========================
@@ -26,6 +31,33 @@ const COOKIE_EXPIRE_DAYS = 30;
 
 const deviceId = ref("");
 const scanCount = ref(0);
+
+const cards = [
+  {
+    icon: Time,
+    title: "Vital Signs in 15 Seconds",
+    description:
+      "Measures heart rate, blood pressure, SpO₂, HRV, and more. no wearables or devices required.",
+  },
+  {
+    icon: UserScan,
+    title: "Micro-Movement Detection",
+    description:
+      "AI uses rPPG to detect blood flow and pulse changes through facial skin via camera.",
+  },
+  {
+    icon: Rate,
+    title: "39 AI-Powered Health Parameters",
+    description:
+      "Instantly measures health and risk indicators for smarter insurance assessments.",
+  },
+  {
+    icon: MedicalNote,
+    title: "Instant Health Report",
+    description:
+      "Creates unique 3D model of your face for accurate health measurements.",
+  },
+];
 
 function getCookie(name) {
   const match = document.cookie
@@ -144,24 +176,44 @@ const submitForm = () => {
 
         <!-- Cards -->
         <div class="absolute z-20 w-full h-full">
+          <!-- Kiri atas -->
           <div class="absolute left-[10%] top-[20%] card-float-left">
-            <card-tracker />
+            <card-tracker
+              :icon="cards[0].icon"
+              :title="cards[0].title"
+              :description="cards[0].description"
+            />
           </div>
 
+          <!-- Kiri bawah -->
           <div
             class="absolute left-[14%] bottom-[20%] lg:bottom-[25%] xl:bottom-[20%] card-float-left-delay"
           >
-            <card-tracker />
+            <card-tracker
+              :icon="cards[1].icon"
+              :title="cards[1].title"
+              :description="cards[1].description"
+            />
           </div>
 
+          <!-- Kanan atas -->
           <div class="absolute right-[10%] top-[20%] card-float-right">
-            <card-tracker />
+            <card-tracker
+              :icon="cards[2].icon"
+              :title="cards[2].title"
+              :description="cards[2].description"
+            />
           </div>
 
+          <!-- Kanan bawah -->
           <div
             class="absolute right-[14%] bottom-[20%] lg:bottom-[25%] xl:bottom-[20%] card-float-right-delay"
           >
-            <card-tracker />
+            <card-tracker
+              :icon="cards[3].icon"
+              :title="cards[3].title"
+              :description="cards[3].description"
+            />
           </div>
         </div>
 
