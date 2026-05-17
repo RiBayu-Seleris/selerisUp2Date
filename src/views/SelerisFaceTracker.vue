@@ -1,3 +1,5 @@
+<!-- Ini parent untuk scanning, uploading, dan result -->
+
 <script setup>
 import ArrowLeft from "@/components/icons/ArrowLeft.vue";
 import CardIconLeft from "@/components/reusable/CardIconLeft.vue";
@@ -30,6 +32,7 @@ const uploadProgress = ref(0);
 const uploadStep = ref("Mengirim ke server...");
 const faceTrackerRef = ref(null);
 const isLimitReached = ref(false);
+const failedReason = ref("no_signal"); // ← tambah: "sqi" | "no_signal"
 
 // ─── Retry state ──────────────────────────────────────────────────────────────
 const retryAttempt = ref(0);
@@ -125,6 +128,16 @@ function onUploadDone(result) {
   isRetrying.value = false;
   retryAttempt.value = 0;
   uploadProgress.value = 100;
+
+  // ─── Cek SQI — jika di bawah 0.3, minta retake ───────────────────────
+  const sqi = faceTrackerRef.value?.latestSqi?.value ?? null;
+  if (sqi !== null && sqi < 0.3) {
+    setTimeout(() => {
+      failedReason.value = "sqi";
+      currentView.value = "failed";
+    }, 400);
+    return;
+  }
 
   // Jika HR kosong, sinyal tidak cukup — minta scan ulang
   if (!result?.heart_rate) {
@@ -496,25 +509,64 @@ const indicators = [
           >
             <div
               class="absolute inset-0 pointer-events-none"
-              style="background-image: radial-gradient(circle, rgba(239,68,68,0.06) 1px, transparent 1px); background-size: 24px 24px;"
+              style="
+                background-image: radial-gradient(
+                  circle,
+                  rgba(239, 68, 68, 0.06) 1px,
+                  transparent 1px
+                );
+                background-size: 24px 24px;
+              "
             />
             <div
               class="absolute inset-0 pointer-events-none"
-              style="background: radial-gradient(circle at center, transparent 35%, #060a0f 80%);"
+              style="
+                background: radial-gradient(
+                  circle at center,
+                  transparent 35%,
+                  #060a0f 80%
+                );
+              "
             />
 
             <div class="relative z-10 flex flex-col items-center gap-6 w-full">
               <!-- Icon -->
-              <div class="w-16 h-16 rounded-full border border-red-500/30 flex items-center justify-center bg-red-500/05">
-                <svg class="w-7 h-7 text-red-400" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
+              <div
+                class="w-16 h-16 rounded-full border border-red-500/30 flex items-center justify-center bg-red-500/05"
+              >
+                <svg
+                  class="w-7 h-7 text-red-400"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"
+                  />
                 </svg>
               </div>
 
               <!-- Teks -->
               <div class="text-center">
-                <p class="text-white/85 text-[15px] font-medium font-mono mb-1">Sinyal tidak terdeteksi</p>
-                <p class="text-white/35 text-[11px] font-mono uppercase tracking-widest">Pastikan wajah terlit dengan baik</p>
+                <p class="text-white/85 text-[15px] font-medium font-mono mb-1">
+                  {{
+                    failedReason === "sqi"
+                      ? "Kualitas sinyal rendah"
+                      : "Sinyal tidak terdeteksi"
+                  }}
+                </p>
+                <p
+                  class="text-white/35 text-[11px] font-mono uppercase tracking-widest leading-relaxed"
+                >
+                  {{
+                    failedReason === "sqi"
+                      ? "Kualitas video masih kurang baik, harap ulangi dengan pencahayaan yang baik dan kondisi stabil"
+                      : "Pastikan wajah terlihat dengan baik"
+                  }}
+                </p>
               </div>
 
               <!-- Tombol scan ulang -->

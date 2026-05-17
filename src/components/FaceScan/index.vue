@@ -1,3 +1,4 @@
+<!-- Ini index.vue untuk scanning -->
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from "vue";
 import { FaceMesh, FACEMESH_TESSELATION } from "@mediapipe/face_mesh";
@@ -14,7 +15,7 @@ const DETECT_MS = 150;
 const BVP_BUFFER_SIZE = 100;
 const SCAN_DURATION_MS = 30000;
 
-// ─── Landmark index paths (ordered for smooth bezier rendering) ───────────────
+// ─── Landmark index paths ─────────────────────────────────────────────────────
 const FACE_OVAL_PATH = [
   10, 338, 297, 332, 284, 251, 389, 356, 454, 323, 361, 288, 397, 365, 379, 378,
   400, 377, 152, 148, 176, 149, 150, 136, 172, 58, 132, 93, 234, 127, 162, 21,
@@ -27,19 +28,14 @@ const RIGHT_EYE_PATH = [
   362, 398, 384, 385, 386, 387, 388, 466, 263, 249, 390, 373, 374, 380, 381,
   382,
 ];
-// Brow: start inner corner → top arc outward → outer end → bottom arc inward → close
-// This forms a proper closed arch without self-crossing loops
 const LEFT_BROW_PATH = [55, 70, 63, 105, 66, 107, 46, 53, 52, 65];
 const RIGHT_BROW_PATH = [285, 300, 293, 334, 296, 336, 276, 283, 282, 295];
 const NOSE_BRIDGE_PATH = [168, 6, 197, 195, 5, 4];
 const NOSE_BOTTOM_PATH = [129, 49, 48, 64, 98, 97, 2, 326, 327, 294, 279, 358];
 const UPPER_LIP_PATH = [61, 185, 40, 39, 37, 0, 267, 269, 270, 409, 291];
 const LOWER_LIP_PATH = [291, 375, 321, 405, 314, 17, 84, 181, 91, 146, 61];
-
-// Key pulsing dots (outer eye corners, nose tip, mouth corners, chin, top)
 const KEY_DOTS = [33, 263, 4, 61, 291, 152, 10];
-
-const OVAL_INDICES = FACE_OVAL_PATH; // reused for position check
+const OVAL_INDICES = FACE_OVAL_PATH;
 
 // ─── Refs ─────────────────────────────────────────────────────────────────────
 const videoRef = ref(null);
@@ -56,6 +52,46 @@ const isDetecting = computed(
 const hasFace = computed(() => faceStatus.value !== "no_face");
 
 const latestMetrics = ref(null);
+const latestSqi = ref(null); // ← tambah ini
+
+// ─── Best snapshot — data paling lengkap selama scan berlangsung ──────────────
+// Score = jumlah field penting yang punya nilai valid (non-null, non-zero, non-NaN)
+let bestSnapshot = null;
+let bestSnapshotScore = -1;
+
+const SNAPSHOT_FIELDS = [
+  (d) => d?.hr,
+  (d) => d?.sqi, // ← tambah
+  (d) => d?.hrv?.breathing_rate,
+  (d) => d?.hrv?.sdnn,
+  (d) => d?.hrv?.rmssd,
+  (d) => d?.hrv?.ibi,
+  (d) => d?.sbp,
+  (d) => d?.dbp,
+];
+
+function scoreSnapshot(data) {
+  if (!data) return -1;
+  return SNAPSHOT_FIELDS.reduce((acc, fn) => {
+    const v = fn(data);
+    return acc + (v != null && !isNaN(v) && v !== 0 ? 1 : 0);
+  }, 0);
+}
+
+function tryUpdateBestSnapshot(data) {
+  const score = scoreSnapshot(data);
+  if (score > bestSnapshotScore) {
+    bestSnapshotScore = score;
+    bestSnapshot = JSON.parse(JSON.stringify(data)); // deep clone
+  }
+}
+
+function resetBestSnapshot() {
+  bestSnapshot = null;
+  bestSnapshotScore = -1;
+}
+
+// ─── Display computed ─────────────────────────────────────────────────────────
 const displayHR = computed(() => {
   const v = latestMetrics.value?.hr;
   return !v || v === 0 ? "-" : Math.round(v);
@@ -198,7 +234,6 @@ function hexToRgb(hex) {
   return `${parseInt(hex.slice(1, 3), 16)},${parseInt(hex.slice(3, 5), 16)},${parseInt(hex.slice(5, 7), 16)}`;
 }
 
-// Build a smooth quadratic bezier path through ordered pixel-space points
 function buildSmoothPath(ctx, pts, closed) {
   if (pts.length < 2) return;
   if (closed) {
@@ -222,7 +257,6 @@ function buildSmoothPath(ctx, pts, closed) {
   }
 }
 
-// Convert landmark indices → pixel pts
 function lmPx(landmarks, indices, W, H) {
   return indices
     .map((i) => landmarks[i])
@@ -230,7 +264,6 @@ function lmPx(landmarks, indices, W, H) {
     .map((p) => ({ x: p.x * W, y: p.y * H }));
 }
 
-// Smooth stroke through landmark indices
 function strokeSmoothPath(ctx, landmarks, indices, W, H, closed) {
   const pts = lmPx(landmarks, indices, W, H);
   ctx.beginPath();
@@ -238,7 +271,6 @@ function strokeSmoothPath(ctx, landmarks, indices, W, H, closed) {
   ctx.stroke();
 }
 
-// ── Layer 1: Radial gradient fill inside face oval ────────────────────────────
 function drawFaceOvalFill(ctx, ovalPx, cx, cy, radius, rgb) {
   const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 0.9);
   grad.addColorStop(0, `rgba(${rgb},0.13)`);
@@ -252,16 +284,13 @@ function drawFaceOvalFill(ctx, ovalPx, cx, cy, radius, rgb) {
   ctx.restore();
 }
 
-// ── Layer 2: Full 468-point tesselation — two-pass for depth ─────────────────
 function drawTesselation(ctx, landmarks, W, H, rgb, alpha) {
-  // Pre-collect edges once
   const edges = [];
   for (const [s, e] of FACEMESH_TESSELATION) {
     const p1 = landmarks[s],
       p2 = landmarks[e];
     if (p1 && p2) edges.push(p1.x * W, p1.y * H, p2.x * W, p2.y * H);
   }
-
   function strokeEdges(lineWidth, a) {
     ctx.save();
     ctx.strokeStyle = `rgba(${rgb},${a})`;
@@ -274,14 +303,10 @@ function drawTesselation(ctx, landmarks, W, H, rgb, alpha) {
     ctx.stroke();
     ctx.restore();
   }
-
-  // Pass 1 — wide soft glow (gives mesh lines weight/depth)
   strokeEdges(1.5, alpha * 0.3);
-  // Pass 2 — narrow crisp line on top
   strokeEdges(0.55, alpha);
 }
 
-// ── Layer 3: All 468 vertex dots — batched in one path ───────────────────────
 function drawAllVertexDots(ctx, landmarks, W, H, rgb, alpha, r) {
   ctx.save();
   ctx.fillStyle = `rgba(${rgb},${alpha})`;
@@ -295,30 +320,23 @@ function drawAllVertexDots(ctx, landmarks, W, H, rgb, alpha, r) {
   ctx.restore();
 }
 
-// ── Layer 4: Scan sweep clipped to face oval ──────────────────────────────────
 function drawScanSweep(ctx, ts, ovalPx, boxX, boxY, boxW, boxH, col, rgb) {
   const sweepFrac = (ts / 2500) % 1;
   const sweepY = boxY + boxH * sweepFrac;
-
   ctx.save();
   ctx.beginPath();
   buildSmoothPath(ctx, ovalPx, true);
   ctx.clip();
-
-  // Scanned-area tint
   const trail = ctx.createLinearGradient(0, boxY, 0, sweepY);
   trail.addColorStop(0, `rgba(${rgb},0)`);
   trail.addColorStop(1, `rgba(${rgb},0.10)`);
   ctx.fillStyle = trail;
   ctx.fillRect(boxX, boxY, boxW, sweepY - boxY);
-
-  // Horizontal glow line
   const lineGrad = ctx.createLinearGradient(boxX, 0, boxX + boxW, 0);
   lineGrad.addColorStop(0, `rgba(${rgb},0)`);
   lineGrad.addColorStop(0.1, `rgba(${rgb},1)`);
   lineGrad.addColorStop(0.9, `rgba(${rgb},1)`);
   lineGrad.addColorStop(1, `rgba(${rgb},0)`);
-
   ctx.shadowBlur = 22;
   ctx.shadowColor = col;
   ctx.strokeStyle = lineGrad;
@@ -327,11 +345,9 @@ function drawScanSweep(ctx, ts, ovalPx, boxX, boxY, boxW, boxH, col, rgb) {
   ctx.moveTo(boxX, sweepY);
   ctx.lineTo(boxX + boxW, sweepY);
   ctx.stroke();
-
   ctx.restore();
 }
 
-// ── Layer 5: Bright glowing feature contours ──────────────────────────────────
 function drawFeatureContours(ctx, landmarks, W, H, col, rgb, isOk) {
   const glowOval = isOk ? 18 : 8;
   const glowFeat = isOk ? 11 : 5;
@@ -341,7 +357,6 @@ function drawFeatureContours(ctx, landmarks, W, H, col, rgb, isOk) {
   const aNose = isOk ? 0.58 : 0.32;
   const aLip = isOk ? 0.8 : 0.5;
 
-  // Face oval
   ctx.save();
   ctx.shadowBlur = glowOval;
   ctx.shadowColor = col;
@@ -350,7 +365,6 @@ function drawFeatureContours(ctx, landmarks, W, H, col, rgb, isOk) {
   strokeSmoothPath(ctx, landmarks, FACE_OVAL_PATH, W, H, true);
   ctx.restore();
 
-  // Eyes
   ctx.save();
   ctx.shadowBlur = glowFeat;
   ctx.shadowColor = col;
@@ -360,7 +374,6 @@ function drawFeatureContours(ctx, landmarks, W, H, col, rgb, isOk) {
   strokeSmoothPath(ctx, landmarks, RIGHT_EYE_PATH, W, H, true);
   ctx.restore();
 
-  // Eyebrows — filled arch (closed path so no loops)
   ctx.save();
   ctx.shadowBlur = glowFeat;
   ctx.shadowColor = col;
@@ -368,7 +381,6 @@ function drawFeatureContours(ctx, landmarks, W, H, col, rgb, isOk) {
   ctx.lineCap = "round";
   for (const path of [LEFT_BROW_PATH, RIGHT_BROW_PATH]) {
     const pts = lmPx(landmarks, path, W, H);
-    // Fill — solid arch body
     ctx.fillStyle = `rgba(${rgb},${isOk ? 0.42 : 0.22})`;
     ctx.strokeStyle = `rgba(${rgb},${aBrow})`;
     ctx.lineWidth = 0.9;
@@ -379,7 +391,6 @@ function drawFeatureContours(ctx, landmarks, W, H, col, rgb, isOk) {
   }
   ctx.restore();
 
-  // Nose
   ctx.save();
   ctx.shadowBlur = glowFeat;
   ctx.shadowColor = col;
@@ -390,7 +401,6 @@ function drawFeatureContours(ctx, landmarks, W, H, col, rgb, isOk) {
   strokeSmoothPath(ctx, landmarks, NOSE_BOTTOM_PATH, W, H, false);
   ctx.restore();
 
-  // Lips
   ctx.save();
   ctx.shadowBlur = glowFeat;
   ctx.shadowColor = col;
@@ -402,7 +412,6 @@ function drawFeatureContours(ctx, landmarks, W, H, col, rgb, isOk) {
   ctx.restore();
 }
 
-// ── Layer 6: Large pulsing dots at key landmark intersections ─────────────────
 function drawKeyDots(ctx, landmarks, col, ts, W, H) {
   const pulse = 0.5 + 0.5 * Math.sin(ts / 600);
   const rgb = hexToRgb(col);
@@ -420,7 +429,6 @@ function drawKeyDots(ctx, landmarks, col, ts, W, H) {
   }
 }
 
-// ── Layer 7: Corner tracking brackets ────────────────────────────────────────
 function drawCornerBrackets(ctx, boxX, boxY, boxW, boxH, col, isOk) {
   const bLen = Math.min(boxW, boxH) * 0.13;
   const rgb = hexToRgb(col);
@@ -462,7 +470,6 @@ function drawCornerBrackets(ctx, boxX, boxY, boxW, boxH, col, isOk) {
   ctx.restore();
 }
 
-// ── No-face: expanding ripple rings ──────────────────────────────────────────
 function drawSearchRipples(ctx, ts, W, H) {
   const cx = W / 2,
     cy = H * 0.48,
@@ -488,21 +495,15 @@ function drawSearchRipples(ctx, ts, W, H) {
   ctx.restore();
 }
 
-// ── Main render — called every rAF tick ───────────────────────────────────────
 function renderAnimatedMesh(ts, landmarks) {
   const canvas = canvasRef.value;
   if (!canvas) return;
   const ctx = canvas.getContext("2d");
 
-  // Clear in display space (identity transform)
   ctx.resetTransform();
   ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-  // Apply same object-cover scale+crop as the video element.
-  // All drawing uses VIDEO-intrinsic coordinates; the transform maps to display.
   ctx.setTransform(coverS, 0, 0, coverS, -coverOX, -coverOY);
 
-  // W/H = video intrinsic size — landmark coords are relative to this
   const W = videoW,
     H = videoH;
 
@@ -515,7 +516,6 @@ function renderAnimatedMesh(ts, landmarks) {
   const col = meshColor.value;
   const rgb = hexToRgb(col);
 
-  // Pre-compute oval in pixel space
   const ovalPx = lmPx(landmarks, FACE_OVAL_PATH, W, H);
   const oxs = ovalPx.map((p) => p.x),
     oys = ovalPx.map((p) => p.y);
@@ -527,34 +527,18 @@ function renderAnimatedMesh(ts, landmarks) {
     cy = boxY + boxH / 2;
   const radius = Math.max(boxW, boxH) / 2;
 
-  // 1. Holographic face fill
   drawFaceOvalFill(ctx, ovalPx, cx, cy, radius, rgb);
-
-  // 2. Full 468-point jaring/net
   drawTesselation(ctx, landmarks, W, H, rgb, isOk ? 0.3 : 0.18);
-
-  // 3. All 468 vertex dots (tiny, batched)
   drawAllVertexDots(ctx, landmarks, W, H, rgb, isOk ? 0.58 : 0.38, 1.2);
-
-  // 4. Animated scan sweep (clipped to face oval)
   if (isOk && !scanComplete.value) {
     drawScanSweep(ctx, ts, ovalPx, boxX, boxY, boxW, boxH, col, rgb);
   }
-
-  // 5. Glowing feature contours on top
   drawFeatureContours(ctx, landmarks, W, H, col, rgb, isOk);
-
-  // 6. Large pulsing key-feature dots
   drawKeyDots(ctx, landmarks, col, ts, W, H);
-
-  // 7. Corner tracking brackets
   drawCornerBrackets(ctx, boxX, boxY, boxW, boxH, col, isOk);
 }
 
 // ─── Object-cover transform state ────────────────────────────────────────────
-// Landmark coords (0-1) are in VIDEO-intrinsic space.
-// We apply the same scale+crop as the video's CSS object-cover so the mesh
-// perfectly overlays the video regardless of container aspect ratio.
 let videoW = 640,
   videoH = 480;
 let coverS = 1,
@@ -653,20 +637,18 @@ function stopSendingFrames() {
   frameIntervalId = null;
 }
 
-// function handleWSData(data) {
-//   latestMetrics.value = data;
-//   const bvp = data.bvp;
-//   if (Array.isArray(bvp) && bvp.length > 0) { bvpBuffer.value = bvp.slice(-BVP_BUFFER_SIZE); bvpEmptyCount = 0; }
-//   else { bvpEmptyCount++; if (bvpEmptyCount >= 3) bvpBuffer.value = []; }
-// }
-
 function handleWSData(data) {
   console.group("[WS DATA]");
   console.log("hr           :", data?.hr);
   console.log("hrv          :", data?.hrv);
   console.log("hrv keys     :", data?.hrv ? Object.keys(data.hrv) : "—");
   console.log("breathing_rate:", data?.hrv?.breathing_rate);
+  console.log("sdnn         :", data?.hrv?.sdnn);
+  console.log("rmssd        :", data?.hrv?.rmssd);
+  console.log("ibi          :", data?.hrv?.ibi);
   console.log("sbp / dbp    :", data?.sbp, "/", data?.dbp);
+  console.log("sqi          :", data?.sqi); // ← tambah
+  console.log("top-level keys:", Object.keys(data)); // ← tambah
   console.log(
     "bvp length   :",
     Array.isArray(data?.bvp) ? data.bvp.length : "bukan array",
@@ -675,6 +657,10 @@ function handleWSData(data) {
   console.groupEnd();
 
   latestMetrics.value = data;
+  latestSqi.value = data?.sqi ?? null; // ← tambah
+
+  tryUpdateBestSnapshot(data);
+
   const bvp = data.bvp;
   if (Array.isArray(bvp) && bvp.length > 0) {
     bvpBuffer.value = bvp.slice(-BVP_BUFFER_SIZE);
@@ -729,7 +715,6 @@ async function startCamera() {
     videoW = video.videoWidth || 640;
     videoH = video.videoHeight || 480;
 
-    // Wait one frame for CSS layout to settle, then compute object-cover transform
     await new Promise((r) => requestAnimationFrame(r));
     const canvas = canvasRef.value;
     if (canvas) {
@@ -738,7 +723,6 @@ async function startCamera() {
       const dH = Math.round(rect.height) || videoH;
       canvas.width = dW;
       canvas.height = dH;
-      // Same scale/crop that CSS object-cover applies to the video
       coverS = Math.max(dW / videoW, dH / videoH);
       coverOX = (videoW * coverS - dW) / 2;
       coverOY = (videoH * coverS - dH) / 2;
@@ -769,7 +753,9 @@ function mapMetricsToResult(m) {
   return {
     heart_rate: m?.hr ?? null,
     breath_rate: m?.hrv?.breathing_rate ?? null,
-    hrv: m?.hrv?.SDNN ?? null,
+    hrv: m?.hrv?.sdnn ?? null,
+    rmssd: m?.hrv?.rmssd ?? null,
+    ibi: m?.hrv?.ibi ?? null,
     systole: m?.sbp ?? null,
     diastole: m?.dbp ?? null,
   };
@@ -787,8 +773,11 @@ async function sendResult() {
     emit("upload-done", resultAPI[0]);
     return;
   }
+
+  // ─── Gunakan bestSnapshot jika ada, fallback ke latestMetrics ────────────
+  const source = bestSnapshot ?? latestMetrics.value;
   isUploadDone = true;
-  emit("upload-done", mapMetricsToResult(latestMetrics.value));
+  emit("upload-done", mapMetricsToResult(source));
 }
 
 function onScanComplete() {
@@ -816,6 +805,7 @@ function resetScan() {
   cancelAnimationFrame(arAnimId);
   arAnimId = null;
   isUnmounted.value = false;
+  resetBestSnapshot(); // ← reset untuk scan baru
   startCamera();
 }
 
@@ -834,6 +824,7 @@ onUnmounted(() => {
 
 defineExpose({
   resetScan,
+  latestSqi, // ← tambah
   stopCamera: () => {
     cancelAnimationFrame(arAnimId);
     arAnimId = null;
@@ -863,7 +854,6 @@ defineExpose({
         style="transform: scaleX(-1)"
       />
 
-      <!-- Mesh + animation canvas -->
       <canvas
         ref="canvasRef"
         class="absolute inset-0 w-full h-full pointer-events-none"
