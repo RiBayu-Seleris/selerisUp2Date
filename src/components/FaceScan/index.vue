@@ -7,29 +7,34 @@ const props = defineProps({
   autoStart: { type: Boolean, default: true },
 });
 
-const USE_MOCK_API     = false;
-const WS_URL           = import.meta.env.VITE_RPPG_WS_URL || "ws://localhost:8000/ws";
-const FRAME_MS         = 67;
-const DETECT_MS        = 150;
-const BVP_BUFFER_SIZE  = 100;
+const USE_MOCK_API = false;
+const WS_URL = import.meta.env.VITE_RPPG_WS_URL || "ws://localhost:8000/ws";
+const FRAME_MS = 67;
+const DETECT_MS = 150;
+const BVP_BUFFER_SIZE = 100;
 const SCAN_DURATION_MS = 30000;
 
 // ─── Landmark index paths (ordered for smooth bezier rendering) ───────────────
 const FACE_OVAL_PATH = [
-  10, 338, 297, 332, 284, 251, 389, 356, 454, 323, 361, 288,
-  397, 365, 379, 378, 400, 377, 152, 148, 176, 149, 150, 136,
-  172, 58, 132, 93, 234, 127, 162, 21, 54, 103, 67, 109,
+  10, 338, 297, 332, 284, 251, 389, 356, 454, 323, 361, 288, 397, 365, 379, 378,
+  400, 377, 152, 148, 176, 149, 150, 136, 172, 58, 132, 93, 234, 127, 162, 21,
+  54, 103, 67, 109,
 ];
-const LEFT_EYE_PATH   = [33, 246, 161, 160, 159, 158, 157, 173, 133, 155, 154, 153, 145, 144, 163, 7];
-const RIGHT_EYE_PATH  = [362, 398, 384, 385, 386, 387, 388, 466, 263, 249, 390, 373, 374, 380, 381, 382];
+const LEFT_EYE_PATH = [
+  33, 246, 161, 160, 159, 158, 157, 173, 133, 155, 154, 153, 145, 144, 163, 7,
+];
+const RIGHT_EYE_PATH = [
+  362, 398, 384, 385, 386, 387, 388, 466, 263, 249, 390, 373, 374, 380, 381,
+  382,
+];
 // Brow: start inner corner → top arc outward → outer end → bottom arc inward → close
 // This forms a proper closed arch without self-crossing loops
-const LEFT_BROW_PATH  = [55, 70, 63, 105, 66, 107, 46, 53, 52, 65];
+const LEFT_BROW_PATH = [55, 70, 63, 105, 66, 107, 46, 53, 52, 65];
 const RIGHT_BROW_PATH = [285, 300, 293, 334, 296, 336, 276, 283, 282, 295];
 const NOSE_BRIDGE_PATH = [168, 6, 197, 195, 5, 4];
 const NOSE_BOTTOM_PATH = [129, 49, 48, 64, 98, 97, 2, 326, 327, 294, 279, 358];
-const UPPER_LIP_PATH  = [61, 185, 40, 39, 37, 0, 267, 269, 270, 409, 291];
-const LOWER_LIP_PATH  = [291, 375, 321, 405, 314, 17, 84, 181, 91, 146, 61];
+const UPPER_LIP_PATH = [61, 185, 40, 39, 37, 0, 267, 269, 270, 409, 291];
+const LOWER_LIP_PATH = [291, 375, 321, 405, 314, 17, 84, 181, 91, 146, 61];
 
 // Key pulsing dots (outer eye corners, nose tip, mouth corners, chin, top)
 const KEY_DOTS = [33, 263, 4, 61, 291, 152, 10];
@@ -37,16 +42,18 @@ const KEY_DOTS = [33, 263, 4, 61, 291, 152, 10];
 const OVAL_INDICES = FACE_OVAL_PATH; // reused for position check
 
 // ─── Refs ─────────────────────────────────────────────────────────────────────
-const videoRef     = ref(null);
-const canvasRef    = ref(null);
+const videoRef = ref(null);
+const canvasRef = ref(null);
 const cameraActive = ref(false);
-const isUnmounted  = ref(false);
-const meshReady    = ref(false);
+const isUnmounted = ref(false);
+const meshReady = ref(false);
 
-const faceStatus   = ref("no_face");
+const faceStatus = ref("no_face");
 const isGazePaused = ref(false);
-const isDetecting  = computed(() => faceStatus.value === "ok" && !isGazePaused.value);
-const hasFace      = computed(() => faceStatus.value !== "no_face");
+const isDetecting = computed(
+  () => faceStatus.value === "ok" && !isGazePaused.value,
+);
+const hasFace = computed(() => faceStatus.value !== "no_face");
 
 const latestMetrics = ref(null);
 const displayHR = computed(() => {
@@ -61,19 +68,26 @@ const displayBreathing = computed(() => {
 const faceGuidanceText = computed(() => {
   if (isDetecting.value) return "Wajah Terdeteksi";
   switch (faceStatus.value) {
-    case "not_centered": return "Arahkan ke tengah";
-    case "too_close":    return "Mundur sedikit";
-    case "too_far":      return "Maju sedikit";
-    case "tilt":         return "Tegakkan kepala";
-    default:             return "Mencari Wajah...";
+    case "not_centered":
+      return "Arahkan ke tengah";
+    case "too_close":
+      return "Mundur sedikit";
+    case "too_far":
+      return "Maju sedikit";
+    case "tilt":
+      return "Tegakkan kepala";
+    default:
+      return "Mencari Wajah...";
   }
 });
 
 const meshColor = computed(() =>
-  faceStatus.value === "ok" || faceStatus.value === "no_face" ? "#4ade80" : "#fb923c"
+  faceStatus.value === "ok" || faceStatus.value === "no_face"
+    ? "#4ade80"
+    : "#fb923c",
 );
 const ovalGuideColor = computed(() => {
-  if (faceStatus.value === "ok")      return "#4ade80";
+  if (faceStatus.value === "ok") return "#4ade80";
   if (faceStatus.value === "no_face") return "rgba(255,255,255,0.3)";
   return "#f87171";
 });
@@ -86,20 +100,27 @@ const hasBvpSignal = computed(() => bvpBuffer.value.length > 1);
 const bvpPoints = computed(() => {
   const buf = bvpBuffer.value;
   if (buf.length < 2) return "";
-  const W = 300, H = 52;
-  let min = buf[0], max = buf[0];
+  const W = 300,
+    H = 52;
+  let min = buf[0],
+    max = buf[0];
   for (let i = 1; i < buf.length; i++) {
     if (buf[i] < min) min = buf[i];
     if (buf[i] > max) max = buf[i];
   }
   const range = max - min || 1;
-  return buf.map((v, i) =>
-    `${((i / (buf.length - 1)) * W).toFixed(1)},${(H - ((v - min) / range) * (H - 6) - 3).toFixed(1)}`
-  ).join(" ");
+  return buf
+    .map(
+      (v, i) =>
+        `${((i / (buf.length - 1)) * W).toFixed(1)},${(H - ((v - min) / range) * (H - 6) - 3).toFixed(1)}`,
+    )
+    .join(" ");
 });
 
 // ─── Scan state ───────────────────────────────────────────────────────────────
-let scanStartMs = null, accumulatedMs = 0, pauseStartMs = null;
+let scanStartMs = null,
+  accumulatedMs = 0,
+  pauseStartMs = null;
 const scanComplete = ref(false);
 const scanProgress = ref(0);
 let arAnimId = null;
@@ -126,7 +147,11 @@ function startProgressLoop() {
         : Math.max(0, now - scanStartMs - accumulatedMs);
       const pct = Math.min(100, (elapsed / SCAN_DURATION_MS) * 100);
       if (Math.abs(pct - scanProgress.value) >= 0.15) scanProgress.value = pct;
-      if (pct >= 100) { scanComplete.value = true; onScanComplete(); return; }
+      if (pct >= 100) {
+        scanComplete.value = true;
+        onScanComplete();
+        return;
+      }
     }
     arAnimId = requestAnimationFrame(tick);
   }
@@ -137,15 +162,19 @@ function startProgressLoop() {
 function checkFaceFromLandmarks(landmarks) {
   if (!landmarks || landmarks.length === 0) return "no_face";
   const ovalPts = OVAL_INDICES.map((i) => landmarks[i]);
-  const xs = ovalPts.map((p) => p.x), ys = ovalPts.map((p) => p.y);
+  const xs = ovalPts.map((p) => p.x),
+    ys = ovalPts.map((p) => p.y);
   const cx = xs.reduce((a, b) => a + b, 0) / xs.length;
   const cy = ys.reduce((a, b) => a + b, 0) / ys.length;
   const rx = (Math.max(...xs) - Math.min(...xs)) / 2;
-  if (Math.abs(cx - 0.5) > 0.22 || Math.abs(cy - 0.5) > 0.25) return "not_centered";
+  if (Math.abs(cx - 0.5) > 0.22 || Math.abs(cy - 0.5) > 0.25)
+    return "not_centered";
   if (rx > 0.27) return "too_close";
   if (rx < 0.14) return "too_far";
-  const L = landmarks[33], R = landmarks[263];
-  if (Math.abs(Math.atan2(R.y - L.y, R.x - L.x) * (180 / Math.PI)) > 15) return "tilt";
+  const L = landmarks[33],
+    R = landmarks[263];
+  if (Math.abs(Math.atan2(R.y - L.y, R.x - L.x) * (180 / Math.PI)) > 15)
+    return "tilt";
   return "ok";
 }
 
@@ -166,34 +195,39 @@ function applyFaceStatus(status) {
 
 // ─── Canvas drawing system ────────────────────────────────────────────────────
 function hexToRgb(hex) {
-  return `${parseInt(hex.slice(1,3),16)},${parseInt(hex.slice(3,5),16)},${parseInt(hex.slice(5,7),16)}`;
+  return `${parseInt(hex.slice(1, 3), 16)},${parseInt(hex.slice(3, 5), 16)},${parseInt(hex.slice(5, 7), 16)}`;
 }
 
 // Build a smooth quadratic bezier path through ordered pixel-space points
 function buildSmoothPath(ctx, pts, closed) {
   if (pts.length < 2) return;
   if (closed) {
-    const sx = (pts[pts.length-1].x + pts[0].x) / 2;
-    const sy = (pts[pts.length-1].y + pts[0].y) / 2;
+    const sx = (pts[pts.length - 1].x + pts[0].x) / 2;
+    const sy = (pts[pts.length - 1].y + pts[0].y) / 2;
     ctx.moveTo(sx, sy);
     for (let i = 0; i < pts.length; i++) {
-      const c = pts[i], n = pts[(i+1) % pts.length];
-      ctx.quadraticCurveTo(c.x, c.y, (c.x+n.x)/2, (c.y+n.y)/2);
+      const c = pts[i],
+        n = pts[(i + 1) % pts.length];
+      ctx.quadraticCurveTo(c.x, c.y, (c.x + n.x) / 2, (c.y + n.y) / 2);
     }
     ctx.closePath();
   } else {
     ctx.moveTo(pts[0].x, pts[0].y);
     for (let i = 0; i < pts.length - 2; i++) {
-      const c = pts[i+1], n = pts[i+2];
-      ctx.quadraticCurveTo(c.x, c.y, (c.x+n.x)/2, (c.y+n.y)/2);
+      const c = pts[i + 1],
+        n = pts[i + 2];
+      ctx.quadraticCurveTo(c.x, c.y, (c.x + n.x) / 2, (c.y + n.y) / 2);
     }
-    ctx.lineTo(pts[pts.length-1].x, pts[pts.length-1].y);
+    ctx.lineTo(pts[pts.length - 1].x, pts[pts.length - 1].y);
   }
 }
 
 // Convert landmark indices → pixel pts
 function lmPx(landmarks, indices, W, H) {
-  return indices.map(i => landmarks[i]).filter(Boolean).map(p => ({ x: p.x*W, y: p.y*H }));
+  return indices
+    .map((i) => landmarks[i])
+    .filter(Boolean)
+    .map((p) => ({ x: p.x * W, y: p.y * H }));
 }
 
 // Smooth stroke through landmark indices
@@ -207,9 +241,9 @@ function strokeSmoothPath(ctx, landmarks, indices, W, H, closed) {
 // ── Layer 1: Radial gradient fill inside face oval ────────────────────────────
 function drawFaceOvalFill(ctx, ovalPx, cx, cy, radius, rgb) {
   const grad = ctx.createRadialGradient(cx, cy, 0, cx, cy, radius * 0.9);
-  grad.addColorStop(0,   `rgba(${rgb},0.13)`);
-  grad.addColorStop(0.55,`rgba(${rgb},0.07)`);
-  grad.addColorStop(1,   `rgba(${rgb},0.01)`);
+  grad.addColorStop(0, `rgba(${rgb},0.13)`);
+  grad.addColorStop(0.55, `rgba(${rgb},0.07)`);
+  grad.addColorStop(1, `rgba(${rgb},0.01)`);
   ctx.save();
   ctx.fillStyle = grad;
   ctx.beginPath();
@@ -223,25 +257,26 @@ function drawTesselation(ctx, landmarks, W, H, rgb, alpha) {
   // Pre-collect edges once
   const edges = [];
   for (const [s, e] of FACEMESH_TESSELATION) {
-    const p1 = landmarks[s], p2 = landmarks[e];
-    if (p1 && p2) edges.push(p1.x*W, p1.y*H, p2.x*W, p2.y*H);
+    const p1 = landmarks[s],
+      p2 = landmarks[e];
+    if (p1 && p2) edges.push(p1.x * W, p1.y * H, p2.x * W, p2.y * H);
   }
 
   function strokeEdges(lineWidth, a) {
     ctx.save();
     ctx.strokeStyle = `rgba(${rgb},${a})`;
-    ctx.lineWidth   = lineWidth;
+    ctx.lineWidth = lineWidth;
     ctx.beginPath();
     for (let i = 0; i < edges.length; i += 4) {
-      ctx.moveTo(edges[i], edges[i+1]);
-      ctx.lineTo(edges[i+2], edges[i+3]);
+      ctx.moveTo(edges[i], edges[i + 1]);
+      ctx.lineTo(edges[i + 2], edges[i + 3]);
     }
     ctx.stroke();
     ctx.restore();
   }
 
   // Pass 1 — wide soft glow (gives mesh lines weight/depth)
-  strokeEdges(1.5, alpha * 0.30);
+  strokeEdges(1.5, alpha * 0.3);
   // Pass 2 — narrow crisp line on top
   strokeEdges(0.55, alpha);
 }
@@ -253,8 +288,8 @@ function drawAllVertexDots(ctx, landmarks, W, H, rgb, alpha, r) {
   ctx.beginPath();
   for (const pt of landmarks) {
     if (!pt) continue;
-    ctx.moveTo(pt.x*W + r, pt.y*H);
-    ctx.arc(pt.x*W, pt.y*H, r, 0, Math.PI * 2);
+    ctx.moveTo(pt.x * W + r, pt.y * H);
+    ctx.arc(pt.x * W, pt.y * H, r, 0, Math.PI * 2);
   }
   ctx.fill();
   ctx.restore();
@@ -263,7 +298,7 @@ function drawAllVertexDots(ctx, landmarks, W, H, rgb, alpha, r) {
 // ── Layer 4: Scan sweep clipped to face oval ──────────────────────────────────
 function drawScanSweep(ctx, ts, ovalPx, boxX, boxY, boxW, boxH, col, rgb) {
   const sweepFrac = (ts / 2500) % 1;
-  const sweepY    = boxY + boxH * sweepFrac;
+  const sweepY = boxY + boxH * sweepFrac;
 
   ctx.save();
   ctx.beginPath();
@@ -278,19 +313,19 @@ function drawScanSweep(ctx, ts, ovalPx, boxX, boxY, boxW, boxH, col, rgb) {
   ctx.fillRect(boxX, boxY, boxW, sweepY - boxY);
 
   // Horizontal glow line
-  const lineGrad = ctx.createLinearGradient(boxX, 0, boxX+boxW, 0);
-  lineGrad.addColorStop(0,   `rgba(${rgb},0)`);
+  const lineGrad = ctx.createLinearGradient(boxX, 0, boxX + boxW, 0);
+  lineGrad.addColorStop(0, `rgba(${rgb},0)`);
   lineGrad.addColorStop(0.1, `rgba(${rgb},1)`);
   lineGrad.addColorStop(0.9, `rgba(${rgb},1)`);
-  lineGrad.addColorStop(1,   `rgba(${rgb},0)`);
+  lineGrad.addColorStop(1, `rgba(${rgb},0)`);
 
-  ctx.shadowBlur  = 22;
+  ctx.shadowBlur = 22;
   ctx.shadowColor = col;
   ctx.strokeStyle = lineGrad;
-  ctx.lineWidth   = 2;
+  ctx.lineWidth = 2;
   ctx.beginPath();
   ctx.moveTo(boxX, sweepY);
-  ctx.lineTo(boxX+boxW, sweepY);
+  ctx.lineTo(boxX + boxW, sweepY);
   ctx.stroke();
 
   ctx.restore();
@@ -300,43 +335,43 @@ function drawScanSweep(ctx, ts, ovalPx, boxX, boxY, boxW, boxH, col, rgb) {
 function drawFeatureContours(ctx, landmarks, W, H, col, rgb, isOk) {
   const glowOval = isOk ? 18 : 8;
   const glowFeat = isOk ? 11 : 5;
-  const aOval    = isOk ? 0.90 : 0.60;
-  const aEye     = isOk ? 0.85 : 0.55;
-  const aBrow    = isOk ? 0.70 : 0.40;
-  const aNose    = isOk ? 0.58 : 0.32;
-  const aLip     = isOk ? 0.80 : 0.50;
+  const aOval = isOk ? 0.9 : 0.6;
+  const aEye = isOk ? 0.85 : 0.55;
+  const aBrow = isOk ? 0.7 : 0.4;
+  const aNose = isOk ? 0.58 : 0.32;
+  const aLip = isOk ? 0.8 : 0.5;
 
   // Face oval
   ctx.save();
-  ctx.shadowBlur  = glowOval;
+  ctx.shadowBlur = glowOval;
   ctx.shadowColor = col;
   ctx.strokeStyle = `rgba(${rgb},${aOval})`;
-  ctx.lineWidth   = 2.2;
+  ctx.lineWidth = 2.2;
   strokeSmoothPath(ctx, landmarks, FACE_OVAL_PATH, W, H, true);
   ctx.restore();
 
   // Eyes
   ctx.save();
-  ctx.shadowBlur  = glowFeat;
+  ctx.shadowBlur = glowFeat;
   ctx.shadowColor = col;
   ctx.strokeStyle = `rgba(${rgb},${aEye})`;
-  ctx.lineWidth   = 1.5;
-  strokeSmoothPath(ctx, landmarks, LEFT_EYE_PATH,  W, H, true);
+  ctx.lineWidth = 1.5;
+  strokeSmoothPath(ctx, landmarks, LEFT_EYE_PATH, W, H, true);
   strokeSmoothPath(ctx, landmarks, RIGHT_EYE_PATH, W, H, true);
   ctx.restore();
 
   // Eyebrows — filled arch (closed path so no loops)
   ctx.save();
-  ctx.shadowBlur  = glowFeat;
+  ctx.shadowBlur = glowFeat;
   ctx.shadowColor = col;
-  ctx.lineJoin    = "round";
-  ctx.lineCap     = "round";
+  ctx.lineJoin = "round";
+  ctx.lineCap = "round";
   for (const path of [LEFT_BROW_PATH, RIGHT_BROW_PATH]) {
     const pts = lmPx(landmarks, path, W, H);
     // Fill — solid arch body
-    ctx.fillStyle   = `rgba(${rgb},${isOk ? 0.42 : 0.22})`;
+    ctx.fillStyle = `rgba(${rgb},${isOk ? 0.42 : 0.22})`;
     ctx.strokeStyle = `rgba(${rgb},${aBrow})`;
-    ctx.lineWidth   = 0.9;
+    ctx.lineWidth = 0.9;
     ctx.beginPath();
     buildSmoothPath(ctx, pts, true);
     ctx.fill();
@@ -346,22 +381,22 @@ function drawFeatureContours(ctx, landmarks, W, H, col, rgb, isOk) {
 
   // Nose
   ctx.save();
-  ctx.shadowBlur  = glowFeat;
+  ctx.shadowBlur = glowFeat;
   ctx.shadowColor = col;
   ctx.strokeStyle = `rgba(${rgb},${aNose})`;
-  ctx.lineWidth   = 1.1;
-  ctx.lineCap     = "round";
+  ctx.lineWidth = 1.1;
+  ctx.lineCap = "round";
   strokeSmoothPath(ctx, landmarks, NOSE_BRIDGE_PATH, W, H, false);
   strokeSmoothPath(ctx, landmarks, NOSE_BOTTOM_PATH, W, H, false);
   ctx.restore();
 
   // Lips
   ctx.save();
-  ctx.shadowBlur  = glowFeat;
+  ctx.shadowBlur = glowFeat;
   ctx.shadowColor = col;
   ctx.strokeStyle = `rgba(${rgb},${aLip})`;
-  ctx.lineWidth   = 1.5;
-  ctx.lineCap     = "round";
+  ctx.lineWidth = 1.5;
+  ctx.lineCap = "round";
   strokeSmoothPath(ctx, landmarks, UPPER_LIP_PATH, W, H, false);
   strokeSmoothPath(ctx, landmarks, LOWER_LIP_PATH, W, H, false);
   ctx.restore();
@@ -370,16 +405,16 @@ function drawFeatureContours(ctx, landmarks, W, H, col, rgb, isOk) {
 // ── Layer 6: Large pulsing dots at key landmark intersections ─────────────────
 function drawKeyDots(ctx, landmarks, col, ts, W, H) {
   const pulse = 0.5 + 0.5 * Math.sin(ts / 600);
-  const rgb   = hexToRgb(col);
+  const rgb = hexToRgb(col);
   for (const i of KEY_DOTS) {
     const pt = landmarks[i];
     if (!pt) continue;
     ctx.save();
-    ctx.shadowBlur  = 12 + pulse * 12;
+    ctx.shadowBlur = 12 + pulse * 12;
     ctx.shadowColor = col;
-    ctx.fillStyle   = `rgba(${rgb},${0.6 + pulse * 0.4})`;
+    ctx.fillStyle = `rgba(${rgb},${0.6 + pulse * 0.4})`;
     ctx.beginPath();
-    ctx.arc(pt.x*W, pt.y*H, 1.8 + pulse*1.6, 0, Math.PI * 2);
+    ctx.arc(pt.x * W, pt.y * H, 1.8 + pulse * 1.6, 0, Math.PI * 2);
     ctx.fill();
     ctx.restore();
   }
@@ -388,43 +423,68 @@ function drawKeyDots(ctx, landmarks, col, ts, W, H) {
 // ── Layer 7: Corner tracking brackets ────────────────────────────────────────
 function drawCornerBrackets(ctx, boxX, boxY, boxW, boxH, col, isOk) {
   const bLen = Math.min(boxW, boxH) * 0.13;
-  const rgb  = hexToRgb(col);
+  const rgb = hexToRgb(col);
   ctx.save();
   ctx.strokeStyle = `rgba(${rgb},${isOk ? 1 : 0.5})`;
-  ctx.lineWidth   = isOk ? 2.5 : 1.8;
-  ctx.lineCap     = "square";
-  ctx.shadowBlur  = isOk ? 16 : 6;
+  ctx.lineWidth = isOk ? 2.5 : 1.8;
+  ctx.lineCap = "square";
+  ctx.shadowBlur = isOk ? 16 : 6;
   ctx.shadowColor = col;
   const corners = [
-    [[boxX, boxY+bLen],[boxX,boxY],[boxX+bLen,boxY]],
-    [[boxX+boxW-bLen,boxY],[boxX+boxW,boxY],[boxX+boxW,boxY+bLen]],
-    [[boxX,boxY+boxH-bLen],[boxX,boxY+boxH],[boxX+bLen,boxY+boxH]],
-    [[boxX+boxW-bLen,boxY+boxH],[boxX+boxW,boxY+boxH],[boxX+boxW,boxY+boxH-bLen]],
+    [
+      [boxX, boxY + bLen],
+      [boxX, boxY],
+      [boxX + bLen, boxY],
+    ],
+    [
+      [boxX + boxW - bLen, boxY],
+      [boxX + boxW, boxY],
+      [boxX + boxW, boxY + bLen],
+    ],
+    [
+      [boxX, boxY + boxH - bLen],
+      [boxX, boxY + boxH],
+      [boxX + bLen, boxY + boxH],
+    ],
+    [
+      [boxX + boxW - bLen, boxY + boxH],
+      [boxX + boxW, boxY + boxH],
+      [boxX + boxW, boxY + boxH - bLen],
+    ],
   ];
-  for (const [[ax,ay],[bx,by],[cx2,cy2]] of corners) {
-    ctx.beginPath(); ctx.moveTo(ax,ay); ctx.lineTo(bx,by); ctx.lineTo(cx2,cy2); ctx.stroke();
+  for (const [[ax, ay], [bx, by], [cx2, cy2]] of corners) {
+    ctx.beginPath();
+    ctx.moveTo(ax, ay);
+    ctx.lineTo(bx, by);
+    ctx.lineTo(cx2, cy2);
+    ctx.stroke();
   }
   ctx.restore();
 }
 
 // ── No-face: expanding ripple rings ──────────────────────────────────────────
 function drawSearchRipples(ctx, ts, W, H) {
-  const cx = W/2, cy = H*0.48, t = (ts/2200)%1;
+  const cx = W / 2,
+    cy = H * 0.48,
+    t = (ts / 2200) % 1;
   for (let i = 0; i < 3; i++) {
-    const frac = (t + i/3) % 1;
+    const frac = (t + i / 3) % 1;
     ctx.save();
-    ctx.strokeStyle = `rgba(74,222,128,${(1-frac)*0.18})`;
-    ctx.lineWidth   = 1.5;
+    ctx.strokeStyle = `rgba(74,222,128,${(1 - frac) * 0.18})`;
+    ctx.lineWidth = 1.5;
     ctx.beginPath();
-    ctx.arc(cx, cy, 40 + frac*100, 0, Math.PI*2);
+    ctx.arc(cx, cy, 40 + frac * 100, 0, Math.PI * 2);
     ctx.stroke();
     ctx.restore();
   }
-  const blink = 0.4 + 0.6*Math.abs(Math.sin(ts/700));
+  const blink = 0.4 + 0.6 * Math.abs(Math.sin(ts / 700));
   ctx.save();
-  ctx.shadowBlur=10; ctx.shadowColor="#4ade80";
-  ctx.fillStyle=`rgba(74,222,128,${blink*0.6})`;
-  ctx.beginPath(); ctx.arc(cx,cy,4,0,Math.PI*2); ctx.fill();
+  ctx.shadowBlur = 10;
+  ctx.shadowColor = "#4ade80";
+  ctx.fillStyle = `rgba(74,222,128,${blink * 0.6})`;
+  ctx.beginPath();
+  ctx.arc(cx, cy, 4, 0, Math.PI * 2);
+  ctx.fill();
   ctx.restore();
 }
 
@@ -443,7 +503,8 @@ function renderAnimatedMesh(ts, landmarks) {
   ctx.setTransform(coverS, 0, 0, coverS, -coverOX, -coverOY);
 
   // W/H = video intrinsic size — landmark coords are relative to this
-  const W = videoW, H = videoH;
+  const W = videoW,
+    H = videoH;
 
   if (!landmarks || landmarks.length === 0) {
     drawSearchRipples(ctx, ts, W, H);
@@ -451,22 +512,26 @@ function renderAnimatedMesh(ts, landmarks) {
   }
 
   const isOk = faceStatus.value === "ok";
-  const col  = meshColor.value;
-  const rgb  = hexToRgb(col);
+  const col = meshColor.value;
+  const rgb = hexToRgb(col);
 
   // Pre-compute oval in pixel space
   const ovalPx = lmPx(landmarks, FACE_OVAL_PATH, W, H);
-  const oxs = ovalPx.map(p=>p.x), oys = ovalPx.map(p=>p.y);
-  const boxX = Math.min(...oxs), boxY = Math.min(...oys);
-  const boxW = Math.max(...oxs)-boxX, boxH = Math.max(...oys)-boxY;
-  const cx = boxX+boxW/2, cy = boxY+boxH/2;
-  const radius = Math.max(boxW, boxH)/2;
+  const oxs = ovalPx.map((p) => p.x),
+    oys = ovalPx.map((p) => p.y);
+  const boxX = Math.min(...oxs),
+    boxY = Math.min(...oys);
+  const boxW = Math.max(...oxs) - boxX,
+    boxH = Math.max(...oys) - boxY;
+  const cx = boxX + boxW / 2,
+    cy = boxY + boxH / 2;
+  const radius = Math.max(boxW, boxH) / 2;
 
   // 1. Holographic face fill
   drawFaceOvalFill(ctx, ovalPx, cx, cy, radius, rgb);
 
   // 2. Full 468-point jaring/net
-  drawTesselation(ctx, landmarks, W, H, rgb, isOk ? 0.30 : 0.18);
+  drawTesselation(ctx, landmarks, W, H, rgb, isOk ? 0.3 : 0.18);
 
   // 3. All 468 vertex dots (tiny, batched)
   drawAllVertexDots(ctx, landmarks, W, H, rgb, isOk ? 0.58 : 0.38, 1.2);
@@ -490,15 +555,18 @@ function renderAnimatedMesh(ts, landmarks) {
 // Landmark coords (0-1) are in VIDEO-intrinsic space.
 // We apply the same scale+crop as the video's CSS object-cover so the mesh
 // perfectly overlays the video regardless of container aspect ratio.
-let videoW  = 640, videoH  = 480;
-let coverS  = 1,   coverOX = 0, coverOY = 0;
+let videoW = 640,
+  videoH = 480;
+let coverS = 1,
+  coverOX = 0,
+  coverOY = 0;
 
 // ─── MediaPipe FaceMesh ───────────────────────────────────────────────────────
-let faceMesh         = null;
+let faceMesh = null;
 let currentLandmarks = null;
-let lastDetectTs     = 0;
-let detectBusy       = false;
-let renderLoopId     = null;
+let lastDetectTs = 0;
+let detectBusy = false;
+let renderLoopId = null;
 
 async function initFaceMesh() {
   faceMesh = new FaceMesh({
@@ -506,8 +574,10 @@ async function initFaceMesh() {
       `https://cdn.jsdelivr.net/npm/@mediapipe/face_mesh@0.4.1633559619/${f}`,
   });
   faceMesh.setOptions({
-    maxNumFaces: 1, refineLandmarks: false,
-    minDetectionConfidence: 0.5, minTrackingConfidence: 0.5,
+    maxNumFaces: 1,
+    refineLandmarks: false,
+    minDetectionConfidence: 0.5,
+    minTrackingConfidence: 0.5,
   });
   faceMesh.onResults((results) => {
     if (isUnmounted.value) return;
@@ -523,11 +593,23 @@ async function initFaceMesh() {
 function startRenderLoop() {
   if (renderLoopId) return;
   function renderFrame(ts) {
-    if (isUnmounted.value) { renderLoopId = null; return; }
+    if (isUnmounted.value) {
+      renderLoopId = null;
+      return;
+    }
     const video = videoRef.value;
-    if (!detectBusy && faceMesh && video && video.readyState >= 2 && ts - lastDetectTs >= DETECT_MS) {
-      detectBusy = true; lastDetectTs = ts;
-      faceMesh.send({ image: video }).catch(() => { detectBusy = false; });
+    if (
+      !detectBusy &&
+      faceMesh &&
+      video &&
+      video.readyState >= 2 &&
+      ts - lastDetectTs >= DETECT_MS
+    ) {
+      detectBusy = true;
+      lastDetectTs = ts;
+      faceMesh.send({ image: video }).catch(() => {
+        detectBusy = false;
+      });
     }
     renderAnimatedMesh(ts, currentLandmarks);
     renderLoopId = requestAnimationFrame(renderFrame);
@@ -536,14 +618,20 @@ function startRenderLoop() {
 }
 
 function stopRenderLoop() {
-  if (renderLoopId) { cancelAnimationFrame(renderLoopId); renderLoopId = null; }
-  detectBusy = false; currentLandmarks = null;
+  if (renderLoopId) {
+    cancelAnimationFrame(renderLoopId);
+    renderLoopId = null;
+  }
+  detectBusy = false;
+  currentLandmarks = null;
   const c = canvasRef.value;
   if (c) c.getContext("2d").clearRect(0, 0, c.width, c.height);
 }
 
 // ─── WebSocket ────────────────────────────────────────────────────────────────
-let ws = null, captureCanvas = null, frameIntervalId = null;
+let ws = null,
+  captureCanvas = null,
+  frameIntervalId = null;
 
 function startSendingFrames() {
   if (frameIntervalId) return;
@@ -551,32 +639,73 @@ function startSendingFrames() {
   frameIntervalId = setInterval(() => {
     const video = videoRef.value;
     if (!video || ws?.readyState !== WebSocket.OPEN) return;
-    const vw = video.videoWidth||480, vh = video.videoHeight||480;
-    captureCanvas.width=vw; captureCanvas.height=vh;
-    captureCanvas.getContext("2d").drawImage(video,0,0,vw,vh);
-    ws.send(captureCanvas.toDataURL("image/jpeg",0.7).split(",")[1]);
+    const vw = video.videoWidth || 480,
+      vh = video.videoHeight || 480;
+    captureCanvas.width = vw;
+    captureCanvas.height = vh;
+    captureCanvas.getContext("2d").drawImage(video, 0, 0, vw, vh);
+    ws.send(captureCanvas.toDataURL("image/jpeg", 0.7).split(",")[1]);
   }, FRAME_MS);
 }
 
-function stopSendingFrames() { clearInterval(frameIntervalId); frameIntervalId = null; }
+function stopSendingFrames() {
+  clearInterval(frameIntervalId);
+  frameIntervalId = null;
+}
+
+// function handleWSData(data) {
+//   latestMetrics.value = data;
+//   const bvp = data.bvp;
+//   if (Array.isArray(bvp) && bvp.length > 0) { bvpBuffer.value = bvp.slice(-BVP_BUFFER_SIZE); bvpEmptyCount = 0; }
+//   else { bvpEmptyCount++; if (bvpEmptyCount >= 3) bvpBuffer.value = []; }
+// }
 
 function handleWSData(data) {
+  console.group("[WS DATA]");
+  console.log("hr           :", data?.hr);
+  console.log("hrv          :", data?.hrv);
+  console.log("hrv keys     :", data?.hrv ? Object.keys(data.hrv) : "—");
+  console.log("breathing_rate:", data?.hrv?.breathing_rate);
+  console.log("sbp / dbp    :", data?.sbp, "/", data?.dbp);
+  console.log(
+    "bvp length   :",
+    Array.isArray(data?.bvp) ? data.bvp.length : "bukan array",
+  );
+  console.log("full object  :", data);
+  console.groupEnd();
+
   latestMetrics.value = data;
   const bvp = data.bvp;
-  if (Array.isArray(bvp) && bvp.length > 0) { bvpBuffer.value = bvp.slice(-BVP_BUFFER_SIZE); bvpEmptyCount = 0; }
-  else { bvpEmptyCount++; if (bvpEmptyCount >= 3) bvpBuffer.value = []; }
+  if (Array.isArray(bvp) && bvp.length > 0) {
+    bvpBuffer.value = bvp.slice(-BVP_BUFFER_SIZE);
+    bvpEmptyCount = 0;
+  } else {
+    bvpEmptyCount++;
+    if (bvpEmptyCount >= 3) bvpBuffer.value = [];
+  }
 }
 
 function connectWS() {
   if (ws) return;
   ws = new WebSocket(WS_URL);
-  ws.onopen    = () => startSendingFrames();
-  ws.onmessage = (e) => { if (isUnmounted.value || scanComplete.value) return; try { handleWSData(JSON.parse(e.data)); } catch {} };
-  ws.onerror   = () => { cameraActive.value = false; };
-  ws.onclose   = () => stopSendingFrames();
+  ws.onopen = () => startSendingFrames();
+  ws.onmessage = (e) => {
+    if (isUnmounted.value || scanComplete.value) return;
+    try {
+      handleWSData(JSON.parse(e.data));
+    } catch {}
+  };
+  ws.onerror = () => {
+    cameraActive.value = false;
+  };
+  ws.onclose = () => stopSendingFrames();
 }
 
-function disconnectWS() { stopSendingFrames(); ws?.close(1000,"done"); ws = null; }
+function disconnectWS() {
+  stopSendingFrames();
+  ws?.close(1000, "done");
+  ws = null;
+}
 
 // ─── Camera ───────────────────────────────────────────────────────────────────
 let mediaStream = null;
@@ -584,26 +713,33 @@ let mediaStream = null;
 async function startCamera() {
   try {
     mediaStream = await navigator.mediaDevices.getUserMedia({
-      video: { width: { ideal: 640 }, height: { ideal: 480 }, facingMode: "user" }, audio: false,
+      video: {
+        width: { ideal: 640 },
+        height: { ideal: 480 },
+        facingMode: "user",
+      },
+      audio: false,
     });
     const video = videoRef.value;
     video.srcObject = mediaStream;
-    await new Promise((resolve) => { video.onloadedmetadata = resolve; });
+    await new Promise((resolve) => {
+      video.onloadedmetadata = resolve;
+    });
 
-    videoW = video.videoWidth  || 640;
+    videoW = video.videoWidth || 640;
     videoH = video.videoHeight || 480;
 
     // Wait one frame for CSS layout to settle, then compute object-cover transform
-    await new Promise(r => requestAnimationFrame(r));
+    await new Promise((r) => requestAnimationFrame(r));
     const canvas = canvasRef.value;
     if (canvas) {
       const rect = canvas.getBoundingClientRect();
-      const dW = Math.round(rect.width)  || videoW;
+      const dW = Math.round(rect.width) || videoW;
       const dH = Math.round(rect.height) || videoH;
-      canvas.width  = dW;
+      canvas.width = dW;
       canvas.height = dH;
       // Same scale/crop that CSS object-cover applies to the video
-      coverS  = Math.max(dW / videoW, dH / videoH);
+      coverS = Math.max(dW / videoW, dH / videoH);
       coverOX = (videoW * coverS - dW) / 2;
       coverOY = (videoH * coverS - dH) / 2;
     }
@@ -611,24 +747,31 @@ async function startCamera() {
     cameraActive.value = true;
     connectWS();
     startRenderLoop();
-  } catch (err) { console.error("[Camera] getUserMedia error:", err); }
+  } catch (err) {
+    console.error("[Camera] getUserMedia error:", err);
+  }
 }
 
 function stopCameraHard() {
-  stopRenderLoop(); disconnectWS();
-  if (mediaStream) { mediaStream.getTracks().forEach(t => t.stop()); mediaStream = null; }
+  stopRenderLoop();
+  disconnectWS();
+  if (mediaStream) {
+    mediaStream.getTracks().forEach((t) => t.stop());
+    mediaStream = null;
+  }
   if (videoRef.value) videoRef.value.srcObject = null;
-  cameraActive.value = false; faceStatus.value = "no_face";
+  cameraActive.value = false;
+  faceStatus.value = "no_face";
 }
 
 // ─── Result mapping ───────────────────────────────────────────────────────────
 function mapMetricsToResult(m) {
   return {
-    heart_rate:  m?.hr ?? null,
+    heart_rate: m?.hr ?? null,
     breath_rate: m?.hrv?.breathing_rate ?? null,
-    hrv:         m?.hrv?.SDNN ?? null,
-    systole:     m?.sbp ?? null,
-    diastole:    m?.dbp ?? null,
+    hrv: m?.hrv?.SDNN ?? null,
+    systole: m?.sbp ?? null,
+    diastole: m?.dbp ?? null,
   };
 }
 
@@ -639,28 +782,41 @@ let isUploadDone = false;
 async function sendResult() {
   if (isUploadDone) return;
   if (USE_MOCK_API) {
-    await new Promise(r => setTimeout(r, 1500));
-    isUploadDone = true; emit("upload-done", resultAPI[0]); return;
+    await new Promise((r) => setTimeout(r, 1500));
+    isUploadDone = true;
+    emit("upload-done", resultAPI[0]);
+    return;
   }
   isUploadDone = true;
   emit("upload-done", mapMetricsToResult(latestMetrics.value));
 }
 
 function onScanComplete() {
-  cancelAnimationFrame(arAnimId); arAnimId = null;
-  emit("upload-start"); emit("scan-complete");
-  stopCameraHard(); sendResult();
+  cancelAnimationFrame(arAnimId);
+  arAnimId = null;
+  emit("upload-start");
+  emit("scan-complete");
+  stopCameraHard();
+  sendResult();
 }
 
 // ─── Reset ────────────────────────────────────────────────────────────────────
 function resetScan() {
-  scanComplete.value=false; scanProgress.value=0;
-  scanStartMs=null; accumulatedMs=0; pauseStartMs=null;
-  isGazePaused.value=false; faceStatus.value="no_face";
-  isUploadDone=false; latestMetrics.value=null;
-  bvpBuffer.value=[]; bvpEmptyCount=0;
-  cancelAnimationFrame(arAnimId); arAnimId=null;
-  isUnmounted.value=false; startCamera();
+  scanComplete.value = false;
+  scanProgress.value = 0;
+  scanStartMs = null;
+  accumulatedMs = 0;
+  pauseStartMs = null;
+  isGazePaused.value = false;
+  faceStatus.value = "no_face";
+  isUploadDone = false;
+  latestMetrics.value = null;
+  bvpBuffer.value = [];
+  bvpEmptyCount = 0;
+  cancelAnimationFrame(arAnimId);
+  arAnimId = null;
+  isUnmounted.value = false;
+  startCamera();
 }
 
 // ─── Lifecycle ────────────────────────────────────────────────────────────────
@@ -671,34 +827,47 @@ onMounted(async () => {
 });
 onUnmounted(() => {
   isUnmounted.value = true;
-  cancelAnimationFrame(arAnimId); arAnimId = null;
+  cancelAnimationFrame(arAnimId);
+  arAnimId = null;
   stopCameraHard();
 });
 
 defineExpose({
   resetScan,
-  stopCamera:  () => { cancelAnimationFrame(arAnimId); arAnimId=null; stopCameraHard(); },
-  startCamera: () => { isUnmounted.value=false; resetScan(); },
+  stopCamera: () => {
+    cancelAnimationFrame(arAnimId);
+    arAnimId = null;
+    stopCameraHard();
+  },
+  startCamera: () => {
+    isUnmounted.value = false;
+    resetScan();
+  },
 });
 </script>
 
 <template>
-  <div class="w-full h-full flex flex-col justify-between rounded-t-2xl rounded-b-xl overflow-hidden">
-
+  <div
+    class="w-full h-full flex flex-col justify-between rounded-t-2xl rounded-b-xl overflow-hidden"
+  >
     <!-- ── Camera area ──────────────────────────────────────────────────────── -->
-    <div class="relative w-full h-[70%] shrink-0 overflow-hidden bg-black rounded-t-2xl">
-
+    <div
+      class="relative w-full h-[70%] shrink-0 overflow-hidden bg-black rounded-t-2xl"
+    >
       <video
-        ref="videoRef" autoplay playsinline muted
+        ref="videoRef"
+        autoplay
+        playsinline
+        muted
         class="absolute inset-0 w-full h-full object-cover pointer-events-none"
-        style="transform:scaleX(-1);"
+        style="transform: scaleX(-1)"
       />
 
       <!-- Mesh + animation canvas -->
       <canvas
         ref="canvasRef"
         class="absolute inset-0 w-full h-full pointer-events-none"
-        style="transform:scaleX(-1);"
+        style="transform: scaleX(-1)"
       />
 
       <!-- Dashed oval guide when no face -->
@@ -707,10 +876,15 @@ defineExpose({
           v-if="!hasFace"
           class="absolute inset-0 flex items-center justify-center pointer-events-none"
         >
-          <div :style="{
-            width:'52%', height:'84%', borderRadius:'9999px',
-            border:`1.5px dashed ${ovalGuideColor}`, opacity:0.3,
-          }"/>
+          <div
+            :style="{
+              width: '52%',
+              height: '84%',
+              borderRadius: '9999px',
+              border: `1.5px dashed ${ovalGuideColor}`,
+              opacity: 0.3,
+            }"
+          />
         </div>
       </Transition>
 
@@ -721,8 +895,13 @@ defineExpose({
           class="absolute inset-0 flex items-center justify-center bg-black/60 pointer-events-none"
         >
           <div class="flex flex-col items-center gap-3">
-            <div class="w-6 h-6 rounded-full border-2 border-[#4ade80]/40 border-t-[#4ade80] animate-spin"/>
-            <span class="text-[10px] font-mono text-white/50 uppercase tracking-widest">Memuat Model...</span>
+            <div
+              class="w-6 h-6 rounded-full border-2 border-[#4ade80]/40 border-t-[#4ade80] animate-spin"
+            />
+            <span
+              class="text-[10px] font-mono text-white/50 uppercase tracking-widest"
+              >Memuat Model...</span
+            >
           </div>
         </div>
       </Transition>
@@ -733,32 +912,72 @@ defineExpose({
           v-if="hasFace && faceStatus !== 'ok'"
           class="absolute bottom-20 left-1/2 -translate-x-1/2 pointer-events-none"
         >
-          <span class="text-[10px] font-mono uppercase tracking-widest px-3 py-1.5 rounded-full"
-            style="background:rgba(0,0,0,0.55);color:#fb923c;">
+          <span
+            class="text-[10px] font-mono uppercase tracking-widest px-3 py-1.5 rounded-full"
+            style="background: rgba(0, 0, 0, 0.55); color: #fb923c"
+          >
             {{ faceGuidanceText }}
           </span>
         </div>
       </Transition>
 
       <!-- TOP-LEFT dot + label -->
-      <div class="absolute top-4 left-4 flex items-center gap-1.5 pointer-events-none">
-        <span class="w-1.5 h-1.5 rounded-full transition-colors duration-300"
-          :class="isDetecting?'bg-[#4ade80] animate-pulse':hasFace?'bg-amber-400':'bg-white/30'"/>
-        <span class="text-[9px] font-mono uppercase tracking-widest transition-colors duration-300"
-          :class="isDetecting?'text-[#4ade80]':hasFace?'text-amber-400':'text-white/40'">
+      <div
+        class="absolute top-4 left-4 flex items-center gap-1.5 pointer-events-none"
+      >
+        <span
+          class="w-1.5 h-1.5 rounded-full transition-colors duration-300"
+          :class="
+            isDetecting
+              ? 'bg-[#4ade80] animate-pulse'
+              : hasFace
+                ? 'bg-amber-400'
+                : 'bg-white/30'
+          "
+        />
+        <span
+          class="text-[9px] font-mono uppercase tracking-widest transition-colors duration-300"
+          :class="
+            isDetecting
+              ? 'text-[#4ade80]'
+              : hasFace
+                ? 'text-amber-400'
+                : 'text-white/40'
+          "
+        >
           {{ faceGuidanceText }}
         </span>
       </div>
 
       <!-- TOP-CENTER badge -->
       <div class="absolute top-4 left-1/2 -translate-x-1/2">
-        <div class="px-3 py-1 rounded-full text-[11px] font-medium flex items-center gap-1.5 backdrop-blur-md border transition-all duration-300"
-          :class="isDetecting?'bg-[#4ade80]/15 border-[#4ade80]/30 text-[#4ade80]'
-            :hasFace?'bg-amber-400/15 border-amber-400/30 text-amber-400'
-            :'bg-black/30 border-white/10 text-white/60'">
-          <div class="w-2 h-2 rounded-full"
-            :class="isDetecting?'bg-[#4ade80] animate-pulse':hasFace?'bg-amber-400':'bg-white/30'"/>
-          {{ isDetecting ? "Scanning..." : hasFace ? "Posisikan Wajah" : "Mencari..." }}
+        <div
+          class="px-3 py-1 rounded-full text-[11px] font-medium flex items-center gap-1.5 backdrop-blur-md border transition-all duration-300"
+          :class="
+            isDetecting
+              ? 'bg-[#4ade80]/15 border-[#4ade80]/30 text-[#4ade80]'
+              : hasFace
+                ? 'bg-amber-400/15 border-amber-400/30 text-amber-400'
+                : 'bg-black/30 border-white/10 text-white/60'
+          "
+        >
+          <div
+            class="w-2 h-2 rounded-full"
+            :class="
+              isDetecting
+                ? 'bg-[#4ade80] animate-pulse'
+                : hasFace
+                  ? 'bg-amber-400'
+                  : 'bg-white/30'
+            "
+          />
+          {{
+            isDetecting
+              ? "Scanning..."
+              : hasFace
+                ? "Posisikan Wajah"
+                : "Mencari..."
+          }}
         </div>
       </div>
 
@@ -768,8 +987,10 @@ defineExpose({
         class="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-10 bg-gradient-to-t from-black/70 to-transparent pointer-events-none"
       >
         <div class="flex items-center justify-between mb-1.5">
-          <span class="text-[9px] font-mono uppercase tracking-widest"
-            :class="isGazePaused?'text-amber-400/80':'text-[#4ade80]/80'">
+          <span
+            class="text-[9px] font-mono uppercase tracking-widest"
+            :class="isGazePaused ? 'text-amber-400/80' : 'text-[#4ade80]/80'"
+          >
             {{ isGazePaused ? "Paused" : "Tracking" }}
           </span>
           <span class="text-[9px] font-mono text-white/40">
@@ -777,56 +998,93 @@ defineExpose({
           </span>
         </div>
         <div class="w-full h-[2px] bg-white/10 rounded-full overflow-hidden">
-          <div class="h-full rounded-full transition-all duration-300"
-            :class="isGazePaused?'bg-amber-400/70':'bg-[#4ade80]'"
-            :style="{width:`${scanProgress}%`}"/>
+          <div
+            class="h-full rounded-full transition-all duration-300"
+            :class="isGazePaused ? 'bg-amber-400/70' : 'bg-[#4ade80]'"
+            :style="{ width: `${scanProgress}%` }"
+          />
         </div>
       </div>
     </div>
 
     <!-- ── Bottom section ───────────────────────────────────────────────────── -->
-    <div class="flex-1 flex flex-col justify-between py-14 items-center bg-[#FFFFFF]">
+    <div
+      class="flex-1 flex flex-col justify-between py-14 items-center bg-[#FFFFFF]"
+    >
       <div class="w-full flex justify-center items-center text-center">
-        <p>Point the Camera at Your Face <br/>Camera Will Detect!</p>
+        <p>Point the Camera at Your Face <br />Camera Will Detect!</p>
       </div>
 
       <!-- Live Metrics -->
       <div class="w-full flex justify-center items-center gap-8 py-2">
         <div class="flex flex-col items-center gap-0.5">
-          <span class="text-[10px] text-[#A0A0A0] uppercase tracking-widest font-mono">Heart Rate</span>
-          <span class="text-[26px] font-semibold text-[#1A1A1A] font-mono leading-none">{{ displayHR }}</span>
+          <span
+            class="text-[10px] text-[#A0A0A0] uppercase tracking-widest font-mono"
+            >Heart Rate</span
+          >
+          <span
+            class="text-[26px] font-semibold text-[#1A1A1A] font-mono leading-none"
+            >{{ displayHR }}</span
+          >
           <span class="text-[9px] text-[#C0C0C0] font-mono">bpm</span>
         </div>
-        <div class="w-px self-stretch bg-[#E5E5E5]"/>
+        <div class="w-px self-stretch bg-[#E5E5E5]" />
         <div class="flex flex-col items-center gap-0.5">
-          <span class="text-[10px] text-[#A0A0A0] uppercase tracking-widest font-mono">Breathing</span>
-          <span class="text-[26px] font-semibold text-[#1A1A1A] font-mono leading-none">{{ displayBreathing }}</span>
+          <span
+            class="text-[10px] text-[#A0A0A0] uppercase tracking-widest font-mono"
+            >Breathing</span
+          >
+          <span
+            class="text-[26px] font-semibold text-[#1A1A1A] font-mono leading-none"
+            >{{ displayBreathing }}</span
+          >
           <span class="text-[9px] text-[#C0C0C0] font-mono">rpm</span>
         </div>
       </div>
 
       <!-- BVP Signal -->
       <div class="w-full px-4">
-        <div class="w-full h-[68px] rounded-xl overflow-hidden relative flex items-center justify-center transition-colors duration-500"
-          :class="hasBvpSignal?'bg-[#F0FDF4] border border-[#BBF7D0]':'bg-[#F9FAFB] border border-[#E5E7EB]'">
+        <div
+          class="w-full h-[68px] rounded-xl overflow-hidden relative flex items-center justify-center transition-colors duration-500"
+          :class="
+            hasBvpSignal
+              ? 'bg-[#F0FDF4] border border-[#BBF7D0]'
+              : 'bg-[#F9FAFB] border border-[#E5E7EB]'
+          "
+        >
           <Transition name="fade-overlay">
             <div v-if="hasBvpSignal" class="absolute inset-0">
-              <svg class="w-full h-full" viewBox="0 0 300 56" preserveAspectRatio="none">
+              <svg
+                class="w-full h-full"
+                viewBox="0 0 300 56"
+                preserveAspectRatio="none"
+              >
                 <defs>
                   <linearGradient id="bvp-fade" x1="0" x2="1" y1="0" y2="0">
-                    <stop offset="0%"   stop-color="#22C55E" stop-opacity="0"/>
-                    <stop offset="20%"  stop-color="#22C55E" stop-opacity="1"/>
-                    <stop offset="100%" stop-color="#22C55E" stop-opacity="1"/>
+                    <stop offset="0%" stop-color="#22C55E" stop-opacity="0" />
+                    <stop offset="20%" stop-color="#22C55E" stop-opacity="1" />
+                    <stop offset="100%" stop-color="#22C55E" stop-opacity="1" />
                   </linearGradient>
                 </defs>
-                <polyline :points="bvpPoints" fill="none" stroke="url(#bvp-fade)"
-                  stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <polyline
+                  :points="bvpPoints"
+                  fill="none"
+                  stroke="url(#bvp-fade)"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
               </svg>
-              <span class="absolute right-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#22C55E] animate-pulse"/>
+              <span
+                class="absolute right-3 top-1/2 -translate-y-1/2 w-1.5 h-1.5 rounded-full bg-[#22C55E] animate-pulse"
+              />
             </div>
           </Transition>
           <Transition name="fade-overlay">
-            <p v-if="!hasBvpSignal" class="text-[10px] font-mono text-[#9CA3AF] uppercase tracking-widest">
+            <p
+              v-if="!hasBvpSignal"
+              class="text-[10px] font-mono text-[#9CA3AF] uppercase tracking-widest"
+            >
               Sinyal kurang baik
             </p>
           </Transition>
@@ -835,13 +1093,22 @@ defineExpose({
 
       <!-- Scan Complete -->
       <Transition name="fade-overlay">
-        <div v-if="scanComplete" class="w-full flex justify-center items-center">
-          <div class="flex flex-row gap-x-3 items-center rounded-full px-5 py-2.5 bg-[#DDF7E5]">
+        <div
+          v-if="scanComplete"
+          class="w-full flex justify-center items-center"
+        >
+          <div
+            class="flex flex-row gap-x-3 items-center rounded-full px-5 py-2.5 bg-[#DDF7E5]"
+          >
             <div class="relative w-3 h-3">
-              <span class="absolute inset-0 rounded-full animate-ping bg-[#22C55E]/40"/>
-              <span class="relative block w-3 h-3 rounded-full bg-[#22C55E]"/>
+              <span
+                class="absolute inset-0 rounded-full animate-ping bg-[#22C55E]/40"
+              />
+              <span class="relative block w-3 h-3 rounded-full bg-[#22C55E]" />
             </div>
-            <p class="text-[15px] font-medium tracking-[0.02em] text-[#15803D]">Scan Complete</p>
+            <p class="text-[15px] font-medium tracking-[0.02em] text-[#15803D]">
+              Scan Complete
+            </p>
           </div>
         </div>
       </Transition>
@@ -850,8 +1117,14 @@ defineExpose({
 </template>
 
 <style scoped>
-.fade-overlay-enter-active { transition: opacity 0.35s ease; }
-.fade-overlay-leave-active  { transition: opacity 0.25s ease; }
+.fade-overlay-enter-active {
+  transition: opacity 0.35s ease;
+}
+.fade-overlay-leave-active {
+  transition: opacity 0.25s ease;
+}
 .fade-overlay-enter-from,
-.fade-overlay-leave-to      { opacity: 0; }
+.fade-overlay-leave-to {
+  opacity: 0;
+}
 </style>
