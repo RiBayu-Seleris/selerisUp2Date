@@ -638,24 +638,6 @@ function stopSendingFrames() {
 }
 
 function handleWSData(data) {
-  console.group("[WS DATA]");
-  console.log("hr           :", data?.hr);
-  console.log("hrv          :", data?.hrv);
-  console.log("hrv keys     :", data?.hrv ? Object.keys(data.hrv) : "—");
-  console.log("breathing_rate:", data?.hrv?.breathing_rate);
-  console.log("sdnn         :", data?.hrv?.sdnn);
-  console.log("rmssd        :", data?.hrv?.rmssd);
-  console.log("ibi          :", data?.hrv?.ibi);
-  console.log("sbp / dbp    :", data?.sbp, "/", data?.dbp);
-  console.log("sqi          :", data?.sqi); // ← tambah
-  console.log("top-level keys:", Object.keys(data)); // ← tambah
-  console.log(
-    "bvp length   :",
-    Array.isArray(data?.bvp) ? data.bvp.length : "bukan array",
-  );
-  console.log("full object  :", data);
-  console.groupEnd();
-
   latestMetrics.value = data;
   latestSqi.value = data?.sqi ?? null; // ← tambah
 
