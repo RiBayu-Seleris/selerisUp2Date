@@ -22,15 +22,12 @@ onMounted(() => {
         subheadings: [],
       });
     });
-
-  //   console.log(headings.value);
 });
 
 const groupedHeadings = computed(() => {
   let items = [...headings.value];
 
   for (let i = items.length - 1; i >= 0; i--) {
-    // console.log(items[i]);
     let currentItem = items[i];
 
     let parentItem = items.findLast((item, index) => {

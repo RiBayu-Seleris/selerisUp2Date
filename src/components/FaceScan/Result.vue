@@ -109,7 +109,7 @@ const metricCards = computed(() => {
     {
       id: "breath_rate",
       title: "Breath Rate",
-      value: d.breath_rate != null ? d.breath_rate.toFixed(1) : "–",
+      value: d.breath_rate != null ? d.breath_rate.toFixed(1) * 60 : "–",
       unit: "brpm",
       description:
         "Respiratory rate is the number of breaths taken per minute. Normal range is 12–20 brpm.",

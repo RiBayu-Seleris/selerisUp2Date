@@ -77,7 +77,7 @@ watch(
   () => props.email,
   (val) => {
     localEmail.value = val; // sinkron kalau parent update
-  }
+  },
 );
 
 const validateEmail = (value) => {
@@ -85,10 +85,9 @@ const validateEmail = (value) => {
 
   if (!regex.test(value)) {
     emailError.value = "Email tidak valid";
-    // console.log("❌ Email tidak valid:", value);
   } else {
     emailError.value = "";
-    // console.log("✅ Email valid:", value);
+    console.error("✅ Email valid:", value);
   }
 
   emit("update:email", value);
@@ -355,7 +354,9 @@ onBeforeUnmount(() => {
 <style scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity 0.25s ease, transform 0.25s ease;
+  transition:
+    opacity 0.25s ease,
+    transform 0.25s ease;
 }
 
 .fade-enter-from {

@@ -160,7 +160,7 @@ const copyLink = async (slug) => {
       timerProgressBar: true,
     });
   } catch (err) {
-    // console.log("Clipboard error (kemungkinan false error):", err);
+    console.error("Clipboard error (kemungkinan false error):", err);
   }
 };
 

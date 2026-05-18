@@ -45,23 +45,10 @@ const handleApply = () => {
   // Simpan Job ke Pinia
   jobApplyStore.setJob(selectedJob.value);
 
-  // 🔍 Lihat data yang tersimpan di Pinia
-  // console.log("Selected job:", selectedJob.value);
-  // console.log("Pinia selectedJobId:", jobApplyStore.selectedJobId);
-  // console.log("Pinia selectedJobData:", jobApplyStore.selectedJobData);
-
   // Arahkan ke halaman Apply
   router.push("/careers/apply");
 };
 
-// Kunci atau buka scroll body tergantung modal
-// watch(isModalOpen, (value) => {
-//   if (value) {
-//     document.body.classList.add("overflow-hidden"); // disable scroll
-//   } else {
-//     document.body.classList.remove("overflow-hidden"); // enable scroll
-//   }
-// });
 watch(
   () => isModalOpen.value,
   (v) => {

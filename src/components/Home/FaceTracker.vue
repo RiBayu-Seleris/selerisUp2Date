@@ -124,6 +124,7 @@ const submitForm = () => {
   // TODO: Integrasi API submit di sini
 
   closeModal();
+  localStorage.removeItem("lp_facetracker_last_result"); // ← tambah ini
   router.push("/face-tracking");
 };
 </script>

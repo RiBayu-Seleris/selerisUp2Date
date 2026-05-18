@@ -98,7 +98,7 @@ const displayHR = computed(() => {
 });
 const displayBreathing = computed(() => {
   const v = latestMetrics.value?.hrv?.breathing_rate;
-  return !v || v === 0 ? "-" : Math.round(v);
+  return !v || v === 0 ? "-" : Math.round(v * 60);
 });
 
 const faceGuidanceText = computed(() => {
@@ -812,9 +812,20 @@ function resetScan() {
 // ─── Lifecycle ────────────────────────────────────────────────────────────────
 onMounted(async () => {
   isUnmounted.value = false;
+  // reset state dulu sebelum mulai
+  scanComplete.value = false;
+  scanProgress.value = 0;
+  scanStartMs = null;
+  accumulatedMs = 0;
+  isUploadDone = false;
+  latestMetrics.value = null;
+  bvpBuffer.value = [];
+  resetBestSnapshot();
+
   await initFaceMesh();
   if (props.autoStart) await startCamera();
 });
+
 onUnmounted(() => {
   isUnmounted.value = true;
   cancelAnimationFrame(arAnimId);
