@@ -883,7 +883,7 @@ defineExpose({
             />
             <span
               class="text-[10px] font-mono text-white/50 uppercase tracking-widest"
-              >Memuat Model...</span
+              >Loading Model...</span
             >
           </div>
         </div>
