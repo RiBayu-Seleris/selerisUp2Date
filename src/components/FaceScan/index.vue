@@ -102,18 +102,18 @@ const displayBreathing = computed(() => {
 });
 
 const faceGuidanceText = computed(() => {
-  if (isDetecting.value) return "Wajah Terdeteksi";
+  if (isDetecting.value) return "Face detected";
   switch (faceStatus.value) {
     case "not_centered":
-      return "Arahkan ke tengah";
+      return "Center it";
     case "too_close":
-      return "Mundur sedikit";
+      return "Move back a little";
     case "too_far":
-      return "Maju sedikit";
+      return "Move forward a little";
     case "tilt":
-      return "Tegakkan kepala";
+      return "Straighten your head";
     default:
-      return "Mencari Wajah...";
+      return "Looking for a face...";
   }
 });
 
@@ -958,8 +958,8 @@ defineExpose({
             isDetecting
               ? "Scanning..."
               : hasFace
-                ? "Posisikan Wajah"
-                : "Mencari..."
+                ? "position your face"
+                : "Searching..."
           }}
         </div>
       </div>
@@ -1068,7 +1068,7 @@ defineExpose({
               v-if="!hasBvpSignal"
               class="text-[10px] font-mono text-[#9CA3AF] uppercase tracking-widest"
             >
-              Sinyal kurang baik
+              Bad signal
             </p>
           </Transition>
         </div>

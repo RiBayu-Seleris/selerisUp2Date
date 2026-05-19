@@ -35,7 +35,7 @@ const scanCount = ref(0);
 const cards = [
   {
     icon: Time,
-    title: "Vital Signs in 15 Seconds",
+    title: "Vital Signs in 30 Seconds",
     description:
       "Measures heart rate, blood pressure, SpO₂, HRV, and more. no wearables or devices required.",
   },
@@ -144,8 +144,8 @@ const submitForm = () => {
       <p
         class="text-[16px] md:text-[32px] lg:text-[34px] xl:text-[46px] leading-snug text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] font-[500]"
       >
-        Apa yang anda dapatkan <br />
-        jika melakukan demo Scan
+        What you get <br />
+        when you try the scan demo
       </p>
     </div>
 
@@ -271,13 +271,13 @@ const submitForm = () => {
             </p>
 
             <p class="text-[#6B7280] dark:text-[#A1A1AA]">
-              Isi data berikut untuk mencoba fitur scan.
+              Enter the following information to try the scan feature.
             </p>
 
             <!-- Scan counter info -->
-            <p class="text-sm text-[#9CA3AF]">
-              Sisa percobaan: {{ MAX_SCAN_ATTEMPTS - scanCount }}x
-            </p>
+            <!-- <p class="text-sm text-[#9CA3AF]">
+              Sisa percobaan: {{ MAX_SCAN_ATTEMPTS - scanCount }}
+            </p> -->
           </div>
 
           <form class="flex flex-col gap-y-4" @submit.prevent="submitForm">
@@ -360,16 +360,16 @@ const submitForm = () => {
                 for="agreeMarketing"
                 class="text-sm text-[#6B7280] dark:text-[#A1A1AA] leading-relaxed cursor-pointer"
               >
-                Saya menyetujui untuk menerima informasi produk dan layanan dari
+                I agree to receive information about
                 <span class="text-[#195279] dark:text-white font-medium"
                   >Seleris AI</span
                 >
-                melalui email. Data pribadi yang diberikan akan diproses sesuai
-                dengan
-                <span class="text-[#2E97DF] hover:underline cursor-pointer"
-                  >Kebijakan Privasi</span
+                products and services via email. The personal data you provide
+                will be processed in accordance with our
+                <span class="text-[#2E97DF] hover:underline cursor-pointer">
+                  Privacy Policy.</span
                 >
-                kami. Anda dapat mencabut persetujuan ini kapan saja
+                You may withdraw this consent at any time
                 <span class="text-red-400">*</span>
               </label>
             </div>

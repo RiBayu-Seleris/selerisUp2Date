@@ -554,8 +554,8 @@ const indicators = [
                 <p class="text-white/85 text-[15px] font-medium font-mono mb-1">
                   {{
                     failedReason === "sqi"
-                      ? "Kualitas sinyal rendah"
-                      : "Sinyal tidak terdeteksi"
+                      ? "Low signal quality"
+                      : "No signal detected"
                   }}
                 </p>
                 <p
@@ -563,8 +563,8 @@ const indicators = [
                 >
                   {{
                     failedReason === "sqi"
-                      ? "Kualitas video masih kurang baik, harap ulangi dengan pencahayaan yang baik dan kondisi stabil"
-                      : "Pastikan wajah terlihat dengan baik"
+                      ? "Video quality is still poor; please try again with good lighting and stable conditions"
+                      : "Make sure your face is clearly visible"
                   }}
                 </p>
               </div>
@@ -574,7 +574,7 @@ const indicators = [
                 @click="onBackToScan"
                 class="px-6 py-2.5 rounded-full text-[13px] font-medium font-mono border border-white/15 text-white/70 hover:bg-white/08 hover:text-white transition-all duration-200 uppercase tracking-widest"
               >
-                Scan Ulang
+                Re-Scan
               </button>
             </div>
           </div>
