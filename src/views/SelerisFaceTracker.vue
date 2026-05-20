@@ -30,15 +30,11 @@ const CertificateAndRewards = [
       .href,
   },
   {
-    img: new URL("/assets/images/certificate-icon/dscui.svg", import.meta.url)
-      .href,
-  },
-  {
     img: new URL("/assets/images/certificate-icon/Cert2.png", import.meta.url)
       .href,
   },
   {
-    img: new URL("/assets/images/certificate-icon/Cert4.png", import.meta.url)
+    img: new URL("/assets/images/certificate-icon/Cert5.png", import.meta.url)
       .href,
   },
   {
@@ -46,7 +42,11 @@ const CertificateAndRewards = [
       .href,
   },
   {
-    img: new URL("/assets/images/certificate-icon/Cert5.png", import.meta.url)
+    img: new URL("/assets/images/certificate-icon/Cert4.png", import.meta.url)
+      .href,
+  },
+  {
+    img: new URL("/assets/images/certificate-icon/dscui.svg", import.meta.url)
       .href,
   },
 ];
@@ -319,7 +319,7 @@ const indicators = [
         </div>
         <div class="w-full h-auto flex justify-start items-center">
           <div
-            class="w-full h-auto flex flex-col gap-y-4 justify-center items-center bg-[#FFFFFF] rounded-xl px-6 py-3"
+            class="w-full h-auto flex flex-col gap-y-4 justify-center items-center bg-[#FFFFFF] rounded-xl px-6 py-4"
           >
             <div class="w-full h-auto flex justify-center items-center">
               <p class="text-[20px]">Certificates and Rewards</p>
