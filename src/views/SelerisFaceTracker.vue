@@ -24,6 +24,33 @@ import FaceTracker from "@/components/FaceScan/index.vue";
 import Result from "@/components/FaceScan/Result.vue";
 import { ref, computed, onMounted, watch, nextTick } from "vue";
 
+const CertificateAndRewards = [
+  {
+    img: new URL("/assets/images/certificate-icon/Cert1.png", import.meta.url)
+      .href,
+  },
+  {
+    img: new URL("/assets/images/certificate-icon/dscui.svg", import.meta.url)
+      .href,
+  },
+  {
+    img: new URL("/assets/images/certificate-icon/Cert2.png", import.meta.url)
+      .href,
+  },
+  {
+    img: new URL("/assets/images/certificate-icon/Cert4.png", import.meta.url)
+      .href,
+  },
+  {
+    img: new URL("/assets/images/certificate-icon/Cert3.png", import.meta.url)
+      .href,
+  },
+  {
+    img: new URL("/assets/images/certificate-icon/Cert5.png", import.meta.url)
+      .href,
+  },
+];
+
 // const currentView = ref("scan");
 const currentView = ref(null);
 // const currentView = ref("scan");
@@ -292,14 +319,56 @@ const indicators = [
         </div>
         <div class="w-full h-auto flex justify-start items-center">
           <div
-            class="w-full h-auto flex flex-col gap-y-8 justify-center items-center bg-[#FFFFFF] rounded-lg p-6"
+            class="w-full h-auto flex flex-col gap-y-4 justify-center items-center bg-[#FFFFFF] rounded-xl px-6 py-3"
           >
             <div class="w-full h-auto flex justify-center items-center">
-              <p>Trust By</p>
+              <p class="text-[20px]">Certificates and Rewards</p>
             </div>
-            <div class="w-full h-auto flex justify-center items-center">
-              <div class="flex-1 flex justify-center items-center">
-                <img :src="TrustedImage" alt="" srcset="" />
+            <div class="w-full flex justify-center items-center">
+              <div class="flex flex-col gap-5 w-fit">
+                <!-- Row penuh (kelipatan 4) -->
+                <div
+                  v-for="rowIndex in Math.floor(
+                    CertificateAndRewards.length / 4,
+                  )"
+                  :key="'row-' + rowIndex"
+                  class="flex gap-x-6"
+                >
+                  <div
+                    v-for="item in CertificateAndRewards.slice(
+                      (rowIndex - 1) * 4,
+                      rowIndex * 4,
+                    )"
+                    :key="item.img"
+                    class="w-[60px] h-[60px] flex justify-center items-center"
+                  >
+                    <img
+                      :src="item.img"
+                      alt=""
+                      class="w-full h-full object-contain"
+                    />
+                  </div>
+                </div>
+
+                <!-- Row sisa (centered) -->
+                <div
+                  v-if="CertificateAndRewards.length % 4 !== 0"
+                  class="flex gap-x-6 justify-center"
+                >
+                  <div
+                    v-for="item in CertificateAndRewards.slice(
+                      -(CertificateAndRewards.length % 4),
+                    )"
+                    :key="item.img"
+                    class="w-[60px] h-[60px] flex justify-center items-center"
+                  >
+                    <img
+                      :src="item.img"
+                      alt=""
+                      class="w-full h-full object-contain"
+                    />
+                  </div>
+                </div>
               </div>
             </div>
           </div>
