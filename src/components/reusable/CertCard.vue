@@ -50,7 +50,7 @@ const shortText = computed(() => {
 <template>
   <!-- <div class="relative w-[335px] h-[419px] group cursor-default"> -->
   <div
-    class="snap-center shrink-0 relative w-[335px] h-[419px] group cursor-default"
+    class="snap-center shrink-0 relative w-[335px] h-[419px] group cursor-grab"
   >
     <!-- Card A -->
 

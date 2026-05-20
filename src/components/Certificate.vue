@@ -1,14 +1,58 @@
 <script setup>
 import CertCard from "@/components/reusable/CertCard.vue";
 import MobileCert from "@/components/CertificateMobile.vue";
-
 import CloseIcon from "@/components/icons/CloseIcon.vue";
-
 import { certificateData } from "@/Data/CertData";
 import { ref, watch } from "vue";
 
 const isModalOpen = ref(false);
 const selectedCert = ref(null);
+const scrollContainer = ref(null);
+
+const CARD_WIDTH = 335 + 24;
+
+// --- Drag to scroll ---
+const isDragging = ref(false);
+const startX = ref(0);
+const scrollLeft = ref(0);
+
+const onMouseDown = (e) => {
+  isDragging.value = true;
+  startX.value = e.pageX - scrollContainer.value.offsetLeft;
+  scrollLeft.value = scrollContainer.value.scrollLeft;
+  scrollContainer.value.style.cursor = "grabbing";
+  scrollContainer.value.style.userSelect = "none";
+  // Nonaktifkan snap saat drag
+  scrollContainer.value.classList.remove("snap-x", "snap-mandatory");
+};
+const onMouseMove = (e) => {
+  if (!isDragging.value) return;
+  e.preventDefault();
+  const x = e.pageX - scrollContainer.value.offsetLeft;
+  const walk = (x - startX.value) * 1.2; // kecepatan drag
+  scrollContainer.value.scrollLeft = scrollLeft.value - walk;
+};
+
+const onMouseUp = () => {
+  isDragging.value = false;
+  scrollContainer.value.style.cursor = "grab";
+  scrollContainer.value.style.userSelect = "";
+  // Aktifkan kembali snap setelah drag selesai
+  scrollContainer.value.classList.add("snap-x", "snap-mandatory");
+};
+
+const onMouseLeave = () => {
+  if (isDragging.value) onMouseUp();
+};
+// ----------------------
+
+const scrollCarousel = (direction) => {
+  if (!scrollContainer.value) return;
+  scrollContainer.value.scrollBy({
+    left: direction === "right" ? CARD_WIDTH : -CARD_WIDTH,
+    behavior: "smooth",
+  });
+};
 
 const openModal = (cert) => {
   selectedCert.value = cert;
@@ -20,11 +64,7 @@ const closeModal = () => {
 };
 
 watch(isModalOpen, (open) => {
-  if (open) {
-    document.body.style.overflow = "hidden";
-  } else {
-    document.body.style.overflow = "";
-  }
+  document.body.style.overflow = open ? "hidden" : "";
 });
 </script>
 
@@ -46,16 +86,64 @@ watch(isModalOpen, (open) => {
       </div>
 
       <!-- Desktop Certificate Cards -->
-      <!-- class="hidden lg:flex flex-row w-full max-w-[1440px] mx-auto gap-x-16 mt-8 mb-12 justify-center" -->
       <div class="relative w-full h-auto">
+        <!-- Gradient fade kiri -->
         <div
-          class="hidden xl:flex absolute w-32 h-full bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-r dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% left-0 z-20"
+          class="hidden lg:flex absolute w-32 h-full bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:from-[#17181A] dark:to-[#17181A]/0 left-0 z-20 pointer-events-none"
         />
+        <!-- Gradient fade kanan -->
         <div
-          class="hidden xl:flex absolute w-32 h-full bg-gradient-to-l from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-l dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% right-0 z-20"
+          class="hidden lg:flex absolute w-32 h-full bg-gradient-to-l from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:from-[#17181A] dark:to-[#17181A]/0 right-0 z-20 pointer-events-none"
         />
+
+        <!-- Tombol Panah Kiri -->
+        <button
+          @click="scrollCarousel('left')"
+          aria-label="Scroll left"
+          class="hidden lg:flex absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-colors duration-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-full h-full"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+
+        <!-- Tombol Panah Kanan -->
+        <button
+          @click="scrollCarousel('right')"
+          aria-label="Scroll right"
+          class="hidden lg:flex absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-colors duration-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-full h-full"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+
+        <!-- Scroll Container -->
         <div
-          class="relative hidden lg:flex flex-row w-full space-x-6 mt-16 overflow-x-auto snap-x snap-mandatory pl-10 pr-10 xl:pl-16 xl:pr-16 hide-scrollbar"
+          ref="scrollContainer"
+          @mousedown="onMouseDown"
+          @mousemove="onMouseMove"
+          @mouseup="onMouseUp"
+          @mouseleave="onMouseLeave"
+          class="relative hidden lg:flex flex-row w-full space-x-6 mt-16 overflow-x-auto snap-x snap-mandatory pl-10 pr-10 xl:pl-16 xl:pr-16 hide-scrollbar cursor-grab"
         >
           <CertCard
             v-for="(cert, index) in certificateData"
@@ -70,6 +158,7 @@ watch(isModalOpen, (open) => {
             @readmore="openModal(cert)"
           />
         </div>
+
         <!-- Modal -->
         <transition name="fade">
           <div
