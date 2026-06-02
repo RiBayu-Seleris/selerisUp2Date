@@ -832,11 +832,11 @@ defineExpose({
 
 <template>
   <div
-    class="w-full h-full flex flex-col justify-between rounded-t-2xl rounded-b-xl overflow-hidden"
+    class="w-full h-full flex flex-col rounded-t-2xl rounded-b-xl overflow-hidden"
   >
     <!-- ── Camera area ──────────────────────────────────────────────────────── -->
     <div
-      class="relative w-full h-[70%] shrink-0 overflow-hidden bg-black rounded-t-2xl"
+      class="relative h-[70%] shrink-0 overflow-hidden bg-black rounded-t-2xl"
     >
       <video
         ref="videoRef"
@@ -992,7 +992,7 @@ defineExpose({
 
     <!-- ── Bottom section ───────────────────────────────────────────────────── -->
     <div
-      class="flex-1 flex flex-col justify-between py-14 items-center bg-[#FFFFFF]"
+      class="flex-1 flex flex-col justify-between py-4 items-center bg-[#FFFFFF]"
     >
       <div class="w-full flex justify-center items-center text-center">
         <p>Point the Camera at Your Face <br />Camera Will Detect!</p>
