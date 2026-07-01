@@ -7,7 +7,7 @@ const directorSeniorteams = [
   {
     image: new URL(
       "@/assets/images/leadership-teams/rinaldi.png",
-      import.meta.url
+      import.meta.url,
     ).href,
     name: "Rinaldi Anwar",
     position: "Founder & CEO",
@@ -23,7 +23,7 @@ const directorSeniorteams = [
   {
     image: new URL(
       "@/assets/images/leadership-teams/fendy.png",
-      import.meta.url
+      import.meta.url,
     ).href,
     name: "Fendy Setiawan",
     position: "Chief Technology Officer",
@@ -31,7 +31,7 @@ const directorSeniorteams = [
   {
     image: new URL(
       "@/assets/images/leadership-teams/rizal.png",
-      import.meta.url
+      import.meta.url,
     ).href,
     name: "Rizal Alfaridzi",
     position: "Chief Product Officer",
@@ -39,7 +39,7 @@ const directorSeniorteams = [
   {
     image: new URL(
       "@/assets/images/leadership-teams/remzy.png",
-      import.meta.url
+      import.meta.url,
     ).href,
     name: "Remzy Ramazan",
     position: "Chief Analytics Officer",
@@ -47,7 +47,7 @@ const directorSeniorteams = [
   {
     image: new URL(
       "@/assets/images/leadership-teams/harum.png",
-      import.meta.url
+      import.meta.url,
     ).href,
     name: "Harum Ananda",
     position: "Chief Research Officer",
@@ -61,7 +61,7 @@ const directorSeniorteams = [
   {
     image: new URL(
       "@/assets/images/leadership-teams/Benedicta.png",
-      import.meta.url
+      import.meta.url,
     ).href,
     name: "dr. Benedicta E.T, M.Kes",
     position: "Senior Medical Advisor",
@@ -69,14 +69,6 @@ const directorSeniorteams = [
 ];
 const managementTeam = [
   // Management Team
-  {
-    image: new URL(
-      "@/assets/images/leadership-teams/dhita.png",
-      import.meta.url
-    ).href,
-    name: "Dhita Septiani",
-    position: "Product Manager",
-  },
   {
     image: new URL("@/assets/images/leadership-teams/riza.png", import.meta.url)
       .href,
@@ -86,7 +78,7 @@ const managementTeam = [
   {
     image: new URL(
       "@/assets/images/leadership-teams/davva.png",
-      import.meta.url
+      import.meta.url,
     ).href,
     name: "M. Davva Alfaiz",
     position: "VP Finance & Investment",
