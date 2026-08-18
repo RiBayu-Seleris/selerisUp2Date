@@ -1,0 +1,100 @@
+name: Deploy Seleris LP v2 to seleris.ai
+
+on:
+  push:
+    branches:
+      - release/production
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-seleris-landing-page-v2-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  build-and-deploy:
+    name: Build and deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+          cache: 'npm'
+
+      - name: Install dependencies
+        # Clean JS-only Vue/Vite — no TypeScript, no peer-dep quirks.
+        run: npm ci
+
+      - name: Build
+        run: npm run build
+        env:
+          # Match production .env on server. Ngrok WS URL and Gemini API key
+          # are read from GitHub Variables so they aren't hardcoded in this
+          # committed workflow file (rotate them without editing YAML).
+          # Set at: Settings → Variables → Actions → New repository variable.
+          VITE_API_URL: https://cms-lp.seleris.ai
+          VITE_RPPG_WS_URL: ${{ vars.VITE_RPPG_WS_URL }}
+          VITE_GEMINI_API_KEY: ${{ vars.VITE_GEMINI_API_KEY }}
+
+      - name: Verify dist exists
+        run: |
+          test -f dist/index.html || (echo "::error::dist/index.html not produced by build" && exit 1)
+          echo "Asset count: $(ls dist/assets 2>/dev/null | wc -l)"
+
+      - name: Setup SSH key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p ${{ secrets.DEPLOY_SSH_PORT }} -H ${{ secrets.DEPLOY_SSH_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
+
+      - name: Backup current dist on server
+        run: |
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.DEPLOY_SSH_PORT }} \
+            ${{ secrets.DEPLOY_SSH_USER }}@${{ secrets.DEPLOY_SSH_HOST }} \
+            "cd /var/www/html/seleris-landing-page-v2 && \
+             rm -rf dist.previous && \
+             [ -d dist ] && cp -a dist dist.previous || true && \
+             echo 'Backup ready'"
+
+      - name: Upload new dist to staging directory
+        run: |
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.DEPLOY_SSH_PORT }} \
+            ${{ secrets.DEPLOY_SSH_USER }}@${{ secrets.DEPLOY_SSH_HOST }} \
+            "rm -rf /var/www/html/seleris-landing-page-v2/dist.new && mkdir -p /var/www/html/seleris-landing-page-v2/dist.new"
+          scp -i ~/.ssh/deploy_key -P ${{ secrets.DEPLOY_SSH_PORT }} -r -q \
+            dist/. \
+            ${{ secrets.DEPLOY_SSH_USER }}@${{ secrets.DEPLOY_SSH_HOST }}:/var/www/html/seleris-landing-page-v2/dist.new/
+
+      - name: Atomic swap and reload nginx
+        run: |
+          ssh -i ~/.ssh/deploy_key -p ${{ secrets.DEPLOY_SSH_PORT }} \
+            ${{ secrets.DEPLOY_SSH_USER }}@${{ secrets.DEPLOY_SSH_HOST }} \
+            "set -e && \
+             cd /var/www/html/seleris-landing-page-v2 && \
+             chown -R www-data:www-data dist.new && \
+             rm -rf dist.old && \
+             [ -d dist ] && mv dist dist.old || true && \
+             mv dist.new dist && \
+             nginx -t && \
+             systemctl reload nginx && \
+             echo 'Deploy complete.'"
+
+      - name: Cleanup SSH key
+        if: always()
+        run: rm -f ~/.ssh/deploy_key
+
+      - name: Smoke test deployment
+        run: |
+          # Two vhosts serve this dist: seleris.ai (production) + lp-staging.seleris.id (staging).
+          # Test both so we know if either has an issue.
+          for host in seleris.ai lp-staging.seleris.id; do
+            STATUS=$(curl -s -o /dev/null -w "%{http_code}" "https://$host/")
+            echo "https://$host/ → $STATUS"
+            test "$STATUS" = "200" || (echo "::error::Smoke test failed for $host: got $STATUS" && exit 1)
+          done
