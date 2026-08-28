@@ -14,22 +14,6 @@ const testimonials = [
     and identify high-risk exposures has optimized our health insurance underwriting. 
     This is the new foundation for sustainable growth in the industry's most dynamic segment`,
   },
-  {
-    name: "Edhie Mulyono",
-    position: "Technical Director - PT Asuransi FPG Indonesia",
-    text: `Seleris empowers FPG's technical team with health data insights that were previously inaccessible. 
-    Its ability to process medical big data,  predict chronic claim patterns, 
-    and identify high-risk exposures has optimized our health insurance underwriting. 
-    This is the new foundation for sustainable growth in the industry's most dynamic segment`,
-  },
-  {
-    name: "Edhie Mulyono",
-    position: "Technical Director - PT Asuransi FPG Indonesia",
-    text: `Seleris empowers FPG's technical team with health data insights that were previously inaccessible. 
-    Its ability to process medical big data,  predict chronic claim patterns, 
-    and identify high-risk exposures has optimized our health insurance underwriting. 
-    This is the new foundation for sustainable growth in the industry's most dynamic segment`,
-  },
 ];
 </script>
 

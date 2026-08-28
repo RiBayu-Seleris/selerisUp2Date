@@ -30,12 +30,12 @@ import Navlink from "@/components/Navlink.vue";
                 <img
                   :src="Logo"
                   alt="Logo"
-                  class="w-full h-[75%] md:h-[80px] xl:h-[80px] object-contain object-left dark:hidden"
+                  class="w-full h-[75%] md:h-[80px] xl:h-[60px] object-contain object-left dark:hidden"
                 />
                 <img
                   :src="DarkLogo"
                   alt="Logo"
-                  class="w-full h-[75%] md:h-[80px] xl:h-[80px] object-contain object-left hidden dark:block"
+                  class="w-full h-[75%] md:h-[80px] xl:h-[60px] object-contain object-left hidden dark:block"
                 />
               </div>
               <div
