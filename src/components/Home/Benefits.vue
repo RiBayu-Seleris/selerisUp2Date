@@ -3,7 +3,7 @@ import CardDefault from "@/components/reusable/CardDefault.vue";
 
 const benefitList = [
   {
-    icon: new URL("@/assets/icons/Benefits/accuracy.png", import.meta.url).href,
+    icon: new URL("@/assets/icons/Benefits/Accuracy.png", import.meta.url).href,
     title: "Accuracy",
     body: "The results show that Seleris can recognize faces with up to 94% accuracy.",
   },
