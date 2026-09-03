@@ -29,7 +29,7 @@ export const SolutionLists = [
     // Overview
     overview: {
       description:
-        "Seleris fundamentally transforms the underwriting paradigm. Using AI-powered rPPG (Remote Photoplethysmography) technology, Seleris measures up to 39 physiological parameters — including heart rate, HRV, respiratory rate, blood pressure estimation, and cardiovascular risk indicators — in just 60 seconds via a standard smartphone camera. No additional devices. No clinic visits. No waiting for lab results.",
+        "Seleris fundamentally transforms the underwriting paradigm. Using AI-powered rPPG (Remote Photoplethysmography) technology, Seleris measures up to 60 physiological parameters — including heart rate, HRV, respiratory rate, blood pressure estimation, and cardiovascular risk indicators — in just 60 seconds via a standard smartphone camera. No additional devices. No clinic visits. No waiting for lab results.",
       stats: [
         { value: "60+", label: "Physiological Parameters" },
         { value: "60s", label: "Scan Time" },
