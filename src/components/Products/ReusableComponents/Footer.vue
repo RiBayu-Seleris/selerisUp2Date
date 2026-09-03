@@ -4,6 +4,7 @@ import DarkLogo from "@/assets/images/darklogo.png";
 // Sosmed Icon
 import Instagram from "@/components/icons/Instagram.vue";
 import Linkedin from "@/components/icons/Linkedin.vue";
+import Tiktok from "@/components/icons/Tiktok.vue";
 import Twitter from "@/components/icons/Twitter.vue";
 
 // Images
@@ -124,8 +125,17 @@ const connectColor = computed(() => {
                     <Linkedin />
                   </a>
                 </div>
-                <div class="w-auto h-[30px] lg:h-[30px] text-[#195279]">
-                  <Twitter />
+                <div
+                  class="w-auto h-[30px] lg:h-[30px] text-[#195279] dark:text-[#FAFAFA]"
+                >
+                  <a
+                    href="https://www.tiktok.com/@seleris.id"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label="Seleris TikTok"
+                  >
+                    <Tiktok />
+                  </a>
                 </div>
               </div>
             </div>
@@ -248,12 +258,12 @@ const connectColor = computed(() => {
               <div class="flex flex-col w-full h-auto mb-3 lg:mt-2">
                 <p class="text-[#195279] text-[20px] lg:text-[18px]">E-Mail</p>
                 <a
-                  href="mailto:info@seleris.id"
+                  href="mailto:info@seleris.ai"
                   :class="[
                     `${connectColor} text-sm lg:text-base xl:text-[18px] lg:pt-1.5`,
                   ]"
                 >
-                  info@seleris.id
+                  info@seleris.ai
                 </a>
               </div>
             </div>

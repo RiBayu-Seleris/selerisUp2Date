@@ -47,7 +47,7 @@ const cards = [
   },
   {
     icon: Rate,
-    title: "39 AI-Powered Health Parameters",
+    title: "60+ AI-Powered Health Parameters",
     description:
       "Instantly measures health and risk indicators for smarter insurance assessments.",
   },

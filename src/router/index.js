@@ -159,6 +159,7 @@ const routes = [
     path: "/solution/:slug",
     name: "SolutionDetail",
     component: () => import("@/views/Solutions.vue"),
+    meta: { title: "Solution" },
   },
 
   // Blogs

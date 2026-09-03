@@ -18,12 +18,12 @@ export const faqList = [
   {
     question: "How can I delete my account?",
     answer:
-      "If you wish to delete your account, please contact our team at info@seleris.id",
+      "If you wish to delete your account, please contact our team at info@seleris.ai",
   },
   {
     question: "Does this application offer customer support?",
     answer:
-      "Yes, we have a customer support team ready to help. Please contact us via info@seleris.id for questions, feedback, or technical assistance.",
+      "Yes, we have a customer support team ready to help. Please contact us via info@seleris.ai for questions, feedback, or technical assistance.",
   },
   {
     question: "is this application Free?",
@@ -37,6 +37,6 @@ export const faqList = [
   {
     question: "How can I provide feedback or suggestions?",
     answer:
-      "We highly value your feedback. You can provide feedback by visiting the settings menu and clicking privacy policy or via info@seleris.id to provide your feedback to our team.",
+      "We highly value your feedback. You can provide feedback by visiting the settings menu and clicking privacy policy or via info@seleris.ai to provide your feedback to our team.",
   },
 ];

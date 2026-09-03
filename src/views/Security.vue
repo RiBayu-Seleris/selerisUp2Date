@@ -86,7 +86,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
         If you've identified a potential security flaw in our infrastructure or
         software, please let us know at
         <span class="text-[#2AB857] font-[500]"
-          ><a href="mailto:info@seleris.id"> info@seleris.id. </a></span
+          ><a href="mailto:info@seleris.ai"> info@seleris.ai. </a></span
         >
         We'll triage the issue and get back to you.
       </p>

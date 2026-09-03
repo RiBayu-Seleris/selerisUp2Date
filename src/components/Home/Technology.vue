@@ -103,7 +103,7 @@ onBeforeUnmount(() => {
             <p
               class="text-[#195279] font-[500] text-[16px] md:text-[24px] lg:text-[26px] xl:text-[36px] leading-normal tracking-wide dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
             >
-              Integrating RPPG + Machine Learning <br class="hidden sm:block" />
+              Integrating rPPG + Machine Learning <br class="hidden sm:block" />
               For Noninvasive Heart Rate Monitoring
             </p>
           </div>

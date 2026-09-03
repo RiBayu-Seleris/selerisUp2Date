@@ -13,7 +13,7 @@ export const medinsFaq = [
   {
     question: "Does this app provide customer support?",
     answer:
-      "Yes, our customer support team is always ready to help. For any inquiries, feedback, or technical assistance, please contact us at info@seleris.id",
+      "Yes, our customer support team is always ready to help. For any inquiries, feedback, or technical assistance, please contact us at info@seleris.ai",
   },
   {
     question: "Is the Seleris Medins app secure?",
@@ -28,7 +28,7 @@ export const medinsFaq = [
   {
     question: "How do I delete my account?",
     answer:
-      "If you want to delete your account, please contact our support team at info@seleris.id and we will process your request securely.",
+      "If you want to delete your account, please contact our support team at info@seleris.ai and we will process your request securely.",
   },
   {
     question: "Is the Seleris Medins app free?",
@@ -38,7 +38,7 @@ export const medinsFaq = [
   {
     question: "How can I provide feedback or suggestions?",
     answer:
-      "You can submit suggestions through the app settings menu or directly email us at info@seleris.id",
+      "You can submit suggestions through the app settings menu or directly email us at info@seleris.ai",
   },
   {
     question: "What are the terms and conditions of use of this app?",
