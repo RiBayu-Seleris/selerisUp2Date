@@ -8,19 +8,19 @@ export function useProductLogoColor() {
   const logo = computed(() => {
     if (route.path === "/product/credit-cover") {
       return new URL(
-        "@/assets/Products/images/Logo/CC-Logo-color.png",
+        "@/assets/Products/images/Logo/CC-Logo-Color.png",
         import.meta.url,
       ).href;
     }
     if (route.path === "/product/medins") {
       return new URL(
-        "@/assets/Products/images/Logo/Medins-Logo-color.png",
+        "@/assets/Products/images/Logo/Medins-Logo-Color.png",
         import.meta.url,
       ).href;
     }
     if (route.path === "/product/lifins") {
       return new URL(
-        "@/assets/Products/images/Logo/Lifins-Logo.png",
+        "@/assets/Products/images/Logo/Lifins-Logo-Color.png",
         import.meta.url,
       ).href;
     }

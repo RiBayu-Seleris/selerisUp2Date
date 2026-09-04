@@ -20,7 +20,7 @@ export function useProductLogo() {
     }
     if (route.path === "/product/lifins") {
       return new URL(
-        "@/assets/Products/images/Logo/Lifins-Logo.png",
+        "@/assets/Products/images/Logo/Lifins-Logo-Color.png",
         import.meta.url,
       ).href;
     }
