@@ -14,7 +14,7 @@ export function useProductLogo() {
     }
     if (route.path === "/product/medins") {
       return new URL(
-        "@/assets/Products/images/Logo/medins-Logo.png",
+        "@/assets/Products/images/Logo/Medins-Logo.png",
         import.meta.url,
       ).href;
     }
