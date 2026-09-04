@@ -354,7 +354,7 @@ onBeforeUnmount(() => {
       >
         <div>
           <p class="text-[12px] xl:text-[14px] font-[400] text-[#FAFAFA]">
-            Berita Lainnya
+            More News
           </p>
         </div>
         <div class="ml-3 text-[#FAFAFA] dark:text-[#FAFAFA]">

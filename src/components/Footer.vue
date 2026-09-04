@@ -276,9 +276,17 @@ import Navlink from "@/components/Navlink.vue";
           </div>
         </div>
       </div>
-      <div class="flex w-full justify-center text-center items-center py-8">
+      <div class="w-full h-[1px] bg-[#d8dee4] rounded-full" />
+      <div
+        class="flex flex-col w-full justify-center text-center items-center pb-6 pt-4 gap-y-2"
+      >
         <p
-          class="text-[14px] lg:text-[16px] xl:text-[18px] dark:text-[#FAFAFA]/40 font-[400]"
+          class="text-[16px] lg:text-[18px] xl:text-[20px] dark:text-[#FAFAFA]/40 font-[400]"
+        >
+          PT Seleris Meditekno Internasional
+        </p>
+        <p
+          class="text-[12px] lg:text-[14px] xl:text-[16px] dark:text-[#FAFAFA]/40 font-[400]"
         >
           © 2023 Seleris Asia Pacific Technology. All rights reserved
         </p>
