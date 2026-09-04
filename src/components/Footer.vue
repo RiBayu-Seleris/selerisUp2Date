@@ -237,7 +237,7 @@ import Navlink from "@/components/Navlink.vue";
             </p>
             <div class="flex flex-row lg:flex-col gap-10 lg:gap-0">
               <a
-                href="https://play.google.com/store/apps/developer?id=PT.+Seleris+Meditekno+Internasional"
+                href="https://play.google.com/store/search?q=blooxia&c=apps&hl=id"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="flex w-auto h-full md:justify-start justify-center items-center content-center xl:justify-start xl:content-start"

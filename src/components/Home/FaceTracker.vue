@@ -341,6 +341,7 @@ const submitForm = () => {
               </label>
 
               <textarea
+                required
                 v-model="form.goals"
                 rows="4"
                 placeholder="Tell us your goals..."
@@ -366,8 +367,11 @@ const submitForm = () => {
                 >
                 products and services via email. The personal data you provide
                 will be processed in accordance with our
-                <span class="text-[#2E97DF] hover:underline cursor-pointer">
-                  Privacy Policy.</span
+                <a
+                  href="/privacy"
+                  class="text-[#2E97DF] hover:underline cursor-pointer"
+                >
+                  Privacy Policy.</a
                 >
                 You may withdraw this consent at any time
                 <span class="text-red-400">*</span>

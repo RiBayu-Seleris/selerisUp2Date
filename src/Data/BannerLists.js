@@ -3,8 +3,8 @@
 export const bannerLists = [
   {
     banner: "Lifins.png",
-    logo: "lifins.svg",
-    darklogo: "lifins.svg",
+    logo: "lifins.png",
+    darklogo: "lifins.png",
     description:
       "An intelligent underwriting platform for individual and group life insurance, accelerating decision-making by 90% with fully configurable business rules.",
     linelightcolor: "#2ab857",

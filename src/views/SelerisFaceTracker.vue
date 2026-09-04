@@ -639,7 +639,7 @@ const indicators = [
           >
             <div class="w-full h-auto flex justify-start items-center">
               <p class="text-[18px] text-[#195279] font-[600]">
-                Monitor 39+ health metrics in just 30 seconds with a facial scan
+                Monitor 60+ health metrics in just 30 seconds with a facial scan
               </p>
             </div>
             <div class="w-full h-auto flex justify-start items-center">
@@ -704,7 +704,9 @@ const indicators = [
                 </div>
               </div>
             </div>
-            <div class="w-full h-auto flex justify-between items-center px-20">
+            <div
+              class="w-full h-auto flex flex-row gap-x-1 justify-between items-center px-20"
+            >
               <div class="w-full h-auto flex justify-center items-center">
                 <p class="text-[#A9A9A9] font-[500] text-[18px]">Powered by</p>
               </div>
