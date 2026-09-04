@@ -407,7 +407,9 @@ const finalBlogs = computed(() => {
         <div
           class="w-[10%] sm:w-[15%] md:w-[5%] h-full flex justify-center items-center text-[#6C6C6C] dark:text-[#ADADAD]"
         >
-          <SearchIcon />
+          <div class="w-8 h-8 flex justify-center items-center">
+            <SearchIcon />
+          </div>
         </div>
         <div class="w-full h-full">
           <input
