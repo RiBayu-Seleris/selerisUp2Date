@@ -1068,7 +1068,7 @@ defineExpose({
               v-if="!hasBvpSignal"
               class="text-[10px] font-mono text-[#9CA3AF] uppercase tracking-widest"
             >
-              Bad signal
+              {{ $t("misc.bad_signal") }}
             </p>
           </Transition>
         </div>
@@ -1090,7 +1090,7 @@ defineExpose({
               <span class="relative block w-3 h-3 rounded-full bg-[#22C55E]" />
             </div>
             <p class="text-[15px] font-medium tracking-[0.02em] text-[#15803D]">
-              Scan Complete
+              {{ $t("misc.scan_complete") }}
             </p>
           </div>
         </div>

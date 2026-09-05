@@ -77,11 +77,13 @@ onUnmounted(() => {
     <div
       class="w-full h-auto flex flex-col gap-y-1.5 text-center justify-center items-center xl:px-8"
     >
-      <p class="text-[20px] text-[#2AB857] font-[500]">Solutions</p>
+      <p class="text-[20px] text-[#2AB857] font-[500]">
+        {{ $t("home.solutions.eyebrow") }}
+      </p>
       <p
         class="text-[16px] md:text-[32px] lg:text-[34px] xl:text-[46px] tracking-wider text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] font-[500]"
       >
-        7 AI-Powered Health Solutions
+        {{ $t("home.solutions.title") }}
       </p>
     </div>
 
@@ -109,15 +111,6 @@ onUnmounted(() => {
           <div
             class="w-full h-full flex flex-col justify-between bg-white dark:bg-[#1D1F23] rounded-2xl px-5 py-6"
           >
-            <component
-              :is="data.icon"
-              class="w-10 h-10 object-contain p-2 rounded-[10px]"
-              :class="
-                SolutionLists.indexOf(data) === activeIndex
-                  ? 'bg-[#39D5BC] text-white'
-                  : 'bg-[#D8F7F2] text-[#39D5BC]'
-              "
-            />
             <div class="w-full h-auto flex flex-col gap-y-4 xl:gap-y-4">
               <div class="w-full h-auto flex justify-start items-start">
                 <div
@@ -140,12 +133,12 @@ onUnmounted(() => {
                       : 'text-[#374151] dark:text-[#357EAF]'
                   "
                 >
-                  {{ data.title }}
+                  {{ $t(`solutions.${data.slug}.title`) }}
                 </span>
                 <span
                   class="text-[#8E98A8] text-[14px] leading-normal font-[400] solution-animate-group-hover"
                 >
-                  {{ data.content }}
+                  {{ $t(`solutions.${data.slug}.subtitle`) }}
                 </span>
               </div>
               <div class="w-full h-5">
@@ -153,7 +146,7 @@ onUnmounted(() => {
                   <span
                     v-if="SolutionLists.indexOf(data) === activeIndex"
                     class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[12px] xl:text-[14px] font-[500] cursor-pointer"
-                    >Learn More <span>→</span>
+                    >{{ $t("home.solutions.learnMore") }} <span>→</span>
                   </span>
                 </Transition>
               </div>
@@ -181,15 +174,6 @@ onUnmounted(() => {
           <div
             class="w-full h-full flex flex-col justify-between bg-white dark:bg-[#1D1F23] rounded-2xl px-5 py-6"
           >
-            <component
-              :is="data.icon"
-              class="w-10 h-10 object-contain p-2 rounded-[10px]"
-              :class="
-                SolutionLists.indexOf(data) === activeIndex
-                  ? 'bg-[#39D5BC] text-white'
-                  : 'bg-[#D8F7F2] text-[#39D5BC]'
-              "
-            />
             <div class="w-full h-auto flex flex-col gap-y-4 xl:gap-y-4">
               <div class="w-full h-auto flex justify-start items-start">
                 <div
@@ -214,11 +198,11 @@ onUnmounted(() => {
                         ? 'dark:text-[#2AB857]'
                         : 'text-[#374151] dark:text-[#357EAF]'
                     "
-                    >{{ data.title }}</span
+                    >{{ $t(`solutions.${data.slug}.title`) }}</span
                   >
                   <span
                     class="text-[#8E98A8] text-[12px] xl:text-[14px] leading-normal font-[400] solution-animate-group-hover"
-                    >{{ data.content }}</span
+                    >{{ $t(`solutions.${data.slug}.subtitle`) }}</span
                   >
                 </div>
                 <div class="w-full h-5 flex items-center">
@@ -226,7 +210,7 @@ onUnmounted(() => {
                     <span
                       v-if="SolutionLists.indexOf(data) === activeIndex"
                       class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[12px] xl:text-[14px] font-[500] cursor-pointer"
-                      >Learn More <span>→</span>
+                      >{{ $t("home.solutions.learnMore") }} <span>→</span>
                     </span>
                   </Transition>
                 </div>
@@ -255,15 +239,6 @@ onUnmounted(() => {
           <div
             class="w-full h-full flex flex-col justify-between bg-white dark:bg-[#1D1F23] rounded-2xl px-5 py-6"
           >
-            <component
-              :is="data.icon"
-              class="w-10 h-10 object-contain p-2 rounded-[10px]"
-              :class="
-                SolutionLists.indexOf(data) === activeIndex
-                  ? 'bg-[#39D5BC] text-white'
-                  : 'bg-[#D8F7F2] text-[#39D5BC]'
-              "
-            />
             <div class="w-full h-auto flex flex-col gap-y-4 xl:gap-y-4">
               <div class="w-full h-auto flex justify-start items-start">
                 <div
@@ -285,11 +260,11 @@ onUnmounted(() => {
                       ? 'dark:text-[#2AB857]'
                       : 'text-[#374151] dark:text-[#357EAF]'
                   "
-                  >{{ data.title }}</span
+                  >{{ $t(`solutions.${data.slug}.title`) }}</span
                 >
                 <span
                   class="text-[#8E98A8] text-[14px] leading-normal font-[400] solution-animate-group-hover"
-                  >{{ data.content }}</span
+                  >{{ $t(`solutions.${data.slug}.subtitle`) }}</span
                 >
               </div>
               <div class="w-full h-5">
@@ -297,7 +272,7 @@ onUnmounted(() => {
                   <span
                     v-if="SolutionLists.indexOf(data) === activeIndex"
                     class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[12px] xl:text-[14px] font-[500] cursor-pointer"
-                    >Learn More <span>→</span>
+                    >{{ $t("home.solutions.learnMore") }} <span>→</span>
                   </span>
                 </Transition>
               </div>
@@ -348,12 +323,12 @@ onUnmounted(() => {
                     ? 'dark:text-[#2AB857]'
                     : 'text-[#374151] dark:text-[#357EAF]'
                 "
-                >{{ data.title }}</span
+                >{{ $t(`solutions.${data.slug}.title`) }}</span
               >
               <span
                 class="text-[#8E98A8] text-[13px] leading-normal font-[400] solution-animate-group-hover"
               >
-                {{ data.content }}
+                {{ $t(`solutions.${data.slug}.subtitle`) }}
               </span>
             </div>
 
@@ -363,7 +338,7 @@ onUnmounted(() => {
                   v-if="index === activeIndex"
                   class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[13px] font-[500]"
                 >
-                  Learn More <span>→</span>
+                  {{ $t("home.solutions.learnMore") }} <span>→</span>
                 </span>
               </Transition>
             </div>
@@ -397,12 +372,12 @@ onUnmounted(() => {
 
             <!-- Text -->
             <h2 class="text-[20px] font-[700] text-[#374151] dark:text-white">
-              Under Construction
+              {{ $t("underConstruction.title") }}
             </h2>
             <p
               class="text-[14px] text-[#9CA3AF] text-center dark:text-[#D1D5DB]"
             >
-              Halaman ini sedang dalam pengembangan. Silakan kembali lagi nanti.
+              {{ $t("underConstruction.description") }}
             </p>
 
             <!-- Close Button -->
@@ -410,7 +385,7 @@ onUnmounted(() => {
               @click="showUnderConstructionModal = false"
               class="mt-2 px-6 py-2 bg-[#2AB857] hover:bg-[#22a04a] text-white text-[14px] font-[600] rounded-xl transition-colors duration-200"
             >
-              Oke, Mengerti
+              {{ $t("underConstruction.close") }}
             </button>
           </div>
         </div>

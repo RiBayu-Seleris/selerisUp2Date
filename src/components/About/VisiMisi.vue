@@ -10,20 +10,14 @@ import MissionVideo from "@/assets/videos/Mission.mp4";
   >
     <VisiMisiCard
       :video="VisionVideo"
-      title="Vision"
-      description="Seleris's vision is to build a world where everyone can access
-                affordable, reliable, and innovative solutions, fostering
-                equality, empowering communities, and creating opportunities for
-                a secure, sustainable, and prosperous future for all."
+      :title="$t('about.vision.title')"
+      :description="$t('about.vision.description')"
     />
 
     <VisiMisiCard
       :video="MissionVideo"
-      title="Mission"
-      description="Seleris's mission is to create innovative solutions that improve
-              efficiency, accuracy, and accessibility, empowering individuals
-              and organizations to achieve growth, make informed decisions, and
-              build a secure, sustainable future for everyone."
+      :title="$t('about.mission.title')"
+      :description="$t('about.mission.description')"
     />
   </div>
 </template>

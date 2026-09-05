@@ -1,8 +1,16 @@
 <script setup>
+import { useLocalizedList } from "@/utils/i18nList";
 import CertCard from "@/components/reusable/CertCard.vue";
 import MobileCert from "@/components/CertificateMobile.vue";
 import CloseIcon from "@/components/icons/CloseIcon.vue";
 import { certificateData } from "@/Data/CertData";
+
+// Teks sertifikat diambil dari file locale
+const localizedCertificates = useLocalizedList(
+  "certificates",
+  certificateData,
+  ["titleBefore", "subtitleBefore", "titleAfter", "description"],
+);
 import { ref, watch } from "vue";
 
 const isModalOpen = ref(false);
@@ -76,12 +84,12 @@ watch(isModalOpen, (open) => {
         <p
           class="text-[24px] sm:text-[30px] md:text-[32px] lg:text-[44px] xl:text-[48px] font-medium text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
         >
-          Seleris Certification
+          {{ $t("home.certificate.title") }}
         </p>
         <p
           class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-2xl xl:text-[22px] font-normal tracking-wide text-[#1DC457] dark:text-[#6A6A6A] sm:mt-2 lg:mt-4"
         >
-          Seleris Meditekno Internasional
+          {{ $t("home.certificate.subtitle") }}
         </p>
       </div>
 
@@ -146,7 +154,7 @@ watch(isModalOpen, (open) => {
           class="relative hidden lg:flex flex-row w-full space-x-6 mt-16 overflow-x-auto snap-x snap-mandatory pl-10 pr-10 xl:pl-16 xl:pr-16 hide-scrollbar cursor-grab"
         >
           <CertCard
-            v-for="(cert, index) in certificateData"
+            v-for="(cert, index) in localizedCertificates"
             :key="index"
             :imageCertLogo="cert.logo"
             :TitleBefore="cert.titleBefore"
@@ -193,7 +201,7 @@ watch(isModalOpen, (open) => {
       </div>
 
       <!-- Mobile Certificate -->
-      <MobileCert :certificates="certificateData" />
+      <MobileCert :certificates="localizedCertificates" />
     </div>
   </div>
 </template>

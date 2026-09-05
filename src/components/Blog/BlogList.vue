@@ -1,4 +1,5 @@
 <script setup>
+import { useI18n } from "vue-i18n";
 import {
   ref,
   computed,
@@ -22,6 +23,7 @@ import ShareIcon from "@/components/icons/Share.vue";
 import { useUtilsStore } from "@/stores/utils.js";
 import { useRoute } from "vue-router";
 
+const { t } = useI18n();
 const utils = useUtilsStore();
 
 // state dropdown
@@ -30,7 +32,7 @@ const selectedCategory = ref("All Articles");
 const isPostTimeOpen = ref(false);
 const selectedPostTime = ref({
   id: 1,
-  name: "Latest", // untuk UI
+  name: t("misc.latest"), // untuk UI
   value: "latest", // untuk API
 });
 const showDateRange = ref(false);
@@ -39,17 +41,17 @@ const activeShareId = ref(null);
 const PostsTime = [
   {
     id: 1,
-    name: "Latest", // tampil di UI
+    name: t("misc.latest"), // tampil di UI
     value: "latest", // dikirim ke API
   },
   {
     id: 2,
-    name: "Oldest",
+    name: t("misc.oldest"),
     value: "oldest",
   },
   {
     id: 3,
-    name: "Views",
+    name: t("misc.views"),
     value: "views",
   },
   // {
@@ -151,8 +153,8 @@ const copyLink = async (slug) => {
     // ✅ Notifikasi sukses
     Swal.fire({
       icon: "success",
-      title: "Link berhasil disalin!",
-      text: "Bagikan ke temanmu 🚀",
+      title: t("blog.linkCopied"),
+      text: t("blog.linkCopiedText"),
       toast: true,
       position: "top", // 👈 Lebih umum untuk toast-style
       showConfirmButton: false,
@@ -416,7 +418,7 @@ const finalBlogs = computed(() => {
             v-model="searchQuery"
             type="text"
             class="bg-transparent outline-none w-full h-full text-[#6C6C6C] dark:text-[#ADADAD]"
-            placeholder="Search Article..."
+            :placeholder="$t('blog.search')"
           />
         </div>
       </div>
@@ -813,7 +815,7 @@ const finalBlogs = computed(() => {
         :disabled="pagination.current_page === 1"
         @click="changePage(pagination.current_page - 1)"
       >
-        Prev
+        {{ $t("misc.prev") }}
       </button>
 
       <!-- Nomor halaman -->
@@ -838,7 +840,7 @@ const finalBlogs = computed(() => {
         :disabled="pagination.current_page === pagination.last_page"
         @click="changePage(pagination.current_page + 1)"
       >
-        Next
+        {{ $t("misc.next") }}
       </button>
     </div>
   </div>
@@ -849,7 +851,7 @@ const finalBlogs = computed(() => {
     class="w-full h-auto mt-5 text-center py-6 text-gray-500"
   >
     <p>
-      Tidak ada artikel yang cocok dengan pencarian
+      {{ $t("blog.noResults") }}
       <template v-if="selectedCategory !== 'All Articles'">
         pada kategori <strong>{{ selectedCategory }}</strong>
       </template>
@@ -872,7 +874,7 @@ const finalBlogs = computed(() => {
     class="w-full h-auto mt-5"
   >
     <p class="text-center text-[#6E6E6E]">
-      Tidak ada artikel
+      {{ $t("blog.noArticles") }}
       <template v-if="selectedCategory !== 'All Articles'">
         pada kategori <strong>{{ selectedCategory }}</strong>
       </template>
@@ -1096,7 +1098,7 @@ const finalBlogs = computed(() => {
         :disabled="pagination.current_page === 1"
         @click="changePage(pagination.current_page - 1)"
       >
-        Prev
+        {{ $t("misc.prev") }}
       </button>
 
       <!-- Nomor halaman -->
@@ -1121,7 +1123,7 @@ const finalBlogs = computed(() => {
         :disabled="pagination.current_page === pagination.last_page"
         @click="changePage(pagination.current_page + 1)"
       >
-        Next
+        {{ $t("misc.next") }}
       </button>
     </div>
   </div>
@@ -1143,7 +1145,7 @@ const finalBlogs = computed(() => {
             <p
               class="text-[#195279] dark:text-[#FAFAFA] font-[500] text-[22px] justify-center"
             >
-              News
+              {{ $t("misc.news") }}
             </p>
           </div>
           <!-- Loading -->
@@ -1386,7 +1388,7 @@ const finalBlogs = computed(() => {
             <p
               class="text-[#195279] font-[500] lg:text-[22px] justify-center dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
             >
-              Most Popular
+              {{ $t("blog.mostPopular") }}
             </p>
           </div>
           <!-- Loading -->
@@ -1484,7 +1486,7 @@ const finalBlogs = computed(() => {
         <p
           class="text-[#195279] font-[500] sm:text-[20px] md:text-[24px] justify-center dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
         >
-          Most Popular
+          {{ $t("blog.mostPopular") }}
         </p>
       </div>
       <div
@@ -1829,7 +1831,7 @@ const finalBlogs = computed(() => {
         :disabled="pagination.current_page === 1"
         @click="changePage(pagination.current_page - 1)"
       >
-        Prev
+        {{ $t("misc.prev") }}
       </button>
 
       <!-- Nomor halaman -->
@@ -1854,7 +1856,7 @@ const finalBlogs = computed(() => {
         :disabled="pagination.current_page === pagination.last_page"
         @click="changePage(pagination.current_page + 1)"
       >
-        Next
+        {{ $t("misc.next") }}
       </button>
     </div>
   </div>

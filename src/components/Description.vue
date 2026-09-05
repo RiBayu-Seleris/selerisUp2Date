@@ -5,23 +5,7 @@ const scrollContainer = ref(null);
 const currentStep = ref(0);
 const scrollProgress = ref(0);
 
-const steps = [
-  {
-    title: "Remote Photoplethysmography Technology",
-    description:
-      "Seleris harnesses Remote Photoplethysmography (rPPG) technology to evaluate various vital signs that represent a customer's health condition.",
-  },
-  {
-    title: "Artificial Intelligence and Machine Learning Adoption",
-    description:
-      "Seleris capitalizes on the power of cutting-edge AI and ML algorithms to evaluate underwriting decisions and furnish comprehensive coverage advice.",
-  },
-  {
-    title: "Data Security and Privacy Compliance",
-    description:
-      "Seleris securely stores and processes customer data, ensuring compliance with global regulations while protecting sensitive personal, financial information.",
-  },
-];
+const steps = [{ key: "rppg" }, { key: "ai" }, { key: "security" }];
 
 onMounted(() => {
   const el = scrollContainer.value;
@@ -66,7 +50,7 @@ onMounted(() => {
         <p
           class="text-[20px] md:text-[24px] text-[#1AB24F] font-[500] dark:text-[#FAFAFA]"
         >
-          AI Technology
+          {{ $t("home.howItWorks.eyebrow") }}
         </p>
       </div>
       <div
@@ -75,13 +59,15 @@ onMounted(() => {
         <p
           class="text-[26px] sm:text-[34px] md:text-[40px] lg:text-[44px] xl:text-[48px] font-[500] dark:text-[#FAFAFA]"
         >
-          How Seleris
-          <span class="inline-flex lg:hidden dark:text-[#FAFAFA]"> Works?</span>
+          {{ $t("home.howItWorks.titleLine1") }}
+          <span class="inline-flex lg:hidden dark:text-[#FAFAFA]">
+            {{ $t("home.howItWorks.titleLine2") }}</span
+          >
         </p>
         <p
           class="hidden lg:block text-[26px] sm:text-[34px] md:text-[40px] lg:text-[44px] xl:text-[48px] font-[500] dark:text-[#FAFAFA]"
         >
-          Works?
+          {{ $t("home.howItWorks.titleLine2") }}
         </p>
       </div>
       <div class="w-full h-[200px] lg:h-[320px] xl:h-[200px] lg:mt-5">
@@ -133,12 +119,12 @@ onMounted(() => {
                 <h3
                   class="text-[16px] sm:text-[20px] md:text-[24px] lg:text-[24px] xl:text-[24px] leading-[20px] sm:leading-normal text-green-600 font-[500]"
                 >
-                  {{ step.title }}
+                  {{ $t(`home.howItWorks.steps.${step.key}.title`) }}
                 </h3>
                 <p
                   class="mt-3.5 md:mt-5 text-[12px] sm:text-[14px] xl:text-[14px] leading-relaxed text-gray-600 dark:text-[#FAFAFA] max-w-xl"
                 >
-                  {{ step.description }}
+                  {{ $t(`home.howItWorks.steps.${step.key}.description`) }}
                 </p>
               </div>
             </section>

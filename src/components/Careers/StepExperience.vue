@@ -222,7 +222,7 @@ onBeforeUnmount(() => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Last Company <span class="text-red-500">*</span>
+        {{ $t("careers.last_company") }} <span class="text-red-500">*</span>
       </label>
       <input
         name="lastcompany"
@@ -230,7 +230,7 @@ onBeforeUnmount(() => {
         @input="emit('update:lastCompany', $event.target.value)"
         type="text"
         class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
-        placeholder="Last Company"
+        :placeholder="$t('careers.last_company')"
       />
     </div>
     <!-- Jabatan Terakhis -->
@@ -238,7 +238,7 @@ onBeforeUnmount(() => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Last Position <span class="text-red-500">*</span>
+        {{ $t("careers.last_position") }} <span class="text-red-500">*</span>
       </label>
       <input
         name="lastPosition"
@@ -246,7 +246,7 @@ onBeforeUnmount(() => {
         @input="emit('update:lastPosition', $event.target.value)"
         type="text"
         class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
-        placeholder="Last Position"
+        :placeholder="$t('careers.last_position')"
       />
     </div>
     <!-- Start + End Date job -->
@@ -256,7 +256,8 @@ onBeforeUnmount(() => {
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
         >
-          Start Date Work <span class="text-red-500">*</span>
+          {{ $t("careers.start_date_work") }}
+          <span class="text-red-500">*</span>
         </label>
         <div
           class="col-span-12 sm:col-span-4 h-full rounded-lg bg-[#D9D9D9] p-[1px] dark:bg-[#565656] mt-0"
@@ -277,7 +278,7 @@ onBeforeUnmount(() => {
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
         >
-          End Date Work <span class="text-red-500">*</span>
+          {{ $t("careers.end_date_work") }} <span class="text-red-500">*</span>
         </label>
         <div
           class="col-span-12 sm:col-span-4 h-full rounded-lg bg-[#D9D9D9] p-[1px] dark:bg-[#565656] mt-0"
@@ -298,7 +299,7 @@ onBeforeUnmount(() => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Current Salary <span class="text-red-500">*</span>
+        {{ $t("careers.current_salary") }} <span class="text-red-500">*</span>
       </label>
       <div class="relative">
         <!-- Prefix "Rp" -->
@@ -322,7 +323,7 @@ onBeforeUnmount(() => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Job Description <span class="text-red-500">*</span>
+        {{ $t("careers.job_description") }} <span class="text-red-500">*</span>
       </label>
       <div class="editor-wrapper">
         <div class="quill-container">
@@ -338,7 +339,7 @@ onBeforeUnmount(() => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Relevant Achievements or Accomplishments
+        {{ $t("misc.achievements") }}
         <span class="text-red-500">*</span>
       </label>
       <div class="editor-wrapper">

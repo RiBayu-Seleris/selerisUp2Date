@@ -1,3 +1,5 @@
+const plugin = require("tailwindcss/plugin");
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   darkMode: "class", // <-- wajib!
@@ -110,6 +112,17 @@ module.exports = {
   },
   plugins: [
     require("@tailwindcss/typography"), // ini boleh tetap
+
+    // Varian bahasa, dipakai persis seperti dark:
+    //   dark:h-20  -> berlaku saat mode gelap
+    //   id:h-20    -> berlaku saat bahasa Indonesia
+    //   en:h-20    -> berlaku saat bahasa Inggris
+    // Dasarnya atribut lang di <html>, yang diperbarui src/stores/language.js
+    // setiap kali bahasa diganti.
+    plugin(function ({ addVariant }) {
+      addVariant("id", 'html[lang="id"] &');
+      addVariant("en", 'html[lang="en"] &');
+    }),
   ],
   safelist: ["rotate-90", "transform"],
 };

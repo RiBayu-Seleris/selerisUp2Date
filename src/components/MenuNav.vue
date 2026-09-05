@@ -59,7 +59,7 @@ onUnmounted(() => {
         class="text-[12pt] lg:text-[10pt] xl:text-[12pt] font-[500] text-animate-hover dark:dark-text-animate-hover"
         href="/"
       >
-        Home
+        {{ $t("nav.home") }}
       </Navlink>
     </li>
 
@@ -73,7 +73,7 @@ onUnmounted(() => {
       <span
         class="cursor-pointer relative inline-block text-animate-hover dark:dark-text-animate-hover font-[500] text-[12pt] lg:text-[10pt] xl:text-[12pt]"
       >
-        About ▾
+        {{ $t("nav.about") }} ▾
       </span>
 
       <!-- Dropdown -->
@@ -97,7 +97,7 @@ onUnmounted(() => {
             >
               <span
                 class="text-[15px] font-[500] text-[#9CA3AF] dark:text-[#FAFAFA]"
-                >{{ about.name }}</span
+                >{{ $t("nav.about_items." + about.key) }}</span
               >
             </Navlink>
           </div>
@@ -115,7 +115,7 @@ onUnmounted(() => {
       <span
         class="cursor-pointer relative inline-block text-animate-hover dark:dark-text-animate-hover font-[500] text-[12pt] lg:text-[10pt] xl:text-[12pt]"
       >
-        Products ▾
+        {{ $t("nav.products") }} ▾
       </span>
 
       <!-- Dropdown -->
@@ -158,7 +158,7 @@ onUnmounted(() => {
       <span
         class="cursor-pointer relative inline-block text-animate-hover dark:dark-text-animate-hover font-[500] text-[12pt] lg:text-[10pt] xl:text-[12pt]"
       >
-        Technology ▾
+        {{ $t("nav.technology") }} ▾
       </span>
 
       <!-- Dropdown -->
@@ -200,7 +200,7 @@ onUnmounted(() => {
       <span
         class="cursor-pointer relative inline-block text-animate-hover dark:dark-text-animate-hover font-[500] text-[12pt] lg:text-[10pt] xl:text-[12pt]"
       >
-        Solutions ▾
+        {{ $t("nav.solutions") }} ▾
       </span>
 
       <!-- Dropdown -->
@@ -224,7 +224,7 @@ onUnmounted(() => {
               <p
                 class="text-[#4B5563] dark:text-white font-[500] lg:text-[18px]"
               >
-                Solutions
+                {{ $t("nav.solutions") }}
               </p>
             </div>
             <div class="grid grid-cols-2 w-auto gap-3">
@@ -263,7 +263,7 @@ onUnmounted(() => {
                   >
                     <span
                       class="text-[14px] font-[600] text-[#374151] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
-                      >{{ solution.title }}</span
+                      >{{ $t("solutions." + solution.slug + ".title") }}</span
                     >
                     <span
                       class="text-[12px] font-[500] solution-text-animate"
@@ -271,7 +271,9 @@ onUnmounted(() => {
                       :style="{
                         '--solution-color': solution.iconColor,
                       }"
-                      >{{ solution.content }}</span
+                      >{{
+                        $t("solutions." + solution.slug + ".subtitle")
+                      }}</span
                     >
                   </div>
                   <div class="w-fit h-auto flex justify-center items-start">
@@ -305,7 +307,7 @@ onUnmounted(() => {
         class="text-[12pt] lg:text-[10pt] xl:text-[12pt] text-animate-hover dark:dark-text-animate-hover font-[500]"
         href="/blogs"
       >
-        Blogs
+        {{ $t("nav.blogs") }}
       </Navlink>
     </li>
     <li>
@@ -313,7 +315,7 @@ onUnmounted(() => {
         class="text-[12pt] lg:text-[10pt] xl:text-[12pt] text-animate-hover dark:dark-text-animate-hover font-[500]"
         href="/services"
       >
-        Services
+        {{ $t("nav.services") }}
       </Navlink>
     </li>
     <li>
@@ -321,7 +323,7 @@ onUnmounted(() => {
         class="text-[12pt] lg:text-[10pt] xl:text-[12pt] text-animate-hover dark:dark-text-animate-hover font-[500]"
         href="/careers"
       >
-        Careers
+        {{ $t("nav.careers") }}
       </Navlink>
     </li>
   </ul>
@@ -351,10 +353,10 @@ onUnmounted(() => {
 
           <!-- Text -->
           <h2 class="text-[20px] font-[700] text-[#374151] dark:text-white">
-            Under Construction
+            {{ $t("underConstruction.title") }}
           </h2>
           <p class="text-[14px] text-[#9CA3AF] text-center dark:text-[#D1D5DB]">
-            Halaman ini sedang dalam pengembangan. Silakan kembali lagi nanti.
+            {{ $t("underConstruction.description") }}
           </p>
 
           <!-- Close Button -->
@@ -362,7 +364,7 @@ onUnmounted(() => {
             @click="showUnderConstructionModal = false"
             class="mt-2 px-6 py-2 bg-[#2AB857] hover:bg-[#22a04a] text-white text-[14px] font-[600] rounded-xl transition-colors duration-200"
           >
-            Oke, Mengerti
+            {{ $t("underConstruction.close") }}
           </button>
         </div>
       </div>

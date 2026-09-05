@@ -134,14 +134,14 @@ onBeforeUnmount(() => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Full Name <span class="text-red-500">*</span>
+        {{ $t("careers.full_name") }} <span class="text-red-500">*</span>
       </label>
       <input
         @input="emit('update:fullname', $event.target.value)"
         name="fullname"
         type="text"
         class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
-        placeholder="Full Name"
+        :placeholder="$t('careers.full_name')"
         :value="fullname"
         :required="required"
       />
@@ -152,14 +152,14 @@ onBeforeUnmount(() => {
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
         >
-          Place Of Birth <span class="text-red-500">*</span>
+          {{ $t("careers.place_of_birth") }} <span class="text-red-500">*</span>
         </label>
         <input
           @input="emit('update:pob', $event.target.value)"
           name="pob"
           type="text"
           class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
-          placeholder="Place Of Birth"
+          :placeholder="$t('careers.place_of_birth')"
           :value="pob"
           :required="required"
         />
@@ -169,7 +169,7 @@ onBeforeUnmount(() => {
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
         >
-          Date Of Birth <span class="text-red-500">*</span>
+          {{ $t("careers.date_of_birth") }} <span class="text-red-500">*</span>
         </label>
 
         <div
@@ -192,7 +192,7 @@ onBeforeUnmount(() => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Gender <span class="text-red-500">*</span>
+        {{ $t("careers.gender") }} <span class="text-red-500">*</span>
       </label>
       <div class="relative w-full">
         <!-- 🔸 Field utama -->
@@ -252,7 +252,7 @@ onBeforeUnmount(() => {
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
         >
-          Email <span class="text-red-500">*</span>
+          {{ $t("careers.email") }} <span class="text-red-500">*</span>
         </label>
         <input
           type="email"
@@ -271,7 +271,7 @@ onBeforeUnmount(() => {
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
         >
-          Phone Number <span class="text-red-500">*</span>
+          {{ $t("careers.phone_number") }} <span class="text-red-500">*</span>
         </label>
         <input
           type="text"
@@ -290,14 +290,14 @@ onBeforeUnmount(() => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Address <span class="text-red-500">*</span>
+        {{ $t("careers.address") }} <span class="text-red-500">*</span>
       </label>
       <input
         type="text"
         :value="address"
         @input="emit('update:address', $event.target.value)"
         class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
-        placeholder="Address"
+        :placeholder="$t('careers.address')"
         :required="required"
       />
     </div>
@@ -307,7 +307,7 @@ onBeforeUnmount(() => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Country <span class="text-red-500">*</span>
+        {{ $t("careers.country") }} <span class="text-red-500">*</span>
       </label>
       <div class="relative w-full">
         <div

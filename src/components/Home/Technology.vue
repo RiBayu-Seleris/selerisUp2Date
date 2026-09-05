@@ -7,27 +7,16 @@ import lottie from "lottie-web/build/player/lottie_light";
 import myAnimation from "@/assets/videos/videojson.json";
 
 const technologyItems = [
-  {
-    title: "What is rPPG? Understanding Core Basics.",
-    description:
-      "Contactless imaging method measuring heart rate from subtle skin color changes via cameras.",
-  },
-  {
-    title: "How rPPG Works in Camera Heart Sensing..",
-    description:
-      "Light reflects from skin as cameras analyze signals to extract blood flow patterns reliably.",
-  },
-  {
-    title: "Machine Learning as the Processing Brain",
-    description:
-      "Machine learning removes motion and lighting noise to extract rPPG for heart rate prediction.",
-  },
-  {
-    title: "Great Potential for Remote Telemedicine.",
-    description:
-      "rPPG supports remote heart monitoring using cameras for scalable mobile telemedicine care.",
-  },
+  { key: "what-is-rppg" },
+  { key: "how-it-works" },
+  { key: "machine-learning" },
+  { key: "telemedicine" },
 ];
+
+// Butir yang judulnya lebih panjang di bahasa Indonesia, sehingga deskripsinya
+// perlu jarak ekstra. Hanya berlaku saat lang="id" (lihat varian id: di
+// tailwind.config.js). Tambah atau kurangi key di sini bila perlu.
+const spacedDescriptionId = ["machine-learning", "telemedicine"];
 
 const container = ref(null);
 const currentIndex = ref(0);
@@ -96,15 +85,16 @@ onBeforeUnmount(() => {
         <div class="w-full h-auto flex flex-col gap-y-3">
           <div class="w-full h-auto">
             <p class="text-[#2AB857] font-[500] text-[18px] sm:text-[24px]">
-              Technology
+              {{ $t("home.technology.eyebrow") }}
             </p>
           </div>
           <div class="w-full h-auto lg:pr-20">
             <p
               class="text-[#195279] font-[500] text-[16px] md:text-[24px] lg:text-[26px] xl:text-[36px] leading-normal tracking-wide dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
             >
-              Integrating rPPG + Machine Learning <br class="hidden sm:block" />
-              For Noninvasive Heart Rate Monitoring
+              {{ $t("home.technology.titleLine1") }}
+              <br class="hidden sm:block" />
+              {{ $t("home.technology.titleLine2") }}
             </p>
           </div>
         </div>
@@ -135,17 +125,24 @@ onBeforeUnmount(() => {
                       : 'text-[#D6D6D6] dark:text-[#565656] '
                   "
                 >
-                  {{ technology.title }}
+                  {{ $t(`home.technology.items.${technology.key}.title`) }}
                 </p>
               </div>
               <div
                 v-if="index === currentIndex && showDescription"
                 class="absolute bottom-0 sm:bottom-3 lg:-bottom-3 xl:-bottom-1 xls:-bottom-1 max-[321px]:!bottom-4 left-0 w-full h-auto transition-all duration-500 ease-out animate__animated animate__fadeIn"
+                :class="
+                  spacedDescriptionId.includes(technology.key)
+                    ? 'id:lg:-bottom-6 id:xl:-bottom-4 id:xls:-bottom-6'
+                    : ''
+                "
               >
                 <p
                   class="font-[500] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] text-[12px] sm:text-[16px] lg:text-[12px] xl:text-[16px] xls:text-[18px] max-[321px]:!text-[10px] leading-snug tracking-wide"
                 >
-                  {{ technology.description }}
+                  {{
+                    $t(`home.technology.items.${technology.key}.description`)
+                  }}
                 </p>
               </div>
             </div>

@@ -1,19 +1,14 @@
 <script setup>
+import { useLocalizedList } from "@/utils/i18nList";
 import ChecklistIcon from "@/components/icons/Checklist.vue";
-const ApiServices = [
-  {
-    title: "API Documentation",
-    body: "Detailed guides and reference to help you integrate quickly.",
-  },
-  {
-    title: "Authentication",
-    body: "Securely authenticate using API keys and tokens.",
-  },
-  {
-    title: "Workflow Automation",
-    body: "Easily manage and automate workflows with speed, accuracy, and minimal manual effort.",
-  },
-];
+const ApiServices = Array.from({ length: 3 }, () => ({}));
+
+// Teks diambil dari file locale
+const localizedServices = useLocalizedList(
+  "services.getStartedItems",
+  ApiServices,
+  ["title", "body"],
+);
 </script>
 
 <template>
@@ -29,15 +24,16 @@ const ApiServices = [
             <p
               class="text-[#1AB24F] font-[500] text-[21px] md:text-[27px] lg:text-[27px] xl:text-[30px]"
             >
-              Services
+              {{ $t("services.eyebrow") }}
             </p>
           </div>
           <div class="flex w-full h-auto">
             <p
               class="text-[#195279] font-[500] text-[27px] md:text-[41px] lg:text-[41px] xl:text-[53px] lg:leading-[50px] xl:leading-[70px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] from-[15%] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
             >
-              How to Get Started with the <br class="md:hidden lg:block" />
-              Seleris API Service
+              {{ $t("services.getStartedTitle1") }}
+              <br class="md:hidden lg:block" />
+              {{ $t("services.getStartedTitle2") }}
             </p>
           </div>
           <div
@@ -46,8 +42,7 @@ const ApiServices = [
             <p
               class="text-[#195279] dark:text-[#6F6F6F] font-[400] lg:text-[17px] xl:text-[21px]"
             >
-              The Seleris API service offers a number of benefits for companies,
-              including
+              {{ $t("services.getStartedSubtitle") }}
             </p>
           </div>
         </div>
@@ -59,7 +54,7 @@ const ApiServices = [
               class="flex flex-col w-full h-auto gap-x-10 justify-center gap-y-8 lg:gap-y-8 xl:gap-y-10 mt-10 md:mt-0"
             >
               <div
-                v-for="(ApiService, index) in ApiServices"
+                v-for="(ApiService, index) in localizedServices"
                 :key="index"
                 class="flex flex-row w-full h-auto gap-x-4 md:gap-x-8 lg:gap-x-4"
               >

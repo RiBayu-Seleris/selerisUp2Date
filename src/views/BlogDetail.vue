@@ -1,4 +1,5 @@
 <script setup>
+import { useI18n } from "vue-i18n";
 import Swal from "sweetalert2";
 import LikeIcon from "@/components/icons/Like.vue";
 import EyeIcon from "@/components/icons/Eye.vue";
@@ -29,6 +30,7 @@ import {
   user,
 } from "@/consumeAPI/authApi";
 
+const { t } = useI18n();
 const route = useRoute();
 const slug = route.params.slug;
 const utils = useUtilsStore();
@@ -153,8 +155,8 @@ const handleLogin = async () => {
   if (data?.success) {
     loginError.value = false;
     Swal.fire({
-      title: "Berhasil Login",
-      text: "Selamat datang kembali!",
+      title: t("blog.loginSuccess"),
+      text: t("blog.loginSuccessText"),
       icon: "success",
       timer: 2000,
       showConfirmButton: false,
@@ -180,7 +182,7 @@ const handleRegister = async () => {
 
   if (data.status === 422) {
     Swal.fire({
-      title: "Gagal Register",
+      title: t("blog.registerFailed"),
       text: data.message,
       icon: "error",
     });
@@ -188,7 +190,7 @@ const handleRegister = async () => {
 
   if (data.status === 200) {
     Swal.fire({
-      title: "Berhasil Register",
+      title: t("blog.registerSuccess"),
       text: data.message,
       icon: "success",
       timer: 2000, // 2 detik otomatis tertutup
@@ -204,12 +206,12 @@ const handleRegister = async () => {
 const handleLogout = async () => {
   // Swal
   const result = await Swal.fire({
-    title: "Yakin ingin logout?",
-    text: "Kamu akan keluar dari akun saat ini.",
+    title: t("blog.logoutConfirm"),
+    text: t("blog.logoutConfirmText"),
     icon: "warning",
     showCancelButton: true,
-    confirmButtonText: "Ya, logout",
-    cancelButtonText: "Batal",
+    confirmButtonText: t("blog.logoutYes"),
+    cancelButtonText: t("blog.logoutCancel"),
   });
 
   if (result.isConfirmed) {
@@ -218,7 +220,7 @@ const handleLogout = async () => {
 
     // Tampilkan notifikasi berhasil
     Swal.fire({
-      title: "Berhasil Logout",
+      title: t("blog.logoutSuccess"),
       icon: "success",
       timer: 2000,
       showConfirmButton: false,
@@ -302,8 +304,8 @@ const copyLink = async (slug) => {
     // ✅ Swal sukses
     Swal.fire({
       icon: "success",
-      title: "Link berhasil disalin!",
-      text: "Bagikan ke temanmu 🚀",
+      title: t("blog.linkCopied"),
+      text: t("blog.linkCopiedText"),
       toast: true,
       position: "top",
       showConfirmButton: false,
@@ -433,7 +435,7 @@ onBeforeUnmount(() => {
                   class="w-full h-full flex justify-center items-center py-2 lg:py-3.5"
                 >
                   <p class="text-[14px] text-[#195279] dark:text-[#FAFAFA]">
-                    Logout
+                    {{ $t("blog.logout") }}
                   </p>
                 </div>
               </button>
@@ -696,7 +698,7 @@ onBeforeUnmount(() => {
                     <p
                       class="text-[#195279] font-[500] lg:text-[16px] justify-center dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                     >
-                      Most Popular
+                      {{ $t("blog.mostPopular") }}
                     </p>
                   </div>
                   <div class="flex flex-col w-full h-full mt-4">
@@ -782,7 +784,7 @@ onBeforeUnmount(() => {
               type="text"
               rows="2"
               class="w-full pl-4 py-2 bg-[#EBEBEB] rounded-[8px] focus:outline-none cursor-pointer"
-              placeholder="Share your thoughts?"
+              :placeholder="$t('blog.commentPlaceholder')"
               aria-label="Write a comment"
               @focus="toggledTextareaIsFocused"
               required
@@ -888,14 +890,14 @@ onBeforeUnmount(() => {
               <p
                 class="md:text-[32px] lg:text-[38px] font-[500] text-[#195279]"
               >
-                Sign In
+                {{ $t("blog.signIn") }}
               </p>
             </div>
             <div class="w-full h-auto">
               <p
                 class="md:text-[18px] lg:text-[22px] font-[400] tracking-tight text-[#195279]"
               >
-                Be among the first to discover what it's all about
+                {{ $t("blog.authSubtitle") }}
               </p>
             </div>
           </div>
@@ -909,7 +911,7 @@ onBeforeUnmount(() => {
                 for="email"
                 class="block text-sm font-medium text-gray-700 mb-1"
               >
-                Email
+                {{ $t("blog.email") }}
               </label>
               <input
                 type="email"
@@ -928,7 +930,7 @@ onBeforeUnmount(() => {
                 for="password"
                 class="block text-sm font-medium text-gray-700 mb-1"
               >
-                Password
+                {{ $t("blog.password") }}
               </label>
               <div class="relative">
                 <input
@@ -936,7 +938,7 @@ onBeforeUnmount(() => {
                   id="password"
                   :type="showPassword ? 'text' : 'password'"
                   v-model="loginData.password"
-                  placeholder="Password"
+                  :placeholder="$t('misc.passwordPlaceholder')"
                   autocomplete="current-password"
                   class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-0 focus:ring-[#2AB857]"
                   :class="{ 'border-red-500 focus:ring-red-500': loginError }"
@@ -999,7 +1001,7 @@ onBeforeUnmount(() => {
               <p
                 class="md:text-[14px] lg:text-[16px] hover:underline cursor-pointer hover:text-[#2AB857]"
               >
-                Forgot Password?
+                {{ $t("blog.forgotPassword") }}
               </p>
             </div>
             <div
@@ -1021,7 +1023,7 @@ onBeforeUnmount(() => {
             class="w-full h-auto flex justify-center items-center cursor-pointer"
           >
             <p>
-              Don't you have an account?
+              {{ $t("blog.noAccount") }}
               <button aria-label="Open Register" @click="openRegisterForm">
                 <span class="text-[#2AB857]">Sign Up</span>
               </button>
@@ -1070,14 +1072,14 @@ onBeforeUnmount(() => {
               <p
                 class="md:text-[32px] lg:text-[38px] font-[500] text-[#195279]"
               >
-                Sign Up
+                {{ $t("blog.signUp") }}
               </p>
             </div>
             <div class="w-full h-auto">
               <p
                 class="md:text-[18px] lg:text-[22px] font-[400] tracking-tight text-[#195279]"
               >
-                Be among the first to discover what it's all about
+                {{ $t("blog.authSubtitle") }}
               </p>
             </div>
           </div>
@@ -1091,14 +1093,14 @@ onBeforeUnmount(() => {
                 for="fullname"
                 class="block text-sm font-medium text-gray-700 mb-1"
               >
-                Full Name
+                {{ $t("blog.fullName") }}
               </label>
               <input
                 required
                 id="fullname"
                 v-model="registerData.fullname"
                 autocomplete="name"
-                placeholder="Fullname"
+                :placeholder="$t('misc.fullname')"
                 class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2AB857]"
               />
             </div>
@@ -1107,7 +1109,7 @@ onBeforeUnmount(() => {
                 for="email"
                 class="block text-sm font-medium text-gray-700 mb-1"
               >
-                Email
+                {{ $t("blog.email") }}
               </label>
               <input
                 required
@@ -1124,7 +1126,7 @@ onBeforeUnmount(() => {
                 for="password"
                 class="block text-sm font-medium text-gray-700 mb-1"
               >
-                Password
+                {{ $t("blog.password") }}
               </label>
               <div class="relative">
                 <input
@@ -1132,7 +1134,7 @@ onBeforeUnmount(() => {
                   id="password"
                   :type="showPasswordRegister ? 'text' : 'password'"
                   v-model="registerData.password"
-                  placeholder="Password"
+                  :placeholder="$t('misc.passwordPlaceholder')"
                   autocomplete="new-password"
                   class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2AB857]"
                 />
@@ -1202,7 +1204,7 @@ onBeforeUnmount(() => {
             class="w-full h-auto flex justify-center items-center cursor-pointer"
           >
             <p>
-              Do you have account?
+              {{ $t("blog.haveAccount") }}
               <button aria-label="Open Login" @click="openLoginForm">
                 <span class="text-[#2AB857]">Sign In</span>
               </button>

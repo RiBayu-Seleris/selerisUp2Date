@@ -77,7 +77,7 @@ onBeforeUnmount(() => {
 
 <template>
   <h2 class="text-xl font-semibold text-[#195279] mb-4">
-    Skills & Competencies
+    {{ $t("careers.skills_competencies") }}
   </h2>
 
   <!-- Skills -->
@@ -86,7 +86,7 @@ onBeforeUnmount(() => {
     <label
       class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
     >
-      Technical Skills <span class="text-red-500">*</span>
+      {{ $t("careers.technical_skills") }} <span class="text-red-500">*</span>
     </label>
     <input
       type="text"
@@ -94,14 +94,14 @@ onBeforeUnmount(() => {
       @input="emit('update:technicalSkills', $event.target.value)"
       :value="technicalSkills"
       class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
-      placeholder="Microsoft Word, Microsoft Excel, Etc."
+      :placeholder="$t('careers.microsoft_word_microsoft_excel_etc')"
     />
   </div>
   <div class="flex flex-col w-full">
     <label
       class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
     >
-      Soft Skills<span class="text-red-500">*</span>
+      {{ $t("careers.soft_skills") }} <span class="text-red-500">*</span>
     </label>
     <input
       type="text"
@@ -109,14 +109,14 @@ onBeforeUnmount(() => {
       @input="emit('update:softSkills', $event.target.value)"
       :value="softSkills"
       class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
-      placeholder="Comunication, Team Work, Etc."
+      :placeholder="$t('careers.comunication_team_work_etc')"
     />
   </div>
   <div class="flex flex-col w-full">
     <label
       class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
     >
-      Language<span class="text-red-500">*</span>
+      {{ $t("careers.language") }} <span class="text-red-500">*</span>
     </label>
     <input
       type="text"
@@ -124,7 +124,7 @@ onBeforeUnmount(() => {
       @input="emit('update:softSkills', $event.target.value)"
       :value="softSkills"
       class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
-      placeholder="English, Bahasa Indonesia, Japan, Etc."
+      :placeholder="$t('careers.english_bahasa_indonesia_japan_etc')"
     />
   </div>
   <!-- </div> -->
@@ -134,7 +134,7 @@ onBeforeUnmount(() => {
     <label
       class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
     >
-      Language Skills <span class="text-red-500">*</span>
+      {{ $t("careers.language_skills") }} <span class="text-red-500">*</span>
     </label>
 
     <!-- Add Skill Button -->
@@ -215,7 +215,7 @@ onBeforeUnmount(() => {
             @click="removeLanguageSkill(index)"
             class="mt-4 p-2 text-red-500 hover:bg-red-50 rounded-md"
           >
-            Hapus
+            {{ $t("careers.hapus") }}
           </button>
         </div>
       </transition>

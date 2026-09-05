@@ -82,7 +82,7 @@ onBeforeUnmount(() => {
                 : 'text-[#89A6BA] dark:text-[#6A6A6A]'
             "
           >
-            Partners
+            {{ $t("home.partners.partners") }}
           </span>
         </div>
         <span>&</span>
@@ -99,7 +99,7 @@ onBeforeUnmount(() => {
                 : 'text-[#89A6BA] dark:text-[#6A6A6A]'
             "
           >
-            Clients
+            {{ $t("home.partners.clients") }}
           </span>
         </div>
       </div>

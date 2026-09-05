@@ -8,12 +8,7 @@ import DescRobot from "@/assets/images/about-images.png";
     <p
       class="text-[14px] lg:text-[17px] xl:text-[21px] text-center text-[#195279] dark:text-[#FAFAFA] font-light"
     >
-      Seleris is a technology company that develops facial video-based
-      applications to help businesses assess individuals more quickly and
-      accurately without the need for face-to-face interviews. The AI-powered
-      solution delivers smarter, faster, and scalable evaluations, making it
-      easier to analyze various aspects such as health, financial condition, and
-      behavioral traits.
+      {{ $t("about.desc1") }}
     </p>
   </div>
   <!-- div Description 2 -->
@@ -34,13 +29,9 @@ import DescRobot from "@/assets/images/about-images.png";
         <p
           class="text-[14px] lg:text-[17px] xl:text-[21px] text-[#195279] dark:text-[#FAFAFA] font-light text-center md:text-justify lg:text-justify xl:text-justify"
         >
-          Founded in 2019 by experienced entrepreneurs and technologists,
-          Seleris is built on the belief that everyone deserves access to
-          affordable and inclusive protection. Its
-          <span class="font-bold"> AI and machine learning </span>
-          models are trained on large datasets of facial video and behavioral
-          data, enabling high accuracy risk assessments even for individuals
-          with limited medical or historical records.
+          {{ $t("about.desc2Before") }}
+          <span class="font-bold"> {{ $t("about.desc2Highlight") }} </span>
+          {{ $t("about.desc2After") }}
         </p>
       </div>
     </div>
@@ -50,12 +41,7 @@ import DescRobot from "@/assets/images/about-images.png";
     <p
       class="text-[14px] lg:text-[17px] xl:text-[21px] text-center text-[#195279] dark:text-[#FAFAFA] font-light"
     >
-      Seleris's platform is designed to be simple and efficient for both
-      companies and customers. Businesses can integrate Seleris through a
-      flexible API, while users can complete the assessment process entirely
-      online within minutes. Seleris helps partners enhance speed, precision,
-      and accessibility across a variety of digital screening and evaluation use
-      cases.
+      {{ $t("about.desc3") }}
     </p>
   </div>
 </template>

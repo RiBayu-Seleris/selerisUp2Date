@@ -5,9 +5,9 @@ import HeroText from "@/components/reusable/HeroText.vue";
 <template>
   <div class="flex w-full h-auto pt-[90px] md:pt-[100px] xl:pt-[140px]">
     <HeroText
-      title="Careers"
-      subtitle="Explore Your Career Destination"
-      description="Find everything you need to start and grow your career journey with Seleris."
+      :title="$t('careers.heroTitle')"
+      :subtitle="$t('careers.heroSubtitle')"
+      :description="$t('careers.heroDescription')"
     />
   </div>
 </template>

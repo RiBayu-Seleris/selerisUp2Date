@@ -1,4 +1,5 @@
 <script setup>
+import { useI18n } from "vue-i18n";
 import {
   ref,
   onMounted,
@@ -25,6 +26,7 @@ import { useRouter } from "vue-router";
 import CloseIcon from "@/components/icons/CloseIcon.vue";
 import Swal from "sweetalert2";
 
+const { t } = useI18n();
 const utils = useUtilsStore();
 const jobApply = useJobApplyStore();
 const router = useRouter();
@@ -172,8 +174,8 @@ function selectCountry(country) {
 const showGenderDropdown = ref(false);
 
 const genderOptions = [
-  { value: "Male", label: "Laki-laki" },
-  { value: "Female", label: "Perempuan" },
+  { value: "Male", label: t("apply.genders.0.label") },
+  { value: "Female", label: t("apply.genders.1.label") },
 ];
 
 function toggleGender() {
@@ -193,11 +195,11 @@ function selectGender(gender) {
 const showEducationDropdown = ref(false);
 
 const educationOptions = [
-  { value: "highschool", label: "High School" },
-  { value: "diploma", label: "Diploma" },
-  { value: "bachelor", label: "Bachelor’s Degree" },
-  { value: "master", label: "Master’s Degree" },
-  { value: "doctorate", label: "Doctorate / PhD" },
+  { value: "highschool", label: t("apply.educations.0.label") },
+  { value: "diploma", label: t("apply.educations.1.label") },
+  { value: "bachelor", label: t("apply.educations.2.label") },
+  { value: "master", label: t("apply.educations.3.label") },
+  { value: "doctorate", label: t("apply.educations.4.label") },
 ];
 
 function toggleEducation() {
@@ -247,43 +249,13 @@ onMounted(async () => {
 /* ============================
    ✅ STEPPER DATA
 =============================== */
-const steps = [
-  {
-    number: "Step 1",
-    title: "Personal",
-    next: "Education",
-  },
-  {
-    number: "Step 2",
-    title: "Education",
-    next: "Experience",
-  },
-  {
-    number: "Step 3",
-    title: "Experience",
-    next: "Skills",
-  },
-  {
-    number: "Step 4",
-    title: "Skills",
-    next: "Motivations",
-  },
-  {
-    number: "Step 5",
-    title: "Motivations",
-    next: "Documents",
-  },
-  {
-    number: "Step 6",
-    title: "Documents",
-    next: "Declaration",
-  },
-  {
-    number: "Step 7",
-    title: "Declaration",
-    next: "Finish",
-  },
-];
+const steps = computed(() =>
+  Array.from({ length: 7 }, (_, i) => ({
+    number: t(`apply.steps.${i}.number`),
+    title: t(`apply.steps.${i}.title`),
+    next: t(`apply.steps.${i}.next`),
+  })),
+);
 
 const currentStep = ref(0);
 const animatedStep = ref(0);
@@ -311,10 +283,10 @@ const scrollToTop = () => {
 const circumference = 2 * Math.PI * 50;
 
 const dashOffset = computed(() => {
-  return circumference * (1 - (currentStep.value + 1) / steps.length);
+  return circumference * (1 - (currentStep.value + 1) / steps.value.length);
 });
 
-const isLastStep = computed(() => currentStep.value === steps.length - 1);
+const isLastStep = computed(() => currentStep.value === steps.value.length - 1);
 
 const nextStep = () => {
   console.log(formData.dob);
@@ -324,13 +296,13 @@ const nextStep = () => {
   if (!isValid) {
     Swal.fire({
       icon: "error",
-      title: "Incomplete Data",
-      text: "Please complete all required fields before continuing.",
+      title: t("apply.incompleteTitle"),
+      text: t("apply.incompleteText"),
     });
     return;
   }
 
-  if (currentStep.value < steps.length - 1) {
+  if (currentStep.value < steps.value.length - 1) {
     currentStep.value++;
   }
 
@@ -509,8 +481,8 @@ const handleToggleModal = () => {
   if (!isValid) {
     Swal.fire({
       icon: "error",
-      title: "Incomplete Data",
-      text: "Please complete all required fields before continuing.",
+      title: t("apply.incompleteTitle"),
+      text: t("apply.incompleteText"),
     });
     return;
   }
@@ -671,8 +643,8 @@ const handleApply = async () => {
       // ✅ Notifikasi sukses
       Swal.fire({
         icon: "success",
-        title: "Successfully Applied!",
-        text: "We have received your application. Please wait and check your email regularly.",
+        title: t("apply.successTitle"),
+        text: t("apply.successText"),
         showConfirmButton: false,
         timer: 3000,
         timerProgressBar: true,
@@ -827,16 +799,21 @@ watch(
           <div
             class="absolute w-full h-full top-0 text-sm font-semibold text-[#195279] flex items-center justify-center"
           >
-            Step {{ currentStep + 1 }} of {{ steps.length }}
+            {{
+              $t("apply.stepOf", {
+                current: currentStep + 1,
+                total: steps.length,
+              })
+            }}
           </div>
         </div>
 
         <div class="w-full h-auto flex flex-col gap-y-1">
           <h3 class="text-lg font-[500] text-[#195279]">
-            Step {{ steps[currentStep].title }}
+            {{ steps[currentStep].title }}
           </h3>
           <p class="text-sm text-gray-400">
-            Next Step: {{ steps[currentStep].next }}
+            {{ $t("apply.nextStep") }}: {{ steps[currentStep].next }}
           </p>
         </div>
       </div>
@@ -845,7 +822,7 @@ watch(
       <div class="md:mt-16 p-0">
         <div v-if="currentStep === 0">
           <h2 class="text-xl font-semibold text-[#195279] mb-4">
-            Personal Info
+            {{ $t("careers.personal_info") }}
           </h2>
           <PersonalInfo
             v-model:fullname="formData.fullname"
@@ -887,7 +864,7 @@ watch(
           <div class="flex flex-col lg:flex-row w-full h-auto gap-y-3">
             <div class="w-full h-auto flex items-center">
               <p class="text-[16px] lg:text-[20px]">
-                Do you have any previous work experience?
+                {{ $t("careers.do_you_have_any_previous_work_experience") }}
               </p>
             </div>
             <div class="flex flex-row w-full h-auto gap-x-5 lg:justify-end">
@@ -896,7 +873,7 @@ watch(
                 class="w-24 lg:w-28 h-auto py-2 bg-[#AAD7FF] border-[#1091F3] border-[1.5px] text-[#1091F3] rounded-lg font-medium"
                 @click="selectExperience(true)"
               >
-                Yes
+                {{ $t("careers.yes") }}
               </button>
               <button
                 aria-label="No Work Experience"
@@ -920,7 +897,7 @@ watch(
         </div>
         <div v-if="currentStep === 3">
           <h2 class="text-xl font-semibold text-[#195279] mb-4">
-            Skills & Competencies
+            {{ $t("careers.skills_competencies") }}
           </h2>
           <Skills
             v-model:technicalSkills="formData.technicalSkills"
@@ -930,7 +907,7 @@ watch(
         </div>
         <div v-if="currentStep === 4">
           <h2 class="text-xl font-semibold text-[#195279] mb-4">
-            Motivation & Preferences
+            {{ $t("careers.motivation_preferences") }}
           </h2>
           <Motivations
             v-model:startDate="formData.startDateMotivations"
@@ -940,7 +917,7 @@ watch(
         </div>
         <div v-if="currentStep === 5">
           <h2 class="text-xl font-semibold text-[#195279] mb-4">
-            Additional Documents
+            {{ $t("careers.additional_documents") }}
           </h2>
           <Documents
             v-model:cvFile="formData.cvFile"
@@ -956,7 +933,7 @@ watch(
         </div>
         <div v-if="currentStep === 6">
           <h2 class="text-xl font-semibold text-[#195279] mb-4">
-            Declaration and Consent
+            {{ $t("careers.declaration_and_consent") }}
           </h2>
           <Declarations
             v-model:trueData="formData.trueData"
@@ -977,7 +954,7 @@ watch(
             ]"
             :disabled="currentStep === 0"
           >
-            Previous
+            {{ $t("careers.previous") }}
           </button>
 
           <button
@@ -990,7 +967,7 @@ watch(
             :disabled="!stepValidators[currentStep]"
             class="bg-[#2AB857] text-white px-4 py-2 rounded-lg ml-auto hover:bg-[#259d4c] transition-all"
           >
-            Next
+            {{ $t("careers.next") }}
           </button>
 
           <button
@@ -1000,7 +977,7 @@ watch(
             @click="handleToggleModal"
           >
             <!-- @click="handleSubmit" -->
-            Submit
+            {{ $t("careers.submit") }}
           </button>
         </div>
       </div>
@@ -1030,7 +1007,7 @@ watch(
               </div>
               <div class="w-full h-auto text-[#FAFAFA]">
                 <p class="text-[18px] lg:text-[32px] font-[600]">
-                  Review Your Application
+                  {{ $t("careers.review_your_application") }}
                 </p>
               </div>
             </div>
@@ -1040,7 +1017,7 @@ watch(
             >
               <!-- === Personal Info === -->
               <ReviewData
-                title="Personal"
+                :title="$t('apply.steps.0.title')"
                 :items="{
                   Fullname: formData.fullname,
                   'Place Of Birth': formData.pob,
@@ -1054,7 +1031,7 @@ watch(
               />
               <!-- === Education === -->
               <ReviewData
-                title="Education"
+                :title="$t('apply.steps.1.title')"
                 :items="{
                   'School Name': formData.schoolName,
                   'Field Of Study': formData.fieldOfStudy,
@@ -1072,7 +1049,7 @@ watch(
               />
               <!-- === Experience === -->
               <ReviewData
-                title="Experience"
+                :title="$t('apply.steps.2.title')"
                 :items="{
                   'Last Company': formData.lastCompany,
                   'Last Position': formData.lastPosition,
@@ -1086,7 +1063,7 @@ watch(
 
               <!-- === Skills === -->
               <ReviewData
-                title="Skills"
+                :title="$t('apply.steps.3.title')"
                 :items="{
                   'Technical Skills': formData.technicalSkills,
                   'Soft Skills': formData.softSkills,
@@ -1095,7 +1072,7 @@ watch(
               />
               <!-- === Motivations === -->
               <ReviewData
-                title="Motivations"
+                :title="$t('apply.steps.4.title')"
                 :items="{
                   'Date of Joining': formData.startDateMotivations,
                   'Expected Salary': 'Rp ' + formData.expectedSalary,
@@ -1104,7 +1081,7 @@ watch(
               />
               <!-- === Documents === -->
               <ReviewData
-                title="Documents"
+                :title="$t('apply.steps.5.title')"
                 :items="{
                   'Curriculum Vitae (CV) File': formData.cvFile?.name || '-',
                   'Cover Letter File': formData.clFile?.name || '-',
@@ -1138,7 +1115,7 @@ watch(
                     <p
                       class="text-[12px] lg:text-[16px] xl:text-[16px] text-[#FF0000] font-500 dark:text-[#FAFAFA]"
                     >
-                      Close
+                      {{ $t("careers.close") }}
                     </p>
                   </div>
                 </button>
@@ -1153,7 +1130,7 @@ watch(
                     <p
                       class="text-[12px] lg:text-[16px] xl:text-[16px] text-[#FAFAFA] font-500 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                     >
-                      Submit
+                      {{ $t("careers.submit") }}
                     </p>
                   </div>
                 </button>

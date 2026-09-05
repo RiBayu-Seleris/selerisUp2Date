@@ -5,7 +5,10 @@ import HeroText from "@/components/reusable/HeroText.vue";
   <section
     class="flex w-full h-auto pt-[120px] md:pt-[150px] lg:pt-[160px] xl:pt-[160px] px-6 md:px-0"
   >
-    <HeroText title="Security" subtitle="Customer Security Comes First" />
+    <HeroText
+      :title="$t('misc.securityHeroTitle')"
+      :subtitle="$t('misc.securityHeroSubtitle')"
+    />
   </section>
   <section class="flex flex-col w-full h-auto px-24 mt-10">
     <div class="flex flex-col text-[#535862] gap-y-5">
@@ -13,52 +16,42 @@ import HeroText from "@/components/reusable/HeroText.vue";
         At
         <span class="text-[#535862] dark:text-[#FAFAFA] font-[700]"
           >Seleris</span
-        >, customers come first. This is a core credo that drives many of our
-        daily decisions. We take the trust of our customers and the security of
-        their data seriously.
+        >{{ $t("misc.securityIntro") }}
       </p>
       <p class="text-[21px] dark:text-[#FAFAFA] leading-relaxed">
-        Our commitment to enterprise-grade security is one reason leading ML
-        teams, including OpenAI and others, rely on
+        {{ $t("misc.securityCommitment") }}
         <span class="text-[#535862] dark:text-[#FAFAFA] font-[700]"
           >Seleris</span
         >
-        to accelerate the development of their AI applications.
+        {{ $t("misc.to_accelerate_the_development_of_their_a") }}
       </p>
       <p class="text-[21px] dark:text-[#FAFAFA] leading-relaxed">
-        Our customers rely on
+        {{ $t("misc.securityRely") }}
         <span class="text-[#535862] dark:text-[#FAFAFA] font-[700]"
           >Seleris</span
         >
-        to power their most critical work, and we're dedicated to building
-        platforms they can trust. Our offering is a managed, standardized,
-        tested, and externally audited platform with robust access controls that
-        scale to meet customer demand.
+        {{ $t("misc.securityRely2") }}
         <span class="text-[#535862] dark:text-[#FAFAFA] font-[700]"
           >Seleris</span
         >
-        is committed to earning customer trust by:
+        {{ $t("misc.is_committed_to_earning_customer_trust_b") }}
       </p>
       <ul class="list-disc text-[21px] pl-10 space-y-3 dark:text-[#FAFAFA]">
         <li>
-          Hiring a world-class security team to oversee all aspects of Seleris'
-          security
+          {{ $t("misc.securityPoint1") }}
         </li>
         <li>
-          Keeping up to date with security industry standards and best practices
+          {{ $t("misc.keeping_up_to_date_with_security_industr") }}
         </li>
         <li>
-          Deploying cutting-edge security technology to safeguard against
-          security threats
+          {{ $t("misc.securityPoint3") }}
         </li>
       </ul>
       <p class="text-[21px] dark:text-[#FAFAFA] leading-relaxed">
-        Our cloud platform's infrastructure and operations are certified
-        compliant with the following industry best practice standards and
-        frameworks:
+        {{ $t("misc.securityCertified") }}
       </p>
       <p class="font-[#181D27] dark:text-[#FAFAFA] text-[24px] font-[600]">
-        Current
+        {{ $t("misc.current") }}
       </p>
       <ul class="list-disc text-[21px] pl-10 space-y-3 dark:text-[#FAFAFA]">
         <li>FedRAMP High Authorized</li>
@@ -68,27 +61,24 @@ import HeroText from "@/components/reusable/HeroText.vue";
         <li>ISO 9001</li>
       </ul>
       <p class="text-[21px] dark:text-[#FAFAFA] leading-relaxed">
-        To access
+        {{ $t("misc.securityAccess") }}
         <span class="text-[#535862] dark:text-[#FAFAFA] font-[700]"
           >Seleris</span
         >
-        latest security compliance certifications and reports, please visit our
-        Trust Center. If you are interested in using
+        {{ $t("misc.securityAccess2") }}
         <span class="text-[#535862] dark:text-[#FAFAFA] font-[700]"
           >Seleris</span
-        >, but have questions about security, please don't hesitate to reach
-        out. We're happy to put you in touch with a member of our Security team.
+        >{{ $t("misc.securityAccess3") }}
       </p>
       <p class="font-[600] text-[30px] text-[#181D27] dark:text-[#FAFAFA] mt-5">
-        Reporting Security Issues
+        {{ $t("misc.reporting_security_issues") }}
       </p>
       <p class="text-[20px] leading-relaxed dark:text-[#FAFAFA]">
-        If you've identified a potential security flaw in our infrastructure or
-        software, please let us know at
+        {{ $t("misc.securityReport") }}
         <span class="text-[#2AB857] font-[500]"
           ><a href="mailto:info@seleris.ai"> info@seleris.ai. </a></span
         >
-        We'll triage the issue and get back to you.
+        {{ $t("misc.we_ll_triage_the_issue_and_get_back_to_y") }}
       </p>
     </div>
   </section>

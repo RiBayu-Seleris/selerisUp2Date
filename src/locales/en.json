@@ -1,0 +1,2239 @@
+{
+  "common": {
+    "changeLanguage": "Change language",
+    "switchToLight": "Switch to light mode",
+    "switchToDark": "Switch to dark mode",
+    "openMenu": "Open menu",
+    "closeMenu": "Close menu",
+    "comingSoon": "Coming Soon!"
+  },
+  "nav": {
+    "home": "Home",
+    "about": "About",
+    "products": "Products",
+    "technology": "Technology",
+    "solutions": "Solutions",
+    "blogs": "Blogs",
+    "services": "Services",
+    "careers": "Careers",
+    "about_items": {
+      "company": "Company",
+      "team": "Our Team",
+      "innovation": "Innovations",
+      "faq": "FAQ",
+      "contact": "Contact Us"
+    }
+  },
+  "solutions": {
+    "ai-powered": {
+      "title": "AI-Powered Insurance Underwriting",
+      "subtitle": "AI-Based Insurance Underwriting",
+      "hero": {
+        "subtitle": "Fair Insurance Pricing, Starting From Your Face."
+      },
+      "overview": {
+        "description": "Seleris fundamentally transforms the underwriting paradigm. Using AI-powered rPPG (Remote Photoplethysmography) technology, Seleris measures up to 60 physiological parameters — including heart rate, HRV, respiratory rate, blood pressure estimation, and cardiovascular risk indicators — in just 60 seconds via a standard smartphone camera. No additional devices. No clinic visits. No waiting for lab results.",
+        "stats": [
+          {
+            "label": "Physiological Parameters"
+          },
+          {
+            "label": "Scan Time"
+          },
+          {
+            "label": "Cost Reduction"
+          }
+        ]
+      },
+      "keyFeatures": [
+        {
+          "title": "60+ Physiological Parameters",
+          "description": "Heart Rate, HRV, Respiratory Rate, Blood Pressure estimation, Stress Index, Cardiovascular Risk Score, Biological Age, BMI, and more"
+        },
+        {
+          "title": "End-to-End Digital Underwriting",
+          "description": "From application, screening, to risk decision — all in one seamless digital workflow without paperwork"
+        },
+        {
+          "title": "Integrated Actuarial Risk Algorithm",
+          "description": "Risk scores are directly translated into evidence-based individual premium recommendation"
+        },
+        {
+          "title": "Compliance-Ready",
+          "description": "Designed in accordance with OJK regulations and international actuarial best practices (FSAI/IAI)"
+        }
+      ],
+      "moreFeatures": [
+        {
+          "title": "Bias-Corrected for Asian Populations",
+          "description": "Models trained on multi-ethnic Southeast Asian datasets for demographically relevant accuracy"
+        }
+      ],
+      "businessBenefits": [
+        {
+          "label": "Reduce underwriting costs by up to 70%"
+        },
+        {
+          "label": "Accelerate policy issuance from days to minutes"
+        },
+        {
+          "label": "Improve risk selection accuracy and minimize adverse selection"
+        },
+        {
+          "label": "Expand insurance access to underserved unbanked/uninsured segments"
+        }
+      ],
+      "cta": {
+        "title": "Smarter Risk. Faster Decision. Sustainable Protection",
+        "subtitle": "Smarter Risk. Faster Decision. Sustainable Protection",
+        "buttonText": "Book a Demo!"
+      }
+    },
+    "mobile-health": {
+      "title": "Mobile Health",
+      "subtitle": "Mobile Health — Seleriscare.ai",
+      "hero": {
+        "subtitle": "Comprehensive Health Check, 60 Seconds, Anywhere."
+      },
+      "overview": {
+        "description": "Seleriscare.ai is an rPPG-based direct-to-consumer (D2C) health platform that brings clinic-grade health assessment capabilities directly to your smartphone. Users simply face their smartphone camera for 60 seconds to receive a comprehensive health report covering vital signs, cardiovascular risk scores, biological age estimation, and metabolic indicators — no additional sensors, no wires, no doctor visits.",
+        "stats": [
+          {
+            "label": "Fast Assessment"
+          },
+          {
+            "label": "Direct to Consumer"
+          },
+          {
+            "label": "Subscription Tiers"
+          }
+        ]
+      },
+      "keyFeatures": [
+        {
+          "title": "60-Second Vital Sign Scan",
+          "description": "Heart rate, respiratory rate, HRV, oxygen saturation (estimated), and blood pressure (estimated)"
+        },
+        {
+          "title": "Comprehensive Health Scores",
+          "description": "Cardiovascular Risk Score, Stress Level, Metabolic Health Index"
+        },
+        {
+          "title": "Biological Age Estimation",
+          "description": "Compare biological vs chronological age to understand true health status"
+        },
+        {
+          "title": "Facial BMI Estimation",
+          "description": "Seleris’s unique technology for Body Mass Index estimation without a scale"
+        }
+      ],
+      "moreFeatures": [
+        {
+          "title": "Health Trend Dashboard",
+          "description": "Track health progress over time with easy-to-understand visualizations"
+        },
+        {
+          "title": "Subscription Packages",
+          "description": "Free, Basic, Silver, Gold — tailored for different age segments and health needs"
+        }
+      ],
+      "businessBenefits": [
+        {
+          "label": "Health assessment without clinic visits"
+        },
+        {
+          "label": "Track personal health trends over time"
+        },
+        {
+          "label": "Early detection of cardiovascular risk"
+        },
+        {
+          "label": "Multiple subscription tiers available"
+        }
+      ],
+      "cta": {
+        "title": "Bring AI Health Checks to Everyone",
+        "subtitle": "Deliver accessible health insights directly from smartphones",
+        "buttonText": "Contact Us for a Demo"
+      }
+    },
+    "corporate-wellness": {
+      "title": "Corporate Wellness",
+      "subtitle": "Corporate Wellness",
+      "hero": {
+        "subtitle": "Healthier Employees, More Productive Companies."
+      },
+      "overview": {
+        "description": "Seleris Corporate Wellness Platform changes the conventional wellness approach entirely: mass employee health screenings can now be conducted contactlessly, quickly, and at scale — directly from each employee's smartphone, anytime, anywhere. Aggregated workforce health data empowers HR teams and management to understand health risk profiles in real-time.",
+        "stats": [
+          {
+            "label": "Operational Disruption"
+          },
+          {
+            "label": "Aggregated Data"
+          },
+          {
+            "label": "Measurable Impact"
+          }
+        ]
+      },
+      "keyFeatures": [
+        {
+          "title": "Wellness Management Dashboard",
+          "description": "Monitor aggregated (anonymized) employee health profiles in a single platform"
+        },
+        {
+          "title": "Mass Screening Without Disruption",
+          "description": "Employees conduct self-scans without leaving their workstations"
+        },
+        {
+          "title": "Risk Stratification Report",
+          "description": "Identify high-risk groups for precisely targeted intervention programs"
+        },
+        {
+          "title": "Health Insurance Benefit Integration",
+          "description": "Link health data to employee premium benefit adjustments"
+        }
+      ],
+      "moreFeatures": [
+        {
+          "title": "Gamified Wellbeing Programs",
+          "description": "Drive employee participation through health challenges with rewards and team leaderboards"
+        },
+        {
+          "title": "Wellness ROI Reports",
+          "description": "Measure the impact of wellness programs on productivity and insurance claim savings"
+        }
+      ],
+      "businessBenefits": [
+        {
+          "label": "Mass screening without operational disruption"
+        },
+        {
+          "label": "Real-time employee risk identification"
+        },
+        {
+          "label": "Precisely targeted intervention programs"
+        },
+        {
+          "label": "Measurable wellness ROI"
+        }
+      ],
+      "cta": {
+        "title": "Build a Healthier Workforce",
+        "subtitle": "Empower HR teams with real-time health intelligence",
+        "buttonText": "Contact Us for a Demo"
+      }
+    },
+    "remote-patient-monitoring": {
+      "title": "Remote Patient Monitoring",
+      "subtitle": "Remote Patient Monitoring",
+      "hero": {
+        "subtitle": "Monitor Your Patients From Anywhere, Anytime."
+      },
+      "overview": {
+        "description": "Seleris RPM Platform enables medical professionals to continuously monitor patients' physiological conditions — without requiring face-to-face interaction. Through integration with telehealth systems and Electronic Medical Records (EMR), patient vital sign data collected via rPPG is directly synchronized to the clinician's dashboard, providing a comprehensive and up-to-date view of patient status.",
+        "stats": [
+          {
+            "label": "Monitoring"
+          },
+          {
+            "label": "Critical Alerts"
+          },
+          {
+            "label": "Integrated"
+          }
+        ]
+      },
+      "keyFeatures": [
+        {
+          "title": "Continuous Monitoring Dashboard",
+          "description": "Real-time monitoring of Heart Rate, HRV, RR, SpO2, and cardiovascular risk"
+        },
+        {
+          "title": "Automated Alert System",
+          "description": "Instant notifications to clinicians when vital parameters exceed critical thresholds"
+        },
+        {
+          "title": "EMR/Telehealth Integration",
+          "description": "Compatible with existing medical record and telehealth platforms"
+        },
+        {
+          "title": "Post-Discharge Monitoring",
+          "description": "Track patients after hospitalization to prevent readmission"
+        }
+      ],
+      "moreFeatures": [
+        {
+          "title": "Chronic Disease Management",
+          "description": "Specialized solutions for long-term management of hypertension, diabetes, and cardiac patients"
+        },
+        {
+          "title": "Structured Clinical Reports",
+          "description": "Generate periodic health reports ready for medical documentation"
+        }
+      ],
+      "businessBenefits": [
+        {
+          "label": "Remote patient monitoring without face-to-face visits"
+        },
+        {
+          "label": "Early detection of post-discharge complications"
+        },
+        {
+          "label": "Long-term chronic disease management"
+        },
+        {
+          "label": "Seamless EMR integration"
+        }
+      ],
+      "cta": {
+        "title": "Deliver Continuous Patient Care",
+        "subtitle": "Extend healthcare monitoring beyond hospital walls",
+        "buttonText": "Contact Us for a Demo"
+      }
+    },
+    "biological-age": {
+      "title": "Biological Age Assessment",
+      "subtitle": "Biological Age Assessment — Seleriscare.ai",
+      "hero": {
+        "subtitle": "How Old Is Your Body, Really?"
+      },
+      "overview": {
+        "description": "Seleris uses a combination of rPPG, computer vision, and machine learning to non-invasively estimate biological age from facial video alone. The model is calibrated using epidemiological data from Southeast Asian populations, making it demographically and clinically relevant for the Indonesian market. The output is not merely a number — it is an actionable guide for health interventions and fairer insurance premium determination.",
+        "stats": [
+          {
+            "label": "Non-Invasive"
+          },
+          {
+            "label": "Southeast Asian Dataset"
+          },
+          {
+            "label": "Strategic Applications"
+          }
+        ]
+      },
+      "keyFeatures": [
+        {
+          "title": "Life Insurance Risk Selection",
+          "description": "Replace or augment conventional medical underwriting with objective biological assessment"
+        },
+        {
+          "title": "Personalized Longevity Programs",
+          "description": "Tailored health guidance based on the biological vs chronological age gap"
+        },
+        {
+          "title": "Intervention Effectiveness Evaluation",
+          "description": "Measure the real impact of health programs on slowing the aging rate"
+        },
+        {
+          "title": "Epidemiological Research",
+          "description": "Large-scale population biological age database for national health research"
+        }
+      ],
+      "moreFeatures": [
+        {
+          "title": "Wellness Incentives",
+          "description": "Reward policyholders/employees who successfully reduce their biological age"
+        }
+      ],
+      "businessBenefits": [
+        {
+          "label": "More accurate risk assessment than chronological age"
+        },
+        {
+          "label": "Personalized health intervention guidance"
+        },
+        {
+          "label": "National-scale epidemiological database"
+        },
+        {
+          "label": "Data-driven wellness incentives"
+        }
+      ],
+      "cta": {
+        "title": "Improve Health Insights with Biological Age",
+        "subtitle": "Turn data into actionable longevity strategies",
+        "buttonText": "Contact Us for a Demo"
+      }
+    },
+    "population-health": {
+      "title": "Population Health Screening",
+      "subtitle": "Population Health Screening — Seleriscare.ai",
+      "hero": {
+        "subtitle": "Screen Millions of People, With Just a Smartphone."
+      },
+      "overview": {
+        "description": "Seleris Population Health Screening changes the equation entirely. With a 'screening-as-a-service' model, Seleris enables national-scale health screening using existing infrastructure: smartphones. No new clinics to build, no additional healthcare staff required. The platform can be integrated into national health apps, corporate health portals, or digital kiosks — reaching millions of people simultaneously.",
+        "stats": [
+          {
+            "label": "BPJS Members"
+          },
+          {
+            "label": "Screening-as-a-Service"
+          },
+          {
+            "label": "Scalability"
+          }
+        ]
+      },
+      "keyFeatures": [
+        {
+          "title": "BPJS Health Members",
+          "description": "Early cardiovascular and metabolic risk screening for 240 million national health insurance participants"
+        },
+        {
+          "title": "Insurance Policyholders",
+          "description": "Pre-underwriting screening to accelerate policy application processing"
+        },
+        {
+          "title": "Government Health Programs",
+          "description": "Supporting national chronic disease prevention, NCD, and hypertension early detection programs"
+        },
+        {
+          "title": "Rural Communities",
+          "description": "Screening without healthcare infrastructure via village health workers and basic smartphones"
+        }
+      ],
+      "moreFeatures": [
+        {
+          "title": "Educational Institutions",
+          "description": "Regular health screening for students and university communities"
+        }
+      ],
+      "businessBenefits": [
+        {
+          "label": "National-scale screening via smartphone"
+        },
+        {
+          "label": "Early detection of chronic diseases"
+        },
+        {
+          "label": "Reach rural and underserved communities"
+        },
+        {
+          "label": "Integration with government health programs"
+        }
+      ],
+      "cta": {
+        "title": "Scale Health Screening Nationwide",
+        "subtitle": "Reach millions with simple smartphone-based screening",
+        "buttonText": "Contact Us for a Demo"
+      }
+    },
+    "b2b-partnership": {
+      "title": "B2B Partnership & Licensing",
+      "subtitle": "B2B Partnership & Licensing — Seleriscare.ai",
+      "hero": {
+        "subtitle": "Integrate the Best Health AI Into Your Platform."
+      },
+      "overview": {
+        "description": "Seleris rPPG technology is available not only as an end-user product, but also as a health technology infrastructure component that can be integrated into your business ecosystem. Through flexible partnership models — from API integration and white-label solutions to strategic joint ventures — Seleris opens collaboration opportunities for organizations wanting to bring cutting-edge health AI to their platforms.",
+        "stats": [
+          {
+            "label": "Countries"
+          },
+          {
+            "label": "SDK Ready"
+          },
+          {
+            "label": "Industry Network"
+          }
+        ]
+      },
+      "keyFeatures": [
+        {
+          "title": "API Integration",
+          "description": "Integrate rPPG SDK directly into your mobile app or web platform with comprehensive technical documentation"
+        },
+        {
+          "title": "White-Label Solution",
+          "description": "Fully rebranded Seleriscare.ai solution matching the partner’s brand identity — including UI/UX, branding, and domain"
+        },
+        {
+          "title": "OEM/Embedded",
+          "description": "SDK integration into hardware devices (kiosks, medical tablets, health IoT devices)"
+        },
+        {
+          "title": "Strategic Joint Venture",
+          "description": "50/50 JV model for specific markets, including Malaysia JV and 30-country Asia-MENA expansion"
+        }
+      ],
+      "moreFeatures": [
+        {
+          "title": "Sub-Licensing Program",
+          "description": "Sub-licensee partners in target countries receive exclusive distribution rights for Seleris technology"
+        }
+      ],
+      "businessBenefits": [
+        {
+          "label": "Flexible partnership models"
+        },
+        {
+          "label": "Access to the full Seleris ecosystem"
+        },
+        {
+          "label": "30-country Asia-MENA expansion"
+        },
+        {
+          "label": "30+ years of industry network"
+        }
+      ],
+      "cta": {
+        "title": "Partner With Seleris",
+        "subtitle": "Bring advanced health AI into your ecosystem",
+        "buttonText": "Contact Us for a Demo"
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Transform the Life and Medical industry by making it more efficient, accurate, and accessible for everyone",
+    "products": "Products",
+    "company": "Company",
+    "stayConnects": "Stay Connects",
+    "address": "Address",
+    "phone": "Phone",
+    "email": "Email",
+    "getTheApp": "Get The App",
+    "copyright": "© 2023 Seleris Asia Pacific Technology. All rights reserved",
+    "company_items": {
+      "about": "About",
+      "terms": "Terms",
+      "privacy": "Privacy",
+      "security": "Security"
+    }
+  },
+  "underConstruction": {
+    "title": "Under Construction",
+    "description": "This page is still under development. Please check back later.",
+    "close": "Got it"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "AI Innovation",
+      "titleLine1": "The Future of Life",
+      "titleLine2": "Technology",
+      "bookDemo": "Book a Demo"
+    },
+    "banners": {
+      "lifins": "An intelligent underwriting platform for individual and group life insurance, accelerating decision-making by 90% with fully configurable business rules.",
+      "medins": "An AI-driven health insurance intelligence system that automates medical data processing, enhances fraud detection, improves risk prediction, and ensures regulatory compliance.",
+      "credit-cover": "An AI-powered solution that streamlines credit life insurance and loan protection, automating risk assessments with up to 25% higher accuracy and reducing processing time by 80%.",
+      "care": "A corporate health and wellness platform that automates employee health monitoring, delivers real-time preventive insights, and lowers medical costs by up to 20%."
+    },
+    "partners": {
+      "partners": "Partners",
+      "clients": "Clients"
+    },
+    "certificate": {
+      "title": "Seleris Certification",
+      "subtitle": "Seleris Meditekno Internasional"
+    },
+    "supported": {
+      "title": "Official Statement",
+      "descriptionLine1": "SELICA is classified as an AI-based Medical Device under the regulations of",
+      "descriptionLine2": "the Ministry of Health of the Republic of Indonesia and complies with Permenkes No.14 of 2021"
+    },
+    "howItWorks": {
+      "eyebrow": "AI Technology",
+      "titleLine1": "How Seleris",
+      "titleLine2": "Works?",
+      "steps": {
+        "rppg": {
+          "title": "Remote Photoplethysmography Technology",
+          "description": "Seleris harnesses Remote Photoplethysmography (rPPG) technology to evaluate various vital signs that represent a customer's health condition."
+        },
+        "ai": {
+          "title": "Artificial Intelligence and Machine Learning Adoption",
+          "description": "Seleris capitalizes on the power of cutting-edge AI and ML algorithms to evaluate underwriting decisions and furnish comprehensive coverage advice."
+        },
+        "security": {
+          "title": "Data Security and Privacy Compliance",
+          "description": "Seleris securely stores and processes customer data, ensuring compliance with global regulations while protecting sensitive personal, financial information."
+        }
+      }
+    },
+    "benefits": {
+      "title": "Benefits Seleris",
+      "subtitle": "Get started with Seleris and see the difference for yourself",
+      "items": {
+        "accuracy": {
+          "title": "Accuracy",
+          "body": "The results show that Seleris can recognize faces with up to 94% accuracy."
+        },
+        "speed": {
+          "title": "Speed",
+          "body": "Seleris has a lightning fast speed. it can open and run features quickly."
+        },
+        "efficiency": {
+          "title": "Efficiency",
+          "body": "The app’s simple interface helps users quickly find desired features easily."
+        },
+        "testimonial": {
+          "title": "Testimonial",
+          "body": "Embrace the power of collaboration with a multitude of partners."
+        },
+        "experience": {
+          "title": "Customer Experience",
+          "body": "We commit to giving Seleris users the best, easy, safe, and comfortable experience."
+        },
+        "guarantee": {
+          "title": "Guarantee",
+          "body": "Your data security is our priority, protected with advanced cutting-edge technology."
+        }
+      }
+    },
+    "aiDesc": {
+      "title": "AI and Machine Learning Algorithms",
+      "highlight": "Our AI and ML",
+      "body": "algorithms conduct in-depth risk assessments, considering various factors and subtleties that impact outcomes. This sophisticated analysis enables us to provide with tailored guidance and recommendations"
+    },
+    "technology": {
+      "eyebrow": "Technology",
+      "titleLine1": "Integrating rPPG + Machine Learning",
+      "titleLine2": "For Noninvasive Heart Rate Monitoring",
+      "items": {
+        "what-is-rppg": {
+          "title": "What is rPPG? Understanding Core Basics.",
+          "description": "Contactless imaging method measuring heart rate from subtle skin color changes via cameras."
+        },
+        "how-it-works": {
+          "title": "How rPPG Works in Camera Heart Sensing..",
+          "description": "Light reflects from skin as cameras analyze signals to extract blood flow patterns reliably."
+        },
+        "machine-learning": {
+          "title": "Machine Learning as the Processing Brain",
+          "description": "Machine learning removes motion and lighting noise to extract rPPG for heart rate prediction."
+        },
+        "telemedicine": {
+          "title": "Great Potential for Remote Telemedicine.",
+          "description": "rPPG supports remote heart monitoring using cameras for scalable mobile telemedicine care."
+        }
+      }
+    },
+    "solutions": {
+      "eyebrow": "Solutions",
+      "title": "7 AI-Powered Health Solutions",
+      "learnMore": "Learn More"
+    },
+    "faceTracker": {
+      "eyebrow": "Request Demo",
+      "titleLine1": "What you get",
+      "titleLine2": "when you try the scan demo",
+      "cards": {
+        "vital-signs": {
+          "title": "Vital Signs in 30 Seconds",
+          "description": "Measures heart rate, blood pressure, SpO₂, HRV, and more. no wearables or devices required."
+        },
+        "micro-movement": {
+          "title": "Micro-Movement Detection",
+          "description": "AI uses rPPG to detect blood flow and pulse changes through facial skin via camera."
+        },
+        "parameters": {
+          "title": "60+ AI-Powered Health Parameters",
+          "description": "Instantly measures health and risk indicators for smarter insurance assessments."
+        },
+        "report": {
+          "title": "Instant Health Report",
+          "description": "Creates unique 3D model of your face for accurate health measurements."
+        }
+      },
+      "scanButton": "Scan Yourself",
+      "scanLimit": "Scan limit reached ({count}x)",
+      "modal": {
+        "title": "Request Demo",
+        "description": "Enter the following information to try the scan feature.",
+        "firstName": "First name",
+        "firstNamePlaceholder": "Enter your first name",
+        "businessEmail": "Business email",
+        "businessEmailPlaceholder": "Enter your business email",
+        "companyName": "Company name",
+        "companyNamePlaceholder": "Enter your company name",
+        "goals": "What would you like to achieve with Seleris AI",
+        "goalsPlaceholder": "Tell us your goals...",
+        "consentBefore": "I agree to receive information about",
+        "consentAfter": "products and services via email. The personal data you provide will be processed in accordance with our",
+        "privacyPolicy": "Privacy Policy.",
+        "consentWithdraw": "You may withdraw this consent at any time",
+        "submit": "Submit Demo Request"
+      }
+    },
+    "testimonial": {
+      "eyebrow": "Client Feedback",
+      "title": "What they say after using our product"
+    },
+    "different": {
+      "title": "What Makes Us Different?",
+      "subtitle": "We bring solutions to make life for our customers.",
+      "items": {
+        "team": {
+          "title": "Our Team",
+          "subtitle": "Collaboration and Teamwork."
+        },
+        "innovation": {
+          "title": "Innovation",
+          "subtitle": "Developing innovative and effective solutions."
+        },
+        "missions": {
+          "title": "Missions",
+          "subtitle": "Efficient, accurate, and accessible."
+        },
+        "performance": {
+          "title": "Optimal Perfomance",
+          "subtitle": "Equipped with advanced technology to ensure smoothness and speed."
+        }
+      }
+    },
+    "blogs": {
+      "eyebrow": "Blog",
+      "title": "What's On Seleris",
+      "more": "More News",
+      "linkCopied": "Link copied!"
+    }
+  },
+  "solutionPage": {
+    "label": "Solution",
+    "overview": "Overview",
+    "keyFeatures": "Key Features",
+    "moreFeatures": "More Features",
+    "businessBenefitsTitle": "Business Benefits",
+    "businessBenefitsSubtitle": "Solution For Your Business",
+    "notFound": "Solution not found."
+  },
+  "roadmap": {
+    "auto-claim": {
+      "title": "Seleris Auto Claim",
+      "subtitle": "Automated Claims Revolution",
+      "description": "Seleris AutoClaim is a revolutionary AI-powered mobile platform designed to automate and streamline the auto insurance claims process, enabling users to assess vehicle damage directly from their smartphones, receive real-time repair cost estimates, and get claims approved faster than ever.",
+      "content": [
+        {
+          "title": "Instant Smartphone & Based Damage Assessment",
+          "description": "Customers upload a photo of their damaged vehicle, and the AI instantly detects the damage and estimates repair costs, minimizing manual inspections."
+        },
+        {
+          "title": "Automated Claims Processing & Approvals",
+          "description": "Simple claims are auto approved, speeding up processing, cutting costs, and ensuring a smoother experience from accident to resolution."
+        },
+        {
+          "title": "Fraud Detection & System Integration",
+          "description": "The app flags claim inconsistencies or potential fraud and integrates with existing insurance systems for a seamless workflow."
+        }
+      ]
+    },
+    "liexpose": {
+      "title": "Seleris LieXpose",
+      "subtitle": "Voice Truth Detection",
+      "description": "Seleris LieXpose is an advanced AI-powered voice analysis platform designed to detect deception in real time by leveraging cutting-edge speech recognition and behavioral algorithms to assess truthfulness through natural conversations whether during calls, interviews, or customer interactions.",
+      "content": [
+        {
+          "title": "Real Time Voice Based Deception Detection",
+          "description": "Seleris LieXpose analyzes live vocal patterns to detect dishonesty, enabling instant risk assessment in insurance, hiring, and customer service."
+        },
+        {
+          "title": "Multi Industry Applications & Core Rollout",
+          "description": "The platform will add emotional intelligence analysis in Q1 2026 and multi-language support in Q2 2026 for insurance, HR, and customer service sectors."
+        },
+        {
+          "title": "Seamless System Integration & Custom Alerts",
+          "description": "LieXpose integrates with call centers and enterprise workflows, offering real-time alerts, customizable thresholds, and audit trails for investigations and compliance."
+        }
+      ]
+    },
+    "credit": {
+      "title": "Seleris Credit",
+      "subtitle": "AI-Powered Credit Life Underwriting Intelligence",
+      "description": "Seleris Credit is an AI-driven credit life underwriting platform that transforms how insurers and financial institutions assess debtor mortality risk. By leveraging artificial intelligence, actuarial science, and predictive analytics, Seleris Credit enables faster, more objective, and prudent underwriting decisions for credit-linked insurance products.",
+      "content": [
+        {
+          "title": "Automated Credit Life Underwriting & Risk Scoring",
+          "description": "Seleris Credit automates underwriting decisions by analyzing vital signs, health biomarkers, and disease risk indicators to generate real-time underwriting outcomes such as Accepted Standard, Accepted Sub-Standard, or Declined."
+        },
+        {
+          "title": "Quantitative Extra Mortality & Predictive Risk Assessment",
+          "description": "The platform calculates extra mortality values using AI-based predictive models, enabling insurers to quantify health-related risks accurately while reducing subjectivity and improving portfolio sustainability."
+        },
+        {
+          "title": "Seamless Integration & Regulatory-Ready Reporting",
+          "description": "Seleris Credit integrates with insurance, banking, and financing systems, delivering structured underwriting logs, audit-ready reports, and decision transparency aligned with prudent risk management and regulatory standards."
+        }
+      ]
+    },
+    "propscan": {
+      "title": "Seleris PropScan",
+      "subtitle": "Property Assessment Revolution",
+      "description": "Seleris PropScan is an AI-driven property assessment platform that revolutionizes the way real estate and insurance industries evaluate properties by combining advanced computer vision, predictive analytics, and 3D modeling technologies.",
+      "content": [
+        {
+          "title": "Automated Property Valuation & Condition Assessment",
+          "description": "Seleris PropScan uses AI and 3D modeling to value properties and check structures, speeding sales, claims, and maintenance."
+        },
+        {
+          "title": "Comprehensive Industry Applications & Rollout Plan",
+          "description": "PropScan launches in Q2 2026 for real estate, insurance, and facility management, with predictive maintenance in Q3 and drone scanning in Q4."
+        },
+        {
+          "title": "Seamless System Integration & Custom Reporting",
+          "description": "The platform connects with property, insurance, and real estate systems, providing reports, logs, and visuals to ease decisions and audits."
+        }
+      ]
+    },
+    "fraudguard": {
+      "title": "Seleris FraudGuard",
+      "subtitle": "Comprehensive Fraud Prevention Suite",
+      "description": "Seleris FraudGuard is a comprehensive AI-driven fraud prevention suite that combines multi-modal detection, predictive analytics, adaptive monitoring, advanced risk modeling, and behavioral analysis to identify and mitigate fraudulent activities before they impact businesses.",
+      "content": [
+        {
+          "title": "Multi-Modal Fraud Detection & Predictive Prevention",
+          "description": "FraudGuard uses transaction, behavior, device, and biometric data to spot suspicious activity, predicting and alerting on fraud before it happens."
+        },
+        {
+          "title": "Launch, Growth & Expansion Strategy",
+          "description": "FraudGuard debuts in Q3 2026 for insurance, banking, and e-commerce fraud detection, adding ID verification in Q1 2027 and AI anomaly simulation in Q2 2027."
+        },
+        {
+          "title": "Seamless Integration & Real-Time Monitoring",
+          "description": "FraudGuard integrates with enterprise systems, offering real-time dashboards, custom alerts, and automated reports for fast, compliant threat response."
+        }
+      ]
+    },
+    "vitalscan": {
+      "title": "Seleris VitalScan",
+      "subtitle": "Advanced health monitoring platform",
+      "description": "Seleris VitalScan is an advanced health monitoring platform that combines IoT-enabled medical devices with predictive health analytics and AI-driven diagnostics to provide continuous, highly accurate, real-time insights into an individual's well-being.",
+      "content": [
+        {
+          "title": "Continuous Health Monitoring & Early Alerts",
+          "description": "VitalScan tracks vitals in real time and uses early warnings to detect issues like heart disease, respiratory illness, and chronic fatigue."
+        },
+        {
+          "title": "Targeted Applications Across Sectors",
+          "description": "VitalScan serves healthcare, corporate wellness, and elder care, delivering insights for long-term care, workplace health, and remote monitoring."
+        },
+        {
+          "title": "IoT Integration & Predictive Health Analytics",
+          "description": "VitalScan uses IoT wearables and predictive models to forecast health risks, integrating with medical systems and secure cloud storage to ensure privacy and compliance."
+        }
+      ]
+    },
+    "enterprise-suite": {
+      "title": "Seleris Enterprise Suite",
+      "subtitle": "Integrated AI management platform",
+      "description": "Seleris Enterprise Suite is a next-generation integrated AI management platform designed to unify and optimize the operation of all Seleris products under a single, intelligent, secure, scalable, and user-friendly dashboard for seamless business insights",
+      "content": [
+        {
+          "title": "Unified Dashboard & Cross-Product Analytics",
+          "description": "Seleris Enterprise Suite centralizes all Seleris solutions, letting organizations track performance, analyze trends, and gain real-time insights across products."
+        },
+        {
+          "title": "Single Sign-On & Streamlined Access Control",
+          "description": "The platform features enterprise-grade SSO for secure logins, role-based access, and easy user onboarding with enhanced efficiency."
+        },
+        {
+          "title": "Centralized Reporting & Advanced Business Intelligence",
+          "description": "With BI tools for custom reports, predictive analytics, and KPI tracking, the suite gives leaders a full view of operations for smarter decisions."
+        }
+      ]
+    },
+    "intelligence-hub": {
+      "title": "Seleris Intelligence Hub",
+      "subtitle": "AI-powered strategic decision platform",
+      "description": "Seleris Intelligence Hub is an AI-powered strategic decision platform engineered to provide organizations with deep predictive insights, market intelligence, and automated recommendations for faster, smarter, and more data-driven, actionable, business focused decision-making",
+      "content": [
+        {
+          "title": "Predictive Analytics Across Multiple Business Domains",
+          "description": "Seleris Intelligence Hub uses machine learning on past and real-time data to forecast sales, operations, finance, and supply chain needs, helping leaders act before challenges arise."
+        },
+        {
+          "title": "Market Intelligence & Trend Detection",
+          "description": "The platform monitors global and industry data to detect trends, competitor moves, and disruptions, helping businesses adjust strategies early."
+        },
+        {
+          "title": "Automated Recommendation & Strategic Planning Tools",
+          "description": "The system provides data-driven recommendations with simulations and impact analysis to guide investment, resource allocation, and strategic planning."
+        }
+      ]
+    }
+  },
+  "roadmapPage": {
+    "title": "Innovation",
+    "subtitle": "Roadmap Seleris Meditekno Internasional"
+  },
+  "products": {
+    "shared": {
+      "aboutUs": "About Us",
+      "ourClient": "Our Client",
+      "testimonial": "Testimonial",
+      "faq": "FAQ's",
+      "company": "Seleris Meditekno Internasional",
+      "easyQuickTitle": "Smarter Medical Claims with",
+      "easyQuickSubtitle": "AI-Powered Automation",
+      "downloadDescription": "Stay in control of your health data and claims anytime, anywhere. Our AI-powered platform makes medical data processing, claims tracking, and risk analysis easier and faster.",
+      "workSteps": [
+        {
+          "title": "Face Scanning",
+          "description": "Instantly scan face to verify user health identity."
+        },
+        {
+          "title": "AI Data Processing",
+          "description": "Automatically analyze claims data with powerful AI."
+        },
+        {
+          "title": "Result",
+          "description": "Get accurate, real-time health claim status instantly."
+        }
+      ],
+      "testimonialsB2B": [
+        {
+          "comment": "Seleris Medins helped us reduce claim processing time by 70%. It’s been a game-changer for our operations.",
+          "authorName": "Arianto Nugroho",
+          "authorPosition": "Chief Operations Officer, Nusantara Health Insurance"
+        },
+        {
+          "comment": "With Seleris Medins, our fraud detection capabilities improved dramatically. It’s fast, reliable, and scalable.",
+          "authorName": "Siti Ramadhani",
+          "authorPosition": "VP Claims Management, Medisafe Corp"
+        },
+        {
+          "comment": "We’ve never seen a platform automate medical data processing so accurately and efficiently. Outstanding work!",
+          "authorName": "Richard Tan",
+          "authorPosition": "Managing Director, AsiaMed Insurance"
+        },
+        {
+          "comment": "Regulatory compliance used to be a nightmare. Thanks to Seleris Medins, we now meet standards effortlessly.",
+          "authorName": "Veronica Lim",
+          "authorPosition": "Compliance Manager, HealthPlus Global"
+        },
+        {
+          "comment": "The risk stratification feature helps us proactively manage high-risk cases. It saves lives and resources.",
+          "authorName": "Dr. Yohan Santoso",
+          "authorPosition": "Medical Director, Klinik Sehat Mandiri"
+        },
+        {
+          "comment": "Seamless API integration and responsive support team. Seleris Medins has become a key part of our ecosystem.",
+          "authorName": "Clara Wijaya",
+          "authorPosition": "IT Solutions Lead, Bumi Insure"
+        }
+      ],
+      "testimonialsConsumer": [
+        {
+          "text": "The AI technology really helps ordinary people detect illness early at an affordable cost.",
+          "name": "Bapak Andi",
+          "location": "Bandung"
+        },
+        {
+          "text": "I feel much calmer now that I can check my health early without always going to the hospital.",
+          "name": "Ibu Siti",
+          "location": "Yogyakarta"
+        },
+        {
+          "text": "The process is fast and easy to understand. It really helps laypeople like me.",
+          "name": "Bapak Rudi",
+          "location": "Surabaya"
+        },
+        {
+          "text": "The app is user-friendly and the analysis is clear. Perfect for monitoring family health.",
+          "name": "Ibu Lina",
+          "location": "Semarang"
+        },
+        {
+          "text": "With this technology, I can be more aware of my body before an illness becomes serious.",
+          "name": "Bapak Dedi",
+          "location": "Bekasi"
+        },
+        {
+          "text": "An extraordinary innovation. It helps a lot, especially for those of us with limited access to healthcare.",
+          "name": "Ibu Maya",
+          "location": "Depok"
+        }
+      ]
+    },
+    "lifins": {
+      "hero": {
+        "title": "Automated Life Insurance",
+        "subtitle": "Underwriting",
+        "description": "Accelerate life policy approvals with intelligent, accurate, and customizable AI underwriting."
+      },
+      "name": "Seleris Lifins",
+      "about": {
+        "title": "AI Underwriting Insurance Application",
+        "description": "Seleris Lifins is an intelligent AI platform designed to automate the underwriting process for individual and group life insurance policies. With a 90% faster decision-making engine and configurable business rules, Lifins empowers insurers to streamline risk assessment, minimize human errors, and deliver exceptional customer experience all through a scalable, API-ready architecture."
+      },
+      "bookDemo": "Seleris Lifins A Complete Solution for Your Health Needs",
+      "healthCheck": [
+        {
+          "title": "90% Faster Underwriting",
+          "description": "Accelerate life policy approvals with near-instant AI decisions."
+        },
+        {
+          "title": "Automated Risk Assessment",
+          "description": "Analyze health and personal data accurately and consistently."
+        },
+        {
+          "title": "Custom Business Rules",
+          "description": "Easily configure underwriting logic to match your policies."
+        },
+        {
+          "title": "Reduced Manual Errors",
+          "description": "Minimize human mistakes with rule-based decision automation."
+        },
+        {
+          "title": "Enhanced Customer Experience",
+          "description": "Deliver faster, smoother, and more transparent application flows."
+        },
+        {
+          "title": "API-First Integration",
+          "description": "Seamlessly integrate with your core systems and workflows."
+        }
+      ],
+      "faq": [
+        {
+          "question": "What is Seleris Lifins?",
+          "answer": "Seleris Lifins is an AI-driven platform that automates life insurance underwriting for both individual and group policies."
+        },
+        {
+          "question": "How does Seleris Lifins speed up underwriting?",
+          "answer": "Our system analyzes applicant data in real time, reducing underwriting time by up to 90% while improving accuracy."
+        },
+        {
+          "question": "How do I start using Seleris Lifins?",
+          "answer": "You can request a demo or contact our team. Integration typically takes less than a month depending on your system."
+        },
+        {
+          "question": "Is customer support included?",
+          "answer": "Yes, our support team is available 24/7 to assist with onboarding, troubleshooting, and feature usage."
+        },
+        {
+          "question": "Is Seleris Lifins secure?",
+          "answer": "We use strong data encryption, access controls, and comply with global data privacy regulations."
+        },
+        {
+          "question": "What platforms does it support?",
+          "answer": "Lifins is a web-based platform with API-first design, making it easy to connect with existing insurance systems."
+        },
+        {
+          "question": "Can I customize underwriting rules?",
+          "answer": "Yes, you can fully configure decision logic and business rules to align with your company’s underwriting policies."
+        },
+        {
+          "question": "Is Seleris Lifins free?",
+          "answer": "Pricing depends on usage and deployment scale. We offer flexible subscription models. Contact us for details."
+        },
+        {
+          "question": "Where can I find the terms and conditions?",
+          "answer": "Full terms and policies are available on our website or in the app settings under 'Legal'."
+        }
+      ]
+    },
+    "medins": {
+      "hero": {
+        "title": "Seleris Medins",
+        "subtitle": "Application",
+        "description": "Enhance efficiency and accuracy in health insurance operations with AI-driven medical data automation."
+      },
+      "name": "Seleris Medins",
+      "about": {
+        "title": "AI Health Care Application",
+        "description": "Seleris Medins uses AI to automate medical data processing and health claims. Our solution helps insurers and corporate healthcare providers reduce costs, detect fraud, predict claim values, and ensure regulatory compliance with ease and accuracy."
+      },
+      "bookDemo": "Seleris Medins A Complete Solution for Your Health Needs",
+      "healthCheck": [
+        {
+          "title": "Medical Data Automation",
+          "description": "Automatically process medical data to reduce manual work and errors."
+        },
+        {
+          "title": "Claims Prediction",
+          "description": "Accurately estimate health claim costs before approval."
+        },
+        {
+          "title": "Fraud Detection",
+          "description": "Identify suspicious claims with AI - powered fraud analytics."
+        },
+        {
+          "title": "Regulatory Compliance",
+          "description": "Ensure alignment with local and international health regulations."
+        },
+        {
+          "title": "Risk Stratification",
+          "description": "Classify patient data to predict high-risk cases."
+        },
+        {
+          "title": "Scalable Integration",
+          "description": "Easily integrate with your existing systems via APIs."
+        }
+      ],
+      "faq": [
+        {
+          "question": "What is Seleris Medins app?",
+          "answer": "Seleris Medins is an AI-powered platform designed to automate medical data processing, predict claims costs, detect fraud, and ensure compliance with healthcare regulations. It helps insurance providers and corporate healthcare programs streamline their health claims processes."
+        },
+        {
+          "question": "How do I get started using the Seleris Medins app?",
+          "answer": "To get started, download the app from the Google Play Store or App Store, or access via browser at medins.seleris.ai. Log in using your registered account to start managing medical claims and health data."
+        },
+        {
+          "question": "Does this app provide customer support?",
+          "answer": "Yes, our customer support team is always ready to help. For any inquiries, feedback, or technical assistance, please contact us at info@seleris.ai"
+        },
+        {
+          "question": "Is the Seleris Medins app secure?",
+          "answer": "Absolutely. Seleris Medins uses industry-standard TLS/SSL encryption protocols and strict data protection policies to safeguard your personal and medical information."
+        },
+        {
+          "question": "Is the Seleris Medins app available on other platforms?",
+          "answer": "Currently, Seleris Medins is available on web and mobile (iOS and Android). We are working on expanding to other platforms and integrations in the near future."
+        },
+        {
+          "question": "How do I delete my account?",
+          "answer": "If you want to delete your account, please contact our support team at info@seleris.ai and we will process your request securely."
+        },
+        {
+          "question": "Is the Seleris Medins app free?",
+          "answer": "Our app offers a free version with core features. For access to advanced analytics and premium tools, subscription or in-app purchases may apply."
+        },
+        {
+          "question": "How can I provide feedback or suggestions?",
+          "answer": "You can submit suggestions through the app settings menu or directly email us at info@seleris.ai"
+        },
+        {
+          "question": "What are the terms and conditions of use of this app?",
+          "answer": "You can view the full terms and conditions of use in the app settings menu. Please read them carefully to understand your rights and responsibilities as a user of Seleris Medins."
+        }
+      ]
+    },
+    "creditCover": {
+      "hero": {
+        "title": "AI-Powered Credit",
+        "subtitle": "Risk & Protection",
+        "description": "Simplify credit life insurance and loan protection processes with real-time risk analysis and compliance automation."
+      },
+      "name": "Seleris Credit Cover",
+      "about": {
+        "title": "AI Credit Insurance Application",
+        "description": "Seleris Credit Cover is a cutting-edge AI solution designed to streamline credit life insurance and loan protection. Our platform automates credit risk assessments, improves accuracy by up to 25%, and reduces processing time by 80%"
+      },
+      "bookDemo": "Seleris Credit Cover A Complete Solution for Your Health Needs",
+      "healthCheck": [
+        {
+          "title": "Real-Time Credit Assessment",
+          "description": "Instantly analyze credit risk with AI-driven insights."
+        },
+        {
+          "title": "Faster Application Processing",
+          "description": "Cut processing time by up to 80% per application."
+        },
+        {
+          "title": "Automated Compliance Reporting",
+          "description": "Generate regulatory reports automatically. No manual work required."
+        },
+        {
+          "title": "Improved Risk Accuracy",
+          "description": "Achieve up to 25% more accurate credit-risk decisions."
+        },
+        {
+          "title": "Seamless System Integration",
+          "description": "Connect easily to existing loan-origination and core systems via APIs."
+        },
+        {
+          "title": "Scalable Performance",
+          "description": "Handle 10,000+ credit applications daily without performance loss."
+        }
+      ],
+      "faq": [
+        {
+          "question": "What is Seleris Credit Cover?",
+          "answer": "Seleris Credit Cover is an AI-powered solution that automates credit life insurance and loan protection processes for financial institutions."
+        },
+        {
+          "question": "How does Seleris Credit Cover work?",
+          "answer": "It analyzes credit applications in real time using AI, predicts risk levels, and automates compliance reporting for faster, more accurate decisions."
+        },
+        {
+          "question": "How can I start using Seleris Credit Cover?",
+          "answer": "Contact our team to schedule a demo. After onboarding, integration can be completed in as little as 2–4 weeks."
+        },
+        {
+          "question": "Is customer support available?",
+          "answer": "Yes, we provide 24/7 customer support via email and live chat for implementation, troubleshooting, and training."
+        },
+        {
+          "question": "Is Seleris Credit Cover secure?",
+          "answer": "Absolutely. We use enterprise-grade encryption, secure APIs, and comply with international data protection standards."
+        },
+        {
+          "question": "What platforms does Seleris Credit Cover support?",
+          "answer": "It’s available as a cloud-based web platform with API access that integrates into existing credit systems."
+        },
+        {
+          "question": "Can I delete or deactivate my organization’s account?",
+          "answer": "Yes, administrators can contact our support team to request account deactivation or data removal at any time."
+        },
+        {
+          "question": "Is Seleris Credit Cover free?",
+          "answer": "We offer flexible pricing models including subscription and usage-based plans. Contact us for a quote based on your needs."
+        },
+        {
+          "question": "Where can I find the terms and conditions?",
+          "answer": "You can access our full terms and conditions on our official website or within the application under the Settings menu."
+        }
+      ]
+    },
+    "healthCare": {
+      "hero": {
+        "title": "Smarter Corporate Health Monitoring",
+        "subtitle": "Application",
+        "description": "Empower your organization with AI-driven employee wellness, preventive insights, and health cost control."
+      },
+      "name": "Seleris Care",
+      "about": {
+        "title": "AI Health Metrics Insurance Application",
+        "description": "Seleris Care is an AI-powered platform built for corporate health and wellness. It automates employee health monitoring, delivers real-time preventive care insights, and helps companies optimize wellness programs while reducing medical costs by up to 20%"
+      },
+      "bookDemo": "Seleris Care A Complete Solution for Your Health Needs",
+      "healthCheck": [
+        {
+          "title": "Employee Health Monitoring",
+          "description": "Track employee health status automatically and continuously."
+        },
+        {
+          "title": "Preventive Care Insights",
+          "description": "Get early warnings and wellness trends using predictive AI."
+        },
+        {
+          "title": "Corporate Wellness Optimization",
+          "description": "Design and manage wellness programs with real-time analytics."
+        },
+        {
+          "title": "Health Cost Reduction",
+          "description": "Lower organizational health expenses by 15–20% annually."
+        },
+        {
+          "title": "Mobile-First Deployment",
+          "description": "Accessible on smartphones and optimized for remote access."
+        },
+        {
+          "title": "Population Health Dashboards",
+          "description": "Visualize group-level health trends and risk segments."
+        }
+      ],
+      "faq": [
+        {
+          "question": "What is Seleris Care?",
+          "answer": "Seleris Care is a corporate health platform that automates employee wellness monitoring and provides preventive care insights using AI."
+        },
+        {
+          "question": "How does Seleris Care help my company?",
+          "answer": "It helps reduce healthcare costs, improve employee health outcomes, and support HR in managing wellness programs efficiently."
+        },
+        {
+          "question": "How do I implement Seleris Care?",
+          "answer": "Implementation is quick, our team supports integration and setup on-site or via mobile apps depending on your needs."
+        },
+        {
+          "question": "Is customer support available?",
+          "answer": "Yes, we offer dedicated support to assist during deployment, training, and ongoing usage."
+        },
+        {
+          "question": "Is employee health data secure?",
+          "answer": "Absolutely. We follow strict privacy regulations and encrypt all health data end-to-end."
+        },
+        {
+          "question": "Can employees use it on mobile?",
+          "answer": "Yes. Seleris Care is mobile-first and works on both Android and iOS devices."
+        },
+        {
+          "question": "Does it provide health insights?",
+          "answer": "Yes, the system offers preventive health analytics, early risk alerts, and corporate-level health dashboards."
+        },
+        {
+          "question": "How much can we save on healthcare?",
+          "answer": "Companies using Seleris Care report 15–20% savings on healthcare and wellness costs annually."
+        },
+        {
+          "question": "Can we customize the wellness program?",
+          "answer": "Yes, you can tailor health programs and screening protocols based on employee needs and company policy."
+        }
+      ]
+    }
+  },
+  "creditPage": {
+    "hero": {
+      "title1": "AI Powered ",
+      "title2": "Credit Life",
+      "title3": "Underwriting Intelligence",
+      "descBefore": "Point your camera to your face and let",
+      "descHighlight": "artificial intelligence",
+      "descAfter": "do the work.",
+      "viewDemo": "View Demo",
+      "requestDemo": "Request Demo"
+    },
+    "clients": "Seleris Credit Clients",
+    "about": {
+      "title1": "Transforming",
+      "title2": "Credit Insurance",
+      "descBefore": "As an evolution of the",
+      "descHighlight": "Smart Credit",
+      "descAfter": "application already used by our insurance and broker partners, Seleris Credit brings a new generation of underwriting built on data, actuarial science, and predictive analytics."
+    },
+    "whatWeDo": {
+      "title": "What Does Seleris Credit Do?",
+      "subtitle1": "Seleris Credit detects and assesses",
+      "subtitle2": "debtor mortality risk through analysis of",
+      "footnote": "These parameters are processed with AI technology to build a comprehensive and consistent risk assessment model, so that undetected health risks can be identified earlier and more objectively.",
+      "items": [
+        {
+          "title": "Vital Signs",
+          "description": "With facial scanning technology, AI analyzes vital signs and assesses health conditions quickly"
+        },
+        {
+          "title": "Health Biomarkers",
+          "description": "AI processes health biomarkers to produce objective, measurable insight into overall health condition"
+        },
+        {
+          "title": "Disease Risk Prediction",
+          "description": "AI technology analyzes health data to predict disease risk more accurately"
+        }
+      ]
+    },
+    "advantages": {
+      "title1": "Key Advantages of",
+      "title2": "Seleris Credit",
+      "items": [
+        {
+          "title": "Extra Mortality Calculation",
+          "description": "Produces extra mortality values quantitatively and based on data."
+        },
+        {
+          "title": "Prudent & Objective Risk Assessment",
+          "description": "Reduces subjectivity, improves consistency, and strengthens risk governance."
+        },
+        {
+          "title": "Faster Time to Yes / No",
+          "description": "Accelerates approval of credit that requires credit life insurance protection."
+        }
+      ],
+      "decisionTitle": "Automated Underwriting Decision",
+      "decisionSubtitle1": "Determining underwriting decisions in",
+      "decisionSubtitle2": "real time:",
+      "decisions": [
+        {
+          "title": "Accepted - Standard"
+        },
+        {
+          "title": "Accepted - Sub Standard"
+        },
+        {
+          "title": "Declined"
+        }
+      ]
+    },
+    "forWho": {
+      "title1": "Who Is",
+      "title2": "Seleris ",
+      "title3": "Credit For?",
+      "desc1": "Seleris Credit detects and assesses",
+      "desc2": "debtor mortality risk through analysis of",
+      "items": [
+        {
+          "title": "Life Insurance, General Insurance and Credit Guarantee Companies",
+          "subtitle": "Improving underwriting quality and the sustainability of credit life insurance portfolios"
+        },
+        {
+          "title": "Life Insurance, General Insurance and Credit Guarantee Companies",
+          "subtitle": "Improving underwriting quality and the sustainability of credit life insurance portfolios"
+        }
+      ]
+    },
+    "why": {
+      "title1": "Why",
+      "title2": " Seleris ",
+      "title3": "Credit?",
+      "descBefore": "In the age of digital and AI, underwriting can no longer rely on intuition and manual processes.",
+      "descHighlight": "Seleris Credit",
+      "descAfter": "delivers underwriting intelligence aligned with prudential principles, regulation, and the needs of the modern financial industry.",
+      "requestDemo": "Request Demo"
+    },
+    "cta": {
+      "title1": "Smarter Risk. Faster Decision.",
+      "title2": "Sustainable Protection",
+      "subtitle": "Request Demo Now!",
+      "button": "Book a Demo"
+    }
+  },
+  "sca": {
+    "hero": {
+      "badge": "A Business Opportunity With No Capital",
+      "title1": "A Health Business",
+      "title2": "Opportunity Powered by",
+      "title3": "the AI of the Future",
+      "description": "Become a Seleris Care Applicator (SCA) and help people monitor their health non-invasively while building flexible, sustainable income.",
+      "register": "Register as an SCA Now"
+    },
+    "intro": "AI-based health scanning services from PT Seleris Meditekno Internasional for fast, non-invasive, and accurate health condition analysis.",
+    "whatIs": {
+      "title1": "What Is Seleris Care",
+      "title2": "Applicator (SCA)?",
+      "descBefore": "SCA is an official partner of",
+      "descHighlight": "Seleris Care",
+      "descAfter": "responsible for marketing and delivering health scanning services to the wider public using our devices and digital application.",
+      "cards": [
+        {
+          "title": "Official Partner",
+          "subtitle": "Has passed a verification and certification process"
+        },
+        {
+          "title": "Health Solution",
+          "subtitle": "Backed by modern scanning technology"
+        },
+        {
+          "title": "Smart Digital Platform",
+          "subtitle": "Integrated reporting and monitoring"
+        }
+      ]
+    },
+    "parameters": {
+      "title": "30 Health Parameters",
+      "description": "Our AI technology analyzes the body's health spectrum in depth in a single scanning session."
+    },
+    "packages": {
+      "title1": "Choose a Health Package",
+      "title2": "That Fits Your Needs",
+      "payPerScan": "Pay Per Scan",
+      "subscribe": "Subscribe",
+      "backToHome": "Back to home",
+      "packageLabel": "Package",
+      "modalTitle1": "Your Health,",
+      "modalTitle2": "Analysis",
+      "modalTitle3": "Without",
+      "modalTitle4": "Needles",
+      "modalSubtitle1": "A fast solution for routine monitoring",
+      "modalSubtitle2": "of your basic health.",
+      "retailPrice": "Service Retail Price",
+      "resultTime": "Results in 5 Minutes",
+      "registerAndSell": "Register as SCA & Start Selling",
+      "viewDetail": "View Details"
+    },
+    "whyJoin": {
+      "title": "Why Join as an SCA?",
+      "subtitle": "Build an independent business with global corporate support",
+      "items": [
+        {
+          "title": "Attractive Commission",
+          "content": "Up to 25% of every transaction"
+        },
+        {
+          "title": "Health Business",
+          "content": "A product everyone needs"
+        },
+        {
+          "title": "Digital System",
+          "content": "Easy app, automatic tracking"
+        },
+        {
+          "title": "Income Source",
+          "content": "Direct commission + network commission"
+        },
+        {
+          "title": "Flexible Hours",
+          "content": "Set your own working schedule"
+        },
+        {
+          "title": "Free Training",
+          "content": "Product and marketing training"
+        }
+      ]
+    },
+    "membership": {
+      "title": "Membership Levels",
+      "subtitle": "Choose the career path that matches your ambition",
+      "joinNow": "Join Now",
+      "starter": {
+        "name": "Starter Level",
+        "features": [
+          {
+            "text": "Focus: Direct Selling"
+          },
+          {
+            "text": "No Minimum Target"
+          },
+          {
+            "text": "Full Digital Access"
+          }
+        ]
+      },
+      "professional": {
+        "name": "Professional Level",
+        "features": [
+          {
+            "text": "Focus: Selling + Building a Team"
+          },
+          {
+            "text": "Requirement: Recruit at least 1 SCA"
+          },
+          {
+            "text": "10% Networking Bonus"
+          }
+        ]
+      }
+    },
+    "simulation": {
+      "title1": "Commission Structure &",
+      "title2": "Income Simulation",
+      "servicePrice": "Service Price",
+      "status": "Status",
+      "perScanning": "/ Scanning",
+      "affordable": "Affordable",
+      "directCommission": "Direct Commission",
+      "networkCommission": "Network Commission",
+      "perScan": "± Rp 30,000 / scan",
+      "targetPerDay": "Scanning Target per Day",
+      "monthlyIncome": "Your Potential Monthly Income"
+    },
+    "howToJoin": {
+      "title": "How to Join",
+      "subtitle": "Start your path to success in 3 easy steps",
+      "items": [
+        {
+          "step": "Register",
+          "content": "Fill in the registration form through the website or a partner referral."
+        },
+        {
+          "step": "Take the Training",
+          "content": "Validated medically and by modern science."
+        },
+        {
+          "step": "Start Scanning",
+          "content": "Validated medically and by modern science."
+        }
+      ]
+    },
+    "benefits": {
+      "title": "SCA Benefits",
+      "subtitle1": "We provide everything you need to build",
+      "subtitle2": "a successful and sustainable health business.",
+      "membershipTitle1": "Membership",
+      "membershipTitle2": "Package",
+      "supportTitle1": "Ongoing",
+      "supportTitle2": "Support",
+      "whyUs": "Why Us",
+      "quote": "“We don't just provide the tools, we build an ecosystem for your career growth.”",
+      "membershipItems": [
+        {
+          "content": "Access to the Seleris Care app"
+        },
+        {
+          "content": "Product and scanning training"
+        },
+        {
+          "content": "Real-time sales dashboard"
+        },
+        {
+          "content": "Personal referral code"
+        },
+        {
+          "content": "Digital marketing materials"
+        },
+        {
+          "content": "Community support group"
+        },
+        {
+          "content": "Official SCA certificate"
+        }
+      ],
+      "supportItems": [
+        {
+          "content": "Product and technology updates"
+        },
+        {
+          "content": "Marketing and sales tips"
+        },
+        {
+          "content": "Regular competitions and rewards"
+        },
+        {
+          "content": "Networking with fellow SCA members"
+        }
+      ]
+    },
+    "testimonials": {
+      "title": "What They Say",
+      "subtitle": "Success stories from Seleris Care partners across Indonesia"
+    },
+    "cta": {
+      "title1": "Ready to Start a",
+      "title2": "Health Business?",
+      "description": "Get exclusive access to the best health AI technology and start building independent income today.",
+      "register": "Register as an SCA Now",
+      "contact": "Contact Admin"
+    },
+    "healthPackages": [
+      {
+        "badge": ""
+      },
+      {
+        "badge": "Popular"
+      },
+      {
+        "badge": "Most Complete"
+      }
+    ],
+    "packageFeatures": {
+      "essential": [
+        {
+          "text": "15 Health Parameters"
+        },
+        {
+          "text": "Basic Health Report"
+        },
+        {
+          "text": "Health Score"
+        },
+        {
+          "text": "Instant Results"
+        }
+      ],
+      "core": [
+        {
+          "text": "20 Health Parameters"
+        },
+        {
+          "text": "Detailed Report"
+        },
+        {
+          "text": "AI Recommendations"
+        },
+        {
+          "text": "Trend Analysis"
+        },
+        {
+          "text": "Doctor Consultation*"
+        }
+      ],
+      "prime": [
+        {
+          "text": "30 Parameters (All In)"
+        },
+        {
+          "text": "Complete Report"
+        },
+        {
+          "text": "Advanced AI Analysis"
+        },
+        {
+          "text": "Personalized Plan"
+        },
+        {
+          "text": "Doctor Video Call"
+        },
+        {
+          "text": "Priority Support"
+        },
+        {
+          "text": "Export PDF to Doctor"
+        }
+      ]
+    },
+    "features": [
+      {
+        "title": "Medical AI Technology",
+        "content": "Reliable and accurate AI-based health analysis"
+      },
+      {
+        "title": "Fast, Accurate Analysis",
+        "content": "Fast results with high, consistent accuracy"
+      },
+      {
+        "title": "Non-Invasive and Safe",
+        "content": "Safe, comfortable, and free of invasive procedures"
+      },
+      {
+        "title": "Easy and Practical",
+        "content": "A simple process that anyone can use"
+      }
+    ],
+    "scaPoints": [
+      {
+        "content": "Backed by a digital system & automatic tracking app"
+      },
+      {
+        "content": "Not a medical professional? No problem!"
+      },
+      {
+        "content": "Given intensive training until you master it"
+      }
+    ]
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "About Us",
+      "title": "Seleris Meditekno Internasional",
+      "subtitle": "The Future of Life Technology",
+      "officeName": "Seleris Development Office",
+      "officeAddress": "Royal Spring , Jakarta Selatan....."
+    },
+    "desc1": "Seleris is a technology company that develops facial video-based applications to help businesses assess individuals more quickly and accurately without the need for face-to-face interviews. The AI-powered solution delivers smarter, faster, and scalable evaluations, making it easier to analyze various aspects such as health, financial condition, and behavioral traits.",
+    "desc2Before": "Founded in 2019 by experienced entrepreneurs and technologists, Seleris is built on the belief that everyone deserves access to affordable and inclusive protection. Its",
+    "desc2Highlight": "AI and machine learning",
+    "desc2After": "models are trained on large datasets of facial video and behavioral data, enabling high accuracy risk assessments even for individuals with limited medical or historical records.",
+    "desc3": "Seleris's platform is designed to be simple and efficient for both companies and customers. Businesses can integrate Seleris through a flexible API, while users can complete the assessment process entirely online within minutes. Seleris helps partners enhance speed, precision, and accessibility across a variety of digital screening and evaluation use cases.",
+    "vision": {
+      "title": "Vision",
+      "description": "Seleris's vision is to build a world where everyone can access affordable, reliable, and innovative solutions, fostering equality, empowering communities, and creating opportunities for a secure, sustainable, and prosperous future for all."
+    },
+    "mission": {
+      "title": "Mission",
+      "description": "Seleris's mission is to create innovative solutions that improve efficiency, accuracy, and accessibility, empowering individuals and organizations to achieve growth, make informed decisions, and build a secure, sustainable future for everyone."
+    },
+    "deliver": {
+      "title": "About Us",
+      "subtitle": "We are committed to deliver efficient and effective products and services.",
+      "whySeleris": {
+        "title": "Why Seleris",
+        "subtitle": "Seleris helps businesses assess people faster, smarter, and easier."
+      },
+      "efficiency": {
+        "title": "Efficiency",
+        "subtitle": "Cut costs and processing time by up to 50 percent."
+      },
+      "accuracy": {
+        "title": "Accuracy",
+        "subtitle": "AI delivers accurate results, even with limited user data."
+      },
+      "innovation": {
+        "title": "Innovation",
+        "subtitle": "Online process is quick, easy, and accessible for everyone."
+      }
+    },
+    "values": {
+      "eyebrow": "App Features",
+      "title1": "We're company",
+      "title2": "Empowering smarter decisions through",
+      "title3": "AI-driven,",
+      "items": [
+        {
+          "title": "Innovation",
+          "description": "Seleris develops smart, effective solutions for insurance and underwriting industry challenges."
+        },
+        {
+          "title": "Optimal Performance",
+          "description": "We use advanced technology to ensure fast, smooth, reliable service delivery."
+        },
+        {
+          "title": "Team Work",
+          "description": "We believe great results come through strong teamwork and shared collaboration."
+        },
+        {
+          "title": "Integrity",
+          "description": "Seleris values honesty and full transparency in all business interactions."
+        },
+        {
+          "title": "Customer Focus",
+          "description": "We prioritize delivering the best possible experience to every customer."
+        },
+        {
+          "title": "Our Vision",
+          "description": "Seleris envisions accessible, affordable life and medical insurance for everyone."
+        }
+      ],
+      "visionTagline": "with a vision.",
+      "humanFocused": "human focused technology."
+    },
+    "visionary": {
+      "eyebrow": "The Visionary",
+      "title": "Seleris AI Revolution",
+      "titleLine1": "The Visionary",
+      "titleLine2": "Revolution",
+      "name": "Rinaldi Anwar Buyung",
+      "role": "Insurtech Innovator & AI Architect",
+      "bio": [
+        {
+          "text": "Rinaldi Anwar Buyung isn't just an actuary; he's a tech entrepreneur actively architecting the future of insurance. He is the Founder of Seleris, a cutting-edge SaaS platform that leverages the power of Artificial Intelligence to revolutionize the underwriting process."
+        },
+        {
+          "text": "Seleris is the direct application of his deep academic work as a Doctoral researcher in AI and Data Science. His vision is backed by a prolific research portfolio, including dozens of scientific journals on AI technology, proving he's not just part of the conversation—he's driving it."
+        },
+        {
+          "text": "With 30 years of industry-experience, Rinaldi possesses a rare blend of deep technical mastery in mathematics, statistics, actuarial science, underwriting, and risk management."
+        },
+        {
+          "text": "He remains a dynamic force in the industry, actively pioneering new innovations at the intersection of healthcare, insurance, and finance. He serves as a high-level strategic advisor and holds senior governance roles across the insurance, reinsurance, and risk consulting sectors. As an actuary, Rinaldi is a central figure who both understands the industry's foundations and is actively building its future."
+        }
+      ]
+    }
+  },
+  "team": {
+    "eyebrow": "Our Team",
+    "title": "Meet the team behind Seleris",
+    "subtitle1": "Behind every breakthrough is a team of passionate experts turning",
+    "subtitle2": "bold ideas into real-world impact.",
+    "subtitleMobile1": "Behind every breakthrough is a team of passionate experts turning bold",
+    "subtitleMobile2": "ideas into real-world impact.",
+    "officeTitle": "Office Team",
+    "officeSubtitle": "Our dev team turns ideas into working code fast, clean, and reliable.",
+    "officeSubtitleMobile1": "Our dev team turns ideas into working code",
+    "officeSubtitleMobile2": "fast, clean, and reliable.",
+    "engineeringDescription": "The Seleris engineering team is responsible for building and maintaining our AI-powered platform. Led by Rinaldi Anwar, who brings over 10 years of experience in AI development and deployment, the team focuses on delivering reliable, scalable, and innovative technology solutions.",
+    "positions": [
+      {
+        "title": "Product",
+        "subtitle": "Drives product vision, user experience, and continuous improvement.",
+        "description": "Our product team shapes the future of Seleris by defining product strategy, enhancing user experience, and translating feedback into meaningful features. Collaborating closely with users and stakeholders, they turn complex ideas into simple, intuitive, and high-impact solutions."
+      },
+      {
+        "title": "Sales & Marketing",
+        "subtitle": "Connects Seleris to the market through strategy and storytelling.",
+        "description": "The sales and marketing team ensures Seleris reaches the right audience with the right message. From lead generation and relationship building to branding and content creation, they craft compelling campaigns and drive business growth through clear communication and market insight."
+      },
+      {
+        "title": "Engineering",
+        "subtitle": "Develops smart, scalable, and reliable AI-driven technology.",
+        "description": "The engineering team is the backbone of Seleris's technology, responsible for developing and maintaining our AI-powered platform with a focus on performance, scalability, and security, while continuously innovating to keep our solutions ahead of industry needs and delivering real value to users."
+      }
+    ]
+  },
+  "services": {
+    "eyebrow": "Services",
+    "heroTitle": "Welcome to Seleris Documentation",
+    "heroSubtitle": "Our intuitive API documentation guides you step-by-step",
+    "apiTitle": "API Services",
+    "apiDescription": "Seleris offers a powerful API service that allows companies to integrate Seleris's capabilities into their existing systems. The API service is easy to use and provides a wide range of features, including.",
+    "apiSupport": "Seleris provides comprehensive documentation and support to help companies get started with the API service.",
+    "apiCards": [
+      {
+        "title": "Smart Video Analysis",
+        "description": "Seleris analyzes short facial videos to identify key risk factors quickly and accurately, enabling smarter, faster evaluations."
+      },
+      {
+        "title": "Instant Risk Scoring",
+        "description": "Get instant risk scores in seconds to streamline decisions and improve your digital evaluation process."
+      },
+      {
+        "title": "Frictionless Evaluation",
+        "description": "Seleris provides a fully digital, seamless evaluation experience, perfect for remote users or those with limited data history."
+      }
+    ],
+    "getStartedTitle1": "How to Get Started with the",
+    "getStartedTitle2": "Seleris API Service",
+    "getStartedSubtitle": "The Seleris API service offers a number of benefits for companies, including",
+    "getStartedItems": [
+      {
+        "title": "API Documentation",
+        "body": "Detailed guides and reference to help you integrate quickly."
+      },
+      {
+        "title": "Authentication",
+        "body": "Securely authenticate using API keys and tokens."
+      },
+      {
+        "title": "Workflow Automation",
+        "body": "Easily manage and automate workflows with speed, accuracy, and minimal manual effort."
+      }
+    ],
+    "benefitsTitle": "Benefits",
+    "benefitsSubtitle": "Benefits of Using the Seleris API",
+    "benefitsDescription": "The Seleris API service offers a number of benefits for companies, including"
+  },
+  "contact": {
+    "title1": "Get",
+    "title2": "in Touch",
+    "titleMobile1": "GET",
+    "titleMobile2": "In Touch",
+    "subtitle": "Be among the first to discover what it's all about",
+    "fullName": "Full Name:",
+    "fullNamePlaceholder": "Full Name",
+    "emailPlaceholder": "Email",
+    "messagePlaceholder": "Message",
+    "submit": "Submit",
+    "mapTitle": "Map showing Seleris Development Office location",
+    "chatTitle": "Chat to Support",
+    "chatSubtitle": "Our team here ready to help you",
+    "callTitle": "Call Us",
+    "callHours": "Mon-Sat 9am to 5pm",
+    "contactTitle": "Contact",
+    "contactSubtitle": "Need help? We're here to listen!",
+    "contactDescription": "Visit our friendly team at any of our locations"
+  },
+  "blog": {
+    "heroTitle": "Blog",
+    "heroSubtitle": "What's On Seleris",
+    "heroDescription": "Stay inspired with the latest in tech, design trends, and business growth",
+    "search": "Search Article...",
+    "mostPopular": "Most Popular",
+    "content": "Content",
+    "noResults": "No articles match your search",
+    "noArticles": "No articles",
+    "linkCopied": "Link copied!",
+    "linkCopiedText": "Share it with your friends 🚀",
+    "logout": "Logout",
+    "signIn": "Sign In",
+    "signUp": "Sign Up",
+    "authSubtitle": "Be among the first to discover what it's all about",
+    "email": "Email",
+    "password": "Password",
+    "fullName": "Full Name",
+    "forgotPassword": "Forgot Password?",
+    "noAccount": "Don't you have an account?",
+    "haveAccount": "Do you have account?",
+    "commentPlaceholder": "Share your thoughts?",
+    "loginSuccess": "Login successful",
+    "loginSuccessText": "Welcome back!",
+    "registerFailed": "Registration failed",
+    "registerSuccess": "Registration successful",
+    "logoutConfirm": "Are you sure you want to log out?",
+    "logoutConfirmText": "You will be signed out of this account.",
+    "logoutYes": "Yes, log out",
+    "logoutCancel": "Cancel",
+    "logoutSuccess": "Logged out successfully"
+  },
+  "careers": {
+    "academic_transcript": "Academic Transcript",
+    "additional_documents": "Additional Documents",
+    "additional_training_certificates_if_any_": "Additional training certificates, if any (combine into a single PDF)",
+    "address": "Address",
+    "apply": "Apply",
+    "atau_seret_dan_lepas": "or drag and drop",
+    "benefit": "Benefits",
+    "close": "Close",
+    "comunication_team_work_etc": "Comunication, Team Work, Etc.",
+    "country": "Country",
+    "cover_letter": "Cover Letter",
+    "current_salary": "Current Salary",
+    "curriculum_vitae_cv": "Curriculum Vitae (CV)",
+    "date_of_birth": "Date Of Birth",
+    "date_of_joining": "Date of Joining",
+    "declaration_and_consent": "Declaration and Consent",
+    "diploma": "Diploma",
+    "do_you_have_any_previous_work_experience": "Do you have any previous work experience?",
+    "email": "Email",
+    "end_date_of_study": "End Date Of Study",
+    "end_date_work": "End Date Work",
+    "english_bahasa_indonesia_japan_etc": "English, Bahasa Indonesia, Japan, Etc.",
+    "expected_salary": "Expected Salary",
+    "explore": "Explore",
+    "field_of_study": "Field of Study",
+    "full_name": "Full Name",
+    "gender": "Gender",
+    "gpa_grade_point_average": "GPA (Grade Point Average)",
+    "hapus": "Remove",
+    "highest_level_of_education": "Highest Level of Education",
+    "job_description": "Job Description",
+    "kualifikasi": "Qualifications",
+    "language": "Language",
+    "language_skills": "Language Skills",
+    "last_company": "Last Company",
+    "last_position": "Last Position",
+    "lihat_dokumen": "View Document",
+    "microsoft_word_microsoft_excel_etc": "Microsoft Word, Microsoft Excel, Etc.",
+    "motivation_preferences": "Motivation & Preferences",
+    "next": "Next",
+    "personal_info": "Personal Info",
+    "phone_number": "Phone Number",
+    "place_of_birth": "Place Of Birth",
+    "portfolio": "Portfolio",
+    "previous": "Previous",
+    "reason_for_applying_to_this_position": "Reason for applying to this position",
+    "recent_formal_photograph": "Recent formal photograph",
+    "requirements": "Requirements:",
+    "review_your_application": "Review Your Application",
+    "school_university_name": "School/University Name",
+    "sertifikat_pelatihan_tambahan_jika_ada": "Additional training certificates (if any)",
+    "skills_competencies": "Skills & Competencies",
+    "soft_skills": "Soft Skills",
+    "start_date_of_study": "Start Date Of Study",
+    "start_date_work": "Start Date Work",
+    "submit": "Submit",
+    "tahun_masuk_dan_tahun_lulus": "Year Started and Year Graduated",
+    "tanggung_jawab_utama": "Key Responsibilities",
+    "technical_skills": "Technical Skills",
+    "training_work_experience_certificates": "Training/Work Experience Certificates",
+    "yes": "Yes",
+    "heroTitle": "Careers",
+    "heroSubtitle": "Explore Your Career Destination",
+    "heroDescription": "Find everything you need to start and grow your career journey with Seleris.",
+    "noOpenings": "There are currently no job openings. Follow our social media for the latest updates.",
+    "department": "Department",
+    "declaration1": "I hereby declare that all information provided in this form is true and accurate.",
+    "declaration2": "I grant permission to the company to use this information for recruitment purposes.",
+    "declaration3": "I agree to undergo a background check process in accordance with the applicable regulations."
+  },
+  "technology": {
+    "sci": [
+      {
+        "title": "Capturing Facial Blood Flow Video",
+        "body": "Captures real-time facial video to analyze micro blood flow changes using standard cameras. This process is non-contact and helps extract physiological signals from skin color fluctuations linked to blood circulation."
+      },
+      {
+        "title": "Object Detection",
+        "body": "Detects and tracks facial areas and other relevant objects to ensure the correct region is monitored throughout the video. This improves accuracy by isolating key visual components."
+      },
+      {
+        "title": "Requirement Condition Detection",
+        "body": "Automatically checks for environmental and positional requirements such as lighting quality, subject distance, and motion artifacts. This ensures the system only processes usable and reliable visual data."
+      },
+      {
+        "title": "Region of Interest (ROI)",
+        "body": "Selects specific facial zones (like the forehead or cheeks) where blood flow signals are most visible. Focusing on ROI improves signal strength and reduces noise from unrelated areas."
+      },
+      {
+        "title": "Raw (RGB) Signals Extraction",
+        "body": "Extracts color channel values (Red, Green, Blue) from the ROI. These raw signals form the basis for further physiological analysis, capturing subtle changes caused by blood flow variations."
+      }
+    ],
+    "sdv": [
+      {
+        "title": "rPPG Signals Extraction",
+        "body": "Derives remote photoplethysmographic (rPPG) signals from facial video data. These signals reflect vital signs such as heart rate and are extracted without physical sensors."
+      },
+      {
+        "title": "Signal Filtering",
+        "body": "Applies advanced signal processing filters to enhance relevant health data while removing interference. This step ensures the extracted rPPG signals are clean and ready for analysis."
+      },
+      {
+        "title": "Noise Reduction",
+        "body": "Removes unwanted disturbances like lighting changes or small head movements from the signal. This enhances the clarity of health indicators by eliminating signal artifacts."
+      },
+      {
+        "title": "AI Feature Extraction",
+        "body": "Uses machine learning algorithms to identify critical patterns in the cleaned signals. The system recognizes features such as heart rate variability and other biometric indicators."
+      },
+      {
+        "title": "Feature Prediction",
+        "body": "Predicts key physiological parameters based on the extracted features, such as estimated pulse, respiration rate, and stress indicators enabling fast, contactless health insights."
+      }
+    ],
+    "sdr": [
+      {
+        "title": "Health Risk Scoring",
+        "body": "Generates a quantifiable score based on physiological input to assess an individual's current health condition. This score helps users and providers make informed wellness or diagnostic decisions."
+      },
+      {
+        "title": "Underwriting Risk Prediction",
+        "body": "Predicts insurance underwriting risks by analyzing biometric data. It provides insurers with automated risk profiling to accelerate and improve decision-making accuracy."
+      },
+      {
+        "title": "Risk Diseases Prediction",
+        "body": "Assesses the likelihood of chronic or critical diseases by combining physiological indicators with AI modeling. It aids early detection and targeted interventions."
+      },
+      {
+        "title": "Mortality/Morbidity Risk Prediction",
+        "body": "Estimates potential health deterioration or death risk using biometric and behavioral data. This insight supports healthcare, insurance, and wellness decision-making for long-term planning."
+      }
+    ]
+  },
+  "misc": {
+    "ai_innovation": "AI Innovation",
+    "current": "Current",
+    "doe": "Doe",
+    "faq": "FAQ",
+    "frequently_asked_questions": "Frequently Asked Questions",
+    "hasil_scan_tidak_dapat_diproses_silakan_": "The scan result could not be processed. Please try scanning again.",
+    "ini_adalah_hasil_scan_terakhir_anda_bata": "This is your last scan result. The scan limit has been reached.",
+    "is_committed_to_earning_customer_trust_b": "is committed to earning customer trust by:",
+    "jhon": "Jhon",
+    "keeping_up_to_date_with_security_industr": "Keeping up to date with security industry standards and best practices",
+    "let_s_seleris_together": "Let's Seleris Together",
+    "message": "Message",
+    "monitor_60_health_metrics_in_just_30_sec": "Monitor 60+ health metrics in just 30 seconds with a facial scan",
+    "re_scan": "Re-Scan",
+    "read_more": "Read More",
+    "reporting_security_issues": "Reporting Security Issues",
+    "technology": "Technology",
+    "the_measured_indicators_are_correct_for_": "The measured indicators are correct for medical use",
+    "title": "Title",
+    "to_accelerate_the_development_of_their_a": "to accelerate the development of their AI applications.",
+    "view_product": "View Product",
+    "we_ll_triage_the_issue_and_get_back_to_y": "We'll triage the issue and get back to you.",
+    "your_company": "Your Company",
+    "prev": "Prev",
+    "next": "Next",
+    "news": "News",
+    "bad_signal": "Bad signal",
+    "scan_complete": "Scan Complete",
+    "hand_detected": "Hand Detected",
+    "potensi_komisi_sca": "SCA Commission Potential",
+    "innovation": "Innovation",
+    "roadmap_seleris_meditekno_internasional": "Roadmap Seleris Meditekno Internasional",
+    "securityIntro": ", customers come first. This is a core credo that drives many of our daily decisions. We take the trust of our customers and the security of their data seriously.",
+    "securityCommitment": "Our commitment to enterprise-grade security is one reason leading ML teams, including OpenAI and others, rely on",
+    "securityRely": "Our customers rely on",
+    "securityRely2": "to power their most critical work, and we're dedicated to building platforms they can trust. Our offering is a managed, standardized, tested, and externally audited platform with robust access controls that scale to meet customer demand.",
+    "securityPoint1": "Hiring a world-class security team to oversee all aspects of Seleris' security",
+    "securityPoint3": "Deploying cutting-edge security technology to safeguard against security threats",
+    "securityCertified": "Our cloud platform's infrastructure and operations are certified compliant with the following industry best practice standards and frameworks:",
+    "securityAccess": "To access",
+    "securityAccess2": "latest security compliance certifications and reports, please visit our Trust Center. If you are interested in using",
+    "securityAccess3": ", but have questions about security, please don't hesitate to reach out. We're happy to put you in touch with a member of our Security team.",
+    "securityReport": "If you've identified a potential security flaw in our infrastructure or software, please let us know at",
+    "firstName": "First Name",
+    "lastName": "Last Name",
+    "company": "Company",
+    "jobTitle": "Job Title",
+    "email": "Email",
+    "department": "Department",
+    "achievements": "Relevant Achievements or Accomplishments",
+    "latest": "Latest",
+    "oldest": "Oldest",
+    "likes": "Likes",
+    "views": "Views",
+    "chatGreeting": "Hi! I'm a Vue chatbot 😊",
+    "chatPlaceholder": "Type a message...",
+    "chatError": "Something went wrong while contacting the server 😞",
+    "chatSend": "Send",
+    "cardiovascular": "Cardiovascular",
+    "metabolic": "Metabolic",
+    "income": "Income",
+    "directorsTeam": "Directors and Senior Management Team",
+    "managementTeam": "Management Team",
+    "leadershipDesktop": "Our leadership team brings decades of experiences,",
+    "faqDescription": "Find answers to frequently asked questions about the seleris app",
+    "securityHeroTitle": "Security",
+    "securityHeroSubtitle": "Customer Security Comes First",
+    "fullname": "Fullname",
+    "reviewPersonal": "Personal",
+    "passwordPlaceholder": "Password"
+  },
+  "apply": {
+    "steps": [
+      {
+        "number": "Step 1",
+        "title": "Personal",
+        "next": "Education"
+      },
+      {
+        "number": "Step 2",
+        "title": "Education",
+        "next": "Experience"
+      },
+      {
+        "number": "Step 3",
+        "title": "Experience",
+        "next": "Skills"
+      },
+      {
+        "number": "Step 4",
+        "title": "Skills",
+        "next": "Motivations"
+      },
+      {
+        "number": "Step 5",
+        "title": "Motivations",
+        "next": "Documents"
+      },
+      {
+        "number": "Step 6",
+        "title": "Documents",
+        "next": "Declaration"
+      },
+      {
+        "number": "Step 7",
+        "title": "Declaration",
+        "next": "Finish"
+      }
+    ],
+    "genders": [
+      {
+        "label": "Male"
+      },
+      {
+        "label": "Female"
+      }
+    ],
+    "educations": [
+      {
+        "label": "High School"
+      },
+      {
+        "label": "Diploma"
+      },
+      {
+        "label": "Bachelor’s Degree"
+      },
+      {
+        "label": "Master’s Degree"
+      },
+      {
+        "label": "Doctorate / PhD"
+      }
+    ],
+    "incompleteTitle": "Incomplete Data",
+    "incompleteText": "Please complete all required fields before continuing.",
+    "successTitle": "Successfully Applied!",
+    "successText": "We have received your application. Please wait and check your email regularly.",
+    "stepOf": "Step {current} of {total}",
+    "nextStep": "Next Step"
+  },
+  "faceScan": {
+    "metrics": [
+      {
+        "title": "Heart Rate",
+        "description": "Heart rate indicates how many times your heart beats per minute. Normal resting range is 60–100 bpm."
+      },
+      {
+        "title": "Heart Rate Variability",
+        "description": "HRV measures the variation in time between heartbeats. Higher HRV generally indicates better cardiovascular fitness."
+      },
+      {
+        "title": "Breath Rate",
+        "description": "Respiratory rate is the number of breaths taken per minute. Normal range is 12–20 brpm."
+      },
+      {
+        "title": "Systolic Pressure",
+        "description": "Systolic pressure measures the force of blood against artery walls when the heart beats."
+      },
+      {
+        "title": "Diastolic Pressure",
+        "description": "Diastolic pressure measures artery pressure when the heart is resting between beats."
+      }
+    ],
+    "checkLighting": "Check Lighting",
+    "stayCentered": "Stay Centered",
+    "diastole": "Diastole",
+    "lightingTip": "Ensure your face is well-lit from the front. Avoid harsh backlighting or deep shadows.",
+    "centeredTip": "Position your face within the red markers. Keep a neutral expression and remain still.",
+    "scanTip": "The scan takes approximately 30 seconds via rPPG technology. Please do not move or speak during the process"
+  },
+  "certificates": [
+    {
+      "titleBefore": "ISO Certification Award",
+      "subtitleBefore": "Information Security Management System",
+      "titleAfter": "ISO Certification",
+      "description": "PT. Seleris Meditekno Internasional has been awarded ISO/IEC 27001:2022 certification with the number 2403150020501, which demonstrates our commitment to healthcare quality and service excellence. This certification signifies that we meet international standards in quality management, and we continuously strive to improve our service quality."
+    },
+    {
+      "titleBefore": "Best Innovation AI Solution for Insurance",
+      "subtitleBefore": "",
+      "titleAfter": "Best Innovation AI Solution for Insurance",
+      "description": "PT. Seleris Meditekno Internasional is proud to announce that we have won the Best Innovation AI Solution for Insurance award from Data Science Center University of Indonesia (DSCUI). This award recognizes our dedication to the outstanding and innovative use of Artificial Intelligence (AI) for the underwriting process for Life and Health Insurance."
+    },
+    {
+      "titleBefore": "ISO Certification Award",
+      "subtitleBefore": "Quality Management System",
+      "titleAfter": "ISO Certification",
+      "description": "PT. Seleris Meditekno Internasional has been awarded ISO 9001:2015 certification with the number, this certificate signifies that our Quality Management System meets stringent international standards, ensuring our products and services are consistent and reliable."
+    },
+    {
+      "titleBefore": "PSE CERTIFICATION",
+      "subtitleBefore": "Electronic System Provider",
+      "titleAfter": "PSE CERTIFICATION",
+      "description": "PT. Seleris Meditekno Internasional is officially registered as an Electronic System Provider (PSE) with the number 016827.01/DJAI.PSE/12/2024, demonstrating our compliance with government regulations in delivering secure and reliable electronic systems. This recognition reinforces our commitment to trust, transparency, and excellence in digital services."
+    },
+    {
+      "titleBefore": "ISO Certification Award",
+      "subtitleBefore": "Service Management System",
+      "titleAfter": "ISO Certification",
+      "description": "PT. Seleris Meditekno Internasional has been awarded ISO/IEC 20000 certification with the number 2403150020502, which demonstrates our commitment to delivering reliable and high-quality Service Management System. This certification signifies that we meet international standards in IT service management, ensuring efficiency, consistency, and continuous improvement in our services."
+    },
+    {
+      "titleBefore": "ISO Certification Award",
+      "subtitleBefore": "Medical Devices Quality Management System",
+      "titleAfter": "ISO 13485:2016 Certification",
+      "description": "PT. Seleris Meditekno Internasional has been awarded ISO 13485:2016 certification with the number JHSBDTCU20251105IDNMD1T3. This certification demonstrates our commitment to maintaining high standards in the design, development, and maintenance of medical device software and AI-based healthcare solutions. It signifies that our organization complies with international standards for quality management in the medical device industry, ensuring reliability, safety, and continuous improvement in our healthcare technology services."
+    }
+  ],
+  "supported": [
+    {
+      "name": "MINISTRY OF HEALTH OF THE REPUBLIC OF INDONESIA",
+      "description": "SELICA is classified as an AI-based medical device in accordance with the regulations of the Ministry of Health of the Republic of Indonesia and complies with Minister of Health Regulation No. 14 of 2021"
+    }
+  ]
+}

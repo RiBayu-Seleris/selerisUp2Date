@@ -24,8 +24,7 @@ const emit = defineEmits([
         @change="emit('update:trueData', $event.target.checked)"
       />
       <span class="text-justify">
-        I hereby declare that all information provided in this form is true and
-        accurate to the best of my knowledge and can be held accountable.
+        {{ $t("careers.declaration1") }}
       </span>
     </label>
 
@@ -37,8 +36,7 @@ const emit = defineEmits([
         @change="emit('update:dataPermission', $event.target.checked)"
       />
       <span class="text-justify">
-        I grant permission to the company to use this information for
-        recruitment purposes in accordance with applicable policies.
+        {{ $t("careers.declaration2") }}
       </span>
     </label>
 
@@ -50,8 +48,7 @@ const emit = defineEmits([
         @change="emit('update:backgroundCheck', $event.target.checked)"
       />
       <span class="text-justify">
-        I agree to undergo a background check process in accordance with the
-        company's regulations.
+        {{ $t("careers.declaration3") }}
       </span>
     </label>
   </div>

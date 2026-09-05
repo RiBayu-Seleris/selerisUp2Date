@@ -115,7 +115,9 @@ onMounted(() => {
           <BoardFill
             sizes="w-[24px] h-[24px] lg:w-[20px] lg:h-[20px] xl:w-[24px] xl:h-[24px]"
           />
-          <p class="font-[400] text-[14px] text-[#195279]">Department</p>
+          <p class="font-[400] text-[14px] text-[#195279]">
+            {{ $t("misc.department") }}
+          </p>
         </div>
         <div
           class="col-span-12 sm:col-span-4 xl:col-span-3 w-full h-auto flex flex-row justify-center items-center gap-x-2 bg-[#FAFAFA] dark:bg-[#2D2F33] text-[#FF383C] dark:text-[#FAFAFA] py-1 rounded-[10px] border-[1px] border-[#DADADA] dark:border-none"
@@ -196,7 +198,7 @@ onMounted(() => {
             <p class="font-[400] text-[12px] lg:text-[12px] xl:text-[14px]">
               <!-- {{ getDivisionName(job.division_category) }} -->
               {{ job.department }}
-              Department
+              {{ $t("misc.department") }}
             </p>
           </div>
 
@@ -294,7 +296,7 @@ onMounted(() => {
                   />
                   <p class="font-[400] text-[12px] lg:text-[14px]">
                     {{ selectedJob?.department }}
-                    Department
+                    {{ $t("misc.department") }}
                   </p>
                 </div>
 
@@ -358,7 +360,7 @@ onMounted(() => {
                 <p
                   class="text-[16px] lg:text-[20px] xl:text-[22px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
                 >
-                  Tanggung Jawab Utama
+                  {{ $t("careers.tanggung_jawab_utama") }}
                 </p>
                 <p class="text-[14px] lg:text-[18px] xl:text-[20px]">
                   {{ selectedJob.responsibilities }}
@@ -373,7 +375,7 @@ onMounted(() => {
                 <p
                   class="text-[16px] lg:text-[20px] xl:text-[22px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
                 >
-                  Kualifikasi
+                  {{ $t("careers.kualifikasi") }}
                 </p>
                 <p class="text-[14px] lg:text-[18px] xl:text-[20px]">
                   {{ selectedJob.requirements }}
@@ -388,7 +390,7 @@ onMounted(() => {
                 <p
                   class="text-[16px] lg:text-[20px] xl:text-[22px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
                 >
-                  Benefit
+                  {{ $t("careers.benefit") }}
                 </p>
                 <p class="text-[14px] lg:text-[18px] xl:text-[20px]">
                   {{ selectedJob.benefits }}
@@ -402,7 +404,7 @@ onMounted(() => {
                 <p
                   class="text-[16px] lg:text-[20px] xl:text-[22px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
                 >
-                  Requirements:
+                  {{ $t("careers.requirements") }}
                 </p>
                 <ul class="list-disc pl-5 space-y-2">
                   <li
@@ -422,7 +424,7 @@ onMounted(() => {
             >
               <div class="flex items-center w-full gap-x-4">
                 <p class="font-medium text-[#195279] dark:text-[#FAFAFA]">
-                  Explore
+                  {{ $t("careers.explore") }}
                 </p>
 
                 <div class="flex items-center gap-x-3">
@@ -463,7 +465,7 @@ onMounted(() => {
                     <p
                       class="text-[12px] lg:text-[16px] xl:text-[20px] text-[#FF0000] font-500 dark:text-[#FAFAFA]"
                     >
-                      Close
+                      {{ $t("careers.close") }}
                     </p>
                   </div>
                 </button>
@@ -478,7 +480,7 @@ onMounted(() => {
                     <p
                       class="text-[12px] lg:text-[16px] xl:text-[20px] text-[#FAFAFA] font-500 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                     >
-                      Apply
+                      {{ $t("careers.apply") }}
                     </p>
                   </div>
                 </button>

@@ -41,15 +41,15 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
           <p
             class="text-[22px] sm:text-[22px] md:text-[22px] lg:text-[26px] xl:text-[32px] text-[#1AB24F] font-[500]"
           >
-            AI Innovation
+            {{ $t("home.hero.eyebrow") }}
           </p>
         </div>
         <div class="w-full pb-2 sm:pb-2 z-20">
           <p
             class="text-[#195279] text-[21px] sm:text-[38px] md:text-[36px] lg:text-[36px] xl:text-[60px] font-[500] leading-tight -tracking-[1px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
-            The Future of Life <br />
-            Technology
+            {{ $t("home.hero.titleLine1") }} <br />
+            {{ $t("home.hero.titleLine2") }}
           </p>
         </div>
         <!-- Swipe caption -->
@@ -59,7 +59,7 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
         >
           <div>
             <p class="text-[12px] xl:text-[14px] font-[400] text-[#FAFAFA]">
-              Book a Demo
+              {{ $t("home.hero.bookDemo") }}
             </p>
           </div>
           <div class="ml-1 text-[#FAFAFA] dark:text-[#FAFAFA]">
@@ -116,7 +116,7 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
                 :darklogo="data.darklogo"
                 :logoWidth="data.logoWidth"
                 :logoHeight="data.logoHeight"
-                :descriptions="data.description"
+                :descriptions="$t(`home.banners.${data.key}`)"
                 :linelightcolor="data.linelightcolor"
                 :href="data.url"
               />

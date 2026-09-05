@@ -34,13 +34,13 @@
             <p
               class="font-[500] dark:font-[400] text-[20px] xl:text-[28px] text-[#1AB24F] dark:text-[#01F27D]"
             >
-              The Visionary
+              {{ $t("about.visionary.eyebrow") }}
             </p>
             <p
               class="font-[500] text-[#195279] dark:text-[#FAFAFA] text-[36px] xl:text-[54px] leading-tight"
             >
               The Brains Behind the <br />
-              Seleris AI Revolution
+              {{ $t("about.visionary.title") }}
             </p>
           </div>
           <div
@@ -67,12 +67,12 @@
                 <p
                   class="text-[#195279] dark:text-[#FFFFFF] font-[600] text-[12px] sm:text-[16px] md:text-[18px] lg:text-[20px] xl:text-[24px]"
                 >
-                  Rinaldi Anwar Buyung
+                  {{ $t("about.visionary.name") }}
                 </p>
                 <p
                   class="text-[#195279] dark:text-[#FFFFFF] font-[500] text-[10px] sm:text-[12px] md:text-[14px] lg:text-[14px] xl:text-[18px]"
                 >
-                  Insurtech Innovator & AI Architect
+                  {{ $t("about.visionary.role") }}
                 </p>
               </div>
             </div>
@@ -91,43 +91,20 @@
             <p
               class="font-[500] text-[20px] sm:text-[18px] text-[#1AB24F] dark:text-[#01F27D]"
             >
-              The Visionary
+              {{ $t("about.visionary.titleLine1") }}
             </p>
             <p
               class="font-[500] text-[#195279] dark:text-[#FAFAFA] text-[20px] sm:text-[28px] leading-snug"
             >
               The Brains Behind the Seleris AI <br class="hidden sm:block" />
-              Revolution
+              {{ $t("about.visionary.titleLine2") }}
             </p>
           </div>
 
-          <p>
-            Rinaldi Anwar Buyung isn't just an actuary; he's a tech entrepreneur
-            actively architecting the future of insurance. He is the Founder of
-            Seleris, a cutting-edge SaaS platform that leverages the power of
-            Artificial Intelligence to revolutionize the underwriting process.
-          </p>
-          <p>
-            Seleris is the direct application of his deep academic work as a
-            Doctoral researcher in AI and Data Science. His vision is backed by
-            a prolific research portfolio, including dozens of scientific
-            journals on AI technology, proving he's not just part of the
-            conversation—he's driving it.
-          </p>
-          <p>
-            With 30 years of industry-experience, Rinaldi possesses a rare blend
-            of deep technical mastery in mathematics, statistics, actuarial
-            science, underwriting, and risk management.
-          </p>
-          <p>
-            He remains a dynamic force in the industry, actively pioneering new
-            innovations at the intersection of healthcare, insurance, and
-            finance. He serves as a high-level strategic advisor and holds
-            senior governance roles across the insurance, reinsurance, and risk
-            consulting sectors. As an actuary, Rinaldi is a central figure who
-            both understands the industry's foundations and is actively building
-            its future.
-          </p>
+          <p>{{ $t("about.visionary.bio.0.text") }}</p>
+          <p>{{ $t("about.visionary.bio.1.text") }}</p>
+          <p>{{ $t("about.visionary.bio.2.text") }}</p>
+          <p>{{ $t("about.visionary.bio.3.text") }}</p>
         </div>
       </div>
     </div>

@@ -59,7 +59,7 @@ const offset = computed(() => {
       <p
         class="text-[#195279] font-[500] text-[16px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
       >
-        Content
+        {{ $t("blog.content") }}
       </p>
       <!-- ToC -->
       <ToCList :items="groupedHeadings" :offset="offset" />

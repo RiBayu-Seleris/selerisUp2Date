@@ -14,70 +14,70 @@ import WhySelerisIcon from "@/assets/icons/About-Why-Seleris.png";
 <template>
   <DifferentSection
     bgImage="bg-different dark:bg-differentDark bg-cover bg-no-repeat"
-    title="About Us"
-    subtitle="We are committed to deliver efficient and effective products and services."
+    :title="$t('about.deliver.title')"
+    :subtitle="$t('about.deliver.subtitle')"
     :robotImage="RobotAI"
   >
     <template #default>
       <div class="flex flex-row mb-10">
         <DifferentCard
           :image="WhySelerisIcon"
-          title="Why Seleris"
-          subtitle="Seleris helps businesses assess people faster, smarter, and easier."
+          :title="$t('about.deliver.whySeleris.title')"
+          :subtitle="$t('about.deliver.whySeleris.subtitle')"
         />
         <DifferentCard
           :image="EfficiencyIcon"
-          title="Efficiency"
-          subtitle="Cut costs and processing time by up to 50 percent."
+          :title="$t('about.deliver.efficiency.title')"
+          :subtitle="$t('about.deliver.efficiency.subtitle')"
         />
       </div>
       <div class="flex flex-row">
         <DifferentCard
           :image="AccuracyIcon"
-          title="Accuracy"
+          :title="$t('about.deliver.accuracy.title')"
           subtitleClass="pr-5"
-          subtitle="AI delivers accurate results, even with limited user data."
+          :subtitle="$t('about.deliver.accuracy.subtitle')"
         />
         <DifferentCard
           :image="InnovationIcon"
-          title="Innovation"
-          subtitle="Online process is quick, easy, and accessible for everyone."
+          :title="$t('about.deliver.innovation.title')"
+          :subtitle="$t('about.deliver.innovation.subtitle')"
         />
       </div>
     </template>
     <template #mobile>
       <DifferentMobileSection
-        title="About Us"
-        subtitle="We are committed to deliver efficient and effective products and services."
+        :title="$t('about.deliver.title')"
+        :subtitle="$t('about.deliver.subtitle')"
         :robotImage="RobotAI2"
       >
         <template #mobileContentDifferent>
           <div class="w-full mb-5">
             <DifferentCard
               :image="WhySelerisIcon"
-              title="Why Seleris"
-              subtitle="Seleris helps businesses assess people faster, smarter, and easier."
+              :title="$t('about.deliver.whySeleris.title')"
+              :subtitle="$t('about.deliver.whySeleris.subtitle')"
             />
           </div>
           <div class="w-full mb-5">
             <DifferentCard
               :image="EfficiencyIcon"
-              title="Efficiency"
-              subtitle="Cut costs and processing time by up to 50 percent."
+              :title="$t('about.deliver.efficiency.title')"
+              :subtitle="$t('about.deliver.efficiency.subtitle')"
             />
           </div>
           <div class="w-full mb-5">
             <DifferentCard
               :image="AccuracyIcon"
-              title="Accuracy"
-              subtitle="AI delivers accurate results, even with limited user data."
+              :title="$t('about.deliver.accuracy.title')"
+              :subtitle="$t('about.deliver.accuracy.subtitle')"
             />
           </div>
           <div class="w-full mb-5">
             <DifferentCard
               :image="InnovationIcon"
-              title="Innovation"
-              subtitle="Online process is quick, easy, and accessible for everyone."
+              :title="$t('about.deliver.innovation.title')"
+              :subtitle="$t('about.deliver.innovation.subtitle')"
             />
           </div>
         </template>

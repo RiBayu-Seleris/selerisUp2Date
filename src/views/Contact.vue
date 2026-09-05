@@ -6,9 +6,9 @@ import HeroText from "@/components/reusable/HeroText.vue";
     class="flex w-full h-auto pt-[120px] md:pt-[150px] lg:pt-[160px] xl:pt-[160px] px-6 md:px-0"
   >
     <HeroText
-      title="Contact"
-      subtitle="Need help? We're here to listen!"
-      description="Visit our friendly team at any of our locations"
+      :title="$t('contact.contactTitle')"
+      :subtitle="$t('contact.contactSubtitle')"
+      :description="$t('contact.contactDescription')"
     />
   </div>
 </template>

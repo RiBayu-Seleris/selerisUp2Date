@@ -11,8 +11,10 @@ import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useUtilsStore } from "@/stores/utils";
+import { useI18n } from "vue-i18n";
 
 const utils = useUtilsStore();
+const { t } = useI18n();
 
 /* =========================
    STATE
@@ -95,7 +97,7 @@ const copyLink = async (slug) => {
     toast: true,
     position: "top",
     icon: "success",
-    title: "Link berhasil disalin!",
+    title: t("home.blogs.linkCopied"),
     showConfirmButton: false,
     timer: 1500,
   });
@@ -134,13 +136,15 @@ onBeforeUnmount(() => {
       class="relative flex flex-col w-full h-auto px-8 lg:px-16 xls:px-8 gap-y-3 justify-center items-center"
     >
       <div class="flex w-full h-auto justify-center items-center text-center">
-        <p class="text-[#2AB857] font-[500] text-[18px] lg:text-[28px]">Blog</p>
+        <p class="text-[#2AB857] font-[500] text-[18px] lg:text-[28px]">
+          {{ $t("home.blogs.eyebrow") }}
+        </p>
       </div>
       <div class="flex w-full h-auto justify-center items-center text-center">
         <p
           class="text-[#195279] font-[500] text-[20px] lg:text-[42px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
         >
-          What's On Seleris
+          {{ $t("home.blogs.title") }}
         </p>
       </div>
     </div>
@@ -354,7 +358,7 @@ onBeforeUnmount(() => {
       >
         <div>
           <p class="text-[12px] xl:text-[14px] font-[400] text-[#FAFAFA]">
-            More News
+            {{ $t("home.blogs.more") }}
           </p>
         </div>
         <div class="ml-3 text-[#FAFAFA] dark:text-[#FAFAFA]">

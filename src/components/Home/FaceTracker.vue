@@ -33,30 +33,10 @@ const deviceId = ref("");
 const scanCount = ref(0);
 
 const cards = [
-  {
-    icon: Time,
-    title: "Vital Signs in 30 Seconds",
-    description:
-      "Measures heart rate, blood pressure, SpO₂, HRV, and more. no wearables or devices required.",
-  },
-  {
-    icon: UserScan,
-    title: "Micro-Movement Detection",
-    description:
-      "AI uses rPPG to detect blood flow and pulse changes through facial skin via camera.",
-  },
-  {
-    icon: Rate,
-    title: "60+ AI-Powered Health Parameters",
-    description:
-      "Instantly measures health and risk indicators for smarter insurance assessments.",
-  },
-  {
-    icon: MedicalNote,
-    title: "Instant Health Report",
-    description:
-      "Creates unique 3D model of your face for accurate health measurements.",
-  },
+  { icon: Time, key: "vital-signs" },
+  { icon: UserScan, key: "micro-movement" },
+  { icon: Rate, key: "parameters" },
+  { icon: MedicalNote, key: "report" },
 ];
 
 function getCookie(name) {
@@ -139,13 +119,15 @@ const submitForm = () => {
     <div
       class="w-full h-auto flex flex-col gap-y-1.5 text-center justify-center items-center xl:px-8"
     >
-      <p class="text-[20px] text-[#2AB857] font-[500]">Request Demo</p>
+      <p class="text-[20px] text-[#2AB857] font-[500]">
+        {{ $t("home.faceTracker.eyebrow") }}
+      </p>
 
       <p
         class="text-[16px] md:text-[32px] lg:text-[34px] xl:text-[46px] leading-snug text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] font-[500]"
       >
-        What you get <br />
-        when you try the scan demo
+        {{ $t("home.faceTracker.titleLine1") }} <br />
+        {{ $t("home.faceTracker.titleLine2") }}
       </p>
     </div>
 
@@ -181,8 +163,10 @@ const submitForm = () => {
           <div class="absolute left-[10%] top-[20%] card-float-left">
             <card-tracker
               :icon="cards[0].icon"
-              :title="cards[0].title"
-              :description="cards[0].description"
+              :title="$t(`home.faceTracker.cards.${cards[0].key}.title`)"
+              :description="
+                $t(`home.faceTracker.cards.${cards[0].key}.description`)
+              "
             />
           </div>
 
@@ -192,8 +176,10 @@ const submitForm = () => {
           >
             <card-tracker
               :icon="cards[1].icon"
-              :title="cards[1].title"
-              :description="cards[1].description"
+              :title="$t(`home.faceTracker.cards.${cards[1].key}.title`)"
+              :description="
+                $t(`home.faceTracker.cards.${cards[1].key}.description`)
+              "
             />
           </div>
 
@@ -201,8 +187,10 @@ const submitForm = () => {
           <div class="absolute right-[10%] top-[20%] card-float-right">
             <card-tracker
               :icon="cards[2].icon"
-              :title="cards[2].title"
-              :description="cards[2].description"
+              :title="$t(`home.faceTracker.cards.${cards[2].key}.title`)"
+              :description="
+                $t(`home.faceTracker.cards.${cards[2].key}.description`)
+              "
             />
           </div>
 
@@ -212,8 +200,10 @@ const submitForm = () => {
           >
             <card-tracker
               :icon="cards[3].icon"
-              :title="cards[3].title"
-              :description="cards[3].description"
+              :title="$t(`home.faceTracker.cards.${cards[3].key}.title`)"
+              :description="
+                $t(`home.faceTracker.cards.${cards[3].key}.description`)
+              "
             />
           </div>
         </div>
@@ -236,8 +226,10 @@ const submitForm = () => {
             <p class="text-white font-medium">
               {{
                 isBlocked
-                  ? `Batas scan tercapai (${MAX_SCAN_ATTEMPTS}x)`
-                  : "Scan Yourself"
+                  ? $t("home.faceTracker.scanLimit", {
+                      count: MAX_SCAN_ATTEMPTS,
+                    })
+                  : $t("home.faceTracker.scanButton")
               }}
             </p>
           </div>
@@ -267,11 +259,11 @@ const submitForm = () => {
           <!-- Header -->
           <div class="flex flex-col gap-y-2 mb-6">
             <p class="text-[28px] font-semibold text-[#195279] dark:text-white">
-              Request Demo
+              {{ $t("home.faceTracker.modal.title") }}
             </p>
 
             <p class="text-[#6B7280] dark:text-[#A1A1AA]">
-              Enter the following information to try the scan feature.
+              {{ $t("home.faceTracker.modal.description") }}
             </p>
 
             <!-- Scan counter info -->
@@ -292,14 +284,14 @@ const submitForm = () => {
             <!-- First Name -->
             <div class="flex flex-col gap-y-2">
               <label class="text-sm font-medium text-[#374151] dark:text-white">
-                First name
+                {{ $t("home.faceTracker.modal.firstName") }}
               </label>
 
               <input
                 required
                 v-model="form.firstName"
                 type="text"
-                placeholder="Enter your first name"
+                :placeholder="$t('home.faceTracker.modal.firstNamePlaceholder')"
                 class="w-full rounded-xl border border-[#D1D5DB] dark:border-[#3F3F46] bg-white dark:bg-[#27272A] px-4 py-3 outline-none focus:ring-2 focus:ring-[#2E97DF] text-black dark:text-white"
               />
             </div>
@@ -307,14 +299,16 @@ const submitForm = () => {
             <!-- Business Email -->
             <div class="flex flex-col gap-y-2">
               <label class="text-sm font-medium text-[#374151] dark:text-white">
-                Business email
+                {{ $t("home.faceTracker.modal.businessEmail") }}
               </label>
 
               <input
                 required
                 v-model="form.businessEmail"
                 type="email"
-                placeholder="Enter your business email"
+                :placeholder="
+                  $t('home.faceTracker.modal.businessEmailPlaceholder')
+                "
                 class="w-full rounded-xl border border-[#D1D5DB] dark:border-[#3F3F46] bg-white dark:bg-[#27272A] px-4 py-3 outline-none focus:ring-2 focus:ring-[#2E97DF] text-black dark:text-white"
               />
             </div>
@@ -322,14 +316,16 @@ const submitForm = () => {
             <!-- Company Name -->
             <div class="flex flex-col gap-y-2">
               <label class="text-sm font-medium text-[#374151] dark:text-white">
-                Company name
+                {{ $t("home.faceTracker.modal.companyName") }}
               </label>
 
               <input
                 required
                 v-model="form.companyName"
                 type="text"
-                placeholder="Enter your company name"
+                :placeholder="
+                  $t('home.faceTracker.modal.companyNamePlaceholder')
+                "
                 class="w-full rounded-xl border border-[#D1D5DB] dark:border-[#3F3F46] bg-white dark:bg-[#27272A] px-4 py-3 outline-none focus:ring-2 focus:ring-[#2E97DF] text-black dark:text-white"
               />
             </div>
@@ -337,14 +333,14 @@ const submitForm = () => {
             <!-- Goals -->
             <div class="flex flex-col gap-y-2">
               <label class="text-sm font-medium text-[#374151] dark:text-white">
-                What would you like to achieve with Seleris AI
+                {{ $t("home.faceTracker.modal.goals") }}
               </label>
 
               <textarea
                 required
                 v-model="form.goals"
                 rows="4"
-                placeholder="Tell us your goals..."
+                :placeholder="$t('home.faceTracker.modal.goalsPlaceholder')"
                 class="w-full rounded-xl border border-[#D1D5DB] dark:border-[#3F3F46] bg-white dark:bg-[#27272A] px-4 py-3 outline-none focus:ring-2 focus:ring-[#2E97DF] text-black dark:text-white resize-none"
               />
             </div>
@@ -361,19 +357,18 @@ const submitForm = () => {
                 for="agreeMarketing"
                 class="text-sm text-[#6B7280] dark:text-[#A1A1AA] leading-relaxed cursor-pointer"
               >
-                I agree to receive information about
+                {{ $t("home.faceTracker.modal.consentBefore") }}
                 <span class="text-[#195279] dark:text-white font-medium"
                   >Seleris AI</span
                 >
-                products and services via email. The personal data you provide
-                will be processed in accordance with our
+                {{ $t("home.faceTracker.modal.consentAfter") }}
                 <a
                   href="/privacy"
                   class="text-[#2E97DF] hover:underline cursor-pointer"
                 >
-                  Privacy Policy.</a
+                  {{ $t("home.faceTracker.modal.privacyPolicy") }}</a
                 >
-                You may withdraw this consent at any time
+                {{ $t("home.faceTracker.modal.consentWithdraw") }}
                 <span class="text-red-400">*</span>
               </label>
             </div>
@@ -389,7 +384,7 @@ const submitForm = () => {
                   : 'bg-gray-300 dark:bg-gray-600 cursor-not-allowed opacity-60',
               ]"
             >
-              Submit Demo Request
+              {{ $t("home.faceTracker.modal.submit") }}
             </button>
           </form>
         </div>

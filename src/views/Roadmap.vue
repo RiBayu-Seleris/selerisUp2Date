@@ -33,8 +33,8 @@ function selectProduct(product) {
     class="flex w-full h-auto pt-[120px] sm:pt-[120px] md:pt-[150px] lg:pt-[160px] xl:pt-[160px] mb-10"
   >
     <HeroText
-      title="Innovation"
-      subtitle="Roadmap Seleris Meditekno Internasional"
+      :title="$t('roadmapPage.title')"
+      :subtitle="$t('roadmapPage.subtitle')"
     />
   </section>
   <section class="relative w-full h-auto mb-20">
@@ -192,12 +192,12 @@ function selectProduct(product) {
                         class="w-full h-[40px] object-contain mb-4"
                       />
                       <p class="text-[#195279] font-[500] text-[22px]">
-                        {{ product.title }}
+                        {{ $t(`roadmap.${product.key}.title`) }}
                       </p>
                       <p
                         class="text-[#195279] font-[400] text-[16px] text-center"
                       >
-                        {{ product.subtitle }}
+                        {{ $t(`roadmap.${product.key}.subtitle`) }}
                       </p>
                     </div>
                     <!-- Card untuk tidak punya logo -->
@@ -217,12 +217,12 @@ function selectProduct(product) {
                       <p
                         class="text-center font-[500] text-[12px] sm:text-[14px] md:text-[16px] xl:text-[22px] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                       >
-                        {{ product.title }}
+                        {{ $t(`roadmap.${product.key}.title`) }}
                       </p>
                       <p
                         class="font-[400] text-[10px] sm:text-[12px] md:text-[12px] xl:text-[16px] text-center text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
                       >
-                        {{ product.subtitle }}
+                        {{ $t(`roadmap.${product.key}.subtitle`) }}
                       </p>
                     </div>
                   </div>
@@ -271,12 +271,12 @@ function selectProduct(product) {
             <p
               class="text-[14px] sm:text-[20px] md:text-[24px] xl:text-[24px] text-center text-[#195279] font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
             >
-              {{ selectedProduct.title }}
+              {{ $t(`roadmap.${selectedProduct.key}.title`) }}
             </p>
             <p
               class="text-center text-[#195279] dark:text-[#6F6F6F] text-[10px] sm:text-[12px] md:text-[14px] lg:text-[20px] lg:px-8"
             >
-              {{ selectedProduct.description }}
+              {{ $t(`roadmap.${selectedProduct.key}.description`) }}
             </p>
           </div>
         </div>
@@ -292,7 +292,7 @@ function selectProduct(product) {
           class="relative flex flex-row w-full max-h-screen gap-x-5 sm:gap-x-5 md:gap-x-10 py-5 overflow-x-auto snap-x snap-mandatory scroll-pl-8 pl-8 pr-8 sm:scroll-pl-10 sm:pl-10 sm:pr-10 md:scroll-pl-10 md:pl-10 md:pr-10 xl:scroll-pl-28 xl:pl-28 xl:pr-28 hide-scrollbar"
         >
           <div
-            v-for="(item, index) in selectedProduct.content"
+            v-for="index in selectedProduct.contentCount"
             :key="index"
             class="h-auto relative p-[1.5px] rounded-[20px] sm:rounded-[30px] bg-gradient-to-r from-[#2C43B7] via-[#3ED2B2] to-[#50B6EE]"
           >
@@ -302,12 +302,20 @@ function selectProduct(product) {
               <p
                 class="text-center h-[60px] px-10 sm:px-8 md:px-16 pb-4 text-[#195279] font-[500] text-[12px] sm:text-[14px] md:text-[16px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
               >
-                {{ item.title }}
+                {{
+                  $t(
+                    `roadmap.${selectedProduct.key}.content.${index - 1}.title`,
+                  )
+                }}
               </p>
               <p
                 class="text-center justify-start items-start text-[#195279] text-[10px] sm:text-[12px] md:text-[14px] dark:text-[#6F6F6F]"
               >
-                {{ item.description }}
+                {{
+                  $t(
+                    `roadmap.${selectedProduct.key}.content.${index - 1}.description`,
+                  )
+                }}
               </p>
             </div>
           </div>

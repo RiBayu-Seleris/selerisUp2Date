@@ -4,37 +4,31 @@ import CardDefault from "@/components/reusable/CardDefault.vue";
 const benefitList = [
   {
     icon: new URL("@/assets/icons/Benefits/Accuracy.png", import.meta.url).href,
-    title: "Accuracy",
-    body: "The results show that Seleris can recognize faces with up to 94% accuracy.",
+    key: "accuracy",
   },
   {
     icon: new URL("@/assets/icons/Benefits/speed.png", import.meta.url).href,
-    title: "Speed",
-    body: "Seleris has a lightning fast speed. it can open and run features quickly.",
+    key: "speed",
   },
   {
     icon: new URL("@/assets/icons/Benefits/efficiency.png", import.meta.url)
       .href,
-    title: "Efficiency",
-    body: "The app’s simple interface helps users quickly find desired features easily.",
+    key: "efficiency",
   },
   {
     icon: new URL("@/assets/icons/Benefits/testimonial.png", import.meta.url)
       .href,
-    title: "Testimonial",
-    body: "Embrace the power of collaboration with a multitude of partners.",
+    key: "testimonial",
   },
   {
     icon: new URL("@/assets/icons/Benefits/experience.png", import.meta.url)
       .href,
-    title: "Customer Experience",
-    body: "We commit to giving Seleris users the best, easy, safe, and comfortable experience.",
+    key: "experience",
   },
   {
     icon: new URL("@/assets/icons/Benefits/guarantee.png", import.meta.url)
       .href,
-    title: "Guarantee",
-    body: "Your data security is our priority, protected with advanced cutting-edge technology.",
+    key: "guarantee",
   },
 ];
 </script>
@@ -48,14 +42,14 @@ const benefitList = [
         <p
           class="text-2xl md:text-[32px] lg:text-[44px] xl:text-[44px] font-[500] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
         >
-          Benefits Seleris
+          {{ $t("home.benefits.title") }}
         </p>
       </div>
       <div class="flex w-full h-auto justify-center items-center px-10">
         <p
           class="text-[14px] sm:text-[16px] md:text-[18px] lg:text-[20px] xl:text-[20px] font-[400] text-[#1DC457] dark:text-[#6A6A6A] text-center"
         >
-          Get started with Seleris and see the difference for yourself
+          {{ $t("home.benefits.subtitle") }}
         </p>
       </div>
     </div>
@@ -73,8 +67,8 @@ const benefitList = [
           v-for="(benefit, index) in benefitList"
           :key="index"
           :icon="benefit.icon"
-          :title="benefit.title"
-          :body="benefit.body"
+          :title="$t(`home.benefits.items.${benefit.key}.title`)"
+          :body="$t(`home.benefits.items.${benefit.key}.body`)"
         />
       </div>
     </div>

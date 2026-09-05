@@ -133,7 +133,8 @@ onBeforeUnmount(() => {
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] lg:mb-1"
         >
-          Date of Joining <span class="text-red-500">*</span>
+          {{ $t("careers.date_of_joining") }}
+          <span class="text-red-500">*</span>
         </label>
         <div
           class="col-span-12 sm:col-span-4 h-full rounded-lg bg-[#D9D9D9] p-[1px] dark:bg-[#565656] mt-0"
@@ -153,7 +154,8 @@ onBeforeUnmount(() => {
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] lg:mb-1"
         >
-          Expected Salary <span class="text-red-500">*</span>
+          {{ $t("careers.expected_salary") }}
+          <span class="text-red-500">*</span>
         </label>
         <div class="relative">
           <!-- Prefix "Rp" -->
@@ -177,7 +179,8 @@ onBeforeUnmount(() => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] lg:mb-1"
       >
-        Reason for applying to this position <span class="text-red-500">*</span>
+        {{ $t("careers.reason_for_applying_to_this_position") }}
+        <span class="text-red-500">*</span>
       </label>
       <div class="editor-wrapper">
         <div class="quill-container">

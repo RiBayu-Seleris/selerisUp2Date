@@ -6,20 +6,20 @@
       <p
         class="text-[26px] md:text-[32px] lg:text-[36px] xl:text-[40px] font-[500] text-[#1AB24F] text-center dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
       >
-        Office Team
+        {{ $t("team.officeTitle") }}
       </p>
       <p
         class="text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] tracking-wider sm:tracking-wide font-[400] text-[#89A6BA] dark:text-[#6F6F6F] px-0 md:px-0 lg:px-8 xl:px-40 text-center"
       >
         <!-- Desktop -->
         <span class="hidden sm:block">
-          Our dev team turns ideas into working code fast, clean, and reliable.
+          {{ $t("team.officeSubtitle") }}
         </span>
         <!-- Mobile -->
         <span class="block sm:hidden">
-          Our dev team turns ideas into working code
+          {{ $t("team.officeSubtitleMobile1") }}
           <br />
-          fast, clean, and reliable.
+          {{ $t("team.officeSubtitleMobile2") }}
         </span>
       </p>
     </div>

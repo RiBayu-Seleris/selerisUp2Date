@@ -18,11 +18,13 @@ const data = computed(() =>
   SolutionLists.find((s) => s.slug === route.params.slug),
 );
 
+// Teks fitur diambil dari locale lewat indeks, jadi di sini cukup pasangan indeks
 const slidePairs = computed(() => {
-  const items = data.value?.keyFeatures?.items ?? [];
+  const count = data.value?.keyFeatures?.count ?? 0;
+  const indexes = Array.from({ length: count }, (_, i) => i);
   const pairs = [];
-  for (let i = 0; i < items.length; i += 2) {
-    pairs.push(items.slice(i, i + 2));
+  for (let i = 0; i < indexes.length; i += 2) {
+    pairs.push(indexes.slice(i, i + 2));
   }
   return pairs;
 });
@@ -44,21 +46,21 @@ const slidePairs = computed(() => {
           <p
             class="text-[24px] md:text-[34px] lg:text-[30px] xl:text-[30px] font-[500] text-[#1AB24F] text-center"
           >
-            Solution
+            {{ $t("solutionPage.label") }}
           </p>
         </div>
         <div class="w-full h-auto">
           <p
             class="text-[20px] sm:text-[24px] md:text-[28px] lg:text-[42px] xl:text-[46px] font-[500] text-[#195279] text-center leading-relaxed dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
-            {{ data.hero.title }}
+            {{ $t(`solutions.${data.slug}.title`) }}
           </p>
         </div>
         <div class="w-full h-auto">
           <p
             class="text-[14px] md:text-[18px] lg:text-[24px] xl:text-[16px] font-[400] text-[#195279] px-8 md:px-0 xl:px-48 text-center leading-normal dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
-            "{{ data.hero.subtitle }}"
+            "{{ $t(`solutions.${data.slug}.hero.subtitle`) }}"
           </p>
         </div>
       </div>
@@ -76,12 +78,12 @@ const slidePairs = computed(() => {
             <p
               class="text-[#1AB24F] font-[500] text-[14px] sm:text-[18px] mb-2 sm:mb-4"
             >
-              Overview
+              {{ $t("solutionPage.overview") }}
             </p>
             <p
               class="text-[#374151] dark:text-[#E8ECF3] text-[12px] sm:text-[16px] md:text-[14px] lg:text-[16px] leading-loose"
             >
-              {{ data.overview.description }}
+              {{ $t(`solutions.${data.slug}.overview.description`) }}
             </p>
           </div>
         </div>
@@ -103,7 +105,9 @@ const slidePairs = computed(() => {
             >
               {{ stat.value }}
             </p>
-            <p class="text-[#87C6F2] text-[14px]">{{ stat.label }}</p>
+            <p class="text-[#87C6F2] text-[14px]">
+              {{ $t(`solutions.${data.slug}.overview.stats.${i}.label`) }}
+            </p>
           </div>
         </div>
       </section>
@@ -131,23 +135,27 @@ const slidePairs = computed(() => {
             <p
               class="text-[#2AB857] font-[500] text-[16px] md:text-[20px] xl:text-[20px] md:px-8 lg:px-0"
             >
-              Key Features
+              {{ $t("solutionPage.keyFeatures") }}
             </p>
             <div
               class="grid md:hidden lg:grid grid-cols-1 lg:grid-cols-2 gap-x-2 md:gap-x-4 xl:gap-x-5 gap-y-6 sm:gap-y-6 md:gap-y-8 lg:gap-y-10 xl:gap-y-10"
             >
               <div
-                v-for="(feature, i) in data.keyFeatures.items"
+                v-for="i in data.keyFeatures.count"
                 :key="i"
                 class="w-full h-auto flex flex-col gap-y-1 md:gap-y-1.5 lg:gap-y-2"
               >
                 <p
                   class="h-auto text-[#2A6993] dark:text-[#2A89CB] font-[500] text-[14px] sm:text-[16px] md:text-[16px] xl:text-[18px]"
                 >
-                  {{ feature.title }}
+                  {{ $t(`solutions.${data.slug}.keyFeatures.${i - 1}.title`) }}
                 </p>
                 <p class="text-[#9CA3AF] text-[12px] lg:text-[14px] h-auto">
-                  {{ feature.description }}
+                  {{
+                    $t(
+                      `solutions.${data.slug}.keyFeatures.${i - 1}.description`,
+                    )
+                  }}
                 </p>
               </div>
             </div>
@@ -171,17 +179,25 @@ const slidePairs = computed(() => {
                   >
                     <div class="grid grid-cols-1 gap-x-4 gap-y-6">
                       <div
-                        v-for="(feature, itemIndex) in pair"
-                        :key="itemIndex"
+                        v-for="featureIndex in pair"
+                        :key="featureIndex"
                         class="w-full h-auto flex flex-col gap-y-1"
                       >
                         <p
                           class="h-auto text-[#2A6993] dark:text-[#2A89CB] font-[500] text-[14px] sm:text-[16px]"
                         >
-                          {{ feature.title }}
+                          {{
+                            $t(
+                              `solutions.${data.slug}.keyFeatures.${featureIndex}.title`,
+                            )
+                          }}
                         </p>
                         <p class="text-[#9CA3AF] text-[10px] h-auto">
-                          {{ feature.description }}
+                          {{
+                            $t(
+                              `solutions.${data.slug}.keyFeatures.${featureIndex}.description`,
+                            )
+                          }}
                         </p>
                       </div>
                     </div>
@@ -194,21 +210,23 @@ const slidePairs = computed(() => {
       </section>
       <!-- More Features -->
       <section class="flex flex-col w-full h-auto gap-y-3 px-8 xl:px-28">
-        <p class="text-[#1AB24F] font-[500] text-[18px]">More Features</p>
+        <p class="text-[#1AB24F] font-[500] text-[18px]">
+          {{ $t("solutionPage.moreFeatures") }}
+        </p>
         <div
           class="grid gap-4"
           :class="
-            data.moreFeatures.length > 3
+            data.moreFeaturesCount > 3
               ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-4'
-              : data.moreFeatures.length === 3
+              : data.moreFeaturesCount === 3
                 ? 'grid-cols-3'
-                : data.moreFeatures.length === 2
+                : data.moreFeaturesCount === 2
                   ? 'grid-cols-1 sm:grid-cols-2'
                   : 'grid-cols-1'
           "
         >
           <div
-            v-for="(feature, i) in data.moreFeatures"
+            v-for="i in data.moreFeaturesCount"
             :key="i"
             class="w-full h-auto p-[1px] bg-[#E3E3E3] dark:bg-gradient-to-r dark:from-[#17181A] dark:to-[#000000]/60 rounded-2xl"
           >
@@ -218,12 +236,14 @@ const slidePairs = computed(() => {
               <p
                 class="text-[#2A6993] dark:text-white font-[500] text-[16px] xl:text-[18px]"
               >
-                {{ feature.title }}
+                {{ $t(`solutions.${data.slug}.moreFeatures.${i - 1}.title`) }}
               </p>
               <p
                 class="text-[#5C6778] text-[12px] md:text-[14px] lg:text-[16px] font-[400]"
               >
-                {{ feature.description }}
+                {{
+                  $t(`solutions.${data.slug}.moreFeatures.${i - 1}.description`)
+                }}
               </p>
             </div>
           </div>
@@ -241,17 +261,17 @@ const slidePairs = computed(() => {
               <p
                 class="text-[#1AB24F] font-[500] text-[20px] xl:text-[24px] text-center"
               >
-                {{ data.businessBenefits.title }}
+                {{ $t("solutionPage.businessBenefitsTitle") }}
               </p>
               <p class="text-[#9CA3AF] text-[12px] xl:text-[16px] text-center">
-                {{ data.businessBenefits.subtitle }}
+                {{ $t("solutionPage.businessBenefitsSubtitle") }}
               </p>
             </div>
             <div
               class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-4 sm:gap-y-8 md:gap-x-5 md:gap-y-6"
             >
               <div
-                v-for="(item, i) in data.businessBenefits.items"
+                v-for="i in data.businessBenefitsCount"
                 :key="i"
                 class="flex flex-row md:flex-col items-center gap-y-1 sm:gap-y-4 md:text-center gap-x-3 md:gap-x-0"
               >
@@ -267,7 +287,9 @@ const slidePairs = computed(() => {
                 <p
                   class="text-[#195279] dark:text-[#D4D4D4] text-[12px] sm:text-[14px] md:px-2"
                 >
-                  {{ item.label }}
+                  {{
+                    $t(`solutions.${data.slug}.businessBenefits.${i - 1}.label`)
+                  }}
                 </p>
               </div>
             </div>
@@ -285,17 +307,17 @@ const slidePairs = computed(() => {
             <p
               class="text-white font-[600] text-[16px] sm:text-[18px] md:text-[20px] text-center"
             >
-              Smarter Risk. Faster Decision. Sustainable Protection
+              {{ $t(`solutions.${data.slug}.cta.title`) }}
             </p>
             <p class="text-white text-[12px] md:text-[14px] text-center">
-              Smarter Risk. Faster Decision. Sustainable Protection
+              {{ $t(`solutions.${data.slug}.cta.subtitle`) }}
             </p>
           </div>
           <a
             href="/book-a-demo"
             class="bg-white text-[#1AB24F] text-[14px] md:text-[16px] font-[500] px-8 sm:px-6 py-2 rounded-full hover:opacity-90 transition"
           >
-            Book a Demo!
+            {{ $t(`solutions.${data.slug}.cta.buttonText`) }}
           </a>
         </div>
       </section>
@@ -303,7 +325,7 @@ const slidePairs = computed(() => {
   </div>
 
   <div v-else class="flex justify-center items-center h-screen">
-    <p class="text-[#9CA3AF]">Solution tidak ditemukan.</p>
+    <p class="text-[#9CA3AF]">{{ $t("solutionPage.notFound") }}</p>
   </div>
 </template>
 <style scoped>

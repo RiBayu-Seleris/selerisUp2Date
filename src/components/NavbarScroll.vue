@@ -4,6 +4,7 @@ import DarkLogo from "@/assets/images/darklogo.png";
 import MenuNav from "@/components/MenuNav.vue";
 import MenuIcon from "@/components/icons/MenuIcon.vue";
 import ThemeToggle from "@/components/reusable/ThemeToggle.vue";
+import LanguageSwitcher from "@/components/reusable/LanguageSwitcher.vue";
 import { ref, onMounted, onUnmounted } from "vue";
 import { useScrollStore } from "@/stores/scroll";
 import { useSidebarStore } from "@/stores/sidebar";
@@ -37,8 +38,8 @@ onUnmounted(() => {
           <div
             class="w-full flex items-center justify-between bg-white dark:bg-black dark:bg-clip-padding dark:backdrop-filter dark:backdrop-blur-3xl dark:bg-opacity-10 rounded-[18px] lg:px-8 py-2 border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30"
           >
-            <div class="hidden lg:grid grid-cols-12 w-full h-auto">
-              <router-link to="/" class="col-span-1 h-auto">
+            <div class="hidden lg:flex items-center w-full h-auto">
+              <router-link to="/" class="shrink-0 h-auto">
                 <div class="flex w-full items-center">
                   <img
                     :src="Logo"
@@ -54,7 +55,7 @@ onUnmounted(() => {
                   />
                 </div>
               </router-link>
-              <div class="hidden lg:flex items-center col-span-10 h-auto">
+              <div class="hidden lg:flex items-center flex-1 min-w-0 h-auto">
                 <div class="flex w-full">
                   <nav
                     class="flex items-center w-full justify-center content-center"
@@ -63,9 +64,12 @@ onUnmounted(() => {
                   </nav>
                 </div>
               </div>
-              <div class="hidden lg:flex col-span-1 h-auto">
-                <div class="flex w-full h-full items-center justify-center">
+              <div class="hidden lg:flex shrink-0 h-auto">
+                <div
+                  class="flex w-full h-full items-center justify-end gap-2 xl:gap-3"
+                >
                   <ThemeToggle />
+                  <LanguageSwitcher />
                 </div>
               </div>
             </div>
@@ -92,8 +96,11 @@ onUnmounted(() => {
               <div
                 class="w-[60%] h-auto flex items-center flex-row justify-end"
               >
-                <div class="w-[70%] h-10 flex items-center justify-end">
+                <div
+                  class="w-auto h-10 flex items-center justify-end gap-2 sm:gap-3"
+                >
                   <ThemeToggle />
+                  <LanguageSwitcher />
                 </div>
                 <div
                   class="w-auto h-auto ml-4 sm:ml-8 lg:ml-0 flex items-center justify-end"

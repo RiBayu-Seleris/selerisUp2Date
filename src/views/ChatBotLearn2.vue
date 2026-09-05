@@ -30,14 +30,14 @@
     <div class="flex flex-row rounded-b-lg">
       <input
         type="text"
-        placeholder="Ketik pesan..."
+        :placeholder="$t('misc.chatPlaceholder')"
         class="flex-1 p-3 outline-none"
       />
       <button
         aria-label="Chatbot Send 2"
         class="h-auto px-4 text-white bg-blue-500 hover:bg-blue-600"
       >
-        Kirim
+        {{ $t("misc.chatSend") }}
       </button>
     </div>
   </div>

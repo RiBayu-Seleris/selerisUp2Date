@@ -395,7 +395,7 @@ const handleDeleteFile = (type) => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Curriculum Vitae (CV)
+        {{ $t("careers.curriculum_vitae_cv") }}
       </label>
       <div
         class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
@@ -451,7 +451,7 @@ const handleDeleteFile = (type) => {
                 <span class="font-medium">
                   {{ cvFileName || "Belum ada dokumen" }}
                   <span class="text-[#1091F3]" @click.stop="openCvPreviewPage">
-                    Lihat Dokumen
+                    {{ $t("careers.lihat_dokumen") }}
                   </span>
                 </span>
               </p>
@@ -472,7 +472,7 @@ const handleDeleteFile = (type) => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Cover Letter
+        {{ $t("careers.cover_letter") }}
       </label>
       <div
         class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
@@ -528,7 +528,7 @@ const handleDeleteFile = (type) => {
                 <span class="font-medium">
                   {{ clFileName || "Belum ada dokumen" }}
                   <span class="text-[#1091F3]" @click.stop="openClPreviewPage">
-                    Lihat Dokumen
+                    {{ $t("careers.lihat_dokumen") }}
                   </span>
                 </span>
               </p>
@@ -549,7 +549,7 @@ const handleDeleteFile = (type) => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Diploma
+        {{ $t("careers.diploma") }}
       </label>
       <div
         class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
@@ -608,7 +608,7 @@ const handleDeleteFile = (type) => {
                     class="text-[#1091F3]"
                     @click.stop="openDiplomaPreviewPage"
                   >
-                    Lihat Dokumen
+                    {{ $t("careers.lihat_dokumen") }}
                   </span>
                 </span>
               </p>
@@ -629,7 +629,7 @@ const handleDeleteFile = (type) => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Academic Transcript
+        {{ $t("careers.academic_transcript") }}
       </label>
       <div
         class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
@@ -688,7 +688,7 @@ const handleDeleteFile = (type) => {
                     class="text-[#1091F3]"
                     @click.stop="openTranscriptPreviewPage"
                   >
-                    Lihat Dokumen
+                    {{ $t("careers.lihat_dokumen") }}
                   </span>
                 </span>
               </p>
@@ -709,7 +709,7 @@ const handleDeleteFile = (type) => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Training/Work Experience Certificates
+        {{ $t("careers.training_work_experience_certificates") }}
       </label>
       <div
         class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
@@ -768,7 +768,7 @@ const handleDeleteFile = (type) => {
                     class="text-[#1091F3]"
                     @click.stop="openExperienceCertificatePreviewPage"
                   >
-                    Lihat Dokumen
+                    {{ $t("careers.lihat_dokumen") }}
                   </span>
                 </span>
               </p>
@@ -789,7 +789,7 @@ const handleDeleteFile = (type) => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Portfolio
+        {{ $t("careers.portfolio") }}
       </label>
       <div
         class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
@@ -848,7 +848,7 @@ const handleDeleteFile = (type) => {
                     class="text-[#1091F3]"
                     @click.stop="openPortfolioPreviewPage"
                   >
-                    Lihat Dokumen
+                    {{ $t("careers.lihat_dokumen") }}
                   </span>
                 </span>
               </p>
@@ -869,7 +869,7 @@ const handleDeleteFile = (type) => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Recent formal photograph
+        {{ $t("careers.recent_formal_photograph") }}
       </label>
       <div
         class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
@@ -928,7 +928,7 @@ const handleDeleteFile = (type) => {
                     class="text-[#1091F3]"
                     @click.stop="openPhotoPreviewPage"
                   >
-                    Lihat Dokumen
+                    {{ $t("careers.lihat_dokumen") }}
                   </span>
                 </span>
               </p>

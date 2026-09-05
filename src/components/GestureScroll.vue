@@ -9,7 +9,7 @@
     v-if="isHandDetected"
     class="fixed top-4 right-4 z-50 bg-green-500 text-white text-xs px-2 py-1 rounded"
   >
-    Hand Detected
+    {{ $t("misc.hand_detected") }}
   </div>
 
   <video ref="video" class="hidden"></video>

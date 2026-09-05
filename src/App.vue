@@ -3,6 +3,7 @@ import { useRoute } from "vue-router";
 import { onMounted, onUnmounted, ref, computed, watch } from "vue";
 import { useScrollStore } from "@/stores/scroll";
 import { useThemeStore } from "@/stores/theme";
+import { useLanguageStore } from "@/stores/language";
 import { useSidebarStore } from "@/stores/sidebar";
 
 import Navbar from "@/components/Navbar.vue";
@@ -24,6 +25,7 @@ import axios from "axios";
 // Store & route
 const dotLazyLoading = 4;
 const themeStore = useThemeStore();
+const languageStore = useLanguageStore();
 const route = useRoute();
 const scrollStore = useScrollStore();
 
@@ -72,6 +74,7 @@ const isStandaloneRoute = computed(() => standaloneRoutes.includes(route.path));
 
 onMounted(() => {
   themeStore.loadTheme();
+  languageStore.loadLanguage();
   window.addEventListener("scroll", handleScroll, { passive: true });
 
   if (route.path === "/") {

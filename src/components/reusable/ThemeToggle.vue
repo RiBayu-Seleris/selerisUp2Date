@@ -1,37 +1,38 @@
 <script setup>
+import { computed } from "vue";
+import { useI18n } from "vue-i18n";
 import { useThemeStore } from "@/stores/theme";
 
 const themeStore = useThemeStore();
+const { t } = useI18n();
+
+const label = computed(() =>
+  themeStore.isDark ? t("common.switchToLight") : t("common.switchToDark"),
+);
 </script>
 
 <template>
-  <div
+  <button
+    type="button"
+    :aria-label="label"
+    :title="label"
+    :aria-pressed="themeStore.isDark"
     @click="themeStore.toggleTheme"
-    class="w-20 h-10 sm:w-24 sm:h-12 lg:w-full lg:h-10 xl:w-24 xl:h-12 bg-white dark:bg-gray-800 rounded-full border-[0.5px] dark:border-[#FAFAFA]/30 shadow-[inset_0px_0px_17px_-3px_rgba(0,_0,_0,_0.1)] relative cursor-pointer flex items-center px-3 transition-all duration-300"
+    class="w-10 h-10 sm:w-11 sm:h-11 lg:w-10 lg:h-10 xl:w-11 xl:h-11 shrink-0 rounded-lg bg-white dark:bg-[#323232] border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30 shadow-[inset_0px_0px_17px_-3px_rgba(0,_0,_0,_0.1)] cursor-pointer flex items-center justify-center relative overflow-hidden transition-all duration-300 hover:border-[#1AB24F]/60 dark:hover:border-[#FAFAFA]/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1AB24F]/60"
   >
-    <!-- Circle -->
-    <div
-      class="absolute w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-white dark:bg-[#878787] shadow-lg transition-all duration-300"
-      :class="
-        themeStore.isDark
-          ? 'translate-x-[34px] sm:translate-x-[43px] md:translate-x-[43px] lg:translate-x-[27px] xl:translate-x-[43px]'
-          : 'translate-x-[-6px]'
-      "
-    >
-      <!-- lg:translate-x-[25px] -->
-    </div>
-
-    <!-- Sun Icon -->
+    <!-- Sun Icon (light mode) -->
     <svg
-      class="flex w-4 h-4 sm:w-5 sm:h-5 z-10 ml-0 transition-colors duration-300"
+      class="absolute w-5 h-5 sm:w-[22px] sm:h-[22px] text-[#1AB24F] transition-all duration-300 ease-in-out"
       :class="
         themeStore.isDark
-          ? 'text-gray-400 dark:text-[#FAFAFA]/50'
-          : 'text-green-500 '
+          ? 'opacity-0 scale-50 -rotate-90'
+          : 'opacity-100 scale-100 rotate-0'
       "
       fill="none"
       stroke="currentColor"
       stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
       viewBox="0 0 24 24"
     >
       <circle cx="12" cy="12" r="5" />
@@ -40,20 +41,22 @@ const themeStore = useThemeStore();
       />
     </svg>
 
-    <!-- Moon Icon -->
+    <!-- Moon Icon (dark mode) -->
     <svg
-      class="w-4 h-4 sm:w-5 sm:h-5 z-10 ml-auto mr-0 transition-colors duration-300"
+      class="absolute w-5 h-5 sm:w-[22px] sm:h-[22px] text-[#FAFAFA] transition-all duration-300 ease-in-out"
       :class="
         themeStore.isDark
-          ? 'text-green-500 dark:text-[#434343]'
-          : 'text-gray-400'
+          ? 'opacity-100 scale-100 rotate-0'
+          : 'opacity-0 scale-50 rotate-90'
       "
       fill="none"
       stroke="currentColor"
       stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
       viewBox="0 0 24 24"
     >
       <path d="M21 12.79A9 9 0 1111.21 3a7 7 0 109.79 9.79z" />
     </svg>
-  </div>
+  </button>
 </template>

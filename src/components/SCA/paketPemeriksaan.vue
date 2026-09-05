@@ -1,5 +1,6 @@
 <script setup>
 import { computed } from "vue";
+import { useLocalizedList } from "@/utils/i18nList";
 
 const props = defineProps({
   pkg: {
@@ -17,6 +18,18 @@ const formatRupiah = (value) => {
 const isEssential = computed(() => props.pkg.id === "essential");
 const isCore = computed(() => props.pkg.id === "core");
 const isPrime = computed(() => props.pkg.id === "prime");
+
+// Teks paket diambil dari file locale
+const packageIndex = computed(() =>
+  ["essential", "core", "prime"].indexOf(props.pkg.id),
+);
+const features = useLocalizedList(
+  computed(() => `sca.packageFeatures.${props.pkg.id}`),
+  computed(() =>
+    Array.from({ length: props.pkg.featureCount ?? 0 }, () => ({})),
+  ),
+  ["text"],
+);
 </script>
 <template>
   <div
@@ -44,7 +57,12 @@ const isPrime = computed(() => props.pkg.id === "prime");
         <p class="text-[20px]">
           {{ pkg.label }}
         </p>
-        <span v-if="pkg.badge" class="text-[14px]"> ({{ pkg.badge }}) </span>
+        <span
+          v-if="$t(`sca.healthPackages.${packageIndex}.badge`)"
+          class="text-[14px]"
+        >
+          ({{ $t(`sca.healthPackages.${packageIndex}.badge`) }})
+        </span>
       </div>
 
       <!-- Price -->
@@ -58,8 +76,8 @@ const isPrime = computed(() => props.pkg.id === "prime");
       <!-- Features -->
       <div class="flex flex-col gap-y-5 h-[300px]">
         <div
-          v-for="feature in pkg.features"
-          :key="feature"
+          v-for="(feature, i) in features"
+          :key="i"
           class="flex items-start gap-x-3"
         >
           <div
@@ -68,7 +86,7 @@ const isPrime = computed(() => props.pkg.id === "prime");
             <img src="@/assets/icons/green-checklist.svg" />
           </div>
           <p class="text-[#515E71] text-[16px]">
-            {{ feature }}
+            {{ feature.text }}
           </p>
         </div>
       </div>
@@ -78,7 +96,7 @@ const isPrime = computed(() => props.pkg.id === "prime");
       <!-- Commission -->
       <div class="flex flex-col gap-y-5">
         <p class="text-[#515E71] font-semibold text-[16px]">
-          Potensi Komisi SCA
+          {{ $t("misc.potensi_komisi_sca") }}
         </p>
 
         <div class="flex justify-between">
@@ -107,7 +125,7 @@ const isPrime = computed(() => props.pkg.id === "prime");
                 : 'bg-[#4273C2] text-[#FFFFFF] ',
           ]"
         >
-          Lihat Detail {{ pkg.label }}
+          {{ $t("sca.packages.viewDetail") }} {{ pkg.label }}
         </div>
       </div>
     </div>

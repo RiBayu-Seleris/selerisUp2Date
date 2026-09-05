@@ -24,14 +24,14 @@ const testimonials = [
     >
       <div class="flex w-full h-auto">
         <p class="text-[#2AB857] font-[500] text-[18px] lg:text-[20px]">
-          Client Feedback
+          {{ $t("home.testimonial.eyebrow") }}
         </p>
       </div>
       <div class="flex w-full h-auto">
         <p
           class="text-[#195279] font-[500] text-[20px] lg:text-[34px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
         >
-          What they say after using our product
+          {{ $t("home.testimonial.title") }}
         </p>
       </div>
     </div>

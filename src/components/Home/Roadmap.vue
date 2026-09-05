@@ -29,7 +29,7 @@ const paginationOptions = {
         <p
           class="text-2xl md:text-[27px] lg:text-[27px] font-[500] text-[#1DC457] dark:text-[#1AB24F] text-center"
         >
-          Innovation
+          {{ $t("misc.innovation") }}
         </p>
       </div>
       <div
@@ -38,7 +38,7 @@ const paginationOptions = {
         <p
           class="text-xl md:text-[32px] lg:text-[32px] font-[400] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] md:leading-relaxed"
         >
-          Roadmap Seleris Meditekno Internasional
+          {{ $t("misc.roadmap_seleris_meditekno_internasional") }}
         </p>
       </div>
     </div>

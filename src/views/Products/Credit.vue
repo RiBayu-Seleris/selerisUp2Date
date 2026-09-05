@@ -1,4 +1,5 @@
 <script setup>
+import { useLocalizedList } from "@/utils/i18nList";
 import { onBeforeUnmount, onMounted, ref } from "vue";
 
 import HeroText from "@productComponents/HeroText.vue";
@@ -55,76 +56,48 @@ function resetTransform() {
   `;
 }
 
-const whosContent = [
-  {
-    // icon: Innovation,
-    title: "Perusahaan Asuransi Jiwa, Asuransi Umum dan Penjaminan Kredit",
-    subtitle:
-      "Meningkatkan kualitas underwriting dan keberlanjutan portofolio asuransi jiwa kredit",
-  },
-  {
-    // icon: Innovation,
-    title: "Perusahaan Asuransi Jiwa, Asuransi Umum dan Penjaminan Kredit",
-    subtitle:
-      "Meningkatkan kualitas underwriting dan keberlanjutan portofolio asuransi jiwa kredit",
-  },
-];
+const whosContent = Array.from({ length: 2 }, () => ({}));
 
 const SelerisDo = [
   {
     icon: new URL("@/assets/Products/icons/vital-sign.png", import.meta.url)
       .href,
-    title: "Vital Signs",
-    description:
-      "Dengan teknologi facial scanning, AI menganalisis tanda vital dan menilai kondisi kesehatan secara cepat",
   },
   {
     icon: new URL("@/assets/Products/icons/bio-marker.png", import.meta.url)
       .href,
-    title: "Biomarker kesehatan",
-    description:
-      "AI mengolah biomarker kesehatan untuk menghasilkan insight objektif dan terukur mengenai kondisi kesehatan secara menyeluruh",
   },
   {
     icon: new URL(
       "@/assets/Products/icons/prediksi-risiko.png",
       import.meta.url,
     ).href,
-    title: "Prediksi Risiko Penyakit",
-    description:
-      "Teknologi AI menganalisis data kesehatan untuk memprediksi risiko penyakit secara lebih akurat",
   },
 ];
 
-const slider1 = [
-  {
-    title: "Extra Mortality Calculation",
-    description:
-      "Menghasilkan nilai extra mortality secara kuantitatif dan berbasis data.",
-  },
-  {
-    title: "Prudent & Objective Risk Assessment",
-    description:
-      "Mengurangi subjektivitas, meningkatkan konsistensi, dan memperkuat tata kelola risiko.",
-  },
-  {
-    title: "Faster Time to Yes / No",
-    description:
-      "Mempercepat proses persetujuan kredit yang membutuhkan proteksi asuransi jiwa kredit.",
-  },
-];
+const slider1 = Array.from({ length: 3 }, () => ({}));
+const slider2 = Array.from({ length: 3 }, () => ({}));
 
-const slider2 = [
-  {
-    title: "Accepted - Standard",
-  },
-  {
-    title: "Accepted - Sub Standard",
-  },
-  {
-    title: "Declined",
-  },
-];
+// Teks daftar diambil dari file locale (lihat src/utils/i18nList.js)
+const localizedWhos = useLocalizedList("creditPage.forWho.items", whosContent, [
+  "title",
+  "subtitle",
+]);
+const localizedSelerisDo = useLocalizedList(
+  "creditPage.whatWeDo.items",
+  SelerisDo,
+  ["title", "description"],
+);
+const localizedSlider1 = useLocalizedList(
+  "creditPage.advantages.items",
+  slider1,
+  ["title", "description"],
+);
+const localizedSlider2 = useLocalizedList(
+  "creditPage.advantages.decisions",
+  slider2,
+  ["title"],
+);
 
 // Credit section
 useVideoOnView(creditVideo, creditBlock);
@@ -195,21 +168,27 @@ useVideoOnView(selerisVideo, selerisBlock);
                 <p
                   class="font-[500] text-[28px] md:text-[28px] lg:text-[38px] xl:text-[50px]"
                 >
-                  <span class="text-[#195279]">AI Powered </span>
-                  <span class="text-[#FDB403]">Credit Life</span>
+                  <span class="text-[#195279]">{{
+                    $t("creditPage.hero.title1")
+                  }}</span>
+                  <span class="text-[#FDB403]">{{
+                    $t("creditPage.hero.title2")
+                  }}</span>
                 </p>
                 <p
                   class="text-[#1889D1] font-[600] text-[22px] md:text-[22px] lg:text-[32px] xl:text-[40px]"
                 >
-                  Underwriting Intelligence
+                  {{ $t("creditPage.hero.title3") }}
                 </p>
               </div>
               <p
                 class="text-[#6F6F6F] text-[14px] md:text-[16px] lg:text-[18px] xl:text-[22px] px-12 md:px-0 md:pl-12 lg:pl-0 w-full lg:w-[80%] text-center md:text-start"
               >
-                Point your camera to your face and let
-                <span class="font-[600]">artificial intelligence</span> do the
-                work.
+                {{ $t("creditPage.hero.descBefore") }}
+                <span class="font-[600]">{{
+                  $t("creditPage.hero.descHighlight")
+                }}</span>
+                {{ $t("creditPage.hero.descAfter") }}
               </p>
             </div>
             <div
@@ -222,7 +201,7 @@ useVideoOnView(selerisVideo, selerisBlock);
                 <p
                   class="text-[#FFFFFF] text-[14px] md:text-[12px] lg:text-[16px]"
                 >
-                  View Demo
+                  {{ $t("creditPage.hero.viewDemo") }}
                 </p>
               </button>
               <router-link
@@ -232,7 +211,7 @@ useVideoOnView(selerisVideo, selerisBlock);
                 <p
                   class="text-[#FFFFFF] text-[14px] md:text-[12px] lg:text-[16px]"
                 >
-                  Request Demo
+                  {{ $t("creditPage.hero.requestDemo") }}
                 </p>
               </router-link>
             </div>
@@ -269,7 +248,7 @@ useVideoOnView(selerisVideo, selerisBlock);
         <p
           class="text-[#626262] font-[500] md:text-[28px] lg:text-[32px] leading-relaxed lg:leading-relaxed"
         >
-          Seleris Credit Clients
+          {{ $t("creditPage.clients") }}
         </p>
       </div>
       <div class="w-full h-auto">
@@ -353,19 +332,20 @@ useVideoOnView(selerisVideo, selerisBlock);
               <p
                 class="text-[#111827] font-[600] text-[24px] md:text-[24px] lg:text-[40px] text-center sm:text-start"
               >
-                Tranformasi <br class="hidden sm:block" />
-                Asuransi Kredit
+                {{ $t("creditPage.about.title1") }}
+                <br class="hidden sm:block" />
+                {{ $t("creditPage.about.title2") }}
               </p>
             </div>
             <div class="w-full h-auto sm:pr-8 lg:pr-0">
               <p
                 class="text-[#626262] font-[400] text-[14px] md:text-[12px] lg:text-[18px] leading-loose text-center sm:text-start"
               >
-                Sebagai transformasi dari aplikasi
-                <span class="font-[600]">Smart Credit</span> yang telah
-                digunakan oleh mitra perusahaan asuransi dan broker asuransi,
-                Seleris Credit menghadirkan pendekatan underwriting generasi
-                baru yang berbasis data, sains aktuaria, dan analitik prediktif.
+                {{ $t("creditPage.about.descBefore") }}
+                <span class="font-[600]">{{
+                  $t("creditPage.about.descHighlight")
+                }}</span>
+                {{ $t("creditPage.about.descAfter") }}
               </p>
             </div>
           </div>
@@ -402,16 +382,16 @@ useVideoOnView(selerisVideo, selerisBlock);
           <p
             class="font-[600] text-[18px] sm:text-[28px] lg:text-[40px] text-center text-[#2C3131]"
           >
-            Apa yang Dikerjakan Seleris Credit?
+            {{ $t("creditPage.whatWeDo.title") }}
           </p>
         </div>
         <div class="w-full h-auto flex justify-center items-center">
           <p
             class="font-[400] text-[12px] sm:text-[20px] xl:text-[20px] text-center text-[#626262]"
           >
-            Seleris Credit melakukan deteksi dan penilaian
+            {{ $t("creditPage.whatWeDo.subtitle1") }}
             <br class="hidden sm:block" />
-            risiko mortalitas debitur melalui analisis
+            {{ $t("creditPage.whatWeDo.subtitle2") }}
           </p>
         </div>
       </div>
@@ -420,7 +400,7 @@ useVideoOnView(selerisVideo, selerisBlock);
         class="hidden w-full h-auto lg:flex flex-row sm:gap-x-5 lg:gap-x-10 px-12 lg:px-20"
       >
         <div
-          v-for="(data, index) in SelerisDo"
+          v-for="(data, index) in localizedSelerisDo"
           :key="index"
           class="w-full h-auto flex flex-col bg-[#FFFFFF] border-[1px] border-[#E3E3E3] rounded-[20px] px-8 pb-8 gap-y-10 transform-gpu transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:border-[#1889D1] hover:-translate-y-2 hover:rotate-x-[6deg] hover:-rotate-y-[6deg] hover:shadow-[0_30px_60px_-15px_rgba(0,0,0,0.25)] [perspective:1200px]"
         >
@@ -452,7 +432,7 @@ useVideoOnView(selerisVideo, selerisBlock);
         class="relative flex lg:hidden flex-row w-full max-h-screen gap-x-5 md:gap-x-10 py-5 overflow-x-auto snap-x snap-mandatory sm:pl-10 px-8 sm:pr-10 md:pl-12 md:pr-12 hide-scrollbar"
       >
         <div
-          v-for="(data, index) in SelerisDo"
+          v-for="(data, index) in localizedSelerisDo"
           :key="index"
           class="flex flex-col lg:hidden snap-center shrink-0 w-full sm:w-[60%] md:w-[60%] h-auto rounded-xl px-5 py-2 sm:py-2 shadow-lg border-[1px] gap-y-5"
         >
@@ -483,10 +463,7 @@ useVideoOnView(selerisVideo, selerisBlock);
         <p
           class="text-center text-[#626262] font-[400] text-[14px] sm:text-[16px] lg:text-[18px] leading-relaxed"
         >
-          Parameter-parameter ini diolah menggunakan teknologi AI untuk
-          membangun model penilaian risiko yang komprehensif dan konsisten,
-          sehingga potensi risiko kesehatan yang belum terdeteksi dapat
-          diidentifikasi lebih dini dan objektif.
+          {{ $t("creditPage.whatWeDo.footnote") }}
         </p>
       </div>
     </section>
@@ -508,8 +485,9 @@ useVideoOnView(selerisVideo, selerisBlock);
             <h2
               class="text-[#1889D1] font-[600] text-[26px] sm:text-[24px] lg:text-[38px] px-8 sm:px-12 lg:px-20"
             >
-              Keunggulan Utama <br class="hidden sm:block" />
-              Seleris Credit
+              {{ $t("creditPage.advantages.title1") }}
+              <br class="hidden sm:block" />
+              {{ $t("creditPage.advantages.title2") }}
             </h2>
 
             <!-- SWIPER WRAPPER (INI YANG NGUNCI LEBAR) -->
@@ -525,7 +503,7 @@ useVideoOnView(selerisVideo, selerisBlock);
                 <SwiperSlide class="w-full h-auto px-8 sm:px-12 lg:px-20">
                   <div class="w-full h-auto flex flex-col gap-y-8">
                     <div
-                      v-for="(data_slider1, index) in slider1"
+                      v-for="(data_slider1, index) in localizedSlider1"
                       :key="index"
                       class="w-full h-auto flex flex-col gap-y-1"
                     >
@@ -554,22 +532,22 @@ useVideoOnView(selerisVideo, selerisBlock);
                         <p
                           class="text-[#2C3131] font-[600] text-[18px] lg:text-[24px]"
                         >
-                          Automated Underwriting Decision
+                          {{ $t("creditPage.advantages.decisionTitle") }}
                         </p>
                       </div>
                       <div class="w-full h-auto">
                         <p
                           class="text-[#626262] font-[400] text-[14px] lg:text-[18px]"
                         >
-                          Menentukan keputusan underwriting secara
+                          {{ $t("creditPage.advantages.decisionSubtitle1") }}
                           <br class="hidden lg:block" />
-                          real time:
+                          {{ $t("creditPage.advantages.decisionSubtitle2") }}
                         </p>
                       </div>
                     </div>
                     <div class="w-full h-auto flex flex-col gap-y-8">
                       <div
-                        v-for="(data_slider2, index) in slider2"
+                        v-for="(data_slider2, index) in localizedSlider2"
                         :key="index"
                         class="w-full h-auto flex flex-row gap-x-4 lg:gap-x-10"
                       >
@@ -640,9 +618,13 @@ useVideoOnView(selerisVideo, selerisBlock);
               </div>
               <div class="w-full h-auto flex items-end">
                 <p class="text-[#195279] font-[600] text-[24px] lg:text-[40px]">
-                  Untuk Siapa <br />
-                  <span class="text-[#1485CB]">Seleris </span>
-                  <span class="text-[#FDB403]">Credit?</span>
+                  {{ $t("creditPage.forWho.title1") }} <br />
+                  <span class="text-[#1485CB]">{{
+                    $t("creditPage.forWho.title2")
+                  }}</span>
+                  <span class="text-[#FDB403]">{{
+                    $t("creditPage.forWho.title3")
+                  }}</span>
                 </p>
               </div>
             </div>
@@ -650,9 +632,9 @@ useVideoOnView(selerisVideo, selerisBlock);
               <p
                 class="text-[#626262] font-[400] text-[14px] sm:text-[16px] lg:text-[18px]"
               >
-                Seleris Credit melakukan deteksi dan penilaian
+                {{ $t("creditPage.forWho.desc1") }}
                 <br class="hidden sm:block" />
-                risiko mortalitas debitur melalui analisis
+                {{ $t("creditPage.forWho.desc2") }}
               </p>
             </div>
             <div
@@ -668,7 +650,7 @@ useVideoOnView(selerisVideo, selerisBlock);
                 class="h-full rounded-xl overflow-hidden flex justify-center items-center cursor-pointer"
               >
                 <SwiperSlide
-                  v-for="(item, index) in whosContent"
+                  v-for="(item, index) in localizedWhos"
                   :key="index"
                   class="!flex items-center justify-center"
                 >
@@ -728,20 +710,25 @@ useVideoOnView(selerisVideo, selerisBlock);
           >
             <div class="w-full h-auto">
               <p class="text-[28px] lg:text-[38px] font-[600]">
-                Mengapa <br class="hidden sm:block" />
-                <span class="text-[#1485CB]"> Seleris </span>
-                <span class="text-[#FDB403]">Credit?</span>
+                {{ $t("creditPage.why.title1") }}
+                <br class="hidden sm:block" />
+                <span class="text-[#1485CB]">{{
+                  $t("creditPage.why.title2")
+                }}</span>
+                <span class="text-[#FDB403]">{{
+                  $t("creditPage.why.title3")
+                }}</span>
               </p>
             </div>
             <div class="w-full h-auto">
               <p
                 class="text-[14px] lg:text-[20px] font-[400] text-[#626262] leading-relaxed"
               >
-                Di era digital dan AI, underwriting tidak lagi cukup berbasis
-                intuisi dan proses manual.
-                <span class="font-[600]">Seleris Credit</span> menghadirkan
-                underwriting intelligence yang selaras dengan prinsip
-                kehati-hatian, regulasi, dan kebutuhan industri keuangan modern.
+                {{ $t("creditPage.why.descBefore") }}
+                <span class="font-[600]">{{
+                  $t("creditPage.why.descHighlight")
+                }}</span>
+                {{ $t("creditPage.why.descAfter") }}
               </p>
             </div>
             <div class="w-full h-auto">
@@ -751,7 +738,7 @@ useVideoOnView(selerisVideo, selerisBlock);
                   class="w-auto h-auto px-8 py-3 bg-[#1485CB] rounded-[8px]"
                 >
                   <p class="text-[#FFFFFF] font-[600] text-[14px]">
-                    Request Demo
+                    {{ $t("creditPage.why.requestDemo") }}
                   </p>
                 </button>
               </router-link>
@@ -793,15 +780,16 @@ useVideoOnView(selerisVideo, selerisBlock);
               <p
                 class="text-[#FAFAFA] font-[600] text-[14px] sm:text-[20px] lg:text-[30px] leading-tight"
               >
-                Smarter Risk. Faster Decision. <br class="hidden sm:block" />
-                Sustainable Protection
+                {{ $t("creditPage.cta.title1") }}
+                <br class="hidden sm:block" />
+                {{ $t("creditPage.cta.title2") }}
               </p>
             </div>
             <div class="w-full h-auto">
               <p
                 class="text-[#FAFAFA] font-[400] text-[12px] sm:text-[14px] lg:text-[20px]"
               >
-                Request Demo Now!
+                {{ $t("creditPage.cta.subtitle") }}
               </p>
             </div>
           </div>
@@ -823,7 +811,7 @@ useVideoOnView(selerisVideo, selerisBlock);
                 <p
                   class="font-[500] max-smallest:text-[12px] text-[10px] md:text-[16px] lg:text-[24px]"
                 >
-                  Book a Demo
+                  {{ $t("creditPage.cta.button") }}
                 </p>
                 <svg
                   class="w-6 h-6 sm:w-8 sm:h-8 lg:w-12 lg:h-12"

@@ -38,17 +38,15 @@ onMounted(() => {
           <p
             class="text-xl md:text-[24px] lg:text-[27px] xl:text-[36px] bg-gradient-to-b from-[#FF09C2] to-[#2B3CFC] dark:bg-gradient-to-r dark:from-[#FF09C2] dark:to-[#2B3CFC] bg-clip-text text-transparent lg:leading-[45px] xl:leading-[50px] font-semibold"
           >
-            AI and Machine Learning Algorithms
+            {{ $t("home.aiDesc.title") }}
           </p>
         </div>
         <div class="w-full h-auto pr-0">
           <p
             class="text-[14px] md:text-[14px] lg:text-[17px] xl:text-[20px] text-[#195279] dark:text-[#FAFAFA]"
           >
-            <span class="font-semibold">Our AI and ML</span> algorithms conduct
-            in-depth risk assessments, considering various factors and
-            subtleties that impact outcomes. This sophisticated analysis enables
-            us to provide with tailored guidance and recommendations
+            <span class="font-semibold">{{ $t("home.aiDesc.highlight") }}</span>
+            {{ $t("home.aiDesc.body") }}
           </p>
         </div>
       </div>
