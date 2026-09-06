@@ -1334,7 +1334,7 @@ watch(showModal, (isOpen) => {
                     <span
                       class="text-[12px] md:text-[12px] text-[#2D71DD] font-[500]"
                     >
-                      ± Rp 45.000 / scan
+                      {{ $t("misc.perScanDirect") }}
                     </span>
                   </div>
                 </div>
@@ -1366,7 +1366,7 @@ watch(showModal, (isOpen) => {
                     <span
                       class="text-[12px] md:text-[12px] text-[#00B171] font-[500]"
                     >
-                      ± Rp 30.000 / scan
+                      {{ $t("misc.perScanNetwork") }}
                     </span>
                   </div>
                 </div>

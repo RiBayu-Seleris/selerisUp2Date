@@ -1485,7 +1485,6 @@
       "affordable": "Terjangkau",
       "directCommission": "Komisi Langsung",
       "networkCommission": "Komisi Jaringan",
-      "perScan": "± Rp 30.000 / scan",
       "targetPerDay": "Target Scanning per Hari",
       "monthlyIncome": "Potensi Income Bulanan Anda"
     },
@@ -1951,7 +1950,6 @@
     "heroSubtitle": "Temukan Tujuan Karier Anda",
     "heroDescription": "Temukan semua yang Anda butuhkan untuk memulai dan mengembangkan perjalanan karier bersama Seleris.",
     "noOpenings": "Saat ini belum ada lowongan. Ikuti media sosial kami untuk informasi terbaru.",
-    "department": "Departemen",
     "declaration1": "Dengan ini saya menyatakan bahwa seluruh informasi dalam formulir ini benar dan akurat.",
     "declaration2": "Saya memberikan izin kepada perusahaan untuk menggunakan informasi ini demi keperluan rekrutmen.",
     "declaration3": "Saya bersedia menjalani proses pemeriksaan latar belakang sesuai ketentuan yang berlaku."
@@ -2084,13 +2082,17 @@
     "income": "Penghasilan",
     "directorsTeam": "Dewan Direksi dan Manajemen Senior",
     "managementTeam": "Tim Manajemen",
-    "leadershipDesktop": "Tim kepemimpinan kami membawa pengalaman puluhan tahun,",
     "faqDescription": "Temukan jawaban atas pertanyaan yang sering diajukan seputar aplikasi Seleris",
     "securityHeroTitle": "Keamanan",
     "securityHeroSubtitle": "Keamanan Nasabah Adalah Prioritas",
     "fullname": "Nama Lengkap",
-    "reviewPersonal": "Data Pribadi",
-    "passwordPlaceholder": "Kata Sandi"
+    "passwordPlaceholder": "Kata Sandi",
+    "leadership1": "Tim kepemimpinan kami membawa pengalaman puluhan tahun,",
+    "leadership2": "serta rekam jejak keberhasilan yang teruji.",
+    "leadershipMobile2": "serta rekam jejak",
+    "leadershipMobile3": "keberhasilan yang teruji.",
+    "perScanDirect": "± Rp 45.000 / scan",
+    "perScanNetwork": "± Rp 30.000 / scan"
   },
   "apply": {
     "steps": [

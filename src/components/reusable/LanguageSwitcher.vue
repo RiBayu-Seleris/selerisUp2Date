@@ -94,7 +94,7 @@ onUnmounted(() => {
       <ul
         v-show="isOpen"
         role="listbox"
-        class="absolute right-0 top-full mt-2 w-44 py-1.5 rounded-lg bg-white dark:bg-[#323232] border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30 shadow-lg z-50 overflow-hidden"
+        class="absolute right-0 top-full mt-2 w-max min-w-[11rem] max-w-[calc(100vw-2rem)] py-1.5 rounded-lg bg-white dark:bg-[#323232] border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30 shadow-lg z-50 overflow-hidden"
       >
         <li v-for="lang in languageStore.languages" :key="lang.code">
           <button
@@ -102,14 +102,14 @@ onUnmounted(() => {
             role="option"
             :aria-selected="languageStore.locale === lang.code"
             @click="selectLanguage(lang.code)"
-            class="w-full flex items-center justify-between gap-2 px-3 py-2 text-left text-[13px] sm:text-sm transition-colors duration-200 hover:bg-[#1AB24F]/10 dark:hover:bg-[#FAFAFA]/10"
+            class="w-full flex items-center justify-between gap-3 px-3 py-2 text-left text-[13px] sm:text-sm transition-colors duration-200 hover:bg-[#1AB24F]/10 dark:hover:bg-[#FAFAFA]/10"
             :class="
               languageStore.locale === lang.code
                 ? 'text-[#1AB24F] font-medium'
                 : 'text-[#434343] dark:text-[#FAFAFA]'
             "
           >
-            <span>{{ lang.label }}</span>
+            <span class="whitespace-nowrap">{{ lang.label }}</span>
             <svg
               v-if="languageStore.locale === lang.code"
               class="w-4 h-4 shrink-0"
@@ -124,7 +124,7 @@ onUnmounted(() => {
             </svg>
             <span
               v-else
-              class="text-[11px] text-[#878787] dark:text-[#FAFAFA]/50"
+              class="shrink-0 text-[11px] text-[#878787] dark:text-[#FAFAFA]/50"
             >
               {{ lang.short }}
             </span>

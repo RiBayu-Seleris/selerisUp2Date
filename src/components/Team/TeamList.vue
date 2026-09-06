@@ -102,17 +102,17 @@ const managementTeam = [
       >
         <!-- Desktop -->
         <span class="hidden md:block">
-          Our leadership team brings decades of experiences,
+          {{ $t("misc.leadership1") }}
           <br class="md:block lg:hidden" />
-          a proven track record of success.
+          {{ $t("misc.leadership2") }}
         </span>
         <!-- Mobile -->
         <span class="block md:hidden">
-          Our leadership team brings decades of experiences,
+          {{ $t("misc.leadership1") }}
           <br class="hidden sm:block" />
-          a proven track
+          {{ $t("misc.leadershipMobile2") }}
           <br class="block sm:hidden" />
-          record of success.
+          {{ $t("misc.leadershipMobile3") }}
         </span>
       </p>
     </div>
@@ -186,17 +186,17 @@ const managementTeam = [
       >
         <!-- Desktop -->
         <span class="hidden md:block">
-          Our leadership team brings decades of experiences,
+          {{ $t("misc.leadership1") }}
           <br class="md:block lg:hidden" />
-          a proven track record of success.
+          {{ $t("misc.leadership2") }}
         </span>
         <!-- Mobile -->
         <span class="block md:hidden">
-          Our leadership team brings decades of experiences,
+          {{ $t("misc.leadership1") }}
           <br class="hidden sm:block" />
-          a proven track
+          {{ $t("misc.leadershipMobile2") }}
           <br class="block sm:hidden" />
-          record of success.
+          {{ $t("misc.leadershipMobile3") }}
         </span>
       </p>
     </div>

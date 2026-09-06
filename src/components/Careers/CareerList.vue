@@ -153,8 +153,7 @@ onMounted(() => {
         class="flex w-auto bg-white py-4 rounded-lg gap-5 dark:bg-[#1D2426] justify-center items-center max-smallest:px-6 px-14 lg:px-0"
       >
         <span class="max-smallest:text-[14px] text-[16px] text-center">
-          There are currently no job openings. Follow our social media for the
-          latest updates.
+          {{ $t("careers.noOpenings") }}
         </span>
       </div>
     </div>

@@ -1485,7 +1485,6 @@
       "affordable": "Affordable",
       "directCommission": "Direct Commission",
       "networkCommission": "Network Commission",
-      "perScan": "± Rp 30,000 / scan",
       "targetPerDay": "Scanning Target per Day",
       "monthlyIncome": "Your Potential Monthly Income"
     },
@@ -1951,7 +1950,6 @@
     "heroSubtitle": "Explore Your Career Destination",
     "heroDescription": "Find everything you need to start and grow your career journey with Seleris.",
     "noOpenings": "There are currently no job openings. Follow our social media for the latest updates.",
-    "department": "Department",
     "declaration1": "I hereby declare that all information provided in this form is true and accurate.",
     "declaration2": "I grant permission to the company to use this information for recruitment purposes.",
     "declaration3": "I agree to undergo a background check process in accordance with the applicable regulations."
@@ -2084,13 +2082,17 @@
     "income": "Income",
     "directorsTeam": "Directors and Senior Management Team",
     "managementTeam": "Management Team",
-    "leadershipDesktop": "Our leadership team brings decades of experiences,",
     "faqDescription": "Find answers to frequently asked questions about the seleris app",
     "securityHeroTitle": "Security",
     "securityHeroSubtitle": "Customer Security Comes First",
     "fullname": "Fullname",
-    "reviewPersonal": "Personal",
-    "passwordPlaceholder": "Password"
+    "passwordPlaceholder": "Password",
+    "leadership1": "Our leadership team brings decades of experiences,",
+    "leadership2": "a proven track record of success.",
+    "leadershipMobile2": "a proven track",
+    "leadershipMobile3": "record of success.",
+    "perScanDirect": "± Rp 45,000 / scan",
+    "perScanNetwork": "± Rp 30,000 / scan"
   },
   "apply": {
     "steps": [

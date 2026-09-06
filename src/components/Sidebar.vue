@@ -107,7 +107,7 @@ onUnmounted(() => {
               <div class="w-[20%] h-auto flex justify-end">
                 <button
                   type="button"
-                  aria-label="Open sidebar menu"
+                  :aria-label="$t('common.closeMenu')"
                   id="sidebarCloseButton"
                   @click="sidebar.close"
                   class="ml-auto text-2xl font-bold text-gray-700 hover:text-black dark:text-[#FAFAFA]"
@@ -131,7 +131,7 @@ onUnmounted(() => {
               <div class="w-full h-auto flex flex-col">
                 <button
                   id="buttonAboutListMenu"
-                  aria-label="Open About menu"
+                  :aria-label="$t('nav.about')"
                   @click.stop="toggleAbout"
                   class="w-full h-auto flex flex-row justify-between pr-1"
                 >
@@ -185,7 +185,7 @@ onUnmounted(() => {
               <div class="w-full h-auto flex flex-col">
                 <button
                   id="buttonProductListMenu"
-                  aria-label="Open Products menu"
+                  :aria-label="$t('nav.products')"
                   @click.stop="toggleProduct"
                   class="w-full h-auto flex flex-row justify-between pr-1"
                 >
@@ -239,7 +239,7 @@ onUnmounted(() => {
               <div class="w-full h-auto flex flex-col">
                 <button
                   id="buttonTechnologyListMenu"
-                  aria-label="Open Technology menu"
+                  :aria-label="$t('nav.technology')"
                   @click.stop="toggleTechnology"
                   class="w-full h-auto flex flex-row justify-between pr-1"
                 >
@@ -293,7 +293,7 @@ onUnmounted(() => {
               <div class="w-full h-auto flex flex-col gap-y-2 sm:gap-y-4">
                 <button
                   id="buttonSolutionsListMenu"
-                  aria-label="Open Solutions menu"
+                  :aria-label="$t('nav.solutions')"
                   @click.stop="toggleSolution"
                   class="w-full h-auto flex flex-row justify-between pr-1"
                 >

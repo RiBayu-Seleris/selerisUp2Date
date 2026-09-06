@@ -107,7 +107,7 @@ onUnmounted(() => {
           <button
             type="button"
             id="sidebarOpenButton"
-            aria-label="Open sidebar menu"
+            :aria-label="$t('common.openMenu')"
             class="bg-white dark:bg-[#323232] p-2 rounded-lg shadow-md text-[#1AB24F] dark:text-[#FAFAFA]"
             @click="sidebarStore.open"
           >

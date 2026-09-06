@@ -51,7 +51,7 @@ onUnmounted(() => {
       'flex items-start text-md font-[400] text-[#374151] transition-all duration-500 ease-in',
       isScrolled
         ? 'lg:gap-[25px] xl:gap-[45px] xls:gap-[55px] dark:text-[#DEDEDE] '
-        : 'lg:gap-[35px] xl:gap-[55px] xls:gap-[70px] justify-start dark:text-[#DEDEDE]',
+        : 'lg:gap-[35px] xl:gap-[55px] xls:gap-[60px] justify-start dark:text-[#DEDEDE]',
     ]"
   >
     <li>
