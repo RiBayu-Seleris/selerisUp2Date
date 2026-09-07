@@ -1,26 +1,3 @@
-export const whyJoinSCA = [
-  {
-    title: "Komisi Menarik ",
-    content: "Hingga 25% dari setiap transaksi",
-  },
-  {
-    title: "Bisnis Kesehatan",
-    content: "Produk yang dibutuhkan semua orang",
-  },
-  {
-    title: "Sistem Digital",
-    content: "Aplikasi mudah, tracking otomatis",
-  },
-  {
-    title: "Sumber Income",
-    content: "Komisi langsung + komisi jaringan",
-  },
-  {
-    title: "Waktu Fleksibel",
-    content: "Atur sendiri jadwal kerja Anda",
-  },
-  {
-    title: "Training Gratis",
-    content: "Pelatihan produk dan marketing",
-  },
-];
+// Teks ada di src/locales/en.json & id.json pada kunci sca.whyJoin.items.<index>.
+// Field teks (title, content) diisi useLocalizedList di komponen.
+export const whyJoinSCA = Array.from({ length: 6 }, () => ({}));

@@ -30,7 +30,7 @@ const props = defineProps({
         >
           <div class="w-full flex justify-start">
             <p
-              class="text-[#195279] font-[500] text-[14px] lg:text-[16px] xl:text-[20px] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+              class="text-[#195279] font-[500] text-[14px] lg:text-[16px] xl:text-[18px] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
             >
               {{ title }}
             </p>

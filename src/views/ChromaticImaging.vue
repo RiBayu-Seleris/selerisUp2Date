@@ -1,4 +1,5 @@
 <script setup>
+import { useLocalizedList } from "@/utils/i18nList";
 import HeroText from "@/components/reusable/TechHero.vue";
 import TechLogo from "@/components/reusable/TechLogo.vue";
 import TechCard from "@/components/reusable/TechCard.vue";
@@ -7,6 +8,12 @@ import SCI_Logo from "@/assets/images/technology/SCI-Logo.svg";
 import Dark_SCI_Logo from "@/assets/images/technology/Dark-SCI-Logo.svg";
 
 import { SCI_Content } from "@/Data/SCI_Content";
+
+// Teks kartu diambil dari file locale
+const localizedCards = useLocalizedList("technology.sci", SCI_Content, [
+  "title",
+  "body",
+]);
 </script>
 
 <template>
@@ -58,7 +65,7 @@ import { SCI_Content } from "@/Data/SCI_Content";
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-start mt-14 md:mt-20 mb-32 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar gap-x-10 scroll-pl-8 pl-8 pr-8"
   >
     <TechCard
-      v-for="(cardContent, index) in SCI_Content"
+      v-for="(cardContent, index) in localizedCards"
       :key="index"
       :icon="cardContent.icon"
       :bgCard="cardContent.bgCard"

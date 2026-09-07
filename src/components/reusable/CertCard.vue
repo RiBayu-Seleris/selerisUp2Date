@@ -105,7 +105,7 @@ const shortText = computed(() => {
             @click="emit('readmore')"
             class="font-bold hover:underline"
           >
-            Read More
+            {{ $t("misc.read_more") }}
           </button>
         </p>
       </div>

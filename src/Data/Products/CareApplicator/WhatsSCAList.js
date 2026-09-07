@@ -1,11 +1,3 @@
-export const whatsSCAList = [
-  {
-    content: "Didukung sistem digital & aplikasi tracking otomatis",
-  },
-  {
-    content: "Bukan tenaga medis? Tidak masalah!",
-  },
-  {
-    content: "Diberikan training intensif hingga mahir",
-  },
-];
+// Teks ada di src/locales/en.json & id.json pada kunci sca.scaPoints.<index>.
+// Field teks (content) diisi useLocalizedList di komponen.
+export const whatsSCAList = Array.from({ length: 3 }, () => ({}));

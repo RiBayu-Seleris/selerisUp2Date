@@ -1087,8 +1087,8 @@ import HeroText from "@/components/reusable/HeroText.vue";
         <p class="text-[#4B5563] dark:text-[#FAFAFA] font-[400]">
           If you require any further information or have any questions about our
           Terms & Conditions, please feel free to contact us by email at
-          <a href="mailto:info@seleris.id" class="text-[#2158EF]"
-            >info@seleris.id</a
+          <a href="mailto:info@seleris.ai" class="text-[#2158EF]"
+            >info@seleris.ai</a
           >
           or by viewing the footer page at the bottom of the site.
         </p>

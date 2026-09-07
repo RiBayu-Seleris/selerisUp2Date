@@ -1,4 +1,5 @@
 <script setup>
+import { useLocalizedList } from "@/utils/i18nList";
 import HeroText from "@/components/reusable/TechHero.vue";
 import TechLogo from "@/components/reusable/TechLogo.vue";
 import TechCard from "@/components/reusable/TechCard.vue";
@@ -7,6 +8,12 @@ import SDV_Logo from "@/assets/images/technology/SDV-Logo.svg";
 import Dark_SDV_Logo from "@/assets/images/technology/Dark-SDV-Logo.svg";
 
 import { SDV_Content } from "@/Data/SDV_Content";
+
+// Teks kartu diambil dari file locale
+const localizedCards = useLocalizedList("technology.sdv", SDV_Content, [
+  "title",
+  "body",
+]);
 </script>
 
 <template>
@@ -56,7 +63,7 @@ import { SDV_Content } from "@/Data/SDV_Content";
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-start mt-14 md:mt-20 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar gap-x-10 scroll-pl-8 pl-8 pr-8"
   >
     <TechCard
-      v-for="(cardContent, index) in SDV_Content"
+      v-for="(cardContent, index) in localizedCards"
       :key="index"
       :bgCard="cardContent.bgCard"
       :icon="cardContent.icon"

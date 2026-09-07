@@ -21,11 +21,7 @@
           <p
             class="text-[14px] sm:text-[10px] md:text-[12px] lg:text-[14px] xl:text-[20px] font-extralight text-[#FAFAFA] text-center sm:text-start leading-loose md:leading-relaxed tracking-wide"
           >
-            The Seleris engineering team is responsible for building and
-            maintaining our AI-powered platform. Led by Rinaldi Anwar, who
-            brings over 10 years of experience in AI development and deployment,
-            the team focuses on delivering reliable, scalable, and innovative
-            technology solutions.
+            {{ $t("team.engineeringDescription") }}
           </p>
         </div>
       </div>

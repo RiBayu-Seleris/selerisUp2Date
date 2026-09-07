@@ -83,7 +83,7 @@ function onSlideChange(swiper) {
           <p
             class="text-[24px] md:text-[36px] lg:text-[28px] xl:text-[36px] text-[#195279] font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
-            Let's Seleris Together
+            {{ $t("misc.let_s_seleris_together") }}
           </p>
         </div>
 
@@ -95,27 +95,27 @@ function onSlideChange(swiper) {
             >
               <Input
                 name="firstname"
-                label="First Name"
+                :label="$t('misc.firstName')"
                 type="text"
-                placeholder="Jhon"
+                :placeholder="$t('misc.jhon')"
               />
               <Input
                 name="lastname"
-                label="Last Name"
+                :label="$t('misc.lastName')"
                 type="text"
-                placeholder="Doe"
+                :placeholder="$t('misc.doe')"
               />
               <Input
                 name="company"
-                label="Company"
+                :label="$t('misc.company')"
                 type="text"
-                placeholder="Your Company"
+                :placeholder="$t('misc.your_company')"
               />
               <Input
                 name="jobtitle"
-                label="Job Title"
+                :label="$t('misc.jobTitle')"
                 type="text"
-                placeholder="Title"
+                :placeholder="$t('misc.title')"
               />
             </div>
 
@@ -123,7 +123,7 @@ function onSlideChange(swiper) {
             <div class="w-full h-auto">
               <Input
                 name="email"
-                label="Email"
+                :label="$t('misc.email')"
                 type="email"
                 placeholder="example@gmail.com"
               />
@@ -157,12 +157,12 @@ function onSlideChange(swiper) {
 
             <!-- MESSAGE -->
             <div class="w-full h-auto space-y-1">
-              <label for="Message">Message</label>
+              <label for="Message">{{ $t("misc.message") }}</label>
               <textarea
                 id="messageBookDemo"
                 aria-label="Message Book Demo"
                 class="w-full lg:h-[70px] xl:h-[130px] p-2 rounded-[8px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:outline-none focus:ring-1 focus:ring-[#2AB857] resize-none align-top"
-                placeholder="Message"
+                :placeholder="$t('misc.message')"
               />
             </div>
 
@@ -208,7 +208,7 @@ function onSlideChange(swiper) {
             <p
               class="text-[16px] sm:text-[18px] md:text-[26px] lg:text-[22px] xl:text-[24px] text-[#1AB24F] font-[500]"
             >
-              AI Innovation
+              {{ $t("misc.ai_innovation") }}
             </p>
           </div>
 
@@ -217,7 +217,7 @@ function onSlideChange(swiper) {
               class="text-[#195279] text-[22px] sm:text-[28px] md:text-[30px] lg:text-[26px] xl:text-[38px] font-[500] leading-[26px] sm:leading-[34px] md:leading-[38px] lg:leading-[34px] xl:leading-[46px] tracking-[1px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
             >
               The Future of Life <br />
-              Technology
+              {{ $t("misc.technology") }}
             </p>
           </div>
 
@@ -271,7 +271,7 @@ function onSlideChange(swiper) {
             >
               <div>
                 <p class="text-[14px] lg:text-[16px] font-[400] text-[#2AB857]">
-                  Read More
+                  {{ $t("misc.read_more") }}
                 </p>
               </div>
               <div class="ml-1 text-[#2AB857] dark:text-[#2AB857]">
@@ -362,7 +362,7 @@ function onSlideChange(swiper) {
                       class="text-[14px] lg:text-[16px] font-[400]"
                       :class="productBannerLists[activeIndex].color"
                     >
-                      View Product
+                      {{ $t("misc.view_product") }}
                     </p>
                   </div>
                   <div class="ml-1">
@@ -427,7 +427,7 @@ function onSlideChange(swiper) {
           >
             <router-link to="/about/frequently-ask-question">
               <p class="text-[14px] lg:text-[16px] font-[400] text-[#2AB857]">
-                Read More
+                {{ $t("misc.read_more") }}
               </p>
             </router-link>
             <div class="ml-1 text-[#2AB857] dark:text-[#2AB857]">

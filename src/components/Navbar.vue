@@ -6,6 +6,7 @@ import DarkLogo from "@/assets/images/darklogo.png";
 import MenuNav from "@/components/MenuNav.vue";
 import MenuIcon from "@/components/icons/MenuIcon.vue";
 import ThemeToggle from "@/components/reusable/ThemeToggle.vue";
+import LanguageSwitcher from "@/components/reusable/LanguageSwitcher.vue";
 import { useSidebarStore } from "@/stores/sidebar";
 
 const sidebarStore = useSidebarStore();
@@ -33,14 +34,14 @@ onUnmounted(() => {
   >
     <!-- Desktop Navbar -->
     <div
-      class="hidden lg:grid grid-cols-12 w-full max-w-[1440px] h-auto px-8 lg:px-6 xl:px-8 xls:px-8 2xls:px-0 transition-all duration-500 ease-in"
+      class="hidden lg:flex items-center w-full max-w-[1440px] h-auto px-8 lg:px-6 xl:px-8 xls:px-8 2xls:px-0 transition-all duration-500 ease-in"
       :class="[
         isScrolled
           ? 'bg-white py-2 xls:px-8 2xls:px-8 rounded-[10px] dark:bg-[#17181A]/50 dark:backdrop-blur-sm dark:border-[0.5px] border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30'
           : 'bg-transparent',
       ]"
     >
-      <div class="col-span-1">
+      <div class="shrink-0">
         <router-link to="/">
           <div class="flex w-full items-center">
             <img
@@ -57,14 +58,15 @@ onUnmounted(() => {
         </router-link>
       </div>
 
-      <div class="flex items-center col-span-10">
+      <div class="flex items-center flex-1 min-w-0">
         <nav class="hidden lg:flex items-center w-full justify-center">
           <MenuNav />
         </nav>
       </div>
 
-      <div class="col-span-1 flex justify-center items-center">
+      <div class="shrink-0 flex justify-end items-center gap-2 xl:gap-3">
         <ThemeToggle />
+        <LanguageSwitcher />
       </div>
     </div>
 
@@ -95,8 +97,9 @@ onUnmounted(() => {
         />
       </router-link>
       <div class="w-[60%] h-auto flex items-center flex-row justify-end">
-        <div class="w-[70%] h-10 flex items-center justify-end">
+        <div class="w-auto h-10 flex items-center justify-end gap-2 sm:gap-3">
           <ThemeToggle />
+          <LanguageSwitcher />
         </div>
         <div
           class="w-auto h-auto ml-4 sm:ml-8 lg:ml-0 flex items-center justify-end p-[1px] dark:bg-gradient-to-r dark:from-[#17181A] dark:from-45% dark:to-[#565656] rounded-lg"
@@ -104,7 +107,7 @@ onUnmounted(() => {
           <button
             type="button"
             id="sidebarOpenButton"
-            aria-label="Open sidebar menu"
+            :aria-label="$t('common.openMenu')"
             class="bg-white dark:bg-[#323232] p-2 rounded-lg shadow-md text-[#1AB24F] dark:text-[#FAFAFA]"
             @click="sidebarStore.open"
           >

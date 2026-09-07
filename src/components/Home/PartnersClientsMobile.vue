@@ -110,7 +110,7 @@ onBeforeUnmount(() => {
           @click="((showPartners = true), (progress = 0))"
           :class="showPartners ? 'text-[#2AB857] dark:text-[#FAFAFA]' : ''"
         >
-          Partners
+          {{ $t("home.partners.partners") }}
         </span>
         <span>&</span>
         <span
@@ -118,7 +118,7 @@ onBeforeUnmount(() => {
           @click="((showPartners = false), (progress = 0))"
           :class="!showPartners ? 'text-[#2AB857] dark:text-[#FAFAFA]' : ''"
         >
-          Clients
+          {{ $t("home.partners.clients") }}
         </span>
       </div>
     </div>

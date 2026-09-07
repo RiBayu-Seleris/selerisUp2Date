@@ -1,6 +1,7 @@
 <script setup>
 import { medinsHealthCheck } from "@/Data/Products/Medins/MedinsHealthCheck";
 import { ref } from "vue";
+import { useLocalizedList } from "@/utils/i18nList";
 
 import HeroText from "@productComponents/HeroText.vue";
 import PhoneHero from "@productComponents/PhoneHero.vue";
@@ -42,6 +43,27 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
     import.meta.url,
   ).href,
 }));
+
+// Teks daftar diambil dari file locale (lihat src/utils/i18nList.js)
+const localizedHealthCheck = useLocalizedList(
+  "products.medins.healthCheck",
+  medinsHealthCheck,
+  ["title", "description"],
+);
+const localizedFaq = useLocalizedList("products.medins.faq", medinsFaq, [
+  "question",
+  "answer",
+]);
+const localizedTestimonials = useLocalizedList(
+  "products.shared.testimonialsB2B",
+  medinsTestimonials,
+  ["comment", "authorName", "authorPosition"],
+);
+const localizedSteps = useLocalizedList(
+  "products.shared.workSteps",
+  stepsWithPath,
+  ["title", "description"],
+);
 </script>
 
 <template>
@@ -55,9 +77,9 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
         class="w-full h-[450px] md:h-[600px] lg:h-[650px] xl:h-[800px] bg-[radial-gradient(circle_at_center,_#4ADDD4,_#23C4BA)] z-20"
       >
         <HeroText
-          title="Seleris Medins"
-          subtitle="Application"
-          description="Enhance efficiency and accuracy in health insurance operations with AI-driven medical data automation."
+          :title="$t('products.medins.hero.title')"
+          :subtitle="$t('products.medins.hero.subtitle')"
+          :description="$t('products.medins.hero.description')"
         />
       </div>
       <div
@@ -103,15 +125,15 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
         class="relative w-full flex flex-col justify-center items-center z-20 mt-16 md:mt-20 lg:mt-40 px-8"
       >
         <AboutUs
-          title="About Us"
-          subtitle="Seleris Medins"
+          :title="$t('products.shared.aboutUs')"
+          :subtitle="$t('products.medins.name')"
           subtitleColor="text-[#42C5AF]"
         />
         <div class="w-full h-auto mt-10 md:mt-10 lg:mt-10">
           <AboutUsDescription
             :image="imageAbout"
-            title="AI Health Care Application"
-            description="Seleris Medins uses AI to automate medical data processing and health claims. Our solution helps insurers and corporate healthcare providers reduce costs, detect fraud, predict claim values, and ensure regulatory compliance with ease and accuracy."
+            :title="$t('products.medins.about.title')"
+            :description="$t('products.medins.about.description')"
           />
         </div>
       </div>
@@ -133,14 +155,14 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
         class="relative w-full flex flex-col justify-center items-center z-20"
       >
         <ApplicationWorkText
-          productname="Seleris Medins"
+          :productname="$t('products.medins.name')"
           textcolor="text-[#42C5AF]"
         />
         <div class="relative w-full h-auto mt-10 md:mt-12 lg:mt-14">
           <ApplicationWorkSlider
             circleColor="bg-gradient-to-b from-[#23C4BA] to-[#4ADDD4]"
             textcolor="text-[#38C1AA]"
-            :steps="stepsWithPath"
+            :steps="localizedSteps"
           >
             <FrameLineWorks />
           </ApplicationWorkSlider>
@@ -158,17 +180,17 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
       >
         <div class="w-full h-auto flex flex-col gap-y-2">
           <EasyQuickText
-            title="Smarter Medical Claims with"
-            subtitle="AI-Powered Automation"
+            :title="$t('products.shared.easyQuickTitle')"
+            :subtitle="$t('products.shared.easyQuickSubtitle')"
             subtitlecolor="text-[#42C5AF]"
-            subsubtitle="Seleris Meditekno Internasional"
+            :subsubtitle="$t('products.shared.company')"
           />
         </div>
         <div
           class="w-full h-auto flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-5 gap-y-8 md:gap-y-8 lg:gap-12 mt-10 lg:mt-16"
         >
           <div
-            v-for="(data, index) in medinsHealthCheck"
+            v-for="(data, index) in localizedHealthCheck"
             :key="index"
             class="w-full h-auto"
           >
@@ -190,8 +212,8 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
     >
       <div class="w-full h-auto flex flex-col">
         <TitleAndSubCard
-          title="Our Client"
-          subtitle="Seleris Meditekno Internasional"
+          :title="$t('products.shared.ourClient')"
+          :subtitle="$t('products.shared.company')"
           subtitleColor="text-[#42C5AF]"
         />
         <div class="mt-10 max-smallest:px-0 px-12">
@@ -216,12 +238,12 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
       >
         <div class="w-full h-auto px-8">
           <TitleAndSubCard
-            title="Testimonial"
-            subtitle="Seleris Meditekno Internasional"
+            :title="$t('products.shared.testimonial')"
+            :subtitle="$t('products.shared.company')"
             subtitleColor="text-[#42C5AF]"
           />
         </div>
-        <TestimonialCommentFrame :Testimonials="medinsTestimonials" />
+        <TestimonialCommentFrame :Testimonials="localizedTestimonials" />
       </div>
     </section>
 
@@ -248,14 +270,14 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
         >
           <div class="w-full h-auto px-8">
             <TitleAndSubCard
-              title="FAQ's"
-              subtitle="Seleris Meditekno Internasional"
+              :title="$t('products.shared.faq')"
+              :subtitle="$t('products.shared.company')"
               subtitleColor="text-[#42C5AF]"
             />
           </div>
         </div>
         <div class="w-full mx-auto mt-10 md:mt-10">
-          <FaqFrame :Faq="medinsFaq" opencolortext="text-[#2ec4b6]" />
+          <FaqFrame :Faq="localizedFaq" opencolortext="text-[#2ec4b6]" />
         </div>
       </div>
     </section>
@@ -269,10 +291,8 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
         class="w-full h-auto px-0 md:px-12 lg:px-20 xl:max-w-6xl mx-auto relative"
       >
         <DownloadFrame
-          appname="Seleris Medins"
-          description="Stay in control of your health data and claims anytime, anywhere. Our
-          AI-powered platform makes medical data processing, claims tracking,
-          and risk analysis easier and faster."
+          :appname="$t('products.medins.name')"
+          :description="$t('products.shared.downloadDescription')"
           :img="DownloadImage"
         />
       </div>
@@ -290,7 +310,7 @@ const stepsWithPath = medinsWorkSteps.map((step) => ({
       />
       <div>
         <BookDemoProduct
-          title="Seleris Medins A Complete Solution for Your Health Needs"
+          :title="$t('products.medins.bookDemo')"
           :framebookdemo="medinsframebook"
           colorarrow="text-[#42C5AF]"
           bgProduct="bg-[#42C5AF]"

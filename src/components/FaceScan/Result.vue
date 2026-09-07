@@ -1,4 +1,5 @@
 <script setup>
+import { useI18n } from "vue-i18n";
 import { computed } from "vue";
 
 import CsIcon from "@/assets/icons/facetracker/cs-icon.svg";
@@ -7,6 +8,7 @@ import ChevronLeft from "@/assets/icons/chevron-left.svg";
 // =========================
 // Props
 // =========================
+const { t } = useI18n();
 const props = defineProps({
   data: {
     type: Object,
@@ -98,51 +100,46 @@ const metricCards = computed(() => {
   return [
     {
       id: "heart_rate",
-      title: "Heart Rate",
+      title: t("faceScan.metrics.0.title"),
       value: d.heart_rate != null ? d.heart_rate.toFixed(1) : "–",
       unit: "bpm",
-      description:
-        "Heart rate indicates how many times your heart beats per minute. Normal resting range is 60–100 bpm.",
+      description: t("faceScan.metrics.0.description"),
       status: getStatus("heart_rate", d.heart_rate),
     },
 
     {
       id: "breath_rate",
-      title: "Breath Rate",
+      title: t("faceScan.metrics.2.title"),
       value: d.breath_rate != null ? d.breath_rate.toFixed(1) * 60 : "–",
       unit: "brpm",
-      description:
-        "Respiratory rate is the number of breaths taken per minute. Normal range is 12–20 brpm.",
+      description: t("faceScan.metrics.2.description"),
       status: getStatus("breath_rate", d.breath_rate),
     },
 
     {
       id: "hrv",
-      title: "Heart Rate Variability",
+      title: t("faceScan.metrics.1.title"),
       value: d.hrv != null ? d.hrv.toFixed(1) : "–",
       unit: "ms",
-      description:
-        "HRV measures the variation in time between heartbeats. Higher HRV generally indicates better cardiovascular fitness.",
+      description: t("faceScan.metrics.1.description"),
       status: getStatus("hrv", d.hrv),
     },
 
     {
       id: "systole",
-      title: "Systolic Pressure",
+      title: t("faceScan.metrics.3.title"),
       value: d.systole != null ? d.systole.toFixed(0) : "–",
       unit: "mmHg",
-      description:
-        "Systolic pressure measures the force of blood against artery walls when the heart beats.",
+      description: t("faceScan.metrics.3.description"),
       status: getStatus("systole", d.systole),
     },
 
     {
       id: "diastole",
-      title: "Diastolic Pressure",
+      title: t("faceScan.metrics.4.title"),
       value: d.diastole != null ? d.diastole.toFixed(0) : "–",
       unit: "mmHg",
-      description:
-        "Diastolic pressure measures artery pressure when the heart is resting between beats.",
+      description: t("faceScan.metrics.4.description"),
       status: getStatus("diastole", d.diastole),
     },
   ];
@@ -188,7 +185,7 @@ const metricCards = computed(() => {
       <p class="text-[20px] text-[#374151] font-[600]">Health Score</p>
 
       <p class="text-[14px] font-[400] text-[#6B7280]">
-        The measured indicators are correct for medical use
+        {{ $t("misc.the_measured_indicators_are_correct_for_") }}
       </p>
     </div>
 
@@ -212,7 +209,7 @@ const metricCards = computed(() => {
       </svg>
 
       <p class="text-[13px] text-[#C2410C]">
-        Ini adalah hasil scan terakhir Anda. Batas scan telah tercapai.
+        {{ $t("misc.ini_adalah_hasil_scan_terakhir_anda_bata") }}
       </p>
     </div>
 
@@ -242,7 +239,7 @@ const metricCards = computed(() => {
         <p class="text-[15px] font-[500] text-[#374151]">Gagal memuat hasil</p>
 
         <p class="text-[13px] text-[#6B7280] text-center">
-          Hasil scan tidak dapat diproses. Silakan coba scan ulang.
+          {{ $t("misc.hasil_scan_tidak_dapat_diproses_silakan_") }}
         </p>
       </div>
     </template>

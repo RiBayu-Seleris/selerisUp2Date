@@ -95,24 +95,24 @@ const managementTeam = [
       <p
         class="px-8 sm:px-0 text-center text-[20px] sm:text-[26px] md:text-[32px] lg:text-[36px] xl:text-[40px] font-[500] text-[#1AB24F] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
       >
-        Directors and Senior Management Team
+        {{ $t("misc.directorsTeam") }}
       </p>
       <p
         class="text-[14px] md:text-[18px] lg:text-[18px] xl:text-[20px] px-10 sm:px-0 font-[400] tracking-wider lg:tracking-normal text-[#89A6BA] dark:text-[#6F6F6F] text-center"
       >
         <!-- Desktop -->
         <span class="hidden md:block">
-          Our leadership team brings decades of experiences,
+          {{ $t("misc.leadership1") }}
           <br class="md:block lg:hidden" />
-          a proven track record of success.
+          {{ $t("misc.leadership2") }}
         </span>
         <!-- Mobile -->
         <span class="block md:hidden">
-          Our leadership team brings decades of experiences,
+          {{ $t("misc.leadership1") }}
           <br class="hidden sm:block" />
-          a proven track
+          {{ $t("misc.leadershipMobile2") }}
           <br class="block sm:hidden" />
-          record of success.
+          {{ $t("misc.leadershipMobile3") }}
         </span>
       </p>
     </div>
@@ -179,24 +179,24 @@ const managementTeam = [
       <p
         class="text-[20px] sm:text-[26px] md:text-[32px] lg:text-[36px] xl:text-[40px] font-[500] text-[#1AB24F] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
       >
-        Management Team
+        {{ $t("misc.managementTeam") }}
       </p>
       <p
         class="text-[14px] md:text-[18px] lg:text-[18px] xl:text-[20px] px-10 sm:px-0 font-[400] tracking-wider lg:tracking-normal text-[#89A6BA] dark:text-[#6F6F6F] text-center"
       >
         <!-- Desktop -->
         <span class="hidden md:block">
-          Our leadership team brings decades of experiences,
+          {{ $t("misc.leadership1") }}
           <br class="md:block lg:hidden" />
-          a proven track record of success.
+          {{ $t("misc.leadership2") }}
         </span>
         <!-- Mobile -->
         <span class="block md:hidden">
-          Our leadership team brings decades of experiences,
+          {{ $t("misc.leadership1") }}
           <br class="hidden sm:block" />
-          a proven track
+          {{ $t("misc.leadershipMobile2") }}
           <br class="block sm:hidden" />
-          record of success.
+          {{ $t("misc.leadershipMobile3") }}
         </span>
       </p>
     </div>

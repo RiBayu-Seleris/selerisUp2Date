@@ -151,7 +151,8 @@ const viewFile = (file) => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Highest Level of Education <span class="text-red-500">*</span>
+        {{ $t("careers.highest_level_of_education") }}
+        <span class="text-red-500">*</span>
       </label>
 
       <div class="relative">
@@ -206,7 +207,8 @@ const viewFile = (file) => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        School / University Name <span class="text-red-500">*</span>
+        {{ $t("careers.school_university_name") }}
+        <span class="text-red-500">*</span>
       </label>
       <input
         name="schoolName"
@@ -214,7 +216,7 @@ const viewFile = (file) => {
         @input="emit('update:schoolName', $event.target.value)"
         type="text"
         class="w-full p-2 rounded-lg border border-gray-300 dark:border-[#FAFAFA]/25 bg-white dark:bg-[#323232] text-gray-800 dark:text-white placeholder-gray-400 dark:placeholder-gray-500 focus:outline-none focus:ring-1 focus:ring-[#2AB857] focus:border-transparent"
-        placeholder="School/University Name"
+        :placeholder="$t('careers.school_university_name')"
       />
     </div>
   </div>
@@ -222,7 +224,7 @@ const viewFile = (file) => {
     <label
       class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
     >
-      Field of Study <span class="text-red-500">*</span>
+      {{ $t("careers.field_of_study") }} <span class="text-red-500">*</span>
     </label>
     <input
       name="fieldOfStudy"
@@ -241,7 +243,8 @@ const viewFile = (file) => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        Tahun Masuk dan Tahun Lulus <span class="text-red-500">*</span>
+        {{ $t("careers.tahun_masuk_dan_tahun_lulus") }}
+        <span class="text-red-500">*</span>
       </label>
       <!-- Input -->
       <div
@@ -326,7 +329,8 @@ const viewFile = (file) => {
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
       >
-        GPA (Grade Point Average) <span class="text-red-500">*</span>
+        {{ $t("careers.gpa_grade_point_average") }}
+        <span class="text-red-500">*</span>
       </label>
       <input
         type="text"
@@ -340,7 +344,7 @@ const viewFile = (file) => {
     <label
       class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
     >
-      Sertifikat pelatihan tambahan (jika ada)
+      {{ $t("careers.sertifikat_pelatihan_tambahan_jika_ada") }}
     </label>
     <div class="w-full h-auto flex flex-col gap-y-5">
       <!-- 🟩 Frame Input Upload -->
@@ -375,7 +379,7 @@ const viewFile = (file) => {
             <span class="text-green-600 font-medium"
               >Klik untuk Mengunggah</span
             >
-            atau seret dan lepas
+            {{ $t("careers.atau_seret_dan_lepas") }}
           </p>
 
           <!-- Input File Asli (disembunyikan) -->
@@ -422,7 +426,7 @@ const viewFile = (file) => {
                 class="text-[#1091F3] font-[600] cursor-pointer hover:underline"
                 @click="viewFile(file)"
               >
-                Lihat Dokumen
+                {{ $t("careers.lihat_dokumen") }}
               </span>
             </p>
           </div>

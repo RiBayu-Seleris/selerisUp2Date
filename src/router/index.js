@@ -1,5 +1,13 @@
 import { createRouter, createWebHistory } from "vue-router";
 
+// "ai-powered" -> "Ai Powered"
+const slugToTitle = (slug) =>
+  String(slug ?? "")
+    .split("-")
+    .filter(Boolean)
+    .map((w) => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(" ");
+
 const routes = [
   {
     path: "/",
@@ -159,6 +167,8 @@ const routes = [
     path: "/solution/:slug",
     name: "SolutionDetail",
     component: () => import("@/views/Solutions.vue"),
+    // title dinamis: ikut :slug (mis. "ai-powered" -> "Ai Powered")
+    meta: { title: (route) => slugToTitle(route.params.slug) || "Solution" },
   },
 
   // Blogs

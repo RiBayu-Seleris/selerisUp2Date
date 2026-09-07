@@ -3,7 +3,7 @@ export const clientLogos = [
     .href,
   new URL(
     "@/assets/images/clients-and-partners/math-faculty.png",
-    import.meta.url
+    import.meta.url,
   ).href,
   new URL("@/assets/images/clients-and-partners/dsc.png", import.meta.url).href,
   new URL("@/assets/images/clients-and-partners/boa.png", import.meta.url).href,

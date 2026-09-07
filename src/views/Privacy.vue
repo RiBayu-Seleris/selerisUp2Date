@@ -832,7 +832,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
             </p>
             <ol class="list-decimal space-y-2 pl-7">
               <li>Contact Number: +62 (21) 526 5235</li>
-              <li>Email : info@seleris.id</li>
+              <li>Email : info@seleris.ai</li>
               <li>
                 Address: Graha SMI, Jl. Raya Ragunan No. 29 A, Jakarta Selatan,
                 Indonesia 12540
@@ -976,7 +976,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
             12540
           </p>
           <p>Contact Number: +62 (21) 526 5235</p>
-          <p>Email : info@seleris.id</p>
+          <p>Email : info@seleris.ai</p>
         </div>
       </div>
     </div>

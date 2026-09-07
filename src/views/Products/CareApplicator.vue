@@ -1,6 +1,8 @@
 <script setup>
+import { useI18n } from "vue-i18n";
 import { computed, nextTick, onMounted, onUnmounted, ref, watch } from "vue";
 import { formatRupiahSmart } from "@/components/Helper/numberFormat.js";
+import { useLocalizedList } from "@/utils/i18nList";
 
 import ThunderIcon from "@/assets/Products/images/Care-Applicator/thunder-icon.vue";
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -23,6 +25,7 @@ import PaketPemeriksaan from "@/components/SCA/paketPemeriksaan.vue";
 import HealthParameterTabs from "@/components/SCA/healthParameters.vue";
 import { payPerScanPackages } from "@/Data/Products/CareApplicator/HealthPackage";
 
+const { t } = useI18n();
 const modules = [Navigation, Pagination, Autoplay];
 
 const contentRefs = ref([]);
@@ -53,12 +56,51 @@ const passiveIncome = computed(
   () => monthlyScan.value * PRICE_PER_SCAN * PASSIVE_PERCENT,
 );
 
-const paketKeanggotaan = computed(
-  () => benefits.find((b) => b.title === "Paket Keanggotaan")?.items || [],
+// Teks daftar diambil dari file locale (lihat src/utils/i18nList.js)
+const localizedFeatures = useLocalizedList("sca.features", whatsSelerisCare, [
+  "title",
+  "content",
+]);
+const localizedScaPoints = useLocalizedList("sca.scaPoints", whatsSCAList, [
+  "content",
+]);
+const localizedWhyJoin = useLocalizedList("sca.whyJoin.items", whyJoinSCA, [
+  "title",
+  "content",
+]);
+const localizedHowToJoin = useLocalizedList("sca.howToJoin.items", howToJoin, [
+  "step",
+  "content",
+]);
+const localizedTestimonials = useLocalizedList(
+  "products.shared.testimonialsConsumer",
+  testimonials,
+  ["name", "location", "text"],
+);
+const starterFeatures = useLocalizedList(
+  "sca.membership.starter.features",
+  Array.from({ length: membershipLevels.starter.featureCount }, () => ({})),
+  ["text"],
+);
+const professionalFeatures = useLocalizedList(
+  "sca.membership.professional.features",
+  Array.from(
+    { length: membershipLevels.professional.featureCount },
+    () => ({}),
+  ),
+  ["text"],
 );
 
-const supportBerkelanjutan = computed(
-  () => benefits.find((b) => b.title === "Support Berkelanjutan")?.items || [],
+const paketKeanggotaan = useLocalizedList(
+  "sca.benefits.membershipItems",
+  Array.from({ length: benefits[0].itemCount }, () => ({})),
+  ["content"],
+);
+
+const supportBerkelanjutan = useLocalizedList(
+  "sca.benefits.supportItems",
+  Array.from({ length: benefits[1].itemCount }, () => ({})),
+  ["content"],
 );
 
 const pricingType = ref("payPerScan");
@@ -66,8 +108,8 @@ const pricingType = ref("payPerScan");
 const isSubscribe = computed(() => pricingType.value === "subscribe");
 
 const tabs = [
-  { id: "Cardiovascular", label: "Cardiovascular" },
-  { id: "Metabolic", label: "Metabolic" },
+  { id: "Cardiovascular", label: t("misc.cardiovascular") },
+  { id: "Metabolic", label: t("misc.metabolic") },
   { id: "Metabolic2", label: "Metabolic2" },
 ];
 
@@ -96,7 +138,7 @@ function handleCloseModal() {
 
 const series = computed(() => [
   {
-    name: "Income",
+    name: t("misc.income"),
     data: [directIncome.value, passiveIncome.value],
   },
 ]);
@@ -301,7 +343,7 @@ watch(showModal, (isOpen) => {
                 <span
                   class="text-[12px] sm:text-[14px] md:text-[14px] lg:text-[16px] xl:text-[16px]"
                 >
-                  Peluang Bisnis Tanpa Modal
+                  {{ $t("sca.hero.badge") }}
                 </span>
               </div>
               <div
@@ -311,22 +353,21 @@ watch(showModal, (isOpen) => {
                   class="font-[600] text-[18px] sm:text-[24px] md:text-[28px] lg:text-[40px] xl:text-[46px]"
                 >
                   <span class="text-[#374151]">
-                    Peluang Bisnis <br class="hidden lg:block" />
-                    Kesehatan Berbasis
+                    {{ $t("sca.hero.title1") }}
+                    <br class="hidden lg:block" />
+                    {{ $t("sca.hero.title2") }}
                   </span>
                 </p>
                 <p
                   class="text-[#1889D1] font-[600] text-[18px] sm:text-[22px] md:text-[22px] lg:text-[38px] xl:text-[40px]"
                 >
-                  AI Masa Depan
+                  {{ $t("sca.hero.title3") }}
                 </p>
               </div>
               <p
                 class="text-[#374151] text-[12px] sm:text-[14px] md:text-[16px] lg:text-[14px] xl:text-[18px] w-full"
               >
-                Jadilah Seleris Care Applicator (SCA) dan bantu masyarakat
-                memantau kesehatan secara non invasif sambil membangun
-                penghasilan fleksibel yang berkelanjutan.
+                {{ $t("sca.hero.description") }}
               </p>
             </div>
             <div
@@ -340,7 +381,7 @@ watch(showModal, (isOpen) => {
                 <span
                   class="text-white whitespace-nowrap text-[14px] md:text-[16px] lg:text-[14px] xl:text-[18px] font-[500]"
                 >
-                  Daftar Jadi SCA Sekarang
+                  {{ $t("sca.hero.register") }}
                 </span>
 
                 <div
@@ -426,9 +467,7 @@ watch(showModal, (isOpen) => {
             <span
               class="text-[12px] md:text-[16px] lg:text-[18px] font-[400] text-[#374151] leading-normal lg:leading-snug"
             >
-              Layanan scanning kesehatan berbasis kecerdasan buatan dari PT
-              Seleris Meditekno Internasional untuk analisis kondisi kesehatan
-              yang cepat, noninvasif, dan akurat.</span
+              {{ $t("sca.intro") }}</span
             >
           </div>
         </div>
@@ -436,7 +475,7 @@ watch(showModal, (isOpen) => {
           class="w-full h-auto grid grid-cols-2 lg:flex lg:flex-row gap-x-4 md:gap-x-8 lg:gap-x-6 xl:gap-x-5"
         >
           <div
-            v-for="(data, index) in whatsSelerisCare"
+            v-for="(data, index) in localizedFeatures"
             :key="data.id"
             :class="[
               'relative w-full h-[190px] sm:h-[150px] md:h-[180px] lg:h-[190px] xl:h-[180px] p-[2px] rounded-2xl cursor-default',
@@ -511,19 +550,19 @@ watch(showModal, (isOpen) => {
                 <span
                   class="text-[#FFFFFF] text-[18px] sm:text-[28px] md:text-[32px] lg:text-[24px] xl:text-[42px] xls:text-[42px] font-[600] leading-snug"
                 >
-                  Apa Itu Seleris Care <br />
-                  Applicator (SCA) ?
+                  {{ $t("sca.whatIs.title1") }} <br />
+                  {{ $t("sca.whatIs.title2") }}
                 </span>
               </div>
               <div class="w-full h-auto flex">
                 <span
                   class="text-[12px] sm:text-[14px] md:text-[16px] lg:text-[14px] xl:text-[16px] xls:text-[16px] text-[#FFFFFF] leading-snug font-[400]"
                 >
-                  SCA adalah mitra resmi
-                  <span class="font-[600]">Seleris Care</span> yang bertugas
-                  memasarkan dan menyediakan layanan scanning kesehatan kepada
-                  masyarakat luas menggunakan perangkat dan aplikasi digital
-                  kami.
+                  {{ $t("sca.whatIs.descBefore") }}
+                  <span class="font-[600]">{{
+                    $t("sca.whatIs.descHighlight")
+                  }}</span>
+                  {{ $t("sca.whatIs.descAfter") }}
                 </span>
               </div>
             </div>
@@ -531,7 +570,7 @@ watch(showModal, (isOpen) => {
               class="w-auto h-auto flex flex-col gap-y-3 sm:gap-y-4 md:gap-y-6 lg:gap-y-4 xl:gap-y-5 xls:gap-y-5 items-start"
             >
               <div
-                v-for="(data, index) in whatsSCAList"
+                v-for="(data, index) in localizedScaPoints"
                 :key="index"
                 class="w-auto h-auto flex flex-row"
               >
@@ -578,14 +617,14 @@ watch(showModal, (isOpen) => {
                       <span
                         class="text-[#FFFFFF] font-[600] text-[16px] md:text-[24px] lg:text-[18px] xl:text-[24px]"
                       >
-                        Partner Resmi
+                        {{ $t("sca.whatIs.cards.0.title") }}
                       </span>
                     </div>
                     <div class="w-full h-auto flex">
                       <span
                         class="text-[#ECECEC] font-[400] text-[10px] md:text-[12px]"
                       >
-                        Telah melalui proses verifikasi dan sertifikasi
+                        {{ $t("sca.whatIs.cards.0.subtitle") }}
                       </span>
                     </div>
                   </div>
@@ -605,14 +644,14 @@ watch(showModal, (isOpen) => {
                       <span
                         class="text-[#FFFFFF] font-[600] text-[16px] md:text-[24px] lg:text-[18px] xl:text-[24px] whitespace-nowrap"
                       >
-                        Solusi Kesehatan
+                        {{ $t("sca.whatIs.cards.1.title") }}
                       </span>
                     </div>
                     <div class="w-full h-auto flex">
                       <span
                         class="text-[#ECECEC] font-[400] text-[10px] md:text-[12px]"
                       >
-                        Didukung teknologi scanning modern
+                        {{ $t("sca.whatIs.cards.1.subtitle") }}
                       </span>
                     </div>
                   </div>
@@ -642,14 +681,14 @@ watch(showModal, (isOpen) => {
                       <span
                         class="text-[#FFFFFF] font-[600] text-[16px] md:text-[20px] lg:text-[18px] xl:text-[20px]"
                       >
-                        Platform Digital Pintar
+                        {{ $t("sca.whatIs.cards.2.title") }}
                       </span>
                     </div>
                     <div class="w-full h-auto flex">
                       <span
                         class="text-[#ECECEC] font-[400] text-[12px] md:text-[14px] lg:text-[12px] xl:text-[14px]"
                       >
-                        Pelaporan dan pemantauan terintegrasi
+                        {{ $t("sca.whatIs.cards.2.subtitle") }}
                       </span>
                     </div>
                   </div>
@@ -708,14 +747,14 @@ watch(showModal, (isOpen) => {
             <span
               class="text-[24px] md:text-[28px] lg:text-[36px] text-[#374151] font-[600] text-center leading-tight tracking-wider"
             >
-              Pilih Paket Kesehatan <br />
-              Sesuai Kebutuhan Anda
+              {{ $t("sca.packages.title1") }} <br />
+              {{ $t("sca.packages.title2") }}
             </span>
           </div>
           <div class="w-full h-auto flex flex-col gap-y-6">
             <div class="flex items-center justify-center gap-6">
               <p :class="!isSubscribe ? 'text-black' : 'text-gray-400'">
-                Pay Per Scan
+                {{ $t("sca.packages.payPerScan") }}
               </p>
               <div
                 @click="toggle"
@@ -729,7 +768,7 @@ watch(showModal, (isOpen) => {
                 />
               </div>
               <p :class="isSubscribe ? 'text-black' : 'text-gray-400'">
-                Subscribe
+                {{ $t("sca.packages.subscribe") }}
               </p>
             </div>
             <div class="max-w-5xl w-full h-auto mx-auto">
@@ -794,7 +833,7 @@ watch(showModal, (isOpen) => {
                   class="w-auto pl-5 pr-4 h-auto flex justify-center items-center"
                 >
                   <span class="text-[#FFFFFF] font-[500] text-[16px]">
-                    Kembali ke beranda
+                    {{ $t("sca.packages.backToHome") }}
                   </span>
                 </div>
               </button>
@@ -813,7 +852,7 @@ watch(showModal, (isOpen) => {
                       <span
                         class="text-[#4273C2] font-[600] text-[14px] lg:text-[16px]"
                       >
-                        Paket
+                        {{ $t("sca.packages.packageLabel") }}
                         <span class="uppercase">
                           {{ selectedPackage.name }}
                         </span>
@@ -826,13 +865,13 @@ watch(showModal, (isOpen) => {
                     <span
                       class="text-[28px] lg:text-[38px] text-[#374151] font-[600] leading-tight tracking-wider"
                     >
-                      Kesehatan Anda, <br />
-                      Analisis
+                      {{ $t("sca.packages.modalTitle1") }} <br />
+                      {{ $t("sca.packages.modalTitle2") }}
                       <span
                         class="text-transparent bg-clip-text bg-gradient-to-br from-[#13B89C] to-[#2EDFC1]"
                       >
-                        Tanpa <br />
-                        Jarum
+                        {{ $t("sca.packages.modalTitle3") }} <br />
+                        {{ $t("sca.packages.modalTitle4") }}
                       </span>
                     </span>
                   </div>
@@ -840,8 +879,8 @@ watch(showModal, (isOpen) => {
                     <span
                       class="text-[#8E98A8] font-[400] text-[16px] leading-relaxed tracking-wide"
                     >
-                      Solusi cepat untuk pemantauan <br />
-                      rutin kesehatan dasar Anda.
+                      {{ $t("sca.packages.modalSubtitle1") }} <br />
+                      {{ $t("sca.packages.modalSubtitle2") }}
                     </span>
                   </div>
                 </div>
@@ -850,7 +889,7 @@ watch(showModal, (isOpen) => {
                 >
                   <div class="w-full h-auto flex">
                     <span class="text-[16px] font-[500] text-[#374151]">
-                      Harga Retail Layanan
+                      {{ $t("sca.packages.retailPrice") }}
                     </span>
                   </div>
                   <div class="w-full h-auto flex">
@@ -872,7 +911,7 @@ watch(showModal, (isOpen) => {
                       <span
                         class="text-[#374151] text-[10px] sm:text-[14px] lg:text-[12px] xl:text-[16px]"
                       >
-                        Hasil Keluar dalam 5 Menit
+                        {{ $t("sca.packages.resultTime") }}
                       </span>
                     </div>
                   </div>
@@ -884,7 +923,7 @@ watch(showModal, (isOpen) => {
                   <span
                     class="text-white whitespace-nowrap text-[14px] md:text-[16px] lg:text-[18px] font-[500]"
                   >
-                    Daftar SCA & Mulai Jualan
+                    {{ $t("sca.packages.registerAndSell") }}
                   </span>
 
                   <div
@@ -977,14 +1016,14 @@ watch(showModal, (isOpen) => {
             <span
               class="text-[#374151] text-[20px] md:text-[32px] lg:text-[44px] font-[600] text-center"
             >
-              Kenapa Bergabung Jadi SCA?
+              {{ $t("sca.whyJoin.title") }}
             </span>
           </div>
           <div class="w-full h-auto flex justify-center items-center">
             <span
               class="text-[12px] md:text-[14px] lg:text-[16px] text-[#374151] font-[400] text-center"
             >
-              Membangun bisnis mandiri dengan dukungan korporasi global
+              {{ $t("sca.whyJoin.subtitle") }}
             </span>
           </div>
         </div>
@@ -992,7 +1031,7 @@ watch(showModal, (isOpen) => {
           class="w-full h-auto grid grid-cols-2 md:grid-cols-3 xl:px-16 gap-5"
         >
           <div
-            v-for="(data, index) in whyJoinSCA"
+            v-for="(data, index) in localizedWhyJoin"
             :key="index"
             class="w-full h-full bg-[#FFFFFF] rounded-[12px]"
           >
@@ -1046,14 +1085,14 @@ watch(showModal, (isOpen) => {
             <span
               class="text-[28px] md:text-[34px] lg:text-[42px] text-[#374151] font-[600]"
             >
-              Level Keanggotaan
+              {{ $t("sca.membership.title") }}
             </span>
           </div>
           <div class="w-full h-auto flex justify-center items-center">
             <span
               class="text-[#374151] font-[400] text-[12px] md:text-[16px] text-center"
             >
-              Pilih jalur karir yang sesuai dengan ambisi Anda
+              {{ $t("sca.membership.subtitle") }}
             </span>
           </div>
         </div>
@@ -1087,12 +1126,14 @@ watch(showModal, (isOpen) => {
             >
               <div class="w-full h-auto flex flex-col gap-y-8 px-5">
                 <div class="w-full h-auto flex flex-col text-[#374151]">
-                  <p class="text-[14px] font-[400]">Starter Level</p>
+                  <p class="text-[14px] font-[400]">
+                    {{ $t("sca.membership.starter.name") }}
+                  </p>
                   <p class="text-[24px] font-[600]">SCA-01</p>
                 </div>
                 <div class="w-full h-auto flex flex-col gap-y-7">
                   <div
-                    v-for="(data, index) in membershipLevels.starter.features"
+                    v-for="(data, index) in starterFeatures"
                     :key="index"
                     class="w-full h-auto flex flex-row gap-x-2"
                   >
@@ -1111,7 +1152,7 @@ watch(showModal, (isOpen) => {
                     </div>
                     <div class="w-auto h-auto flex items-center">
                       <span class="text-[#374151] font-[500] text-[14px]">{{
-                        data
+                        data.text
                       }}</span>
                     </div>
                   </div>
@@ -1146,13 +1187,14 @@ watch(showModal, (isOpen) => {
             >
               <div class="w-full h-auto flex flex-col gap-y-8 px-5">
                 <div class="w-full h-auto flex flex-col text-[#FFFFFF]">
-                  <p class="text-[14px] font-[400]">Professional Level</p>
+                  <p class="text-[14px] font-[400]">
+                    {{ $t("sca.membership.professional.name") }}
+                  </p>
                   <p class="text-[26px] font-[600]">SCA-02</p>
                 </div>
                 <div class="w-full h-auto flex flex-col gap-y-7">
                   <div
-                    v-for="(data, index) in membershipLevels.professional
-                      .features"
+                    v-for="(data, index) in professionalFeatures"
                     :key="index"
                     class="w-full h-auto flex flex-row gap-x-2"
                   >
@@ -1171,7 +1213,7 @@ watch(showModal, (isOpen) => {
                     </div>
                     <div class="w-auto h-auto flex items-center">
                       <span class="text-[#FFFFFF] font-[500] text-[14px]">
-                        {{ data }}
+                        {{ data.text }}
                       </span>
                     </div>
                   </div>
@@ -1187,7 +1229,7 @@ watch(showModal, (isOpen) => {
           <span
             class="text-[#FFFFFF] text-[16px] md:text-[16px] lg:text-[20px]"
           >
-            Bergabung Sekarang
+            {{ $t("sca.membership.joinNow") }}
           </span>
         </a>
       </div>
@@ -1207,8 +1249,9 @@ watch(showModal, (isOpen) => {
               <span
                 class="text-[#374151] font-[600] text-[16px] lg:text-[24px] xl:text-[26px]"
               >
-                Struktur Komisi & <br class="hidden lg:block" />
-                Simulasi Penghasilan
+                {{ $t("sca.simulation.title1") }}
+                <br class="hidden lg:block" />
+                {{ $t("sca.simulation.title2") }}
               </span>
             </div>
             <div
@@ -1232,14 +1275,14 @@ watch(showModal, (isOpen) => {
                   <span
                     class="text-[#6F6F6F] font-[400] text-[10px] md:text-[12px]"
                   >
-                    Harga Layanan
+                    {{ $t("sca.simulation.servicePrice") }}
                   </span>
                 </div>
                 <div class="w-full h-auto flex justify-end items-center">
                   <span
                     class="text-[#49D89C] text-[10px] md:text-[12px] font-[500]"
                   >
-                    Status
+                    {{ $t("sca.simulation.status") }}
                   </span>
                 </div>
               </div>
@@ -1248,15 +1291,17 @@ watch(showModal, (isOpen) => {
                   <span
                     class="text-[#374151] font-[600] text-[14px] md:text-[18px] leading-none"
                   >
-                    Rp 300.000
-                    <span class="text-[#B8B8B8] text-[10px]">/ Scanning</span>
+                    {{ formatRupiahSmart(PRICE_PER_SCAN) }}
+                    <span class="text-[#B8B8B8] text-[10px]">{{
+                      $t("sca.simulation.perScanning")
+                    }}</span>
                   </span>
                 </div>
                 <div class="w-full h-auto flex justify-end items-center">
                   <span
                     class="text-[#49D89C] font-[600] text-[12px] md:text-[14px]"
                   >
-                    Terjangkau
+                    {{ $t("sca.simulation.affordable") }}
                   </span>
                 </div>
               </div>
@@ -1275,7 +1320,7 @@ watch(showModal, (isOpen) => {
                     <span
                       class="text-[#195279] text-[12px] md:text-[14px] font-[500]"
                     >
-                      Komisi Langsung
+                      {{ $t("sca.simulation.directCommission") }}
                     </span>
                   </div>
                   <div class="w-full h-auto flex">
@@ -1289,7 +1334,7 @@ watch(showModal, (isOpen) => {
                     <span
                       class="text-[12px] md:text-[12px] text-[#2D71DD] font-[500]"
                     >
-                      ± Rp 45.000 / scan
+                      {{ $t("misc.perScanDirect") }}
                     </span>
                   </div>
                 </div>
@@ -1307,7 +1352,7 @@ watch(showModal, (isOpen) => {
                     <span
                       class="text-[#00B692] text-[12px] md:text-[14px] font-[500]"
                     >
-                      Komisi Jaringan
+                      {{ $t("sca.simulation.networkCommission") }}
                     </span>
                   </div>
                   <div class="w-full h-auto flex">
@@ -1321,7 +1366,7 @@ watch(showModal, (isOpen) => {
                     <span
                       class="text-[12px] md:text-[12px] text-[#00B171] font-[500]"
                     >
-                      ± Rp 30.000 / scan
+                      {{ $t("misc.perScanNetwork") }}
                     </span>
                   </div>
                 </div>
@@ -1335,7 +1380,7 @@ watch(showModal, (isOpen) => {
                   <span
                     class="text-[12px] md:text-[18px] lg:text-[14px] xls:text-[16px] text-[#FFFFFF] font-[600]"
                   >
-                    Target Scanning per Hari
+                    {{ $t("sca.simulation.targetPerDay") }}
                   </span>
                 </div>
                 <div class="w-auto h-auto flex justify-end">
@@ -1379,7 +1424,7 @@ watch(showModal, (isOpen) => {
                     <span
                       class="text-[12px] md:text-[18px] lg:text-[14px] text-[#37B3D5] font-[400]"
                     >
-                      Potensi Income Bulanan Anda
+                      {{ $t("sca.simulation.monthlyIncome") }}
                     </span>
                   </div>
                   <div
@@ -1429,14 +1474,14 @@ watch(showModal, (isOpen) => {
         <div class="w-full h-auto flex flex-col gap-y-3">
           <div class="w-full h-auto flex justify-center items-center">
             <span class="font-[600] text-[#374151] xl:text-[42px] text-center">
-              Cara Bergabung
+              {{ $t("sca.howToJoin.title") }}
             </span>
           </div>
           <div class="w-full h-auto flex justify-center items-center">
             <span
               class="font-[400] text-[#374151] text-[12px] md:text-[14px] lg:text-[16px] text-center tracking-tight"
             >
-              Mulai langkah sukses anda dalam 3 langkah mudah
+              {{ $t("sca.howToJoin.subtitle") }}
             </span>
           </div>
         </div>
@@ -1450,7 +1495,7 @@ watch(showModal, (isOpen) => {
           </div>
           <div class="relative w-full h-auto z-20 flex flex-row gap-x-28 px-20">
             <div
-              v-for="data in howToJoin"
+              v-for="data in localizedHowToJoin"
               :key="data.id"
               class="w-full h-full flex flex-col justify-between"
               :class="data.id === 2 ? 'pt-5' : ''"
@@ -1523,7 +1568,7 @@ watch(showModal, (isOpen) => {
             <span
               class="text-[#374151] text-[20px] sm:text-[32px] lg:text-[40px] xl:text-[44px] font-[600] text-center"
             >
-              Benefit Menjadi SCA
+              {{ $t("sca.benefits.title") }}
             </span>
           </div>
           <div
@@ -1532,9 +1577,9 @@ watch(showModal, (isOpen) => {
             <span
               class="text-[12px] sm:text-[14px] xl:text-[16px] text-[#374151] font-[400] text-center"
             >
-              Kami memberikan semua yang Anda butuhkan untuk membangun
+              {{ $t("sca.benefits.subtitle1") }}
               <br class="hidden md:block" />
-              bisnis kesehatan yang sukses dan berkelanjutan.
+              {{ $t("sca.benefits.subtitle2") }}
             </span>
           </div>
         </div>
@@ -1565,8 +1610,10 @@ watch(showModal, (isOpen) => {
                   <p
                     class="text-[18px] md:text-[14px] xl:text-[18px] font-[600] text-[#374151] leading-normal"
                   >
-                    Paket
-                    <span class="sm:block">Keanggotaan</span>
+                    {{ $t("sca.benefits.membershipTitle1") }}
+                    <span class="sm:block">{{
+                      $t("sca.benefits.membershipTitle2")
+                    }}</span>
                   </p>
                 </div>
               </div>
@@ -1624,8 +1671,10 @@ watch(showModal, (isOpen) => {
                   <p
                     class="text-[18px] md:text-[14px] xl:text-[18px] font-[600] text-[#374151] leading-normal"
                   >
-                    Support
-                    <span class="sm:block">Berkelanjutan</span>
+                    {{ $t("sca.benefits.supportTitle1") }}
+                    <span class="sm:block">{{
+                      $t("sca.benefits.supportTitle2")
+                    }}</span>
                   </p>
                 </div>
               </div>
@@ -1663,15 +1712,14 @@ watch(showModal, (isOpen) => {
                     <p
                       class="font-[600] text-[16px] md:text-[20px] xl:text-[22px]"
                     >
-                      Kenapa Kami
+                      {{ $t("sca.benefits.whyUs") }}
                     </p>
                   </div>
                   <div
                     class="w-full h-auto text-[10px] md:text-[12px] xl:text-[14px]"
                   >
                     <p>
-                      "Kami tidak hanya memberikan alat, tapi kami membangun
-                      ekosistem untuk pertumbuhan karir Anda."
+                      {{ $t("sca.benefits.quote") }}
                     </p>
                   </div>
                 </div>
@@ -1698,14 +1746,14 @@ watch(showModal, (isOpen) => {
               <span
                 class="max-[375px]:!text-[20px] text-[28px] md:text-[34px] lg:text-[42px] text-[#374151] font-[600]"
               >
-                Apa Kata Mereka?
+                {{ $t("sca.testimonials.title") }}
               </span>
             </div>
             <div class="w-full h-auto flex justify-center items-center">
               <span
                 class="text-[#374151] font-[400] max-[375px]:!text-[10px] text-[12px] md:text-[16px] text-center"
               >
-                Kisah sukses dari mitra Seleris Care di seluruh Indonesia
+                {{ $t("sca.testimonials.subtitle") }}
               </span>
             </div>
           </div>
@@ -1750,7 +1798,10 @@ watch(showModal, (isOpen) => {
                 }"
                 class="w-full h-full !overflow-y-visible"
               >
-                <SwiperSlide v-for="(item, index) in testimonials" :key="index">
+                <SwiperSlide
+                  v-for="(item, index) in localizedTestimonials"
+                  :key="index"
+                >
                   <!-- wrapper ini TIDAK mengubah desain -->
                   <div class="pb-6 px-8 sm:px-8 md:px-12 lg:px-0">
                     <div
@@ -1826,8 +1877,8 @@ watch(showModal, (isOpen) => {
                 class="font-[600] text-[18px] md:text-[28px] lg:text-[32px] xls:text-[36px]"
               >
                 <span class="text-[#374151]">
-                  Siap Memulai Bisnis <br class="hidden lg:block" />
-                  Kesehatan
+                  {{ $t("sca.cta.title1") }} <br class="hidden lg:block" />
+                  {{ $t("sca.cta.title2") }}
                   <span
                     class="text-transparent bg-clip-text bg-gradient-to-br from-[#13B89C] to-[#2EDFC1]"
                     >Masa Depan?</span
@@ -1838,8 +1889,7 @@ watch(showModal, (isOpen) => {
             <p
               class="text-[#374151] text-[12px] md:text-[16px] lg:text-[14px] xl:text-[16px] w-full"
             >
-              Dapatkan akses eksklusif ke teknologi AI kesehatan terbaik dan
-              bangun penghasilan mandiri sekarang juga.
+              {{ $t("sca.cta.description") }}
             </p>
           </div>
           <div
@@ -1854,7 +1904,7 @@ watch(showModal, (isOpen) => {
               <span
                 class="text-white whitespace-nowrap text-[14px] md:text-[16px] lg:text-[14px] xl:text-[16px] font-[500]"
               >
-                Daftar Jadi SCA Sekarang
+                {{ $t("sca.cta.register") }}
               </span>
             </a>
 
@@ -1882,7 +1932,7 @@ watch(showModal, (isOpen) => {
               <span
                 class="text-white whitespace-nowrap text-[14px] md:text-[16px] lg:text-[14px] xl:text-[16px] font-[500]"
               >
-                Hubungi Admin
+                {{ $t("sca.cta.contact") }}
               </span>
             </router-link>
           </div>

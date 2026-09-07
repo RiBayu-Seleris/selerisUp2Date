@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import { useLocalizedList } from "@/utils/i18nList";
 
 import HeroText from "@productComponents/HeroText.vue";
 import PhoneHero from "@productComponents/PhoneHero.vue";
@@ -46,6 +47,27 @@ const stepsWithPath = careWorkSteps.map((step) => ({
     import.meta.url,
   ).href,
 }));
+
+// Teks daftar diambil dari file locale (lihat src/utils/i18nList.js)
+const localizedHealthCheck = useLocalizedList(
+  "products.healthCare.healthCheck",
+  healthCheck,
+  ["title", "description"],
+);
+const localizedFaq = useLocalizedList("products.healthCare.faq", faq, [
+  "question",
+  "answer",
+]);
+const localizedTestimonials = useLocalizedList(
+  "products.shared.testimonialsConsumer",
+  testimonials,
+  ["name", "location", "text"],
+);
+const localizedSteps = useLocalizedList(
+  "products.shared.workSteps",
+  stepsWithPath,
+  ["title", "description"],
+);
 </script>
 
 <template>
@@ -56,11 +78,11 @@ const stepsWithPath = careWorkSteps.map((step) => ({
         class="w-full h-[450px] md:h-[700px] lg:h-[650px] rounded-[20px] z-20"
       >
         <HeroText
-          title="Smarter Corporate Health Monitoring"
-          subtitle="Application"
+          :title="$t('products.healthCare.hero.title')"
+          :subtitle="$t('products.healthCare.hero.subtitle')"
           titlecolor="text-[#195279]"
           subtitlecolor="text-[#13B89C]"
-          description=" Empower your organization with AI-driven employee wellness, preventive insights, and health cost control."
+          :description="$t('products.healthCare.hero.description')"
           descriptioncolor="text-[#6F6F6F]"
         />
       </div>
@@ -99,15 +121,15 @@ const stepsWithPath = careWorkSteps.map((step) => ({
         class="relative w-full flex flex-col max-w-[1440px] mx-auto justify-center items-center z-20 mt-16 md:mt-20 lg:mt-40 px-8"
       >
         <AboutUs
-          title="About Us"
-          subtitle="Seleris Care"
+          :title="$t('products.shared.aboutUs')"
+          :subtitle="$t('products.healthCare.name')"
           subtitleColor="text-[#42C5AF]"
         />
         <div class="w-full h-auto mt-10 md:mt-10 lg:mt-10">
           <AboutUsDescription
             :image="imageAbout"
-            title="AI Health Metrics Insurance Application"
-            description="Seleris Care is an AI-powered platform built for corporate health and wellness. It automates employee health monitoring, delivers real-time preventive care insights, and helps companies optimize wellness programs while reducing medical costs by up to 20%"
+            :title="$t('products.healthCare.about.title')"
+            :description="$t('products.healthCare.about.description')"
           />
         </div>
       </div>
@@ -123,14 +145,14 @@ const stepsWithPath = careWorkSteps.map((step) => ({
         class="relative w-full flex flex-col justify-center items-center z-20"
       >
         <ApplicationWorkText
-          productname="Seleris Care"
+          :productname="$t('products.healthCare.name')"
           textcolor="text-[#42C5AF]"
         />
         <div class="relative w-full h-auto mt-10 md:mt-12 lg:mt-14">
           <ApplicationWorkSlider
             circleColor="bg-gradient-to-b from-[#23C4BA] to-[#4ADDD4]"
             textcolor="text-[#38C1AA]"
-            :steps="stepsWithPath"
+            :steps="localizedSteps"
           >
             <FrameLineWorks />
           </ApplicationWorkSlider>
@@ -148,17 +170,17 @@ const stepsWithPath = careWorkSteps.map((step) => ({
       >
         <div class="w-full h-auto flex flex-col gap-y-2">
           <EasyQuickText
-            title="Smarter Medical Claims with"
-            subtitle="AI-Powered Automation"
+            :title="$t('products.shared.easyQuickTitle')"
+            :subtitle="$t('products.shared.easyQuickSubtitle')"
             subtitlecolor="text-[#42C5AF]"
-            subsubtitle="Seleris Meditekno Internasional"
+            sub:subtitle="$t('products.shared.company')"
           />
         </div>
         <div
           class="w-full h-auto flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-5 gap-y-8 md:gap-y-8 lg:gap-12 mt-10 lg:mt-16"
         >
           <div
-            v-for="(data, index) in healthCheck"
+            v-for="(data, index) in localizedHealthCheck"
             :key="index"
             class="w-full h-auto"
           >
@@ -180,8 +202,8 @@ const stepsWithPath = careWorkSteps.map((step) => ({
     >
       <div class="w-full h-auto flex flex-col">
         <TitleAndSubCard
-          title="Our Client"
-          subtitle="Seleris Meditekno Internasional"
+          :title="$t('products.shared.ourClient')"
+          :subtitle="$t('products.shared.company')"
           subtitleColor="text-[#42C5AF]"
         />
         <div class="mt-10 max-smallest:px-0 px-12">
@@ -200,12 +222,12 @@ const stepsWithPath = careWorkSteps.map((step) => ({
       >
         <div class="w-full h-auto px-8">
           <TitleAndSubCard
-            title="Testimonial"
-            subtitle="Seleris Meditekno Internasional"
+            :title="$t('products.shared.testimonial')"
+            :subtitle="$t('products.shared.company')"
             subtitleColor="text-[#42C5AF]"
           />
         </div>
-        <TestimonialCommentFrame :Testimonials="testimonials" />
+        <TestimonialCommentFrame :Testimonials="localizedTestimonials" />
       </div>
     </section>
 
@@ -220,14 +242,14 @@ const stepsWithPath = careWorkSteps.map((step) => ({
         >
           <div class="w-full h-auto px-8">
             <TitleAndSubCard
-              title="FAQ's"
-              subtitle="Seleris Meditekno Internasional"
+              :title="$t('products.shared.faq')"
+              :subtitle="$t('products.shared.company')"
               subtitleColor="text-[#42C5AF]"
             />
           </div>
         </div>
         <div class="w-full mx-auto mt-10 md:mt-10">
-          <FaqFrame :Faq="faq" opencolortext="text-[#2AB857]" />
+          <FaqFrame :Faq="localizedFaq" opencolortext="text-[#2AB857]" />
         </div>
       </div>
     </section>
@@ -243,10 +265,8 @@ const stepsWithPath = careWorkSteps.map((step) => ({
       />
       <div class="w-full h-auto md:max-w-6xl mx-auto relative z-30">
         <DownloadFrame
-          appname="Seleris Medins"
-          description="Stay in control of your health data and claims anytime, anywhere. Our
-          AI-powered platform makes medical data processing, claims tracking,
-          and risk analysis easier and faster."
+          :appname="$t('products.healthCare.name')"
+          :description="$t('products.shared.downloadDescription')"
           :img="DownloadImage"
         />
       </div>
@@ -258,7 +278,7 @@ const stepsWithPath = careWorkSteps.map((step) => ({
       id="bookdemo"
     >
       <BookDemoProduct
-        title="Seleris Care A Complete Solution for Your Health Needs"
+        :title="$t('products.healthCare.bookDemo')"
         :framebookdemo="medinsframebook"
         colorarrow="text-[#42C5AF]"
         bgProduct="bg-[#42C5AF]"

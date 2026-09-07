@@ -1,26 +1,15 @@
 <script setup>
+import { useLocalizedList } from "@/utils/i18nList";
 import Atom from "@/assets/icons/Services/circle-atom.svg";
 import Chip from "@/assets/icons/Services/chip-thunder.svg";
 import Bars from "@/assets/icons/Services/bars-up.svg";
-const ApiCards = [
-  {
-    icon: Atom,
-    title: "Smart Video Analysis",
-    description: `Seleris analyzes short facial videos to identify key risk factors quickly and accurately, 
-    enabling smarter, faster evaluations.`,
-  },
-  {
-    icon: Chip,
-    title: "Instant Risk Scoring",
-    description: `Get instant risk scores in seconds to streamline decisions and improve your digital evaluation process.`,
-  },
-  {
-    icon: Bars,
-    title: "Frictionless Evaluation",
-    description: `Seleris provides a fully digital, seamless evaluation experience, 
-    perfect for remote users or those with limited data history.`,
-  },
-];
+const ApiCards = [{ icon: Atom }, { icon: Chip }, { icon: Bars }];
+
+// Teks diambil dari file locale
+const localizedCards = useLocalizedList("services.apiCards", ApiCards, [
+  "title",
+  "description",
+]);
 </script>
 
 <template>
@@ -36,24 +25,21 @@ const ApiCards = [
       >
         <div class="flex w-full h-auto">
           <p class="text-[21px] lg:text-[25px] xl:text-[30px] text-[#1DC457]">
-            Services
+            {{ $t("services.eyebrow") }}
           </p>
         </div>
         <div class="flex w-full h-auto">
           <p
             class="text-[27px] lg:text-[29px] xl:text-[37px] text-[#195279] leading-[40px] font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
-            API Services
+            {{ $t("services.apiTitle") }}
           </p>
         </div>
         <div class="flex lg:w-[80%] h-auto">
           <p
             class="text-[15px] lg:text-[19px] xl:text-[21px] text-[#195279] dark:text-[#6F6F6F]"
           >
-            Seleris offers a powerful API service that allows companies to
-            integrate Seleris's capabilities into their existing systems. The
-            API service is easy to use and provides a wide range of features,
-            including.
+            {{ $t("services.apiDescription") }}
           </p>
         </div>
       </div>
@@ -63,7 +49,7 @@ const ApiCards = [
           class="flex flex-row w-full h-auto mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-8 pl-8 pr-8 lg:scroll-pl-14 lg:pl-14 lg:pr-14 xl:scroll-pl-16 xl:pl-16 xl:pr-16 hide-scrollbar gap-x-5 md:gap-x-10"
         >
           <div
-            v-for="(ApiCard, index) in ApiCards"
+            v-for="(ApiCard, index) in localizedCards"
             :key="index"
             class="flex snap-start shrink-0 w-[100%] h-[150px] md:w-[60%] lg:w-[55%] xl:w-[60%] xl:h-[200px] md:h-auto lg:h-auto rounded-[22px] items-center bg-[#FAFAFA] dark:bg-[#323232] p-[1px] md:gap-x-5 dark:bg-gradient-to-tr dark:from-[#1E1F1C] dark:from-45% dark:to-[#565656]"
           >
@@ -106,8 +92,7 @@ const ApiCards = [
         class="flex lg:w-[65%] xl:w-[60%] h-auto px-8 lg:px-16 mt-10 lg:mt-10"
       >
         <p class="text-[#195279] dark:text-[#6F6F6F] xl:text-[20px]">
-          Seleris provides comprehensive documentation and support to help
-          companies get started with the API service.
+          {{ $t("services.apiSupport") }}
         </p>
       </div>
     </div>

@@ -1,4 +1,5 @@
 <script setup>
+import { useLocalizedList } from "@/utils/i18nList";
 import ImgLinear from "@/assets/images/about-linear.png";
 import DarkImgLinear from "@/assets/images/dark-about-linear.png";
 
@@ -14,43 +15,19 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { ref, onMounted, onUnmounted, watch } from "vue"; // ← Tambahkan ini!
 
 const StepsContent = [
-  {
-    icon: Innovation,
-    title: "Innovation",
-    description:
-      "Seleris develops smart, effective solutions for insurance and underwriting industry challenges.",
-  },
-  {
-    icon: OptimalPerformance,
-    title: "Optimal Performance",
-    description:
-      "We use advanced technology to ensure fast, smooth, reliable service delivery.",
-  },
-  {
-    icon: TeamWork,
-    title: "Team Work",
-    description:
-      "We believe great results come through strong teamwork and shared collaboration.",
-  },
-  {
-    icon: Integrity,
-    title: "Integrity",
-    description:
-      "Seleris values honesty and full transparency in all business interactions.",
-  },
-  {
-    icon: Focus,
-    title: "Customer Focus",
-    description:
-      "We prioritize delivering the best possible experience to every customer.",
-  },
-  {
-    icon: Vision,
-    title: "Our Vision",
-    description:
-      "Seleris envisions accessible, affordable life and medical insurance for everyone.",
-  },
+  { icon: Innovation },
+  { icon: OptimalPerformance },
+  { icon: TeamWork },
+  { icon: Integrity },
+  { icon: Focus },
+  { icon: Vision },
 ];
+
+// Teks diambil dari file locale
+const localizedSteps = useLocalizedList("about.values.items", StepsContent, [
+  "title",
+  "description",
+]);
 
 onMounted(() => {
   const video = document.querySelector("video");
@@ -73,7 +50,7 @@ onMounted(() => {
             <p
               class="text-[17px] sm:text-[22px] md:text-[17px] lg:text-[21px] xl:text-[30px] text-[#1AB24F]"
             >
-              App Features
+              {{ $t("about.values.eyebrow") }}
             </p>
           </div>
           <div
@@ -82,19 +59,21 @@ onMounted(() => {
             <p
               class="text-[18px] sm:text-[28px] lg:text-[26px] xl:text-[46px] text-[#195279] leading-[30px] lg:leading-normal xl:leading-[55px] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
             >
-              We're company
-              <span class="inline md:block">with a vision.</span>
+              {{ $t("about.values.title1") }}
+              <span class="inline md:block">{{
+                $t("about.values.visionTagline")
+              }}</span>
             </p>
           </div>
           <div class="flex w-full h-auto justify-center md:justify-start">
             <p
               class="text-center md:text-start text-[12px] sm:text-[16px] lg:text-[14px] xl:text-[17px] text-[#89A6BA] xl:leading-relaxed lg:pr-20 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
             >
-              Empowering smarter decisions through
+              {{ $t("about.values.title2") }}
               <br class="hidden md:block xl:hidden" />
-              AI-driven,
+              {{ $t("about.values.title3") }}
               <br class="hidden xl:block" />
-              human focused technology.
+              {{ $t("about.values.humanFocused") }}
             </p>
           </div>
         </div>
@@ -108,7 +87,7 @@ onMounted(() => {
             loop
             class="w-full h-full rounded-xl overflow-hidden custom-swiper cursor-grab active:cursor-grabbing"
           >
-            <SwiperSlide v-for="(step, index) in StepsContent" :key="index">
+            <SwiperSlide v-for="(step, index) in localizedSteps" :key="index">
               <div
                 class="w-full h-full flex flex-row items-center text-white text-xl"
               >

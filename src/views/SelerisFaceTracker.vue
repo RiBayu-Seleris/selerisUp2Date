@@ -1,6 +1,7 @@
 <!-- Ini parent untuk scanning, uploading, dan result -->
 
 <script setup>
+import { useI18n } from "vue-i18n";
 import ArrowLeft from "@/components/icons/ArrowLeft.vue";
 import CardIconLeft from "@/components/reusable/CardIconLeft.vue";
 import TrustedImage from "@/assets/images/facetracker/trusted-list.svg";
@@ -24,6 +25,7 @@ import FaceTracker from "@/components/FaceScan/index.vue";
 import Result from "@/components/FaceScan/Result.vue";
 import { ref, computed, onMounted, watch, nextTick } from "vue";
 
+const { t } = useI18n();
 const CertificateAndRewards = [
   {
     img: new URL("/assets/images/certificate-icon/Cert1.png", import.meta.url)
@@ -235,28 +237,25 @@ onMounted(async () => {
 const rules = [
   {
     icon: Sun,
-    title: "Check Lighting",
-    description:
-      "Ensure your face is well-lit from the front. Avoid harsh backlighting or deep shadows.",
+    title: t("faceScan.checkLighting"),
+    description: t("faceScan.lightingTip"),
   },
   {
     icon: Contact,
-    title: "Stay Centered",
-    description:
-      "Position your face within the red markers. Keep a neutral expression and remain still.",
+    title: t("faceScan.stayCentered"),
+    description: t("faceScan.centeredTip"),
   },
   {
     icon: Timer,
     title: "30 Seconds",
-    description:
-      "The scan takes approximately 30 seconds via rPPG technology. Please do not move or speak during the process",
+    description: t("faceScan.scanTip"),
   },
 ];
 
 const indicators = [
-  { icon: HeartRate, title: "Heart Rate" },
-  { icon: Heart, title: "Breath Rate" },
-  { icon: StressLevel, title: "Diastole" },
+  { icon: HeartRate, title: t("faceScan.metrics.0.title") },
+  { icon: Heart, title: t("faceScan.metrics.2.title") },
+  { icon: StressLevel, title: t("faceScan.diastole") },
   { icon: Blood, title: "HRV" },
   { icon: BMI, title: "systole" },
 ];
@@ -622,7 +621,7 @@ const indicators = [
                     @click="onBackToScan"
                     class="px-6 py-2.5 rounded-full text-[13px] font-medium font-mono border border-white/15 text-white/70 hover:bg-white/08 hover:text-white transition-all duration-200 uppercase tracking-widest"
                   >
-                    Re-Scan
+                    {{ $t("misc.re_scan") }}
                   </button>
                 </div>
               </div>
@@ -639,7 +638,7 @@ const indicators = [
           >
             <div class="w-full h-auto flex justify-start items-center">
               <p class="text-[18px] text-[#195279] font-[600]">
-                Monitor 39+ health metrics in just 30 seconds with a facial scan
+                {{ $t("misc.monitor_60_health_metrics_in_just_30_sec") }}
               </p>
             </div>
             <div class="w-full h-auto flex justify-start items-center">
@@ -674,7 +673,7 @@ const indicators = [
             </div>
             <div class="flex flex-row gap-5 px-12">
               <a
-                href="https://play.google.com/store/apps/developer?id=PT.+Seleris+Meditekno+Internasional"
+                href="https://play.google.com/store/search?q=blooxia&c=apps&hl=id"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="flex w-auto h-full md:justify-start justify-center items-center"
@@ -704,7 +703,9 @@ const indicators = [
                 </div>
               </div>
             </div>
-            <div class="w-full h-auto flex justify-between items-center px-20">
+            <div
+              class="w-full h-auto flex flex-row gap-x-1 justify-between items-center px-20"
+            >
               <div class="w-full h-auto flex justify-center items-center">
                 <p class="text-[#A9A9A9] font-[500] text-[18px]">Powered by</p>
               </div>

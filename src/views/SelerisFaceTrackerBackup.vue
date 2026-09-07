@@ -451,7 +451,7 @@ const indicators = [
           <p class="text-[#A7A7A7]">Get the apps</p>
           <div class="flex flex-row gap-5 px-12">
             <a
-              href="https://play.google.com/store/apps/developer?id=PT.+Seleris+Meditekno+Internasional"
+              href="https://play.google.com/store/search?q=blooxia&c=apps&hl=id"
               target="_blank"
               rel="noopener noreferrer"
               class="flex w-auto h-full justify-center items-center"

@@ -1,0 +1,2241 @@
+{
+  "common": {
+    "changeLanguage": "Ganti bahasa",
+    "switchToLight": "Ganti ke mode terang",
+    "switchToDark": "Ganti ke mode gelap",
+    "openMenu": "Buka menu",
+    "closeMenu": "Tutup menu",
+    "comingSoon": "Segera Hadir!"
+  },
+  "nav": {
+    "home": "Beranda",
+    "about": "Tentang",
+    "products": "Produk",
+    "technology": "Teknologi",
+    "solutions": "Solusi",
+    "blogs": "Blog",
+    "services": "Layanan",
+    "careers": "Karier",
+    "about_items": {
+      "company": "Perusahaan",
+      "team": "Tim Kami",
+      "innovation": "Inovasi",
+      "faq": "FAQ",
+      "contact": "Hubungi Kami"
+    }
+  },
+  "solutions": {
+    "ai-powered": {
+      "title": "Underwriting Asuransi Berbasis AI",
+      "subtitle": "Underwriting Asuransi Berbasis AI",
+      "hero": {
+        "subtitle": "Penetapan Harga Asuransi yang Adil, Dimulai dari Wajah Anda."
+      },
+      "overview": {
+        "description": "Seleris mengubah paradigma underwriting secara mendasar. Dengan teknologi rPPG (Remote Photoplethysmography) berbasis AI, Seleris mengukur hingga 60 parameter fisiologis — termasuk detak jantung, HRV, laju pernapasan, estimasi tekanan darah, dan indikator risiko kardiovaskular — hanya dalam 60 detik melalui kamera smartphone biasa. Tanpa perangkat tambahan. Tanpa kunjungan klinik. Tanpa menunggu hasil laboratorium.",
+        "stats": [
+          {
+            "label": "Parameter Fisiologis"
+          },
+          {
+            "label": "Waktu Pemindaian"
+          },
+          {
+            "label": "Penghematan Biaya"
+          }
+        ]
+      },
+      "keyFeatures": [
+        {
+          "title": "60+ Parameter Fisiologis",
+          "description": "Detak Jantung, HRV, Laju Pernapasan, estimasi Tekanan Darah, Indeks Stres, Skor Risiko Kardiovaskular, Usia Biologis, BMI, dan lainnya"
+        },
+        {
+          "title": "Underwriting Digital End-to-End",
+          "description": "Dari pengajuan, penyaringan, hingga keputusan risiko — semuanya dalam satu alur kerja digital tanpa dokumen kertas"
+        },
+        {
+          "title": "Algoritma Risiko Aktuaria Terintegrasi",
+          "description": "Skor risiko langsung diterjemahkan menjadi rekomendasi premi individual berbasis bukti"
+        },
+        {
+          "title": "Siap Patuh Regulasi",
+          "description": "Dirancang sesuai regulasi OJK dan praktik terbaik aktuaria internasional (FSAI/IAI)"
+        }
+      ],
+      "moreFeatures": [
+        {
+          "title": "Terkoreksi Bias untuk Populasi Asia",
+          "description": "Model dilatih dengan dataset multietnis Asia Tenggara demi akurasi yang relevan secara demografis"
+        }
+      ],
+      "businessBenefits": [
+        {
+          "label": "Menekan biaya underwriting hingga 70%"
+        },
+        {
+          "label": "Mempercepat penerbitan polis dari hitungan hari menjadi menit"
+        },
+        {
+          "label": "Meningkatkan akurasi seleksi risiko dan menekan adverse selection"
+        },
+        {
+          "label": "Memperluas akses asuransi ke segmen unbanked/uninsured yang belum terlayani"
+        }
+      ],
+      "cta": {
+        "title": "Risiko Lebih Cerdas. Keputusan Lebih Cepat. Proteksi Berkelanjutan",
+        "subtitle": "Risiko Lebih Cerdas. Keputusan Lebih Cepat. Proteksi Berkelanjutan",
+        "buttonText": "Jadwalkan Demo!"
+      }
+    },
+    "mobile-health": {
+      "title": "Kesehatan Mobile",
+      "subtitle": "Kesehatan Mobile — Seleriscare.ai",
+      "hero": {
+        "subtitle": "Cek Kesehatan Menyeluruh, 60 Detik, di Mana Saja."
+      },
+      "overview": {
+        "description": "Seleriscare.ai adalah platform kesehatan direct-to-consumer (D2C) berbasis rPPG yang menghadirkan kemampuan penilaian kesehatan setara klinik langsung di smartphone Anda. Pengguna cukup menghadap kamera smartphone selama 60 detik untuk menerima laporan kesehatan menyeluruh yang mencakup tanda vital, skor risiko kardiovaskular, estimasi usia biologis, dan indikator metabolik — tanpa sensor tambahan, tanpa kabel, tanpa kunjungan dokter.",
+        "stats": [
+          {
+            "label": "Penilaian Cepat"
+          },
+          {
+            "label": "Langsung ke Konsumen"
+          },
+          {
+            "label": "Tingkat Langganan"
+          }
+        ]
+      },
+      "keyFeatures": [
+        {
+          "title": "Pindai Tanda Vital 60 Detik",
+          "description": "Detak jantung, laju pernapasan, HRV, saturasi oksigen (estimasi), dan tekanan darah (estimasi)"
+        },
+        {
+          "title": "Skor Kesehatan Menyeluruh",
+          "description": "Skor Risiko Kardiovaskular, Tingkat Stres, Indeks Kesehatan Metabolik"
+        },
+        {
+          "title": "Estimasi Usia Biologis",
+          "description": "Bandingkan usia biologis dengan usia kronologis untuk memahami kondisi kesehatan sebenarnya"
+        },
+        {
+          "title": "Estimasi BMI dari Wajah",
+          "description": "Teknologi khas Seleris untuk estimasi Indeks Massa Tubuh tanpa timbangan"
+        }
+      ],
+      "moreFeatures": [
+        {
+          "title": "Dasbor Tren Kesehatan",
+          "description": "Pantau perkembangan kesehatan dari waktu ke waktu lewat visualisasi yang mudah dipahami"
+        },
+        {
+          "title": "Paket Langganan",
+          "description": "Free, Basic, Silver, Gold — disesuaikan untuk beragam segmen usia dan kebutuhan kesehatan"
+        }
+      ],
+      "businessBenefits": [
+        {
+          "label": "Penilaian kesehatan tanpa kunjungan klinik"
+        },
+        {
+          "label": "Pantau tren kesehatan pribadi dari waktu ke waktu"
+        },
+        {
+          "label": "Deteksi dini risiko kardiovaskular"
+        },
+        {
+          "label": "Tersedia beberapa pilihan paket langganan"
+        }
+      ],
+      "cta": {
+        "title": "Hadirkan Cek Kesehatan AI untuk Semua Orang",
+        "subtitle": "Sajikan wawasan kesehatan yang mudah diakses langsung dari smartphone",
+        "buttonText": "Hubungi Kami untuk Demo"
+      }
+    },
+    "corporate-wellness": {
+      "title": "Wellness Korporasi",
+      "subtitle": "Wellness Korporasi",
+      "hero": {
+        "subtitle": "Karyawan Lebih Sehat, Perusahaan Lebih Produktif."
+      },
+      "overview": {
+        "description": "Seleris Corporate Wellness Platform mengubah total pendekatan wellness konvensional: skrining kesehatan karyawan secara massal kini dapat dilakukan tanpa kontak, cepat, dan dalam skala besar — langsung dari smartphone masing-masing karyawan, kapan pun dan di mana pun. Data kesehatan tenaga kerja yang teragregasi memampukan tim HR dan manajemen memahami profil risiko kesehatan secara real-time.",
+        "stats": [
+          {
+            "label": "Gangguan Operasional"
+          },
+          {
+            "label": "Data Teragregasi"
+          },
+          {
+            "label": "Dampak Terukur"
+          }
+        ]
+      },
+      "keyFeatures": [
+        {
+          "title": "Dasbor Manajemen Wellness",
+          "description": "Pantau profil kesehatan karyawan yang teragregasi (anonim) dalam satu platform"
+        },
+        {
+          "title": "Skrining Massal Tanpa Gangguan",
+          "description": "Karyawan melakukan pemindaian mandiri tanpa meninggalkan meja kerja"
+        },
+        {
+          "title": "Laporan Stratifikasi Risiko",
+          "description": "Identifikasi kelompok berisiko tinggi untuk program intervensi yang tepat sasaran"
+        },
+        {
+          "title": "Integrasi Manfaat Asuransi Kesehatan",
+          "description": "Hubungkan data kesehatan dengan penyesuaian manfaat premi karyawan"
+        }
+      ],
+      "moreFeatures": [
+        {
+          "title": "Program Wellbeing Bergamifikasi",
+          "description": "Dorong partisipasi karyawan lewat tantangan kesehatan berhadiah dan papan peringkat tim"
+        },
+        {
+          "title": "Laporan ROI Wellness",
+          "description": "Ukur dampak program wellness terhadap produktivitas dan penghematan klaim asuransi"
+        }
+      ],
+      "businessBenefits": [
+        {
+          "label": "Skrining massal tanpa mengganggu operasional"
+        },
+        {
+          "label": "Identifikasi risiko karyawan secara real-time"
+        },
+        {
+          "label": "Program intervensi yang tepat sasaran"
+        },
+        {
+          "label": "ROI wellness yang terukur"
+        }
+      ],
+      "cta": {
+        "title": "Bangun Tenaga Kerja yang Lebih Sehat",
+        "subtitle": "Bekali tim HR dengan intelijen kesehatan real-time",
+        "buttonText": "Hubungi Kami untuk Demo"
+      }
+    },
+    "remote-patient-monitoring": {
+      "title": "Pemantauan Pasien Jarak Jauh",
+      "subtitle": "Pemantauan Pasien Jarak Jauh",
+      "hero": {
+        "subtitle": "Pantau Pasien Anda dari Mana Saja, Kapan Saja."
+      },
+      "overview": {
+        "description": "Seleris RPM Platform memungkinkan tenaga medis memantau kondisi fisiologis pasien secara berkelanjutan — tanpa memerlukan pertemuan tatap muka. Melalui integrasi dengan sistem telehealth dan Rekam Medis Elektronik (EMR), data tanda vital pasien yang dikumpulkan lewat rPPG langsung tersinkronisasi ke dasbor klinisi, memberikan gambaran status pasien yang menyeluruh dan selalu terkini.",
+        "stats": [
+          {
+            "label": "Pemantauan"
+          },
+          {
+            "label": "Peringatan Kritis"
+          },
+          {
+            "label": "Terintegrasi"
+          }
+        ]
+      },
+      "keyFeatures": [
+        {
+          "title": "Dasbor Pemantauan Berkelanjutan",
+          "description": "Pemantauan real-time Detak Jantung, HRV, RR, SpO2, dan risiko kardiovaskular"
+        },
+        {
+          "title": "Sistem Peringatan Otomatis",
+          "description": "Notifikasi instan ke klinisi saat parameter vital melampaui ambang kritis"
+        },
+        {
+          "title": "Integrasi EMR/Telehealth",
+          "description": "Kompatibel dengan platform rekam medis dan telehealth yang sudah berjalan"
+        },
+        {
+          "title": "Pemantauan Pasca Rawat Inap",
+          "description": "Pantau pasien setelah keluar rumah sakit untuk mencegah rawat inap ulang"
+        }
+      ],
+      "moreFeatures": [
+        {
+          "title": "Manajemen Penyakit Kronis",
+          "description": "Solusi khusus untuk penanganan jangka panjang pasien hipertensi, diabetes, dan jantung"
+        },
+        {
+          "title": "Laporan Klinis Terstruktur",
+          "description": "Hasilkan laporan kesehatan berkala yang siap untuk dokumentasi medis"
+        }
+      ],
+      "businessBenefits": [
+        {
+          "label": "Pemantauan pasien jarak jauh tanpa kunjungan tatap muka"
+        },
+        {
+          "label": "Deteksi dini komplikasi pasca rawat inap"
+        },
+        {
+          "label": "Manajemen penyakit kronis jangka panjang"
+        },
+        {
+          "label": "Integrasi EMR yang mulus"
+        }
+      ],
+      "cta": {
+        "title": "Hadirkan Perawatan Pasien Berkelanjutan",
+        "subtitle": "Perluas pemantauan kesehatan hingga ke luar dinding rumah sakit",
+        "buttonText": "Hubungi Kami untuk Demo"
+      }
+    },
+    "biological-age": {
+      "title": "Penilaian Usia Biologis",
+      "subtitle": "Penilaian Usia Biologis — Seleriscare.ai",
+      "hero": {
+        "subtitle": "Sebenarnya, Berapa Usia Tubuh Anda?"
+      },
+      "overview": {
+        "description": "Seleris memadukan rPPG, computer vision, dan machine learning untuk mengestimasi usia biologis secara non-invasif hanya dari video wajah. Model ini dikalibrasi dengan data epidemiologi populasi Asia Tenggara, sehingga relevan secara demografis dan klinis untuk pasar Indonesia. Hasilnya bukan sekadar angka — melainkan panduan yang dapat ditindaklanjuti untuk intervensi kesehatan dan penetapan premi asuransi yang lebih adil.",
+        "stats": [
+          {
+            "label": "Non-Invasif"
+          },
+          {
+            "label": "Dataset Asia Tenggara"
+          },
+          {
+            "label": "Aplikasi Strategis"
+          }
+        ]
+      },
+      "keyFeatures": [
+        {
+          "title": "Seleksi Risiko Asuransi Jiwa",
+          "description": "Gantikan atau lengkapi underwriting medis konvensional dengan penilaian biologis yang objektif"
+        },
+        {
+          "title": "Program Longevity Personal",
+          "description": "Panduan kesehatan yang disesuaikan berdasarkan selisih usia biologis dan kronologis"
+        },
+        {
+          "title": "Evaluasi Efektivitas Intervensi",
+          "description": "Ukur dampak nyata program kesehatan dalam memperlambat laju penuaan"
+        },
+        {
+          "title": "Riset Epidemiologi",
+          "description": "Basis data usia biologis populasi berskala besar untuk riset kesehatan nasional"
+        }
+      ],
+      "moreFeatures": [
+        {
+          "title": "Insentif Wellness",
+          "description": "Beri penghargaan bagi pemegang polis/karyawan yang berhasil menurunkan usia biologisnya"
+        }
+      ],
+      "businessBenefits": [
+        {
+          "label": "Penilaian risiko lebih akurat dibanding usia kronologis"
+        },
+        {
+          "label": "Panduan intervensi kesehatan yang personal"
+        },
+        {
+          "label": "Basis data epidemiologi berskala nasional"
+        },
+        {
+          "label": "Insentif wellness berbasis data"
+        }
+      ],
+      "cta": {
+        "title": "Pertajam Wawasan Kesehatan lewat Usia Biologis",
+        "subtitle": "Ubah data menjadi strategi longevity yang dapat dijalankan",
+        "buttonText": "Hubungi Kami untuk Demo"
+      }
+    },
+    "population-health": {
+      "title": "Skrining Kesehatan Populasi",
+      "subtitle": "Skrining Kesehatan Populasi — Seleriscare.ai",
+      "hero": {
+        "subtitle": "Skrining Jutaan Orang, Cukup dengan Smartphone."
+      },
+      "overview": {
+        "description": "Seleris Population Health Screening mengubah seluruh persamaannya. Dengan model 'screening-as-a-service', Seleris memungkinkan skrining kesehatan berskala nasional memakai infrastruktur yang sudah ada: smartphone. Tanpa perlu membangun klinik baru, tanpa perlu tambahan tenaga kesehatan. Platform ini dapat diintegrasikan ke aplikasi kesehatan nasional, portal kesehatan korporasi, atau kios digital — menjangkau jutaan orang sekaligus.",
+        "stats": [
+          {
+            "label": "Peserta BPJS"
+          },
+          {
+            "label": "Screening-as-a-Service"
+          },
+          {
+            "label": "Skalabilitas"
+          }
+        ]
+      },
+      "keyFeatures": [
+        {
+          "title": "Peserta BPJS Kesehatan",
+          "description": "Skrining dini risiko kardiovaskular dan metabolik bagi 240 juta peserta jaminan kesehatan nasional"
+        },
+        {
+          "title": "Pemegang Polis Asuransi",
+          "description": "Skrining pra-underwriting untuk mempercepat proses pengajuan polis"
+        },
+        {
+          "title": "Program Kesehatan Pemerintah",
+          "description": "Mendukung program nasional pencegahan penyakit kronis, PTM, dan deteksi dini hipertensi"
+        },
+        {
+          "title": "Masyarakat Pedesaan",
+          "description": "Skrining tanpa infrastruktur kesehatan melalui kader kesehatan desa dan smartphone sederhana"
+        }
+      ],
+      "moreFeatures": [
+        {
+          "title": "Institusi Pendidikan",
+          "description": "Skrining kesehatan berkala untuk pelajar dan sivitas akademika"
+        }
+      ],
+      "businessBenefits": [
+        {
+          "label": "Skrining berskala nasional lewat smartphone"
+        },
+        {
+          "label": "Deteksi dini penyakit kronis"
+        },
+        {
+          "label": "Menjangkau masyarakat pedesaan dan yang belum terlayani"
+        },
+        {
+          "label": "Integrasi dengan program kesehatan pemerintah"
+        }
+      ],
+      "cta": {
+        "title": "Perluas Skrining Kesehatan ke Seluruh Negeri",
+        "subtitle": "Jangkau jutaan orang dengan skrining sederhana berbasis smartphone",
+        "buttonText": "Hubungi Kami untuk Demo"
+      }
+    },
+    "b2b-partnership": {
+      "title": "Kemitraan & Lisensi B2B",
+      "subtitle": "Kemitraan & Lisensi B2B — Seleriscare.ai",
+      "hero": {
+        "subtitle": "Integrasikan AI Kesehatan Terbaik ke Platform Anda."
+      },
+      "overview": {
+        "description": "Teknologi rPPG Seleris tidak hanya tersedia sebagai produk pengguna akhir, tetapi juga sebagai komponen infrastruktur teknologi kesehatan yang dapat diintegrasikan ke ekosistem bisnis Anda. Melalui model kemitraan yang fleksibel — mulai dari integrasi API dan solusi white-label hingga joint venture strategis — Seleris membuka peluang kolaborasi bagi organisasi yang ingin menghadirkan AI kesehatan mutakhir ke platform mereka.",
+        "stats": [
+          {
+            "label": "Negara"
+          },
+          {
+            "label": "SDK Siap Pakai"
+          },
+          {
+            "label": "Jaringan Industri"
+          }
+        ]
+      },
+      "keyFeatures": [
+        {
+          "title": "Integrasi API",
+          "description": "Integrasikan SDK rPPG langsung ke aplikasi mobile atau platform web Anda dengan dokumentasi teknis yang lengkap"
+        },
+        {
+          "title": "Solusi White-Label",
+          "description": "Solusi Seleriscare.ai yang sepenuhnya di-rebranding sesuai identitas merek mitra — termasuk UI/UX, branding, dan domain"
+        },
+        {
+          "title": "OEM/Embedded",
+          "description": "Integrasi SDK ke perangkat keras (kios, tablet medis, perangkat IoT kesehatan)"
+        },
+        {
+          "title": "Joint Venture Strategis",
+          "description": "Model JV 50/50 untuk pasar tertentu, termasuk JV Malaysia dan ekspansi 30 negara Asia-MENA"
+        }
+      ],
+      "moreFeatures": [
+        {
+          "title": "Program Sub-Lisensi",
+          "description": "Mitra sub-lisensi di negara sasaran memperoleh hak distribusi eksklusif untuk teknologi Seleris"
+        }
+      ],
+      "businessBenefits": [
+        {
+          "label": "Model kemitraan yang fleksibel"
+        },
+        {
+          "label": "Akses ke seluruh ekosistem Seleris"
+        },
+        {
+          "label": "Ekspansi 30 negara Asia-MENA"
+        },
+        {
+          "label": "Jaringan industri lebih dari 30 tahun"
+        }
+      ],
+      "cta": {
+        "title": "Bermitra dengan Seleris",
+        "subtitle": "Hadirkan AI kesehatan canggih ke dalam ekosistem Anda",
+        "buttonText": "Hubungi Kami untuk Demo"
+      }
+    }
+  },
+  "footer": {
+    "tagline": "Mentransformasi industri asuransi jiwa dan kesehatan agar lebih efisien, akurat, dan dapat diakses oleh semua orang",
+    "products": "Produk",
+    "company": "Perusahaan",
+    "stayConnects": "Tetap Terhubung",
+    "address": "Alamat",
+    "phone": "Telepon",
+    "email": "Email",
+    "getTheApp": "Unduh Aplikasi",
+    "copyright": "© 2023 Seleris Asia Pacific Technology. Seluruh hak cipta dilindungi",
+    "company_items": {
+      "about": "Tentang",
+      "terms": "Syarat & Ketentuan",
+      "privacy": "Kebijakan Privasi",
+      "security": "Keamanan"
+    }
+  },
+  "underConstruction": {
+    "title": "Sedang Dalam Pengembangan",
+    "description": "Halaman ini sedang dalam pengembangan. Silakan kembali lagi nanti.",
+    "close": "Oke, Mengerti"
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "Inovasi AI",
+      "titleLine1": "Masa Depan Teknologi",
+      "titleLine2": "Kehidupan",
+      "bookDemo": "Jadwalkan Demo"
+    },
+    "banners": {
+      "lifins": "Platform underwriting cerdas untuk asuransi jiwa individu dan kumpulan, mempercepat pengambilan keputusan hingga 90% dengan aturan bisnis yang sepenuhnya dapat dikonfigurasi.",
+      "medins": "Sistem inteligensi asuransi kesehatan berbasis AI yang mengotomatiskan pemrosesan data medis, memperkuat deteksi fraud, meningkatkan prediksi risiko, dan memastikan kepatuhan regulasi.",
+      "credit-cover": "Solusi berbasis AI yang menyederhanakan asuransi jiwa kredit dan proteksi pinjaman, mengotomatiskan penilaian risiko dengan akurasi hingga 25% lebih tinggi dan memangkas waktu proses hingga 80%.",
+      "care": "Platform kesehatan dan wellness korporasi yang mengotomatiskan pemantauan kesehatan karyawan, memberikan wawasan preventif secara real-time, dan menekan biaya medis hingga 20%."
+    },
+    "partners": {
+      "partners": "Mitra",
+      "clients": "Klien"
+    },
+    "certificate": {
+      "title": "Sertifikasi Seleris",
+      "subtitle": "Seleris Meditekno Internasional"
+    },
+    "supported": {
+      "title": "Surat Keterangan",
+      "descriptionLine1": "SELICA diklasifikasikan sebagai Alat Kesehatan berbasis AI sesuai regulasi",
+      "descriptionLine2": "Kementerian Kesehatan RI dan mengikuti ketentuan Permenkes No.14 Tahun 2021"
+    },
+    "howItWorks": {
+      "eyebrow": "Teknologi AI",
+      "titleLine1": "Bagaimana Seleris",
+      "titleLine2": "Bekerja?",
+      "steps": {
+        "rppg": {
+          "title": "Teknologi Remote Photoplethysmography",
+          "description": "Seleris memanfaatkan teknologi Remote Photoplethysmography (rPPG) untuk mengevaluasi berbagai tanda vital yang menggambarkan kondisi kesehatan nasabah."
+        },
+        "ai": {
+          "title": "Penerapan Artificial Intelligence dan Machine Learning",
+          "description": "Seleris memanfaatkan kekuatan algoritma AI dan ML terkini untuk mengevaluasi keputusan underwriting dan memberikan rekomendasi pertanggungan yang menyeluruh."
+        },
+        "security": {
+          "title": "Keamanan Data dan Kepatuhan Privasi",
+          "description": "Seleris menyimpan dan memproses data nasabah secara aman, memastikan kepatuhan terhadap regulasi global sekaligus melindungi informasi pribadi dan finansial yang sensitif."
+        }
+      }
+    },
+    "benefits": {
+      "title": "Keunggulan Seleris",
+      "subtitle": "Mulai gunakan Seleris dan rasakan sendiri perbedaannya",
+      "items": {
+        "accuracy": {
+          "title": "Akurasi",
+          "body": "Hasil pengujian menunjukkan Seleris mampu mengenali wajah dengan akurasi hingga 94%."
+        },
+        "speed": {
+          "title": "Kecepatan",
+          "body": "Seleris bekerja sangat cepat, membuka dan menjalankan setiap fitur dalam sekejap."
+        },
+        "efficiency": {
+          "title": "Efisiensi",
+          "body": "Antarmuka yang sederhana membantu pengguna menemukan fitur yang dibutuhkan dengan cepat."
+        },
+        "testimonial": {
+          "title": "Testimoni",
+          "body": "Rasakan kekuatan kolaborasi bersama banyak mitra."
+        },
+        "experience": {
+          "title": "Pengalaman Pelanggan",
+          "body": "Kami berkomitmen memberikan pengalaman terbaik yang mudah, aman, dan nyaman bagi pengguna Seleris."
+        },
+        "guarantee": {
+          "title": "Jaminan",
+          "body": "Keamanan data Anda adalah prioritas kami, dilindungi dengan teknologi mutakhir."
+        }
+      }
+    },
+    "aiDesc": {
+      "title": "Algoritma AI dan Machine Learning",
+      "highlight": "Algoritma AI dan ML kami",
+      "body": "melakukan penilaian risiko secara mendalam, mempertimbangkan berbagai faktor dan nuansa yang memengaruhi hasil. Analisis canggih ini memungkinkan kami memberikan panduan dan rekomendasi yang sesuai kebutuhan"
+    },
+    "technology": {
+      "eyebrow": "Teknologi",
+      "titleLine1": "Memadukan rPPG + Machine Learning",
+      "titleLine2": "Untuk Pemantauan Detak Jantung Nirsentuh",
+      "items": {
+        "what-is-rppg": {
+          "title": "Apa itu rPPG? Memahami Dasar-dasarnya.",
+          "description": "Metode pencitraan tanpa kontak yang mengukur detak jantung dari perubahan halus warna kulit melalui kamera."
+        },
+        "how-it-works": {
+          "title": "Cara Kerja rPPG Mendeteksi Jantung via Kamera..",
+          "description": "Cahaya yang dipantulkan kulit dianalisis kamera untuk mengekstrak pola aliran darah secara andal."
+        },
+        "machine-learning": {
+          "title": "Machine Learning sebagai Otak Pemrosesan",
+          "description": "Machine learning menyaring gangguan gerakan dan pencahayaan untuk mengekstrak rPPG bagi prediksi detak jantung."
+        },
+        "telemedicine": {
+          "title": "Potensi Besar untuk Telemedisin Jarak Jauh.",
+          "description": "rPPG mendukung pemantauan jantung jarak jauh dengan kamera untuk layanan telemedisin mobile yang dapat diskalakan."
+        }
+      }
+    },
+    "solutions": {
+      "eyebrow": "Solusi",
+      "title": "7 Solusi Kesehatan Berbasis AI",
+      "learnMore": "Selengkapnya"
+    },
+    "faceTracker": {
+      "eyebrow": "Ajukan Demo",
+      "titleLine1": "Apa yang Anda dapat",
+      "titleLine2": "saat mencoba demo pemindaian",
+      "cards": {
+        "vital-signs": {
+          "title": "Tanda Vital dalam 30 Detik",
+          "description": "Mengukur detak jantung, tekanan darah, SpO₂, HRV, dan lainnya. Tanpa perangkat wearable apa pun."
+        },
+        "micro-movement": {
+          "title": "Deteksi Gerakan Mikro",
+          "description": "AI memakai rPPG untuk mendeteksi aliran darah dan perubahan denyut melalui kulit wajah via kamera."
+        },
+        "parameters": {
+          "title": "60+ Parameter Kesehatan Berbasis AI",
+          "description": "Mengukur indikator kesehatan dan risiko secara instan untuk penilaian asuransi yang lebih cerdas."
+        },
+        "report": {
+          "title": "Laporan Kesehatan Instan",
+          "description": "Membentuk model 3D wajah Anda untuk pengukuran kesehatan yang akurat."
+        }
+      },
+      "scanButton": "Pindai Diri Anda",
+      "scanLimit": "Batas scan tercapai ({count}x)",
+      "modal": {
+        "title": "Ajukan Demo",
+        "description": "Isi informasi berikut untuk mencoba fitur pemindaian.",
+        "firstName": "Nama depan",
+        "firstNamePlaceholder": "Masukkan nama depan Anda",
+        "businessEmail": "Email bisnis",
+        "businessEmailPlaceholder": "Masukkan email bisnis Anda",
+        "companyName": "Nama perusahaan",
+        "companyNamePlaceholder": "Masukkan nama perusahaan Anda",
+        "goals": "Apa yang ingin Anda capai bersama Seleris AI",
+        "goalsPlaceholder": "Ceritakan tujuan Anda...",
+        "consentBefore": "Saya setuju menerima informasi tentang",
+        "consentAfter": "produk dan layanan melalui email. Data pribadi yang Anda berikan akan diproses sesuai dengan",
+        "privacyPolicy": "Kebijakan Privasi kami.",
+        "consentWithdraw": "Anda dapat menarik persetujuan ini kapan saja",
+        "submit": "Kirim Permintaan Demo"
+      }
+    },
+    "testimonial": {
+      "eyebrow": "Testimoni Klien",
+      "title": "Apa kata mereka setelah menggunakan produk kami"
+    },
+    "different": {
+      "title": "Apa yang Membuat Kami Berbeda?",
+      "subtitle": "Kami menghadirkan solusi untuk kehidupan nasabah kami.",
+      "items": {
+        "team": {
+          "title": "Tim Kami",
+          "subtitle": "Kolaborasi dan kerja sama tim."
+        },
+        "innovation": {
+          "title": "Inovasi",
+          "subtitle": "Mengembangkan solusi yang inovatif dan efektif."
+        },
+        "missions": {
+          "title": "Misi",
+          "subtitle": "Efisien, akurat, dan mudah diakses."
+        },
+        "performance": {
+          "title": "Performa Optimal",
+          "subtitle": "Didukung teknologi mutakhir untuk memastikan kelancaran dan kecepatan."
+        }
+      }
+    },
+    "blogs": {
+      "eyebrow": "Blog",
+      "title": "Kabar Terbaru Seleris",
+      "more": "Berita Lainnya",
+      "linkCopied": "Link berhasil disalin!"
+    }
+  },
+  "solutionPage": {
+    "label": "Solusi",
+    "overview": "Ikhtisar",
+    "keyFeatures": "Fitur Utama",
+    "moreFeatures": "Fitur Lainnya",
+    "businessBenefitsTitle": "Manfaat Bisnis",
+    "businessBenefitsSubtitle": "Solusi untuk Bisnis Anda",
+    "notFound": "Solusi tidak ditemukan."
+  },
+  "roadmap": {
+    "auto-claim": {
+      "title": "Seleris Auto Claim",
+      "subtitle": "Revolusi Klaim Otomatis",
+      "description": "Seleris AutoClaim adalah platform mobile berbasis AI yang dirancang untuk mengotomatiskan dan menyederhanakan proses klaim asuransi kendaraan, memungkinkan pengguna menilai kerusakan kendaraan langsung dari smartphone, menerima estimasi biaya perbaikan secara real-time, dan mendapatkan persetujuan klaim lebih cepat dari sebelumnya.",
+      "content": [
+        {
+          "title": "Penilaian Kerusakan Instan lewat Smartphone",
+          "description": "Nasabah mengunggah foto kendaraan yang rusak, lalu AI langsung mendeteksi kerusakan dan mengestimasi biaya perbaikan, sehingga inspeksi manual dapat ditekan."
+        },
+        {
+          "title": "Pemrosesan dan Persetujuan Klaim Otomatis",
+          "description": "Klaim sederhana disetujui otomatis, mempercepat proses, memangkas biaya, dan menghadirkan pengalaman yang lebih mulus dari kejadian hingga penyelesaian."
+        },
+        {
+          "title": "Deteksi Fraud dan Integrasi Sistem",
+          "description": "Aplikasi menandai ketidaksesuaian klaim atau potensi fraud dan terintegrasi dengan sistem asuransi yang sudah berjalan untuk alur kerja yang mulus."
+        }
+      ]
+    },
+    "liexpose": {
+      "title": "Seleris LieXpose",
+      "subtitle": "Deteksi Kebenaran lewat Suara",
+      "description": "Seleris LieXpose adalah platform analisis suara berbasis AI yang dirancang untuk mendeteksi kebohongan secara real-time dengan memanfaatkan teknologi pengenalan suara mutakhir dan algoritma perilaku untuk menilai kejujuran melalui percakapan alami, baik saat panggilan telepon, wawancara, maupun interaksi dengan pelanggan.",
+      "content": [
+        {
+          "title": "Deteksi Kebohongan Real-Time Berbasis Suara",
+          "description": "Seleris LieXpose menganalisis pola vokal secara langsung untuk mendeteksi ketidakjujuran, memungkinkan penilaian risiko instan di bidang asuransi, rekrutmen, dan layanan pelanggan."
+        },
+        {
+          "title": "Penerapan Lintas Industri dan Peluncuran Inti",
+          "description": "Platform ini akan menambahkan analisis kecerdasan emosional pada Q1 2026 dan dukungan multibahasa pada Q2 2026 untuk sektor asuransi, HR, dan layanan pelanggan."
+        },
+        {
+          "title": "Integrasi Sistem Mulus dan Peringatan Khusus",
+          "description": "LieXpose terintegrasi dengan call center dan alur kerja perusahaan, menyediakan peringatan real-time, ambang batas yang dapat disesuaikan, serta jejak audit untuk investigasi dan kepatuhan."
+        }
+      ]
+    },
+    "credit": {
+      "title": "Seleris Credit",
+      "subtitle": "Inteligensi Underwriting Asuransi Jiwa Kredit Berbasis AI",
+      "description": "Seleris Credit adalah platform underwriting asuransi jiwa kredit berbasis AI yang mengubah cara perusahaan asuransi dan lembaga keuangan menilai risiko mortalitas debitur. Dengan memadukan kecerdasan buatan, ilmu aktuaria, dan analitik prediktif, Seleris Credit memungkinkan keputusan underwriting yang lebih cepat, objektif, dan prudent untuk produk asuransi berbasis kredit.",
+      "content": [
+        {
+          "title": "Underwriting Asuransi Jiwa Kredit dan Skoring Risiko Otomatis",
+          "description": "Seleris Credit mengotomatiskan keputusan underwriting dengan menganalisis tanda vital, biomarker kesehatan, dan indikator risiko penyakit untuk menghasilkan keputusan real-time seperti Accepted Standard, Accepted Sub-Standard, atau Declined."
+        },
+        {
+          "title": "Extra Mortality Kuantitatif dan Penilaian Risiko Prediktif",
+          "description": "Platform ini menghitung nilai extra mortality memakai model prediktif berbasis AI, sehingga perusahaan asuransi dapat mengukur risiko kesehatan secara akurat sekaligus menekan subjektivitas dan meningkatkan keberlanjutan portofolio."
+        },
+        {
+          "title": "Integrasi Mulus dan Pelaporan Siap Regulasi",
+          "description": "Seleris Credit terintegrasi dengan sistem asuransi, perbankan, dan pembiayaan, menyajikan log underwriting terstruktur, laporan siap audit, dan transparansi keputusan yang selaras dengan manajemen risiko prudent serta standar regulasi."
+        }
+      ]
+    },
+    "propscan": {
+      "title": "Seleris PropScan",
+      "subtitle": "Revolusi Penilaian Properti",
+      "description": "Seleris PropScan adalah platform penilaian properti berbasis AI yang merevolusi cara industri properti dan asuransi mengevaluasi aset dengan memadukan computer vision canggih, analitik prediktif, dan teknologi pemodelan 3D.",
+      "content": [
+        {
+          "title": "Valuasi Properti dan Penilaian Kondisi Otomatis",
+          "description": "Seleris PropScan memakai AI dan pemodelan 3D untuk menilai properti dan memeriksa struktur, mempercepat penjualan, klaim, dan pemeliharaan."
+        },
+        {
+          "title": "Penerapan Lintas Industri dan Rencana Peluncuran",
+          "description": "PropScan diluncurkan pada Q2 2026 untuk properti, asuransi, dan manajemen fasilitas, dengan pemeliharaan prediktif pada Q3 dan pemindaian drone pada Q4."
+        },
+        {
+          "title": "Integrasi Sistem Mulus dan Pelaporan Khusus",
+          "description": "Platform ini terhubung dengan sistem properti, asuransi, dan real estat, menyediakan laporan, log, dan visual untuk mempermudah pengambilan keputusan dan audit."
+        }
+      ]
+    },
+    "fraudguard": {
+      "title": "Seleris FraudGuard",
+      "subtitle": "Rangkaian Pencegahan Fraud Menyeluruh",
+      "description": "Seleris FraudGuard adalah rangkaian pencegahan fraud berbasis AI yang menyeluruh, memadukan deteksi multi-modal, analitik prediktif, pemantauan adaptif, pemodelan risiko lanjutan, dan analisis perilaku untuk mengenali serta menekan aktivitas penipuan sebelum berdampak pada bisnis.",
+      "content": [
+        {
+          "title": "Deteksi Fraud Multi-Modal dan Pencegahan Prediktif",
+          "description": "FraudGuard memakai data transaksi, perilaku, perangkat, dan biometrik untuk mengenali aktivitas mencurigakan, memprediksi dan memberi peringatan fraud sebelum terjadi."
+        },
+        {
+          "title": "Strategi Peluncuran, Pertumbuhan, dan Ekspansi",
+          "description": "FraudGuard hadir pada Q3 2026 untuk deteksi fraud di asuransi, perbankan, dan e-commerce, menambahkan verifikasi identitas pada Q1 2027 dan simulasi anomali AI pada Q2 2027."
+        },
+        {
+          "title": "Integrasi Mulus dan Pemantauan Real-Time",
+          "description": "FraudGuard terintegrasi dengan sistem perusahaan, menyediakan dasbor real-time, peringatan khusus, dan laporan otomatis untuk respons ancaman yang cepat dan patuh regulasi."
+        }
+      ]
+    },
+    "vitalscan": {
+      "title": "Seleris VitalScan",
+      "subtitle": "Platform pemantauan kesehatan canggih",
+      "description": "Seleris VitalScan adalah platform pemantauan kesehatan canggih yang memadukan perangkat medis berbasis IoT dengan analitik kesehatan prediktif dan diagnostik berbasis AI untuk menghadirkan wawasan real-time yang berkelanjutan dan sangat akurat tentang kondisi seseorang.",
+      "content": [
+        {
+          "title": "Pemantauan Kesehatan Berkelanjutan dan Peringatan Dini",
+          "description": "VitalScan memantau tanda vital secara real-time dan memakai peringatan dini untuk mendeteksi masalah seperti penyakit jantung, gangguan pernapasan, dan kelelahan kronis."
+        },
+        {
+          "title": "Penerapan Tersasar di Berbagai Sektor",
+          "description": "VitalScan melayani sektor kesehatan, wellness korporasi, dan perawatan lansia, memberikan wawasan untuk perawatan jangka panjang, kesehatan kerja, dan pemantauan jarak jauh."
+        },
+        {
+          "title": "Integrasi IoT dan Analitik Kesehatan Prediktif",
+          "description": "VitalScan memakai perangkat wearable IoT dan model prediktif untuk memperkirakan risiko kesehatan, terintegrasi dengan sistem medis dan penyimpanan cloud yang aman demi menjaga privasi dan kepatuhan."
+        }
+      ]
+    },
+    "enterprise-suite": {
+      "title": "Seleris Enterprise Suite",
+      "subtitle": "Platform manajemen AI terintegrasi",
+      "description": "Seleris Enterprise Suite adalah platform manajemen AI terintegrasi generasi baru yang dirancang untuk menyatukan dan mengoptimalkan seluruh produk Seleris dalam satu dasbor yang cerdas, aman, skalabel, dan mudah digunakan demi wawasan bisnis yang menyeluruh.",
+      "content": [
+        {
+          "title": "Dasbor Terpadu dan Analitik Lintas Produk",
+          "description": "Seleris Enterprise Suite memusatkan seluruh solusi Seleris, sehingga organisasi dapat memantau performa, menganalisis tren, dan memperoleh wawasan real-time lintas produk."
+        },
+        {
+          "title": "Single Sign-On dan Kontrol Akses yang Ringkas",
+          "description": "Platform ini dilengkapi SSO kelas enterprise untuk login yang aman, akses berbasis peran, dan proses onboarding pengguna yang mudah serta efisien."
+        },
+        {
+          "title": "Pelaporan Terpusat dan Business Intelligence Lanjutan",
+          "description": "Dengan perangkat BI untuk laporan khusus, analitik prediktif, dan pemantauan KPI, suite ini memberi pimpinan gambaran operasional yang utuh untuk keputusan yang lebih tepat."
+        }
+      ]
+    },
+    "intelligence-hub": {
+      "title": "Seleris Intelligence Hub",
+      "subtitle": "Platform keputusan strategis berbasis AI",
+      "description": "Seleris Intelligence Hub adalah platform keputusan strategis berbasis AI yang dirancang untuk memberi organisasi wawasan prediktif mendalam, intelijen pasar, dan rekomendasi otomatis demi pengambilan keputusan bisnis yang lebih cepat, cerdas, dan berbasis data.",
+      "content": [
+        {
+          "title": "Analitik Prediktif Lintas Bidang Bisnis",
+          "description": "Seleris Intelligence Hub memakai machine learning atas data historis dan real-time untuk memproyeksikan kebutuhan penjualan, operasional, keuangan, dan rantai pasok, membantu pimpinan bertindak sebelum masalah muncul."
+        },
+        {
+          "title": "Intelijen Pasar dan Deteksi Tren",
+          "description": "Platform ini memantau data global dan industri untuk mengenali tren, langkah pesaing, dan disrupsi, sehingga bisnis dapat menyesuaikan strategi lebih awal."
+        },
+        {
+          "title": "Rekomendasi Otomatis dan Perangkat Perencanaan Strategis",
+          "description": "Sistem ini menyajikan rekomendasi berbasis data lengkap dengan simulasi dan analisis dampak untuk memandu investasi, alokasi sumber daya, dan perencanaan strategis."
+        }
+      ]
+    }
+  },
+  "roadmapPage": {
+    "title": "Inovasi",
+    "subtitle": "Roadmap Seleris Meditekno Internasional"
+  },
+  "products": {
+    "shared": {
+      "aboutUs": "Tentang Kami",
+      "ourClient": "Klien Kami",
+      "testimonial": "Testimoni",
+      "faq": "FAQ",
+      "company": "Seleris Meditekno Internasional",
+      "easyQuickTitle": "Klaim Medis Lebih Cerdas dengan",
+      "easyQuickSubtitle": "Otomatisasi Berbasis AI",
+      "downloadDescription": "Kendalikan data kesehatan dan klaim Anda kapan pun, di mana pun. Platform berbasis AI kami membuat pemrosesan data medis, pelacakan klaim, dan analisis risiko jadi lebih mudah dan cepat.",
+      "workSteps": [
+        {
+          "title": "Pemindaian Wajah",
+          "description": "Pindai wajah seketika untuk memverifikasi identitas kesehatan pengguna."
+        },
+        {
+          "title": "Pemrosesan Data AI",
+          "description": "Analisis data klaim secara otomatis dengan AI yang andal."
+        },
+        {
+          "title": "Hasil",
+          "description": "Dapatkan status klaim kesehatan yang akurat dan real-time seketika."
+        }
+      ],
+      "testimonialsB2B": [
+        {
+          "comment": "Seleris Medins membantu kami memangkas waktu pemrosesan klaim hingga 70%. Ini benar-benar mengubah operasional kami.",
+          "authorName": "Arianto Nugroho",
+          "authorPosition": "Chief Operations Officer, Nusantara Health Insurance"
+        },
+        {
+          "comment": "Dengan Seleris Medins, kemampuan deteksi fraud kami meningkat drastis. Cepat, andal, dan skalabel.",
+          "authorName": "Siti Ramadhani",
+          "authorPosition": "VP Claims Management, Medisafe Corp"
+        },
+        {
+          "comment": "Kami belum pernah melihat platform yang mengotomatiskan pemrosesan data medis seakurat dan seefisien ini. Luar biasa!",
+          "authorName": "Richard Tan",
+          "authorPosition": "Managing Director, AsiaMed Insurance"
+        },
+        {
+          "comment": "Kepatuhan regulasi dulu jadi mimpi buruk. Berkat Seleris Medins, kini kami memenuhi standar dengan mudah.",
+          "authorName": "Veronica Lim",
+          "authorPosition": "Compliance Manager, HealthPlus Global"
+        },
+        {
+          "comment": "Fitur stratifikasi risiko membantu kami menangani kasus berisiko tinggi secara proaktif. Menyelamatkan nyawa dan sumber daya.",
+          "authorName": "Dr. Yohan Santoso",
+          "authorPosition": "Medical Director, Klinik Sehat Mandiri"
+        },
+        {
+          "comment": "Integrasi API yang mulus dan tim dukungan yang responsif. Seleris Medins kini jadi bagian penting ekosistem kami.",
+          "authorName": "Clara Wijaya",
+          "authorPosition": "IT Solutions Lead, Bumi Insure"
+        }
+      ],
+      "testimonialsConsumer": [
+        {
+          "text": "Teknologi AI-nya sangat membantu masyarakat kecil untuk mendeteksi dini penyakit dengan biaya yang terjangkau.",
+          "name": "Bapak Andi",
+          "location": "Bandung"
+        },
+        {
+          "text": "Saya jadi lebih tenang karena bisa cek kondisi kesehatan lebih awal tanpa harus selalu ke rumah sakit.",
+          "name": "Ibu Siti",
+          "location": "Yogyakarta"
+        },
+        {
+          "text": "Prosesnya cepat dan mudah dipahami. Sangat membantu untuk orang awam seperti saya.",
+          "name": "Bapak Rudi",
+          "location": "Surabaya"
+        },
+        {
+          "text": "Aplikasinya ramah pengguna dan hasil analisisnya jelas. Cocok untuk pemantauan kesehatan keluarga.",
+          "name": "Ibu Lina",
+          "location": "Semarang"
+        },
+        {
+          "text": "Dengan teknologi ini, saya bisa lebih aware terhadap kondisi tubuh sebelum penyakit menjadi serius.",
+          "name": "Bapak Dedi",
+          "location": "Bekasi"
+        },
+        {
+          "text": "Inovasi yang luar biasa. Sangat membantu terutama bagi kami yang sulit akses layanan kesehatan.",
+          "name": "Ibu Maya",
+          "location": "Depok"
+        }
+      ]
+    },
+    "lifins": {
+      "hero": {
+        "title": "Underwriting Asuransi Jiwa",
+        "subtitle": "Otomatis",
+        "description": "Percepat persetujuan polis jiwa dengan underwriting AI yang cerdas, akurat, dan dapat disesuaikan."
+      },
+      "name": "Seleris Lifins",
+      "about": {
+        "title": "Aplikasi Underwriting Asuransi Berbasis AI",
+        "description": "Seleris Lifins adalah platform AI cerdas yang dirancang untuk mengotomatiskan proses underwriting polis asuransi jiwa individu maupun kumpulan. Dengan mesin pengambilan keputusan 90% lebih cepat dan aturan bisnis yang dapat dikonfigurasi, Lifins membantu perusahaan asuransi menyederhanakan penilaian risiko, menekan kesalahan manusia, dan menghadirkan pengalaman nasabah yang unggul — semuanya lewat arsitektur skalabel yang siap API."
+      },
+      "bookDemo": "Seleris Lifins, Solusi Lengkap untuk Kebutuhan Kesehatan Anda",
+      "healthCheck": [
+        {
+          "title": "Underwriting 90% Lebih Cepat",
+          "description": "Percepat persetujuan polis jiwa dengan keputusan AI nyaris seketika."
+        },
+        {
+          "title": "Penilaian Risiko Otomatis",
+          "description": "Analisis data kesehatan dan pribadi secara akurat dan konsisten."
+        },
+        {
+          "title": "Aturan Bisnis yang Disesuaikan",
+          "description": "Konfigurasi logika underwriting dengan mudah sesuai kebijakan Anda."
+        },
+        {
+          "title": "Kesalahan Manual Berkurang",
+          "description": "Tekan kesalahan manusia lewat otomatisasi keputusan berbasis aturan."
+        },
+        {
+          "title": "Pengalaman Nasabah Lebih Baik",
+          "description": "Hadirkan alur pengajuan yang lebih cepat, mulus, dan transparan."
+        },
+        {
+          "title": "Integrasi Berbasis API",
+          "description": "Terintegrasi mulus dengan sistem inti dan alur kerja Anda."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Apa itu Seleris Lifins?",
+          "answer": "Seleris Lifins adalah platform berbasis AI yang mengotomatiskan underwriting asuransi jiwa, baik untuk polis individu maupun kumpulan."
+        },
+        {
+          "question": "Bagaimana Seleris Lifins mempercepat underwriting?",
+          "answer": "Sistem kami menganalisis data pemohon secara real-time, memangkas waktu underwriting hingga 90% sekaligus meningkatkan akurasi."
+        },
+        {
+          "question": "Bagaimana cara mulai memakai Seleris Lifins?",
+          "answer": "Anda dapat mengajukan demo atau menghubungi tim kami. Integrasi biasanya memakan waktu kurang dari satu bulan, tergantung sistem Anda."
+        },
+        {
+          "question": "Apakah dukungan pelanggan termasuk?",
+          "answer": "Ya, tim dukungan kami tersedia 24/7 untuk membantu proses onboarding, penanganan kendala, dan penggunaan fitur."
+        },
+        {
+          "question": "Apakah Seleris Lifins aman?",
+          "answer": "Kami memakai enkripsi data yang kuat, kontrol akses, dan mematuhi regulasi privasi data global."
+        },
+        {
+          "question": "Platform apa saja yang didukung?",
+          "answer": "Lifins adalah platform berbasis web dengan desain API-first, sehingga mudah dihubungkan dengan sistem asuransi yang sudah berjalan."
+        },
+        {
+          "question": "Bisakah aturan underwriting disesuaikan?",
+          "answer": "Ya, Anda dapat mengonfigurasi sepenuhnya logika keputusan dan aturan bisnis agar selaras dengan kebijakan underwriting perusahaan Anda."
+        },
+        {
+          "question": "Apakah Seleris Lifins gratis?",
+          "answer": "Harga bergantung pada penggunaan dan skala penerapan. Kami menyediakan model langganan yang fleksibel. Hubungi kami untuk detailnya."
+        },
+        {
+          "question": "Di mana saya bisa menemukan syarat dan ketentuan?",
+          "answer": "Syarat dan kebijakan lengkap tersedia di situs kami atau di pengaturan aplikasi pada menu 'Legal'."
+        }
+      ]
+    },
+    "medins": {
+      "hero": {
+        "title": "Seleris Medins",
+        "subtitle": "Aplikasi",
+        "description": "Tingkatkan efisiensi dan akurasi operasional asuransi kesehatan dengan otomatisasi data medis berbasis AI."
+      },
+      "name": "Seleris Medins",
+      "about": {
+        "title": "Aplikasi Layanan Kesehatan Berbasis AI",
+        "description": "Seleris Medins memakai AI untuk mengotomatiskan pemrosesan data medis dan klaim kesehatan. Solusi kami membantu perusahaan asuransi dan penyedia layanan kesehatan korporasi menekan biaya, mendeteksi fraud, memprediksi nilai klaim, dan memastikan kepatuhan regulasi dengan mudah dan akurat."
+      },
+      "bookDemo": "Seleris Medins, Solusi Lengkap untuk Kebutuhan Kesehatan Anda",
+      "healthCheck": [
+        {
+          "title": "Otomatisasi Data Medis",
+          "description": "Proses data medis secara otomatis untuk menekan pekerjaan manual dan kesalahan."
+        },
+        {
+          "title": "Prediksi Klaim",
+          "description": "Estimasi biaya klaim kesehatan secara akurat sebelum disetujui."
+        },
+        {
+          "title": "Deteksi Fraud",
+          "description": "Kenali klaim mencurigakan dengan analitik fraud berbasis AI."
+        },
+        {
+          "title": "Kepatuhan Regulasi",
+          "description": "Pastikan kesesuaian dengan regulasi kesehatan lokal dan internasional."
+        },
+        {
+          "title": "Stratifikasi Risiko",
+          "description": "Klasifikasikan data pasien untuk memprediksi kasus berisiko tinggi."
+        },
+        {
+          "title": "Integrasi Skalabel",
+          "description": "Integrasikan dengan mudah ke sistem Anda melalui API."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Apa itu aplikasi Seleris Medins?",
+          "answer": "Seleris Medins adalah platform berbasis AI yang dirancang untuk mengotomatiskan pemrosesan data medis, memprediksi biaya klaim, mendeteksi fraud, dan memastikan kepatuhan terhadap regulasi kesehatan. Platform ini membantu penyedia asuransi dan program kesehatan korporasi menyederhanakan proses klaim kesehatan."
+        },
+        {
+          "question": "Bagaimana cara mulai memakai aplikasi Seleris Medins?",
+          "answer": "Untuk memulai, unduh aplikasinya di Google Play Store atau App Store, atau akses lewat browser di medins.seleris.ai. Masuk dengan akun terdaftar Anda untuk mulai mengelola klaim medis dan data kesehatan."
+        },
+        {
+          "question": "Apakah aplikasi ini menyediakan dukungan pelanggan?",
+          "answer": "Ya, tim dukungan pelanggan kami selalu siap membantu. Untuk pertanyaan, masukan, atau bantuan teknis, silakan hubungi kami di info@seleris.ai"
+        },
+        {
+          "question": "Apakah aplikasi Seleris Medins aman?",
+          "answer": "Tentu. Seleris Medins memakai protokol enkripsi TLS/SSL standar industri dan kebijakan perlindungan data yang ketat untuk menjaga informasi pribadi dan medis Anda."
+        },
+        {
+          "question": "Apakah aplikasi Seleris Medins tersedia di platform lain?",
+          "answer": "Saat ini Seleris Medins tersedia di web dan mobile (iOS dan Android). Kami sedang mengembangkan dukungan untuk platform serta integrasi lain dalam waktu dekat."
+        },
+        {
+          "question": "Bagaimana cara menghapus akun saya?",
+          "answer": "Jika Anda ingin menghapus akun, silakan hubungi tim dukungan kami di info@seleris.ai dan kami akan memproses permintaan Anda dengan aman."
+        },
+        {
+          "question": "Apakah aplikasi Seleris Medins gratis?",
+          "answer": "Aplikasi kami menyediakan versi gratis dengan fitur inti. Untuk mengakses analitik lanjutan dan perangkat premium, mungkin berlaku langganan atau pembelian dalam aplikasi."
+        },
+        {
+          "question": "Bagaimana cara memberikan masukan atau saran?",
+          "answer": "Anda dapat mengirimkan saran melalui menu pengaturan aplikasi atau langsung mengirim email ke info@seleris.ai"
+        },
+        {
+          "question": "Apa syarat dan ketentuan penggunaan aplikasi ini?",
+          "answer": "Anda dapat melihat syarat dan ketentuan penggunaan lengkap di menu pengaturan aplikasi. Mohon baca dengan saksama untuk memahami hak dan kewajiban Anda sebagai pengguna Seleris Medins."
+        }
+      ]
+    },
+    "creditCover": {
+      "hero": {
+        "title": "Risiko & Proteksi Kredit",
+        "subtitle": "Berbasis AI",
+        "description": "Sederhanakan proses asuransi jiwa kredit dan proteksi pinjaman dengan analisis risiko real-time dan otomatisasi kepatuhan."
+      },
+      "name": "Seleris Credit Cover",
+      "about": {
+        "title": "Aplikasi Asuransi Kredit Berbasis AI",
+        "description": "Seleris Credit Cover adalah solusi AI mutakhir yang dirancang untuk menyederhanakan asuransi jiwa kredit dan proteksi pinjaman. Platform kami mengotomatiskan penilaian risiko kredit, meningkatkan akurasi hingga 25%, dan memangkas waktu proses hingga 80%"
+      },
+      "bookDemo": "Seleris Credit Cover, Solusi Lengkap untuk Kebutuhan Kesehatan Anda",
+      "healthCheck": [
+        {
+          "title": "Penilaian Kredit Real-Time",
+          "description": "Analisis risiko kredit seketika dengan wawasan berbasis AI."
+        },
+        {
+          "title": "Pemrosesan Pengajuan Lebih Cepat",
+          "description": "Pangkas waktu proses hingga 80% per pengajuan."
+        },
+        {
+          "title": "Pelaporan Kepatuhan Otomatis",
+          "description": "Hasilkan laporan regulasi secara otomatis tanpa pekerjaan manual."
+        },
+        {
+          "title": "Akurasi Risiko Meningkat",
+          "description": "Capai keputusan risiko kredit hingga 25% lebih akurat."
+        },
+        {
+          "title": "Integrasi Sistem yang Mulus",
+          "description": "Terhubung mudah ke sistem loan origination dan core system lewat API."
+        },
+        {
+          "title": "Performa Skalabel",
+          "description": "Tangani 10.000+ pengajuan kredit per hari tanpa penurunan performa."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Apa itu Seleris Credit Cover?",
+          "answer": "Seleris Credit Cover adalah solusi berbasis AI yang mengotomatiskan proses asuransi jiwa kredit dan proteksi pinjaman bagi lembaga keuangan."
+        },
+        {
+          "question": "Bagaimana cara kerja Seleris Credit Cover?",
+          "answer": "Platform ini menganalisis pengajuan kredit secara real-time memakai AI, memprediksi tingkat risiko, dan mengotomatiskan pelaporan kepatuhan demi keputusan yang lebih cepat dan akurat."
+        },
+        {
+          "question": "Bagaimana cara mulai memakai Seleris Credit Cover?",
+          "answer": "Hubungi tim kami untuk menjadwalkan demo. Setelah onboarding, integrasi dapat diselesaikan dalam 2–4 minggu."
+        },
+        {
+          "question": "Apakah tersedia dukungan pelanggan?",
+          "answer": "Ya, kami menyediakan dukungan pelanggan 24/7 melalui email dan live chat untuk implementasi, penanganan kendala, dan pelatihan."
+        },
+        {
+          "question": "Apakah Seleris Credit Cover aman?",
+          "answer": "Tentu. Kami memakai enkripsi kelas enterprise, API yang aman, dan mematuhi standar perlindungan data internasional."
+        },
+        {
+          "question": "Platform apa saja yang didukung Seleris Credit Cover?",
+          "answer": "Tersedia sebagai platform web berbasis cloud dengan akses API yang dapat diintegrasikan ke sistem kredit yang sudah berjalan."
+        },
+        {
+          "question": "Bisakah saya menghapus atau menonaktifkan akun organisasi saya?",
+          "answer": "Ya, administrator dapat menghubungi tim dukungan kami untuk meminta penonaktifan akun atau penghapusan data kapan saja."
+        },
+        {
+          "question": "Apakah Seleris Credit Cover gratis?",
+          "answer": "Kami menyediakan model harga yang fleksibel, termasuk paket langganan dan berbasis pemakaian. Hubungi kami untuk penawaran sesuai kebutuhan Anda."
+        },
+        {
+          "question": "Di mana saya bisa menemukan syarat dan ketentuan?",
+          "answer": "Anda dapat mengakses syarat dan ketentuan lengkap di situs resmi kami atau di dalam aplikasi pada menu Pengaturan."
+        }
+      ]
+    },
+    "healthCare": {
+      "hero": {
+        "title": "Pemantauan Kesehatan Korporasi Lebih Cerdas",
+        "subtitle": "Aplikasi",
+        "description": "Perkuat organisasi Anda dengan wellness karyawan berbasis AI, wawasan preventif, dan kendali biaya kesehatan."
+      },
+      "name": "Seleris Care",
+      "about": {
+        "title": "Aplikasi Asuransi Berbasis Metrik Kesehatan AI",
+        "description": "Seleris Care adalah platform berbasis AI yang dibangun untuk kesehatan dan wellness korporasi. Platform ini mengotomatiskan pemantauan kesehatan karyawan, menghadirkan wawasan perawatan preventif secara real-time, dan membantu perusahaan mengoptimalkan program wellness sekaligus menekan biaya medis hingga 20%"
+      },
+      "bookDemo": "Seleris Care, Solusi Lengkap untuk Kebutuhan Kesehatan Anda",
+      "healthCheck": [
+        {
+          "title": "Pemantauan Kesehatan Karyawan",
+          "description": "Pantau status kesehatan karyawan secara otomatis dan berkelanjutan."
+        },
+        {
+          "title": "Wawasan Perawatan Preventif",
+          "description": "Dapatkan peringatan dini dan tren wellness lewat AI prediktif."
+        },
+        {
+          "title": "Optimalisasi Wellness Korporasi",
+          "description": "Rancang dan kelola program wellness dengan analitik real-time."
+        },
+        {
+          "title": "Penekanan Biaya Kesehatan",
+          "description": "Turunkan biaya kesehatan organisasi 15–20% per tahun."
+        },
+        {
+          "title": "Berbasis Mobile",
+          "description": "Dapat diakses lewat smartphone dan dioptimalkan untuk akses jarak jauh."
+        },
+        {
+          "title": "Dasbor Kesehatan Populasi",
+          "description": "Visualisasikan tren kesehatan kelompok dan segmen risikonya."
+        }
+      ],
+      "faq": [
+        {
+          "question": "Apa itu Seleris Care?",
+          "answer": "Seleris Care adalah platform kesehatan korporasi yang mengotomatiskan pemantauan wellness karyawan dan menyajikan wawasan perawatan preventif memakai AI."
+        },
+        {
+          "question": "Bagaimana Seleris Care membantu perusahaan saya?",
+          "answer": "Platform ini membantu menekan biaya kesehatan, memperbaiki kondisi kesehatan karyawan, dan mendukung HR mengelola program wellness secara efisien."
+        },
+        {
+          "question": "Bagaimana cara menerapkan Seleris Care?",
+          "answer": "Penerapannya cepat; tim kami mendampingi integrasi dan penyiapan, baik di lokasi maupun lewat aplikasi mobile, sesuai kebutuhan Anda."
+        },
+        {
+          "question": "Apakah tersedia dukungan pelanggan?",
+          "answer": "Ya, kami menyediakan dukungan khusus untuk membantu selama penerapan, pelatihan, dan penggunaan sehari-hari."
+        },
+        {
+          "question": "Apakah data kesehatan karyawan aman?",
+          "answer": "Tentu. Kami mengikuti regulasi privasi yang ketat dan mengenkripsi seluruh data kesehatan secara end-to-end."
+        },
+        {
+          "question": "Bisakah karyawan memakainya lewat ponsel?",
+          "answer": "Bisa. Seleris Care dirancang mobile-first dan berjalan di perangkat Android maupun iOS."
+        },
+        {
+          "question": "Apakah menyediakan wawasan kesehatan?",
+          "answer": "Ya, sistem ini menyediakan analitik kesehatan preventif, peringatan risiko dini, dan dasbor kesehatan tingkat korporasi."
+        },
+        {
+          "question": "Berapa besar penghematan biaya kesehatan yang bisa dicapai?",
+          "answer": "Perusahaan yang memakai Seleris Care melaporkan penghematan 15–20% untuk biaya kesehatan dan wellness setiap tahun."
+        },
+        {
+          "question": "Bisakah program wellness disesuaikan?",
+          "answer": "Ya, Anda dapat menyesuaikan program kesehatan dan protokol skrining berdasarkan kebutuhan karyawan dan kebijakan perusahaan."
+        }
+      ]
+    }
+  },
+  "creditPage": {
+    "hero": {
+      "title1": "AI Powered ",
+      "title2": "Credit Life",
+      "title3": "Underwriting Intelligence",
+      "descBefore": "Arahkan kamera ke wajah Anda dan biarkan",
+      "descHighlight": "kecerdasan buatan",
+      "descAfter": "yang bekerja.",
+      "viewDemo": "Lihat Demo",
+      "requestDemo": "Ajukan Demo"
+    },
+    "clients": "Klien Seleris Credit",
+    "about": {
+      "title1": "Tranformasi",
+      "title2": "Asuransi Kredit",
+      "descBefore": "Sebagai transformasi dari aplikasi",
+      "descHighlight": "Smart Credit",
+      "descAfter": "yang telah digunakan oleh mitra perusahaan asuransi dan broker asuransi, Seleris Credit menghadirkan pendekatan underwriting generasi baru yang berbasis data, sains aktuaria, dan analitik prediktif."
+    },
+    "whatWeDo": {
+      "title": "Apa yang Dikerjakan Seleris Credit?",
+      "subtitle1": "Seleris Credit melakukan deteksi dan penilaian",
+      "subtitle2": "risiko mortalitas debitur melalui analisis",
+      "footnote": "Parameter-parameter ini diolah menggunakan teknologi AI untuk membangun model penilaian risiko yang komprehensif dan konsisten, sehingga potensi risiko kesehatan yang belum terdeteksi dapat diidentifikasi lebih dini dan objektif.",
+      "items": [
+        {
+          "title": "Vital Signs",
+          "description": "Dengan teknologi facial scanning, AI menganalisis tanda vital dan menilai kondisi kesehatan secara cepat"
+        },
+        {
+          "title": "Biomarker kesehatan",
+          "description": "AI mengolah biomarker kesehatan untuk menghasilkan insight objektif dan terukur mengenai kondisi kesehatan secara menyeluruh"
+        },
+        {
+          "title": "Prediksi Risiko Penyakit",
+          "description": "Teknologi AI menganalisis data kesehatan untuk memprediksi risiko penyakit secara lebih akurat"
+        }
+      ]
+    },
+    "advantages": {
+      "title1": "Keunggulan Utama",
+      "title2": "Seleris Credit",
+      "items": [
+        {
+          "title": "Extra Mortality Calculation",
+          "description": "Menghasilkan nilai extra mortality secara kuantitatif dan berbasis data."
+        },
+        {
+          "title": "Prudent & Objective Risk Assessment",
+          "description": "Mengurangi subjektivitas, meningkatkan konsistensi, dan memperkuat tata kelola risiko."
+        },
+        {
+          "title": "Faster Time to Yes / No",
+          "description": "Mempercepat proses persetujuan kredit yang membutuhkan proteksi asuransi jiwa kredit."
+        }
+      ],
+      "decisionTitle": "Automated Underwriting Decision",
+      "decisionSubtitle1": "Menentukan keputusan underwriting secara",
+      "decisionSubtitle2": "real time:",
+      "decisions": [
+        {
+          "title": "Accepted - Standard"
+        },
+        {
+          "title": "Accepted - Sub Standard"
+        },
+        {
+          "title": "Declined"
+        }
+      ]
+    },
+    "forWho": {
+      "title1": "Untuk Siapa",
+      "title2": "Seleris ",
+      "title3": "Credit?",
+      "desc1": "Seleris Credit melakukan deteksi dan penilaian",
+      "desc2": "risiko mortalitas debitur melalui analisis",
+      "items": [
+        {
+          "title": "Perusahaan Asuransi Jiwa, Asuransi Umum dan Penjaminan Kredit",
+          "subtitle": "Meningkatkan kualitas underwriting dan keberlanjutan portofolio asuransi jiwa kredit"
+        },
+        {
+          "title": "Perusahaan Asuransi Jiwa, Asuransi Umum dan Penjaminan Kredit",
+          "subtitle": "Meningkatkan kualitas underwriting dan keberlanjutan portofolio asuransi jiwa kredit"
+        }
+      ]
+    },
+    "why": {
+      "title1": "Mengapa",
+      "title2": " Seleris ",
+      "title3": "Credit?",
+      "descBefore": "Di era digital dan AI, underwriting tidak lagi cukup berbasis intuisi dan proses manual.",
+      "descHighlight": "Seleris Credit",
+      "descAfter": "menghadirkan underwriting intelligence yang selaras dengan prinsip kehati-hatian, regulasi, dan kebutuhan industri keuangan modern.",
+      "requestDemo": "Ajukan Demo"
+    },
+    "cta": {
+      "title1": "Smarter Risk. Faster Decision.",
+      "title2": "Sustainable Protection",
+      "subtitle": "Ajukan Demo Sekarang!",
+      "button": "Jadwalkan Demo"
+    }
+  },
+  "sca": {
+    "hero": {
+      "badge": "Peluang Bisnis Tanpa Modal",
+      "title1": "Peluang Bisnis",
+      "title2": "Kesehatan Berbasis",
+      "title3": "AI Masa Depan",
+      "description": "Jadilah Seleris Care Applicator (SCA) dan bantu masyarakat memantau kesehatan secara non invasif sambil membangun penghasilan fleksibel yang berkelanjutan.",
+      "register": "Daftar Jadi SCA Sekarang"
+    },
+    "intro": "Layanan scanning kesehatan berbasis kecerdasan buatan dari PT Seleris Meditekno Internasional untuk analisis kondisi kesehatan yang cepat, noninvasif, dan akurat.",
+    "whatIs": {
+      "title1": "Apa Itu Seleris Care",
+      "title2": "Applicator (SCA) ?",
+      "descBefore": "SCA adalah mitra resmi",
+      "descHighlight": "Seleris Care",
+      "descAfter": "yang bertugas memasarkan dan menyediakan layanan scanning kesehatan kepada masyarakat luas menggunakan perangkat dan aplikasi digital kami.",
+      "cards": [
+        {
+          "title": "Partner Resmi",
+          "subtitle": "Telah melalui proses verifikasi dan sertifikasi"
+        },
+        {
+          "title": "Solusi Kesehatan",
+          "subtitle": "Didukung teknologi scanning modern"
+        },
+        {
+          "title": "Platform Digital Pintar",
+          "subtitle": "Pelaporan dan pemantauan terintegrasi"
+        }
+      ]
+    },
+    "parameters": {
+      "title": "30 Health Parameters",
+      "description": "Teknologi AI kami menganalisis spektrum kesehatan tubuh secara mendalam hanya dalam satu sesi pemindaian."
+    },
+    "packages": {
+      "title1": "Pilih Paket Kesehatan",
+      "title2": "Sesuai Kebutuhan Anda",
+      "payPerScan": "Pay Per Scan",
+      "subscribe": "Subscribe",
+      "backToHome": "Kembali ke beranda",
+      "packageLabel": "Paket",
+      "modalTitle1": "Kesehatan Anda,",
+      "modalTitle2": "Analisis",
+      "modalTitle3": "Tanpa",
+      "modalTitle4": "Jarum",
+      "modalSubtitle1": "Solusi cepat untuk pemantauan",
+      "modalSubtitle2": "rutin kesehatan dasar Anda.",
+      "retailPrice": "Harga Retail Layanan",
+      "resultTime": "Hasil Keluar dalam 5 Menit",
+      "registerAndSell": "Daftar SCA & Mulai Jualan",
+      "viewDetail": "Lihat Detail"
+    },
+    "whyJoin": {
+      "title": "Kenapa Bergabung Jadi SCA?",
+      "subtitle": "Membangun bisnis mandiri dengan dukungan korporasi global",
+      "items": [
+        {
+          "title": "Komisi Menarik",
+          "content": "Hingga 25% dari setiap transaksi"
+        },
+        {
+          "title": "Bisnis Kesehatan",
+          "content": "Produk yang dibutuhkan semua orang"
+        },
+        {
+          "title": "Sistem Digital",
+          "content": "Aplikasi mudah, tracking otomatis"
+        },
+        {
+          "title": "Sumber Income",
+          "content": "Komisi langsung + komisi jaringan"
+        },
+        {
+          "title": "Waktu Fleksibel",
+          "content": "Atur sendiri jadwal kerja Anda"
+        },
+        {
+          "title": "Training Gratis",
+          "content": "Pelatihan produk dan marketing"
+        }
+      ]
+    },
+    "membership": {
+      "title": "Level Keanggotaan",
+      "subtitle": "Pilih jalur karir yang sesuai dengan ambisi Anda",
+      "joinNow": "Bergabung Sekarang",
+      "starter": {
+        "name": "Starter Level",
+        "features": [
+          {
+            "text": "Fokus: Jualan Langsung"
+          },
+          {
+            "text": "Tanpa Target Minimum"
+          },
+          {
+            "text": "Full Digital Akses"
+          }
+        ]
+      },
+      "professional": {
+        "name": "Professional Level",
+        "features": [
+          {
+            "text": "Fokus: Jualan + Membangun Tim"
+          },
+          {
+            "text": "Syarat: Rekrut Minimal 1 SCA"
+          },
+          {
+            "text": "Bonus Networking 10%"
+          }
+        ]
+      }
+    },
+    "simulation": {
+      "title1": "Struktur Komisi &",
+      "title2": "Simulasi Penghasilan",
+      "servicePrice": "Harga Layanan",
+      "status": "Status",
+      "perScanning": "/ Scanning",
+      "affordable": "Terjangkau",
+      "directCommission": "Komisi Langsung",
+      "networkCommission": "Komisi Jaringan",
+      "targetPerDay": "Target Scanning per Hari",
+      "monthlyIncome": "Potensi Income Bulanan Anda"
+    },
+    "howToJoin": {
+      "title": "Cara Bergabung",
+      "subtitle": "Mulai langkah sukses anda dalam 3 langkah mudah",
+      "items": [
+        {
+          "step": "Daftar",
+          "content": "Isi formulir pendaftaran melalui website atau referral mitra."
+        },
+        {
+          "step": "Ikut Training",
+          "content": "Tervalidasi secara medis & sains modern."
+        },
+        {
+          "step": "Mulai Scanning",
+          "content": "Tervalidasi secara medis & sains modern."
+        }
+      ]
+    },
+    "benefits": {
+      "title": "Benefit Menjadi SCA",
+      "subtitle1": "Kami memberikan semua yang Anda butuhkan untuk membangun",
+      "subtitle2": "bisnis kesehatan yang sukses dan berkelanjutan.",
+      "membershipTitle1": "Paket",
+      "membershipTitle2": "Keanggotaan",
+      "supportTitle1": "Support",
+      "supportTitle2": "Berkelanjutan",
+      "whyUs": "Kenapa Kami",
+      "quote": "“Kami tidak hanya memberikan alat, tapi kami membangun ekosistem untuk pertumbuhan karir Anda.”",
+      "membershipItems": [
+        {
+          "content": "Akses aplikasi Seleris Care"
+        },
+        {
+          "content": "Training produk dan scanning"
+        },
+        {
+          "content": "Dashboard penjualan real time"
+        },
+        {
+          "content": "Kode referral pribadi"
+        },
+        {
+          "content": "Materi marketing digital"
+        },
+        {
+          "content": "Grup support komunitas"
+        },
+        {
+          "content": "Sertifikat resmi SCA"
+        }
+      ],
+      "supportItems": [
+        {
+          "content": "Update produk dan teknologi"
+        },
+        {
+          "content": "Tips marketing dan penjualan"
+        },
+        {
+          "content": "Kompetisi dan reward berkala"
+        },
+        {
+          "content": "Networking sesama member SCA"
+        }
+      ]
+    },
+    "testimonials": {
+      "title": "Apa Kata Mereka?",
+      "subtitle": "Kisah sukses dari mitra Seleris Care di seluruh Indonesia"
+    },
+    "cta": {
+      "title1": "Siap Memulai Bisnis",
+      "title2": "Kesehatan",
+      "description": "Dapatkan akses eksklusif ke teknologi AI kesehatan terbaik dan bangun penghasilan mandiri sekarang juga.",
+      "register": "Daftar Jadi SCA Sekarang",
+      "contact": "Hubungi Admin"
+    },
+    "healthPackages": [
+      {
+        "badge": ""
+      },
+      {
+        "badge": "Populer"
+      },
+      {
+        "badge": "Terlengkap"
+      }
+    ],
+    "packageFeatures": {
+      "essential": [
+        {
+          "text": "15 Parameter Kesehatan"
+        },
+        {
+          "text": "Basic Health Report"
+        },
+        {
+          "text": "Health Score"
+        },
+        {
+          "text": "Hasil Instan"
+        }
+      ],
+      "core": [
+        {
+          "text": "20 Parameter Kesehatan"
+        },
+        {
+          "text": "Detailed Report"
+        },
+        {
+          "text": "AI Recommendations"
+        },
+        {
+          "text": "Trend Analysis"
+        },
+        {
+          "text": "Doctor Consultation*"
+        }
+      ],
+      "prime": [
+        {
+          "text": "30 Parameter (All In)"
+        },
+        {
+          "text": "Complete Report"
+        },
+        {
+          "text": "Advanced AI Analysis"
+        },
+        {
+          "text": "Personalized Plan"
+        },
+        {
+          "text": "Doctor Video Call"
+        },
+        {
+          "text": "Priority Support"
+        },
+        {
+          "text": "Export PDF to Doctor"
+        }
+      ]
+    },
+    "features": [
+      {
+        "title": "Teknologi AI Medis",
+        "content": "Analisis kesehatan berbasis AI terpercaya dan akurat"
+      },
+      {
+        "title": "Analisis Cepat Akurat",
+        "content": "Hasil cepat dengan akurasi tinggi dan konsisten"
+      },
+      {
+        "title": "Non Invasif Aman",
+        "content": "Aman tanpa tindakan medis invasif dan nyaman"
+      },
+      {
+        "title": "Mudah Praktis Digunakan",
+        "content": "Proses sederhana dan mudah digunakan oleh semua"
+      }
+    ],
+    "scaPoints": [
+      {
+        "content": "Didukung sistem digital & aplikasi tracking otomatis"
+      },
+      {
+        "content": "Bukan tenaga medis? Tidak masalah!"
+      },
+      {
+        "content": "Diberikan training intensif hingga mahir"
+      }
+    ]
+  },
+  "about": {
+    "hero": {
+      "eyebrow": "Tentang Kami",
+      "title": "Seleris Meditekno Internasional",
+      "subtitle": "Masa Depan Teknologi Kehidupan",
+      "officeName": "Kantor Pengembangan Seleris",
+      "officeAddress": "Royal Spring , Jakarta Selatan....."
+    },
+    "desc1": "Seleris adalah perusahaan teknologi yang mengembangkan aplikasi berbasis video wajah untuk membantu perusahaan menilai individu secara lebih cepat dan akurat tanpa perlu wawancara tatap muka. Solusi berbasis AI ini menghadirkan evaluasi yang lebih cerdas, cepat, dan skalabel, sehingga lebih mudah menganalisis berbagai aspek seperti kesehatan, kondisi finansial, dan karakter perilaku.",
+    "desc2Before": "Didirikan pada 2019 oleh para wirausahawan dan teknolog berpengalaman, Seleris dibangun atas keyakinan bahwa setiap orang berhak mendapatkan proteksi yang terjangkau dan inklusif. Model",
+    "desc2Highlight": "AI dan machine learning",
+    "desc2After": "kami dilatih dengan dataset besar berisi video wajah dan data perilaku, sehingga mampu menilai risiko dengan akurasi tinggi bahkan untuk individu dengan catatan medis atau riwayat yang terbatas.",
+    "desc3": "Platform Seleris dirancang agar sederhana dan efisien, baik bagi perusahaan maupun nasabah. Perusahaan dapat mengintegrasikan Seleris lewat API yang fleksibel, sementara pengguna dapat menyelesaikan seluruh proses penilaian secara online dalam hitungan menit. Seleris membantu mitra meningkatkan kecepatan, presisi, dan aksesibilitas pada berbagai kebutuhan skrining dan evaluasi digital.",
+    "vision": {
+      "title": "Visi",
+      "description": "Visi Seleris adalah membangun dunia di mana setiap orang dapat mengakses solusi yang terjangkau, andal, dan inovatif; mendorong kesetaraan, memberdayakan masyarakat, dan menciptakan peluang bagi masa depan yang aman, berkelanjutan, dan sejahtera untuk semua."
+    },
+    "mission": {
+      "title": "Misi",
+      "description": "Misi Seleris adalah menciptakan solusi inovatif yang meningkatkan efisiensi, akurasi, dan aksesibilitas; memberdayakan individu dan organisasi untuk bertumbuh, mengambil keputusan yang tepat, dan membangun masa depan yang aman serta berkelanjutan bagi semua."
+    },
+    "deliver": {
+      "title": "Tentang Kami",
+      "subtitle": "Kami berkomitmen menghadirkan produk dan layanan yang efisien dan efektif.",
+      "whySeleris": {
+        "title": "Mengapa Seleris",
+        "subtitle": "Seleris membantu perusahaan menilai orang secara lebih cepat, cerdas, dan mudah."
+      },
+      "efficiency": {
+        "title": "Efisiensi",
+        "subtitle": "Pangkas biaya dan waktu proses hingga 50 persen."
+      },
+      "accuracy": {
+        "title": "Akurasi",
+        "subtitle": "AI menghasilkan penilaian akurat, bahkan dengan data pengguna yang terbatas."
+      },
+      "innovation": {
+        "title": "Inovasi",
+        "subtitle": "Proses online yang cepat, mudah, dan dapat diakses semua orang."
+      }
+    },
+    "values": {
+      "eyebrow": "Fitur Aplikasi",
+      "title1": "Kami perusahaan",
+      "title2": "yang mendorong keputusan lebih cerdas lewat",
+      "title3": "kekuatan AI,",
+      "items": [
+        {
+          "title": "Inovasi",
+          "description": "Seleris mengembangkan solusi cerdas dan efektif untuk tantangan industri asuransi dan underwriting."
+        },
+        {
+          "title": "Performa Optimal",
+          "description": "Kami memakai teknologi mutakhir untuk memastikan layanan yang cepat, mulus, dan andal."
+        },
+        {
+          "title": "Kerja Sama Tim",
+          "description": "Kami percaya hasil terbaik lahir dari kerja sama tim yang kuat dan kolaborasi bersama."
+        },
+        {
+          "title": "Integritas",
+          "description": "Seleris menjunjung kejujuran dan transparansi penuh dalam setiap interaksi bisnis."
+        },
+        {
+          "title": "Fokus pada Nasabah",
+          "description": "Kami mengutamakan pengalaman terbaik bagi setiap nasabah."
+        },
+        {
+          "title": "Visi Kami",
+          "description": "Seleris membayangkan asuransi jiwa dan kesehatan yang terjangkau dan dapat diakses semua orang."
+        }
+      ],
+      "visionTagline": "dengan visi.",
+      "humanFocused": "teknologi yang berpusat pada manusia."
+    },
+    "visionary": {
+      "eyebrow": "Sang Visioner",
+      "title": "Revolusi AI Seleris",
+      "titleLine1": "Sang Visioner",
+      "titleLine2": "Revolusi",
+      "name": "Rinaldi Anwar Buyung",
+      "role": "Insurtech Innovator & AI Architect",
+      "bio": [
+        {
+          "text": "Rinaldi Anwar Buyung bukan sekadar aktuaris; ia adalah wirausahawan teknologi yang secara aktif merancang masa depan industri asuransi. Ia adalah Founder Seleris, platform SaaS mutakhir yang memanfaatkan kekuatan kecerdasan buatan untuk merevolusi proses underwriting."
+        },
+        {
+          "text": "Seleris adalah penerapan langsung dari kerja akademiknya yang mendalam sebagai peneliti Doktoral di bidang AI dan Data Science. Visinya ditopang portofolio riset yang produktif, termasuk puluhan jurnal ilmiah tentang teknologi AI — bukti bahwa ia bukan hanya bagian dari percakapan, melainkan penggeraknya."
+        },
+        {
+          "text": "Dengan pengalaman 30 tahun di industri, Rinaldi memiliki perpaduan langka antara penguasaan teknis mendalam di bidang matematika, statistika, ilmu aktuaria, underwriting, dan manajemen risiko."
+        },
+        {
+          "text": "Ia tetap menjadi kekuatan dinamis di industri, aktif merintis inovasi baru di persimpangan layanan kesehatan, asuransi, dan keuangan. Ia berperan sebagai penasihat strategis tingkat tinggi dan memegang posisi tata kelola senior di sektor asuransi, reasuransi, dan konsultansi risiko. Sebagai aktuaris, Rinaldi adalah figur sentral yang memahami fondasi industri sekaligus aktif membangun masa depannya."
+        }
+      ]
+    }
+  },
+  "team": {
+    "eyebrow": "Tim Kami",
+    "title": "Kenali tim di balik Seleris",
+    "subtitle1": "Di balik setiap terobosan ada tim ahli penuh semangat yang mengubah",
+    "subtitle2": "gagasan berani menjadi dampak nyata.",
+    "subtitleMobile1": "Di balik setiap terobosan ada tim ahli penuh semangat yang mengubah",
+    "subtitleMobile2": "gagasan berani menjadi dampak nyata.",
+    "officeTitle": "Tim Kantor",
+    "officeSubtitle": "Tim pengembang kami mengubah gagasan menjadi kode yang cepat, rapi, dan andal.",
+    "officeSubtitleMobile1": "Tim pengembang kami mengubah gagasan menjadi kode",
+    "officeSubtitleMobile2": "yang cepat, rapi, dan andal.",
+    "engineeringDescription": "Tim engineering Seleris bertanggung jawab membangun dan memelihara platform berbasis AI kami. Dipimpin Rinaldi Anwar yang berpengalaman lebih dari 10 tahun dalam pengembangan dan penerapan AI, tim ini berfokus menghadirkan solusi teknologi yang andal, skalabel, dan inovatif.",
+    "positions": [
+      {
+        "title": "Produk",
+        "subtitle": "Menggerakkan visi produk, pengalaman pengguna, dan perbaikan berkelanjutan.",
+        "description": "Tim produk kami membentuk masa depan Seleris dengan menyusun strategi produk, meningkatkan pengalaman pengguna, dan menerjemahkan masukan menjadi fitur yang bermakna. Bekerja erat dengan pengguna dan pemangku kepentingan, mereka mengubah gagasan rumit menjadi solusi yang sederhana, intuitif, dan berdampak besar."
+      },
+      {
+        "title": "Sales & Marketing",
+        "subtitle": "Menghubungkan Seleris dengan pasar lewat strategi dan penceritaan.",
+        "description": "Tim sales dan marketing memastikan Seleris menjangkau audiens yang tepat dengan pesan yang tepat. Mulai dari perolehan prospek dan membangun relasi hingga branding dan pembuatan konten, mereka merancang kampanye yang meyakinkan dan mendorong pertumbuhan bisnis lewat komunikasi yang jelas dan pemahaman pasar."
+      },
+      {
+        "title": "Engineering",
+        "subtitle": "Mengembangkan teknologi berbasis AI yang cerdas, skalabel, dan andal.",
+        "description": "Tim engineering adalah tulang punggung teknologi Seleris, bertanggung jawab mengembangkan dan memelihara platform berbasis AI kami dengan fokus pada performa, skalabilitas, dan keamanan, sekaligus terus berinovasi agar solusi kami selalu selangkah di depan kebutuhan industri dan memberi nilai nyata bagi pengguna."
+      }
+    ]
+  },
+  "services": {
+    "eyebrow": "Layanan",
+    "heroTitle": "Selamat Datang di Dokumentasi Seleris",
+    "heroSubtitle": "Dokumentasi API kami yang intuitif memandu Anda langkah demi langkah",
+    "apiTitle": "Layanan API",
+    "apiDescription": "Seleris menyediakan layanan API yang andal sehingga perusahaan dapat mengintegrasikan kemampuan Seleris ke sistem yang sudah berjalan. Layanan API ini mudah digunakan dan menyediakan beragam fitur, di antaranya.",
+    "apiSupport": "Seleris menyediakan dokumentasi dan dukungan lengkap untuk membantu perusahaan mulai memakai layanan API.",
+    "apiCards": [
+      {
+        "title": "Analisis Video Cerdas",
+        "description": "Seleris menganalisis video wajah singkat untuk mengenali faktor risiko utama secara cepat dan akurat, sehingga evaluasi jadi lebih cerdas dan cepat."
+      },
+      {
+        "title": "Skoring Risiko Instan",
+        "description": "Dapatkan skor risiko dalam hitungan detik untuk menyederhanakan keputusan dan memperbaiki proses evaluasi digital Anda."
+      },
+      {
+        "title": "Evaluasi Tanpa Hambatan",
+        "description": "Seleris menghadirkan pengalaman evaluasi yang sepenuhnya digital dan mulus, cocok untuk pengguna jarak jauh atau yang riwayat datanya terbatas."
+      }
+    ],
+    "getStartedTitle1": "Cara Memulai dengan",
+    "getStartedTitle2": "Layanan API Seleris",
+    "getStartedSubtitle": "Layanan API Seleris menghadirkan sejumlah manfaat bagi perusahaan, di antaranya",
+    "getStartedItems": [
+      {
+        "title": "Dokumentasi API",
+        "body": "Panduan dan referensi terperinci untuk membantu Anda berintegrasi dengan cepat."
+      },
+      {
+        "title": "Autentikasi",
+        "body": "Autentikasi yang aman memakai kunci API dan token."
+      },
+      {
+        "title": "Otomatisasi Alur Kerja",
+        "body": "Kelola dan otomatiskan alur kerja dengan mudah, cepat, akurat, dan minim pekerjaan manual."
+      }
+    ],
+    "benefitsTitle": "Manfaat",
+    "benefitsSubtitle": "Manfaat Memakai API Seleris",
+    "benefitsDescription": "Layanan API Seleris menghadirkan sejumlah manfaat bagi perusahaan, di antaranya"
+  },
+  "contact": {
+    "title1": "Hubungi",
+    "title2": "Kami",
+    "titleMobile1": "HUBUNGI",
+    "titleMobile2": "Kami",
+    "subtitle": "Jadilah yang pertama mengetahui selengkapnya",
+    "fullName": "Nama Lengkap:",
+    "fullNamePlaceholder": "Nama Lengkap",
+    "emailPlaceholder": "Email",
+    "messagePlaceholder": "Pesan",
+    "submit": "Kirim",
+    "mapTitle": "Peta lokasi Kantor Pengembangan Seleris",
+    "chatTitle": "Chat dengan Dukungan",
+    "chatSubtitle": "Tim kami siap membantu Anda",
+    "callTitle": "Telepon Kami",
+    "callHours": "Sen-Sab 09.00 - 17.00",
+    "contactTitle": "Kontak",
+    "contactSubtitle": "Butuh bantuan? Kami siap mendengarkan!",
+    "contactDescription": "Kunjungi tim kami di salah satu lokasi kami"
+  },
+  "blog": {
+    "heroTitle": "Blog",
+    "heroSubtitle": "Kabar Terbaru Seleris",
+    "heroDescription": "Tetap terinspirasi dengan kabar terbaru seputar teknologi, tren desain, dan pertumbuhan bisnis",
+    "search": "Cari Artikel...",
+    "mostPopular": "Paling Populer",
+    "content": "Daftar Isi",
+    "noResults": "Tidak ada artikel yang cocok dengan pencarian",
+    "noArticles": "Tidak ada artikel",
+    "linkCopied": "Link berhasil disalin!",
+    "linkCopiedText": "Bagikan ke temanmu 🚀",
+    "logout": "Keluar",
+    "signIn": "Masuk",
+    "signUp": "Daftar",
+    "authSubtitle": "Jadilah yang pertama mengetahui selengkapnya",
+    "email": "Email",
+    "password": "Kata Sandi",
+    "fullName": "Nama Lengkap",
+    "forgotPassword": "Lupa Kata Sandi?",
+    "noAccount": "Belum punya akun?",
+    "haveAccount": "Sudah punya akun?",
+    "commentPlaceholder": "Bagikan pendapat Anda?",
+    "loginSuccess": "Berhasil Login",
+    "loginSuccessText": "Selamat datang kembali!",
+    "registerFailed": "Gagal Register",
+    "registerSuccess": "Berhasil Register",
+    "logoutConfirm": "Yakin ingin logout?",
+    "logoutConfirmText": "Kamu akan keluar dari akun saat ini.",
+    "logoutYes": "Ya, logout",
+    "logoutCancel": "Batal",
+    "logoutSuccess": "Berhasil Logout"
+  },
+  "careers": {
+    "academic_transcript": "Transkrip Nilai",
+    "additional_documents": "Dokumen Tambahan",
+    "additional_training_certificates_if_any_": "Sertifikat pelatihan tambahan, jika ada (gabungkan menjadi satu PDF)",
+    "address": "Alamat",
+    "apply": "Lamar",
+    "atau_seret_dan_lepas": "atau seret dan lepas",
+    "benefit": "Benefit",
+    "close": "Tutup",
+    "comunication_team_work_etc": "Komunikasi, Kerja Sama Tim, dll.",
+    "country": "Negara",
+    "cover_letter": "Surat Lamaran",
+    "current_salary": "Gaji Saat Ini",
+    "curriculum_vitae_cv": "Curriculum Vitae (CV)",
+    "date_of_birth": "Tanggal Lahir",
+    "date_of_joining": "Tanggal Mulai Bergabung",
+    "declaration_and_consent": "Pernyataan dan Persetujuan",
+    "diploma": "Ijazah",
+    "do_you_have_any_previous_work_experience": "Apakah Anda memiliki pengalaman kerja sebelumnya?",
+    "email": "Email",
+    "end_date_of_study": "Tanggal Selesai Studi",
+    "end_date_work": "Tanggal Selesai Bekerja",
+    "english_bahasa_indonesia_japan_etc": "Inggris, Bahasa Indonesia, Jepang, dll.",
+    "expected_salary": "Gaji yang Diharapkan",
+    "explore": "Jelajahi",
+    "field_of_study": "Bidang Studi",
+    "full_name": "Nama Lengkap",
+    "gender": "Jenis Kelamin",
+    "gpa_grade_point_average": "IPK (Indeks Prestasi Kumulatif)",
+    "hapus": "Hapus",
+    "highest_level_of_education": "Jenjang Pendidikan Terakhir",
+    "job_description": "Deskripsi Pekerjaan",
+    "kualifikasi": "Kualifikasi",
+    "language": "Bahasa",
+    "language_skills": "Kemampuan Bahasa",
+    "last_company": "Perusahaan Terakhir",
+    "last_position": "Posisi Terakhir",
+    "lihat_dokumen": "Lihat Dokumen",
+    "microsoft_word_microsoft_excel_etc": "Microsoft Word, Microsoft Excel, dll.",
+    "motivation_preferences": "Motivasi & Preferensi",
+    "next": "Berikutnya",
+    "personal_info": "Data Pribadi",
+    "phone_number": "Nomor Telepon",
+    "place_of_birth": "Tempat Lahir",
+    "portfolio": "Portofolio",
+    "previous": "Sebelumnya",
+    "reason_for_applying_to_this_position": "Alasan melamar posisi ini",
+    "recent_formal_photograph": "Pas foto formal terbaru",
+    "requirements": "Persyaratan:",
+    "review_your_application": "Tinjau Lamaran Anda",
+    "school_university_name": "Nama Sekolah/Universitas",
+    "sertifikat_pelatihan_tambahan_jika_ada": "Sertifikat pelatihan tambahan (jika ada)",
+    "skills_competencies": "Keahlian & Kompetensi",
+    "soft_skills": "Soft Skill",
+    "start_date_of_study": "Tanggal Mulai Studi",
+    "start_date_work": "Tanggal Mulai Bekerja",
+    "submit": "Kirim",
+    "tahun_masuk_dan_tahun_lulus": "Tahun Masuk dan Tahun Lulus",
+    "tanggung_jawab_utama": "Tanggung Jawab Utama",
+    "technical_skills": "Keahlian Teknis",
+    "training_work_experience_certificates": "Sertifikat Pelatihan/Pengalaman Kerja",
+    "yes": "Ya",
+    "heroTitle": "Karier",
+    "heroSubtitle": "Temukan Tujuan Karier Anda",
+    "heroDescription": "Temukan semua yang Anda butuhkan untuk memulai dan mengembangkan perjalanan karier bersama Seleris.",
+    "noOpenings": "Saat ini belum ada lowongan. Ikuti media sosial kami untuk informasi terbaru.",
+    "declaration1": "Dengan ini saya menyatakan bahwa seluruh informasi dalam formulir ini benar dan akurat.",
+    "declaration2": "Saya memberikan izin kepada perusahaan untuk menggunakan informasi ini demi keperluan rekrutmen.",
+    "declaration3": "Saya bersedia menjalani proses pemeriksaan latar belakang sesuai ketentuan yang berlaku."
+  },
+  "technology": {
+    "sci": [
+      {
+        "title": "Merekam Video Aliran Darah Wajah",
+        "body": "Merekam video wajah secara real-time untuk menganalisis perubahan mikro aliran darah memakai kamera biasa. Proses ini tanpa kontak dan membantu mengekstrak sinyal fisiologis dari fluktuasi warna kulit yang terkait sirkulasi darah."
+      },
+      {
+        "title": "Deteksi Objek",
+        "body": "Mendeteksi dan melacak area wajah serta objek relevan lainnya agar wilayah yang tepat terpantau sepanjang video. Ini meningkatkan akurasi dengan mengisolasi komponen visual utama."
+      },
+      {
+        "title": "Deteksi Kondisi Persyaratan",
+        "body": "Secara otomatis memeriksa persyaratan lingkungan dan posisi seperti kualitas pencahayaan, jarak subjek, dan artefak gerakan. Ini memastikan sistem hanya memproses data visual yang layak dan andal."
+      },
+      {
+        "title": "Region of Interest (ROI)",
+        "body": "Memilih zona wajah tertentu (seperti dahi atau pipi) tempat sinyal aliran darah paling terlihat. Memfokuskan pada ROI meningkatkan kekuatan sinyal dan keandalan."
+      },
+      {
+        "title": "Ekstraksi Sinyal Mentah (RGB)",
+        "body": "Mengekstrak nilai kanal warna (Merah, Hijau, Biru) dari ROI. Sinyal mentah ini menjadi dasar analisis fisiologis lanjutan, menangkap perubahan halus yang tak kasat mata."
+      }
+    ],
+    "sdv": [
+      {
+        "title": "Ekstraksi Sinyal rPPG",
+        "body": "Menurunkan sinyal remote photoplethysmography (rPPG) dari data video wajah. Sinyal ini mencerminkan tanda vital seperti detak jantung dan diekstrak tanpa kontak fisik."
+      },
+      {
+        "title": "Penyaringan Sinyal",
+        "body": "Menerapkan filter pemrosesan sinyal canggih untuk memperkuat data kesehatan yang relevan sekaligus menghilangkan gangguan. Langkah ini memastikan sinyal rPPG yang diekstrak akurat."
+      },
+      {
+        "title": "Reduksi Derau",
+        "body": "Menghilangkan gangguan seperti perubahan pencahayaan atau gerakan kepala kecil dari sinyal. Ini memperjelas indikator kesehatan dengan menyingkirkan distorsi."
+      },
+      {
+        "title": "Ekstraksi Fitur AI",
+        "body": "Memakai algoritma machine learning untuk mengenali pola penting dalam sinyal yang telah dibersihkan. Sistem mengenali fitur seperti variabilitas detak jantung dan lainnya."
+      },
+      {
+        "title": "Prediksi Fitur",
+        "body": "Memprediksi parameter fisiologis utama berdasarkan fitur yang diekstrak, seperti estimasi denyut nadi, laju pernapasan, dan indikator stres, sehingga penilaian menjadi cepat."
+      }
+    ],
+    "sdr": [
+      {
+        "title": "Skoring Risiko Kesehatan",
+        "body": "Menghasilkan skor terukur berdasarkan masukan fisiologis untuk menilai kondisi kesehatan seseorang saat ini. Skor ini membantu pengguna dan penyedia layanan memantau kondisi kesehatan."
+      },
+      {
+        "title": "Prediksi Risiko Underwriting",
+        "body": "Memprediksi risiko underwriting asuransi dengan menganalisis data biometrik. Ini memberi perusahaan asuransi profil risiko otomatis untuk mempercepat dan memperbaiki keputusan."
+      },
+      {
+        "title": "Prediksi Risiko Penyakit",
+        "body": "Menilai kemungkinan penyakit kronis atau kritis dengan memadukan indikator fisiologis dan pemodelan AI. Ini membantu deteksi dini dan intervensi yang tepat sasaran."
+      },
+      {
+        "title": "Prediksi Risiko Mortalitas/Morbiditas",
+        "body": "Mengestimasi potensi penurunan kesehatan atau risiko kematian memakai data biometrik dan perilaku. Wawasan ini mendukung sektor kesehatan, asuransi, dan wellness."
+      }
+    ]
+  },
+  "misc": {
+    "ai_innovation": "Inovasi AI",
+    "current": "Terkini",
+    "doe": "Doe",
+    "faq": "FAQ",
+    "frequently_asked_questions": "Pertanyaan yang Sering Diajukan",
+    "hasil_scan_tidak_dapat_diproses_silakan_": "Hasil scan tidak dapat diproses. Silakan coba scan ulang.",
+    "ini_adalah_hasil_scan_terakhir_anda_bata": "Ini adalah hasil scan terakhir Anda. Batas scan telah tercapai.",
+    "is_committed_to_earning_customer_trust_b": "berkomitmen meraih kepercayaan pelanggan dengan:",
+    "jhon": "Jhon",
+    "keeping_up_to_date_with_security_industr": "Mengikuti perkembangan standar dan praktik terbaik industri keamanan",
+    "let_s_seleris_together": "Mari Ber-Seleris Bersama",
+    "message": "Pesan",
+    "monitor_60_health_metrics_in_just_30_sec": "Pantau 60+ metrik kesehatan hanya dalam 30 detik lewat pemindaian wajah",
+    "re_scan": "Pindai Ulang",
+    "read_more": "Selengkapnya",
+    "reporting_security_issues": "Melaporkan Masalah Keamanan",
+    "technology": "Teknologi",
+    "the_measured_indicators_are_correct_for_": "Indikator yang diukur sesuai untuk penggunaan medis",
+    "title": "Jabatan",
+    "to_accelerate_the_development_of_their_a": "untuk mempercepat pengembangan aplikasi AI mereka.",
+    "view_product": "Lihat Produk",
+    "we_ll_triage_the_issue_and_get_back_to_y": "Kami akan menelaah masalahnya dan menghubungi Anda kembali.",
+    "your_company": "Perusahaan Anda",
+    "prev": "Sebelumnya",
+    "next": "Berikutnya",
+    "news": "Berita",
+    "bad_signal": "Sinyal buruk",
+    "scan_complete": "Pemindaian Selesai",
+    "hand_detected": "Tangan Terdeteksi",
+    "potensi_komisi_sca": "Potensi Komisi SCA",
+    "innovation": "Inovasi",
+    "roadmap_seleris_meditekno_internasional": "Roadmap Seleris Meditekno Internasional",
+    "securityIntro": ", nasabah adalah yang utama. Ini adalah prinsip inti yang menuntun banyak keputusan kami sehari-hari. Kami menjaga kepercayaan nasabah dan keamanan data mereka dengan sungguh-sungguh.",
+    "securityCommitment": "Komitmen kami pada keamanan kelas enterprise adalah salah satu alasan tim ML terkemuka, termasuk OpenAI dan lainnya, mempercayakan pekerjaannya pada",
+    "securityRely": "Nasabah kami mengandalkan",
+    "securityRely2": "untuk menjalankan pekerjaan paling kritis mereka, dan kami berkomitmen membangun platform yang layak dipercaya. Layanan kami adalah platform terkelola, terstandar, teruji, dan diaudit pihak eksternal dengan kontrol akses yang kuat serta skalabel sesuai kebutuhan nasabah.",
+    "securityPoint1": "Merekrut tim keamanan kelas dunia untuk mengawasi seluruh aspek keamanan Seleris",
+    "securityPoint3": "Menerapkan teknologi keamanan mutakhir untuk melindungi dari ancaman keamanan",
+    "securityCertified": "Infrastruktur dan operasional platform cloud kami tersertifikasi patuh terhadap standar dan kerangka kerja praktik terbaik industri berikut:",
+    "securityAccess": "Untuk mengakses",
+    "securityAccess2": "sertifikasi dan laporan kepatuhan keamanan terbaru, silakan kunjungi Trust Center kami. Jika Anda tertarik memakai",
+    "securityAccess3": ", tetapi memiliki pertanyaan seputar keamanan, jangan ragu menghubungi kami. Kami dengan senang hati menghubungkan Anda dengan anggota tim Keamanan kami.",
+    "securityReport": "Jika Anda menemukan potensi celah keamanan pada infrastruktur atau perangkat lunak kami, mohon beri tahu kami di",
+    "firstName": "Nama Depan",
+    "lastName": "Nama Belakang",
+    "company": "Perusahaan",
+    "jobTitle": "Jabatan",
+    "email": "Email",
+    "department": "Departemen",
+    "achievements": "Prestasi atau Pencapaian yang Relevan",
+    "latest": "Terbaru",
+    "oldest": "Terlama",
+    "likes": "Suka",
+    "views": "Dilihat",
+    "chatGreeting": "Halo! Aku chatbot Vue 😊",
+    "chatPlaceholder": "Ketik pesan...",
+    "chatError": "Terjadi kesalahan saat menghubungi server 😞",
+    "chatSend": "Kirim",
+    "cardiovascular": "Kardiovaskular",
+    "metabolic": "Metabolik",
+    "income": "Penghasilan",
+    "directorsTeam": "Dewan Direksi dan Manajemen Senior",
+    "managementTeam": "Tim Manajemen",
+    "faqDescription": "Temukan jawaban atas pertanyaan yang sering diajukan seputar aplikasi Seleris",
+    "securityHeroTitle": "Keamanan",
+    "securityHeroSubtitle": "Keamanan Nasabah Adalah Prioritas",
+    "fullname": "Nama Lengkap",
+    "passwordPlaceholder": "Kata Sandi",
+    "leadership1": "Tim kepemimpinan kami membawa pengalaman puluhan tahun,",
+    "leadership2": "serta rekam jejak keberhasilan yang teruji.",
+    "leadershipMobile2": "serta rekam jejak",
+    "leadershipMobile3": "keberhasilan yang teruji.",
+    "perScanDirect": "± Rp 45.000 / scan",
+    "perScanNetwork": "± Rp 30.000 / scan"
+  },
+  "apply": {
+    "steps": [
+      {
+        "number": "Langkah 1",
+        "title": "Data Pribadi",
+        "next": "Pendidikan"
+      },
+      {
+        "number": "Langkah 2",
+        "title": "Pendidikan",
+        "next": "Pengalaman"
+      },
+      {
+        "number": "Langkah 3",
+        "title": "Pengalaman",
+        "next": "Keahlian"
+      },
+      {
+        "number": "Langkah 4",
+        "title": "Keahlian",
+        "next": "Motivasi"
+      },
+      {
+        "number": "Langkah 5",
+        "title": "Motivasi",
+        "next": "Dokumen"
+      },
+      {
+        "number": "Langkah 6",
+        "title": "Dokumen",
+        "next": "Pernyataan"
+      },
+      {
+        "number": "Langkah 7",
+        "title": "Pernyataan",
+        "next": "Selesai"
+      }
+    ],
+    "genders": [
+      {
+        "label": "Laki-laki"
+      },
+      {
+        "label": "Perempuan"
+      }
+    ],
+    "educations": [
+      {
+        "label": "SMA/SMK"
+      },
+      {
+        "label": "Diploma"
+      },
+      {
+        "label": "Sarjana (S1)"
+      },
+      {
+        "label": "Magister (S2)"
+      },
+      {
+        "label": "Doktor (S3)"
+      }
+    ],
+    "incompleteTitle": "Data Belum Lengkap",
+    "incompleteText": "Mohon lengkapi semua kolom yang wajib diisi sebelum melanjutkan.",
+    "successTitle": "Lamaran Terkirim!",
+    "successText": "Kami telah menerima lamaran Anda. Mohon tunggu dan periksa email Anda secara berkala.",
+    "stepOf": "Langkah {current} dari {total}",
+    "nextStep": "Langkah Berikutnya"
+  },
+  "faceScan": {
+    "metrics": [
+      {
+        "title": "Detak Jantung",
+        "description": "Detak jantung menunjukkan berapa kali jantung Anda berdenyut per menit. Rentang normal saat istirahat adalah 60–100 bpm."
+      },
+      {
+        "title": "Variabilitas Detak Jantung",
+        "description": "HRV mengukur variasi jeda waktu antardetak jantung. HRV yang lebih tinggi umumnya menandakan kebugaran kardiovaskular yang lebih baik."
+      },
+      {
+        "title": "Laju Pernapasan",
+        "description": "Laju pernapasan adalah jumlah napas per menit. Rentang normalnya 12–20 brpm."
+      },
+      {
+        "title": "Tekanan Sistolik",
+        "description": "Tekanan sistolik mengukur tekanan darah pada dinding arteri saat jantung berdenyut."
+      },
+      {
+        "title": "Tekanan Diastolik",
+        "description": "Tekanan diastolik mengukur tekanan arteri saat jantung beristirahat di antara denyut."
+      }
+    ],
+    "checkLighting": "Periksa Pencahayaan",
+    "stayCentered": "Tetap di Tengah",
+    "diastole": "Diastol",
+    "lightingTip": "Pastikan wajah Anda terkena cahaya yang cukup dari depan. Hindari cahaya latar yang menyilaukan atau bayangan pekat.",
+    "centeredTip": "Posisikan wajah Anda di dalam penanda merah. Pertahankan ekspresi netral dan tetap diam.",
+    "scanTip": "Pemindaian berlangsung sekitar 30 detik memakai teknologi rPPG. Mohon tidak bergerak atau berbicara selama proses berlangsung"
+  },
+  "certificates": [
+    {
+      "titleBefore": "Penghargaan Sertifikasi ISO",
+      "subtitleBefore": "Sistem Manajemen Keamanan Informasi",
+      "titleAfter": "Sertifikasi ISO",
+      "description": "PT. Seleris Meditekno Internasional memperoleh sertifikasi ISO/IEC 27001:2022 dengan nomor 2403150020501, yang menunjukkan komitmen kami pada mutu layanan kesehatan dan keunggulan pelayanan. Sertifikasi ini menandakan bahwa kami memenuhi standar internasional dalam manajemen mutu, dan kami terus berupaya meningkatkan kualitas layanan."
+    },
+    {
+      "titleBefore": "Best Innovation AI Solution for Insurance",
+      "subtitleBefore": "",
+      "titleAfter": "Best Innovation AI Solution for Insurance",
+      "description": "PT. Seleris Meditekno Internasional dengan bangga mengumumkan bahwa kami memenangkan penghargaan Best Innovation AI Solution for Insurance dari Data Science Center Universitas Indonesia (DSCUI). Penghargaan ini mengakui dedikasi kami dalam pemanfaatan kecerdasan buatan (AI) yang unggul dan inovatif untuk proses underwriting Asuransi Jiwa dan Kesehatan."
+    },
+    {
+      "titleBefore": "Penghargaan Sertifikasi ISO",
+      "subtitleBefore": "Sistem Manajemen Mutu",
+      "titleAfter": "Sertifikasi ISO",
+      "description": "PT. Seleris Meditekno Internasional memperoleh sertifikasi ISO 9001:2015 dengan nomor tersebut; sertifikat ini menandakan bahwa Sistem Manajemen Mutu kami memenuhi standar internasional yang ketat, sehingga produk dan layanan kami konsisten dan andal."
+    },
+    {
+      "titleBefore": "PSE CERTIFICATION",
+      "subtitleBefore": "Penyelenggara Sistem Elektronik",
+      "titleAfter": "PSE CERTIFICATION",
+      "description": "PT. Seleris Meditekno Internasional memperoleh sertifikasi ISO/IEC 20000 dengan nomor 2403150020502, yang menunjukkan komitmen kami menghadirkan Sistem Manajemen Layanan yang andal dan bermutu tinggi. Sertifikasi ini menandakan bahwa kami memenuhi standar internasional dalam manajemen layanan TI, menjamin efisiensi, konsistensi, dan perbaikan berkelanjutan."
+    },
+    {
+      "titleBefore": "Penghargaan Sertifikasi ISO",
+      "subtitleBefore": "Sistem Manajemen Layanan",
+      "titleAfter": "Sertifikasi ISO",
+      "description": "PT. Seleris Meditekno Internasional memperoleh sertifikasi ISO 13485:2016 dengan nomor JHSBDTCU20251105IDNMD1T3. Sertifikasi ini menunjukkan komitmen kami menjaga standar tinggi dalam perancangan, pengembangan, dan pemeliharaan perangkat lunak alat kesehatan serta solusi kesehatan berbasis AI. Ini menandakan bahwa organisasi kami mematuhi standar internasional manajemen mutu di industri alat kesehatan, menjamin keandalan, keamanan, dan perbaikan berkelanjutan pada layanan teknologi kesehatan kami."
+    },
+    {
+      "titleBefore": "Penghargaan Sertifikasi ISO",
+      "subtitleBefore": "Medical Devices Quality Management System",
+      "titleAfter": "ISO 13485:2016 Certification",
+      "description": "PT. Seleris Meditekno Internasional resmi terdaftar sebagai Penyelenggara Sistem Elektronik (PSE) dengan nomor 016827.01/DJAI.PSE/12/2024, menunjukkan kepatuhan kami terhadap regulasi pemerintah dalam menyediakan sistem elektronik yang aman dan andal. Pengakuan ini memperkuat komitmen kami pada kepercayaan, transparansi, dan keunggulan layanan digital."
+    }
+  ],
+  "supported": [
+    {
+      "name": "KEMENTERIAN KESEHATAN REPUBLIK INDONESIA",
+      "description": "SELICA diklasifikasikan sebagai alat kesehatan berbasis AI sesuai regulasi Kementerian Kesehatan Republik Indonesia dan mematuhi ketentuan Permenkes No. 14 Tahun 2021"
+    }
+  ]
+}

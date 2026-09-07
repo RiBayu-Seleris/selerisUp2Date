@@ -1,4 +1,5 @@
 <script setup>
+import { useLocalizedList } from "@/utils/i18nList";
 import { ref, onMounted, onUnmounted } from "vue";
 
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -7,6 +8,12 @@ import { Navigation, Pagination, Autoplay } from "swiper/modules";
 // import { useScrollStore } from "@/stores/scroll";
 import { useSidebarStore } from "@/stores/sidebar";
 import { supportedLists } from "@/Data/SupportedLists.js";
+
+// Teks diambil dari file locale
+const localizedSupported = useLocalizedList("supported", supportedLists, [
+  "name",
+  "description",
+]);
 
 const activeIndex = ref(0);
 
@@ -37,15 +44,14 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
           <p
             class="text-[16px] sm:text-[18px] md:text-[22px] lg:text-[24px] xl:text-[24px] font-medium text-[#2AB857] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
-            Surat Keterangan
+            {{ $t("home.supported.title") }}
           </p>
           <p
             class="px-8 sm:px-0 text-[10px] sm:text-[12px] md:text-[12px] lg:text-[14px] xl:text-[14px] font-medium text-[#3D6986] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
           >
-            SELICA diklasifikasikan sebagai Alat Kesehatan berbasis AI sesuai
-            regulasi <br class="hidden sm:block" />
-            Kementerian Kesehatan RI dan mengikuti ketentuan Permenkes No.14
-            Tahun 2021
+            {{ $t("home.supported.descriptionLine1") }}
+            <br class="hidden sm:block" />
+            {{ $t("home.supported.descriptionLine2") }}
           </p>
         </div>
         <Swiper
@@ -58,7 +64,7 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
           class="w-full h-auto flex justify-center items-center"
         >
           <SwiperSlide
-            v-for="(data, index) in supportedLists"
+            v-for="(data, index) in localizedSupported"
             :key="index"
             class="w-full h-auto flex items-center justify-center"
           >

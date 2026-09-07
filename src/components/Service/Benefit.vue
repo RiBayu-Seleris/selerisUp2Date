@@ -6,9 +6,9 @@ import HeroText from "@/components/reusable/HeroText.vue";
   <div class="flex flex-col w-full h-auto">
     <div class="flex w-full h-auto pt-[90px] md:pt-[100px] xl:pt-[100px]">
       <HeroText
-        title="Benefits"
-        subtitle="Benefits of Using the Seleris API"
-        description="The Seleris API service offers a number of benefits for companies, including"
+        :title="$t('services.benefitsTitle')"
+        :subtitle="$t('services.benefitsSubtitle')"
+        :description="$t('services.benefitsDescription')"
       />
     </div>
     <div class="flex w-full h-full mt-20">

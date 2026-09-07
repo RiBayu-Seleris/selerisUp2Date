@@ -1,12 +1,12 @@
 // src/data/bannerLists.js
+// Teks deskripsi ada di src/locales/en.json & id.json pada kunci home.banners.<key>.
 
 export const bannerLists = [
   {
     banner: "Lifins.png",
-    logo: "lifins.svg",
-    darklogo: "lifins.svg",
-    description:
-      "An intelligent underwriting platform for individual and group life insurance, accelerating decision-making by 90% with fully configurable business rules.",
+    key: "lifins",
+    logo: "lifins.png",
+    darklogo: "lifins.png",
     linelightcolor: "#2ab857",
     url: "/product/lifins",
     logoWidth: {
@@ -24,10 +24,9 @@ export const bannerLists = [
   },
   {
     banner: "Medins.png",
+    key: "medins",
     logo: "medins.png",
     darklogo: "medins.png",
-    description:
-      "An AI-driven health insurance intelligence system that automates medical data processing, enhances fraud detection, improves risk prediction, and ensures regulatory compliance.",
     linelightcolor: "#2ec4b6",
     url: "/product/medins",
     logoWidth: {
@@ -45,10 +44,9 @@ export const bannerLists = [
   },
   {
     banner: "Credit-Cover.png",
+    key: "credit-cover",
     logo: "credit-cover.png",
     darklogo: "credit-cover.png",
-    description:
-      "An AI-powered solution that streamlines credit life insurance and loan protection, automating risk assessments with up to 25% higher accuracy and reducing processing time by 80%.",
     linelightcolor: "#e84c7f",
     url: "/product/credit-cover",
     logoWidth: {
@@ -66,10 +64,9 @@ export const bannerLists = [
   },
   {
     banner: "Care.png",
+    key: "care",
     logo: "care.svg",
     darklogo: "care.png",
-    description:
-      "A corporate health and wellness platform that automates employee health monitoring, delivers real-time preventive insights, and lowers medical costs by up to 20%.",
     linelightcolor: "#13b89c",
     url: "https://seleriscare.ai/",
     logoWidth: {

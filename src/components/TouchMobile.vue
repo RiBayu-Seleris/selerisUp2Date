@@ -9,7 +9,7 @@ import CallIcon from "@/components/icons/CallIcon.vue";
   >
     <div class="flex w-full h-auto rounded-3xl">
       <iframe
-        title="Map showing Seleris Development Office location"
+        :title="$t('contact.mapTitle')"
         class="w-full h-[300px] rounded-3xl border-2"
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.8339793616797!2d106.83314007441082!3d-6.285542461522718!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f3001660852f%3A0x1ac61febb98f4350!2sSeleris%20Development%20Office!5e0!3m2!1sid!2sid!4v1751444288952!5m2!1sid!2sid"
         allowfullscreen=""
@@ -35,12 +35,12 @@ import CallIcon from "@/components/icons/CallIcon.vue";
             <p
               class="text-[16px] text-[#195279] dark:text-[#FAFAFA] font-[600] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
             >
-              Chat to Support
+              {{ $t("contact.chatTitle") }}
             </p>
           </div>
           <div class="flex w-full justify-center items-center">
             <p class="text-[14px] text-[#ACACAC]">
-              Our team here ready to help you
+              {{ $t("contact.chatSubtitle") }}
             </p>
           </div>
           <div class="flex w-full justify-center items-center">
@@ -63,11 +63,13 @@ import CallIcon from "@/components/icons/CallIcon.vue";
             <p
               class="ttext-[16px] text-[#195279] font-[600] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
             >
-              Call Us
+              {{ $t("contact.callTitle") }}
             </p>
           </div>
           <div class="flex w-full justify-center items-center">
-            <p class="text-[14px] text-[#ACACAC]">Mon-Sat 9am to 5pm</p>
+            <p class="text-[14px] text-[#ACACAC]">
+              {{ $t("contact.callHours") }}
+            </p>
           </div>
           <div class="flex w-full justify-center items-center">
             <p class="text-[#2AB857] text-[14px]">+62 (21) 526 52 35</p>
@@ -83,16 +85,19 @@ import CallIcon from "@/components/icons/CallIcon.vue";
           <p
             class="text-[20px] font-semibold text-[#195279] dark:text-[#FAFAFA]"
           >
-            GET <span class="text-[#2AB857] dark:text-[#FAFAFA]">In Touch</span>
+            {{ $t("contact.titleMobile1") }}
+            <span class="text-[#2AB857] dark:text-[#FAFAFA]">{{
+              $t("contact.titleMobile2")
+            }}</span>
           </p>
           <p class="text-[#195279] text-[14px] dark:text-[#FAFAFA]">
-            Be among the first to discover what it's all about
+            {{ $t("contact.subtitle") }}
           </p>
         </div>
         <!-- <div class="w-full h-[1px] bg-[#F3F4F6] my-3 rounded-full" /> -->
         <div class="flex flex-col w-full mt-5 mb-4">
           <div class="w-full mb-2">
-            <label for="fullname">Full Name:</label>
+            <label for="fullname">{{ $t("contact.fullName") }}</label>
           </div>
           <div class="w-full">
             <input
@@ -125,7 +130,7 @@ import CallIcon from "@/components/icons/CallIcon.vue";
               id="message"
               name="message"
               class="w-full lg:h-[70px] xl:h-[130px] p-2 rounded-[8px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:outline-none focus:ring-1 focus:ring-[#2AB857] resize-none align-top"
-              placeholder="Message"
+              :placeholder="$t('contact.messagePlaceholder')"
             />
           </div>
         </div>
@@ -134,7 +139,7 @@ import CallIcon from "@/components/icons/CallIcon.vue";
             aria-label="Kirim Get In Touch Mobile"
             class="w-full h-12 bg-[#2AB857] text-white rounded-lg"
           >
-            Submit
+            {{ $t("contact.submit") }}
           </button>
         </div>
       </div>

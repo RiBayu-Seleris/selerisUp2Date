@@ -12,28 +12,28 @@ import HeroText from "@/components/reusable/HeroText.vue";
       <p
         class="text-[20px] sm:text-[30px] md:text-[32px] lg:text-[38px] xl:text-[40px] font-[500] tracking-tight text-[#1AB24F] text-center"
       >
-        Our Team
+        {{ $t("team.eyebrow") }}
       </p>
       <p
         class="text-[20px] sm:text-[34px] md:text-[40px] lg:text-[44px] xl:text-[52px] font-[500] tracking-wide lg:tracking-wide xl:tracking-wider text-[#195279] text-center dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
       >
-        Meet the team behind Seleris
+        {{ $t("team.title") }}
       </p>
       <p
         class="text-[13px] sm:text-[12px] md:text-[16px] lg:text-[16px] xl:text-[18px] font-[400] px-4 sm:px-0 tracking-wider text-[#89A6BA] dark:text-[#6F6F6F] text-center"
       >
         <!-- Desktop -->
         <span class="hidden sm:block">
-          Behind every breakthrough is a team of passionate experts turning
+          {{ $t("team.subtitle1") }}
           <br />
-          bold ideas into real-world impact.
+          {{ $t("team.subtitle2") }}
         </span>
 
         <!-- Mobile -->
         <span class="block sm:hidden">
-          Behind every breakthrough is a team of passionate experts turning bold
+          {{ $t("team.subtitleMobile1") }}
           <br />
-          ideas into real-world impact.
+          {{ $t("team.subtitleMobile2") }}
         </span>
       </p>
     </div>

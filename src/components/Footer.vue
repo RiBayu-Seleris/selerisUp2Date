@@ -30,12 +30,12 @@ import Navlink from "@/components/Navlink.vue";
                 <img
                   :src="Logo"
                   alt="Logo"
-                  class="w-full h-[75%] md:h-[80px] xl:h-[80px] object-contain object-left dark:hidden"
+                  class="w-full h-[75%] md:h-[80px] xl:h-[60px] object-contain object-left dark:hidden"
                 />
                 <img
                   :src="DarkLogo"
                   alt="Logo"
-                  class="w-full h-[75%] md:h-[80px] xl:h-[80px] object-contain object-left hidden dark:block"
+                  class="w-full h-[75%] md:h-[80px] xl:h-[60px] object-contain object-left hidden dark:block"
                 />
               </div>
               <div
@@ -52,8 +52,7 @@ import Navlink from "@/components/Navlink.vue";
               <p
                 class="text-[#B8B8B8] text-base xl:text-[18px] text-justify lg:text-left xl:text-left"
               >
-                Transform the Life and Medical industry by making it more
-                efficient, accurate, and accessible for everyone
+                {{ $t("footer.tagline") }}
               </p>
             </div>
             <div class="w-full h-auto mt-4">
@@ -105,7 +104,7 @@ import Navlink from "@/components/Navlink.vue";
             <p
               class="text-[#195279] dark:text-[#FAFAFA] text-[24px] lg:text-[20px] xl:text-[22px] font-medium"
             >
-              Products
+              {{ $t("footer.products") }}
             </p>
             <div class="flex flex-col">
               <!-- <router-link
@@ -135,7 +134,7 @@ import Navlink from "@/components/Navlink.vue";
             <p
               class="text-[#195279] dark:text-[#FAFAFA] text-[24px] lg:text-[20px] xl:text-[22px] font-medium"
             >
-              Company
+              {{ $t("footer.company") }}
             </p>
             <router-link
               v-for="(company, index) in companyList"
@@ -143,7 +142,7 @@ import Navlink from "@/components/Navlink.vue";
               :to="company.url"
             >
               <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] pt-3">
-                {{ company.name }}
+                {{ $t("footer.company_items." + company.key) }}
               </p>
             </router-link>
           </div>
@@ -154,14 +153,14 @@ import Navlink from "@/components/Navlink.vue";
             <p
               class="text-[#195279] dark:text-[#FAFAFA] text-[24px] lg:text-[18px] xl:text-[22px] font-medium"
             >
-              Stay Connects
+              {{ $t("footer.stayConnects") }}
             </p>
 
             <div class="mb-3">
               <p
                 class="text-[#195279] dark:text-[#FAFAFA] text-[18px] lg:text-[18px] xl:text-[22px] pb-2 pt-3"
               >
-                Address
+                {{ $t("footer.address") }}
               </p>
               <div class="w-full h-auto flex flex-col xl:flex-row">
                 <div class="w-full h-auto pb-2 lg:pr-5">
@@ -202,7 +201,7 @@ import Navlink from "@/components/Navlink.vue";
                 <p
                   class="text-[#195279] dark:text-[#FAFAFA] text-[20px] lg:text-[18px]"
                 >
-                  Phone
+                  {{ $t("footer.phone") }}
                 </p>
                 <a
                   href="tel:+62215265235"
@@ -215,7 +214,7 @@ import Navlink from "@/components/Navlink.vue";
                 <p
                   class="text-[#195279] dark:text-[#FAFAFA] text-[20px] lg:text-[18px]"
                 >
-                  Email
+                  {{ $t("footer.email") }}
                 </p>
                 <a
                   href="mailto:info@seleris.ai"
@@ -233,11 +232,11 @@ import Navlink from "@/components/Navlink.vue";
             <p
               class="text-[#195279] dark:text-[#FAFAFA] text-[24px] lg:text-[18px] xl:text-[22px] font-medium pb-0"
             >
-              Get The App
+              {{ $t("footer.getTheApp") }}
             </p>
             <div class="flex flex-row lg:flex-col gap-10 lg:gap-0">
               <a
-                href="https://play.google.com/store/apps/developer?id=PT.+Seleris+Meditekno+Internasional"
+                href="https://play.google.com/store/search?q=blooxia&c=apps&hl=id"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="flex w-auto h-full md:justify-start justify-center items-center content-center xl:justify-start xl:content-start"
@@ -248,7 +247,7 @@ import Navlink from "@/components/Navlink.vue";
                   class="w-full sm:w-[200px] md:w-[200px] xl:w-[200px] h-[100px] object-contain object-center"
                 />
               </a>
-              <div
+              <!-- <div
                 class="flex w-auto h-full justify-center items-center content-center xl:justify-start xl:content-start xl:-mt-5"
               >
                 <div
@@ -260,27 +259,35 @@ import Navlink from "@/components/Navlink.vue";
                     class="w-full h-full object-contain object-center"
                   />
 
-                  <!-- Hover Overlay -->
+                  Hover Overlay
                   <div
                     class="absolute flex items-center justify-center inset-0 group-hover:opacity-100 transition duration-300 bg-opacity-60 opacity-0 py-5"
                   >
                     <div
                       class="w-full h-full bg-[#FDFDFD] bg-opacity-60 flex items-center justify-center text-white cursor-pointer"
                     >
-                      <span>Coming Soon!</span>
+                      <span>{{ $t("common.comingSoon") }}</span>
                     </div>
                   </div>
                 </div>
-              </div>
+              </div> -->
             </div>
           </div>
         </div>
       </div>
-      <div class="flex w-full justify-center text-center items-center py-8">
+      <div class="w-full h-[1px] bg-[#d8dee4] rounded-full" />
+      <div
+        class="flex flex-col w-full justify-center text-center items-center pb-6 pt-4 gap-y-2"
+      >
         <p
-          class="text-[14px] lg:text-[16px] xl:text-[18px] dark:text-[#FAFAFA]/40 font-[400]"
+          class="text-[16px] lg:text-[18px] xl:text-[20px] dark:text-[#FAFAFA]/40 font-[400]"
         >
-          © 2023 Seleris Asia Pacific Technology. All rights reserved
+          PT Seleris Meditekno Internasional
+        </p>
+        <p
+          class="text-[12px] lg:text-[14px] xl:text-[16px] dark:text-[#FAFAFA]/40 font-[400]"
+        >
+          {{ $t("footer.copyright") }}
         </p>
       </div>
     </div>

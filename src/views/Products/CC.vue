@@ -1,6 +1,7 @@
 <script setup>
 import { ccHealthCheck } from "@/Data/Products/CreditCover/CCHealthCheck";
 import { ref } from "vue";
+import { useLocalizedList } from "@/utils/i18nList";
 
 import HeroText from "@productComponents/HeroText.vue";
 import PhoneHero from "@productComponents/PhoneHero.vue";
@@ -41,6 +42,27 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
     import.meta.url,
   ).href,
 }));
+
+// Teks daftar diambil dari file locale (lihat src/utils/i18nList.js)
+const localizedHealthCheck = useLocalizedList(
+  "products.creditCover.healthCheck",
+  ccHealthCheck,
+  ["title", "description"],
+);
+const localizedFaq = useLocalizedList("products.creditCover.faq", ccFaq, [
+  "question",
+  "answer",
+]);
+const localizedTestimonials = useLocalizedList(
+  "products.shared.testimonialsB2B",
+  ccTestimonials,
+  ["comment", "authorName", "authorPosition"],
+);
+const localizedSteps = useLocalizedList(
+  "products.shared.workSteps",
+  stepsWithPath,
+  ["title", "description"],
+);
 </script>
 
 <template>
@@ -52,9 +74,9 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
       >
         <!-- subtitle="Application" -->
         <HeroText
-          title="AI-Powered Credit"
-          subtitle="Risk & Protection"
-          description="Simplify credit life insurance and loan protection processes with real-time risk analysis and compliance automation."
+          :title="$t('products.creditCover.hero.title')"
+          :subtitle="$t('products.creditCover.hero.subtitle')"
+          :description="$t('products.creditCover.hero.description')"
         />
       </div>
       <!-- Image Phone -->
@@ -88,15 +110,15 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
         class="relative w-full flex flex-col justify-center items-center z-20 mt-16 md:mt-20 lg:mt-40 px-8"
       >
         <AboutUs
-          title="About Us"
-          subtitle="Seleris Credit Cover"
+          :title="$t('products.shared.aboutUs')"
+          :subtitle="$t('products.creditCover.name')"
           subtitleColor="text-[#E84C7F]"
         />
         <div class="w-full h-auto mt-10 md:mt-10 lg:mt-10">
           <AboutUsDescription
             :image="imageAbout"
-            title="AI Credit Insurance Application"
-            description="Seleris Credit Cover is a cutting-edge AI solution designed to streamline credit life insurance and loan protection. Our platform automates credit risk assessments, improves accuracy by up to 25%, and reduces processing time by 80%"
+            :title="$t('products.creditCover.about.title')"
+            :description="$t('products.creditCover.about.description')"
           />
         </div>
       </div>
@@ -112,14 +134,14 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
         class="relative w-full flex flex-col justify-center items-center z-20"
       >
         <ApplicationWorkText
-          productname="Seleris Credit Cover"
+          :productname="$t('products.creditCover.name')"
           textcolor="text-[#E84C7F]"
         />
         <div class="relative w-full h-auto mt-10 md:mt-12 lg:mt-14">
           <ApplicationWorkSlider
             circleColor="bg-gradient-to-b from-[#E84C7F] to-[#EF83A6]"
             textcolor="text-[#E84C7F]"
-            :steps="stepsWithPath"
+            :steps="localizedSteps"
           >
             <FrameLineWorks />
           </ApplicationWorkSlider>
@@ -137,17 +159,17 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
       >
         <div class="w-full h-auto flex flex-col gap-y-2">
           <EasyQuickText
-            title="Smarter Medical Claims with"
-            subtitle="AI-Powered Automation"
+            :title="$t('products.shared.easyQuickTitle')"
+            :subtitle="$t('products.shared.easyQuickSubtitle')"
             subtitlecolor="text-[#E84C7F]"
-            subsubtitle="Seleris Meditekno Internasional"
+            sub:subtitle="$t('products.shared.company')"
           />
         </div>
         <div
           class="w-full h-auto flex flex-col md:grid md:grid-cols-2 lg:grid-cols-3 md:gap-x-5 gap-y-8 md:gap-y-8 lg:gap-12 mt-10 lg:mt-16"
         >
           <div
-            v-for="(data, index) in ccHealthCheck"
+            v-for="(data, index) in localizedHealthCheck"
             :key="index"
             class="w-full h-auto"
           >
@@ -169,8 +191,8 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
     >
       <div class="w-full h-auto flex flex-col">
         <TitleAndSubCard
-          title="Our Client"
-          subtitle="Seleris Meditekno Internasional"
+          :title="$t('products.shared.ourClient')"
+          :subtitle="$t('products.shared.company')"
           subtitleColor="text-[#E84C7F]"
         />
         <div class="mt-10 max-smallest:px-0 px-12">
@@ -195,12 +217,12 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
       >
         <div class="w-full h-auto px-8">
           <TitleAndSubCard
-            title="Testimonial"
-            subtitle="Seleris Meditekno Internasional"
+            :title="$t('products.shared.testimonial')"
+            :subtitle="$t('products.shared.company')"
             subtitleColor="text-[#E84C7F]"
           />
         </div>
-        <TestimonialCommentFrame :Testimonials="ccTestimonials" />
+        <TestimonialCommentFrame :Testimonials="localizedTestimonials" />
       </div>
     </section>
 
@@ -227,14 +249,14 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
         >
           <div class="w-full h-auto px-8">
             <TitleAndSubCard
-              title="FAQ's"
-              subtitle="Seleris Meditekno Internasional"
+              :title="$t('products.shared.faq')"
+              :subtitle="$t('products.shared.company')"
               subtitleColor="text-[#E84C7F]"
             />
           </div>
         </div>
         <div class="w-full mx-auto mt-10 md:mt-10">
-          <FaqFrame :Faq="ccFaq" opencolortext="text-[#E84C7F]" />
+          <FaqFrame :Faq="localizedFaq" opencolortext="text-[#E84C7F]" />
         </div>
       </div>
     </section>
@@ -246,10 +268,8 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
     >
       <div class="w-full h-auto md:max-w-6xl mx-auto">
         <DownloadFrame
-          appname="Seleris Credit Cover"
-          description="Stay in control of your health data and claims anytime, anywhere. Our
-          AI-powered platform makes medical data processing, claims tracking,
-          and risk analysis easier and faster."
+          :appname="$t('products.creditCover.name')"
+          :description="$t('products.shared.downloadDescription')"
           :img="DownloadImage"
         />
       </div>
@@ -261,7 +281,7 @@ const stepsWithPath = ccWorkSteps.map((step) => ({
       id="bookdemo"
     >
       <BookDemoProduct
-        title="Seleris Credit Cover A Complete Solution for Your Health Needs"
+        :title="$t('products.creditCover.bookDemo')"
         :framebookdemo="ccframebook"
         colorarrow="text-[#E84C7F]"
         bgProduct="bg-[#E84C7F]"

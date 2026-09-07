@@ -1,8 +1,10 @@
 <script setup>
+import { useI18n } from "vue-i18n";
 import { ref, nextTick, watch } from "vue";
 
 // 🟢 Data awal
-const messages = ref([{ sender: "bot", text: "Halo! Aku chatbot Vue 😊" }]);
+const { t } = useI18n();
+const messages = ref([{ sender: "bot", text: t("misc.chatGreeting") }]);
 const userInput = ref("");
 
 // 🟢 Referensi ke elemen chat-box
@@ -96,7 +98,7 @@ async function sendMessage() {
     console.error(error);
     messages.value.push({
       sender: "bot",
-      text: "Terjadi kesalahan saat menghubungi server 😞",
+      text: t("misc.chatError"),
     });
   }
 }
@@ -123,7 +125,7 @@ watch(messages, scrollToBottom, { deep: true });
       <input
         v-model="userInput"
         @keyup.enter="sendMessage"
-        placeholder="Ketik pesan..."
+        :placeholder="$t('misc.chatPlaceholder')"
       />
       <button aria-label="Chatbot Send" @click="sendMessage">Kirim</button>
     </div>

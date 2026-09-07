@@ -1,32 +1,20 @@
 <script setup>
+import { useLocalizedList } from "@/utils/i18nList";
 import RobotEngineering from "@/assets/images/robot-engineering.png";
 import RobotProduct from "@/assets/images/robot-product.png";
 import RobotSales from "@/assets/images/robot-sales.png";
 const positions = [
-  {
-    robot: RobotProduct,
-    title: "Product",
-    subtitle:
-      "Drives product vision, user experience, and continuous improvement.",
-    description:
-      "Our product team shapes the future of Seleris by defining product strategy, enhancing user experience, and translating feedback into meaningful features. Collaborating closely with users and stakeholders, they turn complex ideas into simple, intuitive, and high-impact solutions.",
-  },
-  {
-    robot: RobotSales,
-    title: "Sales & Marketing",
-    subtitle:
-      "Connects Seleris to the market through strategy and storytelling.",
-    description:
-      "The sales and marketing team ensures Seleris reaches the right audience with the right message. From lead generation and relationship building to branding and content creation, they craft compelling campaigns and drive business growth through clear communication and market insight.",
-  },
-  {
-    robot: RobotEngineering,
-    title: "Engineering",
-    subtitle: "Develops smart, scalable, and reliable AI-driven technology.",
-    description:
-      "The engineering team is the backbone of Seleris's technology, responsible for developing and maintaining our AI-powered platform with a focus on performance, scalability, and security, while continuously innovating to keep our solutions ahead of industry needs and delivering real value to users.",
-  },
+  { robot: RobotProduct },
+  { robot: RobotSales },
+  { robot: RobotEngineering },
 ];
+
+// Teks diambil dari file locale
+const localizedPositions = useLocalizedList("team.positions", positions, [
+  "title",
+  "subtitle",
+  "description",
+]);
 </script>
 
 <template>
@@ -41,7 +29,7 @@ const positions = [
       class="relative flex flex-row w-full h-auto gap-x-4 lg:gap-x-10 mt-5 overflow-x-auto snap-x snap-mandatory pl-8 pr-8 lg:pl-14 lg:pr-14 hide-scrollbar"
     >
       <div
-        v-for="(position, index) in positions"
+        v-for="(position, index) in localizedPositions"
         :key="index"
         class="snap-center shrink-0 h-auto w-full md:w-full lg:w-[740px] xl:w-[750px] rounded-[22px]"
       >
