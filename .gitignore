@@ -22,7 +22,7 @@ node_modules
 *.sw?
 
 # Vite build output + workflow staging dirs (added for GHA auto-deploy)
-dist/
+# dist/
 dist.new/
 dist.old/
 dist.previous/
