@@ -246,7 +246,66 @@ input:-webkit-autofill:focus {
 
    Awalan `html` dipakai supaya bobot aturan ini lebih tinggi dari milik AOS,
    tanpa perlu !important.
+
+   `zoom` ikut dicakup dengan alasan yang sama: animasi zoom berakhir pada
+   `scale(1)`, dan itu pun tetap membuat lapisan tumpukan baru walau tidak
+   mengubah apa pun secara visual.
 --------------------------------------------------------------------------- */
-html [data-aos^="fade"][data-aos^="fade"].aos-animate {
+html [data-aos^="fade"][data-aos^="fade"].aos-animate,
+html [data-aos^="zoom"][data-aos^="zoom"].aos-animate {
   transform: none;
+}
+
+/* ============================================================
+   Cahaya berjalan pada sirkuit gerbang (dipakai di src/App.vue)
+
+   Jalurnya diberi atribut pathLength="100", artinya panjang jalur dianggap
+   selalu 100 satuan berapa pun ukuran layarnya. Karena itu pola garis
+   putus-putusnya bisa ditulis tetap di sini tanpa perlu dihitung ulang saat
+   jendela diubah ukurannya.
+
+   Pola "14 86" berarti: satu ruas menyala sepanjang 14 satuan, lalu jeda 86
+   satuan. Totalnya pas 100, jadi hanya ada SATU ruas cahaya di sepanjang
+   jalur — bukan deretan yang berulang.
+
+   Offset digeser dari 14 (ruasnya masih di luar, sebelum titik awal) ke -100
+   (sudah lewat titik akhir). Dengan "alternate", perjalanan itu diputar maju
+   lalu mundur bergantian: awal -> akhir -> awal lagi, tanpa satu pun lompatan.
+============================================================ */
+@keyframes seleris-cahaya-sirkuit {
+  from {
+    stroke-dashoffset: 14;
+  }
+  to {
+    stroke-dashoffset: -100;
+  }
+}
+
+/* Keadaan DIAM. Pola putus-putusnya tetap dipasang di sini, bukan ikut kelas
+   animasinya — kalau tidak, saat animasinya belum menyala jalurnya akan
+   tergambar sebagai garis penuh, bukan menghilang.
+
+   Offset 14 menaruh ruas cahayanya tepat sebelum titik awal jalur, jadi dia
+   tidak terlihat sampai animasinya dinyalakan. */
+.sirkuit-cahaya {
+  stroke-dasharray: 14 86;
+  stroke-dashoffset: 14;
+}
+
+/* Keadaan BERJALAN. Kelas ini baru dipasang setelah gerbang benar-benar
+   tertutup. Melepas lalu memasang kembali sebuah kelas animasi membuat
+   animasinya mengulang dari awal — itulah yang menjamin cahayanya selalu
+   berangkat dari titik awal, bukan dari tengah jalur. */
+.sirkuit-cahaya-jalan {
+  animation: seleris-cahaya-sirkuit 1s linear infinite alternate;
+}
+
+/* Hormati setelan sistem "kurangi animasi" milik pengunjung. */
+@media (prefers-reduced-motion: reduce) {
+  .sirkuit-cahaya-jalan {
+    animation: none;
+  }
+  .sirkuit-cahaya {
+    opacity: 0;
+  }
 }

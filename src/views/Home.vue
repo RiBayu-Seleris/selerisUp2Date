@@ -31,7 +31,7 @@ import FaceTracker from "@/components/Home/FaceTracker.vue";
   </section>
 
   <section
-    data-aos="fade-up"
+    data-aos="zoom-in"
     class="flex flex-col relative w-full h-auto mt-10 md:mt-10 lg:mt-24"
   >
     <Certificate />
@@ -52,14 +52,13 @@ import FaceTracker from "@/components/Home/FaceTracker.vue";
   </section>
 
   <section
-    data-aos="fade-up"
+    data-aos="fade-left"
     class="flex flex-col relative w-full h-auto mt-14 sm:mt-14 md:mt-24 xl:mt-28"
   >
     <Benefits />
   </section>
 
   <section
-    data-aos="fade-up"
     class="flex flex-col relative w-full h-auto mt-24 lg:mt-10 px-8 xl:mt-28"
   >
     <AiDesc />
@@ -79,10 +78,7 @@ import FaceTracker from "@/components/Home/FaceTracker.vue";
     <FaceTracker />
   </section>
 
-  <section
-    data-aos="fade-up"
-    class="flex flex-col relative w-full h-auto mt-24 lg:mt-10 xl:mt-36"
-  >
+  <section class="flex flex-col relative w-full h-auto mt-24 lg:mt-10 xl:mt-36">
     <Solutions />
   </section>
 
@@ -93,10 +89,7 @@ import FaceTracker from "@/components/Home/FaceTracker.vue";
     <Testimonial />
   </section>
 
-  <section
-    data-aos="fade-up"
-    class="flex flex-col relative w-full h-auto mt-24 xl:mt-32 mb-10"
-  >
+  <section class="flex flex-col relative w-full h-auto mt-24 xl:mt-32 mb-10">
     <Blogs />
   </section>
 

@@ -2,7 +2,6 @@
 import { useLocalizedList } from "@/utils/i18nList";
 import CertCard from "@/components/reusable/CertCard.vue";
 import MobileCert from "@/components/CertificateMobile.vue";
-import CloseIcon from "@/components/icons/CloseIcon.vue";
 import { certificateData } from "@/Data/CertData";
 
 // Teks sertifikat diambil dari file locale
@@ -11,10 +10,8 @@ const localizedCertificates = useLocalizedList(
   certificateData,
   ["titleBefore", "subtitleBefore", "titleAfter", "description"],
 );
-import { ref, watch } from "vue";
+import { ref, onMounted, onUnmounted, nextTick } from "vue";
 
-const isModalOpen = ref(false);
-const selectedCert = ref(null);
 const scrollContainer = ref(null);
 
 const CARD_WIDTH = 335 + 24;
@@ -54,6 +51,67 @@ const onMouseLeave = () => {
 };
 // ----------------------
 
+/* ------------------------------------------------------------
+   Kapan panah kiri/kanan boleh tampil
+
+   Panah kiri hanya berguna kalau masih ada yang bisa digulir ke kiri, begitu
+   pula sebaliknya. Kalau ditampilkan terus, pengunjung menekan tombol yang
+   tidak melakukan apa-apa.
+
+   Namanya sengaja bukan scrollLeft — nama itu sudah dipakai di atas untuk
+   fitur seret-untuk-menggulir, dan menimpanya akan merusak fitur tersebut.
+------------------------------------------------------------ */
+const bisaKeKiri = ref(false);
+const bisaKeKanan = ref(false);
+
+const perbaruiPanah = () => {
+  const el = scrollContainer.value;
+  if (!el) return;
+
+  const posisi = el.scrollLeft;
+  const maksimum = el.scrollWidth - el.clientWidth;
+
+  // Toleransi 2 piksel: posisi gulir sering berupa pecahan (mis. 1247,6 dari
+  // 1248), jadi tanpa toleransi panah kanan tetap tampil walau sudah mentok.
+  bisaKeKiri.value = posisi > 2;
+  bisaKeKanan.value = posisi < maksimum - 2;
+};
+
+// Diredam dengan requestAnimationFrame supaya perhitungannya paling banyak
+// sekali per gambar layar, bukan tiap kejadian gulir datang.
+let idFramePanah = null;
+const tanganiGulirPanah = () => {
+  if (idFramePanah) return;
+  idFramePanah = requestAnimationFrame(() => {
+    perbaruiPanah();
+    idFramePanah = null;
+  });
+};
+
+// Lebar isi carousel berubah saat gambar sertifikat selesai dimuat atau saat
+// jendela diubah ukurannya. ResizeObserver menangkap keduanya — pendengar
+// "resize" saja tidak cukup, karena gambar yang menyusul tidak mengubah
+// ukuran jendela.
+let pengamatUkuran = null;
+
+onMounted(async () => {
+  await nextTick();
+  const el = scrollContainer.value;
+  if (!el) return;
+
+  perbaruiPanah();
+  el.addEventListener("scroll", tanganiGulirPanah, { passive: true });
+
+  pengamatUkuran = new ResizeObserver(perbaruiPanah);
+  pengamatUkuran.observe(el);
+});
+
+onUnmounted(() => {
+  scrollContainer.value?.removeEventListener("scroll", tanganiGulirPanah);
+  pengamatUkuran?.disconnect();
+  if (idFramePanah) cancelAnimationFrame(idFramePanah);
+});
+
 const scrollCarousel = (direction) => {
   if (!scrollContainer.value) return;
   scrollContainer.value.scrollBy({
@@ -61,19 +119,6 @@ const scrollCarousel = (direction) => {
     behavior: "smooth",
   });
 };
-
-const openModal = (cert) => {
-  selectedCert.value = cert;
-  isModalOpen.value = true;
-};
-
-const closeModal = () => {
-  isModalOpen.value = false;
-};
-
-watch(isModalOpen, (open) => {
-  document.body.style.overflow = open ? "hidden" : "";
-});
 </script>
 
 <template>
@@ -105,44 +150,60 @@ watch(isModalOpen, (open) => {
         />
 
         <!-- Tombol Panah Kiri -->
-        <button
-          @click="scrollCarousel('left')"
-          aria-label="Scroll left"
-          class="hidden lg:flex absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-colors duration-200"
+        <transition
+          enter-active-class="duration-300 ease-out"
+          enter-from-class="opacity-0 scale-75 -translate-x-3"
+          leave-active-class="duration-200 ease-in"
+          leave-to-class="opacity-0 scale-75 -translate-x-3"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-full h-full"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+          <button
+            v-if="bisaKeKiri"
+            @click="scrollCarousel('left')"
+            aria-label="Scroll left"
+            class="hidden lg:flex absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
           >
-            <polyline points="15 18 9 12 15 6" />
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-full h-full"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+        </transition>
 
         <!-- Tombol Panah Kanan -->
-        <button
-          @click="scrollCarousel('right')"
-          aria-label="Scroll right"
-          class="hidden lg:flex absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-colors duration-200"
+        <transition
+          enter-active-class="duration-300 ease-out"
+          enter-from-class="opacity-0 scale-75 translate-x-3"
+          leave-active-class="duration-200 ease-in"
+          leave-to-class="opacity-0 scale-75 translate-x-3"
         >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            class="w-full h-full"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="2.5"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+          <button
+            v-if="bisaKeKanan"
+            @click="scrollCarousel('right')"
+            aria-label="Scroll right"
+            class="hidden lg:flex absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 z-30 w-12 h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
           >
-            <polyline points="9 18 15 12 9 6" />
-          </svg>
-        </button>
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-full h-full"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </transition>
 
         <!-- Scroll Container -->
         <div
@@ -163,41 +224,8 @@ watch(isModalOpen, (open) => {
             :TitleAfter="cert.titleAfter"
             :CertNumber="cert.certNumber"
             :BodyText="cert.description"
-            @readmore="openModal(cert)"
           />
         </div>
-
-        <!-- Modal -->
-        <transition name="fade">
-          <div
-            v-if="isModalOpen"
-            class="fixed inset-0 z-50 flex flex-col transition-all duration-300 overflow-hidden bg-[#1C1B1B]/80"
-          >
-            <transition name="slide" appear>
-              <div class="ml-auto w-full h-full p-20 z-50">
-                <div
-                  class="w-full h-auto bg-white dark:bg-[#17181A] relative z-50 flex flex-col items-center rounded-3xl"
-                >
-                  <div
-                    @click="closeModal"
-                    class="w-auto h-auto absolute top-6 right-6 bg-[#94FBB5] rounded-full text-[#2AB857] cursor-pointer"
-                  >
-                    <CloseIcon class="w-auto h-[40px]" />
-                  </div>
-                  <div class="w-full h-auto py-8">
-                    <div class="w-full h-auto px-20">
-                      <p
-                        class="text-[20px] font-[600] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
-                      >
-                        {{ selectedCert?.description }}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </transition>
-          </div>
-        </transition>
       </div>
 
       <!-- Mobile Certificate -->

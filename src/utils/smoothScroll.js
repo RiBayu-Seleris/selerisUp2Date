@@ -189,6 +189,34 @@ export function pasangSmoothScroll() {
 }
 
 /**
+ * Gulir cepat ke satu posisi — dipakai untuk paginasi.
+ *
+ * KENAPA TIDAK MEMAKAI window.scrollTo BIASA
+ * Gulir halus situs ini memakai lengkung ease-in-out yang sengaja lambat di
+ * awal: pada 30% waktu pertama halaman baru menempuh 11% jarak. Untuk tombol
+ * "kembali ke atas" itu terasa tenang, tapi untuk paginasi jendela itu jadi
+ * celah — data baru tiba di dalamnya, jadi pengunjung melihat kartunya
+ * berganti sebelum halaman sempat naik.
+ *
+ * Di sini lengkungnya ease-out: berangkat dengan kecepatan penuh sejak
+ * gerakan pertama lalu melambat menjelang tujuan, dan durasinya dipendekkan
+ * jadi 0,45 detik. Halamannya sudah hampir sampai atas sebelum data tiba.
+ *
+ * Kalau smooth scroll dicabut dari situs, fungsi ini tetap bekerja — dia
+ * jatuh kembali ke gulir halus bawaan browser.
+ */
+export function gulirCepatKe(posisi) {
+  if (!lenis) {
+    window.scrollTo({ top: posisi, behavior: "smooth" });
+    return;
+  }
+  lenis.scrollTo(posisi, {
+    duration: 0.45,
+    easing: (t) => 1 - Math.pow(1 - t, 3),
+  });
+}
+
+/**
  * Menahan gulir. Dipakai selama layar loading tampil — kalau tidak ditahan,
  * halaman di balik layar loading ikut tergeser saat pengunjung memutar roda.
  */

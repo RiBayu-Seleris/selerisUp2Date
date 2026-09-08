@@ -155,9 +155,16 @@ onBeforeUnmount(() => {
       <div
         class="relative z-40 w-full h-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-8 md:px-8 xl:px-0"
       >
+        <!-- Jedanya SAMA dengan lama animasinya (700 ms, disetel di
+             src/main.js). Itu yang membuat kartunya benar-benar bergiliran:
+             kartu berikutnya baru berangkat tepat saat kartu sebelumnya
+             selesai, bukan menyusul di tengah jalan. Kalau durasi AOS di
+             main.js diubah, angka ini ikut. -->
         <div
-          v-for="data in latestBlogs"
+          v-for="(data, i) in latestBlogs"
           :key="data.id"
+          data-aos="zoom-in"
+          :data-aos-delay="i * 700"
           class="relative w-full h-auto grid rounded-[10px] p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:to-[#565656]"
         >
           <div
