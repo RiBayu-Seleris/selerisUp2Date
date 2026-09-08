@@ -39,7 +39,7 @@ onUnmounted(() => {
   <div
     :class="[
       'fixed top-0 left-0 w-full z-50 transition-all duration-500 ease-in flex justify-center',
-      isScrolled ? 'pt-8 px-8 ' : 'bg-transparent py-6',
+      isScrolled ? 'pt-6 px-8 ' : 'bg-transparent py-5',
     ]"
   >
     <!-- Desktop Navbar -->

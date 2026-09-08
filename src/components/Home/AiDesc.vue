@@ -14,6 +14,7 @@ onMounted(() => {
     class="w-full h-auto flex flex-col lg:flex-row xl:flex-row lg:gap-x-8 xl:gap-x-10 sm:px-10"
   >
     <div
+      data-aos="zoom-in"
       class="flex w-full h-[300px] lg:w-[50%] lg:h-[370px] xl:w-[50%] xl:h-[500px] mb-5"
     >
       <video
@@ -28,6 +29,8 @@ onMounted(() => {
       </video>
     </div>
     <div
+      data-aos="fade-left"
+      data-aos-delay="150"
       class="w-full h-auto lg:w-[50%] lg:h-[370px] xl:w-[50%] xl:h-[500px] p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-r dark:from-[#17181A] dark:from-45% dark:to-[#565656] shadow-lg rounded-2xl"
     >
       <div

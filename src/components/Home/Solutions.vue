@@ -94,103 +94,50 @@ onUnmounted(() => {
     >
       <!-- Row 1: 2 cards -->
       <div class="w-full grid grid-cols-2 gap-4">
+        <!-- Pembungkus khusus AOS.
+             Animasinya SENGAJA dipasang di sini, bukan di kartunya.
+             Kartu punya :class yang berubah saat di-hover, dan setiap kali
+             itu berubah Vue menulis ulang seluruh atribut class elemen —
+             ikut menghapus kelas "aos-animate" yang dipasang AOS dari luar.
+             Akibatnya kartunya kembali ke keadaan awal AOS (tak terlihat)
+             dan tidak pernah muncul lagi, karena AOS disetel once: true.
+             Pembungkus ini tidak punya class dinamis, jadi aman. -->
         <div
-          v-for="data in row1"
+          v-for="(data, i) in row1"
           :key="data.id"
-          class="card-wrapper group relative rounded-2xl h-auto p-[1px] cursor-pointer"
-          :class="
-            SolutionLists.indexOf(data) === activeIndex
-              ? 'is-active border-none'
-              : 'bg-[#E6F0ED] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]'
-          "
-          @mouseenter="onMouseEnter(SolutionLists.indexOf(data))"
-          @mouseleave="onMouseLeave"
-          @click="handleCardClick(data)"
+          data-aos="fade-up"
+          :data-aos-delay="i * 80"
+          class="h-full"
         >
-          <!-- @click="showUnderConstructionModal = true" -->
           <div
-            class="w-full h-full flex flex-col justify-between bg-white dark:bg-[#1D1F23] rounded-2xl px-5 py-6"
+            class="card-wrapper group relative rounded-2xl h-full p-[1px] cursor-pointer"
+            :class="
+              SolutionLists.indexOf(data) === activeIndex
+                ? 'is-active border-none'
+                : 'bg-[#E6F0ED] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]'
+            "
+            @mouseenter="onMouseEnter(SolutionLists.indexOf(data))"
+            @mouseleave="onMouseLeave"
+            @click="handleCardClick(data)"
           >
-            <div class="w-full h-auto flex flex-col gap-y-4 xl:gap-y-4">
-              <div class="w-full h-auto flex justify-start items-start">
-                <div
-                  class="w-10 h-10 rounded-md flex justify-center items-center p-2"
-                  :class="
-                    SolutionLists.indexOf(data) === activeIndex
-                      ? 'bg-[#ADF9C5] dark:bg-[#2AB857] text-[#2AB857] dark:text-[#AFFAC6]'
-                      : 'bg-[#ADF9C5] text-[#2AB857]'
-                  "
-                >
-                  <component :is="data.icons" class="w-full h-full" />
+            <!-- @click="showUnderConstructionModal = true" -->
+            <div
+              class="w-full h-full flex flex-col justify-between bg-white dark:bg-[#1D1F23] rounded-2xl px-5 py-6"
+            >
+              <div class="w-full h-auto flex flex-col gap-y-4 xl:gap-y-4">
+                <div class="w-full h-auto flex justify-start items-start">
+                  <div
+                    class="w-10 h-10 rounded-md flex justify-center items-center p-2"
+                    :class="
+                      SolutionLists.indexOf(data) === activeIndex
+                        ? 'bg-[#ADF9C5] dark:bg-[#2AB857] text-[#2AB857] dark:text-[#AFFAC6]'
+                        : 'bg-[#ADF9C5] text-[#2AB857]'
+                    "
+                  >
+                    <component :is="data.icons" class="w-full h-full" />
+                  </div>
                 </div>
-              </div>
-              <div class="w-full h-12 flex flex-col gap-y-1 xl:gap-y-1.5">
-                <span
-                  class="font-[600] text-[14px] xl:text-[20px]"
-                  :class="
-                    SolutionLists.indexOf(data) === activeIndex
-                      ? 'dark:text-[#2AB857]'
-                      : 'text-[#374151] dark:text-[#357EAF]'
-                  "
-                >
-                  {{ $t(`solutions.${data.slug}.title`) }}
-                </span>
-                <span
-                  class="text-[#8E98A8] text-[14px] leading-normal font-[400] solution-animate-group-hover"
-                >
-                  {{ $t(`solutions.${data.slug}.subtitle`) }}
-                </span>
-              </div>
-              <div class="w-full h-5">
-                <Transition name="fade-link">
-                  <span
-                    v-if="SolutionLists.indexOf(data) === activeIndex"
-                    class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[12px] xl:text-[14px] font-[500] cursor-pointer"
-                    >{{ $t("home.solutions.learnMore") }} <span>→</span>
-                  </span>
-                </Transition>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Row 2: 3 cards -->
-      <div class="w-full grid grid-cols-3 gap-4">
-        <div
-          v-for="data in row2"
-          :key="data.id"
-          class="card-wrapper group relative rounded-2xl h-auto p-[1px] cursor-pointer"
-          :class="
-            SolutionLists.indexOf(data) === activeIndex
-              ? 'is-active border-none'
-              : 'bg-[#E6F0ED] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]'
-          "
-          @mouseenter="onMouseEnter(SolutionLists.indexOf(data))"
-          @mouseleave="onMouseLeave"
-          @click="handleCardClick(data)"
-        >
-          <!-- @click="showUnderConstructionModal = true" -->
-          <div
-            class="w-full h-full flex flex-col justify-between bg-white dark:bg-[#1D1F23] rounded-2xl px-5 py-6"
-          >
-            <div class="w-full h-auto flex flex-col gap-y-4 xl:gap-y-4">
-              <div class="w-full h-auto flex justify-start items-start">
-                <div
-                  class="w-10 h-10 rounded-md flex justify-center items-center p-2"
-                  :class="
-                    SolutionLists.indexOf(data) === activeIndex
-                      ? 'bg-[#ADF9C5] dark:bg-[#2AB857] text-[#2AB857] dark:text-[#AFFAC6]'
-                      : 'bg-[#ADF9C5] text-[#2AB857]'
-                  "
-                >
-                  <component :is="data.icons" class="w-full h-full" />
-                </div>
-              </div>
-              <div class="w-full h-auto flex flex-col gap-y-1">
-                <div
-                  class="w-full h-14 xl:h-12 flex flex-col gap-y-1 xl:gap-y-1.5"
-                >
+                <div class="w-full h-12 flex flex-col gap-y-1 xl:gap-y-1.5">
                   <span
                     class="font-[600] text-[14px] xl:text-[20px]"
                     :class="
@@ -198,14 +145,16 @@ onUnmounted(() => {
                         ? 'dark:text-[#2AB857]'
                         : 'text-[#374151] dark:text-[#357EAF]'
                     "
-                    >{{ $t(`solutions.${data.slug}.title`) }}</span
                   >
+                    {{ $t(`solutions.${data.slug}.title`) }}
+                  </span>
                   <span
-                    class="text-[#8E98A8] text-[12px] xl:text-[14px] leading-normal font-[400] solution-animate-group-hover"
-                    >{{ $t(`solutions.${data.slug}.subtitle`) }}</span
+                    class="text-[#8E98A8] text-[14px] leading-normal font-[400] solution-animate-group-hover"
                   >
+                    {{ $t(`solutions.${data.slug}.subtitle`) }}
+                  </span>
                 </div>
-                <div class="w-full h-5 flex items-center">
+                <div class="w-full h-5">
                   <Transition name="fade-link">
                     <span
                       v-if="SolutionLists.indexOf(data) === activeIndex"
@@ -220,61 +169,154 @@ onUnmounted(() => {
         </div>
       </div>
 
-      <!-- Row 3: 2 cards -->
-      <div class="w-full grid grid-cols-2 gap-4">
+      <!-- Row 2: 3 cards -->
+      <div class="w-full grid grid-cols-3 gap-4">
+        <!-- Pembungkus khusus AOS.
+             Animasinya SENGAJA dipasang di sini, bukan di kartunya.
+             Kartu punya :class yang berubah saat di-hover, dan setiap kali
+             itu berubah Vue menulis ulang seluruh atribut class elemen —
+             ikut menghapus kelas "aos-animate" yang dipasang AOS dari luar.
+             Akibatnya kartunya kembali ke keadaan awal AOS (tak terlihat)
+             dan tidak pernah muncul lagi, karena AOS disetel once: true.
+             Pembungkus ini tidak punya class dinamis, jadi aman. -->
         <div
-          v-for="data in row3"
+          v-for="(data, i) in row2"
           :key="data.id"
-          class="card-wrapper group relative rounded-2xl h-auto p-[1px] cursor-pointer"
-          :class="
-            SolutionLists.indexOf(data) === activeIndex
-              ? 'is-active border-none'
-              : 'bg-[#E6F0ED] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]'
-          "
-          @mouseenter="onMouseEnter(SolutionLists.indexOf(data))"
-          @mouseleave="onMouseLeave"
-          @click="handleCardClick(data)"
+          data-aos="fade-up"
+          :data-aos-delay="i * 80"
+          class="h-full"
         >
-          <!-- @click="showUnderConstructionModal = true" -->
           <div
-            class="w-full h-full flex flex-col justify-between bg-white dark:bg-[#1D1F23] rounded-2xl px-5 py-6"
+            class="card-wrapper group relative rounded-2xl h-full p-[1px] cursor-pointer"
+            :class="
+              SolutionLists.indexOf(data) === activeIndex
+                ? 'is-active border-none'
+                : 'bg-[#E6F0ED] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]'
+            "
+            @mouseenter="onMouseEnter(SolutionLists.indexOf(data))"
+            @mouseleave="onMouseLeave"
+            @click="handleCardClick(data)"
           >
-            <div class="w-full h-auto flex flex-col gap-y-4 xl:gap-y-4">
-              <div class="w-full h-auto flex justify-start items-start">
-                <div
-                  class="w-10 h-10 rounded-md flex justify-center items-center p-2"
-                  :class="
-                    SolutionLists.indexOf(data) === activeIndex
-                      ? 'bg-[#ADF9C5] dark:bg-[#2AB857] text-[#2AB857] dark:text-[#AFFAC6]'
-                      : 'bg-[#ADF9C5] text-[#2AB857]'
-                  "
-                >
-                  <component :is="data.icons" class="w-full h-full" />
+            <!-- @click="showUnderConstructionModal = true" -->
+            <div
+              class="w-full h-full flex flex-col justify-between bg-white dark:bg-[#1D1F23] rounded-2xl px-5 py-6"
+            >
+              <div class="w-full h-auto flex flex-col gap-y-4 xl:gap-y-4">
+                <div class="w-full h-auto flex justify-start items-start">
+                  <div
+                    class="w-10 h-10 rounded-md flex justify-center items-center p-2"
+                    :class="
+                      SolutionLists.indexOf(data) === activeIndex
+                        ? 'bg-[#ADF9C5] dark:bg-[#2AB857] text-[#2AB857] dark:text-[#AFFAC6]'
+                        : 'bg-[#ADF9C5] text-[#2AB857]'
+                    "
+                  >
+                    <component :is="data.icons" class="w-full h-full" />
+                  </div>
+                </div>
+                <div class="w-full h-auto flex flex-col gap-y-1">
+                  <div
+                    class="w-full h-14 xl:h-12 flex flex-col gap-y-1 xl:gap-y-1.5"
+                  >
+                    <span
+                      class="font-[600] text-[14px] xl:text-[20px]"
+                      :class="
+                        SolutionLists.indexOf(data) === activeIndex
+                          ? 'dark:text-[#2AB857]'
+                          : 'text-[#374151] dark:text-[#357EAF]'
+                      "
+                      >{{ $t(`solutions.${data.slug}.title`) }}</span
+                    >
+                    <span
+                      class="text-[#8E98A8] text-[12px] xl:text-[14px] leading-normal font-[400] solution-animate-group-hover"
+                      >{{ $t(`solutions.${data.slug}.subtitle`) }}</span
+                    >
+                  </div>
+                  <div class="w-full h-5 flex items-center">
+                    <Transition name="fade-link">
+                      <span
+                        v-if="SolutionLists.indexOf(data) === activeIndex"
+                        class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[12px] xl:text-[14px] font-[500] cursor-pointer"
+                        >{{ $t("home.solutions.learnMore") }} <span>→</span>
+                      </span>
+                    </Transition>
+                  </div>
                 </div>
               </div>
-              <div class="w-full h-12 flex flex-col gap-y-1 xl:gap-y-1.5">
-                <span
-                  class="font-[600] text-[14px] xl:text-[20px]"
-                  :class="
-                    SolutionLists.indexOf(data) === activeIndex
-                      ? 'dark:text-[#2AB857]'
-                      : 'text-[#374151] dark:text-[#357EAF]'
-                  "
-                  >{{ $t(`solutions.${data.slug}.title`) }}</span
-                >
-                <span
-                  class="text-[#8E98A8] text-[14px] leading-normal font-[400] solution-animate-group-hover"
-                  >{{ $t(`solutions.${data.slug}.subtitle`) }}</span
-                >
-              </div>
-              <div class="w-full h-5">
-                <Transition name="fade-link">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Row 3: 2 cards -->
+      <div class="w-full grid grid-cols-2 gap-4">
+        <!-- Pembungkus khusus AOS.
+             Animasinya SENGAJA dipasang di sini, bukan di kartunya.
+             Kartu punya :class yang berubah saat di-hover, dan setiap kali
+             itu berubah Vue menulis ulang seluruh atribut class elemen —
+             ikut menghapus kelas "aos-animate" yang dipasang AOS dari luar.
+             Akibatnya kartunya kembali ke keadaan awal AOS (tak terlihat)
+             dan tidak pernah muncul lagi, karena AOS disetel once: true.
+             Pembungkus ini tidak punya class dinamis, jadi aman. -->
+        <div
+          v-for="(data, i) in row3"
+          :key="data.id"
+          data-aos="fade-up"
+          :data-aos-delay="i * 80"
+          class="h-full"
+        >
+          <div
+            class="card-wrapper group relative rounded-2xl h-full p-[1px] cursor-pointer"
+            :class="
+              SolutionLists.indexOf(data) === activeIndex
+                ? 'is-active border-none'
+                : 'bg-[#E6F0ED] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]'
+            "
+            @mouseenter="onMouseEnter(SolutionLists.indexOf(data))"
+            @mouseleave="onMouseLeave"
+            @click="handleCardClick(data)"
+          >
+            <!-- @click="showUnderConstructionModal = true" -->
+            <div
+              class="w-full h-full flex flex-col justify-between bg-white dark:bg-[#1D1F23] rounded-2xl px-5 py-6"
+            >
+              <div class="w-full h-auto flex flex-col gap-y-4 xl:gap-y-4">
+                <div class="w-full h-auto flex justify-start items-start">
+                  <div
+                    class="w-10 h-10 rounded-md flex justify-center items-center p-2"
+                    :class="
+                      SolutionLists.indexOf(data) === activeIndex
+                        ? 'bg-[#ADF9C5] dark:bg-[#2AB857] text-[#2AB857] dark:text-[#AFFAC6]'
+                        : 'bg-[#ADF9C5] text-[#2AB857]'
+                    "
+                  >
+                    <component :is="data.icons" class="w-full h-full" />
+                  </div>
+                </div>
+                <div class="w-full h-12 flex flex-col gap-y-1 xl:gap-y-1.5">
                   <span
-                    v-if="SolutionLists.indexOf(data) === activeIndex"
-                    class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[12px] xl:text-[14px] font-[500] cursor-pointer"
-                    >{{ $t("home.solutions.learnMore") }} <span>→</span>
-                  </span>
-                </Transition>
+                    class="font-[600] text-[14px] xl:text-[20px]"
+                    :class="
+                      SolutionLists.indexOf(data) === activeIndex
+                        ? 'dark:text-[#2AB857]'
+                        : 'text-[#374151] dark:text-[#357EAF]'
+                    "
+                    >{{ $t(`solutions.${data.slug}.title`) }}</span
+                  >
+                  <span
+                    class="text-[#8E98A8] text-[14px] leading-normal font-[400] solution-animate-group-hover"
+                    >{{ $t(`solutions.${data.slug}.subtitle`) }}</span
+                  >
+                </div>
+                <div class="w-full h-5">
+                  <Transition name="fade-link">
+                    <span
+                      v-if="SolutionLists.indexOf(data) === activeIndex"
+                      class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[12px] xl:text-[14px] font-[500] cursor-pointer"
+                      >{{ $t("home.solutions.learnMore") }} <span>→</span>
+                    </span>
+                  </Transition>
+                </div>
               </div>
             </div>
           </div>

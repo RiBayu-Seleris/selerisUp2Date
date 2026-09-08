@@ -1,6 +1,5 @@
 <script setup>
-import { computed } from "vue";
-const props = defineProps({
+defineProps({
   divImageBefore: {
     type: String,
   },
@@ -31,19 +30,6 @@ const props = defineProps({
   BodyText: {
     type: String,
   },
-  maxLength: {
-    type: Number,
-    default: 300,
-  },
-});
-
-const emit = defineEmits(["readmore"]);
-
-const showReadMore = computed(() => props.BodyText.length > props.maxLength);
-const shortText = computed(() => {
-  return props.BodyText.length > props.maxLength
-    ? props.BodyText.substring(0, props.maxLength) + "..."
-    : props.BodyText;
 });
 </script>
 
@@ -67,7 +53,7 @@ const shortText = computed(() => {
         </div>
         <div class="flex flex-col w-full justify-center mt-6 px-10 text-center">
           <p
-            class="text-[20px] font-normal text-[#195279] dark:text-[#FAFAFAFA]"
+            class="text-[20px] id:text-[17px] font-normal text-[#195279] dark:text-[#FAFAFAFA]"
           >
             {{ TitleBefore }}
           </p>
@@ -96,18 +82,7 @@ const shortText = computed(() => {
         >
           {{ CertNumber }}
         </p>
-        <!-- <p class="text-[12px]">{{ BodyText }}</p> -->
-        <p class="text-[12px]">
-          {{ shortText }}
-          <button
-            aria-label="Readmore"
-            v-if="showReadMore"
-            @click="emit('readmore')"
-            class="font-bold hover:underline"
-          >
-            {{ $t("misc.read_more") }}
-          </button>
-        </p>
+        <p class="text-[12px]">{{ BodyText }}</p>
       </div>
     </div>
   </div>

@@ -1,6 +1,6 @@
 <script setup>
 import loadingAnimation from "@/assets/images/loading.webm";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { onMounted, onUnmounted, ref, computed, watch, nextTick } from "vue";
 import AOS from "aos";
 import { useScrollStore } from "@/stores/scroll";
@@ -34,6 +34,7 @@ const themeStore = useThemeStore();
 const languageStore = useLanguageStore();
 const pageLoading = usePageLoadingStore();
 const route = useRoute();
+const router = useRouter();
 const scrollStore = useScrollStore();
 
 const isTooltipOpen = ref(false);
@@ -42,16 +43,52 @@ const sidebarStore = useSidebarStore();
 // Loading control
 const isLoad = ref(false);
 
-// Berkas animasi loading (webm ±700 KB) perlu waktu untuk diunduh. Tanpa
-// penanda ini, kotak videonya kosong dulu lalu animasinya muncul mendadak.
-// Jadi videonya kita munculkan perlahan begitu benar-benar siap diputar.
-const animasiLoadingSiap = ref(false);
+/* ------------------------------------------------------------
+   Kapan logo di dalam lingkaran boleh tampil
+
+   Berkas animasinya (webm ±700 KB) perlu waktu untuk diunduh. Pada kunjungan
+   PERTAMA, kalau langsung ditampilkan, kotaknya kosong dulu lalu logonya
+   muncul mendadak. Karena itu ada efek memudar masuk.
+
+   Tapi efek itu cuma berguna sekali. Pada kunjungan berikutnya — termasuk
+   setiap kali halaman dimuat ulang — berkasnya sudah tersimpan di cache
+   browser dan sebenarnya siap seketika. Memudar dari nol di situ justru
+   membuat logonya terlihat "hilang sebentar" tiap kali refresh, karena
+   sebelum refresh logonya terlihat penuh lalu sesudahnya mulai lagi dari nol.
+
+   Solusinya: sekali videonya berhasil dimuat, catat di localStorage. Kunjungan
+   berikutnya langsung mulai dari tampil penuh, tanpa memudar sama sekali.
+
+   Catatan: catatan itu berarti "videonya pernah berhasil dimuat", bukan
+   jaminan dia masih ada di cache. Kalau cache-nya sudah dibersihkan browser,
+   logonya akan muncul mendadak seperti kunjungan pertama tanpa efek memudar —
+   jarang terjadi, dan akibatnya ringan.
+------------------------------------------------------------ */
+const KUNCI_VIDEO_PERNAH_DIMUAT = "seleris:loading-video-pernah-dimuat";
+
+const pernahDimuat = (() => {
+  try {
+    return localStorage.getItem(KUNCI_VIDEO_PERNAH_DIMUAT) === "1";
+  } catch {
+    return false; // localStorage diblokir (mode penyamaran)
+  }
+})();
+
+// Kunjungan berulang: langsung true, jadi gambar PERTAMA sudah tampil penuh.
+const animasiLoadingSiap = ref(pernahDimuat);
+
 const tandaiAnimasiSiap = () => {
   animasiLoadingSiap.value = true;
+  try {
+    localStorage.setItem(KUNCI_VIDEO_PERNAH_DIMUAT, "1");
+  } catch {
+    /* diabaikan: hanya membuat efek memudar tetap jalan tiap kali */
+  }
 };
+
 // Pengaman: kalau kejadian "siap diputar" tidak pernah terkirim (mis. browser
-// menolak memutar otomatis), videonya tetap ditampilkan setelah 1,2 detik.
-setTimeout(tandaiAnimasiSiap, 1200);
+// menolak memutar otomatis), videonya tetap ditampilkan setelah 0,6 detik.
+setTimeout(tandaiAnimasiSiap, 600);
 
 /* ------------------------------------------------------------
    Gerbang loading
@@ -70,7 +107,136 @@ setTimeout(tandaiAnimasiSiap, 1200);
    - gerbangMembuka : sedang bergeser ke tepi atau belum. Ini yang memicu
                       animasinya.
 ------------------------------------------------------------ */
-const DURASI_GERBANG_MS = 1100; // samakan dengan duration-[1100ms] di template
+// Membuka dibuat lebih lambat daripada menutup: menutup terasa seperti
+// keputusan (cepat, tegas), membuka terasa seperti persembahan (perlahan).
+// Angka-angka ini HARUS sama dengan duration-[...] di template.
+/**
+ * Penanda supaya piringan logo MENDARAT saat pertama kali tampil.
+ *
+ * Saat refresh, gerbang langsung terpasang dalam keadaan tertutup — jadi kalau
+ * piringannya langsung digambar pada ukuran penuh, tidak ada perubahan yang
+ * bisa dianimasikan dan dia muncul begitu saja.
+ *
+ * Karena itu gambar pertama dibuat sedikit lebih kecil (95%), lalu dinaikkan
+ * ke 100% satu gambar layar kemudian di onMounted. Saat pindah halaman
+ * penanda ini tidak diperlukan: gerbang memang dipasang terbuka lebih dulu,
+ * jadi pendaratannya sudah terjadi dengan sendirinya.
+ */
+const garisTumbuh = ref(false);
+
+/* ------------------------------------------------------------
+   Waktu dan jeda daun gerbang
+
+   Membuka dibuat lebih lambat daripada menutup: menutup terasa seperti
+   keputusan (cepat, tegas), membuka terasa seperti persembahan.
+
+   Daun kanan berangkat 70 ms di belakang daun kiri. Selisih sekecil itu tidak
+   terbaca sebagai "terlambat", tapi terasa: dua bidang yang bergerak persis
+   serempak terbaca sebagai hasil hitungan komputer, sedangkan yang sedikit
+   meleset terbaca sebagai dua benda terpisah. Ini penambah rasa paling murah
+   — tidak menambah satu pun elemen di layar.
+
+   Angka-angka ini HARUS sama dengan duration-[...] dan delay-[...] di
+   template. Jeda daunnya ikut ditambahkan ke total, supaya hitungan selesai
+   tidak memotong daun yang berangkat belakangan.
+------------------------------------------------------------ */
+/* ------------------------------------------------------------
+   Sirkuit cahaya
+
+   Garis dan lingkaran digambar sebagai SATU jalur SVG, bukan dua elemen
+   terpisah. Itu sebabnya cahayanya bisa berjalan menyambung: turun di garis,
+   memutari tepi lingkaran, lalu turun lagi — tanpa pernah melompat, karena
+   memang cuma ada satu jalur untuk diikuti.
+
+   Jalurnya dihitung di JavaScript, bukan ditulis tetap, karena panjangnya
+   bergantung ukuran layar sedangkan jari-jari lingkarannya tetap dalam piksel
+   (harus sama persis dengan ukuran piringan logo di bawahnya).
+
+   Sisi kanvasnya 100vmax — sisi TERPANJANG layar — supaya sirkuitnya tetap
+   membentang penuh baik saat tegak maupun setelah diputar 90 derajat.
+------------------------------------------------------------ */
+const sisiSirkuit = ref(0);
+const jariLingkaran = ref(85);
+
+const hitungSirkuit = () => {
+  sisiSirkuit.value = Math.max(window.innerWidth, window.innerHeight);
+  const lebar = window.innerWidth;
+  // Harus sama dengan setengah ukuran piringan logo: 170 / 240 / 280 px
+  jariLingkaran.value = lebar >= 1024 ? 140 : lebar >= 768 ? 120 : 85;
+};
+
+/**
+ * Lintasan yang selalu terlihat: garis atas, garis bawah, dan lingkaran
+ * PENUH. Ditulis sebagai tiga potongan terpisah (tiap "M" mengangkat pena)
+ * supaya garisnya berhenti di tepi lingkaran dan tidak memotong bagian
+ * dalamnya — kalau memotong, garisnya akan tergambar menyeberangi logo.
+ */
+const lintasanSirkuit = computed(() => {
+  const sisi = sisiSirkuit.value;
+  const t = sisi / 2;
+  const r = jariLingkaran.value;
+  return [
+    `M ${t} 0 L ${t} ${t - r}`,
+    `M ${t} ${t + r} L ${t} ${sisi}`,
+    `M ${t} ${t - r} A ${r} ${r} 0 1 1 ${t} ${t + r} A ${r} ${r} 0 1 1 ${t} ${t - r}`,
+  ].join(" ");
+});
+
+/**
+ * Jalur yang dilalui cahaya — DUA buah, kembar.
+ *
+ * Keduanya sama persis kecuali sisi lingkaran yang dilewati: satu memutar ke
+ * kanan, satu ke kiri. Karena panjangnya identik, cahayanya berjalan serempak:
+ * menyatu di garis lurus, BERPISAH dua saat mengenai lingkaran, lalu bertemu
+ * lagi di bawahnya. Itulah bentuk cahaya yang melewati sebuah benda bulat.
+ *
+ * Bedanya cuma satu angka: "sweep flag" pada perintah A (busur). 1 memutar
+ * searah jarum jam, 0 berlawanan.
+ */
+const jalurCahaya = computed(() => {
+  const sisi = sisiSirkuit.value;
+  const t = sisi / 2;
+  const r = jariLingkaran.value;
+  const masuk = `M ${t} 0 L ${t} ${t - r}`;
+  const keluar = `L ${t} ${sisi}`;
+  return [
+    `${masuk} A ${r} ${r} 0 0 1 ${t} ${t + r} ${keluar}`,
+    `${masuk} A ${r} ${r} 0 0 0 ${t} ${t + r} ${keluar}`,
+  ];
+});
+
+/**
+ * Penanda: cahaya boleh berjalan atau belum.
+ *
+ * MASALAH YANG DISELESAIKAN
+ * Animasi CSS mulai berjalan begitu elemennya dibuat — yaitu saat gerbang
+ * BARU MULAI menutup. Akibatnya, begitu gerbang selesai menutup, cahayanya
+ * sudah berada di tengah jalur, dan posisinya berbeda-beda tergantung berapa
+ * lama gerbang menutup.
+ *
+ * Karena itu kelas animasinya baru dipasang SETELAH gerbang benar-benar
+ * tertutup. Melepas lalu memasang kembali kelas animasi juga membuat
+ * animasinya mengulang dari awal — itu yang menjamin cahayanya selalu
+ * berangkat dari titik awal jalur.
+ */
+const cahayaJalan = ref(false);
+
+const mulaiCahaya = () => {
+  cahayaJalan.value = false;
+  // Dua langkah: lepas kelasnya dulu sampai benar-benar tergambar, baru
+  // pasang lagi. Kalau langsung diubah false lalu true dalam satu tarikan,
+  // browser tidak pernah melihat keadaan "tanpa kelas" dan animasinya
+  // meneruskan yang lama, bukan mengulang.
+  nextTick(() => {
+    requestAnimationFrame(() => {
+      cahayaJalan.value = true;
+    });
+  });
+};
+
+const JEDA_DAUN_MS = 70;
+const DURASI_BUKA_MS = 1100 + JEDA_DAUN_MS;
+const DURASI_TUTUP_MS = 700 + JEDA_DAUN_MS;
 const gerbangTampil = ref(true);
 const gerbangMembuka = ref(false);
 let penghitungGerbang = null;
@@ -117,7 +283,19 @@ const isStandaloneRoute = computed(() => standaloneRoutes.includes(route.path));
    setelah hitungan habis, halaman tampil kosong sebentar dan footer melompat
    ke atas sebelum isinya muncul.
 ============================================================ */
-const MIN_LOADING_MS = 2000; // durasi minimum, seperti sebelumnya
+// Waktu minimum layar loading tampil.
+// Saat pindah halaman angkanya jauh lebih pendek, karena gerbangnya sudah
+// terlihat lebih dulu selama 0,7 detik saat menutup. Kalau tetap 2 detik,
+// satu perpindahan halaman jadi 2,8 detik hanya untuk menunggu.
+const MIN_LOADING_MS = 2000; // muat pertama / refresh
+// Pindah halaman. Angkanya harus cukup supaya keadaan TERKUNCI sempat
+// terbaca: palang selesai melintang pada 400 + 300 = 700 ms, jadi 1200 ms
+// menyisakan setengah detik dalam keadaan terkunci sebelum dibuka lagi.
+const MIN_LOADING_PINDAH_MS = 1200;
+
+// Menandai bahwa gerbang baru saja ditutup oleh perpindahan halaman, supaya
+// mulaiLayarLoading() tahu harus memakai waktu minimum yang mana.
+let baruDitutupUntukPindah = false;
 const MAX_LOADING_MS = 10000; // pengaman: jangan sampai tertahan selamanya
 
 const waktuMinimumLewat = ref(false);
@@ -143,16 +321,145 @@ const mulaiLayarLoading = () => {
   gerbangMembuka.value = false;
   pageLoading.reset(); // pengambilan data halaman sebelumnya tidak relevan lagi
 
+  // Dipanggil di sini karena pada titik ini gerbangnya SUDAH tertutup — baik
+  // saat refresh (terpasang langsung tertutup) maupun saat pindah halaman
+  // (fungsi ini berjalan setelah animasi menutup selesai).
+  mulaiCahaya();
+
+  const waktuMinimum = baruDitutupUntukPindah
+    ? MIN_LOADING_PINDAH_MS
+    : MIN_LOADING_MS;
+  baruDitutupUntukPindah = false;
+
   penghitungMinimum = setTimeout(() => {
     waktuMinimumLewat.value = true;
     cobaTutupLayarLoading();
-  }, MIN_LOADING_MS);
+  }, waktuMinimum);
 
   // Kalau ada pengambilan data yang menggantung (server tidak menjawab),
   // layar loading tetap menutup daripada pengunjung terjebak selamanya.
   penghitungMaksimum = setTimeout(() => {
     isLoad.value = true;
   }, MAX_LOADING_MS);
+};
+
+/**
+ * Menutup gerbang, lalu memberi tahu kalau animasinya sudah selesai.
+ *
+ * Dipakai saat pindah halaman: gerbang menutup dulu menyembunyikan halaman
+ * lama, baru halaman baru dimuat di baliknya, lalu gerbang membuka lagi.
+ *
+ * Satu hal yang mudah terlewat: daun gerbang dipasang dalam keadaan TERBUKA
+ * dulu (posisinya di luar layar, jadi tidak terlihat), baru satu gambar layar
+ * kemudian disuruh menutup. Kalau langsung dipasang tertutup, tidak ada
+ * perubahan posisi yang bisa dianimasikan browser — gerbangnya akan muncul
+ * begitu saja. Dua requestAnimationFrame bertingkat memastikan browser sempat
+ * menggambar posisi awalnya lebih dulu.
+ */
+const tutupGerbang = () =>
+  new Promise((selesai) => {
+    clearTimeout(penghitungGerbang);
+
+    // Sudah terpasang dan tertutup: tidak ada yang perlu dianimasikan.
+    if (gerbangTampil.value && !gerbangMembuka.value) {
+      selesai();
+      return;
+    }
+
+    // Kunci gulir selama peralihan, supaya halaman lama tidak ikut tergeser.
+    document.body.style.overflow = "hidden";
+    hentikanSmoothScroll();
+
+    cahayaJalan.value = false; // cahaya diam selama gerbang menutup
+
+    gerbangTampil.value = true;
+    gerbangMembuka.value = true; // posisi awal: terbuka (di luar layar)
+
+    nextTick(() => {
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          gerbangMembuka.value = false; // -> menutup
+          setTimeout(selesai, DURASI_TUTUP_MS);
+        });
+      });
+    });
+  });
+
+/**
+ * Menahan perpindahan halaman sampai gerbangnya selesai menutup.
+ *
+ * Yang sengaja DILEWATI (gerbang tidak menutup):
+ * - muat pertama, karena belum ada halaman yang perlu ditutupi
+ * - tautan #anchor, yaitu perpindahan yang alamatnya sama dan hanya beda
+ *   bagian. Ini penting: menu "lompat ke bagian" secara teknis tetap
+ *   terhitung pindah rute, dan tanpa pengecualian ini gerbangnya akan
+ *   menutup setiap kali orang mengklik menu
+ * - halaman standalone (chatbot, face-tracking) yang memang tanpa gerbang
+ */
+const lepasPenjagaRute = router.beforeEach(async (to, from) => {
+  if (!from.name) return true;
+  if (to.path === from.path) return true;
+  if (
+    standaloneRoutes.includes(to.path) ||
+    standaloneRoutes.includes(from.path)
+  ) {
+    return true;
+  }
+
+  await tutupGerbang();
+  baruDitutupUntukPindah = true;
+  return true;
+});
+
+/* ------------------------------------------------------------
+   Refresh lewat papan ketik (F5 / Ctrl+R / Cmd+R)
+
+   TUJUANNYA
+   Supaya refresh pun terasa seperti pindah halaman: gerbang menutup dulu,
+   baru halaman dimuat ulang.
+
+   CARA KERJANYA — bagian yang penting dipahami
+   Muat ulang aslinya TIDAK dibatalkan, hanya DITUNDA sampai gerbangnya
+   selesai menutup. Saat itu layar sudah tertutup penuh warna solid, jadi
+   proses muat ulang browser berlangsung di baliknya tanpa terlihat: dokumen
+   baru menggambar latar dengan warna yang sama persis (aturannya ditulis
+   langsung di <head> pada index.html, jadi berlaku sebelum JavaScript apa pun
+   berjalan), dan gerbangnya juga sudah dalam keadaan tertutup.
+
+   Karena muat ulangnya asli, berkas aplikasi tetap diambil ulang — jadi
+   setelah deploy, pengunjung yang menekan F5 tetap mendapat versi terbaru.
+
+   BATASNYA
+   Hanya berlaku untuk refresh lewat papan ketik. Tombol reload di toolbar
+   browser dan Enter di address bar tidak bisa dicegat oleh JavaScript sama
+   sekali — itu di luar halaman, dan browser memang sengaja tidak
+   memberitahukannya ke kode kita.
+------------------------------------------------------------ */
+let sedangMuatUlang = false;
+
+const tanganiTombolRefresh = (e) => {
+  if (sedangMuatUlang) return; // sudah berjalan, jangan dipicu dua kali
+  if (isStandaloneRoute.value) return; // halaman standalone tanpa gerbang
+
+  const F5 =
+    e.key === "F5" && !e.ctrlKey && !e.metaKey && !e.shiftKey && !e.altKey;
+  const ctrlR =
+    (e.ctrlKey || e.metaKey) &&
+    !e.shiftKey &&
+    !e.altKey &&
+    (e.key === "r" || e.key === "R");
+
+  // Ctrl+Shift+R / Ctrl+F5 = muat ulang paksa (abaikan cache). Sengaja
+  // dibiarkan apa adanya, karena itu dipakai justru saat menelusuri masalah —
+  // menggantinya dengan muat ulang biasa malah menghalangi.
+  if (!F5 && !ctrlR) return;
+
+  e.preventDefault();
+  sedangMuatUlang = true;
+
+  tutupGerbang().then(() => {
+    window.location.reload();
+  });
 };
 
 // Dijalankan langsung saat komponen disiapkan — sebelum halaman di dalamnya
@@ -194,10 +501,11 @@ watch(
     // Aba-aba gerbang bergeser ke tepi. Daunnya baru dilepas dari halaman
     // setelah geserannya selesai — kalau dilepas sekarang, animasinya
     // terpotong dan konten muncul mendadak seperti sebelumnya.
+    cahayaJalan.value = false; // cahaya berhenti saat gerbang membuka
     gerbangMembuka.value = true;
     penghitungGerbang = setTimeout(() => {
       gerbangTampil.value = false;
-    }, DURASI_GERBANG_MS);
+    }, DURASI_BUKA_MS);
 
     nextTick(() => {
       document.dispatchEvent(new Event("seleris:content-ready"));
@@ -219,9 +527,23 @@ onMounted(() => {
   // src/utils/smoothScroll.js — komponen lain tidak perlu tahu apa-apa.
   pasangSmoothScroll();
   perbaruiSmoothScroll();
+
+  window.addEventListener("keydown", tanganiTombolRefresh);
+
+  hitungSirkuit();
+  window.addEventListener("resize", hitungSirkuit, { passive: true });
+
+  // Satu gambar layar setelah terpasang, supaya tinggi nol-nya sempat
+  // tergambar dulu dan pertumbuhannya benar-benar terlihat.
+  requestAnimationFrame(() => {
+    garisTumbuh.value = true;
+  });
 });
 
 onUnmounted(() => {
+  lepasPenjagaRute();
+  window.removeEventListener("keydown", tanganiTombolRefresh);
+  window.removeEventListener("resize", hitungSirkuit);
   window.removeEventListener("scroll", handleScroll);
   if (scrollRafId) cancelAnimationFrame(scrollRafId);
 });
@@ -295,9 +617,9 @@ onMounted(() => {
   <!-- Normal routes -->
   <template v-else>
     <!-- ⏳ Layar loading.
-         Tampilannya polos seperti sebelumnya — yang berubah hanya cara
-         menghilangnya: layarnya terbelah dua lalu BERGESER ke tepi (kiri ke
-         kiri, kanan ke kanan), bukan sekadar memudar.
+         Tampilannya polos — yang berubah hanya cara menghilangnya: layarnya
+         terbelah dua lalu BERGESER ke tepi (kiri ke kiri, kanan ke kanan),
+         bukan sekadar memudar.
 
          "overflow-hidden" menahan belahan yang sudah keluar layar supaya
          tidak memunculkan batang gulir mendatar. -->
@@ -311,8 +633,15 @@ onMounted(() => {
       <!-- Belahan kanan -->
       <div
         :class="[
-          'absolute top-0 right-0 w-1/2 h-full bg-[#F9F9F9] dark:bg-[#17181A] transition-transform ease-[cubic-bezier(.7,0,.2,1)] duration-[1100ms]',
-          gerbangMembuka ? 'translate-x-full' : 'translate-x-0',
+          'absolute bottom-0 left-0 w-full h-1/2 lg:bottom-auto lg:left-auto lg:top-0 lg:right-0 lg:w-1/2 lg:h-full bg-[#F9F9F9] dark:bg-[#17181A] transition-transform',
+          gerbangMembuka ? 'duration-[1100ms]' : 'duration-[700ms]',
+          gerbangMembuka
+            ? 'ease-[cubic-bezier(.16,1,.3,1)]'
+            : 'ease-[cubic-bezier(.6,0,.15,1)]',
+          'delay-[70ms]',
+          gerbangMembuka
+            ? 'translate-y-full lg:translate-y-0 lg:translate-x-full'
+            : 'translate-x-0 translate-y-0',
         ]"
       ></div>
 
@@ -326,10 +655,14 @@ onMounted(() => {
            z-20 supaya lingkarannya lewat DI ATAS belahan kanan. -->
       <div
         :class="[
-          'absolute top-0 left-0 w-1/2 h-full z-20 bg-[#F9F9F9] dark:bg-[#17181A] transition-transform ease-[cubic-bezier(.7,0,.2,1)] duration-[1100ms]',
+          'absolute top-0 left-0 w-full h-1/2 lg:w-1/2 lg:h-full z-20 bg-[#F9F9F9] dark:bg-[#17181A] transition-transform',
+          gerbangMembuka ? 'duration-[1100ms]' : 'duration-[700ms]',
           gerbangMembuka
-            ? 'translate-x-[calc(-100%_-_11rem)]'
-            : 'translate-x-0',
+            ? 'ease-[cubic-bezier(.16,1,.3,1)]'
+            : 'ease-[cubic-bezier(.6,0,.15,1)]',
+          gerbangMembuka
+            ? 'translate-y-[calc(-100%_-_11rem)] lg:translate-y-0 lg:translate-x-[calc(-100%_-_11rem)]'
+            : 'translate-x-0 translate-y-0',
         ]"
       >
         <!-- Lingkaran tengah.
@@ -346,33 +679,114 @@ onMounted(() => {
                 (ring) dan bayangan lembut. Tidak ada hiasan lain: belahan
                 gerbangnya sengaja dibiarkan polos, tanpa garis apa pun. -->
         <div
-          class="absolute top-1/2 right-0 flex items-center justify-center w-[170px] h-[170px] md:w-[240px] md:h-[240px] lg:w-[280px] lg:h-[280px] rounded-full bg-[#F9F9F9] dark:bg-[#17181A] ring-1 ring-black/10 dark:ring-white/15 shadow-2xl translate-x-1/2 -translate-y-1/2"
+          :class="[
+            'absolute left-1/2 bottom-0 lg:left-auto lg:bottom-auto lg:top-1/2 lg:right-0 flex items-center justify-center w-[170px] h-[170px] md:w-[240px] md:h-[240px] lg:w-[280px] lg:h-[280px] rounded-full bg-[#F9F9F9] dark:bg-[#17181A] shadow-2xl -translate-x-1/2 translate-y-1/2 lg:translate-x-1/2 lg:-translate-y-1/2 transition-transform duration-700 ease-[cubic-bezier(.16,1,.3,1)]',
+            garisTumbuh && !gerbangMembuka ? 'scale-100' : 'scale-95',
+          ]"
         >
           <!-- Animasi loading. WebM ini punya kanal alpha (transparan), jadi
                satu berkas cocok untuk mode terang maupun gelap.
 
+               Memudarnya sengaja cepat (0,2 detik) dan preload="auto"
+               menyuruh browser mengunduhnya sesegera mungkin. Dulu memudarnya
+               0,5 detik, dan itu terasa seperti logonya "hilang sebentar"
+               setiap kali halaman dimuat ulang — karena sebelum refresh
+               logonya terlihat penuh, lalu sesudahnya mulai lagi dari nol.
+
                Lebarnya 78% dari garis tengah lingkaran. Logonya melebar
                (848 x 318 piksel), jadi batas amannya bukan lebar lingkaran
                melainkan sudut-sudutnya: pada 78% sudut logo berhenti di 83%
-               jari-jari, masih menyisakan jarak ke tepi. Di atas ~93% sudutnya
-               mulai menabrak garis lingkaran. -->
+               jari-jari, masih menyisakan jarak ke tepi. -->
           <video
             autoplay
             loop
             muted
             playsinline
+            preload="auto"
             aria-hidden="true"
             @contextmenu.prevent
             @loadeddata="tandaiAnimasiSiap"
             @canplay="tandaiAnimasiSiap"
             :class="[
-              'w-[132px] md:w-[186px] lg:w-[218px] h-auto object-contain transition-opacity duration-500 ease-out',
+              'w-[132px] md:w-[186px] lg:w-[218px] h-auto object-contain transition-opacity duration-200 ease-out',
               animasiLoadingSiap ? 'opacity-100' : 'opacity-0',
             ]"
           >
             <source :src="loadingAnimation" type="video/webm" />
           </video>
         </div>
+
+        <!-- Sirkuit cahaya.
+             Garis dan lingkaran adalah SATU jalur SVG, jadi cahayanya berjalan
+             menyambung: turun di garis, memutari tepi lingkaran, lalu turun
+             lagi. Tidak mungkin melompat, karena memang cuma ada satu jalur.
+
+             Ditulis SETELAH piringan logo supaya tergambar di atas tepinya.
+             Jalurnya tidak pernah memotong bagian dalam lingkaran, jadi
+             cahayanya tidak akan menyeberangi logo.
+
+             Seluruh sirkuit ikut berputar 90 derajat saat terkunci — dan itu
+             aman untuk logonya: lingkaran yang diputar tetap terlihat sama
+             persis, jadi yang berubah di mata hanya arah garisnya. Logo dan
+             piringannya elemen terpisah yang tidak ikut berputar.
+
+             Kanvasnya 100vmax (sisi terpanjang layar) supaya tetap membentang
+             penuh baik saat tegak maupun setelah diputar. -->
+        <svg
+          aria-hidden="true"
+          :width="sisiSirkuit"
+          :height="sisiSirkuit"
+          :class="[
+            'absolute left-1/2 bottom-0 lg:left-auto lg:bottom-auto lg:top-1/2 lg:right-0 pointer-events-none -translate-x-1/2 translate-y-1/2 lg:translate-x-1/2 lg:-translate-y-1/2 origin-center',
+            // Arahnya TETAP, tidak pernah berputar. Di bawah lg sumbu
+            // gerbangnya mendatar, jadi sirkuitnya diputar 90 derajat sebagai
+            // posisi dasar; di lg ke atas kembali tegak.
+            'rotate-90 lg:rotate-0',
+          ]"
+        >
+          <!-- Lintasannya: garis samar yang selalu terlihat -->
+          <path
+            :d="lintasanSirkuit"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1"
+            class="text-black/10 dark:text-white/15"
+          />
+
+          <!-- Cahaya yang berjalan, dua jalur kembar: satu memutar lewat sisi
+               kanan lingkaran, satu lewat kiri. Di garis lurus keduanya
+               bertumpuk jadi terlihat satu; begitu mengenai lingkaran mereka
+               berpisah, lalu bertemu lagi di bawahnya.
+
+               Warnanya #1AB24F — hijau merek yang sudah dipakai di 25 berkas
+               lain, jadi tidak perlu dibedakan antara mode terang dan gelap.
+
+               Transparansinya dipasang di elemen <g>, BUKAN di tiap jalur.
+               Sebabnya: dua garis setengah tembus pandang yang bertumpuk akan
+               saling menumpuk warnanya, jadi bagian lurus tampak lebih pekat
+               daripada busurnya. Dipasang di grup, isinya digabung dulu baru
+               ditransparankan sekali — kepekatannya rata.
+
+               pathLength="100" membuat panjang jalur dianggap 100 satuan
+               berapa pun ukuran layarnya, jadi animasinya tidak perlu
+               dihitung ulang saat jendela diubah ukurannya. -->
+          <g opacity="0.85">
+            <path
+              v-for="(jalur, i) in jalurCahaya"
+              :key="i"
+              :d="jalur"
+              pathLength="100"
+              fill="none"
+              stroke="#1AB24F"
+              stroke-width="2"
+              stroke-linecap="round"
+              :class="[
+                'sirkuit-cahaya',
+                cahayaJalan ? 'sirkuit-cahaya-jalan' : '',
+              ]"
+            />
+          </g>
+        </svg>
       </div>
     </div>
     <!-- ✅ Main App Content

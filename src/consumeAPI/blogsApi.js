@@ -78,15 +78,36 @@ export function blogsApi() {
     pageLoading.start();
   };
 
+  /**
+   * Mematikan penanda memuat, dan MEMBERI TAHU kapan itu benar-benar terjadi.
+   *
+   * KENAPA harus mengembalikan janji (Promise)
+   * Penanda memuat sengaja ditahan minimal 350 ms supaya tidak berkedip. Dulu
+   * fungsi ini tidak mengembalikan apa-apa, jadi pemanggilnya menganggap
+   * pekerjaan sudah selesai padahal daftar barunya baru akan digambar 350 ms
+   * kemudian.
+   *
+   * Akibatnya terlihat di paginasi blog: halaman sudah meloncat ke atas
+   * sementara isinya masih keadaan memuat, lalu daftarnya muncul menyusul dan
+   * tinggi halaman berubah di bawah jari pengunjung.
+   *
+   * Dengan mengembalikan janji, pemanggil bisa menunggu sampai daftarnya benar
+   * benar siap sebelum melakukan hal berikutnya.
+   */
   const stopLoading = () => {
     pageLoading.done();
     clearTimeout(penundaBerhenti);
     const sisa = MIN_TAMPIL_LOADING - (Date.now() - loadingMulai);
     if (sisa <= 0) {
       loading.value = false;
-      return;
+      return Promise.resolve();
     }
-    penundaBerhenti = setTimeout(() => (loading.value = false), sisa);
+    return new Promise((selesai) => {
+      penundaBerhenti = setTimeout(() => {
+        loading.value = false;
+        selesai();
+      }, sisa);
+    });
   };
 
   const handleError = (err) => {
@@ -158,7 +179,7 @@ export function blogsApi() {
       blogs.value = [];
       pagination.value = {};
     } finally {
-      stopLoading();
+      await stopLoading();
     }
   };
 
@@ -232,7 +253,7 @@ export function blogsApi() {
       }
       blogDetail.value = null;
     } finally {
-      stopLoading();
+      await stopLoading();
     }
   };
 
@@ -272,7 +293,7 @@ export function blogsApi() {
       }
       newestBlog.value = null;
     } finally {
-      stopLoading();
+      await stopLoading();
     }
   };
 
@@ -321,7 +342,7 @@ export function blogsApi() {
       }
       popularBlog.value = null;
     } finally {
-      stopLoading();
+      await stopLoading();
     }
   };
 
@@ -340,7 +361,7 @@ export function blogsApi() {
       console.error("Gagal posting komentar:", err);
       return null;
     } finally {
-      stopLoading();
+      await stopLoading();
     }
   };
 

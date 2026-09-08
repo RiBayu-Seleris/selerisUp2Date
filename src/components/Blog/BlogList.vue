@@ -1,4 +1,5 @@
 <script setup>
+import { gulirCepatKe } from "@/utils/smoothScroll";
 import loadingAnimation from "@/assets/images/loading.webm";
 import { useI18n } from "vue-i18n";
 import {
@@ -119,26 +120,33 @@ const updateMaxHeight = async () => {
 const changePage = async (page) => {
   if (page < 1 || page > pagination.value.last_page) return;
 
-  // Tunggu data baru dimuat (pastikan getAllBlogs mengembalikan Promise)
-  await getAllBlogs({ ...buildParams(), page });
+  /* URUTANNYA PENTING: gulir DULU, baru ambil datanya.
 
-  // Tunggu DOM selesai update
-  await nextTick();
+     Kalau dibalik — menunggu data siap baru menggulir — pengunjung melihat
+     isi daftar berganti lebih dulu di posisi lamanya, baru halaman meloncat
+     ke atas. Terbaca sebagai kedipan, lalu lompatan.
 
-  const section = document.getElementById("blogSection");
+     Dengan gulir didahulukan, yang terlihat cuma satu gerakan: halaman naik
+     ke daftar, dan isinya sudah berganti begitu sampai di sana.
+
+     Posisi tujuannya dihitung sekarang, sebelum data berganti, karena setelah
+     daftarnya bertukar tinggi halaman bisa berubah dan perhitungannya meleset. */
+  /* #blogSection hanya ada pada tampilan tanpa pencarian. Begitu filter atau
+     pencarian aktif, cabang tampilan yang dipakai berbeda dan elemen itu tidak
+     digambar sama sekali — dulu akibatnya gulirnya dilewati diam-diam tanpa
+     pesan apa pun. #blogTop dipakai sebagai cadangan karena selalu ada. */
+  const section =
+    document.getElementById("blogSection") ||
+    document.getElementById("blogTop");
   if (section) {
-    const width = window.innerWidth;
-    let offset = 130; // default offset
-
-    // Kamu bisa aktifkan logika dinamis lagi kalau mau:
-    // if (width >= 1280) offset = 130;
-    // else if (width >= 1024) offset = 120;
-    // else if (width >= 768) offset = 110;
-    // else offset = 100;
-
+    const offset = 130;
     const y = section.getBoundingClientRect().top + window.pageYOffset - offset;
-    window.scrollTo({ top: y, behavior: "smooth" });
+    gulirCepatKe(y);
   }
+
+  // Datanya menyusul. getAllBlogs baru selesai setelah penanda memuat
+  // benar-benar padam, jadi daftarnya sudah dalam bentuk akhir saat selesai.
+  await getAllBlogs({ ...buildParams(), page });
 };
 
 // bikin URL lengkap berdasarkan slug
@@ -397,7 +405,11 @@ const finalBlogs = computed(() => {
 </script>
 
 <template>
+  <!-- id="blogTop" dipakai sebagai titik tuju gulir CADANGAN saat paginasi.
+       Elemen ini selalu tergambar, berbeda dengan #blogSection yang hanya ada
+       pada tampilan tanpa pencarian. -->
   <section
+    id="blogTop"
     class="flex flex-col relative w-full h-auto lg:max-w-2xl mx-auto px-8 md:px-8 lg:px-0"
   >
     <!-- Search Frame -->
