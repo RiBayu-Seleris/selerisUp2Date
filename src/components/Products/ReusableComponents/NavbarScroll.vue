@@ -16,9 +16,6 @@ const { logo } = useProductLogoColor();
 const isSelerisCredit = computed(
   () => route.path === "/product/seleris-credit",
 );
-const isSelerisCareApplicator = computed(
-  () => route.path === "/product/seleris-care-applicator",
-);
 
 const LogoLink = computed(() => {
   if (route.path === "/product/credit-cover") {
@@ -39,15 +36,25 @@ const LogoLink = computed(() => {
   return "";
 });
 
+// Diredam dengan requestAnimationFrame supaya pembaruannya paling banyak
+// sekali per gambar layar. Ini penting sejak situs memakai smooth scroll:
+// halaman digeser tiap frame, jadi kejadian gulir datang jauh lebih sering
+// daripada saat memakai gulir biasa.
+let idFrame = null;
 const handleScroll = () => {
-  scrollStore.updateScroll();
+  if (idFrame) return;
+  idFrame = requestAnimationFrame(() => {
+    scrollStore.updateScroll();
+    idFrame = null;
+  });
 };
 
 onMounted(() => {
-  window.addEventListener("scroll", handleScroll);
+  window.addEventListener("scroll", handleScroll, { passive: true });
 });
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
+  if (idFrame) cancelAnimationFrame(idFrame);
 });
 </script>
 
@@ -108,9 +115,7 @@ onUnmounted(() => {
                     id="sidebar-button"
                     class="bg-white p-2 rounded-lg shadow-md"
                     :class="
-                      isSelerisCredit || isSelerisCareApplicator
-                        ? 'text-[#1485CB]'
-                        : 'text-[#1AB24F]'
+                      isSelerisCredit ? 'text-[#1485CB]' : 'text-[#1AB24F]'
                     "
                     @click="sidebarStore.open"
                   >

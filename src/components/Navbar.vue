@@ -12,16 +12,26 @@ import { useSidebarStore } from "@/stores/sidebar";
 const sidebarStore = useSidebarStore();
 const isScrolled = ref(false);
 
+// Diredam dengan requestAnimationFrame supaya pembaruannya paling banyak
+// sekali per gambar layar. Ini penting sejak situs memakai smooth scroll:
+// halaman digeser tiap frame, jadi kejadian gulir datang jauh lebih sering
+// daripada saat memakai gulir biasa.
+let idFrame = null;
 const handleScroll = () => {
-  isScrolled.value = window.scrollY > 0;
+  if (idFrame) return;
+  idFrame = requestAnimationFrame(() => {
+    isScrolled.value = window.scrollY > 0;
+    idFrame = null;
+  });
 };
 
 onMounted(() => {
-  window.addEventListener("scroll", handleScroll);
+  window.addEventListener("scroll", handleScroll, { passive: true });
 });
 
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
+  if (idFrame) cancelAnimationFrame(idFrame);
 });
 </script>
 
@@ -75,7 +85,7 @@ onUnmounted(() => {
       class="flex lg:hidden flex-row w-full h-auto justify-between transition-all duration-500 ease-in"
       :class="[
         isScrolled
-          ? 'px-4 md:px-10 bg-white py-2 rounded-[10px] dark:bg-[#17181A] dark:backdrop-blur-3xl dark:border border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30'
+          ? 'px-4 md:px-10 bg-white py-2 rounded-[10px] dark:bg-[#17181A] dark:border border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30'
           : 'px-6 sm:px-8 bg-transparent',
       ]"
     >

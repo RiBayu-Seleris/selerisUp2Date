@@ -10,7 +10,7 @@ const props = defineProps({
 
 const COUNTRIES = [
   { name: "Indonesia", code: "ID", flag: "https://flagcdn.com/w40/id.png" },
-  { name: "Malaysia",  code: "MY", flag: "https://flagcdn.com/w40/my.png" },
+  { name: "Malaysia", code: "MY", flag: "https://flagcdn.com/w40/my.png" },
   { name: "Singapore", code: "SG", flag: "https://flagcdn.com/w40/sg.png" },
 ];
 
@@ -31,7 +31,7 @@ watch(
   () => props.modelValue,
   (newVal) => {
     if (newVal) selectedCountry.value = newVal;
-  }
+  },
 );
 </script>
 

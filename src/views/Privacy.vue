@@ -7,7 +7,10 @@ import HeroText from "@/components/reusable/HeroText.vue";
   >
     <HeroText title="Information" subtitle="Privacy and Policy" />
   </section>
-  <section class="flex flex-col w-full h-auto px-10 lg:px-24 mt-10">
+  <section
+    data-aos="fade-up"
+    class="flex flex-col w-full h-auto px-10 lg:px-24 mt-10"
+  >
     <div class="flex flex-col text-[#535862] dark:text-[#FAFAFA] gap-y-5">
       <p class="text-[#60697B] dark:text-[#FAFAFA]">
         <strong>Privacy Policy</strong>

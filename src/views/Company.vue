@@ -23,6 +23,7 @@ import { useSidebarStore } from "@/stores/sidebar";
   </section>
 
   <section
+    data-aos="fade-up"
     class="dark:hidden flex flex-col relative w-full h-auto px-8 mt-20 lg:mt-28"
   >
     <DescAbout />
@@ -30,30 +31,44 @@ import { useSidebarStore } from "@/stores/sidebar";
 
   <!-- DARK MODE -->
   <div class="hidden dark:flex dark:flex-col dark:w-full dark:h-auto">
-    <section class="flex flex-col relative w-full h-auto md:px-20">
+    <section
+      data-aos="fade-up"
+      class="flex flex-col relative w-full h-auto md:px-20"
+    >
       <Hero />
     </section>
 
-    <section class="flex flex-col relative w-full h-auto px-8 mt-20 lg:mt-28">
+    <section
+      data-aos="fade-up"
+      class="flex flex-col relative w-full h-auto px-8 mt-20 lg:mt-28"
+    >
       <DescAbout />
     </section>
   </div>
 
-  <section class="relative w-full h-auto px-0 mt-32 md:mt-40 lg:mt-36 xl:mt-56">
+  <section
+    data-aos="fade-up"
+    class="relative w-full h-auto px-0 mt-32 md:mt-40 lg:mt-36 xl:mt-56"
+  >
     <Visionary />
   </section>
 
-  <section class="relative w-full h-auto px-8 mt-20 lg:mt-28 xl:mt-40">
+  <section
+    data-aos="fade-up"
+    class="relative w-full h-auto px-8 mt-20 lg:mt-28 xl:mt-40"
+  >
     <VisiMisi />
   </section>
 
   <section
+    data-aos="fade-up"
     class="flex flex-col relative w-full h-auto px-8 mt-40 lg:mt-28 xl:mt-40"
   >
     <Description />
   </section>
 
   <section
+    data-aos="fade-up"
     class="flex flex-col relative w-full md:mt-10 lg:mt-10 xl:mt-48 pt-4 pb-8 lg:pt-0 lg:pb-0"
   >
     <Certificate />
@@ -61,12 +76,13 @@ import { useSidebarStore } from "@/stores/sidebar";
   <!-- Section Step -->
 
   <section
+    data-aos="fade-up"
     class="flex relative w-full h-auto pb-8 lg:pb-0 px-8 md:px-8 lg:px-20 mt-10 sm:mt-14 xl:mt-40 mb-20 md:mb-4 lg:mb-20 xl:mb-20"
   >
     <StepDescription />
   </section>
 
-  <section class="flex flex-col relative w-full h-auto px-8">
+  <section data-aos="fade-up" class="flex flex-col relative w-full h-auto px-8">
     <Deliver />
   </section>
 </template>

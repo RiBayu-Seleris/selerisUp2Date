@@ -24,7 +24,7 @@ defineProps({
       class="w-[7rem] h-[7rem] sm:w-[10rem] sm:h-[10rem] justify-center items-center self-center"
     >
       <div class="w-auto h-full z-40">
-        <!-- src="@/assets/images/robot-ai3.svg" -->
+        <!-- src="@/assets/images/robot-ai3.webp" -->
         <img
           :src="robotImage"
           alt="Robot"

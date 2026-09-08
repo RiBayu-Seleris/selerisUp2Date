@@ -8,6 +8,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
     <HeroText title="Information" subtitle="Terms and Condition" />
   </section>
   <section
+    data-aos="fade-up"
     class="flex flex-col w-full h-auto px-8 md:px-24 mt-10 justify-center leading-relaxed"
   >
     <div class="flex flex-col text-[#535862] gap-y-3">

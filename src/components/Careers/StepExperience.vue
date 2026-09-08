@@ -40,11 +40,11 @@ const emit = defineEmits([
    LOCAL REFS
 =========================== */
 const jobDescriptionEditor = ref(null);
-const jobDescription = ref(null);
+const jobDescriptionQuill = ref(null);
 const jobDescriptionError = ref(null);
 
 const achievementDescriptionEditor = ref(null);
-const achievementDescription = ref(null);
+const achievementDescriptionQuill = ref(null);
 const achievementDescriptionError = ref(null);
 
 const startDateWrapper = ref(null);
@@ -144,7 +144,7 @@ function handleClickOutside(e) {
 =========================== */
 // Job Description
 onMounted(() => {
-  jobDescription.value = new Quill(jobDescriptionEditor.value, {
+  jobDescriptionQuill.value = new Quill(jobDescriptionEditor.value, {
     theme: "snow",
     placeholder: "Write your job description...",
     modules: {
@@ -158,12 +158,12 @@ onMounted(() => {
 
   // set initial content from parent (if any)
   if (jobDescriptionModel.value) {
-    jobDescription.value.root.innerHTML = jobDescriptionModel.value;
+    jobDescriptionQuill.value.root.innerHTML = jobDescriptionModel.value;
   }
 
   // Listen changes and emit to parent
-  jobDescription.value.on("text-change", () => {
-    const jobDescriptionValue = jobDescription.value.root.innerHTML;
+  jobDescriptionQuill.value.on("text-change", () => {
+    const jobDescriptionValue = jobDescriptionQuill.value.root.innerHTML;
     jobDescriptionModel.value = jobDescriptionValue;
 
     // if (!jobDescriptionValue || jobDescriptionValue === "<p><br></p>") {
@@ -175,24 +175,27 @@ onMounted(() => {
 });
 
 onMounted(() => {
-  achievementDescription.value = new Quill(achievementDescriptionEditor.value, {
-    theme: "snow",
-    placeholder: `Please write your achievements in your last company, or type '-' if you have none.`,
-    toolbar: [
-      ["bold", "italic", "underline"],
-      [{ list: "ordered" }, { list: "bullet" }],
-      ["link"],
-    ],
-  });
+  achievementDescriptionQuill.value = new Quill(
+    achievementDescriptionEditor.value,
+    {
+      theme: "snow",
+      placeholder: `Please write your achievements in your last company, or type '-' if you have none.`,
+      toolbar: [
+        ["bold", "italic", "underline"],
+        [{ list: "ordered" }, { list: "bullet" }],
+        ["link"],
+      ],
+    },
+  );
 
   if (achievementDescriptionModel.value) {
-    achievementDescription.value.root.innerHTML =
+    achievementDescriptionQuill.value.root.innerHTML =
       achievementDescriptionModel.value;
   }
 
-  achievementDescription.value.on("text-change", () => {
+  achievementDescriptionQuill.value.on("text-change", () => {
     const achievementDescriptionValue =
-      achievementDescription.value.root.innerHTML;
+      achievementDescriptionQuill.value.root.innerHTML;
     achievementDescriptionModel.value = achievementDescriptionValue;
 
     // if (!achievementDescriptionValue || achievementDescriptionValue === "<p><br></p>") {

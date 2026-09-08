@@ -6,7 +6,7 @@ const directorSeniorteams = [
   // Board of Directors and Senior Management
   {
     image: new URL(
-      "@/assets/images/leadership-teams/rinaldi.png",
+      "@/assets/images/leadership-teams/rinaldi.webp",
       import.meta.url,
     ).href,
     name: "Rinaldi Anwar",
@@ -14,7 +14,7 @@ const directorSeniorteams = [
   },
   // {
   //   image: new URL(
-  //     "@/assets/images/leadership-teams/shandy.png",
+  //     "@/assets/images/leadership-teams/shandy.webp",
   //     import.meta.url
   //   ).href,
   //   name: "Shandy Rahussholihin",
@@ -22,7 +22,7 @@ const directorSeniorteams = [
   // },
   {
     image: new URL(
-      "@/assets/images/leadership-teams/fendy.png",
+      "@/assets/images/leadership-teams/fendy.webp",
       import.meta.url,
     ).href,
     name: "Fendy Setiawan",
@@ -30,7 +30,7 @@ const directorSeniorteams = [
   },
   {
     image: new URL(
-      "@/assets/images/leadership-teams/rizal.png",
+      "@/assets/images/leadership-teams/rizal.webp",
       import.meta.url,
     ).href,
     name: "Rizal Alfaridzi",
@@ -38,7 +38,7 @@ const directorSeniorteams = [
   },
   {
     image: new URL(
-      "@/assets/images/leadership-teams/remzy.png",
+      "@/assets/images/leadership-teams/remzy.webp",
       import.meta.url,
     ).href,
     name: "Remzy Ramazan",
@@ -46,21 +46,23 @@ const directorSeniorteams = [
   },
   {
     image: new URL(
-      "@/assets/images/leadership-teams/harum.png",
+      "@/assets/images/leadership-teams/harum.webp",
       import.meta.url,
     ).href,
     name: "Harum Ananda",
     position: "Chief Research Officer",
   },
   {
-    image: new URL("@/assets/images/leadership-teams/prof.png", import.meta.url)
-      .href,
+    image: new URL(
+      "@/assets/images/leadership-teams/prof.webp",
+      import.meta.url,
+    ).href,
     name: "Prof. Alhadi Bustamam",
     position: "Senior Advisor",
   },
   {
     image: new URL(
-      "@/assets/images/leadership-teams/Benedicta.png",
+      "@/assets/images/leadership-teams/Benedicta.webp",
       import.meta.url,
     ).href,
     name: "dr. Benedicta E.T, M.Kes",
@@ -70,14 +72,16 @@ const directorSeniorteams = [
 const managementTeam = [
   // Management Team
   {
-    image: new URL("@/assets/images/leadership-teams/riza.png", import.meta.url)
-      .href,
+    image: new URL(
+      "@/assets/images/leadership-teams/riza.webp",
+      import.meta.url,
+    ).href,
     name: "Riza Afriani",
     position: "Marketing Manager",
   },
   {
     image: new URL(
-      "@/assets/images/leadership-teams/davva.png",
+      "@/assets/images/leadership-teams/davva.webp",
       import.meta.url,
     ).href,
     name: "M. Davva Alfaiz",

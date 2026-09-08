@@ -1,5 +1,6 @@
 import { ref } from "vue";
 import axios from "axios";
+import { usePageLoadingStore } from "@/stores/pageLoading";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
 
@@ -53,10 +54,40 @@ export function blogsApi() {
     per_page: 10,
   });
 
+  // Layar loading di App.vue menunggu sampai pengambilan data ini selesai
+  const pageLoading = usePageLoadingStore();
+
   // Loading State
-  const loading = ref(false);
-  const startLoading = () => (loading.value = true);
-  const stopLoading = () => (loading.value = false);
+  // Dimulai dari true, bukan false. Kalau false, ada satu momen singkat sebelum
+  // pengambilan data dimulai di mana halaman menganggap "tidak sedang memuat
+  // tapi data kosong" — dan tampilan kosong itu sempat terlihat berkedip.
+  const loading = ref(true);
+
+  // API ini menjawab sangat cepat (sekitar 100 milidetik). Tanpa penahan,
+  // animasi loading muncul lalu langsung hilang — terlihat seperti kedipan
+  // yang mengganggu. Jadi begitu muncul, animasinya ditahan minimal sekian
+  // milidetik supaya peralihannya terasa tenang, bukan berkedip.
+  const MIN_TAMPIL_LOADING = 350;
+  let loadingMulai = Date.now();
+  let penundaBerhenti = null;
+
+  const startLoading = () => {
+    clearTimeout(penundaBerhenti);
+    loadingMulai = Date.now();
+    loading.value = true;
+    pageLoading.start();
+  };
+
+  const stopLoading = () => {
+    pageLoading.done();
+    clearTimeout(penundaBerhenti);
+    const sisa = MIN_TAMPIL_LOADING - (Date.now() - loadingMulai);
+    if (sisa <= 0) {
+      loading.value = false;
+      return;
+    }
+    penundaBerhenti = setTimeout(() => (loading.value = false), sisa);
+  };
 
   const handleError = (err) => {
     if (err.response) {
@@ -164,7 +195,6 @@ export function blogsApi() {
         `${BASE_URL}/api/v1/app/blogs/${blog_id}/like`,
         getHeaderApiToken(),
       );
-      // console.log("Response unlike dari API", res);
       return res; // ✅ WAJIB return response agar bisa dicek
     } catch (error) {
       console.error("Error saat unlike:", error);

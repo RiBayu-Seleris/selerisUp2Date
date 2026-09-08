@@ -82,7 +82,7 @@ onUnmounted(() => {
       <!-- <div class="absolute inset-0 bg-black/50"></div> -->
 
       <!-- Sidebar -->
-      <transition name="slide">
+      <transition name="slide" appear>
         <div class="ml-auto w-full h-auto px-4 py-6 z-50">
           <div
             class="w-full h-full bg-white dark:bg-[#17181A] relative z-50 flex flex-col items-center py-6 px-5 rounded-xl"

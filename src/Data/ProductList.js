@@ -10,8 +10,4 @@ export const productList = [
   { url: "/product/seleris-credit", name: "Credit", target: "_blank" },
   { url: "https://seleriscare.ai/", name: "Selica", target: "_blank" },
   // { url: "/", name: "Seleris Cough" },
-  // {
-  //   url: "/product/seleris-care-applicator",
-  //   name: "Seleris Care Applicator",
-  // },
 ];

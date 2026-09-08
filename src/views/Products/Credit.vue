@@ -1,12 +1,11 @@
 <script setup>
-import { useLocalizedList } from "@/utils/i18nList";
+import { emptyItems, useLocalizedList } from "@/utils/i18nList";
 import { onBeforeUnmount, onMounted, ref } from "vue";
 
 import HeroText from "@productComponents/HeroText.vue";
 import TitleAndSubCard from "@productComponents/TitleAndSubCard.vue";
 import ClientCardFrameProduct from "@productComponents/ClientCardFrameProduct.vue";
 import { clientLogos } from "@/Data/Products/SelerisCredit/SCClients";
-import HealthScoreGif from "@/assets/Products/images/Credit/health-score.gif";
 import ChecklistIcon from "@/components/icons/Checklist.vue";
 
 import { Swiper, SwiperSlide } from "swiper/vue";
@@ -56,11 +55,11 @@ function resetTransform() {
   `;
 }
 
-const whosContent = Array.from({ length: 2 }, () => ({}));
+const whosContent = emptyItems(2);
 
 const SelerisDo = [
   {
-    icon: new URL("@/assets/Products/icons/vital-sign.png", import.meta.url)
+    icon: new URL("@/assets/Products/icons/vital-sign.webp", import.meta.url)
       .href,
   },
   {
@@ -75,8 +74,8 @@ const SelerisDo = [
   },
 ];
 
-const slider1 = Array.from({ length: 3 }, () => ({}));
-const slider2 = Array.from({ length: 3 }, () => ({}));
+const slider1 = emptyItems(3);
+const slider2 = emptyItems(3);
 
 // Teks daftar diambil dari file locale (lihat src/utils/i18nList.js)
 const localizedWhos = useLocalizedList("creditPage.forWho.items", whosContent, [
@@ -241,6 +240,7 @@ useVideoOnView(selerisVideo, selerisBlock);
 
     <!-- Section Partner -->
     <section
+      data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto px-0 lg:px-16 xl:px-24 sm:mt-16 flex flex-col gap-y-0"
       id="client"
     >
@@ -258,6 +258,7 @@ useVideoOnView(selerisVideo, selerisBlock);
 
     <!-- Section About -->
     <section
+      data-aos="fade-up"
       class="max-w-[1440px] mx-auto relative w-full h-full rounded-[20px] z-20 mt-10"
       id="about"
     >
@@ -374,6 +375,7 @@ useVideoOnView(selerisVideo, selerisBlock);
 
     <!-- Section Apa Yang Dikerjakan Seleris -->
     <section
+      data-aos="fade-up"
       id="technology"
       class="max-w-[1440px] mx-auto relative flex flex-col w-full h-auto bg-[#FFFFFF] z-20 py-10 sm:py-20 mt-10 gap-y-5 sm:gap-y-10 lg:gap-y-14"
     >
@@ -470,6 +472,7 @@ useVideoOnView(selerisVideo, selerisBlock);
 
     <!-- Keunggulan Utama Seleris Credit -->
     <section
+      data-aos="fade-up"
       class="max-w-[1440px] mx-auto relative w-full h-full rounded-[20px] z-20 mt-32"
     >
       <!-- Keunggulan Video -->
@@ -595,12 +598,13 @@ useVideoOnView(selerisVideo, selerisBlock);
 
     <!-- Untuk Siapa Seleris Credit -->
     <section
+      data-aos="fade-up"
       class="max-w-[1440px] mx-auto relative w-full h-auto z-20 mt-32 bg-white py-14 lg:py-20 px-8 sm:px-12 lg:px-20"
     >
       <div class="w-full h-auto flex flex-col sm:flex-row gap-x-10">
         <div class="w-full sm:w-[60%] h-auto flex">
           <img
-            src="@/assets/Products/images/Credit/image1.png"
+            src="@/assets/Products/images/Credit/image1.webp"
             alt=""
             class="w-full h-full object-fill sm:object-cover object-center rounded-none sm:rounded-[37px]"
           />
@@ -696,6 +700,7 @@ useVideoOnView(selerisVideo, selerisBlock);
 
     <!-- Mengapa Seleris Credit -->
     <section
+      data-aos="fade-up"
       class="max-w-[1440px] mx-auto relative w-full h-full rounded-[20px] z-20 mt-32 py-14 lg:py-20"
       id="whyus"
     >
@@ -767,6 +772,7 @@ useVideoOnView(selerisVideo, selerisBlock);
 
     <!-- Book A Demo -->
     <section
+      data-aos="fade-up"
       class="max-w-[1440px] mx-auto relative w-full h-auto z-20 max-smallest:mt-8 mt-16 sm:mt-32 px-8 sm:px-12 lg:px-20"
     >
       <div

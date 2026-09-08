@@ -13,9 +13,12 @@ const technologyItems = [
   { key: "telemedicine" },
 ];
 
-// Butir yang judulnya lebih panjang di bahasa Indonesia, sehingga deskripsinya
-// perlu jarak ekstra. Hanya berlaku saat lang="id" (lihat varian id: di
-// tailwind.config.js). Tambah atau kurangi key di sini bila perlu.
+// Judul dua butir ini lebih panjang dalam bahasa Indonesia sehingga memakan
+// dua baris, dan deskripsinya jadi terlalu mepet. Key yang terdaftar di sini
+// mendapat jarak tambahan, TAPI hanya saat bahasa Indonesia — versi Inggris
+// tidak berubah. Caranya lewat class berawalan "id:" di template, yang
+// didaftarkan di tailwind.config.js (cara kerjanya sama seperti "dark:").
+// Mau butir lain ikut? Tambahkan key-nya ke daftar ini.
 const spacedDescriptionId = ["machine-learning", "telemedicine"];
 
 const container = ref(null);

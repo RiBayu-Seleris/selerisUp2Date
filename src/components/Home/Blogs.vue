@@ -11,9 +11,12 @@ import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import axios from "axios";
 import Swal from "sweetalert2";
 import { useUtilsStore } from "@/stores/utils";
+import { usePageLoadingStore } from "@/stores/pageLoading";
 import { useI18n } from "vue-i18n";
 
 const utils = useUtilsStore();
+// Layar loading di App.vue menunggu pengambilan data ini selesai
+const pageLoading = usePageLoadingStore();
 const { t } = useI18n();
 
 /* =========================
@@ -40,7 +43,7 @@ const headerApi = {
    API CALL
 ========================= */
 const getBlogs = async () => {
-  //   loading.value = true;
+  pageLoading.start();
   try {
     const res = await axios.get(
       `${BASE_URL}/api/v1/app/blogs?sort_by=latest`,
@@ -51,7 +54,7 @@ const getBlogs = async () => {
   } catch (err) {
     console.error("Get blogs error:", err);
   } finally {
-    // loading.value = false;
+    pageLoading.done(); // WAJIB di finally, supaya tetap jalan walau gagal
   }
 };
 
@@ -74,7 +77,6 @@ const latestBlogs = computed(() => {
 
   // const limit = width > 768 && width < 1024 ? 4 : 3;
   const limit = width >= 768 && width < 1024 ? 4 : 3;
-  // console.log("WIDTH:", width, "LIMIT:", limit);
 
   return blogs.value.slice(0, limit);
 });

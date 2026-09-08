@@ -11,19 +11,28 @@ import Description from "@/components/Team/Description.vue";
     <HeroSection />
   </section>
 
-  <section class="flex flex-col relative w-full h-auto mt-20 sm:mt-32 xl:mt-28">
+  <section
+    data-aos="fade-up"
+    class="flex flex-col relative w-full h-auto mt-20 sm:mt-32 xl:mt-28"
+  >
     <TeamList />
   </section>
 
-  <section class="flex relative w-full h-auto mt-24 sm:mt-32 md:mt-36 lg:mt-36">
+  <section
+    data-aos="fade-up"
+    class="flex relative w-full h-auto mt-24 sm:mt-32 md:mt-36 lg:mt-36"
+  >
     <DevelopmentTeam />
   </section>
 
-  <section class="flex relative w-full h-auto mt-5 sm:mt-10">
+  <section data-aos="fade-up" class="flex relative w-full h-auto mt-5 sm:mt-10">
     <PositionDescription />
   </section>
 
-  <section class="flex relative w-full h-auto mt-20 lg:mt-28 px-8 lg:px-16">
+  <section
+    data-aos="fade-up"
+    class="flex relative w-full h-auto mt-20 lg:mt-28 px-8 lg:px-16"
+  >
     <Description />
   </section>
 </template>

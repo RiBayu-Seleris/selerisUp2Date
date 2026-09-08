@@ -23,7 +23,7 @@ onUnmounted(() => window.removeEventListener("resize", updateWidth));
 
 const getShortText = (fullText) => {
   const length = fullText.length;
-  let max = 130;
+  let max; // selalu diisi salah satu cabang di bawah
   if (windowWidth.value >= 1024) max = 140;
   else if (windowWidth.value >= 768) max = 140;
   else if (windowWidth.value >= 640) max = 140;

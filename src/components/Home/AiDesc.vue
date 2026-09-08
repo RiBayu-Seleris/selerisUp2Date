@@ -1,5 +1,4 @@
 <script setup>
-import VideoAi from "@/assets/images/video-ai-desc.png";
 import { onMounted } from "vue";
 
 onMounted(() => {

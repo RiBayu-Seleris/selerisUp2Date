@@ -173,7 +173,7 @@ watch(isModalOpen, (open) => {
             v-if="isModalOpen"
             class="fixed inset-0 z-50 flex flex-col transition-all duration-300 overflow-hidden bg-[#1C1B1B]/80"
           >
-            <transition name="slide">
+            <transition name="slide" appear>
               <div class="ml-auto w-full h-full p-20 z-50">
                 <div
                   class="w-full h-auto bg-white dark:bg-[#17181A] relative z-50 flex flex-col items-center rounded-3xl"

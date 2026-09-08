@@ -4,7 +4,6 @@
 import { useI18n } from "vue-i18n";
 import ArrowLeft from "@/components/icons/ArrowLeft.vue";
 import CardIconLeft from "@/components/reusable/CardIconLeft.vue";
-import TrustedImage from "@/assets/images/facetracker/trusted-list.svg";
 import Sun from "@/assets/icons/facetracker/sun.svg";
 import Contact from "@/assets/icons/facetracker/contact.svg";
 import Timer from "@/assets/icons/facetracker/timer.svg";
@@ -17,9 +16,7 @@ import HeartRate from "@/assets/icons/facetracker/heart-rate.svg";
 import StressLevel from "@/assets/icons/facetracker/stress-level.svg";
 import Blood from "@/assets/icons/facetracker/blood.svg";
 import BMI from "@/assets/icons/facetracker/body-mass.svg";
-import GenCell from "@/assets/icons/facetracker/gen-cell.svg";
 import Heart from "@/assets/icons/facetracker/heart.svg";
-import Lens from "@/assets/icons/facetracker/lens.svg";
 
 import FaceTracker from "@/components/FaceScan/index.vue";
 import Result from "@/components/FaceScan/Result.vue";

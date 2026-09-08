@@ -20,6 +20,7 @@ const loginStatus = ref(false);
 
   <!-- Account Section -->
   <section
+    data-aos="fade-up"
     v-if="loginStatus === true"
     class="flex flex-row relative w-full h-[70px] max-w-md mx-auto mt-10 lg:mt-10"
   >
@@ -65,6 +66,7 @@ const loginStatus = ref(false);
   </section>
 
   <section
+    data-aos="fade-up"
     class="flex flex-col relative w-full h-auto xl:px-16 mt-10 lg:mt-8 mb-20"
   >
     <BlogList />

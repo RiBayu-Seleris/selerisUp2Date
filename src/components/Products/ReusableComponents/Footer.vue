@@ -40,9 +40,7 @@ const footerTitle = computed(() => {
   if (route.path === "/product/seleris-credit") {
     return "Seleris Credit";
   }
-  if (route.path === "/product/seleris-care-applicator") {
-    return "Seleris Care Applicator";
-  }
+  return ""; // rute lain: tidak ada judul khusus
 });
 
 const connectColor = computed(() => {
@@ -58,6 +56,7 @@ const connectColor = computed(() => {
   if (route.path === "/product/health-care") {
     return "text-[#2AB857]";
   }
+  return ""; // rute lain: pakai warna bawaan
 });
 </script>
 

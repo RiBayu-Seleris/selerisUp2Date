@@ -1,4 +1,5 @@
 <script setup>
+import { useIsDark } from "@/utils/useIsDark";
 import HeroText from "@/components/reusable/HeroText.vue";
 
 import { roadmapData } from "@/Data/RoadmapData";
@@ -27,6 +28,11 @@ function setActive(yearIndex, productIndex) {
 function selectProduct(product) {
   selectedProduct.value = product;
 }
+
+// Dipakai di template: video mode terang pakai v-if="!isDark", yang gelap
+// pakai v-else. Tujuannya supaya cuma satu video yang benar-benar dibuat
+// dan diunduh browser. Penjelasan lengkap ada di src/utils/useIsDark.js
+const isDark = useIsDark();
 </script>
 <template>
   <section
@@ -37,29 +43,31 @@ function selectProduct(product) {
       :subtitle="$t('roadmapPage.subtitle')"
     />
   </section>
-  <section class="relative w-full h-auto mb-20">
+  <section data-aos="fade-up" class="relative w-full h-auto mb-20">
     <video
+      v-if="!isDark"
       autoplay
       loop
       muted
       playsinline
       @contextmenu.prevent
-      class="w-full object-cover object-center dark:hidden"
+      class="w-full object-cover object-center"
     >
       <source src="@/assets/videos/Wave.mp4" type="video/mp4" />
     </video>
     <video
+      v-else
       autoplay
       loop
       muted
       playsinline
       @contextmenu.prevent
-      class="w-full object-cover object-center hidden dark:block"
+      class="w-full object-cover object-center"
     >
       <source src="@/assets/videos/WaveDark.mp4" type="video/mp4" />
     </video>
   </section>
-  <section class="relative w-full h-auto top-0">
+  <section data-aos="fade-up" class="relative w-full h-auto top-0">
     <div class="relative w-full h-auto justify-center">
       <!-- Frame Content Scroll -->
       <div
@@ -257,6 +265,7 @@ function selectProduct(product) {
   </section>
   <!-- Card Description -->
   <section
+    data-aos="fade-up"
     v-if="selectedProduct"
     class="w-full h-auto -mt-[80px] sm:-mt-[70px] md:-mt-[100px] lg:-mt-[130px] xl:-mt-[130px] relative z-20"
   >

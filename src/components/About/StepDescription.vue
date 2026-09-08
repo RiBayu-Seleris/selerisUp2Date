@@ -1,7 +1,6 @@
 <script setup>
+import { useIsDark } from "@/utils/useIsDark";
 import { useLocalizedList } from "@/utils/i18nList";
-import ImgLinear from "@/assets/images/about-linear.png";
-import DarkImgLinear from "@/assets/images/dark-about-linear.png";
 
 import Innovation from "@/assets/icons/innovation.svg";
 import Vision from "@/assets/icons/vision.svg";
@@ -35,6 +34,11 @@ onMounted(() => {
     video.addEventListener("contextmenu", (e) => e.preventDefault());
   }
 });
+
+// Dipakai di template: video mode terang pakai v-if="!isDark", yang gelap
+// pakai v-else. Tujuannya supaya cuma satu video yang benar-benar dibuat
+// dan diunduh browser. Penjelasan lengkap ada di src/utils/useIsDark.js
+const isDark = useIsDark();
 </script>
 
 <template>
@@ -130,22 +134,24 @@ onMounted(() => {
 
       <div class="w-full h-full flex mb-6 md:mb-0">
         <video
+          v-if="!isDark"
           autoplay
           loop
           muted
           playsinline
           @contextmenu.prevent
-          class="w-full h-full sm:w-full sm:h-[400px] md:w-full md:h-full object-contain lg:object-cover object-center rounded-3xl dark:hidden"
+          class="w-full h-full sm:w-full sm:h-[400px] md:w-full md:h-full object-contain lg:object-cover object-center rounded-3xl"
         >
           <source src="@/assets/videos/Step.mp4" type="video/mp4" />
         </video>
         <video
+          v-else
           autoplay
           loop
           muted
           playsinline
           @contextmenu.prevent
-          class="w-full h-full sm:w-full sm:h-[400px] md:w-full md:h-full object-contain lg:object-cover object-center rounded-3xl hidden dark:block"
+          class="w-full h-full sm:w-full sm:h-[400px] md:w-full md:h-full object-contain lg:object-cover object-center rounded-3xl"
         >
           <source src="@/assets/videos/Dark_Step.mp4" type="video/mp4" />
         </video>

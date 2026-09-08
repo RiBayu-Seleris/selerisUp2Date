@@ -27,7 +27,7 @@ const isStartDateOpen = ref(false);
 const startDateWrapper = ref(null);
 
 const reasonDescriptionEditor = ref(null);
-const reasonDescription = ref(null);
+const reasonDescriptionQuill = ref(null);
 
 const toggleStartDate = () => {
   isStartDateOpen.value = !isStartDateOpen.value;
@@ -86,7 +86,7 @@ const handleClickOutside = (e) => {
    QUILL INIT
 =========================== */
 onMounted(() => {
-  reasonDescription.value = new Quill(reasonDescriptionEditor.value, {
+  reasonDescriptionQuill.value = new Quill(reasonDescriptionEditor.value, {
     theme: "snow",
     placeholder: "Write your reason...",
     modules: {
@@ -100,12 +100,12 @@ onMounted(() => {
 
   // set initial content from parent (if any)
   if (reasonDescriptionModel.value) {
-    reasonDescription.value.root.innerHTML = reasonDescriptionModel.value;
+    reasonDescriptionQuill.value.root.innerHTML = reasonDescriptionModel.value;
   }
 
   // Listen changes and emit to parent
-  reasonDescription.value.on("text-change", () => {
-    const reasonDescriptionvalue = reasonDescription.value.root.innerHTML;
+  reasonDescriptionQuill.value.on("text-change", () => {
+    const reasonDescriptionvalue = reasonDescriptionQuill.value.root.innerHTML;
     reasonDescriptionModel.value = reasonDescriptionvalue;
 
     // if (!value || value === "<p><br></p>") {
