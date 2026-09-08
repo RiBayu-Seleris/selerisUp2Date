@@ -276,6 +276,7 @@ const indicators = [
             <a
               href="/"
               target="_blank"
+              rel="noopener noreferrer"
               class="w-10 h-10 flex justify-center items-center bg-[#F7F7F7] rounded-full p-1.5 border-[1px]"
             >
               <ArrowLeft />

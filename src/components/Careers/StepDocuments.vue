@@ -1,5 +1,68 @@
 <script setup>
 import { ref, watch } from "vue";
+import { useI18n } from "vue-i18n";
+import Swal from "sweetalert2";
+
+const { t } = useI18n();
+
+/* ======================================
+📌 Pemeriksaan berkas unggahan
+
+Kolom unggah ini dulu menerima berkas APA PUN, tanpa batas ukuran — termasuk
+berkas program (.exe) atau berkas 2 GB yang membuat pengiriman gagal diam-diam.
+
+PENTING: pemeriksaan di sini hanya untuk kenyamanan pelamar, supaya salah
+berkas ketahuan langsung, bukan setelah menunggu unggahan panjang. Ini BUKAN
+pengaman. Siapa pun bisa melewatinya lewat alat pengembang browser, jadi
+penyaring yang sesungguhnya tetap WAJIB ada di sisi server.
+====================================== */
+const MAKS_DOKUMEN_MB = 5;
+const MAKS_FOTO_MB = 2;
+
+const EKSTENSI_DOKUMEN = [".pdf", ".doc", ".docx"];
+const EKSTENSI_FOTO = [".jpg", ".jpeg", ".png", ".webp"];
+
+const tolak = (pesan) => {
+  Swal.fire({
+    icon: "warning",
+    title: t("careers.fileInvalidTitle"),
+    text: pesan,
+  });
+};
+
+/**
+ * Mengembalikan true kalau berkasnya boleh dipakai.
+ *
+ * Yang diperiksa nama berkasnya (ekstensi), bukan "tipe" yang dilaporkan
+ * browser — karena tipe itu bisa kosong atau dipalsukan, sedangkan ekstensi
+ * lebih dapat diandalkan untuk keperluan tampilan.
+ */
+const berkasLolos = (berkas, daftarEkstensi, maksMB) => {
+  const nama = (berkas.name || "").toLowerCase();
+  const cocok = daftarEkstensi.some((e) => nama.endsWith(e));
+
+  if (!cocok) {
+    tolak(
+      t("careers.fileWrongTypeText", {
+        types: daftarEkstensi.join(", "),
+      }),
+    );
+    return false;
+  }
+
+  const ukuranMB = berkas.size / (1024 * 1024);
+  if (ukuranMB > maksMB) {
+    tolak(
+      t("careers.fileTooLargeText", {
+        max: maksMB,
+        size: ukuranMB.toFixed(1),
+      }),
+    );
+    return false;
+  }
+
+  return true;
+};
 
 /* ======================================
 📌 Props untuk v-model:cvFile
@@ -42,6 +105,10 @@ const openCvUpload = () => {
 const handleCvChange = (event) => {
   const file = event.target.files[0];
   if (file) {
+    if (!berkasLolos(file, EKSTENSI_DOKUMEN, MAKS_DOKUMEN_MB)) {
+      event.target.value = ""; // supaya berkas yang sama bisa dipilih lagi
+      return;
+    }
     emit("update:cvFile", file);
   }
 };
@@ -84,6 +151,10 @@ const handleClChange = (event) => {
   const file = event.target.files[0];
 
   if (file) {
+    if (!berkasLolos(file, EKSTENSI_DOKUMEN, MAKS_DOKUMEN_MB)) {
+      event.target.value = ""; // supaya berkas yang sama bisa dipilih lagi
+      return;
+    }
     clFileName.value = file.name;
 
     // 🔥 Kirim ke parent via v-model:clFile
@@ -129,6 +200,10 @@ const handleDiplomaChange = (event) => {
   const file = event.target.files[0];
 
   if (file) {
+    if (!berkasLolos(file, EKSTENSI_DOKUMEN, MAKS_DOKUMEN_MB)) {
+      event.target.value = ""; // supaya berkas yang sama bisa dipilih lagi
+      return;
+    }
     diplomaFileName.value = file.name;
 
     // 🔥 Kirim ke parent via v-model:diplomaFile
@@ -174,6 +249,10 @@ const handleTranscriptChange = (event) => {
   const file = event.target.files[0];
 
   if (file) {
+    if (!berkasLolos(file, EKSTENSI_DOKUMEN, MAKS_DOKUMEN_MB)) {
+      event.target.value = ""; // supaya berkas yang sama bisa dipilih lagi
+      return;
+    }
     transcriptFileName.value = file.name;
 
     // 🔥 Kirim ke parent via v-model:cvFile
@@ -219,6 +298,10 @@ const handleExperienceCertificateChange = (event) => {
   const file = event.target.files[0];
 
   if (file) {
+    if (!berkasLolos(file, EKSTENSI_DOKUMEN, MAKS_DOKUMEN_MB)) {
+      event.target.value = ""; // supaya berkas yang sama bisa dipilih lagi
+      return;
+    }
     experienceCertificateFileName.value = file.name;
 
     // 🔥 Kirim ke parent via v-model:cvFile
@@ -264,6 +347,10 @@ const handlePortfolioChange = (event) => {
   const file = event.target.files[0];
 
   if (file) {
+    if (!berkasLolos(file, EKSTENSI_DOKUMEN, MAKS_DOKUMEN_MB)) {
+      event.target.value = ""; // supaya berkas yang sama bisa dipilih lagi
+      return;
+    }
     portfolioFileName.value = file.name;
 
     // 🔥 Kirim ke parent via v-model:cvFile
@@ -309,6 +396,10 @@ const handlePhotoChange = (event) => {
   const file = event.target.files[0];
 
   if (file) {
+    if (!berkasLolos(file, EKSTENSI_FOTO, MAKS_FOTO_MB)) {
+      event.target.value = ""; // supaya berkas yang sama bisa dipilih lagi
+      return;
+    }
     photoFileName.value = file.name;
 
     // 🔥 Kirim ke parent via v-model:cvFile
@@ -431,6 +522,7 @@ const handleDeleteFile = (type) => {
             <!-- Input File Asli (disembunyikan) -->
             <input
               type="file"
+              accept=".pdf,.doc,.docx"
               ref="cvInput"
               @change="handleCvChange"
               class="hidden"
@@ -508,6 +600,7 @@ const handleDeleteFile = (type) => {
             <!-- Input File Asli (disembunyikan) -->
             <input
               type="file"
+              accept=".pdf,.doc,.docx"
               ref="clInput"
               @change="handleClChange"
               class="hidden"
@@ -585,6 +678,7 @@ const handleDeleteFile = (type) => {
             <!-- Input File Asli (disembunyikan) -->
             <input
               type="file"
+              accept=".pdf,.doc,.docx"
               ref="diplomaInput"
               @change="handleDiplomaChange"
               class="hidden"
@@ -665,6 +759,7 @@ const handleDeleteFile = (type) => {
             <!-- Input File Asli (disembunyikan) -->
             <input
               type="file"
+              accept=".pdf,.doc,.docx"
               ref="transcriptInput"
               @change="handleTranscriptChange"
               class="hidden"
@@ -745,6 +840,7 @@ const handleDeleteFile = (type) => {
             <!-- Input File Asli (disembunyikan) -->
             <input
               type="file"
+              accept=".pdf,.doc,.docx"
               ref="experienceCertificateInput"
               @change="handleExperienceCertificateChange"
               class="hidden"
@@ -825,6 +921,7 @@ const handleDeleteFile = (type) => {
             <!-- Input File Asli (disembunyikan) -->
             <input
               type="file"
+              accept=".pdf,.doc,.docx"
               ref="portfolioInput"
               @change="handlePortfolioChange"
               class="hidden"
@@ -905,6 +1002,7 @@ const handleDeleteFile = (type) => {
             <!-- Input File Asli (disembunyikan) -->
             <input
               type="file"
+              accept=".jpg,.jpeg,.png,.webp"
               ref="photoInput"
               @change="handlePhotoChange"
               class="hidden"

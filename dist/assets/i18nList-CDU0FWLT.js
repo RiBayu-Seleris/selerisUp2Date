@@ -1,0 +1,1 @@
+import{a6 as i,f as m,U as n}from"./vendor-Hg1rUS2J.js";function p(t,o,s){const{t:u}=i();return m(()=>n(o).map((a,f)=>{const e={...a};for(const r of s)e[r]=u(`${n(t)}.${f}.${r}`);return e}))}function d(t){return Array.from({length:t},()=>({}))}export{d as e,p as u};

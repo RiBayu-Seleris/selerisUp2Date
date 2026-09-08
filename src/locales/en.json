@@ -1651,7 +1651,10 @@
     "noOpenings": "There are currently no job openings. Follow our social media for the latest updates.",
     "declaration1": "I hereby declare that all information provided in this form is true and accurate.",
     "declaration2": "I grant permission to the company to use this information for recruitment purposes.",
-    "declaration3": "I agree to undergo a background check process in accordance with the applicable regulations."
+    "declaration3": "I agree to undergo a background check process in accordance with the applicable regulations.",
+    "fileInvalidTitle": "File cannot be used",
+    "fileWrongTypeText": "Only {types} files are accepted.",
+    "fileTooLargeText": "Maximum file size is {max} MB. Your file is {size} MB."
   },
   "technology": {
     "sci": [

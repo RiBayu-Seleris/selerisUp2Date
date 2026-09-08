@@ -112,6 +112,7 @@ const connectColor = computed(() => {
                   <a
                     href="https://www.instagram.com/selerisindonesia/?igsh=MXJ1Y3c1ZnFtZGdhNA%3D%3D#"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <Instagram />
                   </a>
@@ -120,6 +121,7 @@ const connectColor = computed(() => {
                   <a
                     href="https://www.linkedin.com/company/seleris-meditekno-internasional-smi/posts/?feedView=all"
                     target="_blank"
+                    rel="noopener noreferrer"
                   >
                     <Linkedin />
                   </a>
@@ -157,6 +159,7 @@ const connectColor = computed(() => {
                 :key="index"
                 :href="product.url"
                 target="_blank"
+                rel="noopener noreferrer"
               >
                 <p class="text-[#B8B8B8] lg:text-[18px] xl:text-[18px] py-1.5">
                   {{ product.name }}

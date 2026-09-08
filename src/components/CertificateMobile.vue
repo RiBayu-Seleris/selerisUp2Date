@@ -1,4 +1,5 @@
 <script setup>
+import { bersihkanHtml } from "@/utils/sanitizeHtml";
 import { ref, computed, onMounted, onUnmounted } from "vue";
 defineProps({
   certificates: {
@@ -108,7 +109,7 @@ const getShortText = (fullText) => {
             <div class="flex w-full h-auto">
               <p
                 class="text-[12px] md:text-[16px] overflow-hidden"
-                v-html="getShortText(cert.description)"
+                v-html="bersihkanHtml(getShortText(cert.description))"
               ></p>
             </div>
           </div>
@@ -119,7 +120,7 @@ const getShortText = (fullText) => {
           >
             <p
               class="flex text-[12px] sm:text-[12px] md:text-[18px] leading-normal overflow-hidden justify-center dark:text-[#3D3434]"
-              v-html="cert.description"
+              v-html="bersihkanHtml(cert.description)"
             ></p>
           </div>
         </div>

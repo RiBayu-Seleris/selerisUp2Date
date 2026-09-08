@@ -156,6 +156,7 @@ function getLogoSize(width, height) {
           <a
             :href="href"
             target="_blank"
+            rel="noopener noreferrer"
             class="flex flex-row dark:text-[#FAFAFA] font-medium items-center"
             :style="{ color: linelightcolor }"
           >

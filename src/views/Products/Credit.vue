@@ -806,6 +806,7 @@ useVideoOnView(selerisVideo, selerisBlock);
           <a
             href="/book-a-demo"
             target="_blank"
+            rel="noopener noreferrer"
             class="max-smallest:w-full h-auto"
           >
             <div

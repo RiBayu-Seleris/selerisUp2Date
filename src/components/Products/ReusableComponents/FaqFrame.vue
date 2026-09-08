@@ -1,4 +1,5 @@
 <script setup>
+import { bersihkanHtml } from "@/utils/sanitizeHtml";
 import { computed, ref } from "vue";
 import { useAttrs } from "vue";
 
@@ -76,7 +77,7 @@ const toggleMobile = (index) => {
           >
             <div
               class="px-6 pb-4 text-sm text-gray-700 dark:text-gray-100"
-              v-html="faq.answer"
+              v-html="bersihkanHtml(faq.answer)"
             />
           </div>
         </transition>
@@ -129,7 +130,7 @@ const toggleMobile = (index) => {
           >
             <div
               class="px-6 pb-4 text-sm text-gray-700 dark:text-gray-100"
-              v-html="faq.answer"
+              v-html="bersihkanHtml(faq.answer)"
             />
           </div>
         </transition>
@@ -180,7 +181,7 @@ const toggleMobile = (index) => {
           <div
             v-if="openedIndexMobile === index"
             class="px-6 pb-4 text-[#363049] dark:text-[#FFFFFF] text-[14px]"
-            v-html="faq.answer"
+            v-html="bersihkanHtml(faq.answer)"
           ></div>
         </transition>
       </div>
