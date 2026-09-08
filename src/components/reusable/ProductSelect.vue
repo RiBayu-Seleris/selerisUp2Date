@@ -36,7 +36,7 @@ watch(
   () => props.modelValue,
   (newVal) => {
     selectedProduct.value = newVal;
-  }
+  },
 );
 </script>
 

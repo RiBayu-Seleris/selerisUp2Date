@@ -4,6 +4,9 @@ import Navbar3 from "@productComponents/Navbar3.vue";
 import NavbarScroll from "@productComponents/NavbarScroll.vue";
 import Footer from "@productComponents/Footer.vue";
 import Sidebar from "@productComponents/Sidebar.vue";
+// Dipakai bersama App.vue — letaknya di @/components, bukan
+// @productComponents, karena tampilannya sama di semua halaman.
+import ScrollTopButton from "@/components/reusable/ScrollTopButton.vue";
 
 import { onMounted, onUnmounted, computed, nextTick, watch } from "vue";
 import { useScrollStore } from "@/stores/scroll";
@@ -13,16 +16,21 @@ const scrollStore = useScrollStore();
 const route = useRoute();
 
 // Tooltip scroll ke atas
-const showTooltip = computed(() => scrollStore.isScrolled);
-const handleScroll = () => scrollStore.updateScroll();
-const scrollToTop = () => window.scrollTo({ top: 0, behavior: "smooth" });
+// Diredam dengan requestAnimationFrame supaya pembaruannya paling banyak
+// sekali per gambar layar. Ini penting sejak situs memakai smooth scroll:
+// halaman digeser tiap frame, jadi kejadian gulir datang jauh lebih sering
+// daripada saat memakai gulir biasa.
+let idFrame = null;
+const handleScroll = () => {
+  if (idFrame) return;
+  idFrame = requestAnimationFrame(() => {
+    scrollStore.updateScroll();
+    idFrame = null;
+  });
+};
 
 const isSelerisCredit = computed(
   () => route.path === "/product/seleris-credit",
-);
-
-const isSelerisCareApplicator = computed(
-  () => route.path === "/product/seleris-care-applicator",
 );
 
 // Fungsi scroll ke hash (dengan retry)
@@ -47,14 +55,8 @@ const scrollToHash = async (hash) => {
 
 // Saat halaman dimount
 onMounted(() => {
-  window.addEventListener("scroll", handleScroll);
+  window.addEventListener("scroll", handleScroll, { passive: true });
   document.body.style.overflow = "";
-
-  AOS.init({
-    duration: 800,
-    once: true,
-    disable: false,
-  });
 
   // 🔥 Cek hash saat pertama kali masuk ke halaman produk
   if (route.hash) scrollToHash(route.hash);
@@ -74,21 +76,16 @@ watch(
 
 onUnmounted(() => {
   window.removeEventListener("scroll", handleScroll);
+  if (idFrame) cancelAnimationFrame(idFrame);
 });
-
-// Icon
-import Tooltip from "@/assets/images/tooltip.png";
 </script>
 
 <template>
-  <div
-    class="relative w-full mx-auto font-poppins animate__animated animate__fadeIn animate__slower"
-  >
+  <!-- Animasi masuk halaman diatur dari App.vue lewat <router-view>, supaya
+       jalannya tepat saat layar loading menutup. -->
+  <div class="relative w-full mx-auto font-poppins">
     <main class="relative w-full mx-auto">
-      <header
-        v-if="!isSelerisCredit && !isSelerisCareApplicator"
-        class="fixed top-0 w-full z-50"
-      >
+      <header v-if="!isSelerisCredit" class="fixed top-0 w-full z-50">
         <transition name="slide-down" mode="out-in">
           <component :is="scrollStore.isScrolled ? NavbarScroll : Navbar" />
         </transition>
@@ -99,16 +96,8 @@ import Tooltip from "@/assets/images/tooltip.png";
         </transition>
       </header>
 
-      <!-- Scroll Tooltip -->
-      <transition name="fade-slide">
-        <div
-          v-if="showTooltip"
-          @click="scrollToTop"
-          class="flex fixed justify-center cursor-pointer items-center bottom-5 right-5 lg:right-10 w-9 h-9 lg:w-12 lg:h-12 z-50 bg-white dark:bg-[#17181A] shadow-md border-[0.5px] dark:border-[0.1px] text-white rounded-full p-1 md:p-2"
-        >
-          <img :src="Tooltip" alt="Tooltip" class="w-full h-full" />
-        </div>
-      </transition>
+      <!-- Tombol kembali ke atas (dengan cincin kemajuan gulir) -->
+      <ScrollTopButton />
 
       <Sidebar />
       <!-- router-view produk -->

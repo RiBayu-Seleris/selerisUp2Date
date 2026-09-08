@@ -25,9 +25,9 @@ import CareOrnament2 from "@productComponents/Svg/CareOrnament2.vue";
 import CareOrnament3 from "@productComponents/Svg/CareOrnament3.vue";
 import CareOrnament4 from "@productComponents/Svg/CareOrnament4.vue";
 
-import imageAbout from "@/assets/Products/images/Care/about-care.png";
+import imageAbout from "@/assets/Products/images/Care/about-care.webp";
 import FrameLineWorks from "@productComponents/Svg/HealthCareDescriptionWork.vue";
-import medinsframebook from "@/assets/Products/images/bg-book-demo-medins.png";
+import medinsframebook from "@/assets/Products/images/bg-book-demo-medins.webp";
 
 import DownloadImage from "@/assets/Products/images/Care/download-care.png";
 
@@ -108,7 +108,7 @@ const localizedSteps = useLocalizedList(
     </section>
 
     <!-- About Us -->
-    <section class="relative w-full h-auto" id="about">
+    <section data-aos="fade-up" class="relative w-full h-auto" id="about">
       <CareOrnament3
         positionClass="top-[150px] sm:-top-5 xl:-top-7"
         heightClass="w-full h-auto lg:h-full"
@@ -137,6 +137,7 @@ const localizedSteps = useLocalizedList(
 
     <!-- How Application Work -->
     <section
+      data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-14 lg:mt-20 scroll-mt-[80px]"
       id="howapplicationwork"
     >
@@ -162,6 +163,7 @@ const localizedSteps = useLocalizedList(
 
     <!-- Easy Quick -->
     <section
+      data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto px-8 mt-20"
       id="easyquick"
     >
@@ -197,6 +199,7 @@ const localizedSteps = useLocalizedList(
 
     <!-- Client -->
     <section
+      data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto max-smallest:px-0 px-8 mt-20"
       id="client"
     >
@@ -214,6 +217,7 @@ const localizedSteps = useLocalizedList(
 
     <!-- Testimonial -->
     <section
+      data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 md:mt-28 lg:mt-40"
       id="testimonial"
     >
@@ -233,6 +237,7 @@ const localizedSteps = useLocalizedList(
 
     <!-- FAQ -->
     <section
+      data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-20"
       id="faq"
     >
@@ -256,6 +261,7 @@ const localizedSteps = useLocalizedList(
 
     <!-- Download App -->
     <section
+      data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-40"
       id="download"
     >
@@ -274,6 +280,7 @@ const localizedSteps = useLocalizedList(
 
     <!-- Book Demo -->
     <section
+      data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-40 px-8"
       id="bookdemo"
     >

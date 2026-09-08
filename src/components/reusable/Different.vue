@@ -50,7 +50,7 @@ defineProps({
         </div>
         <div class="flex w-4/12 h-auto">
           <div class="flex w-full h-full z-0">
-            <!-- src="@/assets/images/robot-ai3.svg" -->
+            <!-- src="@/assets/images/robot-ai3.webp" -->
             <img
               :src="robotImage"
               alt="Robot"

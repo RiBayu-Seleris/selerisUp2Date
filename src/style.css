@@ -227,3 +227,26 @@ input:-webkit-autofill:focus {
 }
 @keyframes autofill-fix-dark {
 }
+
+/* ---------------------------------------------------------------------------
+   Perbaikan efek samping AOS
+
+   Setelah animasinya selesai, AOS meninggalkan `transform: translateZ(0)` di
+   elemen — bukan `transform: none`. Elemen yang punya transform membuat
+   "stacking context" baru, artinya z-index anak-anaknya terkurung di dalam
+   section itu dan tidak bisa lagi tampil di atas isi section lain.
+
+   Akibatnya menu share di halaman blog tertutup kotak komentar, padahal
+   z-index-nya sudah tinggi. Elemen `position: fixed` (modal) juga jadi salah
+   posisi karena ikut terkurung.
+
+   Karena semua animasi fade berakhir di posisi normal, mengganti nilainya
+   jadi `none` tidak mengubah tampilan sama sekali — hanya menghapus stacking
+   context yang tidak diinginkan itu.
+
+   Awalan `html` dipakai supaya bobot aturan ini lebih tinggi dari milik AOS,
+   tanpa perlu !important.
+--------------------------------------------------------------------------- */
+html [data-aos^="fade"][data-aos^="fade"].aos-animate {
+  transform: none;
+}

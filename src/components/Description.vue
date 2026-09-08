@@ -1,4 +1,5 @@
 <script setup>
+import { useIsDark } from "@/utils/useIsDark";
 import { ref, onMounted, onUnmounted } from "vue";
 
 const scrollContainer = ref(null);
@@ -39,6 +40,11 @@ onMounted(() => {
     el.removeEventListener("scroll", onScroll);
   });
 });
+
+// Dipakai di template: video mode terang pakai v-if="!isDark", yang gelap
+// pakai v-else. Tujuannya supaya cuma satu video yang benar-benar dibuat
+// dan diunduh browser. Penjelasan lengkap ada di src/utils/useIsDark.js
+const isDark = useIsDark();
 </script>
 
 <template>
@@ -136,24 +142,26 @@ onMounted(() => {
       class="flex w-full h-full md:h-[500px] lg:h-full xl:h-[425px] justify-center items-center mb-12 md:mb-20 lg:mb-0"
     >
       <video
+        v-if="!isDark"
         aria-hidden="true"
         autoplay
         loop
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full md:w-auto md:h-[500px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] object-fill lg:object-contain dark:hidden lg:ml-20 xl:pl-0"
+        class="w-full h-full md:w-auto md:h-[500px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] object-fill lg:object-contain lg:ml-20 xl:pl-0"
       >
         <source src="@/assets/videos/Design-Vector-Web2.mp4" type="video/mp4" />
       </video>
       <video
+        v-else
         aria-hidden="true"
         autoplay
         loop
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full md:w-auto md:h-[500px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] object-fill lg:object-contain hidden dark:block rounded-[20px] bg-[#FFFFFF] dark:bg-[#151819] border-[0.1px] dark:border-[#FAFAFA]/25 lg:ml-20 xl:pl-0"
+        class="w-full h-full md:w-auto md:h-[500px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] object-fill lg:object-contain rounded-[20px] bg-[#FFFFFF] dark:bg-[#151819] border-[0.1px] dark:border-[#FAFAFA]/25 lg:ml-20 xl:pl-0"
       >
         <source
           src="@/assets/videos/Design-Dark-Vector-Web2.mp4"

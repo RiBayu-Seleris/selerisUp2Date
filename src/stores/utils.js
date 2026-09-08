@@ -41,23 +41,6 @@ export const useUtilsStore = defineStore("utils", {
       return `${day}/${month}/${year}`;
     },
 
-    shortNumber(num) {
-      if (num === null || num === undefined) return "-"; // jaga-jaga null/undefined
-      if (isNaN(num)) return "-"; // kalau bukan angka
-
-      if (num >= 1_000_000_000) {
-        return (
-          (num / 1_000_000_000).toFixed(num % 1_000_000_000 === 0 ? 0 : 1) + "B"
-        );
-      } else if (num >= 1_000_000) {
-        return (num / 1_000_000).toFixed(num % 1_000_000 === 0 ? 0 : 1) + "M";
-      } else if (num >= 1000) {
-        return (num / 1000).toFixed(num % 1000 === 0 ? 0 : 1) + "k";
-      }
-
-      return num.toString(); // aman karena sudah difilter di atas
-    },
-
     separatorNumber(num) {
       if (!num) return ""; // kalau kosong jangan return '-'
       const clean = num.toString().replace(/\D/g, ""); // hilangkan karakter non angka

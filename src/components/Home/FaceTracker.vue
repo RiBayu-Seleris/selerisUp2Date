@@ -100,7 +100,6 @@ const submitForm = () => {
   // setCookie(COOKIE_SCAN_COUNT_KEY, newCount, COOKIE_EXPIRE_DAYS);
   // if (newCount >= MAX_SCAN_ATTEMPTS) isBlocked.value = true;
 
-  console.log("Form Submitted:", form.value);
   // TODO: Integrasi API submit di sini
 
   closeModal();

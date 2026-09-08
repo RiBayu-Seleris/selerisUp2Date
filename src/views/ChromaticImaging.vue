@@ -1,4 +1,5 @@
 <script setup>
+import { useIsDark } from "@/utils/useIsDark";
 import { useLocalizedList } from "@/utils/i18nList";
 import HeroText from "@/components/reusable/TechHero.vue";
 import TechLogo from "@/components/reusable/TechLogo.vue";
@@ -14,6 +15,11 @@ const localizedCards = useLocalizedList("technology.sci", SCI_Content, [
   "title",
   "body",
 ]);
+
+// Dipakai di template: video mode terang pakai v-if="!isDark", yang gelap
+// pakai v-else. Tujuannya supaya cuma satu video yang benar-benar dibuat
+// dan diunduh browser. Penjelasan lengkap ada di src/utils/useIsDark.js
+const isDark = useIsDark();
 </script>
 
 <template>
@@ -25,6 +31,7 @@ const localizedCards = useLocalizedList("technology.sci", SCI_Content, [
 
   <!-- SCI LOGO -->
   <section
+    data-aos="fade-up"
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-center"
   >
     <TechLogo :imgUrl="SCI_Logo" :darkImgUrl="Dark_SCI_Logo" />
@@ -32,6 +39,7 @@ const localizedCards = useLocalizedList("technology.sci", SCI_Content, [
 
   <!-- IMAGES -->
   <section
+    data-aos="fade-up"
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-center mt-10 md:mt-20"
   >
     <!-- h-[190px] md:h-[400px] lg:h-[470px] xl:h-[640px] -->
@@ -39,22 +47,24 @@ const localizedCards = useLocalizedList("technology.sci", SCI_Content, [
       class="w-full h-auto aspect-[16/8] flex justify-center mt-10 lg:mt-20 dark:bg-[#323232] rounded-3xl"
     >
       <video
+        v-if="!isDark"
         autoplay
         loop
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full object-cover rounded-[20px] dark:hidden"
+        class="w-full h-full object-cover rounded-[20px]"
       >
         <source src="@/assets/videos/SCI_Video.mp4" type="video/mp4" />
       </video>
       <video
+        v-else
         autoplay
         loop
         muted
         playsinline
         @contextmenu.prevent
-        class="w-full h-full object-cover rounded-[20px] hidden dark:block"
+        class="w-full h-full object-cover rounded-[20px]"
       >
         <source src="@/assets/videos/Dark_SCI_Video.mp4" type="video/mp4" />
       </video>
@@ -62,6 +72,7 @@ const localizedCards = useLocalizedList("technology.sci", SCI_Content, [
   </section>
 
   <section
+    data-aos="fade-up"
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-start mt-14 md:mt-20 mb-32 overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar gap-x-10 scroll-pl-8 pl-8 pr-8"
   >
     <TechCard

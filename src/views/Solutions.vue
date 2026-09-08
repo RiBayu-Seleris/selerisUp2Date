@@ -18,7 +18,9 @@ const data = computed(() =>
   SolutionLists.find((s) => s.slug === route.params.slug),
 );
 
-// Teks fitur diambil dari locale lewat indeks, jadi di sini cukup pasangan indeks
+// Di layar tablet, Key Features ditampilkan sebagai slider berisi 2 kartu per
+// slide. Teks fiturnya diambil dari file bahasa lewat nomor urut, jadi di sini
+// kita cuma perlu mengelompokkan nomornya: [0,1], [2,3], dan seterusnya.
 const slidePairs = computed(() => {
   const count = data.value?.keyFeatures?.count ?? 0;
   const indexes = Array.from({ length: count }, (_, i) => i);
@@ -68,7 +70,10 @@ const slidePairs = computed(() => {
 
     <!-- Overview -->
     <div class="w-full h-auto flex flex-col gap-y-10">
-      <section class="flex flex-col lg:flex-row gap-y-5 gap-x-6 px-8 xl:px-28">
+      <section
+        data-aos="fade-up"
+        class="flex flex-col lg:flex-row gap-y-5 gap-x-6 px-8 xl:px-28"
+      >
         <div
           class="w-full h-auto p-[1px] rounded-2xl bg-[#E3E3E3] dark:bg-gradient-to-r dark:from-[#17181A] dark:to-[#000000]/60"
         >
@@ -112,7 +117,10 @@ const slidePairs = computed(() => {
         </div>
       </section>
       <!-- Key Features -->
-      <section class="flex flex-col md:flex-row gap-6 px-8 xl:px-28">
+      <section
+        data-aos="fade-up"
+        class="flex flex-col md:flex-row gap-6 px-8 xl:px-28"
+      >
         <div class="relative w-full h-auto overflow-hidden rounded-2xl">
           <video
             autoplay
@@ -209,7 +217,10 @@ const slidePairs = computed(() => {
         </div>
       </section>
       <!-- More Features -->
-      <section class="flex flex-col w-full h-auto gap-y-3 px-8 xl:px-28">
+      <section
+        data-aos="fade-up"
+        class="flex flex-col w-full h-auto gap-y-3 px-8 xl:px-28"
+      >
         <p class="text-[#1AB24F] font-[500] text-[18px]">
           {{ $t("solutionPage.moreFeatures") }}
         </p>
@@ -250,7 +261,7 @@ const slidePairs = computed(() => {
         </div>
       </section>
       <!-- Business Benefits -->
-      <section class="w-full h-auto px-8 xl:px-28">
+      <section data-aos="fade-up" class="w-full h-auto px-8 xl:px-28">
         <div
           class="w-full h-auto p-[1px] bg-[#E3E3E3] dark:bg-gradient-to-r dark:from-[#17181A] dark:to-[#000000]/60 rounded-2xl"
         >
@@ -298,6 +309,7 @@ const slidePairs = computed(() => {
       </section>
       <!-- CTA Banner -->
       <section
+        data-aos="fade-up"
         class="w-full h-auto flex flex-col justify-center items-center px-8 xl:px-28"
       >
         <div

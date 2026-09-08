@@ -661,7 +661,10 @@ function connectWS() {
     if (isUnmounted.value || scanComplete.value) return;
     try {
       handleWSData(JSON.parse(e.data));
-    } catch {}
+    } catch {
+      // Satu paket data rusak tidak perlu menghentikan pemindaian —
+      // paket berikutnya menyusul dalam hitungan milidetik.
+    }
   };
   ws.onerror = () => {
     cameraActive.value = false;

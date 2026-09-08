@@ -118,8 +118,6 @@ const selectExperience = (value) => {
   const previousValue = hasExperience.value;
   hasExperience.value = value;
 
-  // console.log("CEKKK", hasExperience.value);
-
   // Jika pilihannya YA dan sama → return
   if (value === true && previousValue === true) {
     return;
@@ -289,9 +287,7 @@ const dashOffset = computed(() => {
 const isLastStep = computed(() => currentStep.value === steps.value.length - 1);
 
 const nextStep = () => {
-  console.log(formData.dob);
   const isValid = stepValidators[currentStep.value]();
-  // console.log(`Validator result: ${currentStep.value}`, isValid);
 
   if (!isValid) {
     Swal.fire({
@@ -359,8 +355,6 @@ const uploadFile = async (file, urlField) => {
     );
 
     formData[urlField] = response.data.data.path;
-
-    // console.log(`Sukses Upload File ${urlField}`, response.data.data.path);
   } catch (err) {
     console.error("Upload failed:", err);
   }
@@ -476,7 +470,6 @@ const stepValidators = [
 
 const handleToggleModal = () => {
   const isValid = stepValidators[currentStep.value]();
-  // console.log(`Validator result: ${currentStep.value}`, isValid);
 
   if (!isValid) {
     Swal.fire({
@@ -571,7 +564,9 @@ const handleApply = async () => {
       ? utils.formatToDDMMYYYY(endDateEducation)
       : "",
     ipk: Number(gpaScore) || null,
-    sertifikasi_tambahan: [certificateFileEducationUrl] || [],
+    sertifikasi_tambahan: certificateFileEducationUrl
+      ? [certificateFileEducationUrl]
+      : [],
 
     // StepExperience
     perusahaan_sebelumnya: lastCompany || "",
@@ -655,10 +650,11 @@ const handleApply = async () => {
       });
     }
   } catch (error) {
-    // console.log("ERROR RESPONSE:", error.response?.data);
+    // PERLU DITINDAKLANJUTI: kegagalan pengiriman lamaran saat ini hanya
+    // tercatat di console, pelamar tidak diberi tahu apa pun. Sebaiknya
+    // ditambahkan pesan gagal seperti pesan sukses di atas.
+    console.error("Gagal mengirim lamaran:", error?.response?.data ?? error);
   }
-
-  // console.table(payload);
 };
 
 watch(
@@ -990,7 +986,7 @@ watch(
       v-if="isModalOpen"
       class="fixed inset-0 z-50 flex flex-col transition-all duration-300 overflow-auto bg-[#1C1B1B]/80"
     >
-      <transition name="slide">
+      <transition name="slide" appear>
         <div class="ml-auto w-full h-auto px-5 py-5 lg:px-20 lg:py-10 z-50">
           <div
             class="w-full h-full bg-white dark:bg-[#17181A] relative z-50 flex flex-col items-center rounded-2xl"

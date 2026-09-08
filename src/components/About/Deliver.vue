@@ -1,8 +1,8 @@
 <script setup>
 import DifferentSection from "@/components/reusable/Different.vue";
 import DifferentMobileSection from "@/components/reusable/DifferentMobile.vue";
-import RobotAI from "@/assets/images/robot-ai.svg";
-import RobotAI2 from "@/assets/images/robot-ai3.svg";
+import RobotAI from "@/assets/images/robot-ai.webp";
+import RobotAI2 from "@/assets/images/robot-ai3.webp";
 import DifferentCard from "@/components/reusable/DifferentCard.vue";
 
 import AccuracyIcon from "@/assets/icons/About-Accuracy.png";

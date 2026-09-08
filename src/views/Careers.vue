@@ -9,6 +9,7 @@ import CareerList from "@/components/Careers/CareerList.vue";
   </section>
 
   <section
+    data-aos="fade-up"
     class="flex flex-col relative w-full h-auto xl:px-16 mt-10 lg:mt-8 mb-20"
   >
     <CareerList />

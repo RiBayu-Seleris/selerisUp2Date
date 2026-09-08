@@ -19,7 +19,7 @@
         class="absolute bottom-0 right-1/2 translate-x-1/2 lg:right-[22%] lg:translate-x-0 w-auto h-auto"
       >
         <img
-          src="@/assets/images/leadership-teams/rinaldi-2.png"
+          src="@/assets/images/leadership-teams/rinaldi-2.webp"
           alt="Visionary"
           class="w-auto h-[230px] sm:h-[280px] md:h-[350px] lg:h-[380px] xl:h-[530px] object-cover object-bottom z-10"
         />

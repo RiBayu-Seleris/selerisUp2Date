@@ -2,7 +2,7 @@
 import DifferentSection from "@/components/reusable/Different.vue";
 import DifferentMobileSection from "@/components/reusable/DifferentMobile.vue";
 import RobotAI from "@/assets/images/robot-ai4.png";
-import RobotAI2 from "@/assets/images/robot-ai3.svg";
+import RobotAI2 from "@/assets/images/robot-ai3.webp";
 import DifferentCard from "@/components/reusable/DifferentCard.vue";
 
 import teamIcon from "@/assets/icons/our-team.svg";

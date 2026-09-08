@@ -27,7 +27,7 @@ export function useVideoOnView(videoRef, targetRef, options = {}) {
       {
         threshold: 0.6,
         ...options,
-      }
+      },
     );
 
     if (targetRef.value) {

@@ -1,7 +1,7 @@
 <script setup>
-import { useLocalizedList } from "@/utils/i18nList";
+import { emptyItems, useLocalizedList } from "@/utils/i18nList";
 import ChecklistIcon from "@/components/icons/Checklist.vue";
-const ApiServices = Array.from({ length: 3 }, () => ({}));
+const ApiServices = emptyItems(3);
 
 // Teks diambil dari file locale
 const localizedServices = useLocalizedList(

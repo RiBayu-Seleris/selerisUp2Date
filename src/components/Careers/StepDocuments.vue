@@ -11,7 +11,6 @@ const props = defineProps({
   transcriptFile: File,
   experienceCertificateFile: File,
   portfolioFile: File,
-  portfolioFile: File,
   photoFile: File,
 });
 

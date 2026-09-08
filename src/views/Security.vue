@@ -10,7 +10,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       :subtitle="$t('misc.securityHeroSubtitle')"
     />
   </section>
-  <section class="flex flex-col w-full h-auto px-24 mt-10">
+  <section data-aos="fade-up" class="flex flex-col w-full h-auto px-24 mt-10">
     <div class="flex flex-col text-[#535862] gap-y-5">
       <p class="text-[21px] dark:text-[#FAFAFA] leading-relaxed">
         At

@@ -1,4 +1,5 @@
 <script setup>
+import loadingAnimation from "@/assets/images/loading.webm";
 import { useI18n } from "vue-i18n";
 import {
   ref,
@@ -366,9 +367,9 @@ const finalBlogs = computed(() => {
   }
 
   /* 📅 DATE RANGE */
-  if (customDateRange.start && customDateRange.end) {
-    const start = new Date(customDateRange.start);
-    const end = new Date(customDateRange.end);
+  if (customDateRange.value.start && customDateRange.value.end) {
+    const start = new Date(customDateRange.value.start);
+    const end = new Date(customDateRange.value.end);
 
     result = result.filter((b) => {
       const date = new Date(b.created_at);
@@ -584,26 +585,18 @@ const finalBlogs = computed(() => {
     class="w-full h-auto lg:px-0 pt-4 flex justify-center"
   >
     <!-- Loader Frame -->
+    <!-- Animasi loading. WebM ini punya kanal alpha (transparan), jadi
+         satu berkas cocok untuk mode terang maupun gelap. -->
     <video
       autoplay
       loop
       muted
       playsinline
+      aria-hidden="true"
       @contextmenu.prevent
-      class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center dark:hidden"
+      class="w-[250px] md:w-[300px] lg:w-[200px] h-auto object-contain"
     >
-      <source src="@/assets/videos/loading.mp4" type="video/mp4" />
-    </video>
-
-    <video
-      autoplay
-      loop
-      muted
-      playsinline
-      @contextmenu.prevent
-      class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center hidden dark:flex"
-    >
-      <source src="@/assets/videos/dark-loading.mp4" type="video/mp4" />
+      <source :src="loadingAnimation" type="video/webm" />
     </video>
   </div>
 
@@ -1151,26 +1144,18 @@ const finalBlogs = computed(() => {
           <!-- Loading -->
           <div v-if="loading" class="flex justify-center items-center">
             <!-- Loader Frame -->
+            <!-- Animasi loading. WebM ini punya kanal alpha (transparan), jadi
+                 satu berkas cocok untuk mode terang maupun gelap. -->
             <video
               autoplay
               loop
               muted
               playsinline
+              aria-hidden="true"
               @contextmenu.prevent
-              class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center dark:hidden"
+              class="w-[250px] md:w-[300px] lg:w-[200px] h-auto object-contain"
             >
-              <source src="@/assets/videos/loading.mp4" type="video/mp4" />
-            </video>
-
-            <video
-              autoplay
-              loop
-              muted
-              playsinline
-              @contextmenu.prevent
-              class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center hidden dark:flex"
-            >
-              <source src="@/assets/videos/dark-loading.mp4" type="video/mp4" />
+              <source :src="loadingAnimation" type="video/webm" />
             </video>
           </div>
           <!-- Error Global -->
@@ -1395,26 +1380,18 @@ const finalBlogs = computed(() => {
           <!-- Loading -->
           <div v-if="loading" class="flex justify-center items-center">
             <!-- Loader Frame -->
+            <!-- Animasi loading. WebM ini punya kanal alpha (transparan), jadi
+                 satu berkas cocok untuk mode terang maupun gelap. -->
             <video
               autoplay
               loop
               muted
               playsinline
+              aria-hidden="true"
               @contextmenu.prevent
-              class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center dark:hidden"
+              class="w-[250px] md:w-[300px] lg:w-[200px] h-auto object-contain"
             >
-              <source src="@/assets/videos/loading.mp4" type="video/mp4" />
-            </video>
-
-            <video
-              autoplay
-              loop
-              muted
-              playsinline
-              @contextmenu.prevent
-              class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center hidden dark:flex"
-            >
-              <source src="@/assets/videos/dark-loading.mp4" type="video/mp4" />
+              <source :src="loadingAnimation" type="video/webm" />
             </video>
           </div>
           <!-- Error Global -->
@@ -1495,26 +1472,18 @@ const finalBlogs = computed(() => {
         <!-- Loading -->
         <div v-if="loading" class="flex justify-center items-center">
           <!-- Loader Frame -->
+          <!-- Animasi loading. WebM ini punya kanal alpha (transparan), jadi
+               satu berkas cocok untuk mode terang maupun gelap. -->
           <video
             autoplay
             loop
             muted
             playsinline
+            aria-hidden="true"
             @contextmenu.prevent
-            class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center dark:hidden"
+            class="w-[250px] md:w-[300px] lg:w-[200px] h-auto object-contain"
           >
-            <source src="@/assets/videos/loading.mp4" type="video/mp4" />
-          </video>
-
-          <video
-            autoplay
-            loop
-            muted
-            playsinline
-            @contextmenu.prevent
-            class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center hidden dark:flex"
-          >
-            <source src="@/assets/videos/dark-loading.mp4" type="video/mp4" />
+            <source :src="loadingAnimation" type="video/webm" />
           </video>
         </div>
         <div v-else-if="error" class="px-6">{{ error }}</div>
@@ -1612,26 +1581,18 @@ const finalBlogs = computed(() => {
       <!-- Loading -->
       <div v-if="loading" class="w-full flex justify-center items-center">
         <!-- Loader Frame -->
+        <!-- Animasi loading. WebM ini punya kanal alpha (transparan), jadi
+             satu berkas cocok untuk mode terang maupun gelap. -->
         <video
           autoplay
           loop
           muted
           playsinline
+          aria-hidden="true"
           @contextmenu.prevent
-          class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center dark:hidden"
+          class="w-[250px] md:w-[300px] lg:w-[200px] h-auto object-contain"
         >
-          <source src="@/assets/videos/loading.mp4" type="video/mp4" />
-        </video>
-
-        <video
-          autoplay
-          loop
-          muted
-          playsinline
-          @contextmenu.prevent
-          class="w-[250px] h-[250px] md:w-[300px] md:h-[300px] lg:w-[200px] lg:h-[200px] object-cover object-center hidden dark:flex"
-        >
-          <source src="@/assets/videos/dark-loading.mp4" type="video/mp4" />
+          <source :src="loadingAnimation" type="video/webm" />
         </video>
       </div>
       <div v-else-if="error" class="px-6">{{ error }}</div>

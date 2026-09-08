@@ -33,8 +33,8 @@ module.exports = {
         hero2: "url('@/assets/images/hero-banner2.png')",
         touch: "url('@/assets/images/touch-bg.png')",
         touchDark: "url('@/assets/images/touch-bg-dark.png')",
-        medins: "url('@/assets/Products/images/bg-hero-medins.png')",
-        cc: "url('@/assets/Products/images/bg-hero-cc.png')",
+        medins: "url('@/assets/Products/images/bg-hero-medins.webp')",
+        cc: "url('@/assets/Products/images/bg-hero-cc.webp')",
         herodark: "url('@/assets/images/herodark3.png')",
         different: "url('@/assets/images/different-background.png')",
         differentDark: "url('@/assets/images/different-dark-background.png')",
@@ -120,6 +120,8 @@ module.exports = {
     // Dasarnya atribut lang di <html>, yang diperbarui src/stores/language.js
     // setiap kali bahasa diganti.
     plugin(function ({ addVariant }) {
+      // Baris di bawah membaca: "class berawalan id: hanya berlaku kalau tag
+      // <html> punya lang=id". Tanda & berarti "elemen yang memakai class ini".
       addVariant("id", 'html[lang="id"] &');
       addVariant("en", 'html[lang="en"] &');
     }),

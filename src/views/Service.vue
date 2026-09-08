@@ -10,15 +10,15 @@ import GetStarted from "@/components/Service/GetStarted.vue";
     <HeroSection />
   </section>
 
-  <section class="flex relative w-full h-auto px-8 mt-16">
+  <section data-aos="fade-up" class="flex relative w-full h-auto px-8 mt-16">
     <ApiService />
   </section>
 
-  <section class="flex relative w-full h-auto px-8">
+  <section data-aos="fade-up" class="flex relative w-full h-auto px-8">
     <Benefit />
   </section>
 
-  <section class="flex relative w-full h-auto px-8">
+  <section data-aos="fade-up" class="flex relative w-full h-auto px-8">
     <GetStarted />
   </section>
 </template>

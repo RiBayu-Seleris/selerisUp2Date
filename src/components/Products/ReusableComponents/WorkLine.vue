@@ -35,7 +35,7 @@ onMounted(() => {
     {
       root: null, // viewport
       threshold: [0, 0.1, 0.25, 0.4, 0.5, 1], // array optional supaya update sering
-    }
+    },
   );
 
   if (lineRef.value) observer.observe(lineRef.value);

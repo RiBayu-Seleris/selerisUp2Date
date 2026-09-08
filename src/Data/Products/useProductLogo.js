@@ -36,12 +36,6 @@ export function useProductLogo() {
         import.meta.url,
       ).href;
     }
-    if (route.path === "/product/seleris-care-applicator") {
-      return new URL(
-        "@/assets/Products/images/Logo/Care-Logo.png",
-        import.meta.url,
-      ).href;
-    }
     return null; // fallback
   });
 

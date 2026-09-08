@@ -51,9 +51,6 @@ const titleSidebar = () => {
   if (route.path === "/product/seleris-credit") {
     return "Credit";
   }
-  if (route.path === "/product/seleris-care-applicator") {
-    return "Credit Applicator";
-  }
 };
 
 const defaultProductMenu = [
@@ -102,33 +99,7 @@ const creditProductMenu = [
   },
 ];
 
-const careApplicatorProductMenu = [
-  {
-    href: "#tentang",
-    label: "Tentang",
-  },
-  {
-    href: "#keunggulan",
-    label: "Keunggulan",
-  },
-  {
-    href: "#komisi",
-    label: "Komisi",
-  },
-  {
-    href: "#faq",
-    label: "FAQ",
-  },
-  {
-    href: "/contact",
-    label: "Contact",
-  },
-];
-
 const isSelerisCredit = ref(route.path === "/product/seleris-credit");
-const isSelerisCareApplicator = ref(
-  route.path === "/product/seleris-care-applicator",
-);
 </script>
 
 <template>
@@ -141,7 +112,7 @@ const isSelerisCareApplicator = ref(
       <div class="absolute inset-0 bg-black/50" @click="sidebar.close"></div>
 
       <!-- Sidebar -->
-      <transition name="slide">
+      <transition name="slide" appear>
         <div class="ml-auto w-full h-auto px-4 pt-6">
           <div
             class="w-full h-full bg-white dark:bg-[#17181A] relative z-50 flex flex-col items-center py-6 px-5 rounded-xl"
@@ -179,20 +150,6 @@ const isSelerisCareApplicator = ref(
               >
                 <Navlink class="text-[11pt]" :href="menuDefault.href">
                   {{ menuDefault.label }}
-                </Navlink>
-              </div>
-            </nav>
-            <nav
-              v-if="isSelerisCareApplicator"
-              class="w-full flex flex-wrap mt-8 text-lg font-semibold text-gray-800 gap-y-2"
-            >
-              <div
-                class="w-full h-auto"
-                v-for="(scaMenu, index) in careApplicatorProductMenu"
-                :key="index"
-              >
-                <Navlink class="text-[11pt]" :href="scaMenu.href">
-                  {{ scaMenu.label }}
                 </Navlink>
               </div>
             </nav>

@@ -1,4 +1,5 @@
 <script setup>
+import loadingAnimation from "@/assets/images/loading.webm";
 import { useI18n } from "vue-i18n";
 import Swal from "sweetalert2";
 import LikeIcon from "@/components/icons/Like.vue";
@@ -66,9 +67,35 @@ const showLoginForm = ref(false);
 const showRegisterForm = ref(false);
 
 // HARUS akses .value untun DOM Purify XSS Defender
-const safeContent = computed(() =>
-  blogDetail.value?.content ? DOMPurify.sanitize(blogDetail.value.content) : "",
-);
+const safeContent = computed(() => {
+  const raw = blogDetail.value?.content;
+  if (!raw) return "";
+
+  // Bersihkan dulu dari kemungkinan skrip berbahaya
+  const clean = DOMPurify.sanitize(raw);
+
+  // Editor artikel di CMS menyimpan setiap penekanan Enter sebagai satu blok
+  // kosong: <p><br></p>, <h3><br></h3>, kadang dibungkus <span> juga. Jarak
+  // antar paragraf sudah diatur CSS, jadi blok kosong itu hanya menghasilkan
+  // rongga besar yang mengganggu.
+  //
+  // Dibersihkan lewat DOMParser, bukan regex, supaya semua bentuk blok kosong
+  // ikut tertangani — termasuk yang dibungkus tag lain.
+  const doc = new DOMParser().parseFromString(clean, "text/html");
+
+  doc.body
+    .querySelectorAll("p, h1, h2, h3, h4, h5, h6, div, li, blockquote")
+    .forEach((el) => {
+      const punyaTeks = el.textContent.replace(/\u00a0/g, " ").trim() !== "";
+      // Blok tanpa teks belum tentu kosong — bisa saja berisi gambar atau video
+      const punyaMedia = el.querySelector(
+        "img, video, iframe, picture, svg, hr, table",
+      );
+      if (!punyaTeks && !punyaMedia) el.remove();
+    });
+
+  return doc.body.innerHTML;
+});
 
 const toggleDropdown = () => {
   isAccountDropdown.value = !isAccountDropdown.value;
@@ -311,8 +338,10 @@ const copyLink = async (slug) => {
       showConfirmButton: false,
       timer: 2000,
     });
-  } catch (err) {
-    // console.log("Clipboard error (kemungkinan false error):", err);
+  } catch {
+    // Sengaja dibiarkan: sebagian browser melempar error walau tautan
+    // sebenarnya berhasil disalin, jadi menampilkan pesan gagal di sini
+    // justru menyesatkan pengguna.
   }
 };
 
@@ -369,7 +398,6 @@ watch(
 
         const data = await response.json();
         isLiked.value = !!data?.liked;
-        // console.log("Status Like setelah login:", isLiked.value);
       } catch (error) {
         console.warn("Gagal cek like setelah login:", error);
       }
@@ -386,7 +414,22 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <div v-if="loading"></div>
+  <!-- Saat memuat: tampilkan animasi, bukan halaman kosong. Sebelumnya blok ini
+       kosong, sehingga sebelum data datang halaman sempat jatuh ke cabang
+       "Blog tidak ditemukan" dan teks itu berkedip sesaat. -->
+  <div v-if="loading" class="flex w-full justify-center items-center py-40">
+    <video
+      autoplay
+      loop
+      muted
+      playsinline
+      aria-hidden="true"
+      @contextmenu.prevent
+      class="w-[250px] md:w-[300px] h-auto object-contain"
+    >
+      <source :src="loadingAnimation" type="video/webm" />
+    </video>
+  </div>
   <div v-else-if="error">{{ error }}</div>
   <div
     v-else-if="blogDetail"
@@ -458,7 +501,7 @@ onBeforeUnmount(() => {
         </div>
       </div>
     </section>
-    <section class="w-full h-auto flex flex-col mt-10">
+    <section data-aos="fade-up" class="w-full h-auto flex flex-col mt-10">
       <!-- Blog Images -->
       <div class="w-full h-auto dark:bg-[17181A]">
         <img
@@ -769,7 +812,10 @@ onBeforeUnmount(() => {
       </div>
     </section>
     <!-- Comments -->
-    <section class="w-full lg:w-[70%] h-auto pt-10 flex flex-col lg:pr-10">
+    <section
+      data-aos="fade-up"
+      class="w-full lg:w-[70%] h-auto pt-10 flex flex-col lg:pr-10"
+    >
       <div class="w-full h-auto flex flex-col">
         <div class="w-full">
           <p class="text-[#374151] font-[500]">
@@ -850,7 +896,7 @@ onBeforeUnmount(() => {
       </div>
     </section>
   </div>
-  <div v-else>Blog tidak ditemukan.</div>
+  <div v-else class="py-40 text-center">{{ $t("blog.notFound") }}</div>
 
   <!-- Login -->
   <Transition

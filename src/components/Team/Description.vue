@@ -7,7 +7,7 @@
         class="flex justify-center w-full sm:w-[25%] md:w-[25%] lg:w-[25%] xl:w-[20%]"
       >
         <img
-          src="@/assets/images/robot-team.svg"
+          src="@/assets/images/robot-team.webp"
           alt="Robot"
           class="w-[130px] h-[130px] sm:w-full sm:h-full md:w-full md:h-full object-contain rounded-[22px]"
         />

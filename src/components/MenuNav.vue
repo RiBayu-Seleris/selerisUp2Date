@@ -27,8 +27,17 @@ const observer = new MutationObserver(() => {
   isDark.value = document.documentElement.classList.contains("dark");
 });
 
+// Diredam dengan requestAnimationFrame supaya pembaruannya paling banyak
+// sekali per gambar layar. Ini penting sejak situs memakai smooth scroll:
+// halaman digeser tiap frame, jadi kejadian gulir datang jauh lebih sering
+// daripada saat memakai gulir biasa.
+let idFrame = null;
 const handleScroll = () => {
-  isScrolled.value = window.scrollY > 50;
+  if (idFrame) return;
+  idFrame = requestAnimationFrame(() => {
+    isScrolled.value = window.scrollY > 50;
+    idFrame = null;
+  });
 };
 
 onMounted(() => {
@@ -36,12 +45,13 @@ onMounted(() => {
     attributes: true,
     attributeFilter: ["class"],
   });
-  window.addEventListener("scroll", handleScroll);
+  window.addEventListener("scroll", handleScroll, { passive: true });
 });
 
 onUnmounted(() => {
   observer.disconnect();
   window.removeEventListener("scroll", handleScroll);
+  if (idFrame) cancelAnimationFrame(idFrame);
 });
 </script>
 

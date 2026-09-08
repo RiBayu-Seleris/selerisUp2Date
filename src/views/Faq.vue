@@ -40,7 +40,7 @@ const toggle = (index) => {
       </div>
     </div>
   </section>
-  <section>
+  <section data-aos="fade-up">
     <div class="w-full mx-auto mt-20">
       <FaqFrame
         :Faq="faqList"

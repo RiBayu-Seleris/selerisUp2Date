@@ -22,71 +22,93 @@ import FaceTracker from "@/components/Home/FaceTracker.vue";
   </section>
 
   <!-- max-w-[1440px] mx-auto -->
-  <section class="hidden lg:flex w-full h-auto">
+  <section data-aos="fade-up" class="hidden lg:flex w-full h-auto">
     <PartnersClients />
   </section>
 
-  <section class="lg:hidden flex w-full h-auto">
+  <section data-aos="fade-up" class="lg:hidden flex w-full h-auto">
     <PartnersClientsMobile />
   </section>
 
-  <section class="flex flex-col relative w-full h-auto mt-10 md:mt-10 lg:mt-24">
+  <section
+    data-aos="fade-up"
+    class="flex flex-col relative w-full h-auto mt-10 md:mt-10 lg:mt-24"
+  >
     <Certificate />
   </section>
 
-  <section class="flex flex-col relative w-full h-auto mt-10 md:mt-10 lg:mt-24">
+  <section
+    data-aos="fade-up"
+    class="flex flex-col relative w-full h-auto mt-10 md:mt-10 lg:mt-24"
+  >
     <Supported />
   </section>
 
   <section
+    data-aos="fade-up"
     class="flex flex-col relative w-full h-auto mt-14 lg:mt-20 xl:mt-28 px-8 xls:px-8"
   >
     <Description />
   </section>
 
   <section
+    data-aos="fade-up"
     class="flex flex-col relative w-full h-auto mt-14 sm:mt-14 md:mt-24 xl:mt-28"
   >
     <Benefits />
   </section>
 
   <section
+    data-aos="fade-up"
     class="flex flex-col relative w-full h-auto mt-24 lg:mt-10 px-8 xl:mt-28"
   >
     <AiDesc />
   </section>
 
   <section
+    data-aos="fade-up"
     class="flex flex-col relative w-full h-auto mt-24 lg:mt-10 px-8 xl:mt-28"
   >
     <Technology />
   </section>
 
   <section
+    data-aos="fade-up"
     class="hidden lg:flex relative w-full h-auto mt-24 lg:mt-10 xl:mt-28"
   >
     <FaceTracker />
   </section>
 
-  <section class="flex flex-col relative w-full h-auto mt-24 lg:mt-10 xl:mt-36">
+  <section
+    data-aos="fade-up"
+    class="flex flex-col relative w-full h-auto mt-24 lg:mt-10 xl:mt-36"
+  >
     <Solutions />
   </section>
 
-  <section class="flex flex-col relative w-full h-auto mt-24 xl:mt-32 mb-10">
+  <section
+    data-aos="fade-up"
+    class="flex flex-col relative w-full h-auto mt-24 xl:mt-32 mb-10"
+  >
     <Testimonial />
   </section>
 
-  <section class="flex flex-col relative w-full h-auto mt-24 xl:mt-32 mb-10">
+  <section
+    data-aos="fade-up"
+    class="flex flex-col relative w-full h-auto mt-24 xl:mt-32 mb-10"
+  >
     <Blogs />
   </section>
 
   <section
+    data-aos="fade-up"
     class="flex flex-col relative w-full h-auto px-8 xls:px-8 2xls:px-0 mt-24"
   >
     <Different />
   </section>
 
-  <!-- <section class="flex flex-col relative w-full h-auto my-20">
+  <!-- <section
+    data-aos="fade-up" class="flex flex-col relative w-full h-auto my-20">
     <Roadmap />
   </section> -->
 </template>

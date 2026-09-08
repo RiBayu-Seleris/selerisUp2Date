@@ -6,6 +6,7 @@ import CloseIcon from "@/components/icons/CloseIcon.vue";
 import Instagram from "@/components/icons/Instagram.vue";
 import Tiktok from "@/components/icons/Tiktok.vue";
 import LinkedIn from "@/components/icons/Linkedin.vue";
+import { usePageLoadingStore } from "@/stores/pageLoading";
 
 import { useRouter } from "vue-router";
 import { timeAgo } from "@/components/Helper/timeAgo.js";
@@ -56,7 +57,11 @@ watch(
   },
 );
 
+// Layar loading di App.vue menunggu pengambilan data ini selesai
+const pageLoading = usePageLoadingStore();
+
 onMounted(async () => {
+  pageLoading.start();
   const BASEURL = "https://alentest.my.id";
 
   try {
@@ -88,7 +93,11 @@ onMounted(async () => {
       benefits: job.benefits,
     }));
   } catch (error) {
-    console.log("data gagal diambil", error);
+    // Bukan sisa uji coba: ini laporan kalau data lowongan gagal diambil.
+    // console.error tetap dipertahankan supaya kegagalan tidak lolos diam-diam.
+    console.error("Gagal mengambil data lowongan:", error);
+  } finally {
+    pageLoading.done(); // WAJIB di finally, supaya tetap jalan walau gagal
   }
 });
 
@@ -234,7 +243,7 @@ onMounted(() => {
       v-if="isModalOpen"
       class="fixed inset-0 z-50 flex flex-col transition-all duration-300 overflow-auto bg-[#1C1B1B]/80"
     >
-      <transition name="slide">
+      <transition name="slide" appear>
         <div class="ml-auto w-full h-auto p-5 lg:p-20 z-50">
           <div
             class="w-full h-full bg-white dark:bg-[#17181A] relative z-50 flex flex-col items-center rounded-3xl"
