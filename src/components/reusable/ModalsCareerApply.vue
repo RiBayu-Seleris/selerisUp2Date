@@ -1,4 +1,5 @@
 <script setup>
+import { bersihkanHtml } from "@/utils/sanitizeHtml";
 defineProps({
   title: String,
   items: Object,
@@ -40,7 +41,7 @@ defineProps({
                 typeof value === 'string' && /<\/?[a-z][\s\S]*>/i.test(value)
               "
               class="text-[14px] font-[500] prose max-w-none"
-              v-html="value"
+              v-html="bersihkanHtml(value)"
             ></p>
 
             <!-- 🔥 jika value adalah teks biasa atau angka -->
@@ -74,7 +75,7 @@ defineProps({
                 typeof value === 'string' && /<\/?[a-z][\s\S]*>/i.test(value)
               "
               class="text-[14px] font-[500] prose max-w-none mb-1"
-              v-html="value"
+              v-html="bersihkanHtml(value)"
             ></p>
 
             <!-- 🔥 jika value adalah teks biasa atau angka -->

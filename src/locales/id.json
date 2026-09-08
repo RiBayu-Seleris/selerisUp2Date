@@ -1651,7 +1651,10 @@
     "noOpenings": "Saat ini belum ada lowongan. Ikuti media sosial kami untuk informasi terbaru.",
     "declaration1": "Dengan ini saya menyatakan bahwa seluruh informasi dalam formulir ini benar dan akurat.",
     "declaration2": "Saya memberikan izin kepada perusahaan untuk menggunakan informasi ini demi keperluan rekrutmen.",
-    "declaration3": "Saya bersedia menjalani proses pemeriksaan latar belakang sesuai ketentuan yang berlaku."
+    "declaration3": "Saya bersedia menjalani proses pemeriksaan latar belakang sesuai ketentuan yang berlaku.",
+    "fileInvalidTitle": "Berkas tidak bisa dipakai",
+    "fileWrongTypeText": "Hanya berkas {types} yang diterima.",
+    "fileTooLargeText": "Ukuran berkas maksimal {max} MB. Berkas Anda {size} MB."
   },
   "technology": {
     "sci": [

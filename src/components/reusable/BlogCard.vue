@@ -1,4 +1,5 @@
 <script setup>
+import { bersihkanHtml } from "@/utils/sanitizeHtml";
 import LikeIcon from "@/components/icons/Like.vue";
 import EyeIcon from "@/components/icons/Eye.vue";
 import CommentIcon from "@/components/icons/Comment.vue";
@@ -57,7 +58,7 @@ defineProps({
     </div>
     <div class="flex w-full h-[100px] justify-start items-start">
       <div
-        v-html="description"
+        v-html="bersihkanHtml(description)"
         class="prose max-w-none line-clamp-3 text-[14px] font-[400] text-[#637381] dark:text-[#6F6F6F]"
       />
       <!-- <p class="text-[14px] font-[400] text-[#637381] dark:text-[#6F6F6F]">

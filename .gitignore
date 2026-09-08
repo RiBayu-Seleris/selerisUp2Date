@@ -10,6 +10,14 @@ lerna-debug.log*
 node_modules
 *.local
 
+# Berkas rahasia. WAJIB di sini: isinya kunci API dan alamat server.
+# Catatan: .gitignore hanya mencegah berkas BARU ikut terlacak. Berkas yang
+# terlanjur masuk git tetap terlacak sampai dilepas dengan:
+#   git rm --cached .env
+.env
+.env.*
+!.env.example
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json
@@ -22,9 +30,12 @@ node_modules
 *.sw?
 
 # Vite build output + workflow staging dirs (added for GHA auto-deploy)
-dist/
+# dist/
 dist.new/
 dist.old/
 dist.previous/
 dist.backup-*/
 CLAUDE.md
+HAPUS-LOG.md
+DEVLOG.md
+RPPG_WEBSOCKET_DOCS.md

@@ -146,6 +146,7 @@ onUnmounted(() => {
               :key="index"
               :href="product.url"
               target="_blank"
+              rel="noopener noreferrer"
               class="flex justify-start items-start text-start w-[300px] text-animate-hover dark:dark-text-animate-hover"
             >
               <span

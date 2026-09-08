@@ -46,7 +46,7 @@ defineProps({
       <div class="w-full h-full flex items-center md:pr-10">
         <div class="w-full h-auto flex flex-col">
           <div class="w-full h-[80px] flex items-center justify-end">
-            <a href="/book-a-demo" target="_blank">
+            <a href="/book-a-demo" target="_blank" rel="noopener noreferrer">
               <div
                 class="w-auto h-auto md:h-full py-1 md:py-2 rounded-md md:rounded-lg flex flex-row px-2 md:px-5 bg-[#FAFAFA]"
               >
@@ -105,6 +105,7 @@ defineProps({
       <a
         href="https://seleris.ai/book-a-demo"
         target="_blank"
+        rel="noopener noreferrer"
         class="w-full h-auto"
       >
         <div
