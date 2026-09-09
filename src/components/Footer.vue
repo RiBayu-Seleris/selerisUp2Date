@@ -244,7 +244,7 @@ import Navlink from "@/components/Navlink.vue";
                 <img
                   :src="playstore"
                   alt="Playstore"
-                  class="w-full sm:w-[200px] md:w-[200px] xl:w-[200px] h-[100px] object-contain object-center"
+                  class="w-auto sm:w-[100px] md:w-[200px] xl:w-[200px] sm:h-[100px] object-contain object-center"
                 />
               </a>
               <!-- <div
@@ -275,7 +275,7 @@ import Navlink from "@/components/Navlink.vue";
           </div>
         </div>
       </div>
-      <div class="w-full h-[1px] bg-[#d8dee4] rounded-full" />
+      <div class="w-full h-[1px] bg-[#d8dee4] rounded-full mt-5 lg:mt-0" />
       <div
         class="flex flex-col w-full justify-center text-center items-center pb-6 pt-4 gap-y-2"
       >

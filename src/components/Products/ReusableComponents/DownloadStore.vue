@@ -14,23 +14,23 @@ import appstore from "@/assets/images/appstore.png";
         rel="noopener noreferrer"
         class="flex w-full h-auto justify-start"
       >
-        <figure class="w-full h-auto shadow-2xl">
+        <figure class="w-full h-auto">
           <img
             :src="playstore"
             alt="Playstore"
-            class="w-full h-full object-contain object-center"
+            class="w-full h-[60px] object-contain object-center"
           />
         </figure>
       </a>
     </div>
-    <div class="relative group w-full h-full">
+    <!-- <div class="relative group w-full h-full">
       <img
         :src="appstore"
         alt="Appstore"
         class="w-full h-full object-contain object-center shadow-2xl"
       />
 
-      <!-- Hover Overlay -->
+      Hover Overlay
       <div
         class="absolute flex w-full h-full items-center justify-center inset-0 group-hover:opacity-100 transition duration-300 bg-opacity-60 opacity-0"
       >
@@ -42,6 +42,6 @@ import appstore from "@/assets/images/appstore.png";
           >
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>

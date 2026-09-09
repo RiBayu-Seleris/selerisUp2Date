@@ -1,5 +1,6 @@
 <script setup>
 import MenuNav from "@productComponents/MenuNav.vue";
+import LanguageSwitcher from "@/components/reusable/LanguageSwitcher.vue";
 import MenuIcon from "@/components/icons/MenuIcon.vue";
 import { ref, onMounted, onUnmounted, computed } from "vue";
 import { useScrollStore } from "@/stores/scroll";
@@ -88,6 +89,13 @@ onUnmounted(() => {
                   </nav>
                 </div>
               </div>
+              <!-- Slot kanan: pengalih bahasa. Grid ini 12 kolom —
+                   1 (logo) + 10 (menu) + 1 (slot ini) = 12, jadi pas sebaris. -->
+              <div
+                class="hidden lg:flex items-center justify-end col-span-1 h-auto"
+              >
+                <LanguageSwitcher />
+              </div>
             </div>
 
             <!-- Mobile Navbar with Sidebar Button -->
@@ -104,8 +112,9 @@ onUnmounted(() => {
                 />
               </router-link>
               <div
-                class="w-[60%] h-auto flex items-center flex-row justify-end"
+                class="w-[60%] h-auto flex items-center flex-row justify-end gap-3"
               >
+                <LanguageSwitcher />
                 <div
                   class="w-[35%] md:w-[15%] h-auto flex items-center justify-end"
                 >

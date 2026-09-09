@@ -5,6 +5,7 @@ import { useRoute } from "vue-router"; // ✅ Tambahkan ini
 import MenuNav from "@productComponents/MenuNav.vue";
 import MenuIcon from "@/components/icons/MenuIcon.vue";
 import ThemeToggle from "@/components/reusable/ThemeToggle.vue";
+import LanguageSwitcher from "@/components/reusable/LanguageSwitcher.vue";
 
 import { useSidebarStore } from "@/stores/sidebar";
 import { useProductLogo } from "@/Data/Products/useProductLogo.js";
@@ -70,7 +71,14 @@ const LogoLink = computed(() => {
           </nav>
         </div>
       </div>
-      <div class="flex items-center col-span-10 h-auto" />
+      <!-- Slot kanan: pengalih bahasa.
+           col-span diperbaiki dari 10 ke 1. Sebelumnya 1 + 10 + 10 = 21 kolom
+           pada grid 12 kolom, jadi elemen ini terdorong ke baris baru — tidak
+           kelihatan karena memang masih kosong. Dengan col-span-1 jumlahnya pas
+           12 dan slot ini duduk di kanan, sebaris dengan logo dan menu. -->
+      <div class="flex items-center justify-end col-span-1 h-auto">
+        <LanguageSwitcher />
+      </div>
     </div>
 
     <!-- Mobile Navbar -->
@@ -83,7 +91,8 @@ const LogoLink = computed(() => {
           class="w-[80px] h-[56px] object-contain"
         />
       </router-link>
-      <div class="w-[60%] h-auto flex items-center flex-row justify-end">
+      <div class="w-[60%] h-auto flex items-center flex-row justify-end gap-3">
+        <LanguageSwitcher />
         <div class="w-[30%] md:w-[15%] h-auto flex items-center justify-end">
           <button
             aria-label="Open Sidebar Page Product"

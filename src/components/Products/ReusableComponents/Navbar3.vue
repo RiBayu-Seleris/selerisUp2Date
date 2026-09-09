@@ -5,6 +5,7 @@ import { useRoute } from "vue-router"; // ✅ Tambahkan ini
 import MenuNav from "@productComponents/MenuNav.vue";
 import MenuIcon from "@/components/icons/MenuIcon.vue";
 import ThemeToggle from "@/components/reusable/ThemeToggle.vue";
+import LanguageSwitcher from "@/components/reusable/LanguageSwitcher.vue";
 
 import { useSidebarStore } from "@/stores/sidebar";
 import { useProductLogo } from "@/Data/Products/useProductLogo.js";
@@ -52,6 +53,11 @@ const LogoLink = computed(() => {
       <div class="w-full h-full py-3">
         <MenuNav />
       </div>
+      <!-- Ditempel di kanan secara absolut, mencerminkan logo yang absolut di
+           kiri. Dengan begitu MenuNav tetap benar-benar di tengah pil navbar. -->
+      <div class="absolute right-10 top-0 h-full flex items-center">
+        <LanguageSwitcher />
+      </div>
     </div>
 
     <!-- Mobile Navbar -->
@@ -64,7 +70,8 @@ const LogoLink = computed(() => {
           class="w-[80px] h-[56px] object-contain"
         />
       </router-link>
-      <div class="w-[60%] h-auto flex items-center flex-row justify-end">
+      <div class="w-[60%] h-auto flex items-center flex-row justify-end gap-3">
+        <LanguageSwitcher />
         <div class="w-[30%] md:w-[15%] h-auto flex items-center justify-end">
           <button
             aria-label="Open Sidebar Care"
