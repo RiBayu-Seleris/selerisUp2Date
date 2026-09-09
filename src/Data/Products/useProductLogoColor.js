@@ -32,7 +32,7 @@ export function useProductLogoColor() {
     }
     if (route.path === "/product/seleris-credit") {
       return new URL(
-        "@/assets/Products/images/Logo/Credit-logo.png",
+        "@/assets/Products/images/Logo/credit-logo.png",
         import.meta.url,
       ).href;
     }

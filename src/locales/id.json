@@ -1073,7 +1073,7 @@
         },
         {
           "question": "Apakah aplikasi ini menyediakan dukungan pelanggan?",
-          "answer": "Ya, tim dukungan pelanggan kami selalu siap membantu. Untuk pertanyaan, masukan, atau bantuan teknis, silakan hubungi kami di info@seleris.ai"
+          "answer": "Ya, tim dukungan pelanggan kami selalu siap membantu. Untuk pertanyaan, masukan, atau bantuan teknis, silakan hubungi kami di info{'@'}seleris.ai"
         },
         {
           "question": "Apakah aplikasi Seleris Medins aman?",
@@ -1085,7 +1085,7 @@
         },
         {
           "question": "Bagaimana cara menghapus akun saya?",
-          "answer": "Jika Anda ingin menghapus akun, silakan hubungi tim dukungan kami di info@seleris.ai dan kami akan memproses permintaan Anda dengan aman."
+          "answer": "Jika Anda ingin menghapus akun, silakan hubungi tim dukungan kami di info{'@'}seleris.ai dan kami akan memproses permintaan Anda dengan aman."
         },
         {
           "question": "Apakah aplikasi Seleris Medins gratis?",
@@ -1093,7 +1093,7 @@
         },
         {
           "question": "Bagaimana cara memberikan masukan atau saran?",
-          "answer": "Anda dapat mengirimkan saran melalui menu pengaturan aplikasi atau langsung mengirim email ke info@seleris.ai"
+          "answer": "Anda dapat mengirimkan saran melalui menu pengaturan aplikasi atau langsung mengirim email ke info{'@'}seleris.ai"
         },
         {
           "question": "Apa syarat dan ketentuan penggunaan aplikasi ini?",

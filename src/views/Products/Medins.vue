@@ -109,11 +109,7 @@ const localizedSteps = useLocalizedList(
     </section>
 
     <!-- About Us -->
-    <section
-      data-aos="fade-up"
-      class="relative w-full h-auto max-w-[1440px] mx-auto"
-      id="about"
-    >
+    <section class="relative w-full h-auto max-w-[1440px] mx-auto" id="about">
       <!-- Circle First -->
       <Circle
         heightClass="h-[200px] md:h-[400px] xl:h-[600px]"
@@ -145,7 +141,6 @@ const localizedSteps = useLocalizedList(
 
     <!-- How Application Work -->
     <section
-      data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-14 lg:mt-20 scroll-mt-[80px]"
       id="howapplicationwork"
     >
@@ -177,7 +172,6 @@ const localizedSteps = useLocalizedList(
 
     <!-- Easy Quick -->
     <section
-      data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto px-8 mt-20"
       id="easyquick"
     >
@@ -213,7 +207,6 @@ const localizedSteps = useLocalizedList(
 
     <!-- Client -->
     <section
-      data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto max-smallest:px-0 px-8 mt-20"
       id="client"
     >
@@ -231,7 +224,6 @@ const localizedSteps = useLocalizedList(
 
     <!-- Testimonial -->
     <section
-      data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 md:mt-28 lg:mt-40"
       id="testimonial"
     >
@@ -257,7 +249,6 @@ const localizedSteps = useLocalizedList(
 
     <!-- FAQ -->
     <section
-      data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-20"
       id="faq"
     >
@@ -293,7 +284,6 @@ const localizedSteps = useLocalizedList(
 
     <!-- Download App -->
     <section
-      data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-40 z-40"
       id="download"
     >
@@ -310,7 +300,6 @@ const localizedSteps = useLocalizedList(
 
     <!-- Book Demo -->
     <section
-      data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-40 px-8 z-30 pt-24"
       id="bookdemo"
     >

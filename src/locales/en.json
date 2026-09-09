@@ -1073,7 +1073,7 @@
         },
         {
           "question": "Does this app provide customer support?",
-          "answer": "Yes, our customer support team is always ready to help. For any inquiries, feedback, or technical assistance, please contact us at info@seleris.ai"
+          "answer": "Yes, our customer support team is always ready to help. For any inquiries, feedback, or technical assistance, please contact us at info{'@'}seleris.ai"
         },
         {
           "question": "Is the Seleris Medins app secure?",
@@ -1085,7 +1085,7 @@
         },
         {
           "question": "How do I delete my account?",
-          "answer": "If you want to delete your account, please contact our support team at info@seleris.ai and we will process your request securely."
+          "answer": "If you want to delete your account, please contact our support team at info{'@'}seleris.ai and we will process your request securely."
         },
         {
           "question": "Is the Seleris Medins app free?",
@@ -1093,7 +1093,7 @@
         },
         {
           "question": "How can I provide feedback or suggestions?",
-          "answer": "You can submit suggestions through the app settings menu or directly email us at info@seleris.ai"
+          "answer": "You can submit suggestions through the app settings menu or directly email us at info{'@'}seleris.ai"
         },
         {
           "question": "What are the terms and conditions of use of this app?",
