@@ -14,7 +14,7 @@ const props = defineProps({
       class="relative w-auto h-auto flex flex-col justify-center items-center bg-white/40 dark:bg-[#1D1F23] backdrop-blur-[30px] px-4 py-5 rounded-xl"
     >
       <div
-        class="w-[250px] lg:w-[320px] xl:w-[400px] h-auto flex flex-row gap-x-4 justify-between items-start"
+        class="w-full lg:w-[320px] xl:w-[400px] h-auto flex flex-row gap-x-4 justify-between items-start"
       >
         <div
           class="w-6 h-6 lg:w-7 lg:h-7 xl:w-10 xl:h-10 shrink-0 flex justify-center items-center bg-gradient-to-b from-[#D0D0D0] from-[0%] to-[#D0D0D0]/40 dark:from-[#63FD94] dark:to-[#3B9758]/0 rounded-md p-[1px]"

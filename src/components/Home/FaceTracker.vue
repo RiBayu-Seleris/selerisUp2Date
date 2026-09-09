@@ -123,15 +123,16 @@ const submitForm = () => {
       </p>
 
       <p
-        class="text-[16px] md:text-[32px] lg:text-[34px] xl:text-[46px] leading-snug text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] font-[500]"
+        class="text-[24px] sm:text-[28px] md:text-[32px] lg:text-[34px] xl:text-[46px] leading-snug text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] font-[500]"
       >
         {{ $t("home.faceTracker.titleLine1") }} <br />
         {{ $t("home.faceTracker.titleLine2") }}
       </p>
     </div>
 
-    <!-- Main Section -->
-    <div class="relative w-full h-auto">
+    <!-- Komposisi DESKTOP: gambar penuh dengan kartu melayang di atasnya.
+         Hanya dipakai mulai lg — di bawah itu ada rancangan tersendiri. -->
+    <div class="relative w-full h-auto hidden lg:block">
       <div class="relative w-full h-full">
         <img :src="gridFaceTracker" alt="" />
       </div>
@@ -157,7 +158,10 @@ const submitForm = () => {
         </div>
 
         <!-- Cards -->
-        <div class="absolute z-20 w-full h-full">
+        <!-- Kartu melayang hanya dipakai mulai lg. Di layar kecil keempatnya
+             akan bertindihan di atas wajah dan teksnya tidak terbaca, jadi
+             digantikan susunan biasa di bawah ilustrasi. -->
+        <div class="hidden lg:block absolute z-20 w-full h-full">
           <!-- Kiri atas -->
           <div class="absolute left-[10%] top-[20%] card-float-left">
             <card-tracker
@@ -206,33 +210,105 @@ const submitForm = () => {
             />
           </div>
         </div>
-
-        <!-- Button Scan Now -->
-        <div
-          @click="openModal"
-          :class="[
-            'absolute z-30 w-fit h-auto flex flex-row gap-x-5 justify-center items-center left-1/2 -translate-x-1/2 bottom-0 lg:bottom-6 xl:bottom-10 px-10 py-2.5 rounded-xl transition-all duration-300 ease-in-out',
-            isBlocked
-              ? 'bg-gray-400 cursor-not-allowed opacity-60'
-              : 'bg-gradient-to-tr from-[#1E6493] from-[20%] to-[#2E97DF] to-[100%] shadow-[0_20px_20px_0_rgba(39,128,188,0.16)] hover:scale-[1.1] cursor-pointer',
-          ]"
-        >
-          <div class="w-6 h-6 shrink-0 flex justify-center items-center">
-            <img :src="FaceIcon" alt="" class="w-full h-full" />
-          </div>
-
-          <div class="w-fit h-auto flex justify-center items-center">
-            <p class="text-white font-medium">
-              {{
-                isBlocked
-                  ? $t("home.faceTracker.scanLimit", {
-                      count: MAX_SCAN_ATTEMPTS,
-                    })
-                  : $t("home.faceTracker.scanButton")
-              }}
-            </p>
-          </div>
+      </div>
+      <!-- Button Scan Now -->
+      <div
+        @click="openModal"
+        :class="[
+          'absolute z-30 w-fit h-auto flex flex-row gap-x-5 justify-center items-center left-1/2 -translate-x-1/2 bottom-6 xl:bottom-10 px-10 py-2.5 rounded-xl transition-all duration-300 ease-in-out',
+          isBlocked
+            ? 'bg-gray-400 cursor-not-allowed opacity-60'
+            : 'bg-gradient-to-tr from-[#1E6493] from-[20%] to-[#2E97DF] to-[100%] shadow-[0_20px_20px_0_rgba(39,128,188,0.16)] hover:scale-[1.1] cursor-pointer',
+        ]"
+      >
+        <div class="w-6 h-6 shrink-0 flex justify-center items-center">
+          <img :src="FaceIcon" alt="" class="w-full h-full" />
         </div>
+
+        <div class="w-fit h-auto flex justify-center items-center">
+          <p class="text-white font-medium">
+            {{
+              isBlocked
+                ? $t("home.faceTracker.scanLimit", {
+                    count: MAX_SCAN_ATTEMPTS,
+                  })
+                : $t("home.faceTracker.scanButton")
+            }}
+          </p>
+        </div>
+      </div>
+    </div>
+    <!-- ============================================================
+         Tampilan PONSEL (di bawah lg) — dirancang tersendiri.
+
+         Bukan versi kecil dari desktop: kartu melayang dan gambar setinggi
+         layar tidak masuk akal di layar sempit. Di sini ilustrasinya dipadatkan
+         jadi satu kartu bertinggi tetap, tombolnya selebar layar, dan
+         keterangannya jadi daftar yang enak dibaca sambil menggulir.
+    ============================================================ -->
+    <div class="lg:hidden flex flex-col gap-6 px-6 sm:px-8">
+      <!-- Ilustrasi versi ponsel.
+
+           Tiga hal yang sengaja berbeda dari desktop:
+
+           1. Rasio, bukan tinggi tetap. Tinggi tetap membuat kartunya jadi
+              kotak lebar-pendek di tablet, dengan orangnya kecil di tengah dan
+              petak kosong di kiri-kanan. Rasio 4:5 menjaga bentuknya tegak,
+              mengikuti bentuk foto orang.
+
+           2. Lebarnya dibatasi 420px dan ditengahkan. Tanpa itu, di tablet
+              kartunya melebar mengikuti layar sementara isinya tidak ikut
+              membesar.
+
+           3. Tanpa lapisan FaceMask. Lapisan itu diposisikan dengan persentase
+              yang dihitung untuk ukuran desktop; pada ukuran ini garis
+              pindaiannya jatuh melintang di dada, bukan di wajah. -->
+      <div
+        class="relative w-full max-w-[420px] mx-auto aspect-[4/5] sm:aspect-[1/1] rounded-3xl overflow-hidden bg-[#EEF3F2] dark:bg-[#1D1F23]"
+      >
+        <img
+          :src="gridFaceTracker"
+          alt=""
+          class="absolute inset-0 w-full h-full object-cover opacity-70 dark:opacity-20"
+        />
+        <img
+          :src="Person"
+          alt=""
+          class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[92%] w-auto max-w-none object-contain object-bottom"
+        />
+      </div>
+
+      <!-- Tombol selebar layar: sasaran sentuh lega, tidak menutupi wajah -->
+      <div
+        @click="openModal"
+        :class="[
+          'w-full flex flex-row gap-x-3 justify-center items-center px-6 py-3.5 rounded-xl transition-all duration-300 ease-in-out',
+          isBlocked
+            ? 'bg-gray-400 cursor-not-allowed opacity-60'
+            : 'bg-gradient-to-tr from-[#1E6493] from-[20%] to-[#2E97DF] to-[100%] shadow-[0_12px_20px_0_rgba(39,128,188,0.20)] active:scale-[0.98] cursor-pointer',
+        ]"
+      >
+        <div class="w-6 h-6 shrink-0 flex justify-center items-center">
+          <img :src="FaceIcon" alt="" class="w-full h-full" />
+        </div>
+        <p class="text-white font-medium">
+          {{
+            isBlocked
+              ? $t("home.faceTracker.scanLimit", { count: MAX_SCAN_ATTEMPTS })
+              : $t("home.faceTracker.scanButton")
+          }}
+        </p>
+      </div>
+
+      <!-- Keterangan: satu kolom di ponsel, dua kolom mulai sm -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <card-tracker
+          v-for="kartu in cards"
+          :key="kartu.key"
+          :icon="kartu.icon"
+          :title="$t(`home.faceTracker.cards.${kartu.key}.title`)"
+          :description="$t(`home.faceTracker.cards.${kartu.key}.description`)"
+        />
       </div>
     </div>
 

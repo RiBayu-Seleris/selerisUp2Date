@@ -96,7 +96,7 @@ onBeforeUnmount(() => {
   <div
     ref="root"
     :style="rootStyle"
-    class="w-full min-h-[420px] sm:min-h-[230px] md:min-h-[300px] lg:min-h-[280px] xl:min-h-[270px] p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656] shadow-sm rounded-lg"
+    class="w-full h-full lg:min-h-[280px] xl:min-h-[270px] p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656] shadow-sm rounded-lg"
   >
     <div
       class="w-full h-full flex flex-col justify-between px-6 lg:px-8 py-6 lg:py-8 rounded-lg shadow-sm bg-[#FFFFFF] dark:bg-[#1D1F23] dark:border-[#FAFAFA]/25"

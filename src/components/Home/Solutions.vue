@@ -137,7 +137,7 @@ onUnmounted(() => {
                     <component :is="data.icons" class="w-full h-full" />
                   </div>
                 </div>
-                <div class="w-full h-12 flex flex-col gap-y-1 xl:gap-y-1.5">
+                <div class="w-full min-h-12 flex flex-col gap-y-1 xl:gap-y-1.5">
                   <span
                     class="font-[600] text-[14px] xl:text-[20px]"
                     :class="
@@ -154,15 +154,15 @@ onUnmounted(() => {
                     {{ $t(`solutions.${data.slug}.subtitle`) }}
                   </span>
                 </div>
-                <div class="w-full h-5">
-                  <Transition name="fade-link">
-                    <span
-                      v-if="SolutionLists.indexOf(data) === activeIndex"
-                      class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[12px] xl:text-[14px] font-[500] cursor-pointer"
-                      >{{ $t("home.solutions.learnMore") }} <span>→</span>
-                    </span>
-                  </Transition>
-                </div>
+              </div>
+              <div class="w-full h-5 mt-4">
+                <Transition name="fade-link">
+                  <span
+                    v-if="SolutionLists.indexOf(data) === activeIndex"
+                    class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[12px] xl:text-[14px] font-[500] cursor-pointer"
+                    >{{ $t("home.solutions.learnMore") }} <span>→</span>
+                  </span>
+                </Transition>
               </div>
             </div>
           </div>
@@ -216,7 +216,7 @@ onUnmounted(() => {
                 </div>
                 <div class="w-full h-auto flex flex-col gap-y-1">
                   <div
-                    class="w-full h-14 xl:h-12 flex flex-col gap-y-1 xl:gap-y-1.5"
+                    class="w-full min-h-14 xl:min-h-12 flex flex-col gap-y-1 xl:gap-y-1.5"
                   >
                     <span
                       class="font-[600] text-[14px] xl:text-[20px]"
@@ -232,16 +232,16 @@ onUnmounted(() => {
                       >{{ $t(`solutions.${data.slug}.subtitle`) }}</span
                     >
                   </div>
-                  <div class="w-full h-5 flex items-center">
-                    <Transition name="fade-link">
-                      <span
-                        v-if="SolutionLists.indexOf(data) === activeIndex"
-                        class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[12px] xl:text-[14px] font-[500] cursor-pointer"
-                        >{{ $t("home.solutions.learnMore") }} <span>→</span>
-                      </span>
-                    </Transition>
-                  </div>
                 </div>
+              </div>
+              <div class="w-full h-5 mt-4 flex items-center">
+                <Transition name="fade-link">
+                  <span
+                    v-if="SolutionLists.indexOf(data) === activeIndex"
+                    class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[12px] xl:text-[14px] font-[500] cursor-pointer"
+                    >{{ $t("home.solutions.learnMore") }} <span>→</span>
+                  </span>
+                </Transition>
               </div>
             </div>
           </div>
@@ -293,7 +293,7 @@ onUnmounted(() => {
                     <component :is="data.icons" class="w-full h-full" />
                   </div>
                 </div>
-                <div class="w-full h-12 flex flex-col gap-y-1 xl:gap-y-1.5">
+                <div class="w-full min-h-12 flex flex-col gap-y-1 xl:gap-y-1.5">
                   <span
                     class="font-[600] text-[14px] xl:text-[20px]"
                     :class="
@@ -308,15 +308,15 @@ onUnmounted(() => {
                     >{{ $t(`solutions.${data.slug}.subtitle`) }}</span
                   >
                 </div>
-                <div class="w-full h-5">
-                  <Transition name="fade-link">
-                    <span
-                      v-if="SolutionLists.indexOf(data) === activeIndex"
-                      class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[12px] xl:text-[14px] font-[500] cursor-pointer"
-                      >{{ $t("home.solutions.learnMore") }} <span>→</span>
-                    </span>
-                  </Transition>
-                </div>
+              </div>
+              <div class="w-full h-5 mt-4">
+                <Transition name="fade-link">
+                  <span
+                    v-if="SolutionLists.indexOf(data) === activeIndex"
+                    class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[12px] xl:text-[14px] font-[500] cursor-pointer"
+                    >{{ $t("home.solutions.learnMore") }} <span>→</span>
+                  </span>
+                </Transition>
               </div>
             </div>
           </div>
@@ -343,7 +343,7 @@ onUnmounted(() => {
       >
         <!-- @click="showUnderConstructionModal = true" -->
         <div
-          class="w-full h-full flex flex-col justify-between bg-white dark:bg-[#1D1F23] rounded-2xl px-5 py-6 gap-y-6"
+          class="w-full h-full flex flex-col justify-between bg-white dark:bg-[#1D1F23] rounded-2xl px-5 py-6 gap-y-3 lg:gap-y-6"
         >
           <div class="w-full h-auto flex flex-col gap-y-4">
             <div
@@ -373,17 +373,16 @@ onUnmounted(() => {
                 {{ $t(`solutions.${data.slug}.subtitle`) }}
               </span>
             </div>
-
-            <div class="w-full h-5">
-              <Transition name="fade-link">
-                <span
-                  v-if="index === activeIndex"
-                  class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[13px] font-[500]"
-                >
-                  {{ $t("home.solutions.learnMore") }} <span>→</span>
-                </span>
-              </Transition>
-            </div>
+          </div>
+          <div class="w-full h-5 lg:mt-4">
+            <Transition name="fade-link">
+              <span
+                v-if="index === activeIndex"
+                class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[13px] font-[500]"
+              >
+                {{ $t("home.solutions.learnMore") }} <span>→</span>
+              </span>
+            </Transition>
           </div>
         </div>
       </div>

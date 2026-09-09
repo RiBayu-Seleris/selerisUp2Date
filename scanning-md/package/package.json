@@ -1,0 +1,16 @@
+{
+  "name": "@seleris/rppg-vue",
+  "version": "0.1.0-dev.2",
+  "description": "Local browser rPPG scanner, Mobile 1.9.2 reference, Vue integration",
+  "type": "module",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "exports": {".": {"types": "./dist/index.d.ts", "import": "./dist/index.js"}},
+  "files": ["dist", "runtime", "docs", "bin", "README.md", "LICENSE", "THIRD_PARTY_NOTICES.md", "DISTRIBUTION.md"],
+  "bin": {"seleris-copy-assets": "./bin/copy-assets.mjs"},
+  "peerDependencies": {"vue": "^3.5.0"},
+  "engines": {"node": ">=20.19.0"},
+  "license": "SEE LICENSE IN LICENSE",
+  "sideEffects": false,
+  "publishConfig": {"access": "restricted"}
+}
