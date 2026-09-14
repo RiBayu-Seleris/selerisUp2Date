@@ -108,10 +108,8 @@ const isSelerisCredit = ref(route.path === "/product/seleris-credit");
       v-if="sidebar.isOpen"
       class="fixed inset-0 z-50 flex flex-col transition-all duration-300 overflow-y-auto"
     >
-      <!-- Overlay -->
       <div class="absolute inset-0 bg-black/50" @click="sidebar.close"></div>
 
-      <!-- Sidebar -->
       <transition name="slide" appear>
         <div class="ml-auto w-full h-auto px-4 pt-6">
           <div

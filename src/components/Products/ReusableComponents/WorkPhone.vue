@@ -10,7 +10,6 @@ defineProps({
 <template>
   <div class="snap-start xl:snap-center shrink-0">
     <figure class="w-full max-w-[250px] lg:max-w-[300px] h-auto mx-auto flex">
-      <!-- src="@/assets/Products/images/Single-Phone.png" -->
       <img
         :src="image"
         alt=""

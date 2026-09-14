@@ -3,7 +3,6 @@ import DescRobot from "@/assets/images/about-images.png";
 </script>
 
 <template>
-  <!-- Section Description 1 -->
   <div class="flex w-full h-auto lg:px-20">
     <p
       class="text-[14px] lg:text-[17px] xl:text-[21px] text-center text-[#195279] dark:text-[#FAFAFA] font-light"
@@ -11,7 +10,7 @@ import DescRobot from "@/assets/images/about-images.png";
       {{ $t("about.desc1") }}
     </p>
   </div>
-  <!-- div Description 2 -->
+
   <div class="flex w-full h-auto my-5 sm:my-8 lg:my-14 xl:my-16 lg:px-20">
     <div
       class="flex flex-col md:flex-row w-full h-auto justify-between gap-y-5 md:gap-8 lg:gap-x-16"
@@ -36,7 +35,7 @@ import DescRobot from "@/assets/images/about-images.png";
       </div>
     </div>
   </div>
-  <!-- div Description 3 -->
+
   <div class="flex w-full h-auto xl:mt-5 lg:px-20">
     <p
       class="text-[14px] lg:text-[17px] xl:text-[21px] text-center text-[#195279] dark:text-[#FAFAFA] font-light"

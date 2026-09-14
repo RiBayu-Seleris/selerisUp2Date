@@ -1,0 +1,5658 @@
+{
+  "schema_version": "care.v3",
+  "request_id": "golden-full-1.6.9",
+  "status": "success",
+  "source": "sdk",
+  "calculation_version": "salvion-care-v3-sdk-1.6.9-mq-parity",
+  "language": "id",
+  "languages": [
+    "id",
+    "en",
+    "ms"
+  ],
+  "quality": {
+    "score": 0.92,
+    "reliable": true,
+    "flags": [],
+    "accepted_sample_count": 900
+  },
+  "domain_a_vital_signs": {
+    "skor_domain": 80.0,
+    "kategori_domain": {
+      "id": "Normal",
+      "en": "Normal",
+      "ms": "Normal"
+    },
+    "parameter": {
+      "heart_rate": {
+        "value": 73.0,
+        "unit": "bpm",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Rata-rata",
+          "en": "Average",
+          "ms": "Sederhana"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "yellow",
+        "color": "#CA8A04",
+        "icon": "wellness",
+        "source": "camera_measured",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ],
+        "batas_lain": {
+          "Above Average": {
+            "min": 64.0,
+            "max": 71.0,
+            "warna": "hijau"
+          },
+          "Below Average": {
+            "min": 79.0,
+            "max": 86.0,
+            "warna": "kuning"
+          }
+        }
+      },
+      "spo2": {
+        "value": 97.0,
+        "unit": "%",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "camera_experimental",
+        "availability": "available_experimental",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ],
+        "hardware_calibrated": false,
+        "calibration_profile": "rgb-rppg-study-transfer-v1"
+      },
+      "tekanan_sistolik": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "tekanan_diastolik": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "cardiac_output": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "tekanan_nadi": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      }
+    }
+  },
+  "domain_b_antropometri": {
+    "skor_domain": 80.0,
+    "kategori_domain": {
+      "id": "Normal",
+      "en": "Normal",
+      "ms": "Normal"
+    },
+    "parameter": {
+      "bmi": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "wthr": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "bsi": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "bri": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "usia_biologis": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "usia_kulit": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "usia_jantung": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "usia_pembuluh_darah": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "conicity_index": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      }
+    }
+  },
+  "domain_c_physio_hrv": {
+    "skor_domain": 80.0,
+    "kategori_domain": {
+      "id": "Normal",
+      "en": "Normal",
+      "ms": "Normal"
+    },
+    "parameter": {
+      "hrv_sdnn": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "laju_napas": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "prq": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "hrv_vlf_power": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "hrv_lf_power": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "hrv_hf_power": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "hrv_sd2": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "hrv_s": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      }
+    }
+  },
+  "domain_d_mental_ans": {
+    "skor_domain": 80.0,
+    "kategori_domain": {
+      "id": "Normal",
+      "en": "Normal",
+      "ms": "Normal"
+    },
+    "parameter": {
+      "tingkat_stres": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "aktivitas_parasimpatik": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "aktivitas_simpatik": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "hrv_rmssd": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "hrv_pnn50": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "hrv_mean_rr": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "hrv_cv_rr": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "hrv_sdsd": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "hrv_lf_hf_ratio": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "hrv_sd1": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      }
+    }
+  },
+  "domain_e_darah": {
+    "skor_domain": 80.0,
+    "kategori_domain": {
+      "id": "Normal",
+      "en": "Normal",
+      "ms": "Normal"
+    },
+    "parameter": {
+      "glukosa_darah": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "kolesterol_total": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "hemoglobin": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "asam_urat": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "hba1c": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      }
+    }
+  },
+  "domain_f_komposisi_tubuh": {
+    "skor_domain": 80.0,
+    "kategori_domain": {
+      "id": "Normal",
+      "en": "Normal",
+      "ms": "Normal"
+    },
+    "parameter": {
+      "otot_persen": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "lemak_tubuh_persen": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "cairan_tubuh_persen": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "massa_tulang": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "bmr": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "protein_persen": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "lemak_visceral": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "lemak_subkutan": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "massa_otot": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "massa_lemak": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "massa_protein": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      },
+      "tdee": {
+        "value": 1.0,
+        "unit": "unit",
+        "label": {
+          "id": "Parameter",
+          "en": "Parameter",
+          "ms": "Parameter"
+        },
+        "category": {
+          "id": "Normal",
+          "en": "Normal",
+          "ms": "Normal"
+        },
+        "wording": {
+          "id": "Nilai berada dalam rentang yang ditentukan.",
+          "en": "The value is within the defined range.",
+          "ms": "Nilai berada dalam julat yang ditetapkan."
+        },
+        "wording_short": {
+          "id": "Dalam rentang",
+          "en": "Within range",
+          "ms": "Dalam julat"
+        },
+        "tone": "green",
+        "color": "#15803D",
+        "icon": "wellness",
+        "source": "formula_estimate",
+        "availability": "available",
+        "category_options": [
+          {
+            "category": {
+              "id": "Rendah",
+              "en": "Rendah",
+              "ms": "Rendah"
+            },
+            "wording": {
+              "id": "Kategori Rendah",
+              "en": "Rendah category",
+              "ms": "Kategori Rendah"
+            },
+            "tone": "blue",
+            "color": "#2563EB",
+            "min": 0.0,
+            "max": 49.0
+          },
+          {
+            "category": {
+              "id": "Normal",
+              "en": "Normal",
+              "ms": "Normal"
+            },
+            "wording": {
+              "id": "Kategori Normal",
+              "en": "Normal category",
+              "ms": "Kategori Normal"
+            },
+            "tone": "green",
+            "color": "#15803D",
+            "min": 50.0,
+            "max": 79.0
+          },
+          {
+            "category": {
+              "id": "Tinggi",
+              "en": "Tinggi",
+              "ms": "Tinggi"
+            },
+            "wording": {
+              "id": "Kategori Tinggi",
+              "en": "Tinggi category",
+              "ms": "Kategori Tinggi"
+            },
+            "tone": "red",
+            "color": "#DC2626",
+            "min": 80.0,
+            "max": 100.0
+          }
+        ]
+      }
+    }
+  },
+  "disease_risks": {
+    "hipertensi": {
+      "value": 10.0,
+      "unit": "%",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    },
+    "diabetes_tipe_2": {
+      "value": 10.0,
+      "unit": "%",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    },
+    "penyakit_kardiovaskular": {
+      "value": 10.0,
+      "unit": "%",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    },
+    "hiperkolesterolemia": {
+      "value": 10.0,
+      "unit": "%",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    },
+    "hipertrigliseridemia": {
+      "value": 10.0,
+      "unit": "%",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    },
+    "serangan_jantung": {
+      "value": 10.0,
+      "unit": "%",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    },
+    "stroke": {
+      "value": 10.0,
+      "unit": "%",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    },
+    "gula_darah_puasa": {
+      "value": 10.0,
+      "unit": "%",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    },
+    "hemoglobin_rendah_atau_anemia": {
+      "value": 10.0,
+      "unit": "%",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    },
+    "ascvd": {
+      "value": 10.0,
+      "unit": "%",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    },
+    "gagal_jantung": {
+      "value": 10.0,
+      "unit": "%",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    },
+    "fatty_liver": {
+      "value": 10.0,
+      "unit": "%",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    }
+  },
+  "health_scores": {
+    "cardiovascular": {
+      "value": 80.0,
+      "unit": "score",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    },
+    "metabolic": {
+      "value": 80.0,
+      "unit": "score",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    },
+    "respiratory": {
+      "value": 80.0,
+      "unit": "score",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    },
+    "lifestyle": {
+      "value": 80.0,
+      "unit": "score",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    },
+    "musculoskeletal": {
+      "value": 80.0,
+      "unit": "score",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    },
+    "aging_quality": {
+      "value": 80.0,
+      "unit": "score",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    },
+    "ows": {
+      "value": 80.0,
+      "unit": "score",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    },
+    "ors": {
+      "value": 80.0,
+      "unit": "score",
+      "label": {
+        "id": "Parameter",
+        "en": "Parameter",
+        "ms": "Parameter"
+      },
+      "category": {
+        "id": "Normal",
+        "en": "Normal",
+        "ms": "Normal"
+      },
+      "wording": {
+        "id": "Nilai berada dalam rentang yang ditentukan.",
+        "en": "The value is within the defined range.",
+        "ms": "Nilai berada dalam julat yang ditetapkan."
+      },
+      "wording_short": {
+        "id": "Dalam rentang",
+        "en": "Within range",
+        "ms": "Dalam julat"
+      },
+      "tone": "green",
+      "color": "#15803D",
+      "icon": "wellness",
+      "source": "formula_estimate",
+      "availability": "available",
+      "category_options": [
+        {
+          "category": {
+            "id": "Rendah",
+            "en": "Rendah",
+            "ms": "Rendah"
+          },
+          "wording": {
+            "id": "Kategori Rendah",
+            "en": "Rendah category",
+            "ms": "Kategori Rendah"
+          },
+          "tone": "blue",
+          "color": "#2563EB",
+          "min": 0.0,
+          "max": 49.0
+        },
+        {
+          "category": {
+            "id": "Normal",
+            "en": "Normal",
+            "ms": "Normal"
+          },
+          "wording": {
+            "id": "Kategori Normal",
+            "en": "Normal category",
+            "ms": "Kategori Normal"
+          },
+          "tone": "green",
+          "color": "#15803D",
+          "min": 50.0,
+          "max": 79.0
+        },
+        {
+          "category": {
+            "id": "Tinggi",
+            "en": "Tinggi",
+            "ms": "Tinggi"
+          },
+          "wording": {
+            "id": "Kategori Tinggi",
+            "en": "Tinggi category",
+            "ms": "Kategori Tinggi"
+          },
+          "tone": "red",
+          "color": "#DC2626",
+          "min": 80.0,
+          "max": 100.0
+        }
+      ]
+    }
+  },
+  "estimated_values": [
+    "spo2"
+  ],
+  "warnings": [],
+  "saran": {},
+  "capture_context": {
+    "person": {
+      "detected": true,
+      "detected_face_count": 1
+    },
+    "lighting": {
+      "status": "ready"
+    }
+  },
+  "ows": 82.0,
+  "ows_kategori": {
+    "id": "Baik",
+    "en": "Good",
+    "ms": "Baik"
+  },
+  "ors": 76.0,
+  "ors_kategori": {
+    "id": "Rata-rata",
+    "en": "Average",
+    "ms": "Sederhana"
+  },
+  "final_score": 80.0,
+  "keputusan": "Hasil yang baik! Anda memiliki fondasi kebugaran yang kuat. Lanjutkan usaha Anda.",
+  "decision_wording": "fit",
+  "deskripsi": "Bugar",
+  "skor_risiko": 0.0
+}

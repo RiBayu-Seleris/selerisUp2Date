@@ -3,7 +3,8 @@ import { useIsDark } from "@/utils/useIsDark";
 import HeroText from "@/components/reusable/HeroText.vue";
 
 import { roadmapData } from "@/Data/RoadmapData";
-import { ref } from "vue";
+import { ref, watch } from "vue";
+import { buatCarousel } from "@/utils/carousel";
 
 // cari tahun 2023
 const initialYearIndex = roadmapData.findIndex((item) => item.year === 2025);
@@ -28,6 +29,11 @@ function setActive(yearIndex, productIndex) {
 function selectProduct(product) {
   selectedProduct.value = product;
 }
+
+const berlian = buatCarousel();
+const kartu = buatCarousel();
+
+watch(selectedProduct, () => kartu.segarkan(true));
 
 // Dipakai di template: video mode terang pakai v-if="!isDark", yang gelap
 // pakai v-else. Tujuannya supaya cuma satu video yang benar-benar dibuat
@@ -69,9 +75,76 @@ const isDark = useIsDark();
   </section>
   <section data-aos="fade-up" class="relative w-full h-auto top-0">
     <div class="relative w-full h-auto justify-center">
-      <!-- Frame Content Scroll -->
       <div
-        class="flex flex-row w-full h-[450px] sm:h-[550px] md:h-[550px] lg:h-[700px] z-20 overflow-x-auto snap-x snap-mandatory scroll-pl-8 pl-8 pr-14 sm:scroll-pl-28 sm:pl-28 sm:pr-14 hide-scrollbar"
+        class="hidden xl:flex absolute w-32 h-full bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-r dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% left-0 top-0 z-30 rounded-r-2xl pointer-events-none"
+      />
+      <div
+        class="hidden xl:flex absolute w-32 h-full bg-gradient-to-l from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-l dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% right-0 top-0 z-30 rounded-l-2xl pointer-events-none"
+      />
+
+      <transition
+        enter-active-class="duration-300 ease-out"
+        enter-from-class="opacity-0 scale-75 -translate-x-3"
+        leave-active-class="duration-200 ease-in"
+        leave-to-class="opacity-0 scale-75 -translate-x-3"
+      >
+        <button
+          v-if="berlian.bisaKeKiri.value"
+          @click="berlian.geser('left')"
+          aria-label="Scroll left"
+          class="hidden lg:flex absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 z-40 w-12 h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-full h-full"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+      </transition>
+
+      <transition
+        enter-active-class="duration-300 ease-out"
+        enter-from-class="opacity-0 scale-75 translate-x-3"
+        leave-active-class="duration-200 ease-in"
+        leave-to-class="opacity-0 scale-75 translate-x-3"
+      >
+        <button
+          v-if="berlian.bisaKeKanan.value"
+          @click="berlian.geser('right')"
+          aria-label="Scroll right"
+          class="hidden lg:flex absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 z-40 w-12 h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-full h-full"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+      </transition>
+
+      <div
+        :ref="berlian.pasangEl"
+        @mousedown="berlian.seretMulai"
+        @mousemove="berlian.seretGerak"
+        @mouseup="berlian.seretSelesai"
+        @mouseleave="berlian.seretSelesai"
+        @dragstart.prevent
+        @click.capture="berlian.tahanKlik"
+        class="flex flex-row w-full h-[450px] sm:h-[550px] md:h-[550px] lg:h-[700px] z-20 overflow-x-auto snap-x snap-mandatory scroll-pl-8 pl-8 pr-14 sm:scroll-pl-28 sm:pl-28 sm:pr-14 hide-scrollbar cursor-grab"
       >
         <div
           v-for="(yearItem, yearIndex) in roadmapData"
@@ -106,15 +179,12 @@ const isDark = useIsDark();
             </div>
           </div>
 
-          <!-- Loop produk (bisa lebih dari 1 per tahun) -->
-          <!-- klik untuk aktif -->
           <div
             v-for="(product, productIndex) in yearItem.data"
             :key="productIndex"
             class="relative w-auto h-full"
           >
             <div class="relative w-full h-full">
-              <!-- Titik Tengah Line -->
               <div
                 @click="
                   setActive(yearIndex, productIndex);
@@ -136,7 +206,7 @@ const isDark = useIsDark();
                   }"
                 />
               </div>
-              <!-- Quarter jika ada -->
+
               <div
                 v-if="product.quarters"
                 class="absolute bottom-[165px] sm:bottom-[210px] md:bottom-[210px] xl:bottom-[280px] z-20 px-8 sm:px-10 py-1 bg-gradient-to-r from-[#2C43B7] to-[#50B6EE] rounded-md left-1/2 -translate-x-1/2"
@@ -145,8 +215,7 @@ const isDark = useIsDark();
                   Q{{ product.quarters }}
                 </span>
               </div>
-              <!-- Kartu Produk -->
-              <!-- Ubah menjadi pt-0 dibawah ini untuk active -->
+
               <div
                 class="relative w-full h-1/2 z-10 flex flex-col"
                 :class="{
@@ -160,7 +229,6 @@ const isDark = useIsDark();
                     ),
                 }"
               >
-                <!-- Tambahkan bg-gradient-to-r from-[#2C43B7] to-[#50B6EE] untuk active -->
                 <div
                   class="flex justify-center relative left-1/2 -translate-x-1/2 w-[200px] sm:w-[270px] md:w-[250px] xl:w-[350px] p-[3px] rounded-xl"
                   :class="{
@@ -173,7 +241,6 @@ const isDark = useIsDark();
                     ),
                   }"
                 >
-                  <!-- Tambahkan bg-white untuk active -->
                   <div
                     @click="
                       setActive(yearIndex, productIndex);
@@ -208,7 +275,7 @@ const isDark = useIsDark();
                         {{ $t(`roadmap.${product.key}.subtitle`) }}
                       </p>
                     </div>
-                    <!-- Card untuk tidak punya logo -->
+
                     <div
                       v-else
                       class="flex flex-col items-center"
@@ -235,7 +302,7 @@ const isDark = useIsDark();
                     </div>
                   </div>
                 </div>
-                <!-- Garis vertikal -->
+
                 <div
                   class="relative w-1 h-[80%] bg-gradient-to-t from-[#1091F3]/0 from-[15%] rounded-b-full to-[#1091F3] left-1/2 -translate-x-1/2"
                   :class="{
@@ -257,13 +324,13 @@ const isDark = useIsDark();
           </div>
         </div>
       </div>
-      <!-- Line Full -->
+
       <div
         class="absolute top-1/2 w-full h-[4px] bg-gradient-to-r from-[#2C43B7] from-1% via-[#3ED2B2] via-40% to-[#50B6EE] to-100% z-0 dark:shadow-[0_0_20px_rgba(80,182,238,1)] rounded-full"
       ></div>
     </div>
   </section>
-  <!-- Card Description -->
+
   <section
     data-aos="fade-up"
     v-if="selectedProduct"
@@ -292,13 +359,73 @@ const isDark = useIsDark();
       </div>
       <div class="relative w-full h-auto mt-4 md:mt-5">
         <div
-          class="hidden xl:flex absolute w-32 h-full bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-r dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% left-0 z-20 rounded-r-2xl"
+          class="hidden xl:flex absolute w-32 h-full bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-r dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% left-0 top-0 z-30 rounded-r-2xl pointer-events-none"
         />
         <div
-          class="hidden xl:flex absolute w-32 h-full bg-gradient-to-l from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-l dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% right-0 z-20 rounded-l-2xl"
+          class="hidden xl:flex absolute w-32 h-full bg-gradient-to-l from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-l dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% right-0 top-0 z-30 rounded-l-2xl pointer-events-none"
         />
+        <transition
+          enter-active-class="duration-300 ease-out"
+          enter-from-class="opacity-0 scale-75 -translate-x-3"
+          leave-active-class="duration-200 ease-in"
+          leave-to-class="opacity-0 scale-75 -translate-x-3"
+        >
+          <button
+            v-if="kartu.bisaKeKiri.value"
+            @click="kartu.geser('left')"
+            aria-label="Scroll left"
+            class="hidden lg:flex absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 z-40 w-12 h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-full h-full"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+        </transition>
+
+        <transition
+          enter-active-class="duration-300 ease-out"
+          enter-from-class="opacity-0 scale-75 translate-x-3"
+          leave-active-class="duration-200 ease-in"
+          leave-to-class="opacity-0 scale-75 translate-x-3"
+        >
+          <button
+            v-if="kartu.bisaKeKanan.value"
+            @click="kartu.geser('right')"
+            aria-label="Scroll right"
+            class="hidden lg:flex absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 z-40 w-12 h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-full h-full"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </transition>
+
         <div
-          class="relative flex flex-row w-full max-h-screen gap-x-5 sm:gap-x-5 md:gap-x-10 py-5 overflow-x-auto snap-x snap-mandatory scroll-pl-8 pl-8 pr-8 sm:scroll-pl-10 sm:pl-10 sm:pr-10 md:scroll-pl-10 md:pl-10 md:pr-10 xl:scroll-pl-28 xl:pl-28 xl:pr-28 hide-scrollbar"
+          :ref="kartu.pasangEl"
+          @mousedown="kartu.seretMulai"
+          @mousemove="kartu.seretGerak"
+          @mouseup="kartu.seretSelesai"
+          @mouseleave="kartu.seretSelesai"
+          @dragstart.prevent
+          class="relative flex flex-row w-full max-h-screen gap-x-5 sm:gap-x-5 md:gap-x-10 py-5 overflow-x-auto snap-x snap-mandatory scroll-pl-8 pl-8 pr-8 sm:scroll-pl-10 sm:pl-10 sm:pr-10 md:scroll-pl-10 md:pl-10 md:pr-10 xl:scroll-pl-28 xl:pl-28 xl:pr-28 hide-scrollbar cursor-grab"
         >
           <div
             v-for="index in selectedProduct.contentCount"

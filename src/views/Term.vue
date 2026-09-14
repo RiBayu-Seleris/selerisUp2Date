@@ -67,7 +67,6 @@ import HeroText from "@/components/reusable/HeroText.vue";
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
     <div class="w-full h-auto">
-      <!-- POINT 1 -->
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
       >
@@ -107,7 +106,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
-    <!-- POINT 2 -->
+
     <div class="w-full h-auto">
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -256,7 +255,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
-    <!-- POINT 3 -->
+
     <div class="w-full h-auto">
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -324,7 +323,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
-    <!-- POINT 4 -->
+
     <div class="w-full h-auto">
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -384,7 +383,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
-    <!-- POINT 5 -->
+
     <div class="w-full h-auto">
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -432,7 +431,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
-    <!-- POINT 6 -->
+
     <div class="w-full h-auto">
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -494,7 +493,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
-    <!-- POINT 7 -->
+
     <div class="w-full h-auto">
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -518,7 +517,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
-    <!-- POINT 8 -->
+
     <div class="w-full h-auto">
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -545,7 +544,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
-    <!-- POINT 9 -->
+
     <div class="w-full h-auto">
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -701,7 +700,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
-    <!-- POINT 10 -->
+
     <div class="w-full h-auto">
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -730,7 +729,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
-    <!-- POINT 11 -->
+
     <div class="w-full h-auto">
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -807,7 +806,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
-    <!-- POINT 12 -->
+
     <div class="w-full h-auto">
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -842,7 +841,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
-    <!-- POINT 13 -->
+
     <div class="w-full h-auto">
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -871,7 +870,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
-    <!-- POINT 14 -->
+
     <div class="w-full h-auto">
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -902,7 +901,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
-    <!-- POINT 15 -->
+
     <div class="w-full h-auto">
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -920,7 +919,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
-    <!-- POINT 16 -->
+
     <div class="w-full h-auto">
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -948,7 +947,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
-    <!-- POINT 17 -->
+
     <div class="w-full h-auto">
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -964,7 +963,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
-    <!-- POINT 18 -->
+
     <div class="w-full h-auto">
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -982,7 +981,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
-    <!-- POINT 19 -->
+
     <div class="w-full h-auto">
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -1077,7 +1076,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
       </div>
     </div>
     <div class="w-full h-[1px] bg-[#D1D5DB] mt-10 mb-5" />
-    <!-- Informations -->
+
     <div class="w-full h-auto">
       <p
         class="text-[27px] font-[600] text-[#374151] mb-4 dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"

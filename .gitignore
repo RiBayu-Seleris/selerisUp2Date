@@ -39,3 +39,11 @@ CLAUDE.md
 HAPUS-LOG.md
 DEVLOG.md
 RPPG_WEBSOCKET_DOCS.md
+
+# Aset runtime SDK rPPG: ~122 MB per versi, dihasilkan ulang oleh
+# `npx seleris-copy-assets` (lihat langkah yang sama di workflow deploy).
+public/vendor/
+
+# Arsip handoff SDK: isinya sama dengan folder yang sudah diekstrak di
+# sebelahnya. Yang wajib masuk git hanya .tgz-nya, dipakai `npm ci`.
+*-handoff-*.zip

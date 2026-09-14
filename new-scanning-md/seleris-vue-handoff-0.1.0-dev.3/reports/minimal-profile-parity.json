@@ -1,0 +1,11 @@
+{
+  "sdkVersion": "0.1.0-dev.3",
+  "reference": "Mobile Kotlin 1.9.2",
+  "minimalProfileCases": 64,
+  "removedAnswerVariants": 3,
+  "nativeReferences": 192,
+  "metricComparisons": 960,
+  "allMatched": true,
+  "fullCareAgeCasesAlsoCompared": 88,
+  "uncollectedLifestyleReads": 0
+}

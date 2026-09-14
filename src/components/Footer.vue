@@ -99,7 +99,6 @@ import Navlink from "@/components/Navlink.vue";
         </div>
         <div class="flex lg:hidden w-full h-[1px] rounded-full mt-8" />
         <div class="w-full h-auto">
-          <!-- lg:pl-6 xl:pl-12 -->
           <div class="flex flex-col w-full h-auto lg:pl-8 xl:px-8">
             <p
               class="text-[#195279] dark:text-[#FAFAFA] text-[24px] lg:text-[20px] xl:text-[22px] font-medium"

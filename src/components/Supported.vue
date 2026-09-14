@@ -39,7 +39,6 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
       <div
         class="flex flex-col gap-y-7 md:gap-y-10 lg:gap-y-10 xl:gap-y-20 py-10 w-full h-auto dark:bg-[#17181A] bg-white rounded-xl"
       >
-        <!-- Heading -->
         <div class="flex flex-col w-full gap-y-3 items-center text-center">
           <p
             class="text-[16px] sm:text-[18px] md:text-[22px] lg:text-[24px] xl:text-[24px] font-medium text-[#2AB857] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -128,7 +127,6 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
   </div>
 </template>
 <style scoped>
-/* Daftarkan CSS custom property agar bisa di-animasi */
 @property --angle {
   syntax: "<angle>";
   initial-value: 0deg;
@@ -141,12 +139,10 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
   }
 }
 
-/* Light mode: gradient border hijau-biru berputar */
 .animated-border-wrapper {
   background: #d9d9d9;
 }
 
-/* Dark mode: gradient border abu gelap berputar */
 .dark .animated-border-wrapper {
   background: conic-gradient(
     from var(--angle),

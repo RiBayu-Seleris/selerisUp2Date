@@ -1,6 +1,9 @@
 <script setup>
 const props = defineProps({
-  icon: String,
+  // Diisi komponen ikon (SVG sebagai komponen Vue), bukan teks. Sebelumnya
+  // ditulis String sehingga Vue mengeluarkan peringatan "type check failed"
+  // di console setiap halaman beranda dimuat.
+  icon: [Object, Function, String],
   title: String,
   description: String,
 });

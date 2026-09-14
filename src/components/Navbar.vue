@@ -42,7 +42,6 @@ onUnmounted(() => {
       isScrolled ? 'pt-6 px-8 ' : 'bg-transparent py-5',
     ]"
   >
-    <!-- Desktop Navbar -->
     <div
       class="hidden lg:flex items-center w-full max-w-[1440px] h-auto px-8 lg:px-6 xl:px-8 xls:px-8 2xls:px-0 transition-all duration-500 ease-in"
       :class="[
@@ -80,7 +79,6 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <!-- Mobile Navbar -->
     <div
       class="flex lg:hidden flex-row w-full h-auto justify-between transition-all duration-500 ease-in"
       :class="[
@@ -90,16 +88,12 @@ onUnmounted(() => {
       ]"
     >
       <router-link to="/" class="w-auto lg:w-[40%] h-auto flex">
-        <!-- Logo terang (light mode) -->
-        <!-- w-[117px] h-[56px] -->
         <img
           :src="Logo"
           alt="Logo"
           class="w-[80px] h-[56px] object-contain dark:hidden"
         />
 
-        <!-- Logo gelap (dark mode) -->
-        <!-- w-[117px] h-[56px] -->
         <img
           :src="DarkLogo"
           alt="Dark Logo"

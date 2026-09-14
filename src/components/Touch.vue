@@ -193,16 +193,12 @@ import CallIcon from "@/components/icons/CallIcon.vue";
 </template>
 
 <style>
-/* === GLOBAL AUTO-FILL FIX === */
-
-/* Light */
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
   -webkit-text-fill-color: #000 !important;
   border: 0.25px solid #d1d5db !important;
 }
 
-/* Light Focus */
 input:-webkit-autofill:focus {
   -webkit-box-shadow:
     0 0 0 1px #2ab857 inset,
@@ -210,14 +206,12 @@ input:-webkit-autofill:focus {
   -webkit-text-fill-color: #000 !important;
 }
 
-/* Dark */
 .dark input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px #323232 inset !important;
   -webkit-text-fill-color: #fafafa !important;
   border: 0.25px solid rgba(250, 250, 250, 0.25) !important;
 }
 
-/* Dark Focus */
 .dark input:-webkit-autofill:focus {
   -webkit-box-shadow:
     0 0 0 1px #2ab857 inset,

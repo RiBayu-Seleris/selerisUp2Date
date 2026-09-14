@@ -1,4 +1,3 @@
-<!-- Ini index.vue untuk scanning -->
 <script setup>
 import { ref, onMounted, onUnmounted, computed } from "vue";
 import { FaceMesh, FACEMESH_TESSELATION } from "@mediapipe/face_mesh";
@@ -837,7 +836,6 @@ defineExpose({
   <div
     class="w-full h-full flex flex-col rounded-t-2xl rounded-b-xl overflow-hidden"
   >
-    <!-- ── Camera area ──────────────────────────────────────────────────────── -->
     <div
       class="relative h-[70%] shrink-0 overflow-hidden bg-black rounded-t-2xl"
     >
@@ -856,7 +854,6 @@ defineExpose({
         style="transform: scaleX(-1)"
       />
 
-      <!-- Dashed oval guide when no face -->
       <Transition name="fade-overlay">
         <div
           v-if="!hasFace"
@@ -874,7 +871,6 @@ defineExpose({
         </div>
       </Transition>
 
-      <!-- Loading -->
       <Transition name="fade-overlay">
         <div
           v-if="!meshReady"
@@ -892,7 +888,6 @@ defineExpose({
         </div>
       </Transition>
 
-      <!-- Position guidance -->
       <Transition name="fade-overlay">
         <div
           v-if="hasFace && faceStatus !== 'ok'"
@@ -907,7 +902,6 @@ defineExpose({
         </div>
       </Transition>
 
-      <!-- TOP-LEFT dot + label -->
       <div
         class="absolute top-4 left-4 flex items-center gap-1.5 pointer-events-none"
       >
@@ -935,7 +929,6 @@ defineExpose({
         </span>
       </div>
 
-      <!-- TOP-CENTER badge -->
       <div class="absolute top-4 left-1/2 -translate-x-1/2">
         <div
           class="px-3 py-1 rounded-full text-[11px] font-medium flex items-center gap-1.5 backdrop-blur-md border transition-all duration-300"
@@ -967,7 +960,6 @@ defineExpose({
         </div>
       </div>
 
-      <!-- BOTTOM PROGRESS -->
       <div
         v-if="scanProgress > 0"
         class="absolute bottom-0 left-0 right-0 px-5 pb-5 pt-10 bg-gradient-to-t from-black/70 to-transparent pointer-events-none"
@@ -993,7 +985,6 @@ defineExpose({
       </div>
     </div>
 
-    <!-- ── Bottom section ───────────────────────────────────────────────────── -->
     <div
       class="flex-1 flex flex-col justify-between py-4 items-center bg-[#FFFFFF]"
     >
@@ -1001,7 +992,6 @@ defineExpose({
         <p>Point the Camera at Your Face <br />Camera Will Detect!</p>
       </div>
 
-      <!-- Live Metrics -->
       <div class="w-full flex justify-center items-center gap-8 py-2">
         <div class="flex flex-col items-center gap-0.5">
           <span
@@ -1028,7 +1018,6 @@ defineExpose({
         </div>
       </div>
 
-      <!-- BVP Signal -->
       <div class="w-full px-4">
         <div
           class="w-full h-[68px] rounded-xl overflow-hidden relative flex items-center justify-center transition-colors duration-500"
@@ -1077,7 +1066,6 @@ defineExpose({
         </div>
       </div>
 
-      <!-- Scan Complete -->
       <Transition name="fade-overlay">
         <div
           v-if="scanComplete"

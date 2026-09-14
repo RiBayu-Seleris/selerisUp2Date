@@ -1,9 +1,12 @@
 <script setup>
 import { useLocalizedList } from "@/utils/i18nList";
+import { buatCarousel } from "@/utils/carousel";
 import Atom from "@/assets/icons/Services/circle-atom.svg";
 import Chip from "@/assets/icons/Services/chip-thunder.svg";
 import Bars from "@/assets/icons/Services/bars-up.svg";
 const ApiCards = [{ icon: Atom }, { icon: Chip }, { icon: Bars }];
+
+const kartu = buatCarousel();
 
 // Teks diambil dari file locale
 const localizedCards = useLocalizedList("services.apiCards", ApiCards, [
@@ -13,7 +16,6 @@ const localizedCards = useLocalizedList("services.apiCards", ApiCards, [
 </script>
 
 <template>
-  <!-- md:rounded-b-[3rem] -->
   <div
     class="flex w-full h-auto lg:h-[588px] xl:h-auto pb-5 lg:pb-10 dark:bg-transparent lg:bg-api dark:lg:bg-darkapi bg-no-repeat bg-cover bg-top xl:rounded-b-[3rem]"
   >
@@ -43,10 +45,72 @@ const localizedCards = useLocalizedList("services.apiCards", ApiCards, [
           </p>
         </div>
       </div>
-      <!-- Cards -->
-      <div class="w-full h-auto flex flex-row mt-5 lg:mt-3 xl:mt-8 pl-1">
+
+      <div
+        class="relative w-full h-auto flex flex-row mt-5 lg:mt-3 xl:mt-8 pl-1"
+      >
+        <transition
+          enter-active-class="duration-300 ease-out"
+          enter-from-class="opacity-0 scale-75 -translate-x-3"
+          leave-active-class="duration-200 ease-in"
+          leave-to-class="opacity-0 scale-75 -translate-x-3"
+        >
+          <button
+            v-if="kartu.bisaKeKiri.value"
+            @click="kartu.geser('left')"
+            aria-label="Scroll left"
+            class="hidden lg:flex absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 mt-2.5 z-40 w-12 h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-full h-full"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+        </transition>
+
+        <transition
+          enter-active-class="duration-300 ease-out"
+          enter-from-class="opacity-0 scale-75 translate-x-3"
+          leave-active-class="duration-200 ease-in"
+          leave-to-class="opacity-0 scale-75 translate-x-3"
+        >
+          <button
+            v-if="kartu.bisaKeKanan.value"
+            @click="kartu.geser('right')"
+            aria-label="Scroll right"
+            class="hidden lg:flex absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 mt-2.5 z-40 w-12 h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-full h-full"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </transition>
+
         <div
-          class="flex flex-row w-full h-auto mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-8 pl-8 pr-8 lg:scroll-pl-14 lg:pl-14 lg:pr-14 xl:scroll-pl-16 xl:pl-16 xl:pr-16 hide-scrollbar gap-x-5 md:gap-x-10"
+          :ref="kartu.pasangEl"
+          @mousedown="kartu.seretMulai"
+          @mousemove="kartu.seretGerak"
+          @mouseup="kartu.seretSelesai"
+          @mouseleave="kartu.seretSelesai"
+          @dragstart.prevent
+          class="cursor-grab flex flex-row w-full h-auto mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-8 pl-8 pr-8 lg:scroll-pl-14 lg:pl-14 lg:pr-14 xl:scroll-pl-16 xl:pl-16 xl:pr-16 hide-scrollbar gap-x-5 md:gap-x-10"
         >
           <div
             v-for="(ApiCard, index) in localizedCards"
@@ -97,6 +161,6 @@ const localizedCards = useLocalizedList("services.apiCards", ApiCards, [
       </div>
     </div>
   </div>
-  <!-- Mobile -->
+
   <!-- <div></div> -->
 </template>

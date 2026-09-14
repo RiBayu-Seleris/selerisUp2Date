@@ -21,7 +21,6 @@ import FaceTracker from "@/components/Home/FaceTracker.vue";
     <Herosection />
   </section>
 
-  <!-- max-w-[1440px] mx-auto -->
   <section data-aos="fade-up" class="hidden lg:flex w-full h-auto">
     <PartnersClients />
   </section>
@@ -46,14 +45,14 @@ import FaceTracker from "@/components/Home/FaceTracker.vue";
 
   <section
     data-aos="fade-up"
-    class="flex flex-col relative w-full h-auto mt-14 lg:mt-20 xl:mt-28 px-8 xls:px-8"
+    class="flex flex-col relative w-full h-auto mt-10 lg:mt-14 xl:mt-16 px-8 xls:px-8"
   >
     <Description />
   </section>
 
   <section
     data-aos="fade-left"
-    class="flex flex-col relative w-full h-auto mt-14 sm:mt-14 md:mt-24 xl:mt-28"
+    class="flex flex-col relative w-full h-auto mt-10 sm:mt-10 md:mt-16 xl:mt-16"
   >
     <Benefits />
   </section>

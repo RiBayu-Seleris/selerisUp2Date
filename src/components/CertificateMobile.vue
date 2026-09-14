@@ -48,7 +48,6 @@ const getShortText = (fullText) => {
       :key="index"
       class="animated-border-wrapper p-[1px] rounded-[20px] snap-center shrink-0 w-full h-[240px] sm:h-[200px] md:h-[240px] lg:h-[230px] mb-2"
     >
-      <!-- Card flip -->
       <div
         class="cursor-pointer w-full h-full perspective rounded-[20px]"
         @click="handleFlip(index)"
@@ -59,7 +58,6 @@ const getShortText = (fullText) => {
             flippedIndex === index ? 'rotate-y-180' : '',
           ]"
         >
-          <!-- FRONT -->
           <div
             class="flex flex-col space-y-2 md:space-y-3 absolute w-full h-full backface-hidden bg-[#F9FAFB] dark:bg-[#1D1F23] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 shadow-md px-5 pt-6"
           >
@@ -105,7 +103,6 @@ const getShortText = (fullText) => {
               </div>
             </div>
 
-            <!-- Description -->
             <div class="flex w-full h-auto">
               <p
                 class="text-[12px] md:text-[16px] overflow-hidden"
@@ -114,7 +111,6 @@ const getShortText = (fullText) => {
             </div>
           </div>
 
-          <!-- BACK -->
           <div
             class="absolute w-full h-full py-5 px-5 sm:px-4 md:px-6 backface-hidden rotate-y-180 bg-[#F9FAFB] dark:bg-[#FAFAFA] rounded-[20px] bg-clip-padding backdrop-filter backdrop-blur-md bg-opacity-60 border border-gray-100 shadow-md flex items-center"
           >
@@ -150,7 +146,6 @@ const getShortText = (fullText) => {
   scrollbar-width: none;
 }
 
-/* Daftarkan CSS custom property agar bisa di-animasi */
 @property --angle {
   syntax: "<angle>";
   initial-value: 0deg;
@@ -163,12 +158,10 @@ const getShortText = (fullText) => {
   }
 }
 
-/* Light mode: gradient border hijau-biru berputar */
 .animated-border-wrapper {
   background: #f9fafb;
 }
 
-/* Dark mode: gradient border abu gelap berputar */
 .dark .animated-border-wrapper {
   background: conic-gradient(
     from var(--angle),

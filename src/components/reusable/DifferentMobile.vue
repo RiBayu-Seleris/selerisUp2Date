@@ -24,7 +24,6 @@ defineProps({
       class="w-[7rem] h-[7rem] sm:w-[10rem] sm:h-[10rem] justify-center items-center self-center"
     >
       <div class="w-auto h-full z-40">
-        <!-- src="@/assets/images/robot-ai3.webp" -->
         <img
           :src="robotImage"
           alt="Robot"
@@ -37,7 +36,6 @@ defineProps({
         <p
           class="text-[14pt] md:text-[23pt] leading-[27pt] font-[400] text-center text-[#1DC457]"
         >
-          <!-- What Makes Us Different? -->
           {{ title }}
         </p>
       </div>
@@ -45,7 +43,6 @@ defineProps({
         <p
           class="text-[10pt] sm:text-[12pt] md:text-[16pt] leading-relaxed md:leading-[32pt] font-normal text-center text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
         >
-          <!-- We bring solutions to make life insurance for our customers. -->
           {{ subtitle }}
         </p>
       </div>

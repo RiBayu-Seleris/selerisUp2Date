@@ -78,22 +78,6 @@ export function blogsApi() {
     pageLoading.start();
   };
 
-  /**
-   * Mematikan penanda memuat, dan MEMBERI TAHU kapan itu benar-benar terjadi.
-   *
-   * KENAPA harus mengembalikan janji (Promise)
-   * Penanda memuat sengaja ditahan minimal 350 ms supaya tidak berkedip. Dulu
-   * fungsi ini tidak mengembalikan apa-apa, jadi pemanggilnya menganggap
-   * pekerjaan sudah selesai padahal daftar barunya baru akan digambar 350 ms
-   * kemudian.
-   *
-   * Akibatnya terlihat di paginasi blog: halaman sudah meloncat ke atas
-   * sementara isinya masih keadaan memuat, lalu daftarnya muncul menyusul dan
-   * tinggi halaman berubah di bawah jari pengunjung.
-   *
-   * Dengan mengembalikan janji, pemanggil bisa menunggu sampai daftarnya benar
-   * benar siap sebelum melakukan hal berikutnya.
-   */
   const stopLoading = () => {
     pageLoading.done();
     clearTimeout(penundaBerhenti);

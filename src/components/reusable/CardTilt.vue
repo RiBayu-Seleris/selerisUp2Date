@@ -75,7 +75,6 @@ function resetTransform() {
   background: linear-gradient(135deg, #17181a 45%, #565656);
 }
 
-/* Dark mode hover: baru animasi aktif */
 .dark .animated-border-wrapper:hover {
   background: conic-gradient(
     from calc(15deg + var(--angle)),

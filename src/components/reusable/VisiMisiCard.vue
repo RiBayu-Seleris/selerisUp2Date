@@ -28,7 +28,7 @@ defineProps({
         <source :src="video" type="video/mp4" />
       </video>
     </div>
-    <!-- Frame Hover -->
+
     <div
       class="absolute w-full md:h-[220px] left-0 bottom-0 sm:bottom-0 md:bottom-0 lg:bottom-5 lg:px-8 lg:hover:px-0 rounded-lg group transition-all duration-500 ease-in"
     >

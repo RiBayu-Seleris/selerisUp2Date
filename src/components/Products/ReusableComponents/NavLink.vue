@@ -55,7 +55,7 @@ function scrollToId(id) {
   >
     <slot />
   </button>
-  <!-- Router-link jika href adalah path -->
+
   <router-link
     v-else
     :to="href"

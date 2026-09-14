@@ -149,9 +149,6 @@ const selectExperience = (value) => {
   }
 };
 
-/* ============================
-   ✅ COUNTRY DROPDOWN
-=============================== */
 const countries = ref([]);
 const showCountryDropdown = ref(false);
 
@@ -166,9 +163,6 @@ function selectCountry(country) {
   showCountryDropdown.value = false;
 }
 
-/* ============================
-   ✅ GENDER DROPDOWN
-=============================== */
 const showGenderDropdown = ref(false);
 
 const genderOptions = [
@@ -187,9 +181,6 @@ function selectGender(gender) {
   showGenderDropdown.value = false;
 }
 
-/* ============================
-   ✅ Education DROPDOWN
-=============================== */
 const showEducationDropdown = ref(false);
 
 const educationOptions = [
@@ -210,9 +201,6 @@ function selectEducation(education) {
   showEducationDropdown.value = false;
 }
 
-/* ============================
-   ✅ CLICK OUTSIDE HANDLER
-=============================== */
 function closeAll() {
   showGenderDropdown.value = false;
   showCountryDropdown.value = false;
@@ -244,9 +232,6 @@ onMounted(async () => {
   }
 });
 
-/* ============================
-   ✅ STEPPER DATA
-=============================== */
 const steps = computed(() =>
   Array.from({ length: 7 }, (_, i) => ({
     number: t(`apply.steps.${i}.number`),
@@ -259,9 +244,6 @@ const currentStep = ref(0);
 const animatedStep = ref(0);
 const activeStep = ref(0);
 
-/* ============================
-   ✅ STEPPER NAVIGATION
-=============================== */
 const formTop = ref(null);
 
 const scrollToTop = () => {
@@ -277,7 +259,6 @@ const scrollToTop = () => {
 //   }, 160); // delay kecil untuk menunggu DOM stabil
 // };
 
-/* ---------------- PROGRESS ---------------- */
 const circumference = 2 * Math.PI * 50;
 
 const dashOffset = computed(() => {
@@ -310,9 +291,6 @@ const prevStep = () => {
   scrollToTop();
 };
 
-/* ============================
-   ✅ STEPPER ANIMATION
-=============================== */
 watch(currentStep, (newVal, oldVal) => {
   if (newVal > oldVal) {
     let i = oldVal;
@@ -336,9 +314,6 @@ watch(currentStep, (newVal, oldVal) => {
   }
 });
 
-/* ============================
-   Fungsi Upload File
-=============================== */
 const uploadFile = async (file, urlField) => {
   try {
     const form = new FormData();
@@ -360,9 +335,6 @@ const uploadFile = async (file, urlField) => {
   }
 };
 
-/* ============================
-   Watch Uploaded File
-=============================== */
 const fileWatchMap = {
   certificateFileEducation: "certificateFileEducationUrl",
   cvFile: "cvFileUrl",
@@ -392,9 +364,6 @@ watch(
   },
 );
 
-/* ============================
-   Step Validator
-=============================== */
 const stepValidators = [
   // STEP 0 — Personal
   () =>
@@ -483,9 +452,6 @@ const handleToggleModal = () => {
   isModalOpen.value = true;
 };
 
-/* ============================
-   ✅ SUBMIT HANDLER
-=============================== */
 const handleApply = async () => {
   // Extract semua value dari reactive formData
   const {
@@ -683,13 +649,11 @@ watch(
         </p>
       </div>
 
-      <!-- Stepper -->
       <div
         class="hidden md:flex flex-row w-full h-auto mt-20 mb-10 items-center"
       >
         <template v-for="(step, index) in steps" :key="index">
           <div class="relative flex items-center w-auto h-auto">
-            <!-- Step Completed -->
             <template v-if="index < currentStep">
               <div
                 class="flex items-center justify-center w-8 h-8 rounded-md p-1 text-white transition-all duration-500 ease-in-out transform"
@@ -708,7 +672,6 @@ watch(
               </div>
             </template>
 
-            <!-- Current Step -->
             <template v-else-if="index === activeStep">
               <div
                 class="flex items-center justify-center w-8 h-8 rounded-md bg-[#2AB857] p-1 text-white transition-all duration-500 ease-in-out transform scale-110 shadow-md"
@@ -723,7 +686,6 @@ watch(
               </div>
             </template>
 
-            <!-- Step Not Done -->
             <template v-else>
               <div
                 class="flex items-center justify-center w-8 h-8 rounded-md bg-[#D9D9D9] p-[3px] text-white transition-all duration-500 ease-in-out transform"
@@ -734,7 +696,6 @@ watch(
               </div>
             </template>
 
-            <!-- Label -->
             <div
               class="absolute flex flex-col items-center text-center justify-center w-[100px] top-10 -left-8"
             >
@@ -749,7 +710,6 @@ watch(
             </div>
           </div>
 
-          <!-- Connector Line -->
           <div
             v-if="index !== steps.length - 1"
             class="flex flex-1 items-center self-stretch px-0.5 rounded-full"
@@ -766,7 +726,6 @@ watch(
         </template>
       </div>
 
-      <!-- MOBILE STEPPER -->
       <div
         class="md:hidden w-full h-auto flex flex-row gap-x-3 items-center my-5"
       >
@@ -814,7 +773,6 @@ watch(
         </div>
       </div>
 
-      <!-- Form -->
       <div class="md:mt-16 p-0">
         <div v-if="currentStep === 0">
           <h2 class="text-xl font-semibold text-[#195279] mb-4">
@@ -972,7 +930,6 @@ watch(
             class="bg-[#2AB857] text-white px-4 py-2 rounded-lg ml-auto hover:bg-[#259d4c] transition-all"
             @click="handleToggleModal"
           >
-            <!-- @click="handleSubmit" -->
             {{ $t("careers.submit") }}
           </button>
         </div>
@@ -980,7 +937,6 @@ watch(
     </div>
   </div>
 
-  <!-- Modal Cheking Data -->
   <transition name="fade">
     <div
       v-if="isModalOpen"
@@ -991,7 +947,6 @@ watch(
           <div
             class="w-full h-full bg-white dark:bg-[#17181A] relative z-50 flex flex-col items-center rounded-2xl"
           >
-            <!-- MODALS HEADER  -->
             <div
               class="relative w-full h-auto flex flex-col bg-[#2AB857] py-6 px-6 lg:py-10 lg:px-14 rounded-t-2xl"
             >
@@ -1007,11 +962,10 @@ watch(
                 </p>
               </div>
             </div>
-            <!-- MODALS BODY -->
+
             <div
               class="w-full h-auto py-8 px-6 lg:px-14 xl:px-14 grid grid-cols-1 lg:grid-cols-2 gap-5"
             >
-              <!-- === Personal Info === -->
               <ReviewData
                 :title="$t('apply.steps.0.title')"
                 :items="{
@@ -1025,7 +979,7 @@ watch(
                   Country: formData.country.label,
                 }"
               />
-              <!-- === Education === -->
+
               <ReviewData
                 :title="$t('apply.steps.1.title')"
                 :items="{
@@ -1043,7 +997,7 @@ watch(
                     formData.certificateFileEducation?.name || '-',
                 }"
               />
-              <!-- === Experience === -->
+
               <ReviewData
                 :title="$t('apply.steps.2.title')"
                 :items="{
@@ -1054,10 +1008,7 @@ watch(
                   'End Date': utils.fromISODate(formData.endDateExperience),
                 }"
               />
-              <!-- 'Job Description': formData.jobDescription,
-                  'Achievement Description': formData.achievementDescription, -->
 
-              <!-- === Skills === -->
               <ReviewData
                 :title="$t('apply.steps.3.title')"
                 :items="{
@@ -1066,7 +1017,7 @@ watch(
                   Language: formData.languageSkills,
                 }"
               />
-              <!-- === Motivations === -->
+
               <ReviewData
                 :title="$t('apply.steps.4.title')"
                 :items="{
@@ -1075,7 +1026,7 @@ watch(
                   'Reason for applying': formData.reasonDescription,
                 }"
               />
-              <!-- === Documents === -->
+
               <ReviewData
                 :title="$t('apply.steps.5.title')"
                 :items="{
@@ -1091,7 +1042,6 @@ watch(
               />
             </div>
 
-            <!-- MODALS FOOTER -->
             <div
               class="relative bottom-0 flex flex-col sm:flex-row sm:justify-between gap-x-10 gap-y-0 w-full h-auto py-5 px-6 lg:px-10 bg-[#D6E8F4] dark:bg-gradient-to-r dark:from-[#424242] dark:from-[75%] dark:to-[#696969] rounded-b-2xl"
             >
@@ -1166,27 +1116,25 @@ watch(
   transform: translateX(100%);
 }
 
-/* === GLOBAL AUTO-FILL FIX === */
-/* Light */
 input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px #ffffff inset !important;
   -webkit-text-fill-color: #000 !important;
   border: 0.25px solid #d1d5db !important;
 }
-/* Light Focus */
+
 input:-webkit-autofill:focus {
   -webkit-box-shadow:
     0 0 0 1px #2ab857 inset,
     0 0 0px 1000px #ffffff inset !important;
   -webkit-text-fill-color: #000 !important;
 }
-/* Dark */
+
 .dark input:-webkit-autofill {
   -webkit-box-shadow: 0 0 0px 1000px #323232 inset !important;
   -webkit-text-fill-color: #fafafa !important;
   border: 0.25px solid rgba(250, 250, 250, 0.25) !important;
 }
-/* Dark Focus */
+
 .dark input:-webkit-autofill:focus {
   -webkit-box-shadow:
     0 0 0 1px #2ab857 inset,

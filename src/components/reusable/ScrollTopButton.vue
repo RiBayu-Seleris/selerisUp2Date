@@ -3,35 +3,12 @@ import { computed, onMounted, onUnmounted, ref } from "vue";
 import { useScrollStore } from "@/stores/scroll";
 import Tooltip from "@/assets/images/tooltip.png";
 
-/**
- * Tombol "kembali ke atas" dengan cincin kemajuan.
- *
- * Cincinnya terisi mengikuti posisi gulir: kosong saat di puncak halaman,
- * penuh 100% saat sudah sampai dasar (setelah footer).
- *
- * Komponen ini dipakai di dua tempat — App.vue (halaman biasa) dan
- * ProductLayout.vue (halaman product). Dulu markup-nya ditulis dua kali
- * persis sama; disatukan di sini supaya perhitungan cincinnya cukup ada di
- * satu tempat.
- */
-
 const scrollStore = useScrollStore();
 
 // Tombol baru muncul setelah pengunjung mulai menggulir — perilaku lama,
 // tidak diubah.
 const tampil = computed(() => scrollStore.isScrolled);
 
-/**
- * Keliling lingkaran cincin: 2 x pi x jari-jari.
- *
- * Jari-jarinya 16 pada kanvas 36x36 (lihat viewBox di bawah). Angka ini
- * dipakai untuk menggambar cincin dengan trik garis putus-putus:
- * - stroke-dasharray  = panjang satu "garis" = satu keliling penuh
- * - stroke-dashoffset = berapa panjang yang DISEMBUNYIKAN
- *
- * Jadi saat offset-nya satu keliling penuh, cincinnya tidak terlihat sama
- * sekali; saat offset-nya 0, cincinnya tergambar utuh.
- */
 const KELILING = 2 * Math.PI * 16;
 
 // Kemajuan gulir dalam persen, 0 sampai 100.
@@ -94,15 +71,11 @@ const keAtas = () => {
       @click="keAtas"
       class="flex fixed justify-center items-center bottom-5 right-5 lg:right-10 w-10 h-10 lg:w-12 lg:h-12 z-50 cursor-pointer rounded-full"
     >
-      <!-- Cincin kemajuan.
-           -rotate-90 memutar titik mulainya ke atas; tanpa itu cincin mulai
-           terisi dari sisi kanan, bukan dari puncak. -->
       <svg
         viewBox="0 0 36 36"
         class="absolute inset-0 w-full h-full -rotate-90"
         aria-hidden="true"
       >
-        <!-- Lintasan cincin: samar saja, sekadar penanda batas penuhnya -->
         <circle
           cx="18"
           cy="18"
@@ -112,7 +85,7 @@ const keAtas = () => {
           stroke-width="2.5"
           class="text-black/10 dark:text-white/20"
         />
-        <!-- Bagian yang terisi mengikuti kemajuan gulir -->
+
         <circle
           cx="18"
           cy="18"
@@ -137,9 +110,6 @@ const keAtas = () => {
 </template>
 
 <style scoped>
-/* Transisi muncul/hilang tombol. Sebelumnya didefinisikan terpisah di App.vue
-   dan ProductLayout.vue; ikut dipindah ke sini supaya komponennya berdiri
-   sendiri. */
 .fade-slide-enter-active,
 .fade-slide-leave-active {
   transition:

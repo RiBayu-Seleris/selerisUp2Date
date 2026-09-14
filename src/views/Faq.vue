@@ -1,16 +1,13 @@
 <script setup>
-import HeroText from "@/components/reusable/HeroText.vue";
-
-import { ref } from "vue";
 import { faqList } from "@/Data/FaqList.js";
+import { useLocalizedList } from "@/utils/i18nList";
 
 import FaqFrame from "@productComponents/FaqFrame.vue";
 
-const openedIndex = ref(null);
-
-const toggle = (index) => {
-  openedIndex.value = openedIndex.value === index ? null : index;
-};
+const daftarFaq = useLocalizedList("misc.faqItems", faqList, [
+  "question",
+  "answer",
+]);
 </script>
 
 <template>
@@ -35,7 +32,6 @@ const toggle = (index) => {
           class="text-[14px] md:text-[18px] lg:text-[18px] xl:text-[18px] font-[400] tracking-wider text-[#89A6BA] dark:text-[#6F6F6F] px-8 md:px-0 lg:px-32 xl:px-52 text-center"
         >
           {{ $t("misc.faqDescription") }}
-          below.
         </p>
       </div>
     </div>
@@ -43,7 +39,7 @@ const toggle = (index) => {
   <section data-aos="fade-up">
     <div class="w-full mx-auto mt-20">
       <FaqFrame
-        :Faq="faqList"
+        :Faq="daftarFaq"
         opencolortext="text-[#2AB857]"
         class="lg:!max-w-4xl xl:!max-w-7xl"
       />

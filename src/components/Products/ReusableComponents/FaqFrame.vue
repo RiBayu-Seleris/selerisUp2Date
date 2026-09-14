@@ -31,7 +31,6 @@ const toggleMobile = (index) => {
     v-bind="attrs"
     class="hidden md:grid md:grid-cols-2 lg:max-w-7xl mx-auto gap-y-5 gap-x-10 px-8 lg:px-16 xl:px-10"
   >
-    <!-- KIRI -->
     <div class="flex flex-col gap-y-5">
       <div
         v-for="(faq, i) in leftFaqs"
@@ -84,7 +83,6 @@ const toggleMobile = (index) => {
       </div>
     </div>
 
-    <!-- KANAN (struktur sama, ganti key dan warna ikon) -->
     <div class="flex flex-col gap-y-5">
       <div
         v-for="(faq, i) in rightFaqs"
@@ -138,7 +136,6 @@ const toggleMobile = (index) => {
     </div>
   </div>
 
-  <!-- Mobile -->
   <div class="w-full flex md:hidden flex-col px-8 gap-y-5">
     <div
       v-for="(faq, index) in props.Faq"

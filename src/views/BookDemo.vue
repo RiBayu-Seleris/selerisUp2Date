@@ -5,6 +5,7 @@ import ProductSelect from "@/components/reusable/ProductSelect.vue";
 import RobotImage from "@/assets/images/robot-ai5-full.png";
 import { productBannerLists } from "@/Data/ListProduct";
 import { faqList } from "@/Data/FaqList.js";
+import { useLocalizedList } from "@/utils/i18nList";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { ref, onMounted, onBeforeUnmount } from "vue";
@@ -26,6 +27,9 @@ const Country = ref({
 const activeIndex = ref(0);
 const currentIndex = ref(0);
 const show = ref(true);
+
+// Teks pertanyaannya diambil dari misc.faqItems, ikut bahasa aktif.
+const daftarFaq = useLocalizedList("misc.faqItems", faqList, ["question"]);
 
 // --- Dropdown control ---
 const activeDropdown = ref(null);
@@ -53,7 +57,7 @@ onMounted(() => {
   interval = setInterval(() => {
     show.value = false;
     setTimeout(() => {
-      currentIndex.value = (currentIndex.value + 1) % faqList.length;
+      currentIndex.value = (currentIndex.value + 1) % daftarFaq.value.length;
       show.value = true;
     }, 500);
   }, 4000);
@@ -72,7 +76,6 @@ function onSlideChange(swiper) {
 
 <template>
   <div class="px-8 pt-40 lg:grid lg:grid-cols-2 w-full h-auto gap-x-5">
-    <!-- KIRI -->
     <div
       class="w-full h-auto bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]/60 p-[1px] rounded-xl"
     >
@@ -89,7 +92,6 @@ function onSlideChange(swiper) {
 
         <div class="w-full h-auto mt-8">
           <form @submit.prevent class="flex flex-col gap-5">
-            <!-- Input dua kolom -->
             <div
               class="w-full h-auto flex flex-col md:grid md:grid-cols-2 gap-5"
             >
@@ -119,7 +121,6 @@ function onSlideChange(swiper) {
               />
             </div>
 
-            <!-- Email -->
             <div class="w-full h-auto">
               <Input
                 name="email"
@@ -129,33 +130,28 @@ function onSlideChange(swiper) {
               />
             </div>
 
-            <!-- COUNTRY SELECT -->
             <div
               id="country-selector"
               ref="countryRef"
               class="w-full h-auto flex flex-col space-y-1 relative"
             >
-              <!-- v-model="selectedCountry" -->
               <CountrySelect
                 :is-open="activeDropdown === 'country'"
                 @open="handleDropdownOpen"
               />
             </div>
 
-            <!-- PRODUCT SELECT -->
             <div
               id="product-selector"
               ref="productRef"
               class="w-full h-auto flex flex-col space-y-1 relative"
             >
-              <!-- v-model="selectedProduct" -->
               <ProductSelect
                 :is-open="activeDropdown === 'product'"
                 @open="handleDropdownOpen"
               />
             </div>
 
-            <!-- MESSAGE -->
             <div class="w-full h-auto space-y-1">
               <label for="Message">{{ $t("misc.message") }}</label>
               <textarea
@@ -166,7 +162,6 @@ function onSlideChange(swiper) {
               />
             </div>
 
-            <!-- PRIVACY POLICY -->
             <div class="w-full h-auto">
               <p
                 class="text-[14px] md:text-[17px] text-[#6E6E6E] dark:text-[#FFFFFF]"
@@ -179,7 +174,6 @@ function onSlideChange(swiper) {
               </p>
             </div>
 
-            <!-- BUTTON -->
             <div class="w-full h-auto">
               <button
                 aria-label="Send Book Demo"
@@ -194,12 +188,9 @@ function onSlideChange(swiper) {
       </div>
     </div>
 
-    <!-- KANAN -->
     <div
       class="flex flex-col w-full h-full rounded-xl justify-between lg:justify-between xl:justify-between gap-y-5 md:gap-y-8 lg:gap-y-10 xl:gap-y-5 mt-5 md:mt-10 lg:mt-0"
     >
-      <!-- Atas -->
-      <!-- lg:h-[358px] xl:h-[485px] -->
       <div
         class="w-full h-auto lg:h-auto flex flex-col bg-frameBookDemo dark:bg-darkFrameBookDemo bg-no-repeat bg-cover lg:bg-cover border-b-[2px] border-[#EBEBEB] dark:border-none rounded-b-[20px] pb-6"
       >
@@ -221,7 +212,6 @@ function onSlideChange(swiper) {
             </p>
           </div>
 
-          <!-- Container gambar -->
           <div
             class="w-full h-auto flex justify-end mt-2 lg:mt-3 xl:mt-3 pr-10 sm:pr-16"
           >
@@ -234,11 +224,9 @@ function onSlideChange(swiper) {
         </div>
       </div>
 
-      <!-- Tengah -->
       <div
         class="flex flex-col sm:flex-row h-auto gap-x-0 sm:gap-x-7 gap-y-5 lg:gap-y-0"
       >
-        <!-- dark:bg-gradient-to-r dark:from-[#17181A] dark:from-45% dark:to-[#565656]/95 p-[1px] rounded-xl -->
         <div
           class="w-full h-auto bg-[#D9D9D9] dark:bg-gradient-to-r dark:from-[#17181A] dark:from-45% dark:to-[#565656]/95 p-[1px] rounded-xl"
         >
@@ -325,7 +313,6 @@ function onSlideChange(swiper) {
                   :key="index"
                   class="!w-full flex-shrink-0 px-4"
                 >
-                  <!-- src="/assets/images/product-hero-image/medins.png" -->
                   <img
                     :src="`/assets/images/product-hero-image/${data.banner}`"
                     alt="Banner"
@@ -397,7 +384,6 @@ function onSlideChange(swiper) {
         </div>
       </div>
 
-      <!-- Bawah -->
       <div
         class="w-full h-auto bg-[#D9D9D9] dark:bg-gradient-to-r dark:from-[#17181A] dark:from-45% dark:to-[#565656]/95 p-[1px] rounded-xl"
       >
@@ -405,9 +391,9 @@ function onSlideChange(swiper) {
           class="w-full h-full flex flex-col bg-[#F9FAFB] dark:bg-[#1D1F23] dark:border-[#FAFAFA]/25 px-6 py-4 gap-y-2 rounded-xl"
         >
           <div class="w-full h-auto">
-            <span class="text-[#B8B8B8] dark:text-[#2AB857]"
-              >Frequently Asked Question</span
-            >
+            <span class="text-[#B8B8B8] dark:text-[#2AB857]">{{
+              $t("misc.frequently_asked_questions")
+            }}</span>
           </div>
           <div
             class="w-full h-[50px] lg:h-[30px] xl:h-[35px] flex items-center"
@@ -418,7 +404,7 @@ function onSlideChange(swiper) {
                 :key="currentIndex"
                 class="text-[16px] lg:text-[16px] xl:text-[22px] font-[500] text-[#195279] text-justify dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
               >
-                {{ faqList[currentIndex].question }}
+                {{ daftarFaq[currentIndex].question }}
               </span>
             </transition>
           </div>
@@ -473,7 +459,6 @@ function onSlideChange(swiper) {
   opacity: 0;
 }
 
-/* 🌞 LIGHT MODE */
 input {
   border: 0.25px solid #d1d5db;
   background-color: #ffffff;
@@ -489,7 +474,6 @@ input:focus {
   box-shadow: 0 0 0 1px #2ab857 !important;
 }
 
-/* 🌙 DARK MODE */
 .dark input {
   border: 0.25px solid rgba(250, 250, 250, 0.25);
   background-color: #323232;

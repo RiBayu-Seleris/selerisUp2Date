@@ -99,7 +99,6 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="flex flex-col w-full px-8 py-10 dark:bg-[#17181A] duration-300">
-    <!-- Title -->
     <div class="text-center mb-4">
       <div
         class="inline-flex gap-2 items-end text-[20px] font-[400] text-[#89A6BA] dark:text-[#6A6A6A]"
@@ -123,7 +122,6 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
-    <!-- LOGO GRID -->
     <transition name="fade" mode="out-in">
       <div
         ref="logoContainer"

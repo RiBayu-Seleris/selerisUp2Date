@@ -5,17 +5,6 @@ import Swal from "sweetalert2";
 
 const { t } = useI18n();
 
-/* ======================================
-📌 Pemeriksaan berkas unggahan
-
-Kolom unggah ini dulu menerima berkas APA PUN, tanpa batas ukuran — termasuk
-berkas program (.exe) atau berkas 2 GB yang membuat pengiriman gagal diam-diam.
-
-PENTING: pemeriksaan di sini hanya untuk kenyamanan pelamar, supaya salah
-berkas ketahuan langsung, bukan setelah menunggu unggahan panjang. Ini BUKAN
-pengaman. Siapa pun bisa melewatinya lewat alat pengembang browser, jadi
-penyaring yang sesungguhnya tetap WAJIB ada di sisi server.
-====================================== */
 const MAKS_DOKUMEN_MB = 5;
 const MAKS_FOTO_MB = 2;
 
@@ -30,13 +19,6 @@ const tolak = (pesan) => {
   });
 };
 
-/**
- * Mengembalikan true kalau berkasnya boleh dipakai.
- *
- * Yang diperiksa nama berkasnya (ekstensi), bukan "tipe" yang dilaporkan
- * browser — karena tipe itu bisa kosong atau dipalsukan, sedangkan ekstensi
- * lebih dapat diandalkan untuk keperluan tampilan.
- */
 const berkasLolos = (berkas, daftarEkstensi, maksMB) => {
   const nama = (berkas.name || "").toLowerCase();
   const cocok = daftarEkstensi.some((e) => nama.endsWith(e));
@@ -64,9 +46,6 @@ const berkasLolos = (berkas, daftarEkstensi, maksMB) => {
   return true;
 };
 
-/* ======================================
-📌 Props untuk v-model:cvFile
-====================================== */
 const props = defineProps({
   cvFile: File,
   clFile: File,
@@ -77,10 +56,6 @@ const props = defineProps({
   photoFile: File,
 });
 
-/* ======================================
-📌 Emit untuk v-model:cvFile
-(⚠️ WAJIB: update:cvFile)
-====================================== */
 const emit = defineEmits([
   "update:cvFile",
   "update:clFile",
@@ -91,9 +66,6 @@ const emit = defineEmits([
   "update:photoFile",
 ]);
 
-/* ======================================
-📌 Upload CV
-====================================== */
 const cvInput = ref(null);
 const cvFileName = ref("");
 const cvPreviewUrl = ref("");
@@ -136,9 +108,6 @@ watch(
   { immediate: true },
 );
 
-/* ======================================
-📌 Upload Cover Letter
-====================================== */
 const clInput = ref(null);
 const clFileName = ref("");
 const clPreviewUrl = ref("");
@@ -185,9 +154,6 @@ watch(
   { immediate: true },
 );
 
-/* ======================================
-📌 Upload Diploma
-====================================== */
 const diplomaInput = ref(null);
 const diplomaFileName = ref("");
 const diplomaPreviewUrl = ref("");
@@ -234,9 +200,6 @@ watch(
   { immediate: true },
 );
 
-/* ======================================
-📌 Upload Transkrip
-====================================== */
 const transcriptInput = ref(null);
 const transcriptFileName = ref("");
 const transcriptPreviewUrl = ref("");
@@ -283,9 +246,6 @@ watch(
   { immediate: true },
 );
 
-/* ======================================
-📌 Upload Experience Certificate
-====================================== */
 const experienceCertificateInput = ref(null);
 const experienceCertificateFileName = ref("");
 const experienceCertificatePreviewUrl = ref("");
@@ -332,9 +292,6 @@ watch(
   { immediate: true },
 );
 
-/* ======================================
-📌 Upload Portfolio
-====================================== */
 const portfolioInput = ref(null);
 const portfolioFileName = ref("");
 const portfolioPreviewUrl = ref("");
@@ -381,9 +338,6 @@ watch(
   { immediate: true },
 );
 
-/* ======================================
-📌 Upload Photo Terbaru
-====================================== */
 const photoInput = ref(null);
 const photoFileName = ref("");
 const photoPreviewUrl = ref("");
@@ -480,7 +434,6 @@ const handleDeleteFile = (type) => {
 
 <template>
   <div class="w-full h-auto flex flex-col gap-y-3">
-    <!-- === Curriculum Vitae (CV) === -->
     <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
@@ -490,13 +443,11 @@ const handleDeleteFile = (type) => {
       <div
         class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
       >
-        <!-- 🟩 Frame Input Upload -->
         <div class="w-full h-full flex items-center">
           <div
             @click="openCvUpload"
             class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
           >
-            <!-- Ikon Upload -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -511,7 +462,7 @@ const handleDeleteFile = (type) => {
                 d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
               />
             </svg>
-            <!-- Teks -->
+
             <p class="text-sm">
               <span>
                 <span class="text-green-600 font-medium"
@@ -519,7 +470,7 @@ const handleDeleteFile = (type) => {
                 >
               </span>
             </p>
-            <!-- Input File Asli (disembunyikan) -->
+
             <input
               type="file"
               accept=".pdf,.doc,.docx"
@@ -537,7 +488,6 @@ const handleDeleteFile = (type) => {
             <div
               class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
             >
-              <!-- Teks -->
               <p class="text-sm">
                 <span class="font-medium">
                   {{ cvFileName || "Belum ada dokumen" }}
@@ -558,7 +508,7 @@ const handleDeleteFile = (type) => {
         </transition>
       </div>
     </div>
-    <!-- === Cover Letter === -->
+
     <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
@@ -568,13 +518,11 @@ const handleDeleteFile = (type) => {
       <div
         class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
       >
-        <!-- 🟩 Frame Input Upload -->
         <div class="w-full h-full flex items-center">
           <div
             @click="openClUpload"
             class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
           >
-            <!-- Ikon Upload -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -589,7 +537,7 @@ const handleDeleteFile = (type) => {
                 d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
               />
             </svg>
-            <!-- Teks -->
+
             <p class="text-sm">
               <span>
                 <span class="text-green-600 font-medium"
@@ -597,7 +545,7 @@ const handleDeleteFile = (type) => {
                 >
               </span>
             </p>
-            <!-- Input File Asli (disembunyikan) -->
+
             <input
               type="file"
               accept=".pdf,.doc,.docx"
@@ -615,7 +563,6 @@ const handleDeleteFile = (type) => {
             <div
               class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
             >
-              <!-- Teks -->
               <p class="text-sm">
                 <span class="font-medium">
                   {{ clFileName || "Belum ada dokumen" }}
@@ -636,7 +583,7 @@ const handleDeleteFile = (type) => {
         </transition>
       </div>
     </div>
-    <!-- === Diploma === -->
+
     <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
@@ -646,13 +593,11 @@ const handleDeleteFile = (type) => {
       <div
         class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
       >
-        <!-- 🟩 Frame Input Upload -->
         <div class="w-full h-full flex items-center">
           <div
             @click="openDiplomaUpload"
             class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
           >
-            <!-- Ikon Upload -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -667,7 +612,7 @@ const handleDeleteFile = (type) => {
                 d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
               />
             </svg>
-            <!-- Teks -->
+
             <p class="text-sm">
               <span>
                 <span class="text-green-600 font-medium"
@@ -675,7 +620,7 @@ const handleDeleteFile = (type) => {
                 >
               </span>
             </p>
-            <!-- Input File Asli (disembunyikan) -->
+
             <input
               type="file"
               accept=".pdf,.doc,.docx"
@@ -693,7 +638,6 @@ const handleDeleteFile = (type) => {
             <div
               class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
             >
-              <!-- Teks -->
               <p class="text-sm">
                 <span class="font-medium">
                   {{ diplomaFileName || "Belum ada dokumen" }}
@@ -717,7 +661,7 @@ const handleDeleteFile = (type) => {
         </transition>
       </div>
     </div>
-    <!-- === Transkrip Nilai === -->
+
     <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
@@ -727,13 +671,11 @@ const handleDeleteFile = (type) => {
       <div
         class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
       >
-        <!-- 🟩 Frame Input Upload -->
         <div class="w-full h-full flex items-center">
           <div
             @click="openTranscriptUpload"
             class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
           >
-            <!-- Ikon Upload -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -748,7 +690,7 @@ const handleDeleteFile = (type) => {
                 d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
               />
             </svg>
-            <!-- Teks -->
+
             <p class="text-sm">
               <span>
                 <span class="text-green-600 font-medium"
@@ -756,7 +698,7 @@ const handleDeleteFile = (type) => {
                 >
               </span>
             </p>
-            <!-- Input File Asli (disembunyikan) -->
+
             <input
               type="file"
               accept=".pdf,.doc,.docx"
@@ -774,7 +716,6 @@ const handleDeleteFile = (type) => {
             <div
               class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
             >
-              <!-- Teks -->
               <p class="text-sm">
                 <span class="font-medium">
                   {{ transcriptFileName || "Belum ada dokumen" }}
@@ -798,7 +739,7 @@ const handleDeleteFile = (type) => {
         </transition>
       </div>
     </div>
-    <!-- === •	Sertifikat pelatihan / pengalaman kerja === -->
+
     <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
@@ -808,13 +749,11 @@ const handleDeleteFile = (type) => {
       <div
         class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
       >
-        <!-- 🟩 Frame Input Upload -->
         <div class="w-full h-full flex items-center">
           <div
             @click="openExperienceCertificateUpload"
             class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
           >
-            <!-- Ikon Upload -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -829,7 +768,7 @@ const handleDeleteFile = (type) => {
                 d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
               />
             </svg>
-            <!-- Teks -->
+
             <p class="text-sm">
               <span>
                 <span class="text-green-600 font-medium"
@@ -837,7 +776,7 @@ const handleDeleteFile = (type) => {
                 >
               </span>
             </p>
-            <!-- Input File Asli (disembunyikan) -->
+
             <input
               type="file"
               accept=".pdf,.doc,.docx"
@@ -855,7 +794,6 @@ const handleDeleteFile = (type) => {
             <div
               class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
             >
-              <!-- Teks -->
               <p class="text-sm">
                 <span class="font-medium">
                   {{ experienceCertificateFileName || "Belum ada dokumen" }}
@@ -879,7 +817,7 @@ const handleDeleteFile = (type) => {
         </transition>
       </div>
     </div>
-    <!-- === Portfolio === -->
+
     <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
@@ -889,13 +827,11 @@ const handleDeleteFile = (type) => {
       <div
         class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
       >
-        <!-- 🟩 Frame Input Upload -->
         <div class="w-full h-full flex items-center">
           <div
             @click="openPortfolioUpload"
             class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
           >
-            <!-- Ikon Upload -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -910,7 +846,7 @@ const handleDeleteFile = (type) => {
                 d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
               />
             </svg>
-            <!-- Teks -->
+
             <p class="text-sm">
               <span>
                 <span class="text-green-600 font-medium"
@@ -918,7 +854,7 @@ const handleDeleteFile = (type) => {
                 >
               </span>
             </p>
-            <!-- Input File Asli (disembunyikan) -->
+
             <input
               type="file"
               accept=".pdf,.doc,.docx"
@@ -936,7 +872,6 @@ const handleDeleteFile = (type) => {
             <div
               class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
             >
-              <!-- Teks -->
               <p class="text-sm">
                 <span class="font-medium">
                   {{ portfolioFileName || "Belum ada dokumen" }}
@@ -960,7 +895,7 @@ const handleDeleteFile = (type) => {
         </transition>
       </div>
     </div>
-    <!-- === Recent formal photograph === -->
+
     <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
@@ -970,13 +905,11 @@ const handleDeleteFile = (type) => {
       <div
         class="w-full h-auto flex flex-col lg:grid lg:grid-cols-2 gap-2 lg:gap-5"
       >
-        <!-- 🟩 Frame Input Upload -->
         <div class="w-full h-full flex items-center">
           <div
             @click="openPhotoUpload"
             class="w-full border-[1px] border-green-500 rounded-lg p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
           >
-            <!-- Ikon Upload -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -991,7 +924,7 @@ const handleDeleteFile = (type) => {
                 d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
               />
             </svg>
-            <!-- Teks -->
+
             <p class="text-sm">
               <span>
                 <span class="text-green-600 font-medium"
@@ -999,7 +932,7 @@ const handleDeleteFile = (type) => {
                 >
               </span>
             </p>
-            <!-- Input File Asli (disembunyikan) -->
+
             <input
               type="file"
               accept=".jpg,.jpeg,.png,.webp"
@@ -1017,7 +950,6 @@ const handleDeleteFile = (type) => {
             <div
               class="w-full h-full border-[1px] border-green-500 rounded-lg p-3 lg:p-2 flex flex-row items-center cursor-pointer hover:bg-green-50 transition"
             >
-              <!-- Teks -->
               <p class="text-sm">
                 <span class="font-medium">
                   {{ photoFileName || "Belum ada dokumen" }}

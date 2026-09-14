@@ -10,7 +10,6 @@ defineProps({
 </script>
 
 <template>
-  <!-- w-auto -->
   <figure :class="[`absolute max-w-full  ${positionClass} ${heightClass} `]">
     <img
       src="@/assets/Products/images/circlegradient.png"

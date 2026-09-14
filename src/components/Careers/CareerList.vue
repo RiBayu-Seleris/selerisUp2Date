@@ -108,7 +108,6 @@ onMounted(() => {
 </script>
 
 <template>
-  <!-- Frame Filter -->
   <!-- <section
     class="flex flex-col relative w-full h-auto lg:max-w-4xl mx-auto px-8 md:px-8 lg:px-0 pt-5"
   >
@@ -153,7 +152,6 @@ onMounted(() => {
     </div>
   </section> -->
 
-  <!-- Tampil jika jobs kosong -->
   <div v-if="jobs.length === 0" class="w-full h-auto flex px-8 lg:px-0">
     <div
       class="w-full h-auto p-[1px] bg-[#E3E3E3] dark:bg-gradient-to-r dark:from-[#1D2426] dark:to-[#BCBCBC]/50 rounded-lg"
@@ -168,12 +166,10 @@ onMounted(() => {
     </div>
   </div>
 
-  <!-- Frame Jobs -->
   <section
     v-else
     class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 lg:mt-10 gap-4 xl:gap-6 px-8 md:px-8 xl:px-0 mt-10"
   >
-    <!-- v-for="job in jobPosts" -->
     <div
       v-for="job in jobs"
       :key="job.id"
@@ -237,7 +233,6 @@ onMounted(() => {
     </div>
   </section>
 
-  <!-- Modal -->
   <transition name="fade">
     <div
       v-if="isModalOpen"
@@ -248,7 +243,6 @@ onMounted(() => {
           <div
             class="w-full h-full bg-white dark:bg-[#17181A] relative z-50 flex flex-col items-center rounded-3xl"
           >
-            <!-- MODALS HEADER  -->
             <div
               class="relative w-full h-auto flex flex-col bg-[#2AB857] py-10 lg:py-14 px-8 lg:px-20 rounded-t-3xl"
             >
@@ -265,7 +259,7 @@ onMounted(() => {
                 <p class="text-[36px] lg:text-[48px] font-[600]">Seleris</p>
               </div>
             </div>
-            <!-- MODALS BODY -->
+
             <div class="w-full h-auto py-8">
               <div class="w-full h-auto px-8 lg:px-20">
                 <p
@@ -329,7 +323,7 @@ onMounted(() => {
                   </p>
                 </div>
               </div>
-              <!-- Ini Deskripsi -->
+
               <div
                 v-if="selectedJob?.description"
                 class="w-full h-auto mt-10 flex flex-col gap-y-5 px-8 lg:px-20"
@@ -341,7 +335,6 @@ onMounted(() => {
                 </p>
               </div>
 
-              <!--  === GARIS === -->
               <div
                 class="hidden sm:flex flex-row w-full h-auto gap-x-2 my-6 xl:my-10"
               >
@@ -360,7 +353,6 @@ onMounted(() => {
                 />
               </div>
 
-              <!-- === Responsibilities === -->
               <div
                 v-if="selectedJob?.responsibilities"
                 class="w-full h-auto mt-5 lg:mt-10 flex flex-col gap-y-2 text-[18px] font-[400] text-[#323232] dark:text-[#B8B8B8] px-8 lg:px-20"
@@ -375,7 +367,6 @@ onMounted(() => {
                 </p>
               </div>
 
-              <!-- === Requirements === -->
               <div
                 v-if="selectedJob?.requirements"
                 class="w-full h-auto mt-5 lg:mt-10 flex flex-col gap-y-2 text-[18px] font-[400] text-[#323232] dark:text-[#B8B8B8] px-8 lg:px-20"
@@ -390,7 +381,6 @@ onMounted(() => {
                 </p>
               </div>
 
-              <!-- === Benefits === -->
               <div
                 v-if="selectedJob?.benefits"
                 class="w-full h-auto mt-5 lg:mt-10 flex flex-col gap-y-2 text-[18px] font-[400] text-[#323232] dark:text-[#B8B8B8] px-8 lg:px-20"
@@ -426,7 +416,6 @@ onMounted(() => {
               </div>
             </div>
 
-            <!-- MODALS FOOTER -->
             <div
               class="relative bottom-0 flex flex-col sm:flex-row sm:justify-between gap-x-10 gap-y-5 lg:gap-y-0 w-full h-auto py-5 px-8 lg:px-20 bg-[#D6E8F4] dark:bg-gradient-to-r dark:from-[#424242] dark:from-[75%] dark:to-[#696969] rounded-b-3xl"
             >

@@ -24,7 +24,6 @@ defineProps({
 </script>
 
 <template>
-  <!-- Desktop -->
   <div class="hidden lg:flex w-full h-auto">
     <div class="flex flex-row w-full h-full">
       <div class="flex w-[15%] xl:w-[15%] h-full">
@@ -53,7 +52,6 @@ defineProps({
     </div>
   </div>
 
-  <!-- Mobile & Tabs -->
   <div class="flex lg:hidden w-full h-auto md:justify-center">
     <div class="flex flex-row w-full h-full md:justify-center">
       <div class="flex w-[20%] h-full md:justify-center">

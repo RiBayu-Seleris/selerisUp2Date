@@ -144,14 +144,12 @@ onBeforeUnmount(() => {
 </template>
 
 <style scoped>
-/* kata: terisi berurutan mengikuti progres kartu (--pw) */
 .reveal-word {
   --t: calc((var(--pw, 1) * var(--span, 1) - var(--i, 0)) / var(--overlap, 8));
   opacity: clamp(20%, calc(20% + 80% * var(--t)), 100%);
   transition: opacity 150ms linear;
 }
 
-/* nama & jabatan: fade in/out beneran, durasinya sendiri, lepas dari kecepatan scroll */
 .reveal-block {
   opacity: 0;
   transform: translateY(10px);
@@ -165,7 +163,6 @@ onBeforeUnmount(() => {
   transform: none;
 }
 
-/* jabatan menyusul sedikit di belakang nama */
 .reveal-delay {
   transition-delay: 140ms;
 }

@@ -35,7 +35,6 @@ const LogoLink = computed(() => {
   <div
     class="relative flex justify-center w-full h-auto items-center max-w-[1440px] mx-auto px-8 md:px-14 lg:px-28 xl:px-32 xls:px-48 pt-4 md:pt-6 xl:pt-8"
   >
-    <!-- Desktop Navbar -->
     <div
       class="hidden relative lg:flex flex-row w-full h-auto bg-[#FFFFFF] px-10 py-1.5 rounded-[40px] border-[#E9EAEC] border-[1px] shadow-[0px_18px_32px_0px_rgba(0,0,0,0.06)]"
     >
@@ -53,14 +52,12 @@ const LogoLink = computed(() => {
       <div class="w-full h-full py-3">
         <MenuNav />
       </div>
-      <!-- Ditempel di kanan secara absolut, mencerminkan logo yang absolut di
-           kiri. Dengan begitu MenuNav tetap benar-benar di tengah pil navbar. -->
+
       <div class="absolute right-10 top-0 h-full flex items-center">
         <LanguageSwitcher />
       </div>
     </div>
 
-    <!-- Mobile Navbar -->
     <div class="w-full h-auto flex lg:hidden flex-row justify-between">
       <router-link :to="LogoLink" class="w-[40%] h-auto flex">
         <img

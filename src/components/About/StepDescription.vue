@@ -167,6 +167,6 @@ const isDark = useIsDark();
 }
 
 :deep(.swiper-pagination-bullet) {
-  margin: 16px 0 !important; /* Atur jarak antar bullet */
+  margin: 16px 0 !important;
 }
 </style>

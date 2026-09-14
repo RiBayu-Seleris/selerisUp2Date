@@ -73,20 +73,17 @@ onUnmounted(() => {
       </Navlink>
     </li>
 
-    <!-- ABOUT MENU -->
     <li
       class="relative list-none"
       @mouseenter="isHoveringAbout = true"
       @mouseleave="isHoveringAbout = false"
     >
-      <!-- Trigger -->
       <span
         class="cursor-pointer relative inline-block text-animate-hover dark:dark-text-animate-hover font-[500] text-[12pt] lg:text-[10pt] xl:text-[12pt]"
       >
         {{ $t("nav.about") }} ▾
       </span>
 
-      <!-- Dropdown -->
       <div
         v-if="isHoveringAbout"
         @mouseenter="isHoveringAbout = true"
@@ -115,20 +112,17 @@ onUnmounted(() => {
       </div>
     </li>
 
-    <!-- PRODUCTS MENU -->
     <li
       class="relative list-none"
       @mouseenter="isHoveringProduct = true"
       @mouseleave="isHoveringProduct = false"
     >
-      <!-- Trigger -->
       <span
         class="cursor-pointer relative inline-block text-animate-hover dark:dark-text-animate-hover font-[500] text-[12pt] lg:text-[10pt] xl:text-[12pt]"
       >
         {{ $t("nav.products") }} ▾
       </span>
 
-      <!-- Dropdown -->
       <div
         v-if="isHoveringProduct"
         @mouseenter="isHoveringProduct = true"
@@ -159,20 +153,17 @@ onUnmounted(() => {
       </div>
     </li>
 
-    <!-- TECHNOLOGY MENU -->
     <li
       class="relative list-none"
       @mouseenter="isHoveringTechnology = true"
       @mouseleave="isHoveringTechnology = false"
     >
-      <!-- Trigger -->
       <span
         class="cursor-pointer relative inline-block text-animate-hover dark:dark-text-animate-hover font-[500] text-[12pt] lg:text-[10pt] xl:text-[12pt]"
       >
         {{ $t("nav.technology") }} ▾
       </span>
 
-      <!-- Dropdown -->
       <div
         v-if="isHoveringTechnology"
         @mouseenter="isHoveringTechnology = true"
@@ -201,20 +192,17 @@ onUnmounted(() => {
       </div>
     </li>
 
-    <!-- SOLUTIONS MENU -->
     <li
       class="relative list-none"
       @mouseenter="isHoveringSolution = true"
       @mouseleave="isHoveringSolution = false"
     >
-      <!-- Trigger -->
       <span
         class="cursor-pointer relative inline-block text-animate-hover dark:dark-text-animate-hover font-[500] text-[12pt] lg:text-[10pt] xl:text-[12pt]"
       >
         {{ $t("nav.solutions") }} ▾
       </span>
 
-      <!-- Dropdown -->
       <div
         v-if="isHoveringSolution"
         @mouseenter="isHoveringSolution = true"
@@ -227,7 +215,6 @@ onUnmounted(() => {
         <div
           class="w-full h-auto p-[1px] bg-gradient-to-r from-[#565656]/0 to-[#BCBCBC]/30 rounded-2xl shadow-lg"
         >
-          <!-- Ini saat tidak underconstruction -->
           <div
             class="w-full h-auto flex flex-col bg-white py-6 px-5 rounded-2xl dark:bg-[#1D2426]"
           >
@@ -312,7 +299,6 @@ onUnmounted(() => {
       </div>
     </li>
 
-    <!-- Tambahan menu lainnya -->
     <li>
       <Navlink
         class="text-[12pt] lg:text-[10pt] xl:text-[12pt] text-animate-hover dark:dark-text-animate-hover font-[500]"
@@ -339,7 +325,6 @@ onUnmounted(() => {
     </li>
   </ul>
 
-  <!-- Under Construction Modal -->
   <Teleport to="body">
     <Transition
       enter-active-class="transition-opacity duration-200 ease-out"
@@ -355,14 +340,12 @@ onUnmounted(() => {
         <div
           class="relative bg-white dark:bg-[#1D2426] rounded-2xl shadow-xl p-8 w-[90%] max-w-md flex flex-col items-center gap-4"
         >
-          <!-- Icon -->
           <div
             class="w-16 h-16 rounded-full bg-[#ADF9C5] dark:bg-[#2AB857]/20 flex items-center justify-center text-4xl"
           >
             🚧
           </div>
 
-          <!-- Text -->
           <h2 class="text-[20px] font-[700] text-[#374151] dark:text-white">
             {{ $t("underConstruction.title") }}
           </h2>
@@ -370,7 +353,6 @@ onUnmounted(() => {
             {{ $t("underConstruction.description") }}
           </p>
 
-          <!-- Close Button -->
           <button
             @click="showUnderConstructionModal = false"
             class="mt-2 px-6 py-2 bg-[#2AB857] hover:bg-[#22a04a] text-white text-[14px] font-[600] rounded-xl transition-colors duration-200"

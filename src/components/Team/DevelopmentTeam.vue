@@ -11,11 +11,10 @@
       <p
         class="text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] tracking-wider sm:tracking-wide font-[400] text-[#89A6BA] dark:text-[#6F6F6F] px-0 md:px-0 lg:px-8 xl:px-40 text-center"
       >
-        <!-- Desktop -->
         <span class="hidden sm:block">
           {{ $t("team.officeSubtitle") }}
         </span>
-        <!-- Mobile -->
+
         <span class="block sm:hidden">
           {{ $t("team.officeSubtitleMobile1") }}
           <br />

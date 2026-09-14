@@ -78,10 +78,8 @@ onUnmounted(() => {
       v-if="sidebar.isOpen"
       class="fixed inset-0 z-50 flex flex-col transition-all duration-300 overflow-y-auto bg-black/50"
     >
-      <!-- Overlay -->
       <!-- <div class="absolute inset-0 bg-black/50"></div> -->
 
-      <!-- Sidebar -->
       <transition name="slide" appear>
         <div class="ml-auto w-full h-auto px-4 py-6 z-50">
           <div
@@ -97,7 +95,6 @@ onUnmounted(() => {
                   class="w-[117px] h-[56px] sm:w-[80px] sm:h-[56px] object-contain dark:hidden"
                 />
 
-                <!-- Logo gelap (dark mode) -->
                 <img
                   :src="DarkLogo"
                   alt="Dark Logo"
@@ -127,7 +124,6 @@ onUnmounted(() => {
                 </Navlink>
               </div>
 
-              <!-- About -->
               <div class="w-full h-auto flex flex-col">
                 <button
                   id="buttonAboutListMenu"
@@ -181,7 +177,6 @@ onUnmounted(() => {
                 </transition>
               </div>
 
-              <!-- Products -->
               <div class="w-full h-auto flex flex-col">
                 <button
                   id="buttonProductListMenu"
@@ -235,7 +230,6 @@ onUnmounted(() => {
                 </transition>
               </div>
 
-              <!-- Technology -->
               <div class="w-full h-auto flex flex-col">
                 <button
                   id="buttonTechnologyListMenu"
@@ -289,7 +283,6 @@ onUnmounted(() => {
                 </transition>
               </div>
 
-              <!-- Technology -->
               <div class="w-full h-auto flex flex-col gap-y-2 sm:gap-y-4">
                 <button
                   id="buttonSolutionsListMenu"
@@ -322,7 +315,6 @@ onUnmounted(() => {
                   </div>
                 </button>
 
-                <!-- Ini saat tidak underconstruction -->
                 <transition name="fade">
                   <div
                     v-if="isSolutionOpen"
@@ -463,7 +455,6 @@ onUnmounted(() => {
                 </transition> -->
               </div>
 
-              <!-- Blogs -->
               <div class="w-full h-auto">
                 <Navlink href="/blogs">
                   <p
@@ -474,7 +465,6 @@ onUnmounted(() => {
                 </Navlink>
               </div>
 
-              <!-- Services -->
               <div class="w-full h-auto">
                 <Navlink href="/services">
                   <p
@@ -485,7 +475,6 @@ onUnmounted(() => {
                 </Navlink>
               </div>
 
-              <!-- Careers -->
               <div class="w-full h-auto">
                 <Navlink href="/careers">
                   <p
@@ -516,14 +505,12 @@ onUnmounted(() => {
         <div
           class="relative bg-white dark:bg-[#1D2426] rounded-2xl shadow-xl p-8 w-[90%] max-w-md flex flex-col items-center gap-4"
         >
-          <!-- Icon -->
           <div
             class="w-16 h-16 rounded-full bg-[#ADF9C5] dark:bg-[#2AB857]/20 flex items-center justify-center text-4xl"
           >
             🚧
           </div>
 
-          <!-- Text -->
           <h2 class="text-[20px] font-[700] text-[#374151] dark:text-white">
             {{ $t("underConstruction.title") }}
           </h2>
@@ -531,7 +518,6 @@ onUnmounted(() => {
             {{ $t("underConstruction.description") }}
           </p>
 
-          <!-- Close Button -->
           <button
             @click="showUnderConstructionModal = false"
             class="mt-2 px-6 py-2 bg-[#2AB857] hover:bg-[#22a04a] text-white text-[14px] font-[600] rounded-xl transition-colors duration-200"

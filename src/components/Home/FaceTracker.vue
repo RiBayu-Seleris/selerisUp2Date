@@ -1,12 +1,14 @@
 <script setup>
-import { ref, onMounted } from "vue";
+import { ref, computed, onMounted, onUnmounted, watch } from "vue";
 
 import gridFaceTracker from "@/assets/images/facetracker/grid-face-tracker2.svg";
 import Person from "@/assets/images/facetracker/person3.png";
 import FaceMask from "@/assets/images/facetracker/MaskingFace2.vue";
 import FaceIcon from "@/assets/icons/facetracker/face-icon.svg";
 import CardTracker from "@/components/CardTracker.vue";
+import SdkProfileForm from "@/components/FaceScan/SdkProfileForm.vue";
 import { useRouter } from "vue-router";
+import { kunciGulirLatar, bukaKunciGulirLatar } from "@/utils/kunciGulir";
 
 import Time from "@/assets/icons/facetracker/Time.vue";
 import Rate from "@/assets/icons/facetracker/Rate.vue";
@@ -14,6 +16,65 @@ import UserScan from "@/assets/icons/facetracker/UserScan.vue";
 import MedicalNote from "@/assets/icons/facetracker/MedicalNote.vue";
 
 const router = useRouter();
+
+const kartu3D = ref(null);
+const kemajuan = ref(0); // -1 (di bawah layar) .. 0 (tengah) .. 1 (di atas)
+
+const hitungKedalaman = () => {
+  const el = kartu3D.value;
+  if (!el) return;
+  const kotak = el.getBoundingClientRect();
+  const tengahKartu = kotak.top + kotak.height / 2;
+  const tengahLayar = window.innerHeight / 2;
+  // dibagi tinggi layar supaya rentangnya seragam di semua ukuran perangkat
+  const n = (tengahLayar - tengahKartu) / window.innerHeight;
+  kemajuan.value = Math.max(-1, Math.min(1, n * 2));
+};
+
+let idFrame3D = null;
+const tanganiGulir3D = () => {
+  if (idFrame3D) return;
+  idFrame3D = requestAnimationFrame(() => {
+    hitungKedalaman();
+    idFrame3D = null;
+  });
+};
+
+// Pengunjung yang menyalakan "kurangi animasi" tidak mendapat efek ini.
+const kurangiGerak =
+  typeof window !== "undefined" &&
+  window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+const gayaKartu = computed(() => ({
+  transform: kurangiGerak
+    ? "none"
+    : `perspective(900px) rotateX(${(-kemajuan.value * 3).toFixed(2)}deg)`,
+}));
+const gayaPetak = computed(() => ({
+  transform: kurangiGerak
+    ? "none"
+    : `translate3d(0, ${(kemajuan.value * 10).toFixed(1)}px, 0) scale(1.08)`,
+}));
+const gayaOrang = computed(() => ({
+  transform: kurangiGerak
+    ? "translateX(-50%)"
+    : `translate3d(-50%, ${(-kemajuan.value * 18).toFixed(1)}px, 0)`,
+}));
+
+onMounted(() => {
+  hitungKedalaman();
+  window.addEventListener("scroll", tanganiGulir3D, { passive: true });
+  window.addEventListener("resize", tanganiGulir3D, { passive: true });
+});
+
+onUnmounted(() => {
+  window.removeEventListener("scroll", tanganiGulir3D);
+  window.removeEventListener("resize", tanganiGulir3D);
+  if (idFrame3D) cancelAnimationFrame(idFrame3D);
+  // Kalau komponen ini dilepas sementara modalnya masih terbuka, kuncinya
+  // harus ikut dilepas — kalau tidak, halaman berikutnya tidak bisa digulir.
+  if (isModalOpen.value) bukaKunciGulirLatar();
+});
 
 // =========================
 // Modal State
@@ -83,9 +144,12 @@ const form = ref({
   agreeMarketing: false,
 });
 
+const langkahModal = ref("lead");
+
 const openModal = () => {
   if (isBlocked.value) return;
   form.value.deviceId = deviceId.value;
+  langkahModal.value = "lead";
   isModalOpen.value = true;
 };
 
@@ -93,18 +157,31 @@ const closeModal = () => {
   isModalOpen.value = false;
 };
 
-const submitForm = () => {
-  // HAPUS bagian ini
-  // const newCount = scanCount.value + 1;
-  // scanCount.value = newCount;
-  // setCookie(COOKIE_SCAN_COUNT_KEY, newCount, COOKIE_EXPIRE_DAYS);
-  // if (newCount >= MAX_SCAN_ATTEMPTS) isBlocked.value = true;
+watch(isModalOpen, (terbuka) => {
+  if (terbuka) kunciGulirLatar();
+  else bukaKunciGulirLatar();
+});
 
-  // TODO: Integrasi API submit di sini
+const KUNCI_PROFIL = "seleris:scan-profile";
 
+const lanjutKeScan = (profil) => {
+  try {
+    sessionStorage.setItem(KUNCI_PROFIL, JSON.stringify(profil));
+  } catch {
+    // Penyimpanan diblokir (mode penyamaran). Biarkan halaman scan yang
+    // menangani ketiadaan profil, jangan menggagalkan alur di sini.
+  }
   closeModal();
-  localStorage.removeItem("lp_facetracker_last_result"); // ← tambah ini
+  localStorage.removeItem("lp_facetracker_last_result");
   router.push("/face-tracking");
+};
+
+const submitForm = () => {
+  // TODO: Integrasi API submit data lead di sini.
+  // Sebelumnya fungsi ini langsung menuju halaman scan; sekarang ia
+  // melanjutkan ke langkah profil, dan perpindahan halaman dilakukan
+  // lanjutKeScan() setelah profilnya sah.
+  langkahModal.value = "profil";
 };
 </script>
 
@@ -114,31 +191,28 @@ const submitForm = () => {
   >
     <div class="absolute w-full h-auto"></div>
 
-    <!-- Title -->
     <div
-      class="w-full h-auto flex flex-col gap-y-1.5 text-center justify-center items-center xl:px-8"
+      class="w-full h-auto flex flex-col gap-y-1.5 text-center justify-center items-center px-6 sm:px-8"
     >
       <p class="text-[20px] text-[#2AB857] font-[500]">
         {{ $t("home.faceTracker.eyebrow") }}
       </p>
 
       <p
-        class="text-[24px] sm:text-[28px] md:text-[32px] lg:text-[34px] xl:text-[46px] leading-snug text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] font-[500]"
+        class="max-w-[22rem] sm:max-w-none text-[22px] max-smallest:text-[20px] sm:text-[28px] md:text-[32px] lg:text-[34px] xl:text-[46px] leading-snug text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] font-[500]"
       >
-        {{ $t("home.faceTracker.titleLine1") }} <br />
+        {{ $t("home.faceTracker.titleLine1") }}
+        <br class="hidden sm:block" />
         {{ $t("home.faceTracker.titleLine2") }}
       </p>
     </div>
 
-    <!-- Komposisi DESKTOP: gambar penuh dengan kartu melayang di atasnya.
-         Hanya dipakai mulai lg — di bawah itu ada rancangan tersendiri. -->
     <div class="relative w-full h-auto hidden lg:block">
       <div class="relative w-full h-full">
         <img :src="gridFaceTracker" alt="" />
       </div>
 
       <div class="absolute inset-0 w-full h-auto">
-        <!-- Person -->
         <div
           class="absolute z-10 inset-0 w-auto h-auto bottom-0 left-1/2 -translate-x-1/2"
         >
@@ -157,12 +231,7 @@ const submitForm = () => {
           </div>
         </div>
 
-        <!-- Cards -->
-        <!-- Kartu melayang hanya dipakai mulai lg. Di layar kecil keempatnya
-             akan bertindihan di atas wajah dan teksnya tidak terbaca, jadi
-             digantikan susunan biasa di bawah ilustrasi. -->
         <div class="hidden lg:block absolute z-20 w-full h-full">
-          <!-- Kiri atas -->
           <div class="absolute left-[10%] top-[20%] card-float-left">
             <card-tracker
               :icon="cards[0].icon"
@@ -173,7 +242,6 @@ const submitForm = () => {
             />
           </div>
 
-          <!-- Kiri bawah -->
           <div
             class="absolute left-[14%] bottom-[20%] lg:bottom-[25%] xl:bottom-[20%] card-float-left-delay"
           >
@@ -186,7 +254,6 @@ const submitForm = () => {
             />
           </div>
 
-          <!-- Kanan atas -->
           <div class="absolute right-[10%] top-[20%] card-float-right">
             <card-tracker
               :icon="cards[2].icon"
@@ -197,7 +264,6 @@ const submitForm = () => {
             />
           </div>
 
-          <!-- Kanan bawah -->
           <div
             class="absolute right-[14%] bottom-[20%] lg:bottom-[25%] xl:bottom-[20%] card-float-right-delay"
           >
@@ -211,7 +277,7 @@ const submitForm = () => {
           </div>
         </div>
       </div>
-      <!-- Button Scan Now -->
+
       <div
         @click="openModal"
         :class="[
@@ -238,47 +304,32 @@ const submitForm = () => {
         </div>
       </div>
     </div>
-    <!-- ============================================================
-         Tampilan PONSEL (di bawah lg) — dirancang tersendiri.
 
-         Bukan versi kecil dari desktop: kartu melayang dan gambar setinggi
-         layar tidak masuk akal di layar sempit. Di sini ilustrasinya dipadatkan
-         jadi satu kartu bertinggi tetap, tombolnya selebar layar, dan
-         keterangannya jadi daftar yang enak dibaca sambil menggulir.
-    ============================================================ -->
     <div class="lg:hidden flex flex-col gap-6 px-6 sm:px-8">
-      <!-- Ilustrasi versi ponsel.
-
-           Tiga hal yang sengaja berbeda dari desktop:
-
-           1. Rasio, bukan tinggi tetap. Tinggi tetap membuat kartunya jadi
-              kotak lebar-pendek di tablet, dengan orangnya kecil di tengah dan
-              petak kosong di kiri-kanan. Rasio 4:5 menjaga bentuknya tegak,
-              mengikuti bentuk foto orang.
-
-           2. Lebarnya dibatasi 420px dan ditengahkan. Tanpa itu, di tablet
-              kartunya melebar mengikuti layar sementara isinya tidak ikut
-              membesar.
-
-           3. Tanpa lapisan FaceMask. Lapisan itu diposisikan dengan persentase
-              yang dihitung untuk ukuran desktop; pada ukuran ini garis
-              pindaiannya jatuh melintang di dada, bukan di wajah. -->
       <div
-        class="relative w-full max-w-[420px] mx-auto aspect-[4/5] sm:aspect-[1/1] rounded-3xl overflow-hidden bg-[#EEF3F2] dark:bg-[#1D1F23]"
+        ref="kartu3D"
+        :style="gayaKartu"
+        class="relative w-full max-w-[420px] mx-auto aspect-[4/5] sm:aspect-[1/1] rounded-3xl overflow-hidden bg-[#EEF3F2] dark:bg-[#1D1F23] transition-transform duration-300 ease-out will-change-transform"
       >
         <img
           :src="gridFaceTracker"
           alt=""
-          class="absolute inset-0 w-full h-full object-cover opacity-70 dark:opacity-20"
+          :style="gayaPetak"
+          class="absolute inset-0 w-full h-full object-cover opacity-70 dark:opacity-20 will-change-transform"
         />
+
+        <div
+          class="absolute left-1/2 -translate-x-1/2 bottom-[18%] w-[70%] aspect-square rounded-full bg-[#2AB857]/10 blur-2xl dark:bg-[#63FD94]/10"
+        ></div>
+
         <img
           :src="Person"
           alt=""
-          class="absolute bottom-0 left-1/2 -translate-x-1/2 h-[92%] w-auto max-w-none object-contain object-bottom"
+          :style="gayaOrang"
+          class="absolute bottom-0 left-1/2 h-[92%] w-auto max-w-none object-contain object-bottom will-change-transform"
         />
       </div>
 
-      <!-- Tombol selebar layar: sasaran sentuh lega, tidak menutupi wajah -->
       <div
         @click="openModal"
         :class="[
@@ -300,7 +351,6 @@ const submitForm = () => {
         </p>
       </div>
 
-      <!-- Keterangan: satu kolom di ponsel, dua kolom mulai sm -->
       <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
         <card-tracker
           v-for="kartu in cards"
@@ -312,18 +362,18 @@ const submitForm = () => {
       </div>
     </div>
 
-    <!-- =========================
-      MODAL
-    ========================== -->
     <transition name="fade">
       <div
         v-if="isModalOpen"
         class="fixed inset-0 z-[999] flex items-center justify-center bg-black/50 backdrop-blur-sm px-4"
       >
         <div
-          class="relative w-full max-w-[500px] rounded-3xl bg-white dark:bg-[#1E1F22] p-6 md:p-8 shadow-2xl"
+          data-lenis-prevent
+          :class="[
+            'relative w-full rounded-3xl bg-white dark:bg-[#1E1F22] p-6 md:p-8 shadow-2xl max-h-[90dvh] overflow-y-auto',
+            langkahModal === 'profil' ? 'max-w-[640px]' : 'max-w-[500px]',
+          ]"
         >
-          <!-- Close -->
           <button
             @click="closeModal"
             class="absolute top-4 right-4 w-9 h-9 rounded-full bg-[#F3F4F6] dark:bg-[#2A2B2F] flex items-center justify-center hover:scale-110 transition"
@@ -331,8 +381,10 @@ const submitForm = () => {
             ✕
           </button>
 
-          <!-- Header -->
-          <div class="flex flex-col gap-y-2 mb-6">
+          <div
+            v-if="langkahModal === 'lead'"
+            class="flex flex-col gap-y-2 mb-6"
+          >
             <p class="text-[28px] font-semibold text-[#195279] dark:text-white">
               {{ $t("home.faceTracker.modal.title") }}
             </p>
@@ -341,14 +393,16 @@ const submitForm = () => {
               {{ $t("home.faceTracker.modal.description") }}
             </p>
 
-            <!-- Scan counter info -->
             <!-- <p class="text-sm text-[#9CA3AF]">
               Sisa percobaan: {{ MAX_SCAN_ATTEMPTS - scanCount }}
             </p> -->
           </div>
 
-          <form class="flex flex-col gap-y-4" @submit.prevent="submitForm">
-            <!-- Hidden deviceId -->
+          <form
+            v-if="langkahModal === 'lead'"
+            class="flex flex-col gap-y-4"
+            @submit.prevent="submitForm"
+          >
             <input
               required
               type="hidden"
@@ -356,7 +410,6 @@ const submitForm = () => {
               name="deviceId"
             />
 
-            <!-- First Name -->
             <div class="flex flex-col gap-y-2">
               <label class="text-sm font-medium text-[#374151] dark:text-white">
                 {{ $t("home.faceTracker.modal.firstName") }}
@@ -371,41 +424,44 @@ const submitForm = () => {
               />
             </div>
 
-            <!-- Business Email -->
-            <div class="flex flex-col gap-y-2">
-              <label class="text-sm font-medium text-[#374151] dark:text-white">
-                {{ $t("home.faceTracker.modal.businessEmail") }}
-              </label>
+            <div
+              class="w-full h-auto flex flex-row justify-between items-center gap-x-5"
+            >
+              <div class="w-full h-auto flex flex-col gap-y-2">
+                <label
+                  class="text-sm font-medium text-[#374151] dark:text-white"
+                >
+                  {{ $t("home.faceTracker.modal.businessEmail") }}
+                </label>
+                <input
+                  required
+                  v-model="form.businessEmail"
+                  type="email"
+                  :placeholder="
+                    $t('home.faceTracker.modal.businessEmailPlaceholder')
+                  "
+                  class="w-full rounded-xl border border-[#D1D5DB] dark:border-[#3F3F46] bg-white dark:bg-[#27272A] px-4 py-3 outline-none focus:ring-2 focus:ring-[#2E97DF] text-black dark:text-white"
+                />
+              </div>
 
-              <input
-                required
-                v-model="form.businessEmail"
-                type="email"
-                :placeholder="
-                  $t('home.faceTracker.modal.businessEmailPlaceholder')
-                "
-                class="w-full rounded-xl border border-[#D1D5DB] dark:border-[#3F3F46] bg-white dark:bg-[#27272A] px-4 py-3 outline-none focus:ring-2 focus:ring-[#2E97DF] text-black dark:text-white"
-              />
+              <div class="w-full h-auto flex flex-col gap-y-2">
+                <label
+                  class="text-sm font-medium text-[#374151] dark:text-white"
+                >
+                  {{ $t("home.faceTracker.modal.companyName") }}
+                </label>
+                <input
+                  required
+                  v-model="form.companyName"
+                  type="text"
+                  :placeholder="
+                    $t('home.faceTracker.modal.companyNamePlaceholder')
+                  "
+                  class="w-full rounded-xl border border-[#D1D5DB] dark:border-[#3F3F46] bg-white dark:bg-[#27272A] px-4 py-3 outline-none focus:ring-2 focus:ring-[#2E97DF] text-black dark:text-white"
+                />
+              </div>
             </div>
 
-            <!-- Company Name -->
-            <div class="flex flex-col gap-y-2">
-              <label class="text-sm font-medium text-[#374151] dark:text-white">
-                {{ $t("home.faceTracker.modal.companyName") }}
-              </label>
-
-              <input
-                required
-                v-model="form.companyName"
-                type="text"
-                :placeholder="
-                  $t('home.faceTracker.modal.companyNamePlaceholder')
-                "
-                class="w-full rounded-xl border border-[#D1D5DB] dark:border-[#3F3F46] bg-white dark:bg-[#27272A] px-4 py-3 outline-none focus:ring-2 focus:ring-[#2E97DF] text-black dark:text-white"
-              />
-            </div>
-
-            <!-- Goals -->
             <div class="flex flex-col gap-y-2">
               <label class="text-sm font-medium text-[#374151] dark:text-white">
                 {{ $t("home.faceTracker.modal.goals") }}
@@ -448,7 +504,6 @@ const submitForm = () => {
               </label>
             </div>
 
-            <!-- Submit -->
             <button
               type="submit"
               :disabled="!form.agreeMarketing"
@@ -462,6 +517,8 @@ const submitForm = () => {
               {{ $t("home.faceTracker.modal.submit") }}
             </button>
           </form>
+
+          <SdkProfileForm v-else @submit="lanjutKeScan" />
         </div>
       </div>
     </transition>
@@ -507,7 +564,6 @@ const submitForm = () => {
   }
 }
 
-/* Modal Animation */
 .fade-enter-active,
 .fade-leave-active {
   transition: all 0.25s ease;

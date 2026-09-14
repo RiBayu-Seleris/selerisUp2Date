@@ -18,7 +18,6 @@ const emit = defineEmits([
 </script>
 
 <template>
-  <!-- Skills -->
   <!-- <div class="flex flex-row w-full h-auto gap-10"> -->
   <div class="w-full h-auto flex flex-col gap-y-3">
     <div class="flex flex-col w-full">
@@ -83,6 +82,6 @@ const emit = defineEmits([
 select:focus {
   outline: none !important;
   box-shadow: none !important;
-  border-color: #d1d5db !important; /* sesuai styling normal */
+  border-color: #d1d5db !important;
 }
 </style>

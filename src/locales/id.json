@@ -1785,6 +1785,40 @@
     "directorsTeam": "Dewan Direksi dan Manajemen Senior",
     "managementTeam": "Tim Manajemen",
     "faqDescription": "Temukan jawaban atas pertanyaan yang sering diajukan seputar aplikasi Seleris",
+    "faqItems": [
+      {
+        "question": "Apa itu Aplikasi Seleris?",
+        "answer": "Seleris adalah platform yang dirancang untuk membuat proses penilaian risiko menjadi lebih efisien, akurat, dan mudah dijangkau siapa saja. Kami menghadirkan fitur unggulan seperti AI Detection, sehingga pengguna dapat langsung menerima hasil keputusannya"
+      },
+      {
+        "question": "Apakah Aplikasi Seleris tersedia di platform lain?",
+        "answer": "Ya, aplikasi kami tersedia di Google Play Store dan akan segera hadir di App Store."
+      },
+      {
+        "question": "Bagaimana cara mulai menggunakan aplikasi ini?",
+        "answer": "Untuk memulai, Anda bisa mengunduhnya di Google Play Store lalu masuk memakai akun yang sudah Anda daftarkan."
+      },
+      {
+        "question": "Bagaimana cara menghapus akun saya?",
+        "answer": "Jika Anda ingin menghapus akun, silakan hubungi tim kami di info{'@'}seleris.ai"
+      },
+      {
+        "question": "Apakah aplikasi ini menyediakan dukungan pelanggan?",
+        "answer": "Ya, kami punya tim dukungan pelanggan yang siap membantu. Silakan hubungi kami lewat info{'@'}seleris.ai untuk pertanyaan, masukan, atau bantuan teknis."
+      },
+      {
+        "question": "Apakah aplikasi ini gratis?",
+        "answer": "Aplikasi kami gratis untuk pemakaian demo. Sebagian fitur bisa dipakai tanpa biaya, sedangkan akses penuh ke fitur premium memerlukan langganan atau pembelian di dalam aplikasi."
+      },
+      {
+        "question": "Apakah aplikasi ini aman?",
+        "answer": "Kami mengutamakan keamanan data pengguna. Aplikasi kami memakai protokol enkripsi TLS/SSL dan mengikuti standar keamanan yang ketat untuk menjaga informasi pribadi pengguna. Seleris telah lulus uji kepatuhan <span class=\"font-[600]\">ISO/IEC 27001:2022</span> dengan nomor sertifikat <span class=\"font-[600]\">2403150020501.</span>"
+      },
+      {
+        "question": "Bagaimana cara menyampaikan masukan atau saran?",
+        "answer": "Kami sangat menghargai masukan Anda. Anda bisa menyampaikannya lewat menu pengaturan lalu klik kebijakan privasi, atau kirim ke info{'@'}seleris.ai agar langsung sampai ke tim kami."
+      }
+    ],
     "securityHeroTitle": "Keamanan",
     "securityHeroSubtitle": "Keamanan Nasabah Adalah Prioritas",
     "fullname": "Nama Lengkap",
@@ -1939,5 +1973,113 @@
       "name": "KEMENTERIAN KESEHATAN REPUBLIK INDONESIA",
       "description": "SELICA diklasifikasikan sebagai alat kesehatan berbasis AI sesuai regulasi Kementerian Kesehatan Republik Indonesia dan mematuhi ketentuan Permenkes No. 14 Tahun 2021"
     }
-  ]
+  ],
+  "scanSdk": {
+    "title": "Lengkapi profil Anda",
+    "intro": "Isi profil untuk perhitungan tekanan darah dan parameter yang menggunakan profil. Pemindaian diproses secara lokal di perangkat Anda.",
+    "groupBasic": "Data dasar",
+    "groupLifestyle": "Gaya hidup",
+    "allRequired": "Semua kolom wajib diisi.",
+    "age": "Usia",
+    "ageUnit": "tahun",
+    "agePlaceholder": "Contoh: 32",
+    "sex": "Jenis kelamin",
+    "sexPlaceholder": "Pilih jenis kelamin",
+    "male": "Laki-laki",
+    "female": "Perempuan",
+    "height": "Tinggi badan",
+    "heightUnit": "cm",
+    "heightPlaceholder": "Contoh: 170",
+    "weight": "Berat badan",
+    "weightUnit": "kg",
+    "weightPlaceholder": "Contoh: 68",
+    "smoking": "Apakah Anda merokok?",
+    "alcohol": "Apakah Anda mengonsumsi alkohol?",
+    "motorcycle": "Apakah Anda menggunakan sepeda motor?",
+    "yes": "Ya",
+    "no": "Tidak",
+    "consent": "Saya setuju kamera dan profil diproses secara lokal untuk pemindaian ini.",
+    "continue": "Lanjut ke pemindaian",
+    "preparing": "Menyiapkan pemindaian…",
+    "start": "Mulai scan",
+    "cancel": "Batalkan",
+    "retry": "Coba lagi",
+    "rescan": "Scan ulang",
+    "backHome": "Kembali ke beranda",
+    "backSite": "Kembali ke Situs",
+    "sideRules": [
+      {
+        "title": "Periksa Pencahayaan",
+        "description": "Pastikan wajah Anda terkena cahaya dari depan. Hindari cahaya dari belakang atau bayangan pekat."
+      },
+      {
+        "title": "Tetap di Tengah",
+        "description": "Posisikan wajah di dalam penanda. Pertahankan ekspresi netral dan jangan banyak bergerak."
+      },
+      {
+        "title": "30 Detik",
+        "description": "Pemindaian berlangsung sekitar 30 detik dengan teknologi rPPG. Jangan bergerak atau berbicara selama prosesnya."
+      }
+    ],
+    "proTipLabel": "Tips dari kami:",
+    "proTip": "Menarik tiga napas panjang yang terukur sebelum memulai membuat pembacaan variabilitas HRV jauh lebih akurat.",
+    "certificates": "Sertifikat dan Penghargaan",
+    "metricsTitle": "Lima parameter kesehatan dari pemindaian wajah 30 detik",
+    "metricsDesc": "Detak jantung, laju napas, HRV dan tekanan darah dibaca dari wajah Anda dengan teknologi rPPG — tanpa alat pakai, dan seluruh perhitungannya berjalan di perangkat Anda sendiri.",
+    "getApps": "Unduh aplikasinya",
+    "poweredBy": "Didukung oleh",
+    "comingSoon": "Segera Hadir!",
+    "needProfile": "Mulai pemindaian dari tombol “Scan Yourself” di beranda agar profil Anda terisi lebih dulu.",
+    "errAge": "Masukkan usia dalam bilangan bulat antara 17 dan 100 tahun.",
+    "errSex": "Pilih jenis kelamin.",
+    "errHeight": "Masukkan tinggi badan antara 100 dan 250 cm.",
+    "errWeight": "Masukkan berat badan antara 20 dan 400 kg.",
+    "errSmoking": "Pilih Ya atau Tidak untuk pertanyaan merokok.",
+    "errAlcohol": "Pilih Ya atau Tidak untuk pertanyaan konsumsi alkohol.",
+    "errMotorcycle": "Pilih Ya atau Tidak untuk pertanyaan penggunaan sepeda motor.",
+    "errConsent": "Mohon setujui dulu sebelum memulai pemindaian.",
+    "resultTitle": "Hasil pemindaian Anda",
+    "heartRate": "Detak Jantung",
+    "breathingRate": "Laju Napas",
+    "hrv": "HRV (SDNN)",
+    "systolic": "Sistolik",
+    "diastolic": "Diastolik",
+    "sourceLabel": "Sumber",
+    "sourceFormula": "Estimasi formula",
+    "unavailable": "Tidak tersedia",
+    "scanning": "Sedang memindai…",
+    "remaining": "Sekitar {seconds} detik lagi",
+    "quality": "Kualitas sinyal",
+    "cameraUnavailable": "Perangkat ini melaporkan tidak ada kamera yang bisa dipakai, jadi pemindaian tidak bisa dimulai.",
+    "techStatus": "Status teknis",
+    "liveHr": "Detak sementara",
+    "provisionalNote": "nilai sementara, bukan hasil akhir",
+    "heatmapToggle": "Tampilkan heatmap perfusi",
+    "heatmapSave": "Simpan heatmap PNG",
+    "heatmapWaiting": "Heatmap belum siap disimpan.",
+    "availabilityLabel": "Ketersediaan",
+    "sourceExperimental": "Estimasi eksperimental dari kamera",
+    "helpPermission": "Izin kamera diblokir. Buka ikon gembok di bilah alamat, izinkan kamera, lalu coba lagi.",
+    "helpCameraBusy": "Pilih kamera yang tersedia dan tutup aplikasi atau tab lain yang sedang memakainya, lalu coba lagi.",
+    "helpPreflight": "Kamera mengirim gambar terlalu lambat selama pemeriksaan 3 detik — butuh sekitar 24 per detik. Tutup DevTools dulu (ini yang paling memperlambat scanner), pakai cahaya lebih terang dari arah depan, tutup tab dan aplikasi lain yang memakai CPU atau kamera, lalu matikan heatmap perfusi.",
+    "rateAnalyzer": "Laju penganalisis",
+    "rateAccepted": "Laju diterima",
+    "rateNeeded": "butuh 24 Hz",
+    "retryNoHeatmap": "Matikan heatmap lalu coba lagi",
+    "helpPreflightAccepted": "Gambarnya sudah cukup cepat, tapi terlalu banyak yang ditolak. Lepas kacamata, kacamata hitam, atau masker — ketiganya menahan pemindaian. Terangi wajah dari arah depan, isi layar dengan satu wajah, dan jangan bergerak.",
+    "accessoryBlocking": "Terdeteksi di wajah Anda: {item}. Kacamata, kacamata hitam, dan masker menahan pemindaian. Tolong dilepas lalu coba lagi.",
+    "lightingLabel": "Pencahayaan",
+    "fpsTitle": "Laju gambar kamera",
+    "fpsNow": "Sekarang",
+    "fpsMin": "Terendah",
+    "fpsAvg": "Rata-rata",
+    "fpsBelow": "Di bawah ambang",
+    "fpsThreshold": "Ambang {hz} Hz",
+    "fpsEmpty": "Belum ada catatan. Mulai pemindaian untuk merekam laju gambarnya.",
+    "fpsCopy": "Salin laporan untuk tim SDK",
+    "fpsCopied": "Laporan disalin",
+    "fpsCopyFailed": "Gagal menyalin. Silakan blok teksnya secara manual.",
+    "fpsPage": "Halaman",
+    "errorTitle": "Pemindaian tidak dapat diselesaikan"
+  }
 }

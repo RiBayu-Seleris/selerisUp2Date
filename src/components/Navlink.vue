@@ -18,7 +18,6 @@ const isExternal = (url) => /^https?:\/\//.test(url);
 </script>
 
 <template>
-  <!-- External link -->
   <a
     v-if="isExternal(href)"
     :href="href"
@@ -29,7 +28,6 @@ const isExternal = (url) => /^https?:\/\//.test(url);
     <slot />
   </a>
 
-  <!-- Internal link -->
   <router-link
     v-else
     :to="href"

@@ -107,7 +107,6 @@ useVideoOnView(selerisVideo, selerisBlock);
 
 <template>
   <div class="relative w-full overflow-hidden">
-    <!-- Hero -->
     <section
       class="relative w-full h-full rounded-[20px] z-20 mx-auto max-w-[1440px]"
       id="hero"
@@ -136,7 +135,6 @@ useVideoOnView(selerisVideo, selerisBlock);
         <div
           class="relative w-full h-full flex flex-col md:flex-row gap-x-0 pt-32 px-0 lg:px-16 xl:px-20 lg:pt-40 gap-y-10"
         >
-          <!-- Phone mobile -->
           <div
             class="relative flex w-full h-auto md:hidden flex-row gap-x-5 items-end justify-center md:items-end md:justify-end"
           >
@@ -215,7 +213,7 @@ useVideoOnView(selerisVideo, selerisBlock);
               </router-link>
             </div>
           </div>
-          <!-- Phone Desktop -->
+
           <div
             class="hidden w-full h-auto relative md:flex flex-row gap-x-5 items-center justify-end md:items-end lg:justify-end pr-12 lg:pr-0"
           >
@@ -238,7 +236,6 @@ useVideoOnView(selerisVideo, selerisBlock);
       </div>
     </section>
 
-    <!-- Section Partner -->
     <section
       data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto px-0 lg:px-16 xl:px-24 sm:mt-16 flex flex-col gap-y-0"
@@ -256,13 +253,11 @@ useVideoOnView(selerisVideo, selerisBlock);
       </div>
     </section>
 
-    <!-- Section About -->
     <section
       data-aos="fade-up"
       class="max-w-[1440px] mx-auto relative w-full h-full rounded-[20px] z-20 mt-10"
       id="about"
     >
-      <!-- SELERIS CREDIT -->
       <div
         ref="creditBlock"
         class="relative w-full h-auto sm:h-[380px] lg:h-[480px] flex flex-col sm:flex-row px-8 sm:px-12 lg:px-16 xl:px-28 gap-y-3 sm:gap-y-0 gap-x-5 lg:gap-x-0"
@@ -320,7 +315,6 @@ useVideoOnView(selerisVideo, selerisBlock);
         </div>
       </div>
 
-      <!-- TRANSFORMASI ASURANSI -->
       <div
         ref="transformBlock"
         class="relative w-full h-auto flex flex-col-reverse gap-y-3 sm:flex-row lg:pr-28 lg:pl-24 mt-20 sm:mt-36 px-10 lg:px-16"
@@ -373,7 +367,6 @@ useVideoOnView(selerisVideo, selerisBlock);
       </div>
     </section>
 
-    <!-- Section Apa Yang Dikerjakan Seleris -->
     <section
       data-aos="fade-up"
       id="technology"
@@ -397,7 +390,7 @@ useVideoOnView(selerisVideo, selerisBlock);
           </p>
         </div>
       </div>
-      <!-- Desktop -->
+
       <div
         class="hidden w-full h-auto lg:flex flex-row sm:gap-x-5 lg:gap-x-10 px-12 lg:px-20"
       >
@@ -429,7 +422,7 @@ useVideoOnView(selerisVideo, selerisBlock);
           </div>
         </div>
       </div>
-      <!-- mobile -->
+
       <div
         class="relative flex lg:hidden flex-row w-full max-h-screen gap-x-5 md:gap-x-10 py-5 overflow-x-auto snap-x snap-mandatory sm:pl-10 px-8 sm:pr-10 md:pl-12 md:pr-12 hide-scrollbar"
       >
@@ -470,12 +463,10 @@ useVideoOnView(selerisVideo, selerisBlock);
       </div>
     </section>
 
-    <!-- Keunggulan Utama Seleris Credit -->
     <section
       data-aos="fade-up"
       class="max-w-[1440px] mx-auto relative w-full h-full rounded-[20px] z-20 mt-32"
     >
-      <!-- Keunggulan Video -->
       <div
         ref="keunggulanBlock"
         class="relative w-full h-auto sm:h-[480px] lg:h-[550px] flex flex-col-reverse sm:flex-row"
@@ -484,7 +475,6 @@ useVideoOnView(selerisVideo, selerisBlock);
           <div
             class="flex flex-col gap-y-8 lg:gap-y-10 w-full h-full pt-10 pb-10 sm:pt-10 sm:pb-0 lg:pt-8"
           >
-            <!-- TITLE -->
             <h2
               class="text-[#1889D1] font-[600] text-[26px] sm:text-[24px] lg:text-[38px] px-8 sm:px-12 lg:px-20"
             >
@@ -493,7 +483,6 @@ useVideoOnView(selerisVideo, selerisBlock);
               {{ $t("creditPage.advantages.title2") }}
             </h2>
 
-            <!-- SWIPER WRAPPER (INI YANG NGUNCI LEBAR) -->
             <div class="relative w-full max-w-full overflow-hidden h-auto">
               <Swiper
                 class="w-full h-full cursor-grab active:cursor-grabbing"
@@ -596,7 +585,6 @@ useVideoOnView(selerisVideo, selerisBlock);
       </div>
     </section>
 
-    <!-- Untuk Siapa Seleris Credit -->
     <section
       data-aos="fade-up"
       class="max-w-[1440px] mx-auto relative w-full h-auto z-20 mt-32 bg-white py-14 lg:py-20 px-8 sm:px-12 lg:px-20"
@@ -658,7 +646,6 @@ useVideoOnView(selerisVideo, selerisBlock);
                   :key="index"
                   class="!flex items-center justify-center"
                 >
-                  <!-- CARD -->
                   <div
                     class="w-full h-auto bg-[#FFFFFF] border-[2px] rounded-[22px] px-8 lg:px-12 py-4 lg:py-10"
                   >
@@ -698,13 +685,11 @@ useVideoOnView(selerisVideo, selerisBlock);
       </div>
     </section>
 
-    <!-- Mengapa Seleris Credit -->
     <section
       data-aos="fade-up"
       class="max-w-[1440px] mx-auto relative w-full h-full rounded-[20px] z-20 mt-32 py-14 lg:py-20"
       id="whyus"
     >
-      <!-- TRANSFORMASI ASURANSI -->
       <div
         ref="selerisBlock"
         class="relative w-full h-auto sm:h-[450px] lg:h-[550px] flex flex-col-reverse sm:flex-row"
@@ -770,7 +755,6 @@ useVideoOnView(selerisVideo, selerisBlock);
       </div>
     </section>
 
-    <!-- Book A Demo -->
     <section
       data-aos="fade-up"
       class="max-w-[1440px] mx-auto relative w-full h-auto z-20 max-smallest:mt-8 mt-16 sm:mt-32 px-8 sm:px-12 lg:px-20"

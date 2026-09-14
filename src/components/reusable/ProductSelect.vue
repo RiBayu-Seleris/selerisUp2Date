@@ -1,4 +1,3 @@
-<!-- src/components/reusable/ProductSelect.vue -->
 <script setup>
 import { ref, onMounted, watch } from "vue";
 

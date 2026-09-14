@@ -73,7 +73,6 @@ onUnmounted(() => {
 
 <template>
   <div class="w-full h-auto flex flex-col gap-y-4 sm:gap-y-5 lg:gap-y-10">
-    <!-- Heading -->
     <div
       class="w-full h-auto flex flex-col gap-y-1.5 text-center justify-center items-center xl:px-8"
     >
@@ -87,21 +86,10 @@ onUnmounted(() => {
       </p>
     </div>
 
-    <!-- Ini ukuran LG -->
-    <!-- Cards Grid 2-3-2 -->
     <div
       class="w-full h-auto hidden lg:flex flex-col gap-y-4 lg:gap-y-4 lg:px-8 xl:px-16"
     >
-      <!-- Row 1: 2 cards -->
       <div class="w-full grid grid-cols-2 gap-4">
-        <!-- Pembungkus khusus AOS.
-             Animasinya SENGAJA dipasang di sini, bukan di kartunya.
-             Kartu punya :class yang berubah saat di-hover, dan setiap kali
-             itu berubah Vue menulis ulang seluruh atribut class elemen —
-             ikut menghapus kelas "aos-animate" yang dipasang AOS dari luar.
-             Akibatnya kartunya kembali ke keadaan awal AOS (tak terlihat)
-             dan tidak pernah muncul lagi, karena AOS disetel once: true.
-             Pembungkus ini tidak punya class dinamis, jadi aman. -->
         <div
           v-for="(data, i) in row1"
           :key="data.id"
@@ -120,7 +108,6 @@ onUnmounted(() => {
             @mouseleave="onMouseLeave"
             @click="handleCardClick(data)"
           >
-            <!-- @click="showUnderConstructionModal = true" -->
             <div
               class="w-full h-full flex flex-col justify-between bg-white dark:bg-[#1D1F23] rounded-2xl px-5 py-6"
             >
@@ -169,16 +156,7 @@ onUnmounted(() => {
         </div>
       </div>
 
-      <!-- Row 2: 3 cards -->
       <div class="w-full grid grid-cols-3 gap-4">
-        <!-- Pembungkus khusus AOS.
-             Animasinya SENGAJA dipasang di sini, bukan di kartunya.
-             Kartu punya :class yang berubah saat di-hover, dan setiap kali
-             itu berubah Vue menulis ulang seluruh atribut class elemen —
-             ikut menghapus kelas "aos-animate" yang dipasang AOS dari luar.
-             Akibatnya kartunya kembali ke keadaan awal AOS (tak terlihat)
-             dan tidak pernah muncul lagi, karena AOS disetel once: true.
-             Pembungkus ini tidak punya class dinamis, jadi aman. -->
         <div
           v-for="(data, i) in row2"
           :key="data.id"
@@ -197,7 +175,6 @@ onUnmounted(() => {
             @mouseleave="onMouseLeave"
             @click="handleCardClick(data)"
           >
-            <!-- @click="showUnderConstructionModal = true" -->
             <div
               class="w-full h-full flex flex-col justify-between bg-white dark:bg-[#1D1F23] rounded-2xl px-5 py-6"
             >
@@ -248,16 +225,7 @@ onUnmounted(() => {
         </div>
       </div>
 
-      <!-- Row 3: 2 cards -->
       <div class="w-full grid grid-cols-2 gap-4">
-        <!-- Pembungkus khusus AOS.
-             Animasinya SENGAJA dipasang di sini, bukan di kartunya.
-             Kartu punya :class yang berubah saat di-hover, dan setiap kali
-             itu berubah Vue menulis ulang seluruh atribut class elemen —
-             ikut menghapus kelas "aos-animate" yang dipasang AOS dari luar.
-             Akibatnya kartunya kembali ke keadaan awal AOS (tak terlihat)
-             dan tidak pernah muncul lagi, karena AOS disetel once: true.
-             Pembungkus ini tidak punya class dinamis, jadi aman. -->
         <div
           v-for="(data, i) in row3"
           :key="data.id"
@@ -276,7 +244,6 @@ onUnmounted(() => {
             @mouseleave="onMouseLeave"
             @click="handleCardClick(data)"
           >
-            <!-- @click="showUnderConstructionModal = true" -->
             <div
               class="w-full h-full flex flex-col justify-between bg-white dark:bg-[#1D1F23] rounded-2xl px-5 py-6"
             >
@@ -324,7 +291,6 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <!-- Mobile -->
     <div
       class="relative flex flex-row lg:hidden w-full gap-x-4 py-5 overflow-x-auto snap-x snap-mandatory pl-8 pr-8 sm:pl-10 sm:pr-10 md:pl-8 md:pr-8 hide-scrollbar"
     >
@@ -341,7 +307,6 @@ onUnmounted(() => {
         @mouseleave="onMouseLeave"
         @click="handleCardClick(data)"
       >
-        <!-- @click="showUnderConstructionModal = true" -->
         <div
           class="w-full h-full flex flex-col justify-between bg-white dark:bg-[#1D1F23] rounded-2xl px-5 py-6 gap-y-3 lg:gap-y-6"
         >
@@ -388,7 +353,6 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <!-- Under Construction Modal -->
     <Teleport to="body">
       <Transition
         enter-active-class="transition-opacity duration-200 ease-out"
@@ -404,14 +368,12 @@ onUnmounted(() => {
           <div
             class="relative bg-white dark:bg-[#1D2426] rounded-2xl shadow-xl p-8 w-[90%] max-w-md flex flex-col items-center gap-4"
           >
-            <!-- Icon -->
             <div
               class="w-16 h-16 rounded-full bg-[#ADF9C5] dark:bg-[#2AB857]/20 flex items-center justify-center text-4xl"
             >
               🚧
             </div>
 
-            <!-- Text -->
             <h2 class="text-[20px] font-[700] text-[#374151] dark:text-white">
               {{ $t("underConstruction.title") }}
             </h2>
@@ -421,7 +383,6 @@ onUnmounted(() => {
               {{ $t("underConstruction.description") }}
             </p>
 
-            <!-- Close Button -->
             <button
               @click="showUnderConstructionModal = false"
               class="mt-2 px-6 py-2 bg-[#2AB857] hover:bg-[#22a04a] text-white text-[14px] font-[600] rounded-xl transition-colors duration-200"
@@ -472,7 +433,6 @@ onUnmounted(() => {
   opacity: 0;
 }
 
-/* Modal Transition */
 .modal-fade-enter-active,
 .modal-fade-leave-active {
   transition: opacity 0.25s ease;

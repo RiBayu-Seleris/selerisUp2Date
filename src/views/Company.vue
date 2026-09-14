@@ -29,7 +29,6 @@ import { useSidebarStore } from "@/stores/sidebar";
     <DescAbout />
   </section>
 
-  <!-- DARK MODE -->
   <div class="hidden dark:flex dark:flex-col dark:w-full dark:h-auto">
     <section
       data-aos="fade-up"
@@ -69,11 +68,10 @@ import { useSidebarStore } from "@/stores/sidebar";
 
   <section
     data-aos="fade-up"
-    class="flex flex-col relative w-full md:mt-10 lg:mt-10 xl:mt-48 pt-4 pb-8 lg:pt-0 lg:pb-0"
+    class="flex flex-col relative w-full md:mt-10 lg:mt-10 xl:mt-0 pt-4 pb-8 lg:pt-0 lg:pb-0"
   >
     <Certificate />
   </section>
-  <!-- Section Step -->
 
   <section
     data-aos="fade-up"

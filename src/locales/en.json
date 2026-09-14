@@ -1785,6 +1785,40 @@
     "directorsTeam": "Directors and Senior Management Team",
     "managementTeam": "Management Team",
     "faqDescription": "Find answers to frequently asked questions about the seleris app",
+    "faqItems": [
+      {
+        "question": "What is Seleris App?",
+        "answer": "Seleris is a platform designed to make the risk assessment process more efficient, accurate, and accessible for everyone. We offer powerful features such as AI Detection, enabling users to instantly receive decision results"
+      },
+      {
+        "question": "Is the Seleris App available on other platforms?",
+        "answer": "Yes, our app available on Google Play Store and soon on App Store."
+      },
+      {
+        "question": "How do I get started with this application?",
+        "answer": "To get started, you can download in Google Play Store and login using the account you have registered."
+      },
+      {
+        "question": "How can I delete my account?",
+        "answer": "If you wish to delete your account, please contact our team at info{'@'}seleris.ai"
+      },
+      {
+        "question": "Does this application offer customer support?",
+        "answer": "Yes, we have a customer support team ready to help. Please contact us via info{'@'}seleris.ai for questions, feedback, or technical assistance."
+      },
+      {
+        "question": "Is this application free?",
+        "answer": "Our app offers free for demo use. Certain features are available for free, while full access to premium features may require a subscription or in-app purchase."
+      },
+      {
+        "question": "Is this application secure?",
+        "answer": "We prioritize user data security. Our application utilizes TLS/SSL encryption protocols and adheres to strict security standards to safeguard users' personal information. Seleris has successfully undergone <span class=\"font-[600]\">ISO/IEC 27001:2022</span> compliance testing with certificate number <span class=\"font-[600]\">2403150020501.</span>"
+      },
+      {
+        "question": "How can I provide feedback or suggestions?",
+        "answer": "We highly value your feedback. You can provide feedback by visiting the settings menu and clicking privacy policy or via info{'@'}seleris.ai to provide your feedback to our team."
+      }
+    ],
     "securityHeroTitle": "Security",
     "securityHeroSubtitle": "Customer Security Comes First",
     "fullname": "Fullname",
@@ -1939,5 +1973,113 @@
       "name": "MINISTRY OF HEALTH OF THE REPUBLIC OF INDONESIA",
       "description": "SELICA is classified as an AI-based medical device in accordance with the regulations of the Ministry of Health of the Republic of Indonesia and complies with Minister of Health Regulation No. 14 of 2021"
     }
-  ]
+  ],
+  "scanSdk": {
+    "title": "Complete your profile",
+    "intro": "Fill in your profile so blood pressure and profile-based parameters can be calculated. The scan is processed locally on your device.",
+    "groupBasic": "Basic data",
+    "groupLifestyle": "Lifestyle",
+    "allRequired": "All fields are required.",
+    "age": "Age",
+    "ageUnit": "years",
+    "agePlaceholder": "Example: 32",
+    "sex": "Sex",
+    "sexPlaceholder": "Select sex",
+    "male": "Male",
+    "female": "Female",
+    "height": "Height",
+    "heightUnit": "cm",
+    "heightPlaceholder": "Example: 170",
+    "weight": "Weight",
+    "weightUnit": "kg",
+    "weightPlaceholder": "Example: 68",
+    "smoking": "Do you smoke?",
+    "alcohol": "Do you drink alcohol?",
+    "motorcycle": "Do you ride a motorcycle?",
+    "yes": "Yes",
+    "no": "No",
+    "consent": "I agree that the camera and profile are processed locally for this scan.",
+    "continue": "Continue to scan",
+    "preparing": "Preparing the scan…",
+    "start": "Start scan",
+    "cancel": "Cancel",
+    "retry": "Try again",
+    "rescan": "Scan again",
+    "backHome": "Back to home",
+    "backSite": "Back to Site",
+    "sideRules": [
+      {
+        "title": "Check Lighting",
+        "description": "Ensure your face is well-lit from the front. Avoid harsh backlighting or deep shadows."
+      },
+      {
+        "title": "Stay Centered",
+        "description": "Position your face within the markers. Keep a neutral expression and remain still."
+      },
+      {
+        "title": "30 Seconds",
+        "description": "The scan takes about 30 seconds via rPPG technology. Please do not move or speak during the process."
+      }
+    ],
+    "proTipLabel": "Professional Tip:",
+    "proTip": "Taking three slow, measured breaths before initialization significantly improves HRV variability accuracy.",
+    "certificates": "Certificates and Rewards",
+    "metricsTitle": "Five health metrics from a 30-second facial scan",
+    "metricsDesc": "Heart rate, breath rate, HRV and blood pressure are read from your face using rPPG — no wearable, and every calculation runs on your own device.",
+    "getApps": "Get the apps",
+    "poweredBy": "Powered by",
+    "comingSoon": "Coming Soon!",
+    "needProfile": "Start the scan from the “Scan Yourself” button on the home page so your profile is filled in first.",
+    "errAge": "Enter your age as a whole number between 17 and 100 years.",
+    "errSex": "Select your sex.",
+    "errHeight": "Enter a height between 100 and 250 cm.",
+    "errWeight": "Enter a weight between 20 and 400 kg.",
+    "errSmoking": "Select Yes or No for the smoking question.",
+    "errAlcohol": "Select Yes or No for the alcohol question.",
+    "errMotorcycle": "Select Yes or No for the motorcycle question.",
+    "errConsent": "Please agree before starting the scan.",
+    "resultTitle": "Your scan results",
+    "heartRate": "Heart Rate",
+    "breathingRate": "Breath Rate",
+    "hrv": "HRV (SDNN)",
+    "systolic": "Systolic",
+    "diastolic": "Diastolic",
+    "sourceLabel": "Source",
+    "sourceFormula": "Formula estimate",
+    "unavailable": "Not available",
+    "scanning": "Scanning…",
+    "remaining": "About {seconds} seconds left",
+    "quality": "Signal quality",
+    "cameraUnavailable": "This device reports no usable camera, so the scan cannot start.",
+    "techStatus": "Technical status",
+    "liveHr": "Live heart rate",
+    "provisionalNote": "provisional, not the final result",
+    "heatmapToggle": "Show perfusion heatmap",
+    "heatmapSave": "Save heatmap PNG",
+    "heatmapWaiting": "The heatmap is not ready to save yet.",
+    "availabilityLabel": "Availability",
+    "sourceExperimental": "Experimental estimate from camera",
+    "helpPermission": "Camera access was blocked. Open the lock icon in the address bar, allow the camera, then try again.",
+    "helpCameraBusy": "Pick an available camera and close any other app or tab that is using it, then try again.",
+    "helpPreflight": "The camera delivered frames too slowly during the 3-second check — it needs about 24 per second. Close DevTools first (it slows the scanner the most), use brighter light from the front, close other tabs and apps using the CPU or camera, and turn off the perfusion heatmap.",
+    "rateAnalyzer": "Analyzer rate",
+    "rateAccepted": "Accepted rate",
+    "rateNeeded": "needs 24 Hz",
+    "retryNoHeatmap": "Turn off heatmap and try again",
+    "helpPreflightAccepted": "Frames arrived fast enough, but too many were rejected. Take off glasses, sunglasses or a mask — they block admission. Light your face from the front, fill the frame with one face, and hold still.",
+    "accessoryBlocking": "Detected on your face: {item}. Glasses, sunglasses and masks block the scan. Please take it off and try again.",
+    "lightingLabel": "Lighting",
+    "fpsTitle": "Camera frame rate",
+    "fpsNow": "Now",
+    "fpsMin": "Lowest",
+    "fpsAvg": "Average",
+    "fpsBelow": "Below threshold",
+    "fpsThreshold": "Threshold {hz} Hz",
+    "fpsEmpty": "No readings yet. Start a scan to record the frame rate.",
+    "fpsCopy": "Copy report for the SDK team",
+    "fpsCopied": "Report copied",
+    "fpsCopyFailed": "Could not copy. Select the text above manually.",
+    "fpsPage": "Page",
+    "errorTitle": "The scan could not be completed"
+  }
 }

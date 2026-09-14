@@ -150,7 +150,6 @@ const metricCards = computed(() => {
   <div
     class="w-full h-full flex flex-col gap-y-5 rounded-t-2xl rounded-b-xl overflow-hidden bg-white"
   >
-    <!-- Header -->
     <div class="w-full flex flex-row justify-between items-center py-6 px-8">
       <button
         type="button"
@@ -178,7 +177,6 @@ const metricCards = computed(() => {
       </a>
     </div>
 
-    <!-- Title -->
     <div
       class="w-full flex flex-col gap-y-1 justify-center items-center text-center px-4"
     >
@@ -189,7 +187,6 @@ const metricCards = computed(() => {
       </p>
     </div>
 
-    <!-- Last Result Notice -->
     <div
       v-if="isLastResult"
       class="mx-4 px-4 py-2.5 rounded-xl bg-[#FFF7ED] border border-[#FED7AA] flex flex-row gap-x-2 items-center"
@@ -213,7 +210,6 @@ const metricCards = computed(() => {
       </p>
     </div>
 
-    <!-- Error State -->
     <template v-if="!data">
       <div
         class="flex-1 flex flex-col items-center justify-center gap-y-3 px-8"
@@ -244,7 +240,6 @@ const metricCards = computed(() => {
       </div>
     </template>
 
-    <!-- Cards -->
     <template v-else>
       <div class="flex-1 min-h-0 overflow-y-auto px-4 py-4">
         <div class="flex flex-col gap-y-4">
@@ -254,7 +249,6 @@ const metricCards = computed(() => {
             class="w-full rounded-xl border border-[#D1D5DB] bg-white p-5 shadow-[2px_4px_4px_0_rgba(0,0,0,0.05)]"
           >
             <div class="flex flex-col gap-y-3">
-              <!-- Title + Value -->
               <div class="flex flex-row justify-between items-start">
                 <div class="flex flex-col gap-y-0.5">
                   <p class="text-[#2AB857] font-[500] text-[16px]">
@@ -273,7 +267,6 @@ const metricCards = computed(() => {
                 </div>
               </div>
 
-              <!-- Description -->
               <p class="text-[13px] font-[300] text-[#4B5563] leading-relaxed">
                 {{ card.description }}
               </p>

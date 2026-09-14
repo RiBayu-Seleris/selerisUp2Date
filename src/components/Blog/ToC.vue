@@ -61,7 +61,7 @@ const offset = computed(() => {
       >
         {{ $t("blog.content") }}
       </p>
-      <!-- ToC -->
+
       <ToCList :items="groupedHeadings" :offset="offset" />
     </div>
   </div>

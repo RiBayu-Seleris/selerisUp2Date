@@ -40,9 +40,8 @@ import HeroText from "@/components/reusable/HeroText.vue";
         Details" (see Section 17 of this Privacy Policy) if you have any
         questions.
       </p>
-      <!-- POINT 1 -->
+
       <div class="flex flex-col w-full h-auto gap-y-5">
-        <!-- Point 1 -->
         <div class="w-full h-auto space-y-2">
           <p class="font-[700] dark:text-[#FAFAFA]">
             1. Personal Data Description
@@ -59,7 +58,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
               to provide our services to you
             </p>
           </div>
-          <!-- Point 1.1 -->
+
           <div class="w-full h-auto space-y-3 pt-2">
             <p class="text-[#4B5563] dark:text-[#FAFAFA] pl-4 font-[600]">
               1.1. Personal Data Provided When You Use Our Seleris Platform
@@ -135,7 +134,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
               </ol>
             </div>
           </div>
-          <!-- Point 1.2 -->
+
           <div class="w-full h-auto space-y-2 pt-2 pl-4">
             <p class="text-[#4B5563] dark:text-[#FAFAFA] font-[600]">
               1.2. Personal Data Provided When You Process Your Account
@@ -151,7 +150,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
               business, property and bank account information.
             </p>
           </div>
-          <!-- Point 1.3 -->
+
           <div class="w-full h-auto space-y-2 pt-2 pl-4">
             <p class="text-[#4B5563] dark:text-[#FAFAFA] font-[600]">
               1.3. Personal Data Provided When You Process Your Account
@@ -216,7 +215,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
               </li>
             </ol>
           </div>
-          <!-- Point 1.4 -->
+
           <div class="w-full h-auto space-y-2 pt-2 pl-4">
             <p class="text-[#4B5563] dark:text-[#FAFAFA] font-[600]">
               1.4. Personal Data We Collect from Third Parties
@@ -245,7 +244,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
               </li>
             </ol>
           </div>
-          <!-- Point 1.5 -->
+
           <div class="w-full h-auto space-y-2 pt-2 pl-4">
             <p class="text-[#4B5563] dark:text-[#FAFAFA] font-[600]">
               1.5. Personal Data about Third Parties You Provide to Us
@@ -262,12 +261,12 @@ import HeroText from "@/components/reusable/HeroText.vue";
             </p>
           </div>
         </div>
-        <!-- Point 2 -->
+
         <div class="w-full h-auto">
           <p class="font-[700] dark:text-[#FAFAFA]">
             2. Purposes for Collection and Use of Your Personal Data
           </p>
-          <!-- Point 2.1 -->
+
           <div class="w-full h-auto space-y-2 pt-2 pl-4">
             <p class="text-[#4B5563] dark:text-[#FAFAFA] font-[600]">
               2.1. Seleris will use your Personal Data for the following
@@ -279,7 +278,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
               <li>Personalization of sales and marketing activities.</li>
             </ol>
           </div>
-          <!-- Point 2.2 -->
+
           <div class="w-full h-auto space-y-2 pt-2 pl-4">
             <p class="text-[#4B5563] dark:text-[#FAFAFA] font-[600]">
               2.2 We process your Personal Data (from collection to deletion) in
@@ -302,7 +301,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
               </li>
             </ol>
           </div>
-          <!-- Point 2.3 -->
+
           <div class="w-full h-auto space-y-2 pt-2 pl-4">
             <p class="text-[#4B5563] dark:text-[#FAFAFA] font-[600]">
               2.3 In order to provide our services to you and improve your
@@ -370,7 +369,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
               </li>
             </ol>
           </div>
-          <!-- Point 2.4 -->
+
           <div class="w-full h-auto space-y-2 pt-2 pl-4">
             <p class="text-[#4B5563] dark:text-[#FAFAFA] font-[600]">
               2.4 We use your Personal Data for marketing purposes, through:
@@ -389,7 +388,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
               </li>
             </ol>
           </div>
-          <!-- Point 2.5 -->
+
           <div class="w-full h-auto space-y-2 pt-2 pl-4">
             <p class="text-[#4B5563] dark:text-[#FAFAFA] font-[600]">
               2.5 Please note that you may opt out of receiving marketing
@@ -417,12 +416,12 @@ import HeroText from "@/components/reusable/HeroText.vue";
             </ol>
           </div>
         </div>
-        <!-- Point 3 -->
+
         <div class="w-full h-auto">
           <p class="font-[700] dark:text-[#FAFAFA]">
             3. Disclosure of Personal Data
           </p>
-          <!-- Point 3.1 -->
+
           <div class="w-full h-auto space-y-2 pt-2 pl-4">
             <p class="text-[#4B5563] dark:text-[#FAFAFA] font-[600]">
               3.1. We may share your Personal Data with other companies,
@@ -483,7 +482,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
               </li>
             </ol>
           </div>
-          <!-- Point 3.2 -->
+
           <div class="w-full h-auto space-y-2 pt-2 pl-4">
             <p class="text-[#4B5563] dark:text-[#FAFAFA] font-[600]">
               3.2. Other than as set out in this Privacy Policy, we may disclose
@@ -518,7 +517,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
               </li>
             </ol>
           </div>
-          <!-- Point 3.3 -->
+
           <div class="w-full h-auto space-y-2 pt-2 pl-4">
             <p class="text-[#4B5563] dark:text-[#FAFAFA] font-[600]">
               3.3. Seleris will ensure security control of Personal Data in
@@ -526,7 +525,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
             </p>
           </div>
         </div>
-        <!-- Point 4 -->
+
         <div class="w-full h-auto">
           <p class="font-[700] dark:text-[#FAFAFA]">
             4. Access to or Correction of Your Personal Data
@@ -573,7 +572,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
             </ol>
           </div>
         </div>
-        <!-- Point 5 -->
+
         <div class="w-full h-auto">
           <p class="font-[700] dark:text-[#FAFAFA]">5. Approval</p>
           <div class="space-y-3 pl-5 pt-2">
@@ -632,7 +631,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
             </p>
           </div>
         </div>
-        <!-- Point 6 -->
+
         <div class="w-full h-auto">
           <p class="font-[700] dark:text-[#FAFAFA]">
             6. Camera and Location Permisisons
@@ -652,7 +651,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
             </p>
           </div>
         </div>
-        <!-- Point 7 -->
+
         <div class="w-full h-auto">
           <p class="font-[700] dark:text-[#FAFAFA]">
             7. Deletion of Your Personal Data
@@ -695,7 +694,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
             </p>
           </div>
         </div>
-        <!-- Point 8 -->
+
         <div class="w-full h-auto">
           <p class="font-[700] dark:text-[#FAFAFA]">
             8. Storage of Your Personal Data
@@ -714,7 +713,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
             </p>
           </div>
         </div>
-        <!-- Point 9 -->
+
         <div class="w-full h-auto">
           <p class="font-[700] dark:text-[#FAFAFA]">
             9. Personal Data Protection
@@ -736,7 +735,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
             </p>
           </div>
         </div>
-        <!-- Point 10 -->
+
         <div class="w-full h-auto">
           <p class="font-[700] dark:text-[#FAFAFA]">
             10. Children's Personal Data
@@ -755,7 +754,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
             </p>
           </div>
         </div>
-        <!-- Point 11 -->
+
         <div class="w-full h-auto">
           <p class="font-[700] dark:text-[#FAFAFA]">
             11. Links to Other Seleris Platforms
@@ -770,7 +769,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
             </p>
           </div>
         </div>
-        <!-- Point 12 -->
+
         <div class="w-full h-auto">
           <p class="font-[700] dark:text-[#FAFAFA]">
             12. Registration and Membership
@@ -794,7 +793,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
             </ol>
           </div>
         </div>
-        <!-- Point 13 -->
+
         <div class="w-full h-auto">
           <p class="font-[700] dark:text-[#FAFAFA]">13. Complaint</p>
           <div class="space-y-3 pl-5 pt-2">
@@ -812,7 +811,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
             </p>
           </div>
         </div>
-        <!-- Point 14 -->
+
         <div class="w-full h-auto">
           <p class="font-[700] dark:text-[#FAFAFA]">14. Language</p>
           <div class="space-y-3 pl-5 pt-2">
@@ -824,7 +823,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
             </p>
           </div>
         </div>
-        <!-- Point 15 -->
+
         <div class="w-full h-auto">
           <p class="font-[700] dark:text-[#FAFAFA]">15. Our Contact Details</p>
           <div class="space-y-3 pl-5 pt-2">

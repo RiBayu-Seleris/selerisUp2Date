@@ -147,7 +147,6 @@ import CallIcon from "@/components/icons/CallIcon.vue";
   </div>
 </template>
 <style scoped>
-/* 🌞 LIGHT MODE */
 input {
   border: 0.25px solid #d1d5db;
   background-color: #ffffff;
@@ -163,7 +162,6 @@ input:focus {
   box-shadow: 0 0 0 1px #2ab857 !important;
 }
 
-/* 🌙 DARK MODE */
 .dark input {
   border: 0.25px solid rgba(250, 250, 250, 0.25);
   background-color: #323232;

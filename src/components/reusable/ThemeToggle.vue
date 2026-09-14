@@ -20,7 +20,6 @@ const label = computed(() =>
     @click="themeStore.toggleTheme"
     class="w-10 h-10 sm:w-11 sm:h-11 lg:w-10 lg:h-10 xl:w-11 xl:h-11 shrink-0 rounded-lg bg-white dark:bg-[#323232] border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30 shadow-[inset_0px_0px_17px_-3px_rgba(0,_0,_0,_0.1)] cursor-pointer flex items-center justify-center relative overflow-hidden transition-all duration-300 hover:border-[#1AB24F]/60 dark:hover:border-[#FAFAFA]/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1AB24F]/60"
   >
-    <!-- Sun Icon (light mode) -->
     <svg
       class="absolute w-5 h-5 sm:w-[22px] sm:h-[22px] text-[#1AB24F] transition-all duration-300 ease-in-out"
       :class="
@@ -41,7 +40,6 @@ const label = computed(() =>
       />
     </svg>
 
-    <!-- Moon Icon (dark mode) -->
     <svg
       class="absolute w-5 h-5 sm:w-[22px] sm:h-[22px] text-[#FAFAFA] transition-all duration-300 ease-in-out"
       :class="

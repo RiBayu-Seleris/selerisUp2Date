@@ -120,21 +120,6 @@ const updateMaxHeight = async () => {
 const changePage = async (page) => {
   if (page < 1 || page > pagination.value.last_page) return;
 
-  /* URUTANNYA PENTING: gulir DULU, baru ambil datanya.
-
-     Kalau dibalik — menunggu data siap baru menggulir — pengunjung melihat
-     isi daftar berganti lebih dulu di posisi lamanya, baru halaman meloncat
-     ke atas. Terbaca sebagai kedipan, lalu lompatan.
-
-     Dengan gulir didahulukan, yang terlihat cuma satu gerakan: halaman naik
-     ke daftar, dan isinya sudah berganti begitu sampai di sana.
-
-     Posisi tujuannya dihitung sekarang, sebelum data berganti, karena setelah
-     daftarnya bertukar tinggi halaman bisa berubah dan perhitungannya meleset. */
-  /* #blogSection hanya ada pada tampilan tanpa pencarian. Begitu filter atau
-     pencarian aktif, cabang tampilan yang dipakai berbeda dan elemen itu tidak
-     digambar sama sekali — dulu akibatnya gulirnya dilewati diam-diam tanpa
-     pesan apa pun. #blogTop dipakai sebagai cadangan karena selalu ada. */
   const section =
     document.getElementById("blogSection") ||
     document.getElementById("blogTop");
@@ -359,7 +344,6 @@ const finalBlogs = computed(() => {
 
   let result = [...blogs.value]; // clone dulu (PENTING)
 
-  /* 🔎 SEARCH */
   if (searchQuery.value) {
     const q = searchQuery.value.toLowerCase();
     result = result.filter(
@@ -369,12 +353,10 @@ const finalBlogs = computed(() => {
     );
   }
 
-  /* 🏷️ CATEGORY */
   if (selectedCategory.value !== "All Articles") {
     result = result.filter((b) => b.category_name === selectedCategory.value);
   }
 
-  /* 📅 DATE RANGE */
   if (customDateRange.value.start && customDateRange.value.end) {
     const start = new Date(customDateRange.value.start);
     const end = new Date(customDateRange.value.end);
@@ -385,7 +367,6 @@ const finalBlogs = computed(() => {
     });
   }
 
-  /* 🔃 SORTING */
   switch (selectedPostTime.value.value) {
     case "latest":
       result.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
@@ -405,14 +386,10 @@ const finalBlogs = computed(() => {
 </script>
 
 <template>
-  <!-- id="blogTop" dipakai sebagai titik tuju gulir CADANGAN saat paginasi.
-       Elemen ini selalu tergambar, berbeda dengan #blogSection yang hanya ada
-       pada tampilan tanpa pencarian. -->
   <section
     id="blogTop"
     class="flex flex-col relative w-full h-auto lg:max-w-2xl mx-auto px-8 md:px-8 lg:px-0"
   >
-    <!-- Search Frame -->
     <div
       class="w-full h-auto rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656]"
     >
@@ -438,7 +415,6 @@ const finalBlogs = computed(() => {
     </div>
 
     <div class="w-full h-auto grid grid-cols-12 gap-x-2 mt-5">
-      <!-- Category -->
       <div
         class="col-span-6 sm:col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656]"
       >
@@ -456,7 +432,7 @@ const finalBlogs = computed(() => {
               :class="isCategoryOpen ? 'rotate-180 transition' : 'transition'"
             />
           </div>
-          <!-- List dropdown -->
+
           <div
             v-if="isCategoryOpen"
             class="absolute left-0 top-12 mt-1 w-full rounded-[5px] shadow bg-white dark:bg-[#565656] z-10 p-[1px]"
@@ -475,7 +451,6 @@ const finalBlogs = computed(() => {
         </div>
       </div>
 
-      <!-- PostTime -->
       <div
         class="col-span-6 sm:col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656]"
       >
@@ -494,7 +469,6 @@ const finalBlogs = computed(() => {
             />
           </div>
 
-          <!-- List dropdown -->
           <div
             v-if="isPostTimeOpen"
             class="absolute left-0 top-12 mt-1 w-full rounded-[5px] shadow bg-white dark:bg-[#565656] z-10 p-[1px]"
@@ -513,7 +487,6 @@ const finalBlogs = computed(() => {
         </div>
       </div>
 
-      <!-- Custom Date -->
       <div
         class="col-span-12 sm:col-span-4 h-full rounded-[5px] bg-[#D9D9D9] p-[1px] dark:bg-[#565656] mt-3 sm:mt-0"
       >
@@ -542,7 +515,7 @@ const finalBlogs = computed(() => {
                 }}
               </span>
             </div>
-            <!-- Ikon kalender -->
+
             <div class="flex items-center">
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -561,7 +534,6 @@ const finalBlogs = computed(() => {
             </div>
           </div>
 
-          <!-- Dropdown Date Range -->
           <div
             v-if="showDateRange"
             class="absolute right-0 top-12 mt-1 w-auto rounded-[5px] shadow bg-white dark:bg-[#565656] z-10 p-[1px]"
@@ -570,14 +542,13 @@ const finalBlogs = computed(() => {
               class="w-full h-auto rounded-[5px] bg-white dark:bg-[#17181A] p-3"
             >
               <div class="flex w-auto flex-row items-center gap-x-1">
-                <!-- Start Date -->
                 <input
                   type="date"
                   v-model="customDateRange.start"
                   class="w-full border rounded px-2 py-1 text-[14px] text-[#6C6C6C] dark:text-black"
                 />
                 <span>-</span>
-                <!-- End Date -->
+
                 <input
                   type="date"
                   v-model="customDateRange.end"
@@ -591,14 +562,10 @@ const finalBlogs = computed(() => {
     </div>
   </section>
 
-  <!-- Loading Search Query Section -->
   <div
     v-if="loadingTyping"
     class="w-full h-auto lg:px-0 pt-4 flex justify-center"
   >
-    <!-- Loader Frame -->
-    <!-- Animasi loading. WebM ini punya kanal alpha (transparan), jadi
-         satu berkas cocok untuk mode terang maupun gelap. -->
     <video
       autoplay
       loop
@@ -612,7 +579,6 @@ const finalBlogs = computed(() => {
     </video>
   </div>
 
-  <!-- Search Result -->
   <div
     v-else-if="finalBlogs.length && searchQuery && !loadingTyping"
     class="w-full h-auto mt-5"
@@ -709,7 +675,6 @@ const finalBlogs = computed(() => {
                       class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
                     >
                       {{ newestBlog.comments }}
-                      <!-- 15 -->
                     </span>
                   </div>
                 </router-link>
@@ -808,12 +773,10 @@ const finalBlogs = computed(() => {
       </div>
     </section>
 
-    <!-- Pagination -->
     <div
       v-if="pagination?.last_page >= 1"
       class="pagination flex gap-2 justify-end px-8 xl:px-0 mb-20 mt-10"
     >
-      <!-- Tombol Prev -->
       <button
         aria-label="Pagination Previous"
         class="px-3 py-1 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition disabled:opacity-50"
@@ -823,7 +786,6 @@ const finalBlogs = computed(() => {
         {{ $t("misc.prev") }}
       </button>
 
-      <!-- Nomor halaman -->
       <button
         v-for="page in pagination.last_page"
         aria-label="Pagination Number"
@@ -838,7 +800,6 @@ const finalBlogs = computed(() => {
         {{ page }}
       </button>
 
-      <!-- Tombol Next -->
       <button
         aria-label="Pagination Next"
         class="px-3 py-1 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition disabled:opacity-50"
@@ -850,7 +811,6 @@ const finalBlogs = computed(() => {
     </div>
   </div>
 
-  <!-- Search Result No Blog Found -->
   <div
     v-else-if="searchQuery && !finalBlogs.length && !loadingTyping"
     class="w-full h-auto mt-5 text-center py-6 text-gray-500"
@@ -867,7 +827,6 @@ const finalBlogs = computed(() => {
     </p>
   </div>
 
-  <!-- 📅 4. Filter kategori atau date range aktif tapi hasil kosong -->
   <div
     v-else-if="
       !searchQuery &&
@@ -890,7 +849,6 @@ const finalBlogs = computed(() => {
     </p>
   </div>
 
-  <!-- Hasil Filter by Category -->
   <div
     v-else-if="
       selectedCategory !== 'All Articles' && finalBlogs.length && !searchQuery
@@ -1034,7 +992,6 @@ const finalBlogs = computed(() => {
                         <div
                           class="w-full h-auto flex flex-col gap-y-4 lg:gap-y-5 cursor-pointer"
                         >
-                          <!-- Linked In -->
                           <div
                             class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                           >
@@ -1049,7 +1006,7 @@ const finalBlogs = computed(() => {
                               <span class="text-[14px]">LinkedIn</span>
                             </div>
                           </div>
-                          <!-- Facebook -->
+
                           <div
                             class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                           >
@@ -1064,7 +1021,7 @@ const finalBlogs = computed(() => {
                               <span class="text-[14px]">Facebook</span>
                             </div>
                           </div>
-                          <!-- Twitter -->
+
                           <div
                             class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                           >
@@ -1091,12 +1048,10 @@ const finalBlogs = computed(() => {
       </div>
     </div>
 
-    <!-- Pagination -->
     <div
       v-if="pagination?.last_page >= 1"
       class="pagination flex gap-2 justify-end px-8 xl:px-0 mb-20 mt-10"
     >
-      <!-- Tombol Prev -->
       <button
         aria-label="Pagination Previous"
         class="px-3 py-1 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition disabled:opacity-50"
@@ -1106,7 +1061,6 @@ const finalBlogs = computed(() => {
         {{ $t("misc.prev") }}
       </button>
 
-      <!-- Nomor halaman -->
       <button
         aria-label="Pagination Number"
         v-for="page in pagination.last_page"
@@ -1121,7 +1075,6 @@ const finalBlogs = computed(() => {
         {{ page }}
       </button>
 
-      <!-- Tombol Next -->
       <button
         aria-label="Pagination Next"
         class="px-3 py-1 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition disabled:opacity-50"
@@ -1133,13 +1086,10 @@ const finalBlogs = computed(() => {
     </div>
   </div>
 
-  <!-- Frame Blog Newest, Popular and Blog Lists -->
   <div v-else-if="!searchQuery && !loadingTyping" class="w-full h-auto mt-10">
-    <!-- Newest and Popular -->
     <section
       class="w-full h-auto flex flex-col lg:grid lg:grid-cols-12 gap-x-5 xl:gap-x-5 px-8 md:px-8 lg:px-8 xl:px-0"
     >
-      <!-- Newest Blog-->
       <div
         class="w-full h-full col-span-12 lg:col-span-8 rounded-lg bg-[#D9D9D9] p-[1px] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]"
       >
@@ -1153,11 +1103,8 @@ const finalBlogs = computed(() => {
               {{ $t("misc.news") }}
             </p>
           </div>
-          <!-- Loading -->
+
           <div v-if="loading" class="flex justify-center items-center">
-            <!-- Loader Frame -->
-            <!-- Animasi loading. WebM ini punya kanal alpha (transparan), jadi
-                 satu berkas cocok untuk mode terang maupun gelap. -->
             <video
               autoplay
               loop
@@ -1170,9 +1117,9 @@ const finalBlogs = computed(() => {
               <source :src="loadingAnimation" type="video/webm" />
             </video>
           </div>
-          <!-- Error Global -->
+
           <div v-else-if="error">{{ error }}</div>
-          <!-- newestError -->
+
           <div v-else-if="newestError" class="lg:pb-4">
             {{ newestError }}
           </div>
@@ -1187,7 +1134,6 @@ const finalBlogs = computed(() => {
               <div class="relative flex flex-col">
                 <div class="w-full h-auto flex flex-col gap-y-4">
                   <figure class="w-full h-auto">
-                    <!-- src="/assets/images/blog/new-example.png" -->
                     <img
                       :src="newestBlog.cover"
                       alt="Newest Blog Cover"
@@ -1206,7 +1152,6 @@ const finalBlogs = computed(() => {
                       <p
                         class="text-[12px] sm:text-[14px] text-[#FFFFFF] bg-[#3758F9] px-2 py-1 rounded-md"
                       >
-                        <!-- Mar 05, 2024 -->
                         {{ utils.fromISODate(newestBlog.created_at) }}
                       </p>
                     </div>
@@ -1319,7 +1264,6 @@ const finalBlogs = computed(() => {
                         <div
                           class="w-full h-auto flex flex-col gap-y-4 lg:gap-y-5 cursor-pointer"
                         >
-                          <!-- Linked In -->
                           <div
                             class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                           >
@@ -1334,7 +1278,7 @@ const finalBlogs = computed(() => {
                               <span class="text-[14px]">LinkedIn</span>
                             </div>
                           </div>
-                          <!-- Facebook -->
+
                           <div
                             class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                           >
@@ -1349,7 +1293,7 @@ const finalBlogs = computed(() => {
                               <span class="text-[14px]">Facebook</span>
                             </div>
                           </div>
-                          <!-- Twitter -->
+
                           <div
                             class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                           >
@@ -1374,7 +1318,7 @@ const finalBlogs = computed(() => {
           </div>
         </div>
       </div>
-      <!-- Most Popular Desktop -->
+
       <div
         class="hidden lg:flex lg:col-span-4 w-full h-auto bg-[#D9D9D9] !p-[1px] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656] rounded-lg"
       >
@@ -1388,12 +1332,8 @@ const finalBlogs = computed(() => {
               {{ $t("blog.mostPopular") }}
             </p>
           </div>
-          <!-- Loading -->
-          <!-- Loading -->
+
           <div v-if="loading" class="flex justify-center items-center">
-            <!-- Loader Frame -->
-            <!-- Animasi loading. WebM ini punya kanal alpha (transparan), jadi
-                 satu berkas cocok untuk mode terang maupun gelap. -->
             <video
               autoplay
               loop
@@ -1406,14 +1346,13 @@ const finalBlogs = computed(() => {
               <source :src="loadingAnimation" type="video/webm" />
             </video>
           </div>
-          <!-- Error Global -->
+
           <div v-else-if="error">{{ error }}</div>
-          <!-- popularError -->
+
           <div v-else-if="popularError" class="px-6 pt-4">
             {{ popularError }}
           </div>
           <div v-else-if="popularBlog" class="flex flex-col w-full h-full mt-4">
-            <!-- ✅ Hanya tampilkan gambar dari data pertama -->
             <router-link
               v-if="popularBlog.length > 0"
               :to="`/blog/${popularBlog[0].slug}`"
@@ -1427,7 +1366,7 @@ const finalBlogs = computed(() => {
                 />
               </figure>
             </router-link>
-            <!-- ✅ Daftar lainnya -->
+
             <div class="flex flex-col w-full h-full">
               <div
                 v-for="(data, index) in popularBlog"
@@ -1467,7 +1406,7 @@ const finalBlogs = computed(() => {
         </div>
       </div>
     </section>
-    <!-- Most Popular Mobile -->
+
     <div
       class="relative hidden md:flex flex-col lg:hidden w-full h-auto mt-10 py-4"
     >
@@ -1481,11 +1420,7 @@ const finalBlogs = computed(() => {
       <div
         class="relative flex flex-row w-full h-auto gap-x-4 sm:gap-x-4 md:gap-x-8 overflow-x-auto snap-x snap-mandatory mt-3 pb-10 pl-8 pr-8 hide-scrollbar"
       >
-        <!-- Loading -->
         <div v-if="loading" class="flex justify-center items-center">
-          <!-- Loader Frame -->
-          <!-- Animasi loading. WebM ini punya kanal alpha (transparan), jadi
-               satu berkas cocok untuk mode terang maupun gelap. -->
           <video
             autoplay
             loop
@@ -1506,7 +1441,6 @@ const finalBlogs = computed(() => {
           class="snap-center shrink-0 relative cursor-default h-auto shadow-md rounded-lg bg-white !p-[1px] dark:bg-gradient-to-bl dark:from-[#17181A] dark:from-25% dark:to-[#565656]"
           :class="popularBlog.length === 1 ? 'w-full' : 'w-full md:w-[650px]'"
         >
-          <!-- Card -->
           <router-link :to="`/blog/${data.slug}`">
             <div
               class="relative h-full w-full p-4 cursor-default shadow-md rounded-lg bg-white dark:bg-[#1D1F23]"
@@ -1574,7 +1508,6 @@ const finalBlogs = computed(() => {
         </div>
       </div>
     </div>
-    <!-- BlogList -->
 
     <div
       v-if="pagination?.last_page"
@@ -1590,11 +1523,7 @@ const finalBlogs = computed(() => {
       id="blogSection"
       class="relative z-0 w-full h-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-8 md:px-8 xl:px-0"
     >
-      <!-- Loading -->
       <div v-if="loading" class="w-full flex justify-center items-center">
-        <!-- Loader Frame -->
-        <!-- Animasi loading. WebM ini punya kanal alpha (transparan), jadi
-             satu berkas cocok untuk mode terang maupun gelap. -->
         <video
           autoplay
           loop
@@ -1736,7 +1665,6 @@ const finalBlogs = computed(() => {
                       <div
                         class="w-full h-auto flex flex-col gap-y-4 lg:gap-y-5 cursor-pointer"
                       >
-                        <!-- Linked In -->
                         <div
                           class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                         >
@@ -1751,7 +1679,7 @@ const finalBlogs = computed(() => {
                             <span class="text-[14px]">LinkedIn</span>
                           </div>
                         </div>
-                        <!-- Facebook -->
+
                         <div
                           class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                         >
@@ -1766,7 +1694,7 @@ const finalBlogs = computed(() => {
                             <span class="text-[14px]">Facebook</span>
                           </div>
                         </div>
-                        <!-- Twitter -->
+
                         <div
                           class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                         >
@@ -1792,12 +1720,10 @@ const finalBlogs = computed(() => {
       </div>
     </section>
 
-    <!-- Pagination -->
     <div
       v-if="pagination?.last_page >= 1"
       class="pagination flex gap-2 justify-end px-8 xl:px-0 mb-20 mt-10"
     >
-      <!-- Tombol Prev -->
       <button
         aria-label="Pagination Previous"
         class="px-3 py-1 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition disabled:opacity-50"
@@ -1807,7 +1733,6 @@ const finalBlogs = computed(() => {
         {{ $t("misc.prev") }}
       </button>
 
-      <!-- Nomor halaman -->
       <button
         aria-label="Pagination Number"
         v-for="page in pagination.last_page"
@@ -1822,7 +1747,6 @@ const finalBlogs = computed(() => {
         {{ page }}
       </button>
 
-      <!-- Tombol Next -->
       <button
         aria-label="Pagination Next"
         class="px-3 py-1 rounded bg-gray-300 text-gray-700 hover:bg-gray-400 transition disabled:opacity-50"

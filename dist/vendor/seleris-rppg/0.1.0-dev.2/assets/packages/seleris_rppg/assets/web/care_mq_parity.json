@@ -1,0 +1,70 @@
+{
+  "artifact_version": "1.6.9",
+  "calculation_version": "salvion-care-v3-sdk-1.6.9-mq-parity",
+  "source_hashes_sha256": {
+    "seleris_medins/seleris_medins_code.py": "9ACC684913A0CF4F1CC4351E5CDD329D1B2FBAA79D82D91BEDC0BB0E49744935",
+    "seleris_medins/seleris_care_advice.py": "E372084DF373764B7DF81F036966DB056044597EAEFCE4B2CC74949C240F504E",
+    "seleris_medins/health_score_seleris_medins.py": "6592E382D6069B76F40B839DA1106B1656C8C5BA93F0CD539465DAFDB46687EC",
+    "assets/predict_vital_sign.py": "6238284123C8BEC9C3AF07AE257A3601495504DCA0609894654A62B9130E70B4",
+    "assets/wording.py": "3D1FB95404B5C7F66EAA45838C80AC398A1606FDBB8C73EC340FB767CD0F3BE7",
+    "assets/bio_age.py": "572B1950E6C612AB177904D600323083C67C16D6ACE1B335BAD8CB1E8A3CA154"
+  },
+  "fitness_thresholds": [
+    {"minimum": 85, "category": 1, "deskripsi": "Sangat Bugar", "decision_wording": "fit"},
+    {"minimum": 70, "category": 2, "deskripsi": "Bugar", "decision_wording": "fit"},
+    {"minimum": 50, "category": 3, "deskripsi": "Cukup Bugar", "decision_wording": "fit"},
+    {"minimum": 25, "category": 4, "deskripsi": "Kurang Bugar", "decision_wording": "unfit"},
+    {"minimum": null, "category": 5, "deskripsi": "Tidak Bugar", "decision_wording": "unfit"}
+  ],
+  "decision_wordings": {
+    "1": [
+      "Luar biasa! Kondisi Anda sangat bugar. Pertahankan gaya hidup sehat Anda untuk menjaga performa tubuh yang prima.",
+      "Hasil Anda menunjukkan tingkat kebugaran yang excellent. Terus lanjutkan kebiasaan baik Anda dalam berolahraga dan menjaga pola makan.",
+      "Anda berada dalam kondisi puncak. Pastikan untuk tetap konsisten dengan rutinitas kesehatan Anda."
+    ],
+    "2": [
+      "Bagus! Anda dalam kondisi bugar. Tingkatkan intensitas atau variasi latihan Anda untuk mencapai tingkat kebugaran yang lebih tinggi.",
+      "Kondisi Anda sudah baik dan di atas rata-rata. Tetap jaga komitmen Anda pada gaya hidup aktif dan sehat.",
+      "Hasil yang baik! Anda memiliki fondasi kebugaran yang kuat. Lanjutkan usaha Anda."
+    ],
+    "3": [
+      "Anda memiliki tingkat kebugaran yang cukup. Dengan sedikit peningkatan pada rutinitas olahraga, Anda bisa mencapai hasil yang lebih baik.",
+      "Kondisi Anda memadai untuk aktivitas sehari-hari. Pertimbangkan untuk menambah jadwal olahraga rutin untuk meningkatkan stamina Anda.",
+      "Anda berada di jalur yang benar. Fokus pada konsistensi untuk meningkatkan tingkat kebugaran Anda ke level selanjutnya."
+    ],
+    "4": [
+      "Hasil Anda menunjukkan ada ruang untuk perbaikan. Mulailah dengan aktivitas fisik ringan secara teratur, seperti berjalan kaki 30 menit setiap hari.",
+      "Tingkat kebugaran Anda perlu ditingkatkan. Disarankan untuk mulai membangun kebiasaan sehat dan berkonsultasi dengan ahli.",
+      "Jangan berkecil hati. Langkah pertama untuk menjadi lebih bugar adalah dengan meningkatkan aktivitas fisik harian Anda secara bertahap."
+    ],
+    "5": [
+      "Kondisi Anda saat ini tidak bugar dan berisiko. Sangat disarankan untuk berkonsultasi dengan dokter untuk evaluasi kesehatan menyeluruh.",
+      "Hasil ini perlu menjadi perhatian. Segera ambil langkah untuk mengubah gaya hidup dengan bimbingan tenaga medis profesional.",
+      "Untuk kesehatan jangka panjang, perubahan signifikan pada aktivitas fisik dan pola makan perlu dilakukan. Mohon diskusikan hasil ini."
+    ]
+  },
+  "risk_score_weights": {
+    "hipertensi": 17,
+    "diabetes_tipe_2": 16,
+    "hiperkolesterolemia": 5,
+    "hipertrigliseridemia": 5,
+    "stroke": 18,
+    "serangan_jantung": 18,
+    "penyakit_kardiovaskular": 16,
+    "gula_darah_puasa": 5
+  },
+  "risk_output_order": [
+    "hipertensi",
+    "diabetes_tipe_2",
+    "penyakit_kardiovaskular",
+    "hiperkolesterolemia",
+    "hipertrigliseridemia",
+    "serangan_jantung",
+    "stroke",
+    "gula_darah_puasa",
+    "hemoglobin_rendah_atau_anemia",
+    "ascvd",
+    "gagal_jantung",
+    "fatty_liver"
+  ]
+}

@@ -63,7 +63,6 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="flex flex-col relative w-full px-12 py-10 dark:bg-[#17181A]">
-    <!-- Title -->
     <div class="text-center mb-4">
       <div
         class="inline-flex gap-2 items-end relative text-[20px] font-[400] text-[#89A6BA] dark:text-[#6A6A6A]"
@@ -105,7 +104,6 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
-    <!-- Content Grid Light -->
     <transition name="fade" mode="out-in" class="dark:hidden h-[200px]">
       <div :key="showPartners" class="flex flex-col items-center gap-6 mt-5">
         <template v-if="showPartners">
@@ -126,7 +124,6 @@ onBeforeUnmount(() => {
               row.length < columnsPerRow ? 'justify-center' : '',
             ]"
           >
-            <!-- rowIndex === 1 ? 'px-24' : 'px-0', -->
             <div
               v-for="(logo, index) in row"
               :key="`${rowIndex}-${index}`"
@@ -175,7 +172,6 @@ onBeforeUnmount(() => {
       </div>
     </transition>
 
-    <!-- Content Grid Dark -->
     <transition name="fade" mode="out-in" class="hidden dark:flex h-[200px]">
       <div :key="showPartners" class="flex flex-col items-center gap-6 mt-5">
         <template v-if="showPartners">

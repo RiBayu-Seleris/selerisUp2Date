@@ -38,8 +38,6 @@ defineProps({
   <div
     class="snap-center shrink-0 relative w-[335px] h-[419px] group cursor-grab"
   >
-    <!-- Card A -->
-
     <div
       :class="`absolute top-0 left-0 z-0 flex flex-col w-full h-full bg-cover bg-center bg-no-repeat bg-centerCertBefore dark:bg-centerCertDarkBefore`"
     >
@@ -65,7 +63,7 @@ defineProps({
         </div>
       </div>
     </div>
-    <!-- Card B -->
+
     <div
       :class="`absolute top-0 left-0 z-0 flex flex-col w-full h-full bg-cover bg-no-repeat bg-center opacity-0 group-hover:opacity-100 transition-opacity duration-700 ease-in-out bg-centerCertAfter dark:bg-centerCertDarkAfter`"
     >

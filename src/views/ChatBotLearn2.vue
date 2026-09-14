@@ -1,13 +1,10 @@
 <script setup></script>
 
 <template>
-  <!-- ChatbotStatic.vue -->
   <div
     class="flex flex-col w-full h-screen justify-between border shadow-lg bg-white mx-auto"
   >
-    <!-- Daftar pesan -->
     <div class="flex-1 overflow-y-auto p-4 space-y-5">
-      <!-- Pesan dari bot -->
       <div class="text-left">
         <div
           class="inline-block px-3 py-2 bg-gray-200 text-black rounded-lg rounded-bl-none"
@@ -16,7 +13,6 @@
         </div>
       </div>
 
-      <!-- Pesan dari user -->
       <div class="text-right">
         <div
           class="inline-block px-3 py-2 bg-blue-500 text-white rounded-lg rounded-br-none"
@@ -26,7 +22,6 @@
       </div>
     </div>
 
-    <!-- Input pesan -->
     <div class="flex flex-row rounded-b-lg">
       <input
         type="text"

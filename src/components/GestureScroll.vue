@@ -20,7 +20,6 @@ import { ref, onMounted, onUnmounted } from "vue";
 import { Hands } from "@mediapipe/hands";
 import { Camera } from "@mediapipe/camera_utils";
 
-/* ================= PROPS & EMITS ================= */
 const props = defineProps({
   enableSidebarGesture: Boolean,
   disableScroll: Boolean,
@@ -28,7 +27,6 @@ const props = defineProps({
 
 const emit = defineEmits(["open-sidebar", "close-sidebar"]);
 
-/* ================= STATE ================= */
 const video = ref(null);
 const isRunning = ref(false);
 const isHandDetected = ref(false);
@@ -38,14 +36,12 @@ let camera = null;
 let animationFrameId = null;
 let initialized = false;
 
-/* ================= SCROLL STATE ================= */
 let lastHandY = null;
 let lastHandX = null;
 let targetVelocity = 0;
 let currentVelocity = 0;
 let lastSwipeTime = 0;
 
-/* ================= CONFIG ================= */
 const FRICTION = 0.25;
 const SENSITIVITY = 2500;
 const DEADZONE = 0.003;
@@ -53,7 +49,6 @@ const MAX_VELOCITY = 50;
 const SWIPE_THRESHOLD = 0.06;
 const SWIPE_COOLDOWN = 800;
 
-/* ================= INIT (ONCE) ================= */
 async function init() {
   if (initialized) return;
 
@@ -83,7 +78,6 @@ async function init() {
   initialized = true;
 }
 
-/* ================= CONTROLS ================= */
 async function start() {
   await init();
   resetMotion();
@@ -104,7 +98,6 @@ function toggle() {
   isRunning.value ? stop() : start();
 }
 
-/* ================= HELPERS ================= */
 function resetMotion() {
   lastHandY = null;
   lastHandX = null;
@@ -112,7 +105,6 @@ function resetMotion() {
   currentVelocity = 0;
 }
 
-/* ================= HAND RESULTS ================= */
 function onResults(results) {
   if (!results.multiHandLandmarks?.length) {
     isHandDetected.value = false;
@@ -125,7 +117,6 @@ function onResults(results) {
 
   isHandDetected.value = true;
 
-  /* === SIDEBAR SWIPE === */
   if (props.enableSidebarGesture && window.innerWidth < 1024) {
     const x = lm[8].x;
     if (lastHandX !== null) {
@@ -145,7 +136,6 @@ function onResults(results) {
     lastHandX = x;
   }
 
-  /* === SCROLL === */
   const y = lm[8].y;
   if (lastHandY !== null) {
     const dy = lastHandY - y;
@@ -159,7 +149,6 @@ function onResults(results) {
   lastHandY = y;
 }
 
-/* ================= SCROLL LOOP ================= */
 function startScrollLoop() {
   const loop = () => {
     if (!isRunning.value) return;
@@ -174,7 +163,6 @@ function startScrollLoop() {
   loop();
 }
 
-/* ================= CLEANUP ================= */
 onUnmounted(() => {
   stop();
   hands?.close();

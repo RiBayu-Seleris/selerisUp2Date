@@ -20,9 +20,6 @@ const emit = defineEmits([
   "closeAll",
 ]);
 
-/* ===========================
-   LOCAL REFS
-=========================== */
 const isStartDateOpen = ref(false);
 const startDateWrapper = ref(null);
 
@@ -49,10 +46,6 @@ const startDateModel = computed({
   set: (val) => emit("update:startDate", val ?? ""),
 });
 
-/* ===========================
-   SALARY HANDLING
-   (use :value + @input OR v-model on computed)
-=========================== */
 function onSalaryInput(e) {
   const raw = e.target.value.replace(/\D/g, "");
   const formatted = utils.separatorNumber(raw);
@@ -82,9 +75,6 @@ const handleClickOutside = (e) => {
   emit("closeAll");
 };
 
-/* ===========================
-   QUILL INIT
-=========================== */
 onMounted(() => {
   reasonDescriptionQuill.value = new Quill(reasonDescriptionEditor.value, {
     theme: "snow",
@@ -127,7 +117,6 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="w-full h-auto flex flex-col gap-y-3">
-    <!-- Date of Joining -->
     <div class="w-full h-auto grid grid-cols-2 gap-x-10">
       <div class="flex flex-col w-full">
         <label
@@ -158,7 +147,6 @@ onBeforeUnmount(() => {
           <span class="text-red-500">*</span>
         </label>
         <div class="relative">
-          <!-- Prefix "Rp" -->
           <span
             class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-[16px]"
           >

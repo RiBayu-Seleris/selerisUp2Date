@@ -81,8 +81,6 @@ onUnmounted(() => {
 </script>
 
 <template>
-  <!-- Animasi masuk halaman diatur dari App.vue lewat <router-view>, supaya
-       jalannya tepat saat layar loading menutup. -->
   <div class="relative w-full mx-auto font-poppins">
     <main class="relative w-full mx-auto">
       <header v-if="!isSelerisCredit" class="fixed top-0 w-full z-50">
@@ -96,11 +94,10 @@ onUnmounted(() => {
         </transition>
       </header>
 
-      <!-- Tombol kembali ke atas (dengan cincin kemajuan gulir) -->
       <ScrollTopButton />
 
       <Sidebar />
-      <!-- router-view produk -->
+
       <router-view />
     </main>
 

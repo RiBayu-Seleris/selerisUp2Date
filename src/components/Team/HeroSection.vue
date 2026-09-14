@@ -22,14 +22,12 @@ import HeroText from "@/components/reusable/HeroText.vue";
       <p
         class="text-[13px] sm:text-[12px] md:text-[16px] lg:text-[16px] xl:text-[18px] font-[400] px-4 sm:px-0 tracking-wider text-[#89A6BA] dark:text-[#6F6F6F] text-center"
       >
-        <!-- Desktop -->
         <span class="hidden sm:block">
           {{ $t("team.subtitle1") }}
           <br />
           {{ $t("team.subtitle2") }}
         </span>
 
-        <!-- Mobile -->
         <span class="block sm:hidden">
           {{ $t("team.subtitleMobile1") }}
           <br />

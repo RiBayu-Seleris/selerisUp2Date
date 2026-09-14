@@ -21,10 +21,8 @@ defineProps({
 </script>
 
 <template>
-  <!-- Desktop -->
   <div class="flex w-full h-auto">
     <div class="flex flex-row w-full h-full gap-x-5">
-      <!-- w-[15%] xl:w-[25%]  -->
       <div class="flex w-full max-w-max h-full">
         <img
           :src="icon"

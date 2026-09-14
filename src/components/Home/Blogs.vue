@@ -19,17 +19,11 @@ const utils = useUtilsStore();
 const pageLoading = usePageLoadingStore();
 const { t } = useI18n();
 
-/* =========================
-   STATE
-========================= */
 const blogs = ref([]);
 // const loading = ref(false);
 const activeShareId = ref(null);
 const shareRefs = ref([]); // simpan semua element share
 
-/* =========================
-   CONFIG
-========================= */
 const BASE_URL = import.meta.env.VITE_API_URL;
 // const VERSION = "v1";
 
@@ -39,9 +33,6 @@ const headerApi = {
   },
 };
 
-/* =========================
-   API CALL
-========================= */
 const getBlogs = async () => {
   pageLoading.start();
   try {
@@ -58,18 +49,12 @@ const getBlogs = async () => {
   }
 };
 
-/* =========================
-   RESPONSIVE WIDTH
-========================= */
 const windowWidth = ref(window.innerWidth);
 
 const handleResize = () => {
   windowWidth.value = window.innerWidth;
 };
 
-/* =========================
-   COMPUTED
-========================= */
 const latestBlogs = computed(() => {
   if (!Array.isArray(blogs.value)) return [];
 
@@ -81,9 +66,6 @@ const latestBlogs = computed(() => {
   return blogs.value.slice(0, limit);
 });
 
-/* =========================
-   SHARE
-========================= */
 const toggleShare = (id) => {
   activeShareId.value = activeShareId.value === id ? null : id;
 };
@@ -117,9 +99,6 @@ const handleClickOutside = (event) => {
   }
 };
 
-/* =========================
-   LIFECYCLE
-========================= */
 onMounted(() => {
   getBlogs();
   document.addEventListener("click", handleClickOutside);
@@ -150,21 +129,16 @@ onBeforeUnmount(() => {
         </p>
       </div>
     </div>
-    <!-- v-for="(data, index) in finalBlogs" -->
+
     <div class="flex flex-col relative w-full h-auto xl:px-16 mt-10 lg:mt-8">
       <div
         class="relative z-40 w-full h-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-8 md:px-8 xl:px-0"
       >
-        <!-- Jedanya SAMA dengan lama animasinya (700 ms, disetel di
-             src/main.js). Itu yang membuat kartunya benar-benar bergiliran:
-             kartu berikutnya baru berangkat tepat saat kartu sebelumnya
-             selesai, bukan menyusul di tengah jalan. Kalau durasi AOS di
-             main.js diubah, angka ini ikut. -->
         <div
           v-for="(data, i) in latestBlogs"
           :key="data.id"
           data-aos="zoom-in"
-          :data-aos-delay="i * 700"
+          :data-aos-delay="i * 500"
           class="relative w-full h-auto grid rounded-[10px] p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:to-[#565656]"
         >
           <div
@@ -188,7 +162,6 @@ onBeforeUnmount(() => {
                     class="text-[12px] md:text-[14px] lg:text-[14px] text-[#7B61FF] dark:text-[#FFFFFF] font-semibold"
                   >
                     {{ data.category_name }}
-                    <!-- CATEGORY -->
                   </p>
                 </div>
                 <div
@@ -198,7 +171,6 @@ onBeforeUnmount(() => {
                     class="text-[#FFFFFF] text-[12px] md:text-[12px] lg:text-[14px]"
                   >
                     {{ utils.fromISODate(data.created_at) }}
-                    <!-- Date -->
                   </p>
                 </div>
               </div>
@@ -209,7 +181,6 @@ onBeforeUnmount(() => {
                   class="text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] font-[500] text-[#111928] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] line-clamp-2"
                 >
                   {{ data.title }}
-                  <!-- TITLE -->
                 </p>
               </div>
               <div class="flex w-full h-auto justify-start items-start my-3">
@@ -217,7 +188,6 @@ onBeforeUnmount(() => {
                   class="text-[12px] lg:text-[14px] text-[#637381] line-clamp-2 lg:line-clamp-2"
                 >
                   {{ data.synopsis }}
-                  <!-- Lorem ipsum dolor sit, amet consectetur adipisicing elit.Officia, expedita! -->
                 </p>
               </div>
             </router-link>
@@ -237,7 +207,6 @@ onBeforeUnmount(() => {
                       class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
                     >
                       {{ utils.shortNumber(data.views) }}
-                      <!-- 100 -->
                     </span>
                   </div>
                 </router-link>
@@ -255,7 +224,6 @@ onBeforeUnmount(() => {
                       class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
                     >
                       {{ utils.shortNumber(data.comments) }}
-                      <!-- 200 -->
                     </span>
                   </div>
                 </router-link>
@@ -304,7 +272,6 @@ onBeforeUnmount(() => {
                         <div
                           class="w-full h-auto flex flex-col gap-y-4 lg:gap-y-5 cursor-pointer"
                         >
-                          <!-- Linked In -->
                           <div
                             class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                           >
@@ -319,7 +286,7 @@ onBeforeUnmount(() => {
                               <span class="text-[14px]">LinkedIn</span>
                             </div>
                           </div>
-                          <!-- Facebook -->
+
                           <div
                             class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                           >
@@ -334,7 +301,7 @@ onBeforeUnmount(() => {
                               <span class="text-[14px]">Facebook</span>
                             </div>
                           </div>
-                          <!-- Twitter -->
+
                           <div
                             class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                           >

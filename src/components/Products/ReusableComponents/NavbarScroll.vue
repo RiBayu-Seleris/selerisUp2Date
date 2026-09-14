@@ -89,8 +89,7 @@ onUnmounted(() => {
                   </nav>
                 </div>
               </div>
-              <!-- Slot kanan: pengalih bahasa. Grid ini 12 kolom —
-                   1 (logo) + 10 (menu) + 1 (slot ini) = 12, jadi pas sebaris. -->
+
               <div
                 class="hidden lg:flex items-center justify-end col-span-1 h-auto"
               >
@@ -98,12 +97,10 @@ onUnmounted(() => {
               </div>
             </div>
 
-            <!-- Mobile Navbar with Sidebar Button -->
             <div
               class="flex lg:hidden flex-row w-full h-auto justify-between px-4 md:px-8"
             >
               <router-link to="/" class="w-[40%] h-auto flex">
-                <!-- Logo terang (light mode) -->
                 <img
                   v-if="logo"
                   :src="logo"

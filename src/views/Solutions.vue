@@ -37,7 +37,6 @@ const slidePairs = computed(() => {
     v-if="data"
     class="dark:bg-[#17181A] w-full h-auto flex flex-col gap-y-10"
   >
-    <!-- Hero -->
     <section
       class="flex w-full h-auto pt-[120px] md:pt-[100px] xl:pt-[160px] dark:bg-[#17181A]"
     >
@@ -68,7 +67,6 @@ const slidePairs = computed(() => {
       </div>
     </section>
 
-    <!-- Overview -->
     <div class="w-full h-auto flex flex-col gap-y-10">
       <section
         data-aos="fade-up"
@@ -116,7 +114,7 @@ const slidePairs = computed(() => {
           </div>
         </div>
       </section>
-      <!-- Key Features -->
+
       <section
         data-aos="fade-up"
         class="flex flex-col md:flex-row gap-6 px-8 xl:px-28"
@@ -216,7 +214,7 @@ const slidePairs = computed(() => {
           </div>
         </div>
       </section>
-      <!-- More Features -->
+
       <section
         data-aos="fade-up"
         class="flex flex-col w-full h-auto gap-y-3 px-8 xl:px-28"
@@ -260,7 +258,7 @@ const slidePairs = computed(() => {
           </div>
         </div>
       </section>
-      <!-- Business Benefits -->
+
       <section data-aos="fade-up" class="w-full h-auto px-8 xl:px-28">
         <div
           class="w-full h-auto p-[1px] bg-[#E3E3E3] dark:bg-gradient-to-r dark:from-[#17181A] dark:to-[#000000]/60 rounded-2xl"
@@ -307,7 +305,7 @@ const slidePairs = computed(() => {
           </div>
         </div>
       </section>
-      <!-- CTA Banner -->
+
       <section
         data-aos="fade-up"
         class="w-full h-auto flex flex-col justify-center items-center px-8 xl:px-28"

@@ -17,7 +17,6 @@ defineProps({
 
 <template>
   <div class="w-full h-auto hidden lg:flex lg:flex-col">
-    <!-- loop -->
     <Swiper
       :modules="modules"
       :navigation="false"
@@ -26,7 +25,6 @@ defineProps({
       :slides-per-view="1"
       class="w-full h-auto mt-8"
     >
-      <!-- Bagi data menjadi grup 4 per slide -->
       <SwiperSlide
         v-for="(group, i) in Math.ceil(Testimonials.length / 4)"
         :key="i"
@@ -42,14 +40,12 @@ defineProps({
           />
         </div>
       </SwiperSlide>
-      <!-- Custom pagination -->
+
       <div class="custom-pagination md:mt-8 flex justify-center gap-2" />
     </Swiper>
   </div>
-  <!-- Mobile Testimonials -->
+
   <div class="w-full h-auto flex flex-col lg:hidden">
-    <!-- :pagination="{ el: '.custom-pagination', clickable: true }" -->
-    <!-- loop -->
     <Swiper
       :modules="modules"
       :navigation="false"
@@ -69,7 +65,7 @@ defineProps({
           :authorPosition="testimonial.authorPosition"
         />
       </SwiperSlide>
-      <!-- Custom pagination -->
+
       <div class="custom-pagination mt-4 flex justify-center gap-2" />
     </Swiper>
   </div>

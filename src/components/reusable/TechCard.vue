@@ -1,4 +1,3 @@
-<!-- Ini adalah card yang memiliki logo di sebelah kiri dan konten di sebelah kanan degan 2 kolom konten -->
 <script setup>
 defineProps({
   icon: {

@@ -35,13 +35,6 @@ const benefitList = [
 
 const scrollContainer = ref(null);
 
-/* ------------------------------------------------------------
-   Seret untuk menggulir
-
-   Pola yang sama dengan carousel sertifikat, supaya rasanya konsisten.
-   Kelas snap dimatikan sementara selama diseret — kalau tidak, tiap gerakan
-   kecil akan ditarik paksa ke kartu terdekat dan seretannya terasa melawan.
------------------------------------------------------------- */
 const isDragging = ref(false);
 const startX = ref(0);
 const scrollAwal = ref(0);
@@ -75,14 +68,6 @@ const onMouseLeave = () => {
   if (isDragging.value) onMouseUp();
 };
 
-/* ------------------------------------------------------------
-   Panah kiri/kanan
-
-   Hanya tampil kalau memang masih ada yang bisa digulir ke arah itu.
-   Kartu di sini lebarnya berubah-ubah mengikuti ukuran layar (80%, 450px,
-   55%), jadi langkah gulirnya dihitung dari lebar wadah — bukan dari lebar
-   kartu seperti di carousel sertifikat yang lebarnya tetap 335px.
------------------------------------------------------------- */
 const bisaKeKiri = ref(false);
 const bisaKeKanan = ref(false);
 
@@ -105,17 +90,6 @@ const tanganiGulirPanah = () => {
   });
 };
 
-/**
- * Jarak satu langkah gulir = lebar SATU kartu + jaraknya ke kartu berikutnya.
- *
- * Diukur langsung dari halaman, bukan ditulis tetap, karena lebar kartu di
- * sini berubah mengikuti ukuran layar (80%, 450px, 55%).
- *
- * Yang diambil kartu pertama yang BENAR-BENAR TERLIHAT. CardDefault punya dua
- * elemen akar — satu versi desktop, satu versi ponsel — dan yang sedang tidak
- * dipakai lebarnya nol. Kalau asal ambil anak pertama, langkahnya bisa jadi
- * nol dan panahnya tidak menggerakkan apa pun.
- */
 const langkahGulir = () => {
   const el = scrollContainer.value;
   const kartu = Array.from(el.children).find(
@@ -262,7 +236,7 @@ onUnmounted(() => {
   display: none;
 }
 .hide-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 </style>

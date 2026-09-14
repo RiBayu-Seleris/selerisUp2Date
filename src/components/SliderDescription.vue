@@ -95,12 +95,9 @@ function getLogoSize(width, height) {
   <div
     class="absolute inset-0 flex items-center justify-end opacity-100 lg:opacity-0 lg:group-hover:opacity-100 mt-5 sm:mt-14 md:mt-10 lg:mt-0 transition-opacity duration-300 z-40"
   >
-    <!-- Bubble wrapper -->
     <div
       class="relative w-[220px] h-[130px] sm:w-[300px] sm:h-[180px] md:w-[340px] md:h-[200px] lg:w-[440px] lg:h-[270px] mr-2.5 sm:mr-10 md:mr-5 lg:mr-44"
     >
-      <!-- SVG as background -->
-      <!-- text-white dark:text-[#363636] -->
       <svg
         class="absolute inset-0 w-full h-full drop-shadow-md z-0 text-white dark:text-[#363636]"
         viewBox="0 0 409 228"
@@ -108,7 +105,6 @@ function getLogoSize(width, height) {
         xmlns="http://www.w3.org/2000/svg"
         preserveAspectRatio="none"
       >
-        <!-- stroke="#48C97C" -->
         <path
           class="dark:hidden"
           d="M1 30.5731V197.292C1 213.624 14.2403 226.865 30.5731 226.865H378.427C394.76 226.865 408 213.624 408 197.292V79.3688C408 63.036 394.76 49.7956 378.427 49.7956H227.234C213.76 49.7956 202.837 38.8724 202.837 25.3978C202.837 11.9233 191.913 1 178.439 1H30.5731C14.2403 1 1 14.2403 1 30.5731Z"
@@ -125,7 +121,6 @@ function getLogoSize(width, height) {
         />
       </svg>
 
-      <!-- Konten di dalam bubble -->
       <div
         class="relative z-10 flex flex-col px-5 sm:px-5 md:px-6 lg:px-7 pt-3 sm:pt-4 md:pt-5 lg:pt-8 w-full h-full space-y-0.5 sm:space-y-1.5 md:space-y-1 lg:space-y-4"
       >

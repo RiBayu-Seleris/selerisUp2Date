@@ -1,0 +1,10 @@
+{
+  "passed": true,
+  "sdkVersion": "0.1.0-dev.3",
+  "files": 98,
+  "bytes": 42808497,
+  "sha256": "98135c0b72b6935d508052af0114e4d646a769fc06f1430a5ef84565a54b43b8",
+  "noMaintainerSource": true,
+  "containsCompiledWasm": true,
+  "embeddedDocsMatch": true
+}

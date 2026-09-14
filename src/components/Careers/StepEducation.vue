@@ -4,9 +4,6 @@ import { useUtilsStore } from "@/stores/utils.js";
 
 const utils = useUtilsStore();
 
-/* ================================
-📚 Bagian Education Dropdown
-================================ */
 const props = defineProps({
   schoolName: String,
   fieldOfStudy: String,
@@ -104,9 +101,6 @@ onBeforeUnmount(() => {
 
 // 👁️ Tutup otomatis jika dua tanggal sudah diisi
 
-/* ================================
-📁 Bagian Upload Sertifikat (Drag & Drop + Multiple File)
-================================ */
 const fileInput = ref(null);
 const isDragging = ref(false);
 const uploadedFiles = ref([]);
@@ -173,7 +167,6 @@ const viewFile = (file) => {
 <template>
   <div class="w-full h-auto flex flex-col gap-y-3">
     <div class="flex flex-col lg:flex-row gap-y-3 lg:gap-y-0 lg:gap-x-5">
-      <!-- Highest Education DROPDOWN -->
       <div ref="educationWrapper" class="flex flex-col w-full">
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] lg:mb-1"
@@ -229,7 +222,7 @@ const viewFile = (file) => {
           </transition>
         </div>
       </div>
-      <!-- School/University -->
+
       <div class="flex flex-col w-full">
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] lg:mb-1"
@@ -262,11 +255,10 @@ const viewFile = (file) => {
         placeholder="e.g., Computer Science"
       />
     </div>
-    <!-- FRAME Tanggal Masuk dan Lulus serta Nilai Rata-Rata (GPA) -->
+
     <div
       class="flex flex-col lg:flex-row w-full h-auto gap-y-3 lg:gap-y-0 lg:gap-x-5"
     >
-      <!-- Tanggal Masuk -->
       <div class="flex flex-col w-full">
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] lg:mb-1"
@@ -274,7 +266,7 @@ const viewFile = (file) => {
           {{ $t("careers.start_date_of_study") }}
           <span class="text-red-500">*</span>
         </label>
-        <!-- ref="dobWrapper" -->
+
         <div
           class="col-span-12 sm:col-span-4 h-full rounded-lg bg-[#D9D9D9] p-[1px] dark:bg-[#565656] mt-0"
         >
@@ -289,7 +281,7 @@ const viewFile = (file) => {
           </div>
         </div>
       </div>
-      <!-- Tanggal Selesai -->
+
       <div class="flex flex-col w-full">
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] lg:mb-1"
@@ -297,7 +289,7 @@ const viewFile = (file) => {
           {{ $t("careers.end_date_of_study") }}
           <span class="text-red-500">*</span>
         </label>
-        <!-- ref="dobWrapper" -->
+
         <div
           class="col-span-12 sm:col-span-4 h-full rounded-lg bg-[#D9D9D9] p-[1px] dark:bg-[#565656] mt-0"
         >
@@ -313,7 +305,7 @@ const viewFile = (file) => {
           </div>
         </div>
       </div>
-      <!-- GPA ATAU NILAI RATA-RATA -->
+
       <div class="flex flex-col w-full h-full">
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] lg:mb-1"
@@ -330,7 +322,7 @@ const viewFile = (file) => {
         />
       </div>
     </div>
-    <!-- Dokumen File Pendukung -->
+
     <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] lg:mb-1"
@@ -338,7 +330,6 @@ const viewFile = (file) => {
         {{ $t("careers.additional_training_certificates_if_any_") }}
       </label>
       <div class="w-full h-auto flex flex-col gap-y-5">
-        <!-- 🟩 Frame Input Upload -->
         <!-- <div class="flex flex-row gap-x-3 w-full h-auto items-center"> -->
         <div class="w-full h-full flex items-center">
           <div
@@ -349,7 +340,6 @@ const viewFile = (file) => {
             @drop.prevent="handleDrop"
             :class="{ 'bg-green-50 border-green-600': isDragging }"
           >
-            <!-- Ikon Upload -->
             <svg
               xmlns="http://www.w3.org/2000/svg"
               fill="none"
@@ -364,7 +354,7 @@ const viewFile = (file) => {
                 d="M12 16v-8m0 0l-3 3m3-3l3 3M4 16v2a2 2 0 002 2h12a2 2 0 002-2v-2"
               />
             </svg>
-            <!-- Teks -->
+
             <p class="text-sm">
               <span v-if="uploadedFiles.length === 0">
                 <span class="text-green-600 font-medium"
@@ -376,7 +366,7 @@ const viewFile = (file) => {
                 {{ uploadedFiles[0].name }}
               </span>
             </p>
-            <!-- Input File Asli (disembunyikan) -->
+
             <input
               type="file"
               ref="fileInput"

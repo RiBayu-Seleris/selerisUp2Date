@@ -47,7 +47,6 @@ onUnmounted(() => {
       @click="toggleMenu"
       class="h-10 sm:h-11 lg:h-10 xl:h-11 px-2.5 sm:px-3 rounded-lg bg-white dark:bg-[#323232] border-[0.5px] border-[#DEDEDE] dark:border-[#FAFAFA]/30 shadow-[inset_0px_0px_17px_-3px_rgba(0,_0,_0,_0.1)] cursor-pointer flex items-center gap-1.5 transition-all duration-300 hover:border-[#1AB24F]/60 dark:hover:border-[#FAFAFA]/60 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#1AB24F]/60"
     >
-      <!-- Globe Icon -->
       <svg
         class="hidden sm:block w-[18px] h-[18px] sm:w-5 sm:h-5 text-[#1AB24F] dark:text-[#FAFAFA]"
         fill="none"
@@ -67,7 +66,6 @@ onUnmounted(() => {
         {{ languageStore.current.short }}
       </span>
 
-      <!-- Chevron -->
       <svg
         class="w-3.5 h-3.5 text-[#878787] dark:text-[#FAFAFA]/70 transition-transform duration-300"
         :class="isOpen ? 'rotate-180' : 'rotate-0'"
@@ -82,7 +80,6 @@ onUnmounted(() => {
       </svg>
     </button>
 
-    <!-- Dropdown -->
     <transition
       enter-active-class="transition ease-out duration-200"
       enter-from-class="opacity-0 -translate-y-1"

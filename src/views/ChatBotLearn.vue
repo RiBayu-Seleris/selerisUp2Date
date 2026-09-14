@@ -109,7 +109,6 @@ watch(messages, scrollToBottom, { deep: true });
 
 <template>
   <div class="chat-container">
-    <!-- Bagian pesan -->
     <div class="chat-box" ref="chatBox">
       <div
         v-for="(msg, index) in messages"
@@ -120,7 +119,6 @@ watch(messages, scrollToBottom, { deep: true });
       </div>
     </div>
 
-    <!-- Bagian input -->
     <div class="chat-input">
       <input
         v-model="userInput"
@@ -149,10 +147,9 @@ watch(messages, scrollToBottom, { deep: true });
   background: #f9f9f9;
   display: flex;
   flex-direction: column;
-  scroll-behavior: smooth; /* 🟢 inilah efek scroll lembut */
+  scroll-behavior: smooth;
 }
 
-/* ======== Pesan Umum ======== */
 .message {
   margin: 8px 0;
   padding: 8px 12px;
@@ -162,23 +159,20 @@ watch(messages, scrollToBottom, { deep: true });
   display: inline-block;
 }
 
-/* ======== Pesan User (kanan) ======== */
 .message.user {
   background: #daf8cb;
-  align-self: flex-end; /* posisi kanan */
+  align-self: flex-end;
   text-align: right;
   border-bottom-right-radius: 0;
 }
 
-/* ======== Pesan Bot (kiri) ======== */
 .message.bot {
   background: #e0e0e0;
-  align-self: flex-start; /* posisi kiri */
+  align-self: flex-start;
   text-align: left;
   border-bottom-left-radius: 0;
 }
 
-/* ======== Input chat ======== */
 .chat-input {
   display: flex;
   padding: 10px;

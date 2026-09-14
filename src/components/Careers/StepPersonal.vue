@@ -129,7 +129,6 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="w-full h-auto flex flex-col gap-y-3">
-    <!-- FULL NAME -->
     <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
@@ -146,7 +145,7 @@ onBeforeUnmount(() => {
         :required="required"
       />
     </div>
-    <!-- POB DOB -->
+
     <div class="w-full h-auto flex flex-col lg:flex-row gap-y-2 lg:gap-x-5">
       <div class="w-full h-full flex flex-col">
         <label
@@ -164,7 +163,7 @@ onBeforeUnmount(() => {
           :required="required"
         />
       </div>
-      <!-- Start Date -->
+
       <div class="flex flex-col w-full">
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
@@ -187,7 +186,7 @@ onBeforeUnmount(() => {
         </div>
       </div>
     </div>
-    <!-- GENDER DROPDOWN -->
+
     <div ref="genderWrapper" class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
@@ -195,7 +194,6 @@ onBeforeUnmount(() => {
         {{ $t("careers.gender") }} <span class="text-red-500">*</span>
       </label>
       <div class="relative w-full">
-        <!-- 🔸 Field utama -->
         <div
           class="w-full p-2 rounded-[8px] border-gray-300 bg-white dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:ring-1 focus:ring-[#2AB857] cursor-pointer flex justify-between"
           @click.stop="
@@ -226,7 +224,7 @@ onBeforeUnmount(() => {
             />
           </svg>
         </div>
-        <!-- 🔸 Dropdown list -->
+
         <transition name="fade">
           <div
             v-if="props.isOpenGender"
@@ -245,9 +243,8 @@ onBeforeUnmount(() => {
         </transition>
       </div>
     </div>
-    <!-- EMAIL + PHONE -->
+
     <div class="flex flex-col sm:flex-row gap-y-3 sm:gap-y-0 sm:gap-x-5">
-      <!-- Email -->
       <div class="flex flex-col w-full">
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
@@ -266,7 +263,7 @@ onBeforeUnmount(() => {
           {{ emailError }}
         </p>
       </div>
-      <!-- Phone -->
+
       <div class="flex flex-col w-full">
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
@@ -285,7 +282,6 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
-    <!-- ADDRESS -->
     <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
@@ -302,7 +298,6 @@ onBeforeUnmount(() => {
       />
     </div>
 
-    <!-- COUNTRY DROPDOWN -->
     <div ref="countryWrapper" class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"

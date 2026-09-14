@@ -22,7 +22,11 @@ export default defineConfig({
         brotliSize: true,
         filename: "dist/stats.html",
       }),
-    process.env.NODE_ENV === "development" && vueDevTools(),
+    // Devtools ikut menghabiskan main thread. Untuk menguji pemindaian
+    // rPPG yang butuh 24 Hz, matikan dengan: npm run dev:scan
+    process.env.NODE_ENV === "development" &&
+      process.env.NO_DEVTOOLS !== "true" &&
+      vueDevTools(),
   ].filter(Boolean),
   resolve: {
     alias: {
@@ -43,7 +47,6 @@ export default defineConfig({
           if (id.includes("node_modules")) {
             if (id.includes("apexcharts")) return "charts";
             if (id.includes("quill")) return "editor";
-            if (id.includes("lottie-web")) return "animation";
             if (id.includes("swiper")) return "swiper";
             if (id.includes("lodash")) return "lodash";
             return "vendor";

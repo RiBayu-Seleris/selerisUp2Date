@@ -9,7 +9,6 @@ import maskLayer1 from "./mask-layer-1.webp";
 
 <template>
   <div class="relative w-full h-full overflow-hidden rounded-[inherit]">
-    <!-- SVG -->
     <svg
       class="w-full h-full relative z-10"
       viewBox="0 0 281 306"
@@ -18,7 +17,6 @@ import maskLayer1 from "./mask-layer-1.webp";
       xmlns:xlink="http://www.w3.org/1999/xlink"
     >
       <defs>
-        <!-- ClipPath yang mengungkap SVG dari atas ke bawah -->
         <clipPath id="revealClip">
           <rect x="-10" y="-10" width="301" height="0">
             <animate
@@ -106,7 +104,6 @@ import maskLayer1 from "./mask-layer-1.webp";
         />
       </defs>
 
-      <!-- Grup konten di-clip agar muncul progresif dari atas ke bawah -->
       <g clip-path="url(#revealClip)">
         <g mask="url(#mask0_268_8222)">
           <rect
@@ -140,7 +137,6 @@ import maskLayer1 from "./mask-layer-1.webp";
         </g>
       </g>
 
-      <!-- Scan line: mulai dari -10 (atas SVG) hingga 316 (bawah SVG) -->
       <line x1="-10" y1="-10" x2="291" y2="-10" stroke="white" stroke-width="2">
         <animate
           attributeName="y1"
@@ -168,6 +164,4 @@ import maskLayer1 from "./mask-layer-1.webp";
   </div>
 </template>
 
-<style scoped>
-/* scan-line CSS tidak lagi diperlukan karena sudah pakai SVG animate */
-</style>
+<style scoped></style>

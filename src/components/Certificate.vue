@@ -51,16 +51,6 @@ const onMouseLeave = () => {
 };
 // ----------------------
 
-/* ------------------------------------------------------------
-   Kapan panah kiri/kanan boleh tampil
-
-   Panah kiri hanya berguna kalau masih ada yang bisa digulir ke kiri, begitu
-   pula sebaliknya. Kalau ditampilkan terus, pengunjung menekan tombol yang
-   tidak melakukan apa-apa.
-
-   Namanya sengaja bukan scrollLeft — nama itu sudah dipakai di atas untuk
-   fitur seret-untuk-menggulir, dan menimpanya akan merusak fitur tersebut.
------------------------------------------------------------- */
 const bisaKeKiri = ref(false);
 const bisaKeKanan = ref(false);
 
@@ -124,7 +114,6 @@ const scrollCarousel = (direction) => {
 <template>
   <div class="relative w-full h-auto">
     <div class="flex flex-col w-full h-auto dark:bg-[#17181A]">
-      <!-- Heading -->
       <div class="flex flex-col w-full items-center text-center">
         <p
           class="text-[24px] sm:text-[30px] md:text-[32px] lg:text-[44px] xl:text-[48px] font-medium text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
@@ -138,18 +127,15 @@ const scrollCarousel = (direction) => {
         </p>
       </div>
 
-      <!-- Desktop Certificate Cards -->
       <div class="relative w-full h-auto">
-        <!-- Gradient fade kiri -->
         <div
           class="hidden lg:flex absolute w-32 h-full bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:from-[#17181A] dark:to-[#17181A]/0 left-0 z-20 pointer-events-none"
         />
-        <!-- Gradient fade kanan -->
+
         <div
           class="hidden lg:flex absolute w-32 h-full bg-gradient-to-l from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:from-[#17181A] dark:to-[#17181A]/0 right-0 z-20 pointer-events-none"
         />
 
-        <!-- Tombol Panah Kiri -->
         <transition
           enter-active-class="duration-300 ease-out"
           enter-from-class="opacity-0 scale-75 -translate-x-3"
@@ -177,7 +163,6 @@ const scrollCarousel = (direction) => {
           </button>
         </transition>
 
-        <!-- Tombol Panah Kanan -->
         <transition
           enter-active-class="duration-300 ease-out"
           enter-from-class="opacity-0 scale-75 translate-x-3"
@@ -205,7 +190,6 @@ const scrollCarousel = (direction) => {
           </button>
         </transition>
 
-        <!-- Scroll Container -->
         <div
           ref="scrollContainer"
           @mousedown="onMouseDown"
@@ -228,7 +212,6 @@ const scrollCarousel = (direction) => {
         </div>
       </div>
 
-      <!-- Mobile Certificate -->
       <MobileCert :certificates="localizedCertificates" />
     </div>
   </div>
@@ -239,8 +222,8 @@ const scrollCarousel = (direction) => {
   display: none;
 }
 .hide-scrollbar {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .fade-enter-active,

@@ -10,7 +10,6 @@ defineProps({
 </script>
 
 <template>
-  <!-- w-auto -->
   <figure
     :class="[`hidden sm:flex sm:absolute ${positionClass} ${heightClass} `]"
   >

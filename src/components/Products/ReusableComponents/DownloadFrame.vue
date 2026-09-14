@@ -37,7 +37,7 @@ defineProps({
           {{ description }}
         </p>
       </div>
-      <!-- DownloadStore -->
+
       <div class="w-full h-auto">
         <DownloadStore />
       </div>

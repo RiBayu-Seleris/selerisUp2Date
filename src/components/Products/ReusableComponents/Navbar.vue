@@ -43,7 +43,6 @@ const LogoLink = computed(() => {
   <div
     class="relative flex justify-center w-full h-auto items-center max-w-[1440px] mx-auto px-10 md:px-14 xl:px-16 xls:px-20 pt-4 md:pt-6 xl:pt-8"
   >
-    <!-- Desktop Navbar -->
     <div class="hidden lg:grid grid-cols-12 w-full h-auto">
       <div class="col-span-1 h-full">
         <router-link :to="LogoLink" class="w-full h-full">
@@ -59,7 +58,6 @@ const LogoLink = computed(() => {
       </div>
       <div class="flex items-center col-span-10 h-auto">
         <div class="flex w-full h-auto">
-          <!-- rounded-full border shadow-[1px_19px_33px_-14px_rgba(0,_0,_0,_0.08)] bg-white z-[999] -->
           <nav
             class="hidden lg:flex items-center w-full justify-center content-center h-auto"
           >
@@ -71,17 +69,12 @@ const LogoLink = computed(() => {
           </nav>
         </div>
       </div>
-      <!-- Slot kanan: pengalih bahasa.
-           col-span diperbaiki dari 10 ke 1. Sebelumnya 1 + 10 + 10 = 21 kolom
-           pada grid 12 kolom, jadi elemen ini terdorong ke baris baru — tidak
-           kelihatan karena memang masih kosong. Dengan col-span-1 jumlahnya pas
-           12 dan slot ini duduk di kanan, sebaris dengan logo dan menu. -->
+
       <div class="flex items-center justify-end col-span-1 h-auto">
         <LanguageSwitcher />
       </div>
     </div>
 
-    <!-- Mobile Navbar -->
     <div class="w-full h-auto flex lg:hidden flex-row justify-between">
       <router-link :to="LogoLink" class="w-[40%] h-auto flex">
         <img

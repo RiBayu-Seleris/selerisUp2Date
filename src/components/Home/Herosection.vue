@@ -52,7 +52,7 @@ onUnmounted(() => window.removeEventListener("resize", handleResize));
             {{ $t("home.hero.titleLine2") }}
           </p>
         </div>
-        <!-- Swipe caption -->
+
         <router-link
           to="/book-a-demo"
           class="cursor-pointer flex flex-row items-center mb-5 sm:mb-5 lg:mb-5 mt-4 lg:mt-6 bg-[#195279] dark:bg-[#2B2E32] border-[1px] dark:border-[1px] dark:border-[#2AB857] px-5 py-2 rounded-full dark:shadow-[0px_4px_18.8px_0px_rgba(0,255,59,0.25)] z-30 transition-all duration-300 hover:shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.4),inset_0px_-4px_0px_0px_rgba(0,0,0,0.2),0px_0px_0px_2px_rgba(255,255,255,0.2),0px_0px_180px_0px_#2AB857] dark:hover:shadow-[inset_0px_1px_0px_0px_rgba(255,255,255,0.4),inset_0px_-4px_0px_0px_rgba(0,0,0,0.2),0px_0px_0px_2px_rgba(0,255,59,0.25),0px_0px_180px_0px_#2AB857] hover:translate-y-[-2px]"

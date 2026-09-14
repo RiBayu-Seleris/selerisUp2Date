@@ -6,9 +6,6 @@ import "quill/dist/quill.snow.css";
 
 const utils = useUtilsStore();
 
-/* ===========================
-   PROPS
-=========================== */
 const props = defineProps({
   lastCompany: String,
   lastPosition: String,
@@ -19,9 +16,6 @@ const props = defineProps({
   achievementDescription: String,
 });
 
-/* ===========================
-   EMITS
-=========================== */
 const emit = defineEmits([
   "update:lastCompany",
   "update:lastPosition",
@@ -36,9 +30,6 @@ const emit = defineEmits([
 // toggleStartDate;
 // isStartDateOpen;
 
-/* ===========================
-   LOCAL REFS
-=========================== */
 const jobDescriptionEditor = ref(null);
 const jobDescriptionQuill = ref(null);
 const jobDescriptionError = ref(null);
@@ -53,10 +44,6 @@ const isStartDateOpen = ref(false);
 const endDateWrapper = ref(null);
 const isEndDateOpen = ref(false);
 
-/* ===========================
-   COMPUTED (sync props <-> parent via emit)
-   Use `v-model:...` pattern from parent
-=========================== */
 const salaryModel = computed({
   get: () => props.salary ?? "",
   set: (val) => emit("update:salary", val ?? ""),
@@ -82,10 +69,6 @@ const achievementDescriptionModel = computed({
   set: (val) => emit("update:achievementDescription", val ?? ""),
 });
 
-/* ===========================
-   SALARY HANDLING
-   (use :value + @input OR v-model on computed)
-=========================== */
 function onSalaryInput(e) {
   const raw = e.target.value.replace(/\D/g, "");
   const formatted = utils.separatorNumber(raw);
@@ -107,9 +90,6 @@ function allowOnlyNumber(e) {
   }
 }
 
-/* ===========================
-   DATE TOGGLES
-=========================== */
 const toggleStartDate = () => {
   isStartDateOpen.value = !isStartDateOpen.value;
   emit("closeAll");
@@ -122,9 +102,6 @@ const toggleEndDate = () => {
   emit("closeAll");
 };
 
-/* ===========================
-   OUTSIDE CLICK HANDLER
-=========================== */
 function handleClickOutside(e) {
   const startWrapper = startDateWrapper.value;
   const endWrapper = endDateWrapper.value;
@@ -139,9 +116,6 @@ function handleClickOutside(e) {
   emit("closeAll");
 }
 
-/* ===========================
-   QUILL INIT
-=========================== */
 // Job Description
 onMounted(() => {
   jobDescriptionQuill.value = new Quill(jobDescriptionEditor.value, {
@@ -210,9 +184,6 @@ onMounted(() => {
   document.addEventListener("click", handleClickOutside);
 });
 
-/* ===========================
-   CLEANUP
-=========================== */
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);
 });
@@ -220,7 +191,6 @@ onBeforeUnmount(() => {
 
 <template>
   <div class="w-full h-auto flex flex-col mt-5 gap-y-3">
-    <!-- Nama Perusahaan Sebelumnya -->
     <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
@@ -236,7 +206,7 @@ onBeforeUnmount(() => {
         :placeholder="$t('careers.last_company')"
       />
     </div>
-    <!-- Jabatan Terakhis -->
+
     <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
@@ -252,9 +222,8 @@ onBeforeUnmount(() => {
         :placeholder="$t('careers.last_position')"
       />
     </div>
-    <!-- Start + End Date job -->
+
     <div class="flex gap-10">
-      <!-- Start Date -->
       <div class="flex flex-col w-full">
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
@@ -276,7 +245,7 @@ onBeforeUnmount(() => {
           </div>
         </div>
       </div>
-      <!-- End Date -->
+
       <div class="flex flex-col w-full">
         <label
           class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
@@ -305,7 +274,6 @@ onBeforeUnmount(() => {
         {{ $t("careers.current_salary") }} <span class="text-red-500">*</span>
       </label>
       <div class="relative">
-        <!-- Prefix "Rp" -->
         <span
           class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 text-[16px]"
         >
@@ -321,7 +289,7 @@ onBeforeUnmount(() => {
         />
       </div>
     </div>
-    <!-- Deskripsi Pekerjaan -->
+
     <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"
@@ -337,7 +305,7 @@ onBeforeUnmount(() => {
         </div>
       </div>
     </div>
-    <!-- Prestasi -->
+
     <div class="flex flex-col w-full">
       <label
         class="text-[14px] font-[500] text-[#4B5563] dark:text-[#6F6F6F] mb-1"

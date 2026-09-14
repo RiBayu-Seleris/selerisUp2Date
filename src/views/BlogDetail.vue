@@ -414,9 +414,6 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-  <!-- Saat memuat: tampilkan animasi, bukan halaman kosong. Sebelumnya blok ini
-       kosong, sehingga sebelum data datang halaman sempat jatuh ke cabang
-       "Blog tidak ditemukan" dan teks itu berkedip sesaat. -->
   <div v-if="loading" class="flex w-full justify-center items-center py-40">
     <video
       autoplay
@@ -453,7 +450,7 @@ onBeforeUnmount(() => {
           }}</span>
         </p>
       </div>
-      <!-- Akun Section -->
+
       <div
         v-if="loginStatus === true"
         class="w-full lg:w-[40%] h-auto flex justify-end mb-8"
@@ -502,7 +499,6 @@ onBeforeUnmount(() => {
       </div>
     </section>
     <section data-aos="fade-up" class="w-full h-auto flex flex-col mt-10">
-      <!-- Blog Images -->
       <div class="w-full h-auto dark:bg-[17181A]">
         <img
           :src="blogDetail.cover"
@@ -510,11 +506,10 @@ onBeforeUnmount(() => {
           class="w-full h-full object-fill rounded-lg sm:rounded-3xl"
         />
       </div>
-      <!-- Frame Blog Detail and Content & Most Popular -->
+
       <div
         class="w-full h-auto flex flex-col-reverse lg:flex-row mt-10 gap-x-5"
       >
-        <!-- Kolom kiri -->
         <div class="w-full lg:w-[70%] h-auto flex flex-col -space-y-0 lg:pr-10">
           <div class="w-full h-auto flex flex-col gap-y-5">
             <div class="w-full h-auto flex flex-col gap-y-4">
@@ -546,7 +541,7 @@ onBeforeUnmount(() => {
                 {{ blogDetail.category_name }}
               </p>
             </div>
-            <!-- ref="articleRef" -->
+
             <article
               id="content"
               class="w-full h-auto flex flex-col leading-loose text-[#535862] dark:text-[#DADADA] font-[500] space-y-6 lg:space-y-8 mt-5 text-[12px] sm:text-[14px] md:text-[16px]"
@@ -554,7 +549,7 @@ onBeforeUnmount(() => {
               <p class="break-words">
                 {{ blogDetail.synopsis }}
               </p>
-              <!-- Content Blog -->
+
               <div
                 class="prose max-w-none text-[#535862] dark:prose-invert prose-p:mt-2 prose-p:mb-0 prose-ul:my-0 prose-ol:my-0 prose-headings:mt-10 prose-headings:mb-3 break-words text-[12px] sm:text-[14px] md:text-[16px] font-[400] dark:[&_*]:!text-[#DADADA] prose-p:leading-loose"
                 v-html="safeContent"
@@ -664,7 +659,6 @@ onBeforeUnmount(() => {
                     <div
                       class="w-full h-auto flex flex-col gap-y-4 lg:gap-y-5 cursor-pointer"
                     >
-                      <!-- Linked In -->
                       <div
                         class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                       >
@@ -681,7 +675,7 @@ onBeforeUnmount(() => {
                           >
                         </div>
                       </div>
-                      <!-- Facebook -->
+
                       <div
                         class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                       >
@@ -698,7 +692,7 @@ onBeforeUnmount(() => {
                           >
                         </div>
                       </div>
-                      <!-- Twitter -->
+
                       <div
                         class="w-full h-auto cursor-pointer flex flex-row gap-x-2 lg:gap-x-3"
                       >
@@ -723,14 +717,11 @@ onBeforeUnmount(() => {
           </div>
         </div>
 
-        <!-- Kolom kanan -->
         <div class="w-full lg:w-[30%] mb-10 lg:mb-0">
-          <!-- wrapper tinggi sama dengan kolom kiri -->
           <div class="relative w-full h-full">
             <div class="sticky top-[17%] flex flex-col gap-y-5">
-              <!-- Box 1 -->
               <ToC />
-              <!-- Box 2 -->
+
               <div
                 class="hidden lg:flex w-full h-auto p-[1px] rounded-[10px] bg-[#D9D9D9] dark:bg-gradient-to-tl dark:from-[#17181A] dark:from-45% dark:to-[#565656]"
               >
@@ -745,7 +736,6 @@ onBeforeUnmount(() => {
                     </p>
                   </div>
                   <div class="flex flex-col w-full h-full mt-4">
-                    <!-- ✅ Hanya tampilkan gambar dari data pertama -->
                     <router-link
                       v-if="popularBlog.length > 0"
                       :to="`/blog/${popularBlog[0].slug}`"
@@ -759,7 +749,7 @@ onBeforeUnmount(() => {
                         />
                       </figure>
                     </router-link>
-                    <!-- ✅ Daftar lainnya -->
+
                     <div class="flex flex-col w-full h-full">
                       <div
                         v-for="(data, index) in popularBlog"
@@ -811,7 +801,7 @@ onBeforeUnmount(() => {
         </div>
       </div>
     </section>
-    <!-- Comments -->
+
     <section
       data-aos="fade-up"
       class="w-full lg:w-[70%] h-auto pt-10 flex flex-col lg:pr-10"
@@ -857,7 +847,7 @@ onBeforeUnmount(() => {
           </div>
         </form>
       </div>
-      <!-- Comments Display -->
+
       <div class="w-full h-auto flex flex-col mt-14 space-y-6">
         <div
           v-for="(comment, index) in blogDetail?.comments_data"
@@ -898,7 +888,6 @@ onBeforeUnmount(() => {
   </div>
   <div v-else class="py-40 text-center">{{ $t("blog.notFound") }}</div>
 
-  <!-- Login -->
   <Transition
     enter-active-class="animate__animated animate__fadeIn duration-75"
     leave-active-class="animate__animated animate__fadeOut duration-75"
@@ -947,7 +936,7 @@ onBeforeUnmount(() => {
               </p>
             </div>
           </div>
-          <!-- Email Input and Label -->
+
           <form
             @submit.prevent="handleLogin"
             class="w-full h-auto flex flex-col space-y-4 lg:space-y-4"
@@ -970,7 +959,7 @@ onBeforeUnmount(() => {
                 :class="{ 'border-red-500 focus:ring-red-500': loginError }"
               />
             </div>
-            <!-- Password Input and Label -->
+
             <div class="w-full h-auto">
               <label
                 for="password"
@@ -989,14 +978,13 @@ onBeforeUnmount(() => {
                   class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-0 focus:ring-[#2AB857]"
                   :class="{ 'border-red-500 focus:ring-red-500': loginError }"
                 />
-                <!-- Tombol toggle mata -->
+
                 <button
                   aria-label="Toggle Password"
                   type="button"
                   @click="togglePassword"
                   class="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
                 >
-                  <!-- Ikon Mata Terbuka -->
                   <svg
                     v-if="!showPassword"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1013,7 +1001,7 @@ onBeforeUnmount(() => {
                     />
                     <circle cx="12" cy="12" r="3" />
                   </svg>
-                  <!-- Ikon Mata Tertutup -->
+
                   <svg
                     v-else
                     xmlns="http://www.w3.org/2000/svg"
@@ -1042,7 +1030,7 @@ onBeforeUnmount(() => {
                 </button>
               </div>
             </div>
-            <!-- Forgot Password -->
+
             <div class="w-full h-auto flex justify-end">
               <p
                 class="md:text-[14px] lg:text-[16px] hover:underline cursor-pointer hover:text-[#2AB857]"
@@ -1056,7 +1044,7 @@ onBeforeUnmount(() => {
             >
               <p class="text-red-500 font-[500]">Email Atau Password Salah</p>
             </div>
-            <!-- Button Send -->
+
             <button
               aria-label="Login Button"
               type="submit"
@@ -1080,7 +1068,6 @@ onBeforeUnmount(() => {
     </div>
   </Transition>
 
-  <!-- Register -->
   <Transition
     enter-active-class="animate__animated animate__fadeIn duration-75"
     leave-active-class="animate__animated animate__fadeOut duration-75"
@@ -1129,7 +1116,7 @@ onBeforeUnmount(() => {
               </p>
             </div>
           </div>
-          <!-- Email Input and Label -->
+
           <form
             @submit.prevent="handleRegister"
             class="w-full h-auto flex flex-col space-y-4 lg:space-y-6"
@@ -1166,7 +1153,7 @@ onBeforeUnmount(() => {
                 class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2AB857]"
               />
             </div>
-            <!-- Password Input and Label -->
+
             <div class="w-full h-auto">
               <label
                 for="password"
@@ -1184,14 +1171,13 @@ onBeforeUnmount(() => {
                   autocomplete="new-password"
                   class="w-full pr-10 pl-3 py-2 border rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-[#2AB857]"
                 />
-                <!-- Tombol toggle mata -->
+
                 <button
                   aria-label="Toggle Password Register"
                   type="button"
                   @click="togglePasswordRegister"
                   class="absolute inset-y-0 right-0 pr-3 flex items-center focus:outline-none"
                 >
-                  <!-- Ikon Mata Terbuka -->
                   <svg
                     v-if="!showPasswordRegister"
                     xmlns="http://www.w3.org/2000/svg"
@@ -1208,7 +1194,7 @@ onBeforeUnmount(() => {
                     />
                     <circle cx="12" cy="12" r="3" />
                   </svg>
-                  <!-- Ikon Mata Tertutup -->
+
                   <svg
                     v-else
                     xmlns="http://www.w3.org/2000/svg"
@@ -1237,7 +1223,7 @@ onBeforeUnmount(() => {
                 </button>
               </div>
             </div>
-            <!-- Button Send -->
+
             <button
               aria-label="Send Register Button"
               type="submit"

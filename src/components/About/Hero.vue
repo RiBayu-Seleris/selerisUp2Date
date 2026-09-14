@@ -63,11 +63,10 @@ import FrameCaptionAboutHeroDark from "@/assets/images/About-frame-hero2-dark.sv
                 <div
                   class="relative md:w-5 md:h-5 xl:w-6 xl:h-6 flex justify-center items-center"
                 >
-                  <!-- ping effect -->
                   <div
                     class="absolute w-full h-full bg-[#2AB857] rounded-full animate-ping opacity-75"
                   ></div>
-                  <!-- circle asli -->
+
                   <div
                     class="md:w-5 md:h-5 xl:w-6 xl:h-6 bg-[#2AB857] rounded-full md:p-[2px] xl:p-[2.5px] flex justify-center items-center"
                   >
@@ -105,7 +104,7 @@ import FrameCaptionAboutHeroDark from "@/assets/images/About-frame-hero2-dark.sv
           alt="About Banner"
           class="w-full h-auto md:h-[380px] lg:h-[400px] xl:h-[500px] object-contain md:object-right px-8 md:px-0"
         />
-        <!-- MOBILE -->
+
         <div class="absolute flex md:hidden w-full h-auto px-12 bottom-4">
           <a
             href="https://maps.app.goo.gl/ywhqmCdfhGod9Mps6"
@@ -115,11 +114,10 @@ import FrameCaptionAboutHeroDark from "@/assets/images/About-frame-hero2-dark.sv
           >
             <div class="w-auto h-auto flex justify-center items-center">
               <div class="relative w-5 h-5 flex justify-center items-center">
-                <!-- ping effect -->
                 <div
                   class="absolute w-full h-full bg-[#2AB857] rounded-full animate-ping opacity-75"
                 ></div>
-                <!-- circle asli -->
+
                 <div
                   class="w-5 h-5 bg-[#2AB857] rounded-full p-[2px] flex justify-center items-center"
                 >
@@ -152,7 +150,6 @@ import FrameCaptionAboutHeroDark from "@/assets/images/About-frame-hero2-dark.sv
   </div>
 </template>
 <style scoped>
-/* Target layar dari 853px sampai sebelum xl (1280px) */
 @media (min-width: 853px) and (max-width: 854px) {
   .-left-custom-target {
     left: -20% !important;

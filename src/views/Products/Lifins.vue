@@ -70,7 +70,6 @@ const localizedSteps = useLocalizedList(
 
 <template>
   <div class="relative w-full min-h-screen overflow-hidden">
-    <!-- Hero -->
     <section class="relative w-full h-full rounded-[20px] z-20 p-4" id="hero">
       <div
         class="relative w-full h-[400px] md:h-[700px] lg:h-[650px] rounded-[20px] z-20"
@@ -85,21 +84,20 @@ const localizedSteps = useLocalizedList(
           descriptioncolor="text-[#6F6F6F]"
         />
       </div>
-      <!-- Image Phone -->
+
       <div
         class="relative w-full max-w-[1440px] mx-auto h-auto flex -mt-[120px] md:-mt-[250px]"
       >
-        <!-- Left Circle -->
         <CircleGradientLeft
           heightClass="h-[300px] md:h-[470px] xl:h-[470px]"
           positionClass="-top-[50px] md:-top-[90px] xl:-top-[100px] -left-[190px] md:-left-[230px] xl:-left-[90px]"
         />
-        <!-- Center Circle -->
+
         <CircleGradient
           heightClass="h-[200px] md:h-[400px] xl:h-[700px]"
           positionClass="-top-[20px] md:-top-[40px] xl:-top-[50px] left-1/2 transform -translate-x-1/2"
         />
-        <!-- Right Circle -->
+
         <CircleGradientRight
           heightClass="h-[300px] md:h-[470px] xl:h-[470px]"
           positionClass="-top-[50px] md:-top-[90px] xl:-top-[100px] -right-[190px] md:-right-[230px] xl:-right-[90px]"
@@ -116,13 +114,12 @@ const localizedSteps = useLocalizedList(
           </div>
         </div>
       </div>
-      <!-- DownloadStore -->
+
       <div class="w-full max-w-sm mx-auto h-auto mt-10 md:mt-20">
         <DownloadStore />
       </div>
     </section>
 
-    <!-- About Us -->
     <section
       data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto"
@@ -146,13 +143,11 @@ const localizedSteps = useLocalizedList(
       </div>
     </section>
 
-    <!-- How Application Work -->
     <section
       data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-14 lg:mt-20 scroll-mt-[80px]"
       id="howapplicationwork"
     >
-      <!-- Application Work Slider -->
       <div
         class="relative w-full flex flex-col justify-center items-center z-20"
       >
@@ -172,7 +167,6 @@ const localizedSteps = useLocalizedList(
       </div>
     </section>
 
-    <!-- Easy Quick -->
     <section
       data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto px-8 mt-20"
@@ -208,7 +202,6 @@ const localizedSteps = useLocalizedList(
       </div>
     </section>
 
-    <!-- Client -->
     <section
       data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto max-smallest:px-0 px-8 mt-20"
@@ -226,7 +219,6 @@ const localizedSteps = useLocalizedList(
       </div>
     </section>
 
-    <!-- Testimonial -->
     <section
       data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 md:mt-28 lg:mt-40"
@@ -246,7 +238,6 @@ const localizedSteps = useLocalizedList(
       </div>
     </section>
 
-    <!-- FAQ -->
     <section
       data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-20"
@@ -270,7 +261,6 @@ const localizedSteps = useLocalizedList(
       </div>
     </section>
 
-    <!-- Download App -->
     <section
       data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto md:px-12 mt-20 lg:mt-40"
@@ -285,7 +275,6 @@ const localizedSteps = useLocalizedList(
       </div>
     </section>
 
-    <!-- Book Demo -->
     <section
       data-aos="fade-up"
       class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-40 px-8"
