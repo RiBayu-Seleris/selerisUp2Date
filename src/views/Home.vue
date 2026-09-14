@@ -45,7 +45,7 @@ import FaceTracker from "@/components/Home/FaceTracker.vue";
 
   <section
     data-aos="fade-up"
-    class="flex flex-col relative w-full h-auto mt-10 lg:mt-14 xl:mt-16 px-8 xls:px-8"
+    class="flex flex-col relative w-full h-auto mt-10 lg:mt-14 xl:mt-0 px-8 xls:px-8"
   >
     <Description />
   </section>
