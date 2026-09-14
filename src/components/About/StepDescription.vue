@@ -1,6 +1,7 @@
 <script setup>
-import { useIsDark } from "@/utils/useIsDark";
+import { ref, computed, nextTick, onMounted, onUnmounted } from "vue";
 import { useLocalizedList } from "@/utils/i18nList";
+import StepLine from "@/components/About/StepLine.vue";
 
 import Innovation from "@/assets/icons/innovation.svg";
 import Vision from "@/assets/icons/vision.svg";
@@ -8,10 +9,6 @@ import TeamWork from "@/assets/icons/team-work.svg";
 import Integrity from "@/assets/icons/integrity.svg";
 import Focus from "@/assets/icons/focus.svg";
 import OptimalPerformance from "@/assets/icons/performance.svg";
-
-import { Swiper, SwiperSlide } from "swiper/vue";
-import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import { ref, onMounted, onUnmounted, watch } from "vue"; // ← Tambahkan ini!
 
 const StepsContent = [
   { icon: Innovation },
@@ -28,27 +25,159 @@ const localizedSteps = useLocalizedList("about.values.items", StepsContent, [
   "description",
 ]);
 
-onMounted(() => {
-  const video = document.querySelector("video");
-  if (video) {
-    video.addEventListener("contextmenu", (e) => e.preventDefault());
+const pembungkus = ref(null);
+const panel = ref(null);
+const kemajuan = ref(0); // 0 saat paku dipasang .. 1 saat paku mau lepas
+
+// Ruang vertikalnya harus cukup: panel dipaku setinggi layar, dan di dalamnya
+// masih ada judul, enam butir, serta grafik yang rasionya hampir persegi.
+const mqRuang = window.matchMedia("(min-width: 768px) and (min-height: 800px)");
+
+// Di bawah lg grafiknya membentang dua baris grid, jadi tingginya diurus grid
+// sendiri. Pengukuran di JS hanya dipakai mulai lg.
+const mqLg = window.matchMedia("(min-width: 1024px)");
+const lebarLg = ref(false);
+const mqGerak = window.matchMedia("(prefers-reduced-motion: reduce)");
+const pinAktif = ref(false);
+
+// Diisi StepLine setelah jalurnya terukur; urut menaik.
+const patokan = ref([]);
+const terimaPatokan = (nilai) => {
+  patokan.value = nilai;
+};
+
+// Tinggi grafik mengikuti tinggi kolom kiri; lebarnya menyesuaikan sendiri
+// lewat rasio viewBox. Diukur di JS, bukan CSS, karena lebar grafik ikut
+// menentukan lebar kolom kiri — kalau dibiarkan saling menghitung di CSS,
+// hasilnya tidak menentu.
+const kolomKiri = ref(null);
+const tinggiKiri = ref(0);
+let pengamatKiri = null;
+
+const ukurKiri = () => {
+  const el = kolomKiri.value;
+  if (!el) return;
+  const t = Math.round(el.offsetHeight);
+  // Ambang 2px supaya keduanya tidak saling kejar tiap frame.
+  if (Math.abs(t - tinggiKiri.value) > 2) tinggiKiri.value = t;
+};
+
+const gayaGrafik = computed(() =>
+  pinAktif.value && lebarLg.value && tinggiKiri.value
+    ? { height: `${tinggiKiri.value}px` }
+    : null,
+);
+
+const hitungKemajuan = () => {
+  if (!pinAktif.value || !pembungkus.value || !panel.value) return;
+  const jarak = pembungkus.value.offsetHeight - panel.value.offsetHeight;
+  if (jarak <= 0) {
+    kemajuan.value = 0;
+    return;
   }
+  const terlewat = -pembungkus.value.getBoundingClientRect().top;
+  kemajuan.value = Math.min(1, Math.max(0, terlewat / jarak));
+};
+
+let idFrame = null;
+const tanganiGulir = () => {
+  if (idFrame) return;
+  idFrame = requestAnimationFrame(() => {
+    hitungKemajuan();
+    idFrame = null;
+  });
+};
+
+const perbaruiMode = () => {
+  pinAktif.value = mqRuang.matches && !mqGerak.matches;
+  lebarLg.value = mqLg.matches;
+  if (pinAktif.value) hentikanPutar();
+  else mulaiPutar();
+  // Tinggi pembungkus baru berubah setelah kelasnya ikut berganti.
+  nextTick(hitungKemajuan);
+};
+
+// Saat tidak dipaku (ponsel / kurangi-animasi) rodanya berputar sendiri.
+const indeksOtomatis = ref(0);
+let idPutar = null;
+
+const hentikanPutar = () => {
+  if (idPutar) clearInterval(idPutar);
+  idPutar = null;
+};
+
+const mulaiPutar = () => {
+  hentikanPutar();
+  idPutar = setInterval(() => {
+    indeksOtomatis.value = (indeksOtomatis.value + 1) % StepsContent.length;
+  }, 2600);
+};
+
+// Ikon terakhir duduk di ujung jalur (pecahan 0,998). Kalau garisnya penuh
+// tepat saat paku lepas, butir terakhir hanya menyala di 0,2% gulir terakhir.
+// Jadi garisnya diselesaikan lebih awal, dan sisa gulir ini jadi jeda supaya
+// butir terakhir sempat terbaca.
+const EKOR = 0.15;
+
+const progresGaris = computed(() => {
+  if (!pinAktif.value) {
+    const p = patokan.value;
+    return p.length ? p[Math.min(indeksOtomatis.value, p.length - 1)] : 0;
+  }
+  return Math.min(1, kemajuan.value / (1 - EKOR));
 });
 
-// Dipakai di template: video mode terang pakai v-if="!isDark", yang gelap
-// pakai v-else. Tujuannya supaya cuma satu video yang benar-benar dibuat
-// dan diunduh browser. Penjelasan lengkap ada di src/utils/useIsDark.js
-const isDark = useIsDark();
+// Butir ke-i menyala tepat saat garisnya sampai ke ikon ke-i.
+const indeksAktif = computed(() => {
+  if (!pinAktif.value) return indeksOtomatis.value;
+  const p = patokan.value;
+  if (p.length !== StepsContent.length) {
+    return Math.min(
+      StepsContent.length - 1,
+      Math.floor(progresGaris.value * StepsContent.length),
+    );
+  }
+  let i = 0;
+  while (i < p.length - 1 && progresGaris.value >= p[i + 1]) i++;
+  return i;
+});
+
+onMounted(() => {
+  perbaruiMode();
+  if (typeof ResizeObserver !== "undefined" && kolomKiri.value) {
+    pengamatKiri = new ResizeObserver(ukurKiri);
+    pengamatKiri.observe(kolomKiri.value);
+  }
+  window.addEventListener("scroll", tanganiGulir, { passive: true });
+  window.addEventListener("resize", tanganiGulir, { passive: true });
+  mqRuang.addEventListener("change", perbaruiMode);
+  mqLg.addEventListener("change", perbaruiMode);
+  mqGerak.addEventListener("change", perbaruiMode);
+});
+
+onUnmounted(() => {
+  hentikanPutar();
+  pengamatKiri?.disconnect();
+  window.removeEventListener("scroll", tanganiGulir);
+  window.removeEventListener("resize", tanganiGulir);
+  mqRuang.removeEventListener("change", perbaruiMode);
+  mqLg.removeEventListener("change", perbaruiMode);
+  mqGerak.removeEventListener("change", perbaruiMode);
+  if (idFrame) cancelAnimationFrame(idFrame);
+});
 </script>
 
 <template>
-  <div class="w-full h-full dark:bg-[#17181A]">
-    <div
-      class="flex flex-col-reverse md:flex-row w-full h-auto gap-x-10 relative"
-    >
-      <div class="flex flex-col w-full h-auto gap-y-7 lg:gap-y-4 xl:gap-y-10">
+  <div
+    ref="pembungkus"
+    class="w-full dark:bg-[#17181A]"
+    :class="pinAktif ? 'pembungkus-pin' : 'h-full'"
+    :style="{ '--jarak-pin': `${StepsContent.length * 40}vh` }"
+  >
+    <div ref="panel" :class="pinAktif ? 'panel-pin' : 'h-full'">
+      <div class="isi-nilai relative w-full h-auto">
         <div
-          class="w-full h-auto flex flex-col gap-y-1.5 sm:gap-y-3 xl:gap-y-3"
+          class="area-judul w-full lg:max-w-3xl h-auto flex flex-col gap-y-1.5 sm:gap-y-3 xl:gap-y-3"
         >
           <div class="flex w-full h-auto justify-center md:justify-start">
             <p
@@ -81,92 +210,203 @@ const isDark = useIsDark();
             </p>
           </div>
         </div>
-        <div class="h-[120px] lg:h-[170px] w-full flex items-center">
-          <Swiper
-            :modules="[Navigation, Autoplay, Pagination]"
-            :direction="'vertical'"
-            :navigation="false"
-            :pagination="false"
-            :autoplay="{ delay: 2000, disableOnInteraction: false }"
-            loop
-            class="w-full h-full rounded-xl overflow-hidden custom-swiper cursor-grab active:cursor-grabbing"
-          >
-            <SwiperSlide v-for="(step, index) in localizedSteps" :key="index">
-              <div
-                class="w-full h-full flex flex-row items-center text-white text-xl"
+
+        <div
+          ref="kolomKiri"
+          class="area-butir w-full h-auto flex flex-col justify-center"
+        >
+          <ul v-if="pinAktif && lebarLg" class="flex flex-col w-full">
+            <li
+              v-for="(step, index) in localizedSteps"
+              :key="index"
+              class="flex flex-row gap-x-4 lg:py-4 xl:py-5"
+            >
+              <span
+                class="shrink-0 flex justify-center items-center w-[42px] h-[42px] xl:w-[52px] xl:h-[52px] rounded-full bg-white dark:bg-[#323232] shadow-md p-1.5 xl:p-2.5 transition-all duration-500"
+                :class="
+                  index === indeksAktif ? 'opacity-100' : 'opacity-40 grayscale'
+                "
               >
-                <div class="flex flex-row text-white text-xl space-x-5">
-                  <div class="flex lg:[15%] xl:w-[10%]">
-                    <div
-                      class="flex bg-white dark:bg-[#323232] rounded-full shadow-md p-1.5 sm:p-2 md:p-1 xl:p-2 w-[50px] h-[50px] md:w-[45px] md:h-[45px] lg:w-[45px] lg:h-[45px] xl:w-[60px] xl:h-[60px] justify-center md:mt-2 lg:mt-0"
-                    >
-                      <img
-                        :src="step.icon"
-                        alt="Icon"
-                        class="w-full lg:h-full xl:h-full object-contain object-center"
-                      />
-                    </div>
-                  </div>
-                  <div
-                    class="flex flex-col lg:w-[85%] xl:w-[90%] h-auto gap-y-1 lg:gap-y-2 xl:gap-y-3"
+                <img
+                  :src="step.icon"
+                  alt=""
+                  class="w-full h-full object-contain"
+                />
+              </span>
+              <div class="flex flex-col min-w-0">
+                <p
+                  class="text-[16px] xl:text-[20px] transition-colors duration-500"
+                  :class="
+                    index === indeksAktif
+                      ? 'text-[#1AB24F] font-[500]'
+                      : 'text-[#9CA3AF] dark:text-[#6F6F6F]'
+                  "
+                >
+                  {{ step.title }}
+                </p>
+                <div
+                  class="grid transition-[grid-template-rows] duration-500 ease-out"
+                  :style="{
+                    gridTemplateRows: index === indeksAktif ? '1fr' : '0fr',
+                  }"
+                >
+                  <p
+                    class="overflow-hidden text-[12px] lg:text-[14px] xl:text-[16px] leading-relaxed text-[#195279] dark:text-[#D4D4D4]"
                   >
-                    <div class="w-full h-auto">
-                      <p
-                        class="text-[#195279] dark:text-white text-[14px] sm:text-[16px] lg:text-[18px] xl:text-[22px]"
-                      >
-                        {{ step.title }}
-                      </p>
-                    </div>
-                    <div class="w-full h-auto leading-relaxed">
-                      <p
-                        class="text-[#195279] dark:text-white text-[10px] sm:text-[14px] lg:text-[14px] xl:text-[19px]"
-                      >
-                        {{ step.description }}
-                      </p>
-                    </div>
-                  </div>
+                    <span class="block pt-1">{{ step.description }}</span>
+                  </p>
                 </div>
               </div>
-            </SwiperSlide>
-          </Swiper>
+            </li>
+          </ul>
+          <div v-else class="roda w-full">
+            <div
+              class="roda-jalur"
+              :style="{
+                transform: `translateY(calc(var(--tinggi-slot) * -${indeksAktif}))`,
+              }"
+            >
+              <div
+                v-for="(step, index) in localizedSteps"
+                :key="index"
+                class="roda-slot flex flex-row items-center gap-x-5"
+              >
+                <div
+                  class="shrink-0 flex bg-white dark:bg-[#323232] rounded-full shadow-md p-1.5 sm:p-2 w-[50px] h-[50px] md:w-[56px] md:h-[56px] justify-center items-center"
+                >
+                  <img
+                    :src="step.icon"
+                    alt=""
+                    class="w-full h-full object-contain object-center"
+                  />
+                </div>
+                <div class="flex flex-col min-w-0 gap-y-1 md:gap-y-2">
+                  <p
+                    class="text-[#195279] dark:text-white text-[14px] sm:text-[16px] md:text-[20px] font-[500]"
+                  >
+                    {{ step.title }}
+                  </p>
+                  <p
+                    class="text-[#195279] dark:text-[#D4D4D4] text-[10px] sm:text-[14px] md:text-[15px] leading-relaxed"
+                  >
+                    {{ step.description }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-
-      <div class="w-full h-full flex mb-6 md:mb-0">
-        <video
-          v-if="!isDark"
-          autoplay
-          loop
-          muted
-          playsinline
-          @contextmenu.prevent
-          class="w-full h-full sm:w-full sm:h-[400px] md:w-full md:h-full object-contain lg:object-cover object-center rounded-3xl"
+        <div
+          class="area-grafik w-full h-auto flex items-center lg:items-start justify-center lg:justify-start"
+          :style="gayaGrafik"
         >
-          <source src="@/assets/videos/Step.mp4" type="video/mp4" />
-        </video>
-        <video
-          v-else
-          autoplay
-          loop
-          muted
-          playsinline
-          @contextmenu.prevent
-          class="w-full h-full sm:w-full sm:h-[400px] md:w-full md:h-full object-contain lg:object-cover object-center rounded-3xl"
-        >
-          <source src="@/assets/videos/Dark_Step.mp4" type="video/mp4" />
-        </video>
-        <!-- <NetworkDiagram /> -->
+          <StepLine :progres="progresGaris" @terukur="terimaPatokan" />
+        </div>
       </div>
     </div>
   </div>
 </template>
+
 <style scoped>
-:deep(.custom-swiper .swiper-pagination-vertical) {
-  left: 0px !important;
-  right: auto !important;
+/* Roda: jendela setinggi satu slot, isinya digeser ke atas satu slot per
+   butir. Semua slot sama tinggi supaya geserannya cukup satu angka. */
+.roda {
+  --tinggi-slot: 140px;
+  height: var(--tinggi-slot);
+  overflow: hidden;
 }
 
-:deep(.swiper-pagination-bullet) {
-  margin: 16px 0 !important;
+.roda-jalur {
+  transition: transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.roda-slot {
+  height: var(--tinggi-slot);
+}
+
+@media (min-width: 768px) {
+  .roda {
+    --tinggi-slot: 170px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .roda-jalur {
+    transition: none;
+  }
+}
+
+/* Tiga susunan, satu per rentang layar.
+   < md  : satu kolom bertumpuk.
+   md-lg : S-Line sejajar dengan judul — ia membentang dua baris, jadi judul
+           dan daftar butirnya duduk berdampingan dengannya di kolom kiri.
+   lg+   : judul kembali melintang penuh, S-Line hanya sebaris dengan butir. */
+.isi-nilai {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+    "judul"
+    "grafik"
+    "butir";
+  row-gap: 1.25rem;
+}
+
+.area-judul {
+  grid-area: judul;
+}
+.area-butir {
+  grid-area: butir;
+}
+.area-grafik {
+  grid-area: grafik;
+}
+
+@media (min-width: 768px) {
+  .isi-nilai {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto auto;
+    grid-template-areas:
+      "judul grafik"
+      "butir grafik";
+    column-gap: 1.25rem;
+    row-gap: 1.25rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .isi-nilai {
+    grid-template-areas:
+      "judul judul"
+      "butir grafik";
+  }
+}
+
+/* Jarak tempuh paku: 40vh per butir, ditetapkan lewat --jarak-pin di template. */
+.pembungkus-pin {
+  height: calc(100svh + var(--jarak-pin));
+}
+
+.panel-pin {
+  position: sticky;
+  top: 0;
+  height: 100svh;
+  display: flex;
+  align-items: center;
+  /* Isinya ditengahkan di dalam kotak padding, jadi selisih atas-bawah inilah
+     yang menentukan tinggi dudukannya: bawah lebih besar = kartu naik.
+     Atas tetap 96px sebagai ruang bebas navbar. */
+  padding-top: 96px;
+  padding-bottom: 140px;
+}
+
+/* Mulai lg tinggi grafik disetel dari tinggi kolom kiri (lihat gayaGrafik),
+   jadi lebarnya yang menyesuaikan. Di bawah lg grafiknya membentang dua baris
+   dan mengisi lebar kolomnya seperti biasa. */
+@media (min-width: 1024px) and (min-height: 800px) {
+  .area-grafik > svg {
+    height: 100%;
+    width: auto;
+    max-width: 100%;
+  }
 }
 </style>

@@ -504,7 +504,12 @@ onMounted(() => {
             // Arahnya TETAP, tidak pernah berputar. Di bawah lg sumbu
             // gerbangnya mendatar, jadi sirkuitnya diputar 90 derajat sebagai
             // posisi dasar; di lg ke atas kembali tegak.
-            'rotate-90 lg:rotate-0',
+            //
+            // Arah putarannya BERLAWANAN jarum jam. Jalur cahayanya digambar
+            // dari atas ke bawah; -90 derajat memetakan arah bawah menjadi
+            // kanan, jadi cahayanya berjalan kiri ke kanan. Dengan rotate-90
+            // arah itu jatuh ke kiri, terbalik dari yang diinginkan.
+            '-rotate-90 lg:rotate-0',
           ]"
         >
           <path

@@ -20,7 +20,11 @@ let idFrame = null;
 const handleScroll = () => {
   if (idFrame) return;
   idFrame = requestAnimationFrame(() => {
-    isScrolled.value = window.scrollY > 0;
+    // Ambangnya HARUS sama dengan MenuNav.vue. Bingkai dan jarak menunya
+    // menyempit bersamaan; kalau angkanya beda, di antara kedua ambang itu
+    // bingkainya sudah sempit sementara menunya masih lebar, dan menunya
+    // mendesak logo.
+    isScrolled.value = window.scrollY > 50;
     idFrame = null;
   });
 };
