@@ -66,6 +66,16 @@ jobs:
           echo "${{ secrets.DEPLOY_SSH_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
           ssh-keyscan -p ${{ secrets.DEPLOY_SSH_PORT }} -H ${{ secrets.DEPLOY_SSH_HOST }} >> ~/.ssh/known_hosts 2>/dev/null
+          # Keepalive on every ssh in this job — public/vendor SDK bundle
+          # (~122 MB) transfers longer than firewall idle timeouts, so without
+          # this the rsync channel goes zombie ("Broken pipe" after ~5 min).
+          cat > ~/.ssh/config <<'EOF'
+          Host *
+            ServerAliveInterval 30
+            ServerAliveCountMax 10
+            TCPKeepAlive yes
+          EOF
+          chmod 600 ~/.ssh/config
 
       - name: Backup current dist on server
         run: |
@@ -81,7 +91,7 @@ jobs:
           ssh -i ~/.ssh/deploy_key -p ${{ secrets.DEPLOY_SSH_PORT }} \
             ${{ secrets.DEPLOY_SSH_USER }}@${{ secrets.DEPLOY_SSH_HOST }} \
             "rm -rf /var/www/html/seleris-landing-page-v2/dist.new && mkdir -p /var/www/html/seleris-landing-page-v2/dist.new"
-          rsync -az --delete \
+          rsync -az --delete --partial --timeout=600 \
             -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.DEPLOY_SSH_PORT }}" \
             dist/ \
             ${{ secrets.DEPLOY_SSH_USER }}@${{ secrets.DEPLOY_SSH_HOST }}:/var/www/html/seleris-landing-page-v2/dist.new/
