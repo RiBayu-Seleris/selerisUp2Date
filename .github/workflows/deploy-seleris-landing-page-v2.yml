@@ -88,9 +88,17 @@ jobs:
 
       - name: Upload new dist to staging directory
         run: |
+          # Seed dist.new from existing dist so rsync --delete only ships the
+          # diff (Vite hash chunks + version.json) — vendor/ SDK is ~122 MB and
+          # rarely changes, transferring it every push chokes on Broken pipe.
           ssh -i ~/.ssh/deploy_key -p ${{ secrets.DEPLOY_SSH_PORT }} \
             ${{ secrets.DEPLOY_SSH_USER }}@${{ secrets.DEPLOY_SSH_HOST }} \
-            "rm -rf /var/www/html/seleris-landing-page-v2/dist.new && mkdir -p /var/www/html/seleris-landing-page-v2/dist.new"
+            "rm -rf /var/www/html/seleris-landing-page-v2/dist.new && \
+             if [ -d /var/www/html/seleris-landing-page-v2/dist ]; then \
+               cp -a /var/www/html/seleris-landing-page-v2/dist /var/www/html/seleris-landing-page-v2/dist.new; \
+             else \
+               mkdir -p /var/www/html/seleris-landing-page-v2/dist.new; \
+             fi"
           rsync -az --delete --partial --timeout=600 \
             -e "ssh -i ~/.ssh/deploy_key -p ${{ secrets.DEPLOY_SSH_PORT }}" \
             dist/ \
