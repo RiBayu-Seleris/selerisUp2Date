@@ -39,8 +39,11 @@ CLAUDE.md
 HAPUS-LOG.md
 DEVLOG.md
 RPPG_WEBSOCKET_DOCS.md
-new-scanning-md
-scanning-md
+new-scanning-md/
+scanning-md/
+Technology-SVG/
+Layer/
+
 
 # Aset runtime SDK rPPG: ~122 MB per versi, dihasilkan ulang oleh
 # `npx seleris-copy-assets` (lihat langkah yang sama di workflow deploy).

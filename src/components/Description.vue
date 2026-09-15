@@ -31,6 +31,7 @@ const tanganiGulir = () => {
   if (idFrame) return;
   idFrame = requestAnimationFrame(() => {
     hitungKemajuan();
+    hitungKemajuanDaftar();
     idFrame = null;
   });
 };
@@ -46,6 +47,7 @@ const perbaruiMode = () => {
   // ikut berganti, jadi keduanya diukur ulang setelah Vue selesai menggambar.
   nextTick(() => {
     hitungKemajuan();
+    hitungKemajuanDaftar();
     ukurUlang();
   });
 };
@@ -67,6 +69,23 @@ const ukurUlang = () => {
       pb: parseFloat(getComputedStyle(li).paddingBottom),
     };
   });
+};
+
+// Mode daftar (di bawah lg): garis hijau mengalir mengikuti gulir, bukan
+// langsung penuh. Patokannya garis baca dekat dasar layar -- garis penuh pas
+// ujung daftar sampai di situ, jadi bersamaan dengan habisnya section.
+const ACUAN_BACA = 0.95;
+const kemajuanDaftar = ref(0);
+
+const hitungKemajuanDaftar = () => {
+  if (pinAktif.value || !daftar.value) return;
+  const kotak = daftar.value.getBoundingClientRect();
+  if (kotak.height <= 0) return;
+  const acuan = window.innerHeight * ACUAN_BACA;
+  kemajuanDaftar.value = Math.min(
+    1,
+    Math.max(0, (acuan - kotak.top) / kotak.height),
+  );
 };
 
 const MULAI_TUKAR = 0.5;
@@ -119,16 +138,25 @@ const perjalanan = computed(() => {
   return { i, d: e, posisi: p[i] + (p[i + 1] - p[i]) * e };
 });
 
+// Letak tiap titik di mode daftar. Titiknya dipasang top-1/2 terhadap div isi,
+// bukan terhadap <li>, jadi jarak bawah li tidak ikut dibagi dua.
+const titikDaftar = computed(() => {
+  let atas = 0;
+  return ukuran.value.map((u) => {
+    const titik = atas + (u.judul + u.ket) / 2;
+    atas += u.judul + u.ket + u.pb;
+    return titik;
+  });
+});
+
 const posisiTitik = computed(() => {
-  // Susunan daftar: semuanya terbuka sekaligus dan tidak ada yang bergerak,
-  // jadi letaknya dibaca dari tata letak sebenarnya.
+  // Mode daftar: penuhnya = seluruh jalur abu-abu (setinggi daftar), bukan
+  // berhenti di titik terakhir, biar habis bersama sectionnya.
   if (!pinAktif.value) {
     const u = ukuran.value;
     if (!u.length) return 0;
-    const akhir = u.length - 1;
-    let atas = 0;
-    for (let k = 0; k < akhir; k++) atas += u[k].judul + u[k].ket + u[k].pb;
-    return atas + (u[akhir].judul + u[akhir].ket) / 2;
+    const penuh = u.reduce((n, x) => n + x.judul + x.ket + x.pb, 0);
+    return penuh * kemajuanDaftar.value;
   }
   return perjalanan.value?.posisi ?? 0;
 });
@@ -180,6 +208,7 @@ onMounted(() => {
   perbaruiMode();
   nextTick(() => {
     ukurUlang();
+    hitungKemajuanDaftar();
     pasangPengawasUkuran();
   });
   mqRuang.addEventListener("change", perbaruiMode);
@@ -211,9 +240,13 @@ const isDark = useIsDark();
   >
     <div
       ref="panel"
-      class="panel-pin flex flex-col-reverse lg:flex-row px-0 lg:px-6 lg:justify-between dark:bg-[#17181A]"
+      class="panel-pin grid grid-cols-1 lg:grid-cols-2 lg:content-center px-0 lg:px-6 dark:bg-[#17181A]"
     >
-      <div class="flex flex-col w-full h-full justify-center dark:bg-[#17181A]">
+      <!-- Judul dapat barisnya sendiri, jadi videonya cuma sejajar dengan
+           daftar langkah. Urutan di layar kecil diatur lewat order-*. -->
+      <div
+        class="order-2 lg:order-none lg:col-start-1 lg:row-start-1 flex flex-col w-full dark:bg-[#17181A]"
+      >
         <div class="w-full pb-0 sm:pb-2 md:pb-0 xl:pb-6">
           <p
             class="text-[20px] md:text-[24px] text-[#1AB24F] font-[500] dark:text-[#FAFAFA]"
@@ -238,72 +271,77 @@ const isDark = useIsDark();
             {{ $t("home.howItWorks.titleLine2") }}
           </p>
         </div>
-
-        <div
-          class="w-full mt-5"
-          :class="pinAktif ? 'h-[390px] xl:h-[380px]' : ''"
-        >
-          <ol ref="daftar" class="relative w-full flex flex-col">
-            <span
-              class="absolute left-3 -translate-x-1/2 top-0 bottom-0 w-[3px] bg-gray-200 dark:bg-[#FAFAFA]/15"
-            ></span>
-
-            <span
-              class="absolute left-3 -translate-x-1/2 top-0 w-[3px] bg-green-500"
-              :style="{ height: `${posisiTitik}px` }"
-            ></span>
-
-            <span
-              v-if="pinAktif"
-              class="absolute left-3 -translate-x-1/2 w-4 h-4 rounded-full bg-green-500"
-              :style="{ top: `${posisiTitik - 8}px` }"
-            ></span>
-
-            <li
-              v-for="(step, index) in steps"
-              :key="step.key"
-              class="relative pb-7 xl:pb-12 last:pb-0"
-            >
-              <div class="relative pl-10 xl:pl-16">
-                <span
-                  v-if="!pinAktif"
-                  class="absolute left-3 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full bg-green-500"
-                ></span>
-
-                <h3
-                  class="text-[16px] sm:text-[20px] md:text-[24px] leading-[20px] sm:leading-normal font-[500] transition-colors duration-500 ease-out"
-                  :class="
-                    langkahAktif(index)
-                      ? 'text-green-600'
-                      : 'text-gray-400 dark:text-[#FAFAFA]/30'
-                  "
-                >
-                  {{ $t(`home.howItWorks.steps.${step.key}.title`) }}
-                </h3>
-
-                <div
-                  class="grid"
-                  :style="{
-                    gridTemplateRows: `${terbuka[index]}fr`,
-                    opacity: terbuka[index],
-                  }"
-                >
-                  <div class="overflow-hidden">
-                    <p
-                      class="mt-3.5 md:mt-4 text-[12px] sm:text-[14px] leading-relaxed text-[#195279] dark:text-[#FAFAFA] max-w-xl"
-                    >
-                      {{ $t(`home.howItWorks.steps.${step.key}.description`) }}
-                    </p>
-                  </div>
-                </div>
-              </div>
-            </li>
-          </ol>
-        </div>
       </div>
 
       <div
-        class="flex w-full h-full md:h-[500px] lg:h-full xl:h-[425px] justify-center items-center mb-12 md:mb-20 lg:mb-0"
+        class="order-3 lg:order-none lg:col-start-1 lg:row-start-2 w-full mt-5"
+        :class="pinAktif ? 'h-[390px] xl:h-[380px]' : ''"
+      >
+        <ol ref="daftar" class="relative w-full flex flex-col">
+          <span
+            class="absolute left-3 -translate-x-1/2 top-0 bottom-0 w-[3px] bg-gray-200 dark:bg-[#FAFAFA]/15"
+          ></span>
+
+          <span
+            class="absolute left-3 -translate-x-1/2 top-0 w-[3px] bg-green-500"
+            :style="{ height: `${posisiTitik}px` }"
+          ></span>
+
+          <span
+            v-if="pinAktif"
+            class="absolute left-3 -translate-x-1/2 w-4 h-4 rounded-full bg-green-500"
+            :style="{ top: `${posisiTitik - 8}px` }"
+          ></span>
+
+          <li
+            v-for="(step, index) in steps"
+            :key="step.key"
+            class="relative pb-7 xl:pb-12 last:pb-0"
+          >
+            <div class="relative pl-10 xl:pl-16">
+              <span
+                v-if="!pinAktif"
+                class="absolute left-3 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full transition-colors duration-300 ease-out"
+                :class="
+                  posisiTitik >= titikDaftar[index]
+                    ? 'bg-green-500'
+                    : 'bg-gray-200 dark:bg-[#FAFAFA]/15'
+                "
+              ></span>
+
+              <h3
+                class="text-[16px] sm:text-[20px] md:text-[24px] lg:text-[22px] xl:text-[24px] leading-[20px] sm:leading-normal font-[500] transition-colors duration-500 ease-out"
+                :class="
+                  langkahAktif(index)
+                    ? 'text-green-600'
+                    : 'text-gray-400 dark:text-[#FAFAFA]/30'
+                "
+              >
+                {{ $t(`home.howItWorks.steps.${step.key}.title`) }}
+              </h3>
+
+              <div
+                class="grid"
+                :style="{
+                  gridTemplateRows: `${terbuka[index]}fr`,
+                  opacity: terbuka[index],
+                }"
+              >
+                <div class="overflow-hidden">
+                  <p
+                    class="mt-3.5 md:mt-4 text-[12px] sm:text-[14px] leading-relaxed text-[#195279] dark:text-[#FAFAFA] max-w-xl"
+                  >
+                    {{ $t(`home.howItWorks.steps.${step.key}.description`) }}
+                  </p>
+                </div>
+              </div>
+            </div>
+          </li>
+        </ol>
+      </div>
+
+      <div
+        class="order-1 lg:order-none lg:col-start-2 lg:row-start-2 flex w-full h-full md:h-[500px] lg:h-full xl:h-[425px] justify-center items-center mb-12 md:mb-20 lg:mb-0"
       >
         <video
           v-if="!isDark"
@@ -313,7 +351,7 @@ const isDark = useIsDark();
           muted
           playsinline
           @contextmenu.prevent
-          class="w-full h-full md:w-auto md:h-[500px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] object-fill lg:object-contain lg:ml-20 xl:pl-0"
+          class="w-full h-auto md:w-auto md:h-[500px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] object-contain lg:ml-20 xl:pl-0"
         >
           <source
             src="@/assets/videos/Design-Vector-Web2.mp4"
@@ -328,7 +366,7 @@ const isDark = useIsDark();
           muted
           playsinline
           @contextmenu.prevent
-          class="w-full h-full md:w-auto md:h-[500px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] object-fill lg:object-contain rounded-[20px] bg-[#FFFFFF] dark:bg-[#151819] border-[0.1px] dark:border-[#FAFAFA]/25 lg:ml-20 xl:pl-0"
+          class="w-full h-auto md:w-auto md:h-[500px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] object-contain rounded-[20px] bg-[#FFFFFF] dark:bg-[#151819] border-[0.1px] dark:border-[#FAFAFA]/25 lg:ml-20 xl:pl-0"
         >
           <source
             src="@/assets/videos/Design-Dark-Vector-Web2.mp4"

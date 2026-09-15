@@ -1,12 +1,5 @@
 <script setup>
-import {
-  ref,
-  onMounted,
-  onBeforeUnmount,
-  computed,
-  watch,
-  nextTick,
-} from "vue";
+import { ref, onMounted, onBeforeUnmount, computed } from "vue";
 
 import {
   partnerLogos,
@@ -24,37 +17,17 @@ const isHovered = ref(false);
 let progressInterval = null;
 let observer = null;
 
-// 🧩 untuk menyimpan tinggi maksimal
-const maxHeight = ref(0);
-const logoContainer = ref(null);
-
 // ✅ Sinkron ke Tailwind darkMode (pakai class “dark”)
 const isDark = ref(document.documentElement.classList.contains("dark"));
 
-// computed pilih logo sesuai mode
-const currentLogos = computed(() => {
-  if (showPartners.value) {
-    return isDark.value ? partnerLogosDark : partnerLogos;
-  } else {
-    return isDark.value ? clientLogosDark : clientLogos;
-  }
-});
-
-// 🧮 Hitung tinggi maksimum dari kontainer
-const updateMaxHeight = async () => {
-  await nextTick();
-  if (logoContainer.value) {
-    const currentHeight = logoContainer.value.scrollHeight;
-    if (currentHeight > maxHeight.value) {
-      maxHeight.value = currentHeight;
-    }
-  }
-};
-
-// Saat berganti partner/client → cek apakah tinggi perlu di-update
-watch(showPartners, async () => {
-  await updateMaxHeight();
-});
+// Dua daftarnya dirender berbarengan dan ditumpuk di satu sel grid, jadi
+// tingginya otomatis ikut yang paling banyak tanpa perlu diukur.
+const logoPartner = computed(() =>
+  isDark.value ? partnerLogosDark : partnerLogos,
+);
+const logoClient = computed(() =>
+  isDark.value ? clientLogosDark : clientLogos,
+);
 
 // progress auto switch
 const startProgress = () => {
@@ -81,19 +54,11 @@ onMounted(() => {
   });
 
   startProgress();
-
-  nextTick(() => updateMaxHeight());
-
-  // ✅ Tambahkan ini
-  window.addEventListener("resize", updateMaxHeight);
 });
 
 onBeforeUnmount(() => {
   stopProgress();
   if (observer) observer.disconnect();
-
-  // ✅ Jangan lupa hapus listener-nya agar tidak memory leak
-  window.removeEventListener("resize", updateMaxHeight);
 });
 </script>
 
@@ -122,15 +87,20 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
-    <transition name="fade" mode="out-in">
+    <!-- Kedua daftar ditumpuk di satu sel grid, jadi tinggi kotaknya
+         mengikuti yang paling banyak dan tidak melompat saat berganti. -->
+    <div class="grid mt-4">
       <div
-        ref="logoContainer"
-        :key="showPartners + (isDark ? '-dark' : '-light')"
-        class="flex flex-wrap justify-center gap-3 sm:gap-6 mt-4 content-start transition-all duration-300"
-        :style="{ minHeight: maxHeight + 'px' }"
+        :class="[
+          'col-start-1 row-start-1 flex flex-wrap justify-center gap-3 sm:gap-6 content-start transition-opacity duration-500',
+          showPartners
+            ? 'opacity-100 delay-500'
+            : 'opacity-0 pointer-events-none',
+        ]"
+        :aria-hidden="!showPartners"
       >
         <div
-          v-for="(logo, i) in currentLogos"
+          v-for="(logo, i) in logoPartner"
           :key="i"
           class="group w-[30%] sm:w-[30%] md:w-[22.4%] lg:w-[18%] h-[65px] sm:h-[80px] p-[1px] rounded-xl bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656] hover:dark:bg-none hover:dark:bg-[#D9D9D9] transition-all duration-300 ease-out"
         >
@@ -145,17 +115,32 @@ onBeforeUnmount(() => {
           </div>
         </div>
       </div>
-    </transition>
+
+      <div
+        :class="[
+          'col-start-1 row-start-1 flex flex-wrap justify-center gap-3 sm:gap-6 content-start transition-opacity duration-500',
+          !showPartners
+            ? 'opacity-100 delay-500'
+            : 'opacity-0 pointer-events-none',
+        ]"
+        :aria-hidden="!!showPartners"
+      >
+        <div
+          v-for="(logo, i) in logoClient"
+          :key="i"
+          class="group w-[30%] sm:w-[30%] md:w-[22.4%] lg:w-[18%] h-[65px] sm:h-[80px] p-[1px] rounded-xl bg-[#D9D9D9] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656] hover:dark:bg-none hover:dark:bg-[#D9D9D9] transition-all duration-300 ease-out"
+        >
+          <div
+            class="flex w-full h-full rounded-xl justify-center items-center bg-[#F9FAFB] hover:bg-white dark:bg-[#1D1F23] dark:border-[#FAFAFA]/25"
+          >
+            <img
+              :src="logo"
+              alt="partner logo"
+              class="w-auto h-full object-contain filter transition duration-300"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
-
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>

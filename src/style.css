@@ -286,9 +286,13 @@ html [data-aos^="zoom"][data-aos^="zoom"].aos-animate {
    tergambar sebagai garis penuh, bukan menghilang.
 
    Offset 14 menaruh ruas cahayanya tepat sebelum titik awal jalur, jadi dia
-   tidak terlihat sampai animasinya dinyalakan. */
+   tidak terlihat sampai animasinya dinyalakan.
+
+   Jaraknya (110) harus lebih panjang dari jalurnya (pathLength 100). Kalau
+   14 + jarak = 100, polanya pas berulang sepanjang jalur, jadi begitu ruas
+   cahayanya keluar di ujung, ruas berikutnya langsung mengintip di pangkal. */
 .sirkuit-cahaya {
-  stroke-dasharray: 14 86;
+  stroke-dasharray: 14 110;
   stroke-dashoffset: 14;
 }
 

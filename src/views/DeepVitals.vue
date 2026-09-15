@@ -1,10 +1,10 @@
 <script setup>
-import { useIsDark } from "@/utils/useIsDark";
 import { useLocalizedList } from "@/utils/i18nList";
 import { buatCarousel } from "@/utils/carousel";
 import HeroText from "@/components/reusable/TechHero.vue";
 import TechLogo from "@/components/reusable/TechLogo.vue";
 import TechCard from "@/components/reusable/TechCard.vue";
+import FlowSdv from "@/components/Technology/FlowSdv.vue";
 
 import SDV_Logo from "@/assets/images/technology/SDV-Logo.svg";
 import Dark_SDV_Logo from "@/assets/images/technology/Dark-SDV-Logo.svg";
@@ -18,11 +18,6 @@ const localizedCards = useLocalizedList("technology.sdv", SDV_Content, [
   "title",
   "body",
 ]);
-
-// Dipakai di template: video mode terang pakai v-if="!isDark", yang gelap
-// pakai v-else. Tujuannya supaya cuma satu video yang benar-benar dibuat
-// dan diunduh browser. Penjelasan lengkap ada di src/utils/useIsDark.js
-const isDark = useIsDark();
 </script>
 
 <template>
@@ -43,31 +38,8 @@ const isDark = useIsDark();
     data-aos="fade-up"
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-center"
   >
-    <div
-      class="w-full h-auto aspect-[16/8] flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
-    >
-      <video
-        v-if="!isDark"
-        autoplay
-        loop
-        muted
-        playsinline
-        @contextmenu.prevent
-        class="w-full h-full object-cover rounded-[20px] dark:bg-[#323232]"
-      >
-        <source src="@/assets/videos/SDV_Video.mp4" type="video/mp4" />
-      </video>
-      <video
-        v-else
-        autoplay
-        loop
-        muted
-        playsinline
-        @contextmenu.prevent
-        class="w-full h-full object-cover rounded-[20px] dark:bg-[#323232]"
-      >
-        <source src="@/assets/videos/Dark_SDV_Video.mp4" type="video/mp4" />
-      </video>
+    <div class="w-full h-auto flex justify-center mt-10 lg:mt-20">
+      <FlowSdv />
     </div>
   </section>
 
@@ -136,7 +108,7 @@ const isDark = useIsDark();
       @mouseup="kartu.seretSelesai"
       @mouseleave="kartu.seretSelesai"
       @dragstart.prevent
-      class="cursor-grab flex relative w-full h-auto px-8 justify-start overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar gap-x-10 scroll-pl-8 pl-8 pr-8"
+      class="cursor-grab flex relative w-full h-auto px-8 justify-start overflow-x-auto snap-x snap-mandatory scroll-smooth hide-scrollbar gap-x-5 md:gap-x-5 lg:gap-x-8 scroll-pl-8 pl-8 pr-8"
     >
       <TechCard
         v-for="(cardContent, index) in localizedCards"

@@ -104,151 +104,171 @@ onBeforeUnmount(() => {
       </div>
     </div>
 
-    <transition name="fade" mode="out-in" class="dark:hidden h-[200px]">
-      <div :key="showPartners" class="flex flex-col items-center gap-6 mt-5">
-        <template v-if="showPartners">
+    <!-- Kedua daftar ditumpuk di satu sel grid (col/row-start-1 sama), jadi
+         tinggi kotaknya otomatis mengikuti daftar yang paling banyak dan tidak
+         naik-turun saat berganti. -->
+    <div class="grid mt-5 dark:hidden">
+      <div
+        :class="[
+          'col-start-1 row-start-1 flex flex-col items-center gap-6 transition-opacity duration-500',
+          showPartners
+            ? 'opacity-100 delay-500'
+            : 'opacity-0 pointer-events-none',
+        ]"
+        :aria-hidden="!showPartners"
+      >
+        <div
+          v-for="(row, rowIndex) in partnerChunks"
+          :key="'row-' + rowIndex"
+          class="grid gap-6"
+          :class="[
+            row.length === 1
+              ? 'grid-cols-1'
+              : row.length === 2
+                ? 'grid-cols-2'
+                : row.length === 3
+                  ? 'grid-cols-3'
+                  : row.length === 4
+                    ? 'grid-cols-4'
+                    : 'grid-cols-5',
+            row.length < columnsPerRow ? 'justify-center' : '',
+          ]"
+        >
           <div
-            v-for="(row, rowIndex) in partnerChunks"
-            :key="'row-' + rowIndex"
-            class="grid gap-6"
-            :class="[
-              row.length === 1
-                ? 'grid-cols-1'
-                : row.length === 2
-                  ? 'grid-cols-2'
-                  : row.length === 3
-                    ? 'grid-cols-3'
-                    : row.length === 4
-                      ? 'grid-cols-4'
-                      : 'grid-cols-5',
-              row.length < columnsPerRow ? 'justify-center' : '',
-            ]"
+            v-for="(logo, index) in row"
+            :key="`${rowIndex}-${index}`"
+            class="flex items-center justify-center"
           >
-            <div
-              v-for="(logo, index) in row"
-              :key="`${rowIndex}-${index}`"
-              class="flex items-center justify-center"
-            >
-              <CardTilt
-                :image="logo"
-                @mouseenter="isHovered = true"
-                @mouseleave="isHovered = false"
-              />
-            </div>
+            <CardTilt
+              :image="logo"
+              @mouseenter="isHovered = true"
+              @mouseleave="isHovered = false"
+            />
           </div>
-        </template>
-
-        <template v-else>
-          <div
-            v-for="(row, rowIndex) in clientChunks"
-            :key="'client-row-' + rowIndex"
-            class="grid gap-6"
-            :class="[
-              row.length === 1
-                ? 'grid-cols-1'
-                : row.length === 2
-                  ? 'grid-cols-2'
-                  : row.length === 3
-                    ? 'grid-cols-3'
-                    : row.length === 4
-                      ? 'grid-cols-4'
-                      : 'grid-cols-5',
-              row.length < columnsPerRow ? 'justify-center' : '',
-            ]"
-          >
-            <div
-              v-for="(logo, index) in row"
-              :key="`${rowIndex}-${index}`"
-              class="flex items-center justify-center"
-            >
-              <CardTilt
-                :image="logo"
-                @mouseenter="isHovered = true"
-                @mouseleave="isHovered = false"
-              />
-            </div>
-          </div>
-        </template>
+        </div>
       </div>
-    </transition>
 
-    <transition name="fade" mode="out-in" class="hidden dark:flex h-[200px]">
-      <div :key="showPartners" class="flex flex-col items-center gap-6 mt-5">
-        <template v-if="showPartners">
+      <div
+        :class="[
+          'col-start-1 row-start-1 flex flex-col items-center gap-6 transition-opacity duration-500',
+          !showPartners
+            ? 'opacity-100 delay-500'
+            : 'opacity-0 pointer-events-none',
+        ]"
+        :aria-hidden="!!showPartners"
+      >
+        <div
+          v-for="(row, rowIndex) in clientChunks"
+          :key="'client-row-' + rowIndex"
+          class="grid gap-6"
+          :class="[
+            row.length === 1
+              ? 'grid-cols-1'
+              : row.length === 2
+                ? 'grid-cols-2'
+                : row.length === 3
+                  ? 'grid-cols-3'
+                  : row.length === 4
+                    ? 'grid-cols-4'
+                    : 'grid-cols-5',
+            row.length < columnsPerRow ? 'justify-center' : '',
+          ]"
+        >
           <div
-            v-for="(row, rowIndex) in partnerChunksDark"
-            :key="'row-' + rowIndex"
-            class="grid gap-6"
-            :class="[
-              row.length === 1
-                ? 'grid-cols-1'
-                : row.length === 2
-                  ? 'grid-cols-2'
-                  : row.length === 3
-                    ? 'grid-cols-3'
-                    : row.length === 4
-                      ? 'grid-cols-4'
-                      : 'grid-cols-5',
-              row.length < columnsPerRow ? 'justify-center' : '',
-            ]"
+            v-for="(logo, index) in row"
+            :key="`${rowIndex}-${index}`"
+            class="flex items-center justify-center"
           >
-            <div
-              v-for="(logo, index) in row"
-              :key="`${rowIndex}-${index}`"
-              class="flex items-center justify-center"
-            >
-              <CardTilt
-                :image="logo"
-                @mouseenter="isHovered = true"
-                @mouseleave="isHovered = false"
-              />
-            </div>
+            <CardTilt
+              :image="logo"
+              @mouseenter="isHovered = true"
+              @mouseleave="isHovered = false"
+            />
           </div>
-        </template>
-
-        <template v-else>
-          <div
-            v-for="(row, rowIndex) in clientChunksDark"
-            :key="'client-row-' + rowIndex"
-            class="grid gap-6"
-            :class="[
-              row.length === 1
-                ? 'grid-cols-1'
-                : row.length === 2
-                  ? 'grid-cols-2'
-                  : row.length === 3
-                    ? 'grid-cols-3'
-                    : row.length === 4
-                      ? 'grid-cols-4'
-                      : 'grid-cols-5',
-              row.length < columnsPerRow ? 'justify-center' : '',
-            ]"
-          >
-            <div
-              v-for="(logo, index) in row"
-              :key="`${rowIndex}-${index}`"
-              class="flex items-center justify-center"
-            >
-              <CardTilt
-                :image="logo"
-                @mouseenter="isHovered = true"
-                @mouseleave="isHovered = false"
-              />
-            </div>
-          </div>
-        </template>
+        </div>
       </div>
-    </transition>
+    </div>
+
+    <div class="hidden dark:grid mt-5">
+      <div
+        :class="[
+          'col-start-1 row-start-1 flex flex-col items-center gap-6 transition-opacity duration-500',
+          showPartners
+            ? 'opacity-100 delay-500'
+            : 'opacity-0 pointer-events-none',
+        ]"
+        :aria-hidden="!showPartners"
+      >
+        <div
+          v-for="(row, rowIndex) in partnerChunksDark"
+          :key="'row-' + rowIndex"
+          class="grid gap-6"
+          :class="[
+            row.length === 1
+              ? 'grid-cols-1'
+              : row.length === 2
+                ? 'grid-cols-2'
+                : row.length === 3
+                  ? 'grid-cols-3'
+                  : row.length === 4
+                    ? 'grid-cols-4'
+                    : 'grid-cols-5',
+            row.length < columnsPerRow ? 'justify-center' : '',
+          ]"
+        >
+          <div
+            v-for="(logo, index) in row"
+            :key="`${rowIndex}-${index}`"
+            class="flex items-center justify-center"
+          >
+            <CardTilt
+              :image="logo"
+              @mouseenter="isHovered = true"
+              @mouseleave="isHovered = false"
+            />
+          </div>
+        </div>
+      </div>
+
+      <div
+        :class="[
+          'col-start-1 row-start-1 flex flex-col items-center gap-6 transition-opacity duration-500',
+          !showPartners
+            ? 'opacity-100 delay-500'
+            : 'opacity-0 pointer-events-none',
+        ]"
+        :aria-hidden="!!showPartners"
+      >
+        <div
+          v-for="(row, rowIndex) in clientChunksDark"
+          :key="'client-row-' + rowIndex"
+          class="grid gap-6"
+          :class="[
+            row.length === 1
+              ? 'grid-cols-1'
+              : row.length === 2
+                ? 'grid-cols-2'
+                : row.length === 3
+                  ? 'grid-cols-3'
+                  : row.length === 4
+                    ? 'grid-cols-4'
+                    : 'grid-cols-5',
+            row.length < columnsPerRow ? 'justify-center' : '',
+          ]"
+        >
+          <div
+            v-for="(logo, index) in row"
+            :key="`${rowIndex}-${index}`"
+            class="flex items-center justify-center"
+          >
+            <CardTilt
+              :image="logo"
+              @mouseenter="isHovered = true"
+              @mouseleave="isHovered = false"
+            />
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
 </template>
-
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-  transition: opacity 0.5s ease;
-}
-.fade-enter-from,
-.fade-leave-to {
-  opacity: 0;
-}
-</style>
