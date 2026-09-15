@@ -17,6 +17,10 @@ module.exports = {
         // Desktop
         lg: "1024px",
         xl: "1280px",
+        // Kunci baru di theme.extend selalu ditambahkan SETELAH breakpoint
+        // bawaan, berapa pun urutan penulisannya di sini. Untuk min-xls itu
+        // aman karena 1300px memang di atas xl (1280px).
+        "min-xls": "1300px",
         // Extra Large
         xls: { raw: "(min-width: 1440px)" },
         "2xls": { raw: "(min-width: 2560px)" },

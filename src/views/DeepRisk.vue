@@ -38,9 +38,7 @@ const localizedCards = useLocalizedList("technology.sdr", SDR_Content, [
     data-aos="fade-up"
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-center"
   >
-    <div
-      class="relative w-full h-auto flex justify-center mt-10 lg:mt-20 bg-[#F3F4F6] dark:bg-[#323232] rounded-3xl"
-    >
+    <div class="relative w-full h-auto flex justify-center mt-10 lg:mt-20">
       <FlowSdr />
     </div>
   </section>
