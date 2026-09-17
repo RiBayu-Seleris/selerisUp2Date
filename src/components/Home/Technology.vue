@@ -11,6 +11,22 @@ const technologyItems = [
 
 const currentIndex = ref(0);
 
+// Butir yang belum gilirannya dikaburkan menurut JARAKNYA ke butir aktif —
+// pola yang sama seperti di Description.vue, supaya urutannya ikut terbaca:
+// mana yang sebentar lagi, mana yang masih jauh.
+//
+// Angkanya lebih kecil daripada di sana (1,1 lawan 2) karena di sini ada
+// EMPAT butir, bukan tiga. Jarak terjauh jadi 3, dan memakai angka yang sama
+// akan membuat butir terakhir kabur 6px — hilang, bukan mundur.
+const BLUR_PER_LANGKAH = 1.1; // px
+
+// Sengaja TANPA pemudaran, berbeda dari Description.vue. Di sana kedua butir
+// tak aktif berbagi satu warna, jadi opasitas yang memberi kedalaman. Di sini
+// warnanya sudah #D6D6D6 — nyaris putih sejak awal — dan menambah pudar di
+// atasnya akan menghapusnya, bukan memundurkannya.
+const kaburButir = (index) =>
+  `blur(${Math.abs(index - currentIndex.value) * BLUR_PER_LANGKAH}px)`;
+
 const pembungkus = ref(null);
 const panel = ref(null);
 const kemajuan = ref(0); // 0 saat paku dipasang .. 1 saat paku mau lepas
@@ -189,6 +205,7 @@ onBeforeUnmount(() => {
                       ? 'top-0'
                       : 'top-1/2 -translate-y-1/2'
                   "
+                  :style="{ filter: kaburButir(index) }"
                 >
                   <p
                     class="font-[500] leading-snug tracking-normal transition-all duration-500 ease-out text-[16px] sm:text-[20px] lg:text-[16px] xl:text-[24px] max-[321px]:!text-[14px] max-[376px]:!text-[14px]"

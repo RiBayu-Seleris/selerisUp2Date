@@ -4,6 +4,7 @@ import { useI18n } from "vue-i18n";
 import { SelerisScanner } from "@seleris/rppg-vue";
 
 import SdkFpsMonitor from "@/components/FaceScan/SdkFpsMonitor.vue";
+import { useCekKamera } from "@/composables/useCekKamera";
 
 const props = defineProps({
   profile: { type: Object, required: true },
@@ -14,7 +15,7 @@ const { t, locale } = useI18n();
 
 // Aset runtime disajikan dari folder publik, satu direktori per versi SDK.
 // BASE_URL dipakai supaya tetap benar kalau situs dipindah ke subpath.
-const VERSI_SDK = "0.1.0-dev.3";
+const VERSI_SDK = "0.1.0-dev.4";
 const assetBaseUrl = `${import.meta.env.BASE_URL}vendor/seleris-rppg/${VERSI_SDK}/`;
 
 // SDK menerima id, en, atau ms. Bahasa situs dipetakan ke situ; selain itu
@@ -44,27 +45,94 @@ const hrSementara = ref(null);
 
 // heatmapStatus: heatmap digambar SDK sendiri di atas video. Host cukup
 // menyalakan/mematikan dan mengetahui kapan sudah benar-benar terlihat.
-const heatmapAktif = ref(true);
+//
+// MATI secara bawaan. Menggambar heatmap di atas setiap frame memakan jatah
+// waktu yang sama dengan penganalisis, padahal satu frame hanya punya ~41 ms
+// sebelum lajunya jatuh di bawah 24 Hz. Teks bantuan SDK sendiri menyuruh
+// mematikannya begitu cadence ditolak — jadi lebih baik tidak pernah
+// menyalakannya lebih dulu. Pengunjung yang ingin melihatnya tetap bisa
+// mencentang saklarnya di bawah.
+const heatmapAktif = ref(false);
 const heatmapTerlihat = ref(false);
 
 // Laju gambar per detik, dari event `quality`. Ambang cadence-nya 24 Hz.
 const CADENCE_MINIMUM_HZ = 24;
+// Ambang yang benar-benar dipakai untuk menilai. Sama dengan konstanta di
+// atas sampai SDK melaporkan angkanya sendiri lewat event `ready`.
+const ambangHz = ref(CADENCE_MINIMUM_HZ);
+
+// Pemeriksaan kamera dan cahaya sebelum scan. Lihat useCekKamera untuk
+// alasan kenapa ini harus terjadi sebelum pengunjung menekan "Mulai scan".
+const { memeriksa: memeriksaKamera, hasil: cekKamera, periksa } = useCekKamera();
+const sudahDicek = ref(false);
+
+// Pengunjung boleh menolak nasihat kita. Pemeriksaan ini pengukuran singkat,
+// dan pengukuran singkat bisa salah — kamera yang baru bangun kadang melapor
+// rendah pada detik pertama lalu membaik. Jadi tombolnya ditahan, bukan
+// dihilangkan: yang keliru diberi jalan keluar, yang benar tetap terlindungi.
+const abaikanPeringatan = ref(false);
+
+// Kamera yang tidak sanggup 24 gambar per detik adalah batas keras: tidak ada
+// optimasi kode yang bisa melewatinya, karena gambarnya memang tidak pernah
+// tiba. Dibedakan dari masalah cahaya, yang masih bisa diperbaiki pengunjung
+// saat itu juga.
+const kameraTerlaluLambat = computed(
+  () => cekKamera.value?.masalah?.includes("laju") === true,
+);
+
+// Yang menahan tombol hanya laju kamera. Cahaya TIDAK menahan: SDK punya
+// gerbang cahayanya sendiri yang menuntun pengunjung saat scan berjalan, dan
+// cahaya masih bisa diperbaiki sambil wajah sudah di depan kamera.
+const tertahan = computed(
+  () => kameraTerlaluLambat.value && !abaikanPeringatan.value,
+);
+
+const periksaUlang = () => {
+  abaikanPeringatan.value = false;
+  periksa();
+};
+const cahayaBermasalah = computed(() => {
+  const nilai = cekKamera.value?.cahaya;
+  return nilai === "gelap" || nilai === "backlight";
+});
 const lajuAnalyzer = ref(null);
 const lajuDiterima = ref(null);
+
+// Tiga besaran yang di dev.3 tercampur jadi satu angka bernama `cameraFps`.
+// Sekarang dipisah, dan pemisahan itulah yang membuat diagnosisnya mungkin:
+//   lajuKamera   -> yang dijanjikan track kamera (getSettings().frameRate)
+//   lajuAnalyzer -> frame yang benar-benar selesai diproses main thread
+//   lajuDiterima -> sampel yang lolos worker ME-rPPG
+// Kamera 30 tapi analyzer 12 berarti perangkatnya yang tidak sanggup;
+// kamera 15 berarti kameranya yang memang tidak pernah mengirim cukup.
+const lajuKamera = ref(null);
+
+// p50/p95 per tahap: total frame, deteksi wajah, cahaya, kirim aksesori,
+// pembacaan wajah, dan round-trip worker. Menggantikan tebak-tebakan.
+const waktuProses = ref(null);
+
+// Dilaporkan SDK di event `ready`. Kalau false, mode banyak thread mati dan
+// seluruh inferensi WASM berjalan satu thread.
+const terisolasi = ref(null);
+const modeAksesori = ref(null);
 
 const BATAS_RIWAYAT = 1200;
 const riwayatLaju = ref([]);
 // Ditulis tiap sampel, tapi TIDAK reaktif. Salinannya baru dipindahkan ke
-// riwayatLaju secara berkala — lihat catatLaju().
+// riwayatLaju sekali saja, saat scan berhenti — lihat segarkanGrafik().
 let bufferLaju = [];
 let mulaiPadaMs = 0;
-let idSegarGrafik = 0;
 
+// Setiap kali daftar ini berubah, SdkFpsMonitor menghitung ulang SEMUANYA:
+// enam computed atas maksimal 1200 sampel, ditambah dua polyline SVG 1200
+// titik. Itu berjalan di main thread yang SAMA dengan penganalisis yang
+// sedang diukur, jadi grafiknya ikut menurunkan angka yang ia laporkan.
+//
+// Karena itu selama scan berjalan grafiknya TIDAK diperbarui sama sekali.
+// Angka langsungnya tetap terlihat di baris kemajuan (lajuAnalyzer dan
+// lajuDiterima), dan grafik utuhnya digambar sekali begitu scan berhenti —
+// baik karena selesai, dibatalkan, maupun ditolak.
 const segarkanGrafik = () => {
-  if (idSegarGrafik) {
-    clearTimeout(idSegarGrafik);
-    idSegarGrafik = 0;
-  }
   riwayatLaju.value = bufferLaju.slice();
 };
 
@@ -77,16 +145,6 @@ const catatLaju = (analyzer, accepted) => {
     accepted: typeof accepted === "number" ? accepted : null,
   });
   if (bufferLaju.length > BATAS_RIWAYAT) bufferLaju.shift();
-
-  // Grafik dan statistik di SdkFpsMonitor dihitung ulang penuh setiap daftar
-  // ini berubah. Kalau disegarkan tiap sampel, kerjanya jatuh ~30x per detik
-  // di main thread yang SAMA dengan penganalisis yang sedang diukur.
-  if (!idSegarGrafik) {
-    idSegarGrafik = setTimeout(() => {
-      idSegarGrafik = 0;
-      riwayatLaju.value = bufferLaju.slice();
-    }, 250);
-  }
 };
 
 const fpsHalaman = ref(null);
@@ -152,6 +210,60 @@ const onReady = (kemampuan) => {
   siap.value = true;
   adaKamera.value = kemampuan?.camera !== false;
   versiRuntime.value = kemampuan?.sdkVersion || null;
+
+  // SDK melaporkan ambangnya sendiri lewat kemampuan. Dipakai kalau ada,
+  // supaya angka di layar tidak perlu diperbaiki manual saat SDK naik versi
+  // dan mengubah ambangnya.
+  //
+  // dev.4 mengganti nama field ini dari preflightAnalyzerMinimumRateHz.
+  // Keduanya tetap dibaca: kalau aset yang tersaji sempat tertinggal di versi
+  // lama — kasus yang justru diperingatkan dokumen upgrade-nya — angkanya
+  // masih terbaca, bukan diam-diam jatuh ke nilai cadangan.
+  const ambangSDK =
+    kemampuan?.minimumAnalyzerRateHz ??
+    kemampuan?.preflightAnalyzerMinimumRateHz;
+
+  if (typeof ambangSDK === "number" && ambangSDK > 0) {
+    ambangHz.value = ambangSDK;
+  }
+
+  terisolasi.value =
+    typeof kemampuan?.crossOriginIsolated === "boolean"
+      ? kemampuan.crossOriginIsolated
+      : null;
+  modeAksesori.value = kemampuan?.accessoryInference || null;
+
+  // Diperiksa sendiri HANYA kalau izin kameranya sudah pernah diberikan.
+  //
+  // Kalau belum, memanggilnya di sini berarti memunculkan permintaan izin
+  // begitu halaman terbuka, tanpa pengunjung menyentuh apa pun. Itu menakutkan
+  // pada halaman yang memindai wajah, dan sebagian browser memang menolak
+  // permintaan kamera yang tidak lahir dari tekanan tombol. Untuk pengunjung
+  // yang belum memberi izin, pemeriksaannya menumpang pada tombol "Mulai
+  // scan" — lihat mulai().
+  if (!sudahDicek.value) {
+    izinKameraSudahAda().then((sudah) => {
+      if (!sudah || sudahDicek.value) return;
+      sudahDicek.value = true;
+      periksa();
+    });
+  }
+};
+
+/**
+ * Apakah izin kamera sudah pernah diberikan sebelumnya?
+ *
+ * Permissions API belum ada di semua browser untuk "camera". Yang tidak bisa
+ * menjawab diperlakukan sebagai BELUM diberikan — memilih diam lebih aman
+ * daripada memunculkan permintaan izin yang tidak diminta.
+ */
+const izinKameraSudahAda = async () => {
+  try {
+    const izin = await navigator.permissions?.query({ name: "camera" });
+    return izin?.state === "granted";
+  } catch {
+    return false;
+  }
 };
 
 const teksSDK = (nilai) => {
@@ -196,6 +308,8 @@ const onQuality = (q) => {
   kualitas.value = q?.score ?? null;
   lajuAnalyzer.value = q?.analyzerRateHz ?? null;
   lajuDiterima.value = q?.acceptedRateHz ?? null;
+  lajuKamera.value = q?.cameraRateHz ?? null;
+  waktuProses.value = q?.processing ?? null;
   catatLaju(lajuAnalyzer.value, lajuDiterima.value);
 };
 
@@ -226,6 +340,14 @@ const saranGalat = computed(() => {
   if (kode === "CAMERA_PERMISSION_DENIED") return t("scanSdk.helpPermission");
   if (kode === "CAMERA_CONFIG_FAILED" || kode === "CAMERA_STREAM_ENDED")
     return t("scanSdk.helpCameraBusy");
+
+  // Baru di dev.4. SDK kini meminta minimum 24 fps langsung ke browser, jadi
+  // kamera yang tidak sanggup ditolak SEBELUM pemindaian dimulai — bukan
+  // setelah pengunjung menahan wajah lima detik seperti sebelumnya.
+  if (kode === "CAMERA_CADENCE_UNSUPPORTED")
+    return t("scanSdk.helpCameraCadence", {
+      hz: galat.value?.details?.minimumRateHz ?? ambangHz.value,
+    });
   // Dua kelompok PREFLIGHT_ yang penyebabnya BERBEDA, jadi sarannya juga
   // harus berbeda:
   //   CADENCE  -> penganalisis tidak sanggup 24 Hz; ini soal kecepatan.
@@ -244,6 +366,24 @@ const mulai = async () => {
   galat.value = null;
   progres.value = 0;
   sisaDetik.value = null;
+
+  // Pengunjung yang belum pernah memberi izin kamera baru diperiksa di sini,
+  // pada tekanan tombolnya sendiri. Permintaan izin yang muncul karenanya
+  // dipakai dua kali: sekali untuk pemeriksaan ini, lalu oleh SDK.
+  if (!sudahDicek.value) {
+    sudahDicek.value = true;
+    await periksa();
+    // Kamera baru saja dilepas. Membukanya kembali seketika membuat sebagian
+    // perangkat menjawab CAMERA_CONFIG_FAILED, jadi diberi jeda sebentar
+    // supaya driver-nya sempat benar-benar melepaskan.
+    await new Promise((r) => setTimeout(r, 250));
+  }
+
+  // Kameranya tidak sanggup. Menjalankan scan sekarang berarti menghabiskan
+  // satu setengah menit pengunjung untuk penolakan yang sudah bisa kita
+  // ramalkan. Panelnya sudah menjelaskan sebab dan jalan keluarnya.
+  if (tertahan.value) return;
+
   mulaiPencatatan();
   // Ditandai berjalan SEJAK tombol ditekan, bukan menunggu event progres
   // pertama. Izin kamera bisa memakan beberapa detik; tanpa ini tombol
@@ -299,6 +439,42 @@ const ulangiTanpaHeatmap = async () => {
   await ulangiScan();
 };
 
+// Hasil pemeriksaan pra-scan ikut disalin ke laporan. Tanpa ini tim SDK
+// tidak bisa membedakan "penganalisisnya lambat" dari "kameranya memang cuma
+// mengirim 15 gambar per detik" — dua sebab berbeda dengan angka akhir sama.
+const ringkasCek = () => {
+  const c = cekKamera.value;
+  if (!c) return "belum dijalankan";
+  if (c.status === "galat") return `gagal (${c.kode})`;
+  const laju = [
+    c.fpsKamera === null ? null : `setelan ${c.fpsKamera} Hz`,
+    c.fpsDiukur === null ? null : `terukur ${c.fpsDiukur.toFixed(1)} Hz`,
+  ]
+    .filter(Boolean)
+    .join(", ");
+  const ukuran = c.lebar && c.tinggi ? `${c.lebar}x${c.tinggi}` : "ukuran ?";
+  return `${ukuran}, ${laju || "laju ?"}, cahaya ${c.cahaya}`;
+};
+
+// Rincian waktu per tahap dari event `quality` dev.4. Inilah yang membuat
+// "lambat" bisa ditunjuk penyebabnya: deteksi wajah, gerbang cahaya,
+// pengiriman ke worker aksesori, pembacaan piksel wajah, atau round-trip
+// worker ME-rPPG. Anggarannya 41,7 ms untuk 24 Hz.
+const ringkasProses = () => {
+  const p = waktuProses.value;
+  if (!p) return "tidak dilaporkan";
+
+  const angka = (v) => (typeof v === "number" ? `${v.toFixed(1)}ms` : "-");
+  const bagian = Object.entries(p)
+    .map(([nama, nilai]) => {
+      if (!nilai || typeof nilai !== "object") return null;
+      return `${nama} p50 ${angka(nilai.p50)} / p95 ${angka(nilai.p95)}`;
+    })
+    .filter(Boolean);
+
+  return bagian.length ? bagian.join(" | ") : "tidak dilaporkan";
+};
+
 const laporan = computed(() => {
   // riwayatLaju sebagai pemicu; angkanya diambil dari buffer yang paling baru.
   const sumber = riwayatLaju.value.length ? bufferLaju : [];
@@ -327,11 +503,17 @@ const laporan = computed(() => {
     `Layar            : ${window.innerWidth}x${window.innerHeight} @ ${window.devicePixelRatio}x`,
     `Kamera           : front`,
     `Perangkat kamera : ${labelKamera.value || "-"}`,
+    `Cek pra-scan     : ${ringkasCek()}`,
     `Bahasa SDK       : ${bahasa.value}`,
     `Heatmap          : ${heatmapAktif.value ? "menyala" : "mati"}`,
     "",
-    `Laju penganalisis: ${ringkas(analyzer)}   (ambang ${CADENCE_MINIMUM_HZ} Hz)`,
+    `Isolasi origin   : ${terisolasi.value === null ? "tidak dilaporkan" : terisolasi.value ? "aktif (banyak thread)" : "MATI (satu thread)"}`,
+    `Inferensi aksesori: ${modeAksesori.value || "-"}`,
+    "",
+    `Laju kamera      : ${lajuKamera.value === null ? "-" : lajuKamera.value.toFixed(1) + " Hz"}`,
+    `Laju penganalisis: ${ringkas(analyzer)}   (ambang ${ambangHz.value} Hz)`,
     `Laju diterima    : ${ringkas(accepted)}`,
+    `Waktu per frame  : ${ringkasProses()}`,
     `FPS halaman ini  : ${fpsHalaman.value === null ? "-" : fpsHalaman.value.toFixed(1) + " Hz"}`,
     `Jumlah catatan   : ${sumber.length}`,
     `Durasi           : ${durasi}`,
@@ -344,6 +526,13 @@ const laporan = computed(() => {
     "",
     `Kode penolakan   : ${galat.value?.code || "-"}`,
     `Pesan            : ${teksSDK(galat.value?.message) || "-"}`,
+    // `details` dibawa SDK pada penolakan gerak dan cadence. Isinya angka
+    // yang tidak bisa ditebak dari layar — rasio penolakan gerak, jumlah
+    // sampel teramati, panjang jeda — dan justru itu yang dibutuhkan tim SDK
+    // untuk menilai apakah ambangnya terlalu ketat.
+    `Detail penolakan : ${
+      galat.value?.details ? JSON.stringify(galat.value.details) : "-"
+    }`,
   ].join("\n");
 });
 
@@ -374,7 +563,7 @@ defineExpose({ ulangiScan });
 <template>
   <div class="w-full max-w-2xl mx-auto flex flex-col gap-5">
     <div
-      class="relative w-full aspect-[3/4] sm:aspect-[4/3] max-h-[60dvh] rounded-2xl overflow-hidden bg-black/5 dark:bg-white/5"
+      class="relative w-full max-w-[420px] mx-auto aspect-[3/4] sm:aspect-[4/3] max-h-[50dvh] rounded-2xl overflow-hidden bg-black/5 dark:bg-white/5"
     >
       <SelerisScanner
         ref="scannerRef"
@@ -451,15 +640,22 @@ defineExpose({ ulangiScan });
 
         <span
           v-if="lajuAnalyzer !== null"
-          :class="
-            lajuAnalyzer < CADENCE_MINIMUM_HZ ? 'text-red-600 font-medium' : ''
-          "
+          :class="lajuAnalyzer < ambangHz ? 'text-red-600 font-medium' : ''"
         >
           {{ t("scanSdk.rateAnalyzer") }}: {{ lajuAnalyzer.toFixed(1) }} Hz
-          <span class="opacity-70">({{ t("scanSdk.rateNeeded") }})</span>
+          <span class="opacity-70">
+            ({{ t("scanSdk.rateNeeded", { hz: ambangHz }) }})
+          </span>
         </span>
         <span v-if="lajuDiterima !== null">
           {{ t("scanSdk.rateAccepted") }}: {{ lajuDiterima.toFixed(1) }} Hz
+        </span>
+
+        <!-- Laju kamera dipisahkan dari laju penganalisis sejak dev.4.
+             Keduanya berdampingan supaya langsung terlihat mana yang
+             kurang: kameranya, atau kemampuan memprosesnya. -->
+        <span v-if="lajuKamera !== null">
+          {{ t("scanSdk.rateCamera") }}: {{ lajuKamera.toFixed(0) }} Hz
         </span>
       </div>
     </div>
@@ -495,25 +691,133 @@ defineExpose({ ulangiScan });
       </button>
     </div>
 
+    <!-- dev.4 melaporkan ini di `ready`. Tanpa isolasi, seluruh inferensi
+         WASM jalan satu thread dan ambang 24 Hz jauh lebih sulit dicapai —
+         penyebab yang tidak akan pernah terlihat dari layar tanpa penanda
+         seperti ini. -->
+    <p
+      v-if="terisolasi === false"
+      class="text-[11px] text-amber-700 dark:text-amber-400"
+    >
+      {{ t("scanSdk.notIsolated") }}
+    </p>
+
     <p v-if="tahap" class="text-[11px] text-[#8E98A8]">
       {{ t("scanSdk.techStatus") }}: {{ tahap }}
     </p>
 
     <SdkFpsMonitor
       :samples="riwayatLaju"
-      :threshold="CADENCE_MINIMUM_HZ"
+      :threshold="ambangHz"
       :report="laporan"
       :page-fps="fpsHalaman"
     />
+
+    <section
+      v-if="!berjalan && (memeriksaKamera || cekKamera)"
+      class="rounded-2xl border p-4 flex flex-col gap-2"
+      :class="
+        memeriksaKamera
+          ? 'border-[#DEDEDE] dark:border-[#3A3B3D]'
+          : kameraTerlaluLambat
+            ? 'border-red-300 bg-red-50 dark:bg-red-950/30'
+            : cahayaBermasalah
+              ? 'border-amber-300 bg-amber-50 dark:bg-amber-950/30'
+              : 'border-emerald-300 bg-emerald-50 dark:bg-emerald-950/30'
+      "
+    >
+      <p v-if="memeriksaKamera" class="text-[13px] text-[#6F6F6F]">
+        {{ t("scanSdk.check.running") }}
+      </p>
+
+      <template v-else-if="cekKamera">
+        <p
+          v-if="cekKamera.status === 'galat'"
+          class="text-[13px] text-[#6F6F6F] dark:text-[#AAAAAA]"
+        >
+          {{ t("scanSdk.check.failed") }}
+          <span class="opacity-70">({{ cekKamera.kode }})</span>
+        </p>
+
+        <template v-else>
+          <p
+            v-if="kameraTerlaluLambat"
+            class="text-[14px] font-medium text-red-700 dark:text-red-300"
+          >
+            {{
+              t("scanSdk.check.tooSlow", {
+                hz: cekKamera.fpsEfektif ? cekKamera.fpsEfektif.toFixed(0) : "?",
+                need: ambangHz,
+              })
+            }}
+          </p>
+          <p
+            v-else-if="cahayaBermasalah"
+            class="text-[14px] font-medium text-amber-800 dark:text-amber-300"
+          >
+            {{
+              cekKamera.cahaya === "backlight"
+                ? t("scanSdk.check.backlight")
+                : t("scanSdk.check.tooDark")
+            }}
+          </p>
+          <p
+            v-else
+            class="text-[14px] font-medium text-emerald-800 dark:text-emerald-300"
+          >
+            {{
+              t("scanSdk.check.ready", {
+                hz: cekKamera.fpsEfektif ? cekKamera.fpsEfektif.toFixed(0) : "?",
+              })
+            }}
+          </p>
+
+          <p
+            v-if="kameraTerlaluLambat"
+            class="text-[13px] text-red-700 dark:text-red-400"
+          >
+            {{ t("scanSdk.check.tooSlowHelp") }}
+          </p>
+          <p
+            v-else-if="cahayaBermasalah"
+            class="text-[13px] text-amber-800 dark:text-amber-400"
+          >
+            {{
+              cekKamera.cahaya === "backlight"
+                ? t("scanSdk.check.backlightHelp")
+                : t("scanSdk.check.tooDarkHelp")
+            }}
+          </p>
+        </template>
+      </template>
+
+      <div v-if="!memeriksaKamera" class="flex flex-wrap gap-x-4 gap-y-1 mt-1">
+        <button
+          type="button"
+          class="text-[13px] font-medium text-[#2E97DF] hover:underline"
+          @click="periksaUlang"
+        >
+          {{ t("scanSdk.check.recheck") }}
+        </button>
+        <button
+          v-if="tertahan"
+          type="button"
+          class="text-[13px] text-[#8E98A8] hover:underline"
+          @click="abaikanPeringatan = true"
+        >
+          {{ t("scanSdk.check.ignore") }}
+        </button>
+      </div>
+    </section>
 
     <div class="flex flex-col sm:flex-row gap-3">
       <button
         v-if="!berjalan"
         type="button"
-        :disabled="!siap || !adaKamera"
+        :disabled="!siap || !adaKamera || memeriksaKamera || tertahan"
         class="flex-1 h-12 rounded-xl text-white font-medium transition-all duration-300"
         :class="
-          siap && adaKamera
+          siap && adaKamera && !memeriksaKamera && !tertahan
             ? 'bg-gradient-to-tr from-[#1E6493] to-[#2E97DF] active:scale-[0.99]'
             : 'bg-gray-400 cursor-not-allowed opacity-60'
         "
@@ -522,9 +826,13 @@ defineExpose({ ulangiScan });
         {{
           !siap
             ? t("scanSdk.preparing")
-            : galat
-              ? t("scanSdk.retry")
-              : t("scanSdk.start")
+            : memeriksaKamera
+              ? t("scanSdk.check.running")
+              : tertahan
+                ? t("scanSdk.check.blocked")
+                : galat
+                  ? t("scanSdk.retry")
+                  : t("scanSdk.start")
         }}
       </button>
 

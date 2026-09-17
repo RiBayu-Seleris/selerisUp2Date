@@ -75,11 +75,11 @@ const sertifikat = [
 
 <template>
   <div
-    class="w-full min-h-[100dvh] lg:h-[100dvh] lg:overflow-hidden p-4 lg:p-5 bg-[#F1F4F5] dark:bg-[#17181A] dark:text-[#FAFAFA]"
+    class="w-full min-h-[100dvh] lg:h-[100dvh] lg:overflow-hidden p-3 sm:p-4 lg:p-5 bg-[#F1F4F5] dark:bg-[#17181A] dark:text-[#FAFAFA]"
   >
     <div class="w-full max-w-[1440px] h-full mx-auto flex flex-col">
       <div
-        class="w-full flex-1 min-h-0 grid gap-4 grid-cols-1 lg:grid-cols-[1fr_minmax(500px,600px)_1fr]"
+        class="w-full flex-1 min-h-0 grid gap-3 sm:gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr_minmax(500px,600px)_1fr]"
       >
         <aside
           data-lenis-prevent
@@ -101,7 +101,7 @@ const sertifikat = [
           </button>
 
           <div
-            class="w-full flex flex-col gap-y-6 px-4 py-6 bg-white dark:bg-[#232427] rounded-lg"
+            class="w-full flex flex-col gap-y-5 sm:gap-y-6 px-4 py-5 sm:py-6 bg-white dark:bg-[#232427] rounded-lg"
           >
             <CardIconLeft
               v-for="(ikon, index) in ikonAturan"
@@ -112,7 +112,7 @@ const sertifikat = [
             />
           </div>
 
-          <div class="w-full p-6 bg-white dark:bg-[#232427] rounded-lg">
+          <div class="w-full p-4 sm:p-6 bg-white dark:bg-[#232427] rounded-lg">
             <p class="text-[#5A6062] dark:text-[#AAAAAA] text-[16px]">
               <span class="font-[600]">{{ t("scanSdk.proTipLabel") }}</span>
               {{ t("scanSdk.proTip") }}
@@ -120,9 +120,9 @@ const sertifikat = [
           </div>
 
           <div
-            class="w-full flex flex-col gap-y-4 items-center bg-white dark:bg-[#232427] rounded-xl px-6 py-4"
+            class="w-full flex flex-col gap-y-4 items-center bg-white dark:bg-[#232427] rounded-xl px-4 sm:px-6 py-4"
           >
-            <p class="text-[20px] text-center">
+            <p class="text-[17px] sm:text-[20px] text-center">
               {{ t("scanSdk.certificates") }}
             </p>
             <div class="flex flex-wrap justify-center gap-5">
@@ -143,7 +143,7 @@ const sertifikat = [
 
         <section
           data-lenis-prevent
-          class="order-1 lg:order-2 min-w-0 flex flex-col lg:overflow-y-auto hide-scrollbar"
+          class="order-1 md:col-span-2 lg:col-span-1 lg:order-2 min-w-0 flex flex-col lg:overflow-y-auto hide-scrollbar"
         >
           <div
             v-if="!profil"
@@ -175,7 +175,7 @@ const sertifikat = [
             class="w-full flex flex-col gap-y-2 bg-white dark:bg-[#232427] rounded-lg border border-[#E5E7EB] dark:border-[#3A3B3D] p-4"
           >
             <p
-              class="text-[18px] text-[#195279] dark:text-[#FAFAFA] font-[600]"
+              class="text-[16px] sm:text-[18px] text-[#195279] dark:text-[#FAFAFA] font-[600]"
             >
               {{ t("scanSdk.metricsTitle") }}
             </p>
@@ -184,11 +184,11 @@ const sertifikat = [
             </p>
           </div>
 
-          <div class="w-full grid grid-cols-2 gap-4">
+          <div class="w-full grid grid-cols-2 max-smallest:grid-cols-1 gap-3 sm:gap-4">
             <div
               v-for="item in indikator"
               :key="item.kunci"
-              class="w-full flex flex-col gap-y-1 items-start bg-white dark:bg-[#232427] p-6 rounded-lg"
+              class="w-full flex flex-col gap-y-1 items-start bg-white dark:bg-[#232427] p-4 sm:p-6 rounded-lg"
             >
               <span class="w-8 h-8 flex justify-center items-center p-1">
                 <img
@@ -202,7 +202,7 @@ const sertifikat = [
           </div>
 
           <div
-            class="w-full flex flex-col gap-y-5 items-center p-8 bg-white dark:bg-[#232427] rounded-lg"
+            class="w-full flex flex-col gap-y-5 items-center p-5 sm:p-8 bg-white dark:bg-[#232427] rounded-lg"
           >
             <p class="text-[#A7A7A7]">{{ t("scanSdk.getApps") }}</p>
             <div class="flex flex-row gap-5 w-full max-w-[320px]">

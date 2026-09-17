@@ -193,6 +193,42 @@ const indeksAktif = computed(() => {
 
 const langkahAktif = (index) => !pinAktif.value || index === indeksAktif.value;
 
+// Seberapa kabur langkah yang sedang tidak terbuka.
+//
+// Diukur dari JARAKNYA ke langkah aktif, bukan sekadar "aktif atau tidak":
+// tetangga langsung sedikit kabur, yang terjauh lebih kabur. Dengan begitu
+// urutannya ikut terbaca — mana yang sebentar lagi giliran, dan mana yang
+// masih jauh — bukan cuma "ini bukan yang sedang dibaca".
+const BLUR_PER_LANGKAH = 2; // px
+
+// Selain mengabur, langkah yang jauh juga memudar. Blur saja membuat ketiganya
+// terasa sama "hadir" — hanya beda ketajaman — padahal yang ingin disampaikan
+// adalah kedalaman: makin jauh gilirannya, makin mundur ia dari perhatian.
+// Keduanya bekerja ke arah yang sama, jadi masing-masing tidak perlu kuat.
+const REDUP_PER_LANGKAH = 0.3; // 1 -> 0,7 -> 0,4
+
+const gayaLangkah = (index) => {
+  // Mode daftar membuka semua langkah sekaligus, jadi tidak ada satu pun yang
+  // "belum giliran"; mengaburkan sebagiannya di sana berarti mengaburkan isi
+  // yang justru sedang dibaca. Mode ini juga yang dipakai pengunjung dengan
+  // "kurangi animasi" menyala dan layar kecil, dan keduanya memang tidak
+  // seharusnya kena efek ini.
+  if (!pinAktif.value) return {};
+
+  const jarak = Math.abs(index - indeksAktif.value);
+
+  // Sengaja melangkah, bukan meluncur mengikuti nilai terbuka[] yang berubah
+  // tiap frame gulir. Radius blur yang berubah terus-menerus memaksa teksnya
+  // dirender ulang di setiap frame; dengan tiga nilai tetap dan satu transisi
+  // CSS, hasilnya terlihat sama halusnya tapi hanya digambar ulang dua kali
+  // per pergantian. Waktunya disamakan dengan transisi warna judul (500 ms)
+  // supaya warna, kabur, dan pudarnya berganti sebagai satu gerakan.
+  return {
+    filter: `blur(${jarak * BLUR_PER_LANGKAH}px)`,
+    opacity: 1 - jarak * REDUP_PER_LANGKAH,
+  };
+};
+
 let pengawasUkuran = null;
 
 const pasangPengawasUkuran = () => {
@@ -298,7 +334,10 @@ const isDark = useIsDark();
             :key="step.key"
             class="relative pb-7 xl:pb-12 last:pb-0"
           >
-            <div class="relative pl-10 xl:pl-16">
+            <div
+              class="relative pl-10 xl:pl-16 transition-[filter,opacity] duration-500 ease-out"
+              :style="gayaLangkah(index)"
+            >
               <span
                 v-if="!pinAktif"
                 class="absolute left-3 top-1/2 -translate-x-1/2 -translate-y-1/2 w-4 h-4 rounded-full transition-colors duration-300 ease-out"

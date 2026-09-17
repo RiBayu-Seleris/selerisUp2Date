@@ -1548,7 +1548,28 @@
     "callHours": "Sen-Sab 09.00 - 17.00",
     "contactTitle": "Kontak",
     "contactSubtitle": "Butuh bantuan? Kami siap mendengarkan!",
-    "contactDescription": "Kunjungi tim kami di salah satu lokasi kami"
+    "contactDescription": "Kunjungi tim kami di salah satu lokasi kami",
+    "successTitle": "Pesan terkirim",
+    "successText": "Terima kasih sudah menghubungi kami. Tim kami akan segera membalas.",
+    "errorTitle": "Pesan tidak terkirim",
+    "errorText": "Terjadi gangguan di sisi kami. Silakan coba lagi sebentar lagi.",
+    "incompleteTitle": "Lengkapi dulu formulirnya",
+    "incompleteText": "Nama, email, dan pesan wajib diisi.",
+    "tooManyText": "Anda mengirim beberapa pesan dalam waktu singkat. Tunggu satu menit sebelum mencoba lagi.",
+    "sending": "Mengirim...",
+    "notAvailableText": "Formulir ini belum tersedia — tim kami masih menyiapkannya. Sementara ini Anda bisa menghubungi kami lewat WhatsApp atau telepon yang tertera di samping formulir."
+  },
+  "bookDemo": {
+    "submit": "Kirim",
+    "sending": "Mengirim...",
+    "successTitle": "Permintaan demo terkirim",
+    "successText": "Terima kasih. Tim kami akan segera menghubungi Anda untuk mengatur jadwal demonya.",
+    "errorTitle": "Permintaan tidak terkirim",
+    "errorText": "Terjadi gangguan di sisi kami. Silakan coba lagi sebentar lagi.",
+    "incompleteTitle": "Lengkapi dulu formulirnya",
+    "incompleteText": "Nama depan, email, dan produk wajib diisi.",
+    "tooManyText": "Anda mengirim beberapa permintaan dalam waktu singkat. Tunggu satu menit sebelum mencoba lagi.",
+    "notAvailableText": "Pemesanan demo belum tersedia — tim kami masih menyiapkannya. Sementara ini silakan hubungi kami secara langsung."
   },
   "blog": {
     "heroTitle": "Blog",
@@ -2064,7 +2085,7 @@
     "helpPreflight": "Kamera mengirim gambar terlalu lambat selama pemeriksaan 3 detik — butuh sekitar 24 per detik. Tutup DevTools dulu (ini yang paling memperlambat scanner), pakai cahaya lebih terang dari arah depan, tutup tab dan aplikasi lain yang memakai CPU atau kamera, lalu matikan heatmap perfusi.",
     "rateAnalyzer": "Laju penganalisis",
     "rateAccepted": "Laju diterima",
-    "rateNeeded": "butuh 24 Hz",
+    "rateNeeded": "butuh {hz} Hz",
     "retryNoHeatmap": "Matikan heatmap lalu coba lagi",
     "helpPreflightAccepted": "Gambarnya sudah cukup cepat, tapi terlalu banyak yang ditolak. Lepas kacamata, kacamata hitam, atau masker — ketiganya menahan pemindaian. Terangi wajah dari arah depan, isi layar dengan satu wajah, dan jangan bergerak.",
     "accessoryBlocking": "Terdeteksi di wajah Anda: {item}. Kacamata, kacamata hitam, dan masker menahan pemindaian. Tolong dilepas lalu coba lagi.",
@@ -2080,6 +2101,23 @@
     "fpsCopied": "Laporan disalin",
     "fpsCopyFailed": "Gagal menyalin. Silakan blok teksnya secara manual.",
     "fpsPage": "Halaman",
-    "errorTitle": "Pemindaian tidak dapat diselesaikan"
+    "errorTitle": "Pemindaian tidak dapat diselesaikan",
+    "check": {
+      "running": "Memeriksa kamera Anda...",
+      "ready": "Kamera siap — {hz} gambar per detik, cahaya cukup.",
+      "tooSlow": "Kamera Anda hanya mengirim {hz} gambar per detik. Pemindaian butuh {need}.",
+      "tooSlowHelp": "Hampir selalu soal cahaya: di ruang remang kamera memperlambat dirinya sendiri supaya gambarnya tidak gelap. Hadapkan wajah ke jendela atau lampu, tutup aplikasi lain yang memakai kamera, dan colok laptop ke listrik.",
+      "tooDark": "Cahaya di wajah Anda kurang.",
+      "tooDarkHelp": "Beri cahaya dari depan wajah. Jendela atau lampu di belakang layar paling mudah. Memindai dengan cahaya seperti ini kemungkinan besar ditolak.",
+      "backlight": "Cahayanya ada di belakang Anda.",
+      "backlightHelp": "Latar Anda lebih terang daripada wajah, jadi kamera menggelapkan Anda. Berbaliklah, atau tutup tirai di belakang Anda.",
+      "failed": "Kamera tidak bisa diperiksa.",
+      "recheck": "Periksa ulang",
+      "ignore": "Tetap pindai",
+      "blocked": "Kamera terlalu lambat"
+    },
+    "rateCamera": "Kamera",
+    "helpCameraCadence": "Kamera ini tidak sanggup mengirim {hz} gambar per detik, padahal pemindaian membutuhkannya. Biasanya cukup dengan cahaya lebih terang dari depan — di ruang remang kamera memperlambat dirinya sendiri. Kalau tetap begitu, pilih kamera atau perangkat lain.",
+    "notIsolated": "Halaman ini belum terisolasi lintas-origin, jadi pemindai berjalan satu thread dan bisa kesulitan mencapai laju gambar yang dibutuhkan."
   }
 }

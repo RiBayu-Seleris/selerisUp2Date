@@ -38,9 +38,7 @@ const localizedCards = useLocalizedList("technology.sci", SCI_Content, [
     data-aos="fade-up"
     class="flex relative w-full max-w-[1440px] 2xl:max-w-[1440px] mx-auto h-auto px-8 justify-center mt-10 md:mt-20"
   >
-    <div
-      class="w-full h-auto flex justify-center mt-10 lg:mt-20 dark:bg-[#323232] rounded-3xl"
-    >
+    <div class="w-full h-auto flex justify-center mt-10 lg:mt-20 rounded-3xl">
       <FlowSci />
     </div>
   </section>

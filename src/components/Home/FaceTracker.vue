@@ -14,6 +14,7 @@ import Time from "@/assets/icons/facetracker/Time.vue";
 import Rate from "@/assets/icons/facetracker/Rate.vue";
 import UserScan from "@/assets/icons/facetracker/UserScan.vue";
 import MedicalNote from "@/assets/icons/facetracker/MedicalNote.vue";
+import { useScanDemoForm } from "@/composables/useScanDemoForm";
 
 const router = useRouter();
 
@@ -176,11 +177,17 @@ const lanjutKeScan = (profil) => {
   router.push("/face-tracking");
 };
 
-const submitForm = () => {
-  // TODO: Integrasi API submit data lead di sini.
-  // Sebelumnya fungsi ini langsung menuju halaman scan; sekarang ia
-  // melanjutkan ke langkah profil, dan perpindahan halaman dilakukan
-  // lanjutKeScan() setelah profilnya sah.
+const { mengirim, kirim } = useScanDemoForm();
+
+const submitForm = async () => {
+  // Data lead dikirim ke CMS lebih dulu. kirim() menghasilkan false hanya
+  // kalau isiannya memang perlu diperbaiki pengunjung (422/429); gangguan di
+  // pihak server tidak menahannya — yang ia cari adalah mencoba fitur scan,
+  // bukan mengirim formulir.
+  const bolehLanjut = await kirim(form.value);
+
+  if (!bolehLanjut) return;
+
   langkahModal.value = "profil";
 };
 </script>
@@ -506,7 +513,7 @@ const submitForm = () => {
 
             <button
               type="submit"
-              :disabled="!form.agreeMarketing"
+              :disabled="!form.agreeMarketing || mengirim"
               :class="[
                 'mt-4 w-full rounded-xl py-3 text-white font-medium transition',
                 form.agreeMarketing

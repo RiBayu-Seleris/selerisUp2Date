@@ -1,7 +1,11 @@
 <script setup>
 import TouchMobile from "@/components/TouchMobile.vue";
+import { useContactForm } from "@/composables/useContactForm";
 import ChatIcon from "@/components/icons/ChatIcon.vue";
 import CallIcon from "@/components/icons/CallIcon.vue";
+
+// Logikanya dipakai bersama dengan TouchMobile.vue
+const { form, mengirim, kirim } = useContactForm();
 </script>
 
 <template>
@@ -40,10 +44,12 @@ import CallIcon from "@/components/icons/CallIcon.vue";
                 </div>
                 <div class="w-full">
                   <input
+                    v-model="form.name"
                     name="fullname"
                     type="text"
                     class="w-full p-2 rounded-[8px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:outline-none focus:ring-1 focus:ring-[#2AB857] dark:focus:border-[0.1px]"
                     :placeholder="$t('contact.fullNamePlaceholder')"
+                    @keyup.enter="kirim"
                   />
                 </div>
               </div>
@@ -55,10 +61,12 @@ import CallIcon from "@/components/icons/CallIcon.vue";
                 </div>
                 <div class="w-full">
                   <input
+                    v-model="form.email"
                     name="email"
                     type="email"
                     class="w-full p-2 rounded-[8px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:outline-none focus:ring-1 focus:ring-[#2AB857] dark:focus:border-[0.1px]"
                     :placeholder="$t('contact.emailPlaceholder')"
+                    @keyup.enter="kirim"
                   />
                 </div>
               </div>
@@ -70,6 +78,8 @@ import CallIcon from "@/components/icons/CallIcon.vue";
                 </div>
                 <div class="w-full">
                   <textarea
+                    v-model="form.message"
+                    name="message"
                     class="w-full lg:h-[70px] xl:h-[130px] p-2 rounded-[8px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:outline-none focus:ring-1 focus:ring-[#2AB857] resize-none align-top"
                     :placeholder="$t('contact.messagePlaceholder')"
                   />
@@ -78,9 +88,12 @@ import CallIcon from "@/components/icons/CallIcon.vue";
               <div class="flex w-full h-auto rounded-lg mt-2">
                 <button
                   aria-label="Kirim Get In Touch"
-                  class="w-full h-12 bg-[#2AB857] text-white rounded-lg"
+                  type="button"
+                  :disabled="mengirim"
+                  class="w-full h-12 bg-[#2AB857] text-white rounded-lg transition-opacity disabled:opacity-60 disabled:cursor-not-allowed"
+                  @click="kirim"
                 >
-                  {{ $t("contact.submit") }}
+                  {{ mengirim ? $t("contact.sending") : $t("contact.submit") }}
                 </button>
               </div>
             </div>

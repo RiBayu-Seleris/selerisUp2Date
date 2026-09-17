@@ -406,7 +406,7 @@ const headerApi = {
 const getTracking = async () => {
   try {
     const getGuestData = await axios.get(
-      `${BASE_URL}/v1/app/visitors/track/`,
+      `${BASE_URL}/api/v1/app/visitors/track`,
       headerApi,
     );
   } catch (error) {

@@ -1548,7 +1548,28 @@
     "callHours": "Mon-Sat 9am to 5pm",
     "contactTitle": "Contact",
     "contactSubtitle": "Need help? We're here to listen!",
-    "contactDescription": "Visit our friendly team at any of our locations"
+    "contactDescription": "Visit our friendly team at any of our locations",
+    "successTitle": "Message sent",
+    "successText": "Thank you for reaching out. Our team will get back to you shortly.",
+    "errorTitle": "Message not sent",
+    "errorText": "Something went wrong on our side. Please try again in a moment.",
+    "incompleteTitle": "Please complete the form",
+    "incompleteText": "Name, email, and message are all required.",
+    "tooManyText": "You have sent several messages in a short time. Please wait a minute before trying again.",
+    "sending": "Sending...",
+    "notAvailableText": "This form is not available yet — our team is still setting it up. In the meantime you can reach us by WhatsApp or phone using the details beside this form."
+  },
+  "bookDemo": {
+    "submit": "Send",
+    "sending": "Sending...",
+    "successTitle": "Demo request sent",
+    "successText": "Thank you. Our team will contact you shortly to arrange the demo.",
+    "errorTitle": "Request not sent",
+    "errorText": "Something went wrong on our side. Please try again in a moment.",
+    "incompleteTitle": "Please complete the form",
+    "incompleteText": "First name, email, and product are all required.",
+    "tooManyText": "You have sent several requests in a short time. Please wait a minute before trying again.",
+    "notAvailableText": "Demo booking is not available yet — our team is still setting it up. Please contact us directly in the meantime."
   },
   "blog": {
     "heroTitle": "Blog",
@@ -2064,7 +2085,7 @@
     "helpPreflight": "The camera delivered frames too slowly during the 3-second check — it needs about 24 per second. Close DevTools first (it slows the scanner the most), use brighter light from the front, close other tabs and apps using the CPU or camera, and turn off the perfusion heatmap.",
     "rateAnalyzer": "Analyzer rate",
     "rateAccepted": "Accepted rate",
-    "rateNeeded": "needs 24 Hz",
+    "rateNeeded": "needs {hz} Hz",
     "retryNoHeatmap": "Turn off heatmap and try again",
     "helpPreflightAccepted": "Frames arrived fast enough, but too many were rejected. Take off glasses, sunglasses or a mask — they block admission. Light your face from the front, fill the frame with one face, and hold still.",
     "accessoryBlocking": "Detected on your face: {item}. Glasses, sunglasses and masks block the scan. Please take it off and try again.",
@@ -2080,6 +2101,23 @@
     "fpsCopied": "Report copied",
     "fpsCopyFailed": "Could not copy. Select the text above manually.",
     "fpsPage": "Page",
-    "errorTitle": "The scan could not be completed"
+    "errorTitle": "The scan could not be completed",
+    "check": {
+      "running": "Checking your camera...",
+      "ready": "Camera ready — {hz} frames per second, lighting is good.",
+      "tooSlow": "Your camera only delivers {hz} frames per second. The scan needs {need}.",
+      "tooSlowHelp": "Almost always the light: in a dim room the camera slows itself down to brighten the picture. Face a window or a lamp, close other apps using the camera, and plug the laptop into power.",
+      "tooDark": "Not enough light on your face.",
+      "tooDarkHelp": "Light your face from the front. A window or lamp behind the screen works well. Scanning in this light will likely be rejected.",
+      "backlight": "The light is behind you.",
+      "backlightHelp": "Your background is brighter than your face, so the camera darkens you. Turn around, or close the curtain behind you.",
+      "failed": "Could not check the camera.",
+      "recheck": "Check again",
+      "ignore": "Scan anyway",
+      "blocked": "Camera too slow"
+    },
+    "rateCamera": "Camera",
+    "helpCameraCadence": "This camera cannot deliver {hz} frames per second, which the scan requires. Brighter light from the front usually fixes it — in dim rooms the camera slows itself down. Otherwise pick a different camera or device.",
+    "notIsolated": "This page is not cross-origin isolated, so the scanner runs single-threaded and may struggle to reach the required frame rate."
   }
 }

@@ -1,5 +1,6 @@
 <script setup>
-import { ref, onMounted, watch } from "vue";
+import { computed, ref, watch } from "vue";
+import { productList } from "@/Data/ProductList";
 
 const emit = defineEmits(["update:modelValue", "open"]);
 const props = defineProps({
@@ -8,7 +9,21 @@ const props = defineProps({
 });
 
 const selectedProduct = ref(props.modelValue || null);
-const products = ref([]);
+
+// Daftarnya diambil dari sumber yang sama dengan menu Products di navbar.
+// Sebelumnya ditulis ulang di sini, dan keduanya sudah sempat berbeda:
+// dropdown ini masih memuat "Seleris Care" dan "Seleris Cough" — yang di
+// navbar sudah diganti "Selica" dan dikomentari — sekaligus melewatkan
+// produk "Credit".
+//
+// id dipakai sebagai nilai yang dikirim; diturunkan dari url produknya
+// supaya tetap stabil walau nama tampilannya kelak diubah.
+const products = computed(() =>
+  productList.map((prd) => ({
+    id: prd.url.replace(/^https?:\/\//, "").replace(/[^a-zA-Z0-9]+/g, "-").replace(/^-|-$/g, ""),
+    name: prd.name,
+  })),
+);
 
 function chooseProduct(product) {
   selectedProduct.value = product;
@@ -19,17 +34,6 @@ function chooseProduct(product) {
 function toggleDropdown() {
   emit("open", "product");
 }
-
-// Simulasi fetch data
-onMounted(() => {
-  products.value = [
-    { id: "Seleris-Credit-Cover", name: "Seleris Credit Cover" },
-    { id: "Seleris-Lifins", name: "Seleris Lifins" },
-    { id: "Seleris-Medins", name: "Seleris Medins" },
-    { id: "Seleris-Care", name: "Seleris Care" },
-    { id: "Seleris-Cough", name: "Seleris Cough" },
-  ];
-});
 
 watch(
   () => props.modelValue,

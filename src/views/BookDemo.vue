@@ -6,22 +6,16 @@ import RobotImage from "@/assets/images/robot-ai5-full.png";
 import { productBannerLists } from "@/Data/ListProduct";
 import { faqList } from "@/Data/FaqList.js";
 import { useLocalizedList } from "@/utils/i18nList";
+import { useBookDemoForm } from "@/composables/useBookDemoForm";
 import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { ref, onMounted, onBeforeUnmount } from "vue";
 
 // --- Form data ---
-const FullName = ref("");
-const CompanyName = ref("");
-const Email = ref("");
-const PhoneNumber = ref("");
-const Products = ref("");
-const Message = ref("");
-const Country = ref({
-  name: "Indonesia",
-  code: "ID",
-  flag: "https://flagcdn.com/w40/id.png",
-});
+// Isian dan pengirimannya ditangani composable, sejalan dengan formulir
+// Get In Touch. Sebelumnya di sini hanya ada sekumpulan ref yang tidak
+// terpasang ke satu pun isian, dan formulirnya tidak mengirim ke mana pun.
+const { form, mengirim, kirim } = useBookDemoForm();
 
 // --- UI control ---
 const activeIndex = ref(0);
@@ -91,29 +85,34 @@ function onSlideChange(swiper) {
         </div>
 
         <div class="w-full h-auto mt-8">
-          <form @submit.prevent class="flex flex-col gap-5">
+          <form @submit.prevent="kirim" class="flex flex-col gap-5">
             <div
               class="w-full h-auto flex flex-col md:grid md:grid-cols-2 gap-5"
             >
               <Input
+                v-model="form.firstName"
                 name="firstname"
                 :label="$t('misc.firstName')"
                 type="text"
                 :placeholder="$t('misc.jhon')"
+                required
               />
               <Input
+                v-model="form.lastName"
                 name="lastname"
                 :label="$t('misc.lastName')"
                 type="text"
                 :placeholder="$t('misc.doe')"
               />
               <Input
+                v-model="form.company"
                 name="company"
                 :label="$t('misc.company')"
                 type="text"
                 :placeholder="$t('misc.your_company')"
               />
               <Input
+                v-model="form.jobTitle"
                 name="jobtitle"
                 :label="$t('misc.jobTitle')"
                 type="text"
@@ -123,10 +122,12 @@ function onSlideChange(swiper) {
 
             <div class="w-full h-auto">
               <Input
+                v-model="form.email"
                 name="email"
                 :label="$t('misc.email')"
                 type="email"
                 placeholder="example@gmail.com"
+                required
               />
             </div>
 
@@ -135,7 +136,10 @@ function onSlideChange(swiper) {
               ref="countryRef"
               class="w-full h-auto flex flex-col space-y-1 relative"
             >
+              <!-- v-model sebelumnya tidak dipasang di sini juga, sehingga
+                   negara yang dipilih tidak pernah sampai ke formulir. -->
               <CountrySelect
+                v-model="form.country"
                 :is-open="activeDropdown === 'country'"
                 @open="handleDropdownOpen"
               />
@@ -146,7 +150,10 @@ function onSlideChange(swiper) {
               ref="productRef"
               class="w-full h-auto flex flex-col space-y-1 relative"
             >
+              <!-- v-model sebelumnya tidak dipasang, sehingga produk yang
+                   dipilih pengunjung tidak pernah sampai ke formulir. -->
               <ProductSelect
+                v-model="form.product"
                 :is-open="activeDropdown === 'product'"
                 @open="handleDropdownOpen"
               />
@@ -156,6 +163,7 @@ function onSlideChange(swiper) {
               <label for="Message">{{ $t("misc.message") }}</label>
               <textarea
                 id="messageBookDemo"
+                v-model="form.message"
                 aria-label="Message Book Demo"
                 class="w-full lg:h-[70px] xl:h-[130px] p-2 rounded-[8px] border-gray-300 placeholder-[6F6F6F] dark:bg-[#323232] border-[0.1px] dark:border-[#FAFAFA]/25 focus:outline-none focus:ring-1 focus:ring-[#2AB857] resize-none align-top"
                 :placeholder="$t('misc.message')"
@@ -178,9 +186,12 @@ function onSlideChange(swiper) {
               <button
                 aria-label="Send Book Demo"
                 type="submit"
-                class="w-full h-auto py-2 flex justify-center items-center bg-[#2AB857] rounded-[20px]"
+                :disabled="mengirim"
+                class="w-full h-auto py-2 flex justify-center items-center bg-[#2AB857] rounded-[20px] disabled:opacity-60 disabled:cursor-not-allowed"
               >
-                <p class="text-white">Send</p>
+                <p class="text-white">
+                  {{ mengirim ? $t("bookDemo.sending") : $t("bookDemo.submit") }}
+                </p>
               </button>
             </div>
           </form>

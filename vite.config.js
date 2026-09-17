@@ -7,6 +7,51 @@ import { visualizer } from "rollup-plugin-visualizer";
 
 // "tailwindcss": "^3.3.5",
 
+// Menyalakan mode "cross-origin isolated" HANYA pada route pemindai.
+//
+// Efeknya satu: browser mengizinkan SharedArrayBuffer, dan SDK rPPG memakai
+// itu untuk membuka thread tambahan. Lihat seleris_rppg_worker.js — jumlah
+// thread ONNX-nya dipilih begini:
+//   numThreads = self.crossOriginIsolated ? min(4, hardwareConcurrency) : 1
+// Tanpa header ini angkanya SELALU 1, dan berkas berulir yang sudah ikut
+// dipaketkan menganggur.
+//
+// SEBELUMNYA dipasang lewat server.headers, yang berlaku untuk SELURUH situs —
+// dan itu mematikan <iframe> Google Maps di bagian "Get In Touch". Penyebabnya
+// halus: COEP "credentialless" melonggarkan pemuatan SUBRESOURCE lintas-origin,
+// tetapi tidak berlaku untuk dokumen bersarang. Sebuah iframe lintas-origin
+// tetap harus mengirim COEP-nya sendiri agar boleh disematkan, dan Google Maps
+// tidak melakukannya. Hasilnya iframe itu diblokir tanpa pesan apa pun.
+//
+// Karena /face-tracking adalah route standalone yang tidak memuat Touch.vue
+// maupun TouchMobile.vue, mempersempit cakupannya tidak mengorbankan apa pun.
+// Pola ini juga yang harus dipakai di nginx produksi.
+const RUTE_TERISOLASI = ["/face-tracking", "/vendor/seleris-rppg/"];
+
+const perluIsolasi = (url = "") =>
+  RUTE_TERISOLASI.some((awalan) => url.startsWith(awalan));
+
+const isolasiPemindai = () => {
+  // Dipasang langsung, bukan dikembalikan sebagai fungsi. Middleware yang
+  // dikembalikan berjalan SETELAH middleware bawaan Vite — terlambat, karena
+  // saat itu responsnya sudah terkirim dan header tidak lagi bisa ditambahkan.
+  const pasang = (server) => {
+    server.middlewares.use((req, res, next) => {
+      if (perluIsolasi(req.url)) {
+        res.setHeader("Cross-Origin-Opener-Policy", "same-origin");
+        res.setHeader("Cross-Origin-Embedder-Policy", "credentialless");
+      }
+      next();
+    });
+  };
+
+  return {
+    name: "isolasi-pemindai",
+    configureServer: pasang,
+    configurePreviewServer: pasang,
+  };
+};
+
 export default defineConfig({
   server: {
     allowedHosts: ["954cd8c1ef8e.ngrok-free.app"],
@@ -14,6 +59,7 @@ export default defineConfig({
   },
   plugins: [
     vue(),
+    isolasiPemindai(),
     // react(),
     process.env.ANALYZE === "true" &&
       visualizer({
