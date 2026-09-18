@@ -17,10 +17,14 @@ defineProps({
         class="w-auto h-auto flex flex-col gap-y-1 justify-center items-center"
       >
         <div class="w-full h-auto">
-          <p class="text-[16px] font-[500] text-[#2D3335]">{{ title }}</p>
+          <p class="text-[16px] font-[500] text-[#2D3335] dark:text-[#FAFAFA]">
+            {{ title }}
+          </p>
         </div>
         <div class="w-full h-auto">
-          <p class="text-[14px] font-[400] text-[#5A6062]">{{ description }}</p>
+          <p class="text-[14px] font-[400] text-[#5A6062] dark:text-[#AAAAAA]">
+            {{ description }}
+          </p>
         </div>
       </div>
     </div>

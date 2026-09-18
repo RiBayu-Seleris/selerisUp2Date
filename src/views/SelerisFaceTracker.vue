@@ -1,5 +1,6 @@
 <script setup>
-import { ref } from "vue";
+import { ref, nextTick, onBeforeUnmount } from "vue";
+import AOS from "aos";
 import { useI18n } from "vue-i18n";
 import { useRouter } from "vue-router";
 
@@ -40,14 +41,67 @@ const profil = ref(bacaProfil());
 const hasil = ref(null);
 const scannerRef = ref(null);
 
+// Kolom tengah hanya menampilkan SATU hal pada satu waktu.
+//   scan     -> kamera + tombol
+//   analisis -> animasi peralihan
+//   hasil    -> lima kartu hasil
+const fase = ref("scan");
+const kemajuanAnalisis = ref(0);
+
+// SDK mengirim `result` ketika perhitungannya SUDAH selesai, jadi jeda ini
+// murni peralihan tampilan — bukan menunggu apa pun. Dibuat pendek supaya
+// tidak menahan angka yang sebenarnya sudah di tangan.
+const DURASI_ANALISIS_MS = 2000;
+const KELILING_CINCIN = 2 * Math.PI * 16;
+let rafAnalisis = null;
+
+const hentikanAnalisis = () => {
+  if (rafAnalisis) cancelAnimationFrame(rafAnalisis);
+  rafAnalisis = null;
+};
+
 const keHasil = (hasilScan) => {
   hasil.value = hasilScan;
+  fase.value = "analisis";
+  kemajuanAnalisis.value = 0;
+
+  hentikanAnalisis();
+  const mulaiPada = performance.now();
+  const langkah = (sekarang) => {
+    const rasio = Math.min((sekarang - mulaiPada) / DURASI_ANALISIS_MS, 1);
+    kemajuanAnalisis.value = Math.round(rasio * 100);
+    if (rasio < 1) {
+      rafAnalisis = requestAnimationFrame(langkah);
+      return;
+    }
+    rafAnalisis = null;
+    // Scan bisa saja sudah dimulai lagi selama animasi berjalan; kalau begitu
+    // jangan tarik pengunjung kembali ke layar hasil.
+    if (fase.value !== "analisis") return;
+    fase.value = "hasil";
+
+    // AOS di proyek ini dijalankan dengan disableMutationObserver: true, jadi
+    // ia TIDAK akan menemukan kartu hasil yang baru lahir ini sendiri. Tanpa
+    // aba-aba berikut elemen ber-data-aos tetap opacity 0 alias hasilnya tidak
+    // terlihat sama sekali. refreshHard, bukan refresh: elemennya memang baru.
+    nextTick(() => AOS.refreshHard());
+  };
+  rafAnalisis = requestAnimationFrame(langkah);
+};
+
+// Dikirim scanner setiap kali scan BARU dimulai, dari tombol mana pun.
+const keScan = () => {
+  hentikanAnalisis();
+  hasil.value = null;
+  fase.value = "scan";
 };
 
 const scanUlang = () => {
-  hasil.value = null;
+  keScan();
   scannerRef.value?.ulangiScan();
 };
+
+onBeforeUnmount(hentikanAnalisis);
 
 const keBeranda = () => router.push("/");
 
@@ -75,75 +129,33 @@ const sertifikat = [
 
 <template>
   <div
-    class="w-full min-h-[100dvh] lg:h-[100dvh] lg:overflow-hidden p-3 sm:p-4 lg:p-5 bg-[#F1F4F5] dark:bg-[#17181A] dark:text-[#FAFAFA]"
+    class="w-full min-h-[100dvh] xl:h-[100dvh] xl:overflow-hidden p-3 sm:p-4 xl:p-5 bg-[#F1F4F5] dark:bg-[#17181A] dark:text-[#FAFAFA]"
   >
     <div class="w-full max-w-[1440px] h-full mx-auto flex flex-col">
       <div
-        class="w-full flex-1 min-h-0 grid gap-3 sm:gap-4 grid-cols-1 md:grid-cols-2 lg:grid-cols-[1fr_minmax(500px,600px)_1fr]"
+        class="w-full flex-1 min-h-0 grid gap-3 sm:gap-4 grid-cols-1 md:grid-cols-2 xl:grid-cols-[1fr_minmax(500px,600px)_1fr] xl:grid-rows-[auto_minmax(0,1fr)]"
       >
-        <aside
-          data-lenis-prevent
-          class="order-2 lg:order-1 flex flex-col gap-y-4 lg:overflow-y-auto hide-scrollbar"
+        <!-- Tombol kembali berdiri sendiri di grid. Di bawah xl ia harus jadi
+             hal pertama yang terlihat; kalau tetap menempel di aside kiri, ia
+             terlempar ke tengah halaman, di bawah kamera. -->
+        <button
+          type="button"
+          class="w-full md:col-span-2 xl:col-span-1 xl:col-start-1 xl:row-start-1 flex flex-row gap-x-3 sm:gap-x-4 justify-start items-center bg-white dark:bg-[#232427] rounded-full text-[#000000] dark:text-[#FAFAFA] border border-[#E5E7EB] dark:border-[#3A3B3D]"
+          @click="keBeranda"
         >
-          <button
-            type="button"
-            class="w-full flex flex-row gap-x-4 justify-start items-center bg-white dark:bg-[#232427] rounded-full text-[#000000] dark:text-[#FAFAFA] border border-[#E5E7EB] dark:border-[#3A3B3D]"
-            @click="keBeranda"
+          <span
+            class="w-10 h-10 shrink-0 flex justify-center items-center bg-[#F7F7F7] dark:bg-[#2F3033] rounded-full p-1.5 border border-[#E5E7EB] dark:border-[#3A3B3D] [&_svg]:w-full [&_svg]:h-full"
           >
-            <span
-              class="w-10 h-10 shrink-0 flex justify-center items-center bg-[#F7F7F7] dark:bg-[#2F3033] rounded-full p-1.5 border border-[#E5E7EB] dark:border-[#3A3B3D] [&_svg]:w-full [&_svg]:h-full"
-            >
-              <ArrowLeft />
-            </span>
-            <span class="text-[16px] font-[400]">{{
-              t("scanSdk.backSite")
-            }}</span>
-          </button>
-
-          <div
-            class="w-full flex flex-col gap-y-5 sm:gap-y-6 px-4 py-5 sm:py-6 bg-white dark:bg-[#232427] rounded-lg"
-          >
-            <CardIconLeft
-              v-for="(ikon, index) in ikonAturan"
-              :key="index"
-              :icon="ikon"
-              :title="t(`scanSdk.sideRules.${index}.title`)"
-              :description="t(`scanSdk.sideRules.${index}.description`)"
-            />
-          </div>
-
-          <div class="w-full p-4 sm:p-6 bg-white dark:bg-[#232427] rounded-lg">
-            <p class="text-[#5A6062] dark:text-[#AAAAAA] text-[16px]">
-              <span class="font-[600]">{{ t("scanSdk.proTipLabel") }}</span>
-              {{ t("scanSdk.proTip") }}
-            </p>
-          </div>
-
-          <div
-            class="w-full flex flex-col gap-y-4 items-center bg-white dark:bg-[#232427] rounded-xl px-4 sm:px-6 py-4"
-          >
-            <p class="text-[17px] sm:text-[20px] text-center">
-              {{ t("scanSdk.certificates") }}
-            </p>
-            <div class="flex flex-wrap justify-center gap-5">
-              <div
-                v-for="berkas in sertifikat"
-                :key="berkas"
-                class="w-[60px] h-[60px] flex justify-center items-center"
-              >
-                <img
-                  :src="`/assets/images/certificate-icon/${berkas}`"
-                  alt=""
-                  class="w-full h-full object-contain"
-                />
-              </div>
-            </div>
-          </div>
-        </aside>
+            <ArrowLeft />
+          </span>
+          <span class="text-[15px] sm:text-[16px] font-[400]">{{
+            t("scanSdk.backSite")
+          }}</span>
+        </button>
 
         <section
           data-lenis-prevent
-          class="order-1 md:col-span-2 lg:col-span-1 lg:order-2 min-w-0 flex flex-col lg:overflow-y-auto hide-scrollbar"
+          class="md:col-span-2 xl:col-span-1 xl:col-start-2 xl:row-start-1 xl:row-span-2 min-w-0 min-h-0 flex flex-col xl:overflow-hidden"
         >
           <div
             v-if="!profil"
@@ -161,15 +173,124 @@ const sertifikat = [
             </button>
           </div>
 
-          <div v-else class="flex flex-col gap-10">
-            <SdkScanner ref="scannerRef" :profile="profil" @result="keHasil" />
-            <SdkResult v-if="hasil" :result="hasil" @rescan="scanUlang" />
-          </div>
+          <template v-else>
+            <!-- v-show, BUKAN v-if: membongkar scanner berarti memuat ulang
+                 seluruh runtime SDK setiap kali pengunjung menekan "Scan
+                 lagi". Ia tetap terpasang, hanya disembunyikan. -->
+            <div v-show="fase === 'scan'" class="flex-1 min-h-0 flex flex-col">
+              <SdkScanner
+                ref="scannerRef"
+                :profile="profil"
+                @result="keHasil"
+                @mulai="keScan"
+              />
+            </div>
+
+            <div
+              v-if="fase === 'analisis'"
+              class="flex-1 min-h-0 flex flex-col items-center justify-center gap-5 py-16"
+              role="status"
+              aria-live="polite"
+            >
+              <div class="relative w-28 h-28">
+                <svg viewBox="0 0 36 36" class="w-full h-full -rotate-90">
+                  <circle
+                    cx="18"
+                    cy="18"
+                    r="16"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.5"
+                    class="text-black/10 dark:text-white/15"
+                  />
+                  <circle
+                    cx="18"
+                    cy="18"
+                    r="16"
+                    fill="none"
+                    stroke="#2AB857"
+                    stroke-width="2.5"
+                    stroke-linecap="round"
+                    :stroke-dasharray="KELILING_CINCIN"
+                    :stroke-dashoffset="
+                      KELILING_CINCIN * (1 - kemajuanAnalisis / 100)
+                    "
+                  />
+                </svg>
+                <span
+                  class="absolute inset-0 flex items-center justify-center text-[20px] font-[600] text-[#195279] dark:text-[#FAFAFA]"
+                >
+                  {{ kemajuanAnalisis }}%
+                </span>
+              </div>
+              <p class="text-[15px] text-[#6F6F6F] dark:text-[#AAAAAA]">
+                {{ t("scanSdk.analyzing") }}
+              </p>
+            </div>
+
+            <div
+              v-else-if="fase === 'hasil'"
+              class="flex-1 min-h-0 xl:overflow-y-auto hide-scrollbar"
+            >
+              <SdkResult :result="hasil" @rescan="scanUlang" />
+            </div>
+          </template>
         </section>
 
         <aside
           data-lenis-prevent
-          class="order-3 flex flex-col gap-y-4 lg:overflow-y-auto hide-scrollbar"
+          class="xl:col-start-1 xl:row-start-2 min-h-0 flex flex-col gap-y-3 sm:gap-y-4 xl:overflow-y-auto hide-scrollbar"
+        >
+          <div
+            class="w-full flex flex-col gap-y-5 sm:gap-y-6 px-4 py-5 sm:py-6 bg-white dark:bg-[#232427] rounded-lg"
+            :class="{ 'hidden xl:flex': fase === 'hasil' }"
+          >
+            <CardIconLeft
+              v-for="(ikon, index) in ikonAturan"
+              :key="index"
+              :icon="ikon"
+              :title="t(`scanSdk.sideRules.${index}.title`)"
+              :description="t(`scanSdk.sideRules.${index}.description`)"
+            />
+          </div>
+
+          <div
+            class="w-full p-4 sm:p-6 bg-white dark:bg-[#232427] rounded-lg"
+            :class="{ 'hidden xl:block': fase === 'hasil' }"
+          >
+            <p class="text-[#5A6062] dark:text-[#AAAAAA] text-[16px]">
+              <span class="font-[600]">{{ t("scanSdk.proTipLabel") }}</span>
+              {{ t("scanSdk.proTip") }}
+            </p>
+          </div>
+
+          <div
+            class="w-full flex flex-col gap-y-4 items-center bg-white dark:bg-[#232427] rounded-xl px-4 sm:px-6 py-4 xl:grow xl:justify-center"
+          >
+            <p class="text-[17px] sm:text-[20px] text-center">
+              {{ t("scanSdk.certificates") }}
+            </p>
+            <div
+              class="grid grid-cols-[repeat(3,56px)] sm:grid-cols-[repeat(3,60px)] justify-center gap-4 sm:gap-5"
+            >
+              <div
+                v-for="berkas in sertifikat"
+                :key="berkas"
+                class="w-full aspect-square flex justify-center items-center"
+              >
+                <img
+                  :src="`/assets/images/certificate-icon/${berkas}`"
+                  alt=""
+                  class="w-full h-full object-contain"
+                />
+              </div>
+            </div>
+          </div>
+        </aside>
+
+        <aside
+          data-lenis-prevent
+          class="xl:col-start-3 xl:row-start-1 xl:row-span-2 min-h-0 flex flex-col gap-y-3 sm:gap-y-4 xl:overflow-y-auto hide-scrollbar"
         >
           <div
             class="w-full flex flex-col gap-y-2 bg-white dark:bg-[#232427] rounded-lg border border-[#E5E7EB] dark:border-[#3A3B3D] p-4"
@@ -184,7 +305,7 @@ const sertifikat = [
             </p>
           </div>
 
-          <div class="w-full grid grid-cols-2 max-smallest:grid-cols-1 gap-3 sm:gap-4">
+          <div class="w-full grid grid-cols-2 gap-3 sm:gap-4">
             <div
               v-for="item in indikator"
               :key="item.kunci"
@@ -202,7 +323,7 @@ const sertifikat = [
           </div>
 
           <div
-            class="w-full flex flex-col gap-y-5 items-center p-5 sm:p-8 bg-white dark:bg-[#232427] rounded-lg"
+            class="w-full flex flex-col gap-y-5 items-center p-5 sm:p-8 bg-white dark:bg-[#232427] rounded-lg xl:grow xl:justify-center"
           >
             <p class="text-[#A7A7A7]">{{ t("scanSdk.getApps") }}</p>
             <div class="flex flex-row gap-5 w-full max-w-[320px]">

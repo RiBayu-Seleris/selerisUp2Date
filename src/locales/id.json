@@ -2067,8 +2067,12 @@
     "diastolic": "Diastolik",
     "sourceLabel": "Sumber",
     "sourceFormula": "Estimasi formula",
+    "sourceMeasured": "Diukur dari kamera",
+    "sourceDerived": "Turunan dari kamera",
+    "unitBreaths": "napas/menit",
     "unavailable": "Tidak tersedia",
     "scanning": "Sedang memindai…",
+    "analyzing": "Menganalisis hasil pemindaian…",
     "remaining": "Sekitar {seconds} detik lagi",
     "quality": "Kualitas sinyal",
     "cameraUnavailable": "Perangkat ini melaporkan tidak ada kamera yang bisa dipakai, jadi pemindaian tidak bisa dimulai.",
@@ -2078,7 +2082,6 @@
     "heatmapToggle": "Tampilkan heatmap perfusi",
     "heatmapSave": "Simpan heatmap PNG",
     "heatmapWaiting": "Heatmap belum siap disimpan.",
-    "availabilityLabel": "Ketersediaan",
     "sourceExperimental": "Estimasi eksperimental dari kamera",
     "helpPermission": "Izin kamera diblokir. Buka ikon gembok di bilah alamat, izinkan kamera, lalu coba lagi.",
     "helpCameraBusy": "Pilih kamera yang tersedia dan tutup aplikasi atau tab lain yang sedang memakainya, lalu coba lagi.",
@@ -2118,6 +2121,10 @@
     },
     "rateCamera": "Kamera",
     "helpCameraCadence": "Kamera ini tidak sanggup mengirim {hz} gambar per detik, padahal pemindaian membutuhkannya. Biasanya cukup dengan cahaya lebih terang dari depan — di ruang remang kamera memperlambat dirinya sendiri. Kalau tetap begitu, pilih kamera atau perangkat lain.",
+    "helpMotionLip": "Pemindaian dihentikan karena mulut terus bergerak. Jangan berbicara atau mengunyah selama 30 detik — tahan wajah dengan ekspresi netral.",
+    "helpMotionPose": "Pemindaian dihentikan karena kepala terus menoleh. Hadapkan wajah lurus ke kamera dan tahan kepala di satu posisi.",
+    "helpMotionScale": "Pemindaian dihentikan karena jarak wajah ke kamera berubah-ubah. Sandarkan punggung, jaga jaraknya tetap sama, dan jangan maju-mundur.",
+    "helpMotion": "Pemindaian dihentikan karena wajah terlalu banyak bergerak. Sandarkan punggung ke kursi, tahan kepala tetap diam, lalu coba lagi.",
     "notIsolated": "Halaman ini belum terisolasi lintas-origin, jadi pemindai berjalan satu thread dan bisa kesulitan mencapai laju gambar yang dibutuhkan."
   }
 }

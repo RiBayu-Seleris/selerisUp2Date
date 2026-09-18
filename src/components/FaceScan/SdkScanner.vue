@@ -9,18 +9,31 @@ import { useCekKamera } from "@/composables/useCekKamera";
 const props = defineProps({
   profile: { type: Object, required: true },
 });
-const emit = defineEmits(["result"]);
+// `mulai` memberi tahu halaman bahwa scan BARU berjalan. Tanpa ini halaman
+// tidak punya cara tahu bahwa hasil lama sudah basi, dan kartu hasil
+// sebelumnya tetap menempel saat pengunjung menekan tombol milik scanner.
+const emit = defineEmits(["result", "mulai"]);
 
 const { t, locale } = useI18n();
 
 // Aset runtime disajikan dari folder publik, satu direktori per versi SDK.
 // BASE_URL dipakai supaya tetap benar kalau situs dipindah ke subpath.
-const VERSI_SDK = "0.1.0-dev.4";
+const VERSI_SDK = "0.1.0-dev.5";
 const assetBaseUrl = `${import.meta.env.BASE_URL}vendor/seleris-rppg/${VERSI_SDK}/`;
 
 // SDK menerima id, en, atau ms. Bahasa situs dipetakan ke situ; selain itu
 // jatuh ke "id" sesuai bawaan SDK.
 const bahasa = computed(() => (locale.value === "en" ? "en" : "id"));
+
+// Panel diagnostik (laju kamera, status teknis, laporan UAT) bukan untuk
+// pengunjung. Dibuka dengan menambahkan ?debug=1 pada URL.
+const debug = (() => {
+  try {
+    return new URLSearchParams(window.location.search).has("debug");
+  } catch {
+    return false;
+  }
+})();
 
 const scannerRef = ref(null);
 
@@ -43,18 +56,6 @@ const galat = ref(null);
 // liveVitals: detak SEMENTARA selama scan berjalan. Bukan hasil akhir.
 const hrSementara = ref(null);
 
-// heatmapStatus: heatmap digambar SDK sendiri di atas video. Host cukup
-// menyalakan/mematikan dan mengetahui kapan sudah benar-benar terlihat.
-//
-// MATI secara bawaan. Menggambar heatmap di atas setiap frame memakan jatah
-// waktu yang sama dengan penganalisis, padahal satu frame hanya punya ~41 ms
-// sebelum lajunya jatuh di bawah 24 Hz. Teks bantuan SDK sendiri menyuruh
-// mematikannya begitu cadence ditolak — jadi lebih baik tidak pernah
-// menyalakannya lebih dulu. Pengunjung yang ingin melihatnya tetap bisa
-// mencentang saklarnya di bawah.
-const heatmapAktif = ref(false);
-const heatmapTerlihat = ref(false);
-
 // Laju gambar per detik, dari event `quality`. Ambang cadence-nya 24 Hz.
 const CADENCE_MINIMUM_HZ = 24;
 // Ambang yang benar-benar dipakai untuk menilai. Sama dengan konstanta di
@@ -63,7 +64,11 @@ const ambangHz = ref(CADENCE_MINIMUM_HZ);
 
 // Pemeriksaan kamera dan cahaya sebelum scan. Lihat useCekKamera untuk
 // alasan kenapa ini harus terjadi sebelum pengunjung menekan "Mulai scan".
-const { memeriksa: memeriksaKamera, hasil: cekKamera, periksa } = useCekKamera();
+const {
+  memeriksa: memeriksaKamera,
+  hasil: cekKamera,
+  periksa,
+} = useCekKamera();
 const sudahDicek = ref(false);
 
 // Pengunjung boleh menolak nasihat kita. Pemeriksaan ini pengukuran singkat,
@@ -95,6 +100,15 @@ const cahayaBermasalah = computed(() => {
   const nilai = cekKamera.value?.cahaya;
   return nilai === "gelap" || nilai === "backlight";
 });
+
+// Gerbang tampilnya kartu pemeriksaan kamera. Keadaan sehat tidak
+// diumumkan sama sekali.
+const adaMasalahKamera = computed(
+  () =>
+    cekKamera.value?.status === "galat" ||
+    kameraTerlaluLambat.value ||
+    cahayaBermasalah.value,
+);
 const lajuAnalyzer = ref(null);
 const lajuDiterima = ref(null);
 
@@ -115,6 +129,14 @@ const waktuProses = ref(null);
 // seluruh inferensi WASM berjalan satu thread.
 const terisolasi = ref(null);
 const modeAksesori = ref(null);
+
+// Telemetri gerak, baru di dev.5. Dokumen MOTION-GATE meminta lima sampel
+// terakhir dilampirkan setiap kali penolakan gerak masih terjadi — angka-angka
+// inilah yang memisahkan "pengunjung memang bergerak" dari "detektornya yang
+// bergetar", dan tidak satu pun bisa ditebak dari layar.
+const BATAS_RIWAYAT_GERAK = 5;
+const riwayatGerak = ref([]);
+const versiAlgoritmaGerak = ref(null);
 
 const BATAS_RIWAYAT = 1200;
 const riwayatLaju = ref([]);
@@ -196,6 +218,7 @@ const bacaKamera = async () => {
 const mulaiPencatatan = () => {
   bufferLaju = [];
   riwayatLaju.value = [];
+  riwayatGerak.value = [];
   mulaiPadaMs = Date.now();
   fpsHalaman.value = null;
   mulaiUkurHalaman();
@@ -282,12 +305,26 @@ const onState = (s) => {
   pesanCahaya.value = teksSDK(s?.lighting?.message);
   aksesori.value = s?.accessory || null;
 
+  // `warming_up` dilewati: detektornya belum menilai apa pun, jadi angkanya
+  // hanya akan mengisi jatah lima sampel dengan nol.
+  const gerak = s?.motion;
+  if (gerak && gerak.detectorState !== "warming_up") {
+    versiAlgoritmaGerak.value = gerak.algorithmVersion || null;
+    riwayatGerak.value = [...riwayatGerak.value, gerak].slice(
+      -BATAS_RIWAYAT_GERAK,
+    );
+  }
+
   tahap.value = [
     s?.stage,
     s?.guidanceCode,
     s?.faceStatus,
     s?.lighting?.status,
     s?.accessory,
+    // Checklist UAT `.5` menyuruh penguji memastikan "bicara terus" berakhir
+    // `moving` dengan alasan persistent_lip_activity. Tanpa ditampilkan,
+    // itu baru terbaca setelah scan-nya terlanjur ditolak.
+    gerak?.active ? `moving:${gerak.reason || "?"}` : gerak?.detectorState,
   ]
     .filter(Boolean)
     .join(" · ");
@@ -317,10 +354,6 @@ const onLiveVitals = (v) => {
   hrSementara.value = typeof v?.heartRate === "number" ? v.heartRate : null;
 };
 
-const onHeatmapStatus = (h) => {
-  heatmapTerlihat.value = !!h?.visible;
-};
-
 const onResult = (hasil) => {
   berjalan.value = false;
   hentikanUkurHalaman();
@@ -333,6 +366,15 @@ const onError = (e) => {
   hentikanUkurHalaman();
   hrSementara.value = null;
   galat.value = e;
+};
+
+// Tiga dari lima alasan gerak punya perbaikan yang berbeda dan bisa disebut
+// ke pengunjung. Dua sisanya (sudden_translation, gradual_translation) jatuh
+// ke saran umum "tahan kepala" karena perbaikannya memang sama.
+const SARAN_GERAK = {
+  persistent_lip_activity: "scanSdk.helpMotionLip",
+  pose_change: "scanSdk.helpMotionPose",
+  scale_change: "scanSdk.helpMotionScale",
 };
 
 const saranGalat = computed(() => {
@@ -359,10 +401,27 @@ const saranGalat = computed(() => {
       ? t("scanSdk.helpPreflight")
       : t("scanSdk.helpPreflightAccepted");
   }
+
+  // Baru di dev.5. SDK kini menyebut ALASAN penolakan geraknya, jadi sarannya
+  // bisa menyebut hal yang benar — "jangan bicara" dan "jangan menoleh" adalah
+  // dua perbaikan yang berbeda. `motion_reason` kosong kalau penolakan datang
+  // dari jeda, bukan dari satu episode; di situ pemicu terbanyak yang dipakai.
+  if (kode === "MEASUREMENT_MOTION_REJECTED") {
+    const d = galat.value?.details;
+    const dominan =
+      d?.motion_reason ||
+      Object.entries(d?.motion_trigger_counts || {}).sort(
+        (a, b) => b[1] - a[1],
+      )[0]?.[0];
+
+    return t(SARAN_GERAK[dominan] || "scanSdk.helpMotion");
+  }
+
   return "";
 });
 
 const mulai = async () => {
+  emit("mulai");
   galat.value = null;
   progres.value = 0;
   sisaDetik.value = null;
@@ -410,6 +469,7 @@ const batal = async () => {
 };
 
 const ulangiScan = async () => {
+  emit("mulai");
   galat.value = null;
   progres.value = 0;
   sisaDetik.value = null;
@@ -420,23 +480,6 @@ const ulangiScan = async () => {
   } catch {
     await mulai();
   }
-};
-
-const bisaCobaTanpaHeatmap = computed(
-  () =>
-    heatmapAktif.value &&
-    typeof galat.value?.code === "string" &&
-    // Hanya untuk penolakan karena KECEPATAN. Kalau gambarnya ditolak karena
-    // kacamata atau cahaya, mematikan heatmap tidak menolong apa pun.
-    galat.value.code.includes("CADENCE"),
-);
-
-const ulangiTanpaHeatmap = async () => {
-  heatmapAktif.value = false;
-  // Beri kesempatan SDK menerima setHeatmapEnabled(false) lewat watcher-nya
-  // sebelum pemindaian berikutnya dimulai.
-  await nextTick();
-  await ulangiScan();
 };
 
 // Hasil pemeriksaan pra-scan ikut disalin ke laporan. Tanpa ini tim SDK
@@ -475,6 +518,24 @@ const ringkasProses = () => {
   return bagian.length ? bagian.join(" | ") : "tidak dilaporkan";
 };
 
+const angkaGerak = (nilai, digit = 4) =>
+  typeof nilai === "number" ? nilai.toFixed(digit) : "-";
+
+const barisGerak = (m) =>
+  [
+    `  ${m.detectorState}`,
+    `reason=${m.reason || "-"}`,
+    `center=${angkaGerak(m.centerDeltaRatio)}`,
+    `scale=${angkaGerak(m.scaleDeltaRatio)}`,
+    `pose=${angkaGerak(m.poseDeltaDegrees, 2)}deg`,
+    `jitter=${angkaGerak(m.boxJitterRatio)}`,
+    `lipScore=${angkaGerak(m.lipVisualScore)}`,
+    `lipFrac=${angkaGerak(m.lipActiveFraction, 3)}`,
+    `rejRatio=${angkaGerak(m.motionRejectionRatio, 3)}`,
+    `gap=${angkaGerak(m.activeGapSeconds, 2)}s`,
+    `triggers=${JSON.stringify(m.triggerCounts || {})}`,
+  ].join(" ");
+
 const laporan = computed(() => {
   // riwayatLaju sebagai pemicu; angkanya diambil dari buffer yang paling baru.
   const sumber = riwayatLaju.value.length ? bufferLaju : [];
@@ -505,7 +566,6 @@ const laporan = computed(() => {
     `Perangkat kamera : ${labelKamera.value || "-"}`,
     `Cek pra-scan     : ${ringkasCek()}`,
     `Bahasa SDK       : ${bahasa.value}`,
-    `Heatmap          : ${heatmapAktif.value ? "menyala" : "mati"}`,
     "",
     `Isolasi origin   : ${terisolasi.value === null ? "tidak dilaporkan" : terisolasi.value ? "aktif (banyak thread)" : "MATI (satu thread)"}`,
     `Inferensi aksesori: ${modeAksesori.value || "-"}`,
@@ -533,27 +593,16 @@ const laporan = computed(() => {
     `Detail penolakan : ${
       galat.value?.details ? JSON.stringify(galat.value.details) : "-"
     }`,
+    "",
+    // Format ini mengikuti bagian "Data lapangan yang kami butuhkan" di
+    // MOTION-GATE-0.1.0-dev.5.md, supaya laporannya bisa ditempel apa adanya.
+    `Algoritma gerak  : ${versiAlgoritmaGerak.value || "-"}`,
+    "Telemetri gerak (5 terakhir):",
+    riwayatGerak.value.length
+      ? riwayatGerak.value.map(barisGerak).join("\n")
+      : "  tidak ada data",
   ].join("\n");
 });
-
-const simpanHeatmap = async () => {
-  try {
-    const blob = await scannerRef.value?.exportHeatmap({ composite: true });
-    if (!blob) return;
-    const url = URL.createObjectURL(blob);
-    const tautan = document.createElement("a");
-    tautan.href = url;
-    tautan.download = "seleris-heatmap.png";
-    tautan.click();
-    setTimeout(() => URL.revokeObjectURL(url), 1000);
-  } catch (e) {
-    // HEATMAP_NOT_READY berarti belum ada heatmap yang layak diekspor.
-    onError({
-      code: e?.code || "HEATMAP_NOT_READY",
-      message: e?.message || t("scanSdk.heatmapWaiting"),
-    });
-  }
-};
 
 // Dipakai halaman untuk menekan "Scan ulang" dari panel hasil, tanpa perlu
 // melepas dan memasang ulang scanner (yang berarti memuat ulang seluruh aset).
@@ -561,9 +610,12 @@ defineExpose({ ulangiScan });
 </script>
 
 <template>
-  <div class="w-full max-w-2xl mx-auto flex flex-col gap-5">
+  <!-- Di xl kolom tengah tingginya terkunci: kamera memakan sisa ruang dan
+       tombol duduk di dasar, sejajar dengan kolom kiri-kanan. Di bawah xl
+       halaman menggulir biasa, jadi kamera kembali memakai rasio tetap. -->
+  <div class="w-full mx-auto flex flex-col gap-4 sm:gap-5 xl:flex-1 xl:min-h-0">
     <div
-      class="relative w-full max-w-[420px] mx-auto aspect-[3/4] sm:aspect-[4/3] max-h-[50dvh] rounded-2xl overflow-hidden bg-black/5 dark:bg-white/5"
+      class="relative w-full aspect-[3/4] sm:aspect-[4/3] max-h-[50dvh] md:max-h-none xl:aspect-auto xl:max-h-none xl:flex-1 xl:min-h-0 rounded-2xl overflow-hidden bg-black/5 dark:bg-white/5"
     >
       <SelerisScanner
         ref="scannerRef"
@@ -571,166 +623,156 @@ defineExpose({ ulangiScan });
         :profile="props.profile"
         :language="bahasa"
         camera-facing="front"
-        :heatmap-enabled="heatmapAktif"
+        :heatmap-enabled="false"
         @ready="onReady"
         @state="onState"
         @progress="onProgress"
         @quality="onQuality"
         @live-vitals="onLiveVitals"
-        @heatmap-status="onHeatmapStatus"
         @result="onResult"
         @error="onError"
       />
     </div>
 
+    <!-- Tingginya SENGAJA dipatok di xl. Kalau dibiarkan mengikuti isi,
+         kotak kamera ikut mengecil setiap kali peringatan aksesori atau
+         galat muncul, dan gambarnya melompat di depan mata pengunjung. -->
     <div
-      v-if="siap && !adaKamera"
-      class="rounded-xl border border-amber-300 bg-amber-50 dark:bg-amber-950/30 px-4 py-3 text-[13px] text-amber-800 dark:text-amber-300"
+      class="flex flex-col gap-4 sm:gap-5 xl:h-[190px] xl:shrink-0 xl:overflow-y-auto hide-scrollbar"
     >
-      {{ t("scanSdk.cameraUnavailable") }}
-    </div>
-
-    <div
-      v-if="aksesori"
-      class="rounded-xl border border-amber-300 bg-amber-50 dark:bg-amber-950/30 px-4 py-3 text-[13px] text-amber-800 dark:text-amber-300"
-    >
-      {{ t("scanSdk.accessoryBlocking", { item: aksesori }) }}
-    </div>
-
-    <p
-      v-if="pesanCahaya && statusCahaya !== 'ready'"
-      class="text-[13px] text-center text-amber-700 dark:text-amber-400"
-    >
-      {{ t("scanSdk.lightingLabel") }}: {{ pesanCahaya }}
-    </p>
-
-    <p
-      v-if="panduan"
-      aria-live="polite"
-      class="text-[14px] text-center text-[#6F6F6F] dark:text-[#AAAAAA]"
-    >
-      {{ panduan }}
-    </p>
-
-    <div v-if="berjalan" class="flex flex-col gap-2">
-      <div class="flex justify-between text-[13px] text-[#6F6F6F]">
-        <span>{{ t("scanSdk.scanning") }}</span>
-        <span v-if="sisaDetik !== null">
-          {{ t("scanSdk.remaining", { seconds: Math.ceil(sisaDetik) }) }}
-        </span>
-      </div>
       <div
-        class="w-full h-2 rounded-full bg-black/10 dark:bg-white/10 overflow-hidden"
+        v-if="siap && !adaKamera"
+        class="rounded-xl border border-amber-300 bg-amber-50 dark:bg-amber-950/30 px-4 py-3 text-[13px] text-amber-800 dark:text-amber-300"
       >
-        <div
-          class="h-full bg-[#2AB857] transition-all duration-200"
-          :style="{ width: persen + '%' }"
-        ></div>
+        {{ t("scanSdk.cameraUnavailable") }}
       </div>
 
-      <div class="flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-[#8E98A8]">
-        <span v-if="kualitas !== null">
-          {{ t("scanSdk.quality") }}: {{ Math.round(kualitas * 100) }}%
-        </span>
-
-        <span v-if="hrSementara !== null">
-          {{ t("scanSdk.liveHr") }}: {{ Math.round(hrSementara) }} bpm
-          <span class="opacity-70">({{ t("scanSdk.provisionalNote") }})</span>
-        </span>
-
-        <span
-          v-if="lajuAnalyzer !== null"
-          :class="lajuAnalyzer < ambangHz ? 'text-red-600 font-medium' : ''"
-        >
-          {{ t("scanSdk.rateAnalyzer") }}: {{ lajuAnalyzer.toFixed(1) }} Hz
-          <span class="opacity-70">
-            ({{ t("scanSdk.rateNeeded", { hz: ambangHz }) }})
-          </span>
-        </span>
-        <span v-if="lajuDiterima !== null">
-          {{ t("scanSdk.rateAccepted") }}: {{ lajuDiterima.toFixed(1) }} Hz
-        </span>
-
-        <!-- Laju kamera dipisahkan dari laju penganalisis sejak dev.4.
-             Keduanya berdampingan supaya langsung terlihat mana yang
-             kurang: kameranya, atau kemampuan memprosesnya. -->
-        <span v-if="lajuKamera !== null">
-          {{ t("scanSdk.rateCamera") }}: {{ lajuKamera.toFixed(0) }} Hz
-        </span>
+      <div
+        v-if="aksesori"
+        class="rounded-xl border border-amber-300 bg-amber-50 dark:bg-amber-950/30 px-4 py-3 text-[13px] text-amber-800 dark:text-amber-300"
+      >
+        {{ t("scanSdk.accessoryBlocking", { item: aksesori }) }}
       </div>
-    </div>
 
-    <div
-      v-if="galat"
-      role="alert"
-      class="rounded-xl border border-red-300 bg-red-50 dark:bg-red-950/30 px-4 py-3"
-    >
-      <p class="text-[14px] font-medium text-red-700 dark:text-red-300">
-        {{ t("scanSdk.errorTitle") }}
-      </p>
       <p
-        v-if="teksSDK(galat.message)"
-        class="text-[13px] text-red-600 dark:text-red-400 mt-1"
+        v-if="pesanCahaya && statusCahaya !== 'ready'"
+        class="text-[13px] text-center text-amber-700 dark:text-amber-400"
       >
-        {{ teksSDK(galat.message) }}
-      </p>
-      <p v-if="saranGalat" class="text-[13px] text-red-600 dark:text-red-400">
-        {{ saranGalat }}
-      </p>
-      <p v-if="galat.code" class="text-[11px] text-red-500/70 mt-1">
-        {{ galat.code }}
+        {{ t("scanSdk.lightingLabel") }}: {{ pesanCahaya }}
       </p>
 
-      <button
-        v-if="bisaCobaTanpaHeatmap"
-        type="button"
-        class="mt-3 h-10 px-4 rounded-lg bg-white dark:bg-[#27272A] border border-red-300 dark:border-red-500/50 text-[13px] font-medium text-red-700 dark:text-red-300"
-        @click="ulangiTanpaHeatmap"
+      <p
+        v-if="panduan"
+        aria-live="polite"
+        class="text-[14px] text-center text-[#6F6F6F] dark:text-[#AAAAAA]"
       >
-        {{ t("scanSdk.retryNoHeatmap") }}
-      </button>
-    </div>
-
-    <!-- dev.4 melaporkan ini di `ready`. Tanpa isolasi, seluruh inferensi
-         WASM jalan satu thread dan ambang 24 Hz jauh lebih sulit dicapai —
-         penyebab yang tidak akan pernah terlihat dari layar tanpa penanda
-         seperti ini. -->
-    <p
-      v-if="terisolasi === false"
-      class="text-[11px] text-amber-700 dark:text-amber-400"
-    >
-      {{ t("scanSdk.notIsolated") }}
-    </p>
-
-    <p v-if="tahap" class="text-[11px] text-[#8E98A8]">
-      {{ t("scanSdk.techStatus") }}: {{ tahap }}
-    </p>
-
-    <SdkFpsMonitor
-      :samples="riwayatLaju"
-      :threshold="ambangHz"
-      :report="laporan"
-      :page-fps="fpsHalaman"
-    />
-
-    <section
-      v-if="!berjalan && (memeriksaKamera || cekKamera)"
-      class="rounded-2xl border p-4 flex flex-col gap-2"
-      :class="
-        memeriksaKamera
-          ? 'border-[#DEDEDE] dark:border-[#3A3B3D]'
-          : kameraTerlaluLambat
-            ? 'border-red-300 bg-red-50 dark:bg-red-950/30'
-            : cahayaBermasalah
-              ? 'border-amber-300 bg-amber-50 dark:bg-amber-950/30'
-              : 'border-emerald-300 bg-emerald-50 dark:bg-emerald-950/30'
-      "
-    >
-      <p v-if="memeriksaKamera" class="text-[13px] text-[#6F6F6F]">
-        {{ t("scanSdk.check.running") }}
+        {{ panduan }}
       </p>
 
-      <template v-else-if="cekKamera">
+      <div v-if="berjalan" class="flex flex-col gap-2">
+        <div class="flex justify-between text-[13px] text-[#6F6F6F]">
+          <span>{{ t("scanSdk.scanning") }}</span>
+          <span v-if="sisaDetik !== null">
+            {{ t("scanSdk.remaining", { seconds: Math.ceil(sisaDetik) }) }}
+          </span>
+        </div>
+        <div
+          class="w-full h-2 rounded-full bg-black/10 dark:bg-white/10 overflow-hidden"
+        >
+          <div
+            class="h-full bg-[#2AB857] transition-all duration-200"
+            :style="{ width: persen + '%' }"
+          ></div>
+        </div>
+
+        <div
+          v-if="debug"
+          class="flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-[#8E98A8]"
+        >
+          <span v-if="kualitas !== null">
+            {{ t("scanSdk.quality") }}: {{ Math.round(kualitas * 100) }}%
+          </span>
+
+          <span v-if="hrSementara !== null">
+            {{ t("scanSdk.liveHr") }}: {{ Math.round(hrSementara) }} bpm
+            <span class="opacity-70">({{ t("scanSdk.provisionalNote") }})</span>
+          </span>
+
+          <span
+            v-if="lajuAnalyzer !== null"
+            :class="lajuAnalyzer < ambangHz ? 'text-red-600 font-medium' : ''"
+          >
+            {{ t("scanSdk.rateAnalyzer") }}: {{ lajuAnalyzer.toFixed(1) }} Hz
+            <span class="opacity-70">
+              ({{ t("scanSdk.rateNeeded", { hz: ambangHz }) }})
+            </span>
+          </span>
+          <span v-if="lajuDiterima !== null">
+            {{ t("scanSdk.rateAccepted") }}: {{ lajuDiterima.toFixed(1) }} Hz
+          </span>
+
+          <span v-if="lajuKamera !== null">
+            {{ t("scanSdk.rateCamera") }}: {{ lajuKamera.toFixed(0) }} Hz
+          </span>
+        </div>
+      </div>
+
+      <div
+        v-if="galat"
+        role="alert"
+        class="rounded-xl border border-red-300 bg-red-50 dark:bg-red-950/30 px-4 py-3"
+      >
+        <p class="text-[14px] font-medium text-red-700 dark:text-red-300">
+          {{ t("scanSdk.errorTitle") }}
+        </p>
+        <p
+          v-if="teksSDK(galat.message)"
+          class="text-[13px] text-red-600 dark:text-red-400 mt-1"
+        >
+          {{ teksSDK(galat.message) }}
+        </p>
+        <p v-if="saranGalat" class="text-[13px] text-red-600 dark:text-red-400">
+          {{ saranGalat }}
+        </p>
+        <p v-if="galat.code" class="text-[11px] text-red-500/70 mt-1">
+          {{ galat.code }}
+        </p>
+      </div>
+
+      <p
+        v-if="debug && terisolasi === false"
+        class="text-[11px] text-amber-700 dark:text-amber-400"
+      >
+        {{ t("scanSdk.notIsolated") }}
+      </p>
+
+      <p v-if="debug && tahap" class="text-[11px] text-[#8E98A8]">
+        {{ t("scanSdk.techStatus") }}: {{ tahap }}
+      </p>
+
+      <SdkFpsMonitor
+        v-if="debug"
+        :samples="riwayatLaju"
+        :threshold="ambangHz"
+        :report="laporan"
+        :page-fps="fpsHalaman"
+      />
+
+      <!-- Hanya muncul kalau memang ADA yang salah. Keadaan "kamera siap"
+           tidak perlu diumumkan; tombol Mulai sudah mengatakannya. Peringatan
+           kamera lambat tetap di sini karena "Scan anyway" satu-satunya jalan
+           keluar dari blokirnya. -->
+      <section
+        v-if="!berjalan && cekKamera && adaMasalahKamera"
+        class="rounded-2xl border p-4 flex flex-col gap-2"
+        :class="
+          cekKamera.status === 'galat'
+            ? 'border-[#DEDEDE] dark:border-[#3A3B3D]'
+            : kameraTerlaluLambat
+              ? 'border-red-300 bg-red-50 dark:bg-red-950/30'
+              : 'border-amber-300 bg-amber-50 dark:bg-amber-950/30'
+        "
+      >
         <p
           v-if="cekKamera.status === 'galat'"
           class="text-[13px] text-[#6F6F6F] dark:text-[#AAAAAA]"
@@ -746,29 +788,21 @@ defineExpose({ ulangiScan });
           >
             {{
               t("scanSdk.check.tooSlow", {
-                hz: cekKamera.fpsEfektif ? cekKamera.fpsEfektif.toFixed(0) : "?",
+                hz: cekKamera.fpsEfektif
+                  ? cekKamera.fpsEfektif.toFixed(0)
+                  : "?",
                 need: ambangHz,
               })
             }}
           </p>
           <p
-            v-else-if="cahayaBermasalah"
+            v-else
             class="text-[14px] font-medium text-amber-800 dark:text-amber-300"
           >
             {{
               cekKamera.cahaya === "backlight"
                 ? t("scanSdk.check.backlight")
                 : t("scanSdk.check.tooDark")
-            }}
-          </p>
-          <p
-            v-else
-            class="text-[14px] font-medium text-emerald-800 dark:text-emerald-300"
-          >
-            {{
-              t("scanSdk.check.ready", {
-                hz: cekKamera.fpsEfektif ? cekKamera.fpsEfektif.toFixed(0) : "?",
-              })
             }}
           </p>
 
@@ -778,10 +812,7 @@ defineExpose({ ulangiScan });
           >
             {{ t("scanSdk.check.tooSlowHelp") }}
           </p>
-          <p
-            v-else-if="cahayaBermasalah"
-            class="text-[13px] text-amber-800 dark:text-amber-400"
-          >
+          <p v-else class="text-[13px] text-amber-800 dark:text-amber-400">
             {{
               cekKamera.cahaya === "backlight"
                 ? t("scanSdk.check.backlightHelp")
@@ -789,33 +820,33 @@ defineExpose({ ulangiScan });
             }}
           </p>
         </template>
-      </template>
 
-      <div v-if="!memeriksaKamera" class="flex flex-wrap gap-x-4 gap-y-1 mt-1">
-        <button
-          type="button"
-          class="text-[13px] font-medium text-[#2E97DF] hover:underline"
-          @click="periksaUlang"
-        >
-          {{ t("scanSdk.check.recheck") }}
-        </button>
-        <button
-          v-if="tertahan"
-          type="button"
-          class="text-[13px] text-[#8E98A8] hover:underline"
-          @click="abaikanPeringatan = true"
-        >
-          {{ t("scanSdk.check.ignore") }}
-        </button>
-      </div>
-    </section>
+        <div class="flex flex-wrap gap-x-4 gap-y-1 mt-1">
+          <button
+            type="button"
+            class="text-[13px] font-medium text-[#2E97DF] hover:underline"
+            @click="periksaUlang"
+          >
+            {{ t("scanSdk.check.recheck") }}
+          </button>
+          <button
+            v-if="tertahan"
+            type="button"
+            class="text-[13px] text-[#8E98A8] hover:underline"
+            @click="abaikanPeringatan = true"
+          >
+            {{ t("scanSdk.check.ignore") }}
+          </button>
+        </div>
+      </section>
+    </div>
 
     <div class="flex flex-col sm:flex-row gap-3">
       <button
         v-if="!berjalan"
         type="button"
         :disabled="!siap || !adaKamera || memeriksaKamera || tertahan"
-        class="flex-1 h-12 rounded-xl text-white font-medium transition-all duration-300"
+        class="flex-1 h-auto lg:h-12 rounded-xl text-white font-medium transition-all duration-300 py-3 lg:py-0"
         :class="
           siap && adaKamera && !memeriksaKamera && !tertahan
             ? 'bg-gradient-to-tr from-[#1E6493] to-[#2E97DF] active:scale-[0.99]'
@@ -843,28 +874,6 @@ defineExpose({ ulangiScan });
         @click="batal"
       >
         {{ t("scanSdk.cancel") }}
-      </button>
-    </div>
-
-    <div class="flex flex-wrap items-center justify-between gap-3">
-      <label class="flex items-center gap-2 cursor-pointer">
-        <input
-          v-model="heatmapAktif"
-          type="checkbox"
-          class="w-4 h-4 accent-[#2AB857]"
-        />
-        <span class="text-[13px] text-[#6F6F6F] dark:text-[#AAAAAA]">
-          {{ t("scanSdk.heatmapToggle") }}
-        </span>
-      </label>
-
-      <button
-        type="button"
-        :disabled="!heatmapTerlihat"
-        class="text-[13px] underline underline-offset-2 disabled:opacity-40 disabled:no-underline disabled:cursor-not-allowed text-[#2E97DF]"
-        @click="simpanHeatmap"
-      >
-        {{ t("scanSdk.heatmapSave") }}
       </button>
     </div>
   </div>

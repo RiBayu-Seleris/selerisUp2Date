@@ -2067,8 +2067,12 @@
     "diastolic": "Diastolic",
     "sourceLabel": "Source",
     "sourceFormula": "Formula estimate",
+    "sourceMeasured": "Measured from camera",
+    "sourceDerived": "Derived from camera",
+    "unitBreaths": "breaths/min",
     "unavailable": "Not available",
     "scanning": "Scanning…",
+    "analyzing": "Analysing your scan…",
     "remaining": "About {seconds} seconds left",
     "quality": "Signal quality",
     "cameraUnavailable": "This device reports no usable camera, so the scan cannot start.",
@@ -2078,7 +2082,6 @@
     "heatmapToggle": "Show perfusion heatmap",
     "heatmapSave": "Save heatmap PNG",
     "heatmapWaiting": "The heatmap is not ready to save yet.",
-    "availabilityLabel": "Availability",
     "sourceExperimental": "Experimental estimate from camera",
     "helpPermission": "Camera access was blocked. Open the lock icon in the address bar, allow the camera, then try again.",
     "helpCameraBusy": "Pick an available camera and close any other app or tab that is using it, then try again.",
@@ -2118,6 +2121,10 @@
     },
     "rateCamera": "Camera",
     "helpCameraCadence": "This camera cannot deliver {hz} frames per second, which the scan requires. Brighter light from the front usually fixes it — in dim rooms the camera slows itself down. Otherwise pick a different camera or device.",
+    "helpMotionLip": "The scan was stopped because your mouth kept moving. Please do not talk or chew during the 30 seconds — hold a neutral expression.",
+    "helpMotionPose": "The scan was stopped because your head kept turning. Face the camera straight on and keep your head in one position.",
+    "helpMotionScale": "The scan was stopped because the distance to the camera kept changing. Sit back, keep the same distance, and avoid leaning in or out.",
+    "helpMotion": "The scan was stopped because your face moved too much. Rest your back against the chair, hold your head still, and try again.",
     "notIsolated": "This page is not cross-origin isolated, so the scanner runs single-threaded and may struggle to reach the required frame rate."
   }
 }

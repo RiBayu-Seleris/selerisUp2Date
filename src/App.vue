@@ -13,6 +13,7 @@ import {
   pasangSmoothScroll,
   hentikanSmoothScroll,
   jalankanSmoothScroll,
+  copotSmoothScroll,
 } from "@/utils/smoothScroll";
 import { useSidebarStore } from "@/stores/sidebar";
 
@@ -300,11 +301,28 @@ if (isStandaloneRoute.value) {
 }
 
 const perbaruiSmoothScroll = () => {
-  if (isLoad.value && !isStandaloneRoute.value) {
-    jalankanSmoothScroll();
-  } else {
-    hentikanSmoothScroll();
+  // Halaman standalone: Lenis DILEPAS, bukan sekadar dihentikan.
+  //
+  // `lenis.stop()` memasang kelas `lenis-stopped` pada <html>, dan CSS bawaan
+  // Lenis memberi kelas itu `overflow: clip`. Itu memang yang diinginkan saat
+  // mengunci latar di balik modal — tapi di sini akibatnya gulir NATIVE ikut
+  // mati, sehingga halaman panjang seperti /face-tracking tidak bisa digulir
+  // sama sekali di layar sempit. Melepasnya membersihkan kelas itu dan
+  // mengembalikan window.scrollTo yang sempat ditambal.
+  if (isStandaloneRoute.value) {
+    copotSmoothScroll();
+    return;
   }
+
+  if (!isLoad.value) {
+    hentikanSmoothScroll();
+    return;
+  }
+
+  // Idempoten, dan memasang ulang kalau sebelumnya dilepas oleh halaman
+  // standalone yang baru saja ditinggalkan.
+  pasangSmoothScroll();
+  jalankanSmoothScroll();
 };
 
 // Kunci scroll selama layar loading tampil, supaya konten di baliknya tidak
