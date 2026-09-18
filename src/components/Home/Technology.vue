@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, nextTick, onMounted, onBeforeUnmount } from "vue";
+import { ref, computed, onMounted, onBeforeUnmount } from "vue";
 import TechnologyStack from "@/components/Home/TechnologyStack.vue";
 
 const technologyItems = [
@@ -9,7 +9,13 @@ const technologyItems = [
   { key: "telemedicine" },
 ];
 
-const currentIndex = ref(0);
+// Keadaan pembuka: keempat judul abu-abu semua, dirapatkan di tengah kolom,
+// dan tumpukan pelat di kanan belum ada yang ditarik keluar — lurus semua.
+// Sengaja -1, jadi putarannya tinggal menambah satu seperti butir biasa.
+const PEMBUKA = -1;
+
+const currentIndex = ref(PEMBUKA);
+const pembuka = computed(() => currentIndex.value === PEMBUKA);
 
 // Butir yang belum gilirannya dikaburkan menurut JARAKNYA ke butir aktif —
 // pola yang sama seperti di Description.vue, supaya urutannya ikut terbaca:
@@ -25,220 +31,206 @@ const BLUR_PER_LANGKAH = 1.1; // px
 // warnanya sudah #D6D6D6 — nyaris putih sejak awal — dan menambah pudar di
 // atasnya akan menghapusnya, bukan memundurkannya.
 const kaburButir = (index) =>
-  `blur(${Math.abs(index - currentIndex.value) * BLUR_PER_LANGKAH}px)`;
+  pembuka.value
+    ? "none"
+    : `blur(${Math.abs(index - currentIndex.value) * BLUR_PER_LANGKAH}px)`;
 
-const pembungkus = ref(null);
-const panel = ref(null);
-const kemajuan = ref(0); // 0 saat paku dipasang .. 1 saat paku mau lepas
+// Jarak antar judul saat pembuka, dalam persen tinggi kolom — bukan piksel,
+// supaya ikut menyesuaikan diri: kolomnya melar mengikuti grafik di sebelah,
+// sementara judulnya ada yang satu baris dan ada yang dua.
+//
+// Bandingkan dengan 25% saat daftar terbuka (satu pita per butir): serapat
+// ini judulnya masih punya sela, tidak menempel.
+const RAPAT_PEMBUKA = 17; // %
 
-const mqRuang = window.matchMedia(
-  "(min-width: 1024px) and (min-height: 800px)",
-);
-const mqGerak = window.matchMedia("(prefers-reduced-motion: reduce)");
-const pinAktif = ref(false);
+const PITA = 100 / technologyItems.length; // % tinggi satu pita butir
 
-const hitungKemajuan = () => {
-  if (!pinAktif.value || !pembungkus.value || !panel.value) return;
-  const jarak = pembungkus.value.offsetHeight - panel.value.offsetHeight;
-  if (jarak <= 0) {
-    kemajuan.value = 0;
-    return;
+// Butirnya dipasang absolut terhadap kolom, bukan mengalir, supaya
+// perpindahan antar tiga keadaan ini cuma soal `top` — dan karenanya bisa
+// digeser mulus oleh transisi, bukan meloncat.
+const letakButir = (index) => {
+  if (pembuka.value) {
+    const tengah = (technologyItems.length - 1) / 2;
+    return {
+      top: `${50 + (index - tengah) * RAPAT_PEMBUKA}%`,
+      transform: "translateY(-50%)",
+    };
   }
-  const terlewat = -pembungkus.value.getBoundingClientRect().top;
-  kemajuan.value = Math.min(1, Math.max(0, terlewat / jarak));
+
+  // Butir aktif naik ke puncak pitanya, memberi ruang bagi keterangan yang
+  // muncul di bawahnya; sisanya duduk di tengah pitanya masing-masing.
+  return index === currentIndex.value
+    ? { top: `${index * PITA}%`, transform: "none" }
+    : { top: `${(index + 0.5) * PITA}%`, transform: "translateY(-50%)" };
 };
 
-let idFrame = null;
-const tanganiGulir = () => {
-  if (idFrame) return;
-  idFrame = requestAnimationFrame(() => {
-    hitungKemajuan();
-    if (pinAktif.value) {
-      const jumlah = technologyItems.length;
-      currentIndex.value = Math.min(
-        jumlah - 1,
-        Math.floor(kemajuan.value * jumlah),
-      );
-    }
-    idFrame = null;
-  });
-};
+// ⏱️ berapa lama satu butir bertahan sebelum berganti sendiri. Pelatnya butuh
+// 600ms untuk selesai bergeser, jadi angka ini bukan waktu baca: sisanya yang
+// benar-benar diam kira-kira 1,9 detik.
+const SLIDE_DURATION = 2500;
 
-const AYUN = 0.55;
+// Pembuka sedikit lebih panjang: yang terbaca di situ empat judul sekaligus,
+// bukan satu.
+const DURASI_PEMBUKA = 3000;
 
-// Patokan titik: tengah tiap butir, lalu ujung jalur. Butirnya berbagi tinggi
-// sama rata, jadi cukup pecahan — tidak perlu mengukur DOM.
-const patokan = technologyItems
-  .map((_, i) => (i + 0.5) / technologyItems.length)
-  .concat(1);
-
-// Pecahan tinggi daftar, 0..1. Lajunya diayun seperti di Description.vue:
-// pelan saat pas di sebuah butir, cepat saat menyeberang, tidak pernah berhenti.
-const posisiTitik = computed(() => {
-  if (!pinAktif.value) return patokan[currentIndex.value];
-
-  const p = patokan;
-  const akhir = technologyItems.length - 1;
-  const panjang = p[p.length - 1] - p[0];
-  const q = Math.min(1, Math.max(0, kemajuan.value));
-
-  let i = 0;
-  while (i < akhir && q >= (p[i + 1] - p[0]) / panjang) i++;
-
-  const mulai = (p[i] - p[0]) / panjang;
-  const usai = (p[i + 1] - p[0]) / panjang;
-  const d = usai > mulai ? (q - mulai) / (usai - mulai) : 1;
-  const e = d - (AYUN * Math.sin(2 * Math.PI * d)) / (2 * Math.PI);
-
-  return p[i] + (p[i + 1] - p[i]) * e;
-});
-
-let interval = null;
-
-// ⏱️ konfigurasi timing untuk mode berputar sendiri (saat paku tidak dipasang)
-const SLIDE_DURATION = 4000;
+// Rantai setTimeout, bukan setInterval, justru karena kedua jatah waktu itu
+// berbeda — tiap langkah menjadwalkan langkah berikutnya menurut apa yang
+// sedang tampil.
+let jam = null;
 
 const hentikanPutaran = () => {
-  clearInterval(interval);
-  interval = null;
+  clearTimeout(jam);
+  jam = null;
+};
+
+const jadwalkanLangkah = () => {
+  jam = setTimeout(
+    () => {
+      currentIndex.value =
+        currentIndex.value === technologyItems.length - 1
+          ? PEMBUKA
+          : currentIndex.value + 1;
+      jadwalkanLangkah();
+    },
+    pembuka.value ? DURASI_PEMBUKA : SLIDE_DURATION,
+  );
 };
 
 const jalankanPutaran = () => {
-  if (interval) return;
-  interval = setInterval(() => {
-    currentIndex.value =
-      currentIndex.value === technologyItems.length - 1
-        ? 0
-        : currentIndex.value + 1;
-  }, SLIDE_DURATION);
+  if (jam) return;
+  jadwalkanLangkah();
 };
 
-const perbaruiMode = () => {
-  pinAktif.value = mqRuang.matches && !mqGerak.matches;
-  if (pinAktif.value) hentikanPutaran();
-  else jalankanPutaran();
-  nextTick(hitungKemajuan);
+const mqSorot = window.matchMedia("(hover: hover)");
+const terlihat = ref(false);
+const disorot = ref(false);
+
+// Kursor menunjuk satu butir — lewat judulnya atau lewat pelatnya di grafik —
+// maka putaran berhenti dan penjelasannya pindah ke situ.
+//
+// Layar sentuh tidak punya kursor: di sana "hover" cuma ketukan yang akan
+// membekukan putaran sampai ada ketukan lain, jadi dilewati.
+const sorotButir = (index) => {
+  if (!mqSorot.matches) return;
+  disorot.value = true;
+  hentikanPutaran();
+  currentIndex.value = index;
 };
 
-// Keterangan disembunyikan sekejap tiap ganti butir supaya ia muncul dengan
-// memudar, bukan berganti teks begitu saja di tempat. Ditaruh di watch, bukan
-// di dalam pemutarnya, supaya berlaku untuk kedua cara berpindah — digulir
-// maupun berputar sendiri.
+// Kursor pergi: putaran lanjut dari butir yang barusan disorot, tidak
+// mengulang dari awal.
+const lepasSorot = () => {
+  if (!mqSorot.matches) return;
+  disorot.value = false;
+  if (terlihat.value) jalankanPutaran();
+};
+
+// Putarannya baru jalan saat sectionnya kelihatan, dan berhenti lagi begitu
+// lewat — kalau dibiarkan jalan sejak halaman dibuka, pembaca yang menggulir
+// ke sini akan tiba di tengah putaran, entah butir yang mana.
+const pembungkus = ref(null);
+let pengamat = null;
+
 onMounted(() => {
-  perbaruiMode();
-  mqRuang.addEventListener("change", perbaruiMode);
-  mqGerak.addEventListener("change", perbaruiMode);
-  window.addEventListener("scroll", tanganiGulir, { passive: true });
-  window.addEventListener("resize", tanganiGulir, { passive: true });
+  pengamat = new IntersectionObserver(
+    ([entri]) => {
+      terlihat.value = entri.isIntersecting;
+      // Kursor yang masih menempel tetap menahan putaran, termasuk saat
+      // sectionnya balik kelihatan.
+      if (entri.isIntersecting && !disorot.value) jalankanPutaran();
+      else if (!entri.isIntersecting) {
+        hentikanPutaran();
+        // Balik ke pembuka, supaya sectionnya selalu memperkenalkan diri dulu
+        // saat pembaca kembali ke sini.
+        if (!disorot.value) currentIndex.value = PEMBUKA;
+      }
+    },
+    { threshold: 0.35 },
+  );
+  pengamat.observe(pembungkus.value);
 });
 
 onBeforeUnmount(() => {
-  mqRuang.removeEventListener("change", perbaruiMode);
-  mqGerak.removeEventListener("change", perbaruiMode);
-  window.removeEventListener("scroll", tanganiGulir);
-  window.removeEventListener("resize", tanganiGulir);
+  pengamat?.disconnect();
   hentikanPutaran();
-  if (idFrame) cancelAnimationFrame(idFrame);
 });
 </script>
 
 <template>
-  <div
-    ref="pembungkus"
-    class="pembungkus-pin w-full h-auto sm:px-10"
-    :style="{ '--jarak-pin': `${technologyItems.length * 45}vh` }"
-  >
-    <div ref="panel" class="panel-pin">
+  <div ref="pembungkus" class="w-full h-auto sm:px-10">
+    <div
+      class="w-full h-auto p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-r dark:from-[#17181A] dark:from-45% dark:to-[#565656] shadow-lg rounded-2xl"
+    >
       <div
-        class="w-full h-auto p-[1px] bg-[#D9D9D9] dark:bg-gradient-to-r dark:from-[#17181A] dark:from-45% dark:to-[#565656] shadow-lg rounded-2xl"
+        class="kartu-teknologi w-full h-auto flex flex-col bg-[#FFFFFF] dark:bg-[#1D1F23] pt-14 pb-14 sm:pb-16 px-8 md:px-12 lg:px-10 xl:px-12 rounded-2xl gap-y-3"
       >
-        <div
-          class="kartu-teknologi w-full h-auto flex flex-col bg-[#FFFFFF] dark:bg-[#1D1F23] pt-14 pb-14 sm:pb-16 px-8 md:px-12 lg:px-10 xl:px-12 rounded-2xl gap-y-3"
-        >
-          <div class="isi-teknologi w-full h-auto">
-            <div class="area-judul w-full h-auto flex flex-col gap-y-3">
-              <div class="w-full h-auto">
-                <p class="text-[#2AB857] font-[500] text-[18px] sm:text-[24px]">
-                  {{ $t("home.technology.eyebrow") }}
-                </p>
-              </div>
-              <div class="w-full h-auto lg:pr-20">
-                <p
-                  class="text-[#195279] font-[500] text-[16px] md:text-[24px] lg:text-[26px] xl:text-[36px] leading-normal tracking-wide dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
-                >
-                  {{ $t("home.technology.titleLine1") }}
-                  <br class="hidden sm:block" />
-                  {{ $t("home.technology.titleLine2") }}
-                </p>
-              </div>
+        <div class="isi-teknologi w-full h-auto">
+          <div class="area-judul w-full h-auto flex flex-col gap-y-3">
+            <div class="w-full h-auto">
+              <p class="text-[#2AB857] font-[500] text-[18px] sm:text-[24px]">
+                {{ $t("home.technology.eyebrow") }}
+              </p>
             </div>
-
-            <div class="area-grafik w-full">
-              <TechnologyStack :aktif="currentIndex" class="grafik-tumpuk" />
+            <div class="w-full h-auto lg:pr-20">
+              <p
+                class="text-[#195279] font-[400] text-[16px] md:text-[24px] lg:text-[26px] xl:text-[36px] leading-normal tracking-wide dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+              >
+                {{ $t("home.technology.titleLine1") }}
+                <br class="hidden sm:block" />
+                {{ $t("home.technology.titleLine2") }}
+              </p>
             </div>
+          </div>
 
+          <div class="area-grafik w-full">
+            <TechnologyStack
+              :aktif="currentIndex"
+              class="grafik-tumpuk"
+              @sorot="sorotButir"
+              @lepas="lepasSorot"
+            />
+          </div>
+
+          <div
+            class="area-butir relative w-full h-[410px] lg:min-w-0 lg:pr-5"
+            @mouseleave="lepasSorot"
+          >
             <div
-              class="area-butir relative flex flex-col w-full h-[410px] lg:min-w-0 lg:pl-8 lg:pr-5 xl:pl-10 transition-all duration-500 ease-out"
+              v-for="(technology, index) in technologyItems"
+              :key="index"
+              class="absolute left-0 w-full transition-all duration-500 ease-out"
+              :class="{ 'z-10': index === currentIndex }"
+              :style="[letakButir(index), { filter: kaburButir(index) }]"
+              @mouseenter="sorotButir(index)"
             >
-              <span
-                class="hidden lg:block absolute left-3 -translate-x-1/2 top-0 bottom-0 w-[3px] bg-gray-200 dark:bg-[#FAFAFA]/15"
-              ></span>
+              <p
+                class="font-[500] leading-snug tracking-normal transition-all duration-500 ease-out text-[16px] sm:text-[20px] lg:text-[16px] xl:text-[24px] max-[321px]:!text-[14px] max-[376px]:!text-[14px]"
+                :class="
+                  index === currentIndex
+                    ? 'text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]'
+                    : 'text-[#D6D6D6] dark:text-[#565656] '
+                "
+              >
+                {{ $t(`home.technology.items.${technology.key}.title`) }}
+              </p>
 
-              <span
-                class="hidden lg:block absolute left-3 -translate-x-1/2 top-0 w-[3px] bg-green-500"
-                :style="{ height: `${posisiTitik * 100}%` }"
-              ></span>
-
-              <span
-                class="hidden lg:block absolute left-3 -translate-x-1/2 w-4 h-4 rounded-full bg-green-500"
-                :style="{ top: `calc(${posisiTitik * 100}% - 8px)` }"
-              ></span>
-              <div
-                v-for="(technology, index) in technologyItems"
-                :key="index"
-                class="relative w-full min-h-0 flex-1 flex flex-col items-center transition-all duration-500 ease-out"
+              <Transition
+                enter-active-class="transition-all duration-300 ease-out"
+                enter-from-class="opacity-0 translate-y-1"
               >
                 <div
-                  class="absolute left-0 w-full transition-all duration-500 ease-out"
-                  :class="
-                    index === currentIndex
-                      ? 'top-0'
-                      : 'top-1/2 -translate-y-1/2'
-                  "
-                  :style="{ filter: kaburButir(index) }"
+                  v-if="index === currentIndex"
+                  class="absolute left-0 top-full w-full mt-2"
                 >
                   <p
-                    class="font-[500] leading-snug tracking-normal transition-all duration-500 ease-out text-[16px] sm:text-[20px] lg:text-[16px] xl:text-[24px] max-[321px]:!text-[14px] max-[376px]:!text-[14px]"
-                    :class="
-                      index === currentIndex
-                        ? 'text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]'
-                        : 'text-[#D6D6D6] dark:text-[#565656] '
-                    "
+                    class="font-[500] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] text-[12px] sm:text-[16px] lg:text-[12px] xl:text-[16px] xls:text-[18px] max-[321px]:!text-[10px] leading-snug tracking-wide"
                   >
-                    {{ $t(`home.technology.items.${technology.key}.title`) }}
+                    {{
+                      $t(`home.technology.items.${technology.key}.description`)
+                    }}
                   </p>
-
-                  <Transition
-                    enter-active-class="transition-all duration-300 ease-out"
-                    enter-from-class="opacity-0 translate-y-1"
-                  >
-                    <div
-                      v-if="index === currentIndex"
-                      class="absolute left-0 top-full w-full mt-2"
-                    >
-                      <p
-                        class="font-[500] text-[#195279] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-br dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] text-[12px] sm:text-[16px] lg:text-[12px] xl:text-[16px] xls:text-[18px] max-[321px]:!text-[10px] leading-snug tracking-wide"
-                      >
-                        {{
-                          $t(
-                            `home.technology.items.${technology.key}.description`,
-                          )
-                        }}
-                      </p>
-                    </div>
-                  </Transition>
                 </div>
-              </div>
+              </Transition>
             </div>
           </div>
         </div>
@@ -303,44 +295,6 @@ onBeforeUnmount(() => {
   .area-butir {
     height: auto;
     min-height: 480px;
-  }
-}
-
-@media (min-width: 1024px) and (min-height: 800px) {
-  .pembungkus-pin {
-    height: calc(100svh + var(--jarak-pin));
-  }
-
-  .panel-pin {
-    position: sticky;
-    top: 0;
-    height: 100svh;
-    display: flex;
-    align-items: center;
-
-    /* Jumlah atas+bawah tetap 80px seperti semula, hanya dibagi ulang supaya
-       kartunya naik sedikit. 56 adalah batasnya: lebih kecil dari itu, eyebrow
-       "Technology" mulai masuk ke bawah navbar. */
-    padding-top: 56px;
-    padding-bottom: 24px;
-  }
-
-  .kartu-teknologi {
-    padding-top: 2rem;
-    padding-bottom: 5rem;
-  }
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .pembungkus-pin {
-    height: auto;
-  }
-
-  .panel-pin {
-    position: static;
-    height: auto;
-    padding-top: 0;
-    padding-bottom: 0;
   }
 }
 </style>
