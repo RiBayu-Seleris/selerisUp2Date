@@ -242,6 +242,18 @@ const sertifikat = [
           class="xl:col-start-1 xl:row-start-2 min-h-0 flex flex-col gap-y-3 sm:gap-y-4 xl:overflow-y-auto hide-scrollbar"
         >
           <div
+            class="w-full flex lg:hidden flex-col gap-y-2 bg-white dark:bg-[#232427] rounded-lg border border-[#E5E7EB] dark:border-[#3A3B3D] p-4"
+          >
+            <p
+              class="text-[16px] sm:text-[18px] text-[#195279] dark:text-[#FAFAFA] font-[600]"
+            >
+              {{ t("scanSdk.metricsTitle") }}
+            </p>
+            <p class="text-[14px] text-[#5A6062] dark:text-[#AAAAAA]">
+              {{ t("scanSdk.metricsDesc") }}
+            </p>
+          </div>
+          <div
             class="w-full flex flex-col gap-y-5 sm:gap-y-6 px-4 py-5 sm:py-6 bg-white dark:bg-[#232427] rounded-lg"
             :class="{ 'hidden xl:flex': fase === 'hasil' }"
           >
@@ -293,7 +305,7 @@ const sertifikat = [
           class="xl:col-start-3 xl:row-start-1 xl:row-span-2 min-h-0 flex flex-col gap-y-3 sm:gap-y-4 xl:overflow-y-auto hide-scrollbar"
         >
           <div
-            class="w-full flex flex-col gap-y-2 bg-white dark:bg-[#232427] rounded-lg border border-[#E5E7EB] dark:border-[#3A3B3D] p-4"
+            class="hidden w-full lg:flex flex-col gap-y-2 bg-white dark:bg-[#232427] rounded-lg border border-[#E5E7EB] dark:border-[#3A3B3D] p-4"
           >
             <p
               class="text-[16px] sm:text-[18px] text-[#195279] dark:text-[#FAFAFA] font-[600]"
