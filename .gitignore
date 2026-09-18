@@ -39,6 +39,13 @@ CLAUDE.md
 HAPUS-LOG.md
 DEVLOG.md
 RPPG_WEBSOCKET_DOCS.md
+# Folder handoff SDK: dokumen, contoh, dan laporan dari tim SDK. Isinya besar
+# dan tidak dibutuhkan saat build, jadi tidak ikut git.
+#
+# TAPI tarball-nya dibutuhkan `npm ci`, dan runner CI hanya menerima berkas
+# yang terlacak git. Karena itu salinan .tgz-nya disimpan terpisah di sdk/ —
+# lihat "@seleris/rppg-vue" di package.json. Menaruhnya di sini saja pernah
+# membuat deploy gagal dengan ENOENT saat npm ci.
 new-scanning-md/
 scanning-md/
 Technology-SVG/
@@ -50,5 +57,5 @@ Layer/
 public/vendor/
 
 # Arsip handoff SDK: isinya sama dengan folder yang sudah diekstrak di
-# sebelahnya. Yang wajib masuk git hanya .tgz-nya, dipakai `npm ci`.
+# sebelahnya. Yang wajib masuk git hanya .tgz-nya — ada di sdk/.
 *-handoff-*.zip
