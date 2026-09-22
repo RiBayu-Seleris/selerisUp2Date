@@ -248,12 +248,12 @@ const connectColor = computed(() => {
               <div class="flex flex-col w-full h-auto mb-3 lg:mt-2">
                 <p class="text-[#195279] text-[20px] lg:text-[18px]">Phone</p>
                 <a
-                  href="tel:+62215265235"
+                  href="tel:+622178835193"
                   :class="[
                     `${connectColor} text-sm lg:text-base xl:text-[18px] lg:pt-1.5`,
                   ]"
                 >
-                  +62 (21) 526 52 35
+                  +62 (21) 7883 5193
                 </a>
               </div>
               <div class="flex flex-col w-full h-auto mb-3 lg:mt-2">

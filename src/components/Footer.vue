@@ -203,10 +203,10 @@ import Navlink from "@/components/Navlink.vue";
                   {{ $t("footer.phone") }}
                 </p>
                 <a
-                  href="tel:+62215265235"
+                  href="tel:+622178835193"
                   class="text-[#2AB857] text-sm lg:text-base xl:text-[18px] lg:pt-1.5"
                 >
-                  +62 (21) 526 52 35
+                  +62 (21) 7883 5193
                 </a>
               </div>
               <div class="flex flex-col w-full h-auto mb-3 lg:mt-2">

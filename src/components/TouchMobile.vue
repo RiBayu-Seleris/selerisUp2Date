@@ -76,7 +76,7 @@ const { form, mengirim, kirim } = useContactForm();
             </p>
           </div>
           <div class="flex w-full justify-center items-center">
-            <p class="text-[#2AB857] text-[14px]">+62 (21) 526 52 35</p>
+            <p class="text-[#2AB857] text-[14px]">+62 (21) 7883 5193</p>
           </div>
         </div>
       </div>
