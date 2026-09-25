@@ -64,12 +64,22 @@ const ukurUlang = () => {
     const judul = isi.querySelector("h3");
     const ket = isi.querySelector("p");
     return {
-      judul: judul.offsetHeight,
-      ket: ket.offsetHeight + parseFloat(getComputedStyle(ket).marginTop),
+      judul: judul.getBoundingClientRect().height,
+      ket:
+        ket.getBoundingClientRect().height +
+        parseFloat(getComputedStyle(ket).marginTop),
       pb: parseFloat(getComputedStyle(li).paddingBottom),
     };
   });
 };
+
+const tinggiDaftar = computed(() => {
+  const u = ukuran.value;
+  if (!u.length) return 0;
+  return (
+    u.reduce((n, x) => n + x.judul + x.pb, 0) + Math.max(...u.map((x) => x.ket))
+  );
+});
 
 // Mode daftar (di bawah lg): garis hijau mengalir mengikuti gulir, bukan
 // langsung penuh. Patokannya garis baca dekat dasar layar -- garis penuh pas
@@ -262,6 +272,18 @@ onUnmounted(() => {
   pengawasUkuran?.disconnect();
 });
 
+const kelasKotakVideo = computed(() =>
+  pinAktif.value
+    ? "lg:row-start-1 lg:row-span-2 lg:self-stretch lg:h-auto"
+    : "lg:row-start-2 lg:h-full xl:h-[425px]",
+);
+
+const kelasVideo = computed(() =>
+  pinAktif.value
+    ? "lg:absolute lg:top-0 lg:bottom-0 lg:left-1/2 lg:-translate-x-1/2 lg:h-full lg:w-auto lg:max-w-full"
+    : "lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] lg:ml-20",
+);
+
 // Dipakai di template: video mode terang pakai v-if="!isDark", yang gelap
 // pakai v-else. Tujuannya supaya cuma satu video yang benar-benar dibuat
 // dan diunduh browser. Penjelasan lengkap ada di src/utils/useIsDark.js
@@ -278,8 +300,7 @@ const isDark = useIsDark();
       ref="panel"
       class="panel-pin grid grid-cols-1 lg:grid-cols-2 lg:content-center px-0 lg:px-6 dark:bg-[#17181A]"
     >
-      <!-- Judul dapat barisnya sendiri, jadi videonya cuma sejajar dengan
-           daftar langkah. Urutan di layar kecil diatur lewat order-*. -->
+      <!-- Urutan di layar kecil diatur lewat order-*. -->
       <div
         class="order-2 lg:order-none lg:col-start-1 lg:row-start-1 flex flex-col w-full dark:bg-[#17181A]"
       >
@@ -312,6 +333,9 @@ const isDark = useIsDark();
       <div
         class="order-3 lg:order-none lg:col-start-1 lg:row-start-2 w-full mt-5"
         :class="pinAktif ? 'h-[390px] xl:h-[380px]' : ''"
+        :style="
+          pinAktif && tinggiDaftar ? { height: `${tinggiDaftar}px` } : null
+        "
       >
         <ol ref="daftar" class="relative w-full flex flex-col">
           <span
@@ -380,7 +404,8 @@ const isDark = useIsDark();
       </div>
 
       <div
-        class="order-1 lg:order-none lg:col-start-2 lg:row-start-2 flex w-full h-full md:h-[500px] lg:h-full xl:h-[425px] justify-center items-center mb-12 md:mb-20 lg:mb-0"
+        class="order-1 lg:order-none lg:col-start-2 relative flex w-full h-full md:h-[500px] justify-end items-center mb-12 md:mb-20 lg:mb-0"
+        :class="kelasKotakVideo"
       >
         <video
           v-if="!isDark"
@@ -390,7 +415,8 @@ const isDark = useIsDark();
           muted
           playsinline
           @contextmenu.prevent
-          class="w-full h-auto md:w-auto md:h-[500px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] object-contain lg:ml-20 xl:pl-0"
+          class="w-full h-auto md:w-auto md:h-[500px] lg:aspect-[483/431] object-contain"
+          :class="kelasVideo"
         >
           <source
             src="@/assets/videos/Design-Vector-Web2.mp4"
@@ -405,7 +431,8 @@ const isDark = useIsDark();
           muted
           playsinline
           @contextmenu.prevent
-          class="w-full h-auto md:w-auto md:h-[500px] lg:w-[400px] lg:h-[400px] xl:w-[500px] xl:h-[500px] object-contain rounded-[20px] bg-[#FFFFFF] dark:bg-[#151819] border-[0.1px] dark:border-[#FAFAFA]/25 lg:ml-20 xl:pl-0"
+          class="w-full h-auto md:w-auto md:h-[500px] lg:aspect-[75/71] object-contain rounded-[20px] bg-[#FFFFFF] dark:bg-[#151819] border-[0.1px] dark:border-[#FAFAFA]/25"
+          :class="kelasVideo"
         >
           <source
             src="@/assets/videos/Design-Dark-Vector-Web2.mp4"

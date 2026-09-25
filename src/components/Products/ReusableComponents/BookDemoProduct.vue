@@ -86,7 +86,7 @@ defineProps({
       </div>
     </div>
   </div>
-  <div
+  <!-- <div
     :class="`w-full h-auto over-smallest:flex flex-col gap-y-5 hidden ${bgProduct} p-4 rounded-xl justify-center items-center`"
   >
     <div class="w-full h-full flex items-center">
@@ -139,5 +139,5 @@ defineProps({
         </div>
       </a>
     </div>
-  </div>
+  </div> -->
 </template>

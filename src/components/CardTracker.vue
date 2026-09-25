@@ -11,10 +11,10 @@ const props = defineProps({
 
 <template>
   <div
-    class="w-auto h-auto flex justify-center items-center p-[1px] bg-white/50 dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656] shadow-[0_26px_44px_0_rgba(0,0,0,0.08)] rounded-xl"
+    class="w-auto h-full lg:h-auto flex justify-center items-stretch lg:items-center p-[1px] bg-white/50 dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656] shadow-[0_26px_44px_0_rgba(0,0,0,0.08)] rounded-xl"
   >
     <div
-      class="relative w-auto h-auto flex flex-col justify-center items-center bg-white/40 dark:bg-[#1D1F23] backdrop-blur-[30px] px-4 py-5 rounded-xl"
+      class="relative w-full h-full lg:w-auto lg:h-auto flex flex-col justify-start lg:justify-center items-center bg-white/40 dark:bg-[#1D1F23] backdrop-blur-[30px] px-4 py-5 rounded-xl"
     >
       <div
         class="w-full lg:w-[320px] xl:w-[400px] h-auto flex flex-row gap-x-4 justify-between items-start"
@@ -33,7 +33,7 @@ const props = defineProps({
         >
           <div class="w-full flex justify-start">
             <p
-              class="text-[#195279] font-[500] text-[14px] lg:text-[16px] xl:text-[18px] dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
+              class="text-[#195279] font-[500] text-[14px] lg:text-[16px] xl:text-[18px] text-balance lg:text-wrap dark:bg-clip-text dark:text-transparent dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA]"
             >
               {{ title }}
             </p>

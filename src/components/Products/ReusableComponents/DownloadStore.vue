@@ -5,7 +5,7 @@ import appstore from "@/assets/images/appstore.png";
 
 <template>
   <div
-    class="w-full h-auto flex flex-row justify-center max-smallest:px-6 px-8 md:px-0 gap-x-10"
+    class="w-full h-auto flex flex-row justify-center max-smallest:px-0 px-8 sm:px-20 md:px-0 gap-x-10"
   >
     <div class="w-full h-full flex justify-center">
       <a
@@ -14,21 +14,23 @@ import appstore from "@/assets/images/appstore.png";
         rel="noopener noreferrer"
         class="flex w-full h-auto justify-start"
       >
-        <figure class="w-full h-auto">
+        <figure class="w-full h-auto shadow-2xl">
           <img
             :src="playstore"
             alt="Playstore"
-            class="w-full h-[60px] object-contain object-center"
+            class="w-full h-full object-contain object-center"
+            loading="lazy"
+            decoding="async"
           />
         </figure>
       </a>
     </div>
-    <!-- <div class="relative group w-full h-full">
-      <img
+    <div class="relative group w-full h-full">
+      <!-- <img
         :src="appstore"
         alt="Appstore"
         class="w-full h-full object-contain object-center shadow-2xl"
-      />
+      loading="lazy" decoding="async" />
 
       Hover Overlay
       <div
@@ -37,11 +39,9 @@ import appstore from "@/assets/images/appstore.png";
         <div
           class="w-full h-full bg-[#FDFDFD] bg-opacity-50 flex items-center justify-center text-white cursor-pointer rounded-md"
         >
-          <span class="text-[14px] md:text-[17px] lg:text-[20px]"
-            >Coming Soon!</span
-          >
+          <span class="text-[14px] md:text-[17px] lg:text-[20px]">Coming Soon!</span>
         </div>
-      </div>
-    </div> -->
+      </div> -->
+    </div>
   </div>
 </template>

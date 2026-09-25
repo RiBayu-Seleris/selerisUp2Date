@@ -312,7 +312,7 @@ const submitForm = async () => {
       </div>
     </div>
 
-    <div class="lg:hidden flex flex-col gap-6 px-6 sm:px-8">
+    <div class="lg:hidden flex flex-col md:flex-row gap-6 px-8 sm:px-8">
       <div
         ref="kartu3D"
         :style="gayaKartu"
@@ -338,34 +338,37 @@ const submitForm = async () => {
       </div>
 
       <div
-        @click="openModal"
-        :class="[
-          'w-full flex flex-row gap-x-3 justify-center items-center px-6 py-3.5 rounded-xl transition-all duration-300 ease-in-out',
-          isBlocked
-            ? 'bg-gray-400 cursor-not-allowed opacity-60'
-            : 'bg-gradient-to-tr from-[#1E6493] from-[20%] to-[#2E97DF] to-[100%] shadow-[0_12px_20px_0_rgba(39,128,188,0.20)] active:scale-[0.98] cursor-pointer',
-        ]"
+        class="w-full md:w-[62%] min-w-0 shrink-0 flex flex-col-reverse gap-4 md:gap-5"
       >
-        <div class="w-6 h-6 shrink-0 flex justify-center items-center">
-          <img :src="FaceIcon" alt="" class="w-full h-full" />
-        </div>
-        <p class="text-white font-medium">
-          {{
+        <div
+          @click="openModal"
+          :class="[
+            'w-full flex flex-row gap-x-3 justify-center items-center px-6 py-3.5 rounded-xl transition-all duration-300 ease-in-out',
             isBlocked
-              ? $t("home.faceTracker.scanLimit", { count: MAX_SCAN_ATTEMPTS })
-              : $t("home.faceTracker.scanButton")
-          }}
-        </p>
-      </div>
-
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-        <card-tracker
-          v-for="kartu in cards"
-          :key="kartu.key"
-          :icon="kartu.icon"
-          :title="$t(`home.faceTracker.cards.${kartu.key}.title`)"
-          :description="$t(`home.faceTracker.cards.${kartu.key}.description`)"
-        />
+              ? 'bg-gray-400 cursor-not-allowed opacity-60'
+              : 'bg-gradient-to-tr from-[#1E6493] from-[20%] to-[#2E97DF] to-[100%] shadow-[0_12px_20px_0_rgba(39,128,188,0.20)] active:scale-[0.98] cursor-pointer',
+          ]"
+        >
+          <div class="w-6 h-6 shrink-0 flex justify-center items-center">
+            <img :src="FaceIcon" alt="" class="w-full h-full" />
+          </div>
+          <p class="text-white font-medium">
+            {{
+              isBlocked
+                ? $t("home.faceTracker.scanLimit", { count: MAX_SCAN_ATTEMPTS })
+                : $t("home.faceTracker.scanButton")
+            }}
+          </p>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <card-tracker
+            v-for="kartu in cards"
+            :key="kartu.key"
+            :icon="kartu.icon"
+            :title="$t(`home.faceTracker.cards.${kartu.key}.title`)"
+            :description="$t(`home.faceTracker.cards.${kartu.key}.description`)"
+          />
+        </div>
       </div>
     </div>
 

@@ -15,6 +15,7 @@ import ClientCardFrameProduct from "@productComponents/ClientCardFrameProduct.vu
 import FaqFrame from "@productComponents/FaqFrame.vue";
 import DownloadFrame from "@productComponents/DownloadFrame.vue";
 import BookDemoProduct from "@productComponents/BookDemoProduct.vue";
+import playstore from "@/assets/images/playstore.png";
 
 import TestimonialCommentFrame from "@productComponents/TestimonialCommentFrame.vue";
 import Circle from "@productComponents/Svg/Circle.vue";
@@ -102,8 +103,31 @@ const localizedSteps = useLocalizedList(
         </div>
       </div>
 
-      <div class="w-full max-w-sm mx-auto h-auto mt-10 md:mt-20">
+      <!-- <div class="w-full max-w-sm mx-auto h-auto mt-10 md:mt-20">
         <DownloadStore />
+      </div> -->
+      <div
+        class="w-full max-w-sm mx-auto h-auto max-smallest:px-8 px-0 mt-10 md:mt-20"
+      >
+        <div class="w-full h-[100px] flex justify-center">
+          <a
+            href="https://play.google.com/store/search?q=blooxia&c=apps&hl=id"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex w-full h-auto justify-start"
+          >
+            <figure class="w-full h-auto">
+              <img
+                :src="playstore"
+                alt="Playstore"
+                class="w-full h-[30px] sm:h-[60px] object-contain object-center"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </a>
+        </div>
+        <!-- <DownloadStore /> -->
       </div>
     </section>
 
@@ -270,14 +294,13 @@ const localizedSteps = useLocalizedList(
     </section>
 
     <section
-      class="relative w-full h-auto max-w-[1440px] mx-auto mt-20 lg:mt-40 z-40"
+      data-aos="fade-up"
+      class="relative w-full h-auto max-w-[1440px] mx-auto md:px-12 mt-20 lg:mt-40"
       id="download"
     >
-      <div
-        class="w-full h-auto px-0 md:px-12 lg:px-20 xl:max-w-6xl mx-auto relative"
-      >
+      <div class="w-full h-auto md:max-w-6xl mx-auto">
         <DownloadFrame
-          :appname="$t('products.medins.name')"
+          :appname="$t('products.lifins.name')"
           :description="$t('products.shared.downloadDescription')"
           :img="DownloadImage"
         />
