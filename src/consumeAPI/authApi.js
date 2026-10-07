@@ -43,7 +43,7 @@ export const login = async (payload) => {
   try {
     const res = await axios.post(
       `${BASE_URL}/api/v1/auth/login`,
-      payload,
+      { remember_me: true, ...payload },
       headerApi,
     );
 
@@ -97,9 +97,13 @@ export const register = async (payload) => {
   }
 };
 
-export const logout = () => {
+export const clearSession = () => {
   token.value = null;
   user.value = null;
   localStorage.removeItem("token");
   localStorage.removeItem("name");
+};
+
+export const logout = () => {
+  clearSession();
 };

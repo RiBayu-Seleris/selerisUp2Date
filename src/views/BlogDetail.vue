@@ -207,15 +207,7 @@ const handleRegister = async () => {
   };
   const data = await register(payload);
 
-  if (data.status === 422) {
-    Swal.fire({
-      title: t("blog.registerFailed"),
-      text: data.message,
-      icon: "error",
-    });
-  }
-
-  if (data.status === 200) {
+  if (data.status === 200 || data.status === 201) {
     Swal.fire({
       title: t("blog.registerSuccess"),
       text: data.message,
@@ -226,7 +218,24 @@ const handleRegister = async () => {
       showRegisterForm.value = false;
       showLoginForm.value = true;
     });
+    return;
   }
+
+  Swal.fire({
+    title: t("blog.registerFailed"),
+    text: data.message,
+    icon: "error",
+  });
+};
+
+const showSessionExpired = () => {
+  Swal.fire({
+    title: t("blog.sessionExpired"),
+    text: t("blog.sessionExpiredText"),
+    icon: "info",
+  }).then(() => {
+    openLoginForm();
+  });
 };
 
 // Logout
@@ -268,6 +277,10 @@ const handleLike = async () => {
 
   try {
     const check = await likeBlogCheck(blogId);
+    if (check?.sessionExpired) {
+      showSessionExpired();
+      return;
+    }
     const isAlreadyLiked = !!check?.liked;
 
     if (!isAlreadyLiked) {
@@ -277,6 +290,9 @@ const handleLike = async () => {
 
       if ([200, 201, 409].includes(res?.status)) {
         blogDetail.value.likes++;
+      } else if (res?.sessionExpired) {
+        isLiked.value = false;
+        showSessionExpired();
       } else {
         isLiked.value = false;
         console.warn("Gagal like:", res?.status);
@@ -288,6 +304,8 @@ const handleLike = async () => {
 
       if (res?.status === 200) {
         blogDetail.value.likes--;
+      } else if (res?.sessionExpired) {
+        showSessionExpired();
       } else {
         isLiked.value = true; // rollback
         console.warn("Gagal unlike:", res?.status);
@@ -314,6 +332,10 @@ const handleSubmitComment = async () => {
   if (!payload.content) return; // jangan kirim kalau kosong
 
   const data = await postComment(payload, blogId);
+  if (data?.sessionExpired) {
+    showSessionExpired();
+    return;
+  }
   if (data) {
     inputCommentData.comment = "";
     await getBlogBySlug(slug); // refresh komentar
@@ -366,45 +388,27 @@ const handleClickOutside = (event) => {
   }
 };
 
+const refreshLikeStatus = async () => {
+  const blogId = blogDetail.value?.id;
+  if (!blogId || !loginStatus.value) {
+    isLiked.value = false;
+    return;
+  }
+  const check = await likeBlogCheck(blogId);
+  isLiked.value = !!check?.liked;
+};
+
 onMounted(async () => {
   await getBlogBySlug(slug);
   getPopularBlog();
+  refreshLikeStatus();
   document.addEventListener("click", handleClickOutside);
 });
 
-// ✅ Reaktif cek ketika blogDetail sudah terisi
 watch(
   () => loginStatus.value,
-  async (status) => {
-    const blogId = blogDetail.value?.id;
-    if (!blogId) return;
-
-    if (status) {
-      // user baru login → cek ulang status like
-      const BASE_URL = import.meta.env.VITE_API_URL;
-      const userToken = localStorage.getItem("token");
-
-      try {
-        const response = await fetch(
-          `${BASE_URL}/api/v1/app/blogs/${blogId}/like`,
-          {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-              Authorization: `Bearer ${userToken}`,
-            },
-          },
-        );
-
-        const data = await response.json();
-        isLiked.value = !!data?.liked;
-      } catch (error) {
-        console.warn("Gagal cek like setelah login:", error);
-      }
-    } else {
-      // user logout → reset warna like
-      isLiked.value = false;
-    }
+  () => {
+    refreshLikeStatus();
   },
 );
 
@@ -611,7 +615,7 @@ onBeforeUnmount(() => {
                   <span
                     class="text-[14px] sm:text-[18px] lg:text-[18px] text-[#6E6E6E] dark:text-[#637381]"
                   >
-                    {{ blogDetail.comments }}
+                    {{ blogDetail.comments_data?.length || 0 }}
                   </span>
                 </div>
               </div>
@@ -1147,6 +1151,7 @@ onBeforeUnmount(() => {
               <input
                 required
                 id="email"
+                type="email"
                 v-model="registerData.email"
                 autocomplete="email"
                 placeholder="example@email.com"
@@ -1164,6 +1169,7 @@ onBeforeUnmount(() => {
               <div class="relative">
                 <input
                   required
+                  minlength="8"
                   id="password"
                   :type="showPasswordRegister ? 'text' : 'password'"
                   v-model="registerData.password"
@@ -1222,6 +1228,9 @@ onBeforeUnmount(() => {
                   </svg>
                 </button>
               </div>
+              <p class="mt-1 text-xs text-gray-500">
+                {{ $t("blog.passwordHint") }}
+              </p>
             </div>
 
             <button

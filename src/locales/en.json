@@ -1602,7 +1602,10 @@
     "logoutYes": "Yes, log out",
     "logoutCancel": "Cancel",
     "logoutSuccess": "Logged out successfully",
-    "notFound": "Article not found."
+    "notFound": "Article not found.",
+    "passwordHint": "At least 8 characters",
+    "sessionExpired": "Session expired",
+    "sessionExpiredText": "Please sign in again to continue."
   },
   "careers": {
     "academic_transcript": "Academic Transcript",

@@ -1602,7 +1602,10 @@
     "logoutYes": "Ya, logout",
     "logoutCancel": "Batal",
     "logoutSuccess": "Berhasil Logout",
-    "notFound": "Blog tidak ditemukan."
+    "notFound": "Blog tidak ditemukan.",
+    "passwordHint": "Minimal 8 karakter",
+    "sessionExpired": "Sesi berakhir",
+    "sessionExpiredText": "Silakan masuk lagi untuk melanjutkan."
   },
   "careers": {
     "academic_transcript": "Transkrip Nilai",
