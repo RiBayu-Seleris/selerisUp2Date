@@ -18,9 +18,10 @@ export function useProductLogoColor() {
         import.meta.url,
       ).href;
     }
-    if (route.path === "/product/lifins") {
+    if (route.path === "/product/assure") {
       return new URL(
-        "@/assets/Products/images/Logo/Lifins-Logo-Color.png",
+        "@/assets/Products/images/Logo/Assure-Logo.png",
+        // "@/assets/Products/images/Logo/Lifins-Logo-Color.png",
         import.meta.url,
       ).href;
     }

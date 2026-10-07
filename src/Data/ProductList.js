@@ -5,7 +5,7 @@ export const productList = [
     name: "Credit Cover",
     target: "_blank",
   },
-  { url: "/product/lifins", name: "Lifins", target: "_blank" },
+  { url: "/product/assure", name: "Assure", target: "_blank" },
   { url: "/product/medins", name: "Medins", target: "_blank" },
   { url: "/product/seleris-credit", name: "Credit", target: "_blank" },
   { url: "https://seleriscare.ai/", name: "Selica", target: "_blank" },

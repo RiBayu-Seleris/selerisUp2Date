@@ -31,8 +31,8 @@ const footerTitle = computed(() => {
   if (route.path === "/product/medins") {
     return "Seleris Medins";
   }
-  if (route.path === "/product/lifins") {
-    return "Seleris Lifins";
+  if (route.path === "/product/assure") {
+    return "Assure";
   }
   if (route.path === "/product/health-care") {
     return "Seleris Care";
@@ -50,7 +50,7 @@ const connectColor = computed(() => {
   if (route.path === "/product/medins") {
     return "text-[#42C5AF]";
   }
-  if (route.path === "/product/lifins") {
+  if (route.path === "/product/assure") {
     return "text-[#2AB857]";
   }
   if (route.path === "/product/health-care") {

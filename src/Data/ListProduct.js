@@ -17,10 +17,10 @@ export const productBannerLists = [
   },
   {
     id: 3,
-    banner: "lifins.png",
-    product_name: "Seleris Lifins",
+    banner: "assure.png",
+    product_name: "Assure",
     color: "text-[#2ab857]",
-    url: "/product/lifins#howapplicationwork",
+    url: "/product/assure#howapplicationwork",
   },
   {
     id: 4,

@@ -44,7 +44,7 @@ function scrollToId(id) {
     @click="scrollToId(href.replace('#', ''))"
     :class="[
       'relative inline-block font-medium',
-      route.path === '/product/lifins'
+      route.path === '/product/assure'
         ? 'text-[#374151]'
         : route.path === '/product/health-care'
           ? 'text-[#374151]'
@@ -61,7 +61,7 @@ function scrollToId(id) {
     :to="href"
     :class="[
       'relative inline-block font-medium',
-      route.path === '/product/lifins'
+      route.path === '/product/assure'
         ? 'text-[#374151]'
         : route.path === '/product/health-care'
           ? 'text-[#374151]'
