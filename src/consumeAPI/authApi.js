@@ -42,7 +42,7 @@ export const login = async (payload) => {
 
   try {
     const res = await axios.post(
-      `${BASE_URL}/api/v1/auth/login`,
+      `${BASE_URL}/api/v1/app/auth/login`,
       { remember_me: true, ...payload },
       headerApi,
     );
@@ -84,7 +84,7 @@ export const register = async (payload) => {
 
   try {
     const res = await axios.post(
-      `${BASE_URL}/api/v1/auth/register`,
+      `${BASE_URL}/api/v1/app/auth/register`,
       payload,
       headerApi,
     );
@@ -104,6 +104,22 @@ export const clearSession = () => {
   localStorage.removeItem("name");
 };
 
-export const logout = () => {
+export const logout = async () => {
+  const sessionToken = token.value;
   clearSession();
+  if (!sessionToken) return;
+
+  await axios
+    .post(
+      `${BASE_URL}/api/v1/app/auth/logout`,
+      {},
+      {
+        headers: {
+          Accept: "application/json",
+          Authorization: `Bearer ${sessionToken}`,
+        },
+        timeout: 5000,
+      },
+    )
+    .catch(() => null);
 };

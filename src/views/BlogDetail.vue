@@ -252,7 +252,7 @@ const handleLogout = async () => {
 
   if (result.isConfirmed) {
     // Panggil fungsi logout
-    logout();
+    await logout();
 
     // Tampilkan notifikasi berhasil
     Swal.fire({
