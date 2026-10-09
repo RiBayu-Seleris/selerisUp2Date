@@ -157,7 +157,7 @@ const localizedSteps = useLocalizedList(
         <AboutUs
           :title="$t('products.shared.aboutUs')"
           :subtitle="$t('products.assure.name')"
-          subtitleColor="text-[#2AB857]"
+          subtitleColor="text-[#0E4BC7]"
         />
         <div class="w-full h-auto mt-10 md:mt-10 lg:mt-10">
           <AboutUsDescription
@@ -179,12 +179,12 @@ const localizedSteps = useLocalizedList(
       >
         <ApplicationWorkText
           :productname="$t('products.assure.name')"
-          textcolor="text-[#2AB857]"
+          textcolor="text-[#0E4BC7]"
         />
         <div class="relative w-full h-auto mt-10 md:mt-12 lg:mt-14">
           <ApplicationWorkSlider
             circleColor="bg-gradient-to-b from-[#2B7C3F] to-[#30C254]"
-            textcolor="text-[#2AB857]"
+            textcolor="text-[#0E4BC7]"
             :steps="localizedSteps"
           >
             <FrameLineWorks />
@@ -205,7 +205,7 @@ const localizedSteps = useLocalizedList(
           <EasyQuickText
             :title="$t('products.shared.easyQuickTitle')"
             :subtitle="$t('products.shared.easyQuickSubtitle')"
-            subtitlecolor="text-[#2AB857]"
+            subtitlecolor="text-[#0E4BC7]"
             sub:subtitle="$t('products.shared.company')"
           />
         </div>
@@ -237,7 +237,7 @@ const localizedSteps = useLocalizedList(
         <TitleAndSubCard
           :title="$t('products.shared.ourClient')"
           :subtitle="$t('products.shared.company')"
-          subtitleColor="text-[#2AB857]"
+          subtitleColor="text-[#0E4BC7]"
         />
         <div class="mt-10 max-smallest:px-0 px-12">
           <ClientCardFrameProduct :client-logos="clientLogos" />
@@ -257,7 +257,7 @@ const localizedSteps = useLocalizedList(
           <TitleAndSubCard
             :title="$t('products.shared.testimonial')"
             :subtitle="$t('products.shared.company')"
-            subtitleColor="text-[#2AB857]"
+            subtitleColor="text-[#0E4BC7]"
           />
         </div>
         <TestimonialCommentFrame :Testimonials="localizedTestimonials" />
@@ -277,12 +277,12 @@ const localizedSteps = useLocalizedList(
             <TitleAndSubCard
               :title="$t('products.shared.faq')"
               :subtitle="$t('products.shared.company')"
-              subtitleColor="text-[#2AB857]"
+              subtitleColor="text-[#0E4BC7]"
             />
           </div>
         </div>
         <div class="w-full mx-auto mt-10 md:mt-10">
-          <FaqFrame :Faq="localizedFaq" opencolortext="text-[#2AB857]" />
+          <FaqFrame :Faq="localizedFaq" opencolortext="text-[#0E4BC7]" />
         </div>
       </div>
     </section>
@@ -309,8 +309,8 @@ const localizedSteps = useLocalizedList(
       <BookDemoProduct
         :title="$t('products.assure.bookDemo')"
         :framebookdemo="assureframebook"
-        colorarrow="text-[#2AB857]"
-        bgProduct="bg-[#2AB857]"
+        colorarrow="text-[#0E4BC7]"
+        bgProduct="bg-[#0E4BC7]"
       />
     </section>
   </div>
