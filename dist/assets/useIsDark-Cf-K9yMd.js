@@ -1,1 +1,0 @@
-import{r as n,a as s,W as o}from"./vendor-CR3HHhDG.js";function u(){const e=n(document.documentElement.classList.contains("dark"));let t=null;return s(()=>{t=new MutationObserver(()=>{e.value=document.documentElement.classList.contains("dark")}),t.observe(document.documentElement,{attributes:!0,attributeFilter:["class"]})}),o(()=>{t==null||t.disconnect()}),e}export{u};
