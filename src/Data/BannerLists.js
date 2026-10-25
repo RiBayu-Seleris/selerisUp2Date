@@ -3,12 +3,12 @@
 
 export const bannerLists = [
   {
-    banner: "Lifins.png",
-    key: "lifins",
-    logo: "lifins.png",
-    darklogo: "lifins.png",
+    banner: "Assure.png",
+    key: "assure",
+    logo: "assure.png",
+    darklogo: "assure.png",
     linelightcolor: "#2ab857",
-    url: "/product/lifins",
+    url: "/product/assure",
     logoWidth: {
       lg: 160,
       md: 90,
@@ -16,14 +16,14 @@ export const bannerLists = [
       base: 70,
     },
     logoHeight: {
-      lg: 50,
+      lg: 40,
       md: 40,
       sm: 50,
       base: 25,
     },
   },
   {
-    banner: "Medins.png",
+    banner: "Shield.png",
     key: "medins",
     logo: "medins.png",
     darklogo: "medins.png",

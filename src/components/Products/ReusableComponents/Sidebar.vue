@@ -36,8 +36,8 @@ const handleTechnology = () => {
 };
 
 const titleSidebar = () => {
-  if (route.path === "/product/lifins") {
-    return "Lifins";
+  if (route.path === "/product/assure") {
+    return "Assure";
   }
   if (route.path === "/product/credit-cover") {
     return "Credit Cover";
@@ -56,46 +56,46 @@ const titleSidebar = () => {
 const defaultProductMenu = [
   {
     href: "#hero",
-    label: "Home",
+    labelKey: "nav.product_items.home",
   },
   {
     href: "#about",
-    label: "About",
+    labelKey: "nav.product_items.about",
   },
   {
     href: "#testimonial",
-    label: "Testimonial",
+    labelKey: "nav.product_items.testimonial",
   },
   {
     href: "#faq",
-    label: "FAQ",
+    labelKey: "nav.product_items.faq",
   },
   {
     href: "/contact",
-    label: "Contact",
+    labelKey: "nav.product_items.contact",
   },
 ];
 
 const creditProductMenu = [
   {
     href: "#hero",
-    label: "Home",
+    labelKey: "nav.product_items.home",
   },
   {
     href: "#about",
-    label: "Product",
+    labelKey: "nav.product_items.product",
   },
   {
     href: "#technology",
-    label: "Technology",
+    labelKey: "nav.product_items.technology",
   },
   {
     href: "#whyus",
-    label: "Why Us",
+    labelKey: "nav.product_items.whyUs",
   },
   {
     href: "/contact",
-    label: "Contact",
+    labelKey: "nav.product_items.contact",
   },
 ];
 
@@ -147,7 +147,7 @@ const isSelerisCredit = ref(route.path === "/product/seleris-credit");
                 :key="index"
               >
                 <Navlink class="text-[11pt]" :href="menuDefault.href">
-                  {{ menuDefault.label }}
+                  {{ $t(menuDefault.labelKey) }}
                 </Navlink>
               </div>
             </nav>
@@ -161,7 +161,7 @@ const isSelerisCredit = ref(route.path === "/product/seleris-credit");
                 :key="index"
               >
                 <Navlink class="text-[11pt]" :href="menuDefault.href">
-                  {{ menuDefault.label }}
+                  {{ $t(menuDefault.labelKey) }}
                 </Navlink>
               </div>
             </nav>

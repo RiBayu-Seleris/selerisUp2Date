@@ -22,6 +22,16 @@
       "innovation": "Inovasi",
       "faq": "FAQ",
       "contact": "Hubungi Kami"
+    },
+    "product_items": {
+      "home": "Beranda",
+      "about": "Tentang",
+      "testimonial": "Testimoni",
+      "faq": "FAQ",
+      "contact": "Kontak",
+      "product": "Produk",
+      "technology": "Teknologi",
+      "whyUs": "Kenapa Kami"
     }
   },
   "solutions": {
@@ -495,6 +505,7 @@
     "phone": "Telepon",
     "email": "Email",
     "getTheApp": "Unduh Aplikasi",
+    "scanQrAssure": "Pindai untuk membuka Assure",
     "copyright": "© 2023 Seleris Asia Pacific Technology. Seluruh hak cipta dilindungi",
     "company_items": {
       "about": "Tentang",
@@ -516,7 +527,7 @@
       "bookDemo": "Jadwalkan Demo"
     },
     "banners": {
-      "lifins": "Platform underwriting cerdas untuk asuransi jiwa individu dan kumpulan, mempercepat pengambilan keputusan hingga 90% dengan aturan bisnis yang sepenuhnya dapat dikonfigurasi.",
+      "assure": "Platform underwriting cerdas untuk asuransi jiwa individu dan kumpulan, mempercepat pengambilan keputusan hingga 90% dengan aturan bisnis yang sepenuhnya dapat dikonfigurasi.",
       "medins": "Sistem inteligensi asuransi kesehatan berbasis AI yang mengotomatiskan pemrosesan data medis, memperkuat deteksi fraud, meningkatkan prediksi risiko, dan memastikan kepatuhan regulasi.",
       "credit-cover": "Solusi berbasis AI yang menyederhanakan asuransi jiwa kredit dan proteksi pinjaman, mengotomatiskan penilaian risiko dengan akurasi hingga 25% lebih tinggi dan memangkas waktu proses hingga 80%.",
       "care": "Platform kesehatan dan wellness korporasi yang mengotomatiskan pemantauan kesehatan karyawan, memberikan wawasan preventif secara real-time, dan menekan biaya medis hingga 20%."
@@ -947,18 +958,18 @@
         }
       ]
     },
-    "lifins": {
+    "assure": {
       "hero": {
         "title": "Underwriting Asuransi Jiwa",
         "subtitle": "Otomatis",
         "description": "Percepat persetujuan polis jiwa dengan underwriting AI yang cerdas, akurat, dan dapat disesuaikan."
       },
-      "name": "Seleris Lifins",
+      "name": "Assure",
       "about": {
         "title": "Aplikasi Underwriting Asuransi Berbasis AI",
-        "description": "Seleris Lifins adalah platform AI cerdas yang dirancang untuk mengotomatiskan proses underwriting polis asuransi jiwa individu maupun kumpulan. Dengan mesin pengambilan keputusan 90% lebih cepat dan aturan bisnis yang dapat dikonfigurasi, Lifins membantu perusahaan asuransi menyederhanakan penilaian risiko, menekan kesalahan manusia, dan menghadirkan pengalaman nasabah yang unggul — semuanya lewat arsitektur skalabel yang siap API."
+        "description": "Assure adalah platform AI cerdas yang dirancang untuk mengotomatiskan proses underwriting polis asuransi jiwa individu maupun kumpulan. Dengan mesin pengambilan keputusan 90% lebih cepat dan aturan bisnis yang dapat dikonfigurasi, Assure membantu perusahaan asuransi menyederhanakan penilaian risiko, menekan kesalahan manusia, dan menghadirkan pengalaman nasabah yang unggul — semuanya lewat arsitektur skalabel yang siap API."
       },
-      "bookDemo": "Seleris Lifins, Solusi Lengkap untuk Kebutuhan Kesehatan Anda",
+      "bookDemo": "Assure, Solusi Lengkap untuk Kebutuhan Kesehatan Anda",
       "healthCheck": [
         {
           "title": "Underwriting 90% Lebih Cepat",
@@ -987,15 +998,15 @@
       ],
       "faq": [
         {
-          "question": "Apa itu Seleris Lifins?",
-          "answer": "Seleris Lifins adalah platform berbasis AI yang mengotomatiskan underwriting asuransi jiwa, baik untuk polis individu maupun kumpulan."
+          "question": "Apa itu Assure?",
+          "answer": "Assure adalah platform berbasis AI yang mengotomatiskan underwriting asuransi jiwa, baik untuk polis individu maupun kumpulan."
         },
         {
-          "question": "Bagaimana Seleris Lifins mempercepat underwriting?",
+          "question": "Bagaimana Assure mempercepat underwriting?",
           "answer": "Sistem kami menganalisis data pemohon secara real-time, memangkas waktu underwriting hingga 90% sekaligus meningkatkan akurasi."
         },
         {
-          "question": "Bagaimana cara mulai memakai Seleris Lifins?",
+          "question": "Bagaimana cara mulai memakai Assure?",
           "answer": "Anda dapat mengajukan demo atau menghubungi tim kami. Integrasi biasanya memakan waktu kurang dari satu bulan, tergantung sistem Anda."
         },
         {
@@ -1003,19 +1014,19 @@
           "answer": "Ya, tim dukungan kami tersedia 24/7 untuk membantu proses onboarding, penanganan kendala, dan penggunaan fitur."
         },
         {
-          "question": "Apakah Seleris Lifins aman?",
+          "question": "Apakah Assure aman?",
           "answer": "Kami memakai enkripsi data yang kuat, kontrol akses, dan mematuhi regulasi privasi data global."
         },
         {
           "question": "Platform apa saja yang didukung?",
-          "answer": "Lifins adalah platform berbasis web dengan desain API-first, sehingga mudah dihubungkan dengan sistem asuransi yang sudah berjalan."
+          "answer": "Assure adalah platform berbasis web dengan desain API-first, sehingga mudah dihubungkan dengan sistem asuransi yang sudah berjalan."
         },
         {
           "question": "Bisakah aturan underwriting disesuaikan?",
           "answer": "Ya, Anda dapat mengonfigurasi sepenuhnya logika keputusan dan aturan bisnis agar selaras dengan kebijakan underwriting perusahaan Anda."
         },
         {
-          "question": "Apakah Seleris Lifins gratis?",
+          "question": "Apakah Assure gratis?",
           "answer": "Harga bergantung pada penggunaan dan skala penerapan. Kami menyediakan model langganan yang fleksibel. Hubungi kami untuk detailnya."
         },
         {

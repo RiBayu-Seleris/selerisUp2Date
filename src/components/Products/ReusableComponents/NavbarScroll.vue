@@ -25,8 +25,8 @@ const LogoLink = computed(() => {
   if (route.path === "/product/medins") {
     return "/product/medins";
   }
-  if (route.path === "/product/lifins") {
-    return "/product/lifins";
+  if (route.path === "/product/assure") {
+    return "/product/assure";
   }
   if (route.path === "/product/health-care") {
     return "/product/health-care";

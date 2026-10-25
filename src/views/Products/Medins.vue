@@ -300,7 +300,7 @@ const localizedSteps = useLocalizedList(
     >
       <div class="w-full h-auto md:max-w-6xl mx-auto">
         <DownloadFrame
-          :appname="$t('products.lifins.name')"
+          :appname="$t('products.medins.name')"
           :description="$t('products.shared.downloadDescription')"
           :img="DownloadImage"
         />

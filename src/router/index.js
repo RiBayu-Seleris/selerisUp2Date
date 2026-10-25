@@ -131,10 +131,14 @@ const routes = [
         meta: { title: "Credit Cover" },
       },
       {
+        path: "assure",
+        name: "Assure",
+        component: () => import("@/views/Products/Assure.vue"),
+        meta: { title: "Assure" },
+      },
+      {
         path: "lifins",
-        name: "Lifins",
-        component: () => import("@/views/Products/Lifins.vue"),
-        meta: { title: "Lifins" },
+        redirect: "/product/assure",
       },
       {
         path: "health-care",

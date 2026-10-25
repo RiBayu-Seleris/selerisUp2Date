@@ -856,7 +856,7 @@ import HeroText from "@/components/reusable/HeroText.vue";
           </p>
         </div>
         <div class="w-full h-auto">
-          <p>Feature when using the seleris lifins app:</p>
+          <p>Feature when using the Assure app:</p>
           <ol class="list-decimal space-y-2 pl-4 pt-2">
             <li>
               Improve Your Customer Experience
