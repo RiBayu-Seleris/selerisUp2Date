@@ -23,7 +23,7 @@ export const bannerLists = [
     },
   },
   {
-    banner: "Medins.png",
+    banner: "Shield.png",
     key: "medins",
     logo: "medins.png",
     darklogo: "medins.png",
