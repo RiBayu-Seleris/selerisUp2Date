@@ -1,8 +1,15 @@
 import { ref } from "vue";
 import axios from "axios";
 import { usePageLoadingStore } from "@/stores/pageLoading";
+import { clearSession } from "@/consumeAPI/authApi";
 
 const BASE_URL = import.meta.env.VITE_API_URL;
+
+const endSessionIfUnauthorized = (err) => {
+  if (err?.response?.status !== 401) return false;
+  clearSession();
+  return true;
+};
 
 // const token = localStorage.getItem("token");
 
@@ -176,6 +183,7 @@ export function blogsApi() {
       return res?.data;
     } catch (error) {
       // console.error("Error saat check like:", error);
+      if (endSessionIfUnauthorized(error)) return { sessionExpired: true };
       return null;
     }
   };
@@ -190,6 +198,7 @@ export function blogsApi() {
       return res; // ✅ kembalikan full response agar bisa cek status
     } catch (error) {
       // console.error("Error saat like blog:", error);
+      if (endSessionIfUnauthorized(error)) return { sessionExpired: true };
       return null;
     }
   };
@@ -202,6 +211,7 @@ export function blogsApi() {
       );
       return res; // ✅ WAJIB return response agar bisa dicek
     } catch (error) {
+      if (endSessionIfUnauthorized(error)) return { sessionExpired: true };
       console.error("Error saat unlike:", error);
       return null;
     }
@@ -342,6 +352,7 @@ export function blogsApi() {
       );
       return res.data;
     } catch (err) {
+      if (endSessionIfUnauthorized(err)) return { sessionExpired: true };
       console.error("Gagal posting komentar:", err);
       return null;
     } finally {
