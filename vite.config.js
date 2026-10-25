@@ -56,6 +56,12 @@ export default defineConfig({
   server: {
     allowedHosts: ["954cd8c1ef8e.ngrok-free.app"],
     port: 5179,
+    proxy: {
+      "/api": {
+        target: process.env.VITE_PROXY_TARGET || "https://sentris-api.seleris.ai",
+        changeOrigin: true,
+      },
+    },
   },
   plugins: [
     vue(),

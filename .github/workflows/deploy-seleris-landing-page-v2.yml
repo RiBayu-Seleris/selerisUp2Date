@@ -47,7 +47,7 @@ jobs:
           # are read from GitHub Variables so they aren't hardcoded in this
           # committed workflow file (rotate them without editing YAML).
           # Set at: Settings → Variables → Actions → New repository variable.
-          VITE_API_URL: https://cms-lp.seleris.ai
+          VITE_API_URL: https://sentris-api.seleris.ai
           VITE_RPPG_WS_URL: ${{ vars.VITE_RPPG_WS_URL }}
           VITE_GEMINI_API_KEY: ${{ vars.VITE_GEMINI_API_KEY }}
 
