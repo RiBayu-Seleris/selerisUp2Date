@@ -506,6 +506,7 @@
     "email": "Email",
     "getTheApp": "Get The App",
     "scanQrAssure": "Scan to open Assure",
+    "scanQrShield": "Scan to open Shield",
     "copyright": "© 2023 Seleris Asia Pacific Technology. All rights reserved",
     "company_items": {
       "about": "About",
@@ -1094,7 +1095,7 @@
         },
         {
           "question": "How do I get started using the Shield app?",
-          "answer": "To get started, download the app from the Google Play Store or App Store, or access via browser at medins.seleris.ai. Log in using your registered account to start managing medical claims and health data."
+          "answer": "To get started, download the app from the Google Play Store or App Store, or access via browser at shield.seleris.ai. Log in using your registered account to start managing medical claims and health data."
         },
         {
           "question": "Does this app provide customer support?",

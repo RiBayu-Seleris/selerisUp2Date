@@ -40,17 +40,18 @@ const titleSidebar = () => {
     return "Assure";
   }
   if (route.path === "/product/credit-cover") {
-    return "Credit Cover";
+    return "Seleris Credit Cover";
   }
   if (route.path === "/product/shield") {
     return "Shield";
   }
   if (route.path === "/product/health-care") {
-    return "Care";
+    return "Seleris Care";
   }
   if (route.path === "/product/seleris-credit") {
-    return "Credit";
+    return "Seleris Credit";
   }
+  return "";
 };
 
 const defaultProductMenu = [
@@ -122,7 +123,7 @@ const isSelerisCredit = ref(route.path === "/product/seleris-credit");
                 <p
                   class="text-[#195279] dark:text-[#FAFAFA] font-semibold text-md md:text-[1.7rem]"
                 >
-                  Seleris {{ titleSidebar() }}
+                  {{ titleSidebar() }}
                 </p>
               </div>
               <div class="w-[20%] h-auto flex justify-end">

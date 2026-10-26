@@ -121,7 +121,7 @@ const localizedSteps = useLocalizedList(
               <img
                 :src="playstore"
                 alt="Playstore"
-                class="w-full h-[30px] sm:h-[60px] object-contain object-center"
+                class="w-full h-[30px] sm:h-[60px] md:h-[45px] lg:h-[60px] object-contain object-center"
                 loading="lazy"
                 decoding="async"
               />

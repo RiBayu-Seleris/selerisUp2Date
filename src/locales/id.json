@@ -506,6 +506,7 @@
     "email": "Email",
     "getTheApp": "Unduh Aplikasi",
     "scanQrAssure": "Pindai untuk membuka Assure",
+    "scanQrShield": "Pindai untuk membuka Shield",
     "copyright": "© 2023 Seleris Asia Pacific Technology. Seluruh hak cipta dilindungi",
     "company_items": {
       "about": "Tentang",
@@ -1094,7 +1095,7 @@
         },
         {
           "question": "Bagaimana cara mulai memakai aplikasi Shield?",
-          "answer": "Untuk memulai, unduh aplikasinya di Google Play Store atau App Store, atau akses lewat browser di medins.seleris.ai. Masuk dengan akun terdaftar Anda untuk mulai mengelola klaim medis dan data kesehatan."
+          "answer": "Untuk memulai, unduh aplikasinya di Google Play Store atau App Store, atau akses lewat browser di shield.seleris.ai. Masuk dengan akun terdaftar Anda untuk mulai mengelola klaim medis dan data kesehatan."
         },
         {
           "question": "Apakah aplikasi ini menyediakan dukungan pelanggan?",

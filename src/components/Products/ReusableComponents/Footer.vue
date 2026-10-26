@@ -11,6 +11,7 @@ import Twitter from "@/components/icons/Twitter.vue";
 import playstore from "@/assets/images/playstore.png";
 import appstore from "@/assets/images/appstore.png";
 import qrAssure from "@/assets/images/qr-assure.svg";
+import qrShield from "@/assets/images/qr-shield.svg";
 
 import { productList } from "@/Data/ProductList";
 import { companyList } from "@/Data/CompanyList";
@@ -24,7 +25,23 @@ const route = useRoute(); // ✅ Ambil route saat ini
 const { logo } = useProductLogoColor();
 
 const isSelerisCredit = ref(route.path === "/product/seleris-credit");
-const isAssure = computed(() => route.path === "/product/assure");
+const qr = computed(() => {
+  if (route.path === "/product/assure") {
+    return {
+      src: qrAssure,
+      href: "https://assure.seleris.ai/",
+      label: "footer.scanQrAssure",
+    };
+  }
+  if (route.path === "/product/shield") {
+    return {
+      src: qrShield,
+      href: "https://shield.seleris.ai/",
+      label: "footer.scanQrShield",
+    };
+  }
+  return null;
+});
 
 const footerTitle = computed(() => {
   if (route.path === "/product/credit-cover") {
@@ -284,7 +301,7 @@ const connectColor = computed(() => {
             </p>
             <div
               :class="
-                isAssure
+                qr
                   ? 'flex flex-col items-start gap-6 sm:flex-row sm:justify-center sm:gap-8 lg:flex-col lg:items-start lg:gap-4'
                   : 'flex flex-row lg:flex-col gap-10 lg:gap-0'
               "
@@ -294,7 +311,7 @@ const connectColor = computed(() => {
                 target="_blank"
                 rel="noopener noreferrer"
                 :class="
-                  isAssure
+                  qr
                     ? 'flex w-full max-w-[220px] shrink-0 items-center justify-center sm:w-auto lg:justify-start'
                     : 'flex w-auto h-full md:justify-start justify-center items-center content-center xl:justify-start xl:content-start'
                 "
@@ -303,7 +320,7 @@ const connectColor = computed(() => {
                   :src="playstore"
                   alt="Playstore"
                   :class="
-                    isAssure
+                    qr
                       ? 'h-[88px] w-full object-contain object-center sm:h-[100px] sm:w-[200px]'
                       : 'w-auto sm:w-[100px] md:w-[200px] xl:w-[200px] sm:h-[100px] object-contain object-center'
                   "
@@ -311,25 +328,25 @@ const connectColor = computed(() => {
               </a>
 
               <div
-                v-if="isAssure"
+                v-if="qr"
                 class="flex w-auto shrink-0 flex-col items-start gap-y-2 lg:items-start"
               >
                 <a
-                  href="https://assure.seleris.ai/"
+                  :href="qr.href"
                   target="_blank"
                   rel="noopener noreferrer"
                   class="rounded-[12px] bg-white p-2 shadow-sm ring-1 ring-black/5"
                 >
                   <img
-                    :src="qrAssure"
-                    :alt="$t('footer.scanQrAssure')"
+                    :src="qr.src"
+                    :alt="$t(qr.label)"
                     class="h-[100px] w-[100px] object-contain sm:h-[104px] sm:w-[104px]"
                     loading="lazy"
                     decoding="async"
                   />
                 </a>
                 <span class="text-[11px] text-[#7C8A99] dark:text-[#9AA5B1]">
-                  {{ $t("footer.scanQrAssure") }}
+                  {{ $t(qr.label) }}
                 </span>
               </div>
               <!-- <div

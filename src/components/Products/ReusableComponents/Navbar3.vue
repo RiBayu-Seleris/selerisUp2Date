@@ -69,7 +69,7 @@ const LogoLink = computed(() => {
       </router-link>
       <div class="w-[60%] h-auto flex items-center flex-row justify-end gap-3">
         <LanguageSwitcher />
-        <div class="w-[30%] md:w-[15%] h-auto flex items-center justify-end">
+        <div class="w-auto md:w-[15%] h-auto flex items-center justify-end">
           <button
             aria-label="Open Sidebar Care"
             type="button"
