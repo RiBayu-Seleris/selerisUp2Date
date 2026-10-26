@@ -8,6 +8,11 @@ const props = defineProps({
   description: String,
   isLast: Boolean,
   index: Number,
+  growCard: Boolean,
+  descriptionClass: {
+    type: String,
+    default: "text-[10px] md:text-[14px] lg:text-[18px]",
+  },
 });
 
 const showContent = ref(false);
@@ -45,16 +50,25 @@ onMounted(() => {
 <template>
   <div ref="lineRef" class="w-auto h-auto flex items-center">
     <div class="relative flex flex-row w-auto h-full">
-      <div class="absolute w-full h-1/2 bottom-[0px] justify-center flex pt-8">
+      <div
+        class="absolute w-full justify-center flex pt-8"
+        :class="growCard ? 'top-1/2 h-auto md:px-6' : 'h-1/2 bottom-[0px]'"
+      >
         <transition name="fade">
           <div
-            class="relative w-full h-full md:w-auto md:h-auto"
+            class="relative w-full"
+            :class="growCard ? 'h-auto' : 'h-full md:w-auto md:h-auto'"
             v-if="showContent"
           >
             <slot />
 
             <div
-              class="absolute w-full h-full top-0 flex flex-col justify-center items-center px-6 lg:px-8 gap-y-2.5 lg:gap-y-2 pt-8 sm:pt-9 md:pt-7 lg:pt-8"
+              class="absolute w-full h-full top-0 flex flex-col justify-center items-center"
+              :class="
+                growCard
+                  ? 'px-5 md:px-6 lg:px-8 gap-y-1 lg:gap-y-2 pt-5 sm:pt-6 md:pt-6 lg:pt-8'
+                  : 'px-6 lg:px-8 gap-y-2.5 lg:gap-y-2 pt-8 sm:pt-9 md:pt-7 lg:pt-8'
+              "
             >
               <div
                 class="w-full h-[10px] sm:h-[15px] md:h-[20px] lg:h-[35px] flex justify-center items-start"
@@ -67,10 +81,11 @@ onMounted(() => {
                   {{ title }}
                 </p>
               </div>
-              <div class="w-full h-[50px] flex justify-center">
-                <p
-                  class="text-center text-[10px] md:text-[14px] lg:text-[18px] text-[#6F6F6F]"
-                >
+              <div
+                class="w-full flex justify-center"
+                :class="growCard ? 'h-auto' : 'h-[50px]'"
+              >
+                <p :class="`text-center ${descriptionClass} text-[#6F6F6F]`">
                   {{ description }}
                 </p>
               </div>

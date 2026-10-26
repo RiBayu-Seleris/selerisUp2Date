@@ -528,7 +528,7 @@
     },
     "banners": {
       "assure": "Platform underwriting cerdas untuk asuransi jiwa individu dan kumpulan, mempercepat pengambilan keputusan hingga 90% dengan aturan bisnis yang sepenuhnya dapat dikonfigurasi.",
-      "medins": "Sistem inteligensi asuransi kesehatan berbasis AI yang mengotomatiskan pemrosesan data medis, memperkuat deteksi fraud, meningkatkan prediksi risiko, dan memastikan kepatuhan regulasi.",
+      "shield": "Sistem inteligensi asuransi kesehatan berbasis AI yang mengotomatiskan pemrosesan data medis, memperkuat deteksi fraud, meningkatkan prediksi risiko, dan memastikan kepatuhan regulasi.",
       "credit-cover": "Solusi berbasis AI yang menyederhanakan asuransi jiwa kredit dan proteksi pinjaman, mengotomatiskan penilaian risiko dengan akurasi hingga 25% lebih tinggi dan memangkas waktu proses hingga 80%.",
       "care": "Platform kesehatan dan wellness korporasi yang mengotomatiskan pemantauan kesehatan karyawan, memberikan wawasan preventif secara real-time, dan menekan biaya medis hingga 20%."
     },
@@ -895,12 +895,12 @@
       ],
       "testimonialsB2B": [
         {
-          "comment": "Seleris Medins membantu kami memangkas waktu pemrosesan klaim hingga 70%. Ini benar-benar mengubah operasional kami.",
+          "comment": "Shield membantu kami memangkas waktu pemrosesan klaim hingga 70%. Ini benar-benar mengubah operasional kami.",
           "authorName": "Arianto Nugroho",
           "authorPosition": "Chief Operations Officer, Nusantara Health Insurance"
         },
         {
-          "comment": "Dengan Seleris Medins, kemampuan deteksi fraud kami meningkat drastis. Cepat, andal, dan skalabel.",
+          "comment": "Dengan Shield, kemampuan deteksi fraud kami meningkat drastis. Cepat, andal, dan skalabel.",
           "authorName": "Siti Ramadhani",
           "authorPosition": "VP Claims Management, Medisafe Corp"
         },
@@ -910,7 +910,7 @@
           "authorPosition": "Managing Director, AsiaMed Insurance"
         },
         {
-          "comment": "Kepatuhan regulasi dulu jadi mimpi buruk. Berkat Seleris Medins, kini kami memenuhi standar dengan mudah.",
+          "comment": "Kepatuhan regulasi dulu jadi mimpi buruk. Berkat Shield, kini kami memenuhi standar dengan mudah.",
           "authorName": "Veronica Lim",
           "authorPosition": "Compliance Manager, HealthPlus Global"
         },
@@ -920,7 +920,7 @@
           "authorPosition": "Medical Director, Klinik Sehat Mandiri"
         },
         {
-          "comment": "Integrasi API yang mulus dan tim dukungan yang responsif. Seleris Medins kini jadi bagian penting ekosistem kami.",
+          "comment": "Integrasi API yang mulus dan tim dukungan yang responsif. Shield kini jadi bagian penting ekosistem kami.",
           "authorName": "Clara Wijaya",
           "authorPosition": "IT Solutions Lead, Bumi Insure"
         }
@@ -1035,18 +1035,32 @@
         }
       ]
     },
-    "medins": {
+    "shield": {
       "hero": {
-        "title": "Seleris Medins",
+        "title": "Shield",
         "subtitle": "Aplikasi",
         "description": "Tingkatkan efisiensi dan akurasi operasional asuransi kesehatan dengan otomatisasi data medis berbasis AI."
       },
-      "name": "Seleris Medins",
+      "name": "Shield",
       "about": {
         "title": "Aplikasi Layanan Kesehatan Berbasis AI",
-        "description": "Seleris Medins memakai AI untuk mengotomatiskan pemrosesan data medis dan klaim kesehatan. Solusi kami membantu perusahaan asuransi dan penyedia layanan kesehatan korporasi menekan biaya, mendeteksi fraud, memprediksi nilai klaim, dan memastikan kepatuhan regulasi dengan mudah dan akurat."
+        "description": "Shield memakai AI untuk mengotomatiskan pemrosesan data medis dan klaim kesehatan. Solusi kami membantu perusahaan asuransi dan penyedia layanan kesehatan korporasi menekan biaya, mendeteksi fraud, memprediksi nilai klaim, dan memastikan kepatuhan regulasi dengan mudah dan akurat."
       },
-      "bookDemo": "Seleris Medins, Solusi Lengkap untuk Kebutuhan Kesehatan Anda",
+      "bookDemo": "Shield, Solusi Lengkap untuk Kebutuhan Kesehatan Anda",
+      "workSteps": [
+        {
+          "title": "Isi Data",
+          "description": "Lengkapi data diri dengan cepat. Pindai KTP untuk mengisi nama, NIK, tanggal lahir, dan jenis kelamin secara otomatis."
+        },
+        {
+          "title": "Face Scan",
+          "description": "Pindai wajah selama 30 detik untuk memeriksa kondisi kesehatan secara instan, tanpa alat tambahan."
+        },
+        {
+          "title": "Hasil Langsung Keluar",
+          "description": "AI menganalisis hasil pemindaian dan menampilkan skor kesehatan serta keputusan underwriting dalam bahasa Indonesia, lengkap dengan laporan PDF yang bisa diunduh."
+        }
+      ],
       "healthCheck": [
         {
           "title": "Otomatisasi Data Medis",
@@ -1075,11 +1089,11 @@
       ],
       "faq": [
         {
-          "question": "Apa itu aplikasi Seleris Medins?",
-          "answer": "Seleris Medins adalah platform berbasis AI yang dirancang untuk mengotomatiskan pemrosesan data medis, memprediksi biaya klaim, mendeteksi fraud, dan memastikan kepatuhan terhadap regulasi kesehatan. Platform ini membantu penyedia asuransi dan program kesehatan korporasi menyederhanakan proses klaim kesehatan."
+          "question": "Apa itu aplikasi Shield?",
+          "answer": "Shield adalah platform berbasis AI yang dirancang untuk mengotomatiskan pemrosesan data medis, memprediksi biaya klaim, mendeteksi fraud, dan memastikan kepatuhan terhadap regulasi kesehatan. Platform ini membantu penyedia asuransi dan program kesehatan korporasi menyederhanakan proses klaim kesehatan."
         },
         {
-          "question": "Bagaimana cara mulai memakai aplikasi Seleris Medins?",
+          "question": "Bagaimana cara mulai memakai aplikasi Shield?",
           "answer": "Untuk memulai, unduh aplikasinya di Google Play Store atau App Store, atau akses lewat browser di medins.seleris.ai. Masuk dengan akun terdaftar Anda untuk mulai mengelola klaim medis dan data kesehatan."
         },
         {
@@ -1087,19 +1101,19 @@
           "answer": "Ya, tim dukungan pelanggan kami selalu siap membantu. Untuk pertanyaan, masukan, atau bantuan teknis, silakan hubungi kami di info{'@'}seleris.ai"
         },
         {
-          "question": "Apakah aplikasi Seleris Medins aman?",
-          "answer": "Tentu. Seleris Medins memakai protokol enkripsi TLS/SSL standar industri dan kebijakan perlindungan data yang ketat untuk menjaga informasi pribadi dan medis Anda."
+          "question": "Apakah aplikasi Shield aman?",
+          "answer": "Tentu. Shield memakai protokol enkripsi TLS/SSL standar industri dan kebijakan perlindungan data yang ketat untuk menjaga informasi pribadi dan medis Anda."
         },
         {
-          "question": "Apakah aplikasi Seleris Medins tersedia di platform lain?",
-          "answer": "Saat ini Seleris Medins tersedia di web dan mobile (iOS dan Android). Kami sedang mengembangkan dukungan untuk platform serta integrasi lain dalam waktu dekat."
+          "question": "Apakah aplikasi Shield tersedia di platform lain?",
+          "answer": "Saat ini Shield tersedia di web dan mobile (iOS dan Android). Kami sedang mengembangkan dukungan untuk platform serta integrasi lain dalam waktu dekat."
         },
         {
           "question": "Bagaimana cara menghapus akun saya?",
           "answer": "Jika Anda ingin menghapus akun, silakan hubungi tim dukungan kami di info{'@'}seleris.ai dan kami akan memproses permintaan Anda dengan aman."
         },
         {
-          "question": "Apakah aplikasi Seleris Medins gratis?",
+          "question": "Apakah aplikasi Shield gratis?",
           "answer": "Aplikasi kami menyediakan versi gratis dengan fitur inti. Untuk mengakses analitik lanjutan dan perangkat premium, mungkin berlaku langganan atau pembelian dalam aplikasi."
         },
         {
@@ -1108,7 +1122,7 @@
         },
         {
           "question": "Apa syarat dan ketentuan penggunaan aplikasi ini?",
-          "answer": "Anda dapat melihat syarat dan ketentuan penggunaan lengkap di menu pengaturan aplikasi. Mohon baca dengan saksama untuk memahami hak dan kewajiban Anda sebagai pengguna Seleris Medins."
+          "answer": "Anda dapat melihat syarat dan ketentuan penggunaan lengkap di menu pengaturan aplikasi. Mohon baca dengan saksama untuk memahami hak dan kewajiban Anda sebagai pengguna Shield."
         }
       ]
     },

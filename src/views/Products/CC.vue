@@ -210,7 +210,7 @@ const localizedSteps = useLocalizedList(
 
     <section
       data-aos="fade-up"
-      class="relative w-full h-auto max-w-[1440px] mx-auto max-smallest:px-0 px-8 mt-20"
+      class="relative w-full h-auto max-w-[1440px] mx-auto max-smallest:px-0 lg:px-8 mt-20"
       id="client"
     >
       <div class="w-full h-auto flex flex-col">
@@ -219,7 +219,7 @@ const localizedSteps = useLocalizedList(
           :subtitle="$t('products.shared.company')"
           subtitleColor="text-[#E84C7F]"
         />
-        <div class="mt-10 max-smallest:px-0 px-12">
+        <div class="mt-10 max-smallest:px-0 lg:px-12">
           <ClientCardFrameProduct :client-logos="clientLogos" />
         </div>
       </div>

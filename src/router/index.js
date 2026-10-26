@@ -119,10 +119,14 @@ const routes = [
     component: () => import("@/views/Products/ProductLayout.vue"),
     children: [
       {
+        path: "shield",
+        name: "Shield",
+        component: () => import("@/views/Products/Shield.vue"),
+        meta: { title: "Shield" },
+      },
+      {
         path: "medins",
-        name: "Medins",
-        component: () => import("@/views/Products/Medins.vue"),
-        meta: { title: "Medins" },
+        redirect: "/product/shield",
       },
       {
         path: "credit-cover",

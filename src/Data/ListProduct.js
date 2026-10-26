@@ -3,10 +3,10 @@
 export const productBannerLists = [
   {
     id: 1,
-    banner: "medins.png",
-    product_name: "Seleris Medins",
+    banner: "shield.png",
+    product_name: "Shield",
     color: "text-[#2ec4b6]",
-    url: "/product/medins#howapplicationwork",
+    url: "/product/shield#howapplicationwork",
   },
   {
     id: 2,

@@ -12,9 +12,9 @@ export function useProductLogo() {
         import.meta.url,
       ).href;
     }
-    if (route.path === "/product/medins") {
+    if (route.path === "/product/shield") {
       return new URL(
-        "@/assets/Products/images/Logo/Medins-Logo.png",
+        "@/assets/Products/images/Logo/Shield-Logo.png",
         import.meta.url,
       ).href;
     }

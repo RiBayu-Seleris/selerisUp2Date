@@ -30,8 +30,8 @@ const footerTitle = computed(() => {
   if (route.path === "/product/credit-cover") {
     return "Seleris Credit Cover";
   }
-  if (route.path === "/product/medins") {
-    return "Seleris Medins";
+  if (route.path === "/product/shield") {
+    return "Shield";
   }
   if (route.path === "/product/assure") {
     return "Assure";
@@ -49,7 +49,7 @@ const connectColor = computed(() => {
   if (route.path === "/product/credit-cover") {
     return "text-[#E84C7F]";
   }
-  if (route.path === "/product/medins") {
+  if (route.path === "/product/shield") {
     return "text-[#42C5AF]";
   }
   if (route.path === "/product/assure") {

@@ -528,7 +528,7 @@
     },
     "banners": {
       "assure": "An intelligent underwriting platform for individual and group life insurance, accelerating decision-making by 90% with fully configurable business rules.",
-      "medins": "An AI-driven health insurance intelligence system that automates medical data processing, enhances fraud detection, improves risk prediction, and ensures regulatory compliance.",
+      "shield": "An AI-driven health insurance intelligence system that automates medical data processing, enhances fraud detection, improves risk prediction, and ensures regulatory compliance.",
       "credit-cover": "An AI-powered solution that streamlines credit life insurance and loan protection, automating risk assessments with up to 25% higher accuracy and reducing processing time by 80%.",
       "care": "A corporate health and wellness platform that automates employee health monitoring, delivers real-time preventive insights, and lowers medical costs by up to 20%."
     },
@@ -895,12 +895,12 @@
       ],
       "testimonialsB2B": [
         {
-          "comment": "Seleris Medins helped us reduce claim processing time by 70%. It’s been a game-changer for our operations.",
+          "comment": "Shield helped us reduce claim processing time by 70%. It’s been a game-changer for our operations.",
           "authorName": "Arianto Nugroho",
           "authorPosition": "Chief Operations Officer, Nusantara Health Insurance"
         },
         {
-          "comment": "With Seleris Medins, our fraud detection capabilities improved dramatically. It’s fast, reliable, and scalable.",
+          "comment": "With Shield, our fraud detection capabilities improved dramatically. It’s fast, reliable, and scalable.",
           "authorName": "Siti Ramadhani",
           "authorPosition": "VP Claims Management, Medisafe Corp"
         },
@@ -910,7 +910,7 @@
           "authorPosition": "Managing Director, AsiaMed Insurance"
         },
         {
-          "comment": "Regulatory compliance used to be a nightmare. Thanks to Seleris Medins, we now meet standards effortlessly.",
+          "comment": "Regulatory compliance used to be a nightmare. Thanks to Shield, we now meet standards effortlessly.",
           "authorName": "Veronica Lim",
           "authorPosition": "Compliance Manager, HealthPlus Global"
         },
@@ -920,7 +920,7 @@
           "authorPosition": "Medical Director, Klinik Sehat Mandiri"
         },
         {
-          "comment": "Seamless API integration and responsive support team. Seleris Medins has become a key part of our ecosystem.",
+          "comment": "Seamless API integration and responsive support team. Shield has become a key part of our ecosystem.",
           "authorName": "Clara Wijaya",
           "authorPosition": "IT Solutions Lead, Bumi Insure"
         }
@@ -1035,18 +1035,32 @@
         }
       ]
     },
-    "medins": {
+    "shield": {
       "hero": {
-        "title": "Seleris Medins",
+        "title": "Shield",
         "subtitle": "Application",
         "description": "Enhance efficiency and accuracy in health insurance operations with AI-driven medical data automation."
       },
-      "name": "Seleris Medins",
+      "name": "Shield",
       "about": {
         "title": "AI Health Care Application",
-        "description": "Seleris Medins uses AI to automate medical data processing and health claims. Our solution helps insurers and corporate healthcare providers reduce costs, detect fraud, predict claim values, and ensure regulatory compliance with ease and accuracy."
+        "description": "Shield uses AI to automate medical data processing and health claims. Our solution helps insurers and corporate healthcare providers reduce costs, detect fraud, predict claim values, and ensure regulatory compliance with ease and accuracy."
       },
-      "bookDemo": "Seleris Medins A Complete Solution for Your Health Needs",
+      "bookDemo": "Shield A Complete Solution for Your Health Needs",
+      "workSteps": [
+        {
+          "title": "Fill In Data",
+          "description": "Complete your personal details in seconds. Scan an ID card to fill in name, ID number, date of birth, and gender automatically."
+        },
+        {
+          "title": "Face Scan",
+          "description": "Scan your face for 30 seconds to check your health condition instantly, with no extra devices."
+        },
+        {
+          "title": "Instant Results",
+          "description": "AI analyses the scan and presents a health score and underwriting decision in Indonesian, complete with a downloadable PDF report."
+        }
+      ],
       "healthCheck": [
         {
           "title": "Medical Data Automation",
@@ -1075,11 +1089,11 @@
       ],
       "faq": [
         {
-          "question": "What is Seleris Medins app?",
-          "answer": "Seleris Medins is an AI-powered platform designed to automate medical data processing, predict claims costs, detect fraud, and ensure compliance with healthcare regulations. It helps insurance providers and corporate healthcare programs streamline their health claims processes."
+          "question": "What is Shield app?",
+          "answer": "Shield is an AI-powered platform designed to automate medical data processing, predict claims costs, detect fraud, and ensure compliance with healthcare regulations. It helps insurance providers and corporate healthcare programs streamline their health claims processes."
         },
         {
-          "question": "How do I get started using the Seleris Medins app?",
+          "question": "How do I get started using the Shield app?",
           "answer": "To get started, download the app from the Google Play Store or App Store, or access via browser at medins.seleris.ai. Log in using your registered account to start managing medical claims and health data."
         },
         {
@@ -1087,19 +1101,19 @@
           "answer": "Yes, our customer support team is always ready to help. For any inquiries, feedback, or technical assistance, please contact us at info{'@'}seleris.ai"
         },
         {
-          "question": "Is the Seleris Medins app secure?",
-          "answer": "Absolutely. Seleris Medins uses industry-standard TLS/SSL encryption protocols and strict data protection policies to safeguard your personal and medical information."
+          "question": "Is the Shield app secure?",
+          "answer": "Absolutely. Shield uses industry-standard TLS/SSL encryption protocols and strict data protection policies to safeguard your personal and medical information."
         },
         {
-          "question": "Is the Seleris Medins app available on other platforms?",
-          "answer": "Currently, Seleris Medins is available on web and mobile (iOS and Android). We are working on expanding to other platforms and integrations in the near future."
+          "question": "Is the Shield app available on other platforms?",
+          "answer": "Currently, Shield is available on web and mobile (iOS and Android). We are working on expanding to other platforms and integrations in the near future."
         },
         {
           "question": "How do I delete my account?",
           "answer": "If you want to delete your account, please contact our support team at info{'@'}seleris.ai and we will process your request securely."
         },
         {
-          "question": "Is the Seleris Medins app free?",
+          "question": "Is the Shield app free?",
           "answer": "Our app offers a free version with core features. For access to advanced analytics and premium tools, subscription or in-app purchases may apply."
         },
         {
@@ -1108,7 +1122,7 @@
         },
         {
           "question": "What are the terms and conditions of use of this app?",
-          "answer": "You can view the full terms and conditions of use in the app settings menu. Please read them carefully to understand your rights and responsibilities as a user of Seleris Medins."
+          "answer": "You can view the full terms and conditions of use in the app settings menu. Please read them carefully to understand your rights and responsibilities as a user of Shield."
         }
       ]
     },

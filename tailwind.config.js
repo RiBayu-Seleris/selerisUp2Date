@@ -37,7 +37,7 @@ module.exports = {
         hero2: "url('@/assets/images/hero-banner2.png')",
         touch: "url('@/assets/images/touch-bg.png')",
         touchDark: "url('@/assets/images/touch-bg-dark.png')",
-        medins: "url('@/assets/Products/images/bg-hero-medins.webp')",
+        shield: "url('@/assets/Products/images/bg-hero-shield.webp')",
         cc: "url('@/assets/Products/images/bg-hero-cc.webp')",
         herodark: "url('@/assets/images/herodark3.png')",
         different: "url('@/assets/images/different-background.png')",

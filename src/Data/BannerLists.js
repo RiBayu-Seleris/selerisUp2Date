@@ -24,11 +24,11 @@ export const bannerLists = [
   },
   {
     banner: "Shield.png",
-    key: "medins",
-    logo: "medins.png",
-    darklogo: "medins.png",
+    key: "shield",
+    logo: "shield.png",
+    darklogo: "shield.png",
     linelightcolor: "#2ec4b6",
-    url: "/product/medins",
+    url: "/product/shield",
     logoWidth: {
       lg: 150,
       md: 90,

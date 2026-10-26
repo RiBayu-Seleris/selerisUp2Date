@@ -12,9 +12,9 @@ export function useProductLogoColor() {
         import.meta.url,
       ).href;
     }
-    if (route.path === "/product/medins") {
+    if (route.path === "/product/shield") {
       return new URL(
-        "@/assets/Products/images/Logo/Medins-Logo-Color.png",
+        "@/assets/Products/images/Logo/Shield-Logo-Color.png",
         import.meta.url,
       ).href;
     }

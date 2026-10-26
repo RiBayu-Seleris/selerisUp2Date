@@ -42,8 +42,8 @@ const titleSidebar = () => {
   if (route.path === "/product/credit-cover") {
     return "Credit Cover";
   }
-  if (route.path === "/product/medins") {
-    return "Medins";
+  if (route.path === "/product/shield") {
+    return "Shield";
   }
   if (route.path === "/product/health-care") {
     return "Care";

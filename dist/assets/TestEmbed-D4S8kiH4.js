@@ -1,0 +1,1 @@
+import{_ as e}from"./index-CAjje-yf.js";import{K as r,J as t}from"./vendor-Bmd0ABfc.js";import"./charts-CR2ZieCz.js";import"./swiper-DtD1VB3b.js";const o={};function c(n,s){return t(),r("div")}const i=e(o,[["render",c]]);export{i as default};
