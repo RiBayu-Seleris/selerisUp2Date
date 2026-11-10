@@ -33,7 +33,7 @@ import {
 
 const { t } = useI18n();
 const route = useRoute();
-const slug = route.params.slug;
+const slug = computed(() => route.params.slug);
 const utils = useUtilsStore();
 const {
   blogDetail,
@@ -338,7 +338,7 @@ const handleSubmitComment = async () => {
   }
   if (data) {
     inputCommentData.comment = "";
-    await getBlogBySlug(slug); // refresh komentar
+    await getBlogBySlug(slug.value); // refresh komentar
   }
 };
 
@@ -399,7 +399,7 @@ const refreshLikeStatus = async () => {
 };
 
 onMounted(async () => {
-  await getBlogBySlug(slug);
+  await getBlogBySlug(slug.value);
   getPopularBlog();
   refreshLikeStatus();
   document.addEventListener("click", handleClickOutside);
@@ -411,6 +411,16 @@ watch(
     refreshLikeStatus();
   },
 );
+
+watch(slug, async (slugBaru) => {
+  if (!slugBaru) return;
+  inputCommentData.comment = "";
+  isFocusedComment.value = false;
+  activeShareId.value = null;
+  isLiked.value = false;
+  await getBlogBySlug(slugBaru);
+  refreshLikeStatus();
+});
 
 onBeforeUnmount(() => {
   document.removeEventListener("click", handleClickOutside);

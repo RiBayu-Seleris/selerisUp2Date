@@ -6,14 +6,12 @@ import CloseIcon from "@/components/icons/CloseIcon.vue";
 import Instagram from "@/components/icons/Instagram.vue";
 import Tiktok from "@/components/icons/Tiktok.vue";
 import LinkedIn from "@/components/icons/Linkedin.vue";
-import { usePageLoadingStore } from "@/stores/pageLoading";
 
 import { useRouter } from "vue-router";
 import { timeAgo } from "@/components/Helper/timeAgo.js";
 import { formatNumberSeparator } from "@/components/Helper/numberFormat.js";
 import { useJobApplyStore } from "@/stores/jobApply";
 import { onMounted, ref, watch } from "vue";
-import axios from "axios";
 
 const jobs = ref([]);
 const jobApplyStore = useJobApplyStore();
@@ -56,50 +54,6 @@ watch(
     document.body.style.overflow = v ? "hidden" : "auto";
   },
 );
-
-// Layar loading di App.vue menunggu pengambilan data ini selesai
-const pageLoading = usePageLoadingStore();
-
-onMounted(async () => {
-  pageLoading.start();
-  const BASEURL = "https://alentest.my.id";
-
-  try {
-    const response = await axios.get(`${BASEURL}/api/job`, {
-      headers: { Accept: "application/json" },
-    });
-
-    const raw = response.data.data;
-
-    // Normalisasi data
-    jobs.value = raw.map((job) => ({
-      id: job.id,
-      title: job.job_title?.title || "-", // ambil title sebenarnya
-      slug: job.slug,
-      posted_at: job.posted_at, // samakan dengan UI-mu
-      employment_level: job.employee_level_data?.employee_level || "-",
-      work_type: job.job_type_data?.job_type || "-",
-      location: job.location_data?.location || "-",
-      department: job.department_data?.department || "-",
-
-      salary_status: true,
-      salary_currency: job.salary_currency,
-      salary_min: job.salary_min,
-      salary_max: job.salary_max,
-
-      description: job.description,
-      responsibilities: job.responsibilities,
-      requirements: job.requirements,
-      benefits: job.benefits,
-    }));
-  } catch (error) {
-    // Bukan sisa uji coba: ini laporan kalau data lowongan gagal diambil.
-    // console.error tetap dipertahankan supaya kegagalan tidak lolos diam-diam.
-    console.error("Gagal mengambil data lowongan:", error);
-  } finally {
-    pageLoading.done(); // WAJIB di finally, supaya tetap jalan walau gagal
-  }
-});
 
 // Hapus localstorage careers
 onMounted(() => {

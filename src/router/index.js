@@ -202,9 +202,7 @@ const routes = [
   },
   {
     path: "/careers/apply",
-    name: "CareerApply",
-    component: () => import("@/views/CareerApply.vue"),
-    meta: { title: "Pelamaran" },
+    redirect: "/careers",
   },
 
   // Face Tracking
