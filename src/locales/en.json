@@ -571,7 +571,7 @@
       "items": {
         "accuracy": {
           "title": "Accuracy",
-          "body": "The results show that Seleris can recognize faces with up to 94% accuracy."
+          "body": "Testing demonstrated that Seleris can accurately predict several health parameters using facial video, achieving accuracy levels of up to 94%."
         },
         "speed": {
           "title": "Speed",
