@@ -1631,7 +1631,10 @@
     "notFound": "Article not found.",
     "passwordHint": "At least 8 characters",
     "sessionExpired": "Session expired",
-    "sessionExpiredText": "Please sign in again to continue."
+    "sessionExpiredText": "Please sign in again to continue.",
+    "loadErrorTitle": "We couldn't load the articles",
+    "loadErrorText": "Our server isn't responding right now. Check your internet connection, then try again.",
+    "retry": "Try again"
   },
   "careers": {
     "academic_transcript": "Academic Transcript",

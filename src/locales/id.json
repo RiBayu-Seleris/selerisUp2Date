@@ -571,7 +571,7 @@
       "items": {
         "accuracy": {
           "title": "Akurasi",
-          "body": "Hasil pengujian menunjukkan Seleris mampu mengenali wajah dengan akurasi hingga 94%."
+          "body": "Hasil pengujian menunjukkan Seleris mampu memprediksi beberapa parameter kesehatan dari video wajah dengan akurasi hingga 94%."
         },
         "speed": {
           "title": "Kecepatan",
@@ -1631,7 +1631,10 @@
     "notFound": "Blog tidak ditemukan.",
     "passwordHint": "Minimal 8 karakter",
     "sessionExpired": "Sesi berakhir",
-    "sessionExpiredText": "Silakan masuk lagi untuk melanjutkan."
+    "sessionExpiredText": "Silakan masuk lagi untuk melanjutkan.",
+    "loadErrorTitle": "Artikel belum bisa dimuat",
+    "loadErrorText": "Server kami sedang tidak merespons. Periksa koneksi internet Anda, lalu coba lagi.",
+    "retry": "Coba lagi"
   },
   "careers": {
     "academic_transcript": "Transkrip Nilai",

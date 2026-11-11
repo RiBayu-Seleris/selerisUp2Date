@@ -249,6 +249,13 @@ const fetchWithResetPage = async () => {
   });
 };
 
+const muatUlang = () => {
+  getAllBlogs({ ...buildParams(), page: 1 });
+  getNewestBlog();
+  getPopularBlog();
+  if (!categories.value.length) fetchCategory();
+};
+
 // klik luar → tutup semua
 const handleClickOutside = (event) => {
   if (isClickOutside(".category-box", event)) {
@@ -579,6 +586,67 @@ const finalBlogs = computed(() => {
     </video>
   </div>
 
+  <div v-else-if="error" class="w-full h-auto mt-10 px-8 xl:px-0">
+    <div
+      class="w-full rounded-lg bg-[#D9D9D9] p-[1px] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]"
+    >
+      <div
+        role="alert"
+        class="w-full flex flex-col items-center text-center rounded-lg bg-[#FAFAFA] dark:bg-[#1D1F23] px-6 py-14 md:py-20"
+      >
+        <div
+          class="flex items-center justify-center w-16 h-16 md:w-20 md:h-20 rounded-full bg-[#195279]/10 text-[#195279] dark:bg-[#FAFAFA]/10 dark:text-[#D4D4D4]"
+        >
+          <svg
+            aria-hidden="true"
+            class="w-8 h-8 md:w-10 md:h-10"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path
+              d="M22.61 16.95A5 5 0 0 0 18 10h-1.26a8 8 0 0 0-7.05-6M5 5a8 8 0 0 0 4 15h9a5 5 0 0 0 1.7-.3"
+            />
+            <line x1="1" y1="1" x2="23" y2="23" />
+          </svg>
+        </div>
+        <p
+          class="mt-6 text-[20px] md:text-[24px] font-[500] text-[#195279] dark:text-[#FAFAFA]"
+        >
+          {{ $t("blog.loadErrorTitle") }}
+        </p>
+        <p
+          class="mt-2 max-w-md text-[14px] md:text-[16px] text-[#6E6E6E] dark:text-[#B8B8B8]"
+        >
+          {{ $t("blog.loadErrorText") }}
+        </p>
+        <button
+          type="button"
+          @click="muatUlang"
+          class="mt-8 inline-flex items-center gap-x-2 px-6 py-2.5 rounded-full bg-[#2AB857] hover:bg-[#22a04a] text-white text-[14px] md:text-[16px] font-[500] transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#2AB857]/60"
+        >
+          <svg
+            aria-hidden="true"
+            class="w-4 h-4 md:w-5 md:h-5"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="23 4 23 10 17 10" />
+            <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10" />
+          </svg>
+          {{ $t("blog.retry") }}
+        </button>
+      </div>
+    </div>
+  </div>
+
   <div
     v-else-if="finalBlogs.length && searchQuery && !loadingTyping"
     class="w-full h-auto mt-5"
@@ -657,7 +725,7 @@ const finalBlogs = computed(() => {
                     <span
                       class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
                     >
-                      {{ utils.shortNumber(newestBlog.views) }}
+                      {{ utils.shortNumber(data.views) }}
                     </span>
                   </div>
                 </router-link>
@@ -674,7 +742,7 @@ const finalBlogs = computed(() => {
                     <span
                       class="text-[14px] text-[#6E6E6E] dark:text-[#637381]"
                     >
-                      {{ newestBlog.comments }}
+                      {{ data.comments }}
                     </span>
                   </div>
                 </router-link>
@@ -1118,8 +1186,6 @@ const finalBlogs = computed(() => {
             </video>
           </div>
 
-          <div v-else-if="error">{{ error }}</div>
-
           <div v-else-if="newestError" class="lg:pb-4">
             {{ newestError }}
           </div>
@@ -1347,8 +1413,6 @@ const finalBlogs = computed(() => {
             </video>
           </div>
 
-          <div v-else-if="error">{{ error }}</div>
-
           <div v-else-if="popularError" class="px-6 pt-4">
             {{ popularError }}
           </div>
@@ -1433,7 +1497,6 @@ const finalBlogs = computed(() => {
             <source :src="loadingAnimation" type="video/webm" />
           </video>
         </div>
-        <div v-else-if="error" class="px-6">{{ error }}</div>
         <div
           v-else
           v-for="(data, index) in popularBlog"
@@ -1536,7 +1599,6 @@ const finalBlogs = computed(() => {
           <source :src="loadingAnimation" type="video/webm" />
         </video>
       </div>
-      <div v-else-if="error" class="px-6">{{ error }}</div>
       <div
         v-for="(data, index) in finalBlogs"
         :key="index"

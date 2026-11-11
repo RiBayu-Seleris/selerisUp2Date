@@ -132,6 +132,7 @@ export function blogsApi() {
 
   const getAllBlogs = async (params = {}) => {
     startLoading();
+    error.value = null;
     try {
       const response = await axios.get(`${BASE_URL}/api/v1/app/blogs`, {
         headers: headerApi.headers,
