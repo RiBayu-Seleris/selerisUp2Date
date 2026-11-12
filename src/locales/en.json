@@ -1125,7 +1125,76 @@
           "question": "What are the terms and conditions of use of this app?",
           "answer": "You can view the full terms and conditions of use in the app settings menu. Please read them carefully to understand your rights and responsibilities as a user of Shield."
         }
-      ]
+      ],
+      "landing": {
+        "downloadApp": "Download app",
+        "hero": {
+          "titleLine1": "Shield Your",
+          "titleLine2": "Connected Risk Coach"
+        },
+        "showcase": [
+          {
+            "title": "Dashboard",
+            "description": "See your latest scan at a glance: health score, biological age, and estimated monthly premium in one place."
+          },
+          {
+            "title": "Face Scanning",
+            "description": "Scan your face for 30 seconds to check your health condition instantly, with no extra devices."
+          },
+          {
+            "title": "Health Result",
+            "description": "AI analyses the scan and presents a health score and underwriting decision in Indonesian, complete with a downloadable PDF report."
+          }
+        ],
+        "how": {
+          "eyebrow": "How It Works",
+          "title": "How Shield Works",
+          "description": "Risk signals can come from multiple sources, formats, and contexts. Shield brings them together into one useful view.",
+          "aggregation": "Multimodal Signal Aggregation",
+          "preview": "Architecture preview",
+          "replay": "Replay",
+          "steps": [
+            {
+              "title": "Technology rPPG",
+              "description": "Shield harnesses Remote Photoplethysmography (rPPG) technology to evaluate various vital signs that represent a customer's health condition."
+            },
+            {
+              "title": "Artificial Intelligence",
+              "description": "Shield uses AI algorithms to evaluate underwriting decisions and provide comprehensive coverage advice."
+            },
+            {
+              "title": "Machine Learning",
+              "description": "Machine learning removes motion and lighting noise to extract rPPG signals for health prediction."
+            },
+            {
+              "title": "Data Security",
+              "description": "Shield securely stores and processes customer data, ensuring compliance with global regulations while protecting sensitive personal and financial information."
+            }
+          ]
+        },
+        "automation": {
+          "description": "Shield uses AI to automate medical data processing and health claims."
+        },
+        "clients": {
+          "description": "Insurance and healthcare companies that work with Seleris."
+        },
+        "reviews": {
+          "title": "Customer Reviews",
+          "previous": "Previous review",
+          "next": "Next review"
+        },
+        "faq": {
+          "titleLine1": "Answers",
+          "titleLine2": "to Popular",
+          "titleLine3": "Questions"
+        },
+        "cta": {
+          "titleLine1": "Where the next decade",
+          "titleLine2": "of risk intelligence gets built",
+          "description": "Book a demo today and see how Shield can help your organization.",
+          "button": "Get Started"
+        }
+      }
     },
     "creditCover": {
       "hero": {

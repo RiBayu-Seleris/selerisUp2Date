@@ -4,6 +4,7 @@ import Navbar3 from "@productComponents/Navbar3.vue";
 import NavbarScroll from "@productComponents/NavbarScroll.vue";
 import Footer from "@productComponents/Footer.vue";
 import Sidebar from "@productComponents/Sidebar.vue";
+import ShieldNavbar from "@/components/Products/Shield/ShieldNavbar.vue";
 // Dipakai bersama App.vue — letaknya di @/components, bukan
 // @productComponents, karena tampilannya sama di semua halaman.
 import ScrollTopButton from "@/components/reusable/ScrollTopButton.vue";
@@ -32,6 +33,8 @@ const handleScroll = () => {
 const isSelerisCredit = computed(
   () => route.path === "/product/seleris-credit",
 );
+
+const isShield = computed(() => route.path === "/product/shield");
 
 // Fungsi scroll ke hash (dengan retry)
 const scrollToHash = async (hash) => {
@@ -83,7 +86,10 @@ onUnmounted(() => {
 <template>
   <div class="relative w-full mx-auto font-poppins">
     <main class="relative w-full mx-auto">
-      <header v-if="!isSelerisCredit" class="fixed top-0 w-full z-50">
+      <header v-if="isShield" class="fixed top-0 w-full z-50">
+        <ShieldNavbar />
+      </header>
+      <header v-else-if="!isSelerisCredit" class="fixed top-0 w-full z-50">
         <transition name="slide-down" mode="out-in">
           <component :is="scrollStore.isScrolled ? NavbarScroll : Navbar" />
         </transition>

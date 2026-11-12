@@ -101,6 +101,7 @@ export default defineConfig({
             if (id.includes("quill")) return "editor";
             if (id.includes("swiper")) return "swiper";
             if (id.includes("lodash")) return "lodash";
+            if (id.includes("/gsap/")) return "animation";
             return "vendor";
           }
         },

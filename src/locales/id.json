@@ -1125,7 +1125,76 @@
           "question": "Apa syarat dan ketentuan penggunaan aplikasi ini?",
           "answer": "Anda dapat melihat syarat dan ketentuan penggunaan lengkap di menu pengaturan aplikasi. Mohon baca dengan saksama untuk memahami hak dan kewajiban Anda sebagai pengguna Shield."
         }
-      ]
+      ],
+      "landing": {
+        "downloadApp": "Unduh aplikasi",
+        "hero": {
+          "titleLine1": "Shield, Pendamping Risiko",
+          "titleLine2": "yang Selalu Terhubung"
+        },
+        "showcase": [
+          {
+            "title": "Dasbor",
+            "description": "Lihat hasil pemindaian terakhir sekilas: skor kesehatan, usia biologis, dan perkiraan premi bulanan dalam satu tempat."
+          },
+          {
+            "title": "Pindai Wajah",
+            "description": "Pindai wajah selama 30 detik untuk memeriksa kondisi kesehatan secara instan, tanpa alat tambahan."
+          },
+          {
+            "title": "Hasil Kesehatan",
+            "description": "AI menganalisis hasil pemindaian dan menampilkan skor kesehatan serta keputusan underwriting dalam bahasa Indonesia, lengkap dengan laporan PDF yang bisa diunduh."
+          }
+        ],
+        "how": {
+          "eyebrow": "Cara Kerja",
+          "title": "Cara Kerja Shield",
+          "description": "Sinyal risiko bisa datang dari berbagai sumber, format, dan konteks. Shield menyatukannya menjadi satu tampilan yang berguna.",
+          "aggregation": "Agregasi Sinyal Multimodal",
+          "preview": "Pratinjau arsitektur",
+          "replay": "Putar ulang",
+          "steps": [
+            {
+              "title": "Teknologi rPPG",
+              "description": "Shield memanfaatkan teknologi Remote Photoplethysmography (rPPG) untuk mengevaluasi berbagai tanda vital yang menggambarkan kondisi kesehatan nasabah."
+            },
+            {
+              "title": "Artificial Intelligence",
+              "description": "Shield memakai algoritma AI untuk mengevaluasi keputusan underwriting dan memberikan rekomendasi pertanggungan yang menyeluruh."
+            },
+            {
+              "title": "Machine Learning",
+              "description": "Machine learning menyaring gangguan gerakan dan pencahayaan untuk mengekstrak sinyal rPPG bagi prediksi kesehatan."
+            },
+            {
+              "title": "Keamanan Data",
+              "description": "Shield menyimpan dan memproses data nasabah secara aman, memastikan kepatuhan terhadap regulasi global sekaligus melindungi informasi pribadi dan finansial yang sensitif."
+            }
+          ]
+        },
+        "automation": {
+          "description": "Shield memakai AI untuk mengotomatiskan pemrosesan data medis dan klaim kesehatan."
+        },
+        "clients": {
+          "description": "Perusahaan asuransi dan layanan kesehatan yang bekerja sama dengan Seleris."
+        },
+        "reviews": {
+          "title": "Ulasan Pelanggan",
+          "previous": "Ulasan sebelumnya",
+          "next": "Ulasan berikutnya"
+        },
+        "faq": {
+          "titleLine1": "Jawaban",
+          "titleLine2": "atas Pertanyaan",
+          "titleLine3": "Populer"
+        },
+        "cta": {
+          "titleLine1": "Di sinilah masa depan",
+          "titleLine2": "kecerdasan risiko dibangun",
+          "description": "Jadwalkan demo hari ini dan lihat bagaimana Shield dapat membantu organisasi Anda.",
+          "button": "Mulai Sekarang"
+        }
+      }
     },
     "creditCover": {
       "hero": {
