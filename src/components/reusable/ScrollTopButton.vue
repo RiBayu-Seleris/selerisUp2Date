@@ -1,9 +1,14 @@
 <script setup>
 import { computed, onMounted, onUnmounted, ref } from "vue";
+import { useRoute } from "vue-router";
 import { useScrollStore } from "@/stores/scroll";
 import Tooltip from "@/assets/images/tooltip.png";
 
 const scrollStore = useScrollStore();
+const route = useRoute();
+const warnaCincin = computed(() =>
+  route.path === "/product/shield" ? "#0071E7" : "#1AB24F",
+);
 
 // Tombol baru muncul setelah pengunjung mulai menggulir — perilaku lama,
 // tidak diubah.
@@ -91,7 +96,7 @@ const keAtas = () => {
           cy="18"
           r="16"
           fill="none"
-          stroke="#1AB24F"
+          :stroke="warnaCincin"
           stroke-width="2.5"
           stroke-linecap="round"
           :stroke-dasharray="KELILING"

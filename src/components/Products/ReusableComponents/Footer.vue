@@ -67,7 +67,7 @@ const connectColor = computed(() => {
     return "text-[#E84C7F]";
   }
   if (route.path === "/product/shield") {
-    return "text-[#42C5AF]";
+    return "text-[#0071E7]";
   }
   if (route.path === "/product/assure") {
     return "text-[#2AB857]";
