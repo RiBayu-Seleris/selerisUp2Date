@@ -1,5 +1,5 @@
 <script setup>
-import { ref, computed, nextTick, onBeforeUnmount } from "vue";
+import { ref, computed, watch, nextTick, onBeforeUnmount } from "vue";
 import { useI18n } from "vue-i18n";
 import { SelerisScanner } from "@seleris/rppg-vue";
 
@@ -55,6 +55,40 @@ const galat = ref(null);
 
 // liveVitals: detak SEMENTARA selama scan berjalan. Bukan hasil akhir.
 const hrSementara = ref(null);
+
+const LEBAR_GELOMBANG = 200;
+const TINGGI_GELOMBANG = 40;
+const BATAS_RIWAYAT_SQI = 120;
+const riwayatSqi = ref([]);
+
+const ySqi = (v) => TINGGI_GELOMBANG - 3 - v * (TINGGI_GELOMBANG - 6);
+
+const titikSqi = computed(() => {
+  const data = riwayatSqi.value;
+  if (data.length < 2) return "";
+  const langkah = LEBAR_GELOMBANG / (BATAS_RIWAYAT_SQI - 1);
+  const awal = LEBAR_GELOMBANG - (data.length - 1) * langkah;
+  return data
+    .map((v, i) => `${(awal + i * langkah).toFixed(2)},${ySqi(v).toFixed(2)}`)
+    .join(" ");
+});
+
+const areaSqi = computed(() => {
+  if (!titikSqi.value) return "";
+  const langkah = LEBAR_GELOMBANG / (BATAS_RIWAYAT_SQI - 1);
+  const awal = LEBAR_GELOMBANG - (riwayatSqi.value.length - 1) * langkah;
+  return `${awal.toFixed(2)},${TINGGI_GELOMBANG} ${titikSqi.value} ${LEBAR_GELOMBANG},${TINGGI_GELOMBANG}`;
+});
+
+const ujungSqi = computed(() => {
+  const data = riwayatSqi.value;
+  if (!data.length) return 50;
+  return (ySqi(data[data.length - 1]) / TINGGI_GELOMBANG) * 100;
+});
+
+watch(berjalan, (aktif) => {
+  if (aktif) riwayatSqi.value = [];
+});
 
 // Laju gambar per detik, dari event `quality`. Ambang cadence-nya 24 Hz.
 const CADENCE_MINIMUM_HZ = 24;
@@ -343,6 +377,14 @@ const onProgress = (p) => {
 
 const onQuality = (q) => {
   kualitas.value = q?.score ?? null;
+  if (
+    berjalan.value &&
+    typeof q?.score === "number" &&
+    Number.isFinite(q.score)
+  ) {
+    const nilai = Math.min(1, Math.max(0, q.score));
+    riwayatSqi.value = [...riwayatSqi.value, nilai].slice(-BATAS_RIWAYAT_SQI);
+  }
   lajuAnalyzer.value = q?.analyzerRateHz ?? null;
   lajuDiterima.value = q?.acceptedRateHz ?? null;
   lajuKamera.value = q?.cameraRateHz ?? null;
@@ -351,7 +393,7 @@ const onQuality = (q) => {
 };
 
 const onLiveVitals = (v) => {
-  hrSementara.value = typeof v?.heartRate === "number" ? v.heartRate : null;
+  if (typeof v?.heartRate === "number") hrSementara.value = v.heartRate;
 };
 
 const onResult = (hasil) => {
@@ -686,20 +728,96 @@ defineExpose({ ulangiScan });
         </div>
 
         <div
+          class="mt-1 rounded-2xl border border-[#DEDEDE] dark:border-[#3A3B3D] bg-white dark:bg-[#1D1F23] px-4 py-3 flex flex-wrap sm:flex-nowrap items-center gap-x-4 gap-y-3"
+        >
+          <div
+            class="flex flex-col gap-1 shrink-0"
+            :title="t('scanSdk.provisionalNote')"
+          >
+            <span class="text-[12px] text-[#8E98A8] whitespace-nowrap">
+              {{ t("scanSdk.liveHr") }}
+            </span>
+            <div class="flex items-baseline gap-1">
+              <span
+                class="text-[22px] font-semibold leading-none tabular-nums text-[#195279] dark:text-[#FAFAFA]"
+              >
+                {{ hrSementara !== null ? Math.round(hrSementara) : "–" }}
+              </span>
+              <span class="text-[12px] text-[#6F6F6F] dark:text-[#AAAAAA]">
+                bpm
+              </span>
+            </div>
+          </div>
+
+          <div class="w-px self-stretch bg-[#DEDEDE] dark:bg-[#3A3B3D]"></div>
+
+          <div class="flex flex-col gap-1 shrink-0">
+            <span class="text-[12px] text-[#8E98A8] whitespace-nowrap">
+              {{ t("scanSdk.quality") }}
+            </span>
+            <div class="flex items-baseline gap-1">
+              <span
+                class="text-[22px] font-semibold leading-none tabular-nums text-[#195279] dark:text-[#FAFAFA]"
+              >
+                {{ kualitas !== null ? Math.round(kualitas * 100) : "–" }}
+              </span>
+              <span class="text-[12px] text-[#6F6F6F] dark:text-[#AAAAAA]">
+                %
+              </span>
+            </div>
+          </div>
+
+          <div class="relative basis-full sm:basis-auto sm:flex-1 h-10 min-w-0">
+            <svg
+              class="absolute inset-0 w-full h-full"
+              :viewBox="`0 0 ${LEBAR_GELOMBANG} ${TINGGI_GELOMBANG}`"
+              preserveAspectRatio="none"
+              aria-hidden="true"
+            >
+              <defs>
+                <linearGradient id="sqi-isi" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#2AB857" stop-opacity="0.22" />
+                  <stop offset="100%" stop-color="#2AB857" stop-opacity="0" />
+                </linearGradient>
+              </defs>
+              <template v-if="titikSqi">
+                <polygon :points="areaSqi" fill="url(#sqi-isi)" />
+                <polyline
+                  :points="titikSqi"
+                  fill="none"
+                  stroke="#2AB857"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  vector-effect="non-scaling-stroke"
+                />
+              </template>
+              <line
+                v-else
+                x1="0"
+                :x2="LEBAR_GELOMBANG"
+                :y1="TINGGI_GELOMBANG / 2"
+                :y2="TINGGI_GELOMBANG / 2"
+                stroke="#DEDEDE"
+                stroke-width="1"
+                stroke-dasharray="4 4"
+                vector-effect="non-scaling-stroke"
+              />
+            </svg>
+            <span
+              v-if="titikSqi"
+              class="absolute right-0 w-1.5 h-1.5 -mt-[3px] -mr-[3px] rounded-full bg-[#2AB857] animate-pulse"
+              :style="{ top: ujungSqi + '%' }"
+            ></span>
+          </div>
+        </div>
+
+        <div
           v-if="debug"
           class="flex flex-wrap gap-x-4 gap-y-1 text-[12px] text-[#8E98A8]"
         >
-          <span v-if="kualitas !== null">
-            {{ t("scanSdk.quality") }}: {{ Math.round(kualitas * 100) }}%
-          </span>
-
-          <span v-if="hrSementara !== null">
-            {{ t("scanSdk.liveHr") }}: {{ Math.round(hrSementara) }} bpm
-            <span class="opacity-70">({{ t("scanSdk.provisionalNote") }})</span>
-          </span>
-
           <span
-            v-if="lajuAnalyzer !== null"
+            v-if="debug && lajuAnalyzer !== null"
             :class="lajuAnalyzer < ambangHz ? 'text-red-600 font-medium' : ''"
           >
             {{ t("scanSdk.rateAnalyzer") }}: {{ lajuAnalyzer.toFixed(1) }} Hz
@@ -707,11 +825,11 @@ defineExpose({ ulangiScan });
               ({{ t("scanSdk.rateNeeded", { hz: ambangHz }) }})
             </span>
           </span>
-          <span v-if="lajuDiterima !== null">
+          <span v-if="debug && lajuDiterima !== null">
             {{ t("scanSdk.rateAccepted") }}: {{ lajuDiterima.toFixed(1) }} Hz
           </span>
 
-          <span v-if="lajuKamera !== null">
+          <span v-if="debug && lajuKamera !== null">
             {{ t("scanSdk.rateCamera") }}: {{ lajuKamera.toFixed(0) }} Hz
           </span>
         </div>

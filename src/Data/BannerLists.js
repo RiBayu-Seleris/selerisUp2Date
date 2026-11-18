@@ -82,4 +82,24 @@ export const bannerLists = [
       base: 25,
     },
   },
+  {
+    banner: "Drive.png",
+    key: "drive",
+    logo: "drive.png",
+    darklogo: "drive.png",
+    linelightcolor: "#7cc417",
+    url: "https://selerisauto.ai",
+    logoWidth: {
+      lg: 160,
+      md: 110,
+      sm: 110,
+      base: 80,
+    },
+    logoHeight: {
+      lg: 48,
+      md: 30,
+      sm: 30,
+      base: 22,
+    },
+  },
 ];
