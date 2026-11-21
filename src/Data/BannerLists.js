@@ -102,4 +102,24 @@ export const bannerLists = [
       base: 22,
     },
   },
+  {
+    banner: "Proper.webp",
+    key: "proper",
+    logo: "proper.svg",
+    darklogo: "proper.svg",
+    linelightcolor: "#26DCA2",
+    url: "https://lp-proper.seleris.ai",
+    logoWidth: {
+      lg: 160,
+      md: 110,
+      sm: 110,
+      base: 80,
+    },
+    logoHeight: {
+      lg: 48,
+      md: 32,
+      sm: 32,
+      base: 24,
+    },
+  },
 ];
