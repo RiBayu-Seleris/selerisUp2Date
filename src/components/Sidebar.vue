@@ -11,6 +11,7 @@ import { aboutList } from "@/Data/AboutList";
 import { productList } from "@/Data/ProductList";
 import { technologyList } from "@/Data/TechnologyList";
 import { SolutionLists } from "@/Data/SolutionLists";
+import { resourceList } from "@/Data/ResourceList";
 import { onMounted } from "vue";
 import ArrowRight from "@/components/icons/ArrowRight.vue";
 
@@ -58,6 +59,12 @@ const toggleTechnology = () => {
 const toggleSolution = () => {
   isSolutionOpen.value = !isSolutionOpen.value;
   // isProductOpen.value = false;
+};
+
+const hasNewResource = resourceList.some((resource) => resource.isNew);
+const isResourceOpen = ref(hasNewResource);
+const toggleResource = () => {
+  isResourceOpen.value = !isResourceOpen.value;
 };
 
 onMounted(() => {
@@ -455,14 +462,99 @@ onUnmounted(() => {
                 </transition> -->
               </div>
 
-              <div class="w-full h-auto">
-                <Navlink href="/blogs">
-                  <p
-                    class="text-[#374151] dark:text-[#FAFAFA] font-[500] text-[16px] sm:text-[18px]"
+              <div class="w-full h-auto flex flex-col">
+                <button
+                  id="buttonResourceListMenu"
+                  :aria-label="$t('nav.resources')"
+                  :aria-expanded="isResourceOpen"
+                  @click.stop="toggleResource"
+                  class="w-full h-auto flex flex-row justify-between pr-1"
+                >
+                  <div class="w-full h-auto flex items-center gap-2">
+                    <span
+                      v-if="hasNewResource"
+                      class="relative flex w-2 h-2 shrink-0"
+                      aria-hidden="true"
+                    >
+                      <span
+                        class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#1AB24F] opacity-75 motion-reduce:animate-none dark:bg-[#3DDC84]"
+                      ></span>
+                      <span
+                        class="relative inline-flex w-2 h-2 rounded-full bg-[#1AB24F] dark:bg-[#3DDC84]"
+                      ></span>
+                    </span>
+                    <p
+                      class="text-[#374151] dark:text-[#FAFAFA] text-[16px] sm:text-[18px] font-[500]"
+                    >
+                      {{ $t("nav.resources") }}
+                    </p>
+                    <span
+                      v-if="hasNewResource"
+                      class="rounded-full bg-[#1AB24F] px-2 py-[2px] text-[9px] sm:text-[10px] font-[700] tracking-[0.06em] text-white"
+                      >{{ $t("nav.newBadge") }}</span
+                    >
+                  </div>
+                  <div class="text-[#374151] dark:text-[#FAFAFA]">
+                    <svg
+                      class="w-4 sm:w-5 h-auto transition-transform duration-200 transform"
+                      :class="{ 'rotate-90': isResourceOpen }"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="3"
+                      viewBox="0 0 24 24"
+                    >
+                      <path
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                        d="M9 5l7 7-7 7"
+                      />
+                    </svg>
+                  </div>
+                </button>
+                <transition name="fade">
+                  <div
+                    v-if="isResourceOpen"
+                    class="w-full h-auto flex flex-col mt-2 sm:mt-3 gap-1"
                   >
-                    {{ $t("nav.blogs") }}
-                  </p>
-                </Navlink>
+                    <Navlink
+                      v-for="resource in resourceList"
+                      :key="resource.key"
+                      :href="resource.url"
+                      class="w-full"
+                    >
+                      <div class="flex items-center gap-3 w-full py-1.5">
+                        <span
+                          class="w-8 h-8 sm:w-9 sm:h-9 shrink-0 rounded-lg p-1.5 sm:p-2 flex items-center justify-center"
+                          :class="
+                            resource.isNew
+                              ? 'bg-[#1AB24F]/[0.12] text-[#159447] dark:bg-[#1AB24F]/20 dark:text-[#5EE38F]'
+                              : 'bg-[#F3F4F6] text-[#6B7280] dark:bg-white/[0.06] dark:text-[#C9C9C9]'
+                          "
+                        >
+                          <component :is="resource.icon" />
+                        </span>
+                        <span class="flex flex-col min-w-0 flex-1">
+                          <span
+                            class="flex items-center gap-2 text-[13px] sm:text-[16px] font-[500] text-[#4B5563] dark:text-[#E5E7EB]"
+                          >
+                            {{ $t(`nav.resource_items.${resource.key}.title`) }}
+                            <span
+                              v-if="resource.isNew"
+                              class="rounded-full bg-[#1AB24F] px-1.5 py-[1px] text-[9px] font-[700] tracking-[0.06em] text-white"
+                              >{{ $t("nav.newBadge") }}</span
+                            >
+                          </span>
+                          <span
+                            class="text-[11px] sm:text-[13px] text-[#8E98A8] leading-snug"
+                            >{{
+                              $t(`nav.resource_items.${resource.key}.desc`)
+                            }}</span
+                          >
+                        </span>
+                      </div>
+                    </Navlink>
+                  </div>
+                </transition>
               </div>
 
               <div class="w-full h-auto">
@@ -471,16 +563,6 @@ onUnmounted(() => {
                     class="text-[#374151] dark:text-[#FAFAFA] font-[500] text-[16px] sm:text-[18px]"
                   >
                     {{ $t("nav.services") }}
-                  </p>
-                </Navlink>
-              </div>
-
-              <div class="w-full h-auto">
-                <Navlink href="/careers">
-                  <p
-                    class="text-[#374151] dark:text-[#FAFAFA] font-[500] text-[16px] sm:text-[18px]"
-                  >
-                    {{ $t("nav.careers") }}
                   </p>
                 </Navlink>
               </div>

@@ -195,6 +195,16 @@ const routes = [
 
   // Careers
   {
+    path: "/workshop",
+    redirect: "/workshop/healthpricing-360",
+  },
+  {
+    path: "/workshop/healthpricing-360",
+    name: "WorkshopHealthPricing360",
+    component: () => import("@/views/Workshop/HealthPricing360.vue"),
+    meta: { title: "HEALTHPRICING 360° Workshop" },
+  },
+  {
     path: "/careers",
     name: "Careers",
     component: () => import("@/views/Careers.vue"),
