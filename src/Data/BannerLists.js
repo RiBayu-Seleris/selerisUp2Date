@@ -122,4 +122,24 @@ export const bannerLists = [
       base: 24,
     },
   },
+  {
+    banner: "Selfit.webp",
+    key: "selfit",
+    logo: "selfit.svg",
+    darklogo: "selfit.svg",
+    linelightcolor: "#01A3E8",
+    url: "https://lp-selfit.seleris.ai/",
+    logoWidth: {
+      lg: 160,
+      md: 110,
+      sm: 110,
+      base: 80,
+    },
+    logoHeight: {
+      lg: 48,
+      md: 32,
+      sm: 32,
+      base: 24,
+    },
+  },
 ];
