@@ -22,5 +22,6 @@ export const resourceList = [
     url: healthPricing360.path,
     icon: ResourceWorkshop,
     isNew: isWorkshopHighlighted(healthPricing360),
+    isHidden: !healthPricing360.isPublished,
   },
-];
+].filter((resource) => !resource.isHidden);

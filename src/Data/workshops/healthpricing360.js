@@ -1,6 +1,7 @@
 export const healthPricing360 = {
   slug: "healthpricing-360",
   path: "/workshop/healthpricing-360",
+  isPublished: false,
   name: "HEALTHPRICING 360°",
   organizer: "Shield",
   durationDays: 2,

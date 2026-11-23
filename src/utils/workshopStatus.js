@@ -6,7 +6,7 @@ const endOfDay = (value) => {
 };
 
 export function isWorkshopHighlighted(workshop, now = new Date()) {
-  if (!workshop?.registration?.isOpen) return false;
+  if (!workshop?.isPublished || !workshop?.registration?.isOpen) return false;
   const end = endOfDay(workshop.event?.endDate || workshop.event?.startDate);
   return !end || now <= end;
 }

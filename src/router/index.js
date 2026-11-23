@@ -1,4 +1,5 @@
 import { createRouter, createWebHistory } from "vue-router";
+import { healthPricing360 } from "@/Data/workshops/healthpricing360";
 
 // "ai-powered" -> "Ai Powered"
 const slugToTitle = (slug) =>
@@ -203,6 +204,8 @@ const routes = [
     name: "WorkshopHealthPricing360",
     component: () => import("@/views/Workshop/HealthPricing360.vue"),
     meta: { title: "HEALTHPRICING 360° Workshop" },
+    beforeEnter: () =>
+      healthPricing360.isPublished || { path: "/", replace: true },
   },
   {
     path: "/careers",

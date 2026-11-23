@@ -39,7 +39,7 @@ export function workshopStaticMeta() {
         ),
       );
 
-      for (const page of PAGES) {
+      for (const page of PAGES.filter((item) => item.workshop.isPublished)) {
         const seo = messages.workshop[page.key].seo;
         const url = SITE_ORIGIN + page.workshop.path;
         const image = page.workshop.seo.ogImage
