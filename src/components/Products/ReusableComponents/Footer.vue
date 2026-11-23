@@ -121,8 +121,8 @@ const connectColor = computed(() => {
               <p
                 class="text-[#B8B8B8] text-base xl:text-[18px] text-justify lg:text-left xl:text-left"
               >
-                Transform the Life and Medical industry by making it more
-                efficient, accurate, and accessible for everyone
+                Transform the Insurance industry by making it more efficient,
+                accurate, and accessible for everyone.
               </p>
             </div>
             <div class="w-full h-auto mt-4">
