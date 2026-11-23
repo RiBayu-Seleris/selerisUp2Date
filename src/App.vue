@@ -586,7 +586,11 @@ onMounted(() => {
 
           <section
             class="flex flex-col relative w-full mx-auto h-auto mt-32 px-8 xls:px-8 2xls:px-0"
-            v-if="route.path !== '/blogs' && !route.path.startsWith('/blog/')"
+            v-if="
+              route.path !== '/blogs' &&
+              !route.path.startsWith('/blog/') &&
+              !route.path.startsWith('/workshop')
+            "
           >
             <Touch />
           </section>
