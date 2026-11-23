@@ -4,7 +4,6 @@ import vue from "@vitejs/plugin-vue";
 import path from "path"; // <-- tambahkan ini
 import vueDevTools from "vite-plugin-vue-devtools";
 import { visualizer } from "rollup-plugin-visualizer";
-import { workshopStaticMeta } from "./build/workshopStaticMeta.js";
 
 // "tailwindcss": "^3.3.5",
 
@@ -59,8 +58,7 @@ export default defineConfig({
     port: 5179,
     proxy: {
       "/api": {
-        target:
-          process.env.VITE_PROXY_TARGET || "https://sentris-api.seleris.ai",
+        target: process.env.VITE_PROXY_TARGET || "https://sentris-api.seleris.ai",
         changeOrigin: true,
       },
     },
@@ -68,7 +66,6 @@ export default defineConfig({
   plugins: [
     vue(),
     isolasiPemindai(),
-    workshopStaticMeta(),
     // react(),
     process.env.ANALYZE === "true" &&
       visualizer({

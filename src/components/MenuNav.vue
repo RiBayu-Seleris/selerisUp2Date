@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onMounted, onUnmounted, ref } from "vue";
+import { onMounted, onUnmounted, ref } from "vue";
 import { useScrollStore } from "@/stores/scroll";
 import { useRoute } from "vue-router";
 import Navlink from "@/components/Navlink.vue";
@@ -7,7 +7,6 @@ import { productList } from "@/Data/ProductList";
 import { aboutList } from "@/Data/AboutList";
 import { technologyList } from "@/Data/TechnologyList";
 import { SolutionLists } from "@/Data/SolutionLists";
-import { resourceList } from "@/Data/ResourceList";
 import ArrowRight from "@/components/icons/ArrowRight.vue";
 
 // const { isScrolled } = useScrollStore();
@@ -16,14 +15,6 @@ const isHoveringAbout = ref(false);
 const isHoveringProduct = ref(false);
 const isHoveringTechnology = ref(false);
 const isHoveringSolution = ref(false);
-const isHoveringResource = ref(false);
-const hasNewResource = resourceList.some((resource) => resource.isNew);
-const isResourceRoute = computed(
-  () =>
-    route.path.startsWith("/blog") ||
-    route.path.startsWith("/careers") ||
-    route.path.startsWith("/workshop"),
-);
 const showUnderConstructionModal = ref(false);
 const isScrolled = ref(false);
 
@@ -309,89 +300,13 @@ onUnmounted(() => {
       </div>
     </li>
 
-    <li
-      class="relative list-none"
-      @mouseenter="isHoveringResource = true"
-      @mouseleave="isHoveringResource = false"
-    >
-      <span
-        class="cursor-pointer relative inline-flex items-center gap-2 font-[500] text-[12pt] lg:text-[10pt] xl:text-[12pt]"
+    <li>
+      <Navlink
+        class="text-[12pt] lg:text-[10pt] xl:text-[12pt] text-animate-hover dark:dark-text-animate-hover font-[500]"
+        href="/blogs"
       >
-        <span
-          v-if="hasNewResource"
-          class="relative flex w-2 h-2 shrink-0"
-          aria-hidden="true"
-        >
-          <span
-            class="absolute inline-flex h-full w-full animate-ping rounded-full bg-[#1AB24F] opacity-75 motion-reduce:animate-none dark:bg-[#3DDC84]"
-          ></span>
-          <span
-            class="relative inline-flex w-2 h-2 rounded-full bg-[#1AB24F] dark:bg-[#3DDC84]"
-          ></span>
-        </span>
-        <span
-          class="text-animate-hover dark:dark-text-animate-hover"
-          :class="isResourceRoute ? 'text-[#18AB53] dark:text-[#EEEEEE]' : ''"
-          >{{ $t("nav.resources") }} ▾</span
-        >
-      </span>
-
-      <div
-        v-if="isHoveringResource"
-        @mouseenter="isHoveringResource = true"
-        @mouseleave="isHoveringResource = false"
-        class="absolute left-0 top-full z-50 pt-8"
-      >
-        <div
-          class="w-full h-auto p-[1px] dark:bg-gradient-to-r dark:from-[#565656]/0 dark:to-[#BCBCBC]/50 rounded-2xl shadow-lg"
-        >
-          <div
-            class="flex flex-col w-[330px] bg-white p-2 rounded-2xl shadow-lg gap-1 dark:bg-[#1D2426]"
-          >
-            <Navlink
-              v-for="resource in resourceList"
-              :key="resource.key"
-              :href="resource.url"
-              class="group w-full"
-            >
-              <div
-                class="flex items-center gap-3.5 w-full rounded-xl px-3 py-3 transition-colors duration-200"
-                :class="
-                  route.path === resource.url
-                    ? 'bg-[#1AB24F]/[0.08] dark:bg-white/[0.06]'
-                    : 'group-hover:bg-[#F3F4F6] dark:group-hover:bg-white/[0.05]'
-                "
-              >
-                <span
-                  class="w-10 h-10 shrink-0 rounded-[10px] p-2.5 flex items-center justify-center transition-colors duration-200"
-                  :class="
-                    resource.isNew
-                      ? 'bg-[#1AB24F]/[0.12] text-[#159447] dark:bg-[#1AB24F]/20 dark:text-[#5EE38F]'
-                      : 'bg-[#F3F4F6] text-[#6B7280] group-hover:text-[#159447] dark:bg-white/[0.06] dark:text-[#C9C9C9]'
-                  "
-                >
-                  <component :is="resource.icon" />
-                </span>
-                <span class="flex flex-col min-w-0 flex-1">
-                  <span
-                    class="text-[15px] font-[600] text-[#1F2937] dark:text-[#FAFAFA] leading-tight"
-                    >{{ $t(`nav.resource_items.${resource.key}.title`) }}</span
-                  >
-                  <span
-                    class="text-[12.5px] font-[400] text-[#6B7280] dark:text-[#A3A3A3] mt-1 leading-snug"
-                    >{{ $t(`nav.resource_items.${resource.key}.desc`) }}</span
-                  >
-                </span>
-                <span
-                  v-if="resource.isNew"
-                  class="shrink-0 self-start mt-0.5 rounded-full bg-[#1AB24F] px-2 py-[3px] text-[10px] font-[700] tracking-[0.06em] text-white"
-                  >{{ $t("nav.newBadge") }}</span
-                >
-              </div>
-            </Navlink>
-          </div>
-        </div>
-      </div>
+        {{ $t("nav.blogs") }}
+      </Navlink>
     </li>
     <li>
       <Navlink
@@ -399,6 +314,14 @@ onUnmounted(() => {
         href="/services"
       >
         {{ $t("nav.services") }}
+      </Navlink>
+    </li>
+    <li>
+      <Navlink
+        class="text-[12pt] lg:text-[10pt] xl:text-[12pt] text-animate-hover dark:dark-text-animate-hover font-[500]"
+        href="/careers"
+      >
+        {{ $t("nav.careers") }}
       </Navlink>
     </li>
   </ul>

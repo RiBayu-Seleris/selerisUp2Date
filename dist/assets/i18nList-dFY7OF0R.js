@@ -1,0 +1,1 @@
+import{O as i,f as m,A as n}from"./vendor-BjTQ16eS.js";function p(t,o,s){const{t:u}=i();return m(()=>n(o).map((f,a)=>{const e={...f};for(const r of s)e[r]=u(`${n(t)}.${a}.${r}`);return e}))}function d(t){return Array.from({length:t},()=>({}))}export{d as e,p as u};

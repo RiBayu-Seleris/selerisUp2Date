@@ -13,7 +13,6 @@ import Testimonial from "@/components/Home/Testimonial.vue";
 import Blogs from "@/components/Home/Blogs.vue";
 import Different from "@/components/Home/Different.vue";
 import FaceTracker from "@/components/Home/FaceTracker.vue";
-import WorkshopPopup from "@/components/Home/WorkshopPopup.vue";
 // import Roadmap from "@/components/Home/Roadmap.vue";
 </script>
 
@@ -99,8 +98,6 @@ import WorkshopPopup from "@/components/Home/WorkshopPopup.vue";
   >
     <Different />
   </section>
-
-  <WorkshopPopup />
 
   <!-- <section
     data-aos="fade-up" class="flex flex-col relative w-full h-auto my-20">
