@@ -2271,7 +2271,9 @@
       "directory": {
         "eyebrow": "Program lainnya",
         "title": "Jelajahi workshop lainnya",
-        "desc": "Temukan program yang sesuai dengan peran dan kebutuhan tim Anda."
+        "desc": "Temukan program yang sesuai dengan peran dan kebutuhan tim Anda.",
+        "allEyebrow": "Daftar workshop",
+        "allTitle": "Semua workshop"
       },
       "filter": {
         "search": "Cari workshop",

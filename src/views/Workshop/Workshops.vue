@@ -31,8 +31,8 @@ const SOCIALS = [
   },
 ];
 
-const isEmpty = computed(
-  () => state.value === "ready" && items.value.length === 0,
+const showDirectory = computed(
+  () => state.value === "ready" && items.value.length > 0,
 );
 
 const query = ref("");
@@ -153,21 +153,26 @@ usePageMeta(() => ({
     </section>
 
     <section class="relative w-full px-4 sm:px-8 mt-20 lg:mt-28">
-      <div
-        v-if="!isEmpty"
-        data-aos="fade-up"
-        class="flex flex-col gap-5 px-1 lg:flex-row lg:items-end lg:justify-between"
-      >
-        <div>
-          <WorkshopEyebrow index="02" :label="t(`${NS}.directory.eyebrow`)" />
-          <h2
-            class="mt-6 text-[26px] sm:text-[34px] xl:text-[42px] font-[700] leading-[1.15] tracking-[-0.02em] text-[#0B1324] dark:text-white"
-          >
-            {{ t(`${NS}.directory.title`) }}
-          </h2>
-        </div>
+      <div v-if="showDirectory" class="max-w-[860px] px-1">
+        <WorkshopEyebrow
+          index="02"
+          :label="
+            featured
+              ? t(`${NS}.directory.eyebrow`)
+              : t(`${NS}.directory.allEyebrow`)
+          "
+        />
+        <h2
+          class="mt-6 text-[26px] sm:text-[34px] xl:text-[42px] font-[700] leading-[1.15] tracking-[-0.02em] text-[#0B1324] dark:text-white"
+        >
+          {{
+            featured
+              ? t(`${NS}.directory.title`)
+              : t(`${NS}.directory.allTitle`)
+          }}
+        </h2>
         <p
-          class="max-w-[440px] text-[15px] sm:text-[16px] leading-[1.7] text-[#475467] dark:text-[#A3A3A3]"
+          class="mt-4 max-w-[640px] text-[15px] sm:text-[16px] leading-[1.7] text-[#475467] dark:text-[#A3A3A3]"
         >
           {{ t(`${NS}.directory.desc`) }}
         </p>

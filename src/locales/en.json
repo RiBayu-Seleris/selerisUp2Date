@@ -2271,7 +2271,9 @@
       "directory": {
         "eyebrow": "More programmes",
         "title": "Explore more workshops",
-        "desc": "Find a programme that fits your role and your team’s needs."
+        "desc": "Find a programme that fits your role and your team’s needs.",
+        "allEyebrow": "Workshop list",
+        "allTitle": "All workshops"
       },
       "filter": {
         "search": "Search workshops",
