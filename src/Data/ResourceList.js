@@ -1,7 +1,11 @@
 import ResourceBlog from "@/components/icons/ResourceBlog.vue";
 import ResourceCareer from "@/components/icons/ResourceCareer.vue";
 import ResourceWorkshop from "@/components/icons/ResourceWorkshop.vue";
-import { healthPricing360 } from "@/Data/workshops/healthpricing360";
+import {
+  WORKSHOP_LIST_PATH,
+  hasPublishedWorkshops,
+  publishedWorkshops,
+} from "@/Data/workshops";
 import { isWorkshopHighlighted } from "@/utils/workshopStatus";
 
 export const resourceList = [
@@ -19,9 +23,12 @@ export const resourceList = [
   },
   {
     key: "workshops",
-    url: healthPricing360.path,
+    url: WORKSHOP_LIST_PATH,
+    activePrefix: "/workshop",
     icon: ResourceWorkshop,
-    isNew: isWorkshopHighlighted(healthPricing360),
-    isHidden: !healthPricing360.isPublished,
+    isNew: publishedWorkshops.some((workshop) =>
+      isWorkshopHighlighted(workshop),
+    ),
+    isHidden: !hasPublishedWorkshops,
   },
 ].filter((resource) => !resource.isHidden);

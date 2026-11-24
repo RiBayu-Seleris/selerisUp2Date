@@ -7,6 +7,7 @@ import { useContentReady } from "@/components/Products/Shield/useContentReady";
 import { scrollToSection } from "@/utils/scrollToSection";
 import CurriculumDial from "./CurriculumDial.vue";
 import shieldMark from "@/assets/Products/images/Shield/v2/shield-mark.webp";
+import { WORKSHOP_LIST_PATH } from "@/Data/workshops";
 
 const props = defineProps({
   workshop: { type: Object, required: true },
@@ -75,7 +76,11 @@ const ready = useContentReady();
       <span aria-hidden="true" class="text-[#D0D5DD] dark:text-white/20"
         >/</span
       >
-      <span>{{ t(`${NS}.hero.breadcrumb.workshops`) }}</span>
+      <router-link
+        :to="WORKSHOP_LIST_PATH"
+        class="transition-colors hover:text-[#138A3D] dark:hover:text-[#5EE38F]"
+        >{{ t(`${NS}.hero.breadcrumb.workshops`) }}</router-link
+      >
       <span aria-hidden="true" class="text-[#D0D5DD] dark:text-white/20"
         >/</span
       >

@@ -513,7 +513,7 @@
     }
   },
   "footer": {
-    "tagline": "Transform the Insurance industry by making it more efficient, accurate, and accessible for everyone.",
+    "tagline": "Transform the insurance and healthcare industries by making them more efficient, accurate, and accessible for everyone.",
     "products": "Products",
     "company": "Company",
     "stayConnects": "Stay Connects",
@@ -2243,6 +2243,66 @@
     "notIsolated": "This page is not cross-origin isolated, so the scanner runs single-threaded and may struggle to reach the required frame rate."
   },
   "workshop": {
+    "list": {
+      "seo": {
+        "title": "Workshops — Seleris",
+        "description": "Professional workshops from Seleris for the insurance industry: programmes, schedules, and registration."
+      },
+      "breadcrumb": {
+        "home": "Home",
+        "resources": "Resources",
+        "workshops": "Workshops"
+      },
+      "eyebrow": "Workshops",
+      "title": "Professional workshops",
+      "titleAccent": "with Seleris",
+      "lead": "Hands-on training programmes for the insurance industry, from data and risk analysis to practice on Seleris platforms.",
+      "featured": "Featured workshop",
+      "scheduleTba": "Schedule to be announced",
+      "viewDetail": "View details",
+      "register": "Register now",
+      "status": {
+        "open": "Registration open",
+        "full": "Fully booked",
+        "closed": "Registration closed",
+        "past": "Completed"
+      },
+      "directory": {
+        "eyebrow": "More programmes",
+        "title": "Explore more workshops",
+        "desc": "Find a programme that fits your role and your team’s needs."
+      },
+      "filter": {
+        "search": "Search workshops",
+        "searchPh": "Search by title, topic, or product…",
+        "status": "Filter by status",
+        "all": "All",
+        "count": "Showing {n} of {total} workshops",
+        "reset": "Reset filters",
+        "noResult": "No workshops match your search.",
+        "noResultHint": "Try another keyword or choose the “All” status."
+      },
+      "next": {
+        "title": "More workshops coming soon",
+        "desc": "New programmes will be announced on this page."
+      },
+      "empty": {
+        "title": "No workshops are open yet",
+        "desc": "New programmes will be announced on this page."
+      },
+      "error": {
+        "title": "The workshop list could not be loaded.",
+        "retry": "Try again"
+      },
+      "preview": {
+        "badge": "Preview",
+        "label": "Example list with many workshops",
+        "actual": "Actual data",
+        "examples": "Examples ({n})",
+        "note": "This panel only appears in development (npm run dev) or when the URL has ?contoh-workshop. Example workshops are fictitious and have no detail page. In development, unpublished workshops are shown as well.",
+        "noDetail": "Example · no detail page"
+      }
+    },
     "formats": {
       "onsite": "Onsite",
       "online": "Online",

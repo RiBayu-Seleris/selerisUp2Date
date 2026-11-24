@@ -513,7 +513,7 @@
     }
   },
   "footer": {
-    "tagline": "Mentransformasi industri asuransi agar lebih efisien, akurat, dan dapat diakses oleh semua orang.",
+    "tagline": "Mentransformasi industri asuransi dan industri kesehatan agar lebih efisien, akurat, dan dapat diakses oleh semua orang.",
     "products": "Produk",
     "company": "Perusahaan",
     "stayConnects": "Tetap Terhubung",
@@ -2243,6 +2243,66 @@
     "notIsolated": "Halaman ini belum terisolasi lintas-origin, jadi pemindai berjalan satu thread dan bisa kesulitan mencapai laju gambar yang dibutuhkan."
   },
   "workshop": {
+    "list": {
+      "seo": {
+        "title": "Workshop — Seleris",
+        "description": "Workshop profesional dari Seleris untuk industri asuransi: daftar program, jadwal, dan pendaftaran."
+      },
+      "breadcrumb": {
+        "home": "Beranda",
+        "resources": "Resources",
+        "workshops": "Workshop"
+      },
+      "eyebrow": "Workshop",
+      "title": "Workshop profesional",
+      "titleAccent": "bersama Seleris",
+      "lead": "Program pelatihan praktis untuk industri asuransi, dari analisis data dan risiko hingga praktik langsung dengan platform Seleris.",
+      "featured": "Workshop pilihan",
+      "scheduleTba": "Jadwal segera diumumkan",
+      "viewDetail": "Lihat detail",
+      "register": "Daftar sekarang",
+      "status": {
+        "open": "Pendaftaran dibuka",
+        "full": "Kuota penuh",
+        "closed": "Pendaftaran ditutup",
+        "past": "Selesai"
+      },
+      "directory": {
+        "eyebrow": "Program lainnya",
+        "title": "Jelajahi workshop lainnya",
+        "desc": "Temukan program yang sesuai dengan peran dan kebutuhan tim Anda."
+      },
+      "filter": {
+        "search": "Cari workshop",
+        "searchPh": "Cari judul, topik, atau produk…",
+        "status": "Saring menurut status",
+        "all": "Semua",
+        "count": "Menampilkan {n} dari {total} workshop",
+        "reset": "Atur ulang",
+        "noResult": "Tidak ada workshop yang cocok dengan pencarian Anda.",
+        "noResultHint": "Coba kata kunci lain atau pilih status “Semua”."
+      },
+      "next": {
+        "title": "Workshop berikutnya segera hadir",
+        "desc": "Program baru akan diumumkan di halaman ini."
+      },
+      "empty": {
+        "title": "Belum ada workshop yang dibuka",
+        "desc": "Program baru akan diumumkan di halaman ini."
+      },
+      "error": {
+        "title": "Daftar workshop belum dapat dimuat.",
+        "retry": "Coba lagi"
+      },
+      "preview": {
+        "badge": "Pratinjau",
+        "label": "Contoh daftar dengan banyak workshop",
+        "actual": "Data asli",
+        "examples": "Contoh ({n})",
+        "note": "Panel ini hanya muncul saat pengembangan (npm run dev) atau bila URL diberi ?contoh-workshop. Workshop contoh bersifat fiktif dan tidak punya halaman detail. Saat pengembangan, workshop yang belum terbit ikut ditampilkan.",
+        "noDetail": "Contoh · tanpa halaman detail"
+      }
+    },
     "formats": {
       "onsite": "Tatap muka",
       "online": "Online",

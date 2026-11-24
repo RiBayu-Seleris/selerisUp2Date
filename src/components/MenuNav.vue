@@ -357,7 +357,9 @@ onUnmounted(() => {
               <div
                 class="flex items-center gap-3.5 w-full rounded-xl px-3 py-3 transition-colors duration-200"
                 :class="
-                  route.path === resource.url
+                  route.path === resource.url ||
+                  (resource.activePrefix &&
+                    route.path.startsWith(resource.activePrefix))
                     ? 'bg-[#1AB24F]/[0.08] dark:bg-white/[0.06]'
                     : 'group-hover:bg-[#F3F4F6] dark:group-hover:bg-white/[0.05]'
                 "

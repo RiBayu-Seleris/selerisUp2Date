@@ -9,7 +9,7 @@ const directorSeniorteams = [
   // Board of Directors and Senior Management
   {
     image: new URL(
-      "@/assets/images/leadership-teams/rinaldi.webp",
+      "@/assets/images/leadership-teams/rinaldi.png",
       import.meta.url,
     ).href,
     name: "Rinaldi Anwar",
@@ -17,7 +17,7 @@ const directorSeniorteams = [
   },
   // {
   //   image: new URL(
-  //     "@/assets/images/leadership-teams/shandy.webp",
+  //     "@/assets/images/leadership-teams/shandy.png",
   //     import.meta.url
   //   ).href,
   //   name: "Shandy Rahussholihin",
@@ -25,7 +25,7 @@ const directorSeniorteams = [
   // },
   {
     image: new URL(
-      "@/assets/images/leadership-teams/fendy.webp",
+      "@/assets/images/leadership-teams/fendy.png",
       import.meta.url,
     ).href,
     name: "Fendy Setiawan",
@@ -33,7 +33,7 @@ const directorSeniorteams = [
   },
   {
     image: new URL(
-      "@/assets/images/leadership-teams/rizal.webp",
+      "@/assets/images/leadership-teams/rizal.png",
       import.meta.url,
     ).href,
     name: "Rizal Alfaridzi",
@@ -41,7 +41,7 @@ const directorSeniorteams = [
   },
   {
     image: new URL(
-      "@/assets/images/leadership-teams/remzy.webp",
+      "@/assets/images/leadership-teams/remzy.png",
       import.meta.url,
     ).href,
     name: "Remzy Ramazan",
@@ -49,42 +49,54 @@ const directorSeniorteams = [
   },
   {
     image: new URL(
-      "@/assets/images/leadership-teams/harum.webp",
+      "@/assets/images/leadership-teams/harum.png",
       import.meta.url,
     ).href,
     name: "Harum Ananda",
     position: "Chief Research Officer",
   },
   {
-    image: new URL(
-      "@/assets/images/leadership-teams/prof.webp",
-      import.meta.url,
-    ).href,
+    image: new URL("@/assets/images/leadership-teams/prof.png", import.meta.url)
+      .href,
     name: "Prof. Alhadi Bustamam",
     position: "Senior Advisor",
   },
   {
     image: new URL(
-      "@/assets/images/leadership-teams/Benedicta.webp",
+      "@/assets/images/leadership-teams/Benedicta.png",
       import.meta.url,
     ).href,
     name: "dr. Benedicta E.T, M.Kes",
     position: "Senior Medical Advisor",
+  },
+  {
+    image: new URL(
+      "@/assets/images/leadership-teams/Yurika.png",
+      import.meta.url,
+    ).href,
+    name: "dr. Yurika Martalia",
+    position: "Medical Advisor",
+  },
+  {
+    image: new URL("@/assets/images/leadership-teams/Febi.png", import.meta.url)
+      .href,
+    name: "dr. Febi Revia",
+    position: "Medical Advisor",
   },
 ];
 const managementTeam = [
   // Management Team
   {
     image: new URL(
-      "@/assets/images/leadership-teams/riza.webp",
+      "@/assets/images/leadership-teams/Zahra.png",
       import.meta.url,
     ).href,
-    name: "Riza Afriani",
+    name: "Zahra Ulfa",
     position: "Marketing Manager",
   },
   {
     image: new URL(
-      "@/assets/images/leadership-teams/davva.webp",
+      "@/assets/images/leadership-teams/davva.png",
       import.meta.url,
     ).href,
     name: "M. Davva Alfaiz",

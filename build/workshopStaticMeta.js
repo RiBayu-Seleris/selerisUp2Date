@@ -1,7 +1,11 @@
 import fs from "fs";
 import path from "path";
 import { fileURLToPath } from "url";
-import { healthPricing360 } from "../src/Data/workshops/healthpricing360.js";
+import {
+  WORKSHOP_LIST_PATH,
+  publishedWorkshops,
+  workshopCatalog,
+} from "../src/Data/workshops/index.js";
 
 const SITE_ORIGIN = "https://seleris.ai";
 const LOCALE = "id";
@@ -16,12 +20,10 @@ const escape = (value) =>
 const MANAGED =
   /\s*<meta\s+(?:name|property)="(?:description|og:title|og:description|og:url|og:type|og:image|og:locale|twitter:title|twitter:description|twitter:image)"[\s\S]*?\/?>/g;
 
-const PAGES = [
-  {
-    workshop: healthPricing360,
-    key: "healthpricing360",
-  },
-];
+const PAGES = workshopCatalog.map((entry) => ({
+  workshop: entry.workshop,
+  key: entry.i18nKey,
+}));
 
 export function workshopStaticMeta() {
   return {
@@ -39,12 +41,25 @@ export function workshopStaticMeta() {
         ),
       );
 
-      for (const page of PAGES.filter((item) => item.workshop.isPublished)) {
-        const seo = messages.workshop[page.key].seo;
-        const url = SITE_ORIGIN + page.workshop.path;
-        const image = page.workshop.seo.ogImage
-          ? new URL(page.workshop.seo.ogImage, SITE_ORIGIN).href
-          : null;
+      const targets = PAGES.filter((item) => item.workshop.isPublished).map(
+        (page) => ({
+          seo: messages.workshop[page.key].seo,
+          path: page.workshop.path,
+          image: page.workshop.seo.ogImage,
+        }),
+      );
+      if (publishedWorkshops.length) {
+        targets.push({
+          seo: messages.workshop.list.seo,
+          path: WORKSHOP_LIST_PATH,
+          image: null,
+        });
+      }
+
+      for (const page of targets) {
+        const seo = page.seo;
+        const url = SITE_ORIGIN + page.path;
+        const image = page.image ? new URL(page.image, SITE_ORIGIN).href : null;
 
         const tags = [
           `<title>${escape(seo.title)}</title>`,
@@ -71,7 +86,7 @@ export function workshopStaticMeta() {
           .replace(MANAGED, "")
           .replace("</head>", `${tags}\n  </head>`);
 
-        const target = path.join(outDir, page.workshop.path, "index.html");
+        const target = path.join(outDir, page.path, "index.html");
         fs.mkdirSync(path.dirname(target), { recursive: true });
         fs.writeFileSync(target, html);
       }
