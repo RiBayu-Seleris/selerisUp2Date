@@ -3,15 +3,27 @@ import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import WorkshopEyebrow from "./WorkshopEyebrow.vue";
 
-const NS = "workshop.healthpricing360.faq";
-const { t, tm, rt } = useI18n();
+const props = defineProps({
+  workshop: { type: Object, required: true },
+});
 
-const items = computed(() =>
-  tm(`${NS}.items`).map((m) => ({
+const NS = "workshop.healthpricing360.faq";
+const { t, tm, rt, locale } = useI18n();
+
+const items = computed(() => {
+  const fromSentris = props.workshop.faq || [];
+  if (fromSentris.length) {
+    const lang = locale.value;
+    return fromSentris.map((item) => ({
+      question: item.question[lang] || item.question.id,
+      answer: item.answer[lang] || item.answer.id,
+    }));
+  }
+  return tm(`${NS}.items`).map((m) => ({
     question: rt(m.question),
     answer: rt(m.answer),
-  })),
-);
+  }));
+});
 
 const open = ref(0);
 

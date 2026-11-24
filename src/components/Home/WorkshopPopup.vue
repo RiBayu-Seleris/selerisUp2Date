@@ -1,18 +1,31 @@
 <script setup>
-import { onBeforeUnmount, onMounted, ref } from "vue";
+import { onBeforeUnmount, onMounted, reactive, ref, watch } from "vue";
 import { healthPricing360 as workshop } from "@/Data/workshops/healthpricing360";
 import { useWorkshopInfo } from "@/composables/useWorkshopInfo";
+import { useContentReady } from "@/components/Products/Shield/useContentReady";
 import shieldMark from "@/assets/Products/images/Shield/v2/shield-mark.webp";
 import ResourceWorkshop from "@/components/icons/ResourceWorkshop.vue";
 import { useSidebarStore } from "@/stores/sidebar";
-import { isWorkshopHighlighted } from "@/utils/workshopStatus";
+import { loadWorkshopList } from "@/consumeAPI/workshopsApi";
+import { featuredWorkshop, workshopStatus } from "@/utils/workshopStatus";
 
 const DISMISS_KEY = `seleris:workshop-popup:${workshop.slug}`;
 const SHOW_DELAY_MS = 1400;
 
 const visible = ref(false);
+const eligible = ref(false);
 const sidebar = useSidebarStore();
-const { dateLabel, timeLabel, formatLabel } = useWorkshopInfo(workshop);
+const contentReady = useContentReady();
+const info = reactive({
+  event: {
+    startDate: null,
+    endDate: null,
+    time: null,
+    timezone: "WIB",
+    format: null,
+  },
+});
+const { dateLabel, timeLabel, formatLabel } = useWorkshopInfo(info);
 
 let timer = null;
 
@@ -24,14 +37,6 @@ const wasDismissed = () => {
   }
 };
 
-const schedule = () => {
-  document.removeEventListener("seleris:content-ready", schedule);
-  clearTimeout(timer);
-  timer = setTimeout(() => {
-    visible.value = true;
-  }, SHOW_DELAY_MS);
-};
-
 const close = () => {
   visible.value = false;
   try {
@@ -41,15 +46,32 @@ const close = () => {
   }
 };
 
-onMounted(() => {
-  if (!isWorkshopHighlighted(workshop) || wasDismissed()) return;
-  document.addEventListener("seleris:content-ready", schedule);
-  timer = setTimeout(schedule, 12000);
+watch([contentReady, eligible], ([ready, ok]) => {
+  if (!ready || !ok || timer) return;
+  timer = setTimeout(() => {
+    visible.value = true;
+  }, SHOW_DELAY_MS);
+});
+
+onMounted(async () => {
+  if (wasDismissed()) return;
+  try {
+    const item = featuredWorkshop(await loadWorkshopList());
+    if (item?.slug !== workshop.slug || workshopStatus(item) !== "open") return;
+    Object.assign(info.event, {
+      startDate: item.start_date || null,
+      endDate: item.end_date || null,
+      timezone: item.timezone || "WIB",
+      format: item.format || null,
+    });
+    eligible.value = true;
+  } catch {
+    return;
+  }
 });
 
 onBeforeUnmount(() => {
   clearTimeout(timer);
-  document.removeEventListener("seleris:content-ready", schedule);
 });
 </script>
 

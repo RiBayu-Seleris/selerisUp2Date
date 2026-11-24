@@ -3,7 +3,6 @@ import path from "path";
 import { fileURLToPath } from "url";
 import {
   WORKSHOP_LIST_PATH,
-  publishedWorkshops,
   workshopCatalog,
 } from "../src/Data/workshops/index.js";
 
@@ -41,20 +40,16 @@ export function workshopStaticMeta() {
         ),
       );
 
-      const targets = PAGES.filter((item) => item.workshop.isPublished).map(
-        (page) => ({
-          seo: messages.workshop[page.key].seo,
-          path: page.workshop.path,
-          image: page.workshop.seo.ogImage,
-        }),
-      );
-      if (publishedWorkshops.length) {
-        targets.push({
-          seo: messages.workshop.list.seo,
-          path: WORKSHOP_LIST_PATH,
-          image: null,
-        });
-      }
+      const targets = PAGES.map((page) => ({
+        seo: messages.workshop[page.key].seo,
+        path: page.workshop.path,
+        image: page.workshop.seo.ogImage,
+      }));
+      targets.push({
+        seo: messages.workshop.list.seo,
+        path: WORKSHOP_LIST_PATH,
+        image: null,
+      });
 
       for (const page of targets) {
         const seo = page.seo;

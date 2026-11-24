@@ -2260,6 +2260,7 @@
       "featured": "Workshop pilihan",
       "scheduleTba": "Jadwal segera diumumkan",
       "viewDetail": "Lihat detail",
+      "detailSoon": "Halaman detail segera hadir",
       "register": "Daftar sekarang",
       "status": {
         "open": "Pendaftaran dibuka",
@@ -2287,20 +2288,12 @@
         "desc": "Program baru akan diumumkan di halaman ini."
       },
       "empty": {
-        "title": "Belum ada workshop yang dibuka",
-        "desc": "Program baru akan diumumkan di halaman ini."
+        "title": "Belum ada workshop yang dibuka saat ini",
+        "desc": "Program berikutnya sedang kami siapkan. Ikuti media sosial kami supaya tidak ketinggalan jadwal dan pendaftarannya."
       },
       "error": {
         "title": "Daftar workshop belum dapat dimuat.",
         "retry": "Coba lagi"
-      },
-      "preview": {
-        "badge": "Pratinjau",
-        "label": "Contoh daftar dengan banyak workshop",
-        "actual": "Data asli",
-        "examples": "Contoh ({n})",
-        "note": "Panel ini hanya muncul saat pengembangan (npm run dev) atau bila URL diberi ?contoh-workshop. Workshop contoh bersifat fiktif dan tidak punya halaman detail. Saat pengembangan, workshop yang belum terbit ikut ditampilkan.",
-        "noDetail": "Contoh · tanpa halaman detail"
       }
     },
     "formats": {
@@ -2637,15 +2630,6 @@
         "title": "Profil fasilitator",
         "tba": "Profil fasilitator akan segera diumumkan.",
         "leads": "Memandu",
-        "example": "Contoh",
-        "preview": {
-          "badge": "Pratinjau",
-          "label": "Contoh tampilan profil fasilitator",
-          "actual": "Data asli",
-          "show": "Tampilkan {n} contoh fasilitator",
-          "note": "Panel ini hanya muncul saat pengembangan (npm run dev) atau bila URL diberi ?contoh-fasilitator. Nama dan organisasi pada contoh bersifat fiktif.",
-          "count": "Jumlah"
-        },
         "prev": "Fasilitator sebelumnya",
         "next": "Fasilitator berikutnya",
         "focus": "Tampilkan profil {name}",
@@ -2766,7 +2750,8 @@
         "errorText": "Terjadi gangguan saat mengirim. Silakan coba lagi beberapa saat lagi.",
         "notAvailable": "Formulir belum dapat menerima pendaftaran. Silakan coba lagi nanti atau hubungi penyelenggara.",
         "tooMany": "Terlalu banyak percobaan. Tunggu sebentar lalu coba lagi.",
-        "closed": "Pendaftaran untuk workshop ini sudah ditutup."
+        "closed": "Pendaftaran untuk workshop ini sudah ditutup.",
+        "full": "Kuota workshop ini sudah penuh."
       }
     }
   }

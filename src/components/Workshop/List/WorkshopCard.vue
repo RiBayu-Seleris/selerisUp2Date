@@ -123,7 +123,7 @@ const place = computed(() =>
       <span
         v-else
         class="font-mono text-[10.5px] font-[600] uppercase tracking-[0.12em] text-[#98A2B3] dark:text-[#8A8A8A]"
-        >{{ t("workshop.list.preview.noDetail") }}</span
+        >{{ t("workshop.list.detailSoon") }}</span
       >
     </div>
   </component>

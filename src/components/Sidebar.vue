@@ -1,5 +1,5 @@
 <script setup>
-import { onUnmounted, ref, watch } from "vue";
+import { computed, onUnmounted, ref, watch } from "vue";
 import { useSidebarStore } from "@/stores/sidebar";
 import { useRoute } from "vue-router";
 import MenuIconClose from "@/components/icons/CloseIcon.vue";
@@ -12,6 +12,7 @@ import { productList } from "@/Data/ProductList";
 import { technologyList } from "@/Data/TechnologyList";
 import { SolutionLists } from "@/Data/SolutionLists";
 import { resourceList } from "@/Data/ResourceList";
+import { loadWorkshopList } from "@/consumeAPI/workshopsApi";
 import { onMounted } from "vue";
 import ArrowRight from "@/components/icons/ArrowRight.vue";
 
@@ -61,13 +62,23 @@ const toggleSolution = () => {
   // isProductOpen.value = false;
 };
 
-const hasNewResource = resourceList.some((resource) => resource.isNew);
-const isResourceOpen = ref(hasNewResource);
+const hasNewResource = computed(() =>
+  resourceList.value.some((resource) => resource.isNew),
+);
+const isResourceOpen = ref(false);
+watch(
+  hasNewResource,
+  (isNew) => {
+    if (isNew) isResourceOpen.value = true;
+  },
+  { immediate: true },
+);
 const toggleResource = () => {
   isResourceOpen.value = !isResourceOpen.value;
 };
 
 onMounted(() => {
+  loadWorkshopList().catch(() => {});
   observer.observe(document.documentElement, {
     attributes: true,
     attributeFilter: ["class"],

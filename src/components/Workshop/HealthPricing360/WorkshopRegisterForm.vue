@@ -125,7 +125,11 @@ defineExpose({ status });
       v-else-if="!workshop.registration.isOpen"
       class="flex h-full items-center justify-center py-16 text-center text-[16px] font-[500] text-[#4B5563] dark:text-[#A3A3A3]"
     >
-      {{ t(`${F}.result.closed`) }}
+      {{
+        workshop.registration.status === "full"
+          ? t(`${F}.result.full`)
+          : t(`${F}.result.closed`)
+      }}
     </div>
 
     <form

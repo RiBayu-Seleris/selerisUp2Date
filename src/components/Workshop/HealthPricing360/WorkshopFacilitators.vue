@@ -1,8 +1,6 @@
 <script setup>
-import { computed, ref } from "vue";
-import { useRoute } from "vue-router";
+import { computed } from "vue";
 import { useI18n } from "vue-i18n";
-import { facilitatorExamples } from "@/Data/workshops/facilitatorExamples";
 import FacilitatorGlassCard from "./FacilitatorGlassCard.vue";
 import FacilitatorCoverflow from "./FacilitatorCoverflow.vue";
 
@@ -12,21 +10,8 @@ const props = defineProps({
 
 const NS = "workshop.healthpricing360";
 const { t, tm, rt, locale } = useI18n();
-const route = useRoute();
 
 const COVERFLOW_FROM = 5;
-
-const previewEnabled = computed(
-  () => import.meta.env.DEV || route.query["contoh-fasilitator"] !== undefined,
-);
-
-const COUNT_OPTIONS = [0, 1, 2, 3, 4, 5, facilitatorExamples.length];
-
-const previewCount = ref(0);
-
-const isExample = computed(
-  () => previewEnabled.value && previewCount.value > 0,
-);
 
 const moduleTitles = computed(() =>
   tm(`${NS}.modules`).map((m) => rt(m.title)),
@@ -38,10 +23,7 @@ const dayOf = (moduleNumber) =>
   )?.day ?? 1;
 
 const people = computed(() => {
-  const source = isExample.value
-    ? facilitatorExamples.slice(0, previewCount.value)
-    : props.workshop.facilitators;
-  return source.map((person) => ({
+  return props.workshop.facilitators.map((person) => ({
     ...person,
     initials: String(person.name || "")
       .replace(/^(dr|drg|prof|ir)\.?\s+/i, "")
@@ -72,59 +54,6 @@ const variant = computed(() => {
 <template>
   <div>
     <div
-      v-if="previewEnabled"
-      class="mb-6 flex flex-col gap-3 rounded-2xl border border-dashed border-[#F79009]/50 bg-[#FFFAEB] px-4 py-3.5 dark:border-[#F79009]/40 dark:bg-[#F79009]/[0.06]"
-    >
-      <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
-        <span
-          class="rounded-md bg-[#F79009] px-2 py-0.5 font-mono text-[10px] font-[700] uppercase tracking-[0.12em] text-white"
-          >{{ t(`${NS}.facilitators.preview.badge`) }}</span
-        >
-        <span
-          class="text-[13.5px] font-[600] text-[#7A2E0E] dark:text-[#FEC84B]"
-          >{{ t(`${NS}.facilitators.preview.label`) }}</span
-        >
-        <div class="sm:ml-auto flex flex-wrap items-center gap-2">
-          <span
-            class="font-mono text-[11px] font-[600] uppercase tracking-[0.12em] text-[#93370D] dark:text-[#FEC84B]/80"
-            >{{ t(`${NS}.facilitators.preview.count`) }}</span
-          >
-          <div
-            role="group"
-            :aria-label="t(`${NS}.facilitators.preview.count`)"
-            class="inline-flex flex-wrap gap-1 rounded-xl border border-[#FEDF89] bg-white p-1 dark:border-white/10 dark:bg-[#1D2426]"
-          >
-            <button
-              v-for="option in COUNT_OPTIONS"
-              :key="option"
-              type="button"
-              :aria-pressed="previewCount === option"
-              :aria-label="
-                option
-                  ? t(`${NS}.facilitators.preview.show`, { n: option })
-                  : undefined
-              "
-              class="min-w-[40px] rounded-lg px-3 py-1.5 text-[13px] font-[700] transition-colors"
-              :class="
-                previewCount === option
-                  ? 'bg-[#071427] text-white dark:bg-[#F79009]'
-                  : 'text-[#7A2E0E] hover:bg-[#FEF0C7] dark:text-[#FEC84B] dark:hover:bg-white/5'
-              "
-              @click="previewCount = option"
-            >
-              {{ option || t(`${NS}.facilitators.preview.actual`) }}
-            </button>
-          </div>
-        </div>
-      </div>
-      <p
-        class="text-[12px] leading-[1.6] text-[#93370D] dark:text-[#FEC84B]/80"
-      >
-        {{ t(`${NS}.facilitators.preview.note`) }}
-      </p>
-    </div>
-
-    <div
       class="fg-panel relative isolate overflow-hidden rounded-[28px] md:rounded-[36px] px-4 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12"
     >
       <div
@@ -149,18 +78,13 @@ const variant = computed(() => {
       </h3>
 
       <div v-if="people.length" class="mt-6 sm:mt-8">
-        <FacilitatorCoverflow
-          v-if="variant === 'coverflow'"
-          :people="people"
-          :example="isExample"
-        />
+        <FacilitatorCoverflow v-if="variant === 'coverflow'" :people="people" />
 
         <FacilitatorGlassCard
           v-else-if="variant === 'feature'"
           :person="people[0]"
           variant="feature"
           :index="0"
-          :example="isExample"
         />
 
         <ul
@@ -168,12 +92,7 @@ const variant = computed(() => {
           class="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5"
         >
           <li v-for="(person, i) in people" :key="person.name">
-            <FacilitatorGlassCard
-              :person="person"
-              variant="wide"
-              :index="i"
-              :example="isExample"
-            />
+            <FacilitatorGlassCard :person="person" variant="wide" :index="i" />
           </li>
         </ul>
 
@@ -186,7 +105,6 @@ const variant = computed(() => {
               :person="person"
               variant="column"
               :index="i"
-              :example="isExample"
             />
           </li>
         </ul>
@@ -197,7 +115,6 @@ const variant = computed(() => {
               :person="person"
               variant="compact"
               :index="i"
-              :example="isExample"
             />
           </li>
         </ul>

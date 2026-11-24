@@ -1,11 +1,9 @@
 <script setup>
 import { computed, ref, watch } from "vue";
-import { useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
 import { usePageMeta } from "@/composables/usePageMeta";
 import { useWorkshopList } from "@/composables/useWorkshopList";
 import { WORKSHOP_LIST_PATH } from "@/Data/workshops";
-import { workshopExamples } from "@/Data/workshops/workshopExamples";
 import WorkshopEyebrow from "@/components/Workshop/HealthPricing360/WorkshopEyebrow.vue";
 import WorkshopFeatured from "@/components/Workshop/List/WorkshopFeatured.vue";
 import WorkshopCard from "@/components/Workshop/List/WorkshopCard.vue";
@@ -15,17 +13,27 @@ const FILTER_MIN = 4;
 const STATUS_FILTERS = ["open", "full", "closed", "past"];
 
 const { t } = useI18n();
-const route = useRoute();
 
-const previewEnabled = computed(
-  () => import.meta.env.DEV || route.query["contoh-workshop"] !== undefined,
+const { items, state, reload } = useWorkshopList();
+
+const SOCIALS = [
+  {
+    name: "LinkedIn",
+    url: "https://www.linkedin.com/company/seleris-meditekno-internasional-smi/posts/?feedView=all",
+  },
+  {
+    name: "Instagram",
+    url: "https://www.instagram.com/selerisindonesia/",
+  },
+  {
+    name: "TikTok",
+    url: "https://www.tiktok.com/@selerisindonesia?lang=id-ID",
+  },
+];
+
+const isEmpty = computed(
+  () => state.value === "ready" && items.value.length === 0,
 );
-const showExamples = ref(false);
-
-const { items, state, reload } = useWorkshopList({
-  includeDrafts: import.meta.env.DEV,
-  includeExamples: computed(() => previewEnabled.value && showExamples.value),
-});
 
 const query = ref("");
 const statusFilter = ref("all");
@@ -146,6 +154,7 @@ usePageMeta(() => ({
 
     <section class="relative w-full px-4 sm:px-8 mt-20 lg:mt-28">
       <div
+        v-if="!isEmpty"
         data-aos="fade-up"
         class="flex flex-col gap-5 px-1 lg:flex-row lg:items-end lg:justify-between"
       >
@@ -161,52 +170,6 @@ usePageMeta(() => ({
           class="max-w-[440px] text-[15px] sm:text-[16px] leading-[1.7] text-[#475467] dark:text-[#A3A3A3]"
         >
           {{ t(`${NS}.directory.desc`) }}
-        </p>
-      </div>
-
-      <div
-        v-if="previewEnabled"
-        class="mt-8 flex flex-col gap-3 rounded-2xl border border-dashed border-[#F79009]/50 bg-[#FFFAEB] px-4 py-3.5 dark:border-[#F79009]/40 dark:bg-[#F79009]/[0.06]"
-      >
-        <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
-          <span
-            class="rounded-md bg-[#F79009] px-2 py-0.5 font-mono text-[10px] font-[700] uppercase tracking-[0.12em] text-white"
-            >{{ t(`${NS}.preview.badge`) }}</span
-          >
-          <span
-            class="text-[13.5px] font-[600] text-[#7A2E0E] dark:text-[#FEC84B]"
-            >{{ t(`${NS}.preview.label`) }}</span
-          >
-          <div
-            role="group"
-            :aria-label="t(`${NS}.preview.label`)"
-            class="sm:ml-auto inline-flex flex-wrap gap-1 rounded-xl border border-[#FEDF89] bg-white p-1 dark:border-white/10 dark:bg-[#1D2426]"
-          >
-            <button
-              v-for="option in [false, true]"
-              :key="String(option)"
-              type="button"
-              :aria-pressed="showExamples === option"
-              class="rounded-lg px-3 py-1.5 text-[13px] font-[700] transition-colors"
-              :class="
-                showExamples === option
-                  ? 'bg-[#071427] text-white dark:bg-[#F79009]'
-                  : 'text-[#7A2E0E] hover:bg-[#FEF0C7] dark:text-[#FEC84B] dark:hover:bg-white/5'
-              "
-              @click="showExamples = option"
-            >
-              {{
-                option
-                  ? t(`${NS}.preview.examples`, { n: workshopExamples.length })
-                  : t(`${NS}.preview.actual`)
-              }}
-            </button>
-          </div>
-        </div>
-        <p
-          class="text-[12px] leading-[1.6] text-[#93370D] dark:text-[#FEC84B]/80"
-        >
-          {{ t(`${NS}.preview.note`) }}
         </p>
       </div>
 
@@ -370,10 +333,34 @@ usePageMeta(() => ({
             {{ items.length ? t(`${NS}.next.title`) : t(`${NS}.empty.title`) }}
           </p>
           <p
-            class="mt-2 max-w-[420px] text-[14px] leading-[1.65] text-[#475467] dark:text-[#A3A3A3]"
+            class="mt-2 max-w-[440px] text-[14px] leading-[1.65] text-[#475467] dark:text-[#A3A3A3]"
           >
             {{ items.length ? t(`${NS}.next.desc`) : t(`${NS}.empty.desc`) }}
           </p>
+          <ul class="mt-6 flex flex-wrap justify-center gap-2.5">
+            <li v-for="social in SOCIALS" :key="social.name">
+              <a
+                :href="social.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                class="inline-flex min-h-[44px] items-center gap-2 rounded-xl border border-[#E4E7EC] bg-white px-4 py-2.5 text-[14px] font-[600] text-[#0B1324] transition-colors hover:border-[#1AB24F]/50 hover:text-[#138A3D] dark:border-white/10 dark:bg-[#1D2426] dark:text-white dark:hover:border-[#3DDC84]/40 dark:hover:text-[#5EE38F]"
+              >
+                {{ social.name }}
+                <svg
+                  viewBox="0 0 24 24"
+                  class="w-3.5 h-3.5 shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="2.2"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  aria-hidden="true"
+                >
+                  <path d="M7 17 17 7M9 7h8v8" />
+                </svg>
+              </a>
+            </li>
+          </ul>
         </div>
       </template>
     </section>

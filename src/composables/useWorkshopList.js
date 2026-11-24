@@ -1,15 +1,12 @@
-import { computed, ref, unref } from "vue";
-import axios from "axios";
+import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { usePageLoadingStore } from "@/stores/pageLoading";
-import { WORKSHOP_DATA_SOURCE, workshopCatalog } from "@/Data/workshops";
-import { workshopExamples } from "@/Data/workshops/workshopExamples";
-
-const BASE_URL = import.meta.env.VITE_API_URL ?? "";
+import { detailPathFor } from "@/Data/workshops";
+import { loadWorkshopList, sentrisWorkshops } from "@/consumeAPI/workshopsApi";
 
 const STATUSES = ["open", "full", "closed", "past"];
 
-const pick = (value, locale) => {
+export const pickText = (value, locale) => {
   if (!value) return "";
   if (typeof value === "string") return value;
   return value[locale] || value.id || value.en || "";
@@ -23,13 +20,13 @@ const todayKey = () => {
 
 export const fromSentris = (item, locale) => ({
   slug: item.slug,
-  path: `/workshop/${item.slug}`,
+  path: detailPathFor(item.slug),
   name: item.name,
   organizer: item.organizer || "",
-  subtitle: pick(item.subtitle, locale),
-  summary: pick(item.summary, locale),
+  subtitle: pickText(item.subtitle, locale),
+  summary: pickText(item.summary, locale),
   highlights: (item.highlights || [])
-    .map((highlight) => pick(highlight, locale))
+    .map((highlight) => pickText(highlight, locale))
     .filter(Boolean),
   event: {
     startDate: item.start_date || null,
@@ -44,22 +41,6 @@ export const fromSentris = (item, locale) => ({
   registrationStatus: item.registration?.status || "closed",
   featured: Boolean(item.is_featured),
 });
-
-const fromCatalog = ({ workshop, i18nKey, featured }, t, tm, rt) => {
-  const ns = `workshop.${i18nKey}.hero`;
-  return {
-    slug: workshop.slug,
-    path: workshop.path,
-    name: workshop.name,
-    organizer: workshop.organizer,
-    subtitle: t(`${ns}.subtitle`),
-    summary: t(`${ns}.lead`),
-    highlights: tm(`${ns}.pills`).map((message) => rt(message)),
-    event: workshop.event,
-    registrationStatus: workshop.registration.isOpen ? "open" : "closed",
-    featured,
-  };
-};
 
 const resolveStatus = (item, today) => {
   const lastDay = item.event.endDate || item.event.startDate;
@@ -79,27 +60,19 @@ const compare = (a, b) => {
     : first.localeCompare(second);
 };
 
-export function useWorkshopList({
-  includeDrafts = false,
-  includeExamples = false,
-} = {}) {
-  const { t, tm, rt, locale } = useI18n();
-  const remote = ref([]);
-  const state = ref(WORKSHOP_DATA_SOURCE === "sentris" ? "loading" : "ready");
+export function useWorkshopList() {
+  const { locale } = useI18n();
+  const state = ref(sentrisWorkshops.value ? "ready" : "loading");
 
-  const load = async () => {
-    if (WORKSHOP_DATA_SOURCE !== "sentris") return;
+  const load = async ({ fresh = true } = {}) => {
     const pageLoading = usePageLoadingStore();
-    state.value = "loading";
+    if (!sentrisWorkshops.value) state.value = "loading";
     pageLoading.start();
     try {
-      const { data } = await axios.get(`${BASE_URL}/api/v1/app/workshops`, {
-        headers: { Accept: "application/json" },
-      });
-      remote.value = Array.isArray(data?.data) ? data.data : [];
+      await loadWorkshopList({ fresh });
       state.value = "ready";
     } catch {
-      state.value = "error";
+      state.value = sentrisWorkshops.value ? "ready" : "error";
     } finally {
       pageLoading.done();
     }
@@ -108,25 +81,13 @@ export function useWorkshopList({
   const items = computed(() => {
     const lang = locale.value;
     const today = todayKey();
-    const base =
-      WORKSHOP_DATA_SOURCE === "sentris"
-        ? remote.value.map((item) => fromSentris(item, lang))
-        : workshopCatalog
-            .filter((entry) => entry.workshop.isPublished || includeDrafts)
-            .map((entry) => fromCatalog(entry, t, tm, rt));
-    const examples = unref(includeExamples)
-      ? workshopExamples.map((item) => ({
-          ...fromSentris(item, lang),
-          path: null,
-          isExample: true,
-        }))
-      : [];
-    return [...base, ...examples]
+    return (sentrisWorkshops.value || [])
+      .map((item) => fromSentris(item, lang))
       .map((item) => ({ ...item, status: resolveStatus(item, today) }))
       .sort(compare);
   });
 
   load();
 
-  return { items, state, reload: load };
+  return { items, state, reload: () => load({ fresh: true }) };
 }

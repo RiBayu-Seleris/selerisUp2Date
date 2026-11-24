@@ -2,7 +2,8 @@
 import { nextTick, provide, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 import { useI18n } from "vue-i18n";
-import { healthPricing360 as workshop } from "@/Data/workshops/healthpricing360";
+import { healthPricing360 } from "@/Data/workshops/healthpricing360";
+import { useWorkshopDetail } from "@/composables/useWorkshopDetail";
 import { usePageMeta } from "@/composables/usePageMeta";
 import { useContentReady } from "@/components/Products/Shield/useContentReady";
 import { scrollToSection } from "@/utils/scrollToSection";
@@ -21,6 +22,7 @@ import WorkshopRegisterModal from "@/components/Workshop/HealthPricing360/Worksh
 const { t } = useI18n();
 const route = useRoute();
 const ready = useContentReady();
+const workshop = useWorkshopDetail(healthPricing360);
 
 const registrationOpen = ref(false);
 const openRegistration = () => {
@@ -61,7 +63,7 @@ usePageMeta(() => ({
     <WorkshopAudience />
     <WorkshopBenefits :workshop="workshop" />
     <WorkshopInfo :workshop="workshop" />
-    <WorkshopFaq />
+    <WorkshopFaq :workshop="workshop" />
     <WorkshopCta />
     <WorkshopRegisterModal
       :open="registrationOpen"

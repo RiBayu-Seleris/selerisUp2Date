@@ -5,7 +5,6 @@ import FacilitatorGlassCard from "./FacilitatorGlassCard.vue";
 
 const props = defineProps({
   people: { type: Array, required: true },
-  example: { type: Boolean, default: false },
 });
 
 const NS = "workshop.healthpricing360.facilitators";
@@ -143,12 +142,7 @@ onBeforeUnmount(() => resizeObserver?.disconnect());
             aria-hidden="true"
             class="absolute -inset-4 -z-10 rounded-[40px] bg-[#3DDC84]/25 blur-2xl"
           ></span>
-          <FacilitatorGlassCard
-            :person="person"
-            variant="cover"
-            :index="i"
-            :example="example"
-          />
+          <FacilitatorGlassCard :person="person" variant="cover" :index="i" />
           <span
             aria-hidden="true"
             class="pointer-events-none absolute inset-0 z-[3] rounded-[28px] bg-[#040c1a] transition-opacity duration-500"

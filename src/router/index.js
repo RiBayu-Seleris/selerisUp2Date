@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { healthPricing360 } from "@/Data/workshops/healthpricing360";
-import { WORKSHOP_LIST_PATH, hasPublishedWorkshops } from "@/Data/workshops";
+import { WORKSHOP_LIST_PATH } from "@/Data/workshops";
+import { loadWorkshopDetail } from "@/consumeAPI/workshopsApi";
 
 // "ai-powered" -> "Ai Powered"
 const slugToTitle = (slug) =>
@@ -205,18 +206,21 @@ const routes = [
     name: "Workshops",
     component: () => import("@/views/Workshop/Workshops.vue"),
     meta: { title: "Workshops" },
-    beforeEnter: () =>
-      hasPublishedWorkshops ||
-      import.meta.env.DEV || { path: "/", replace: true },
   },
   {
     path: "/workshop/healthpricing-360",
     name: "WorkshopHealthPricing360",
     component: () => import("@/views/Workshop/HealthPricing360.vue"),
     meta: { title: "HEALTHPRICING 360° Workshop" },
-    beforeEnter: () =>
-      healthPricing360.isPublished ||
-      import.meta.env.DEV || { path: "/", replace: true },
+    beforeEnter: async () => {
+      if (import.meta.env.DEV) return true;
+      try {
+        const detail = await loadWorkshopDetail(healthPricing360.slug);
+        return Boolean(detail) || { path: "/", replace: true };
+      } catch {
+        return true;
+      }
+    },
   },
   {
     path: "/careers",

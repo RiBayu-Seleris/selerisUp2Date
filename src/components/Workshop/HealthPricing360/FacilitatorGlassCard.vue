@@ -11,7 +11,6 @@ const props = defineProps({
       ["feature", "wide", "column", "compact", "cover"].includes(v),
   },
   index: { type: Number, default: 0 },
-  example: { type: Boolean, default: false },
 });
 
 const NS = "workshop.healthpricing360";
@@ -122,12 +121,6 @@ const shell = computed(
           aria-hidden="true"
           class="fg-corner fg-br right-3 bottom-3 border-b-2 border-r-2 rounded-br-[10px]"
         ></span>
-
-        <span
-          v-if="example"
-          class="absolute right-5 top-5 rounded-full border border-[#FEC84B]/50 bg-[#F79009]/25 px-2.5 py-0.5 font-mono text-[10px] font-[700] uppercase tracking-[0.12em] text-[#FEDF89] backdrop-blur-md"
-          >{{ t(`${NS}.facilitators.example`) }}</span
-        >
 
         <div
           v-if="captionOnPhoto"

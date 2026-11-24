@@ -2260,6 +2260,7 @@
       "featured": "Featured workshop",
       "scheduleTba": "Schedule to be announced",
       "viewDetail": "View details",
+      "detailSoon": "Details coming soon",
       "register": "Register now",
       "status": {
         "open": "Registration open",
@@ -2287,20 +2288,12 @@
         "desc": "New programmes will be announced on this page."
       },
       "empty": {
-        "title": "No workshops are open yet",
-        "desc": "New programmes will be announced on this page."
+        "title": "There are no open workshops right now",
+        "desc": "Our next programme is in the works. Follow us on social media so you don’t miss the schedule and registration."
       },
       "error": {
         "title": "The workshop list could not be loaded.",
         "retry": "Try again"
-      },
-      "preview": {
-        "badge": "Preview",
-        "label": "Example list with many workshops",
-        "actual": "Actual data",
-        "examples": "Examples ({n})",
-        "note": "This panel only appears in development (npm run dev) or when the URL has ?contoh-workshop. Example workshops are fictitious and have no detail page. In development, unpublished workshops are shown as well.",
-        "noDetail": "Example · no detail page"
       }
     },
     "formats": {
@@ -2642,15 +2635,6 @@
         "title": "Facilitator profiles",
         "tba": "Facilitator profiles will be announced soon.",
         "leads": "Leads",
-        "example": "Example",
-        "preview": {
-          "badge": "Preview",
-          "label": "Example facilitator profile layouts",
-          "actual": "Actual data",
-          "show": "Show {n} example facilitators",
-          "note": "This panel only appears in development (npm run dev) or when the URL has ?contoh-fasilitator. Names and organisations in the examples are fictitious.",
-          "count": "Count"
-        },
         "prev": "Previous facilitator",
         "next": "Next facilitator",
         "focus": "Show {name}'s profile",
@@ -2771,7 +2755,8 @@
         "errorText": "Something went wrong while sending. Please try again in a moment.",
         "notAvailable": "The form cannot accept registrations yet. Please try again later or contact the organiser.",
         "tooMany": "Too many attempts. Please wait a moment and try again.",
-        "closed": "Registration for this workshop is closed."
+        "closed": "Registration for this workshop is closed.",
+        "full": "This workshop is fully booked."
       }
     }
   }

@@ -8,6 +8,7 @@ import { aboutList } from "@/Data/AboutList";
 import { technologyList } from "@/Data/TechnologyList";
 import { SolutionLists } from "@/Data/SolutionLists";
 import { resourceList } from "@/Data/ResourceList";
+import { loadWorkshopList } from "@/consumeAPI/workshopsApi";
 import ArrowRight from "@/components/icons/ArrowRight.vue";
 
 // const { isScrolled } = useScrollStore();
@@ -17,7 +18,9 @@ const isHoveringProduct = ref(false);
 const isHoveringTechnology = ref(false);
 const isHoveringSolution = ref(false);
 const isHoveringResource = ref(false);
-const hasNewResource = resourceList.some((resource) => resource.isNew);
+const hasNewResource = computed(() =>
+  resourceList.value.some((resource) => resource.isNew),
+);
 const isResourceRoute = computed(
   () =>
     route.path.startsWith("/blog") ||
@@ -51,6 +54,7 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
+  loadWorkshopList().catch(() => {});
   observer.observe(document.documentElement, {
     attributes: true,
     attributeFilter: ["class"],

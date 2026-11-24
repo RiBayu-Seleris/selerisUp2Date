@@ -85,7 +85,7 @@ import Navlink from "@/components/Navlink.vue";
                   class="w-auto h-[30px] lg:h-[30px] text-[#195279] dark:text-[#FAFAFA]"
                 >
                   <a
-                    href="https://www.tiktok.com/@seleris.id"
+                    href="https://www.tiktok.com/@selerisindonesia?lang=id-ID"
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label="Seleris TikTok"

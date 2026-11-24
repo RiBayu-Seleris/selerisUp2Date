@@ -1,8 +1,8 @@
 import { reactive, ref } from "vue";
 import axios from "axios";
 import { useI18n } from "vue-i18n";
+import { SENTRIS_BASE_URL } from "@/consumeAPI/workshopsApi";
 
-const BASE_URL = import.meta.env.VITE_API_URL ?? "";
 const MIN_FILL_MS = 3000;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const PHONE_RE = /^\+?\d{9,15}$/;
@@ -134,7 +134,10 @@ export function useWorkshopRegistration(workshop) {
 
     if (!workshop.registration.isOpen) {
       status.value = "error";
-      message.value = t("workshop.form.result.closed");
+      message.value =
+        workshop.registration.status === "full"
+          ? t("workshop.form.result.full")
+          : t("workshop.form.result.closed");
       return null;
     }
 
@@ -156,7 +159,7 @@ export function useWorkshopRegistration(workshop) {
 
     try {
       await axios.post(
-        `${BASE_URL}${workshop.registration.endpoint}`,
+        `${SENTRIS_BASE_URL}${workshop.registration.endpoint}`,
         {
           workshop_slug: workshop.slug,
           workshop_name: workshop.name,
