@@ -6,10 +6,6 @@ export const workshopCatalog = [
   { i18nKey: "healthpricing360", workshop: healthPricing360 },
 ];
 
-// Sakelar sementara: data workshop dari Sentris hanya aktif di lokal dan di
-// situs uji selerisup2date.pages.dev. Di seleris.ai belum, sampai pengujian
-// selesai dan disetujui. Untuk mengaktifkan di produksi nanti: tambahkan
-// "seleris.ai" ke daftar, atau ubah baris ini menjadi true.
 const dynamicHost = () => {
   if (typeof window === "undefined") return false;
   const host = window.location.hostname;
