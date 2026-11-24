@@ -31,10 +31,6 @@ const SOCIALS = [
   },
 ];
 
-const showDirectory = computed(
-  () => state.value === "ready" && items.value.length > 0,
-);
-
 const query = ref("");
 const statusFilter = ref("all");
 const keyword = computed(() => query.value.trim().toLowerCase());
@@ -52,6 +48,9 @@ const featured = computed(
 );
 const others = computed(() =>
   items.value.filter((item) => item.slug !== featured.value?.slug),
+);
+const showDirectory = computed(
+  () => state.value === "ready" && others.value.length > 0,
 );
 
 const showFilters = computed(() => items.value.length >= FILTER_MIN);
@@ -152,7 +151,10 @@ usePageMeta(() => ({
       </div>
     </section>
 
-    <section class="relative w-full px-4 sm:px-8 mt-20 lg:mt-28">
+    <section
+      class="relative w-full px-4 sm:px-8"
+      :class="featured && !showDirectory ? 'mt-10 lg:mt-14' : 'mt-20 lg:mt-28'"
+    >
       <div v-if="showDirectory" class="max-w-[860px] px-1">
         <WorkshopEyebrow
           index="02"
