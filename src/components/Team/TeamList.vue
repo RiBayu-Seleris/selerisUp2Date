@@ -4,6 +4,7 @@ import DarkDescTeamFrame from "@/components/icons/DarkDescCardTeam.vue";
 import { buatCarousel } from "@/utils/carousel";
 
 const direksi = buatCarousel();
+const manajemen = buatCarousel();
 
 const directorSeniorteams = [
   // Board of Directors and Senior Management
@@ -30,6 +31,14 @@ const directorSeniorteams = [
     ).href,
     name: "Fendy Setiawan",
     position: "Chief Technology Officer",
+  },
+  {
+    image: new URL(
+      "@/assets/images/leadership-teams/Yudhi.png",
+      import.meta.url,
+    ).href,
+    name: "Yudhi Novi",
+    position: "Chief Operating Officer",
   },
   {
     image: new URL(
@@ -93,6 +102,22 @@ const managementTeam = [
     ).href,
     name: "Zahra Ulfa",
     position: "Marketing Manager",
+  },
+  {
+    image: new URL(
+      "@/assets/images/leadership-teams/Yusuf.png",
+      import.meta.url,
+    ).href,
+    name: "Yusuf Rijal",
+    position: "Operation Manager",
+  },
+  {
+    image: new URL(
+      "@/assets/images/leadership-teams/Jatra.png",
+      import.meta.url,
+    ).href,
+    name: "Jatra Randura",
+    position: "Software Engineer",
   },
   {
     image: new URL(
@@ -277,13 +302,73 @@ const managementTeam = [
     </div>
     <div class="relative w-full h-auto flex flex-row mt-10">
       <div
-        class="hidden xl:flex absolute w-32 h-full bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-r dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% left-0 z-20"
+        class="hidden xl:flex absolute w-32 h-full bg-gradient-to-r from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-r dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% left-0 top-0 z-30 pointer-events-none"
       />
       <div
-        class="hidden xl:flex absolute w-32 h-full bg-gradient-to-l from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-l dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% right-0 z-20"
+        class="hidden xl:flex absolute w-32 h-full bg-gradient-to-l from-[#FAFAFA] from-0% to-[#FAFAFA]/0 to-60% dark:bg-gradient-to-l dark:from-[#17181A] dark:from-0% dark:to-[#17181A]/0 dark:to-60% right-0 top-0 z-30 pointer-events-none"
       />
+      <transition
+        enter-active-class="duration-300 ease-out"
+        enter-from-class="opacity-0 scale-75 -translate-x-3"
+        leave-active-class="duration-200 ease-in"
+        leave-to-class="opacity-0 scale-75 -translate-x-3"
+      >
+        <button
+          v-if="manajemen.bisaKeKiri.value"
+          @click="manajemen.geser('left')"
+          aria-label="Scroll left"
+          class="hidden lg:flex absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 mt-2.5 z-40 w-12 h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-full h-full"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+      </transition>
+
+      <transition
+        enter-active-class="duration-300 ease-out"
+        enter-from-class="opacity-0 scale-75 translate-x-3"
+        leave-active-class="duration-200 ease-in"
+        leave-to-class="opacity-0 scale-75 translate-x-3"
+      >
+        <button
+          v-if="manajemen.bisaKeKanan.value"
+          @click="manajemen.geser('right')"
+          aria-label="Scroll right"
+          class="hidden lg:flex absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 mt-2.5 z-40 w-12 h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-full h-full"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+      </transition>
+
       <div
-        class="flex flex-row lg:justify-center lg:items-center py-0 w-full h-auto gap-x-5 sm:gap-x-7 md:gap-x-8 lg:gap-x-10 mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-10 pl-10 pr-10 sm:scroll-pl-10 sm:pl-10 sm:pr-10 lg:scroll-pl-16 lg:pl-16 lg:pr-16 hide-scrollbar"
+        :ref="manajemen.pasangEl"
+        @mousedown="manajemen.seretMulai"
+        @mousemove="manajemen.seretGerak"
+        @mouseup="manajemen.seretSelesai"
+        @mouseleave="manajemen.seretSelesai"
+        @dragstart.prevent
+        class="cursor-grab flex flex-row py-0 w-full h-auto gap-x-5 sm:gap-x-7 md:gap-x-8 lg:gap-x-10 mt-5 overflow-x-auto snap-x snap-mandatory scroll-pl-10 pl-10 pr-10 sm:scroll-pl-10 sm:pl-10 sm:pr-10 lg:scroll-pl-16 lg:pl-16 lg:pr-16 hide-scrollbar"
       >
         <div
           v-for="(team, index) in managementTeam"
