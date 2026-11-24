@@ -1,6 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import { healthPricing360 } from "@/Data/workshops/healthpricing360";
-import { WORKSHOP_LIST_PATH } from "@/Data/workshops";
+import { WORKSHOP_DYNAMIC, WORKSHOP_LIST_PATH } from "@/Data/workshops";
 import { loadWorkshopDetail } from "@/consumeAPI/workshopsApi";
 
 // "ai-powered" -> "Ai Powered"
@@ -214,6 +214,7 @@ const routes = [
     meta: { title: "HEALTHPRICING 360° Workshop" },
     beforeEnter: async () => {
       if (import.meta.env.DEV) return true;
+      if (!WORKSHOP_DYNAMIC) return { path: "/", replace: true };
       try {
         const detail = await loadWorkshopDetail(healthPricing360.slug);
         return Boolean(detail) || { path: "/", replace: true };

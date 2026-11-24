@@ -1,7 +1,7 @@
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import { usePageLoadingStore } from "@/stores/pageLoading";
-import { detailPathFor } from "@/Data/workshops";
+import { WORKSHOP_DYNAMIC, detailPathFor } from "@/Data/workshops";
 import { loadWorkshopList, sentrisWorkshops } from "@/consumeAPI/workshopsApi";
 
 const STATUSES = ["open", "full", "closed", "past"];
@@ -62,9 +62,15 @@ const compare = (a, b) => {
 
 export function useWorkshopList() {
   const { locale } = useI18n();
-  const state = ref(sentrisWorkshops.value ? "ready" : "loading");
+  const state = ref(
+    !WORKSHOP_DYNAMIC || sentrisWorkshops.value ? "ready" : "loading",
+  );
 
   const load = async ({ fresh = true } = {}) => {
+    if (!WORKSHOP_DYNAMIC) {
+      state.value = "ready";
+      return;
+    }
     const pageLoading = usePageLoadingStore();
     if (!sentrisWorkshops.value) state.value = "loading";
     pageLoading.start();

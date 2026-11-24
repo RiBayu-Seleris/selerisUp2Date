@@ -12,6 +12,7 @@ import { productList } from "@/Data/ProductList";
 import { technologyList } from "@/Data/TechnologyList";
 import { SolutionLists } from "@/Data/SolutionLists";
 import { resourceList } from "@/Data/ResourceList";
+import { WORKSHOP_DYNAMIC } from "@/Data/workshops";
 import { loadWorkshopList } from "@/consumeAPI/workshopsApi";
 import { onMounted } from "vue";
 import ArrowRight from "@/components/icons/ArrowRight.vue";
@@ -78,7 +79,7 @@ const toggleResource = () => {
 };
 
 onMounted(() => {
-  loadWorkshopList().catch(() => {});
+  if (WORKSHOP_DYNAMIC) loadWorkshopList().catch(() => {});
   observer.observe(document.documentElement, {
     attributes: true,
     attributeFilter: ["class"],

@@ -8,6 +8,7 @@ import ResourceWorkshop from "@/components/icons/ResourceWorkshop.vue";
 import { useSidebarStore } from "@/stores/sidebar";
 import { loadWorkshopList } from "@/consumeAPI/workshopsApi";
 import { featuredWorkshop, workshopStatus } from "@/utils/workshopStatus";
+import { WORKSHOP_DYNAMIC } from "@/Data/workshops";
 
 const DISMISS_KEY = `seleris:workshop-popup:${workshop.slug}`;
 const SHOW_DELAY_MS = 1400;
@@ -54,7 +55,7 @@ watch([contentReady, eligible], ([ready, ok]) => {
 });
 
 onMounted(async () => {
-  if (wasDismissed()) return;
+  if (!WORKSHOP_DYNAMIC || wasDismissed()) return;
   try {
     const item = featuredWorkshop(await loadWorkshopList());
     if (item?.slug !== workshop.slug || workshopStatus(item) !== "open") return;

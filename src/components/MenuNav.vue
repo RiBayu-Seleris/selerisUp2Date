@@ -8,6 +8,7 @@ import { aboutList } from "@/Data/AboutList";
 import { technologyList } from "@/Data/TechnologyList";
 import { SolutionLists } from "@/Data/SolutionLists";
 import { resourceList } from "@/Data/ResourceList";
+import { WORKSHOP_DYNAMIC } from "@/Data/workshops";
 import { loadWorkshopList } from "@/consumeAPI/workshopsApi";
 import ArrowRight from "@/components/icons/ArrowRight.vue";
 
@@ -54,7 +55,7 @@ const handleScroll = () => {
 };
 
 onMounted(() => {
-  loadWorkshopList().catch(() => {});
+  if (WORKSHOP_DYNAMIC) loadWorkshopList().catch(() => {});
   observer.observe(document.documentElement, {
     attributes: true,
     attributeFilter: ["class"],

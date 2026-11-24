@@ -2,12 +2,12 @@ import { computed } from "vue";
 import ResourceBlog from "@/components/icons/ResourceBlog.vue";
 import ResourceCareer from "@/components/icons/ResourceCareer.vue";
 import ResourceWorkshop from "@/components/icons/ResourceWorkshop.vue";
-import { WORKSHOP_LIST_PATH } from "@/Data/workshops";
+import { WORKSHOP_DYNAMIC, WORKSHOP_LIST_PATH } from "@/Data/workshops";
 import { sentrisWorkshops } from "@/consumeAPI/workshopsApi";
 import { workshopStatus } from "@/utils/workshopStatus";
 
 export const resourceList = computed(() => {
-  const workshops = sentrisWorkshops.value || [];
+  const workshops = WORKSHOP_DYNAMIC ? sentrisWorkshops.value || [] : [];
   return [
     {
       key: "blogs",
