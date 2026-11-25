@@ -2,6 +2,7 @@
 import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import WorkshopEyebrow from "./WorkshopEyebrow.vue";
+import { useHpModules } from "@/composables/useHpModules";
 
 const props = defineProps({
   workshop: { type: Object, required: true },
@@ -60,11 +61,19 @@ const typeOf = (moduleNumber) => {
   return "lecture";
 };
 
+const hpModules = useHpModules(props.workshop);
+
 const days = computed(() => {
   const sessions = tm(`${NS}.agenda.sessions`).map((m) => rt(m));
   const summaries = tm(`${NS}.agenda.summaries`).map((m) => rt(m));
   const titles = tm(`${NS}.days`).map((m) => rt(m.title));
-  const scopes = tm(`${NS}.modules`).map((m) => rt(m.scope));
+  const fromSentris = (props.workshop.modules || []).length > 0;
+  const byNumber = new Map(hpModules.value.map((m) => [m.number, m]));
+  const titleOf = (n) =>
+    (fromSentris && byNumber.get(n)?.title) ||
+    sessions[n - 1] ||
+    byNumber.get(n)?.title ||
+    "";
   return props.workshop.agenda.map((day, i) => {
     const numbers = day.sessions.map((s) => s.module);
     return {
@@ -77,8 +86,8 @@ const days = computed(() => {
       sessions: day.sessions.map((session, j) => ({
         n: j + 1,
         time: session.time,
-        title: sessions[session.module - 1],
-        scope: scopes[session.module - 1],
+        title: titleOf(session.module),
+        scope: byNumber.get(session.module)?.scope || "",
         module: String(session.module).padStart(2, "0"),
         type: typeOf(session.module),
       })),

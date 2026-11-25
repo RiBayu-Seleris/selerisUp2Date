@@ -57,6 +57,13 @@ const applyDetail = (workshop, data) => {
   const agenda = toAgenda(data.agenda);
   if (agenda.length) workshop.agenda = agenda;
 
+  workshop.modules = (data.modules || []).map((item) => ({
+    number: item.number,
+    day: item.day ?? null,
+    title: bilingual(item.title),
+    summary: bilingual(item.summary),
+  }));
+
   workshop.facilitators = (data.facilitators || []).map(toFacilitator);
   workshop.faq = (data.faq || []).map((item) => ({
     question: bilingual(item.question),

@@ -3,6 +3,7 @@ import { computed, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 import WorkshopEyebrow from "./WorkshopEyebrow.vue";
 import CurriculumModuleDetail from "./CurriculumModuleDetail.vue";
+import { useHpModules } from "@/composables/useHpModules";
 
 const props = defineProps({
   workshop: { type: Object, required: true },
@@ -53,7 +54,7 @@ const sessionOf = (moduleNumber) => {
     if (idx !== -1)
       return { day: day.day, session: idx + 1, time: day.sessions[idx].time };
   }
-  return { day: 1, session: moduleNumber, time: null };
+  return null;
 };
 
 const typeOf = (moduleNumber) => {
@@ -62,21 +63,28 @@ const typeOf = (moduleNumber) => {
   return "lecture";
 };
 
+const hpModules = useHpModules(props.workshop);
+
 const modules = computed(() =>
-  tm(`${NS}.modules`).map((m, index) => {
-    const n = index + 1;
-    const where = sessionOf(n);
+  hpModules.value.map((m, index) => {
+    const where = sessionOf(m.number);
     return {
       index,
-      number: String(n).padStart(2, "0"),
-      title: rt(m.title),
-      scope: rt(m.scope),
-      topics: (m.topics || []).map((topic) => rt(topic)),
-      icon: ICONS[index],
-      type: typeOf(n),
-      ...where,
+      number: String(m.number).padStart(2, "0"),
+      title: m.title,
+      scope: m.scope,
+      topics: m.topics,
+      icon: ICONS[(m.number - 1) % ICONS.length],
+      type: typeOf(m.number),
+      day: where?.day ?? m.day ?? 1,
+      session: where?.session ?? m.number,
+      time: where?.time ?? null,
     };
   }),
+);
+
+const dayNumbers = computed(() =>
+  [...new Set(modules.value.map((m) => m.day))].sort((a, b) => a - b),
 );
 
 const dayTitles = computed(() => tm(`${NS}.days`).map((m) => rt(m.title)));
@@ -87,7 +95,7 @@ const mobileOpen = ref(true);
 
 const filters = computed(() => [
   { value: 0, label: t(`${NS}.curriculum.all`), meta: modules.value.length },
-  ...[1, 2].map((day) => {
+  ...dayNumbers.value.map((day) => {
     const list = modules.value.filter((m) => m.day === day);
     return {
       value: day,
@@ -98,11 +106,11 @@ const filters = computed(() => [
 ]);
 
 const groups = computed(() =>
-  [1, 2]
+  dayNumbers.value
     .filter((day) => filter.value === 0 || filter.value === day)
     .map((day) => ({
       day,
-      title: dayTitles.value[day - 1],
+      title: dayTitles.value[day - 1] || t(`${NS}.hero.dial.day`, { n: day }),
       modules: modules.value.filter((m) => m.day === day),
     })),
 );

@@ -3,19 +3,19 @@ import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import FacilitatorGlassCard from "./FacilitatorGlassCard.vue";
 import FacilitatorCoverflow from "./FacilitatorCoverflow.vue";
+import { useHpModules } from "@/composables/useHpModules";
 
 const props = defineProps({
   workshop: { type: Object, required: true },
 });
 
 const NS = "workshop.healthpricing360";
-const { t, tm, rt, locale } = useI18n();
+const { t, locale } = useI18n();
 
 const COVERFLOW_FROM = 5;
 
-const moduleTitles = computed(() =>
-  tm(`${NS}.modules`).map((m) => rt(m.title)),
-);
+const hpModules = useHpModules(props.workshop);
+const titleOf = (n) => hpModules.value.find((m) => m.number === n)?.title || "";
 
 const dayOf = (moduleNumber) =>
   props.workshop.agenda.find((day) =>
@@ -36,7 +36,7 @@ const people = computed(() => {
     moduleChips: (person.modules || []).map((n) => ({
       number: String(n).padStart(2, "0"),
       day: dayOf(n),
-      title: moduleTitles.value[n - 1],
+      title: titleOf(n),
     })),
   }));
 });

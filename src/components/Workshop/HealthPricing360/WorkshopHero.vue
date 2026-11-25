@@ -2,6 +2,7 @@
 import { computed, inject } from "vue";
 import { useI18n } from "vue-i18n";
 import { useLocalizedList } from "@/utils/i18nList";
+import { useHpModules } from "@/composables/useHpModules";
 import { useWorkshopInfo } from "@/composables/useWorkshopInfo";
 import { useContentReady } from "@/components/Products/Shield/useContentReady";
 import { scrollToSection } from "@/utils/scrollToSection";
@@ -17,12 +18,14 @@ const { t, tm, rt } = useI18n();
 const NS = "workshop.healthpricing360";
 const openRegistration = inject("hpOpenRegistration", () => {});
 
-const modules = useLocalizedList(
-  `${NS}.modules`,
-  Array.from({ length: props.workshop.moduleCount }, (_, i) => ({
-    day: i < props.workshop.moduleCount / 2 ? 1 : 2,
+const hpModules = useHpModules(props.workshop);
+
+const modules = computed(() =>
+  hpModules.value.map((m, i, list) => ({
+    day: m.day ?? (i < list.length / 2 ? 1 : 2),
+    title: m.title,
+    scope: m.scope,
   })),
-  ["title", "scope"],
 );
 
 const days = useLocalizedList(

@@ -48,6 +48,8 @@ export const healthPricing360 = {
 
   faq: [],
 
+  modules: [],
+
   seo: {
     ogImage: null,
   },
