@@ -2747,6 +2747,8 @@
       "result": {
         "successTitle": "Pendaftaran terkirim",
         "successText": "Terima kasih, {name}. Tim Shield akan menghubungi Anda melalui email atau WhatsApp untuk konfirmasi dan informasi pembayaran.",
+        "codeLabel": "Nomor pendaftaran",
+        "codeHint": "Simpan nomor ini sebagai bukti pendaftaran.",
         "again": "Daftarkan peserta lain",
         "errorTitle": "Pendaftaran belum terkirim",
         "errorText": "Terjadi gangguan saat mengirim. Silakan coba lagi beberapa saat lagi.",

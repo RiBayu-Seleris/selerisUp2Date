@@ -22,11 +22,33 @@ const {
   status,
   message,
   submittedName,
+  registrationCode,
   touch,
   revalidate,
   submit,
   reset,
 } = useWorkshopRegistration(props.workshop);
+
+const digitsOnly = (value, allowPlus) => {
+  const clean = value.replace(allowPlus ? /[^\d+]/g : /\D/g, "");
+  return allowPlus ? clean.replace(/(?!^)\+/g, "") : clean;
+};
+
+const keepDigits = (event, field, allowPlus = false) => {
+  const input = event.target;
+  const raw = input.value;
+  const clean = digitsOnly(raw, allowPlus);
+  if (clean !== raw) {
+    const caret = digitsOnly(
+      raw.slice(0, input.selectionStart ?? raw.length),
+      allowPlus,
+    ).length;
+    input.value = clean;
+    input.setSelectionRange(caret, caret);
+  }
+  form[field] = clean;
+  revalidate(field);
+};
 
 const categories = computed(() =>
   PARTICIPANT_CATEGORIES.map((value) => ({
@@ -105,6 +127,22 @@ defineExpose({ status });
       >
         {{ t(`${F}.result.successText`, { name: submittedName }) }}
       </p>
+      <div
+        v-if="registrationCode"
+        class="mt-6 flex flex-col items-center gap-1 rounded-2xl border border-[#1AB24F]/30 bg-[#1AB24F]/[0.06] px-6 py-4"
+      >
+        <span
+          class="font-mono text-[11px] font-[600] uppercase tracking-[0.14em] text-[#667085] dark:text-[#A3A3A3]"
+          >{{ t(`${F}.result.codeLabel`) }}</span
+        >
+        <span
+          class="font-mono text-[22px] font-[700] tracking-[0.04em] text-[#0B1324] dark:text-white select-all"
+          >{{ registrationCode }}</span
+        >
+        <span class="text-[12.5px] text-[#667085] dark:text-[#A3A3A3]">{{
+          t(`${F}.result.codeHint`)
+        }}</span>
+      </div>
       <button
         type="button"
         class="mt-8 inline-flex h-11 items-center rounded-xl border border-[#E5E7EB] px-5 text-[14px] font-[600] text-[#0F172A] transition-colors hover:border-[#1AB24F] hover:text-[#159447] dark:border-white/15 dark:text-white"
@@ -187,17 +225,17 @@ defineExpose({ status });
       >
         <input
           v-bind="fieldAttrs('whatsapp')"
-          v-model="form.whatsapp"
+          :value="form.whatsapp"
           type="tel"
           name="tel"
           autocomplete="tel"
           inputmode="tel"
-          maxlength="20"
+          maxlength="16"
           required
           :placeholder="t(`${F}.whatsappPh`)"
           :class="inputClass('whatsapp')"
           @blur="touch('whatsapp')"
-          @input="revalidate('whatsapp')"
+          @input="keepDigits($event, 'whatsapp', true)"
         />
       </WorkshopField>
 
@@ -365,17 +403,15 @@ defineExpose({ status });
       >
         <input
           v-bind="fieldAttrs('teamSize')"
-          v-model="form.teamSize"
-          type="number"
+          :value="form.teamSize"
+          type="text"
           inputmode="numeric"
-          min="2"
-          max="500"
-          step="1"
+          maxlength="3"
           required
           placeholder="5"
           :class="inputClass('teamSize')"
           @blur="touch('teamSize')"
-          @input="revalidate('teamSize')"
+          @input="keepDigits($event, 'teamSize')"
         />
       </WorkshopField>
 

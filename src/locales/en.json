@@ -2752,6 +2752,8 @@
       "result": {
         "successTitle": "Registration received",
         "successText": "Thank you, {name}. The Shield team will contact you by email or WhatsApp for confirmation and payment information.",
+        "codeLabel": "Registration number",
+        "codeHint": "Keep this number as proof of your registration.",
         "again": "Register another participant",
         "errorTitle": "Registration not sent",
         "errorText": "Something went wrong while sending. Please try again in a moment.",

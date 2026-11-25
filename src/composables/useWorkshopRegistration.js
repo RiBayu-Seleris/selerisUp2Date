@@ -44,6 +44,7 @@ export function useWorkshopRegistration(workshop) {
   const status = ref("idle");
   const message = ref("");
   const submittedName = ref("");
+  const registrationCode = ref("");
   let startedAt = Date.now();
 
   const rules = {
@@ -119,11 +120,13 @@ export function useWorkshopRegistration(workshop) {
     Object.keys(touched).forEach((key) => delete touched[key]);
     status.value = "idle";
     message.value = "";
+    registrationCode.value = "";
     startedAt = Date.now();
   };
 
-  const succeed = (name) => {
+  const succeed = (name, code = "") => {
     submittedName.value = name;
+    registrationCode.value = code;
     status.value = "success";
     message.value = "";
   };
@@ -158,7 +161,7 @@ export function useWorkshopRegistration(workshop) {
     status.value = "submitting";
 
     try {
-      await axios.post(
+      const response = await axios.post(
         `${SENTRIS_BASE_URL}${workshop.registration.endpoint}`,
         {
           workshop_slug: workshop.slug,
@@ -185,7 +188,7 @@ export function useWorkshopRegistration(workshop) {
           },
         },
       );
-      succeed(name);
+      succeed(name, response?.data?.data?.registration_code || "");
     } catch (error) {
       const code = error.response?.status;
       status.value = "error";
@@ -211,6 +214,7 @@ export function useWorkshopRegistration(workshop) {
     status,
     message,
     submittedName,
+    registrationCode,
     touch,
     revalidate,
     submit,
