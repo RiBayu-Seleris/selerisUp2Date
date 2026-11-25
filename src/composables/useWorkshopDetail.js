@@ -1,5 +1,7 @@
 import { reactive } from "vue";
+import { WORKSHOP_DYNAMIC } from "@/Data/workshops";
 import { loadWorkshopDetail } from "@/consumeAPI/workshopsApi";
+import { useAutoRefresh } from "@/composables/useAutoRefresh";
 
 const timeRange = (start, end) => {
   if (!start) return null;
@@ -73,12 +75,23 @@ const applyDetail = (workshop, data) => {
 
 export function useWorkshopDetail(base) {
   const workshop = reactive(JSON.parse(JSON.stringify(base)));
+  let lastJson = "";
 
-  loadWorkshopDetail(base.slug)
-    .then((data) => {
-      if (data) applyDetail(workshop, data);
-    })
-    .catch(() => {});
+  const refresh = (fresh = false) =>
+    loadWorkshopDetail(base.slug, { fresh })
+      .then((data) => {
+        if (!data) return;
+        const json = JSON.stringify(data);
+        if (json === lastJson) return;
+        lastJson = json;
+        applyDetail(workshop, data);
+      })
+      .catch(() => {});
+
+  if (WORKSHOP_DYNAMIC) {
+    refresh();
+    useAutoRefresh(() => refresh(true));
+  }
 
   return workshop;
 }

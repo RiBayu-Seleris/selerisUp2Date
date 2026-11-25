@@ -3,6 +3,7 @@ import { useI18n } from "vue-i18n";
 import { usePageLoadingStore } from "@/stores/pageLoading";
 import { WORKSHOP_DYNAMIC, detailPathFor } from "@/Data/workshops";
 import { loadWorkshopList, sentrisWorkshops } from "@/consumeAPI/workshopsApi";
+import { useAutoRefresh } from "@/composables/useAutoRefresh";
 
 const STATUSES = ["open", "full", "closed", "past"];
 
@@ -66,9 +67,17 @@ export function useWorkshopList() {
     !WORKSHOP_DYNAMIC || sentrisWorkshops.value ? "ready" : "loading",
   );
 
-  const load = async ({ fresh = true } = {}) => {
+  const load = async ({ fresh = true, silent = false } = {}) => {
     if (!WORKSHOP_DYNAMIC) {
       state.value = "ready";
+      return;
+    }
+    if (silent) {
+      await loadWorkshopList({ fresh: true })
+        .then(() => {
+          state.value = "ready";
+        })
+        .catch(() => {});
       return;
     }
     const pageLoading = usePageLoadingStore();
@@ -94,6 +103,7 @@ export function useWorkshopList() {
   });
 
   load();
+  if (WORKSHOP_DYNAMIC) useAutoRefresh(() => load({ silent: true }));
 
   return { items, state, reload: () => load({ fresh: true }) };
 }

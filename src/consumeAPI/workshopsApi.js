@@ -7,23 +7,28 @@ export const SENTRIS_BASE_URL = import.meta.env.DEV
 
 const API = `${SENTRIS_BASE_URL}/api/v1/app`;
 const HEADERS = { Accept: "application/json" };
-const LIST_MAX_AGE_MS = 60_000;
+const MAX_AGE_MS = 60_000;
 
 export const sentrisWorkshops = ref(null);
 
 let listRequest = null;
 let listFetchedAt = 0;
+let listJson = "";
 
 export const loadWorkshopList = ({ fresh = false } = {}) => {
-  const stale = Date.now() - listFetchedAt > LIST_MAX_AGE_MS;
+  const stale = Date.now() - listFetchedAt > MAX_AGE_MS;
   if (!listRequest || (fresh && stale)) {
     listRequest = axios
       .get(`${API}/workshops`, { headers: HEADERS })
       .then(({ data }) => {
         const list = Array.isArray(data?.data) ? data.data : [];
-        sentrisWorkshops.value = list;
+        const json = JSON.stringify(list);
+        if (json !== listJson) {
+          listJson = json;
+          sentrisWorkshops.value = list;
+        }
         listFetchedAt = Date.now();
-        return list;
+        return sentrisWorkshops.value;
       })
       .catch((error) => {
         listRequest = null;
@@ -35,21 +40,22 @@ export const loadWorkshopList = ({ fresh = false } = {}) => {
 
 const detailRequests = new Map();
 
-export const loadWorkshopDetail = (slug) => {
-  if (!detailRequests.has(slug)) {
-    detailRequests.set(
-      slug,
-      axios
-        .get(`${API}/workshops/${encodeURIComponent(slug)}`, {
-          headers: HEADERS,
-        })
-        .then(({ data }) => data?.data ?? null)
-        .catch((error) => {
-          if (error.response?.status === 404) return null;
+export const loadWorkshopDetail = (slug, { fresh = false } = {}) => {
+  const cached = detailRequests.get(slug);
+  if (!cached || (fresh && Date.now() - cached.at > MAX_AGE_MS)) {
+    const promise = axios
+      .get(`${API}/workshops/${encodeURIComponent(slug)}`, {
+        headers: HEADERS,
+      })
+      .then(({ data }) => data?.data ?? null)
+      .catch((error) => {
+        if (error.response?.status === 404) return null;
+        if (detailRequests.get(slug)?.promise === promise) {
           detailRequests.delete(slug);
-          throw error;
-        }),
-    );
+        }
+        throw error;
+      });
+    detailRequests.set(slug, { promise, at: Date.now() });
   }
-  return detailRequests.get(slug);
+  return detailRequests.get(slug).promise;
 };

@@ -8,17 +8,20 @@ const parseDate = (value) => {
   return new Date(y, m - 1, d);
 };
 
-export function useWorkshopInfo(workshop) {
+export function useWorkshopInfo(source) {
   const { t, locale } = useI18n();
+
+  const event = () =>
+    (typeof source === "function" ? source() : source)?.event || {};
 
   const intlLocale = computed(() =>
     locale.value === "id" ? "id-ID" : "en-GB",
   );
 
   const dateLabel = computed(() => {
-    const start = parseDate(workshop.event.startDate);
+    const start = parseDate(event().startDate);
     if (!start) return null;
-    const end = parseDate(workshop.event.endDate);
+    const end = parseDate(event().endDate);
     const full = new Intl.DateTimeFormat(intlLocale.value, {
       day: "numeric",
       month: "long",
@@ -29,20 +32,16 @@ export function useWorkshopInfo(workshop) {
   });
 
   const timeLabel = computed(() => {
-    if (!workshop.event.time) return null;
-    return [workshop.event.time, workshop.event.timezone]
-      .filter(Boolean)
-      .join(" ");
+    if (!event().time) return null;
+    return [event().time, event().timezone].filter(Boolean).join(" ");
   });
 
   const formatLabel = computed(() =>
-    workshop.event.format
-      ? t(`workshop.formats.${workshop.event.format}`)
-      : null,
+    event().format ? t(`workshop.formats.${event().format}`) : null,
   );
 
   const priceLabel = computed(() => {
-    const price = workshop.event.price;
+    const price = event().price;
     if (price === null || price === undefined || price === "") return null;
     if (typeof price === "number") {
       return new Intl.NumberFormat("id-ID", {
@@ -55,9 +54,7 @@ export function useWorkshopInfo(workshop) {
   });
 
   const quotaLabel = computed(() =>
-    workshop.event.quota
-      ? t("workshop.info.quotaValue", { n: workshop.event.quota })
-      : null,
+    event().quota ? t("workshop.info.quotaValue", { n: event().quota }) : null,
   );
 
   const items = computed(() =>
@@ -65,7 +62,7 @@ export function useWorkshopInfo(workshop) {
       { key: "date", value: dateLabel.value },
       { key: "time", value: timeLabel.value },
       { key: "format", value: formatLabel.value },
-      { key: "location", value: workshop.event.venue || null },
+      { key: "location", value: event().venue || null },
       { key: "price", value: priceLabel.value },
       { key: "quota", value: quotaLabel.value },
     ].map((item) => ({

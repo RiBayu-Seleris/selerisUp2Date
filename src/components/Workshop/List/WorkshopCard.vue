@@ -10,7 +10,7 @@ const props = defineProps({
 });
 
 const { t } = useI18n();
-const { dateLabel, formatLabel } = useWorkshopInfo(props.workshop);
+const { dateLabel, formatLabel } = useWorkshopInfo(() => props.workshop);
 
 const place = computed(() =>
   [formatLabel.value, props.workshop.event.venue].filter(Boolean).join(" · "),
