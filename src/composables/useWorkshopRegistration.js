@@ -1,4 +1,4 @@
-import { reactive, ref } from "vue";
+import { computed, reactive, ref, watch } from "vue";
 import axios from "axios";
 import { useI18n } from "vue-i18n";
 import { SENTRIS_BASE_URL } from "@/consumeAPI/workshopsApi";
@@ -42,7 +42,10 @@ export function useWorkshopRegistration(workshop) {
   const errors = reactive({});
   const touched = reactive({});
   const status = ref("idle");
-  const message = ref("");
+  const notice = ref(null);
+  const message = computed(() =>
+    notice.value?.key ? t(notice.value.key) : notice.value?.text || "",
+  );
   const submittedName = ref("");
   const registrationCode = ref("");
   let startedAt = Date.now();
@@ -96,6 +99,10 @@ export function useWorkshopRegistration(workshop) {
     return !error;
   };
 
+  watch(locale, () => {
+    Object.keys(errors).forEach(validateField);
+  });
+
   const touch = (field) => {
     touched[field] = true;
     validateField(field);
@@ -119,7 +126,7 @@ export function useWorkshopRegistration(workshop) {
     Object.keys(errors).forEach((key) => delete errors[key]);
     Object.keys(touched).forEach((key) => delete touched[key]);
     status.value = "idle";
-    message.value = "";
+    notice.value = null;
     registrationCode.value = "";
     startedAt = Date.now();
   };
@@ -128,26 +135,28 @@ export function useWorkshopRegistration(workshop) {
     submittedName.value = name;
     registrationCode.value = code;
     status.value = "success";
-    message.value = "";
+    notice.value = null;
   };
 
   const submit = async () => {
     if (status.value === "submitting") return null;
-    message.value = "";
+    notice.value = null;
 
     if (!workshop.registration.isOpen) {
       status.value = "error";
-      message.value =
-        workshop.registration.status === "full"
-          ? t("workshop.form.result.full")
-          : t("workshop.form.result.closed");
+      notice.value = {
+        key:
+          workshop.registration.status === "full"
+            ? "workshop.form.result.full"
+            : "workshop.form.result.closed",
+      };
       return null;
     }
 
     const firstInvalid = validateAll();
     if (firstInvalid) {
       status.value = "invalid";
-      message.value = t("workshop.form.errors.summary");
+      notice.value = { key: "workshop.form.errors.summary" };
       return firstInvalid;
     }
 
@@ -193,16 +202,16 @@ export function useWorkshopRegistration(workshop) {
       const code = error.response?.status;
       status.value = "error";
       if (code === 404 || code === 405) {
-        message.value = t("workshop.form.result.notAvailable");
+        notice.value = { key: "workshop.form.result.notAvailable" };
       } else if (code === 422) {
         const list = error.response?.data?.errors;
-        message.value = list
-          ? Object.values(list).flat().join(" ")
-          : t("workshop.form.errors.summary");
+        notice.value = list
+          ? { text: Object.values(list).flat().join(" ") }
+          : { key: "workshop.form.errors.summary" };
       } else if (code === 429) {
-        message.value = t("workshop.form.result.tooMany");
+        notice.value = { key: "workshop.form.result.tooMany" };
       } else {
-        message.value = t("workshop.form.result.errorText");
+        notice.value = { key: "workshop.form.result.errorText" };
       }
     }
     return null;

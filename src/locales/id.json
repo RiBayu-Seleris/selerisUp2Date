@@ -2309,6 +2309,7 @@
       "format": "Format",
       "location": "Lokasi",
       "price": "Investasi",
+      "free": "Gratis",
       "quota": "Kuota",
       "quotaValue": "{n} peserta",
       "organizer": "Penyelenggara",

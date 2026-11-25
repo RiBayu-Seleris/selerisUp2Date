@@ -2309,6 +2309,7 @@
       "format": "Format",
       "location": "Location",
       "price": "Investment",
+      "free": "Free",
       "quota": "Quota",
       "quotaValue": "{n} participants",
       "organizer": "Organizer",

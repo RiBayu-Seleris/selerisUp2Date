@@ -43,6 +43,7 @@ export function useWorkshopInfo(source) {
   const priceLabel = computed(() => {
     const price = event().price;
     if (price === null || price === undefined || price === "") return null;
+    if (price === 0) return t("workshop.info.free");
     if (typeof price === "number") {
       return new Intl.NumberFormat("id-ID", {
         style: "currency",
