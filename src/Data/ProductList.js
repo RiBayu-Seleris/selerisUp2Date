@@ -12,5 +12,6 @@ export const productList = [
   { url: "https://selerisauto.ai", name: "Drive", target: "_blank" },
   { url: "https://lp-proper.seleris.ai", name: "Proper", target: "_blank" },
   { url: "https://lp-selfit.seleris.ai/", name: "Selfit+", target: "_blank" },
+  { url: "https://lp-selora.seleris.ai/", name: "Selora", target: "_blank" },
   // { url: "/", name: "Seleris Cough" },
 ];

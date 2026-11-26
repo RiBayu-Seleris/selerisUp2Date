@@ -83,7 +83,7 @@ export const bannerLists = [
     },
   },
   {
-    banner: "Drive.png",
+    banner: "Drive.webp",
     key: "drive",
     logo: "drive.png",
     darklogo: "drive.png",
@@ -129,6 +129,26 @@ export const bannerLists = [
     darklogo: "selfit.svg",
     linelightcolor: "#01A3E8",
     url: "https://lp-selfit.seleris.ai/",
+    logoWidth: {
+      lg: 160,
+      md: 110,
+      sm: 110,
+      base: 80,
+    },
+    logoHeight: {
+      lg: 48,
+      md: 32,
+      sm: 32,
+      base: 24,
+    },
+  },
+  {
+    banner: "Selora.webp",
+    key: "selora",
+    logo: "selora.svg",
+    darklogo: "selora.svg",
+    linelightcolor: "#087BC1",
+    url: "https://lp-selora.seleris.ai/",
     logoWidth: {
       lg: 160,
       md: 110,
