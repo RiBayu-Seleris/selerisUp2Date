@@ -5,6 +5,7 @@ export const healthPricing360 = {
   organizer: "Shield",
   subtitle: null,
   highlights: [],
+  content: null,
   durationDays: 2,
   moduleCount: 10,
   handsOnModule: 8,

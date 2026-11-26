@@ -2,9 +2,15 @@
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import WorkshopEyebrow from "./WorkshopEyebrow.vue";
+import { useWorkshopContent } from "@/composables/useWorkshopContent";
+
+const props = defineProps({
+  workshop: { type: Object, default: null },
+});
 
 const NS = "workshop.healthpricing360.audience";
 const { t, tm, rt } = useI18n();
+const content = useWorkshopContent(props.workshop);
 
 const GROUPS = [
   { roles: [0, 1, 2], icon: ["M18 5H6l6 7-6 7h12"] },
@@ -28,6 +34,14 @@ const GROUPS = [
 ];
 
 const groups = computed(() => {
+  const own = props.workshop?.content?.audience || [];
+  if (own.length) {
+    return own.map((group, i) => ({
+      title: content.pick(group.group),
+      icon: GROUPS[i % GROUPS.length].icon,
+      roles: group.roles.map((role) => content.pick(role)).filter(Boolean),
+    }));
+  }
   const roles = tm(`${NS}.roles`).map((m) => rt(m));
   const titles = tm(`${NS}.groups`).map((m) => rt(m));
   return GROUPS.map((group, i) => ({
@@ -53,7 +67,7 @@ const groups = computed(() => {
       <p
         class="mt-4 text-[15px] sm:text-[17px] leading-[1.7] text-[#475467] dark:text-[#A3A3A3]"
       >
-        {{ t(`${NS}.desc`) }}
+        {{ content.text("audienceDescription", `${NS}.desc`) }}
       </p>
     </div>
 

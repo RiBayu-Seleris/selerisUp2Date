@@ -4,6 +4,7 @@ import { useI18n } from "vue-i18n";
 import WorkshopEyebrow from "./WorkshopEyebrow.vue";
 import WorkshopFacilitators from "./WorkshopFacilitators.vue";
 import { useWorkshopInfo } from "@/composables/useWorkshopInfo";
+import { useWorkshopContent } from "@/composables/useWorkshopContent";
 import shieldMark from "@/assets/Products/images/Shield/v2/shield-mark.webp";
 
 const props = defineProps({
@@ -43,6 +44,7 @@ const ICONS = {
 };
 
 const { items } = useWorkshopInfo(props.workshop);
+const content = useWorkshopContent(props.workshop);
 
 const tiles = computed(() =>
   items.value.map((item) => ({ ...item, icon: ICONS[item.key] })),
@@ -223,7 +225,7 @@ const steps = computed(() => tm(`${NS}.register.steps`).map((m) => rt(m)));
           {{ t(`${NS}.register.eyebrow`) }}
         </p>
         <p class="mt-3 text-[15px] leading-[1.65] text-white/80">
-          {{ t(`${NS}.register.desc`) }}
+          {{ content.text("ctaDescription", `${NS}.register.desc`) }}
         </p>
         <ol class="mt-6 flex flex-col gap-3">
           <li

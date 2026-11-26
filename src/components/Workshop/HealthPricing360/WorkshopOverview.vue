@@ -2,9 +2,15 @@
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import WorkshopEyebrow from "./WorkshopEyebrow.vue";
+import { useWorkshopContent } from "@/composables/useWorkshopContent";
+
+const props = defineProps({
+  workshop: { type: Object, default: null },
+});
 
 const NS = "workshop.healthpricing360.overview";
-const { t, tm, rt } = useI18n();
+const { t } = useI18n();
+const content = useWorkshopContent(props.workshop);
 
 const ICONS = [
   [
@@ -34,9 +40,9 @@ const ICONS = [
 ];
 
 const outcomes = computed(() =>
-  tm(`${NS}.outcomes`).map((m, i) => ({
-    text: rt(m),
-    icon: ICONS[i],
+  content.list("learningOutcomes", `${NS}.outcomes`).map((text, i) => ({
+    text,
+    icon: ICONS[i % ICONS.length],
     shield: i === 6,
   })),
 );
@@ -50,12 +56,12 @@ const outcomes = computed(() =>
         <h2
           class="mt-6 text-[26px] sm:text-[34px] xl:text-[40px] font-[700] leading-[1.18] tracking-[-0.02em] text-[#0B1324] dark:text-white"
         >
-          {{ t(`${NS}.question`) }}
+          {{ content.text("introQuestion", `${NS}.question`) }}
         </h2>
         <p
-          class="mt-6 text-[15px] sm:text-[17px] leading-[1.75] text-[#475467] dark:text-[#A3A3A3]"
+          class="mt-6 whitespace-pre-line text-[15px] sm:text-[17px] leading-[1.75] text-[#475467] dark:text-[#A3A3A3]"
         >
-          {{ t(`${NS}.context`) }}
+          {{ content.text("description", `${NS}.context`) }}
         </p>
       </div>
 
@@ -89,7 +95,7 @@ const outcomes = computed(() =>
           <blockquote
             class="relative mt-4 max-w-[640px] text-[19px] sm:text-[23px] xl:text-[25px] font-[600] leading-[1.42] tracking-[-0.01em]"
           >
-            {{ t(`${NS}.principle`) }}
+            {{ content.text("keyMessage", `${NS}.principle`) }}
           </blockquote>
         </figure>
 
@@ -123,7 +129,7 @@ const outcomes = computed(() =>
             <p
               class="mt-2 text-[14.5px] leading-[1.7] text-[#475467] dark:text-[#A3A3A3]"
             >
-              {{ t(`${NS}.objective`) }}
+              {{ content.text("objective", `${NS}.objective`) }}
             </p>
           </div>
           <div
@@ -155,7 +161,7 @@ const outcomes = computed(() =>
             <p
               class="mt-2 text-[14.5px] leading-[1.7] text-[#475467] dark:text-[#A3A3A3]"
             >
-              {{ t(`${NS}.why`) }}
+              {{ content.text("whyItMatters", `${NS}.why`) }}
             </p>
           </div>
         </div>

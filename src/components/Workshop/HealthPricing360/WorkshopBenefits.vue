@@ -4,6 +4,7 @@ import { useI18n } from "vue-i18n";
 import WorkshopEyebrow from "./WorkshopEyebrow.vue";
 import { useWorkshopInfo } from "@/composables/useWorkshopInfo";
 import { useHpDays } from "@/composables/useHpDays";
+import { useWorkshopContent } from "@/composables/useWorkshopContent";
 import healthResult from "@/assets/Products/images/Shield/v2/health-result.webp";
 import shieldMark from "@/assets/Products/images/Shield/v2/shield-mark.webp";
 
@@ -15,13 +16,15 @@ const NS = "workshop.healthpricing360";
 const { t, tm, rt } = useI18n();
 const { dateLabel } = useWorkshopInfo(props.workshop);
 const hpDays = useHpDays(props.workshop);
+const content = useWorkshopContent(props.workshop);
 
-const items = computed(() =>
-  tm(`${NS}.benefits.items`).map((m) => ({
-    title: rt(m.title),
-    desc: rt(m.desc),
-  })),
-);
+const items = computed(() => {
+  const own = props.workshop?.content?.benefits || [];
+  return tm(`${NS}.benefits.items`).map((m, i) => ({
+    title: content.pick(own[i]?.title) || rt(m.title),
+    desc: content.pick(own[i]?.description) || rt(m.desc),
+  }));
+});
 
 const days = computed(() => {
   return props.workshop.agenda.map((day) => {
@@ -69,7 +72,7 @@ const SHEET = [
       <p
         class="mt-4 text-[15px] sm:text-[17px] leading-[1.7] text-[#475467] dark:text-[#A3A3A3]"
       >
-        {{ t(`${NS}.benefits.desc`) }}
+        {{ content.text("benefitsDescription", `${NS}.benefits.desc`) }}
       </p>
     </div>
 

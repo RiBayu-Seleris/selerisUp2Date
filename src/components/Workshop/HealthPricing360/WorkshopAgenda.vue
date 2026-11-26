@@ -4,6 +4,7 @@ import { useI18n } from "vue-i18n";
 import WorkshopEyebrow from "./WorkshopEyebrow.vue";
 import { useHpModules } from "@/composables/useHpModules";
 import { useHpDays } from "@/composables/useHpDays";
+import { useWorkshopContent } from "@/composables/useWorkshopContent";
 
 const props = defineProps({
   workshop: { type: Object, required: true },
@@ -11,6 +12,7 @@ const props = defineProps({
 
 const NS = "workshop.healthpricing360";
 const { t, tm, rt, locale } = useI18n();
+const content = useWorkshopContent(props.workshop);
 
 const METHOD_ICONS = [
   [
@@ -36,9 +38,9 @@ const METHOD_ICONS = [
 ];
 
 const methods = computed(() =>
-  tm(`${NS}.agenda.methods`).map((m, i) => ({
-    label: rt(m),
-    icon: METHOD_ICONS[i],
+  content.list("learningMethods", `${NS}.agenda.methods`).map((label, i) => ({
+    label,
+    icon: METHOD_ICONS[i % METHOD_ICONS.length],
   })),
 );
 
@@ -89,7 +91,7 @@ const days = computed(() => {
         title: titleOf(session.module),
         scope: byNumber.get(session.module)?.scope || "",
         module: String(session.module).padStart(2, "0"),
-        type: typeOf(session.module),
+        type: byNumber.get(session.module)?.type || typeOf(session.module),
       })),
     };
   });
@@ -125,7 +127,7 @@ const tone = (day) =>
       <h2
         class="mt-6 text-[26px] sm:text-[34px] xl:text-[44px] font-[700] leading-[1.15] tracking-[-0.02em] text-[#0B1324] dark:text-white"
       >
-        {{ t(`${NS}.agenda.title`) }}
+        {{ content.text("agendaTitle", `${NS}.agenda.title`) }}
       </h2>
       <p
         class="mt-4 text-[14.5px] sm:text-[16px] text-[#475467] dark:text-[#A3A3A3]"

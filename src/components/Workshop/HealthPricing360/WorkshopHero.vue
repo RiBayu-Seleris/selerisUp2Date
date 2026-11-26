@@ -10,6 +10,7 @@ import CurriculumDial from "./CurriculumDial.vue";
 import shieldMark from "@/assets/Products/images/Shield/v2/shield-mark.webp";
 import { WORKSHOP_LIST_PATH } from "@/Data/workshops";
 import { pickText } from "@/utils/workshopText";
+import { useWorkshopContent } from "@/composables/useWorkshopContent";
 
 const props = defineProps({
   workshop: { type: Object, required: true },
@@ -30,6 +31,7 @@ const modules = computed(() =>
 );
 
 const hpDays = useHpDays(props.workshop);
+const content = useWorkshopContent(props.workshop);
 
 const days = computed(() =>
   ["#3DDC84", "#4AA8FF"].map((color, i) => ({
@@ -142,7 +144,7 @@ const ready = useContentReady();
               />
             </span>
             <span class="text-[12px] sm:text-[12.5px] font-[600] text-white/90">
-              {{ t(`${NS}.hero.eyebrow`) }}
+              {{ content.text("label", `${NS}.hero.eyebrow`) }}
             </span>
             <span
               v-if="workshop.registration.isOpen"
@@ -185,14 +187,14 @@ const ready = useContentReady();
             class="hp-rise mt-6 sm:mt-7 max-w-[600px] text-[18px] sm:text-[22px] xl:text-[24px] font-[500] leading-[1.35] tracking-[-0.01em] text-white"
             style="animation-delay: 160ms"
           >
-            {{ t(`${NS}.hero.headline`) }}
+            {{ content.text("headline", `${NS}.hero.headline`) }}
           </p>
 
           <p
             class="hp-rise mt-4 max-w-[580px] text-[14px] sm:text-[16px] leading-[1.7] text-white/70"
             style="animation-delay: 220ms"
           >
-            {{ t(`${NS}.hero.lead`) }}
+            {{ content.text("summary", `${NS}.hero.lead`) }}
           </p>
 
           <ul

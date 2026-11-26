@@ -13,6 +13,7 @@ import WorkshopEyebrow from "./WorkshopEyebrow.vue";
 import CurriculumModuleDetail from "./CurriculumModuleDetail.vue";
 import { useHpModules } from "@/composables/useHpModules";
 import { useHpDays } from "@/composables/useHpDays";
+import { useWorkshopContent } from "@/composables/useWorkshopContent";
 
 const props = defineProps({
   workshop: { type: Object, required: true },
@@ -84,7 +85,7 @@ const modules = computed(() =>
       scope: m.scope,
       topics: m.topics,
       icon: ICONS[(m.number - 1) % ICONS.length],
-      type: typeOf(m.number),
+      type: m.type || typeOf(m.number),
       day: where?.day ?? m.day ?? 1,
       session: where?.session ?? m.number,
       time: where?.time ?? null,
@@ -97,6 +98,7 @@ const dayNumbers = computed(() =>
 );
 
 const hpDays = useHpDays(props.workshop);
+const content = useWorkshopContent(props.workshop);
 
 const filter = ref(0);
 const active = ref(0);
@@ -206,12 +208,12 @@ onBeforeUnmount(() => pillObserver?.disconnect());
         <h2
           class="mt-6 text-[26px] sm:text-[34px] xl:text-[44px] font-[700] leading-[1.15] tracking-[-0.02em] text-[#0B1324] dark:text-white"
         >
-          {{ t(`${NS}.curriculum.title`) }}
+          {{ content.text("curriculumTitle", `${NS}.curriculum.title`) }}
         </h2>
         <p
           class="mt-4 text-[15px] sm:text-[17px] leading-[1.7] text-[#475467] dark:text-[#A3A3A3]"
         >
-          {{ t(`${NS}.curriculum.desc`) }}
+          {{ content.text("curriculumDescription", `${NS}.curriculum.desc`) }}
         </p>
       </div>
 

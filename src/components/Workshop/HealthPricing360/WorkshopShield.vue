@@ -1,21 +1,67 @@
 <script setup>
 import { computed, onBeforeUnmount, onMounted, ref } from "vue";
+import { RouterLink } from "vue-router";
 import { useI18n } from "vue-i18n";
 import WorkshopEyebrow from "./WorkshopEyebrow.vue";
+import { useWorkshopContent } from "@/composables/useWorkshopContent";
 import shieldMark from "@/assets/Products/images/Shield/v2/shield-mark.webp";
 import faceScanning from "@/assets/Products/images/Shield/v2/face-scanning.webp";
 import healthResult from "@/assets/Products/images/Shield/v2/health-result.webp";
 
 const NS = "workshop.healthpricing360.shield";
+const props = defineProps({
+  workshop: { type: Object, default: null },
+});
+
 const { t, tm, rt } = useI18n();
+const content = useWorkshopContent(props.workshop);
 
 const IMAGES = [faceScanning, healthResult];
 const INTERVAL_MS = 6500;
 
-const steps = computed(() =>
-  tm(`${NS}.steps`).map((m) => ({ title: rt(m.title), desc: rt(m.desc) })),
-);
+const showcase = computed(() => props.workshop?.content?.showcase || null);
+
+const showText = (field, key) =>
+  content.pick(showcase.value?.[field]) || t(`${NS}.${key}`);
+
+const steps = computed(() => {
+  const own = (showcase.value?.steps || [])
+    .map((step) => ({
+      title: content.pick(step.title),
+      desc: content.pick(step.description),
+      image: step.imageUrl,
+      alt: content.pick(step.imageAlt),
+    }))
+    .filter((step) => step.title);
+  if (own.length) return own;
+  return tm(`${NS}.steps`).map((m) => ({
+    title: rt(m.title),
+    desc: rt(m.desc),
+    image: null,
+    alt: "",
+  }));
+});
+
 const imageAlts = computed(() => tm(`${NS}.imageAlt`).map((m) => rt(m)));
+
+const visuals = computed(() =>
+  steps.value.map((step, index) => ({
+    index,
+    image: step.image || IMAGES[index] || null,
+    alt: step.alt || imageAlts.value[index] || "",
+  })),
+);
+
+const imageVisuals = computed(() => visuals.value.filter((v) => v.image));
+const flowIndex = computed(() => visuals.value.findIndex((v) => !v.image));
+
+const link = computed(() => {
+  const url = showcase.value?.linkUrl || "/product/shield";
+  const site = url.match(/^https?:\/\/(?:www\.)?seleris\.ai(\/[^?#]*)?/i);
+  if (site) return { is: RouterLink, attrs: { to: site[1] || "/" } };
+  if (url.startsWith("/")) return { is: RouterLink, attrs: { to: url } };
+  return { is: "a", attrs: { href: url, target: "_blank", rel: "noopener" } };
+});
 
 const active = ref(0);
 const paused = ref(false);
@@ -77,12 +123,12 @@ onBeforeUnmount(() => observer?.disconnect());
           <h2
             class="mt-6 text-[26px] sm:text-[34px] xl:text-[40px] font-[700] leading-[1.15] tracking-[-0.02em]"
           >
-            {{ t(`${NS}.title`) }}
+            {{ showText("title", "title") }}
           </h2>
           <p
             class="mt-5 text-[15px] sm:text-[16px] leading-[1.75] text-white/70"
           >
-            {{ t(`${NS}.body`) }}
+            {{ showText("body", "body") }}
           </p>
 
           <ol class="mt-8 flex flex-col gap-2.5">
@@ -128,8 +174,9 @@ onBeforeUnmount(() => observer?.disconnect());
             </li>
           </ol>
 
-          <router-link
-            to="/product/shield"
+          <component
+            :is="link.is"
+            v-bind="link.attrs"
             class="group mt-7 inline-flex h-11 items-center gap-2 self-start rounded-xl bg-white px-5 text-[14px] font-[600] text-[#071427] transition-colors hover:bg-[#E8F2FF]"
           >
             <img
@@ -139,7 +186,7 @@ onBeforeUnmount(() => observer?.disconnect());
               height="16"
               class="w-4 h-4 object-contain"
             />
-            {{ t(`${NS}.cta`) }}
+            {{ showText("linkLabel", "cta") }}
             <svg
               viewBox="0 0 24 24"
               class="w-4 h-4 transition-transform duration-200 group-hover:translate-x-0.5"
@@ -152,7 +199,7 @@ onBeforeUnmount(() => observer?.disconnect());
             >
               <path d="M5 12h14M13 6l6 6-6 6" />
             </svg>
-          </router-link>
+          </component>
         </div>
 
         <div class="lg:col-span-7">
@@ -186,14 +233,14 @@ onBeforeUnmount(() => observer?.disconnect());
               ></div>
               <div class="sh-stack relative grid w-full place-items-center">
                 <div
-                  v-for="(image, i) in IMAGES"
-                  :key="image"
+                  v-for="visual in imageVisuals"
+                  :key="visual.index"
                   class="sh-visual relative flex w-full items-end justify-center"
-                  :class="{ 'is-active': active === i }"
+                  :class="{ 'is-active': active === visual.index }"
                 >
                   <img
-                    :src="image"
-                    :alt="imageAlts[i]"
+                    :src="visual.image"
+                    :alt="visual.alt"
                     width="606"
                     height="808"
                     loading="lazy"
@@ -201,17 +248,18 @@ onBeforeUnmount(() => observer?.disconnect());
                   />
                   <span
                     class="absolute left-0 sm:left-4 top-4 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 font-mono text-[10.5px] font-[600] uppercase tracking-[0.12em] text-white/80 backdrop-blur-md"
-                    >{{ t(`${NS}.stepLabel`, { n: i + 1 }) }}</span
+                    >{{ t(`${NS}.stepLabel`, { n: visual.index + 1 }) }}</span
                   >
                 </div>
 
                 <div
                   class="sh-visual relative flex w-full max-w-[460px] flex-col items-center"
-                  :class="{ 'is-active': active >= IMAGES.length }"
+                  v-if="flowIndex !== -1"
+                  :class="{ 'is-active': active === flowIndex }"
                 >
                   <span
                     class="self-start mb-5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 font-mono text-[10.5px] font-[600] uppercase tracking-[0.12em] text-white/80"
-                    >{{ t(`${NS}.stepLabel`, { n: 3 }) }}</span
+                    >{{ t(`${NS}.stepLabel`, { n: flowIndex + 1 }) }}</span
                   >
                   <div class="grid w-full grid-cols-2 gap-3">
                     <div
@@ -344,7 +392,7 @@ onBeforeUnmount(() => observer?.disconnect());
             <strong class="font-[600] text-[#FDE68A]"
               >{{ t(`${NS}.disclaimerTitle`) }}.</strong
             >
-            {{ t(`${NS}.disclaimer`) }}
+            {{ showText("disclaimer", "disclaimer") }}
           </p>
         </aside>
       </div>

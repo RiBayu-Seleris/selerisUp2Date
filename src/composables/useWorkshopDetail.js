@@ -14,6 +14,60 @@ const bilingual = (value) => ({
   en: value?.en || toEnglish(value?.id) || value?.id || null,
 });
 
+const text = (value) => (value ? bilingual(value) : null);
+
+const texts = (items) =>
+  (items || []).map(bilingual).filter((item) => item.id || item.en);
+
+const toShowcase = (showcase) =>
+  showcase
+    ? {
+        title: text(showcase.title),
+        body: text(showcase.body),
+        steps: (showcase.steps || []).map((step) => ({
+          title: text(step.title),
+          description: text(step.description),
+          imageUrl: step.image_url || null,
+          imageAlt: text(step.image_alt),
+        })),
+        disclaimer: text(showcase.disclaimer),
+        linkUrl: showcase.link_url || null,
+        linkLabel: text(showcase.link_label),
+      }
+    : null;
+
+const toContent = (data) => ({
+  label: text(data.label),
+  headline: text(data.headline),
+  summary: text(data.summary),
+  introQuestion: text(data.intro_question),
+  description: text(data.description),
+  whyItMatters: text(data.why_it_matters),
+  objective: text(data.objective),
+  keyMessage: text(data.key_message),
+  learningOutcomes: texts(data.learning_outcomes),
+  curriculumTitle: text(data.curriculum_title),
+  curriculumDescription: text(data.curriculum_description),
+  agendaTitle: text(data.agenda_title),
+  learningMethods: texts(data.learning_methods),
+  showcase: toShowcase(data.showcase),
+  audienceDescription: text(data.audience_description),
+  audience: (data.audience || [])
+    .filter((group) => Array.isArray(group?.roles))
+    .map((group) => ({ group: text(group.group), roles: texts(group.roles) }))
+    .filter((group) => group.roles.length),
+  benefitsDescription: text(data.benefits_description),
+  benefits: (data.benefits || []).map((item) => ({
+    title: text(item.title),
+    description: text(item.description),
+  })),
+  ctaTitle: text(data.cta_title),
+  ctaDescription: text(data.cta_description),
+  seoTitle: text(data.seo_title),
+  seoDescription: text(data.seo_description),
+  ogImageUrl: data.og_image_url || null,
+});
+
 const toAgenda = (days) =>
   (days || [])
     .map((day) => ({
@@ -45,6 +99,7 @@ const applyDetail = (workshop, data) => {
   workshop.highlights = (data.highlights || [])
     .map(bilingual)
     .filter((item) => item.id || item.en);
+  workshop.content = toContent(data);
 
   Object.assign(workshop.event, {
     startDate: data.start_date ?? null,
@@ -72,6 +127,8 @@ const applyDetail = (workshop, data) => {
     day: item.day ?? null,
     title: bilingual(item.title),
     summary: bilingual(item.summary),
+    type: item.type || null,
+    topics: texts(item.topics),
   }));
 
   workshop.facilitators = (data.facilitators || []).map(toFacilitator);

@@ -1,9 +1,15 @@
 <script setup>
 import { inject } from "vue";
 import { useI18n } from "vue-i18n";
+import { useWorkshopContent } from "@/composables/useWorkshopContent";
+
+const props = defineProps({
+  workshop: { type: Object, default: null },
+});
 
 const NS = "workshop.healthpricing360";
 const { t } = useI18n();
+const content = useWorkshopContent(props.workshop);
 const openRegistration = inject("hpOpenRegistration", () => {});
 </script>
 
@@ -60,12 +66,12 @@ const openRegistration = inject("hpOpenRegistration", () => {});
           <h2
             class="mt-4 text-[24px] sm:text-[32px] xl:text-[38px] font-[700] leading-[1.2] tracking-[-0.02em]"
           >
-            {{ t(`${NS}.register.title`) }}
+            {{ content.text("ctaTitle", `${NS}.register.title`) }}
           </h2>
           <p
             class="mt-4 text-[15px] sm:text-[16.5px] leading-[1.7] text-white/70"
           >
-            {{ t(`${NS}.register.desc`) }}
+            {{ content.text("ctaDescription", `${NS}.register.desc`) }}
           </p>
         </div>
         <button
