@@ -24,6 +24,10 @@ export const partnerLogos = [
     "@/assets/images/clients-and-partners/kitamedika.png",
     import.meta.url,
   ).href,
+  new URL(
+    "@/assets/images/clients-and-partners/harmonivita.png",
+    import.meta.url,
+  ).href,
 ];
 
 export const partnerLogosDark = [
@@ -63,6 +67,10 @@ export const partnerLogosDark = [
   ).href,
   new URL(
     "@/assets/images/clients-and-partners/kitamedika-dark.png",
+    import.meta.url,
+  ).href,
+  new URL(
+    "@/assets/images/clients-and-partners/harmonivita-dark.png",
     import.meta.url,
   ).href,
 ];
