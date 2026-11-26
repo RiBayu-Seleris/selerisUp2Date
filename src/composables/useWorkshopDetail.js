@@ -2,6 +2,7 @@ import { reactive } from "vue";
 import { WORKSHOP_DYNAMIC } from "@/Data/workshops";
 import { loadWorkshopDetail } from "@/consumeAPI/workshopsApi";
 import { useAutoRefresh } from "@/composables/useAutoRefresh";
+import { toEnglish } from "@/utils/workshopText";
 
 const timeRange = (start, end) => {
   if (!start) return null;
@@ -10,7 +11,7 @@ const timeRange = (start, end) => {
 
 const bilingual = (value) => ({
   id: value?.id || null,
-  en: value?.en || value?.id || null,
+  en: value?.en || toEnglish(value?.id) || value?.id || null,
 });
 
 const toAgenda = (days) =>

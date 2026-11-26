@@ -1,5 +1,6 @@
 import { computed } from "vue";
 import { useI18n } from "vue-i18n";
+import { pickText } from "@/utils/workshopText";
 
 const parseDate = (value) => {
   if (!value) return null;
@@ -33,7 +34,9 @@ export function useWorkshopInfo(source) {
 
   const timeLabel = computed(() => {
     if (!event().time) return null;
-    return [event().time, event().timezone].filter(Boolean).join(" ");
+    return [event().time, pickText(event().timezone, locale.value)]
+      .filter(Boolean)
+      .join(" ");
   });
 
   const formatLabel = computed(() =>
@@ -63,7 +66,7 @@ export function useWorkshopInfo(source) {
       { key: "date", value: dateLabel.value },
       { key: "time", value: timeLabel.value },
       { key: "format", value: formatLabel.value },
-      { key: "location", value: event().venue || null },
+      { key: "location", value: pickText(event().venue, locale.value) || null },
       { key: "price", value: priceLabel.value },
       { key: "quota", value: quotaLabel.value },
     ].map((item) => ({

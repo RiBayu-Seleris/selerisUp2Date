@@ -4,14 +4,9 @@ import { usePageLoadingStore } from "@/stores/pageLoading";
 import { WORKSHOP_DYNAMIC, detailPathFor } from "@/Data/workshops";
 import { loadWorkshopList, sentrisWorkshops } from "@/consumeAPI/workshopsApi";
 import { useAutoRefresh } from "@/composables/useAutoRefresh";
+import { pickText } from "@/utils/workshopText";
 
 const STATUSES = ["open", "full", "closed", "past"];
-
-export const pickText = (value, locale) => {
-  if (!value) return "";
-  if (typeof value === "string") return value;
-  return value[locale] || value.id || value.en || "";
-};
 
 const todayKey = () => {
   const now = new Date();
@@ -35,7 +30,7 @@ export const fromSentris = (item, locale) => ({
     time: null,
     timezone: item.timezone || "WIB",
     format: item.format || null,
-    venue: item.city || null,
+    venue: pickText(item.city, locale) || null,
     price: null,
     quota: null,
   },

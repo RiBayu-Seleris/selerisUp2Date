@@ -4,6 +4,7 @@ import { useI18n } from "vue-i18n";
 import FacilitatorGlassCard from "./FacilitatorGlassCard.vue";
 import FacilitatorCoverflow from "./FacilitatorCoverflow.vue";
 import { useHpModules } from "@/composables/useHpModules";
+import { pickText } from "@/utils/workshopText";
 
 const props = defineProps({
   workshop: { type: Object, required: true },
@@ -25,6 +26,8 @@ const dayOf = (moduleNumber) =>
 const people = computed(() => {
   return props.workshop.facilitators.map((person) => ({
     ...person,
+    role: pickText(person.role, locale.value),
+    organization: pickText(person.organization, locale.value),
     initials: String(person.name || "")
       .replace(/^(dr|drg|prof|ir)\.?\s+/i, "")
       .split(/\s+/)
