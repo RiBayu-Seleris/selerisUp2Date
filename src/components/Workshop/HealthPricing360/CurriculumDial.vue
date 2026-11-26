@@ -1,5 +1,5 @@
 <script setup>
-import { computed, onBeforeUnmount, onMounted, ref } from "vue";
+import { computed, onBeforeUnmount, onMounted, ref, watch } from "vue";
 import { useI18n } from "vue-i18n";
 
 const props = defineProps({
@@ -69,10 +69,15 @@ const ticks = computed(() =>
 const current = computed(() => segments.value[active.value]);
 const currentModule = computed(() => props.modules[active.value]);
 
-const pointer = computed(() => {
-  const mid = (active.value + 0.5) * step.value;
-  return { rotate: mid };
+const pointerAngle = ref((active.value + 0.5) * step.value);
+
+watch([active, step], ([index, size]) => {
+  const target = (index + 0.5) * size;
+  const turn = ((((target - pointerAngle.value) % 360) + 540) % 360) - 180;
+  pointerAngle.value += turn;
 });
+
+const pointer = computed(() => ({ rotate: pointerAngle.value }));
 
 const next = () => {
   active.value = (active.value + 1) % props.modules.length;
@@ -282,20 +287,28 @@ onBeforeUnmount(stop);
         class="absolute left-0 top-4 bottom-4 w-[3px] rounded-full transition-colors duration-500"
         :style="{ backgroundColor: current.color }"
       ></span>
-      <Transition name="dial-caption" mode="out-in">
-        <div :key="active">
+      <p class="sr-only">
+        {{ currentModule.title }}. {{ currentModule.scope }}
+      </p>
+      <div aria-hidden="true" class="dial-captions grid">
+        <div
+          v-for="(caption, i) in modules"
+          :key="i"
+          class="dial-caption"
+          :class="{ 'is-active': i === active }"
+        >
           <p
             class="text-[14px] sm:text-[15px] font-[600] leading-snug text-white"
           >
-            {{ currentModule.title }}
+            {{ caption.title }}
           </p>
           <p
             class="mt-1 text-[12.5px] sm:text-[13px] leading-relaxed text-white/65"
           >
-            {{ currentModule.scope }}
+            {{ caption.scope }}
           </p>
         </div>
-      </Transition>
+      </div>
     </div>
   </div>
 </template>
@@ -333,19 +346,26 @@ onBeforeUnmount(stop);
 .dial-number {
   animation: dial-number-in 0.5s cubic-bezier(0.16, 1, 0.3, 1);
 }
-.dial-caption-enter-active,
-.dial-caption-leave-active {
-  transition:
-    opacity 0.25s ease,
-    transform 0.3s ease;
+.dial-captions > .dial-caption {
+  grid-area: 1 / 1;
 }
-.dial-caption-enter-from {
+.dial-caption {
   opacity: 0;
   transform: translateY(6px);
+  visibility: hidden;
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease,
+    visibility 0s linear 0.18s;
 }
-.dial-caption-leave-to {
-  opacity: 0;
-  transform: translateY(-4px);
+.dial-caption.is-active {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  transition:
+    opacity 0.35s ease 0.1s,
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.1s,
+    visibility 0s;
 }
 
 @keyframes dial-spin {
@@ -372,6 +392,17 @@ onBeforeUnmount(stop);
   .dial-pointer,
   .dial-seg {
     transition: none;
+  }
+  .dial-caption {
+    transform: none;
+    transition:
+      opacity 0.15s ease,
+      visibility 0s linear 0.15s;
+  }
+  .dial-caption.is-active {
+    transition:
+      opacity 0.15s ease,
+      visibility 0s;
   }
 }
 </style>

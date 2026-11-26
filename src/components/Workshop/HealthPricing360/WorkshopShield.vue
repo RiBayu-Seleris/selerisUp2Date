@@ -119,7 +119,7 @@ onBeforeUnmount(() => observer?.disconnect());
                   v-if="autoplay && active === i && !interacted"
                   :key="`p-${active}`"
                   aria-hidden="true"
-                  class="sh-progress absolute left-0 bottom-0 h-[2px] bg-[#4AA8FF]"
+                  class="sh-progress absolute inset-x-0 bottom-0 h-[2px] bg-[#4AA8FF]"
                   :class="{ 'is-paused': paused || !inView }"
                   :style="{ animationDuration: `${INTERVAL_MS}ms` }"
                   @animationend="advance"
@@ -184,15 +184,16 @@ onBeforeUnmount(() => observer?.disconnect());
                 aria-hidden="true"
                 class="absolute left-1/2 top-1/2 w-[70%] aspect-square -translate-x-1/2 -translate-y-1/2 rounded-full bg-[#0071E7]/20 blur-[80px]"
               ></div>
-              <Transition name="sh-swap" mode="out-in">
+              <div class="sh-stack relative grid w-full place-items-center">
                 <div
-                  v-if="active < 2"
-                  :key="`img-${active}`"
-                  class="relative flex w-full items-end justify-center"
+                  v-for="(image, i) in IMAGES"
+                  :key="image"
+                  class="sh-visual relative flex w-full items-end justify-center"
+                  :class="{ 'is-active': active === i }"
                 >
                   <img
-                    :src="IMAGES[active]"
-                    :alt="imageAlts[active]"
+                    :src="image"
+                    :alt="imageAlts[i]"
                     width="606"
                     height="808"
                     loading="lazy"
@@ -200,14 +201,13 @@ onBeforeUnmount(() => observer?.disconnect());
                   />
                   <span
                     class="absolute left-0 sm:left-4 top-4 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 font-mono text-[10.5px] font-[600] uppercase tracking-[0.12em] text-white/80 backdrop-blur-md"
-                    >{{ t(`${NS}.stepLabel`, { n: active + 1 }) }}</span
+                    >{{ t(`${NS}.stepLabel`, { n: i + 1 }) }}</span
                   >
                 </div>
 
                 <div
-                  v-else
-                  key="flow"
-                  class="relative flex w-full max-w-[460px] flex-col items-center"
+                  class="sh-visual relative flex w-full max-w-[460px] flex-col items-center"
+                  :class="{ 'is-active': active >= IMAGES.length }"
                 >
                   <span
                     class="self-start mb-5 rounded-full border border-white/15 bg-white/10 px-3 py-1.5 font-mono text-[10.5px] font-[600] uppercase tracking-[0.12em] text-white/80"
@@ -314,7 +314,7 @@ onBeforeUnmount(() => observer?.disconnect());
                     </p>
                   </div>
                 </div>
-              </Transition>
+              </div>
             </div>
           </div>
         </div>
@@ -381,7 +381,8 @@ onBeforeUnmount(() => observer?.disconnect());
 }
 
 .sh-progress {
-  width: 0;
+  transform: scaleX(0);
+  transform-origin: left center;
   animation-name: sh-progress;
   animation-timing-function: linear;
   animation-fill-mode: forwards;
@@ -392,33 +393,44 @@ onBeforeUnmount(() => observer?.disconnect());
 
 @keyframes sh-progress {
   to {
-    width: 100%;
+    transform: scaleX(1);
   }
 }
 
-.sh-swap-enter-active,
-.sh-swap-leave-active {
+.sh-stack > .sh-visual {
+  grid-area: 1 / 1;
+}
+.sh-visual {
+  opacity: 0;
+  transform: translateY(14px);
+  visibility: hidden;
+  will-change: opacity, transform;
   transition:
-    opacity 0.3s ease,
-    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity 0.2s ease,
+    transform 0.2s ease,
+    visibility 0s linear 0.2s;
 }
-.sh-swap-enter-from {
-  opacity: 0;
-  transform: translateY(16px) scale(0.98);
-}
-.sh-swap-leave-to {
-  opacity: 0;
-  transform: translateY(-8px);
+.sh-visual.is-active {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  transition:
+    opacity 0.4s ease 0.12s,
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.12s,
+    visibility 0s;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sh-swap-enter-active,
-  .sh-swap-leave-active {
-    transition: opacity 0.15s ease;
-  }
-  .sh-swap-enter-from,
-  .sh-swap-leave-to {
+  .sh-visual {
     transform: none;
+    transition:
+      opacity 0.15s ease,
+      visibility 0s linear 0.15s;
+  }
+  .sh-visual.is-active {
+    transition:
+      opacity 0.15s ease,
+      visibility 0s;
   }
 }
 </style>

@@ -200,157 +200,154 @@ const tone = (day) =>
       </button>
     </div>
 
-    <div class="mx-auto mt-6 max-w-[1100px]">
-      <Transition name="ag-swap" mode="out-in">
-        <div
-          :id="`agenda-panel-${current.day}`"
-          :key="current.day"
-          role="tabpanel"
-          :aria-labelledby="`agenda-tab-${current.day}`"
-          class="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6"
+    <div class="ag-stack mx-auto mt-6 grid max-w-[1100px]">
+      <div
+        v-for="panel in days"
+        :id="`agenda-panel-${panel.day}`"
+        :key="panel.day"
+        role="tabpanel"
+        :aria-labelledby="`agenda-tab-${panel.day}`"
+        class="ag-panel grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-6"
+        :class="{ 'is-active': panel.day === current.day }"
+      >
+        <aside
+          class="ag-overview relative isolate overflow-hidden lg:col-span-4 rounded-[24px] p-6 sm:p-7 text-white self-start"
         >
-          <aside
-            class="ag-overview relative isolate overflow-hidden lg:col-span-4 rounded-[24px] p-6 sm:p-7 text-white self-start"
+          <div
+            aria-hidden="true"
+            class="absolute -z-10 -right-16 -top-16 w-56 h-56 rounded-full blur-[80px]"
+            :class="panel.day === 1 ? 'bg-[#1AB24F]/35' : 'bg-[#0071E7]/40'"
+          ></div>
+          <p
+            class="font-mono text-[11px] font-[600] uppercase tracking-[0.16em]"
+            :class="panel.day === 1 ? 'text-[#3DDC84]' : 'text-[#4AA8FF]'"
           >
-            <div
-              aria-hidden="true"
-              class="absolute -z-10 -right-16 -top-16 w-56 h-56 rounded-full blur-[80px]"
-              :class="current.day === 1 ? 'bg-[#1AB24F]/35' : 'bg-[#0071E7]/40'"
-            ></div>
-            <p
-              class="font-mono text-[11px] font-[600] uppercase tracking-[0.16em]"
-              :class="current.day === 1 ? 'text-[#3DDC84]' : 'text-[#4AA8FF]'"
-            >
-              {{ t(`${NS}.agenda.overviewTitle`) }}
-            </p>
-            <p
-              class="mt-3 text-[15px] sm:text-[16px] leading-[1.65] text-white/85"
-            >
-              {{ current.summary }}
-            </p>
-            <p
-              class="sm:hidden mt-4 font-mono text-[11px] uppercase tracking-[0.1em] text-white/50"
-            >
-              {{ current.date || t(`${NS}.agenda.dateTba`) }}
-            </p>
-            <div class="mt-6 border-t border-white/10 pt-5">
-              <ul class="flex flex-col gap-3">
-                <li
-                  v-for="method in methods"
-                  :key="method.label"
-                  class="flex items-center gap-3 text-[13.5px] font-[500] text-white/85"
-                >
-                  <span
-                    class="inline-flex w-8 h-8 shrink-0 items-center justify-center rounded-lg bg-white/[0.08]"
-                    :class="
-                      current.day === 1 ? 'text-[#3DDC84]' : 'text-[#4AA8FF]'
-                    "
-                  >
-                    <svg
-                      viewBox="0 0 24 24"
-                      class="w-4 h-4"
-                      fill="none"
-                      stroke="currentColor"
-                      stroke-width="1.8"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      aria-hidden="true"
-                    >
-                      <path v-for="(d, k) in method.icon" :key="k" :d="d" />
-                    </svg>
-                  </span>
-                  {{ method.label }}
-                </li>
-              </ul>
-            </div>
-          </aside>
-
-          <ol class="relative lg:col-span-8">
-            <span
-              aria-hidden="true"
-              class="absolute left-[19px] sm:left-[111px] top-6 bottom-6 w-px bg-gradient-to-b"
-              :class="
-                current.day === 1
-                  ? 'from-[#1AB24F]/50 via-[#1AB24F]/20 to-transparent'
-                  : 'from-[#0071E7]/50 via-[#0071E7]/20 to-transparent'
-              "
-            ></span>
-            <li
-              v-for="session in current.sessions"
-              :key="session.n"
-              class="relative flex items-stretch gap-4 sm:gap-0 pb-3 last:pb-0"
-            >
-              <div
-                class="hidden sm:flex w-[92px] shrink-0 flex-col items-end pr-5 pt-5 text-right"
+            {{ t(`${NS}.agenda.overviewTitle`) }}
+          </p>
+          <p
+            class="mt-3 text-[15px] sm:text-[16px] leading-[1.65] text-white/85"
+          >
+            {{ panel.summary }}
+          </p>
+          <p
+            class="sm:hidden mt-4 font-mono text-[11px] uppercase tracking-[0.1em] text-white/50"
+          >
+            {{ panel.date || t(`${NS}.agenda.dateTba`) }}
+          </p>
+          <div class="mt-6 border-t border-white/10 pt-5">
+            <ul class="flex flex-col gap-3">
+              <li
+                v-for="method in methods"
+                :key="method.label"
+                class="flex items-center gap-3 text-[13.5px] font-[500] text-white/85"
               >
                 <span
-                  class="font-mono text-[12.5px] font-[700] text-[#0B1324] dark:text-white"
+                  class="inline-flex w-8 h-8 shrink-0 items-center justify-center rounded-lg bg-white/[0.08]"
+                  :class="panel.day === 1 ? 'text-[#3DDC84]' : 'text-[#4AA8FF]'"
+                >
+                  <svg
+                    viewBox="0 0 24 24"
+                    class="w-4 h-4"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
+                  >
+                    <path v-for="(d, k) in method.icon" :key="k" :d="d" />
+                  </svg>
+                </span>
+                {{ method.label }}
+              </li>
+            </ul>
+          </div>
+        </aside>
+
+        <ol class="relative lg:col-span-8">
+          <span
+            aria-hidden="true"
+            class="absolute left-[19px] sm:left-[111px] top-6 bottom-6 w-px bg-gradient-to-b"
+            :class="
+              panel.day === 1
+                ? 'from-[#1AB24F]/50 via-[#1AB24F]/20 to-transparent'
+                : 'from-[#0071E7]/50 via-[#0071E7]/20 to-transparent'
+            "
+          ></span>
+          <li
+            v-for="session in panel.sessions"
+            :key="session.n"
+            class="relative flex items-stretch gap-4 sm:gap-0 pb-3 last:pb-0"
+          >
+            <div
+              class="hidden sm:flex w-[92px] shrink-0 flex-col items-end pr-5 pt-5 text-right"
+            >
+              <span
+                class="font-mono text-[12.5px] font-[700] text-[#0B1324] dark:text-white"
+                >{{
+                  session.time || t(`${NS}.agenda.session`, { n: session.n })
+                }}</span
+              >
+              <span
+                v-if="!session.time"
+                class="mt-1 text-[11px] leading-tight text-[#98A2B3]"
+                >{{ t(`${NS}.agenda.timeTba`) }}</span
+              >
+            </div>
+
+            <span
+              class="relative z-10 mt-4 sm:mt-5 shrink-0 flex w-10 h-10 sm:w-10 sm:h-10 items-center justify-center rounded-full border-4 border-[#F9FAFB] font-mono text-[11.5px] font-[700] text-white dark:border-[#17181A]"
+              :class="
+                session.type === 'handsOn'
+                  ? 'bg-[#0071E7]'
+                  : panel.day === 1
+                    ? 'bg-[#1AB24F]'
+                    : 'bg-[#0B2D5C]'
+              "
+              >{{ session.module }}</span
+            >
+
+            <div
+              class="min-w-0 flex-1 sm:ml-4 rounded-[18px] border p-4 sm:p-5 transition-colors"
+              :class="
+                session.type === 'handsOn'
+                  ? 'border-[#0071E7]/30 bg-gradient-to-br from-[#0071E7]/[0.07] to-white dark:to-[#1D2426]'
+                  : 'border-[#E4E7EC] bg-white hover:border-[#D0D5DD] dark:border-white/10 dark:bg-[#1D2426]'
+              "
+            >
+              <div class="flex flex-wrap items-center gap-2">
+                <span
+                  class="sm:hidden font-mono text-[11px] font-[700] text-[#0B1324] dark:text-white"
                   >{{
                     session.time || t(`${NS}.agenda.session`, { n: session.n })
                   }}</span
                 >
                 <span
-                  v-if="!session.time"
-                  class="mt-1 text-[11px] leading-tight text-[#98A2B3]"
-                  >{{ t(`${NS}.agenda.timeTba`) }}</span
+                  class="rounded-full px-2 py-0.5 font-mono text-[10px] font-[700] uppercase tracking-[0.1em]"
+                  :class="
+                    session.type === 'handsOn'
+                      ? 'bg-[#0071E7] text-white'
+                      : session.type === 'simulation'
+                        ? 'bg-[#071427] text-[#3DDC84] dark:bg-white/10'
+                        : 'bg-[#F2F4F7] text-[#475467] dark:bg-white/[0.06] dark:text-[#C9C9C9]'
+                  "
+                  >{{ t(`${NS}.curriculum.types.${session.type}`) }}</span
                 >
               </div>
-
-              <span
-                class="relative z-10 mt-4 sm:mt-5 shrink-0 flex w-10 h-10 sm:w-10 sm:h-10 items-center justify-center rounded-full border-4 border-[#F9FAFB] font-mono text-[11.5px] font-[700] text-white dark:border-[#17181A]"
-                :class="
-                  session.type === 'handsOn'
-                    ? 'bg-[#0071E7]'
-                    : current.day === 1
-                      ? 'bg-[#1AB24F]'
-                      : 'bg-[#0B2D5C]'
-                "
-                >{{ session.module }}</span
+              <p
+                class="mt-2 text-[15.5px] sm:text-[17px] font-[600] leading-[1.35] text-[#0B1324] dark:text-white"
               >
-
-              <div
-                class="min-w-0 flex-1 sm:ml-4 rounded-[18px] border p-4 sm:p-5 transition-colors"
-                :class="
-                  session.type === 'handsOn'
-                    ? 'border-[#0071E7]/30 bg-gradient-to-br from-[#0071E7]/[0.07] to-white dark:to-[#1D2426]'
-                    : 'border-[#E4E7EC] bg-white hover:border-[#D0D5DD] dark:border-white/10 dark:bg-[#1D2426]'
-                "
+                {{ session.title }}
+              </p>
+              <p
+                class="mt-1.5 text-[13.5px] sm:text-[14px] leading-[1.6] text-[#667085] dark:text-[#A3A3A3]"
               >
-                <div class="flex flex-wrap items-center gap-2">
-                  <span
-                    class="sm:hidden font-mono text-[11px] font-[700] text-[#0B1324] dark:text-white"
-                    >{{
-                      session.time ||
-                      t(`${NS}.agenda.session`, { n: session.n })
-                    }}</span
-                  >
-                  <span
-                    class="rounded-full px-2 py-0.5 font-mono text-[10px] font-[700] uppercase tracking-[0.1em]"
-                    :class="
-                      session.type === 'handsOn'
-                        ? 'bg-[#0071E7] text-white'
-                        : session.type === 'simulation'
-                          ? 'bg-[#071427] text-[#3DDC84] dark:bg-white/10'
-                          : 'bg-[#F2F4F7] text-[#475467] dark:bg-white/[0.06] dark:text-[#C9C9C9]'
-                    "
-                    >{{ t(`${NS}.curriculum.types.${session.type}`) }}</span
-                  >
-                </div>
-                <p
-                  class="mt-2 text-[15.5px] sm:text-[17px] font-[600] leading-[1.35] text-[#0B1324] dark:text-white"
-                >
-                  {{ session.title }}
-                </p>
-                <p
-                  class="mt-1.5 text-[13.5px] sm:text-[14px] leading-[1.6] text-[#667085] dark:text-[#A3A3A3]"
-                >
-                  {{ session.scope }}
-                </p>
-              </div>
-            </li>
-          </ol>
-        </div>
-      </Transition>
+                {{ session.scope }}
+              </p>
+            </div>
+          </li>
+        </ol>
+      </div>
     </div>
   </section>
 </template>
@@ -360,29 +357,39 @@ const tone = (day) =>
   background: linear-gradient(155deg, #0a1b36 0%, #071427 60%, #040c1a 100%);
 }
 
-.ag-swap-enter-active,
-.ag-swap-leave-active {
-  transition:
-    opacity 0.25s ease,
-    transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+.ag-stack > .ag-panel {
+  grid-area: 1 / 1;
 }
-.ag-swap-enter-from {
+.ag-panel {
   opacity: 0;
   transform: translateY(10px);
+  visibility: hidden;
+  transition:
+    opacity 0.18s ease,
+    transform 0.18s ease,
+    visibility 0s linear 0.18s;
 }
-.ag-swap-leave-to {
-  opacity: 0;
-  transform: translateY(-6px);
+.ag-panel.is-active {
+  opacity: 1;
+  transform: none;
+  visibility: visible;
+  transition:
+    opacity 0.35s ease 0.1s,
+    transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.1s,
+    visibility 0s;
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .ag-swap-enter-active,
-  .ag-swap-leave-active {
-    transition: opacity 0.15s ease;
-  }
-  .ag-swap-enter-from,
-  .ag-swap-leave-to {
+  .ag-panel {
     transform: none;
+    transition:
+      opacity 0.15s ease,
+      visibility 0s linear 0.15s;
+  }
+  .ag-panel.is-active {
+    transition:
+      opacity 0.15s ease,
+      visibility 0s;
   }
 }
 </style>

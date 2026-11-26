@@ -1,5 +1,13 @@
 <script setup>
-import { computed, ref, watch } from "vue";
+import {
+  computed,
+  nextTick,
+  onBeforeUnmount,
+  onMounted,
+  reactive,
+  ref,
+  watch,
+} from "vue";
 import { useI18n } from "vue-i18n";
 import WorkshopEyebrow from "./WorkshopEyebrow.vue";
 import CurriculumModuleDetail from "./CurriculumModuleDetail.vue";
@@ -154,6 +162,33 @@ const jump = (index) => {
     filter.value = 0;
   }
 };
+
+const filterGroup = ref(null);
+const pill = reactive({ x: 0, width: 0, animate: false });
+let pillObserver = null;
+
+const placePill = () => {
+  const button = filterGroup.value?.querySelector('[aria-pressed="true"]');
+  if (!button) return;
+  pill.x = button.offsetLeft;
+  pill.width = button.offsetWidth;
+  if (!pill.animate) {
+    requestAnimationFrame(() => {
+      pill.animate = true;
+    });
+  }
+};
+
+watch([filter, filters], () => nextTick(placePill));
+
+onMounted(() => {
+  placePill();
+  if (typeof ResizeObserver === "undefined" || !filterGroup.value) return;
+  pillObserver = new ResizeObserver(placePill);
+  pillObserver.observe(filterGroup.value);
+});
+
+onBeforeUnmount(() => pillObserver?.disconnect());
 </script>
 
 <template>
@@ -180,26 +215,39 @@ const jump = (index) => {
       </div>
 
       <div
+        ref="filterGroup"
         role="group"
         :aria-label="t(`${NS}.curriculum.eyebrow`)"
-        class="grid grid-cols-3 sm:inline-flex self-stretch sm:self-start lg:self-auto shrink-0 gap-1 rounded-2xl border border-[#E4E7EC] bg-white p-1.5 shadow-[0_1px_2px_rgba(16,24,40,0.05)] dark:border-white/10 dark:bg-[#1D2426]"
+        class="relative grid grid-cols-3 sm:inline-flex self-stretch sm:self-start lg:self-auto shrink-0 gap-1 rounded-2xl border border-[#E4E7EC] bg-white p-1.5 shadow-[0_1px_2px_rgba(16,24,40,0.05)] dark:border-white/10 dark:bg-[#1D2426]"
       >
+        <span
+          v-if="pill.width"
+          aria-hidden="true"
+          class="cm-pill absolute left-0 top-1.5 bottom-1.5 rounded-xl bg-[#071427] dark:bg-[#1AB24F]"
+          :class="{ 'is-animated': pill.animate }"
+          :style="{
+            width: `${pill.width}px`,
+            transform: `translateX(${pill.x}px)`,
+          }"
+        ></span>
         <button
           v-for="option in filters"
           :key="option.value"
           type="button"
           :aria-pressed="filter === option.value"
-          class="flex flex-col sm:flex-row items-center justify-center gap-x-2 rounded-xl px-3 sm:px-4 py-2 text-[13px] sm:text-[14px] font-[600] transition-colors"
+          class="relative flex flex-col sm:flex-row items-center justify-center gap-x-2 rounded-xl px-3 sm:px-4 py-2 text-[13px] sm:text-[14px] font-[600] transition-colors duration-300"
           :class="
             filter === option.value
-              ? 'bg-[#071427] text-white dark:bg-[#1AB24F]'
+              ? pill.width
+                ? 'text-white'
+                : 'bg-[#071427] text-white dark:bg-[#1AB24F]'
               : 'text-[#475467] hover:bg-[#F2F4F7] dark:text-[#A3A3A3] dark:hover:bg-white/5'
           "
           @click="filter = option.value"
         >
           {{ option.label }}
           <span
-            class="font-mono text-[11px] font-[500]"
+            class="font-mono text-[11px] font-[500] transition-colors duration-300"
             :class="
               filter === option.value
                 ? 'text-[#3DDC84] dark:text-white/80'
@@ -221,112 +269,114 @@ const jump = (index) => {
         >
           {{ t(`${NS}.curriculum.hint`) }}
         </p>
-        <div v-for="group in groups" :key="group.day">
-          <div class="flex items-center gap-3 px-1">
-            <span
-              class="w-2 h-2 rounded-full"
-              :class="group.day === 1 ? 'bg-[#1AB24F]' : 'bg-[#0071E7]'"
-            ></span>
-            <span
-              class="font-mono text-[11px] font-[600] uppercase tracking-[0.14em]"
-              :class="
-                group.day === 1
-                  ? 'text-[#138A3D] dark:text-[#5EE38F]'
-                  : 'text-[#0059B8] dark:text-[#4AA8FF]'
-              "
-              >{{ t(`${NS}.hero.dial.day`, { n: group.day }) }}</span
-            >
-            <span
-              class="truncate text-[13px] font-[500] text-[#667085] dark:text-[#A3A3A3]"
-              >{{ group.title }}</span
-            >
-          </div>
-
-          <ol class="mt-3 flex flex-col gap-2">
-            <li v-for="m in group.modules" :key="m.index">
-              <button
-                type="button"
-                :aria-expanded="active === m.index && mobileOpen"
-                :aria-controls="`cm-detail-${m.index}`"
-                class="group flex w-full items-center gap-4 rounded-2xl border px-4 py-3.5 text-left transition-all duration-300"
+        <TransitionGroup tag="div" name="cm-group" class="relative -mt-6">
+          <div v-for="group in groups" :key="group.day" class="mt-6">
+            <div class="flex items-center gap-3 px-1">
+              <span
+                class="w-2 h-2 rounded-full"
+                :class="group.day === 1 ? 'bg-[#1AB24F]' : 'bg-[#0071E7]'"
+              ></span>
+              <span
+                class="font-mono text-[11px] font-[600] uppercase tracking-[0.14em]"
                 :class="
-                  active === m.index
-                    ? m.day === 1
-                      ? 'border-[#1AB24F]/50 bg-white shadow-[0_14px_34px_-22px_rgba(26,178,79,0.8)] dark:bg-[#1D2426]'
-                      : 'border-[#0071E7]/45 bg-white shadow-[0_14px_34px_-22px_rgba(0,113,231,0.8)] dark:bg-[#1D2426]'
-                    : 'border-transparent hover:border-[#E4E7EC] hover:bg-white dark:hover:border-white/10 dark:hover:bg-white/[0.03]'
+                  group.day === 1
+                    ? 'text-[#138A3D] dark:text-[#5EE38F]'
+                    : 'text-[#0059B8] dark:text-[#4AA8FF]'
                 "
-                @click="select(m.index)"
+                >{{ t(`${NS}.hero.dial.day`, { n: group.day }) }}</span
               >
-                <span
-                  class="shrink-0 inline-flex w-11 h-11 items-center justify-center rounded-xl font-mono text-[14px] font-[700] transition-colors"
+              <span
+                class="truncate text-[13px] font-[500] text-[#667085] dark:text-[#A3A3A3]"
+                >{{ group.title }}</span
+              >
+            </div>
+
+            <ol class="mt-3 flex flex-col gap-2">
+              <li v-for="m in group.modules" :key="m.index">
+                <button
+                  type="button"
+                  :aria-expanded="active === m.index && mobileOpen"
+                  :aria-controls="`cm-detail-${m.index}`"
+                  class="group flex w-full items-center gap-4 rounded-2xl border px-4 py-3.5 text-left transition-all duration-300"
                   :class="
                     active === m.index
                       ? m.day === 1
-                        ? 'bg-[#1AB24F] text-white'
-                        : 'bg-[#0071E7] text-white'
-                      : 'bg-[#F2F4F7] text-[#475467] group-hover:text-[#0B1324] dark:bg-white/[0.06] dark:text-[#C9C9C9]'
+                        ? 'border-[#1AB24F]/50 bg-white shadow-[0_14px_34px_-22px_rgba(26,178,79,0.8)] dark:bg-[#1D2426]'
+                        : 'border-[#0071E7]/45 bg-white shadow-[0_14px_34px_-22px_rgba(0,113,231,0.8)] dark:bg-[#1D2426]'
+                      : 'border-transparent hover:border-[#E4E7EC] hover:bg-white dark:hover:border-white/10 dark:hover:bg-white/[0.03]'
                   "
-                  >{{ m.number }}</span
+                  @click="select(m.index)"
                 >
-                <span class="min-w-0 flex-1">
                   <span
-                    class="block text-[14.5px] sm:text-[15px] font-[600] leading-[1.35]"
+                    class="shrink-0 inline-flex w-11 h-11 items-center justify-center rounded-xl font-mono text-[14px] font-[700] transition-colors"
                     :class="
                       active === m.index
-                        ? 'text-[#0B1324] dark:text-white'
-                        : 'text-[#344054] dark:text-[#D1D5DB]'
+                        ? m.day === 1
+                          ? 'bg-[#1AB24F] text-white'
+                          : 'bg-[#0071E7] text-white'
+                        : 'bg-[#F2F4F7] text-[#475467] group-hover:text-[#0B1324] dark:bg-white/[0.06] dark:text-[#C9C9C9]'
                     "
-                    >{{ m.title }}</span
+                    >{{ m.number }}</span
                   >
-                  <span
-                    v-if="m.type !== 'lecture'"
-                    class="mt-1 inline-block font-mono text-[10.5px] font-[600] uppercase tracking-[0.1em]"
-                    :class="
-                      m.type === 'handsOn'
-                        ? 'text-[#0071E7] dark:text-[#4AA8FF]'
-                        : 'text-[#138A3D] dark:text-[#5EE38F]'
-                    "
-                    >{{ t(`${NS}.curriculum.types.${m.type}`) }}</span
+                  <span class="min-w-0 flex-1">
+                    <span
+                      class="block text-[14.5px] sm:text-[15px] font-[600] leading-[1.35]"
+                      :class="
+                        active === m.index
+                          ? 'text-[#0B1324] dark:text-white'
+                          : 'text-[#344054] dark:text-[#D1D5DB]'
+                      "
+                      >{{ m.title }}</span
+                    >
+                    <span
+                      v-if="m.type !== 'lecture'"
+                      class="mt-1 inline-block font-mono text-[10.5px] font-[600] uppercase tracking-[0.1em]"
+                      :class="
+                        m.type === 'handsOn'
+                          ? 'text-[#0071E7] dark:text-[#4AA8FF]'
+                          : 'text-[#138A3D] dark:text-[#5EE38F]'
+                      "
+                      >{{ t(`${NS}.curriculum.types.${m.type}`) }}</span
+                    >
+                  </span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    class="shrink-0 w-4 h-4 transition-transform duration-300"
+                    :class="[
+                      active === m.index
+                        ? 'text-[#0B1324] dark:text-white lg:translate-x-0.5'
+                        : 'text-[#98A2B3]',
+                      active === m.index && mobileOpen
+                        ? 'rotate-90 lg:rotate-0'
+                        : '',
+                    ]"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="2.2"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    aria-hidden="true"
                   >
-                </span>
-                <svg
-                  viewBox="0 0 24 24"
-                  class="shrink-0 w-4 h-4 transition-transform duration-300"
-                  :class="[
-                    active === m.index
-                      ? 'text-[#0B1324] dark:text-white lg:translate-x-0.5'
-                      : 'text-[#98A2B3]',
-                    active === m.index && mobileOpen
-                      ? 'rotate-90 lg:rotate-0'
-                      : '',
-                  ]"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2.2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="m9 6 6 6-6 6" />
-                </svg>
-              </button>
+                    <path d="m9 6 6 6-6 6" />
+                  </svg>
+                </button>
 
-              <div
-                v-if="active === m.index && mobileOpen"
-                :id="`cm-detail-${m.index}`"
-                class="lg:hidden mt-2"
-              >
-                <CurriculumModuleDetail
-                  :module="m"
-                  :modules="modules"
-                  :total="modules.length"
-                  compact
-                />
-              </div>
-            </li>
-          </ol>
-        </div>
+                <div
+                  v-if="active === m.index && mobileOpen"
+                  :id="`cm-detail-${m.index}`"
+                  class="lg:hidden mt-2"
+                >
+                  <CurriculumModuleDetail
+                    :module="m"
+                    :modules="modules"
+                    :total="modules.length"
+                    compact
+                  />
+                </div>
+              </li>
+            </ol>
+          </div>
+        </TransitionGroup>
       </div>
 
       <div class="hidden lg:block lg:col-span-7 lg:sticky lg:top-28">
@@ -342,3 +392,42 @@ const jump = (index) => {
     </div>
   </section>
 </template>
+
+<style scoped>
+.cm-pill.is-animated {
+  transition:
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1),
+    width 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cm-group-move {
+  transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.cm-group-enter-active {
+  transition:
+    opacity 0.35s ease 0.08s,
+    transform 0.45s cubic-bezier(0.16, 1, 0.3, 1) 0.08s;
+}
+.cm-group-enter-from {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.cm-group-leave-active {
+  position: absolute;
+  left: 0;
+  right: 0;
+  transition: opacity 0.15s ease;
+}
+.cm-group-leave-to {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .cm-pill.is-animated,
+  .cm-group-move,
+  .cm-group-enter-active,
+  .cm-group-leave-active {
+    transition: none;
+  }
+}
+</style>
