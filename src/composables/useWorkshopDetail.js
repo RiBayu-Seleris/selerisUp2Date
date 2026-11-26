@@ -18,6 +18,8 @@ const toAgenda = (days) =>
   (days || [])
     .map((day) => ({
       day: day.day,
+      title: day.title ? bilingual(day.title) : null,
+      summary: day.summary ? bilingual(day.summary) : null,
       sessions: (day.sessions || [])
         .filter((session) => session.type === "module" && session.module)
         .map((session) => ({
@@ -39,6 +41,11 @@ const toFacilitator = (person) => ({
 });
 
 const applyDetail = (workshop, data) => {
+  workshop.subtitle = data.subtitle ? bilingual(data.subtitle) : null;
+  workshop.highlights = (data.highlights || [])
+    .map(bilingual)
+    .filter((item) => item.id || item.en);
+
   Object.assign(workshop.event, {
     startDate: data.start_date ?? null,
     endDate: data.end_date ?? null,

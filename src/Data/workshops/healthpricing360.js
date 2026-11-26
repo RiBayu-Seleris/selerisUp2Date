@@ -3,6 +3,8 @@ export const healthPricing360 = {
   path: "/workshop/healthpricing-360",
   name: "HEALTHPRICING 360°",
   organizer: "Shield",
+  subtitle: null,
+  highlights: [],
   durationDays: 2,
   moduleCount: 10,
   handsOnModule: 8,

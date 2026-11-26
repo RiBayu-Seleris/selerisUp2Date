@@ -3,6 +3,7 @@ import { computed, ref } from "vue";
 import { useI18n } from "vue-i18n";
 import WorkshopEyebrow from "./WorkshopEyebrow.vue";
 import { useHpModules } from "@/composables/useHpModules";
+import { useHpDays } from "@/composables/useHpDays";
 
 const props = defineProps({
   workshop: { type: Object, required: true },
@@ -62,11 +63,10 @@ const typeOf = (moduleNumber) => {
 };
 
 const hpModules = useHpModules(props.workshop);
+const hpDays = useHpDays(props.workshop);
 
 const days = computed(() => {
   const sessions = tm(`${NS}.agenda.sessions`).map((m) => rt(m));
-  const summaries = tm(`${NS}.agenda.summaries`).map((m) => rt(m));
-  const titles = tm(`${NS}.days`).map((m) => rt(m.title));
   const fromSentris = (props.workshop.modules || []).length > 0;
   const byNumber = new Map(hpModules.value.map((m) => [m.number, m]));
   const titleOf = (n) =>
@@ -74,12 +74,12 @@ const days = computed(() => {
     sessions[n - 1] ||
     byNumber.get(n)?.title ||
     "";
-  return props.workshop.agenda.map((day, i) => {
+  return props.workshop.agenda.map((day) => {
     const numbers = day.sessions.map((s) => s.module);
     return {
       day: day.day,
-      title: titles[i],
-      summary: summaries[i],
+      title: hpDays.title(day.day),
+      summary: hpDays.summary(day.day),
       date: dayDate(day.day),
       from: String(Math.min(...numbers)).padStart(2, "0"),
       to: String(Math.max(...numbers)).padStart(2, "0"),

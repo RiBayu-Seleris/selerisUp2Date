@@ -3,6 +3,7 @@ import { computed } from "vue";
 import { useI18n } from "vue-i18n";
 import WorkshopEyebrow from "./WorkshopEyebrow.vue";
 import { useWorkshopInfo } from "@/composables/useWorkshopInfo";
+import { useHpDays } from "@/composables/useHpDays";
 import healthResult from "@/assets/Products/images/Shield/v2/health-result.webp";
 import shieldMark from "@/assets/Products/images/Shield/v2/shield-mark.webp";
 
@@ -13,6 +14,7 @@ const props = defineProps({
 const NS = "workshop.healthpricing360";
 const { t, tm, rt } = useI18n();
 const { dateLabel } = useWorkshopInfo(props.workshop);
+const hpDays = useHpDays(props.workshop);
 
 const items = computed(() =>
   tm(`${NS}.benefits.items`).map((m) => ({
@@ -22,12 +24,11 @@ const items = computed(() =>
 );
 
 const days = computed(() => {
-  const titles = tm(`${NS}.days`).map((m) => rt(m.title));
-  return props.workshop.agenda.map((day, i) => {
+  return props.workshop.agenda.map((day) => {
     const numbers = day.sessions.map((s) => s.module);
     return {
       day: day.day,
-      title: titles[i],
+      title: hpDays.title(day.day),
       sessions: day.sessions.length,
       from: String(Math.min(...numbers)).padStart(2, "0"),
       to: String(Math.max(...numbers)).padStart(2, "0"),

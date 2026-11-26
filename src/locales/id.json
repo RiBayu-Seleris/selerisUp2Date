@@ -2345,23 +2345,23 @@
     },
     "healthpricing360": {
       "seo": {
-        "title": "Workshop HEALTHPRICING 360° — Actuarial Pricing & Medical Risk Intelligence",
-        "description": "Workshop profesional 2 hari tentang actuarial pricing asuransi kesehatan dan medical risk intelligence: claims analytics, credibility theory, simulasi pricing, dan praktik Shield."
+        "title": "Workshop HEALTHPRICING 360° — Penetapan Harga Aktuarial & Analisis Risiko Medis",
+        "description": "Workshop profesional 2 hari tentang penetapan harga aktuarial asuransi kesehatan dan analisis risiko medis: analisis klaim, teori kredibilitas, simulasi penetapan harga, dan praktik Shield."
       },
       "popup": {
         "label": "Pengumuman workshop",
         "chip": "Workshop baru",
         "close": "Tutup",
-        "host": "Professional Workshop dari Shield",
-        "meta": "2 hari • 10 modul • Certificate of Completion",
-        "title": "Actuarial Pricing & Medical Risk Intelligence",
+        "host": "Workshop profesional dari Shield",
+        "meta": "2 hari • 10 modul • Sertifikat Penyelesaian",
+        "title": "Penetapan Harga Aktuarial & Analisis Risiko Medis",
         "scheduleTba": "Jadwal segera diumumkan",
         "cta": "Daftar Sekarang"
       },
       "hero": {
-        "eyebrow": "Shield Professional Workshop",
-        "subtitle": "Actuarial Pricing & Medical Risk Intelligence",
-        "headline": "Bangun premi asuransi kesehatan dengan dasar aktuaria, data, dan medical risk intelligence.",
+        "eyebrow": "Workshop Profesional Shield",
+        "subtitle": "Penetapan Harga Aktuarial & Analisis Risiko Medis",
+        "headline": "Bangun premi asuransi kesehatan dengan dasar aktuaria, data, dan intelijensi risiko medis.",
         "lead": "Pelajari cara menganalisis klaim, memahami profil risiko, menghitung premi per manfaat, dan menyusun rekomendasi premi yang lebih terukur melalui studi kasus serta praktik Shield.",
         "ctaPrimary": "Daftar Workshop",
         "ctaSecondary": "Lihat Kurikulum",
@@ -2380,135 +2380,135 @@
           "2 hari intensif",
           "10 modul",
           "Praktik Shield",
-          "Certificate of Completion"
+          "Sertifikat Penyelesaian"
         ]
       },
       "modules": [
         {
-          "title": "Health Insurance Pricing Fundamentals",
-          "scope": "Konsep premi, risk pooling, benefit, dan tantangan pricing.",
+          "title": "Dasar-dasar Penetapan Harga Asuransi Kesehatan",
+          "scope": "Konsep premi, pengumpulan risiko, manfaat, dan tantangan penetapan harga.",
           "topics": [
             "Konsep premi",
-            "Risk pooling",
-            "Benefit",
-            "Tantangan pricing"
+            "Pengumpulan risiko",
+            "Manfaat",
+            "Tantangan penetapan harga"
           ]
         },
         {
-          "title": "Statistical Foundation for Actuarial Pricing",
-          "scope": "Statistik deskriptif, sampling, standard error, confidence interval, dan distribusi.",
+          "title": "Dasar-dasar Statistik dalam Penetapan Harga Aktuaria",
+          "scope": "Statistik deskriptif, pengambilan sampel, galat baku, interval kepercayaan, dan distribusi.",
           "topics": [
             "Statistik deskriptif",
-            "Sampling",
-            "Standard error",
-            "Confidence interval",
+            "Pengambilan sampel",
+            "Galat baku",
+            "Interval kepercayaan",
             "Distribusi"
           ]
         },
         {
-          "title": "Health Insurance Claims Analytics",
-          "scope": "Frequency, severity, utilization, loss ratio, IBNR, dan medical inflation.",
+          "title": "Analisis Klaim Asuransi Kesehatan",
+          "scope": "Frekuensi, tingkat keparahan, utilisasi, rasio kerugian, IBNR, dan inflasi medis.",
           "topics": [
-            "Frequency",
-            "Severity",
-            "Utilization",
-            "Loss ratio",
+            "Frekuensi",
+            "Tingkat keparahan",
+            "Utilisasi",
+            "Rasio kerugian",
             "IBNR",
-            "Medical inflation"
+            "Inflasi medis"
           ]
         },
         {
-          "title": "Actuarial Pricing Methodology",
-          "scope": "Pure premium, frequency-severity, experience rating, manual rating, dan trend.",
+          "title": "Metodologi Penetapan Harga Aktuarial",
+          "scope": "Premi murni, frekuensi dan tingkat keparahan, tarif berbasis pengalaman, tarif manual, dan tren.",
           "topics": [
-            "Pure premium",
-            "Frequency-severity",
-            "Experience rating",
-            "Manual rating",
-            "Trend"
+            "Premi murni",
+            "Frekuensi & tingkat keparahan",
+            "Tarif berbasis pengalaman",
+            "Tarif manual",
+            "Tren"
           ]
         },
         {
-          "title": "Benefit-Based Health Insurance Pricing",
-          "scope": "Inpatient, outpatient, dental, maternity, dan optical.",
+          "title": "Penetapan Harga Asuransi Kesehatan Berbasis Manfaat",
+          "scope": "Rawat inap, rawat jalan, gigi, persalinan, dan kacamata.",
           "topics": [
-            "Inpatient",
-            "Outpatient",
-            "Dental",
-            "Maternity",
-            "Optical"
+            "Rawat inap",
+            "Rawat jalan",
+            "Gigi",
+            "Persalinan",
+            "Kacamata"
           ]
         },
         {
-          "title": "Medical Risk Assessment & Risk Stratification",
-          "scope": "Faktor risiko medis, health profile, dan klasifikasi risiko.",
+          "title": "Penilaian Risiko Medis & Stratifikasi Risiko",
+          "scope": "Faktor risiko medis, profil kesehatan, dan klasifikasi risiko.",
           "topics": [
             "Faktor risiko medis",
-            "Health profile",
+            "Profil kesehatan",
             "Klasifikasi risiko"
           ]
         },
         {
-          "title": "Credibility Theory & Risk-Based Pricing",
-          "scope": "Credibility, experience rating, manual rating, dan Bayesian perspective.",
+          "title": "Teori Kredibilitas & Penetapan Harga Berbasis Risiko",
+          "scope": "Kredibilitas, tarif berbasis pengalaman, tarif manual, dan perspektif Bayesian.",
           "topics": [
-            "Credibility",
-            "Experience rating",
-            "Manual rating",
-            "Bayesian perspective"
+            "Kredibilitas",
+            "Tarif berbasis pengalaman",
+            "Tarif manual",
+            "Perspektif Bayesian"
           ]
         },
         {
-          "title": "AI-Powered Underwriting with Shield",
-          "scope": "Praktik membaca hasil medical risk assessment Shield.",
+          "title": "Penilaian Risiko Berbasis AI dengan Shield",
+          "scope": "Praktik membaca hasil penilaian risiko medis Shield.",
           "topics": [
-            "Medical risk assessment",
+            "Penilaian risiko medis",
             "Interpretasi hasil Shield",
             "Underwriting"
           ]
         },
         {
-          "title": "Integrated Health Insurance Pricing Simulation",
+          "title": "Simulasi Penetapan Harga Asuransi Kesehatan Terpadu",
           "scope": "Simulasi data peserta, klaim, asumsi, dan rekomendasi premi.",
           "topics": ["Data peserta", "Klaim", "Asumsi", "Rekomendasi premi"]
         },
         {
-          "title": "Pricing Governance, Validation & Monitoring",
-          "scope": "Back-testing, actual vs expected, model monitoring, dan audit trail.",
+          "title": "Tata Kelola Penetapan Harga, Validasi, dan Pemantauan",
+          "scope": "Uji balik, aktual vs ekspektasi, pemantauan model, dan jejak audit.",
           "topics": [
-            "Back-testing",
-            "Actual vs expected",
-            "Model monitoring",
-            "Audit trail"
+            "Uji balik",
+            "Aktual vs ekspektasi",
+            "Pemantauan model",
+            "Jejak audit"
           ]
         }
       ],
       "days": [
         {
-          "title": "Actuarial & Statistical Foundation"
+          "title": "Dasar-Dasar Aktuaria & Statistik"
         },
         {
-          "title": "Medical Risk Intelligence & Practical Pricing"
+          "title": "Intelijensi Risiko Medis & Penetapan Harga Praktis"
         }
       ],
       "overview": {
         "eyebrow": "Pengantar & tujuan",
         "question": "Apakah metode penetapan premi kesehatan di organisasi Anda sudah mempertimbangkan lebih dari sekadar pengalaman klaim masa lalu?",
         "context": "Biaya kesehatan terus berkembang. Pola utilisasi, tingkat keparahan klaim, karakteristik peserta, desain manfaat, dan profil risiko medis dapat memengaruhi ekspektasi biaya asuransi kesehatan. Karena itu, penetapan premi membutuhkan pendekatan yang menggabungkan analisis data, metodologi aktuaria, dan pemahaman risiko yang relevan.",
-        "why": "Mengandalkan satu indikator saja dapat membuat analisis kurang lengkap. HEALTHPRICING 360° membantu peserta memahami cara menggabungkan data klaim, asumsi aktuaria, desain manfaat, dan informasi risiko medis dalam kerangka pricing yang dapat dijelaskan dan dievaluasi.",
+        "why": "Mengandalkan satu indikator saja dapat membuat analisis kurang lengkap. HEALTHPRICING 360° membantu peserta memahami cara menggabungkan data klaim, asumsi aktuaria, desain manfaat, dan informasi risiko medis dalam kerangka penetapan harga yang dapat dijelaskan dan dievaluasi.",
         "objectiveTitle": "Tujuan workshop",
-        "objective": "Peserta mempelajari kerangka kerja untuk menganalisis klaim, memahami risiko, membangun asumsi, dan menyusun komponen premi secara lebih terukur, dilengkapi praktik penggunaan Shield sebagai Medical Risk & Underwriting Intelligence.",
+        "objective": "Peserta mempelajari kerangka kerja untuk menganalisis klaim, memahami risiko, membangun asumsi, dan menyusun komponen premi secara lebih terukur, dilengkapi praktik penggunaan Shield sebagai alat bantu analisis risiko medis dan underwriting.",
         "principleLabel": "Pesan inti",
         "principle": "Premi yang proper bukan berarti selalu lebih murah. Premi yang proper memiliki dasar data, asumsi transparan, metode aktuaria yang dapat dijelaskan, dan proses validasi yang dapat dipertanggungjawabkan.",
         "outcomesTitle": "Apa yang akan Anda kuasai?",
         "outcomes": [
           "Membaca dan mengevaluasi data klaim kesehatan.",
-          "Mengukur frequency, severity, utilization, dan tren biaya.",
-          "Memahami pure premium dan komponen technical premium.",
+          "Mengukur frekuensi, tingkat keparahan, utilisasi, dan tren biaya.",
+          "Memahami premi murni dan komponen premi teknis.",
           "Menyusun analisis harga untuk lima kelompok manfaat kesehatan.",
-          "Memahami standard error, confidence interval, dan credibility.",
-          "Menginterpretasikan medical risk profile untuk mendukung underwriting.",
-          "Menghubungkan informasi Shield dengan proses pricing melalui model tervalidasi.",
+          "Memahami galat baku, interval kepercayaan, dan kredibilitas.",
+          "Menginterpretasikan profil risiko medis untuk mendukung underwriting.",
+          "Menghubungkan informasi Shield dengan proses penetapan harga melalui model tervalidasi.",
           "Mendokumentasikan asumsi, hasil, dan calculation trace."
         ],
         "whyTitle": "Mengapa workshop ini penting?",
@@ -2516,8 +2516,8 @@
       },
       "curriculum": {
         "eyebrow": "Kurikulum",
-        "title": "10 modul, dari fondasi statistik hingga tata kelola pricing.",
-        "desc": "Materi disusun bertahap: dimulai dari fondasi aktuaria dan statistik, lalu berlanjut ke medical risk intelligence dan simulasi pricing terintegrasi.",
+        "title": "10 modul, dari fondasi statistik hingga tata kelola penetapan harga.",
+        "desc": "Materi disusun bertahap: dimulai dari fondasi aktuaria dan statistik, lalu berlanjut ke intelijensi risiko medis dan simulasi penetapan harga terintegrasi.",
         "all": "Semua modul",
         "module": "Modul",
         "hint": "Pilih modul untuk melihat cakupan dan topik utamanya.",
@@ -2536,8 +2536,8 @@
       },
       "agenda": {
         "eyebrow": "Agenda workshop",
-        "title": "Dua hari intensif, satu kerangka pricing yang utuh.",
-        "format": "Intensive Professional Workshop • 2 hari",
+        "title": "Dua hari intensif, satu kerangka penetapan harga yang utuh.",
+        "format": "Workshop Profesional Intensif • 2 hari",
         "methods": [
           "Pembelajaran konseptual",
           "Studi kasus",
@@ -2546,20 +2546,20 @@
         "session": "Sesi {n}",
         "timeTba": "Jam sesi menyusul",
         "summaries": [
-          "Membangun fondasi: konsep premi, statistik, analisis klaim, metodologi aktuaria, hingga pricing per kelompok manfaat.",
-          "Memasukkan risiko medis: risk assessment, credibility, praktik Shield, simulasi pricing terintegrasi, dan tata kelola."
+          "Membangun fondasi: konsep premi, statistik, analisis klaim, metodologi aktuaria, hingga penetapan harga per kelompok manfaat.",
+          "Memasukkan risiko medis: penilaian risiko, kredibilitas, praktik Shield, simulasi penetapan harga terpadu, dan tata kelola."
         ],
         "sessions": [
-          "Health Insurance Pricing Fundamentals",
-          "Statistical Foundation",
-          "Claims Analytics",
-          "Actuarial Pricing Methodology",
-          "Benefit-Based Pricing",
-          "Medical Risk Assessment",
-          "Credibility Theory",
-          "Shield Hands-on",
-          "Integrated Pricing Simulation",
-          "Pricing Governance & Validation"
+          "Dasar-dasar Penetapan Harga Asuransi Kesehatan",
+          "Dasar-dasar Statistik",
+          "Analisis Klaim",
+          "Metodologi Penetapan Harga Aktuarial",
+          "Penetapan Harga Berbasis Manfaat",
+          "Penilaian Risiko Medis",
+          "Teori Kredibilitas",
+          "Praktik Shield",
+          "Simulasi Penetapan Harga Terpadu",
+          "Tata Kelola & Validasi Penetapan Harga"
         ],
         "dayModules": "Modul {from}–{to} · {n} sesi",
         "overviewTitle": "Gambaran hari",
@@ -2567,35 +2567,35 @@
       },
       "shield": {
         "eyebrow": "Kenali Shield",
-        "title": "Medical Risk Intelligence untuk mendukung proses underwriting.",
-        "body": "Shield digunakan dalam sesi praktik untuk memperkenalkan bagaimana informasi hasil medical risk assessment dapat membantu memperkaya pemahaman terhadap profil kesehatan peserta. Peserta akan mempelajari cara membaca hasil assessment dan mendiskusikan bagaimana informasi tersebut dapat dipertimbangkan dalam proses underwriting serta model pricing yang sesuai.",
+        "title": "Analisis risiko medis untuk mendukung proses underwriting.",
+        "body": "Shield digunakan dalam sesi praktik untuk memperkenalkan bagaimana informasi hasil penilaian risiko medis dapat membantu memperkaya pemahaman terhadap profil kesehatan peserta. Peserta akan mempelajari cara membaca hasil penilaian dan mendiskusikan bagaimana informasi tersebut dapat dipertimbangkan dalam proses underwriting serta model penetapan harga yang sesuai.",
         "steps": [
           {
-            "title": "Proses medical risk assessment",
-            "desc": "Mengenal alur assessment Shield yang menghasilkan informasi profil kesehatan peserta."
+            "title": "Proses penilaian risiko medis",
+            "desc": "Mengenal alur penilaian Shield yang menghasilkan informasi profil kesehatan peserta."
           },
           {
-            "title": "Membaca hasil assessment",
+            "title": "Membaca hasil penilaian",
             "desc": "Menginterpretasikan hasil untuk memperkaya pemahaman terhadap profil kesehatan peserta."
           },
           {
-            "title": "Dipertimbangkan dalam underwriting & pricing",
-            "desc": "Mendiskusikan bagaimana informasi tersebut dapat dipertimbangkan melalui model pricing yang sesuai dan tervalidasi."
+            "title": "Dipertimbangkan dalam underwriting & penetapan harga",
+            "desc": "Mendiskusikan bagaimana informasi tersebut dapat dipertimbangkan melalui model penetapan harga yang sesuai dan tervalidasi."
           }
         ],
         "disclaimerTitle": "Catatan penting",
-        "disclaimer": "Shield merupakan alat pendukung risk assessment, bukan pengganti diagnosis dokter, keputusan medis, atau validasi aktuaria. Hasilnya tidak secara otomatis menentukan besaran premi maupun probabilitas klaim.",
+        "disclaimer": "Shield merupakan alat pendukung penilaian risiko, bukan pengganti diagnosis dokter, keputusan medis, atau validasi aktuaria. Hasilnya tidak secara otomatis menentukan besaran premi maupun probabilitas klaim.",
         "cta": "Pelajari Shield",
         "stepLabel": "Langkah {n}",
         "previewLabel": "Pratinjau sesi praktik",
         "imageAlt": [
           "Tampilan pemindaian pada aplikasi Shield",
-          "Tampilan hasil assessment pada aplikasi Shield"
+          "Tampilan hasil penilaian pada aplikasi Shield"
         ],
         "flow": {
-          "input": "Informasi hasil assessment Shield",
+          "input": "Informasi hasil penilaian Shield",
           "data": "Data klaim & asumsi aktuaria",
-          "model": "Model pricing yang sesuai",
+          "model": "Model penetapan harga yang sesuai",
           "gate": "Validasi & tata kelola",
           "output": "Rekomendasi premi"
         }
@@ -2607,18 +2607,18 @@
         "roles": [
           "Aktuaris",
           "Underwriter",
-          "Pricing & Product Development",
+          "Penetapan Harga & Pengembangan Produk",
           "Perusahaan Asuransi",
           "Broker",
           "TPA",
           "Konsultan Asuransi",
-          "Pengelola Employee Benefits",
-          "Profesional Risk Management"
+          "Pengelola Program Manfaat Karyawan",
+          "Profesional Manajemen Risiko"
         ],
         "groups": ["Fungsi teknis", "Organisasi", "Penasihat & korporat"]
       },
       "benefits": {
-        "eyebrow": "Benefit peserta",
+        "eyebrow": "Manfaat peserta",
         "title": "Apa yang didapatkan peserta?",
         "packageNote": "Sesuai paket",
         "packageInfo": "Detail paket dan fasilitas diinformasikan oleh penyelenggara saat konfirmasi.",
@@ -2628,33 +2628,33 @@
             "desc": "Pembelajaran konseptual, studi kasus, dan praktik aplikasi."
           },
           {
-            "title": "Materi pembelajaran & handbook",
+            "title": "Materi pembelajaran & buku panduan",
             "desc": "Rangkuman materi untuk dipelajari kembali setelah workshop."
           },
           {
-            "title": "Dataset & studi kasus simulasi",
-            "desc": "Data latihan untuk mempraktikkan analisis klaim dan pricing."
+            "title": "Kumpulan data & studi kasus simulasi",
+            "desc": "Data latihan untuk mempraktikkan analisis klaim dan penetapan harga."
           },
           {
-            "title": "Lembar kerja / template pricing",
+            "title": "Lembar kerja / templat penetapan harga",
             "desc": "Kerangka perhitungan yang dipakai dalam sesi simulasi."
           },
           {
             "title": "Sesi praktik Shield",
-            "desc": "Demonstrasi dan praktik terarah membaca hasil medical risk assessment."
+            "desc": "Demonstrasi dan praktik terarah membaca hasil penilaian risiko medis."
           },
           {
-            "title": "Certificate of Completion",
+            "title": "Sertifikat Penyelesaian",
             "desc": "Bagi peserta yang memenuhi ketentuan kehadiran dan penyelesaian program."
           }
         ],
-        "desc": "Semua yang dibutuhkan untuk berpindah dari konsep ke praktik pricing, dalam satu program.",
+        "desc": "Semua yang dibutuhkan untuk berpindah dari konsep ke praktik penetapan harga, dalam satu program.",
         "illus": {
           "day": "Hari {n}",
-          "fx": "Pure premium = Frequency × Severity",
-          "handbook": "Handbook",
+          "fx": "Premi murni = Frekuensi × Keparahan",
+          "handbook": "Buku Panduan",
           "dataset": ["Peserta", "Usia", "Klaim", "Manfaat"],
-          "certificate": "Certificate of Completion"
+          "certificate": "Sertifikat Penyelesaian"
         }
       },
       "facilitators": {
@@ -2672,7 +2672,7 @@
         "items": [
           {
             "question": "Apakah workshop ini hanya untuk aktuaris?",
-            "answer": "Tidak. Program ini juga ditujukan bagi underwriter, tim pricing, product development, perusahaan asuransi, broker, TPA, konsultan, dan pengelola program kesehatan korporasi."
+            "answer": "Tidak. Program ini juga ditujukan bagi underwriter, tim penetapan harga, pengembangan produk, perusahaan asuransi, broker, TPA, konsultan, dan pengelola program kesehatan korporasi."
           },
           {
             "question": "Apakah peserta harus memiliki latar belakang matematika atau aktuaria?",
@@ -2683,8 +2683,8 @@
             "answer": "Ya, terdapat sesi demonstrasi dan praktik terarah menggunakan Shield. Akses, skenario, dan cakupan praktik mengikuti paket serta pengaturan penyelenggara."
           },
           {
-            "question": "Apakah workshop memberikan rumus dan template pricing?",
-            "answer": "Materi membahas formula dan kerangka perhitungan. Template, dataset, dan lembar kerja yang diberikan mengikuti paket workshop yang diumumkan."
+            "question": "Apakah workshop memberikan rumus dan templat penetapan harga?",
+            "answer": "Materi membahas formula dan kerangka perhitungan. Templat, kumpulan data, dan lembar kerja yang diberikan mengikuti paket workshop yang diumumkan."
           },
           {
             "question": "Apakah peserta langsung memperoleh premi siap pakai untuk produk asuransi?",
@@ -2692,17 +2692,17 @@
           },
           {
             "question": "Apakah Shield menentukan premi secara otomatis?",
-            "answer": "Tidak. Shield menyediakan medical risk intelligence untuk mendukung risk assessment dan underwriting. Penetapan premi memerlukan model aktuaria dan validasi hubungan profil risiko dengan pengalaman atau ekspektasi klaim."
+            "answer": "Tidak. Shield menyediakan intelijensi risiko medis untuk mendukung penilaian risiko dan underwriting. Penetapan premi memerlukan model aktuaria dan validasi hubungan profil risiko dengan pengalaman atau ekspektasi klaim."
           },
           {
             "question": "Apakah peserta mendapatkan sertifikat?",
-            "answer": "Peserta yang memenuhi ketentuan kehadiran dan penyelesaian program memperoleh Certificate of Completion dari penyelenggara."
+            "answer": "Peserta yang memenuhi ketentuan kehadiran dan penyelesaian program memperoleh Sertifikat Penyelesaian dari penyelenggara."
           }
         ]
       },
       "register": {
         "eyebrow": "Pendaftaran",
-        "title": "Siap meningkatkan kualitas analisis pricing di organisasi Anda?",
+        "title": "Siap meningkatkan kualitas analisis penetapan harga di organisasi Anda?",
         "desc": "Isi formulir pendaftaran berikut. Tim Shield akan menghubungi Anda untuk konfirmasi dan informasi pembayaran.",
         "cancellation": "Kebijakan pembatalan",
         "contact": "Kontak",
@@ -2740,7 +2740,7 @@
       "organization": "Perusahaan / organisasi",
       "organizationPh": "Nama perusahaan atau organisasi",
       "jobTitle": "Jabatan / fungsi pekerjaan",
-      "jobTitlePh": "Contoh: Pricing Actuary",
+      "jobTitlePh": "Contoh: Aktuaris Senior",
       "category": "Kategori peserta",
       "categoryPh": "Pilih kategori",
       "categories": {

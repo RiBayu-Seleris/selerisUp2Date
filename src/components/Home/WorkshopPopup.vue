@@ -1,5 +1,13 @@
 <script setup>
-import { onBeforeUnmount, onMounted, reactive, ref, watch } from "vue";
+import {
+  computed,
+  onBeforeUnmount,
+  onMounted,
+  reactive,
+  ref,
+  watch,
+} from "vue";
+import { useI18n } from "vue-i18n";
 import { healthPricing360 as workshop } from "@/Data/workshops/healthpricing360";
 import { useWorkshopInfo } from "@/composables/useWorkshopInfo";
 import { useContentReady } from "@/components/Products/Shield/useContentReady";
@@ -9,6 +17,7 @@ import { useSidebarStore } from "@/stores/sidebar";
 import { loadWorkshopList } from "@/consumeAPI/workshopsApi";
 import { featuredWorkshop, workshopStatus } from "@/utils/workshopStatus";
 import { WORKSHOP_DYNAMIC } from "@/Data/workshops";
+import { pickText } from "@/utils/workshopText";
 
 const DISMISS_KEY = `seleris:workshop-popup:${workshop.slug}`;
 const SHOW_DELAY_MS = 1400;
@@ -18,6 +27,7 @@ const eligible = ref(false);
 const sidebar = useSidebarStore();
 const contentReady = useContentReady();
 const info = reactive({
+  subtitle: null,
   event: {
     startDate: null,
     endDate: null,
@@ -27,6 +37,12 @@ const info = reactive({
   },
 });
 const { dateLabel, timeLabel, formatLabel } = useWorkshopInfo(info);
+const { t, locale } = useI18n();
+const title = computed(
+  () =>
+    pickText(info.subtitle, locale.value) ||
+    t("workshop.healthpricing360.popup.title"),
+);
 
 let timer = null;
 
@@ -65,6 +81,7 @@ onMounted(async () => {
       timezone: item.timezone || "WIB",
       format: item.format || null,
     });
+    info.subtitle = item.subtitle || null;
     eligible.value = true;
   } catch {
     return;
@@ -157,7 +174,7 @@ onBeforeUnmount(() => {
           >
             {{ workshop.name }}
             <span class="block font-[600] text-[#374151] dark:text-[#D1D5DB]">
-              {{ $t("workshop.healthpricing360.popup.title") }}
+              {{ title }}
             </span>
           </p>
 

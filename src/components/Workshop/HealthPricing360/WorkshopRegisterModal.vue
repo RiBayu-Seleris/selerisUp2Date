@@ -7,6 +7,7 @@ import {
 } from "@/utils/smoothScroll";
 import WorkshopRegisterForm from "./WorkshopRegisterForm.vue";
 import shieldMark from "@/assets/Products/images/Shield/v2/shield-mark.webp";
+import { pickText } from "@/utils/workshopText";
 
 const props = defineProps({
   open: { type: Boolean, default: false },
@@ -16,9 +17,14 @@ const props = defineProps({
 const emit = defineEmits(["close"]);
 
 const NS = "workshop.healthpricing360";
-const { t, tm, rt } = useI18n();
+const { t, tm, rt, locale } = useI18n();
 
 const steps = computed(() => tm(`${NS}.register.steps`).map((m) => rt(m)));
+
+const subtitle = computed(
+  () =>
+    pickText(props.workshop.subtitle, locale.value) || t(`${NS}.hero.subtitle`),
+);
 
 const dialog = ref(null);
 let lastFocus = null;
@@ -156,7 +162,7 @@ onBeforeUnmount(release);
               {{ t(`${NS}.modal.title`) }}
               <span
                 class="block mt-1 text-[14px] sm:text-[15px] font-[500] text-white/60"
-                >{{ workshop.name }} · {{ t(`${NS}.hero.subtitle`) }}</span
+                >{{ workshop.name }} · {{ subtitle }}</span
               >
             </h2>
             <ol

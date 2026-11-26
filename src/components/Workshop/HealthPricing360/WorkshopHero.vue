@@ -1,20 +1,21 @@
 <script setup>
 import { computed, inject } from "vue";
 import { useI18n } from "vue-i18n";
-import { useLocalizedList } from "@/utils/i18nList";
 import { useHpModules } from "@/composables/useHpModules";
+import { useHpDays } from "@/composables/useHpDays";
 import { useWorkshopInfo } from "@/composables/useWorkshopInfo";
 import { useContentReady } from "@/components/Products/Shield/useContentReady";
 import { scrollToSection } from "@/utils/scrollToSection";
 import CurriculumDial from "./CurriculumDial.vue";
 import shieldMark from "@/assets/Products/images/Shield/v2/shield-mark.webp";
 import { WORKSHOP_LIST_PATH } from "@/Data/workshops";
+import { pickText } from "@/utils/workshopText";
 
 const props = defineProps({
   workshop: { type: Object, required: true },
 });
 
-const { t, tm, rt } = useI18n();
+const { t, tm, rt, locale } = useI18n();
 const NS = "workshop.healthpricing360";
 const openRegistration = inject("hpOpenRegistration", () => {});
 
@@ -28,10 +29,13 @@ const modules = computed(() =>
   })),
 );
 
-const days = useLocalizedList(
-  `${NS}.days`,
-  [{ color: "#3DDC84" }, { color: "#4AA8FF" }],
-  ["title"],
+const hpDays = useHpDays(props.workshop);
+
+const days = computed(() =>
+  ["#3DDC84", "#4AA8FF"].map((color, i) => ({
+    color,
+    title: hpDays.title(i + 1),
+  })),
 );
 
 const PILL_ICONS = [
@@ -47,13 +51,24 @@ const PILL_ICONS = [
   ["M12 15a6 6 0 1 0 0-12 6 6 0 0 0 0 12Z", "M8.5 13.9 7 21l5-3 5 3-1.5-7.1"],
 ];
 
-const pills = computed(() =>
-  tm(`${NS}.hero.pills`).map((m, i) => ({
-    label: rt(m),
-    icon: PILL_ICONS[i],
-    blue: i === 2,
-  })),
+const subtitle = computed(
+  () =>
+    pickText(props.workshop.subtitle, locale.value) || t(`${NS}.hero.subtitle`),
 );
+
+const pills = computed(() => {
+  const fromSentris = (props.workshop.highlights || [])
+    .map((item) => pickText(item, locale.value))
+    .filter(Boolean);
+  const labels = fromSentris.length
+    ? fromSentris
+    : tm(`${NS}.hero.pills`).map((m) => rt(m));
+  return labels.map((label, i) => ({
+    label,
+    icon: PILL_ICONS[i % PILL_ICONS.length],
+    blue: i === 2,
+  }));
+});
 
 const { items } = useWorkshopInfo(props.workshop);
 const ready = useContentReady();
@@ -161,7 +176,7 @@ const ready = useContentReady();
               <span
                 class="pb-1 sm:pb-2 xl:pb-3 font-mono text-[10.5px] sm:text-[12px] xl:text-[13px] font-[600] uppercase tracking-[0.16em] leading-[1.6] text-[#9BE8B8]"
               >
-                {{ t(`${NS}.hero.subtitle`) }}
+                {{ subtitle }}
               </span>
             </span>
           </h1>

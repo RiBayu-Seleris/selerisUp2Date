@@ -12,13 +12,14 @@ import { useI18n } from "vue-i18n";
 import WorkshopEyebrow from "./WorkshopEyebrow.vue";
 import CurriculumModuleDetail from "./CurriculumModuleDetail.vue";
 import { useHpModules } from "@/composables/useHpModules";
+import { useHpDays } from "@/composables/useHpDays";
 
 const props = defineProps({
   workshop: { type: Object, required: true },
 });
 
 const NS = "workshop.healthpricing360";
-const { t, tm, rt } = useI18n();
+const { t } = useI18n();
 
 const ICONS = [
   ["m12 3 9 4.5-9 4.5-9-4.5L12 3Z", "m3 12 9 4.5 9-4.5", "m3 16.5 9 4.5 9-4.5"],
@@ -95,7 +96,7 @@ const dayNumbers = computed(() =>
   [...new Set(modules.value.map((m) => m.day))].sort((a, b) => a - b),
 );
 
-const dayTitles = computed(() => tm(`${NS}.days`).map((m) => rt(m.title)));
+const hpDays = useHpDays(props.workshop);
 
 const filter = ref(0);
 const active = ref(0);
@@ -118,7 +119,7 @@ const groups = computed(() =>
     .filter((day) => filter.value === 0 || filter.value === day)
     .map((day) => ({
       day,
-      title: dayTitles.value[day - 1] || t(`${NS}.hero.dial.day`, { n: day }),
+      title: hpDays.title(day),
       modules: modules.value.filter((m) => m.day === day),
     })),
 );
