@@ -175,7 +175,7 @@ const managementTeam = [
           v-if="direksi.bisaKeKiri.value"
           @click="direksi.geser('left')"
           aria-label="Scroll left"
-          class="hidden lg:flex absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 mt-2.5 z-40 w-12 h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
+          class="flex absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 mt-2.5 z-40 w-10 h-10 lg:w-12 lg:h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -202,7 +202,7 @@ const managementTeam = [
           v-if="direksi.bisaKeKanan.value"
           @click="direksi.geser('right')"
           aria-label="Scroll right"
-          class="hidden lg:flex absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 mt-2.5 z-40 w-12 h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
+          class="flex absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 mt-2.5 z-40 w-10 h-10 lg:w-12 lg:h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -317,7 +317,7 @@ const managementTeam = [
           v-if="manajemen.bisaKeKiri.value"
           @click="manajemen.geser('left')"
           aria-label="Scroll left"
-          class="hidden lg:flex absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 mt-2.5 z-40 w-12 h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
+          class="flex absolute left-2 lg:left-8 top-1/2 -translate-y-1/2 mt-2.5 z-40 w-10 h-10 lg:w-12 lg:h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
@@ -344,7 +344,7 @@ const managementTeam = [
           v-if="manajemen.bisaKeKanan.value"
           @click="manajemen.geser('right')"
           aria-label="Scroll right"
-          class="hidden lg:flex absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 mt-2.5 z-40 w-12 h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
+          class="flex absolute right-2 lg:right-8 top-1/2 -translate-y-1/2 mt-2.5 z-40 w-10 h-10 lg:w-12 lg:h-12 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"

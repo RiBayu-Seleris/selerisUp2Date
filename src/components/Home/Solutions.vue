@@ -2,9 +2,11 @@
 import { onMounted, onUnmounted, ref } from "vue";
 import { SolutionLists } from "@/Data/SolutionLists.js";
 import { useRouter } from "vue-router";
+import { buatCarousel } from "@/utils/carousel";
 // import { X, HardHat } from "lucide-vue-next";
 
 const router = useRouter();
+const kartu = buatCarousel();
 const activeIndex = ref(0);
 const hoveredIndex = ref(null);
 const showUnderConstructionModal = ref(false);
@@ -291,63 +293,118 @@ onUnmounted(() => {
       </div>
     </div>
 
-    <div
-      class="relative flex flex-row lg:hidden w-full gap-x-4 py-5 overflow-x-auto snap-x snap-mandatory pl-8 pr-8 sm:pl-10 sm:pr-10 md:pl-8 md:pr-8 hide-scrollbar"
-    >
+    <div class="relative lg:hidden w-full">
+      <transition
+        enter-active-class="duration-300 ease-out"
+        enter-from-class="opacity-0 scale-75 -translate-x-3"
+        leave-active-class="duration-200 ease-in"
+        leave-to-class="opacity-0 scale-75 -translate-x-3"
+      >
+        <button
+          v-if="kartu.bisaKeKiri.value"
+          @click="kartu.geser('left')"
+          aria-label="Scroll left"
+          class="flex absolute left-2 top-1/2 -translate-y-1/2 z-30 w-10 h-10 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-full h-full"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="15 18 9 12 15 6" />
+          </svg>
+        </button>
+      </transition>
+      <transition
+        enter-active-class="duration-300 ease-out"
+        enter-from-class="opacity-0 scale-75 translate-x-3"
+        leave-active-class="duration-200 ease-in"
+        leave-to-class="opacity-0 scale-75 translate-x-3"
+      >
+        <button
+          v-if="kartu.bisaKeKanan.value"
+          @click="kartu.geser('right')"
+          aria-label="Scroll right"
+          class="flex absolute right-2 top-1/2 -translate-y-1/2 z-30 w-10 h-10 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            class="w-full h-full"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <polyline points="9 18 15 12 9 6" />
+          </svg>
+        </button>
+      </transition>
       <div
-        v-for="(data, index) in SolutionLists"
-        :key="index"
-        class="card-wrapper group relative rounded-2xl flex-shrink-0 p-[1px] cursor-pointer w-[80vw] sm:w-[60%] md:w-[460px] snap-center"
-        :class="
-          SolutionLists.indexOf(data) === activeIndex
-            ? 'is-active border-none'
-            : 'bg-[#E6F0ED] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]'
-        "
-        @mouseenter="onMouseEnter(index)"
-        @mouseleave="onMouseLeave"
-        @click="handleCardClick(data)"
+        :ref="kartu.pasangEl"
+        class="relative flex flex-row w-full gap-x-4 py-5 overflow-x-auto snap-x snap-mandatory pl-8 pr-8 sm:pl-10 sm:pr-10 md:pl-8 md:pr-8 hide-scrollbar"
       >
         <div
-          class="w-full h-full flex flex-col justify-between bg-white dark:bg-[#1D1F23] rounded-2xl px-5 py-6 gap-y-3 lg:gap-y-6"
+          v-for="(data, index) in SolutionLists"
+          :key="index"
+          class="card-wrapper group relative rounded-2xl flex-shrink-0 p-[1px] cursor-pointer w-[80vw] sm:w-[60%] md:w-[460px] snap-center"
+          :class="
+            SolutionLists.indexOf(data) === activeIndex
+              ? 'is-active border-none'
+              : 'bg-[#E6F0ED] dark:bg-gradient-to-tr dark:from-[#17181A] dark:from-45% dark:to-[#565656]'
+          "
+          @mouseenter="onMouseEnter(index)"
+          @mouseleave="onMouseLeave"
+          @click="handleCardClick(data)"
         >
-          <div class="w-full h-auto flex flex-col gap-y-4">
-            <div
-              class="w-10 h-10 rounded-md flex justify-center items-center p-2"
-              :class="
-                index === activeIndex
-                  ? 'bg-[#ADF9C5] dark:bg-[#2AB857] text-[#2AB857] dark:text-[#AFFAC6]'
-                  : 'bg-[#ADF9C5] text-[#2AB857]'
-              "
-            >
-              <component :is="data.icons" class="w-full h-full" />
-            </div>
-
-            <div class="w-full flex flex-col gap-y-1.5">
-              <span
-                class="font-[600] text-[14px] md:text-[16px]"
+          <div
+            class="w-full h-full flex flex-col justify-between bg-white dark:bg-[#1D1F23] rounded-2xl px-5 py-6 gap-y-3 lg:gap-y-6"
+          >
+            <div class="w-full h-auto flex flex-col gap-y-4">
+              <div
+                class="w-10 h-10 rounded-md flex justify-center items-center p-2"
                 :class="
                   index === activeIndex
-                    ? 'dark:text-[#2AB857]'
-                    : 'text-[#374151] dark:text-[#357EAF]'
+                    ? 'bg-[#ADF9C5] dark:bg-[#2AB857] text-[#2AB857] dark:text-[#AFFAC6]'
+                    : 'bg-[#ADF9C5] text-[#2AB857]'
                 "
-                >{{ $t(`solutions.${data.slug}.title`) }}</span
               >
-              <span
-                class="text-[#8E98A8] text-[13px] leading-normal font-[400] solution-animate-group-hover"
-              >
-                {{ $t(`solutions.${data.slug}.subtitle`) }}
-              </span>
+                <component :is="data.icons" class="w-full h-full" />
+              </div>
+
+              <div class="w-full flex flex-col gap-y-1.5">
+                <span
+                  class="font-[600] text-[14px] md:text-[16px]"
+                  :class="
+                    index === activeIndex
+                      ? 'dark:text-[#2AB857]'
+                      : 'text-[#374151] dark:text-[#357EAF]'
+                  "
+                  >{{ $t(`solutions.${data.slug}.title`) }}</span
+                >
+                <span
+                  class="text-[#8E98A8] text-[13px] leading-normal font-[400] solution-animate-group-hover"
+                >
+                  {{ $t(`solutions.${data.slug}.subtitle`) }}
+                </span>
+              </div>
             </div>
-          </div>
-          <div class="w-full h-5 lg:mt-4">
-            <Transition name="fade-link">
-              <span
-                v-if="index === activeIndex"
-                class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[13px] font-[500]"
-              >
-                {{ $t("home.solutions.learnMore") }} <span>→</span>
-              </span>
-            </Transition>
+            <div class="w-full h-5 lg:mt-4">
+              <Transition name="fade-link">
+                <span
+                  v-if="index === activeIndex"
+                  class="inline-flex items-center gap-x-1.5 text-[#2AB857] text-[13px] font-[500]"
+                >
+                  {{ $t("home.solutions.learnMore") }} <span>→</span>
+                </span>
+              </Transition>
+            </div>
           </div>
         </div>
       </div>

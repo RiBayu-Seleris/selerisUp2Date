@@ -551,7 +551,8 @@
       "drive": "Cek kondisi kendaraan dengan AI, klaim asuransi, cari bengkel, dan pesan derek dalam satu alur yang terhubung.",
       "proper": "Dari identifikasi properti hingga penilaian risiko, PROPER membantu Anda mengambil keputusan yang lebih tepat.",
       "selfit": "Kenali indikator kesehatan tubuh dan temukan panduan wellness personal dengan SELFIT+, platform wellness berbantuan AI.",
-      "selora": "Teknologi analisis wajah berbasis AI untuk membantu memahami karakteristik kulit melalui wawasan yang terukur dan personal."
+      "selora": "Teknologi analisis wajah berbasis AI untuk membantu memahami karakteristik kulit melalui wawasan yang terukur dan personal.",
+      "credit": "Seleris Credit adalah platform underwriting asuransi jiwa kredit berbasis AI yang mengubah cara perusahaan asuransi dan lembaga keuangan menilai risiko mortalitas debitur."
     },
     "partners": {
       "partners": "Mitra",
@@ -689,6 +690,14 @@
         "consentWithdraw": "Anda dapat menarik persetujuan ini kapan saja",
         "submit": "Kirim Permintaan Demo"
       }
+    },
+    "productOrbit": {
+      "eyebrow": "Produk Kami",
+      "title": "Jelajahi ekosistem produk Seleris",
+      "viewProduct": "Lihat produk",
+      "previous": "Produk sebelumnya",
+      "next": "Produk berikutnya",
+      "show": "Tampilkan {name}"
     },
     "testimonial": {
       "eyebrow": "Testimoni Klien",

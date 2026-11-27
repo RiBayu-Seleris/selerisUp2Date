@@ -12,6 +12,9 @@ import { Swiper, SwiperSlide } from "swiper/vue";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 
 import { useVideoOnView } from "@/composables/useVideoOnView";
+import { buatCarousel } from "@/utils/carousel";
+
+const kartu = buatCarousel();
 
 const creditVideo = ref(null);
 const creditBlock = ref(null);
@@ -423,33 +426,88 @@ useVideoOnView(selerisVideo, selerisBlock);
         </div>
       </div>
 
-      <div
-        class="relative flex lg:hidden flex-row w-full max-h-screen gap-x-5 md:gap-x-10 py-5 overflow-x-auto snap-x snap-mandatory sm:pl-10 px-8 sm:pr-10 md:pl-12 md:pr-12 hide-scrollbar"
-      >
-        <div
-          v-for="(data, index) in localizedSelerisDo"
-          :key="index"
-          class="flex flex-col lg:hidden snap-center shrink-0 w-full sm:w-[60%] md:w-[60%] h-auto rounded-xl px-5 py-2 sm:py-2 shadow-lg border-[1px] gap-y-5"
+      <div class="relative lg:hidden w-full">
+        <transition
+          enter-active-class="duration-300 ease-out"
+          enter-from-class="opacity-0 scale-75 -translate-x-3"
+          leave-active-class="duration-200 ease-in"
+          leave-to-class="opacity-0 scale-75 -translate-x-3"
         >
-          <div class="flex flex-row">
-            <div class="flex w-[40%] h-auto">
-              <img
-                :src="data.icon"
-                alt="BenefitRobot"
-                class="w-full h-full object-center object-contain"
-              />
+          <button
+            v-if="kartu.bisaKeKiri.value"
+            @click="kartu.geser('left')"
+            aria-label="Scroll left"
+            class="flex absolute left-2 top-1/2 -translate-y-1/2 z-30 w-10 h-10 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-full h-full"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+        </transition>
+        <transition
+          enter-active-class="duration-300 ease-out"
+          enter-from-class="opacity-0 scale-75 translate-x-3"
+          leave-active-class="duration-200 ease-in"
+          leave-to-class="opacity-0 scale-75 translate-x-3"
+        >
+          <button
+            v-if="kartu.bisaKeKanan.value"
+            @click="kartu.geser('right')"
+            aria-label="Scroll right"
+            class="flex absolute right-2 top-1/2 -translate-y-1/2 z-30 w-10 h-10 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-full h-full"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </transition>
+        <div
+          :ref="kartu.pasangEl"
+          class="relative flex flex-row w-full max-h-screen gap-x-5 md:gap-x-10 py-5 overflow-x-auto snap-x snap-mandatory sm:pl-10 px-8 sm:pr-10 md:pl-12 md:pr-12 hide-scrollbar"
+        >
+          <div
+            v-for="(data, index) in localizedSelerisDo"
+            :key="index"
+            class="flex flex-col lg:hidden snap-center shrink-0 w-full sm:w-[60%] md:w-[60%] h-auto rounded-xl px-5 py-2 sm:py-2 shadow-lg border-[1px] gap-y-5"
+          >
+            <div class="flex flex-row">
+              <div class="flex w-[40%] h-auto">
+                <img
+                  :src="data.icon"
+                  alt="BenefitRobot"
+                  class="w-full h-full object-center object-contain"
+                />
+              </div>
+              <div class="flex w-full h-auto pl-5 pt-9 items-center">
+                <p class="text-[20px] text-[#2C3131] font-[600]">
+                  {{ data.title }}
+                </p>
+              </div>
             </div>
-            <div class="flex w-full h-auto pl-5 pt-9 items-center">
-              <p class="text-[20px] text-[#2C3131] font-[600]">
-                {{ data.title }}
-              </p>
-            </div>
-          </div>
-          <div class="flex flex-col w-full h-full pb-5">
-            <div class="flex w-full h-full items-start justify-start">
-              <p class="text-[12px] sm:text-[14px] text-[#626262] font-[400]">
-                {{ data.description }}
-              </p>
+            <div class="flex flex-col w-full h-full pb-5">
+              <div class="flex w-full h-full items-start justify-start">
+                <p class="text-[12px] sm:text-[14px] text-[#626262] font-[400]">
+                  {{ data.description }}
+                </p>
+              </div>
             </div>
           </div>
         </div>

@@ -9,6 +9,7 @@ import Solutions from "@/components/Home/Solutions.vue";
 import Certificate from "@/components/Certificate.vue";
 import Supported from "@/components/Supported.vue";
 import Benefits from "@/components/Home/Benefits.vue";
+import ProductOrbit from "@/components/Home/ProductOrbit.vue";
 import Testimonial from "@/components/Home/Testimonial.vue";
 import Blogs from "@/components/Home/Blogs.vue";
 import Different from "@/components/Home/Different.vue";
@@ -80,6 +81,13 @@ import WorkshopPopup from "@/components/Home/WorkshopPopup.vue";
 
   <section class="flex flex-col relative w-full h-auto mt-24 lg:mt-10 xl:mt-36">
     <Solutions />
+  </section>
+
+  <section
+    data-aos="fade-up"
+    class="flex flex-col relative w-full h-auto mt-24 xl:mt-32"
+  >
+    <ProductOrbit />
   </section>
 
   <section

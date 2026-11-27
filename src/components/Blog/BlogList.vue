@@ -24,6 +24,7 @@ import CommentIcon from "@/components/icons/Comment.vue";
 import ShareIcon from "@/components/icons/Share.vue";
 import { useUtilsStore } from "@/stores/utils.js";
 import { useRoute } from "vue-router";
+import { buatCarousel } from "@/utils/carousel";
 
 const { t } = useI18n();
 const utils = useUtilsStore();
@@ -96,6 +97,9 @@ const {
   fetchCategory,
   pagination,
 } = blogsApi();
+
+const populer = buatCarousel();
+watch([() => popularBlog.value?.length, loading], () => populer.segarkan());
 
 const dummyPagination = {
   current_page: 1,
@@ -1481,93 +1485,148 @@ const finalBlogs = computed(() => {
           {{ $t("blog.mostPopular") }}
         </p>
       </div>
-      <div
-        class="relative flex flex-row w-full h-auto gap-x-4 sm:gap-x-4 md:gap-x-8 overflow-x-auto snap-x snap-mandatory mt-3 pb-10 pl-8 pr-8 hide-scrollbar"
-      >
-        <div v-if="loading" class="flex justify-center items-center">
-          <video
-            autoplay
-            loop
-            muted
-            playsinline
-            aria-hidden="true"
-            @contextmenu.prevent
-            class="w-[250px] md:w-[300px] lg:w-[200px] h-auto object-contain"
-          >
-            <source :src="loadingAnimation" type="video/webm" />
-          </video>
-        </div>
-        <div
-          v-else
-          v-for="(data, index) in popularBlog"
-          :key="index"
-          class="snap-center shrink-0 relative cursor-default h-auto shadow-md rounded-lg bg-white !p-[1px] dark:bg-gradient-to-bl dark:from-[#17181A] dark:from-25% dark:to-[#565656]"
-          :class="popularBlog.length === 1 ? 'w-full' : 'w-full md:w-[650px]'"
+      <div class="relative w-full mt-3">
+        <transition
+          enter-active-class="duration-300 ease-out"
+          enter-from-class="opacity-0 scale-75 -translate-x-3"
+          leave-active-class="duration-200 ease-in"
+          leave-to-class="opacity-0 scale-75 -translate-x-3"
         >
-          <router-link :to="`/blog/${data.slug}`">
-            <div
-              class="relative h-full w-full p-4 cursor-default shadow-md rounded-lg bg-white dark:bg-[#1D1F23]"
+          <button
+            v-if="populer.bisaKeKiri.value"
+            @click="populer.geser('left')"
+            aria-label="Scroll left"
+            class="flex absolute left-2 top-1/2 -translate-y-1/2 -mt-5 z-30 w-10 h-10 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-full h-full"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
             >
+              <polyline points="15 18 9 12 15 6" />
+            </svg>
+          </button>
+        </transition>
+        <transition
+          enter-active-class="duration-300 ease-out"
+          enter-from-class="opacity-0 scale-75 translate-x-3"
+          leave-active-class="duration-200 ease-in"
+          leave-to-class="opacity-0 scale-75 translate-x-3"
+        >
+          <button
+            v-if="populer.bisaKeKanan.value"
+            @click="populer.geser('right')"
+            aria-label="Scroll right"
+            class="flex absolute right-2 top-1/2 -translate-y-1/2 -mt-5 z-30 w-10 h-10 p-2 items-center justify-center rounded-full bg-white dark:bg-[#2A2B2D] shadow-md border border-[#E5E7EB] dark:border-[#3A3B3D] text-[#195279] dark:text-[#D4D4D4] hover:bg-[#195279] hover:text-white dark:hover:bg-[#3A3B3D] transition-all duration-200"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              class="w-full h-full"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            >
+              <polyline points="9 18 15 12 9 6" />
+            </svg>
+          </button>
+        </transition>
+        <div
+          :ref="populer.pasangEl"
+          class="relative flex flex-row w-full h-auto gap-x-4 sm:gap-x-4 md:gap-x-8 overflow-x-auto snap-x snap-mandatory pb-10 pl-8 pr-8 hide-scrollbar"
+        >
+          <div v-if="loading" class="flex justify-center items-center">
+            <video
+              autoplay
+              loop
+              muted
+              playsinline
+              aria-hidden="true"
+              @contextmenu.prevent
+              class="w-[250px] md:w-[300px] lg:w-[200px] h-auto object-contain"
+            >
+              <source :src="loadingAnimation" type="video/webm" />
+            </video>
+          </div>
+          <div
+            v-else
+            v-for="(data, index) in popularBlog"
+            :key="index"
+            class="snap-center shrink-0 relative cursor-default h-auto shadow-md rounded-lg bg-white !p-[1px] dark:bg-gradient-to-bl dark:from-[#17181A] dark:from-25% dark:to-[#565656]"
+            :class="popularBlog.length === 1 ? 'w-full' : 'w-full md:w-[650px]'"
+          >
+            <router-link :to="`/blog/${data.slug}`">
               <div
-                class="absolute z-20 w-12 h-auto sm:w-14 sm:h-8 flex justify-center items-center bg-[#1AB24F] top-0 right-0 rounded-bl-lg rounded-tr-lg"
+                class="relative h-full w-full p-4 cursor-default shadow-md rounded-lg bg-white dark:bg-[#1D1F23]"
               >
-                <p class="text-white text-[16px]">#{{ index + 1 }}</p>
-              </div>
-              <div
-                class="relative w-full h-full flex flex-row items-center justify-center gap-x-4 rounded-lg"
-              >
-                <div class="w-[40%] h-full flex items-center rounded-lg">
-                  <img
-                    :src="data.cover"
-                    alt=""
-                    class="w-full h-full rounded-lg"
-                  />
+                <div
+                  class="absolute z-20 w-12 h-auto sm:w-14 sm:h-8 flex justify-center items-center bg-[#1AB24F] top-0 right-0 rounded-bl-lg rounded-tr-lg"
+                >
+                  <p class="text-white text-[16px]">#{{ index + 1 }}</p>
                 </div>
                 <div
-                  class="w-[60%] sm:h-full flex flex-col items-start gap-y-2 md:gap-y-3 rounded-lg justify-between"
+                  class="relative w-full h-full flex flex-row items-center justify-center gap-x-4 rounded-lg"
                 >
-                  <div class="w-full h-[20%] flex items-center">
-                    <p
-                      class="text-[10px] sm:text-[12px] md:text-[14px] text-[#6941C6] dark:text-[#2AB857] bg-[#7B61FF]/10 dark:bg-transparent px-2 sm:px-4 dark:px-0 rounded-full w-auto h-full flex items-center"
-                    >
-                      {{ data.category_name }}
-                    </p>
+                  <div class="w-[40%] h-full flex items-center rounded-lg">
+                    <img
+                      :src="data.cover"
+                      alt=""
+                      class="w-full h-full rounded-lg"
+                    />
                   </div>
                   <div
-                    class="w-full h-full flex flex-col items-center gap-y-3 sm:gap-y-3"
+                    class="w-[60%] sm:h-full flex flex-col items-start gap-y-2 md:gap-y-3 rounded-lg justify-between"
                   >
-                    <div class="w-full sm:h-[40px] flex items-center">
+                    <div class="w-full h-[20%] flex items-center">
                       <p
-                        class="text-[10px] sm:text-[14px] md:text-[12px] lg:text-[16px] text-[#111928] leading-relaxed font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] line-clamp-2"
+                        class="text-[10px] sm:text-[12px] md:text-[14px] text-[#6941C6] dark:text-[#2AB857] bg-[#7B61FF]/10 dark:bg-transparent px-2 sm:px-4 dark:px-0 rounded-full w-auto h-full flex items-center"
                       >
-                        {{ data.title }}
+                        {{ data.category_name }}
                       </p>
                     </div>
-                    <!-- <div class="w-full h-auto flex items-start">
+                    <div
+                      class="w-full h-full flex flex-col items-center gap-y-3 sm:gap-y-3"
+                    >
+                      <div class="w-full sm:h-[40px] flex items-center">
+                        <p
+                          class="text-[10px] sm:text-[14px] md:text-[12px] lg:text-[16px] text-[#111928] leading-relaxed font-[500] dark:text-transparent dark:bg-clip-text dark:bg-gradient-to-r dark:from-[#FAFAFA] dark:via-[#D4D4D4] dark:to-[#AAAAAA] line-clamp-2"
+                        >
+                          {{ data.title }}
+                        </p>
+                      </div>
+                      <!-- <div class="w-full h-auto flex items-start">
                       <p
                         class="text-[10px] sm:text-[12px] md:text-[12px] leading-normal line-clamp-2 lg:line-clamp-3 text-[#637381]"
                       >
                         {{ data.synopsis }}
                       </p>
                     </div> -->
-                  </div>
-                  <div
-                    class="hidden w-full h-auto sm:flex flex-row items-center"
-                  >
-                    <div class="w-full h-[40px] flex items-end">
-                      <p
-                        class="text-[12px] md:text-[12px] text-[#535862] dark:text-[#6F6F6F]"
-                      >
-                        <span class="font-[600]">{{ data.author_name }}</span>
-                        |
-                        {{ utils.fromISODate(data.created_at) }}
-                      </p>
+                    </div>
+                    <div
+                      class="hidden w-full h-auto sm:flex flex-row items-center"
+                    >
+                      <div class="w-full h-[40px] flex items-end">
+                        <p
+                          class="text-[12px] md:text-[12px] text-[#535862] dark:text-[#6F6F6F]"
+                        >
+                          <span class="font-[600]">{{ data.author_name }}</span>
+                          |
+                          {{ utils.fromISODate(data.created_at) }}
+                        </p>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          </router-link>
+            </router-link>
+          </div>
         </div>
       </div>
     </div>
