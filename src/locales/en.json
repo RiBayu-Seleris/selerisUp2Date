@@ -2771,9 +2771,12 @@
       "individualDesc": "Registering for yourself",
       "team": "Company / team",
       "teamDesc": "Registering several participants",
-      "teamSize": "Estimated number of participants",
+      "teamSize": "Number of participants",
       "payment": {
         "title": "Payment",
+        "total": "Total",
+        "perTeam": "{n} participants × {price}",
+        "perPerson": "per participant",
         "lead": "Transfer the fee to the account below, then upload your transfer receipt.",
         "leadMany": "Transfer the fee to one of the accounts below, then upload your transfer receipt.",
         "holder": "Account name: {name}",

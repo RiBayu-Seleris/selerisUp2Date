@@ -6,7 +6,7 @@ import {
   PROOF_ACCEPT,
   useWorkshopRegistration,
 } from "@/composables/useWorkshopRegistration";
-import { useWorkshopInfo } from "@/composables/useWorkshopInfo";
+import { formatRupiah, useWorkshopInfo } from "@/composables/useWorkshopInfo";
 import { pickText } from "@/utils/workshopText";
 import WorkshopField from "./WorkshopField.vue";
 
@@ -41,6 +41,21 @@ const payment = computed(() => props.workshop.payment);
 const amount = computed(() =>
   props.workshop.event.price === 0 ? "" : priceLabel.value || "",
 );
+
+const isTeam = computed(() => form.participation === "team");
+
+const teamCount = computed(() => {
+  if (!isTeam.value) return 0;
+  const n = Number(form.teamSize);
+  return Number.isInteger(n) && n >= 2 && n <= 500 ? n : 0;
+});
+
+const teamTotal = computed(() => {
+  const price = props.workshop.event.price;
+  return teamCount.value && typeof price === "number" && price > 0
+    ? formatRupiah(price * teamCount.value)
+    : "";
+});
 
 const paymentNote = computed(() =>
   pickText(payment.value?.instructions, locale.value),
@@ -533,13 +548,27 @@ defineExpose({ status });
           >
             {{ t(`${F}.payment.title`) }}
           </h3>
-          <p
-            v-if="amount"
-            class="text-[15px] font-[700] text-[#0B1324] dark:text-white"
-          >
-            <span class="sr-only">{{ t("workshop.info.price") }}: </span
-            >{{ amount }}
-          </p>
+          <div v-if="amount" class="text-right">
+            <p class="text-[15px] font-[700] text-[#0B1324] dark:text-white">
+              <span class="sr-only"
+                >{{
+                  teamTotal
+                    ? t(`${F}.payment.total`)
+                    : t("workshop.info.price")
+                }}: </span
+              >{{ teamTotal || amount }}
+            </p>
+            <p
+              v-if="isTeam"
+              class="mt-0.5 text-[12px] leading-snug text-[#667085] dark:text-[#A3A3A3]"
+            >
+              {{
+                teamTotal
+                  ? t(`${F}.payment.perTeam`, { n: teamCount, price: amount })
+                  : t(`${F}.payment.perPerson`)
+              }}
+            </p>
+          </div>
         </div>
         <p
           class="mt-1 text-[13px] leading-[1.6] text-[#6B7280] dark:text-[#A3A3A3]"

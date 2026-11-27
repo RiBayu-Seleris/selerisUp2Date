@@ -9,6 +9,13 @@ const parseDate = (value) => {
   return new Date(y, m - 1, d);
 };
 
+export const formatRupiah = (value) =>
+  new Intl.NumberFormat("id-ID", {
+    style: "currency",
+    currency: "IDR",
+    maximumFractionDigits: 0,
+  }).format(value);
+
 export function useWorkshopInfo(source) {
   const { t, locale } = useI18n();
 
@@ -47,13 +54,7 @@ export function useWorkshopInfo(source) {
     const price = event().price;
     if (price === null || price === undefined || price === "") return null;
     if (price === 0) return t("workshop.info.free");
-    if (typeof price === "number") {
-      return new Intl.NumberFormat("id-ID", {
-        style: "currency",
-        currency: "IDR",
-        maximumFractionDigits: 0,
-      }).format(price);
-    }
+    if (typeof price === "number") return formatRupiah(price);
     return String(price);
   });
 

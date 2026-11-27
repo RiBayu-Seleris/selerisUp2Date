@@ -2766,9 +2766,12 @@
       "individualDesc": "Mendaftar untuk diri sendiri",
       "team": "Perusahaan / tim",
       "teamDesc": "Mendaftarkan beberapa peserta",
-      "teamSize": "Perkiraan jumlah peserta",
+      "teamSize": "Jumlah peserta",
       "payment": {
         "title": "Pembayaran",
+        "total": "Total",
+        "perTeam": "{n} peserta × {price}",
+        "perPerson": "per peserta",
         "lead": "Transfer biaya ke rekening di bawah ini, lalu unggah bukti transfernya.",
         "leadMany": "Transfer biaya ke salah satu rekening di bawah ini, lalu unggah bukti transfernya.",
         "holder": "a.n. {name}",
