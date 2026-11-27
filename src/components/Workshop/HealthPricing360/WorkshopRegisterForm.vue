@@ -1,10 +1,13 @@
 <script setup>
-import { computed, nextTick, ref } from "vue";
+import { computed, nextTick, onBeforeUnmount, ref, watch } from "vue";
 import { Translation as I18nT, useI18n } from "vue-i18n";
 import {
   PARTICIPANT_CATEGORIES,
+  PROOF_ACCEPT,
   useWorkshopRegistration,
 } from "@/composables/useWorkshopRegistration";
+import { useWorkshopInfo } from "@/composables/useWorkshopInfo";
+import { pickText } from "@/utils/workshopText";
 import WorkshopField from "./WorkshopField.vue";
 
 const props = defineProps({
@@ -14,7 +17,7 @@ const props = defineProps({
 const emit = defineEmits(["done"]);
 
 const F = "workshop.form";
-const { t } = useI18n();
+const { t, locale } = useI18n();
 
 const {
   form,
@@ -23,11 +26,112 @@ const {
   message,
   submittedName,
   registrationCode,
+  paidSubmission,
+  progress,
   touch,
   revalidate,
   submit,
   reset,
 } = useWorkshopRegistration(props.workshop);
+
+const { priceLabel } = useWorkshopInfo(props.workshop);
+
+const payment = computed(() => props.workshop.payment);
+
+const amount = computed(() =>
+  props.workshop.event.price === 0 ? "" : priceLabel.value || "",
+);
+
+const paymentNote = computed(() =>
+  pickText(payment.value?.instructions, locale.value),
+);
+
+const copied = ref(-1);
+let copyTimer = 0;
+
+const copyNumber = async (account, index) => {
+  const value = account.number.replace(/\D/g, "") || account.number;
+  try {
+    await navigator.clipboard.writeText(value);
+    copied.value = index;
+    clearTimeout(copyTimer);
+    copyTimer = setTimeout(() => (copied.value = -1), 1600);
+  } catch {
+    const target = document.getElementById(`hp-account-${index}`);
+    const selection = window.getSelection();
+    if (!target || !selection) return;
+    const range = document.createRange();
+    range.selectNodeContents(target);
+    selection.removeAllRanges();
+    selection.addRange(range);
+  }
+};
+
+const proofInput = ref(null);
+const proofPreview = ref("");
+const dragging = ref(false);
+
+watch(
+  () => form.paymentProof,
+  (file) => {
+    if (proofPreview.value) URL.revokeObjectURL(proofPreview.value);
+    proofPreview.value =
+      file && /^image\/(jpeg|png)$/.test(file.type)
+        ? URL.createObjectURL(file)
+        : "";
+  },
+);
+
+const setProof = (file) => {
+  form.paymentProof = file;
+  if (proofInput.value) proofInput.value.value = "";
+  if (file) touch("paymentProof");
+  else revalidate("paymentProof");
+};
+
+const onProofChange = (event) => {
+  const file = event.target.files?.[0];
+  if (file) setProof(file);
+};
+
+const onProofDrop = (event) => {
+  dragging.value = false;
+  const file = event.dataTransfer?.files?.[0];
+  if (file) setProof(file);
+};
+
+const fileSize = (bytes) => {
+  const intl = locale.value === "id" ? "id-ID" : "en-GB";
+  if (bytes >= 1024 * 1024) {
+    const mb = (bytes / (1024 * 1024)).toLocaleString(intl, {
+      maximumFractionDigits: 1,
+    });
+    return `${mb} MB`;
+  }
+  return `${Math.max(1, Math.round(bytes / 1024)).toLocaleString(intl)} KB`;
+};
+
+const successText = computed(() => {
+  if (!paidSubmission.value)
+    return t(`${F}.result.successText`, { name: submittedName.value });
+  const format = props.workshop.event.format;
+  const key = ["online", "onsite", "hybrid"].includes(format)
+    ? format
+    : "other";
+  return t(`${F}.result.paidText.${key}`, { name: submittedName.value });
+});
+
+const submitLabel = computed(() => {
+  if (status.value !== "submitting") return t(`${F}.submit`);
+  return progress.value > 0 && progress.value < 100
+    ? t(`${F}.uploading`, { n: progress.value })
+    : t(`${F}.submitting`);
+});
+
+onBeforeUnmount(() => {
+  clearTimeout(copyTimer);
+  if (proofPreview.value) URL.revokeObjectURL(proofPreview.value);
+});
 
 const digitsOnly = (value, allowPlus) => {
   const clean = value.replace(allowPlus ? /[^\d+]/g : /\D/g, "");
@@ -125,7 +229,7 @@ defineExpose({ status });
       <p
         class="mt-3 max-w-[440px] text-[15px] leading-[1.7] text-[#4B5563] dark:text-[#A3A3A3]"
       >
-        {{ t(`${F}.result.successText`, { name: submittedName }) }}
+        {{ successText }}
       </p>
       <div
         v-if="registrationCode"
@@ -415,6 +519,237 @@ defineExpose({ status });
         />
       </WorkshopField>
 
+      <section
+        v-if="payment"
+        aria-labelledby="hp-payment-title"
+        class="sm:col-span-2 rounded-2xl border border-[#E5E7EB] bg-[#F9FAFB] p-4 sm:p-5 dark:border-white/10 dark:bg-white/[0.03]"
+      >
+        <div
+          class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1"
+        >
+          <h3
+            id="hp-payment-title"
+            class="text-[14.5px] font-[700] text-[#0F172A] dark:text-white"
+          >
+            {{ t(`${F}.payment.title`) }}
+          </h3>
+          <p
+            v-if="amount"
+            class="text-[15px] font-[700] text-[#0B1324] dark:text-white"
+          >
+            <span class="sr-only">{{ t("workshop.info.price") }}: </span
+            >{{ amount }}
+          </p>
+        </div>
+        <p
+          class="mt-1 text-[13px] leading-[1.6] text-[#6B7280] dark:text-[#A3A3A3]"
+        >
+          {{
+            payment.accounts.length > 1
+              ? t(`${F}.payment.leadMany`)
+              : t(`${F}.payment.lead`)
+          }}
+        </p>
+        <ul class="mt-4 flex flex-col gap-3">
+          <li
+            v-for="(account, i) in payment.accounts"
+            :key="`${account.bank}-${account.number}`"
+            class="flex items-center justify-between gap-3 rounded-xl border border-[#E5E7EB] bg-white px-4 py-3 dark:border-white/10 dark:bg-[#141819]"
+          >
+            <div class="min-w-0">
+              <p
+                v-if="account.bank"
+                class="font-mono text-[11px] font-[600] uppercase tracking-[0.14em] text-[#667085] dark:text-[#A3A3A3]"
+              >
+                {{ account.bank }}
+              </p>
+              <p
+                :id="`hp-account-${i}`"
+                class="mt-1 font-mono text-[18px] sm:text-[20px] font-[700] tracking-[0.04em] text-[#0B1324] dark:text-white select-all break-all"
+              >
+                {{ account.number }}
+              </p>
+              <p
+                v-if="account.holder"
+                class="mt-0.5 text-[12.5px] leading-snug text-[#667085] dark:text-[#A3A3A3]"
+              >
+                {{ t(`${F}.payment.holder`, { name: account.holder }) }}
+              </p>
+            </div>
+            <button
+              type="button"
+              class="shrink-0 inline-flex h-9 items-center gap-1.5 rounded-lg border px-3 text-[13px] font-[600] transition-colors"
+              :class="
+                copied === i
+                  ? 'border-[#1AB24F] bg-[#1AB24F]/[0.08] text-[#138A3D] dark:text-[#5EE38F]'
+                  : 'border-[#E5E7EB] text-[#0F172A] hover:border-[#1AB24F] hover:text-[#159447] dark:border-white/15 dark:text-white'
+              "
+              :aria-label="
+                t(`${F}.payment.copyLabel`, { number: account.number })
+              "
+              @click="copyNumber(account, i)"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                class="w-4 h-4"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path v-if="copied === i" d="m5 12.5 4.5 4.5L19 7.5" />
+                <template v-else>
+                  <path
+                    d="M9.5 8h9A1.5 1.5 0 0 1 20 9.5v9a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 8 18.5v-9A1.5 1.5 0 0 1 9.5 8Z"
+                  />
+                  <path
+                    d="M16 8V5.5A1.5 1.5 0 0 0 14.5 4h-9A1.5 1.5 0 0 0 4 5.5v9A1.5 1.5 0 0 0 5.5 16H8"
+                  />
+                </template>
+              </svg>
+              {{
+                copied === i ? t(`${F}.payment.copied`) : t(`${F}.payment.copy`)
+              }}
+            </button>
+          </li>
+        </ul>
+        <p
+          v-if="paymentNote"
+          class="mt-3 whitespace-pre-line text-[12.5px] leading-[1.6] text-[#6B7280] dark:text-[#A3A3A3]"
+        >
+          {{ paymentNote }}
+        </p>
+        <span class="sr-only" aria-live="polite">{{
+          copied >= 0 ? t(`${F}.payment.copied`) : ""
+        }}</span>
+      </section>
+
+      <WorkshopField
+        v-if="payment"
+        id="hp-paymentProof"
+        :label="t(`${F}.proof.label`)"
+        :error="errors.paymentProof"
+        class="sm:col-span-2"
+      >
+        <input
+          ref="proofInput"
+          v-bind="fieldAttrs('paymentProof')"
+          type="file"
+          name="payment_proof"
+          :accept="PROOF_ACCEPT"
+          class="peer sr-only"
+          @change="onProofChange"
+        />
+        <div
+          v-if="form.paymentProof"
+          class="flex items-center gap-3 rounded-xl border bg-white p-3 transition-[border-color,box-shadow] peer-focus-visible:ring-4 peer-focus-visible:ring-[#1AB24F]/15 dark:bg-[#141819]"
+          :class="
+            errors.paymentProof
+              ? 'border-[#F87171]'
+              : 'border-[#D0D5DD] dark:border-white/10'
+          "
+        >
+          <img
+            v-if="proofPreview"
+            :src="proofPreview"
+            alt=""
+            class="w-12 h-12 shrink-0 rounded-lg object-cover"
+          />
+          <span
+            v-else
+            class="w-12 h-12 shrink-0 rounded-lg bg-[#F2F4F7] flex items-center justify-center text-[#667085] dark:bg-white/[0.06] dark:text-[#A3A3A3]"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              class="w-6 h-6"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path
+                d="M14 3H7.5A1.5 1.5 0 0 0 6 4.5v15A1.5 1.5 0 0 0 7.5 21h9a1.5 1.5 0 0 0 1.5-1.5V7l-4-4Z"
+              />
+              <path d="M14 3v4h4" />
+            </svg>
+          </span>
+          <div class="min-w-0 flex-1">
+            <p
+              class="truncate text-[14px] font-[600] text-[#0F172A] dark:text-white"
+            >
+              {{ form.paymentProof.name }}
+            </p>
+            <p class="text-[12.5px] text-[#667085] dark:text-[#A3A3A3]">
+              {{ fileSize(form.paymentProof.size) }}
+            </p>
+          </div>
+          <label
+            for="hp-paymentProof"
+            class="shrink-0 cursor-pointer rounded-lg px-2.5 py-1.5 text-[13px] font-[600] text-[#159447] transition-colors hover:bg-[#1AB24F]/10 dark:text-[#5EE38F]"
+            >{{ t(`${F}.proof.change`) }}</label
+          >
+          <button
+            type="button"
+            class="shrink-0 rounded-lg px-2.5 py-1.5 text-[13px] font-[600] text-[#667085] transition-colors hover:bg-[#F2F4F7] hover:text-[#B91C1C] dark:text-[#A3A3A3] dark:hover:bg-white/[0.06] dark:hover:text-[#FCA5A5]"
+            @click="setProof(null)"
+          >
+            {{ t(`${F}.proof.remove`) }}
+          </button>
+        </div>
+        <label
+          v-else
+          for="hp-paymentProof"
+          class="flex cursor-pointer flex-col items-center justify-center gap-1.5 rounded-xl border-2 border-dashed px-4 py-6 text-center transition-colors peer-focus-visible:ring-4 peer-focus-visible:ring-[#1AB24F]/15"
+          :class="
+            errors.paymentProof
+              ? 'border-[#F87171]'
+              : dragging
+                ? 'border-[#1AB24F] bg-[#1AB24F]/[0.05]'
+                : 'border-[#D0D5DD] hover:border-[#1AB24F]/60 hover:bg-[#1AB24F]/[0.03] dark:border-white/15'
+          "
+          @dragover.prevent="dragging = true"
+          @dragleave="dragging = false"
+          @drop.prevent="onProofDrop"
+        >
+          <span
+            class="pointer-events-none w-10 h-10 rounded-full bg-[#1AB24F]/10 flex items-center justify-center text-[#1AB24F]"
+          >
+            <svg
+              viewBox="0 0 24 24"
+              class="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M12 15V4" />
+              <path d="m7.5 8.5 4.5-4.5 4.5 4.5" />
+              <path
+                d="M4 15v3.5A1.5 1.5 0 0 0 5.5 20h13a1.5 1.5 0 0 0 1.5-1.5V15"
+              />
+            </svg>
+          </span>
+          <span
+            class="pointer-events-none text-[14px] font-[600] text-[#0F172A] dark:text-white"
+            >{{ t(`${F}.proof.choose`) }}
+            <span
+              class="hidden sm:inline font-[500] text-[#667085] dark:text-[#A3A3A3]"
+              >{{ t(`${F}.proof.drop`) }}</span
+            ></span
+          >
+          <span
+            class="pointer-events-none text-[12.5px] text-[#667085] dark:text-[#A3A3A3]"
+            >{{ t(`${F}.proof.hint`) }}</span
+          >
+        </label>
+      </WorkshopField>
+
       <div
         class="absolute -left-[9999px] w-px h-px overflow-hidden"
         aria-hidden="true"
@@ -507,9 +842,7 @@ defineExpose({ status });
               stroke-linecap="round"
             />
           </svg>
-          {{
-            status === "submitting" ? t(`${F}.submitting`) : t(`${F}.submit`)
-          }}
+          {{ submitLabel }}
         </button>
         <p class="text-center text-[12.5px] text-[#6B7280] dark:text-[#A3A3A3]">
           {{ t(`${F}.privacyNote`) }}

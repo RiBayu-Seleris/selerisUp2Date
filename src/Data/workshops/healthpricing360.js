@@ -6,6 +6,7 @@ export const healthPricing360 = {
   subtitle: null,
   highlights: [],
   content: null,
+  payment: null,
   durationDays: 2,
   moduleCount: 10,
   handsOnModule: 8,

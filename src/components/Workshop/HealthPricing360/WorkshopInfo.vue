@@ -68,7 +68,11 @@ const whatsappLink = computed(() => {
   return `https://wa.me/${digits.startsWith("0") ? "62" + digits.slice(1) : digits}`;
 });
 
-const steps = computed(() => tm(`${NS}.register.steps`).map((m) => rt(m)));
+const steps = computed(() =>
+  tm(`${NS}.register.${props.workshop.payment ? "stepsPaid" : "steps"}`).map(
+    (m) => rt(m),
+  ),
+);
 </script>
 
 <template>

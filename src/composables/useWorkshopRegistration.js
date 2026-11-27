@@ -6,6 +6,23 @@ import { SENTRIS_BASE_URL } from "@/consumeAPI/workshopsApi";
 const MIN_FILL_MS = 3000;
 const EMAIL_RE = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
 const PHONE_RE = /^\+?\d{9,15}$/;
+const PROOF_MAX_BYTES = 5 * 1024 * 1024;
+const PROOF_TYPES = ["image/jpeg", "image/png", "application/pdf"];
+const PROOF_EXT = /\.(jpe?g|png|pdf)$/i;
+
+export const PROOF_ACCEPT =
+  "image/jpeg,image/png,application/pdf,.jpg,.jpeg,.png,.pdf";
+
+const toFormData = (payload, file) => {
+  const body = new FormData();
+  Object.entries(payload).forEach(([key, value]) => {
+    if (value === null || value === undefined) return;
+    if (typeof value === "boolean") body.append(key, value ? "1" : "0");
+    else body.append(key, String(value));
+  });
+  body.append("payment_proof", file);
+  return body;
+};
 
 export const PARTICIPANT_CATEGORIES = [
   "actuary",
@@ -28,6 +45,7 @@ const blank = () => ({
   categoryOther: "",
   participation: "individual",
   teamSize: "",
+  paymentProof: null,
   consent: false,
   website: "",
 });
@@ -48,6 +66,8 @@ export function useWorkshopRegistration(workshop) {
   );
   const submittedName = ref("");
   const registrationCode = ref("");
+  const paidSubmission = ref(false);
+  const progress = ref(0);
   let startedAt = Date.now();
 
   const rules = {
@@ -86,6 +106,16 @@ export function useWorkshopRegistration(workshop) {
       return Number.isInteger(n) && n >= 2 && n <= 500
         ? ""
         : t("workshop.form.errors.teamSize");
+    },
+    paymentProof: () => {
+      if (!workshop.payment) return "";
+      const file = form.paymentProof;
+      if (!file) return t("workshop.form.errors.proofRequired");
+      if (!PROOF_TYPES.includes(file.type) && !PROOF_EXT.test(file.name || ""))
+        return t("workshop.form.errors.proofType");
+      return file.size > PROOF_MAX_BYTES
+        ? t("workshop.form.errors.proofSize")
+        : "";
     },
     consent: () => (form.consent ? "" : t("workshop.form.errors.consent")),
   };
@@ -128,12 +158,15 @@ export function useWorkshopRegistration(workshop) {
     status.value = "idle";
     notice.value = null;
     registrationCode.value = "";
+    paidSubmission.value = false;
+    progress.value = 0;
     startedAt = Date.now();
   };
 
-  const succeed = (name, code = "") => {
+  const succeed = (name, code = "", paid = false) => {
     submittedName.value = name;
     registrationCode.value = code;
+    paidSubmission.value = paid;
     status.value = "success";
     notice.value = null;
   };
@@ -161,48 +194,62 @@ export function useWorkshopRegistration(workshop) {
     }
 
     const name = form.fullName.trim();
+    const paid = Boolean(workshop.payment);
 
     if (form.website || Date.now() - startedAt < MIN_FILL_MS) {
-      succeed(name);
+      succeed(name, "", paid);
       return null;
     }
 
     status.value = "submitting";
+    progress.value = 0;
+
+    const payload = {
+      workshop_slug: workshop.slug,
+      workshop_name: workshop.name,
+      full_name: name,
+      email: form.email.trim().toLowerCase(),
+      whatsapp: normalizePhone(form.whatsapp),
+      organization: form.organization.trim(),
+      job_title: form.jobTitle.trim(),
+      participant_category: form.category,
+      participant_category_other:
+        form.category === "other" ? form.categoryOther.trim() : null,
+      participation_type: form.participation,
+      team_size: form.participation === "team" ? Number(form.teamSize) : null,
+      consent: true,
+      locale: locale.value,
+      source_url: window.location.href,
+    };
 
     try {
       const response = await axios.post(
         `${SENTRIS_BASE_URL}${workshop.registration.endpoint}`,
-        {
-          workshop_slug: workshop.slug,
-          workshop_name: workshop.name,
-          full_name: name,
-          email: form.email.trim().toLowerCase(),
-          whatsapp: normalizePhone(form.whatsapp),
-          organization: form.organization.trim(),
-          job_title: form.jobTitle.trim(),
-          participant_category: form.category,
-          participant_category_other:
-            form.category === "other" ? form.categoryOther.trim() : null,
-          participation_type: form.participation,
-          team_size:
-            form.participation === "team" ? Number(form.teamSize) : null,
-          consent: true,
-          locale: locale.value,
-          source_url: window.location.href,
-        },
+        paid ? toFormData(payload, form.paymentProof) : payload,
         {
           headers: {
             Accept: "application/json",
             "Accept-Language": locale.value,
           },
+          onUploadProgress: paid
+            ? (event) => {
+                if (event.total)
+                  progress.value = Math.round(
+                    (event.loaded / event.total) * 100,
+                  );
+              }
+            : undefined,
         },
       );
-      succeed(name, response?.data?.data?.registration_code || "");
+      succeed(name, response?.data?.data?.registration_code || "", paid);
     } catch (error) {
       const code = error.response?.status;
       status.value = "error";
       if (code === 404 || code === 405) {
         notice.value = { key: "workshop.form.result.notAvailable" };
+      } else if (code === 413) {
+        notice.value = { key: "workshop.form.errors.proofSize" };
+        errors.paymentProof = t("workshop.form.errors.proofSize");
       } else if (code === 422) {
         const list = error.response?.data?.errors;
         notice.value = list
@@ -224,6 +271,8 @@ export function useWorkshopRegistration(workshop) {
     message,
     submittedName,
     registrationCode,
+    paidSubmission,
+    progress,
     touch,
     revalidate,
     submit,

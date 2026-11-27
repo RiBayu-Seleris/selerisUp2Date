@@ -69,6 +69,19 @@ const toContent = (data) => ({
   priceNote: text(data.price_note),
 });
 
+const toPayment = (payment) => {
+  const accounts = (payment?.accounts || [])
+    .map((account) => ({
+      bank: account?.bank_name || "",
+      number: String(account?.account_number ?? "").trim(),
+      holder: account?.account_name || "",
+    }))
+    .filter((account) => account.number);
+  return accounts.length
+    ? { accounts, instructions: text(payment.instructions) }
+    : null;
+};
+
 const toAgenda = (days) =>
   (days || [])
     .map((day) => ({
@@ -101,6 +114,7 @@ const applyDetail = (workshop, data) => {
     .map(bilingual)
     .filter((item) => item.id || item.en);
   workshop.content = toContent(data);
+  workshop.payment = toPayment(data.payment);
 
   Object.assign(workshop.event, {
     startDate: data.start_date ?? null,

@@ -19,7 +19,11 @@ const emit = defineEmits(["close"]);
 const NS = "workshop.healthpricing360";
 const { t, tm, rt, locale } = useI18n();
 
-const steps = computed(() => tm(`${NS}.register.steps`).map((m) => rt(m)));
+const steps = computed(() =>
+  tm(`${NS}.register.${props.workshop.payment ? "stepsPaid" : "steps"}`).map(
+    (m) => rt(m),
+  ),
+);
 
 const subtitle = computed(
   () =>

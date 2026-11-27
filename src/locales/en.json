@@ -2717,6 +2717,11 @@
           "Fill in the form",
           "Confirmation from the Shield team",
           "Payment information"
+        ],
+        "stepsPaid": [
+          "Fill in the form & upload the receipt",
+          "The Shield team checks your payment",
+          "Confirmation sent by email"
         ]
       },
       "info": {
@@ -2767,22 +2772,49 @@
       "team": "Company / team",
       "teamDesc": "Registering several participants",
       "teamSize": "Estimated number of participants",
+      "payment": {
+        "title": "Payment",
+        "lead": "Transfer the fee to the account below, then upload your transfer receipt.",
+        "leadMany": "Transfer the fee to one of the accounts below, then upload your transfer receipt.",
+        "holder": "Account name: {name}",
+        "copy": "Copy",
+        "copied": "Copied",
+        "copyLabel": "Copy account number {number}"
+      },
+      "proof": {
+        "label": "Transfer receipt",
+        "choose": "Upload your receipt",
+        "drop": "or drag it here",
+        "hint": "JPG, PNG, or PDF, up to 5 MB.",
+        "change": "Change",
+        "remove": "Remove"
+      },
       "consent": "I agree to the processing of this registration data in line with the {policy}.",
       "policy": "Privacy Policy",
       "privacyNote": "Your data is used by the organiser only for registration and participant confirmation.",
       "submit": "Submit registration",
       "submitting": "Submitting…",
+      "uploading": "Uploading {n}%…",
       "errors": {
         "required": "This field is required.",
         "email": "Please enter a valid email address.",
         "phone": "Enter a valid WhatsApp number, e.g. 081234567890.",
         "teamSize": "Enter a number between 2 and 500.",
         "consent": "Your consent is required to continue.",
-        "summary": "Please check the highlighted fields."
+        "summary": "Please check the highlighted fields.",
+        "proofRequired": "Please upload your transfer receipt.",
+        "proofType": "Please use a JPG, PNG, or PDF file.",
+        "proofSize": "The file is larger than 5 MB. Please choose a smaller file."
       },
       "result": {
         "successTitle": "Registration received",
         "successText": "Thank you, {name}. The Shield team will contact you by email or WhatsApp for confirmation and payment information.",
+        "paidText": {
+          "online": "Thank you, {name}. The Shield team is checking your transfer receipt. Once your payment is confirmed, we will email you the link to join the online session.",
+          "onsite": "Thank you, {name}. The Shield team is checking your transfer receipt. Once your payment is confirmed, we will email you a personal QR code for check-in at the venue.",
+          "hybrid": "Thank you, {name}. The Shield team is checking your transfer receipt. Once your payment is confirmed, we will email you the online session link and a personal QR code for check-in at the venue.",
+          "other": "Thank you, {name}. The Shield team is checking your transfer receipt. Once your payment is confirmed, we will email you the event details."
+        },
         "codeLabel": "Registration number",
         "codeHint": "Keep this number as proof of your registration.",
         "again": "Register another participant",

@@ -2712,6 +2712,11 @@
           "Isi formulir",
           "Konfirmasi dari tim Shield",
           "Informasi pembayaran"
+        ],
+        "stepsPaid": [
+          "Isi formulir & unggah bukti transfer",
+          "Tim Shield memeriksa pembayaran",
+          "Konfirmasi dikirim lewat email"
         ]
       },
       "info": {
@@ -2762,22 +2767,49 @@
       "team": "Perusahaan / tim",
       "teamDesc": "Mendaftarkan beberapa peserta",
       "teamSize": "Perkiraan jumlah peserta",
+      "payment": {
+        "title": "Pembayaran",
+        "lead": "Transfer biaya ke rekening di bawah ini, lalu unggah bukti transfernya.",
+        "leadMany": "Transfer biaya ke salah satu rekening di bawah ini, lalu unggah bukti transfernya.",
+        "holder": "a.n. {name}",
+        "copy": "Salin",
+        "copied": "Tersalin",
+        "copyLabel": "Salin nomor rekening {number}"
+      },
+      "proof": {
+        "label": "Bukti transfer",
+        "choose": "Unggah bukti transfer",
+        "drop": "atau seret ke sini",
+        "hint": "JPG, PNG, atau PDF, maksimal 5 MB.",
+        "change": "Ganti",
+        "remove": "Hapus"
+      },
       "consent": "Saya menyetujui pemrosesan data pendaftaran ini sesuai {policy}.",
       "policy": "Kebijakan Privasi",
       "privacyNote": "Data Anda hanya digunakan penyelenggara untuk keperluan pendaftaran dan konfirmasi peserta.",
       "submit": "Kirim pendaftaran",
       "submitting": "Mengirim…",
+      "uploading": "Mengunggah {n}%…",
       "errors": {
         "required": "Bagian ini wajib diisi.",
         "email": "Format email belum benar.",
         "phone": "Masukkan nomor WhatsApp yang valid, contoh 081234567890.",
         "teamSize": "Masukkan angka antara 2 dan 500.",
         "consent": "Persetujuan diperlukan untuk melanjutkan.",
-        "summary": "Periksa kembali isian yang ditandai."
+        "summary": "Periksa kembali isian yang ditandai.",
+        "proofRequired": "Unggah bukti transfer terlebih dahulu.",
+        "proofType": "Gunakan berkas JPG, PNG, atau PDF.",
+        "proofSize": "Ukuran berkas lebih dari 5 MB. Pilih berkas yang lebih kecil."
       },
       "result": {
         "successTitle": "Pendaftaran terkirim",
         "successText": "Terima kasih, {name}. Tim Shield akan menghubungi Anda melalui email atau WhatsApp untuk konfirmasi dan informasi pembayaran.",
+        "paidText": {
+          "online": "Terima kasih, {name}. Tim Shield sedang memeriksa bukti transfer Anda. Setelah pembayaran dikonfirmasi, tautan untuk bergabung ke sesi online akan dikirim ke email Anda.",
+          "onsite": "Terima kasih, {name}. Tim Shield sedang memeriksa bukti transfer Anda. Setelah pembayaran dikonfirmasi, kode QR pribadi untuk presensi di lokasi akan dikirim ke email Anda.",
+          "hybrid": "Terima kasih, {name}. Tim Shield sedang memeriksa bukti transfer Anda. Setelah pembayaran dikonfirmasi, tautan sesi online dan kode QR pribadi untuk presensi di lokasi akan dikirim ke email Anda.",
+          "other": "Terima kasih, {name}. Tim Shield sedang memeriksa bukti transfer Anda. Setelah pembayaran dikonfirmasi, detail acara akan dikirim ke email Anda."
+        },
         "codeLabel": "Nomor pendaftaran",
         "codeHint": "Simpan nomor ini sebagai bukti pendaftaran.",
         "again": "Daftarkan peserta lain",
