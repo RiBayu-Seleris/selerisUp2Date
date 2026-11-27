@@ -52,6 +52,10 @@ const tiles = computed(() =>
 
 const hasPending = computed(() => tiles.value.some((tile) => !tile.isSet));
 
+const priceNote = computed(() =>
+  content.pick(props.workshop.content?.priceNote),
+);
+
 const cancellation = computed(
   () => props.workshop.event.cancellationPolicy?.[locale.value] || null,
 );
@@ -181,6 +185,21 @@ const steps = computed(() => tm(`${NS}.register.steps`).map((m) => rt(m)));
               "
             >
               {{ cancellation || t("workshop.info.tba") }}
+            </p>
+          </div>
+          <div
+            v-if="priceNote"
+            class="md:col-span-2 rounded-[20px] border border-[#E4E7EC] bg-white p-4 sm:p-5 dark:border-white/10 dark:bg-[#1D2426]"
+          >
+            <p
+              class="font-mono text-[10.5px] sm:text-[11px] font-[600] uppercase tracking-[0.14em] text-[#98A2B3]"
+            >
+              {{ t("workshop.info.priceNote") }}
+            </p>
+            <p
+              class="mt-1 whitespace-pre-line text-[14px] leading-[1.6] text-[#344054] dark:text-[#D1D5DB]"
+            >
+              {{ priceNote }}
             </p>
           </div>
           <div

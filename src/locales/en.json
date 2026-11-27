@@ -2311,6 +2311,7 @@
       "location": "Location",
       "price": "Investment",
       "free": "Free",
+      "priceNote": "Fee notes",
       "quota": "Quota",
       "quotaValue": "{n} participants",
       "organizer": "Organizer",

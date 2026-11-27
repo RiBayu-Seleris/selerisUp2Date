@@ -66,6 +66,7 @@ const toContent = (data) => ({
   seoTitle: text(data.seo_title),
   seoDescription: text(data.seo_description),
   ogImageUrl: data.og_image_url || null,
+  priceNote: text(data.price_note),
 });
 
 const toAgenda = (days) =>

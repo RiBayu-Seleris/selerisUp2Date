@@ -2311,6 +2311,7 @@
       "location": "Lokasi",
       "price": "Investasi",
       "free": "Gratis",
+      "priceNote": "Catatan biaya",
       "quota": "Kuota",
       "quotaValue": "{n} peserta",
       "organizer": "Penyelenggara",
